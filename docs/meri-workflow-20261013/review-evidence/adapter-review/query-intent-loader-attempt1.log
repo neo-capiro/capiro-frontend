@@ -1,0 +1,9 @@
+file:///tmp/capiro-meri-adapter-independent-review-20261013/probe-query-intent.mjs:20
+const hash = value => bytesHash(canonicalize(value));
+                                ^
+
+TypeError: canonicalize is not a function
+    at hash (file:///tmp/capiro-meri-adapter-independent-review-20261013/probe-query-intent.mjs:20:33)
+    at file:///tmp/capiro-meri-adapter-independent-review-20261013/probe-query-intent.mjs:38:27
+
+Node.js v24.19.0

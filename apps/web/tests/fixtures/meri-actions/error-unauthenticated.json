@@ -1,0 +1,13 @@
+{
+  "name": "error-unauthenticated",
+  "route": "execute",
+  "httpStatus": 401,
+  "response": {
+    "error": {
+      "code": "UNAUTHENTICATED",
+      "outcome": "NOT_DISPATCHED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Exact published public-test code/status. Local abort and durable cancellation remain distinct."
+}

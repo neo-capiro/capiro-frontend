@@ -1,0 +1,81 @@
+{
+  "recordedUTC": "2026-10-13T02:49:17.399685+00:00",
+  "base": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "candidateState": "Uncommitted inactive source; exact hashes below",
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "bytes": 3851,
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "bytes": 2897,
+      "sha256": "ea51c88a19018e117b85fcccb052034db08e3f8a39482d0bebaaaf23a34fcd20"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "bytes": 1978,
+      "sha256": "7f9c2be4d30e327ba98415d839a879808157447bdab5139522945c86d7ba8b55"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "bytes": 2414,
+      "sha256": "f38f997a7418b5285337a60c57d781895493d0c3e8f9ea854eab0d8bc091dec5"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "bytes": 2123,
+      "sha256": "096ce01abc55d053583f23c64dc8db85baec6ad2b61c9c72da913714099f9f3e"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "bytes": 6273,
+      "sha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/workflow-problems.ts",
+      "bytes": 2004,
+      "sha256": "6c9c27003d7461210b78f978070126794f304f668a5e18695d45720a0ca44b1c"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/workflow.module.css",
+      "bytes": 2690,
+      "sha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee"
+    },
+    {
+      "path": "apps/web/test/action-workflow.test.mjs",
+      "bytes": 13444,
+      "sha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742"
+    },
+    {
+      "path": "docs/meri-workflow-20261013/PLAN.md",
+      "bytes": 4157,
+      "sha256": "9a1819a3366dbac475a746295154633e325189400132555e712caf275deec241"
+    }
+  ],
+  "acceptedCorrections": [
+    "MWF-01 canonical focus rule reuse",
+    "MWF-02 retirement of earlier approval refusal on admitted execution and failed observation"
+  ],
+  "original21TestsPreserved": true,
+  "newTestsAddedLines": 59,
+  "authorRegressions": {
+    "baseline": {
+      "pass": 21,
+      "fail": 5
+    },
+    "corrected": {
+      "pass": 26,
+      "fail": 0
+    },
+    "sameTestBytes": true
+  },
+  "reviewerTestExecutions": 0,
+  "remainingBlockers": [
+    "Missing governed public action-result validator/types package and authenticated adapter",
+    "Actual host actor/session/tenant/client lifetime integration",
+    "Type/lint/architecture and browser/visual/keyboard qualification",
+    "Native approval/provider/durability acceptance not established"
+  ]
+}

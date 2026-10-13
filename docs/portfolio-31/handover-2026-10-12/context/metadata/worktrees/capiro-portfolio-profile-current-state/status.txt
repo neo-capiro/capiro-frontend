@@ -1,0 +1,47 @@
+## codex/portfolio-profile-current-state-20261011
+ M apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx
+ M apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx
+ M apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx
+ M apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx
+ M apps/web/src/features/portfolio/client-profile/NotesDialog.tsx
+ M apps/web/src/features/portfolio/client-profile/TeamDialog.tsx
+ M apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts
+ M apps/web/src/features/portfolio/client-profile/facility-map-queries.ts
+ M apps/web/src/features/portfolio/client-profile/facility-map.module.css
+ D apps/web/src/features/portfolio/client-profile/mutations.ts
+ M apps/web/src/features/portfolio/client-profile/queries.ts
+ M apps/web/src/features/portfolio/index/contracts-public.ts
+ M apps/web/tests/browser/facility-map.spec.ts
+?? apps/web/src/features/portfolio/client-profile/FacilityActionStatus.tsx
+?? apps/web/src/features/portfolio/client-profile/FacilityFields.tsx
+?? apps/web/src/features/portfolio/client-profile/FacilityRemoveDialog.tsx
+?? apps/web/src/features/portfolio/client-profile/FacilityWriteStatus.tsx
+?? apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx
+?? apps/web/src/features/portfolio/client-profile/facility-action-attempt.ts
+?? apps/web/src/features/portfolio/client-profile/facility-action-writer.ts
+?? apps/web/src/features/portfolio/client-profile/facility-attempt.ts
+?? apps/web/src/features/portfolio/client-profile/facility-writer.ts
+?? apps/web/src/features/portfolio/client-profile/notes-writer.ts
+?? apps/web/src/features/portfolio/client-profile/profile-access.ts
+?? apps/web/src/features/portfolio/client-profile/profile-keys.ts
+?? apps/web/src/features/portfolio/client-profile/profile-read-queries.ts
+?? apps/web/src/features/portfolio/client-profile/profile-receipts.ts
+?? apps/web/src/features/portfolio/client-profile/profile-source.ts
+?? apps/web/src/features/portfolio/client-profile/team-writer.ts
+?? apps/web/src/features/portfolio/client-profile/useFacilityWriter.ts
+?? apps/web/src/features/portfolio/client-profile/useProfileNotesEditor.ts
+?? apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts
+?? apps/web/tests/browser/facility-action-lifetime.spec.ts
+?? apps/web/tests/browser/profile-current-state-fixtures.ts
+?? apps/web/tests/browser/profile-current-state-harness.tsx
+?? apps/web/tests/browser/profile-current-state.html
+?? apps/web/tests/browser/profile-current-state.spec.ts
+?? apps/web/tests/browser/profile-dialog-layout.spec.ts
+?? apps/web/tests/browser/profile-write-lifetime.spec.ts
+?? apps/web/tests/facility-action-writer.test.ts
+?? apps/web/tests/profile-current-state-fixtures.ts
+?? apps/web/tests/profile-current-state.test.ts
+?? docs/portfolio-31/CORE-FACILITY-ACTIONS-20261011.md
+?? docs/portfolio-31/CORE-FACILITY-ACTIONS-SIZE-REVIEWS-20261011.json
+?? docs/portfolio-31/CORE-PROFILE-CURRENT-STATE-20261011.md
+?? docs/portfolio-31/CORE-PROFILE-CURRENT-STATE-SIZE-REVIEWS-20261011.json

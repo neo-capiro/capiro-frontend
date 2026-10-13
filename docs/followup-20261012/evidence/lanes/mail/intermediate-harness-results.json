@@ -1,0 +1,708 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-mail/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-next-mail-evidence/browser.config.ts",
+      "mail-local-draft.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-next-mail-evidence/browser.config.ts",
+    "rootDir": "/workspace/capiro-next-mail/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-mail-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-mail/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "mail-local-draft.spec.ts",
+          "mail-rewrite.spec.ts",
+          "email-compose.spec.ts",
+          "thread-mail.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-mail-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mail-local-draft.spec.ts",
+      "file": "mail-local-draft.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "saved signature display preserves append=true without copying HTML into the body",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3623,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:23.380Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-014ff9aba21090965d44",
+          "file": "mail-local-draft.spec.ts",
+          "line": 112,
+          "column": 3
+        },
+        {
+          "title": "saved signature display preserves append=false without copying HTML into the body",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2727,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:27.269Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-4c2f584ee95ca8361c33",
+          "file": "mail-local-draft.spec.ts",
+          "line": 112,
+          "column": 3
+        },
+        {
+          "title": "saved signature preview blocks active markup and automatic remote content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2392,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:30.018Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-140a1a3ee1e053fd8883",
+          "file": "mail-local-draft.spec.ts",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "title": "empty signature null has no misleading preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2409,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:32.428Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-9900fe42991b6ac4ed43",
+          "file": "mail-local-draft.spec.ts",
+          "line": 178,
+          "column": 3
+        },
+        {
+          "title": "empty signature  has no misleading preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2317,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:34.857Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-598ca1c2766f316da973",
+          "file": "mail-local-draft.spec.ts",
+          "line": 178,
+          "column": 3
+        },
+        {
+          "title": "signature read failure remains distinct from empty and can be retried deliberately",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4048,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:37.193Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-894d668f2298936223a6",
+          "file": "mail-local-draft.spec.ts",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "local Undo restores exactly the body preceding the latest verified rewrite with no extra requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2626,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:41.253Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-5ab204ddd355c2c35705",
+          "file": "mail-local-draft.spec.ts",
+          "line": 215,
+          "column": 1
+        },
+        {
+          "title": "manual edits retire Undo and the next rewrite snapshots the new local draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2708,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:43.894Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-d96a7707937c682dfedd",
+          "file": "mail-local-draft.spec.ts",
+          "line": 234,
+          "column": 1
+        },
+        {
+          "title": "repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2741,
+                  "error": {
+                    "message": "ReferenceError: failed is not defined",
+                    "stack": "ReferenceError: failed is not defined\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:269:19",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 19,
+                      "line": 269
+                    },
+                    "snippet": "  267 |   await expect(\n  268 |     page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true }),\n> 269 |   ).toBeDisabled();\n      |                   ^\n  270 |   state.release();\n  271 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\n  272 |     \"Second verified revision.\","
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 19,
+                        "line": 269
+                      },
+                      "message": "ReferenceError: failed is not defined\n\n  267 |   await expect(\n  268 |     page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true }),\n> 269 |   ).toBeDisabled();\n      |                   ^\n  270 |   state.release();\n  271 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\n  272 |     \"Second verified revision.\",\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:269:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:46.619Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 19,
+                    "line": 269
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-833dd723fbc484840301",
+          "file": "mail-local-draft.spec.ts",
+          "line": 255,
+          "column": 1
+        },
+        {
+          "title": "unverified subsequent rewrite retains the prior valid Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3140,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:49.971Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-81277f00b7c0a592d199",
+          "file": "mail-local-draft.spec.ts",
+          "line": 294,
+          "column": 3
+        },
+        {
+          "title": "failed subsequent rewrite retains the prior valid Undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2172,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:53.348Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-5a7654c2bbf7c426444a",
+          "file": "mail-local-draft.spec.ts",
+          "line": 294,
+          "column": 3
+        },
+        {
+          "title": "recipients replacement retires an earlier Undo snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2271,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:55.554Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-27ab0555c598f84bc77c",
+          "file": "mail-local-draft.spec.ts",
+          "line": 324,
+          "column": 3
+        },
+        {
+          "title": "client replacement retires an earlier Undo snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:55:57.840Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-0e5f401c3059e33e9b78",
+          "file": "mail-local-draft.spec.ts",
+          "line": 324,
+          "column": 3
+        },
+        {
+          "title": "actor replacement retires an earlier Undo snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:56:00.055Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-c8d85f2623700e6ffa11",
+          "file": "mail-local-draft.spec.ts",
+          "line": 324,
+          "column": 3
+        },
+        {
+          "title": "invalidated replacement retires an earlier Undo snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3071,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:56:05.452Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-1299e52de8242d20910a",
+          "file": "mail-local-draft.spec.ts",
+          "line": 324,
+          "column": 3
+        },
+        {
+          "title": "close replacement retires an earlier Undo snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3243,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:56:08.539Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-6e2cd7eef3f91b5285f9",
+          "file": "mail-local-draft.spec.ts",
+          "line": 324,
+          "column": 3
+        },
+        {
+          "title": "append selection is local to the message and controls review inclusion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2877,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:56:11.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-8ef6584a12c467323d2c",
+          "file": "mail-local-draft.spec.ts",
+          "line": 363,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:55:22.749Z",
+    "duration": 52093.511999999995,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

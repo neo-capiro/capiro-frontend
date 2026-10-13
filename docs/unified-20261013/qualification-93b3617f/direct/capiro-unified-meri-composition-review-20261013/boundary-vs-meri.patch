@@ -1,0 +1,134 @@
+diff --git a/apps/web/src/proxy.ts b/apps/web/src/proxy.ts
+index 31942e4..63b2dd4 100644
+--- a/apps/web/src/proxy.ts
++++ b/apps/web/src/proxy.ts
+@@ -9,6 +9,9 @@ import { responseHeaders } from "./shared/response-headers";
+ 
+ const clerk = clerkMiddleware();
+ export default function proxy(request: NextRequest, event: NextFetchEvent) {
++  // This namespace has its own closed public capability allowlist in the route.
++  if (request.nextUrl.pathname.startsWith("/api/capiro/public-onboard."))
++    return NextResponse.next();
+   if (request.nextUrl.pathname === "/settings") {
+     const destination = request.nextUrl.clone();
+     destination.pathname = "/settings/personal";
+@@ -32,6 +35,17 @@ export const config = {
+     "/modules/:path*",
+     "/settings/:path*",
+     "/sign-in/:path*",
++    "/register",
++    "/verify",
++    "/plan",
++    "/legal",
++    "/billing",
++    "/admins",
++    "/clients",
++    "/org",
++    "/confirm",
++    "/accept-invite",
++    "/setup",
+     "/api/capiro/:path*",
+     "/api/action-followthrough/:path*",
+   ],
+diff --git a/apps/web/src/shared/session/ApplicationBoundary.tsx b/apps/web/src/shared/session/ApplicationBoundary.tsx
+index c773791..e2a61f2 100644
+--- a/apps/web/src/shared/session/ApplicationBoundary.tsx
++++ b/apps/web/src/shared/session/ApplicationBoundary.tsx
+@@ -8,6 +8,28 @@ import { CapiroDataProvider } from "../capiro/CapiroBoundary";
+ import { SessionContext } from "./SessionContext";
+ import { SelectedClientProvider } from "./SelectedClient";
+ import { routeClientId } from "./client-route";
++import { isOnboardPath, isPublicOnboardPath } from "./onboard-route";
++
++const noSignedInSession = () => {};
++
++/** Reuse the canonical query/request owner for signed-out onboarding too. */
++function PublicSessionData({
++  children,
++  state = "signed-out",
++}: {
++  children: ReactNode;
++  state?: "signed-out" | "loading" | "unconfigured";
++}) {
++  return (
++    <SessionContext.Provider value={state}>
++      <DataProvider>
++        <CapiroDataProvider onSessionExpired={noSignedInSession}>
++          {children}
++        </CapiroDataProvider>
++      </DataProvider>
++    </SessionContext.Provider>
++  );
++}
+ 
+ function SessionData({
+   children,
+@@ -47,12 +69,22 @@ function CurrentSession({ children }: { children: ReactNode }) {
+   const pathname = usePathname();
+   const search = useSearchParams();
+   const clientId = routeClientId(pathname, search);
++  if (!isLoaded && isOnboardPath(pathname))
++    return (
++      <PublicSessionData key="loading-onboard" state="loading">
++        {children}
++      </PublicSessionData>
++    );
+   if (!isLoaded)
+     return (
+       <SessionContext.Provider value="loading">
+         {children}
+       </SessionContext.Provider>
+     );
++  if (!userId && isOnboardPath(pathname))
++    return (
++      <PublicSessionData key="signed-out-onboard">{children}</PublicSessionData>
++    );
+   if (!userId)
+     return (
+       <SessionContext.Provider key="signed-out" value="signed-out">
+@@ -79,6 +111,14 @@ export function ApplicationBoundary({
+   const pathname = usePathname();
+   // Revocable Planner capability forms have an independent public contract.
+   if (pathname.startsWith("/forms/")) return children;
++  // IT tokens, including invalid/expired ones, do not depend on Clerk startup.
++  // Replacing that capability discards its private cache and pending observation.
++  if (isPublicOnboardPath(pathname))
++    return <PublicSessionData key={pathname}>{children}</PublicSessionData>;
++  if (!publishableKey && isOnboardPath(pathname))
++    return (
++      <PublicSessionData state="unconfigured">{children}</PublicSessionData>
++    );
+   if (!publishableKey)
+     return (
+       <SessionContext.Provider value="unconfigured">
+diff --git a/apps/web/src/shared/session/onboard-route.ts b/apps/web/src/shared/session/onboard-route.ts
+new file mode 100644
+index 0000000..beb7d7b
+--- /dev/null
++++ b/apps/web/src/shared/session/onboard-route.ts
+@@ -0,0 +1,25 @@
++const onboardPaths = new Set([
++  "/register",
++  "/verify",
++  "/plan",
++  "/legal",
++  "/billing",
++  "/admins",
++  "/clients",
++  "/org",
++  "/confirm",
++  "/accept-invite",
++  "/setup",
++]);
++
++/** Narrow public capability pages retain their independent IT authorization. */
++export function isPublicOnboardPath(pathname: string) {
++  return /^\/it\/[^/]+\/?$/.test(pathname);
++}
++
++export function isOnboardPath(pathname: string) {
++  return (
++    onboardPaths.has(pathname.replace(/\/$/, "")) ||
++    isPublicOnboardPath(pathname)
++  );
++}

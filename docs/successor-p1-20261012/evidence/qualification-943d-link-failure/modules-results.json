@@ -1,0 +1,4108 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts"
+    ],
+    "configFile": "/workspace/capiro-p1-successor/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-p1-successor/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-p1-successor/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-successor/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-p1-successor/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "billing-flow.spec.ts",
+      "file": "billing-flow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "active subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6283,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:47:58.775Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-ac49f2a40f69808aed4a",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "past_due subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5175,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:06.689Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-3c9b0acf79b6501203cc",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "trialing subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:11.892Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-d27d345fd0f66c35bcf8",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "canceled subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5482,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:16.248Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-71f836f1996b1936409e",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "none subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:21.753Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-f886bea1ae8a8d2cfdb1",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "comped subscriber adds profiles through the portal, never checkout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5073,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:27.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-d674796a7bb1e10b482c",
+          "file": "billing-flow.spec.ts",
+          "line": 54,
+          "column": 3
+        },
+        {
+          "title": "none non-subscriber can review a new subscription",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5735,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:32.357Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-5ad12520f7a6922cab00",
+          "file": "billing-flow.spec.ts",
+          "line": 73,
+          "column": 3
+        },
+        {
+          "title": "trialing non-subscriber can review a new subscription",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4899,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:38.115Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-f00cfd18fd7413cb6864",
+          "file": "billing-flow.spec.ts",
+          "line": 73,
+          "column": 3
+        },
+        {
+          "title": "active without a subscription does not infer checkout eligibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:43.065Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-0b7e3a22eb14f40231b8",
+          "file": "billing-flow.spec.ts",
+          "line": 100,
+          "column": 3
+        },
+        {
+          "title": "past_due without a subscription does not infer checkout eligibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5422,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:46.959Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-58c6f49cf6265afb9eb0",
+          "file": "billing-flow.spec.ts",
+          "line": 100,
+          "column": 3
+        },
+        {
+          "title": "canceled without a subscription does not infer checkout eligibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5781,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:52.472Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-000a60faf59f034047a1",
+          "file": "billing-flow.spec.ts",
+          "line": 100,
+          "column": 3
+        },
+        {
+          "title": "comped without a subscription does not infer checkout eligibility",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:48:58.297Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-d67c5f245c36217c3e8b",
+          "file": "billing-flow.spec.ts",
+          "line": 100,
+          "column": 3
+        },
+        {
+          "title": "disabled billing cannot open either hosted flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:03.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-7f3a71cfcc50f36806fc",
+          "file": "billing-flow.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "checkout closes when a fresh summary reports an existing subscription",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7219,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:09.068Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-8a3cd1b433a50c8f60e6",
+          "file": "billing-flow.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "failed current summary prevents checkout from a previously opened form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5649,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:16.456Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-17a681a7faea9a3212f3",
+          "file": "billing-flow.spec.ts",
+          "line": 157,
+          "column": 3
+        },
+        {
+          "title": "failed current state prevents checkout from a previously opened form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:22.157Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-92f53f3e39e87beace67",
+          "file": "billing-flow.spec.ts",
+          "line": 157,
+          "column": 3
+        },
+        {
+          "title": "an existing-subscriber action rechecks that a subscription still exists",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:26.252Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-2a602c426d09a339e590",
+          "file": "billing-flow.spec.ts",
+          "line": 182,
+          "column": 1
+        },
+        {
+          "title": "portal rejects a receipt for the other hosted flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4880,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:30.739Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-9e465ef710de2485dfde",
+          "file": "billing-flow.spec.ts",
+          "line": 199,
+          "column": 3
+        },
+        {
+          "title": "checkout rejects a receipt for the other hosted flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3968,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:35.653Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-a57e9e204a5e875d4292",
+          "file": "billing-flow.spec.ts",
+          "line": 199,
+          "column": 3
+        },
+        {
+          "title": "repeated clicks while summary revalidation is pending dispatch one portal request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:39.661Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-a7790a4dc9943035f89b",
+          "file": "billing-flow.spec.ts",
+          "line": 228,
+          "column": 3
+        },
+        {
+          "title": "repeated clicks while summary revalidation is pending dispatch one checkout request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4877,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:44.202Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-a8f2e31ad3424693ef67",
+          "file": "billing-flow.spec.ts",
+          "line": 228,
+          "column": 3
+        },
+        {
+          "title": "session replacement discards a pending hosted receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4497,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:49.173Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-4a6d9fdadd4ccd2dd3ba",
+          "file": "billing-flow.spec.ts",
+          "line": 274,
+          "column": 1
+        },
+        {
+          "title": "contradictory current reads and failed initial summary expose no billing action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9114,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:49:53.741Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-755b411b0dc4fa67bb68",
+          "file": "billing-flow.spec.ts",
+          "line": 315,
+          "column": 1
+        },
+        {
+          "title": "session replacement during revalidation prevents dispatch from the old form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4980,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:02.901Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9399e5e31f26086deceb-3e6abd600c70048838ee",
+          "file": "billing-flow.spec.ts",
+          "line": 347,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "calendar-visual-closeout.spec.ts",
+      "file": "calendar-visual-closeout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "compact Calendar retains scoped module navigation, history, source disclosures and mobile controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7559,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:07.977Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06180893bc08d6a2468a-9d59ed03c4b713013566",
+          "file": "calendar-visual-closeout.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "calendar.spec.ts",
+      "file": "calendar.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "month and week retain client scope and query end-exclusive Eastern ranges",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5478,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:15.586Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd11a3d0e6100edc747e-4697999a9e9cfa714ce0",
+          "file": "calendar.spec.ts",
+          "line": 24,
+          "column": 1
+        },
+        {
+          "title": "client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:21.104Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd11a3d0e6100edc747e-f17bf466c0c2e21e9578",
+          "file": "calendar.spec.ts",
+          "line": 79,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "effective-dates.spec.ts",
+      "file": "effective-dates.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Modules master Government feed preserves date-only provenance and partial coverage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5585,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:26.842Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "file": "effective-dates.spec.ts",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "an empty Government page remains explicitly incomplete and forecasts unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4620,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:32.499Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+          "file": "effective-dates.spec.ts",
+          "line": 49,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "integration.spec.ts",
+      "file": "integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "shared product navigation and history preserve verified client hints and scoped styles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8401,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:37.210Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-54662d70587443b0fb64",
+          "file": "integration.spec.ts",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "client replacement interrupts a write and organization replacement clears drafts and revalidates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5336,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:45.621Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-b539859bb125ac6030fd",
+          "file": "integration.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "Core expiry clears the application, does not replay and cannot be escaped by changing client",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4728,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:51.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-326407ca30a2f0129b7e",
+          "file": "integration.spec.ts",
+          "line": 169,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "legiwatch.spec.ts",
+      "file": "legiwatch.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "LegiWatch News evidence renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4541,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:50:55.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-33ab2994f08594f2df63",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Florida Budget renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5011,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:00.370Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-3f8617a06457355ba4e4",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Research evidence renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:05.418Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-f803804f41dd4ac5a8cc",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Monitoring renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6297,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:11.648Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-24cf4b213b2854cb92f1",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Client briefings renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5581,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:18.063Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-fe55a3c2a7f3df447775",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Reports renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4542,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:23.700Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-dfa2a02d497f768b5bb5",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Trends renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4426,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:28.316Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-0c2055eaca3e660c127b",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Legacy digest renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:32.810Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-457652b660d3adbfe465",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Import review renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:36.942Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-c4d1515a7e1e725cad3b",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch Research import review renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:41.368Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-2ba093a7e69add585568",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "LegiWatch LegiWatch settings renders a real connected view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3617,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:44.708Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-10331ab9c8197bfe5e7f",
+          "file": "legiwatch.spec.ts",
+          "line": 21,
+          "column": 3
+        },
+        {
+          "title": "research continues past an empty matched page using the retained-source cursor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5786,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:48.392Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-ddd8a8195edb9d4fc898",
+          "file": "legiwatch.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "workflow changes invalidate a reviewed preview and enqueue only its exact current hash",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:51:54.238Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-525e87306f0a22279f0a",
+          "file": "legiwatch.spec.ts",
+          "line": 96,
+          "column": 1
+        },
+        {
+          "title": "monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5504,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:00.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a5ac3d95daa9ac20e47c-942126efc78bbec8243b",
+          "file": "legiwatch.spec.ts",
+          "line": 169,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "modules.spec.ts",
+      "file": "modules.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Engagement Manager primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:06.455Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-552c6a95f5a790ab10d2",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Planner primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3975,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:11.960Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-1343613913d3fa34df43",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Master calendar primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5499,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:15.992Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-988bd762ab183256e6b7",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Workspace primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4932,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:21.592Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-bd08573526d062aaf18c",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Strategies primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "interrupted",
+                  "duration": 4980,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:52:26.602Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-p1-successor/apps/web/test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/test-failed-1.png"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-p1-successor/apps/web/test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-f9ae51209eeb6a64c854",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Directory primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-9fedf8d18eb7e7656781",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Intelligence Center primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-a9d447e0eff9435e55ae",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Research Portfolios primary route renders through the canonical session/API boundary",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c30cd39e1c87f9ff656a-af3d7c08fed1837ae449",
+          "file": "modules.spec.ts",
+          "line": 16,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "newsletter-staging.spec.ts",
+      "file": "newsletter-staging.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "explicit saved revision review stages only its exact references and opens the selected session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-17e2213ded72cb956f0a",
+          "file": "newsletter-staging.spec.ts",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "title": "lost response then reload recovers original key/version without restaging later session edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-03228ccf4bb2e73f6bdd",
+          "file": "newsletter-staging.spec.ts",
+          "line": 129,
+          "column": 1
+        },
+        {
+          "title": "incompatible destination and unavailable source make zero staging calls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-cce9cd93fe087391b8ec",
+          "file": "newsletter-staging.spec.ts",
+          "line": 172,
+          "column": 1
+        },
+        {
+          "title": "storage refusal blocks selection and replacement writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-a37c6990348ab20f84b1",
+          "file": "newsletter-staging.spec.ts",
+          "line": 218,
+          "column": 1
+        },
+        {
+          "title": "replacement Core actor cannot recover the former actor's pending staging",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-165dbe7953fbbbfba691",
+          "file": "newsletter-staging.spec.ts",
+          "line": 237,
+          "column": 1
+        },
+        {
+          "title": "conflict and malformed receipt retain the same original staging request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-bd010c97730754113f09",
+          "file": "newsletter-staging.spec.ts",
+          "line": 275,
+          "column": 1
+        },
+        {
+          "title": "fresh source refusal before dispatch clears review and sends no staging request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-a2438a7a4e337de3ec6d",
+          "file": "newsletter-staging.spec.ts",
+          "line": 305,
+          "column": 1
+        },
+        {
+          "title": "a refreshed destination version requires fresh explicit review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-a6d1d5b3caab9df6bc54",
+          "file": "newsletter-staging.spec.ts",
+          "line": 329,
+          "column": 1
+        },
+        {
+          "title": "mobile saved text review fits the viewport and supports keyboard acknowledgement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5ec209819a3fd394a783-b37cfcc82289ffd6b976",
+          "file": "newsletter-staging.spec.ts",
+          "line": 356,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "objective-destination.spec.ts",
+      "file": "objective-destination.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "each Objective-bound open/reload calls the canonical owner without an unbound session fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cef7f3a8fb5e1a57eee3-cc373b6e606fb5d0f91f",
+          "file": "objective-destination.spec.ts",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "owner refusal404 clears bound content and never falls back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cef7f3a8fb5e1a57eee3-f016affc48f4def14656",
+          "file": "objective-destination.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "owner refusal409 clears bound content and never falls back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cef7f3a8fb5e1a57eee3-5fb3d7b5c2065f7fc808",
+          "file": "objective-destination.spec.ts",
+          "line": 96,
+          "column": 3
+        },
+        {
+          "title": "mismatched binding and malformed Objective query never expose session content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cef7f3a8fb5e1a57eee3-46df0099a5f8a1f3d164",
+          "file": "objective-destination.spec.ts",
+          "line": 122,
+          "column": 1
+        },
+        {
+          "title": "a replaced Objective query hides the old observation and ignores its late response",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cef7f3a8fb5e1a57eee3-727c2ab4041dd9959991",
+          "file": "objective-destination.spec.ts",
+          "line": 141,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "objective-navigation.spec.ts",
+      "file": "objective-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Objective navigation resolves the exact saved version through Core before opening its local destination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "60c004e14f66a84ebb77-44057e8ab05fb97bdce3",
+          "file": "objective-navigation.spec.ts",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "unsaved edits and stale Objective resolver never navigate using old campaign text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "60c004e14f66a84ebb77-333f42bc36b919ec7d25",
+          "file": "objective-navigation.spec.ts",
+          "line": 93,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "objective-work-destinations.spec.ts",
+      "file": "objective-work-destinations.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-9d312663f8fb146cba0a",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 61,
+          "column": 3
+        },
+        {
+          "title": "strategies owner404 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-63e90b2c55e65827de38",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "strategies owner409 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-1245c3b803a4f33a7d0d",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "strategies owner503 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-84403933c605a33395ae",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "strategies refuses changed and malformed bindings before exposing resource content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-2e29d3e93c572cae4f79",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 194,
+          "column": 3
+        },
+        {
+          "title": "planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-9ddecb0e9d2e5757b5c0",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 61,
+          "column": 3
+        },
+        {
+          "title": "planner owner404 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-1102d9e2470f40150961",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "planner owner409 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-3c0f059c4ef8994391cc",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "planner owner503 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-a559e1716dfc9ca7fc97",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "planner refuses changed and malformed bindings before exposing resource content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-4b2b72e6259d87f3fe8a",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 194,
+          "column": 3
+        },
+        {
+          "title": "workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-3bfce2458be189eb0c83",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 61,
+          "column": 3
+        },
+        {
+          "title": "workspace owner404 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-c6621368a3165561f963",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "workspace owner409 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-76a24270bdda55f93e01",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "workspace owner503 removes the prior observation with no fallback or automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-5f1c4f5cfa17522c7414",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 161,
+          "column": 5
+        },
+        {
+          "title": "workspace refuses changed and malformed bindings before exposing resource content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-108f77863c6f2eb70185",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 194,
+          "column": 3
+        },
+        {
+          "title": "replacement query and session scope hide old or late Strategy observations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-d2a508c2c462fe59ed8e",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 220,
+          "column": 1
+        },
+        {
+          "title": "Planner401 expires the shared session without replay or retained task content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-e87e7e76d2d56acc8f41",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 294,
+          "column": 1
+        },
+        {
+          "title": "a changed Workspace client hint clears the saved snapshot and rechecks its owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d00d3ced147b02325ad4-4fb9d1e0302b43b6244f",
+          "file": "objective-work-destinations.spec.ts",
+          "line": 323,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "objective-work-navigation.spec.ts",
+      "file": "objective-work-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "strategies Portfolio handoff resolves exact saved Objective then resolves again at destination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a798a4968f19641d319c-799940b7399dba54c642",
+          "file": "objective-work-navigation.spec.ts",
+          "line": 83,
+          "column": 3
+        },
+        {
+          "title": "planner Portfolio handoff resolves exact saved Objective then resolves again at destination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a798a4968f19641d319c-331021020e581ccc0a25",
+          "file": "objective-work-navigation.spec.ts",
+          "line": 83,
+          "column": 3
+        },
+        {
+          "title": "workspace Portfolio handoff resolves exact saved Objective then resolves again at destination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a798a4968f19641d319c-e15308258f61f546c238",
+          "file": "objective-work-navigation.spec.ts",
+          "line": 83,
+          "column": 3
+        },
+        {
+          "title": "saved Workspace selection is explicit and never opens the current working draft automatically",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a798a4968f19641d319c-4322fa55e5b387664353",
+          "file": "objective-work-navigation.spec.ts",
+          "line": 124,
+          "column": 1
+        },
+        {
+          "title": "unsaved edits and close interrupt Strategy resolution without late navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a798a4968f19641d319c-3d10c0b9fdface27feb1",
+          "file": "objective-work-navigation.spec.ts",
+          "line": 183,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "planner-engagement.spec.ts",
+      "file": "planner-engagement.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Planner modes use the same permitted task data and exact board assets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "89777fd173b753a3989c-5063bacb1c26b597722e",
+          "file": "planner-engagement.spec.ts",
+          "line": 112,
+          "column": 1
+        },
+        {
+          "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "89777fd173b753a3989c-0964d903fcfc8d41ed87",
+          "file": "planner-engagement.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "89777fd173b753a3989c-b5ce3052322269df05b2",
+          "file": "planner-engagement.spec.ts",
+          "line": 218,
+          "column": 1
+        },
+        {
+          "title": "A template session deep link keeps the server state version and sends no mail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "89777fd173b753a3989c-9600fbda34a87898cf29",
+          "file": "planner-engagement.spec.ts",
+          "line": 279,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "prospect-draft-pending-edit.spec.ts",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "prospect fields freeze during held update; success preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-a818300d797addc5b35d",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held update; failure preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-1f87d6262342322d5422",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held update; lost receipt preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-61a4f488ded5fba780cd",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "leaving during held update retains the original intent without continuing the old save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-78327263a03b71091acf",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 166,
+          "column": 3
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; success preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-039f2063c3767bcbf981",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; failure preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-cb18463f04e7a7893e64",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "prospect fields freeze during held snapshot; lost receipt preserves submitted text",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-6bb12538db0da5930d97",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "leaving during held snapshot retains the original intent without continuing the old save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-8ab2e5c7dd121b9fc23b",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 166,
+          "column": 3
+        },
+        {
+          "title": "a user replacement during PATCH cannot restore or finish the former editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-fc96c9acb570e0b08764",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 196,
+          "column": 3
+        },
+        {
+          "title": "a tenant replacement during PATCH cannot restore or finish the former editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-b0ddafaacf162339e9b9",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 196,
+          "column": 3
+        },
+        {
+          "title": "a prospect replacement during PATCH cannot restore or finish the former editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-47fe4a106e5443aa3451",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 196,
+          "column": 3
+        },
+        {
+          "title": "a client replacement during PATCH cannot restore or finish the former editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f59a1a266aa647562453-2960f7df209d2e249378",
+          "file": "prospect-draft-pending-edit.spec.ts",
+          "line": 196,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "prospect-draft-restart-acceptance.spec.ts",
+      "file": "prospect-draft-restart-acceptance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4ff68bafba3514a2b3bd-0ab55ff9f97028ee5ded",
+          "file": "prospect-draft-restart-acceptance.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "prospect-workspace.spec.ts",
+      "file": "prospect-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "prospect creation recovers its original seed and key after a lost receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-acad55320b2b53fc31cd",
+          "file": "prospect-workspace.spec.ts",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "title": "manual content, version history and exports use only reviewed draft operations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-2e613289ada7bfed7c82",
+          "file": "prospect-workspace.spec.ts",
+          "line": 76,
+          "column": 1
+        },
+        {
+          "title": "an uncertain save retains edits across navigation and requires read-back before explicit save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-9e60bd9a44e4d3338f1a",
+          "file": "prospect-workspace.spec.ts",
+          "line": 124,
+          "column": 1
+        },
+        {
+          "title": "a wrong prospectId never exposes the document or writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-669b995ed4b1933fd8ba",
+          "file": "prospect-workspace.spec.ts",
+          "line": 152,
+          "column": 3
+        },
+        {
+          "title": "a wrong tenantId never exposes the document or writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-8cbb0e4f20721b001a29",
+          "file": "prospect-workspace.spec.ts",
+          "line": 152,
+          "column": 3
+        },
+        {
+          "title": "prospect Newsletter origin cannot open its sending workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-9e454a7e2c430da92276",
+          "file": "prospect-workspace.spec.ts",
+          "line": 168,
+          "column": 1
+        },
+        {
+          "title": "a changed document blocks PATCH and shows the saved content for deliberate review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-edb5cd43d78fe3d4a6e8",
+          "file": "prospect-workspace.spec.ts",
+          "line": 182,
+          "column": 1
+        },
+        {
+          "title": "mobile prospect manual editor preserves keyboard fields and stays in the viewport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-e4632844df5447d29a33",
+          "file": "prospect-workspace.spec.ts",
+          "line": 214,
+          "column": 1
+        },
+        {
+          "title": "leaving during save preflight aborts the write and retains the uncertain editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-21dc831a385f7d744c82",
+          "file": "prospect-workspace.spec.ts",
+          "line": 237,
+          "column": 1
+        },
+        {
+          "title": "expired creation sends one original request and clears the authenticated editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-a1a6cf6903d5c7ad6fc3",
+          "file": "prospect-workspace.spec.ts",
+          "line": 274,
+          "column": 1
+        },
+        {
+          "title": "reload preserves the original prospect creation seed and request key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-9d463163b2500798862f",
+          "file": "prospect-workspace.spec.ts",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "reload preserves uncertain manual edits and the read-back requirement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-b37cad0787a3c1e8589c",
+          "file": "prospect-workspace.spec.ts",
+          "line": 331,
+          "column": 1
+        },
+        {
+          "title": "replacement Core actor cannot restore the former creation input after reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-ed51f0f966a6b64ae76e",
+          "file": "prospect-workspace.spec.ts",
+          "line": 359,
+          "column": 3
+        },
+        {
+          "title": "replacement Core actor cannot restore the former manual-save input after reload",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-2b52aa66e4fd42508d40",
+          "file": "prospect-workspace.spec.ts",
+          "line": 359,
+          "column": 3
+        },
+        {
+          "title": "unavailable browser journal blocks creation without a backend write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-a2d135e8b9e6579b79d2",
+          "file": "prospect-workspace.spec.ts",
+          "line": 427,
+          "column": 3
+        },
+        {
+          "title": "unavailable browser journal blocks manual-save without a backend write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "11cac9176bd88cd5201d-1e8a163bd3da2384d354",
+          "file": "prospect-workspace.spec.ts",
+          "line": 427,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "public-forms.spec.ts",
+      "file": "public-forms.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public form submits only displayed answers and shows the returned receipt without sign-in",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e5c4ce30762cc3efb433-16d03e6875c928f8bebb",
+          "file": "public-forms.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "revoked public capability renders an unavailable state without a submission action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e5c4ce30762cc3efb433-7e84295e157af2a4a593",
+          "file": "public-forms.spec.ts",
+          "line": 52,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "session.spec.ts",
+      "file": "session.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "missing configuration renders setup without issuing service requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6fa1842ca325e3ffbb00-81bd4dd9ca73d71e1062",
+          "file": "session.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "org/session change clears prior records and sign-out removes all protected content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6fa1842ca325e3ffbb00-8d804dc078c64c6b8e7a",
+          "file": "session.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "401 removes protected content and asks for sign-in without replaying a request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6fa1842ca325e3ffbb00-5bc2da0110bdef1b3466",
+          "file": "session.spec.ts",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "title": "development StrictMode remount establishes a valid request scope before child reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6fa1842ca325e3ffbb00-37f83310b3c5ae1cf1c0",
+          "file": "session.spec.ts",
+          "line": 69,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "settings-scenes.spec.ts",
+      "file": "settings-scenes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Settings personal renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-78dadb5ba293bb21e2e6",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings contact-info renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-b64225e61938708cdd63",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings branding renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-ac391a9498eed6914d1a",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings team renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-75327961b629930f42ed",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings integrations renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-2e1b32a86db9b1373f3c",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings memory renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-73a16c3d6ba3b9235123",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings meri-preferences renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-457d5375751b62ac6652",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings billing renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-85e7282d504c8262fae1",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings ai-usage renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-2c3a62f6bdfd4856ad4f",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings profiles renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-06829afb77d63b23247a",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-9f191187eed4ea4dec3c",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-tenants renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-a6b61b23d98f86df6266",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-customers renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-0f22d3ef68aa3c0085d0",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-d6555a10bd329f4839d1",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-222d0a1c4fa804ab0701",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-personnel renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-15f5f181fcb14dad6e19",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-e81c57790a9c1c981fb3",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-matches renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-51ccbae799fe20068929",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "Settings hq-analyst renders compatible responses without runtime failures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-23523699d6a24637cb06",
+          "file": "settings-scenes.spec.ts",
+          "line": 33,
+          "column": 3
+        },
+        {
+          "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-f0b1b5748d2e74f23547",
+          "file": "settings-scenes.spec.ts",
+          "line": 59,
+          "column": 1
+        },
+        {
+          "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d5fe286c4acf6dc67aa8-de6e0d004e615d64a0de",
+          "file": "settings-scenes.spec.ts",
+          "line": 95,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "settings.spec.ts",
+      "file": "settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Personal saves the title only after a validated response and keeps signature uploads separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d877ffdf71ec720167ae-ae5fd4705e13bd258c4f",
+          "file": "settings.spec.ts",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "Team does not fetch private records for a standard user",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d877ffdf71ec720167ae-3d26a5f6d97f712edd95",
+          "file": "settings.spec.ts",
+          "line": 46,
+          "column": 1
+        },
+        {
+          "title": "Team prevents self-removal and failed invitations remain editable without success feedback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d877ffdf71ec720167ae-7a2c456b791ee086e7f2",
+          "file": "settings.spec.ts",
+          "line": 64,
+          "column": 1
+        },
+        {
+          "title": "Mobile Personal fits the viewport and Settings sections remain keyboard accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d877ffdf71ec720167ae-8640c530e6fcb35af5ca",
+          "file": "settings.spec.ts",
+          "line": 118,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:47:48.902Z",
+    "duration": 283323.05100000004,
+    "expected": 50,
+    "skipped": 107,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

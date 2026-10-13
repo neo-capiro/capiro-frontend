@@ -1,0 +1,20 @@
+{
+  "observedUTC": "2026-10-13T07:00:36.169851+00:00",
+  "status": "PASS_COMPLETED_SHARD_EVIDENCE_OUTER_ORCHESTRATION_FAILED_FULL_GATE_PENDING",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "rootTree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "status": ""
+  },
+  "oldSealedPacketIntact": true,
+  "oldPacketFilesVerified": 16,
+  "originalPacketManifestSha256": "a0c4dc76e656a44bf848f054ce65d667dea11627c7fa53882d3e697a1b5a1883",
+  "discoveryIds": 1122,
+  "completedActualPassedResults": 581,
+  "duplicateIds": 0,
+  "undiscoveredIds": 0,
+  "remainingCount": 541,
+  "causeOfOuter120": "NOT_ESTABLISHED",
+  "reviewerRuntimeExecution": false
+}

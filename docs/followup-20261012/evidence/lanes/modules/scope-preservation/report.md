@@ -1,0 +1,15 @@
+# Calendar corrective follow-up
+
+Cherry-pick **`076ee3e72263f3727ea9b850052e71043c9489af` only**. Parent is original lane commit `21503cf438862be6ea30db7f29c11f5b0db856f5`, already integrated by root as `f26b635`. Exact tree: `73e6a3cea15bc61d3eb2a080284245467b523ee1`.
+
+The independent review correctly identified a MCAL-003 regression: changing client URL remounted Calendar, resetting the local view/date. Calendar now reads validated `date` and `view` presentation fields from its URL. Date/view controls replace the current history entry; scope changes push while retaining both. Invalid dates never reach range construction. Shared client verification, disposal of former queries/drafts, and transport ownership remain untouched.
+
+Meaningful red: unchanged new regressions against the preserved 21503cf fixture bundle failed for **Month, Week, and Agenda** when a selected future date crossed the client boundary; the invalid-URL control passed. Green: **28/28 browser cases** passed, covering all three views through Master/client A/client B/Master, back/forward and reload; the prior 19 scope/query/draft controls; two membership characterizations; and the existing three Calendar/compact visual cases. **22/22 Calendar units** passed, including invalid civil dates and leap day. Typecheck, focused lint, formatting and diff checks passed. One worker, zero retries, local Chromium fixtures only.
+
+Project-scope clarification: the existing Planner predicate accepts direct `task.clientId` **or** current bootstrap project membership. New positive tests explicitly cover a membership-only task and a task with a different direct client but a matching project. This preserves existing presentation semantics and does not claim strict direct-client equality or backend authorization.
+
+Exact structure update: `useCalendar`, 96 nonblank function lines, fingerprint `99be1ba2c80f448785bb3651fd514baf63dd1553cede089730f7d8715b1c83e4`. It remains one Calendar screen selection/read/composition hook; the new local parser owns only validation of URL presentation state. No shared authority or cache layer changed. Architecture has zero boundary errors; root owns the exact size records. **TaskFilters syntax and function fingerprint are unchanged from fd117** (`e37fcba349a4bcc65144de99bb0050c31d966f7f825ebc44afb754335069a648`); its review was invalidated by the whole TaskWorkspace file change, not by changed TaskFilters syntax. `unchanged-task-filters.json` records the byte comparison.
+
+Evidence: `red/results.json` and failure traces/screenshots; `green/results.json`; `unit.log`, `typecheck.log`, `lint.log`, `format-check.log`, `architecture.json`, `source-hashes.json`. Original finalized lane evidence remains untouched. No native/provider tests or whole-row acceptance are claimed.
+
+Owned server PID 639595 was stopped and port 5197 verified empty (`server-stop.json`, `port-after-stop.txt`). Source and evidence remain for review. Root combined qualification and registry publication remain separate.

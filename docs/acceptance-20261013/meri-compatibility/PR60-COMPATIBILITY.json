@@ -1,0 +1,134 @@
+{
+  "utc": "2026-10-13T12:26:56.134186+00:00",
+  "meriHead": "a2aef4a5fcd3c19cec974dc62b69222836d71b3e",
+  "meriTree": "c9fe3ebb35213af65a70c01563855dfe08ed2606",
+  "frontendPublishedBase": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "all19PublicMembersExact": true,
+  "members": [
+    {
+      "path": "packages/contracts/dist/action-application.metadata.json",
+      "sha256": "9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355",
+      "frontendTarSha256": "9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/action-application.schema.json",
+      "sha256": "a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c",
+      "frontendTarSha256": "a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/document-application.metadata.json",
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "frontendTarSha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/document-application.schema.json",
+      "sha256": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+      "frontendTarSha256": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/meri.schema.json",
+      "sha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "frontendTarSha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "frontendTarSha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/README.md",
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "frontendTarSha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/THIRD-PARTY-NOTICES.md",
+      "sha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "frontendTarSha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/action-application.mjs",
+      "sha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+      "frontendTarSha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/browser.mjs",
+      "sha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "frontendTarSha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/document-application.mjs",
+      "sha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde",
+      "frontendTarSha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/metadata.mjs",
+      "sha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "frontendTarSha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/validate.mjs",
+      "sha256": "c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10",
+      "frontendTarSha256": "c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/action-application.d.ts",
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "frontendTarSha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/browser.d.ts",
+      "sha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "frontendTarSha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/contracts.d.ts",
+      "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "frontendTarSha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/document-application.d.ts",
+      "sha256": "1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31",
+      "frontendTarSha256": "1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/index.d.ts",
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "frontendTarSha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "exact": true
+    },
+    {
+      "path": "packages/contracts/dist/metadata.d.ts",
+      "sha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "frontendTarSha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "exact": true
+    }
+  ],
+  "reviewedMeriBlobs": {
+    "packages/contracts/package.json": "f53cfa9fdbc943da29becd5b206dc3d024ad0767",
+    "apps/control/conversations/README.md": "67ed04f3c1403c4e4e90281f2fe3d9cadec2d23e",
+    "apps/control/conversations/http.mjs": "1a9c4d4b84f16ba012043084c37376141d547835",
+    "apps/control/conversations/boundary.mjs": "1a93997b6fe51bbba74360545151788c653c9523",
+    "packages/ui-stream/src/producer.ts": "7703aaf884569be202d172bd1cefce869febe68b"
+  },
+  "reviewedFrontendSha256": {
+    "packages/meri-client/src/guarded-transport.ts": "1c9ec9128ad333db214aff636bb1745ccb0a306c3920ccc39643f39e8fafc04c"
+  },
+  "runtimeValidation": "Read-only source assessment; native runtime and conversation frontend integration unrun."
+}

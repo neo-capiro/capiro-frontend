@@ -1,0 +1,13 @@
+{
+  "name": "approval-refused-but-unknown",
+  "route": "execute",
+  "httpStatus": 409,
+  "response": {
+    "error": {
+      "code": "COMMAND_APPROVAL_REFUSED",
+      "outcome": "UNKNOWN"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Receiver acceptance does not mean approval-pending: only exact refusal plus NOT_DISPATCHED can map to pending."
+}

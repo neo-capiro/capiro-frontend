@@ -1,0 +1,875 @@
+{
+  "review": "Cross-lane acceptance-ledger publication audit",
+  "createdAt": "2026-10-12T14:38:46.686605+00:00",
+  "mode": "READ_ONLY_LEDGER_AND_TARGETED_SOURCE_AUDIT",
+  "frozenApplicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "evidenceBase": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "scope": "Six partitioned lane row-assessment and findings outputs; no browser gates rerun, app edits, provider calls, native acceptance or external actions. This does not independently revalidate every browser finding.",
+  "coverage": {
+    "assigned": 345,
+    "observed": 345,
+    "uniqueObserved": 345,
+    "inScope": 337,
+    "excluded": 8,
+    "missing": [],
+    "extras": [],
+    "crossLaneDuplicates": [],
+    "result": "PASS_EXACT_ASSIGNED_ID_COVERAGE"
+  },
+  "reasoningAudit": {
+    "result": "PASS_WITH_NORMALIZATION_AND_PRECISION_NOTES",
+    "summary": "Every assigned row has a nonempty concrete observation/reason. Shared Calendar reasons identify a shared hook/owner; exclusion reasons preserve historical scope. No row is merely marked held without explanation. Native and provider limitations are explicit. Some row labels need orthogonal facets so implemented work and confirmed gaps survive aggregation.",
+    "fullNativeAcceptanceClaimsFound": 0,
+    "fullRowAcceptanceClaimsFound": 0,
+    "unqualifiedBlanketDeploymentHoldClaimsFound": 0,
+    "limitation": "Counts describe claims in these lane outputs, not actual deployed correctness. Native acceptance was not performed."
+  },
+  "lanes": [
+    {
+      "lane": "core_intake",
+      "ledger": "evidence/core_intake/row-assessment.json",
+      "sha256": "77349a80f3ca7bde7238361d353a73c553c9dbb22a258ba8ddbff5f272209369",
+      "assigned": 59,
+      "observed": 59,
+      "inScope": 57,
+      "excludedIds": [
+        "CORE-010",
+        "CORE-018"
+      ],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rows",
+      "statusField": "classification",
+      "statusCounts": {
+        "IMPLEMENTED_BOUNDED_SOURCE_REVIEW": 24,
+        "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY": 19,
+        "EXCLUDED_AS_PREVIOUSLY_RECORDED": 2,
+        "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP": 1,
+        "CONFIRMED_SOURCE_FEATURE_GAP": 2,
+        "IMPLEMENTED_WITH_BACKEND_DEPENDENCY": 9,
+        "CONFIRMED_SOURCE_CONTRACT_MISMATCH_REFER_TO_MS01": 1,
+        "IMPLEMENTED_HOSTED_FLOW_NATIVE_UNASSESSED": 1
+      },
+      "reasonField": "reason",
+      "uniqueReasons": 58,
+      "blankReasons": [],
+      "sharedReasons": [
+        {
+          "ids": [
+            "CORE-010",
+            "CORE-018"
+          ],
+          "assessment": "Explicit shared owner/hook, or preserved exclusions; not an unexplained blanket hold."
+        }
+      ],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    },
+    {
+      "lane": "core_profile",
+      "ledger": "evidence/core_profile/row-assessment.json",
+      "sha256": "afd5a4e3dc50b211eeda3f27c274e45f05cec67f426361bba3e6e14eb2ead7fb",
+      "assigned": 59,
+      "observed": 59,
+      "inScope": 59,
+      "excludedIds": [],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rows",
+      "statusField": "classification",
+      "statusCounts": {
+        "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP_NATIVE_OPEN": 13,
+        "IMPLEMENTED_BOUNDED_NATIVE_OPEN": 26,
+        "PARTIAL_IMPLEMENTATION_AND_OWNER_DEPENDENCY": 4,
+        "CONFIRMED_DEFECT_AND_OWNER_DEPENDENCY": 2,
+        "CONFIRMED_SOURCE_AND_BROWSER_DEFECT": 2,
+        "PARTIAL_IMPLEMENTATION_AND_NATIVE_DEPENDENCY": 2,
+        "LEGITIMATELY_UNAVAILABLE_OWNER_DEPENDENCY": 10
+      },
+      "reasonField": "frontendAssessment",
+      "uniqueReasons": 59,
+      "blankReasons": [],
+      "sharedReasons": [],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    },
+    {
+      "lane": "calendar_relationships",
+      "ledger": "evidence/calendar_relationships/row-assessment.json",
+      "sha256": "d9eeb6df8a79f3b43a5dc8e2bd85dc083d070891139293ca0f53293bb7da2b9c",
+      "assigned": 100,
+      "observed": 100,
+      "inScope": 95,
+      "excludedIds": [
+        "ENG-meeting_share_legacy",
+        "ENG-meeting_unshare_legacy",
+        "ENG-legacy_engagement_waves",
+        "ENG-legacy_dc_windows",
+        "ENG-legacy_plan_visit"
+      ],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rows",
+      "statusField": "localStatus",
+      "statusCounts": {
+        "SUPPORTED_BOUNDED_FRONTEND": 67,
+        "UNAVAILABLE_CONTRACT_FACET": 3,
+        "PARTIAL_FRONTEND": 7,
+        "FRONTEND_DEFECT": 15,
+        "EXCLUDED": 5,
+        "REQUIREMENT_RECONCILIATION": 3
+      },
+      "reasonField": "reason",
+      "uniqueReasons": 94,
+      "blankReasons": [],
+      "sharedReasons": [
+        {
+          "ids": [
+            "ENG-meeting_share_artifacts",
+            "ENG-meeting_unshare_artifacts"
+          ],
+          "assessment": "Explicit shared owner/hook, or preserved exclusions; not an unexplained blanket hold."
+        },
+        {
+          "ids": [
+            "ENG-notes_add",
+            "ENG-notes_edit",
+            "ENG-notes_approve"
+          ],
+          "assessment": "Explicit shared owner/hook, or preserved exclusions; not an unexplained blanket hold."
+        },
+        {
+          "ids": [
+            "ENG-debrief_create",
+            "ENG-debrief_edit",
+            "ENG-debrief_approve"
+          ],
+          "assessment": "Explicit shared owner/hook, or preserved exclusions; not an unexplained blanket hold."
+        },
+        {
+          "ids": [
+            "ENG-tasks_list",
+            "ENG-tasks_update"
+          ],
+          "assessment": "Explicit shared owner/hook, or preserved exclusions; not an unexplained blanket hold."
+        }
+      ],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    },
+    {
+      "lane": "objectives_work_intel",
+      "ledger": "evidence/objectives_work_intel/row-assessment.json",
+      "sha256": "c8f3044e7b7080a1588dc1fa0d92c8079125397a5141b4f4ba9f92cafb3dcc64",
+      "assigned": 73,
+      "observed": 73,
+      "inScope": 72,
+      "excludedIds": [
+        "CAP-14"
+      ],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rows",
+      "statusField": "assessment",
+      "statusCounts": {
+        "PARTIAL_SOURCE_AND_DESIGN_REVIEW": 3,
+        "BOUNDED_EXISTING_EVIDENCE_RETAINED": 14,
+        "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING": 12,
+        "BACKEND_DURABILITY_DEPENDENCY": 4,
+        "CONFIRMED_FRONTEND_DEFECT": 2,
+        "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY": 4,
+        "NATIVE_FEATURE_DEPENDENCY": 1,
+        "CONFIRMED_FRONTEND_DEFECT_AND_NATIVE_DEPENDENCY": 1,
+        "CONFIRMED_FRONTEND_VISUAL_DEFECT": 2,
+        "SOURCE_REVIEW_NATIVE_PENDING": 4,
+        "NATIVE_CONCURRENCY_AND_POLICY_DEPENDENCY": 1,
+        "DESIGN_AUDIT_RECONCILIATION_AND_NATIVE_PENDING": 1,
+        "NATIVE_DESTINATION_DEPENDENCY": 2,
+        "PRODUCT_AND_MERI_CONTRACT_DEPENDENCY": 2,
+        "BACKEND_CONTRACT_DEPENDENCY": 11,
+        "PARTIAL_SOURCE_AND_FIGMA_REVIEW": 1,
+        "SOURCE_AND_NATIVE_DESTINATION_PENDING": 1,
+        "BACKEND_AND_PRODUCT_CONTRACT_DEPENDENCY": 1,
+        "EXCLUDED_AS_PREVIOUSLY_RECORDED": 1,
+        "NATIVE_PROVIDER_AND_CONCURRENCY_DEPENDENCY": 1,
+        "BACKEND_SEMANTICS_DEPENDENCY": 2,
+        "BACKEND_AND_MERI_CONTRACT_DEPENDENCY": 1,
+        "PRODUCT_DECISION_AND_NATIVE_DEPENDENCY": 1
+      },
+      "reasonField": "reason",
+      "uniqueReasons": 73,
+      "blankReasons": [],
+      "sharedReasons": [],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    },
+    {
+      "lane": "prospects",
+      "ledger": "evidence/prospects/row-assessment.json",
+      "sha256": "d071e3cf2be30c6ad285cb643036dc67936ec938cf9f74acc723360bb0bbe237",
+      "assigned": 40,
+      "observed": 40,
+      "inScope": 40,
+      "excludedIds": [],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rowAssessments",
+      "statusField": "assessment",
+      "statusCounts": {
+        "CONFIRMED_DEFECT": 2,
+        "BOUNDED_IMPLEMENTED": 5,
+        "PARTIAL_IMPLEMENTED_WITH_DEPENDENCIES": 5,
+        "DEPENDENCY_UNAVAILABLE": 8,
+        "BOUNDED_IMPLEMENTED_CAPABILITY_GATED": 1,
+        "BOUNDED_IMPLEMENTED_NATIVE_DEPENDENCY": 4,
+        "CONFIRMED_PRODUCT_GAP_WITH_IMPLEMENTED_FACETS": 1,
+        "BOUNDED_IMPLEMENTED_WITH_VISUAL_DIFFERENCE": 1,
+        "CONFIRMED_DEFECT_AND_RICH_EDITOR_GAP": 1,
+        "LEGITIMATELY_DISABLED_DEPENDENCY": 6,
+        "PARTIAL_ORIGIN_RETENTION_NOT_CARRY_OVER": 1,
+        "PARTIAL_LINK_NAVIGATION_NATIVE_ENTITLEMENT_UNASSESSED": 1,
+        "PARTIAL_IMPLEMENTED_WITH_VISUAL_GAPS": 1,
+        "REUSED_SCOPED_SHELL_PARTIAL": 1,
+        "PRODUCT_DEFINITION_DEPENDENCY": 2
+      },
+      "reasonField": "observed",
+      "uniqueReasons": 40,
+      "blankReasons": [],
+      "sharedReasons": [],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    },
+    {
+      "lane": "modules_settings",
+      "ledger": "evidence/modules_settings/row-assessment.json",
+      "sha256": "9a03c487274e2b16af3996eb3c7634f4b2a7cd8f6a0fdcc9f26aa2490025f781",
+      "assigned": 14,
+      "observed": 14,
+      "inScope": 14,
+      "excludedIds": [],
+      "missingIds": [],
+      "extraIds": [],
+      "duplicateIds": [],
+      "rowsContainer": "rows",
+      "statusField": "assessment",
+      "statusCounts": {
+        "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW": 11,
+        "CONFIRMED_SHARED_MUTATION_RECEIPT_GAP": 1,
+        "PARTIAL_SOURCE_COVERAGE": 1,
+        "PARTIAL_WITH_CONTRACT_DEPENDENCY": 1
+      },
+      "reasonField": "observation",
+      "uniqueReasons": 14,
+      "blankReasons": [],
+      "sharedReasons": [],
+      "nativeClaimAssessment": "No full native acceptance claimed; bounded source/fixture findings and remaining native gates are distinguished."
+    }
+  ],
+  "findingRegister": {
+    "count": 37,
+    "severityCounts": {
+      "P2": 25,
+      "P3": 5,
+      "P1": 7
+    },
+    "findings": [
+      {
+        "lane": "core_intake",
+        "id": "CI-01",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-013"
+        ]
+      },
+      {
+        "lane": "core_intake",
+        "id": "CI-02",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-121"
+        ]
+      },
+      {
+        "lane": "core_intake",
+        "id": "CI-03",
+        "severity": "P3",
+        "rowIds": [
+          "CORE-028",
+          "CORE-030",
+          "CORE-031",
+          "CORE-032"
+        ]
+      },
+      {
+        "lane": "core_intake",
+        "id": "CI-04",
+        "severity": "P3",
+        "rowIds": [
+          "CORE-012",
+          "CORE-014"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-01",
+        "severity": "P1",
+        "rowIds": [
+          "CORE-058"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-02",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-056",
+          "CORE-063"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-03",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-060"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-04",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-033",
+          "CORE-034",
+          "CORE-035",
+          "CORE-037",
+          "CORE-038",
+          "CORE-039"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-05",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-048",
+          "CORE-103",
+          "CORE-104",
+          "CORE-105",
+          "CORE-107",
+          "CORE-110"
+        ]
+      },
+      {
+        "lane": "core_profile",
+        "id": "CP-06",
+        "severity": "P2",
+        "rowIds": [
+          "CORE-052",
+          "CORE-053",
+          "CORE-062"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-01",
+        "severity": "P1",
+        "rowIds": [
+          "ENG-notes_add",
+          "ENG-notes_edit",
+          "ENG-notes_approve",
+          "ENG-debrief_create",
+          "ENG-debrief_edit",
+          "ENG-debrief_approve",
+          "ENG-meeting_share_artifacts",
+          "ENG-meeting_unshare_artifacts"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-02",
+        "severity": "P1",
+        "rowIds": [
+          "ENG-notes_add",
+          "ENG-debrief_create"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-03",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-meeting_edit"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-04",
+        "severity": "P1",
+        "rowIds": [
+          "ENG-meeting_edit",
+          "ENG-meeting_create"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-05",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-calendar_list",
+          "ENG-meeting_filters"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-06",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-meeting_details",
+          "ENG-meeting_attendees"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-07",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-email_signature",
+          "ENG-email_send"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-08",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-meeting_share_artifacts",
+          "ENG-meeting_unshare_artifacts"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-09",
+        "severity": "P2",
+        "rowIds": [
+          "ENG-meeting_shared_feed"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-10",
+        "severity": "P3",
+        "rowIds": [
+          "ENG-email_send"
+        ]
+      },
+      {
+        "lane": "calendar_relationships",
+        "id": "CR-11",
+        "severity": "P3",
+        "rowIds": [
+          "ENG-email_rewrite"
+        ]
+      },
+      {
+        "lane": "objectives_work_intel",
+        "id": "OWI-F01",
+        "severity": "P2",
+        "rowIds": [
+          "OBJ-12"
+        ]
+      },
+      {
+        "lane": "objectives_work_intel",
+        "id": "OWI-F02",
+        "severity": "P2",
+        "rowIds": [
+          "WORK-03",
+          "WORK-08"
+        ]
+      },
+      {
+        "lane": "objectives_work_intel",
+        "id": "OWI-F03",
+        "severity": "P2",
+        "rowIds": [
+          "CAP-08"
+        ]
+      },
+      {
+        "lane": "objectives_work_intel",
+        "id": "OWI-F04",
+        "severity": "P2",
+        "rowIds": [
+          "CAP-01"
+        ]
+      },
+      {
+        "lane": "prospects",
+        "id": "PROS-F01",
+        "severity": "P1",
+        "rowIds": [
+          "PROS-001",
+          "PROS-002"
+        ]
+      },
+      {
+        "lane": "prospects",
+        "id": "PROS-F02",
+        "severity": "P1",
+        "rowIds": [
+          "PROS-024"
+        ]
+      },
+      {
+        "lane": "prospects",
+        "id": "PROS-F03",
+        "severity": "P2",
+        "rowIds": [
+          "PROS-019"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS01",
+        "severity": "P1",
+        "rowIds": [
+          "CORE-077"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS02",
+        "severity": "P2",
+        "rowIds": [
+          "MCAL-002",
+          "MCAL-003"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS03",
+        "severity": "P2",
+        "rowIds": [
+          "MCAL-009"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS04",
+        "severity": "P2",
+        "rowIds": [
+          "MCAL-013"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS05",
+        "severity": "P2",
+        "rowIds": [
+          "MCAL-009"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS06",
+        "severity": "P2",
+        "rowIds": [
+          "MCAL-006"
+        ]
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS07",
+        "severity": "P2",
+        "rowIds": []
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS08",
+        "severity": "P2",
+        "rowIds": []
+      },
+      {
+        "lane": "modules_settings",
+        "id": "MS09",
+        "severity": "P3",
+        "rowIds": []
+      }
+    ],
+    "crossLaneReference": "CORE-077 => MS01 is intentional; no duplicate finding required.",
+    "unassignedScreenFindings": [
+      "MS07",
+      "MS08",
+      "MS09"
+    ]
+  },
+  "localPathAudit": {
+    "checkedReferenceOccurrences": 1151,
+    "missingReferences": [],
+    "method": "Recognized local file references in source/evidence fields checked under repository or lane directory, including glob matches; excludes remote backend pseudo-paths/URLs. Presence is not proof of content or native success.",
+    "correction": "CP-01 broken trace reference was corrected by its author before evidence was copied. Initial audit and observations remain in copied raw review."
+  },
+  "reconciliationItems": [
+    {
+      "id": "CLR-01",
+      "priority": "publication_required",
+      "kind": "schema_normalization",
+      "lanes": [
+        "core_intake",
+        "core_profile",
+        "calendar_relationships",
+        "objectives_work_intel",
+        "prospects",
+        "modules_settings"
+      ],
+      "observation": "Six ledgers use different row containers, assessment fields and native/full-row fields. Prospects uses rowAssessments; Calendar and Prospects have no explicit fullRowAcceptance field. Reading rows only loses all 40 Prospects criteria. Full-row OPEN and native unrun must be preserved separately from the local assessment label.",
+      "action": "Normalize to audit_id, scope, frontendAssessment, visualAssessment, nativeAssessment, fullRowAcceptance, reason, findingIds, sourceEvidence, freshEvidence and inheritedEvidence. Resolve exclusion scope from assigned rows. Preserve original raw fields/evidence. Do not turn IMPLEMENTED/SUPPORTED/BOUNDED labels or passed fixture cases into full or native acceptance.",
+      "evidence": [
+        "PARTITIONS.json",
+        "prospects/row-assessment.json",
+        "calendar_relationships/row-assessment.json",
+        "modules_settings/row-assessment.json"
+      ],
+      "resolution": "assemble.py reads both containers and normalizes all345 rows, exclusion/native/full-row status, classification, observation, finding references and frozen source. Full original row details retained.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-02",
+      "priority": "publication_required",
+      "kind": "stale_interface_mapping",
+      "lanes": [
+        "calendar_relationships"
+      ],
+      "rowIds": [
+        "ENG-tasks_create",
+        "ENG-tasks_list",
+        "ENG-tasks_update"
+      ],
+      "observation": "Reasons correctly describe canonical Planner and durable generic activity commands, but nativeRequiredInterfaces still list POST/GET/PATCH /api/engagement/tasks. Those inherited endpoints do not identify the current frontend path.",
+      "action": "Retain the legacy endpoint as historical requirement context if necessary. Record the actual Core activity-commands creation/read/resume owner and Strategy /planner/tasks list/detail/versioned update interfaces, and keep commitment/strategy semantics separate.",
+      "evidence": [
+        "calendar_relationships/row-assessment.json",
+        "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts:49",
+        "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts:67",
+        "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts:113",
+        "apps/web/src/shared/capiro/operations/planner-tasks.ts:47",
+        "apps/web/src/shared/capiro/operations/planner-tasks.ts:87"
+      ],
+      "resolution": "Calendar reviewer corrected nativeRequiredInterfaces to Core durable activity commands and Strategy Planner; historical interfaces retained separately.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-03",
+      "priority": "publication_required",
+      "kind": "broken_evidence_link",
+      "lanes": [
+        "core_profile"
+      ],
+      "findingIds": [
+        "CP-01"
+      ],
+      "observation": "CP-01 trace wildcard browser-output/assessment-DEFECT-same-id-w-*/trace.zip matches no file. Its JSON, screenshot and source evidence exist.",
+      "action": "Use browser-output/assessment-DEFECT-same-id--5e63f-isses-requested-restriction/trace.zip. This is a reference correction, not a challenge to the reproduced defect.",
+      "evidence": [
+        "core_profile/findings.json",
+        "core_profile/browser-output/assessment-DEFECT-same-id--5e63f-isses-requested-restriction/trace.zip"
+      ],
+      "resolution": "Core Profile reviewer replaced missing CP-01 trace wildcard with the exact extant trace path before copying.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-04",
+      "priority": "publication_required",
+      "kind": "route_scope_preservation",
+      "lanes": [
+        "modules_settings"
+      ],
+      "rowIds": [
+        "MCAL-002",
+        "MCAL-003",
+        "MCAL-006",
+        "MCAL-009",
+        "MCAL-013"
+      ],
+      "findingIds": [
+        "MS02",
+        "MS03",
+        "MS04",
+        "MS05",
+        "MS06"
+      ],
+      "observation": "Assigned MCAL rows are canonical /calendar; these related findings concern /modules/calendar or Modules meeting detail. The lane explicitly warns not to transplant the variant failures.",
+      "action": "Retain route/component scope on each finding and distinguish relatedModulesVariantFindings from findings against the canonical criterion. Include these real route defects in product findings without making the passing canonical source checks fail by association.",
+      "evidence": [
+        "modules_settings/report.md",
+        "modules_settings/row-assessment.json",
+        "modules_settings/findings.json"
+      ],
+      "resolution": "Normalized rows retain relatedVariantFindingIds separately from canonical findingIds. Original route-specific findings and canonical observations preserved.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-05",
+      "priority": "publication_required",
+      "kind": "rollup_classification_loss",
+      "lanes": [
+        "core_profile",
+        "modules_settings",
+        "core_intake"
+      ],
+      "observation": "Core Profile IMPLEMENTED_BOUNDED_NATIVE_OPEN rows can also have confirmed visual/workflow findings. All 14 MCAL rows share BOUNDED_SOURCE_AND_EVIDENCE_REVIEW although MCAL-010 lacks SAM/SBIR composition and MCAL-012 lacks forecast-window contracts. Core Intake implemented rows also carry CI-03/04 presentation findings. A single status rollup would hide specific gaps.",
+      "action": "Use orthogonal implementation/visual/native facets or a finding-present flag. Preserve the positive implemented facets and the explicit gap in the same row. MCAL-010 is partial source coverage; MCAL-012 is implemented effective dates plus unavailable forecasts, not a wholesale unavailable calendar.",
+      "evidence": [
+        "core_profile/row-assessment.json#CORE-033",
+        "core_profile/row-assessment.json#CORE-048",
+        "core_profile/row-assessment.json#CORE-062",
+        "core_intake/row-assessment.json#CORE-028",
+        "modules_settings/row-assessment.json#MCAL-010",
+        "modules_settings/row-assessment.json#MCAL-012"
+      ],
+      "resolution": "Core Profile reviewer changed13 affected classifications to explicitly retain visual gaps; Modules corrected MCAL-010 partial source coverage and MCAL-012 partial with contract dependency. Other gap-bearing rows retain exact reasons and findingIds.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-06",
+      "priority": "review_decision",
+      "kind": "severity_consistency",
+      "lanes": [
+        "prospects",
+        "objectives_work_intel"
+      ],
+      "findingIds": [
+        "PROS-F01",
+        "OWI-F01"
+      ],
+      "observation": "Both prove cached formerly authorized records and dependent UI remain accessible after a current 403. Prospects labels P1; Objectives labels P2. Neither demonstrates a server authorization bypass, cross-tenant fetch or successful unauthorized mutation. Objectives also opens the stale editor; Prospects opens cached pipeline.",
+      "action": "Apply one severity rubric or document why broader prospect-list exposure changes priority. Keep exposure, reproduction and feature-specific release impact separate from the P label. Do not silently claim either proves backend bypass.",
+      "evidence": [
+        "prospects/findings.json#PROS-F01",
+        "objectives_work_intel/findings.json#OWI-F01"
+      ],
+      "resolution": "Root disposition normalizes PROS-F01 to P2 to match OWI-F01, with author P1 retained. Same stale current-read impact is recorded without backend bypass claims.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-07",
+      "priority": "publication_required",
+      "kind": "source_vs_native_dependency_wording",
+      "lanes": [
+        "prospects"
+      ],
+      "rowIds": [
+        "PROS-017"
+      ],
+      "observation": "Remaining text says native contact registration/DDL/release is open. Current backend243248e manifest publishes the Contacts routes and includes allocated but unapplied Contacts migration; compatibility review describes the composed current service. Registration wording can be read as the stale claim that source is not integrated.",
+      "action": "State that Contacts source is composed and compatible; unapplied DDL, activation/deployment, real identity/RLS/persistence/concurrency and conversion carry-over remain unqualified as applicable. Do not treat existing source registration as still absent or treat manifest inclusion as deployed acceptance.",
+      "evidence": [
+        "prospects/row-assessment.json#PROS-017",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:351",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/RELEASE-MANIFEST.json:414",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:15",
+        "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md:23"
+      ],
+      "resolution": "Prospects reviewer now states source registration is composed at243248e and distinguishes unapplied migration/native activation and persistence from source availability.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-08",
+      "priority": "publication_required",
+      "kind": "cross_lane_finding_reference",
+      "lanes": [
+        "core_intake",
+        "modules_settings"
+      ],
+      "rowIds": [
+        "CORE-077"
+      ],
+      "findingIds": [
+        "MS01"
+      ],
+      "observation": "Core Intake CORE-077 now explicitly supersedes its initial unresolved-risk classification and references canonical MS01 in Modules/Settings. This is a valid cross-lane reference; a lane-local finding lookup reports it as missing. The old classification is retained only under initialBoundedAssessment.",
+      "action": "Resolve finding IDs globally and count MS01 once. Publish the current source-contract mismatch classification; retain the initial statement as history only. No duplicate charge or live subscription creation was executed.",
+      "evidence": [
+        "core_intake/row-assessment.json#CORE-077",
+        "core_intake/secondary-review.json",
+        "modules_settings/findings.json#MS01"
+      ],
+      "resolution": "CORE-077 resolves globally to MS01, counted once. Superseded initialBoundedAssessment remains historical; current row uses confirmed source-contract mismatch.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "CLR-09",
+      "priority": "evidence_precision",
+      "kind": "file_level_source_anchors",
+      "lanes": [
+        "objectives_work_intel"
+      ],
+      "observation": "All 73 row sourceEvidence anchors use line 1. These are file-level references, not exact assertion sites. The four concrete findings separately supply precise lines, reproduction and screenshots.",
+      "action": "Label the row anchors as file-level or add specific lines when normalizing. Use findings.json for exact defect locations; do not represent the line-1 row anchors as independently precise line proof. The row reasons themselves are all nonempty and distinct.",
+      "evidence": [
+        "objectives_work_intel/row-assessment.json",
+        "objectives_work_intel/findings.json"
+      ],
+      "resolution": "Consolidated Objectives/Work/intelligence rows explicitly label sourceEvidencePrecision as FILE_LEVEL_ROW_ANCHORS. Exact defect locations remain in findings.json. No line1 anchor is promoted to exact assertion proof.",
+      "status": "RESOLVED_WITH_DISCLOSED_LIMIT"
+    },
+    {
+      "id": "CLR-10",
+      "priority": "publication_required",
+      "kind": "historical_source_and_scope_preservation",
+      "lanes": [
+        "core_intake",
+        "core_profile",
+        "calendar_relationships",
+        "objectives_work_intel",
+        "prospects",
+        "modules_settings"
+      ],
+      "observation": "Assigned rows preserve historical currentSource2d50edd8... whereas current lane assessments pin frozen shipping4a161488... . Extra Modules MS07/MS08/MS09 findings have no 345-row ID; that is additional reviewed product scope, not missing coverage.",
+      "action": "When merging, set the current assessment source to4a1614886fd98bb42d529f1ef59b3d01d7ff9173 and preserve prior source separately. Keep extra Modules findings in the product/screen register without creating or duplicating Portfolio criteria. Do not let inherited337-open ledger wording imply337 frontend failures or a blanket deployment hold.",
+      "evidence": [
+        "PARTITIONS.json",
+        "core_intake/assigned-rows.json",
+        "modules_settings/findings.json",
+        "objectives_work_intel/row-assessment.json"
+      ],
+      "resolution": "Every consolidated row records frozen assessmentSourceCommit4a161488. Historical input ledger remains unchanged. MS07/MS08/MS09 remain unassigned product-screen findings, without invented Portfolio rows.",
+      "status": "RESOLVED"
+    }
+  ],
+  "preserveTheseCorrections": [
+    "CORE-077 MS01 supersedes historical unresolved billing risk, but provider effects remain unrun.",
+    "CORE-078 internal Billing Settings and hosted portal are implemented; do not restore external-link-only claim.",
+    "CORE-096/ENG-tasks_create generic durable activity plus Planner follow-up exists; full commitment semantics remain separate.",
+    "CORE-102 current Calendar handoff includes both start and end; do not restore old absent-end claim.",
+    "ENG-calendar_navigation and calendar-only sync scope conflicts need requirement reconciliation, not guessed missing-feature findings.",
+    "PROS-019\u2013021 current scoped Files and Workspace exist; do not restore historical wholesale absent-adapter holds.",
+    "OPP-01 service fit bands do not establish a probability defect; BILL coverage dashes truthfully disclose absent semantics.",
+    "CAP-14 and other seven exclusions remain excluded.",
+    "Previously repaired capability Name/type/sector/scrim, Bill header/results, and bounded Objectives/Work acceptance remain retained."
+  ],
+  "conclusion": "All345 assigned rows are present once,337 in scope. Publication reconciliation is complete; original raw evidence and limitations are preserved. Zero full native rows are accepted and no blanket infrastructure hold is inferred. Root owns final review and commit.",
+  "finalizedAt": "2026-10-12T14:42:04.534697+00:00",
+  "publicationStatus": "RECONCILIATIONS_APPLIED_WITH_EXPLICIT_PRECISION_LIMIT",
+  "copiedRawReview": "evidence/objectives_work_intel/cross-lane-ledger-review.json",
+  "rootSeverityDispositions": {
+    "PROS-F01": {
+      "from": "P1",
+      "to": "P2"
+    },
+    "CP-03": {
+      "from": "P2",
+      "to": "P3"
+    },
+    "CR-04": {
+      "from": "P1",
+      "to": "P2"
+    }
+  },
+  "rootSeverityCounts": {
+    "P1": 5,
+    "P2": 26,
+    "P3": 6
+  }
+}

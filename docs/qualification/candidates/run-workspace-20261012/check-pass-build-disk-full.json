@@ -1,0 +1,38 @@
+{
+  "node": "v24.19.0",
+  "offlineSupportedCiEnvironment": {
+    "CI": "true",
+    "__NEXT_AGENT_UPGRADE": "security",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_IGNORE_INCORRECT_LOCKFILE": "1",
+    "NPM_CONFIG_OFFLINE": "true"
+  },
+  "lockOrDependencyVersionsModified": false,
+  "cleanBuild": true,
+  "commands": [
+    {
+      "label": "check",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 15.229,
+      "bytes": 12083,
+      "sha256": "2cb03124ce1a1d7a0cc8bc6022e3889d3da0e229c78eebc2c230a9fb7d8492cc"
+    },
+    {
+      "label": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 1,
+      "elapsedSeconds": 2.373,
+      "bytes": 1609,
+      "sha256": "f93907f17235c3750878e8d26f5ca1b7ec3b94e92ec6f38bc20866753e4715ca"
+    }
+  ]
+}

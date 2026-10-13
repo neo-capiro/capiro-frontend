@@ -1,0 +1,59 @@
+{
+  "sealedUTC": "2026-10-13T04:54:55.799992+00:00",
+  "source": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+  "decision": "PASS_WITH_EXPLICIT_LOCAL_SCOPE_LIMITS",
+  "visualHold": "RESOLVED_BY_SCROLLED_VIEWPORT_DIAGNOSTIC",
+  "priorManifestSha256": "07351301d2ab5be6babacce204974708d61df5dba9cd9501399f264ee78ce098",
+  "files": [
+    {
+      "path": "VISUAL-REVIEW-PENDING.json",
+      "bytes": 694,
+      "sha256": "9d1c251205d52879462b484dd16b96f3cdab000fb794e4a69318bd47c60490ca"
+    },
+    {
+      "path": "final-evidence-review.json",
+      "bytes": 30101,
+      "sha256": "13b921516ed26b1aaec652dca443a0987c652d4f36de5590cad1735cf28ebe0a"
+    },
+    {
+      "path": "manifest-final-attempt1.json",
+      "bytes": 1410,
+      "sha256": "9a27a48a9655a7e753a8b5c6bd2ab62e62a3e0f3d2e8772fab0db057e87fea65"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 797,
+      "sha256": "07351301d2ab5be6babacce204974708d61df5dba9cd9501399f264ee78ce098"
+    },
+    {
+      "path": "review-draft.md",
+      "bytes": 3234,
+      "sha256": "40f8b5c2b54c9c4d935a0bf3eca17c03665e51765a7ef89895a84dd0667c2697"
+    },
+    {
+      "path": "review-in-progress.json",
+      "bytes": 19247,
+      "sha256": "90dea3b247cfa5eca960df6efc752782e0f0a1180f3892a9d435fa36ef4e3c65"
+    },
+    {
+      "path": "review.md",
+      "bytes": 4487,
+      "sha256": "ab34e0a3a3e6fcbf60f07660738523b60fd8db0ffaa24c840680d7709657d8dc"
+    },
+    {
+      "path": "seal-correction.json",
+      "bytes": 838,
+      "sha256": "850c0d75be165d5f543a2fcab2a32c93f7b0e5b04f27bf974630144c98d17522"
+    },
+    {
+      "path": "visual-addendum.md",
+      "bytes": 2669,
+      "sha256": "339138059a3e594d0fd9f53ca45c2e48988046c87390342113a34f454ce875c0"
+    },
+    {
+      "path": "visual-disposition.json",
+      "bytes": 11395,
+      "sha256": "4cd08291805a8f5a18433baf4f3bee1d62530eda3f2969b271736257c22dafaf"
+    }
+  ]
+}

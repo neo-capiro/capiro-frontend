@@ -1,0 +1,247 @@
+{
+  "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "httpRecords": [
+    {
+      "path": "/healthz",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/portfolio",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/calendar",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/sign-in",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/api/backend/core/clients",
+      "status": 503,
+      "headers": "passed"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/modules",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings",
+      "status": 307,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+      "status": 307,
+      "headers": "passed"
+    },
+    {
+      "path": "/settings/personal",
+      "status": 200,
+      "headers": "passed"
+    },
+    {
+      "path": "/api/capiro/me.read",
+      "status": 503,
+      "headers": "passed"
+    }
+  ],
+  "previewRootResult": {
+    "defaultProduct": "portfolio",
+    "rootStatus": 200,
+    "location": "/",
+    "followedSetup": true
+  },
+  "viewportThemeRecords": [
+    {
+      "colorScheme": "light",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "portfolio": {
+        "background": "rgb(245, 245, 244)",
+        "color": "rgb(10, 10, 10)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "none"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "colorScheme": "light",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "portfolio": {
+        "background": "rgb(245, 245, 244)",
+        "color": "rgb(10, 10, 10)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "none"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "colorScheme": "dark",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "portfolio": {
+        "background": "rgb(18, 18, 18)",
+        "color": "rgb(250, 250, 249)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "invert(1)"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    },
+    {
+      "colorScheme": "dark",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "portfolio": {
+        "background": "rgb(18, 18, 18)",
+        "color": "rgb(250, 250, 249)",
+        "fontSize": "14px",
+        "markerCount": 1,
+        "fits": true,
+        "sameDocument": true
+      },
+      "wordmark": {
+        "width": 77,
+        "height": 26,
+        "filter": "invert(1)"
+      },
+      "stylesRestoredOnReturn": true,
+      "clientNavigation": true,
+      "headerNavigation": true
+    }
+  ],
+  "desktopHistoryRecords": [
+    {
+      "crossMode": "Meri/Portfolio/Modules/Settings",
+      "history": "back/forward",
+      "sameDocument": true
+    },
+    {
+      "crossMode": "Meri/Portfolio/Modules/Settings",
+      "history": "back/forward",
+      "sameDocument": true
+    }
+  ],
+  "assertionMapping": [
+    {
+      "facet": "Credential-free route and response-header contract",
+      "source": "apps/web/tests/production/verify-standalone.mjs",
+      "line": 13,
+      "evidence": "11 HTTP result records: expected setup pages, health response, missing-service 503s and settings 307 redirects.",
+      "boundedDetails": "Settings Location is checked with and without clientId query. Assertions check nosniff, DENY, and absent x-powered-by. Referrer-Policy exists in source but is not directly asserted by this probe. No live authorization or native service call is accepted."
+    },
+    {
+      "facet": "Actual header Portfolio link and scoped styles across viewport/theme",
+      "source": "apps/web/tests/production/verify-standalone.mjs",
+      "line": 56,
+      "evidence": "4 theme/viewport records and 4 visually reviewed PNGs.",
+      "boundedDetails": "Actual Portfolio header Link is clicked from Meri at 1440 and 390; checks canonical / href, setup heading, loaded 77x26 wordmark, dark inversion, one Portfolio marker, 14px body, expected background, no document overflow, same document, and restored Meri computed body styles on return. clientNavigation means client-side routing, not selected-client/tenant authority verification."
+    },
+    {
+      "facet": "Meri/Modules/Settings navigation and history",
+      "source": "apps/web/tests/production/verify-standalone.mjs",
+      "line": 162,
+      "evidence": "2 history records, one per theme.",
+      "boundedDetails": "Runs only at 1440x1040. Actual Modules and Account settings links, Connection setup heading, absence of Portfolio marker in Modules, /settings/personal URL, back to /modules and forward to settings, same-document sentinel. No screenshots capture Meri, Modules or Settings destination appearance; no mobile full-history claim."
+    },
+    {
+      "facet": "Default Portfolio root and runtime-config eligibility",
+      "source": "apps/web/tests/production/run-standalone.mjs",
+      "line": 42,
+      "evidence": "Successful runner plus preview-root-smoke.json and source-bound exit receipt.",
+      "boundedDetails": "9 shared entry routes must be absent from prerender manifest; runner clears keys/service origins. Separate CAPIRO_DEFAULT_PRODUCT=portfolio root receives 200 and setup content. Meri itself remains the explicitly labeled disconnected synthetic product fixture; no injected browser identity or intercepted service response is used."
+    },
+    {
+      "facet": "Uncaught page errors",
+      "source": "apps/web/tests/production/verify-standalone.mjs",
+      "line": 185,
+      "evidence": "pageErrors []",
+      "boundedDetails": "No pageerror during these flows; not a blanket console/network/performance or crash-free application claim."
+    }
+  ],
+  "accessibility": {
+    "supported": [
+      "Source provides html lang=en, main landmark, h1 setup heading, explanatory paragraph, semantic ul/li and Capiro image alternative text.",
+      "Product modes navigation and destination links have accessible names; role/name locators successfully identify clicked controls in the producer run.",
+      "All captured setup text and logo appear legible in light/dark; both phone captures show wrapped content without visible clipping.",
+      "Producer asserts no horizontal document overflow for the four Portfolio fallback states."
+    ],
+    "notEstablished": [
+      "No keyboard-only Tab order, activation, focus-return/history focus or visible focus capture.",
+      "No axe or equivalent whole-page accessibility audit, screen-reader session, accessible-tree snapshot or formal all-element contrast measurement.",
+      "No zoom/reflow at 200/400%, forced colors, reduced motion, localization or other browser/device coverage.",
+      "No signed-in forms/dialogs, loaded data tables, mobile Modules/Settings history or authenticated current-client replacement accessibility."
+    ],
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1040
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ]
+  },
+  "testCoverageDefectsFound": [],
+  "importantCoverageBoundaries": [
+    "Only the Portfolio configuration-required fallback is captured.",
+    "Full mode history tested at desktop width; mobile has Portfolio header entry/return only.",
+    "clientNavigation record denotes client-side router behavior, not client identity/authority.",
+    "No live sign-in, native service, provider, Meri runtime or data durability acceptance.",
+    "No Figma or full accessibility acceptance."
+  ],
+  "all337RowsRemainUnaccepted": true,
+  "reviewerExecutedRuntime": false
+}

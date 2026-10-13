@@ -1,0 +1,57 @@
+{
+  "method": "Actual PNGs opened with view_image and visually inspected; automated geometry/keyboard results stored separately.",
+  "files": [
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-1440/files-access-unknown-top.png",
+      "sha256": "5291f59303e5bc3ac1649da497c743c63a9a9d234595bc63b6705ba310b2bd73"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-1440/meeting-unknown-top.png",
+      "sha256": "877b2688b58da976f9bd9da9fa93ce4c0e0806ea3d938b96f4aa5f82b36a9a8c"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-1440/notes-unknown-top.png",
+      "sha256": "5af7d9ef83d761046aa22ecf057f13d143fa0fd09e6429b99ce70fbeb5ec7f42"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-unknown-bottom.png",
+      "sha256": "239c9e5d6ae41c9f878c0fd35fb09518a3bb052d54a82651a8db663c85add5f2"
+    },
+    {
+      "path": "artifacts/review-Files-ACL-pending-unknown-review-at-360/files-access-reviewed-top.png",
+      "sha256": "79270cef3cdff80a9d0dd593188a41dfae436f89108fdc41f67fd4e4fcafef5c"
+    },
+    {
+      "path": "artifacts/review-Files-folder-unknown-review-at-360/files-folder-unknown-top.png",
+      "sha256": "41d8d9eaff0b4b07ac95c3e36fe90dc3a67d0d6289b11a444f9b71ce20c82b3e"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown-top.png",
+      "sha256": "a0716a120ec7ea00b39ddc2a5c25d72df20f53f7791d7470e9bda3881f72fa9c"
+    },
+    {
+      "path": "artifacts/review-Meeting-pending-unknown-at-360/meeting-unknown-bottom.png",
+      "sha256": "44569d1d7649f61a6d3d2c4b16db9944ccc92d88e8f9947903ea84eb5d324476"
+    },
+    {
+      "path": "artifacts/review-Calendar-notes-pending-unknown-at-360/notes-unknown-top.png",
+      "sha256": "6f1416d62eaae24010002b4c37cd94e1f3618c5e1f5b16e5984231bdf8c7f6da"
+    },
+    {
+      "path": "artifacts/review-Calendar-debriefs-pending-unknown-at-360/debriefs-unknown-top.png",
+      "sha256": "3f5aac0f32d3635669c265bc87cea28537ffd4aebe6d3161c75fb9f232479152"
+    }
+  ],
+  "observations": [
+    "No horizontal clipping in inspected dialog content.",
+    "Tall mobile ACL/Meeting dialogs retain internal vertical scrolling; bottom captures show warning and actions.",
+    "Long Files viewer names wrap; existing member name/email styling remains a Figma difference.",
+    "Retained Calendar text and unknown warning readable at 360px.",
+    "Native-disabled save controls remain unavailable; explicit Files current read is available through keyboard."
+  ],
+  "notClaimed": [
+    "Exact pixel parity for pending/unknown states absent from Figma packet.",
+    "Full screen reader, all browsers/devices/themes, or live native acceptance.",
+    "New sharing caption/client-clear/native receipt semantics are not additional controls in this unchanged15 replay."
+  ]
+}

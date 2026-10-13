@@ -1,0 +1,45 @@
+## codex/portfolio-watchlist-current-state-20261011
+ M apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
+ M apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
+ M apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts
+ M apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts
+ M apps/web/tests/browser/tracker-boundary-harness.tsx
+?? apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx
+?? apps/web/src/features/portfolio/bill-tracker/WatchlistNotice.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-attempts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/core-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-access.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-queries.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/preference-write-lifetime.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts
+?? apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts
+?? apps/web/src/features/portfolio/bill-tracker/watchlist-session.ts
+?? apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts
+?? apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts
+?? apps/web/src/features/portfolio/bill-tracker/watchlist.module.css
+?? apps/web/src/features/portfolio/client-profile/read-public.ts
+?? apps/web/tests/browser/watchlist-current-behavior.spec.ts
+?? apps/web/tests/browser/watchlist-current-fixtures.ts
+?? apps/web/tests/browser/watchlist-current-harness.tsx
+?? apps/web/tests/browser/watchlist-current-visual.spec.ts
+?? apps/web/tests/browser/watchlist-current.html
+?? apps/web/tests/browser/watchlist-current.spec.ts
+?? apps/web/tests/browser/watchlist-preference-entry.spec.ts
+?? apps/web/tests/watchlist-current-fixtures.ts
+?? apps/web/tests/watchlist-current-source.test.ts
+?? apps/web/tests/watchlist-current-writer.test.ts
+?? docs/portfolio-31/WATCHLIST-CURRENT-STATE-CONTINUATION.md
+?? docs/portfolio-31/WATCHLIST-CURRENT-STATE-SIZE-REVIEWS-20261012.json

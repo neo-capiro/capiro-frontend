@@ -1,0 +1,568 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-newsletter-port/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-newsletter-lifecycle-browser-20261013/playwright.config.mjs"
+    ],
+    "configFile": "/tmp/capiro-newsletter-lifecycle-browser-20261013/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-newsletter-port/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-newsletter-port/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "newsletter-document-lifecycle.spec.ts",
+          "newsletter-document-navigation.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "newsletter-document-lifecycle.spec.ts",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "rich document create is explicit, preserves local content and stages only a confirmed full save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:31.776Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-4c08b34864b618f46786",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "rich library detail requires explicit adoption and sends the complete reviewed CAS document",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:33.433Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-f527869b561963857370",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "rich save 409 retains edits until deliberate owner review and full rebase",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1706,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:34.847Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-e5b4182bbdfc62c304f5",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 130,
+          "column": 3
+        },
+        {
+          "title": "rich save 503 retains edits until deliberate owner review and full rebase",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:36.565Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-ac274c68d54b0873ce50",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 130,
+          "column": 3
+        },
+        {
+          "title": "rich explicit adoption replaces uncertain local edits without attributing the owner state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:38.112Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-2f15d08bf539f62816a2",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 200,
+          "column": 1
+        },
+        {
+          "title": "rich saved preview excludes local edits and sanitizes active HTML without remote requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1467,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:39.615Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-cc994a5a9b9d78fe95fa",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 238,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "newsletter-document-navigation.spec.ts",
+      "file": "newsletter-document-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "rich pending create remains fenced after history close/reopen and an empty library",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1841,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:41.111Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-2ee3004e3791aa588f09",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "rich pending stage stays fenced across history navigation and late 200",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30184,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts",
+                        "column": 16,
+                        "line": 97
+                      },
+                      "message": "Error: page.goBack: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for navigation until \"load\"\u001b[22m\n\n\n   95 |       page.getByText(\"stage in progress…\", { exact: true }),\n   96 |     ).toBeVisible();\n>  97 |     await page.goBack();\n      |                ^\n   98 |     await expect(\n   99 |       page.getByRole(\"heading\", { name: \"Workspace\", exact: true }),\n  100 |     ).toBeVisible();\n    at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts:97:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:43:42.960Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-7482c935c54e21202a8c",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 67,
+          "column": 3
+        },
+        {
+          "title": "rich pending stage stays fenced across history navigation and late 503",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30194,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts",
+                        "column": 16,
+                        "line": 97
+                      },
+                      "message": "Error: page.goBack: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for navigation until \"load\"\u001b[22m\n\n\n   95 |       page.getByText(\"stage in progress…\", { exact: true }),\n   96 |     ).toBeVisible();\n>  97 |     await page.goBack();\n      |                ^\n   98 |     await expect(\n   99 |       page.getByRole(\"heading\", { name: \"Workspace\", exact: true }),\n  100 |     ).toBeVisible();\n    at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts:97:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:44:13.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-5188f03cbd7d9375bee3",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 67,
+          "column": 3
+        },
+        {
+          "title": "rich unknown save after reopen needs a successful owner read and separate adoption",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2024,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:44:44.608Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-360bc687694c1b6b3dc4",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "rich held save cannot restore prior private material after client replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1451,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:44:46.850Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-13160c50d504d88a4950",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 172,
+          "column": 3
+        },
+        {
+          "title": "rich held save cannot restore prior private material after session replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1446,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:44:48.310Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6ef731f16be9040e8ddb-19f4dc6c3d0fe726d856",
+          "file": "newsletter-document-navigation.spec.ts",
+          "line": 172,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T03:43:31.320Z",
+    "duration": 78528.426,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

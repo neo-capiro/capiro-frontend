@@ -1,0 +1,1096 @@
+{
+  "status": "PASS_BOUNDED_MAPPING_ALL_63_OPEN",
+  "reviewer": "core_profile",
+  "utc": "2026-10-13T11:08:45.555424+00:00",
+  "source": {
+    "application_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "publication_commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "observed_head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "published_application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "source_tree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+    "working_tree_status": "",
+    "backend_reference": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "backend_checkout_head_not_used_as_contract": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace"
+  },
+  "ledger": {
+    "published_path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+    "published_commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "published_git_bytes": 1332257,
+    "published_git_sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+    "mapping_input_path": "inputs/reconciliation-ledger.json",
+    "mapping_input_bytes": 1332566,
+    "mapping_input_sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+    "parsed_json_equality": true,
+    "note": "Mapping snapshot hash binds its serialized input. Published Git JSON has different formatting bytes but is semantically identical; neither original was rewritten."
+  },
+  "inputs": [
+    {
+      "path": "MAPPING-INSTRUCTIONS.md",
+      "bytes": 3529,
+      "sha256": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5"
+    },
+    {
+      "path": "MAPPING-SNAPSHOT.json",
+      "bytes": 600,
+      "sha256": "7fd2cd5b7843d2a74cd16dfdbf304e6b50197cae94e955893519fdae2a4841f7"
+    },
+    {
+      "path": "inputs/core_profile.json",
+      "bytes": 205412,
+      "sha256": "82caa1f7d4f9ca2599026a07393e42bbecd17013bb8f3cac76bebe68e25c07b0"
+    },
+    {
+      "path": "inputs/PHASED-PLAN.md",
+      "bytes": 43148,
+      "sha256": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e"
+    },
+    {
+      "path": "inputs/figma-screen-index.csv",
+      "bytes": 230733,
+      "sha256": "ffb9be58b8e96e26a849ee0292e1e600e2cdf79a94cdcaa61db92143df59076c"
+    },
+    {
+      "path": "inputs/reconciliation-ledger.json",
+      "bytes": 1332566,
+      "sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf"
+    }
+  ],
+  "assigned_ids": [
+    "CORE-066",
+    "CORE-067",
+    "CORE-068",
+    "CORE-069",
+    "CORE-070",
+    "CORE-071",
+    "CORE-072",
+    "CORE-074",
+    "CORE-075",
+    "CORE-076",
+    "CORE-077",
+    "CORE-078",
+    "CORE-079",
+    "CORE-080",
+    "CORE-081",
+    "CORE-082",
+    "CORE-083",
+    "CORE-084",
+    "CORE-085",
+    "CORE-086",
+    "CORE-087",
+    "CORE-088",
+    "CORE-089",
+    "CORE-090",
+    "CORE-091",
+    "CORE-092",
+    "CORE-093",
+    "CORE-094",
+    "CORE-095",
+    "CORE-096",
+    "CORE-097",
+    "CORE-098",
+    "CORE-099",
+    "CORE-100",
+    "CORE-101",
+    "CORE-102",
+    "CORE-103",
+    "CORE-104",
+    "CORE-105",
+    "CORE-106",
+    "CORE-107",
+    "CORE-108",
+    "CORE-109",
+    "CORE-110",
+    "CORE-111",
+    "CORE-112",
+    "CORE-113",
+    "CORE-114",
+    "CORE-115",
+    "CORE-116",
+    "CORE-117",
+    "CORE-118",
+    "CORE-119",
+    "CORE-120",
+    "CORE-121",
+    "CORE-122",
+    "CORE-123",
+    "CORE-124",
+    "CORE-125",
+    "CORE-126",
+    "CORE-127",
+    "CORE-128",
+    "CORE-129"
+  ],
+  "counts": {
+    "actual_missing_implementation": 1,
+    "existing_behavior_missing_evidence": 33,
+    "authentic_backend_provider_dependency": 29,
+    "selected_figma31_mismatch": 0
+  },
+  "accepted_native_rows": 0,
+  "unblocked_offline_next_steps": 34,
+  "inspected_current_source_and_tests": [
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/actions.ts",
+      "line": 55,
+      "symbol": "executeReviewAction",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "cb73fcb300c3fc9e2e4759dea4155515a8f4c00b",
+      "sha256": "a74079b97a90c8e7b60f2b5b0fd4e758dbe2425ef1be9eb171cef3fea0236762"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/RunLedger.tsx",
+      "line": 15,
+      "symbol": "RunLedger",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "f6da99f2a656ad8968755c0e6465b1d740312ecc",
+      "sha256": "1f6fe95650a71ebe78f922358dc423c4c7fb1b22c0450bcf0e0a2bcebaa0fa69"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/queries.ts",
+      "line": 55,
+      "symbol": "useLatestReview",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "a3fdd5abfd11f5b60115bd449a1f3cbc048fa567",
+      "sha256": "eeeee76b0639d7081b8ea76b42ace9a83669c33a61b075fbd3841ee6dfdd02e1"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/FindingReview.tsx",
+      "line": 13,
+      "symbol": "FindingValue",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "47a596d993e5cd262a09974f2cc594883f71f8d9",
+      "sha256": "a641913416ae11801a6b975b975775b63c18aff6250d364a9a4dd4b0dca2b4d7"
+    },
+    {
+      "path": "apps/web/tests/browser/client-enrichment.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "42690b6e6a8489c413bd94fba7499549188cc6a7",
+      "sha256": "b68178cfbd787ddd0fdf4a0447475fc2cc582b56e0cd1c323a9c14dcd26cb472"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/useReviewAction.ts",
+      "line": 1,
+      "symbol": "useReviewAction",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "5fc24e130e49e02d35355944b614860465b0d4fb",
+      "sha256": "ea57cbab6f64d76addc2cc88b732b0ea9f6cef2a3cb7c62e0a2086950e7b6acf"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx",
+      "line": 122,
+      "symbol": "Run again disabled",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4c3a819cbebc417124972e1f42793b8720bd063f",
+      "sha256": "af91ef6c2916e9b5e6316c1b7ad3a368cbdfe7ebf34eebc539223d43a5bda152"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/contracts.ts",
+      "line": 139,
+      "symbol": "canSelectFinding",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "db9741fa1bf8bf11a0699915040a279f713a05be",
+      "sha256": "dca68213d5b0386314bffe0e72f31cc6539033dd49e68c96612955516fe2fbfb"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/useProfileCapacity.ts",
+      "line": 10,
+      "symbol": "useProfileCapacity",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e820f47e31e34b062076689ae9ce12fc8860b962",
+      "sha256": "ad124414d705d46950867d32712d8667f73bc88de5bf17fdd8a4e51c1f3658ae"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx",
+      "line": 32,
+      "symbol": "inline billing unavailable",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "a5f7aa7f76b5717ce0783c7faf360e0f51dd73bd",
+      "sha256": "162dd9ac8a22c5e25c8fc789fe4f6902f338f611598b413dc41b8254b0aa99eb"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-capacity.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "909e9301aa61a13b78089c1a26df5ab80f01fdbc",
+      "sha256": "f523e5e40acbcbfce52e6a27c268bcddc4a1288dc3f468a2b681ca17d607ec02"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
+      "line": 128,
+      "symbol": "not a quote disclaimer",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4bafbca53321ebdd4e2c302489b95c281e8b7570",
+      "sha256": "79a74272d8044615d93520516731ee2b429374958fa9c2ff89c4b6680fabc963"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/summary-authority.ts",
+      "line": 1,
+      "symbol": "billing reader",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "cd6c0a22d84d206aef8b39bdc83a7ea58abf4ff7",
+      "sha256": "11e3fb628c84092d9a5f3318ea988ca1dcee996fec4202eaaf2c977a7fb4e388"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/summary-api.ts",
+      "line": 9,
+      "symbol": "readBillingSummary",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e67de2d2cf8fe15f65a414bd6cbf370240aed919",
+      "sha256": "8f1a83ed9261705f3576b87927547356d9a72e11d870ea8a55870c6e2c6aac92"
+    },
+    {
+      "path": "apps/web/tests/browser/billing-summary.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "87fe71a5db0b54cdea08702b7c492e11c974ddee",
+      "sha256": "1d712798c98dac25a0cccee2d77fdfd698ed1b8ece32057040ef12612875af40"
+    },
+    {
+      "path": "apps/web/tests/browser/billing-summary-integration.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e72f2ff4a42c854f7f0e0f5474317b820e200ef7",
+      "sha256": "692e1393d603727a8b3463ab872d19e54c8b28c9540468bd7255ea6bac644c1d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+      "line": 126,
+      "symbol": "disabled Create with Meri",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "190933077dd92403692f770939f623fdd406d1ed",
+      "sha256": "b86a333d4dce5266d648b91cbfbdf0e83b2b1a2a10f93f88140dab626bf0f288"
+    },
+    {
+      "path": "apps/web/src/features/settings/billingFlow.ts",
+      "line": 41,
+      "symbol": "requestBillingDestination",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "97a620bbe017cee793a7d8c55d09924aef8264ab",
+      "sha256": "283de53c92e183bf9da301c102d8c191b7d0036b97032a55c5f2aad4da415897"
+    },
+    {
+      "path": "apps/web/src/features/settings/BillingSettings.tsx",
+      "line": 165,
+      "symbol": "Payment method and invoices",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4aa5959d36f8a692cca9b7cb0f24932fa7ad49a4",
+      "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838"
+    },
+    {
+      "path": "apps/web/tests/browser/review-billing-route.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "ce365971e065eadbbd92716a284b166129e3b3f9",
+      "sha256": "81d343cc322b9699d6c934739a5b0393b55fce751b6f67ffcbb6f984819e0aea"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/contracts.ts",
+      "line": 5,
+      "symbol": "billingStateSchema",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "fe8ed1c5cd340f4830fada49f0a9ff2b3b7f3879",
+      "sha256": "ac58ce75ca7125b761e728af3c75a1e1e37001ad2ad7950f26f293a9cff92d02"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/summary-contracts.ts",
+      "line": 4,
+      "symbol": "billingSummarySchema",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "aa01c8d8a42743d5d196d678a083e31e26c4ebb5",
+      "sha256": "2837fb097af5e5a70386b0bb885029fc3441ea3a7dd22b90ee0a0b685aa5b5c6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/billing/capacity.ts",
+      "line": 23,
+      "symbol": "capacityIssue",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "d3627d163723241f8b4a6a3cfb4a873b29c8baa1",
+      "sha256": "f8008e5a9a705f60c5576c8a7265f046e779269c6918d1bb38d3805fb4cf834e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/IndexOwnerFilter.tsx",
+      "line": 19,
+      "symbol": "owner choices",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "b7310522e0a8648840846b5b2a51d164b9656585",
+      "sha256": "3ef0363c5371f2f4a692fc4d760ee6cb85e6da1c5647da4a609732bfba469796"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/filter.ts",
+      "line": 76,
+      "symbol": "filterClients",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "56bd8611e3313ddb34dbd246f314e58027ff03e1",
+      "sha256": "051119310261726f5514c71140779e99136ef11accfe2497b35407d6f83796a3"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/queries.ts",
+      "line": 35,
+      "symbol": "useAccountOwners",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "71d075d210a7749e8e48a39d6653303d9534ce7a",
+      "sha256": "a6d6f751ce82bb536e3441d16cd509b69a379ca4c7d8e40ec88b34ccd8c643f3"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-index.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4d8307a6922cce7adbb28475661094f2dc4acd18",
+      "sha256": "59412d3a62a0e5f0c1cb4543e75c14801dafed1069af486ab18156375bda21d2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioPulse.tsx",
+      "line": 17,
+      "symbol": "pulse counts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "68f6c1d29ae763f8b6eda4855c2ade3d7d3a018c",
+      "sha256": "019cb0be54db257700ac6085f7fc0e02b0a2e2f49cf1788a4123cee3224d2428"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "line": 55,
+      "symbol": "bounded alerts disclosure",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "7377f1ecd7476f6b0a96bbd7a57a8e69facccaa0",
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/query.ts",
+      "line": 8,
+      "symbol": "loadPortfolioAlerts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e2a08ac33049ede2e36235fb224a80b27ec40ce0",
+      "sha256": "35eeffe9425d3c6328f819de617617af9eb67a68a718684328ce666b7b2ec26b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
+      "line": 12,
+      "symbol": "QuickLogSession",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "3e269a17c7ff896173236a54618ee81b13b9640d",
+      "sha256": "c77e5378973e869fbf6cd8de8b9d864cac313d519f456c3220105ba81584c327"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "line": 57,
+      "symbol": "New objective",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "8367795833e3f5c48c4dd6f4b0103e47ad84d2b8",
+      "sha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165"
+    },
+    {
+      "path": "apps/web/tests/browser/member-notes.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4884a9689cf0ee0b99be3954e64d8fa2ce528308",
+      "sha256": "12f357001f0329f9a85b9f07e27f8c8b270840cc772f2723f0bcc6809ed44e33"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+      "line": 125,
+      "symbol": "Record a meeting handoff",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "7d9bdff95b7d46d14a73b531d517c0c1af9a38df",
+      "sha256": "78c1b144587cc1aad6e290e8266e5e982cf4974fb93ba12bb0dcf4dfc8057916"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/actions.ts",
+      "line": 52,
+      "symbol": "undoQuickLog",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "539a6d21f08cd0b99bb193d79b2dd6c2b2260b1c",
+      "sha256": "a0a3a2cfd0b56932e7823ef78864984afe0f0be15524ad135d5a14b6085f7111"
+    },
+    {
+      "path": "apps/web/tests/browser/activity.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "68a078965e8ff5ee840cf186a412393efdd998f2",
+      "sha256": "1115f96b3600251cc4f6f87f83cc3873947b294be591ad3335e5ee107b27c986"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",
+      "line": 53,
+      "symbol": "MemberPicker",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "070c91c02e1e1908ca0501daee1d47feb50ebe07",
+      "sha256": "1419b564851e4a6201cc0e65f19e276e58c5e07ad3b505317e8eb17d4dcdcdc5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+      "line": 1,
+      "symbol": "useTargetDirectory",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6b61aca37a4d68615480a62b04b156d03bb1b419",
+      "sha256": "d3c24380be51be928531e2b4ed4543c88d428ec83b15f85230a8ceb65102c409"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/member-notes/api.ts",
+      "line": 42,
+      "symbol": "Directory note POST",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "0512a8fefa7fa654dd717d237a655b488b547a83",
+      "sha256": "7be23ab0cc0f3bdd605ec719e25c7af2afa39d9b27feb8a2446997cfd907dc48"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
+      "line": 102,
+      "symbol": "unsupported member-note associations",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "3252e63b73daf6d1fa40483d9dcb58d0d51ab1c4",
+      "sha256": "2b7c6067168d05c6d611e5c9366e0cbfa7c00e17129d6ebf9b7555749809bb8a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-contracts.ts",
+      "line": 1,
+      "symbol": "activity command schema",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "8b1038e040446b4e6eb929ee83aba563d0b3e0d9",
+      "sha256": "3e3d9896f75910190eddb7f1950c22e5ab078c7c795bd04634e00bacb930175b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-actions.ts",
+      "line": 19,
+      "symbol": "durable generic command",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6a0a8d99888bf8c8813f5e0698b4c08bedcd5ea0",
+      "sha256": "6880089b9ed1a1d03a49aa7ffe072873ab2021ba515f73f1b8ffc933b5502538"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-recovery.ts",
+      "line": 1,
+      "symbol": "original-intent recovery",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "d8d09c59d3a41254a8d568d7ca18b2f26ddf5512",
+      "sha256": "38d3f16eb59d286b8793c183bab538f771f91d962df0e4a0804786f5ee80e107"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "cdf0b57d8e7dde254b4fb90013152dddf9c45e47",
+      "sha256": "eb336075c93f6002112b38896cfbfe515ca36966878fc05111cffeb1651287ff"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "06ed17c9406029336c2a28e085a0c858b29af4ba",
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+      "line": 47,
+      "symbol": "EditorSession",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "409377c0903585a75344141f001cd7b857f5e457",
+      "sha256": "2581d88a746cd1c45dd5d5dacc86ed8239b728797e34c8220ce79b7273ca70e7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/layout/api.ts",
+      "line": 61,
+      "symbol": "savePortfolioLayout",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6991341ec7c9def7cb645b34e54d557bfa74a032",
+      "sha256": "dfb25d0b044ce8d4a8e0f52bda5b66f090f51e77b64345c57b0643a2342e8657"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+      "line": 1,
+      "symbol": "layout composition",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "55318b962c5768f963becb63a36f6e3cb8c58398",
+      "sha256": "2842464b82e2b7e8e69708d0f0b0a7c3f8822a3b893ecd696e5b7d90427a0d57"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-layout.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "0343734bb05ab99df839b3ffd1eadffdb63901ee",
+      "sha256": "5e85b00f31e596199525772ea311816f2b886f82973eac0e99fea4e7d45c726a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ordered-owners.ts",
+      "line": 100,
+      "symbol": "replaceOrderedOwners",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9e5ad142f998702a3b52c5346d3d69c56e7cc22a",
+      "sha256": "aec82574e47b177ffab365fb1b36e1078718281cf3561effff38db05afb21795"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
+      "line": 20,
+      "symbol": "ranked drag/keyboard owner controls",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "ac2dd3dfb67870e1f069c9e8a0136eeb52c275f2",
+      "sha256": "66b5136ab9266b10041a6afa3be6b3704e30e67c8d07b0aad97a1b3bf8083d03"
+    },
+    {
+      "path": "apps/web/tests/browser/ordered-owners.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "be5069e31606eb2ab6d05a258bdc2753f1700aa5",
+      "sha256": "0d795c3e4e4272154dc44203b52d53b980fc24b07991c0ab990546f859409e1c"
+    },
+    {
+      "path": "apps/web/tests/browser/quick-log-meeting.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "c66d045c9f280adecd0f32ae4831f03321086cb6",
+      "sha256": "99f932d3f47743a636710683a5f4f2a6058f7d8e908ef3431db3dd4549e36b27"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "line": 69,
+      "symbol": "bounded latest500 disclosure",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "da9f21d6f5607ea52efa31d900be3763dc0c48b3",
+      "sha256": "e3968866a9f7527a59b54693d8bd8bd114ba682ae6a2c187ef5bd3dfd56328ab"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-filters.ts",
+      "line": 33,
+      "symbol": "filterActivity",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "b921210b8a0185ee09e44e4d1fb1a377830e7d5a",
+      "sha256": "1b09e41b63abedd343728da77d07383030b8640d04cbb8f91e2b3efcca9b1314"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "b007f6f559307ca475373ac7f956c5d41973f0ba",
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d"
+    },
+    {
+      "path": "apps/web/tests/browser/current-projection.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02",
+      "sha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+      "line": 40,
+      "symbol": "Settle/Reopen",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "895db47e3338b7120eec55097fc346198b4d7e66",
+      "sha256": "5f053626b14e1f74ac4b89d8392a6a4e19f05f4ba62917f9ba11d853d131dfb6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-change.ts",
+      "line": 74,
+      "symbol": "due-date guard",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "f3a6e0dda33929fd29b38f01288a7f6eb7ce377a",
+      "sha256": "263ec3fd114f1a07c743ed6fc653825461a05fcbe6fef14735c24acd46a2bf0b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+      "line": 111,
+      "symbol": "reviewLatest",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "ddcd1e61a0473cee748fae48d0de97c4843f6d76",
+      "sha256": "41d575b4ce099d0ea1a24136bb71b8e2d6db52cec6e8e585ed98e5cc290da49c"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-pin.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "cf93bc73956a881af1fc12ed1416d5c85138bc42",
+      "sha256": "cec777caeced78ba8ba5a3f21c57eae6045963a66f455ad3b47c1e2e2fa42665"
+    },
+    {
+      "path": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "a18a9016b22d5292cdd3eef7fb51ac4fac52e12d",
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-actions.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "eb08522240c591d11cbf7bcbc1c458c9b0d712c5",
+      "sha256": "07fa6ccaeb2b2523f7ba18f7ad947c13063281ea809d2ce7758260656cba19be"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/queries.ts",
+      "line": 11,
+      "symbol": "useActivity",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9b5df19a4f94e22c5b3bd3121621e60b92b35227",
+      "sha256": "b3a3cd94140099d7f27a9836fee8df4cc0afb7fb40675bf9d263caa40524eeff"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "line": 143,
+      "symbol": "source record links",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "61f71b49efd7c0d3baacddb4284c2f35ab99c76b",
+      "sha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/thread/contracts.ts",
+      "line": 42,
+      "symbol": "readTimelineThread",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "85d87223ab9fe15c102197064fa59f26032bde59",
+      "sha256": "5db3e665065e0982e1bd5b91f0025f4efb29094a1c2a21411f0bb3db33f7c6dc"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
+      "line": 168,
+      "symbol": "blocked reply composer",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "bb21ef3e7d81e76c421760715d090dea45bd0b06",
+      "sha256": "e880690e7fd6d30a4fd3ecb3860814716aa4e742e5feb724a6aee8745a029091"
+    },
+    {
+      "path": "apps/web/tests/browser/thread-mail.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9328e7af87572f9045346148c7fac3de2abb58c0",
+      "sha256": "b9cc49c891495c25eee6f3cf335216d10c3eeb21fa802f842c7afe4b73cfae3b"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "line": 45,
+      "symbol": "clientId/draft URL parser",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "f79d100554d6146e86263851b7b765db06e9eee6",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "line": 41,
+      "symbol": "exact draft GET and destination",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4aad7447dd06cd39645e7591ab5fbfd8762e556e",
+      "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "line": 266,
+      "symbol": "engagement.outreach.record",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "8295c0adde22683904241890aa3f5783fd2ed403",
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx",
+      "line": 1,
+      "symbol": "retained input/retry UI",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "33627e6e47e759fa474213b442d69ee9e021472e",
+      "sha256": "834280a6a10e5e3bd50fe163222b5bffb8e9591838c7f8737977e49d938984ed"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+      "line": 19,
+      "symbol": "GovernmentInfo",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "29bb35161742e9db1bf1f6f29042ae96eb2d6d82",
+      "sha256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+      "line": 1,
+      "symbol": "retained details without metric dialogs",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e9e33a2199c0f4d595fc9e0c248ce5b1d645f89f",
+      "sha256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de"
+    },
+    {
+      "path": "apps/web/tests/browser/remaining-intake.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "64b7c2f37df8b8bde98f7665b017ab166584e1ef",
+      "sha256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "line": 266,
+      "symbol": "single selected move gate",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9739ef4b7027141c954d10f6b60cef324beb01e7",
+      "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/contracts.ts",
+      "line": 134,
+      "symbol": "fileStatus",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "965ba6532eafa9cb0519001c679b255b94eced35",
+      "sha256": "b6489db3880eae0df2cf176920e76dcf9225cde5d668aade87b90e7a10dedc51"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/upload.ts",
+      "line": 43,
+      "symbol": "uploadParentFile",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+      "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+      "line": 45,
+      "symbol": "retained UploadAttempt",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "245fdeaca03bd092757511c685f00cd659c77674",
+      "sha256": "a537b6190672a6f038df074ccc9e5e364efeb9fff23bb6b2463555204b1ec238"
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-upload.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "9298f664c62c91955bfed20153a5b171ef92b6a9",
+      "sha256": "09f9a9c488020edae6e0585a8f57cdfd29071a6f8c9496f2d5e5b20d32d0ca65"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilePreview.tsx",
+      "line": 86,
+      "symbol": "explicit extracted text",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "2d32e6d05569748795f90b7573ed368c72498d47",
+      "sha256": "d4e75d262099ed3967722595d95525d0a3c76baed899a2cd087a20d147d5e07a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/extraction.ts",
+      "line": 1,
+      "symbol": "current receipt-bound extraction",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "ec72f1c578a418e056c15f149a790bd5f250753c",
+      "sha256": "c23bb4d6e032e6503dee9054797307b7802d3fe0b6f00fd53f35a52288fb7ee0"
+    },
+    {
+      "path": "apps/web/tests/browser/files-boundary.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "33d2886444aacd5671977c18e96afd47f57d8d8c",
+      "sha256": "3d53ae6404a3be7bdc7e4ee2f454cb0879e7e2ecb70111b6df09efccf36e42a7"
+    },
+    {
+      "path": "apps/web/tests/browser/files-reader-selection.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "8adf2621c017e042d3b775dfe3a7c0a813fa92da",
+      "sha256": "8942f7c69dd333ffc320851929655396c8c2f5eb7e32bd76d4e9769b330ca7a6"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "line": 15,
+      "symbol": "host-owned fixed operation workflow",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6c071980630b019b864a593560b5a591808876ad",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "line": 25,
+      "symbol": "public document adapter options",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "7be9958c579d050fff37039625fbb91df91711a1",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+      "line": 39,
+      "symbol": "single move submit",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "d13aa23ba9de3aec0ee3f5f8cc04a78aebdd9ac8",
+      "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "line": 12,
+      "symbol": "ClientViewSwitcher",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "532b4dc1956d895f9f57f8ecc20f5b3bd3f15e14",
+      "sha256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts",
+      "line": 1,
+      "symbol": "useClientViewKeys",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "db56e8932dd00837fb7671b8c83eab8ff1fafeeb",
+      "sha256": "1bcd921c2c8536d0e74a8701786ba1cad4acf4f24287fb951b0a49fe5621b0ed"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/client-views.ts",
+      "line": 2,
+      "symbol": "clientViews",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "64c833bc1ddd483d15f0d469a8f22a3524249e71",
+      "sha256": "9c55087415ff03d172119df9dedeb23709bbf89adbaa959f07a5177a5d7c7d37"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx",
+      "line": 37,
+      "symbol": "disabled Ask Meri",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "e86a8ac32f28da4c69a2c51970b3c1a8f77b82e2",
+      "sha256": "e115fe1976fb399f4aa2cfb1a7933568517ce872dbd73706cc7cf19061ad85fd"
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriHome.tsx",
+      "line": 11,
+      "symbol": "local synthetic MeriHome",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "94431141c21253c904f4b88cc4b87b83660dfc74",
+      "sha256": "a10b355ffae83dd189bd1a17332a1dca6ee07a56922b7e88d3b50da90f9d5158"
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriComposer.tsx",
+      "line": 69,
+      "symbol": "disconnected Send",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6153c695b9971882b16a6c98a2b177990d8e3a92",
+      "sha256": "1abcdd338fde7735699e91d60ffb3e8e4097828ab2eb8c0addae019f1d5771b8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx",
+      "line": 187,
+      "symbol": "Retry stopping Meri",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "69169ccbf5b5ad01d89dd9efe8c0780faa310d36",
+      "sha256": "cb3f34f06eabae0d71dfa25d8ff6e61a4955f487f956dd471453f45e7b2ce344"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/attendance/api.ts",
+      "line": 151,
+      "symbol": "changePreference",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "766b1643693fcdc4871918900dd75c01fe32163f",
+      "sha256": "beb8aff51e89c6412086495af364e56fac676506abfcc6612bed03d71055449a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/attendance/queries.ts",
+      "line": 1,
+      "symbol": "attendance access/query scope",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "1e98179edae14d419e2897d4a26245d85c2f174e",
+      "sha256": "b5233e53bb5bb0bab65d3f493311b92390e45215827549536652e8e2a4b5d142"
+    },
+    {
+      "path": "apps/web/tests/browser/attendance.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "dc2f996f6c7b587574b9c1ed5ed543e9521b99e0",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx",
+      "line": 76,
+      "symbol": "start unavailable",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "4e1b47b18560e80623f4845fe3ad55d608311a73",
+      "sha256": "c61dd163b43e2358f8887515286c4e27239a536a804592bb023a17e3c007fb6e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "line": 114,
+      "symbol": "PastPerformance composition",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "d595e249d98213478861a9ec4b53f6af6fcb26b0",
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/past-performance/queries.ts",
+      "line": 30,
+      "symbol": "loadSubmissions",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "3408a940a5ba4280590740d2ecbd3b77d0df785f",
+      "sha256": "9726effe450e65b8b3b808d2887def4afe5457aa1e86d7f976ca9f55a452c95c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/past-performance/actions.ts",
+      "line": 5,
+      "symbol": "removeSubmission",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "062d16b6a25a5e9fd2790780282fcf674bda5f28",
+      "sha256": "e2df52eef0bdc72922e3ba8e6ccc86a3af9950e9e602eb2743d8d56e42f36e95"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/past-performance/useSubmissionRemoval.ts",
+      "line": 1,
+      "symbol": "removal lifetime",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "6d8a5ed24a424187413ccedd0f7fa88988d467a4",
+      "sha256": "658638a7a6adfc1ef8c9bcf92cc443170b2eeafc5b2734802651a0ef0611cc32"
+    },
+    {
+      "path": "apps/web/tests/browser/saved-submissions-current.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "3f676c8560cae646e3bab15a0081947276f32f25",
+      "sha256": "e1dc241fb8c300b60d44fd083e27afdb01f3ab81920a4e29e69065932c633d4e"
+    },
+    {
+      "path": "apps/web/tests/browser/saved-submissions-lifetime.spec.ts",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "8468d8a662215d7d3a724a031b50fc43dee6f289",
+      "sha256": "db31671c03bd3bb56e0afc0dcdab197a897e55f9fff60ddcd0f35c352430691d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogUndo.tsx",
+      "line": 36,
+      "symbol": "initiating actor guard",
+      "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "git_blob": "ccd615f979149bfdfadc4a05e01c529438c685d1",
+      "sha256": "226eeda5be197c04001342339e85bd70194ed3c5f76b4bbb29221145e817c6eb"
+    }
+  ],
+  "inspected_backend_source": [
+    {
+      "path": "apps/api/src/clients/client-profile-fill.controller.ts",
+      "line": 169,
+      "symbol": "existing start route",
+      "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "git_blob": "a060e49bd15c89a96b653c2ff83acbaa08f4734e",
+      "sha256": "2c4d3bc3e659ca80f4ac1aa98df7cab0b707ca9008eaf2fac7f7db7613ebb4b8"
+    },
+    {
+      "path": "apps/api/src/clients/client-activity.service.ts",
+      "line": 88,
+      "symbol": "bounded list",
+      "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "git_blob": "84d0adc9786f4a63d1074c048319d54d5554031c",
+      "sha256": "799ba0cea21195d432789d6f86f079a38f2d1bfac27d34621848b32e173f788f"
+    },
+    {
+      "path": "apps/api/src/clients/client-activity.controller.ts",
+      "line": 82,
+      "symbol": "list kinds/limit only",
+      "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "git_blob": "e1397d0402b669db286b8a8ba9c15f41dad95818",
+      "sha256": "1698caf9ea82a7329cd14645a53bf9d52cec6d7c7cb7cccbc13a820c772390fc"
+    },
+    {
+      "path": "apps/api/src/clients/client-files.controller.ts",
+      "line": 75,
+      "symbol": "ClientFilesService.move",
+      "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "git_blob": "a4b499084ff6b6392d55cc24a893a253bd0647b5",
+      "sha256": "9b983bc5ecbf7810ebf054c3e55c6d6343220eb7f3832057469e0c21da8dcfa2"
+    }
+  ],
+  "inspected_documents": [
+    {
+      "path": "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "50cb476a06f4e52ad872f730c467c89ffa0df43773460d1ec81a28e0f70e3fb9",
+      "proves": "Approved paid-only ACH policy and distinct added-slot inline billing semantics; historical PR/provider status is not a current activation claim."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/QUICK-LOG-SCOPE.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "d3d1e8dab2e01c65cc740a6094831786d49c69b1c25a7d83d07772a201adb55c",
+      "proves": "Explicit later user exclusion of Commitment/direction/counterparty; row retains ordinary note plus generic follow-up."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/QUICK-LOG-FOLLOW-UP.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "22f2e21f689d204c2f1a74dafeac2108ccbe85c119c5047b7034291d1c0ee9bd",
+      "proves": "Pinned PR2396 handoff and separate outcomes."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/COMMAND-RESTART-RECOVERY.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "a5bf6b977038be148ee2de8c9e660d289f548bb41998dbb88c5434e84fee8fa6",
+      "proves": "Journal scope, original intent, fresh authority and cross-device/erased-data limits."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/ORDERED-OWNERS.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "4ef172c625f3d474e2c90113fd93a0c31f8d6df4f5164d02b7e6dfbc59daf231",
+      "proves": "Exact PR2399 complete-order contract replaces historical scalar owner gap."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "272e3ebe1a1116860a94d9cbf6d084e1b7c4bcd95706540f3765363fcad011b9",
+      "proves": "Exact composed backend is source-compatible; actual native authority is unrun."
+    },
+    {
+      "path": "docs/portfolio-31/QUICK-LOG-MEETING-HANDOFF-2026-10-11.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "29a3c009ea12dddc7f378ecede43099ca81244cc9857c8b72abf6bb64f1fcd9f",
+      "proves": "Explicit owner-approved source and Figma continuation for canonical meeting handoff."
+    },
+    {
+      "path": "docs/integration-contracts-20261012/MAILBOX-CONTRACT.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "e5179856fc57d6f1655e32c089f8e3682c0abab1fe0763d01ffc92dcd4598c79",
+      "proves": "Exact sender integration deliberately does not unblock native reply headers/recovery."
+    },
+    {
+      "path": "docs/meri-files-20261013/ADAPTER-PLAN.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "d9b9f9f37797d87179f32a622dd13fa7cf441931707251e69df02353a25b28d7",
+      "proves": "Exact0.1.2 receiver and fixed-operation/session boundary."
+    },
+    {
+      "path": "docs/meri-files-20261013/PREPARATION.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "cab8de42da97c5cde812f385153c2ed457fcb92881617351767fb21ae6933332",
+      "proves": "Actual /meri/files integration, no attachment upload/list/delete; native337 rows remain held."
+    },
+    {
+      "path": "docs/portfolio-31/CORE-128-SAVED-SUBMISSIONS-CONTINUATION-20261011.md",
+      "commit": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+      "sha256": "1601ba45f9ba61f6ed2f34b9dbb94148613ed24c6cf8319c06d082b96abd9291",
+      "proves": "Supersedes stale test-harness-only/placement blocker; product Saved submissions entry and original native limits."
+    }
+  ],
+  "exact_case_evidence": {
+    "path": "docs/unified-20261013/qualification-90ccdd47/FINAL-CASE-VERIFICATION.json",
+    "publication": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "sha256": "b6aae4a90f1b6673b376c20a1b43729c127ce53d59d04234065027b642c0baf4",
+    "limits": "Only matched synthetic case IDs support row subcriteria. No broad suite count qualifies a native row."
+  },
+  "source_candidates": [
+    {
+      "id": "PROFILE-MAP-CANDIDATE-01",
+      "rows": [
+        "CORE-103",
+        "CORE-104",
+        "CORE-110"
+      ],
+      "confidence": "source-traced, no runtime reproduction",
+      "description": "Action-bearing filtered row unmount discards local useChangeActivity uncertainty."
+    },
+    {
+      "id": "PROFILE-MAP-CANDIDATE-02",
+      "rows": [
+        "CORE-110"
+      ],
+      "confidence": "source-traced, no runtime reproduction",
+      "description": "reviewLatest direct GET failure only sets local reviewError; canonical list current-state authority needs explicit probe."
+    },
+    {
+      "id": "PROFILE-MAP-CANDIDATE-03",
+      "rows": [
+        "CORE-092",
+        "CORE-094"
+      ],
+      "confidence": "known local-lifetime limit, duplicate impact not tested here",
+      "description": "Legacy ordinary activity/Directory note POSTs lack durable request keys; probe close/re-entry while avoiding generalization from the generic follow-up journal."
+    }
+  ],
+  "confirmed_implementation_gap": {
+    "row": "CORE-109",
+    "description": "No timeline outreach source navigation; canonical Modules destination already exists. Exact client binding must be verified in the bounded implementation."
+  },
+  "performed": {
+    "source_reads": true,
+    "git_object_reads": true,
+    "existing_evidence_reads": true,
+    "new_tests": false,
+    "browser": false,
+    "install_build_server": false,
+    "native_calls": false,
+    "provider_paid_model_aws": false,
+    "source_changes": false,
+    "new_figma_calls": false
+  },
+  "limits": [
+    "All63 assigned native acceptances OPEN; unblocked flag refers to offline subcriterion next step only.",
+    "No new Figma or render comparison; representative node mapping is not mismatch evidence.",
+    "Backend reference is exact local immutable243248e; no latest deployment/head status inferred.",
+    "No runtime/source/index/branch changes; only three assigned output files written.",
+    "No full-Meri workspace, native Office,337-row,Figma/AT,musl/image or deployment acceptance."
+  ],
+  "output_hashes": {
+    "rows.json": "8fb40ad1581617612dcecbb725e6200712bdd7a974f36c62acd001b652742633",
+    "summary.md": "85f838decd3437fe69d6375c3597c6a257fa7a0251994edbe44cbc4ac8fa36a6"
+  },
+  "validation": {
+    "utc": "2026-10-13T11:10:03.453778+00:00",
+    "row_count": 63,
+    "unique_assigned_ids": 63,
+    "all_required_fields": true,
+    "all_open": true,
+    "every_focused_execution_status_passed": true,
+    "mapping_ledger_serialization_difference_resolved_by_parsed_equality": true,
+    "validation_only_no_product_tests": true
+  }
+}

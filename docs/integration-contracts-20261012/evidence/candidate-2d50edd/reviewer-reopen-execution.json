@@ -1,0 +1,21 @@
+{
+  "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "node",
+    "/tmp/review-r3-controls/run-review-control.mjs",
+    "/workspace/capiro-contracts",
+    "/tmp/review-r3-controls/reopen-authority.spec.ts",
+    "/tmp/capiro-candidate-2d50edd/immutable-reviewer-reopen",
+    "portfolio"
+  ],
+  "startedAt": "2026-10-12T10:20:41.624931+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T10:20:54.866983+00:00",
+  "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "statusAtFinish": ""
+}

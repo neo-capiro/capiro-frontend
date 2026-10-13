@@ -1,0 +1,64 @@
+{
+  "sealedUTC": "2026-10-13T08:58:38.685715+00:00",
+  "source": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "status": "PASS_BOUNDED_OFFLINE_GATES_WITH_DOCUMENTED_INFRASTRUCTURE_RECOVERY",
+  "fileCount": 11,
+  "bytes": 887232,
+  "files": [
+    {
+      "path": "GATE-RECEIPTS.json",
+      "bytes": 17566,
+      "sha256": "def7fb7d633f7c5d054d4968e859bc17fd5607ae5b837c63bf515286a7eff325"
+    },
+    {
+      "path": "MODULES-CASE-BINDINGS.json",
+      "bytes": 156526,
+      "sha256": "2cac884edfdfefdf25324ae931cbe400ed27b988016d15f7ca1a6cd81ae06a90"
+    },
+    {
+      "path": "PORTFOLIO-CASE-BINDINGS.json",
+      "bytes": 667782,
+      "sha256": "06da9672f9416d4ee89bcfdc29eadf3be61c3572c065cdce8b9df3571db87cea"
+    },
+    {
+      "path": "RAW-EVIDENCE-BINDINGS.json",
+      "bytes": 13886,
+      "sha256": "0a518de5b5f37b38149b795a02214caa55635a105bc996bea5b82863bedf4254"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 7702,
+      "sha256": "fc37488661bdd0acd73443545d76cec0c5803d032d11c0c3622b5a0b29b99e4f"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 5926,
+      "sha256": "a8399c6540c269a42f83bed9cc206271b025054bb93554612cae9055fd0071f2"
+    },
+    {
+      "path": "verify-initial-discovery-timeout-assumption.log",
+      "bytes": 1340,
+      "sha256": "232e1198cfa7f3089ef69dc534fc4eeed87208886d66a4311ac7b09a4ccb192c"
+    },
+    {
+      "path": "verify-initial-summary-key-assumption.log",
+      "bytes": 298,
+      "sha256": "6c9e0dc0186d6a10e10d26582b17a79a21be61ac25342a98136ac3c5a8e2c5f0"
+    },
+    {
+      "path": "verify-initial-viewport-assumption.log",
+      "bytes": 487,
+      "sha256": "6978321a20bd102307902f905792a7ad364c242649a593542e939fee8a9e24a4"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 1325,
+      "sha256": "6e8d9ff695b925d2fdb8889a21581bc955baa819f73d57651891bd3da9630ddb"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 14394,
+      "sha256": "6ae673c47c09059fc1976a49cd0b274359d427daa92d453cfbd1a882711b4ae9"
+    }
+  ]
+}

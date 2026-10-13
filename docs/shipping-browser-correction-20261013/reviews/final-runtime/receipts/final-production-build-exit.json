@@ -1,0 +1,28 @@
+{
+  "name": "final-production-build",
+  "command": [
+    "env",
+    "TZ=UTC",
+    "NEXT_TELEMETRY_DISABLED=1",
+    "npm",
+    "run",
+    "build"
+  ],
+  "startedUTC": "2026-10-13T03:15:06.875570+00:00",
+  "endedUTC": "2026-10-13T03:15:57.358721+00:00",
+  "durationSeconds": 50.48317716199381,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

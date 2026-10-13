@@ -1,0 +1,42 @@
+[
+  {
+    "trace": "/tmp/capiro-email-actor-review/original-failure/trace.zip",
+    "writes": [
+      {
+        "method": "POST",
+        "url": "http://127.0.0.1:5191/api/backend/core/engagement/attachments/upload-url",
+        "status": 200
+      }
+    ]
+  },
+  {
+    "trace": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/trace.zip",
+    "writes": [
+      {
+        "method": "POST",
+        "url": "http://127.0.0.1:5191/api/backend/core/engagement/attachments/upload-url",
+        "status": 200
+      }
+    ]
+  },
+  {
+    "trace": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat1/trace.zip",
+    "writes": [
+      {
+        "method": "POST",
+        "url": "http://127.0.0.1:5191/api/backend/core/engagement/attachments/upload-url",
+        "status": 200
+      }
+    ]
+  },
+  {
+    "trace": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/trace.zip",
+    "writes": [
+      {
+        "method": "POST",
+        "url": "http://127.0.0.1:5191/api/backend/core/engagement/attachments/upload-url",
+        "status": 200
+      }
+    ]
+  }
+]

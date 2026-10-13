@@ -1,0 +1,143 @@
+[
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-meri-1440x1040-light.json",
+    "sha256": "2fff863eba5057738e38082998f652e218632326fed074e619d6534c2ba77084",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-meri-1440x1040-light.png",
+    "pngSha256": "c67a1a739e5a34a70117fc5bad80000a80e28ba68f7043b52a4232f828ebe1ee",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "actual-meri-1440x1040-light",
+      "origin": "http://127.0.0.1:5188",
+      "path": "/meri",
+      "frame": "442:81437",
+      "classification": "Actual compiled disconnected synthetic Meri Home; no signed-in identity"
+    },
+    "capturedUTC": "2026-10-13T06:43:24.970Z",
+    "fonts": "loaded",
+    "apiRequests": 0,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  },
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-modules-1440x1040-light.json",
+    "sha256": "3a04b884a377d21f120da74c5c653b29a2a890c86048cc4a41997a9e14ae4ed6",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-modules-1440x1040-light.png",
+    "pngSha256": "457183dddfea842e59663945eaaca35808a5c62db075e396554f6f9aee04c6ea",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "actual-modules-1440x1040-light",
+      "origin": "http://127.0.0.1:5188",
+      "path": "/modules",
+      "frame": "411:93787",
+      "classification": "Actual compiled unconfigured setup boundary; target connected screen unavailable"
+    },
+    "capturedUTC": "2026-10-13T06:43:27.564Z",
+    "fonts": "loaded",
+    "apiRequests": 0,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  },
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-portfolio-1440x1040-light.json",
+    "sha256": "6ffbf46c908c7cfff18988e7e3039a88e495d307a51ad469d005b8c481290637",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/actual-portfolio-1440x1040-light.png",
+    "pngSha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "actual-portfolio-1440x1040-light",
+      "origin": "http://127.0.0.1:5188",
+      "path": "/",
+      "frame": "411:41421",
+      "classification": "Actual compiled unconfigured setup boundary; target connected screen unavailable"
+    },
+    "capturedUTC": "2026-10-13T06:43:21.116Z",
+    "fonts": "loaded",
+    "apiRequests": 0,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  },
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-meri-1440x1040-light.json",
+    "sha256": "01485eaa6b135c11dd375c642269bf7bf0d36290adebe8ce3fda47bb5fae34d5",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-meri-1440x1040-light.png",
+    "pngSha256": "1a18a6d225d69d82c43450513a94900fad1696e42cf47da38ae2c342bb36b157",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "fixture-meri-1440x1040-light",
+      "origin": "http://127.0.0.1:5197",
+      "path": "/meri",
+      "frame": "442:81437",
+      "fixture": "modules",
+      "classification": "Existing Modules harness with synthetic Clerk identity and intercepted me.read; no selected client, empty permitted client list; not real authorization"
+    },
+    "capturedUTC": "2026-10-13T06:46:55.344Z",
+    "fonts": "loaded",
+    "apiRequests": 0,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  },
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-modules-1440x1040-light.json",
+    "sha256": "c7c5b3ab99956967b24a635b899374a80be05862d11030a4b9986ab638de1c85",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-modules-1440x1040-light.png",
+    "pngSha256": "e1ec8b0a0b3759f97a6962dc00741d40da5e3f15d5ff6d8e39332ed07ae5122c",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "fixture-modules-1440x1040-light",
+      "origin": "http://127.0.0.1:5197",
+      "path": "/modules",
+      "frame": "411:93787",
+      "fixture": "modules",
+      "classification": "Existing Modules harness with synthetic Clerk identity and intercepted me.read; no selected client, empty permitted client list; not real authorization"
+    },
+    "capturedUTC": "2026-10-13T06:47:01.288Z",
+    "fonts": "loaded",
+    "apiRequests": 1,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  },
+  {
+    "metadata": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-portfolio-1440x1040-light.json",
+    "sha256": "565b2200b73944b224bf9431f584a9160901093c8da69d94199a5f1fc3429aa9",
+    "png": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-portfolio-1440x1040-light.png",
+    "pngSha256": "670f6706013c3a61ed6dd82f56fa49701f71d325bae0786ef68b40f7493eb543",
+    "dimensions": [
+      1440,
+      1040
+    ],
+    "target": {
+      "name": "fixture-portfolio-1440x1040-light",
+      "origin": "http://127.0.0.1:5191",
+      "path": "/",
+      "frame": "411:41421",
+      "fixture": "portfolio",
+      "classification": "Existing Portfolio component harness; Test Aerospace singleton, UI tests synthetic identity, default cards/saved sort, saved layout unavailable; not native application authority"
+    },
+    "capturedUTC": "2026-10-13T06:45:23.617Z",
+    "fonts": "loaded",
+    "apiRequests": 5,
+    "remote": [],
+    "blocked": [],
+    "errors": []
+  }
+]

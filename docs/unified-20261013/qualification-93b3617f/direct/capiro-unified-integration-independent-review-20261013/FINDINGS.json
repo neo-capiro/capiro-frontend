@@ -1,0 +1,22 @@
+{
+  "atUTC": "2026-10-13T06:09:58.344513+00:00",
+  "initialSource": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "acceptedSource": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "disposition": "ACCEPT_BOUNDED_STATIC_INTEGRATION_REVIEW; FINAL_RUNTIME_QUALIFICATION_SEPARATE",
+  "remainingFindings": [],
+  "resolvedFindings": [
+    {
+      "id": "UNIFIED-01",
+      "severity": "GATE_BLOCKER",
+      "origin": "Root exact-source architecture gate, independently verified from frozen JSON",
+      "title": "Duplicate active WorkspaceScreen responsibility review",
+      "initialFingerprints": [
+        "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
+        "849d2840007f21da937f4b3f2c09a993d9444e3ff834a574467e10814d0d9160"
+      ],
+      "correction": "Only superseded active record removed; exact record retained in docs/unified-20261013/SUPERSEDED-REVIEW.json. All other records unchanged and no duplicates remain. Current newer fingerprint retained. No application source/rule/assertion changes.",
+      "receipt": "UNION-VERIFICATION.json",
+      "diff": "final-registry-retirement.diff"
+    }
+  ]
+}

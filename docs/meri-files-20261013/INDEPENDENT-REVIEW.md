@@ -1,0 +1,55 @@
+# Meri Files independent source and responsibility review
+
+**Accepted for bounded source integration, with browser confirmation and fresh integrated qualification pending.** No unresolved static correctness or responsibility defect was found in the final reviewed source. One root-owned host lifetime defect was identified and corrected during review. This is not shipping approval, native activation, Office qualification, full design acceptance or accessibility certification.
+
+The review binds the uncommitted successor above `83f54f5ac0107822833adbbfef2b453e0240bc56` in `/workspace/capiro-meri-files-20261013`. `SOURCE-PINS.json` records 49 stable source, metadata, pure-test and fixture-dispatch files. Both owner source manifests match those bytes with zero mismatches. The reviewer performed read-only source/diff/AST/archive inspection and wrote only this external evidence packet. No application code, runtime tests, browsers, servers, builds, installs, native/provider/model calls, AWS operations, repository edits or commits were performed by this reviewer.
+
+## Corrected finding
+
+**MF-REVIEW-01 — P2, same-client revalidation discarded local Files work.** Initially the Files host returned its loading branch before its ready branch. `SelectedClientProvider` treats a current `isFetching` client query as loading, so a stale reconnect or explicit client-query invalidation unmounted the editor. Its layout cleanup cleared the draft/version selection and aborted the pending request, potentially leaving an uncertain write. Canonical configuration disables window-focus refetch, so ordinary focus alone was not claimed as the trigger. This was a static finding; no failing-browser reproduction is claimed.
+
+Root moved the ready branch before the loading branch and retained the mounted workflow under a hidden availability guard, matching the existing Actions host. A verification pause now preserves the local editor; the port still prevents dispatch/publication until the client is current. Unavailable access still revokes in layout and disposes the view; client/operation changes still replace the keyed host. The correction is accepted statically. A held same-client refresh browser regression remains required before final qualification.
+
+## Contract, authority and lifetime
+
+The two activation flags remain independent and disabled by default. Documents additionally require a valid server-only `MERI_DOCUMENT_OPERATION` selecting exactly `create_word` or `create_excel`. Either enabled workflow may bootstrap through the existing session route; document activation does not enable recommendation query/draft/prepare/execute. The production page projects only the configured family into the UI. Fixture-only URL switches are confined to the canonical browser harness.
+
+Only the four published authenticated POST document routes are exposed: create, revise, inspect and download. Literal path, method, same origin, no query/compression and valid deployment configuration are checked. The existing Clerk `capiro` token establishes a native signed-in session and is forwarded only to session bootstrap. Document operations forward the opaque session bearer with credentials omitted, fixed paths and redirects refused; browser cookies, tenant headers and native tokens are not forwarded. The response strips private headers. No approval, listing, upload, deletion, mixed-family, reconciliation or discovery endpoint is invented.
+
+The public receiver admits create/revise payloads before forwarding and the proxy checks their configured operation family. Inspect/download identify a version only; a UUID cannot establish its family. The trusted single-family native mount still owns that authority, and the received view must match the current operation/context. Word retains DOCX/TXT text creation; Excel uses typed sheet/cell JSON. Revisions send a complete replacement against the exact immutable base version, with explicit UI acknowledgement. Native Word/Excel generation is never implemented locally.
+
+The shared opaque controller is a cohesive extraction of the existing Action host lifecycle, with an Action compatibility composition. Canonical ApplicationBoundary still replaces user/session/organization/client scopes. Connection expiry/disposal aborts observation, drops its private bearer and disposes the port. The document adapter rechecks current access around asynchronous publication. The view owns local draft/selection and Blob URLs, and never disposes its borrowed port. URLs are revoked on view disposal, selection/read replacement and failed download; bytes are exposed only after the public binary receiver and final current-lifetime check.
+
+The document journal is separate from recommendation state. It claims pending synchronously before hashing or dispatch, freezes snapshot/fingerprint data, disables structural sharing for those snapshots, and binds ownership to one exact canonical query-cache generation. Old owners cannot repopulate cleared or replaced cache entries. The write path checks ownership after hashing, before dispatch and after settlement notifications; reentrant cache clear or disposal cannot publish success. Unknown/result-withheld writes remain fenced across same-scope view navigation, and explicit inspection does not resolve them. Network/malformed outcomes do not invent a NOT_DISPATCHED disposition. No automatic retry or new delivery occurs. This cache fence is in-memory; it is not durable recovery across a full browser/process restart.
+
+Real receiver brands stay private behind opaque view handles. The adapter verifies current tenant/actor/conversation/run/client, operation family, known immutable version consistency and revision artifact/parent lineage. Historical producer attempt/worker/fence values are preserved as provenance rather than compared with a new executor. Request/version correlation precedes binary delivery. The final explicit fingerprint projection contains exactly the admitted request and optional baseVersionId, excluding deliveryId as before.
+
+Acquisition is bounded to 2 MiB for proxy requests and 16 MiB for responses. JSON bytes remain unmodified before public parsing; the existing action text interface retains fatal UTF-8 decoding. The deadline covers body acquisition/verification. Late and unconsumed responses are cancelled, including validation refusal before the public binary reader takes ownership. Binary forwarding preserves exact bytes and verification headers without fabricating missing metadata; the browser receiver checks the branded version, headers, byte count, SHA and EOF. Missing or malformed verification headers remain rejectable.
+
+## Public artifact and preservation
+
+The 0.1.2 tar is exactly 228,048 bytes with SHA256 `8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa`; its SHA512 matches the lock. All 19 installed app-local overlay members match the tar. Of the 15 previous 0.1.1 members, only README and package manifest change; the four additions are the public document module, declarations, schema and metadata. Only the app dependency entry and app-local resolved package entry change in the lock. The original 0.1.0 event consumer remains unchanged. This is static provenance verification, not a clean-install result.
+
+The separately sealed PR56 check confirms unchanged public/application docs and public package at Meri `25e0d29d6f0b6c3de284d13e86bc5f1aa0c00d21`, compared with PR54 `70516e5c9681917ce493bbc50e3023494f2e1209`. A trusted host binds one operation family; using the same four public routes does not create a mixed-family host. No private backend implementation was copied.
+
+`ASSERTION-PRESERVATION.json` compares all 306 pre-existing test/spec files to the exact base: zero changed files. Their original names, assertions and payload handlers are therefore preserved. The canonical browser dispatcher adds 16 lines and removes none. New browser Files fixtures/specs were still being authored and are excluded from this final pure-test responsibility acceptance.
+
+## Exact responsibility reviews
+
+Five production function signals are independently accepted. `REGISTRY-RECORDS.json` contains exact fingerprint records; `SOURCE-REVIEW-RECORDS.json` contains full-file hash records pointing to the proposed publication path `docs/meri-files-20261013/INDEPENDENT-REVIEW.md`. Root must copy this report there, or update that path, before registering them. This reviewer did not edit either registry.
+
+| Owner | Nonblank function lines | Responsibility |
+| --- | ---: | --- |
+| `DocumentEditor` | 112 | One Word input/replacement form, with mapping and execution elsewhere. |
+| `DocumentVersionPanel` | 146 | One selected immutable receipt and its explicit controls; structural inspection is already a child. |
+| `WorkbookEditor` | 111 | One typed-workbook form, without schema or operation-family authority. |
+| `DocumentWorkflow.write` | 90 | One reservation-to-settlement lifecycle with adjacent reentrancy and uncertainty checks. |
+| `Sidebar` | 116 | Existing Meri navigation with Files and accurate current-route selection. |
+
+`TEST-STRUCTURE-REVIEW.json` accepts twelve exact test/harness signals individually: the existing route dispatcher; the adapter module and three case groups; two transport groups; the journal group; the proxy module; and the presentation-state module, fixture and case group. These remain coherent owners. The proxy's byte-reader tests are already separate. Large describe callbacks collect independently observable cases rather than executing one large algorithm. The view's abstract port fixture is explicitly presentation-only; real receiver brands, Response streams and QueryClient behavior are exercised by separate adapter/transport/journal tests. No split was requested merely to reduce a count, and no blanket exemption is proposed.
+
+## Evidence and limits
+
+`OWNER-RECEIPTS.json` records and hashes these owner results, all with zero failed/pending tests: 191 original action characterization, 86 new proxy/bounds, 77 final sealed adapter/transport/journal and 32 final presentation pure cases. The existing six route-allocation checks also pass. These were inspected receipts, not reviewer executions. Real journal, download-correlation, settlement and workbook-example reds remain in their owner packets; initial fixture defects remain separately labeled. The hydrated architecture report has zero errors, with only the five explicit production reviews above outstanding before root registration.
+
+Browser rendering/keyboard/axe behavior, the host refresh control, final comprehensive tests/build and exact frozen-source qualification remain pending. Public-schema synthetic DOCX/XLSX bytes and receipts are not actual Office generation, opening, rendering or recalculation evidence. The UI retains draft/pending/native-unverified statements and uncertainty limits. Native Clerk/RLS/run/artifact capability/storage/worker integration and deployment activation remain unqualified; the original 337 held Portfolio criteria are not accepted by this work.

@@ -1,0 +1,56 @@
+
+Running 17 tests using 1 worker
+
+(node:623700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/mail-local-draft.spec.ts:112:3 › saved signature display preserves append=true without copying HTML into the body (3.6s)
+  ✓   2 apps/web/tests/browser/mail-local-draft.spec.ts:112:3 › saved signature display preserves append=false without copying HTML into the body (2.7s)
+  ✓   3 apps/web/tests/browser/mail-local-draft.spec.ts:149:1 › saved signature preview blocks active markup and automatic remote content (2.4s)
+  ✓   4 apps/web/tests/browser/mail-local-draft.spec.ts:178:3 › empty signature null has no misleading preview (2.4s)
+  ✓   5 apps/web/tests/browser/mail-local-draft.spec.ts:178:3 › empty signature  has no misleading preview (2.3s)
+  ✓   6 apps/web/tests/browser/mail-local-draft.spec.ts:192:1 › signature read failure remains distinct from empty and can be retried deliberately (4.0s)
+  ✓   7 apps/web/tests/browser/mail-local-draft.spec.ts:215:1 › local Undo restores exactly the body preceding the latest verified rewrite with no extra requests (2.6s)
+  ✓   8 apps/web/tests/browser/mail-local-draft.spec.ts:234:1 › manual edits retire Undo and the next rewrite snapshots the new local draft (2.7s)
+  ✘   9 apps/web/tests/browser/mail-local-draft.spec.ts:255:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits (2.7s)
+(node:624341) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 apps/web/tests/browser/mail-local-draft.spec.ts:294:3 › unverified subsequent rewrite retains the prior valid Undo (3.1s)
+  ✓  11 apps/web/tests/browser/mail-local-draft.spec.ts:294:3 › failed subsequent rewrite retains the prior valid Undo (2.2s)
+  ✓  12 apps/web/tests/browser/mail-local-draft.spec.ts:324:3 › recipients replacement retires an earlier Undo snapshot (2.3s)
+  ✓  13 apps/web/tests/browser/mail-local-draft.spec.ts:324:3 › client replacement retires an earlier Undo snapshot (2.2s)
+  ✓  14 apps/web/tests/browser/mail-local-draft.spec.ts:324:3 › actor replacement retires an earlier Undo snapshot (5.4s)
+  ✓  15 apps/web/tests/browser/mail-local-draft.spec.ts:324:3 › invalidated replacement retires an earlier Undo snapshot (3.1s)
+  ✓  16 apps/web/tests/browser/mail-local-draft.spec.ts:324:3 › close replacement retires an earlier Undo snapshot (3.2s)
+  ✓  17 apps/web/tests/browser/mail-local-draft.spec.ts:363:1 › append selection is local to the message and controls review inclusion (2.9s)
+
+
+  1) apps/web/tests/browser/mail-local-draft.spec.ts:255:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits 
+
+    ReferenceError: failed is not defined
+
+      267 |   await expect(
+      268 |     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
+    > 269 |   ).toBeDisabled();
+          |                   ^
+      270 |   state.release();
+      271 |   await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+      272 |     "Second verified revision.",
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:269:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/mail-local-draft.spec.ts:255:1 › repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits 
+  16 passed (52.1s)

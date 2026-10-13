@@ -1,0 +1,209 @@
+{
+  "cohorts": [
+    {
+      "cohort": "modules-browser",
+      "logBinding": {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/modules-browser.log",
+        "bytes": 48768,
+        "sha256": "fba608e87c8c8b7c5b01f71da88a54b28abd7431e82f21bb8449e0933b99a7e4"
+      },
+      "observations": [
+        {
+          "line": 5,
+          "text": "[WebServer] (node:1418719) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 10,
+          "text": "(node:1418746) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 12,
+          "text": "(node:1418747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        }
+      ],
+      "duplicateSiblingKeyWarnings": 0
+    },
+    {
+      "cohort": "portfolio-shard-1",
+      "logBinding": {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1.log",
+        "bytes": 43834,
+        "sha256": "53902f3c31367ddd594a0da784964fbee1b23fe9b0ddfe8957831a26e755c128"
+      },
+      "observations": [
+        {
+          "line": 9,
+          "text": "[WebServer] (node:1431355) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 14,
+          "text": "(node:1431383) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 16,
+          "text": "(node:1431382) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        }
+      ],
+      "duplicateSiblingKeyWarnings": 0
+    },
+    {
+      "cohort": "portfolio-shard-2",
+      "logBinding": {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2.log",
+        "bytes": 44446,
+        "sha256": "88f307130781e3c8fea4b1760efdda15e78fe2b882bab5826dd2ce817b149a43"
+      },
+      "observations": [
+        {
+          "line": 9,
+          "text": "[WebServer] (node:1444064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 14,
+          "text": "(node:1444084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 16,
+          "text": "(node:1444083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        }
+      ],
+      "duplicateSiblingKeyWarnings": 0
+    },
+    {
+      "cohort": "portfolio-shard-3",
+      "logBinding": {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3.log",
+        "bytes": 46645,
+        "sha256": "3eaff11d53befcb811f7201dd68dbc929fbe3bcb9f04e432fecd0204a082ef5b"
+      },
+      "observations": [
+        {
+          "line": 9,
+          "text": "[WebServer] (node:1456547) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 14,
+          "text": "(node:1456566) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 16,
+          "text": "(node:1456567) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 86,
+          "text": "[WebServer] 10:16:38 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 87,
+          "text": "[WebServer] 10:16:39 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 88,
+          "text": "[WebServer] 10:16:39 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 89,
+          "text": "[WebServer] 10:16:39 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 98,
+          "text": "[WebServer] 10:16:56 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 99,
+          "text": "[WebServer] 10:16:56 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 100,
+          "text": "[WebServer] 10:16:56 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 101,
+          "text": "[WebServer] 10:16:58 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 107,
+          "text": "[WebServer] 10:17:06 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 108,
+          "text": "[WebServer] 10:17:06 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 118,
+          "text": "[WebServer] 10:17:26 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 119,
+          "text": "[WebServer] 10:17:26 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 120,
+          "text": "[WebServer] 10:17:26 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 121,
+          "text": "[WebServer] 10:17:26 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 122,
+          "text": "[WebServer] 10:17:27 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 123,
+          "text": "[WebServer] 10:17:27 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:4`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 124,
+          "text": "[WebServer] 10:17:27 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:4`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        }
+      ],
+      "duplicateSiblingKeyWarnings": 17
+    },
+    {
+      "cohort": "portfolio-shard-4",
+      "logBinding": {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4.log",
+        "bytes": 44297,
+        "sha256": "84d4c0bae5b82fd4c3688410b69f64b9acb1b75364a3353527c365044f15ef1f"
+      },
+      "observations": [
+        {
+          "line": 9,
+          "text": "[WebServer] (node:1468037) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 14,
+          "text": "(node:1468057) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 16,
+          "text": "(node:1468056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set."
+        },
+        {
+          "line": 152,
+          "text": "[WebServer] 10:30:09 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 153,
+          "text": "[WebServer] 10:30:10 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 154,
+          "text": "[WebServer] 10:30:11 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 164,
+          "text": "[WebServer] 10:30:31 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        },
+        {
+          "line": 165,
+          "text": "[WebServer] 10:30:32 AM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted \u2014 the behavior is unsupported and could change in a future version."
+        }
+      ],
+      "duplicateSiblingKeyWarnings": 5
+    }
+  ],
+  "testResultErrorsAreNotConsoleWarnings": true,
+  "cleanConsoleClaim": false
+}

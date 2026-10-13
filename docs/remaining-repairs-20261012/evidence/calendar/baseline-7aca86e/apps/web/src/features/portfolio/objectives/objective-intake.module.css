@@ -1,0 +1,263 @@
+.page {
+  padding-top: 0;
+}
+.form {
+  display: grid;
+  gap: 20px;
+}
+.back {
+  justify-self: start;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.back:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.heading,
+.title,
+.cardHeader {
+  display: flex;
+  align-items: center;
+}
+.heading {
+  justify-content: space-between;
+  gap: 16px;
+}
+.title,
+.cardHeader {
+  gap: 6px;
+}
+.title h1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+.heading .headerSave {
+  min-height: 30px;
+  padding: 5px 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+.card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+.cardHeader {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.cardHeader h2 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+}
+.body {
+  display: grid;
+  gap: 16px;
+  padding: 18px 20px;
+}
+.client {
+  display: grid;
+  gap: 6px;
+}
+.eyebrow {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+}
+.clientChip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--dark-gradient);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.clientName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.clientChip small {
+  margin-left: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: right;
+}
+.fields,
+.askType {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.pageFields {
+  gap: 16px;
+}
+.pageFields > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 8px;
+}
+.pageFields label,
+.pageFields small,
+.askType legend {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.pageFields label {
+  display: inline;
+}
+.pageFields textarea {
+  flex-basis: 100%;
+  min-height: 0;
+  padding: 9px 12px;
+  border-color: var(--border-strong);
+  border-radius: 8px;
+  color: var(--foreground);
+  background: var(--card);
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+}
+.pageFields .outcome,
+.pageFields .governmentProblem {
+  height: 64px;
+}
+.pageFields .minimumWin {
+  height: 50px;
+}
+.pageFields .limits {
+  height: 40px;
+}
+.askType legend {
+  margin-bottom: 6px;
+}
+.askChoices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pageFields .askChoice {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--foreground);
+  background: var(--card);
+  cursor: pointer;
+}
+.askChoice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+.askChoice:has(input:checked) {
+  background: var(--dark-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+.askChoice:has(input:focus-visible) {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+.askChoice:has(input:disabled) {
+  cursor: default;
+  opacity: 0.5;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+}
+.footer :global(.formActions) {
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.draftStatus {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.rail {
+  min-width: 0;
+}
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}
+@media (max-width: 600px) {
+  .pageFields .limits {
+    height: 64px;
+  }
+  .clientChip {
+    flex-wrap: wrap;
+  }
+  .clientChip small {
+    flex-basis: 100%;
+    text-align: left;
+    margin-left: 34px;
+  }
+  .body {
+    padding: 16px;
+  }
+  .cardHeader,
+  .footer {
+    padding: 14px 16px;
+  }
+  .footer :global(.formActions) {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+}

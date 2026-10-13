@@ -1,0 +1,10 @@
+{
+  "prefix":"RELEASED-4",
+  "scope":"Root released all completed90cc runtime outputs after session39111 exited0. Final independent gate audit remains pending; no final publication seal until its inclusion. CONTINUATION.md is historical active context superseded by ALL-GATES-COMPLETE.",
+  "groups":[
+    {"lane":"portfolio-shard-4","root":"/workspace/capiro-unified-files-corrected-20261013","paths":["portfolio-shard-4-running.json","portfolio-shard-4-exit.json","portfolio-shard-4-results.json","portfolio-shard-4.log"]},
+    {"lane":"portfolio-shard-4-artifacts","root":"/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts"},
+    {"lane":"final-runtime-receipts","root":"/workspace/capiro-unified-files-corrected-20261013","paths":["portfolio-progress.json","portfolio-aggregate.json","ALL-GATES-COMPLETE.json","INPUT-HEAD-REFRESH.json","FINAL-SOURCE-CONFIRMATION.json","CONTINUATION.md"]},
+    {"lane":"completed90-elements-storage","root":"/workspace/capiro-final-storage-files-elements-20261013","manifestSha256":"f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a"}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-13T02:25:32.943082+00:00",
+  "baselineHead": "7c87678730538958ace9762f824dc3e588bf445b",
+  "state": "Intermediate snapshot taken after the root had already begun applying review corrections; not a failing baseline.",
+  "files": [
+    {
+      "path": "apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4276,
+      "sha256": "1f8a2d95f8ab0396dadfef03db2755d3d2cfb8630675dfabf1b48287bd65e58a"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3526,
+      "sha256": "a29702df3c718d4e2e56a6bbfbd3fbab49af8bcb4457387ece7f01e95357bf56"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "bytes": 9149,
+      "sha256": "f01774f3a412dd164d1bb8a8188fd4d6ecc6638c6e675b5fcf95d863aee611e0"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace.ts",
+      "bytes": 969,
+      "sha256": "98efbd7add19d3a8e2dd83cc9006e57d0c79aeb99e76d5fb11b7f448c40fa45b"
+    }
+  ]
+}

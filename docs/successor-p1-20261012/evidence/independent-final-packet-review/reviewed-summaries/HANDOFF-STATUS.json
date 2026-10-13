@@ -1,0 +1,39 @@
+{
+  "source": {
+    "commit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "trees": {
+      "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+      "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+      "packages": "71f37898a39fb8a6c00e7c2bc539e9d8af265fc3",
+      "scripts": "c71ce54dbf9c1857ed687ba05425d69691fd3d32"
+    },
+    "cleanInstall": {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --cache /tmp/capiro-p1-npm-cache",
+      "exitCode": 0,
+      "packages": 847
+    },
+    "recordedUTC": "2026-10-12T16:57:11.056601+00:00",
+    "nativePortfolioRowsAccepted": 0
+  },
+  "archive": {
+    "bytes": 498171732,
+    "sha256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+    "trackedBlobs": 5006,
+    "zipMembers": 5007,
+    "perMemberInventorySHA256": "1ac06b53762855f60f8a1d4fc1343e51ce373711cee5ac8479bd26a0e2a73139"
+  },
+  "qualification": "PENDING_FINAL_PORTFOLIO_BUILD_RUNTIME",
+  "passed": {
+    "combinedCheck": 1386,
+    "elements": 15,
+    "modulesBrowser": 157,
+    "canonicalParentClientClear": 1,
+    "independentVisualKeyboard": 15
+  },
+  "nativeAcceptedRows": 0,
+  "nativeRowsHeld": 337,
+  "originalUnresolvedFindings": 27,
+  "shipping": "Reserved for designated session after qualification/review; no AWS action. Prior PR12 controller remains bound to4a until separately reviewed binding.",
+  "transfer": "Exact offline Git-source reproduction and source validation available; Library upload not completed."
+}

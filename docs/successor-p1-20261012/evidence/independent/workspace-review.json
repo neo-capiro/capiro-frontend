@@ -1,0 +1,64 @@
+{
+  "reviewedAt": "2026-10-12T15:15:50.802516+00:00",
+  "finding": "PROS-F02",
+  "candidateCommit": "bd7f77f8601da883c54ae700ce32e2748cadd24d",
+  "verdict": "ACCEPT_BOUNDED_FRONTEND_REPAIR_PENDING_ROOT_INTEGRATED_GATES",
+  "sourceDiff": "Two disabled attributes on prospect editor title and mapped section fields; no hook, journal, contract, registry or transport changes. New browser tests are separate from production.",
+  "sourceEvidence": [
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207"
+    },
+    {
+      "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    }
+  ],
+  "independentBrowserRuns": [
+    {
+      "file": "workspace-independent-results.json",
+      "expected": 3,
+      "unexpected": 0,
+      "meaning": "Independent authority-preflight denial, foreign snapshot/reload/read-current without replay, changed source version without write."
+    },
+    {
+      "file": "workspace-author-controls-results.json",
+      "expected": 12,
+      "unexpected": 0,
+      "meaning": "Independent execution of author regression controls across held update/snapshot success/failure/lost receipt, leaving/reopening, and user/tenant/prospect/client replacement."
+    }
+  ],
+  "behaviorReview": [
+    "pending is owned by existing useProspectDraftSave across journal reserve, authority verification, source reread, update, snapshot and acknowledgement; freezing both input locations prevents later local input being accepted before key remount.",
+    "Non-prospect generic draft behavior is unchanged because optional prospectSave.pending is undefined.",
+    "Error and uncertain outcome retain the original reviewed input and explicit read-current recovery. No synthetic success is promoted to native persistence or transactional atomicity.",
+    "Known user/tenant/prospect/client lifetime replacement remains owned above the editor and journal; independent controls show no old snapshot dispatch or old editor revival."
+  ],
+  "architecture": {
+    "boundaryErrors": [],
+    "scannerExit": 1,
+    "pendingSignals": [
+      {
+        "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+        "kind": "function",
+        "symbol": "DraftEditor",
+        "line": 28,
+        "nonblank": 178,
+        "fingerprint": "460c5e02e91187ab5fcc03a8dbb83b0ba8d4bc0857d028a32111a8b6928f252a",
+        "provenance": "new",
+        "reviewStatus": "changed-since-review",
+        "blocking": true
+      }
+    ],
+    "decision": "ACCEPT_EXACT_FUNCTION_RESPONSIBILITY_REVIEW_FOR_ROOT_RECORDING",
+    "reason": "DraftEditor remains the canonical presentation and local-state owner for one document editor: title/sections, save/history controls and status. The two pending attributes reuse the existing prospect-save lifecycle without adding transport, persistence, provider integration or authority responsibilities. The 178-nonblank function is cohesive JSX composition; splitting solely to lower the count would obscure the shared editor lifetime. Existing separate hook, export and newsletter owners remain separate.",
+    "registryEdited": false
+  },
+  "limitations": [
+    "Root must record exact architecture fingerprint and run combined qualification on the integrated successor.",
+    "No native identity/RLS, real Workspace writes/snapshot persistence, provider, paid model, or deployed-image acceptance performed.",
+    "Unrelated missing rich editor, sharing/comments and proposal contracts remain outside this repair."
+  ],
+  "newFindings": [],
+  "noSourceEditsByReviewer": true
+}

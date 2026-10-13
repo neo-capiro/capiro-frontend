@@ -1,0 +1,218 @@
+[WebServer] (node:1523603) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 127 tests using 2 workers
+
+(node:1523661) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1523660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    2 tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement actor's feed (6.5s)
+  ✓    1 tests/browser/acceptance-activity-lifetime.spec.ts:35:3 › activity filtering retains uncertainty after 503 without an observed change until deliberate review (9.9s)
+  ✓    3 tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement tenant's feed (5.5s)
+  ✓    5 tests/browser/acceptance-activity-authority.spec.ts:79:1 › same-actor filtering still refreshes a dispatched activity write without replay (5.4s)
+  ✓    4 tests/browser/acceptance-activity-lifetime.spec.ts:35:3 › activity filtering retains uncertainty after 503 after the synthetic change until deliberate review (7.6s)
+  ✓    6 tests/browser/acceptance-bill-search.spec.ts:14:1 › a held current search conceals old results and fences Track until the new response (6.8s)
+  ✓    7 tests/browser/acceptance-activity-lifetime.spec.ts:35:3 › activity filtering retains uncertainty after wrong-client receipt until deliberate review (10.0s)
+  ✓    8 tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 403 removes selection; held retry cannot resurrect it (6.2s)
+  ✓    9 tests/browser/acceptance-activity-lifetime.spec.ts:35:3 › activity filtering retains uncertainty after wrong-tenant receipt until deliberate review (8.4s)
+  ✓   10 tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 503 removes selection; held retry cannot resurrect it (7.8s)
+  ✓   11 tests/browser/acceptance-activity-lifetime.spec.ts:35:3 › activity filtering retains uncertainty after wrong-activity receipt until deliberate review (7.8s)
+  ✓   12 tests/browser/acceptance-bill-search.spec.ts:87:1 › a successful empty reread cannot keep an absent bill selected for tracking (6.4s)
+  ✓   14 tests/browser/acceptance-bill-search.spec.ts:105:3 › query replacement clears prior selection while its new search is held (7.3s)
+  ✓   13 tests/browser/acceptance-activity-lifetime.spec.ts:81:1 › activity definite refusal remains retryable after filtering (9.6s)
+  ✓   15 tests/browser/acceptance-bill-search.spec.ts:105:3 › jurisdiction replacement clears prior selection while its new search is held (5.9s)
+  ✓   16 tests/browser/acceptance-activity-lifetime.spec.ts:102:1 › activity dispatched pending write stays fenced through filtering and uncertain completion (7.1s)
+  ✓   17 tests/browser/acceptance-bill-search.spec.ts:139:1 › client replacement cancels a held former-client search and starts with no selection (6.4s)
+  ✓   18 tests/browser/acceptance-activity-lifetime.spec.ts:141:1 › activity readonly actor cannot acquire write eligibility by filtering (5.1s)
+  ✓   20 tests/browser/acceptance-activity-lifetime.spec.ts:160:1 › activity expired preflight cannot dispatch a write after filter reappearance (5.9s)
+  ✓   19 tests/browser/acceptance-contact-mail-write-lifetime.spec.ts:12:1 › pending send and lost delivery receipt survive current-history loss and same-contact reopen (9.2s)
+  ✓   22 tests/browser/acceptance-folder-access-lifetime.spec.ts:15:1 › an ambiguous folder PATCH freezes the exact draft through close and reopen (3.1s)
+  ✓   23 tests/browser/acceptance-folder-access-lifetime.spec.ts:44:1 › an unknown folder intent survives actor navigation without entering another actor's form (3.6s)
+  ✓   24 tests/browser/acceptance-folder-access-lifetime.spec.ts:76:1 › a folder attempt fences two synchronous submits before its response arrives (2.8s)
+  ✓   21 tests/browser/acceptance-contact-mail.spec.ts:45:1 › contact thread admits the exact requested ID for direct and recipient-derived null or other-client histories (12.7s)
+  ✓   25 tests/browser/acceptance-folder-access-lifetime.spec.ts:112:1 › a pending folder attempt cannot be dispatched again after an actor round-trip (4.0s)
+  ✓   27 tests/browser/acceptance-folder-access-lifetime.spec.ts:148:3 › a matching folder PATCH after actor replacement cannot close the replacement dialog (2.4s)
+  ✓   26 tests/browser/acceptance-contact-mail.spec.ts:72:1 › contact thread refuses a different returned thread ID even when its client and recipients match (5.9s)
+  ✓   28 tests/browser/acceptance-folder-access-lifetime.spec.ts:148:3 › a matching folder PATCH after tenant replacement cannot close the replacement dialog (3.0s)
+  ✓   30 tests/browser/acceptance-folder-access-lifetime.spec.ts:148:3 › a matching folder PATCH after client replacement cannot close the replacement dialog (2.8s)
+  ✓   29 tests/browser/acceptance-contact-mail.spec.ts:104:3 › failed current contact history removes previous messages and draft until a successful explicit read (5.8s)
+  ✓   31 tests/browser/acceptance-folder-access-lifetime.spec.ts:190:1 › a matching folder PATCH after unmount cannot invalidate the departed view (2.7s)
+  ✓   33 tests/browser/acceptance-folder-access-lifetime.spec.ts:223:1 › folder dispatch rechecks authority synchronously before sending a stale form (2.1s)
+  ✓   34 tests/browser/acceptance-folder-access-lifetime.spec.ts:251:1 › a current read-only actor can inspect folder controls but cannot save access (1.8s)
+  ✓   32 tests/browser/acceptance-contact-mail.spec.ts:104:3 › failed current contact detail removes previous messages and draft until a successful explicit read (7.0s)
+  ✓   35 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects count-only acknowledgment, retains intent and fences another write (3.1s)
+  ✓   36 tests/browser/acceptance-contact-mail.spec.ts:188:1 › a held former-client contact thread cannot surface after the route selects another client (4.6s)
+  ✓   37 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects foreign folder, retains intent and fences another write (2.6s)
+  ✓   39 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects foreign unfiled group, retains intent and fences another write (2.8s)
+  ✓   38 tests/browser/acceptance-folder-access-recovery.spec.ts:15:1 › explicit current folder review preserves intent and permits only a separate deliberate save (3.4s)
+  ✓   40 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects contradictory access mode, retains intent and fences another write (2.6s)
+  ✓   42 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects missing requested viewer, retains intent and fences another write (1.7s)
+  ✓   43 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects additional viewer, retains intent and fences another write (1.6s)
+  ✓   44 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects negative count, retains intent and fences another write (1.6s)
+  ✓   45 tests/browser/acceptance-folder-access-receipts.spec.ts:35:3 › folder ACL rejects fractional count, retains intent and fences another write (1.5s)
+  ✓   46 tests/browser/acceptance-folder-access-receipts.spec.ts:64:1 › folder ACL accepts the native reordered viewer set and trimmed folder (1.4s)
+  ✓   47 tests/browser/acceptance-folder-access-receipts.spec.ts:94:1 › folder ACL accepts a native zero-count unfiled response without inventing folder inheritance (1.4s)
+  ✓   48 tests/browser/acceptance-folder-access-receipts.spec.ts:122:1 › folder ACL allows a corrected explicit save after a definite 422 rejection (1.6s)
+  ✓   49 tests/browser/acceptance-meeting-artifacts-delivery.spec.ts:10:3 › notes: a delivered editor submit checks current cache before React conceals the form (2.3s)
+  ✓   50 tests/browser/acceptance-meeting-artifacts-delivery.spec.ts:10:3 › debriefs: a delivered editor submit checks current cache before React conceals the form (2.4s)
+  ✓   51 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:18:3 › notes: a held read conceals an open editor without discarding its local draft (2.5s)
+  ✓   52 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:59:3 › notes: a failed read refuses an obsolete editor submit before dispatch (2.3s)
+  ✓   53 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:89:3 › notes: an already opened share confirmation cannot dispatch after list refusal (2.4s)
+  ✓   54 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:18:3 › debriefs: a held read conceals an open editor without discarding its local draft (2.5s)
+  ✘   41 tests/browser/acceptance-folder-access-recovery.spec.ts:58:1 › failed current folder review keeps uncertainty through collection recovery and reopen (30.4s)
+  ✓   55 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:59:3 › debriefs: a failed read refuses an obsolete editor submit before dispatch (2.9s)
+(node:1526252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   56 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:89:3 › debriefs: an already opened share confirmation cannot dispatch after list refusal (3.9s)
+  ✓   57 tests/browser/acceptance-folder-access-recovery.spec.ts:94:1 › a held folder review cannot clear the original fence after actor replacement (4.5s)
+  ✓   58 tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts:120:1 › debrief preview conceals cached content and printing after parent list refusal (4.9s)
+  ✓   59 tests/browser/acceptance-meeting-artifacts-lifetime.spec.ts:18:3 › notes: pending then uncertain creation survives list refusal and recovery without replay (5.4s)
+  ✓   60 tests/browser/acceptance-meeting-artifacts-preflight.spec.ts:12:3 › notes: list refusal while parent preflight is held prevents write and retains original intent (5.0s)
+  ✓   61 tests/browser/acceptance-meeting-artifacts-lifetime.spec.ts:92:3 › notes: replacing a meeting client requires its own current list receipt (4.1s)
+  ✓   62 tests/browser/acceptance-meeting-artifacts-preflight.spec.ts:12:3 › debriefs: list refusal while parent preflight is held prevents write and retains original intent (4.8s)
+  ✓   63 tests/browser/acceptance-meeting-artifacts-lifetime.spec.ts:18:3 › debriefs: pending then uncertain creation survives list refusal and recovery without replay (4.9s)
+  ✓   64 tests/browser/acceptance-meeting-artifacts-preview.spec.ts:10:1 › reopened debrief preview conceals its own cached body until the current saved read completes (4.7s)
+  ✓   65 tests/browser/acceptance-meeting-artifacts-lifetime.spec.ts:92:3 › debriefs: replacing a meeting client requires its own current list receipt (4.1s)
+  ✓   66 tests/browser/acceptance-meeting-artifacts-preview.spec.ts:60:3 › debrief preview rejects its own meeting receipt after an admitted card list (4.5s)
+  ✓   67 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › notes: held list conceals the saved body and recovers only current records (3.9s)
+  ✓   68 tests/browser/acceptance-meeting-artifacts-preview.spec.ts:60:3 › debrief preview rejects its own client receipt after an admitted card list (4.3s)
+  ✓   69 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery (4.5s)
+  ✓   70 tests/browser/acceptance-meeting-artifacts-preview.spec.ts:60:3 › debrief preview rejects its own duplicate receipt after an admitted card list (4.2s)
+  ✓   71 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery (6.1s)
+  ✓   72 tests/browser/acceptance-meeting-artifacts-preview.spec.ts:96:1 › debrief preview preserves omitted optional parent echoes on its own native read (2.7s)
+  ✓   73 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › notes: an older released read cannot replace a newer failed read (4.3s)
+  ✓   74 tests/browser/acceptance-objective-keys.spec.ts:14:1 › actual ObjectiveEditor has independent destination panels without duplicate sibling-key warnings (6.0s)
+  ✓   75 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects meeting list provenance without body or write controls (6.3s)
+  ✓   76 tests/browser/acceptance-objective-keys.spec.ts:58:1 › a persisted Objective version remounts both destination selections and resolves only the new version (6.6s)
+  ✓   77 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects client list provenance without body or write controls (6.1s)
+  ✓   78 tests/browser/acceptance-objective-keys.spec.ts:154:3 › both held destination resolutions abort on editor close without late navigation (3.9s)
+  ✓   80 tests/browser/acceptance-objective-keys.spec.ts:154:3 › both held destination resolutions abort on editor client without late navigation (5.2s)
+  ✓   79 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects duplicate list provenance without body or write controls (5.9s)
+  ✓   82 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:126:3 › notes: omitted optional parent echoes preserve the original native list projection (3.9s)
+  ✓   83 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › notes: exact native client-one parent remains usable (3.5s)
+  ✓   81 tests/browser/acceptance-portfolio-incompletes.spec.ts:11:5 › Portfolio incomplete contrast and names are reviewed at 1440px light (8.3s)
+  ✓   84 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › notes: exact native unscoped parent remains usable (4.3s)
+  ✓   86 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › debriefs: held list conceals the saved body and recovers only current records (3.4s)
+  ✓   85 tests/browser/acceptance-portfolio-incompletes.spec.ts:11:5 › Portfolio incomplete contrast and names are reviewed at 1440px dark (9.0s)
+  ✓   87 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery (4.1s)
+  ✓   88 tests/browser/acceptance-portfolio-incompletes.spec.ts:11:5 › Portfolio incomplete contrast and names are reviewed at 390px light (6.8s)
+  ✓   89 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery (5.6s)
+  ✓   91 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › debriefs: an older released read cannot replace a newer failed read (5.6s)
+  ✓   90 tests/browser/acceptance-portfolio-incompletes.spec.ts:11:5 › Portfolio incomplete contrast and names are reviewed at 390px dark (11.0s)
+  ✓   92 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects meeting list provenance without body or write controls (5.7s)
+  ✓   93 tests/browser/acceptance-prospect-brief-current.spec.ts:19:3 › brief history 403 current read hides cached selection until held recovery succeeds (4.9s)
+  ✓   94 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects client list provenance without body or write controls (5.8s)
+  ✓   95 tests/browser/acceptance-prospect-brief-current.spec.ts:68:3 › selected brief version 403 current read withholds its cached document through held recovery (5.4s)
+  ✓   96 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects duplicate list provenance without body or write controls (5.9s)
+  ✓   97 tests/browser/acceptance-prospect-brief-current.spec.ts:135:3 › brief refresh 403 current read removes prior comparison through held recovery (4.5s)
+  ✓   98 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:126:3 › debriefs: omitted optional parent echoes preserve the original native list projection (5.6s)
+  ✓   99 tests/browser/acceptance-prospect-brief-current.spec.ts:184:3 › brief source 403 current read withholds current evidence while retaining immutable citation facts (7.2s)
+  ✓  100 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › debriefs: exact native client-one parent remains usable (4.7s)
+  ✓  102 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › debriefs: exact native unscoped parent remains usable (3.9s)
+  ✓  101 tests/browser/acceptance-prospect-brief-current.spec.ts:19:3 › brief history 503 current read hides cached selection until held recovery succeeds (6.6s)
+  ✓  103 tests/browser/acceptance-prospect-client-link.spec.ts:32:3 › existing-client 403 current read revokes old selection and requires fresh confirmation after held recovery (6.2s)
+  ✓  104 tests/browser/acceptance-prospect-brief-current.spec.ts:68:3 › selected brief version 503 current read withholds its cached document through held recovery (7.0s)
+  ✓  105 tests/browser/acceptance-prospect-client-link.spec.ts:32:3 › existing-client 503 current read revokes old selection and requires fresh confirmation after held recovery (6.5s)
+  ✓  106 tests/browser/acceptance-prospect-brief-current.spec.ts:135:3 › brief refresh 503 current read removes prior comparison through held recovery (6.0s)
+  ✓  107 tests/browser/acceptance-prospect-client-link.spec.ts:77:1 › changing client search cannot dispatch a confirmation from a previous result set (5.2s)
+  ✓  108 tests/browser/acceptance-prospect-brief-current.spec.ts:184:3 › brief source 503 current read withholds current evidence while retaining immutable citation facts (6.9s)
+  ✓  109 tests/browser/acceptance-prospect-contacts.spec.ts:33:3 › contacts 403 current read removes cached contacts and editor through held recovery (4.9s)
+  ✓  110 tests/browser/acceptance-prospect-create-intent.spec.ts:113:1 › unknown prospect creation cannot bind edited input to the original request identity (5.7s)
+  ✓  111 tests/browser/acceptance-prospect-contacts.spec.ts:33:3 › contacts 503 current read removes cached contacts and editor through held recovery (6.8s)
+  ✓  112 tests/browser/acceptance-prospect-create-intent.spec.ts:140:1 › definite prospect creation refusal permits correction and an explicit editable retry (5.2s)
+  ✓  114 tests/browser/acceptance-prospect-write-preservation.spec.ts:36:1 › pending contact creation survives denied current read and retains the same request after an unknown reply (4.8s)
+  ✓  115 tests/browser/acceptance-prospect-write-preservation.spec.ts:134:1 › pending brief save survives selected-version denial and retries only its retained unknown SaveInput (3.6s)
+  ✘  113 tests/browser/acceptance-prospect-contacts.spec.ts:90:1 › held contact recovery cannot resurrect an old editor after route replacement (10.9s)
+(node:1528931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  116 tests/browser/acceptance-relationships-write-lifetime.spec.ts:17:3 › contact create 200 cannot repeat after read loss and its late completion cannot close a replacement drawer (5.5s)
+  ✓  117 tests/browser/acceptance-relationships.spec.ts:21:3 › current people 403 conceals roster and dirty drawer until an explicit successful recovery (6.3s)
+  ✓  118 tests/browser/acceptance-relationships-write-lifetime.spec.ts:17:3 › contact create 503 cannot repeat after read loss and its late completion cannot close a replacement drawer (5.7s)
+  ✓  119 tests/browser/acceptance-relationships.spec.ts:21:3 › current people 503 conceals roster and dirty drawer until an explicit successful recovery (6.2s)
+  ✓  120 tests/browser/acceptance-relationships-write-lifetime.spec.ts:110:1 › held target removal stays scoped to its target and cannot close a replacement drawer after read loss (5.5s)
+  ✓  121 tests/browser/acceptance-relationships.spec.ts:74:1 › current target-list denial closes former target detail and recovers without restoring its selection (4.2s)
+  ✓  122 tests/browser/acceptance-relationships.spec.ts:125:1 › failed current recommendations conceal old suggestions while the independent target list remains usable (4.0s)
+  ✓  123 tests/browser/acceptance-relationships.spec.ts:184:3 › current congress directory failure removes stale choices and retains independent feeds (3.2s)
+  ✓  124 tests/browser/acceptance-relationships.spec.ts:184:3 › current staff directory failure removes stale choices and retains independent feeds (3.0s)
+  ✓  125 tests/browser/acceptance-relationships.spec.ts:184:3 › current state directory failure removes stale choices and retains independent feeds (3.0s)
+  ✓  126 tests/browser/acceptance-relationships.spec.ts:184:3 › current committee directory failure removes stale choices and retains independent feeds (3.0s)
+  ✓  127 tests/browser/acceptance-relationships.spec.ts:281:1 › failed current target detail removes old positions and the open mail draft until reviewed again (3.1s)
+
+
+  1) tests/browser/acceptance-folder-access-recovery.spec.ts:58:1 › failed current folder review keeps uncertainty through collection recovery and reopen 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('aside').getByRole('button', { name: /^Reports\s*1$/ })
+
+
+       at acceptance-folder-access-fixtures.ts:67
+
+      65 |   await aside
+      66 |     .getByRole("button", { name: new RegExp(`^${folder}\\s*1$`) })
+    > 67 |     .click();
+         |      ^
+      68 |   await aside.getByRole("button", { name: "Access", exact: true }).click();
+      69 |   const dialog = page.getByRole("dialog", {
+      70 |     name: `Access: ${folder}`,
+        at openFolderAccess (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-folder-access-fixtures.ts:67:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-folder-access-recovery.spec.ts:85:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-folder-access-r-2a781-lection-recovery-and-reopen/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-folder-access-r-2a781-lection-recovery-and-reopen/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-folder-access-r-2a781-lection-recovery-and-reopen/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-folder-access-r-2a781-lection-recovery-and-reopen/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/acceptance-prospect-contacts.spec.ts:90:1 › held contact recovery cannot resurrect an old editor after route replacement 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Prospects', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Prospects', exact: true })
+
+
+      109 |   await expect(
+      110 |     page.getByRole("heading", { name: "Prospects", exact: true }),
+    > 111 |   ).toBeVisible();
+          |     ^
+      112 |   release();
+      113 |   await replaceProspectRoute(page, prospectDetail);
+      114 |   await expect(
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-contacts.spec.ts:111:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-all-browser/artifacts/acceptance-prospect-contac-6d176-tor-after-route-replacement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/acceptance-folder-access-recovery.spec.ts:58:1 › failed current folder review keeps uncertainty through collection recovery and reopen 
+    tests/browser/acceptance-prospect-contacts.spec.ts:90:1 › held contact recovery cannot resurrect an old editor after route replacement 
+  125 passed (5.8m)

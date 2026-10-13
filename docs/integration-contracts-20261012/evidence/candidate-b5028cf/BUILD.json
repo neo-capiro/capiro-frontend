@@ -1,0 +1,36 @@
+{
+  "source": "b5028cf033e019e14943940f287ad12a1192554a",
+  "buildId": "72T3LarGTjxs_SdMNVvNX",
+  "prerenderedRoutes": [
+    "/_global-error"
+  ],
+  "meriPrerendered": false,
+  "artifacts": [
+    {
+      "path": "apps/web/.next/BUILD_ID",
+      "bytes": 21,
+      "sha256": "5ca8f77b2767571bb34f72344a0a35be93c18262f2da9ccb5eb6212d5aeca003"
+    },
+    {
+      "path": "apps/web/.next/standalone/apps/web/server.js",
+      "bytes": 7950,
+      "sha256": "2675d9038e95dd23a14f45fbfbc4684aca589f83d85b59390a556829a5734bec"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 510436,
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802"
+    },
+    {
+      "path": "apps/web/package.json",
+      "bytes": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "bytes": 1470,
+      "sha256": "f824ad8a78522b2d66f3357329bc6e107005b70b3972dc860144d909ea7b5552"
+    }
+  ],
+  "claim": "One root production build after clean installation. This is a standalone artifact check, not a container image or live-service qualification."
+}

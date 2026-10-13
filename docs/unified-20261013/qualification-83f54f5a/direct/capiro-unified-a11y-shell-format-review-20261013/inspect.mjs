@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import ts from '/workspace/capiro-onboard-port-20261013/node_modules/typescript/lib/typescript.js';
+const dir='/tmp/capiro-unified-a11y-shell-format-review-20261013';
+const beforePath='/tmp/capiro-unified-a11y-proposal-20261013/candidate/apps/web/src/shared/shell/ProductShell.tsx';
+const afterPath='/workspace/capiro-onboard-port-20261013/apps/web/src/shared/shell/ProductShell.tsx';
+const before=fs.readFileSync(beforePath,'utf8'),after=fs.readFileSync(afterPath,'utf8');
+const options={compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,jsx:ts.JsxEmit.ReactJSX},fileName:'ProductShell.tsx'};
+const beforeJS=ts.transpileModule(before,options).outputText,afterJS=ts.transpileModule(after,options).outputText;
+const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
+const data={review:'Read-only JSX formatting/type-erasure check; no application imports or runtime.',beforePath,afterPath,beforeSha256:hash(before),afterSha256:hash(after),emittedJSIdentical:beforeJS===afterJS,beforeEmittedSha256:hash(beforeJS),afterEmittedSha256:hash(afterJS),typescriptVersion:ts.version};
+fs.writeFileSync(`${dir}/FORMAT-DELTA.json`,JSON.stringify(data,null,2)+'\n');
+fs.writeFileSync(`${dir}/before.tsx`,before);fs.writeFileSync(`${dir}/after.tsx`,after);fs.writeFileSync(`${dir}/emitted.js`,afterJS);
+console.log(JSON.stringify(data,null,2));

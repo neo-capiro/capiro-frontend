@@ -1,0 +1,31 @@
+{
+  "sealedUTC": "2026-10-13T14:19:13.577099+00:00",
+  "scope": "Read-only publication packet/member/source verification and documentation truthfulness; no runtime replay or repository mutation.",
+  "members": [
+    {
+      "path": "DOCUMENT-CONTENT-REVIEW.json",
+      "bytes": 5589,
+      "sha256": "10a876376f5f1ac41c92e974610364b87b39a0faa3888a2d08382c667b1450a5"
+    },
+    {
+      "path": "PACKET-VERIFICATION.json",
+      "bytes": 3328,
+      "sha256": "71c101a7047e473c31c127be091d7d6b7065ef7ff888eda651eede3d49f1e1f1"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3056,
+      "sha256": "0dcd914a88637697956bb5438a3420577a7ac79255c676bdfd28d33de805f376"
+    },
+    {
+      "path": "SOURCE-DOCUMENT-VERIFICATION.json",
+      "bytes": 2727,
+      "sha256": "813c28609ee96df6b2b7c166eec344c9fdfb16eb99d4f4f6dacd9edbb32d8421"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 6002,
+      "sha256": "742c8fc7c1da1cbeb4b2a46bff88d732564233f808a35539a93973500ebd9096"
+    }
+  ]
+}

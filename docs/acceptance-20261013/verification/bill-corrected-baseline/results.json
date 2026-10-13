@@ -1,0 +1,507 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-acceptance-batch-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "tests/browser/acceptance-bill-search.spec.ts",
+      "--workers=2",
+      "--output",
+      "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 2,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance-bill-search.spec.ts",
+      "file": "acceptance-bill-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a held current search conceals old results and fences Track until the new response",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8376,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:24:55",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                      "column": 55,
+                      "line": 24
+                    },
+                    "snippet": "  22 |     await refreshBillSearch(page);\n  23 |     await expect.poll(() => state.entered).toBe(2);\n> 24 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  25 |     await expect(trackButton(page)).toBeDisabled();\n  26 |     expect(state.writes).toEqual([]);\n  27 |   } finally {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                        "column": 55,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  22 |     await refreshBillSearch(page);\n  23 |     await expect.poll(() => state.entered).toBe(2);\n> 24 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  25 |     await expect(trackButton(page)).toBeDisabled();\n  26 |     expect(state.writes).toEqual([]);\n  27 |   } finally {\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:24:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:42.720Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                    "column": 55,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "de979218f687781eef1d-50bd1c49daead754507b",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "a cached search followed by 403 removes selection; held retry cannot resurrect it",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8916,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                      "column": 55,
+                      "line": 61
+                    },
+                    "snippet": "  59 |       contentType: \"application/json\",\n  60 |     });\n> 61 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  62 |     await expect(trackButton(page)).toBeDisabled();\n  63 |     state.status = 200;\n  64 |     state.rows = [recoveredBill];"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                        "column": 55,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  59 |       contentType: \"application/json\",\n  60 |     });\n> 61 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  62 |     await expect(trackButton(page)).toBeDisabled();\n  63 |     state.status = 200;\n  64 |     state.rows = [recoveredBill];\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:51.903Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "search-refusal-observation",
+                      "contentType": "application/json",
+                      "body": "eyJyZWFkcyI6W3siY2xpZW50IjoiMTAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicXVlcnkiOiJIQiAxIiwianVyaXNkaWN0aW9ucyI6WyJVUyJdfSx7ImNsaWVudCI6IjEwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMSIsInF1ZXJ5IjoiSEIgMSIsImp1cmlzZGljdGlvbnMiOlsiVVMiXX1dLCJ3cml0ZXMiOltdfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                    "column": 55,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "de979218f687781eef1d-bd720d4b361920d8f626",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "a cached search followed by 503 removes selection; held retry cannot resurrect it",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9415,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                      "column": 55,
+                      "line": 61
+                    },
+                    "snippet": "  59 |       contentType: \"application/json\",\n  60 |     });\n> 61 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  62 |     await expect(trackButton(page)).toBeDisabled();\n  63 |     state.status = 200;\n  64 |     state.rows = [recoveredBill];"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                        "column": 55,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  59 |       contentType: \"application/json\",\n  60 |     });\n> 61 |     await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n     |                                                       ^\n  62 |     await expect(trackButton(page)).toBeDisabled();\n  63 |     state.status = 200;\n  64 |     state.rows = [recoveredBill];\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:01.676Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "search-refusal-observation",
+                      "contentType": "application/json",
+                      "body": "eyJyZWFkcyI6W3siY2xpZW50IjoiMTAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicXVlcnkiOiJIQiAxIiwianVyaXNkaWN0aW9ucyI6WyJVUyJdfSx7ImNsaWVudCI6IjEwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMSIsInF1ZXJ5IjoiSEIgMSIsImp1cmlzZGljdGlvbnMiOlsiVVMiXX0seyJjbGllbnQiOiIxMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDEiLCJxdWVyeSI6IkhCIDEiLCJqdXJpc2RpY3Rpb25zIjpbIlVTIl19XSwid3JpdGVzIjpbXX0="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                    "column": 55,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "de979218f687781eef1d-9c136d0c983bb924a62b",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 42,
+          "column": 3
+        },
+        {
+          "title": "a successful empty reread cannot keep an absent bill selected for tracking",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8125,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Track selected bill</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Track selected bill</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:99:35",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                      "column": 35,
+                      "line": 99
+                    },
+                    "snippet": "   97 |   await expect(billDialog(page).getByText(\"No matching bills.\")).toBeVisible();\n   98 |   await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n>  99 |   await expect(trackButton(page)).toBeDisabled();\n      |                                   ^\n  100 |   expect(state.writes).toEqual([]);\n  101 |   expect(unexpected).toEqual([]);\n  102 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                        "column": 35,
+                        "line": 99
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Track selected bill</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n   97 |   await expect(billDialog(page).getByText(\"No matching bills.\")).toBeVisible();\n   98 |   await expect(billDialog(page).getByRole(\"radio\")).toHaveCount(0);\n>  99 |   await expect(trackButton(page)).toBeDisabled();\n      |                                   ^\n  100 |   expect(state.writes).toEqual([]);\n  101 |   expect(unexpected).toEqual([]);\n  102 | });\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:99:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:11.906Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts",
+                    "column": 35,
+                    "line": 99
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "de979218f687781eef1d-54724c4bf3a9a6ad1d87",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "query replacement clears prior selection while its new search is held",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3434,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:20.761Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "de979218f687781eef1d-8f14c2c6f124cd446c45",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 105,
+          "column": 3
+        },
+        {
+          "title": "jurisdiction replacement clears prior selection while its new search is held",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2919,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:24.425Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "de979218f687781eef1d-04e5e0557ff39b1e723f",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 105,
+          "column": 3
+        },
+        {
+          "title": "client replacement cancels a held former-client search and starts with no selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:27.360Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "client-read-scope",
+                      "contentType": "application/json",
+                      "body": "W3siY2xpZW50IjoiMTAwMDAwMDAtMDAwMC00MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicXVlcnkiOiJIQiAxIiwianVyaXNkaWN0aW9ucyI6WyJVUyJdfSx7ImNsaWVudCI6IjEwMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMSIsInF1ZXJ5IjoiSEIgMSIsImp1cmlzZGljdGlvbnMiOlsiVVMiXX0seyJjbGllbnQiOiIxMDAwMDAwMC0wMDAwLTQwMDAtODAwMC0wMDAwMDAwMDAwMDIiLCJxdWVyeSI6IkhCIDIiLCJqdXJpc2RpY3Rpb25zIjpbIlVTIl19XQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "de979218f687781eef1d-8499dcba0d8d7b90ae22",
+          "file": "acceptance-bill-search.spec.ts",
+          "line": 139,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T11:47:41.778Z",
+    "duration": 49107.148,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

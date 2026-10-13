@@ -1,0 +1,134 @@
+{
+  "capturedAt": "2026-10-12T23:22:37.970586+00:00",
+  "baseHead": "b680b65e14134be736942b29d715e49c2c6a8b19",
+  "uncommitted": true,
+  "excludedLinks": [
+    {
+      "path": "packages/qualification-newsletter/node_modules",
+      "target": "/tmp/capiro-newsletter-consumer-install/node_modules",
+      "reason": "borrowed dependency link; must not be staged"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/newsletter-port-20261012/HANDOVER.md",
+      "bytes": 4897,
+      "sha256": "d8b7b270d6ff9d8b7c424e550f44053cc73461cd8972e5f80d7e1cebc13988dc"
+    },
+    {
+      "path": "docs/newsletter-port-20261012/PACKED-CONSUMER-PLAN.md",
+      "bytes": 2153,
+      "sha256": "7e1f2321a4ba4225c0c29157eb07013780051f6f5faac710f0ab5120f2cb4cf7"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 511228,
+      "sha256": "7f9bd7d2f087017d10139ec57d383de26878bd4382440ed715929be3ac98e1f3"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2034,
+      "sha256": "f6159deb8588ef341d6ea5f48cb3d68a1534217758c012a813975a2d9570e51d"
+    },
+    {
+      "path": "packages/qualification-newsletter/README.md",
+      "bytes": 2264,
+      "sha256": "ec319597a797ab9cac43d36016fe6ffd7f52ffae312f9fe4efff37c52ce67add"
+    },
+    {
+      "path": "packages/qualification-newsletter/browser-check.mjs",
+      "bytes": 5013,
+      "sha256": "2b5c600fb592987c5c27516812aa089ef1f3d0a779680f12bd2f1d3cf9e556a1"
+    },
+    {
+      "path": "packages/qualification-newsletter/browser-entry.mjs",
+      "bytes": 361,
+      "sha256": "5159b6e71c45780c8d1882c8745c1a665177f5f6314a3a01154a10c79806ca1c"
+    },
+    {
+      "path": "packages/qualification-newsletter/declarations.mjs",
+      "bytes": 3871,
+      "sha256": "788c10e686caaed0286af1948e754dbd2d3334ec33389a5ec708d4b5287a9ba9"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixed-clock.mjs",
+      "bytes": 643,
+      "sha256": "7a1bd66f91f6736c258faaea3e3f60fc9dde8d2669a5ff3529c7c81b7ff83385"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/PUBLIC-ENTRY-BINDINGS.json",
+      "bytes": 2510,
+      "sha256": "c82b35648c41837c7a5451582a6b5097f6519610ebdb3b46efc9e0dbdd48549a"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba"
+    },
+    {
+      "path": "packages/qualification-newsletter/package.json",
+      "bytes": 648,
+      "sha256": "144706ecdb0b3f29eee70ddbba7312467ec518238e5af4fbf7fa6c3d3795e7e1"
+    },
+    {
+      "path": "packages/qualification-newsletter/qualification.test.mjs",
+      "bytes": 2963,
+      "sha256": "fb40d8a105dd86278f58d46788deb72de7616cf403fc00ef21c6cffd2212b0f3"
+    },
+    {
+      "path": "packages/qualification-newsletter/tsconfig.json",
+      "bytes": 311,
+      "sha256": "28927e603338c74b0c9b661bd0abb2811ab08fb5a8504bed89ea7e91d00ccace"
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "bytes": 22615,
+      "sha256": "cef6885b5a3c174c62a41657f92b803cdf6b599a8dd0eab6c7d5193a789f2ed5"
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "bytes": 5027,
+      "sha256": "e24fb0affc7b8397a970b1d76df126ca32bb86f9468f4062488c648512d69af8"
+    },
+    {
+      "path": "scripts/newsletter-cli.test.mjs",
+      "bytes": 1437,
+      "sha256": "63625b7fc3c792c92379f7b3b7469a6268a3eaae2c3ba52333d201cde30deddd"
+    },
+    {
+      "path": "scripts/public-packages.mjs",
+      "bytes": 2926,
+      "sha256": "1d3585ed0b380a039b8f42e7d50632fc640e88688de40b345d23fc98459065a0"
+    },
+    {
+      "path": "vendor/README.md",
+      "bytes": 2263,
+      "sha256": "3e5940387698cbb944b2b23c99f85f30c0fb495956d8b6e96c1da9ce66bbfc9d"
+    },
+    {
+      "path": "vendor/capiro-shared-0.0.0.tgz",
+      "bytes": 510772,
+      "sha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab"
+    },
+    {
+      "path": "vendor/newsletter-public-packages.json",
+      "bytes": 1052,
+      "sha256": "03a191db7912271f585abb2199fd1404170ef76739f8083047666aaf22c4f855"
+    }
+  ]
+}

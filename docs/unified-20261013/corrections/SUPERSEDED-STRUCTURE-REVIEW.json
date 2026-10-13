@@ -1,0 +1,11 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
+    "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  }
+]

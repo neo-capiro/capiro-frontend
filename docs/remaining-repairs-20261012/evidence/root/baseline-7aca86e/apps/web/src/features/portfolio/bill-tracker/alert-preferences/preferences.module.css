@@ -1,0 +1,240 @@
+.dialog.dialog {
+  width: min(720px, calc(100vw - 32px));
+  padding: 0;
+  gap: 0;
+  border-radius: 14px;
+  box-shadow:
+    0 16px 40px -12px #0c0a092e,
+    0 2px 6px #0c0a090d;
+}
+.dialog > header {
+  padding: 20px 28px 0;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.dialog > header h2 {
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+}
+.dialog > header button {
+  padding: 0;
+  min-height: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--muted-foreground);
+}
+.dialog > p {
+  padding: 8px 28px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.form {
+  min-width: 0;
+}
+.body {
+  display: grid;
+  gap: 20px;
+  padding: 20px 28px;
+  min-width: 0;
+}
+.fields,
+.triggers {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.fields {
+  display: grid;
+  gap: 20px;
+}
+.criteria,
+.quiet,
+.channel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.triggers legend,
+.quiet h3 {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.triggerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.choice.choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.choice input[type="checkbox"] {
+  appearance: none;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  background: var(--card);
+  display: grid;
+  place-content: center;
+}
+.choice input:checked {
+  background: var(--foreground);
+  border-color: var(--foreground);
+}
+.choice input:checked::after {
+  content: "✓";
+  color: var(--card);
+  line-height: 1;
+  font-size: 16px;
+}
+.filters,
+.quietInputs,
+.delivery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.delivery {
+  gap: 20px;
+}
+.field.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.field > span,
+.select label {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+.field input,
+.select select {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.field input::placeholder {
+  color: var(--muted-foreground);
+}
+.select {
+  position: relative;
+  min-width: 0;
+}
+.select select {
+  appearance: none;
+  padding-right: 30px;
+}
+.select::after {
+  content: "⌄";
+  position: absolute;
+  bottom: 13px;
+  right: 12px;
+  pointer-events: none;
+  font-size: 13px;
+}
+.help,
+.field small {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+}
+.footer button {
+  min-height: 36px;
+  padding: 8px 14px;
+}
+.entry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+}
+.entry p {
+  color: var(--muted-foreground);
+}
+.reload {
+  display: grid;
+  gap: 12px;
+}
+.channelAction {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.channelAction h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.actionButtons,
+.testChoices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.testChoices {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.testResults {
+  padding-left: 20px;
+  margin: 0;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .dialog > header {
+    padding-inline: 20px;
+  }
+  .dialog > p {
+    padding-inline: 20px;
+  }
+  .body {
+    padding-inline: 20px;
+  }
+  .footer {
+    padding-inline: 20px;
+  }
+  .triggerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .filters,
+  .delivery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

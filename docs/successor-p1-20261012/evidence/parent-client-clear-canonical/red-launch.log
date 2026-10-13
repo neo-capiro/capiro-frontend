@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:4:1 › No client in an existing meeting submits and verifies an explicit association clear (3.9s)
+
+
+  1) ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:4:1 › No client in an existing meeting submits and verifies an explicit association clear 
+
+    Error: expect(received).toHaveProperty(path, value)
+
+    Expected path: "clientId"
+    Received path: []
+
+    Expected value: null
+    Received value: {"description": "", "endsAt": "2026-10-01T15:00:00Z", "location": "Meeting room", "startsAt": "2026-10-01T14:00:00Z", "subject": "Synthetic association clear"}
+
+      30 |  writeFileSync(info.outputPath('client-clear-observation.json'),JSON.stringify({requestedUiClient:null,body,returnedClient:returned.client,editorClosed:true,writes,unexpected},null,2));
+      31 |  await page.screenshot({path:info.outputPath('client-clear-after.png'),fullPage:true});
+    > 32 |  expect(unexpected).toEqual([]);expect(body).toHaveProperty('clientId',null);
+         |                                              ^
+      33 |  expect(returned.client).toBeNull();
+      34 | });
+      35 |
+        at /tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:32:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/artifacts/control-No-client-in-an-ex-0aea3--explicit-association-clear/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/capiro-parent-client-clear-red-09aa0ab/control.spec.ts:4:1 › No client in an existing meeting submits and verifies an explicit association clear 
+[WebServer] (node:541271) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:541290) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

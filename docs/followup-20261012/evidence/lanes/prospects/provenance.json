@@ -1,0 +1,32 @@
+{
+  "baselineSource": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "worktree": "/workspace/capiro-next-prospect-files",
+  "scope": "PROS-F03 local loaded Prospect Files filename search only",
+  "row": "PROS-019",
+  "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+  "figmaFrame": "411:65071",
+  "figmaSearchNodes": [
+    "411:65104",
+    "411:65105"
+  ],
+  "evidence": [
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/prospects/findings.json",
+      "sha256": "e1463ccaef0a5657ec880707d8f791c763b3549b5b7a1ba350de4f81c17b8501"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/prospects/row-assessment.json",
+      "sha256": "d071e3cf2be30c6ad285cb643036dc67936ec938cf9f74acc723360bb0bbe237"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/prospects/figma-411-65071-context.txt",
+      "sha256": "82d68c0ef2f216cd35b30a475b604f2f0dbf6f223a668eefafd8e806ecbc8020"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/prospects/figma-411-65071.png",
+      "sha256": "b62c598253cf293699d2ca8f7cbf442915dbdf484c90dd3c476494c772ac1b3e"
+    }
+  ],
+  "designDecision": "Reuse existing global toolbar and input tokens within the currently implemented Prospect Files card. Figma plain Search files control has no dedicated image asset; standalone table/shell redesign remains outside this repair.",
+  "remaining": "Native storage authorization/durability and research/proposal source federation are not run or implemented by local search."
+}

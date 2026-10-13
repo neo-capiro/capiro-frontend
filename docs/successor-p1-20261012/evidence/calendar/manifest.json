@@ -1,0 +1,77 @@
+{
+  "head": "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab",
+  "commits": [
+    "42a7e0c0f7602a1fc01b23495178639a46360c13",
+    "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab"
+  ],
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "browser": {
+    "passed": 20,
+    "failed": 0,
+    "log": "final-browser-20.log",
+    "report": "browser-results.json"
+  },
+  "unit": {
+    "passed": 52,
+    "failed": 0,
+    "log": "final-unit.log"
+  },
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/api.ts",
+      "sha256": "cee1fe8a5b7c8ace24b7fa5125e3c7c12e0cda7b391e3c6fdd868654556ad3cb"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "sha256": "145e2f76cb7461f7009583117d0355b1587fd55b6da18d80addbca26630ed389"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "sha256": "9f1ad90ab30c24fd5d6f7977a0c9770a745d5c532cb258737731d7bb3141a6e0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/meeting-save.ts",
+      "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/mutations.ts",
+      "sha256": "f60e03a9e739e364a54123486abee3e5eb649cf765e2b5977d847f3782056d4e"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-artifact-receipts-harness.tsx",
+      "sha256": "064517a14a54739c73acf17249acdbac25bade672b28ac2ed575d401efb0fc73"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-artifact-receipts.html",
+      "sha256": "34c9c6a5991883fe3f8d10f2da545e57364b62af59c4f45aad43f0892807eeb3"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "sha256": "18d15a0e614a1b3d3c615c1e8754d2327432a485e2385140a45010bdb86adff7"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+      "sha256": "015f55816098db004dacd6defdab087ec0d25a84844c04b239740ffb57d77b7e"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-receipts.html",
+      "sha256": "d88bcd0daf247c21f2c8dfde631552e45f15bedae060f9c450d44a94f7522fa1"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+      "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f"
+    },
+    {
+      "path": "apps/web/tests/calendar-artifact-receipts.test.ts",
+      "sha256": "83922ca9c25c06b8605e8417615153f0571051293770266be0b2404277c60a4a"
+    }
+  ]
+}

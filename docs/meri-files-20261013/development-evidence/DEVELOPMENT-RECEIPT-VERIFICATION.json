@@ -1,0 +1,679 @@
+{
+  "verifiedUTC": "2026-10-13T09:18:06.604776+00:00",
+  "scope": "Read-only development receipt inspection; no runtime executed and no clean/frozen qualification claim",
+  "browser": {
+    "candidate": {
+      "startTime": "2026-10-13T08:56:30.113Z",
+      "duration": 246008.99300000002,
+      "expected": 17,
+      "skipped": 0,
+      "unexpected": 10,
+      "flaky": 0
+    },
+    "corrected": {
+      "startTime": "2026-10-13T09:02:17.217Z",
+      "duration": 51098.231,
+      "expected": 27,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "same27Ids": true,
+    "workers": 1,
+    "automaticRetries": 0,
+    "finalCases": [
+      {
+        "id": "fe49776d263255289005-d70f71838633cef83ed6",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 200 cannot publish or revoke the replacement user",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-0940b8d5df8f2301c4dd",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 401 cannot publish or revoke the replacement user",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-900eb1903f1e1e003488",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 200 cannot publish or revoke the replacement session",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-e5e6b8897acbbd1c77e6",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 401 cannot publish or revoke the replacement session",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-b2b322a5e420f9dd255e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 200 cannot publish or revoke the replacement organization",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-a025884b13a9334291fa",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files late create 401 cannot publish or revoke the replacement organization",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-22d89b21797e0961991e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files held create cannot restore details after selected-client replacement",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-bcfe4f407efe0b36362c",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files expiry removes an idle draft, known version and owned download URL without reconnect",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-46f96a9487f6dd44d9f9",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files current 401 refusal clears known versions and download resources",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-10186c37ce23678ec5ad",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files current 403 refusal clears known versions and download resources",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-25764d0c896c3fb39b67",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files same-client held verification retains typed draft and known version after current success",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-84ae6370f1b43bb9c603",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files authorized same-client verification does not abort an already held create",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-1ae0a29bc660b9f46143",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files a denied same-client refresh destroys retained private state without new document requests",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-72ced52b53f160ccb13b",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files sign-out removes draft and verified download without a background operation",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-22c08fec7650127483d0",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-3219ae74e46b76153e10",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-beffcd4a14c7b6e0102f",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-9fc5d2f750265c743b66",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-747a8fc851a583c6e43e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-58fd5c7608e906873c52",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-8709ec0312c46a1e9cf6",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-4b7cb3591848b938f99e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-ba58a52ddda944c5e62e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-5701cb347d13380a0b23",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-6595563736a3a5c444fa",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files repeated create intent is refused locally without a second delivery",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-f12e87e647b99ce015e6",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files incorrect download hash hides known version actions and releases no object URL",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-813ab5e4623cf574226b",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files requires a selected client without bootstrapping from browser hints",
+        "status": "expected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "errors": []
+          }
+        ]
+      }
+    ],
+    "candidateFailures": [
+      {
+        "id": "fe49776d263255289005-bcfe4f407efe0b36362c",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files expiry removes an idle draft, known version and owned download URL without reconnect",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                  "column": 6,
+                  "line": 116
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  114 |   await page\n  115 |     .getByLabel(\"Document text\", { exact: true })\n> 116 |     .fill(\"Unsubmitted private text\");\n      |      ^\n  117 |   const before = fixture.requests.length;\n  118 |   await page.clock.fastForward(60_001);\n  119 |   await expect(\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:116:6"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-25764d0c896c3fb39b67",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files same-client held verification retains typed draft and known version after current success",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                  "column": 6,
+                  "line": 185
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  183 |   await page\n  184 |     .getByLabel(\"Document text\", { exact: true })\n> 185 |     .fill(\"Retained same-client private draft\");\n      |      ^\n  186 |   const before = fixture.requests.length;\n  187 |   const held = fixture.host.hold(\"client\", { json: actionClient });\n  188 |   await page.clock.setSystemTime(new Date(actionClock + 31_000));\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:185:6"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "fe49776d263255289005-84ae6370f1b43bb9c603",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+        "title": "Files authorized same-client verification does not abort an already held create",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "errors": [
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                  "column": 5,
+                  "line": 235
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Document text', { exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  233 |   await expect(\n  234 |     page.getByLabel(\"Document text\", { exact: true }),\n> 235 |   ).toBeDisabled();\n      |     ^\n  236 |   expect(await write.release()).toBe(\"finished\");\n  237 |   await expect(\n  238 |     page.getByRole(\"heading\", { name: \"Synthetic.docx\", exact: true }),\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:235:5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-22c08fec7650127483d0",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "errors": [
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 5,
+                  "line": 202
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEditable\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: editable\nReceived: disabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEditable\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <input disabled value=\"\" required=\"\" maxlength=\"200\" data-slot=\"input\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacit\u2026/>\u001b[22m\n\u001b[2m       - unexpected value \"disabled\"\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202\n\n  200 |       exact: true,\n  201 |     }),\n> 202 |   ).toBeEditable();\n      |     ^\n  203 | }\n  204 | export async function fillDocument(page: Page, format: Format = \"docx\") {\n  205 |   await page\n    at connectFiles (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202:5)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:55:5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-3219ae74e46b76153e10",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "errors": [
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 5,
+                  "line": 202
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEditable\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: editable\nReceived: disabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEditable\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <input disabled value=\"\" required=\"\" maxlength=\"200\" data-slot=\"input\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacit\u2026/>\u001b[22m\n\u001b[2m       - unexpected value \"disabled\"\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202\n\n  200 |       exact: true,\n  201 |     }),\n> 202 |   ).toBeEditable();\n      |     ^\n  203 | }\n  204 | export async function fillDocument(page: Page, format: Format = \"docx\") {\n  205 |   await page\n    at connectFiles (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202:5)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:55:5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9e06737cde5cc087cc47-beffcd4a14c7b6e0102f",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+        "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "errors": [
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+                  "column": 25,
+                  "line": 115
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'Files', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Files', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  113 |     ).toBeVisible();\n  114 |     const files = page.getByRole(\"link\", { name: \"Files\", exact: true });\n> 115 |     await expect(files).toHaveCount(1);\n      |                         ^\n  116 |     await expect(files).toHaveAttribute(\"href\", filesUrl());\n  117 |     await tabTo(page, files);\n  118 |     await expectFocusEvidence(files, testInfo);\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:115:25"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-747a8fc851a583c6e43e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 6,
+                  "line": 215
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at createDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:222:3)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:37:7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-58fd5c7608e906873c52",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 6,
+                  "line": 215
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at createDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:222:3)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:37:7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-8709ec0312c46a1e9cf6",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 6,
+                  "line": 215
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Complete sheets (JSON)', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:31:7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "0975b53fce585a7e75b8-4b7cb3591848b938f99e",
+        "file": "../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts",
+        "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+        "status": "unexpected",
+        "expectedStatus": "passed",
+        "results": [
+          {
+            "status": "timedOut",
+            "retry": 0,
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                  "column": 6,
+                  "line": 215
+                },
+                "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Complete sheets (JSON)', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:31:7"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "interpretation": "Owner reports initial10 failures as harness/locator assumptions, preserved with unchanged production; not claimed product red baselines."
+  },
+  "pureControls": [
+    {
+      "lane": "adapter",
+      "path": "/tmp/capiro-meri-files-adapter-20261013/sealed-results.json",
+      "passed": 77,
+      "failed": 0,
+      "pending": 0
+    },
+    {
+      "lane": "ui",
+      "path": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-final.json",
+      "passed": 32,
+      "failed": 0,
+      "pending": 0
+    },
+    {
+      "lane": "proxy",
+      "path": "/tmp/capiro-meri-document-proxy-tests-20261013/final-results.json",
+      "passed": 86,
+      "failed": 0,
+      "pending": 0
+    }
+  ]
+}

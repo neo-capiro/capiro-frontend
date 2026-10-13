@@ -1,0 +1,20 @@
+[
+  {
+    "installedPath": "node_modules/playwright/lib/runner/index.js",
+    "sha256": "42772378ebad5d2387726d02d377721112edbdde99d495c1259855ddb701b08e",
+    "offsetCharacters": 53591,
+    "text": "function resolveOutputFile(reporterName, options) {\n  const name = reporterName.toUpperCase();\n  let outputFile = resolveFromEnv(`PLAYWRIGHT_${name}_OUTPUT_FILE`);\n  if (!outputFile && options.outputFile)\n    outputFile = import_path2.default.resolve(options.configDir, options.outputFile);\n  if (outputFile)\n    return { outputFile };\n  let outputDir = resolveFromEnv(`PLAYWRIGHT_${name}_OUTPUT_DIR`);\n  if (!outputDir && options.outputDir)\n    outputDir = import_path2.default.resolve(options.configDir, options.outputDir);\n  if (!outputDir && options.default)\n    outputDir = (0, import_util2.resolveReporterOutputPath)(options.default.outputDir, options.configDir, void 0);\n  if (!outputDir)\n    outputDir = options.configDir;\n  const reportName = process.env[`PLAYWRIGHT_${name}_OUTPUT_NAME`] ?? options.fileName ?? options.default?.fileName;\n  if (!reportName)\n    return void 0;\n  outputFile = import_path2.default.resolve(outputDir, reportName);\n  return { outputFile, outputDir };\n}\nfunction groupAttachments(attachments) {\n  const result = [];\n  const attachmentsByPrefix = /* @__PURE__ */ "
+  },
+  {
+    "installedPath": "node_modules/playwright-core/lib/coreBundle.js",
+    "sha256": "6be5c2ea035554e9b184b1dbc7aa5e7f1fb428dd1b5c202022858dcfae9bee27",
+    "offsetCharacters": 1948537,
+    "text": "executablePath() {\n        return registry.findExecutable(this._name).executablePath() || \"\";\n      }\n      name() {\n        return this._name;\n      }\n      async launch(progress2, options, protocolLogger) {\n        options = this._validateLaunchOpt"
+  },
+  {
+    "installedPath": "node_modules/playwright-core/lib/coreBundle.js",
+    "sha256": "6be5c2ea035554e9b184b1dbc7aa5e7f1fb428dd1b5c202022858dcfae9bee27",
+    "offsetCharacters": 2089101,
+    "text": "return options.headless ? \"chromium-headless-shell\" : \"chromium\";\n      }\n    };\n  }\n});\n\n// packages/playwright-core/src/server/bidi/bidiOverCdp.ts\nvar bidiOverCdp_exports = {};\n_"
+  }
+]

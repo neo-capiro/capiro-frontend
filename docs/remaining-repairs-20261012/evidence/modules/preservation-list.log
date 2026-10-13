@@ -1,0 +1,27 @@
+Listing tests:
+  next-modules-baseline.spec.ts:4:1 › MS02 verified Calendar entry dispatches only the selected client scope
+  next-modules-baseline.spec.ts:27:1 › MS03 agenda preserves both Planner start and due occurrences
+  next-modules-baseline.spec.ts:53:1 › MS04 meeting failure leaves successful agenda feeds visible
+  next-modules-baseline.spec.ts:74:1 › MS05 linked task resolves beyond the current list and opens its detail
+  next-modules-task-links.spec.ts:14:3 › linked task rejects wrong-task receipt without detail actions
+  next-modules-task-links.spec.ts:14:3 › linked task rejects wrong-client receipt without detail actions
+  next-modules-task-links.spec.ts:40:1 › invalid task link makes no detail request and can be dismissed without losing scope
+  next-modules-task-links.spec.ts:62:3 › task link hides prior editor after current 403, then recovers only after successful retry
+  next-modules-task-links.spec.ts:62:3 › task link hides prior editor after current 503, then recovers only after successful retry
+  next-modules-task-links.spec.ts:106:1 › linked task follows back-forward and discards a held replaced task
+  next-modules-task-links.spec.ts:150:3 › linked task client replacement rejects the former read and editor
+  next-modules-task-links.spec.ts:150:3 › linked task tenant replacement rejects the former read and editor
+  next-modules-task-links.spec.ts:195:1 › agenda link opens a done task despite default open list filter, and respects viewer access
+  next-modules-task-links.spec.ts:216:3 › linked task uses current project membership when direct client is absent
+  next-modules-task-links.spec.ts:216:3 › linked task uses current project membership when direct client is different
+  next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Month and chosen date across client, Master and history
+  next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Week and chosen date across client, Master and history
+  next-modules-view-persistence.spec.ts:5:3 › Calendar keeps Agenda and chosen date across client, Master and history
+  next-modules-view-persistence.spec.ts:54:1 › invalid Calendar URL selection falls back to valid defaults before any date request
+  planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets
+  planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields
+  planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width
+  planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail
+  public-forms.spec.ts:5:1 › public form submits only displayed answers and shows the returned receipt without sign-in
+  public-forms.spec.ts:52:1 › revoked public capability renders an unavailable state without a submission action
+Total: 25 tests in 5 files

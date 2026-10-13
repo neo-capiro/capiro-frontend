@@ -1,0 +1,53 @@
+{
+  "capturedAt": "2026-10-12T21:57:24.207070+00:00",
+  "scope": "Tracked current test trees; search absence is reported as no identified coverage, not proof of historical/manual absence.",
+  "results": [
+    {
+      "name": "meri-workspace-browser",
+      "command": [
+        "rg",
+        "-n",
+        "run-activity|MeriRunWorkspace|Send unavailable|Run activity",
+        "apps/web/tests/browser",
+        "apps/web/test/browser",
+        "--glob",
+        "*.spec.ts"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "accessibility-automation",
+      "command": [
+        "rg",
+        "-n",
+        "axe|pa11y|NVDA|VoiceOver|screen.reader|WCAG|reduced.motion|200%|400%",
+        "apps/web/tests",
+        "apps/web/test",
+        "--glob",
+        "*spec*",
+        "--glob",
+        "*test*"
+      ],
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "live-signout-browser",
+      "command": [
+        "rg",
+        "-n",
+        "signOut\\(|SignOutButton|UserButton|Sign out|sign-out|Sign in",
+        "apps/web/tests/browser",
+        "apps/web/test/browser",
+        "--glob",
+        "*.spec.ts"
+      ],
+      "exitCode": 0,
+      "stdout": "apps/web/test/browser/objective-work-destinations.spec.ts:291:    page.getByRole(\"heading\", { name: \"Sign in to Capiro\" }),\napps/web/test/browser/session.spec.ts:20:test(\"org/session change clears prior records and sign-out removes all protected content\", async ({\napps/web/test/browser/session.spec.ts:49:    page.getByRole(\"heading\", { name: \"Sign in to Capiro\" }),\napps/web/tests/browser/meeting-review.spec.ts:714:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/portfolio-index.spec.ts:318:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/profile-tools.spec.ts:315:        page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/relationships.spec.ts:300:  await expect(page.getByRole(\"link\", { name: \"Sign in\" })).toHaveAttribute(\napps/web/tests/browser/portfolio-layout.spec.ts:233:  await expect(page.getByRole(\"link\", { name: \"Sign in\" })).toHaveAttribute(\napps/web/tests/browser/bill-hearings.spec.ts:313:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/prospect-contacts.spec.ts:364:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/activity-actions.spec.ts:330:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\napps/web/tests/browser/public-event.spec.ts:167:  await expect(page.getByRole(\"link\", { name: \"Sign in\" })).toHaveAttribute(\napps/web/tests/browser/portfolio-attention.spec.ts:294:    page.getByRole(\"link\", { name: \"Sign in\", exact: true }),\n",
+      "stderr": ""
+    }
+  ]
+}

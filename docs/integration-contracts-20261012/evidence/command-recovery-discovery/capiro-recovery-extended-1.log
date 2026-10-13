@@ -1,0 +1,73 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test activity-command-recovery.spec.ts
+
+[WebServer] (node:215893) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:215912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/activity-command-recovery.spec.ts:7:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (9.7s)
+(node:216047) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/browser/activity-command-recovery.spec.ts:37:3 › a replacement Core actor never sees or dispatches the retained body after reload (4.0s)
+  ✓  3 tests/browser/activity-command-recovery.spec.ts:37:3 › a replacement Core tenant never sees or dispatches the retained body after reload (3.7s)
+  ✓  4 tests/browser/activity-command-recovery.spec.ts:55:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (2.5s)
+  ✓  5 tests/browser/activity-command-recovery.spec.ts:65:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (3.8s)
+  ✓  6 tests/browser/activity-command-recovery.spec.ts:79:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (4.1s)
+
+
+  1) tests/browser/activity-command-recovery.spec.ts:7:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Recover original request', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Recover original request', exact: true })
+
+
+      24 |   expect(saved.state.calls).toHaveLength(1);
+      25 |   await page.getByRole("button", { name: "Read saved command", exact: true }).click();
+    > 26 |   await expect(page.getByRole("button", { name: "Recover original request", exact: true })).toBeEnabled();
+         |                                                                                             ^
+      27 |   expect(saved.posts()).toHaveLength(1);
+      28 |   saved.allowReplay();
+      29 |   await page.getByRole("button", { name: "Recover original request", exact: true }).click();
+        at /workspace/capiro-contracts/apps/web/tests/browser/activity-command-recovery.spec.ts:26:93
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-command-recovery--f2380-deliberate-exact-key-replay/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/activity-command-recovery--f2380-deliberate-exact-key-replay/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-command-recovery--f2380-deliberate-exact-key-replay/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/activity-command-recovery--f2380-deliberate-exact-key-replay/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/activity-command-recovery.spec.ts:7:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay 
+  5 passed (30.1s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test activity-command-recovery.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

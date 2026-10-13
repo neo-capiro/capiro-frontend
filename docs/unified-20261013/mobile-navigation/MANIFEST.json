@@ -1,0 +1,95 @@
+{
+  "scope": "Initial red and targeted green on preceding combined source plus the reviewed navigation delta. Final-source full qualification remains separate.",
+  "files": [
+    {
+      "path": "root-regression/baseline-source.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/baseline-source.json",
+      "bytes": 10429,
+      "sha256": "3ccc9606da4e35a44c5f5e713aaf602cf905651756020d3aa82d3f5176d0166f"
+    },
+    {
+      "path": "root-regression/green-artifacts/.last-run.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/green-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "root-regression/green-results.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/green-results.json",
+      "bytes": 4688,
+      "sha256": "9f799d0d3b9127606fa96e6d36c4bf2b92d4d465e27a7274ba4805949c45a1e1"
+    },
+    {
+      "path": "root-regression/green.log",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/green.log",
+      "bytes": 1209,
+      "sha256": "52cb34eda92fb4cfc77bfd184cf31353b4778da0f5845ff8a0c6c73464e23987"
+    },
+    {
+      "path": "root-regression/red-artifacts/.last-run.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "fe8213a3008c73ed7390572d7ce9b53419570afe6f51babb7dd5edaf746e28ff"
+    },
+    {
+      "path": "root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md",
+      "bytes": 11609,
+      "sha256": "61ae3a5e21e88c49ccf917121f300f02ba3f7006160210ebadfb7a06c69d4920"
+    },
+    {
+      "path": "root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png",
+      "bytes": 42336,
+      "sha256": "870d33e47be2048bfc59241a782b2203d5cc79f9391d080011e49afb671ad5d5"
+    },
+    {
+      "path": "root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip",
+      "bytes": 331744,
+      "sha256": "e3904235e1abf6ae8fd2b453b0a89622b76504635ce5362b91d68d944e63c6dd"
+    },
+    {
+      "path": "root-regression/red-results.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-results.json",
+      "bytes": 9567,
+      "sha256": "bc3691354e03dff269a0d484bfcd69e9dae9c4f2027032932f6528c9b218a79e"
+    },
+    {
+      "path": "root-regression/red.log",
+      "source": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red.log",
+      "bytes": 4859,
+      "sha256": "d0bd38968b21df790d76b3185ec1e83c23d5e4d4ce07bfd1e42b049f9dfa10fa"
+    },
+    {
+      "path": "author-proposal/HANDOFF.md",
+      "source": "/tmp/capiro-meri-mobile-navigation-proposal-20261013/HANDOFF.md",
+      "bytes": 2634,
+      "sha256": "48c5dca3ac22dc968d16de0f60aff1fa511d8e04e65fa48de9dcdb75c1e45584"
+    },
+    {
+      "path": "author-proposal/MANIFEST.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-proposal-20261013/MANIFEST.json",
+      "bytes": 639,
+      "sha256": "d6c0554e6cefda3604a0203ac6d9d0bc5a2dbd33f30bb040b8de6d0a002cf513"
+    },
+    {
+      "path": "author-proposal/OUTLINE.md",
+      "source": "/tmp/capiro-meri-mobile-navigation-proposal-20261013/OUTLINE.md",
+      "bytes": 935,
+      "sha256": "e705ee54847654e6ca0412dc3d45d8cc4e63246a8ba49226039029af9262439e"
+    },
+    {
+      "path": "author-proposal/SOURCE-REVIEW.json",
+      "source": "/tmp/capiro-meri-mobile-navigation-proposal-20261013/SOURCE-REVIEW.json",
+      "bytes": 1866,
+      "sha256": "65e5627ff5a900a9fb90745b1b35896436648ef1837391dd541b87797a500a03"
+    },
+    {
+      "path": "author-proposal/meri-action-host-mobile-navigation.spec.ts",
+      "source": "/tmp/capiro-meri-mobile-navigation-proposal-20261013/meri-action-host-mobile-navigation.spec.ts",
+      "bytes": 5018,
+      "sha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056"
+    }
+  ]
+}

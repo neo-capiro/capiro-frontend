@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-12T12:09:49.694946+00:00",
+  "base": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+  "candidate": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "paths": [
+    "apps/web/src/shared/session",
+    "apps/web/src/shared/portfolio/api",
+    "apps/web/src/shared/portfolio/auth",
+    "apps/web/src/shared/capiro",
+    "apps/web/src/shared/shell/HeaderFrame.tsx",
+    "apps/web/src/features/meri",
+    "packages",
+    "package-lock.json",
+    "package.json",
+    "apps/web/public/design",
+    "apps/web/public/figma"
+  ],
+  "changedFiles": [],
+  "meaning": "These source/asset/package/authority/transport paths remain byte-identical. Browser verification is separately recorded; this is preservation evidence, not native acceptance."
+}

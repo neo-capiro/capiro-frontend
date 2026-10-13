@@ -1,0 +1,1279 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-files/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-p1-files/playwright.config.ts",
+      "files-metadata-receipts.spec.ts",
+      "files-reader-selection.spec.ts",
+      "files-boundary.spec.ts",
+      "files.spec.ts",
+      "--grep-invert",
+      "Master calendar"
+    ],
+    "configFile": "/tmp/capiro-p1-files/playwright.config.ts",
+    "rootDir": "/workspace/capiro-p1-files/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-files/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-files/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-files/browser-expanded.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "files-boundary.spec.ts",
+      "file": "files-boundary.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a wrong-client file response fails before exposing its name or signed URLs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3827,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:28.775Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-boundary-a-wrong-cli-1f5ef-ing-its-name-or-signed-URLs/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1295fb02c0de8bcff82d-bab6fa431ab24d18667a",
+          "file": "files-boundary.spec.ts",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "an open file preview follows the current removed list state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:32.900Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-boundary-an-open-fil-c61ca--current-removed-list-state/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1295fb02c0de8bcff82d-df962f40814c9be225f9",
+          "file": "files-boundary.spec.ts",
+          "line": 37,
+          "column": 3
+        },
+        {
+          "title": "an open file preview follows the current denied list state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2339,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:35.450Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-boundary-an-open-fil-55db9-e-current-denied-list-state/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1295fb02c0de8bcff82d-74520aa33297fb4a23dc",
+          "file": "files-boundary.spec.ts",
+          "line": 37,
+          "column": 3
+        },
+        {
+          "title": "an open file preview follows the current quarantined list state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2988,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:37.846Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-boundary-an-open-fil-92204-rent-quarantined-list-state/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1295fb02c0de8bcff82d-9140e5c7e6c1c39c5e90",
+          "file": "files-boundary.spec.ts",
+          "line": 37,
+          "column": 3
+        },
+        {
+          "title": "a mismatched folder-save receipt keeps the edit open and does not claim success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4709,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:40.922Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-boundary-a-mismatche-ecf04--and-does-not-claim-success/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1295fb02c0de8bcff82d-9c953585e98d476b3429",
+          "file": "files-boundary.spec.ts",
+          "line": 90,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "files-metadata-receipts.spec.ts",
+      "file": "files-metadata-receipts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "conflicting ACL receipt retains the draft and freezes repeat save until current GET review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2970,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:45.708Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-e9e180137125e19683eb",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 26,
+          "column": 1
+        },
+        {
+          "title": "a matching reordered restricted viewer set completes the save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2674,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:48.752Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--ccb36-ewer-set-completes-the-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-bc220f69dd3dd77bcee5",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "a definite access rejection retains an editable draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4442,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:51.510Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--9dc6e-n-retains-an-editable-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-c973f1f1993d92b518cb",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "a matching PATCH completing after actor replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1877,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:56.021Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--ee8d2-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-3a11e251baf797830894",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 3
+        },
+        {
+          "title": "a matching PATCH completing after client replacement cannot close or update the replacement view",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1728,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"GET core/clients/10000000-0000-4000-8000-000000000002\",\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"GET core/clients/10000000-0000-4000-8000-000000000002\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:206:24",
+                    "location": {
+                      "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                      "column": 24,
+                      "line": 206
+                    },
+                    "snippet": "  204 |       ).toBeEnabled();\n  205 |     }\n> 206 |     expect(unexpected).toEqual([]);\n      |                        ^\n  207 |   });\n  208 | }\n  209 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                        "column": 24,
+                        "line": 206
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   \"GET core/clients/10000000-0000-4000-8000-000000000002\",\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  204 |       ).toBeEnabled();\n  205 |     }\n> 206 |     expect(unexpected).toEqual([]);\n      |                        ^\n  207 |   });\n  208 | }\n  209 |\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:206:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:20:57.946Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--b6a74-update-the-replacement-view/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--b6a74-update-the-replacement-view/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--b6a74-update-the-replacement-view/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                    "column": 24,
+                    "line": 206
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-81b00cc46f53315892b4",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 3
+        },
+        {
+          "title": "a matching PATCH completing after unmount replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2726,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:00.203Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--49b9a-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-eabe6f15603bd9d604bc",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 3
+        },
+        {
+          "title": "a review completing after actor replacement cannot clear the original unknown save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2895,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:03.308Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--cd4d9-r-the-original-unknown-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-d361dacde56dfd2c4927",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 210,
+          "column": 1
+        },
+        {
+          "title": "a contradictory folder receipt keeps the requested folder and needs current review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2893,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:06.276Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-384126e500ffa686a8e2",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 252,
+          "column": 1
+        },
+        {
+          "title": "unknown ACL save survives close/reopen and a failed review does not thaw it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4249,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:09.244Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-1f013c45e3b38a231806",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 290,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "files-reader-selection.spec.ts",
+      "file": "files-reader-selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Files clears checked rows and the prior preview selection when the reader changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3017,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:13.748Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-reader-selection-Fil-b3225-ion-when-the-reader-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d893bc11f77e2ecfba3c-a472473803a319c94959",
+          "file": "files-reader-selection.spec.ts",
+          "line": 18,
+          "column": 3
+        },
+        {
+          "title": "Files clears checked rows and the prior delete selection when the reader changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1561,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:16.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-reader-selection-Fil-13252-ion-when-the-reader-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d893bc11f77e2ecfba3c-5aef3033b1b1cb6bb99c",
+          "file": "files-reader-selection.spec.ts",
+          "line": 18,
+          "column": 3
+        },
+        {
+          "title": "Files clears checked rows and the prior file-access selection when the reader changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1578,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:18.400Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-reader-selection-Fil-9e376-ion-when-the-reader-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d893bc11f77e2ecfba3c-ade38a06322659d18ba4",
+          "file": "files-reader-selection.spec.ts",
+          "line": 18,
+          "column": 3
+        },
+        {
+          "title": "Files clears checked rows and the prior folder-access selection when the reader changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1489,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:20.009Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-reader-selection-Fil-8db44-ion-when-the-reader-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d893bc11f77e2ecfba3c-d7fe1812f2f2f4c4ea59",
+          "file": "files-reader-selection.spec.ts",
+          "line": 18,
+          "column": 3
+        },
+        {
+          "title": "Files clears checked rows and the prior upload selection when the reader changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1928,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:21.535Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-reader-selection-Fil-7221c-ion-when-the-reader-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d893bc11f77e2ecfba3c-930f64c5f4df46669c4f",
+          "file": "files-reader-selection.spec.ts",
+          "line": 18,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "files.spec.ts",
+      "file": "files.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Files keeps quarantined bytes unavailable and persists folder moves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4505,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:23.552Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-Files-keeps-quaranti-ff1bf-e-and-persists-folder-moves/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+          "file": "files.spec.ts",
+          "line": 26,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "prospect-files.spec.ts",
+      "file": "prospect-files.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "current prospect files retain readiness and do not expose unsupported actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3556,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:28.179Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-current-pro-d4269--expose-unsupported-actions/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-d1bc3e28d8a33d1b9f47",
+          "file": "prospect-files.spec.ts",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "upload loss retains one exact intent and confirms without reuploading bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:31.863Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-upload-loss-fce21-s-without-reuploading-bytes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-b0bca2bcebede3785579",
+          "file": "prospect-files.spec.ts",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "title": "wrong lineage suppresses file links and upload without broadening the request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5466,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:36.548Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-wrong-linea-ca961-hout-broadening-the-request/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-c832bc9c918814698c7f",
+          "file": "prospect-files.spec.ts",
+          "line": 121,
+          "column": 1
+        },
+        {
+          "title": "deletion requires confirmation and current list, with no uncertain automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:42.087Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-deletion-re-85df1-o-uncertain-automatic-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-a0c39e505d37d9f91030",
+          "file": "prospect-files.spec.ts",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "dismissed prospect retains historical files but cannot upload, including on mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3360,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:46.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-dismissed-p-d4a6f--upload-including-on-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-a0a619fde6f518ac7b9b",
+          "file": "prospect-files.spec.ts",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "reload preserves the original upload confirmation without reuploading bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:50.079Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-reload-pres-01208-n-without-reuploading-bytes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-f32ae7b3174a1153a4fd",
+          "file": "prospect-files.spec.ts",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "lost upload-ticket response survives reload and requires exact original bytes before same-key recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:21:59.744Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-lost-upload-be467-es-before-same-key-recovery/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-6e280660722c5b5234df",
+          "file": "prospect-files.spec.ts",
+          "line": 265,
+          "column": 1
+        },
+        {
+          "title": "unavailable browser recovery storage cannot issue an upload intent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5294,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:22:12.481Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/prospect-files-unavailable-82638-nnot-issue-an-upload-intent/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "169ece02ec834ebcd84e-e6d6d070b01b3ae79500",
+          "file": "prospect-files.spec.ts",
+          "line": 346,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:20:27.978Z",
+    "duration": 110162.073,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

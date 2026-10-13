@@ -1,0 +1,92 @@
+{
+  "recordedUTC": "2026-10-13T03:18:15.084548+00:00",
+  "source": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "rootTree": "401cadde371b91606e3346243aaca6b6225aafcb",
+  "appTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+  "checks": {
+    "final-clean-install": {
+      "exitCode": 0,
+      "endedUTC": "2026-10-13T01:45:49.314791+00:00",
+      "sourceChanged": false
+    },
+    "final-check": {
+      "exitCode": 0,
+      "endedUTC": "2026-10-13T01:48:42.114680+00:00",
+      "sourceChanged": false
+    },
+    "final-elements": {
+      "exitCode": 0,
+      "endedUTC": "2026-10-13T01:49:06.726431+00:00",
+      "sourceChanged": false
+    },
+    "final-controlled-selection": {
+      "exitCode": 1,
+      "endedUTC": "2026-10-13T01:49:26.087716+00:00",
+      "sourceChanged": false
+    },
+    "final-controlled-selection-v2": {
+      "exitCode": 0,
+      "endedUTC": "2026-10-13T01:50:49.690918+00:00",
+      "sourceChanged": false
+    }
+  },
+  "unitCounts": {
+    "root": 59,
+    "transport": 21,
+    "portfolio": 1282,
+    "capiro": 117,
+    "total": 1479
+  },
+  "elements": 15,
+  "controlledRegression": {
+    "frozenFailures": 3,
+    "correctedPasses": 3,
+    "firstGreenAttempt": "Setup failure: external harness missing Playwright resolution;0 tests ran; preserved separately"
+  },
+  "fullPortfolio": {
+    "status": "PASS",
+    "expected": 1122,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "receipt": "final-portfolio-browser-v2-exit.json",
+    "sourceChanged": false
+  },
+  "fullModules": {
+    "status": "PASS",
+    "startTime": "2026-10-13T03:10:30.018Z",
+    "duration": 264531.312,
+    "expected": 208,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "receipt": "final-modules-browser-exit.json",
+    "sourceChanged": false
+  },
+  "productionBuild": {
+    "status": "PASS",
+    "receipt": "final-production-build-exit.json",
+    "sourceChanged": false
+  },
+  "actualServer": {
+    "status": "PASS",
+    "httpChecks": 11,
+    "renderChecks": 4,
+    "crossModeHistoryChecks": 2,
+    "browserErrors": 0,
+    "liveAuthenticationExercised": false,
+    "receipt": "final-production-server-exit.json",
+    "sourceChanged": false
+  },
+  "runtimeLimit": "Local Chromium154; official pinned149 downloads blocked403",
+  "nativePortfolioAccepted": 0,
+  "nativePortfolioRows": 337,
+  "fullPortfolioFirstRun": {
+    "status": "FAILED",
+    "passed": 1121,
+    "failed": 1,
+    "cause": "ENOSPC screenshot write; trace truncated; assertions after screenshot unrun",
+    "endedUTC": "2026-10-13T02:28:28.853603+00:00",
+    "sourceChanged": false
+  }
+}

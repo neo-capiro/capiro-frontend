@@ -1,0 +1,27 @@
+{
+  "pid": 1260730,
+  "command": [
+    "env",
+    "NEXT_TELEMETRY_DISABLED=1",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=",
+    "CLERK_SECRET_KEY=",
+    "TRACKER_BACKEND=",
+    "CORE_API_BASE_URL=",
+    "STRATEGY_API_BASE_URL=",
+    "WORKSPACE_API_BASE_URL=",
+    "INTELLIGENCE_API_BASE_URL=",
+    "ONBOARD_API_BASE_URL=",
+    "MERI_API_BASE_URL=",
+    "MERI_ACTION_WORKFLOW_ENABLED=",
+    "npm",
+    "run",
+    "build"
+  ],
+  "startedUTC": "2026-10-13T06:21:09.697867+00:00",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "sourceDiff": ""
+  }
+}

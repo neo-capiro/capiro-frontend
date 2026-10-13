@@ -1,0 +1,343 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-modules/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-next-modules-evidence/scope-preservation/red/playwright.config.mjs"
+    ],
+    "configFile": "/tmp/capiro-next-modules-evidence/scope-preservation/red/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "next-modules-view-persistence.spec.ts"
+        ],
+        "timeout": 25000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-modules-evidence/scope-preservation/red/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "next-modules-view-persistence.spec.ts",
+      "file": "next-modules-view-persistence.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Calendar keeps Month and chosen date across client, Master and history",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6332,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Choose calendar date', exact: true })\nExpected: \u001b[32m\"\u001b[7mFebruary\u001b[27m 202\u001b[7m7\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOctober\u001b[27m 202\u001b[7m6\u001b[27m\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Choose calendar date', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"_title_1xqwp_106\" aria-label=\"Choose calendar date\">October 2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"October 2026\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Choose calendar date', exact: true })\nExpected: \u001b[32m\"\u001b[7mFebruary\u001b[27m 202\u001b[7m7\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOctober\u001b[27m 202\u001b[7m6\u001b[27m\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Choose calendar date', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"_title_1xqwp_106\" aria-label=\"Choose calendar date\">October 2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"October 2026\"\u001b[22m\n\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:26:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                      "column": 9,
+                      "line": 26
+                    },
+                    "snippet": "  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n> 26 |       ).toHaveText(title!);\n     |         ^\n  27 |       await page\n  28 |         .getByRole(\"button\", { name: \"Choose calendar date\", exact: true })\n  29 |         .click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                        "column": 9,
+                        "line": 26
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Choose calendar date', exact: true })\nExpected: \u001b[32m\"\u001b[7mFebruary\u001b[27m 202\u001b[7m7\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOctober\u001b[27m 202\u001b[7m6\u001b[27m\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Choose calendar date', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"_title_1xqwp_106\" aria-label=\"Choose calendar date\">October 2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"October 2026\"\u001b[22m\n\n\n  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n> 26 |       ).toHaveText(title!);\n     |         ^\n  27 |       await page\n  28 |         .getByRole(\"button\", { name: \"Choose calendar date\", exact: true })\n  29 |         .click();\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:26:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:09:23.417Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-278bc-s-client-Master-and-history/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                    "column": 9,
+                    "line": 26
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d06dbfb82040117bd09f-bda3a6ce71d951ca96c5",
+          "file": "next-modules-view-persistence.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "Calendar keeps Week and chosen date across client, Master and history",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6719,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Week', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Week', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Week</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Week', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Week', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Week</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                      "column": 9,
+                      "line": 23
+                    },
+                    "snippet": "  21 |       await expect(\n  22 |         page.getByRole(\"button\", { name: view, exact: true }),\n> 23 |       ).toHaveAttribute(\"aria-pressed\", \"true\");\n     |         ^\n  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n  26 |       ).toHaveText(title!);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                        "column": 9,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Week', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Week', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Week</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  21 |       await expect(\n  22 |         page.getByRole(\"button\", { name: view, exact: true }),\n> 23 |       ).toHaveAttribute(\"aria-pressed\", \"true\");\n     |         ^\n  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n  26 |       ).toHaveText(title!);\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:09:30.884Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-5b016-s-client-Master-and-history/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                    "column": 9,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d06dbfb82040117bd09f-c942dc728431f18674db",
+          "file": "next-modules-view-persistence.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "Calendar keeps Agenda and chosen date across client, Master and history",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6742,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Agenda', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Agenda', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Agenda</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Agenda', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Agenda', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Agenda</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                      "column": 9,
+                      "line": 23
+                    },
+                    "snippet": "  21 |       await expect(\n  22 |         page.getByRole(\"button\", { name: view, exact: true }),\n> 23 |       ).toHaveAttribute(\"aria-pressed\", \"true\");\n     |         ^\n  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n  26 |       ).toHaveText(title!);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                        "column": 9,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Agenda', exact: true })\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Agenda', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button type=\"button\" aria-pressed=\"false\">Agenda</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  21 |       await expect(\n  22 |         page.getByRole(\"button\", { name: view, exact: true }),\n> 23 |       ).toHaveAttribute(\"aria-pressed\", \"true\");\n     |         ^\n  24 |       await expect(\n  25 |         page.getByRole(\"button\", { name: \"Choose calendar date\", exact: true }),\n  26 |       ).toHaveText(title!);\n    at check (/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:23:9)\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts:36:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:09:38.774Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/scope-preservation/red/output/next-modules-view-persiste-eaf44-s-client-Master-and-history/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+                    "column": 9,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d06dbfb82040117bd09f-7c1ca56c43a04ff171de",
+          "file": "next-modules-view-persistence.spec.ts",
+          "line": 5,
+          "column": 3
+        },
+        {
+          "title": "invalid Calendar URL selection falls back to valid defaults before any date request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1909,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:09:46.573Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d06dbfb82040117bd09f-e0285b90f73283af4790",
+          "file": "next-modules-view-persistence.spec.ts",
+          "line": 54,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T18:09:22.811Z",
+    "duration": 26008.684,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

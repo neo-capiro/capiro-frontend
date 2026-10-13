@@ -1,0 +1,243 @@
+{
+  "source": "7b5a9644d30d22389b23f0e07f923c8925682047",
+  "repository": "neo-capiro/capirov2",
+  "reviewMode": "Read-only HTTP contract derivation; no implementation imports or copies, no service/provider execution",
+  "frontendSnapshot": "/tmp/capiro-onboard-port-evidence-20261013/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web",
+  "artifactCount": 26,
+  "refs": [
+    {
+      "path": "apps/onboard-api/src/funnel/funnel.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "17db3eeeabc3b3fe6cf1c8769386c4a555ec33b5",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/funnel/funnel.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 7825
+    },
+    {
+      "path": "apps/onboard-api/src/setup/setup.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "e1f68e072b2850f89bebcff9b432ca286aa7561d",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/setup/setup.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 3084
+    },
+    {
+      "path": "apps/onboard-api/src/it-admin/it-admin.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "23d2d88bc84af4f53dac36c36fabff75d84dbe47",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/it-admin/it-admin.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 2098
+    },
+    {
+      "path": "apps/onboard-api/src/public/public-config.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "0cef9b4f0b015a97c7ae4835c900de96e3a1a4de",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/public/public-config.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 1097
+    },
+    {
+      "path": "apps/api/src/intelligence/firm-onboarding.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "93ffb1d7a97a2f2df7958d4fec049da56744e68f",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/intelligence/firm-onboarding.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 2189
+    },
+    {
+      "path": "apps/api/src/clients/clients.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "54be4e4148352309522eb1632ca2e3750940dcb9",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/clients/clients.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 11395
+    },
+    {
+      "path": "apps/api/src/memory/memory.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "3b3c3a9d615058006d10d6801f15a0d4cb287f05",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/memory/memory.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 23411
+    },
+    {
+      "path": "apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "9650c44d814a1aeed5a6f7466de333afcea7c2d0",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/tenant-admin/tenant-admin.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 5541
+    },
+    {
+      "path": "apps/onboard-api/src/auth/clerk-user.guard.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "fbe0e04ba8f6d294b5adb9a3eb4a905aac36201f",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/auth/clerk-user.guard.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 2191
+    },
+    {
+      "path": "apps/onboard-api/src/main.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "3737d3f9964b07b1161c7dc66365cc44ed48413f",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/main.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 4553
+    },
+    {
+      "path": "apps/onboard-api/src/funnel/funnel.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "ee3201741a729fc1bca0a7e28978bd79ee674997",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/funnel/funnel.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 34593
+    },
+    {
+      "path": "apps/onboard-api/src/funnel/provisioning.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "e1c7d84dcf2809766db59fbe78ebe2ec1ab9465b",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/funnel/provisioning.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 15717
+    },
+    {
+      "path": "apps/onboard-api/src/setup/setup.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "1b0d21d061c35dd65d259ef890a6fde7dcc2083c",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/setup/setup.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 17344
+    },
+    {
+      "path": "apps/onboard-api/src/it-admin/it-admin.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "12547c448954409c358f5c87d728facf90a9a1d5",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/it-admin/it-admin.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 20081
+    },
+    {
+      "path": "apps/api/src/intelligence/firm-onboarding.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "e114d658bfe3a22ba052da0e707b646c10f03333",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/intelligence/firm-onboarding.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 13927
+    },
+    {
+      "path": "apps/api/src/users/users.controller.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "1bd5eb81436f3857761f4aec4af05ee7742f5ed6",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/users/users.controller.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 16934
+    },
+    {
+      "path": "apps/onboard-api/src/legal/signed-pdf.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "0dc6ff68cb6eec660d56753c1aabd0f09485abb7",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/legal/signed-pdf.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 10016
+    },
+    {
+      "path": "apps/onboard-api/src/legal/legal.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "c6d505871237d7322cfc6c9e4154985eb876718b",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-api/src/legal/legal.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 7298
+    },
+    {
+      "path": "packages/auth/src/tenant.guard.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "0b3903659b92c20337b44a3d4da0dca2916fc927",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/packages/auth/src/tenant.guard.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 9875
+    },
+    {
+      "path": "packages/auth/src/clerk.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "f2964d04bf93ff46ac5b5a55bc13404da2c13b2c",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/packages/auth/src/clerk.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 6805
+    },
+    {
+      "path": "docs/runbooks/onboarding-operations.md",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "c59e94dba184c900dd6f1e3f6f226fdab6b0d727",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/docs/runbooks/onboarding-operations.md",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 9172
+    },
+    {
+      "path": "docs/plans/onboarding-v1-plan.md",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "6c833c4289a9a55dceb84e1d892dade528f869a9",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/docs/plans/onboarding-v1-plan.md",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 53889
+    },
+    {
+      "path": "apps/api/src/tenant-admin/tenant-admin.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "552ca0d5ca8008abbf073cc16ee5c447cc91d226",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/tenant-admin/tenant-admin.service.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 19320
+    },
+    {
+      "path": "apps/api/src/clients/clients.service.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "c2bc995104db4762be078f42b00232ea1790029c",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/clients/clients.service.ts",
+      "readOnly": true,
+      "scope": "lines 1115-1260",
+      "bytesRead": 6919
+    },
+    {
+      "path": "apps/api/src/memory/memory-catalog.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "03ac2b2398ad579e9b228da3e450cef951a88c5f",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/memory/memory-catalog.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 13691
+    },
+    {
+      "path": "apps/api/src/auth/roles.guard.ts",
+      "commit": "7b5a9644d30d22389b23f0e07f923c8925682047",
+      "blob": "60fbbc8a1de21962a95af60842d25087f58a612d",
+      "url": "https://github.com/neo-capiro/capirov2/blob/7b5a9644d30d22389b23f0e07f923c8925682047/apps/api/src/auth/roles.guard.ts",
+      "readOnly": true,
+      "scope": "full UTF-8 content inspected; no implementation copied",
+      "bytesRead": 2703
+    }
+  ]
+}

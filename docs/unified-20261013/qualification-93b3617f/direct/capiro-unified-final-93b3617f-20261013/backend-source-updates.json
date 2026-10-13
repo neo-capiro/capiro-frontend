@@ -1,0 +1,18 @@
+{
+  "receivedUTC": "2026-10-13T06:28:25.877630+00:00",
+  "source": "Parent thread01a0ff18-26cd-7609-beba-87726d0300c6",
+  "frontendQualificationSource": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "newsletterAdmission": {
+    "pr": 2448,
+    "head": "cac35b007917127b0b78dc38c62b14ff99e90d4e",
+    "tree": "f3d8e4a07236ea47ae567a7bee08a8835e01c6bf",
+    "admittedFrontendSource": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "limitation": "Source policy only; no transfer to the unified source. Target-musl producer/provenance/ABI/image remain open."
+  },
+  "meriAuthority": {
+    "pr": 2449,
+    "head": "60cf2e51129f8358e6afe5fc600ffcdb6de01759",
+    "limitation": "Endpoint source implementation only. No liveClerk/RLS/HTTP or production activation. Frontend source remains unchanged; independent read-only compatibility review pending."
+  },
+  "aws": "PR17 freeze unchanged; no shipping or image creation."
+}

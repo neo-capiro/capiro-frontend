@@ -1,0 +1,24 @@
+{
+  "sourceThread": "01a0ff18-26cd-7609-beba-87726d0300c6",
+  "receivedUTC": "2026-10-12T17:15:01.144392+00:00",
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "appSourceTreePath": "apps/web/src",
+  "appSourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "reportedResult": {
+    "browserPassed": 74,
+    "unitPassed": 59,
+    "types": "passed",
+    "architecture": "passed",
+    "packages": "passed",
+    "blockingFindings": 0
+  },
+  "reportedChecks": [
+    "Original unchanged client-clear control passed with sourceChanged=false",
+    "Contradictory old-client receipts rejected",
+    "Native debrief GET omission retains unavailable sharing and no unshare even after idempotent share",
+    "Disabled generation and uncertain-write suppression intact"
+  ],
+  "reportedReportSHA256": "83c408d0883ee1ef68afe0703656759ed292819571f82d30bb12498574cb84ab",
+  "provenance": "Parent message reports independent results. Report body/raw artifacts were not supplied here, so this receipt is not presented as locally executed or independently hash-verified evidence. Root separately executes its own exact-source full gates and original canonical control."
+}

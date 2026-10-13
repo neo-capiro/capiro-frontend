@@ -1,0 +1,1752 @@
+{
+  "schema": "capiro-independent-successor-gate-review/1",
+  "reviewedAtUTC": "2026-10-12T21:02:04.924211+00:00",
+  "status": "partial_qualification_in_progress",
+  "source": {
+    "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "rootTree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+    "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+    "runtimeSourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+    "createdUTC": "2026-10-12T20:55:38.321718+00:00",
+    "sourceDiff": "",
+    "worktreeStatus": ""
+  },
+  "method": "Read-only raw evidence/source/archive audit; no heavy gates or runtime commands executed by reviewer.",
+  "gateStatus": [
+    {
+      "gate": "clean-install",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install-exit.json",
+        "bytes": 776,
+        "sha256": "59e58884588c5a7c3f8eb73ec43e93e0ffa4b200a2462f843d7ad076896dc7e3"
+      }
+    },
+    {
+      "gate": "combined-check",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check-exit.json",
+        "bytes": 777,
+        "sha256": "7745426cb31bff20b76720cb58de2158d30f90b16809e2cfc6c0d7875c0cfcbe"
+      }
+    },
+    {
+      "gate": "elements-prepare",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare-exit.json",
+        "bytes": 855,
+        "sha256": "d99a2e0e5fe643ef2ba4b7fce719445c56b8569fea69c5c227047e7467baf8ec"
+      }
+    },
+    {
+      "gate": "elements-check-new-capture",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture-exit.json",
+        "bytes": 1071,
+        "sha256": "50421c30b6f51f91ea58d15a2bf2dc031ce4eebc408fb6c948573e9c9045cb80"
+      }
+    },
+    {
+      "gate": "production-build",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build-exit.json",
+        "bytes": 778,
+        "sha256": "4f7cfbb9eefbc3b00b8fa0ebd25e5ee302c24212d24fb50d8cd509bff49bf6d6"
+      }
+    },
+    {
+      "gate": "actual-production-server",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-server-exit.json",
+        "bytes": 892,
+        "sha256": "48a6d82af336b0b43fcfd70922a8ea359d1d5ded81d1ba1a4318f4775354e10c"
+      }
+    },
+    {
+      "gate": "modules-browser",
+      "status": "pending",
+      "receipt": null
+    },
+    {
+      "gate": "portfolio-browser",
+      "status": "pending",
+      "receipt": null
+    },
+    {
+      "gate": "docker-context",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context-exit.json",
+        "bytes": 898,
+        "sha256": "12696c1bdfc0f865c41f5ef5321852da1abbf36292ae1aca69ec931644ee39ea"
+      }
+    },
+    {
+      "gate": "docker-build",
+      "status": "failed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network-exit.json",
+        "bytes": 1055,
+        "sha256": "8b6164d139a112ca02810bffc617735985d7f29b066b6c3fa22f3a82cf858cc4"
+      }
+    },
+    {
+      "gate": "docker-smoke",
+      "status": "pending",
+      "receipt": null
+    }
+  ],
+  "gateReceipts": [
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install-exit.json",
+        "bytes": 776,
+        "sha256": "59e58884588c5a7c3f8eb73ec43e93e0ffa4b200a2462f843d7ad076896dc7e3"
+      },
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--cache",
+        "/tmp/capiro-p1-npm-cache"
+      ],
+      "startedUTC": "2026-10-12T20:55:38.395114+00:00",
+      "endedUTC": "2026-10-12T20:55:50.789937+00:00",
+      "durationSeconds": 12.394873522003763,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check-exit.json",
+        "bytes": 777,
+        "sha256": "7745426cb31bff20b76720cb58de2158d30f90b16809e2cfc6c0d7875c0cfcbe"
+      },
+      "name": "combined-check",
+      "command": [
+        "env",
+        "NODE_OPTIONS=--max-old-space-size=4096",
+        "npm",
+        "run",
+        "check"
+      ],
+      "startedUTC": "2026-10-12T20:56:04.705393+00:00",
+      "endedUTC": "2026-10-12T20:58:10.365268+00:00",
+      "durationSeconds": 125.65991213300731,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network-exit.json",
+        "bytes": 1055,
+        "sha256": "8b6164d139a112ca02810bffc617735985d7f29b066b6c3fa22f3a82cf858cc4"
+      },
+      "name": "docker-build-existing-host-network",
+      "command": [
+        "env",
+        "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+        "docker",
+        "build",
+        "--network=host",
+        "--build-arg",
+        "HTTP_PROXY",
+        "--build-arg",
+        "HTTPS_PROXY",
+        "--build-arg",
+        "NO_PROXY",
+        "--progress=plain",
+        "-f",
+        "apps/web/Dockerfile",
+        "--tag",
+        "capiro-remaining:adbc84b-20261012",
+        "."
+      ],
+      "startedUTC": "2026-10-12T21:01:18.823244+00:00",
+      "endedUTC": "2026-10-12T21:01:29.589715+00:00",
+      "durationSeconds": 10.766499655990629,
+      "exitCode": 1,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-exit.json",
+        "bytes": 901,
+        "sha256": "e13b1a039b199630aded9397a8b95f798269cbcb0bf0ff9207a21a1034765e6a"
+      },
+      "name": "docker-build",
+      "command": [
+        "env",
+        "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+        "docker",
+        "build",
+        "--progress=plain",
+        "-f",
+        "apps/web/Dockerfile",
+        "--tag",
+        "capiro-remaining:adbc84b-20261012",
+        "."
+      ],
+      "startedUTC": "2026-10-12T21:00:36.453526+00:00",
+      "endedUTC": "2026-10-12T21:00:47.444017+00:00",
+      "durationSeconds": 10.990629291001824,
+      "exitCode": 1,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy-exit.json",
+        "bytes": 1159,
+        "sha256": "63ecbb995976e7e62f8863cd1a20dba87ffd0b39aae86b0b6824a770dd4bc004"
+      },
+      "name": "docker-build-inherited-proxy",
+      "command": [
+        "env",
+        "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+        "docker",
+        "build",
+        "--network=host",
+        "--build-arg",
+        "HTTP_PROXY",
+        "--build-arg",
+        "HTTPS_PROXY",
+        "--build-arg",
+        "NO_PROXY",
+        "--build-arg",
+        "http_proxy",
+        "--build-arg",
+        "https_proxy",
+        "--build-arg",
+        "no_proxy",
+        "--progress=plain",
+        "-f",
+        "apps/web/Dockerfile",
+        "--tag",
+        "capiro-remaining:adbc84b-20261012",
+        "."
+      ],
+      "startedUTC": "2026-10-12T21:01:48.092381+00:00",
+      "endedUTC": "2026-10-12T21:01:58.980176+00:00",
+      "durationSeconds": 10.887833750006394,
+      "exitCode": 1,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context-exit.json",
+        "bytes": 898,
+        "sha256": "12696c1bdfc0f865c41f5ef5321852da1abbf36292ae1aca69ec931644ee39ea"
+      },
+      "name": "docker-context",
+      "command": [
+        "env",
+        "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+        "npm",
+        "run",
+        "test:docker-context",
+        "--",
+        "--artifacts",
+        "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b"
+      ],
+      "startedUTC": "2026-10-12T20:59:57.850832+00:00",
+      "endedUTC": "2026-10-12T20:59:58.289874+00:00",
+      "durationSeconds": 0.4390710110019427,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-exit.json",
+        "bytes": 1054,
+        "sha256": "d0840067afca911f8a89df3dcfbc14e4e1d9f48788375a6c52d5fb24dd0ea427"
+      },
+      "name": "elements-check",
+      "command": [
+        "env",
+        "MERI_ELEMENTS_SSR_RECEIPT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/receipt.json",
+        "MERI_ELEMENTS_SSR_RECEIPT_SHA256=8bfeb60180345f7aa6d1bcd4b27dc4f8963bddfa1c95471e1d4c2c04e7fbb1a6",
+        "MERI_ELEMENTS_SSR_CAPTURE_ROOT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr",
+        "npm",
+        "run",
+        "check:elements"
+      ],
+      "startedUTC": "2026-10-12T20:58:46.950394+00:00",
+      "endedUTC": "2026-10-12T20:58:52.354868+00:00",
+      "durationSeconds": 5.404507596991607,
+      "exitCode": 1,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture-exit.json",
+        "bytes": 1071,
+        "sha256": "50421c30b6f51f91ea58d15a2bf2dc031ce4eebc408fb6c948573e9c9045cb80"
+      },
+      "name": "elements-check-new-capture",
+      "command": [
+        "env",
+        "MERI_ELEMENTS_SSR_RECEIPT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/receipt.json",
+        "MERI_ELEMENTS_SSR_RECEIPT_SHA256=8bfeb60180345f7aa6d1bcd4b27dc4f8963bddfa1c95471e1d4c2c04e7fbb1a6",
+        "MERI_ELEMENTS_SSR_CAPTURE_ROOT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-captures",
+        "npm",
+        "run",
+        "check:elements"
+      ],
+      "startedUTC": "2026-10-12T20:59:24.645062+00:00",
+      "endedUTC": "2026-10-12T20:59:30.139146+00:00",
+      "durationSeconds": 5.494122693999088,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare-exit.json",
+        "bytes": 855,
+        "sha256": "d99a2e0e5fe643ef2ba4b7fce719445c56b8569fea69c5c227047e7467baf8ec"
+      },
+      "name": "elements-prepare",
+      "command": [
+        "node",
+        "packages/qualification-elements/ssr-build.mjs",
+        "/tmp/capiro-elements-tool",
+        "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr"
+      ],
+      "startedUTC": "2026-10-12T20:58:26.068373+00:00",
+      "endedUTC": "2026-10-12T20:58:27.729195+00:00",
+      "durationSeconds": 1.6608504119940335,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build-exit.json",
+        "bytes": 778,
+        "sha256": "4f7cfbb9eefbc3b00b8fa0ebd25e5ee302c24212d24fb50d8cd509bff49bf6d6"
+      },
+      "name": "production-build",
+      "command": [
+        "env",
+        "NODE_OPTIONS=--max-old-space-size=4096",
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedUTC": "2026-10-12T20:59:46.830320+00:00",
+      "endedUTC": "2026-10-12T20:59:54.946533+00:00",
+      "durationSeconds": 8.116246417994262,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-server-exit.json",
+        "bytes": 892,
+        "sha256": "48a6d82af336b0b43fcfd70922a8ea359d1d5ded81d1ba1a4318f4775354e10c"
+      },
+      "name": "production-server",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "npm",
+        "run",
+        "test:production",
+        "--",
+        "/tmp/capiro-remaining-qualification/final-adbc84b/production-artifacts"
+      ],
+      "startedUTC": "2026-10-12T21:00:20.126208+00:00",
+      "endedUTC": "2026-10-12T21:00:26.691291+00:00",
+      "durationSeconds": 6.565112134005176,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+        "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    }
+  ],
+  "combined": {
+    "parts": [
+      59,
+      21,
+      1275,
+      117
+    ],
+    "total": 1472,
+    "rootNodeIncludesNineMeriWorkspaceCases": true,
+    "rootNodeNewCase": "Docker context regression is import-safe and refuses invalid or reused outputs before allocation",
+    "lint": {
+      "errors": 0,
+      "warnings": 76
+    },
+    "architecture": {
+      "errors": [],
+      "sizeSummary": {
+        "total": 427,
+        "reviewed": 403,
+        "inheritedUnreviewed": 24,
+        "blocking": 0
+      }
+    }
+  },
+  "elements": {
+    "initialExit": 1,
+    "initialObserved": "13passed/2failed due EEXIST reused capture directory; preserved",
+    "retryExit": 0,
+    "retryObserved": "15passed/0failed with new elements-captures directory; no source change",
+    "receipt": {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/receipt.json",
+      "bytes": 984935,
+      "sha256": "8bfeb60180345f7aa6d1bcd4b27dc4f8963bddfa1c95471e1d4c2c04e7fbb1a6"
+    },
+    "hashChecks": [
+      {
+        "kind": "sources",
+        "count": 48,
+        "mismatches": []
+      },
+      {
+        "kind": "outputs",
+        "count": 3,
+        "mismatches": []
+      }
+    ],
+    "scope": "Offline SSR fixture; not browser/product/G1 admission"
+  },
+  "browserSuites": {
+    "modules": {
+      "status": "pending",
+      "noPassClaim": true
+    },
+    "portfolio": {
+      "status": "pending",
+      "noPassClaim": true
+    }
+  },
+  "production": {
+    "buildIdentity": {
+      "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "hostStandaloneBuildId": "qN3DBpJoPTKLiI1dR3tA9",
+      "node": "v24.19.0",
+      "method": "npm run build; existing framework build cache permitted; clean npm ci preceded combined checks"
+    },
+    "production-smoke.json": {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-artifacts/production-smoke.json",
+        "bytes": 3624,
+        "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+      },
+      "data": {
+        "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+        "browserVersion": "154.0.8037.57",
+        "results": [
+          {
+            "path": "/healthz",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/portfolio",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/calendar",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/sign-in",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/api/backend/core/clients",
+            "status": 503,
+            "headers": "passed"
+          },
+          {
+            "path": "/",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/modules",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/settings",
+            "status": 307,
+            "headers": "passed"
+          },
+          {
+            "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+            "status": 307,
+            "headers": "passed"
+          },
+          {
+            "path": "/settings/personal",
+            "status": 200,
+            "headers": "passed"
+          },
+          {
+            "path": "/api/capiro/me.read",
+            "status": 503,
+            "headers": "passed"
+          },
+          {
+            "colorScheme": "light",
+            "viewport": {
+              "width": 1440,
+              "height": 1040
+            },
+            "portfolio": {
+              "background": "rgb(245, 245, 244)",
+              "color": "rgb(10, 10, 10)",
+              "fontSize": "14px",
+              "markerCount": 1,
+              "fits": true,
+              "sameDocument": true
+            },
+            "wordmark": {
+              "width": 77,
+              "height": 26,
+              "filter": "none"
+            },
+            "stylesRestoredOnReturn": true,
+            "clientNavigation": true,
+            "headerNavigation": true
+          },
+          {
+            "colorScheme": "light",
+            "viewport": {
+              "width": 390,
+              "height": 844
+            },
+            "portfolio": {
+              "background": "rgb(245, 245, 244)",
+              "color": "rgb(10, 10, 10)",
+              "fontSize": "14px",
+              "markerCount": 1,
+              "fits": true,
+              "sameDocument": true
+            },
+            "wordmark": {
+              "width": 77,
+              "height": 26,
+              "filter": "none"
+            },
+            "stylesRestoredOnReturn": true,
+            "clientNavigation": true,
+            "headerNavigation": true
+          },
+          {
+            "crossMode": "Meri/Portfolio/Modules/Settings",
+            "history": "back/forward",
+            "sameDocument": true
+          },
+          {
+            "colorScheme": "dark",
+            "viewport": {
+              "width": 1440,
+              "height": 1040
+            },
+            "portfolio": {
+              "background": "rgb(18, 18, 18)",
+              "color": "rgb(250, 250, 249)",
+              "fontSize": "14px",
+              "markerCount": 1,
+              "fits": true,
+              "sameDocument": true
+            },
+            "wordmark": {
+              "width": 77,
+              "height": 26,
+              "filter": "invert(1)"
+            },
+            "stylesRestoredOnReturn": true,
+            "clientNavigation": true,
+            "headerNavigation": true
+          },
+          {
+            "colorScheme": "dark",
+            "viewport": {
+              "width": 390,
+              "height": 844
+            },
+            "portfolio": {
+              "background": "rgb(18, 18, 18)",
+              "color": "rgb(250, 250, 249)",
+              "fontSize": "14px",
+              "markerCount": 1,
+              "fits": true,
+              "sameDocument": true
+            },
+            "wordmark": {
+              "width": 77,
+              "height": 26,
+              "filter": "invert(1)"
+            },
+            "stylesRestoredOnReturn": true,
+            "clientNavigation": true,
+            "headerNavigation": true
+          },
+          {
+            "crossMode": "Meri/Portfolio/Modules/Settings",
+            "history": "back/forward",
+            "sameDocument": true
+          }
+        ],
+        "pageErrors": []
+      }
+    },
+    "preview-root-smoke.json": {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-artifacts/preview-root-smoke.json",
+        "bytes": 101,
+        "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+      },
+      "data": {
+        "defaultProduct": "portfolio",
+        "rootStatus": 200,
+        "location": "/",
+        "followedSetup": true
+      }
+    },
+    "manual-visual-review.json": {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-artifacts/manual-visual-review.json",
+        "bytes": 724,
+        "sha256": "8696aa67d1a0cbaa9e3fb8ecb86465dd40161bdef674ba60155d1cbe9434fe05"
+      },
+      "data": {
+        "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "reviewer": "root",
+        "timeUTC": "2026-10-12T21:00:56.113504+00:00",
+        "reviewed": [
+          {
+            "path": "production-portfolio-1440-light.png",
+            "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+          },
+          {
+            "path": "production-portfolio-390-dark.png",
+            "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+          }
+        ],
+        "finding": "Setup-only Portfolio view is legible, contained and correctly themed at desktop/light and phone/dark. No visible overflow/clipping. Four render controls passed programmatically. This does not establish authenticated product/Figma fidelity or full accessibility."
+      }
+    }
+  },
+  "docker": {
+    "context": {
+      "evidence": {
+        "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/report.json",
+        "bytes": 10476,
+        "sha256": "1afeec90c7dae36fe9e8572ba62ff452bd9a1960dfd381c99bcfd4478054a4c9"
+      },
+      "checks": 33,
+      "requiredApplicationFiles": 12,
+      "scope": "Actual local Linux Docker/BuildKit context matching; scratch COPY only, no application or provider execution",
+      "passed": true
+    }
+  },
+  "archive": {
+    "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "rootTree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+    "archive": "/tmp/capiro-source-adbc84b/source-adbc84b.zip",
+    "bytes": 841124429,
+    "sha256": "5a631ef2f6d7500c947fafa85ed22731214b37bc2f587da29db6f1b272f0784a",
+    "zipCommitComment": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "gitInventorySha256": "c3d332ddbf69c2a9505586b2e5708152d24c0a3a8abaf17a0f3eeffc85558fe7",
+    "gitFileCount": 9191,
+    "archiveFileCount": 9191,
+    "missing": [],
+    "extra": [],
+    "duplicates": [],
+    "contentMismatches": [],
+    "stableDuringVerification": true,
+    "allCrcReadsSucceeded": true,
+    "passed": true,
+    "startedUTC": "2026-10-12T20:59:34.182097+00:00",
+    "endedUTC": "2026-10-12T20:59:39.898342+00:00",
+    "scope": "Read-only ZIP inventory/content verification against frozen Git blobs; no extraction, runtime, build or native effects.",
+    "modeVerification": {
+      "gitMode100644": 9191,
+      "zipDOSDefaultRegular": 9191,
+      "executables": 0,
+      "symlinks": 0,
+      "acceptedSemantics": "DOS create_system0/external_attr0 regular entries preserve this all100644 source; Unix permissions are not claimed."
+    },
+    "rootReceiptMatches": true
+  },
+  "coverage": [
+    {
+      "id": "cross_mode_history",
+      "coverage": "Actual Next same-document Meri/Portfolio/Modules/Settings navigation and back/forward in light and dark. Synthetic application-boundary navigation additionally preserves verified client hints, scope draft and style marker; Calendar history preserves view/date/client scope.",
+      "sourceReferences": [
+        {
+          "path": "apps/web/tests/production/verify-standalone.mjs",
+          "find": "sameDocument"
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 37
+        },
+        {
+          "path": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+          "find": "goBack"
+        }
+      ],
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts"
+      ],
+      "limitations": [
+        "Next smoke has no credentials and sees setup screens for protected features. Authenticated data transitions are Vite harness tests with test-only Clerk/navigation aliases; live production auth navigation is unrun."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts"
+      ],
+      "status": "pending_fresh_browser_results"
+    },
+    {
+      "id": "signout_expiry",
+      "coverage": "Synthetic sign-out removes protected content; Core401 expires above selected-client replacement with no request replay. Feature401 coverage additionally checks drafts and current records disappear.",
+      "sourceReferences": [
+        {
+          "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+          "find": "function SessionData"
+        },
+        {
+          "path": "apps/web/test/browser/session.spec.ts",
+          "line": 20
+        },
+        {
+          "path": "apps/web/test/browser/session.spec.ts",
+          "line": 53
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 169
+        }
+      ],
+      "testFiles": [
+        "apps/web/test/browser/session.spec.ts",
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/objective-work-destinations.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/tests/browser/portfolio.spec.ts",
+        "apps/web/tests/browser/activity-command-recovery.spec.ts"
+      ],
+      "limitations": [
+        "Custom test:session events and mocked401 establish browser lifetime behavior, not live Clerk logout/token expiry/revocation. Actual Next smoke only verifies unconfigured fail-closed presentation."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [
+        "apps/web/test/browser/session.spec.ts",
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/objective-work-destinations.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/tests/browser/portfolio.spec.ts",
+        "apps/web/tests/browser/activity-command-recovery.spec.ts"
+      ],
+      "status": "pending_fresh_browser_results"
+    },
+    {
+      "id": "tenant_client_replacement",
+      "coverage": "Shared user/session/organization key replaces scopes; client-keyed provider removes cache/editors while preserving expiry. Held old-client responses do not populate replacement; tenant changes clear drafts and force new current reads.",
+      "sourceReferences": [
+        {
+          "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+          "find": "key={clientId"
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 120
+        },
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 196
+        }
+      ],
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/tests/browser/prospect-current-read.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts"
+      ],
+      "limitations": [
+        "Selected client URL/state is a hint and local protection, not backend authorization. Native cross-tenant denial and fresh server authorization need separate native acceptance."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/tests/browser/prospect-current-read.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts"
+      ],
+      "status": "pending_fresh_browser_results"
+    },
+    {
+      "id": "interrupted_writes",
+      "coverage": "Held PATCH and snapshot success/failure/lost response freeze draft fields and preserve submitted text; navigation retains uncertain intent; read-back does not silently replay. Reload recovery retains original request keys/bytes, and replacement actors cannot restore former journals. File deletion uncertainty requires current read and a new explicit confirmation.",
+      "sourceReferences": [
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 111
+        },
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 166
+        },
+        {
+          "path": "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+          "line": 5
+        },
+        {
+          "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 21
+        }
+      ],
+      "testFiles": [
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/test/browser/newsletter-staging.spec.ts",
+        "apps/web/test/browser/billing-flow.spec.ts",
+        "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+        "apps/web/tests/browser/files-delete-recovery.spec.ts",
+        "apps/web/tests/browser/activity-command.spec.ts",
+        "apps/web/tests/browser/activity-command-restart.spec.ts",
+        "apps/web/tests/browser/activity-command-storage.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+        "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts"
+      ],
+      "limitations": [
+        "All writes, upload storage, provider-shaped endpoints and receipts here are intercepted synthetic fixtures. No native CAS, persistence, S3 durability, paid model, mail delivery or hosted billing acceptance. Coverage is per tested flow; it is not proof of every possible interruption."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/test/browser/newsletter-staging.spec.ts",
+        "apps/web/test/browser/billing-flow.spec.ts",
+        "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+        "apps/web/tests/browser/files-delete-recovery.spec.ts",
+        "apps/web/tests/browser/activity-command.spec.ts",
+        "apps/web/tests/browser/activity-command-restart.spec.ts",
+        "apps/web/tests/browser/activity-command-storage.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+        "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts"
+      ],
+      "status": "pending_fresh_browser_results"
+    },
+    {
+      "id": "desktop_mobile_accessibility",
+      "coverage": "Representative component views test desktop/mobile geometry and dark colors, image loading, contained controls and no page error. Specific dialogs/editor/toolbars test keyboard reachability, Tab containment, Escape and focus return. Actual Next setup inspected at1440 light and390 dark; four theme/viewport measurements passed.",
+      "sourceReferences": [
+        {
+          "path": "apps/web/tests/browser/visual.spec.ts",
+          "line": 22
+        },
+        {
+          "path": "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 24
+        },
+        {
+          "path": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+          "line": 6
+        },
+        {
+          "path": "apps/web/test/browser/settings-scenes.spec.ts",
+          "line": 95
+        }
+      ],
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+        "apps/web/test/browser/settings.spec.ts",
+        "apps/web/test/browser/settings-scenes.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/tests/browser/visual.spec.ts",
+        "apps/web/tests/browser/visual-closeout.spec.ts",
+        "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+        "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "apps/web/tests/browser/portfolio-layout-integration.spec.ts"
+      ],
+      "limitations": [
+        "Keyboard/semantic/geometry assertions do not establish comprehensive WCAG, screen-reader, contrast, zoom, touch or cross-browser/device certification. Screenshots alone are not Figma pixel comparison. Actual Next screenshot scope is setup presentation."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+        "apps/web/test/browser/settings.spec.ts",
+        "apps/web/test/browser/settings-scenes.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/tests/browser/visual.spec.ts",
+        "apps/web/tests/browser/visual-closeout.spec.ts",
+        "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+        "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "apps/web/tests/browser/portfolio-layout-integration.spec.ts"
+      ],
+      "status": "pending_fresh_browser_results"
+    },
+    {
+      "id": "public_packages_transport",
+      "coverage": "Byte-bound vendor artifacts, AST public-boundary/cycle/server-entry checks and safe-import tests pass. Real createMeriChat, external Chat and public stream writer are composed in21 offline controls for ordered replay, immutable projection, resume cursor, typed admissions, detach and stream/run distinction.15 Elements controls qualify adopted closed display import graph and restricted deterministic SSR.",
+      "sourceReferences": [
+        {
+          "path": "scripts/public-packages.mjs",
+          "line": 9
+        },
+        {
+          "path": "scripts/public-packages.test.mjs",
+          "line": 8
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 10
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 52
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 122
+        },
+        {
+          "path": "packages/qualification-transport/qualification.test.mjs",
+          "line": 1
+        },
+        {
+          "path": "packages/meri-client/src/client-facade.tsx",
+          "line": 26
+        },
+        {
+          "path": "packages/qualification-elements/qualification.test.mjs",
+          "line": 1
+        }
+      ],
+      "testFiles": [],
+      "limitations": [
+        "Transport injects mock fetch and throws on global network. UI transport is not backend run authority; local detach does not cancel a durable run; stream end does not prove run completion. Elements fixture is offline SSR, not browser styling, G1 product admission or model orchestration."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [],
+      "status": "source_and_completed_bounded_evidence"
+    },
+    {
+      "id": "figma",
+      "coverage": "Frozen local source and asset tests bind selected original Figma exports, tokens and screenshots. Preserved per-node contexts and lane-specific visual reviews support bounded implemented facets; exact full-file visual acceptance remains open.",
+      "sourceReferences": [
+        {
+          "path": "docs/remaining-repairs-20261012/design-baseline/README.md",
+          "line": 3
+        },
+        {
+          "path": "docs/remaining-repairs-20261012/design-baseline/README.md",
+          "line": 31
+        },
+        {
+          "path": "apps/web/test/assets.test.mjs",
+          "line": 6
+        },
+        {
+          "path": "apps/web/test/cited-answer-assets.test.mjs",
+          "line": 6
+        }
+      ],
+      "testFiles": [],
+      "limitations": [
+        "No immutable Figma revision/file-wide variable/component/prototype backup has been verified. CR10 original435:82802 rendered target remains1x1 and parent435:82147 clipped; full composer pixel parity remains unassessed. Read preservation table with subsequent lane reports: original audit was point-in-time, not current blanket completion. All337 native rows remain individually held; source repairs and fixture screenshots do not close native/design criteria."
+      ],
+      "mappedResultRecords": [],
+      "mappedOutcomeCounts": {
+        "passed": 0,
+        "failed": 0,
+        "interrupted": 0,
+        "unrun": 0,
+        "retries": 0
+      },
+      "pendingSuiteFiles": [],
+      "status": "source_and_completed_bounded_evidence"
+    }
+  ],
+  "publicTransportSourceCases": [
+    [
+      167,
+      "test('all ten frozen variants compose through the real factory + external Chat and project exactly once in order', async () => {"
+    ],
+    [
+      195,
+      "test('split SSE / UTF-8 byte boundaries do not corrupt frames (real factory path)', async () => {"
+    ],
+    [
+      219,
+      "test('duplicate replay of the same eventId and payload is idempotent', async () => {"
+    ],
+    [
+      229,
+      "test('immutable eventId conflict aborts the subscription and preserves the last contiguous cursor', async () => {"
+    ],
+    [
+      247,
+      "test('duplicate sequence bound to a different eventId aborts the subscription', async () => {"
+    ],
+    [
+      263,
+      "test('a gap pauses the cursor and is repaired by the missing event (real factory path)', async () => {"
+    ],
+    [
+      278,
+      "test('multiple runs and attempts share one conversation-wide sequence (real factory path)', async () => {"
+    ],
+    [
+      294,
+      "test('malformed custom data is rejected on the guard boundary before onData/admission', async () => {"
+    ],
+    [
+      308,
+      "test('the dataPartSchemas runtime/type key mismatch is reproduced at this exact pin', async () => {"
+    ],
+    [
+      352,
+      "test('unexpected native reasoning/tool/text frames are rejected (real factory path)', async () => {"
+    ],
+    [
+      367,
+      "test('run.error is rendered by approved code or generic text, never the raw message', async () => {"
+    ],
+    [
+      381,
+      "test('HTTP 204 reconnect via chat.resumeStream uses the authorized conversation URL and cursor header', async () => {"
+    ],
+    [
+      395,
+      "test('incremental reconnect via chat.resumeStream requests the last accepted sequence and appends', async () => {"
+    ],
+    [
+      420,
+      "test('stop/dispose on a held-open pending stream admit nothing, issue no durable cancel, and leave run status unchanged', async () => {"
+    ],
+    [
+      466,
+      "test('projection snapshots inputs: mutating raw/nested input cannot rewrite accepted history', async () => {"
+    ],
+    [
+      494,
+      "test('projection snapshots committed inputs and nested payloads; factory path is immune to later mutation', async () => {"
+    ],
+    [
+      531,
+      "test('a completed stream outcome does not mark the run complete without an authoritative run.status', () => {"
+    ],
+    [
+      540,
+      "test('prototype-looking run error codes use only the generic safe string', () => {"
+    ],
+    [
+      548,
+      "test('mutating factory view input cannot change send or reconnect conversation identity', async () => {"
+    ],
+    [
+      569,
+      "test('missing endpoint fails before subscription allocation or fetch', () => {"
+    ],
+    [
+      579,
+      "test('public browser validator guards the actual composed SDK stream and rejects nested extras', async () => {"
+    ]
+  ],
+  "sourceFiles": [
+    {
+      "path": "/workspace/capiro-remaining/apps/web/playwright.config.ts",
+      "bytes": 1042,
+      "sha256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/src/shared/capiro/vitest.config.mts",
+      "bytes": 232,
+      "sha256": "d4e64f3a514d2b2d86404e4262783260088b78aaf6c038ae6165d0814d6197aa"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/assets.test.mjs",
+      "bytes": 4905,
+      "sha256": "c9f442dc6710f27c2ca010741d4f913fa77aa34df79e105889c3288f574cd4c2"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/billing-flow.spec.ts",
+      "bytes": 12634,
+      "sha256": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "bytes": 3565,
+      "sha256": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/fixtures.ts",
+      "bytes": 1917,
+      "sha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/integration.spec.ts",
+      "bytes": 7147,
+      "sha256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+      "bytes": 8999,
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/newsletter-staging.spec.ts",
+      "bytes": 11993,
+      "sha256": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/next-modules-scope.spec.ts",
+      "bytes": 6262,
+      "sha256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "bytes": 2932,
+      "sha256": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/objective-work-destinations.spec.ts",
+      "bytes": 10868,
+      "sha256": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "bytes": 9341,
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "bytes": 2795,
+      "sha256": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-workspace.spec.ts",
+      "bytes": 16006,
+      "sha256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts",
+      "bytes": 16593,
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/server.mjs",
+      "bytes": 1712,
+      "sha256": "7fe3264d45a5c753aa699eb34209590ba211fe79da7a911c8e4858331f2f8605"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/session.spec.ts",
+      "bytes": 2595,
+      "sha256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/settings-scenes.spec.ts",
+      "bytes": 3847,
+      "sha256": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/settings.spec.ts",
+      "bytes": 4472,
+      "sha256": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/cited-answer-assets.test.mjs",
+      "bytes": 2528,
+      "sha256": "c3b26f8cc82776e7a8766a44cc0c583c17a94e204596e887fb44d5705ab8030b"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/test/run-workspace.test.mjs",
+      "bytes": 7594,
+      "sha256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "bytes": 6186,
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-restart.spec.ts",
+      "bytes": 3076,
+      "sha256": "a2be29f498a7e6b0e21e300442797a26bdfa8ca8bea31210b431d807c52f9791"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-storage.spec.ts",
+      "bytes": 4661,
+      "sha256": "b4335bdb78f5382eada29cb18e44852775fd0fe4a787ebeb064d6397406b2f78"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command.spec.ts",
+      "bytes": 9866,
+      "sha256": "eb336075c93f6002112b38896cfbfe515ca36966878fc05111cffeb1651287ff"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/calendar-sharing.spec.ts",
+      "bytes": 16606,
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+      "bytes": 2467,
+      "sha256": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "bytes": 14019,
+      "sha256": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/fixtures.ts",
+      "bytes": 11227,
+      "sha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "bytes": 14236,
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+      "bytes": 6128,
+      "sha256": "3f021e5d35710def2b27c2c809ca4337376c98e98102224d20316003f86a0a9e"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/portfolio.spec.ts",
+      "bytes": 8238,
+      "sha256": "7b9a731ac8e5c6f4f46018218230217939348669a9984b6f81abe5e943302066"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "bytes": 13448,
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/prospect-current-read.spec.ts",
+      "bytes": 11055,
+      "sha256": "84eb51196c433cf32261a4a9202b4df2d73d073c4d04218f92b215e1c174096f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+      "bytes": 3817,
+      "sha256": "a3b4a62a6adee256e17bb63569650eb8435cf6f4090483370c41238eb45c0f9c"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/server.mjs",
+      "bytes": 1976,
+      "sha256": "eedc3911d74e8159d105b2bea55c07ac935b05c90f71292b0138a00c6efae420"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "bytes": 6753,
+      "sha256": "1908dcd7446c40aceabf63a8b0f7eb85313334ab84ffd49ec6d6327cfa370de7"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/visual-closeout.spec.ts",
+      "bytes": 9787,
+      "sha256": "4f5648ba1039600934a08143b55fa3a9b9fb77e076e90e82194a6222c93cde6f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/visual.spec.ts",
+      "bytes": 4481,
+      "sha256": "f7358b0e00219df4bdf085308d3c860466ada3f3e26fa933fdb42551b506ce14"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "path": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/README.md",
+      "bytes": 7728,
+      "sha256": "c064eb9b5ada13b3442e3812c9ee9f305a51cd1a17d3b579690d487c58e45af9"
+    },
+    {
+      "path": "/workspace/capiro-remaining/packages/meri-client/package.json",
+      "bytes": 1189,
+      "sha256": "e9915b6f417a60256ecccdc3a93a7e7075487bd2bd6cd0e5b6e46d05fc4957e0"
+    },
+    {
+      "path": "/workspace/capiro-remaining/packages/meri-client/src/client-facade.tsx",
+      "bytes": 1682,
+      "sha256": "7c2854745cc55c578bf9530c551ea45a0ee050de3c8ac814c61afa89043b1c8f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/packages/qualification-elements/qualification.test.mjs",
+      "bytes": 26855,
+      "sha256": "eb37e5b64d6be644c0c0255d9723f0985f61ad43e49db1bbbe94dc87c51362b6"
+    },
+    {
+      "path": "/workspace/capiro-remaining/packages/qualification-transport/qualification.test.mjs",
+      "bytes": 24494,
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "/workspace/capiro-remaining/scripts/architecture.test.mjs",
+      "bytes": 21948,
+      "sha256": "cafcf2f4a996030425413f181bf145c0371a3bb8a90650a2eb4a02294f5183cd"
+    },
+    {
+      "path": "/workspace/capiro-remaining/scripts/public-packages.mjs",
+      "bytes": 2799,
+      "sha256": "6647b05a9d51b38b456fa27d4c68a6c3460e263b59f02814713cbeb2d5e2dffa"
+    },
+    {
+      "path": "/workspace/capiro-remaining/scripts/public-packages.test.mjs",
+      "bytes": 3342,
+      "sha256": "c8196fccd6569f47c86453b9e0578186c66eacd65a597ac737bdf3a85a0d2f8f"
+    },
+    {
+      "path": "/workspace/capiro-remaining/vendor/meri-public-packages.json",
+      "bytes": 1140,
+      "sha256": "560004de77422e78345463d5faeeaa87784e1ad8f495f082e22d7d21e9a34141"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+      "bytes": 18067,
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "bytes": 5179,
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c"
+    },
+    {
+      "path": "/workspace/capiro-remaining/apps/web/src/features/portfolio/calendar/lifecycle.ts",
+      "bytes": 2571,
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491"
+    },
+    {
+      "path": "/workspace/capiro-remaining/.dockerignore",
+      "bytes": 311,
+      "sha256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a"
+    },
+    {
+      "path": "/workspace/capiro-remaining/scripts/docker-context-regression.mjs",
+      "bytes": 6362,
+      "sha256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35"
+    },
+    {
+      "path": "/workspace/capiro-remaining/scripts/deployment-cli.test.mjs",
+      "bytes": 3349,
+      "sha256": "393f0c193faaf08110515f82b01bac11ea364cfd7f894b5e9568d10239efd998"
+    },
+    {
+      "path": "/workspace/capiro-remaining/package.json",
+      "bytes": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/BUILD-IDENTITY.json",
+      "bytes": 243,
+      "sha256": "c4a35dc3baa322f487aa19cae2551f21066f2359eea46980d500d818e7a5287b"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/SOURCE.json",
+      "bytes": 343,
+      "sha256": "38fc9d3065808a2cdfa9eaf270bce2c44e38d7fff697b0923982146b5b9fa6e6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install-exit.json",
+      "bytes": 776,
+      "sha256": "59e58884588c5a7c3f8eb73ec43e93e0ffa4b200a2462f843d7ad076896dc7e3"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install-running.json",
+      "bytes": 402,
+      "sha256": "365f5bf88c8c8a94747000d38069d3e1ec9728380f653a14f735a7ffaae58780"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install.log",
+      "bytes": 164,
+      "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check-exit.json",
+      "bytes": 777,
+      "sha256": "7745426cb31bff20b76720cb58de2158d30f90b16809e2cfc6c0d7875c0cfcbe"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check-running.json",
+      "bytes": 402,
+      "sha256": "388ab419cbe1ccd7f536da3ed7538f9f64ab24f3a5d9780792e74f2137af2b50"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check.log",
+      "bytes": 815141,
+      "sha256": "5fb163c63e33beac30a9d9764d63b10a0c2b8cf0a77cfef1f29e9d6350d896e5"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network-exit.json",
+      "bytes": 1055,
+      "sha256": "8b6164d139a112ca02810bffc617735985d7f29b066b6c3fa22f3a82cf858cc4"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network-running.json",
+      "bytes": 660,
+      "sha256": "35879d00d56bba5130a627620bb627a8cf4b431b1fce1b2dc2a3fd019f2caf58"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network.log",
+      "bytes": 2637,
+      "sha256": "9639468a711b9f41f0a4b8c9be6b0b67af65346449df3586f7e6b5a0ac3984f9"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-exit.json",
+      "bytes": 901,
+      "sha256": "e13b1a039b199630aded9397a8b95f798269cbcb0bf0ff9207a21a1034765e6a"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy-exit.json",
+      "bytes": 1159,
+      "sha256": "63ecbb995976e7e62f8863cd1a20dba87ffd0b39aae86b0b6824a770dd4bc004"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy-running.json",
+      "bytes": 770,
+      "sha256": "ce79637f1fd717346507d491bdcee4526f6b3d567065a8b43d68317396985864"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy.log",
+      "bytes": 2637,
+      "sha256": "b4fb8e7af4b4870f58bfdbe580a764c4d553b2caa16390d91b821ba6e49870f1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-running.json",
+      "bytes": 528,
+      "sha256": "25c92e57c7cba3ded0bea286d0e44668ca3c7e5b259e93085c0a3321f17d9bba"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build.log",
+      "bytes": 2636,
+      "sha256": "a1463956d168b180aa99e8b5a83eff5578f73def5804cb49c9c94056747aa877"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context-exit.json",
+      "bytes": 898,
+      "sha256": "12696c1bdfc0f865c41f5ef5321852da1abbf36292ae1aca69ec931644ee39ea"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context-running.json",
+      "bytes": 523,
+      "sha256": "4f26849760c6deac47421f894a489e70bf5c842889e0bd0cf9119d2e53800731"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context.log",
+      "bytes": 500,
+      "sha256": "3df0dd16721c1e94a16d9db6ef0a62b2f2fbe37b4e878f42a64977db5f84b23a"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-exit.json",
+      "bytes": 1054,
+      "sha256": "d0840067afca911f8a89df3dcfbc14e4e1d9f48788375a6c52d5fb24dd0ea427"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture-exit.json",
+      "bytes": 1071,
+      "sha256": "50421c30b6f51f91ea58d15a2bf2dc031ce4eebc408fb6c948573e9c9045cb80"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture-running.json",
+      "bytes": 685,
+      "sha256": "d718aa729ad9009d8581239220b395a5f35cfad66b98a46501e463a87e2d8464"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture.log",
+      "bytes": 3091,
+      "sha256": "b74af62473703248f5aadd4051c918dda79a0a06d7b879f313dacb85cb92431e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-running.json",
+      "bytes": 680,
+      "sha256": "595a5abceae7ae6038cd04bf401e9ff7f17c84a7d051c4da41bbe3040b15de33"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check.log",
+      "bytes": 6121,
+      "sha256": "649965d1fcc4aaa4955677163c999d546354a27bea8f9633b5ce28a959401077"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare-exit.json",
+      "bytes": 855,
+      "sha256": "d99a2e0e5fe643ef2ba4b7fce719445c56b8569fea69c5c227047e7467baf8ec"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare-running.json",
+      "bytes": 478,
+      "sha256": "ca43294577cdb752a9ffed2a8b0b0c19e5c86498705c61c2a6ec40e94fd8d8da"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare.log",
+      "bytes": 244,
+      "sha256": "8443d4fa5dacd3b1f16f26c5480ddabc9a23511748f3ee4b2b02daf35b804dd6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build-exit.json",
+      "bytes": 778,
+      "sha256": "4f7cfbb9eefbc3b00b8fa0ebd25e5ee302c24212d24fb50d8cd509bff49bf6d6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build-running.json",
+      "bytes": 402,
+      "sha256": "a236e4860ef7469a04b8ed5af8a3cdf657d38c3d7adee919f47aec93be0a77e1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build.log",
+      "bytes": 2232,
+      "sha256": "7e95f2a899559f63501ad2894584b6e889c8fa5e02ea6e83ca5f3886a9e399d3"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-server-exit.json",
+      "bytes": 892,
+      "sha256": "48a6d82af336b0b43fcfd70922a8ea359d1d5ded81d1ba1a4318f4775354e10c"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-server-running.json",
+      "bytes": 515,
+      "sha256": "8425ac89dbaa652dbe2fe32383e79739bff9a7a7b75a8756664c4048ff380eae"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-server.log",
+      "bytes": 4258,
+      "sha256": "fb8fd294b0b96d465006d6a75793d5723af1473e35f81a7c999632fbd7d52ea6"
+    }
+  ],
+  "previousCheckpoint": "../checkpoint-104495d/report.json",
+  "sourceDelta": {
+    "attendance": "Added explicit Information navigation and empty current Preparation attachment GET fixture; existing assertions retained.",
+    "docker": "Removed recursive **/work ignore while keeping root work excluded, added actual context regression and import/input controls.",
+    "runtimeSourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+    "runtimeSourceMatches104495d": true
+  },
+  "limits": [
+    "Fresh pending browser/build/container gates are not inherited from104495d.",
+    "1118-case suite is Portfolio; no full Meri browser product acceptance claimed.",
+    "Synthetic identities, writes and provider-shaped endpoints are not native authorization/persistence/provider acceptance.",
+    "No immutable full-file Figma baseline; full CR10 composer rendering still clipped.",
+    "Keyboard and geometry tests are bounded; no full accessibility/device certification.",
+    "Native337-row acceptance, deployment, live environment and shipping remain separate."
+  ]
+}

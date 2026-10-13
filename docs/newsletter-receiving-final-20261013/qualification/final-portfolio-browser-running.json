@@ -1,0 +1,21 @@
+{
+  "pid": 1161430,
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-results.json",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=3",
+    "--output=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-artifacts"
+  ],
+  "startedUTC": "2026-10-13T04:03:41.423584+00:00",
+  "source": {
+    "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+    "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+    "sourceDiff": ""
+  }
+}

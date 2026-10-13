@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import assert from 'node:assert/strict';
+import ts from '/workspace/capiro-remaining/node_modules/typescript/lib/typescript.js';
+import { scanModule } from '/workspace/capiro-remaining/scripts/architecture/scan.mjs';
+const root='/workspace/capiro-remaining',out='/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc',source='d68c2dc6b80c400b8ce9b07837f7a14cabb5d616',old='adbc84b2251fe6b06cb7f75030026fba5b4ff498';
+const read=(commit,path)=>execFileSync('git',['show',`${commit}:${path}`],{cwd:root,encoding:'utf8'});
+const parse=(text,path)=>{const n=ts.createSourceFile(path,text,ts.ScriptTarget.Latest,true);assert.equal(n.parseDiagnostics.length,0);return n;};
+const signature=node=>{const children=[];ts.forEachChild(node,n=>{children.push(signature(n));});return [node.kind,(ts.isIdentifier(node)||ts.isLiteralExpression(node)||ts.isTemplateLiteralToken(node))?node.text:null,children];};
+const equal=(a,b)=>JSON.stringify(signature(a))===JSON.stringify(signature(b));
+const visit=(ast,predicate)=>{const result=[];const walk=n=>{if(predicate(n))result.push(n);ts.forEachChild(n,walk);};walk(ast);return result;};
+const portfolio='apps/web/tests/browser/portfolio.spec.ts';const pretext=read('fe6ff41251006efc659ec80e4542b1a795e15ca5',portfolio),posttext=read(source,portfolio),pre=parse(pretext,portfolio),post=parse(posttext,portfolio);assert(equal(pre,post));
+assert.equal(fs.readFileSync('/tmp/capiro-remaining-root-evidence/final-format-correction/before-portfolio.spec.ts.txt','utf8'),pretext);
+const beforetext=read(old,portfolio),before=parse(beforetext,portfolio);
+const assertions=ast=>visit(ast,n=>ts.isExpressionStatement(n)&&/^(?:await\s+)?expect\(/.test(n.getText(ast))).map(n=>JSON.stringify(signature(n)));
+const originals=assertions(before),current=assertions(post);assert.equal(originals.length,31);assert.equal(current.length,33);assert(originals.every(x=>current.includes(x)));
+const tests=ast=>ast.statements.filter(n=>ts.isExpressionStatement(n)&&ts.isCallExpression(n.expression)&&n.expression.expression.getText(ast)==='test');
+const oldtests=tests(before),newtests=tests(post);assert.equal(oldtests.length,5);assert.equal(newtests.length,5);const unrelated=[];
+for(let i=0;i<oldtests.length;i++){assert.equal(oldtests[i].expression.arguments[0].text,newtests[i].expression.arguments[0].text);if(i!==1){assert.equal(oldtests[i].getText(before),newtests[i].getText(post));unrelated.push(oldtests[i].expression.arguments[0].text);}}
+const rel='apps/web/tests/browser/relationships.spec.ts';const oldrel=read(old,rel),newrel=read(source,rel);const exactBefore='await expect(mail.getByLabel("Message", { exact: true })).toHaveValue(',exactAfter='await expect(mail.getByLabel("Message", { exact: true })).toHaveText(';assert.equal(newrel.replace(exactAfter,exactBefore),oldrel);const relast=parse(newrel,rel);
+const inventory=JSON.parse(fs.readFileSync('/tmp/capiro-remaining-root-evidence/final-correction-all-test-source-size-findings.json','utf8'));
+const findings=inventory.paths.flatMap(path=>scanModule(path,read(source,path)).sizeFindings);assert.deepEqual(findings,inventory.records);assert.equal(findings.length,14);
+const activity='apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx';const activityFindings=scanModule(activity,read(source,activity)).sizeFindings;assert.equal(activityFindings.length,1);assert.equal(activityFindings[0].fingerprint,'e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43');assert.equal(activityFindings[0].nonblank,124);
+const result={at:new Date().toISOString(),scope:'Read-only TypeScript parsing and existing pure source scanner only; no application module, browser, test suite, typecheck or build executed.',source,formatOnly:{beforeCommit:'fe6ff41251006efc659ec80e4542b1a795e15ca5',savedBeforeBytesMatch:true,parsedStructureAndLiteralsIdentical:true},facility:{originalAssertions:originals.length,currentAssertions:current.length,missingOriginalAssertions:0,added:2,unchangedOtherTestStatements:unrelated},relationships:{exactSingleMatcherReplacement:true,calls:visit(relast,ts.isCallExpression).length,stringLiterals:visit(relast,ts.isStringLiteralLike).length,expectedTextUnchanged:'Synthetic message'},changedTestInventory:{files:inventory.paths.length,sizeSignals:findings.length,allExactRecordsMatch:true,records:findings},activity:activityFindings[0],initialReviewHelperFailure:'audit.py initially used a non-ASCII bytes literal and failed before execution; original script retained, corrected to UTF-8 encoding. No product/evidence state was changed.'};
+fs.writeFileSync(`${out}/PARSED-SOURCE-VERIFICATION.json`,JSON.stringify(result,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({...result,changedTestInventory:{files:inventory.paths.length,sizeSignals:findings.length,allExactRecordsMatch:true}},null,2));

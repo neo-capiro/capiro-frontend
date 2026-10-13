@@ -1,0 +1,20 @@
+{
+  "typecheck": {
+    "command": "NODE_OPTIONS=--max-old-space-size=2048 ../../node_modules/.bin/tsc --noEmit",
+    "exitCode": 0,
+    "log": "typecheck-candidate-final.log"
+  },
+  "format": {
+    "exitCode": 0,
+    "log": "format-final.log"
+  },
+  "diffCheck": {
+    "exitCode": 0,
+    "log": "diff-check-final.log"
+  },
+  "lint": {
+    "errors": 0,
+    "inheritedWarnings": 2,
+    "log": "lint-corrected.log"
+  }
+}

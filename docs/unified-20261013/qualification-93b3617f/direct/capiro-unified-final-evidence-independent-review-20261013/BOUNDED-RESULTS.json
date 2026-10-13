@@ -1,0 +1,635 @@
+{
+  "publicBrowser": {
+    "passedCharacterizations": 116,
+    "passedReceivingCases": 130,
+    "publicNames": [
+      "NEWSLETTER_BLOCK_KINDS",
+      "NEWSLETTER_BLOCK_LABELS",
+      "NEWSLETTER_COLUMN_RATIOS",
+      "NEWSLETTER_FONT_CATALOG",
+      "NEWSLETTER_RECEIVE_LIMITS",
+      "NEWSLETTER_SOCIAL_ICON_STYLES",
+      "NEWSLETTER_SOCIAL_PLATFORMS",
+      "NEWSLETTER_SOCIAL_SHARE_PLATFORMS",
+      "NEWSLETTER_SURVEY_SECTION_TYPES",
+      "NEWSLETTER_SYSTEM_FONTS",
+      "NEWSLETTER_TEMPLATE_ID",
+      "applyNewsletterBrandKit",
+      "cloneNewsletterBlocks",
+      "createNewsletterBlock",
+      "createNewsletterLayout",
+      "createNewsletterSection",
+      "createNewsletterSurveyQuestion",
+      "defaultNewsletterBrandKit",
+      "defaultNewsletterConfig",
+      "defaultNewsletterSocialSettings",
+      "defaultNewsletterSocialShare",
+      "defaultNewsletterStyles",
+      "defaultNewsletterSurveyDefinition",
+      "findNewsletterBlock",
+      "governmentAffairsNewsletter",
+      "newsletterBlockVisible",
+      "newsletterBrandButtonStyle",
+      "newsletterCatalogFont",
+      "newsletterCatalogStyle",
+      "newsletterCustomVideoThumbnail",
+      "newsletterDesignFontRequests",
+      "newsletterDesignFonts",
+      "newsletterId",
+      "newsletterSocialPlatform",
+      "newsletterSocialSettings",
+      "newsletterSourceClients",
+      "newsletterVideoSource",
+      "newsletterWebFontUrls",
+      "parseNewsletterCampaign",
+      "parseNewsletterChecks",
+      "parseNewsletterDocumentList",
+      "parseNewsletterHtmlCheck",
+      "parseNewsletterOutreachRecord",
+      "parseNewsletterOutreachStage",
+      "parseNewsletterPreview",
+      "parseNewsletterRecordDiscriminator",
+      "parseNewsletterReservedMetadata",
+      "parseNewsletterStageReceipt",
+      "visitNewsletterBlocks"
+    ],
+    "packedModuleCount": 6,
+    "browserVersion": "154.0.8037.57",
+    "executablePath": "/usr/bin/chromium",
+    "requests": [],
+    "pageErrors": [],
+    "scope": "Actual Chromium execution of packed pure public imports; no full editor, backend, visual or native acceptance"
+  },
+  "receiving": {
+    "total": 130,
+    "passed": 130,
+    "failed": []
+  },
+  "production": {
+    "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+    "browserVersion": "154.0.8037.57",
+    "results": [
+      {
+        "path": "/healthz",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/portfolio",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/calendar",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/sign-in",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/api/backend/core/clients",
+        "status": 503,
+        "headers": "passed"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/modules",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings",
+        "status": 307,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+        "status": 307,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings/personal",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/api/capiro/me.read",
+        "status": 503,
+        "headers": "passed"
+      },
+      {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "crossMode": "Meri/Portfolio/Modules/Settings",
+        "history": "back/forward",
+        "sameDocument": true
+      },
+      {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "crossMode": "Meri/Portfolio/Modules/Settings",
+        "history": "back/forward",
+        "sameDocument": true
+      }
+    ],
+    "pageErrors": []
+  },
+  "previewRoot": {
+    "defaultProduct": "portfolio",
+    "rootStatus": 200,
+    "location": "/",
+    "followedSetup": true
+  },
+  "additionalV2": {
+    "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "startedUTC": "2026-10-13T06:26:46.764Z",
+    "scope": "Unconfigured actual Next standalone, no service interception or real identity/provider execution",
+    "http": [
+      {
+        "path": "/register",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/verify",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/plan",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/legal",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/billing",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/admins",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/clients",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/org",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/confirm",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/accept-invite",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/setup",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/it/synthetic-local-capability",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/it/done",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/it/error",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/meri/actions",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/api/action-followthrough/session",
+        "status": 503,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/query",
+        "status": 503,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/draft",
+        "status": 503,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/prepare",
+        "status": 503,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/execute",
+        "status": 503,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/approve",
+        "status": 404,
+        "noRemoteDisposition": true
+      },
+      {
+        "path": "/api/action-followthrough/session",
+        "foreignOrigin": "http://127.0.0.1:5188",
+        "status": 400,
+        "rejectedOrigin": true
+      },
+      {
+        "path": "/api/action-followthrough/session",
+        "foreignOrigin": "https://foreign.example.test",
+        "status": 400,
+        "rejectedOrigin": true
+      }
+    ],
+    "assets": [
+      {
+        "path": "/onboard/favicon.svg",
+        "bytes": 310,
+        "sha256": "6b853e45dfd9c0b5de548d2d1fa779330c09f6cda89f52c1d1bf6b3ca44904c4"
+      },
+      {
+        "path": "/onboard/fonts/hanken-grotesk-latin.woff2",
+        "bytes": 34704,
+        "sha256": "e9201eddf1d41d0b62253295d869ce3cf65768f7102b797f02c7f8c876b4a9d5"
+      },
+      {
+        "path": "/onboard/fonts/jetbrains-mono-latin.woff2",
+        "bytes": 31432,
+        "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be"
+      },
+      {
+        "path": "/onboard/fonts/newsreader-latin.woff2",
+        "bytes": 132000,
+        "sha256": "6e4f2958c3a7c4a80acde4e5a679abe7e01bc1e30b92be3c7a8b696ef401d101"
+      },
+      {
+        "path": "/onboard/legal-docs/Capiro-Subscription-Agreement.pdf",
+        "bytes": 201149,
+        "sha256": "2ae1437094f9310c9e9cf49c71aa1725e06823c02fba6cb546d40e3cedd33ff5"
+      },
+      {
+        "path": "/onboard/legal-docs/Capiro-Terms-of-Service.pdf",
+        "bytes": 58509,
+        "sha256": "94e03031d00eaf759c7e55795aa89edfa5429bf667c3ce9f975f8f2b69b6d5d2"
+      }
+    ],
+    "browser": [
+      {
+        "width": 1440,
+        "meriNavigationAndHistory": true,
+        "onboardPublicSetup": true
+      },
+      {
+        "width": 375,
+        "meriNavigationAndHistory": true,
+        "onboardPublicSetup": true
+      }
+    ],
+    "pageErrors": [],
+    "remoteRequests": [],
+    "browserVersion": "154.0.8037.57",
+    "endedUTC": "2026-10-13T06:26:50.375Z",
+    "success": true,
+    "error": null
+  },
+  "servedNewsletterAssets": {
+    "count": 179,
+    "bytes": 486014,
+    "allMatchTrackedFiles": true,
+    "platform": "linux",
+    "architecture": "x64",
+    "glibc": "2.41",
+    "runtime": "v24.19.0"
+  },
+  "onboardAssets": {
+    "count": 6,
+    "bytes": 458104,
+    "allMatchTrackedFiles": true
+  },
+  "elements": {
+    "receiptPath": "/tmp/capiro-unified-final-93b3617f-20261013/elements-work/ssr/receipt.json",
+    "expectedSha256": "bd97a5e60da91f26c6214733a155e07ed71637db606f94e1a65100ddbab53fd1",
+    "bundleBytes": 20518628,
+    "inputCount": 2807,
+    "dependencyRecords": 3155,
+    "scope": "Offline SSR fixture; not browser/product/G1 admission",
+    "node": {
+      "version": "v24.19.0",
+      "platform": "linux",
+      "arch": "x64"
+    }
+  },
+  "clientChunkBoundary": {
+    "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "testedRootOnlyExportSentinels": [
+      "MERI_TOOL_MANIFEST",
+      "MERI_CAPABILITY_REGISTRY",
+      "DEFENSE_BUDGET_DOMAIN_PRIMER",
+      "MERI_GROUNDING_OUTREACH_KERNEL",
+      "fundingCurrentCoalesceSql",
+      "GRANTS_GOV_ORGANIZATION_TYPE_GROUPS"
+    ],
+    "clientSentinelHits": [],
+    "clientReferenceManifestCount": 44,
+    "broadRootClientReferenceHits": [],
+    "serverPricingLiteralHits": [
+      "apps/web/.next/server/chunks/ssr/_18-wosn0a1179._.js"
+    ],
+    "scope": "Supplemental emitted-artifact exclusion check plus canonical server-only import guard. No assertion of complete whole-program provenance from string absence alone.",
+    "chunkCount": 470
+  },
+  "initialActualAdditions": {
+    "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "startedUTC": "2026-10-13T06:23:10.234Z",
+    "scope": "Unconfigured actual Next standalone, no service interception or real identity/provider execution",
+    "http": [
+      {
+        "path": "/register",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/verify",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/plan",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/legal",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/billing",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/admins",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/clients",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/org",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/confirm",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/accept-invite",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/setup",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      },
+      {
+        "path": "/it/synthetic-local-capability",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/it/done",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/it/error",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-store"
+      },
+      {
+        "path": "/meri/actions",
+        "status": 200,
+        "explicitSetup": true,
+        "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate"
+      }
+    ],
+    "assets": [],
+    "browser": [],
+    "pageErrors": [],
+    "remoteRequests": [],
+    "endedUTC": "2026-10-13T06:23:11.248Z",
+    "success": false,
+    "error": "AssertionError [ERR_ASSERTION]: /api/action-followthrough/session\n\n400 !== 503\n\n    at file:///tmp/capiro-unified-final-93b3617f-20261013/verify-additions.mjs:28:228\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+  },
+  "diagnosticV1": {
+    "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "startedUTC": "2026-10-13T06:25:28.015Z",
+    "scope": "Unconfigured actual Next standalone, no service interception or real identity/provider execution",
+    "http": [
+      {
+        "sentOrigin": "http://127.0.0.1:5188",
+        "status": 500,
+        "body": "Internal Server Error"
+      },
+      {
+        "sentOrigin": "http://localhost:5188",
+        "status": 500,
+        "body": "Internal Server Error"
+      },
+      {
+        "sentOrigin": "http://0.0.0.0:5188",
+        "status": 500,
+        "body": "Internal Server Error"
+      }
+    ],
+    "assets": [],
+    "browser": [],
+    "pageErrors": [],
+    "remoteRequests": [],
+    "endedUTC": "2026-10-13T06:25:28.540Z",
+    "success": true,
+    "error": null
+  },
+  "diagnosticV2": {
+    "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "startedUTC": "2026-10-13T06:25:49.883Z",
+    "scope": "Unconfigured actual Next standalone, no service interception or real identity/provider execution",
+    "http": [
+      {
+        "sentOrigin": "http://127.0.0.1:5188",
+        "status": 400,
+        "body": "{\"error\":{\"code\":\"FRONTEND_ACTION_UNAVAILABLE\"}}"
+      },
+      {
+        "sentOrigin": "http://localhost:5188",
+        "status": 503,
+        "body": "{\"error\":{\"code\":\"FRONTEND_ACTION_UNAVAILABLE\"}}"
+      },
+      {
+        "sentOrigin": "http://0.0.0.0:5188",
+        "status": 400,
+        "body": "{\"error\":{\"code\":\"FRONTEND_ACTION_UNAVAILABLE\"}}"
+      }
+    ],
+    "assets": [],
+    "browser": [],
+    "pageErrors": [],
+    "remoteRequests": [],
+    "endedUTC": "2026-10-13T06:25:50.461Z",
+    "success": true,
+    "error": null
+  }
+}

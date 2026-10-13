@@ -1,0 +1,125 @@
+{
+  "preparedAt": "2026-10-12T22:41:35.381627+00:00",
+  "portfolio": "PASS: all 1118 tests and attempts passed; no retries, skips, flaky or unexpected cases.",
+  "records": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/BUILD-IDENTITY.json",
+      "copy": "completed-receipts/BUILD-IDENTITY.json",
+      "sha256": "9bab5f88efd0ee22c8ec539a2082e94b64b415ac7a5a416a751a9aa8fe3726e7",
+      "exitCode": null,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": null
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install-exit.json",
+      "copy": "completed-receipts/clean-install-exit.json",
+      "sha256": "1813f0bfc88b3e777f35ac6e5b3fd1f3b05467734931284ae040617bc778558c",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check-exit.json",
+      "copy": "completed-receipts/combined-check-exit.json",
+      "sha256": "1e1b3c1fe73f399cfb944ab715fea299bc9d4b712e5a76c539cc4b1e39266d7d",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build-exit.json",
+      "copy": "completed-receipts/production-build-exit.json",
+      "sha256": "c2770fc52e329bc8c38f0d8f4eb3bf695f45b99f7f8b4dbfb3a36608ab136cbb",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+      "copy": "completed-receipts/production-server-exit.json",
+      "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-prepare-exit.json",
+      "copy": "completed-receipts/elements-prepare-exit.json",
+      "sha256": "7e47177ec8dc7502a1ee296d437d37888f14101ff612ae6304b82f5bdbe11194",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check-exit.json",
+      "copy": "completed-receipts/elements-check-exit.json",
+      "sha256": "664440a7ec07e20652fa0b223fe90442b4d72322c17abe40e334b8456efc82a2",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context-exit.json",
+      "copy": "completed-receipts/docker-context-exit.json",
+      "sha256": "6c5ff22e2552ed4d96bf67c370ad2aa963e269cda185407648313888200158de",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-build-exit.json",
+      "copy": "completed-receipts/docker-build-exit.json",
+      "sha256": "78c1eb82c96f1a25af2429e74a38dba6493557ddf7220ba614583c2a41155d1d",
+      "exitCode": 1,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-exit.json",
+      "copy": "completed-receipts/modules-browser-exit.json",
+      "sha256": "6f074b687aba8936f12639adac955a0b916312604809b29a9f1b3338fe55b9b1",
+      "exitCode": 0,
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "sourceChanged": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "copy": "completed-receipts/production-artifacts/production-smoke.json",
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "exitCode": null,
+      "source": null,
+      "sourceChanged": null
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-results.json",
+      "sha256": "a702239c8a547b7811a4a719e060df09448d822d4873daa3b2648e3d5aefff6d",
+      "stats": {
+        "startTime": "2026-10-12T22:11:51.833Z",
+        "duration": 268592.838,
+        "expected": 208,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-results.json",
+      "copy": "completed-receipts/portfolio-browser-results.json",
+      "sha256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f",
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/PORTFOLIO-FINAL-SUMMARY.json",
+      "copy": "completed-receipts/PORTFOLIO-FINAL-SUMMARY.json",
+      "sha256": "c36a656d782893c5dc3107afe7ffc7c59ccb84fd1ede8ad5655e712f8e945015",
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-exit.json",
+      "copy": "completed-receipts/portfolio-browser-exit.json",
+      "sha256": "ea734bd1ec3251a9002ac6ab1ae19094ec6505d4ab0426845e46dc62043a49e4",
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca"
+    }
+  ],
+  "finalizedAt": "2026-10-12T22:54:23.325222+00:00"
+}

@@ -1,0 +1,35 @@
+{
+  "utc": "2026-10-13T10:04:50.514354+00:00",
+  "status": "SEALED_OWNER_REVIEWS_STAGED_PORTFOLIO_STILL_PENDING_NO_FINAL_PUBLICATION_SEAL",
+  "originalRecords": 43,
+  "originalBytes": 958940,
+  "archive": {
+    "path": "review-objects.zip",
+    "bytes": 181561,
+    "sha256": "7cfce58e0b3f390e3321da1953453bbd1b6b350711873b56064ecd9434d678a7",
+    "uniqueMembers": 30
+  },
+  "directFiles": 38,
+  "ownerSeals": [
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-preservation-review-20261013/MANIFEST.json",
+      "sha256": "19fd6fc8e2cef4dd6c95d952c55c8c9c28999ccedea5b4fb41a527c679b194c0",
+      "membersVerified": 15,
+      "unchanged": true
+    },
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-emitted-review-20261013/MANIFEST.json",
+      "sha256": "4283aa5a6908a8d02961306c8fbabacb7754b675d52a5c7a45f5aed591363620",
+      "membersVerified": 25,
+      "unchanged": true
+    }
+  ],
+  "allArchivedBytesReopenedEqual": true,
+  "historicalReceiptScope": "Receipt records626 restored committed historical files/83824863bytes. This publication preserves that receipt; it neither duplicates nor reruns materialization of those files.",
+  "pending": [
+    "Completed Portfolio root release",
+    "Final independent gate review",
+    "Sealed storage addendum"
+  ],
+  "activePortfolioFilesReadOrHashed": false
+}

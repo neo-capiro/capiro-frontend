@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-control-884204e/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/reload-negative-884204e-1/review.playwright.ts"
+    ],
+    "configFile": "/tmp/reload-negative-884204e-1/review.playwright.ts",
+    "rootDir": "/tmp/reload-negative-884204e-1",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/reload-negative-884204e-1/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/reload-negative-884204e-1",
+        "testIgnore": [],
+        "testMatch": [
+          "replay.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/reload-negative-884204e-1/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" /workspace/capiro-control-884204e/apps/web/tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "replay.spec.ts",
+      "file": "replay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "reload retains an uncertain original command instead of creating a duplicate activity and task",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9092,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Title', { exact: true })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent restart duplicate activity\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Title', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input disabled required=\"\" name=\"title\" maxlength=\"300\" value=\"Independent restart duplicate activity\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent restart duplicate activity\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Title', { exact: true })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent restart duplicate activity\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Title', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input disabled required=\"\" name=\"title\" maxlength=\"300\" value=\"Independent restart duplicate activity\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent restart duplicate activity\"\u001b[22m\n\n    at /tmp/reload-negative-884204e-1/replay.spec.ts:43:54",
+                    "location": {
+                      "file": "/tmp/reload-negative-884204e-1/replay.spec.ts",
+                      "column": 54,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  expect(commands.size).toBe(1);\n  42 |  await page.reload();\n> 43 |  await expect(page.getByLabel('Title',{exact:true})).toHaveValue('');\n     |                                                      ^\n  44 |  await expect(page.getByRole('button',{name:'Read saved command'})).toHaveCount(0);\n  45 |  await page.screenshot({path:info.outputPath('reload-lost-recovery.png')});\n  46 |  await fill(page);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/reload-negative-884204e-1/replay.spec.ts",
+                        "column": 54,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Title', { exact: true })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent restart duplicate activity\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Title', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input disabled required=\"\" name=\"title\" maxlength=\"300\" value=\"Independent restart duplicate activity\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent restart duplicate activity\"\u001b[22m\n\n\n  41 |  expect(commands.size).toBe(1);\n  42 |  await page.reload();\n> 43 |  await expect(page.getByLabel('Title',{exact:true})).toHaveValue('');\n     |                                                      ^\n  44 |  await expect(page.getByRole('button',{name:'Read saved command'})).toHaveCount(0);\n  45 |  await page.screenshot({path:info.outputPath('reload-lost-recovery.png')});\n  46 |  await fill(page);\n    at /tmp/reload-negative-884204e-1/replay.spec.ts:43:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T07:37:04.716Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/reload-negative-884204e-1/replay.spec.ts",
+                    "column": 54,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6613f1f6335d1a86a8f6-d6697dd7d6a5e1dd2368",
+          "file": "replay.spec.ts",
+          "line": 14,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T07:37:03.723Z",
+    "duration": 10569.690999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

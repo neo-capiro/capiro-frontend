@@ -1,0 +1,99 @@
+{
+  "sealedUTC": "2026-10-13T10:03:56.686990+00:00",
+  "status": "VERIFIED_ASSIGNED_HISTORICAL_STORAGE_PRESERVATION_COMPLETE",
+  "fileCount": 18,
+  "bytes": 604030,
+  "files": [
+    {
+      "path": "ELEMENTS83-ARCHIVE-LOCATION.json",
+      "bytes": 730,
+      "sha256": "bd700355e2ca66118f4ef7fec5f020100db49ec9a56fe42f98aff78a94403a08"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3878,
+      "sha256": "a21e4ad943eab3a64ab99d4886f10e081f8094848efcbade5a3b6981d17ea703"
+    },
+    {
+      "path": "elements83-archive-verification.json",
+      "bytes": 21116,
+      "sha256": "c6eeb918ca9e208ad33c8e761b5632ee0fd2594ce957013745b22d307214294a"
+    },
+    {
+      "path": "elements83-before-archive.json",
+      "bytes": 20976,
+      "sha256": "283e94525936808053ca54a96eb6ac4f1651475d4ac2a5e9a87b55753aad57b2"
+    },
+    {
+      "path": "elements83-initial-failure.json",
+      "bytes": 793,
+      "sha256": "949907854b3ebc4af497e2c8814136c67a76369d67b8111f654cf774a578a8a2"
+    },
+    {
+      "path": "elements83-initial-stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "elements83-retirement.json",
+      "bytes": 21337,
+      "sha256": "e694688dbb351648ba0ba078f451c8f3b07a71d09079ab6cb21146364c8c8da7"
+    },
+    {
+      "path": "elements83-v2.log",
+      "bytes": 329,
+      "sha256": "def7e9abf0d9d4357cf5503a477c145f0502279ca8ab391de4d37c7a2d8b2e82"
+    },
+    {
+      "path": "elements83.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "frozen83-reference/OMITTED-LOCAL-GRAPH.json",
+      "bytes": 1674,
+      "sha256": "092e785d3c6c8ff023c057747b0a50cfe78bbb061839da316aa713bc286b1c08"
+    },
+    {
+      "path": "frozen83-reference/PUBLICATION-MANIFEST.json",
+      "bytes": 43784,
+      "sha256": "fe793fae01d20e40bf5b2057ac433550408f1fbcd193af93053bfd44b4f68fbd"
+    },
+    {
+      "path": "frozen83-reference/SOURCE-FILES.json",
+      "bytes": 323481,
+      "sha256": "549c4b45b9ccc031170d1b8c15b447c0942a0d55b518b1033669e968daf82959"
+    },
+    {
+      "path": "help.txt",
+      "bytes": 451,
+      "sha256": "38ca07bb555b8666870943752dbc556180110766e1dedd157fbbc3dcec7955bb"
+    },
+    {
+      "path": "publication-before-retirement.json",
+      "bytes": 70998,
+      "sha256": "d5f187ba9b8435e9f660bd808ff34a7439cffa389b41d8b33b2337fdaf8d3340"
+    },
+    {
+      "path": "publication-retirement.json",
+      "bytes": 71337,
+      "sha256": "29957dfd8ec1486fbd93be656bde0c365f50fe4a469ab9e5f32d3208a3a5dfee"
+    },
+    {
+      "path": "publication.log",
+      "bytes": 219,
+      "sha256": "ad9a049a14249d623ef06988a5a7d56e576e4a64c33551c6736a350be4744bdf"
+    },
+    {
+      "path": "recover-historical-storage.initial.py",
+      "bytes": 10878,
+      "sha256": "a1078af5f6d0bbb8dfb603944475b16fe17838df2b51aef49c7a2ebb26dcb9e1"
+    },
+    {
+      "path": "recover-historical-storage.py",
+      "bytes": 12049,
+      "sha256": "8e0bb77bc3e78452717bcf9e0b5ad0ad5fa64e70becd784eebc92742bc322ceb"
+    }
+  ],
+  "manifestSelfExcluded": true
+}

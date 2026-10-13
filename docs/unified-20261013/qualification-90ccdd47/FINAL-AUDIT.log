@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-13T10:44:07.039547+00:00",
+  "status": "RELEASED_INPUT_WAVE_VERIFIED_NOT_FINAL_PUBLICATION_SEAL",
+  "records": 18,
+  "originalBytes": 992600,
+  "archive": {
+    "path": "final-audit-objects.zip",
+    "bytes": 184388,
+    "sha256": "818339b6533f60bbdd6ea920b409a0a6e2891a72ec7f9070d428b8a2ea478e3a",
+    "uniqueMembers": 18
+  },
+  "directFiles": 14,
+  "ownerManifests": [
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/MANIFEST.json",
+      "sha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c",
+      "membersVerified": 17
+    }
+  ],
+  "allOriginalBytesReopenedEqual": true,
+  "scope": "Final independent gate audit sealed after all90cc runtime completion. Accepted bounded offline gates; inherited22duplicate-key console warnings and native/Office/Figma/AT/musl/337limits remain explicit."
+}

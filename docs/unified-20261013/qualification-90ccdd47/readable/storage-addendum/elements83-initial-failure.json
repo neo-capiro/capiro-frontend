@@ -1,0 +1,13 @@
+{
+  "attempt": "First elements83 command before archive allocation",
+  "command": "python3 recover-historical-storage.py elements83 > elements83.log",
+  "exitCode": 1,
+  "errorType": "FileNotFoundError",
+  "missingPath": "/workspace/capiro-unified-publication-83-20261013/OMITTED-LOCAL-GRAPH.json",
+  "cause": "Canonical sparse working-tree documentation behind the prior staging symlink is not materialized. Exact committed evidence remains available in Git.",
+  "sourceScriptSha256": "a1078af5f6d0bbb8dfb603944475b16fe17838df2b51aef49c7a2ebb26dcb9e1",
+  "archiveCreated": false,
+  "oldElementsRetired": false,
+  "recordKind": "Failure metadata transcribed from the tool-returned original stderr; no claim of a raw stderr file capture.",
+  "recordedUTC": "2026-10-13T10:01:18.353659+00:00"
+}

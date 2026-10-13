@@ -1,0 +1,81 @@
+{
+  "sealedAt": "2026-10-13T05:42:33.074031+00:00",
+  "scope": "Independent responsibility review and pure canonical architecture/AST scans; no registry/source edits or runtime/native acceptance",
+  "files": [
+    {
+      "path": "architecture-exit.json",
+      "bytes": 66,
+      "sha256": "319b6ba54aec13735f49c8d868eda601687e3ced727bdb4dbd925a4a9d8c2a27"
+    },
+    {
+      "path": "architecture-final-exit.json",
+      "bytes": 137,
+      "sha256": "ed22a91df74d7cdad93639b44aea1ae33470722d6e9c63e163f8f42d7e556bb0"
+    },
+    {
+      "path": "architecture-final.log",
+      "bytes": 789099,
+      "sha256": "d1af0b221243ba47fd7af67299ef72c4e5c591fa085a908b7d62c014bb650453"
+    },
+    {
+      "path": "architecture-summary.json",
+      "bytes": 555,
+      "sha256": "e288f8eddc5062c0d430ebd381287e253f8cb460b48a90fc636faa4b5a4cdb49"
+    },
+    {
+      "path": "architecture.log",
+      "bytes": 789097,
+      "sha256": "a37e673d62e2bb0ec931fe63b6b13c55e02f1e2424632e315a09864b0719d53f"
+    },
+    {
+      "path": "host-author-proposal-verification.json",
+      "bytes": 324,
+      "sha256": "7a1a205a81a23a002ff34b36f11fc2a9f0639296840c728f6d2e88c858d7ae47"
+    },
+    {
+      "path": "host-test-registry-proposals.json",
+      "bytes": 2619,
+      "sha256": "17878708e674209d369ab271cbf40fe86b760e786e0bf09a381b8764fefcd615"
+    },
+    {
+      "path": "production-registry-proposals.json",
+      "bytes": 1098,
+      "sha256": "bc4c504715de66ee1142337bb0a15ff1c0fe2438f00012c919e2b082fcade661"
+    },
+    {
+      "path": "registry-proposals.json",
+      "bytes": 11711,
+      "sha256": "96e54078ebd447148940ebcf1bfb84498a051e6e1b8c929c98e67b1f2858c726"
+    },
+    {
+      "path": "review.md",
+      "bytes": 6534,
+      "sha256": "042cea1ec122e2584bfe5fd85b4d530ab649164040eb94fea92cbdad2fcf1e57"
+    },
+    {
+      "path": "source-binding.json",
+      "bytes": 6166,
+      "sha256": "dc1ed2106f2e2a35a1db4f6dc1fbaf07643e1ea9fdf755d7993d44d27cee2ce0"
+    },
+    {
+      "path": "test-author-proposal-verification.json",
+      "bytes": 4317,
+      "sha256": "8d1fe9cba9936af08c120802b97c66cb60ceeee6e4ebfaac566e24ec6da56464"
+    },
+    {
+      "path": "test-author-registry-proposals.json",
+      "bytes": 8000,
+      "sha256": "10bcafb7d8041b502f05272c86bef4f402342d861e7d50c96ce36ef31b8502ed"
+    },
+    {
+      "path": "test-declaration-review.json",
+      "bytes": 5601,
+      "sha256": "c139a3c3f707d298249abd3d4d21a74f01d701ac5258b9a2992925edcfdb3dd6"
+    },
+    {
+      "path": "test-module-scan.json",
+      "bytes": 5556,
+      "sha256": "5ed045ef0401ed974e31d0e39ef14080369772d54a88a887d0f3ed2087d6a48b"
+    }
+  ]
+}

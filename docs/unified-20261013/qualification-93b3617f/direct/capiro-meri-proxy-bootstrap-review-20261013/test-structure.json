@@ -1,0 +1,110 @@
+[
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "sha256": "a2d9b9bfb17f5a59973af6d90cc599a8795abe295a0e2257442a2389fd2fc8be",
+    "imports": [
+      {
+        "specifier": "vitest",
+        "line": 1
+      },
+      {
+        "specifier": "../src/shared/meri-actions/config",
+        "line": 2
+      },
+      {
+        "specifier": "../src/shared/meri-actions/proxy",
+        "line": 3
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [
+      5,
+      8,
+      9,
+      63,
+      64,
+      65,
+      91,
+      147,
+      172
+    ],
+    "sizeFindings": [
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 403,
+        "fingerprint": "cb4712e290e60ed66afd3b9b3c224841d6886e697cd609776a5f338c8eff3c8f"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 42,
+        "nonblank": 90,
+        "fingerprint": "b9af5b36f5f757188b08bf5d8545fb92e2c79e963026f03e97c6ffe432954652"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 133,
+        "nonblank": 185,
+        "fingerprint": "c6ff13897283b82778fe992add839d9c12f0811280df6d01dde16740b27096cf"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 319,
+        "nonblank": 89,
+        "fingerprint": "fdfb1367fc9055cca78fb45c9e405981812fd6dbdb71fdc2dc46b4451cda5ae2"
+      }
+    ],
+    "nonblank": 403
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "sha256": "c042aa98b53c2f6ff65722f8098870c408f9f21a025afce02d40448c97b008ca",
+    "imports": [
+      {
+        "specifier": "vitest",
+        "line": 1
+      },
+      {
+        "specifier": "../src/shared/meri-actions/session-bootstrap",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 28,
+        "nonblank": 94,
+        "fingerprint": "2f67151ce37495bc5bc774a5e1f5241fb9bd85abbe372ca0b2c3815263240727"
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 123,
+        "nonblank": 109,
+        "fingerprint": "7629ac2f7de3ccefce7ecbc8521a9c0138c8a7730e42852530ddac16fb114d92"
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 233,
+        "nonblank": 99,
+        "fingerprint": "b561f986fec284fc08df17ae2e72825302f53ec6c80a72cab6dc02279b3f3b03"
+      }
+    ],
+    "nonblank": 327
+  }
+]

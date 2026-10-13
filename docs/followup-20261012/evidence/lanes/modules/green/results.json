@@ -1,0 +1,749 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-modules/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-next-modules-evidence/green/playwright.config.mjs"
+    ],
+    "configFile": "/tmp/capiro-next-modules-evidence/green/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-modules-evidence/green/output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "next-modules-*.spec.ts"
+        ],
+        "timeout": 25000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-modules-evidence/green/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "next-modules-baseline.spec.ts",
+      "file": "next-modules-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MS02 verified Calendar entry dispatches only the selected client scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1699,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:57.053Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-576a7ad9051c1f178438",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "MS03 agenda preserves both Planner start and due occurrences",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:59.013Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-bf615a99fa9f819d0c49",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "MS04 meeting failure leaves successful agenda feeds visible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:01.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-e230c6ea5aea5572517f",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "title": "MS05 linked task resolves beyond the current list and opens its detail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1100,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:02.771Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-ed93cfde4a13b5d81069",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 74,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "next-modules-scope.spec.ts",
+      "file": "next-modules-scope.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Calendar picker and history share verified scope and discard a held former-client read",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:03.890Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-d24151974b6ddce226c2",
+          "file": "next-modules-scope.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "Calendar denied client verification never falls back to master reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:05.434Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-2a22f9a8bdfea249012c",
+          "file": "next-modules-scope.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "Calendar wrong-client client verification never falls back to master reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:06.442Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-7b22615528319c5d4bb6",
+          "file": "next-modules-scope.spec.ts",
+          "line": 65,
+          "column": 3
+        },
+        {
+          "title": "Calendar current scope label survives optional picker-list failure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1537,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:08.996Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-c0e5b291fefd6dee91ec",
+          "file": "next-modules-scope.spec.ts",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "Calendar meeting retry preserves other feeds and reports partial empty coverage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:10.546Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-6f69d4b731ff92c040e9",
+          "file": "next-modules-scope.spec.ts",
+          "line": 104,
+          "column": 1
+        },
+        {
+          "title": "Calendar tenant replacement and failed current read hide prior agenda rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:11.971Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-a1ba15944994e44e5f6a",
+          "file": "next-modules-scope.spec.ts",
+          "line": 142,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "next-modules-task-links.spec.ts",
+      "file": "next-modules-task-links.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "linked task rejects wrong-task receipt without detail actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1126,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:13.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-c26283d6f93ec27fee9e",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 13,
+          "column": 3
+        },
+        {
+          "title": "linked task rejects wrong-client receipt without detail actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1481,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:14.656Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-8973256098ab4b6a0ed9",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 13,
+          "column": 3
+        },
+        {
+          "title": "invalid task link makes no detail request and can be dismissed without losing scope",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2561,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:16.153Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-47752d811d3b5d035a71",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 39,
+          "column": 1
+        },
+        {
+          "title": "task link hides prior editor after current 403, then recovers only after successful retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2607,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:18.744Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-736d9be87e2a2d14bb63",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 61,
+          "column": 3
+        },
+        {
+          "title": "task link hides prior editor after current 503, then recovers only after successful retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1987,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:21.380Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-998bb4fbd2b1f88257a6",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 61,
+          "column": 3
+        },
+        {
+          "title": "linked task follows back-forward and discards a held replaced task",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:23.389Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-e2e97455db5e43bbe8ce",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "linked task client replacement rejects the former read and editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:25.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-d8c4c86c8647d58936ea",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 149,
+          "column": 3
+        },
+        {
+          "title": "linked task tenant replacement rejects the former read and editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2761,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:26.632Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-4b3d503efb8d124608f3",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 149,
+          "column": 3
+        },
+        {
+          "title": "agenda link opens a done task despite default open list filter, and respects viewer access",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2076,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:29.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d670bbef234c16ef3571-263d7b524bcec6b5589c",
+          "file": "next-modules-task-links.spec.ts",
+          "line": 194,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:52:56.532Z",
+    "duration": 35064.763,
+    "expected": 19,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

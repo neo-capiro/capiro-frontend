@@ -1,0 +1,600 @@
+{
+  "verifiedUTC": "2026-10-13T10:36:57.573617+00:00",
+  "status": "ALL_RELEASED_RUNTIME_RECEIPTS_RECONCILED_AWAITING_FINAL_INDEPENDENT_AUDIT_SEAL",
+  "source": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "receipts": [
+    {
+      "name": "actual-additions",
+      "command": [
+        "env",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "node",
+        "/workspace/capiro-unified-files-corrected-20261013/verify-additions-v2.mjs"
+      ],
+      "startedUTC": "2026-10-13T09:48:44.256099+00:00",
+      "endedUTC": "2026-10-13T09:48:48.064023+00:00",
+      "durationSeconds": 3.8079583720100345,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "build",
+      "command": [
+        "env",
+        "NEXT_TELEMETRY_DISABLED=1",
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=",
+        "CLERK_SECRET_KEY=",
+        "TRACKER_BACKEND=",
+        "CORE_API_BASE_URL=",
+        "STRATEGY_API_BASE_URL=",
+        "WORKSPACE_API_BASE_URL=",
+        "INTELLIGENCE_API_BASE_URL=",
+        "ONBOARD_API_BASE_URL=",
+        "MERI_API_BASE_URL=",
+        "MERI_ACTION_WORKFLOW_ENABLED=",
+        "MERI_DOCUMENT_WORKFLOW_ENABLED=",
+        "MERI_DOCUMENT_OPERATION=",
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedUTC": "2026-10-13T09:45:03.963693+00:00",
+      "endedUTC": "2026-10-13T09:46:01.807423+00:00",
+      "durationSeconds": 57.84376217301178,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "check",
+      "command": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "startedUTC": "2026-10-13T09:43:12.185295+00:00",
+      "endedUTC": "2026-10-13T09:44:54.757964+00:00",
+      "durationSeconds": 102.57270581800549,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "clean-install",
+      "command": [
+        "env",
+        "npm_config_cache=/workspace/capiro-unified-files-corrected-npm-cache",
+        "npm",
+        "ci",
+        "--ignore-scripts"
+      ],
+      "startedUTC": "2026-10-13T09:42:11.465602+00:00",
+      "endedUTC": "2026-10-13T09:42:29.932972+00:00",
+      "durationSeconds": 18.467401964007877,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "elements",
+      "command": [
+        "node",
+        "apps/web/deployment/portfolio/qualify-elements.mjs",
+        "/workspace/capiro-unified-elements-files-corrected-20261013"
+      ],
+      "startedUTC": "2026-10-13T09:44:54.812098+00:00",
+      "endedUTC": "2026-10-13T09:45:02.359287+00:00",
+      "durationSeconds": 7.5472231970052235,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "modules-browser",
+      "command": [
+        "env",
+        "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/modules-browser-results.json",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "npm",
+        "run",
+        "test:browser:modules",
+        "--workspace",
+        "@capiro/web",
+        "--",
+        "--workers=2",
+        "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts"
+      ],
+      "startedUTC": "2026-10-13T09:48:48.116418+00:00",
+      "endedUTC": "2026-10-13T09:54:15.405068+00:00",
+      "durationSeconds": 327.2886844549939,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "portfolio-discovery",
+      "command": [
+        "env",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-discovery.json",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--list"
+      ],
+      "startedUTC": "2026-10-13T09:54:15.457617+00:00",
+      "endedUTC": "2026-10-13T09:54:17.231893+00:00",
+      "durationSeconds": 1.7743082770030014,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "portfolio-shard-1",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-results.json",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=2",
+        "--shard=1/4",
+        "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-1-artifacts"
+      ],
+      "startedUTC": "2026-10-13T09:54:17.318851+00:00",
+      "endedUTC": "2026-10-13T10:02:39.194997+00:00",
+      "durationSeconds": 501.8761805270042,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "portfolio-shard-2",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=2",
+        "--shard=2/4",
+        "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts"
+      ],
+      "startedUTC": "2026-10-13T10:02:39.250349+00:00",
+      "endedUTC": "2026-10-13T10:13:41.032702+00:00",
+      "durationSeconds": 661.7823967959994,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "portfolio-shard-3",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-results.json",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=2",
+        "--shard=3/4",
+        "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-3-artifacts"
+      ],
+      "startedUTC": "2026-10-13T10:13:41.092983+00:00",
+      "endedUTC": "2026-10-13T10:24:41.810045+00:00",
+      "durationSeconds": 660.7170922769874,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "portfolio-shard-4",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=2",
+        "--shard=4/4",
+        "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts"
+      ],
+      "startedUTC": "2026-10-13T10:24:41.871428+00:00",
+      "endedUTC": "2026-10-13T10:34:07.188948+00:00",
+      "durationSeconds": 565.3175540990051,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "production",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+        "ONBOARD_API_BASE_URL=",
+        "MERI_ACTION_WORKFLOW_ENABLED=",
+        "npm",
+        "run",
+        "test:production",
+        "--",
+        "/workspace/capiro-unified-files-corrected-20261013/production"
+      ],
+      "startedUTC": "2026-10-13T09:46:02.070426+00:00",
+      "endedUTC": "2026-10-13T09:46:10.280648+00:00",
+      "durationSeconds": 8.210252093005693,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "public-newsletter-browser",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "node",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser"
+      ],
+      "startedUTC": "2026-10-13T09:45:02.425932+00:00",
+      "endedUTC": "2026-10-13T09:45:03.905278+00:00",
+      "durationSeconds": 1.479444947995944,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "served-newsletter-assets",
+      "command": [
+        "node",
+        "/workspace/capiro-unified-files-corrected-20261013/verify-assets.mjs"
+      ],
+      "startedUTC": "2026-10-13T09:46:10.340277+00:00",
+      "endedUTC": "2026-10-13T09:46:10.399767+00:00",
+      "durationSeconds": 0.0595354929973837,
+      "exitCode": 1,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    {
+      "name": "served-newsletter-assets-restored-input",
+      "command": [
+        "node",
+        "/workspace/capiro-unified-files-corrected-20261013/verify-assets.mjs"
+      ],
+      "startedUTC": "2026-10-13T09:48:43.323598+00:00",
+      "endedUTC": "2026-10-13T09:48:44.200622+00:00",
+      "durationSeconds": 0.8770571909990394,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+        "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    }
+  ],
+  "receiptCount": 15,
+  "preservedNonzeroCurrentSourceReceipt": "served-newsletter-assets exit1 before HTTP",
+  "portfolio": {
+    "uniquePassed": 1139,
+    "discoveryCount": 1139,
+    "shards": [
+      {
+        "shard": 1,
+        "passed": 285,
+        "stats": {
+          "startTime": "2026-10-13T09:54:18.244Z",
+          "duration": 500896.126,
+          "expected": 285,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "timeoutDistribution": {
+          "30000": 285
+        }
+      },
+      {
+        "shard": 2,
+        "passed": 298,
+        "stats": {
+          "startTime": "2026-10-13T10:02:40.115Z",
+          "duration": 660862.2609999999,
+          "expected": 298,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "timeoutDistribution": {
+          "30000": 295,
+          "90000": 3
+        }
+      },
+      {
+        "shard": 3,
+        "passed": 273,
+        "stats": {
+          "startTime": "2026-10-13T10:13:41.978Z",
+          "duration": 659767.9619999999,
+          "expected": 273,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "timeoutDistribution": {
+          "30000": 273
+        }
+      },
+      {
+        "shard": 4,
+        "passed": 283,
+        "stats": {
+          "startTime": "2026-10-13T10:24:42.749Z",
+          "duration": 564380.472,
+          "expected": 283,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "timeoutDistribution": {
+          "30000": 282,
+          "90000": 1
+        }
+      }
+    ],
+    "automaticRetries": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "sharedSuitePassed": 324,
+  "canonicalCheck": {
+    "nodeGroups": [
+      97,
+      21,
+      385
+    ],
+    "vitestGroups": [
+      1826,
+      288
+    ],
+    "declarationControls": 8,
+    "lintWarnings": 76,
+    "lintErrors": 0,
+    "architecture": {
+      "total": 479,
+      "reviewed": 456,
+      "inheritedUnreviewed": 23,
+      "blocking": 0
+    }
+  },
+  "publicBrowser": {
+    "characterizations": 116,
+    "receiving": 130,
+    "browserVersion": "154.0.8037.57"
+  },
+  "actualServer": {
+    "httpHeaderControls": 12,
+    "disabledDocumentPosts503": 4,
+    "FilesNavigationCases": 4,
+    "PortfolioRenders": 4,
+    "crossModeHistoryCases": 2,
+    "pageErrors": [],
+    "browserVersion": "154.0.8037.57"
+  },
+  "assets": {
+    "count": 179,
+    "bytes": 486014,
+    "scope": "separate restored-input pass; original preflight failure retained"
+  },
+  "additions": {
+    "http": 23,
+    "assets": 6,
+    "viewports": [
+      1440,
+      375
+    ]
+  },
+  "finalSourceConfirmation": {
+    "utc": "2026-10-13T10:34:46.242243+00:00",
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "status": "",
+    "lockSha256": "6acaf74b4fb676b59731245e04a6c2d54865fb71727b6f6d5f99b4cfa5e1fed7",
+    "completion": {
+      "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "completedUTC": "2026-10-13T10:34:07.209254+00:00",
+      "scope": "Offline combined gates; not native, full design, AT, musl image or deployment acceptance.",
+      "harnessRecovery": "Original served-newsletter-assets failed before server/HTTP due omitted sparse metadata; exact committed input restored and separate actual asset run retained."
+    },
+    "scope": "Offline gates complete; no native activation, native acceptance, build image, deployment or337rowacceptance."
+  },
+  "openConsoleIssue": "Inherited83 pre-Files integration duplicate sibling keys; remains open despite passing assertions",
+  "limits": [
+    "not native337 acceptance",
+    "not Office opening/rendering/recalculation",
+    "not full Figma/theme/AT/WCAG",
+    "not musl/container image/deployment",
+    "no current runtime/test/build/install executed by this publisher"
+  ]
+}

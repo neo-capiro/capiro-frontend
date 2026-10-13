@@ -1,0 +1,45 @@
+{
+  "capturedAtUTC": "2026-10-13T04:23:08.312743+00:00",
+  "mode": "Read-only static WIP review; no tests/build/install/browser/native/AWS calls",
+  "public401": "Parent independently found and corrected public401 signed-in copy. Snapshot includes publicCapability-specific text; new end-to-end test inspected statically, not executed by reviewer.",
+  "additionalTestBinding": {
+    "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/shared/capiro/onboard-gateway.test.ts",
+    "sha256": "3b4526a8cf64380708c64202a419d15a23334287b8c31ec6d5fd2eff86a1e755",
+    "bytes": 6692
+  },
+  "changesSincePerFileSnapshot": [
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "reviewedSha256": "5e98506dca794400ef4ab0831346b3cfead6589586c8d14513d24e033436de53",
+      "currentSha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-core-api.ts",
+      "reviewedSha256": "b96b54a17da845f6a7aee3c211b46e0cb772ba3419694e3d6ddc11ad744940a3",
+      "currentSha256": "c7fbf99299408ecc1e0508bf64c56c2eb5eb6938f93ab4e3d854d623e110bbcc"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "reviewedSha256": "6cb02c62e2bf8cb49e26f61a91ae785c487376e3976c34534f0d5590b86247bd",
+      "currentSha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+      "reviewedSha256": "536cc29ec4c2ad4912cc77a4ea564ae28c2652a5ddfbb16b21e40a700a32ae25",
+      "currentSha256": "af5e011d76bc1ab8f9d0f079b269988ca9fce77a11810fce30df57958f8ed536"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/funnel.ts",
+      "reviewedSha256": "ca23ccb4312c202ab272a808bdc46d1d81ade16598ddd67c1753205eafcacd8e",
+      "currentSha256": "87dffe73c7a5e93fc86af4dc8733a37224b68405c3cc927edd28c3bebd8473c6"
+    },
+    {
+      "path": "apps/web/src/features/onboard/pages/funnel/FunnelStepGuard.tsx",
+      "reviewedSha256": "52bc0fd848da0116a280b11c585e44dba9feb477340ed8a1b5e1bdb965e4a9c9",
+      "currentSha256": "3d54a4dbadaa5a6e184569bc8c9de97022aa1b25083cae866b26a74b47e6eb84"
+    }
+  ],
+  "nativeFetch": "Four exact-commit GitHub file reads only. Local git object lookup was unavailable; no native route was probed.",
+  "findingsCount": 2,
+  "finalAcceptance": false
+}

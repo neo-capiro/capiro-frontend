@@ -1,0 +1,14 @@
+{
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "remainingBlockingFindings": [],
+  "correctedDuringReview": [
+    {
+      "id": "CALENDAR-REVIEW-DRAFT-LIFETIME",
+      "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "finding": "Early current-read return unmounted same-scope local drafts",
+      "disposition": "corrected before final source freeze",
+      "evidenceLimit": "Source finding and owner acknowledgement; corrected snapshot3/3 green; no immutable executed failing baseline for this adjacent correction"
+    }
+  ],
+  "nativeRowsPromoted": 0
+}

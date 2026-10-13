@@ -1,0 +1,58 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test activity-command-restart.spec.ts
+
+[WebServer] (node:213444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:213463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (3.0s)
+
+
+  1) tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 0
+
+      50 |   await expect(page.getByText(/original request is retained/i)).toBeVisible();
+      51 |   const original = structuredClone(state.input);
+    > 52 |   expect(persisted.size).toBe(1);
+         |                          ^
+      53 |   await page.reload();
+      54 |   await page
+      55 |     .locator("button:not([disabled])")
+        at /workspace/capiro-contracts/apps/web/tests/browser/activity-command-restart.spec.ts:52:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-command-restart-a-1530a-vity-task-pair-after-reload/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/activity-command-restart-a-1530a-vity-task-pair-after-reload/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-command-restart-a-1530a-vity-task-pair-after-reload/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/activity-command-restart-a-1530a-vity-task-pair-after-reload/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload 
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test activity-command-restart.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

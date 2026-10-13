@@ -1,0 +1,37 @@
+{
+  "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "status": "ActualLinuxDockerBuildFailedBeforeApplicationCompile",
+  "failedStage": "apps/web/Dockerfile:5: apk add --no-cache --upgrade zlib=1.3.2-r1 ca-certificates",
+  "observedFailure": "Alpine APKINDEX DNS transient failures; package selection then failed",
+  "attempts": [
+    "docker-build",
+    "docker-build-existing-host-network",
+    "docker-build-inherited-proxy"
+  ],
+  "attemptEvidenceDirectory": "/tmp/capiro-remaining-qualification/final-adbc84b",
+  "contextGate": "Passed33/33 on exact source;12trackedWorkfiles preserved",
+  "imageProduced": false,
+  "containerSmoke": "NOT_RUN: no completed application image",
+  "imageScan": "NOT_RUN: no completed application image",
+  "dockerfileOrSecurityPinChanged": false,
+  "awsActions": 0,
+  "nextAction": "Run exact pinned archive through the unchanged Dockerfile in an approved Linux build environment with working package-network access, then local container smoke and required image review. No third AWS attempt is authorized.",
+  "boundedNetworkDiagnosis": {
+    "configuredProxyHostname": "proxy",
+    "workspaceResolvedAddress": "172.31.0.253",
+    "dockerResolverAddress": "172.31.0.253",
+    "ephemeralHostMapping": "proxy:172.31.0.253",
+    "result": "Mapping resolved the configured proxy inside the disposable container, but HTTPS HEAD probes still failed. No TLS disable or Dockerfile/security pin change.",
+    "probes": [
+      {
+        "file": "proxy-dns-mapping-probe.log",
+        "sha256": "283c6806b10615ee3789e87212501dca74937ff657867ff0813fa6bb5c99bfff"
+      },
+      {
+        "file": "proxy-node-head-probe.log",
+        "sha256": "293737011532a40f49bd26a5e3e9d66cc8f8bdf40453217838c4ff97d663c585"
+      }
+    ],
+    "ownedContainersRemaining": 0
+  }
+}

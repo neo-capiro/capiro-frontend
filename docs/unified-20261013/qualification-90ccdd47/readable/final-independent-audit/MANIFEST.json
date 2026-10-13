@@ -1,0 +1,96 @@
+{
+  "sealedAt": "2026-10-13T10:42:33.694013+00:00",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "status": "ACCEPTED_BOUNDED_OFFLINE_FINAL_GATES_WITH_EXPLICIT_OPEN_LIMITS",
+  "scope": "Read-only independent receipt/source/ID/attempt/artifact audit after ALL-GATES-COMPLETE; no runtime executed by reviewer",
+  "files": [
+    {
+      "path": "BROWSER-ATTACHMENTS-AND-AXE.json",
+      "bytes": 50105,
+      "sha256": "12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531"
+    },
+    {
+      "path": "BROWSER-RECONCILIATION.json",
+      "bytes": 631218,
+      "sha256": "f1f15a7f47d80b2e5c477c43d4afc029ba4168984be4506891e856e97ce7f39a"
+    },
+    {
+      "path": "COMPLETED-EARLY-GATES.json",
+      "bytes": 10418,
+      "sha256": "7345599eccf50837602b36af5924fa8c113ba84ea932049b58d6001429526c02"
+    },
+    {
+      "path": "CONSOLE-OBSERVATIONS.json",
+      "bytes": 13661,
+      "sha256": "150b298b719b07753f99f5c33151f57c9cf34cac4769f8d902fc899c29ffcff0"
+    },
+    {
+      "path": "ELEMENTS-ARCHIVE-AUDIT.json",
+      "bytes": 4319,
+      "sha256": "a0fd75b8384544fa5509bc52b084a71651688a44ccb46bc1c4549d9c866ce7f1"
+    },
+    {
+      "path": "FINAL-SCOPE-AND-OBSERVATIONS.json",
+      "bytes": 9704,
+      "sha256": "ba9951b4db51e723c4441c8c6255e40822a2664597987b28867c32da48c7e45d"
+    },
+    {
+      "path": "HARNESS-COMPARISON.patch",
+      "bytes": 6911,
+      "sha256": "0907952239052c96a3bb6d176651d9a03d81b8970586adc4d052b5f5948d1c41"
+    },
+    {
+      "path": "PREPARATION-VERIFICATION.json",
+      "bytes": 5659,
+      "sha256": "d66157656a068b8267923685df5d7aa252a5023c512ae7c672b5f86fbb2e5608"
+    },
+    {
+      "path": "RAW-PRODUCER-BINDINGS.json",
+      "bytes": 16508,
+      "sha256": "107758c9f7392fca358e03c206bebde77c9e93943bf47796ce766abc776d2494"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5329,
+      "sha256": "6c65ff1f83bf1dbdb186d5610a68f2ffff205c84b614479af778a43a0730b0f2"
+    },
+    {
+      "path": "REVIEW-PLAN.md",
+      "bytes": 3252,
+      "sha256": "ca6587b233de9fbb44d52f13659c9065db02965c0f1643489b3e17fa9b929b85"
+    },
+    {
+      "path": "SPARSE-RECOVERY-REVIEW.json",
+      "bytes": 3001,
+      "sha256": "d759c105063b7850e954cc582ac093bec0c9d9a8b5d5cc99ba81372f2e30d29c"
+    },
+    {
+      "path": "SUPPLEMENTAL-REVIEWS.json",
+      "bytes": 1243,
+      "sha256": "455abcf77ee86c3a7d4d22495c3274020c7333c180fb1aa7ac534e064f076459"
+    },
+    {
+      "path": "after-sparse-recovery.json",
+      "bytes": 18113,
+      "sha256": "a4a9d15241ee28a0d882251a183d76f6b5860850bc9f1658b7df9cdef73754fc"
+    },
+    {
+      "path": "audit_receipts.py",
+      "bytes": 8914,
+      "sha256": "72194fdd14c4ed99714f2d59473dd207f616518d259bb5fd2cb42459ddc99a68"
+    },
+    {
+      "path": "final-receipts.json",
+      "bytes": 187156,
+      "sha256": "1e66416d3266ecd1be1cf1cdb93789b284d6dfc0f8d1945a24d98f4ece82f9a2"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 13973,
+      "sha256": "8bf7e0ed431d3351a144bb4c7bd58fa2910f90d8f711d071fc474e24244c1a3e"
+    }
+  ],
+  "fileCount": 17,
+  "bytes": 989484,
+  "manifestSelfExcluded": true
+}

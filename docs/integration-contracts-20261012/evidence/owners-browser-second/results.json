@@ -1,0 +1,1101 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-contracts/node_modules/.bin/playwright",
+      "test",
+      "tests/browser/ordered-owners.spec.ts",
+      "tests/browser/profile-current-state.spec.ts",
+      "tests/browser/profile-write-lifetime.spec.ts",
+      "--workers=3"
+    ],
+    "configFile": "/workspace/capiro-contracts/apps/web/playwright.config.ts",
+    "rootDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 3,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "ordered-owners.spec.ts",
+      "file": "ordered-owners.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "four ranked owners require a deliberate save and preserve exact order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6575,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:02.995Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-d8b41f312b1132f8d5cd",
+          "file": "ordered-owners.spec.ts",
+          "line": 35,
+          "column": 1
+        },
+        {
+          "title": "clearing Primary preserves later positions and blocks an implicit promotion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6947,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:09.946Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-75a56210d092b8aa41dc",
+          "file": "ordered-owners.spec.ts",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "title": "unavailable historical owners keep their rank and ranked members have no roster Remove",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4419,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:16.909Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-e2dfc3895d2962bcd7b1",
+          "file": "ordered-owners.spec.ts",
+          "line": 108,
+          "column": 1
+        },
+        {
+          "title": "409 requires read-back and a fresh deliberate versioned save, never automatic retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8132,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:21.356Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-9137a360e9c72a385129",
+          "file": "ordered-owners.spec.ts",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "an interrupted PUT remains fenced after reopening and matching read-back sends nothing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5659,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:29.511Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-d8f3a1b24ea1158097c4",
+          "file": "ordered-owners.spec.ts",
+          "line": 177,
+          "column": 1
+        },
+        {
+          "title": "background read cannot silently rebase a draft, and replacing the actor clears that editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4407,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:35.220Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ffed1971b641ee1e0fbe-ebbaf361696dd6b6ab5d",
+          "file": "ordered-owners.spec.ts",
+          "line": 211,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "profile-current-state.spec.ts",
+      "file": "profile-current-state.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "profile notes conceal a failed saved-client read and prevent replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4891,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:03.005Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-c6e6ca952a2b18259aff",
+          "file": "profile-current-state.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "profile notes reject another client's receipt and require review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4203,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:08.250Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-53ca37f99b1e982e2ce5",
+          "file": "profile-current-state.spec.ts",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "profile notes retain a refused draft without reporting it saved",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5167,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:12.464Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-bceb15afae16b96e19ed",
+          "file": "profile-current-state.spec.ts",
+          "line": 56,
+          "column": 1
+        },
+        {
+          "title": "late notes receipts cannot close a replacement actor's editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5413,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:17.670Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-bf58955463a7fd8e756d",
+          "file": "profile-current-state.spec.ts",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "title": "failed account-team refresh conceals cached members and disables changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4638,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:23.140Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-13f49fe240c9a430d97a",
+          "file": "profile-current-state.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "failed member options cannot submit a retained selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:27.802Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-016d5898ae78ce2ea020",
+          "file": "profile-current-state.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "team add needs the requested native roster effect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5142,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:32.145Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-9e14bca58ae64cfed37a",
+          "file": "profile-current-state.spec.ts",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "owner assignment rejects a different returned owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3946,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:37.307Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-c4352021feb062e6a3c4",
+          "file": "profile-current-state.spec.ts",
+          "line": 162,
+          "column": 1
+        },
+        {
+          "title": "failed facilities refresh conceals saved locations and closes their detail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:41.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-8ce56e1a3b05c83a59b5",
+          "file": "profile-current-state.spec.ts",
+          "line": 186,
+          "column": 1
+        },
+        {
+          "title": "a removed facility selection does not reopen when that ID returns",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2251,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:44.212Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-fc327624671bb40bc01d",
+          "file": "profile-current-state.spec.ts",
+          "line": 211,
+          "column": 1
+        },
+        {
+          "title": "unknown facility creation stays fenced after closing and reopening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3843,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:46.475Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-9455588260151efa54c1",
+          "file": "profile-current-state.spec.ts",
+          "line": 233,
+          "column": 1
+        },
+        {
+          "title": "identity invalidation disables facility creation despite a cached role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3134,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:50.342Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6cf814b8064818acfea6-11e8d246ca84d88b3feb",
+          "file": "profile-current-state.spec.ts",
+          "line": 256,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "profile-write-lifetime.spec.ts",
+      "file": "profile-write-lifetime.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a matching notes clear uses only the native notes PUT and closes once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5123,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:03.064Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-c2589197d38e1eb6f1d5",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "a refreshed notes source fences a late receipt and retains the local draft for review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 6051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:08.655Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-7593b32d15805bfe6e43",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "owner membership role mismatches stay unknown and preserve the role draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5948,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:14.740Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-ac290636231276ef3a04",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "an owner's successfully updated membership role remains visible on the single owner row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5397,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:20.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-57004d18095c0b600a74",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 111,
+          "column": 1
+        },
+        {
+          "title": "a successfully removed member option leaves the retained choice unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:26.189Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-9ad810d9cee3be9746d7",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "late team receipts do not report success or invalidate a replacement client view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5895,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:31.018Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-99377ff503feaee35268",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "closing a pending facility create keeps the unknown fence when its view reopens",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 9900,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts:235:65",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+                      "column": 65,
+                      "line": 235
+                    },
+                    "snippet": "  233 |   await page.getByRole(\"button\", { name: \"Add facility\", exact: true }).click();\n  234 |   const dialog = page.getByRole(\"dialog\", { name: \"Add facility\" });\n> 235 |   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();\n      |                                                                 ^\n  236 |   await expect(\n  237 |     dialog.getByRole(\"button\", { name: \"Add facility\" }),\n  238 |   ).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+                        "column": 65,
+                        "line": 235
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)\u001b[22m\n\n\n  233 |   await page.getByRole(\"button\", { name: \"Add facility\", exact: true }).click();\n  234 |   const dialog = page.getByRole(\"dialog\", { name: \"Add facility\" });\n> 235 |   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();\n      |                                                                 ^\n  236 |   await expect(\n  237 |     dialog.getByRole(\"button\", { name: \"Add facility\" }),\n  238 |   ).toBeDisabled();\n    at /workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts:235:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:36.960Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+                    "column": 65,
+                    "line": 235
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-b8d89a89e690ccc9ae10",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "a similar current facility cannot be claimed as an unknown creation receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5785,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:47.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-916c55c92f24e5fa9a63",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 243,
+          "column": 1
+        },
+        {
+          "title": "a changed saved facility cannot be overwritten by an older open draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4399,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:53.856Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-0d964d5117101a48d5f2",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 277,
+          "column": 1
+        },
+        {
+          "title": "a late facility result cannot escape its original actor's unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2792,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T05:38:58.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fb23fc3f8172d2ceb6f2-af668b32833a9a7afa54",
+          "file": "profile-write-lifetime.spec.ts",
+          "line": 312,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T05:38:01.965Z",
+    "duration": 59262.501000000004,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

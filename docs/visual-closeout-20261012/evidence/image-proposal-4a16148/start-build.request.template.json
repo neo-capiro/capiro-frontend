@@ -1,0 +1,24 @@
+{
+  "projectName": "capiro-portfolio-preview-build",
+  "sourceVersion": "REPLACE_WITH_VERIFIED_VERSION_ID_OF_REVIEWED_ARCHIVE",
+  "buildspecOverride": "apps/web/deployment/portfolio/buildspec.yml",
+  "environmentVariablesOverride": [
+    {
+      "name": "EXPECTED_SHA",
+      "value": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "type": "PLAINTEXT"
+    },
+    {
+      "name": "EXPECTED_S3_VERSION",
+      "value": "REPLACE_WITH_THE_SAME_VERIFIED_S3_VERSION_ID",
+      "type": "PLAINTEXT"
+    },
+    {
+      "name": "REPOSITORY_URI",
+      "value": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview",
+      "type": "PLAINTEXT"
+    }
+  ],
+  "autoRetryLimitOverride": 0,
+  "idempotencyToken": "capiro-frontend-4a161488-20261012"
+}

@@ -1,0 +1,44 @@
+{
+  "reviewer": "Codex prospects repair agent",
+  "date": "2026-10-12",
+  "sources": [
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207",
+      "nonblank": 318,
+      "sizeFindings": [
+        {
+          "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+          "kind": "function",
+          "symbol": "DraftEditor",
+          "line": 28,
+          "nonblank": 178,
+          "fingerprint": "460c5e02e91187ab5fcc03a8dbb83b0ba8d4bc0857d028a32111a8b6928f252a"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "nonblank": 273,
+      "sizeFindings": [
+        {
+          "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #3",
+          "line": 196,
+          "nonblank": 82,
+          "fingerprint": "c24bfe8406f60e1da52ae6d356e41b7475dc2e7c24eacdc1cd4fcabf5b2cce4b"
+        }
+      ]
+    }
+  ],
+  "rationale": "DraftEditor remains the cohesive presentation owner of manual document title/section input, history and save/recovery controls. The two added disabled attributes consume the existing prospect save pending state; no new state, persistence, dispatch, authority, domain rule or dependency is introduced. The prospect save hook continues to own journaling, authority verification, optimistic version checking, PATCH/snapshot receipt validation, recovery acknowledgement and explicit read-back. The existing function size signal is reviewed as local editor composition; extracting individual disabled props would not create a meaningful separate responsibility. No shared architecture review record changed; root must register this exact source/function review during integration.",
+  "testResponsibility": "The new browser spec owns delayed prospect draft save acceptance only. It reuses the existing application harness, operation fixtures, identity and prospect document fixture, and supplies local held receipts for success, explicit failure and uncertain completion. All traffic is restricted to local synthetic endpoints.",
+  "testFunctionReview": {
+    "symbol": "<anonymous> #3",
+    "line": 196,
+    "nonblank": 82,
+    "rationale": "This single parameterized browser acceptance scenario owns replacement of the editor authority during a held PATCH. User, tenant, prospect and selected-client fixtures each establish the replacement through their canonical public boundary and then share the assertions that no old content or snapshot continuation remains. Keeping the setup and outcome together makes the security/lifetime acceptance criterion directly reviewable; it adds no application responsibility or production dependency. The 82-line test signal is explicitly reviewed rather than hidden by arbitrary extraction."
+  }
+}

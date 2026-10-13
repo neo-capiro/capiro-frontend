@@ -1,0 +1,66 @@
+{
+  "atUTC": "2026-10-13T05:07:14.296Z",
+  "method": "Pure execution of captured LegalPage function using minimal hook-state/element projection fixtures. No React mount, browser, native request, schema/transport execution or provider. All require imports closed-listed synthetic stubs. Production source is not changed.",
+  "source": "apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+  "sourceSha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303",
+  "results": [
+    {
+      "replacement": false,
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "expected": "Same reviewed documents remain eligible; one call",
+      "pass": true
+    },
+    {
+      "replacement": true,
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Unreviewed terms B"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Unreviewed agreement B"
+        }
+      ],
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-B",
+          "saVersion": "sa-B",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "expected": "Re-review required; no acceptLegal call",
+      "pass": false
+    }
+  ]
+}

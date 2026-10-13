@@ -1,0 +1,124 @@
+
+ RUN  v4.1.11 /tmp/capiro-calendar-correction-independent
+
+ ❯ native-parser.spec.ts (39 tests | 6 failed) 70ms
+     ✓ accepts native creation metadata without body or tenantId 17ms
+     ✓ rejects swapped kind lifecycle on create 2ms
+     ✓ rejects creation receipt with wrong authorUserId 1ms
+     ✓ rejects creation receipt with wrong meetingId 1ms
+     ✓ rejects creation receipt with wrong clientId 1ms
+     ✓ requires matching explicit confidential state 0ms
+     ✓ rejects incomplete id-only receipt 1ms
+     ✓ accepts current edited receipt with preserved admin-editable author other-author 1ms
+     ✓ accepts current edited receipt with preserved admin-editable author null 2ms
+     ✓ rejects update that did not clear sharing 1ms
+     ✓ accepts native approval with null/deleted author 1ms
+     ✓ accepts native idempotent share with preserved sharer prior-sharer 4ms
+     × accepts native idempotent share with preserved sharer null 12ms
+     ✓ rejects share lacking current sharedAt even if visible-shared 2ms
+     ✓ rejects share for duplicate selected artifacts 1ms
+     ✓ accepts unshare preserving meeting visibility for other shared artifacts 2ms
+     × rejects stale approval stamps on note edit 2ms
+     × rejects stale approval stamps on note creation 1ms
+     ✓ requires current actor on note approval (native reapprove overwrites stamp) 1ms
+     × accepts native creation metadata without body or tenantId 4ms
+     × rejects swapped kind lifecycle on create 1ms
+     ✓ rejects creation receipt with wrong authorUserId 0ms
+     ✓ rejects creation receipt with wrong meetingId 0ms
+     ✓ rejects creation receipt with wrong clientId 0ms
+     ✓ requires matching explicit confidential state 0ms
+     ✓ rejects incomplete id-only receipt 0ms
+     ✓ accepts current edited receipt with preserved admin-editable author other-author 0ms
+     ✓ accepts current edited receipt with preserved admin-editable author null 0ms
+     ✓ rejects update that did not clear sharing 0ms
+     ✓ accepts native approval with null/deleted author 0ms
+     ✓ accepts native idempotent share with preserved sharer prior-sharer 1ms
+     × accepts native idempotent share with preserved sharer null 1ms
+     ✓ rejects share lacking current sharedAt even if visible-shared 1ms
+     ✓ rejects share for duplicate selected artifacts 0ms
+     ✓ accepts unshare preserving meeting visibility for other shared artifacts 1ms
+     ✓ accepts inferred client for unscoped creation 1ms
+     ✓ accepts retained client when update omits property 0ms
+     ✓ refuses old association for explicit clear 1ms
+     ✓ accepts native explicit-clear receipt 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  native-parser.spec.ts > notes > accepts native idempotent share with preserved sharer null
+ FAIL  native-parser.spec.ts > debriefs > accepts native idempotent share with preserved sharer null
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ native-parser.spec.ts:20:305
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  native-parser.spec.ts > notes > rejects stale approval stamps on note edit
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ native-parser.spec.ts:25:234
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  native-parser.spec.ts > notes > rejects stale approval stamps on note creation
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ native-parser.spec.ts:26:204
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  native-parser.spec.ts > debriefs > accepts native creation metadata without body or tenantId
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ native-parser.spec.ts:12:151
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  native-parser.spec.ts > debriefs > rejects swapped kind lifecycle on create
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ native-parser.spec.ts:13:181
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 33 passed (39)
+   Start at  16:37:17
+   Duration  664ms (transform 185ms, setup 0ms, import 357ms, tests 70ms, environment 0ms)
+
+JSON report written to /tmp/capiro-calendar-correction-independent/parser-native-before-results.json

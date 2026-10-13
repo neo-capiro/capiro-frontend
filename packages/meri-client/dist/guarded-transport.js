@@ -61,9 +61,52 @@ export function guardUiChunk(chunk, validateEvent) {
     }
     return null;
 }
+/** Preserve backpressure/cancellation while keeping unadmitted parser details private. */
+function boundedDiagnostics(source, translate) {
+    const reader = source.getReader();
+    let ended = false;
+    return new ReadableStream({
+        async pull(controller) {
+            if (ended)
+                return;
+            try {
+                const next = await reader.read();
+                if (ended)
+                    return;
+                if (next.done) {
+                    ended = true;
+                    reader.releaseLock();
+                    controller.close();
+                }
+                else
+                    controller.enqueue(next.value);
+            }
+            catch (error) {
+                if (ended)
+                    return;
+                ended = true;
+                await reader.cancel().catch(() => { });
+                reader.releaseLock();
+                controller.error(translate(error));
+            }
+        },
+        async cancel(reason) {
+            if (ended)
+                return;
+            ended = true;
+            try {
+                await reader.cancel(reason);
+            }
+            finally {
+                reader.releaseLock();
+            }
+        },
+    });
+}
 function guardStream(source, context) {
-    return source.pipeThrough(new TransformStream({
+    const guarded = source.pipeThrough(new TransformStream({
         transform(chunk, controller) {
+            context.beforeChunk?.(chunk);
             let event;
             try {
                 event = guardUiChunk(chunk, context.validateEvent);
@@ -75,9 +118,11 @@ function guardStream(source, context) {
             }
             if (event)
                 context.onEvent?.(event);
+            context.beforeChunk?.(chunk);
             controller.enqueue(chunk);
         },
     }));
+    return context.errorBoundary ? boundedDiagnostics(guarded, context.errorBoundary) : guarded;
 }
 export class MeriGuardedTransport {
     /** Incremental replay: reconnect returns only new events after the accepted cursor. */
@@ -85,21 +130,36 @@ export class MeriGuardedTransport {
     inner;
     context;
     closed = false;
+    beginGuard;
     constructor(options) {
         this.inner = options.inner;
+        this.beginGuard = options.beginGuard;
         this.context = {
             validateEvent: options.validateEvent,
             onEvent: options.onEvent,
             onRejected: options.onRejected,
+            errorBoundary: options.errorBoundary,
         };
     }
     async sendMessages(options) {
-        const stream = await this.inner.sendMessages(options);
-        return guardStream(stream, this.context);
+        try {
+            const beforeChunk = this.beginGuard?.();
+            const stream = await this.inner.sendMessages(options);
+            return guardStream(stream, { ...this.context, beforeChunk });
+        }
+        catch (error) {
+            throw this.context.errorBoundary?.(error) ?? error;
+        }
     }
     async reconnectToStream(options) {
-        const stream = await this.inner.reconnectToStream(options);
-        return stream ? guardStream(stream, this.context) : null;
+        try {
+            const beforeChunk = this.beginGuard?.();
+            const stream = await this.inner.reconnectToStream(options);
+            return stream ? guardStream(stream, { ...this.context, beforeChunk }) : null;
+        }
+        catch (error) {
+            throw this.context.errorBoundary?.(error) ?? error;
+        }
     }
     /**
      * Releases resources owned by this transport only. It never issues a durable run

@@ -1,0 +1,13 @@
+{
+  "scope": "Actual unconfigured Next standalone server; checks shipping body assertion only. Not a container/runtime/image qualification.",
+  "applicationSource": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e (application bytes unchanged at988b244)",
+  "status": 200,
+  "expectedShippingBody": "Configure the existing Clerk test application to sign in.",
+  "actualHeading": "Sign-in setup required",
+  "actualHeadingPresent": true,
+  "matchesShippingBody": false,
+  "nosniff": "nosniff",
+  "frameOptions": "DENY",
+  "poweredBy": null,
+  "bodySha256": "4d04e9e20f9b51021806322e703e1892c8e4abf19883040dce1a67261a93af1f"
+}

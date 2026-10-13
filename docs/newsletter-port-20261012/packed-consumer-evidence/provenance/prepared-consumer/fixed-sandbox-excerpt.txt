@@ -1,0 +1,7 @@
+const sandbox = () => {
+  const milliseconds = Date.parse('2026-10-12T12:00:00.000Z');
+  class FixedDate extends Date { constructor(...args) { super(...(args.length ? args : [milliseconds])); } static now() { return milliseconds; } }
+  const context = vm.createContext({ URL, structuredClone, Date: FixedDate });
+  vm.runInContext('Math.random=()=>0.125', context);
+  return context;
+};

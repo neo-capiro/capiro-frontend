@@ -1,0 +1,45 @@
+{
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "tree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
+  "context": "committed repository root",
+  "platform": "linux/amd64",
+  "repository": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview",
+  "tag": "exact reviewed source SHA",
+  "runtime": {
+    "entry": "node apps/web/server.js",
+    "uid": 1000,
+    "port": 5188,
+    "health": "/healthz"
+  },
+  "files": [
+    {
+      "path": "apps/web/deployment/portfolio/buildspec.yml",
+      "sha256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6"
+    },
+    {
+      "path": "apps/web/Dockerfile",
+      "sha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1"
+    },
+    {
+      "path": "apps/web/deployment/portfolio/smoke.sh",
+      "sha256": "001ce1efc52666ec91815fcd23b1ed59883aa2561a564c740b2f8d909d050f01"
+    },
+    {
+      "path": "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "sha256": "7a933f851f36bd47bca3b8ca371845c6a65ba43335543dda94a7390401c47215"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "432b70d7b19f3a7a55ecefc38d706d95d53fe253c82dd5dc7538d918dadd3c34"
+    },
+    {
+      "path": "scripts/deployment-cli.test.mjs",
+      "sha256": "454a9d35ebdbe0b188e6ea8fbb2b7b83172c490b1f2cc589d05a61fadecfc6ca"
+    }
+  ],
+  "independentReview": "Parent reports narrow review PASS for exact e1bcf60 delta; full browser qualification failed (880 passed, two failed) and additional runtime-config regression is open. Shipping remains held.",
+  "containerResult": "UNRUN on this pin; the9fa5e2c local build stopped at official Alpine package-index HTTPS CONNECT403 from configured proxy. Base and APK pins unchanged. No bypass, final image, runtime smoke or new scan.",
+  "AWSAction": "none",
+  "containerEvidence": "evidence/candidate-9fa5e2c/host-alpine-connect-denied.txt",
+  "reviewCorrectionEvidence": "evidence/shipping-sign-in/"
+}

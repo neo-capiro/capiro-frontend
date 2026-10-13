@@ -1,0 +1,10 @@
+# Governed newsletter package consumption
+
+This bounded PR16 slice consumes the backend-owned immutable package distributed at `62d057b4a17b2c038920f10b93e83e51e46239bc`, built from `fe50dc1c2de1660a036e338cf81acdcf0f2fb26a`. It follows slice2 of the existing outline. PR15 source `1585438295776604f23a5cb5ab592729f7c468ca` and evidence `3a83e874383d9129726689bb8fc66438c2f18f18` remain frozen.
+
+- `vendor` owns the exact tarball and provenance manifest. The existing public-package checker verifies both Meri and newsletter inputs with the same strict byte-binding function.
+- `packages/qualification-newsletter` owns an offline packed consumer, preserved producer characterization fixtures, declaration acceptance/refusal, browser bundling and actual browser evaluation. It imports only `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render`; it does not import a backend checkout, copy editable DTO/render implementation or create an application runtime owner.
+- The root manifest/lock and architecture allowlist bind the new qualification workspace and exactly those two reviewed public subpaths. Other shared-package paths remain outside the frontend allowlist.
+- The rich editor, native operations, stage dispatch and application dependency wiring remain the next implementation slices. Rich `NewsletterStage`/`WsNewsletterStage` IDs remain separate from saved `WsDocVersion` snapshots; this slice adds no bridge or conversion.
+
+Verification: independently match the artifact SHA256/SHA512 and entry manifest; resolve both actual packed public imports; preserve and compare all116 producer characterizations; compile actual packed declarations in NodeNext and browser Bundler modes with explicit negative cases; check the browser graph closes over only five packed modules; execute the bundle in Chromium with no provider/service requests. Run the existing public-package/architecture tests and guards without weakening earlier cases. Record exact tool versions, source/fixture hashes, passed/failed/unrun results and original asset continuity. This qualifies the public input and consumer, not the full frontend or any native action.

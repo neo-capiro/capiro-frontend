@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';
+import original from "/workspace/capiro-p1-successor/apps/web/playwright.config";
+export default defineConfig({...original,testDir:"/tmp/capiro-parent-client-clear-red-09aa0ab",testMatch:'control.spec.ts',outputDir:"/tmp/capiro-parent-client-clear-red-09aa0ab/artifacts",reporter:[['list'],['json',{outputFile:"/tmp/capiro-parent-client-clear-red-09aa0ab/results.json"}]],webServer:{...original.webServer,command:"\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" /workspace/capiro-p1-successor/apps/web/tests/browser/server.mjs"}});

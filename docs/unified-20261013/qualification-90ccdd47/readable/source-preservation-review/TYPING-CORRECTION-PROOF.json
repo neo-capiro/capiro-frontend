@@ -1,0 +1,84 @@
+{
+  "manifestSha256": "5aed3b2450859f1c331788322845bebc72abb5f19be597426f96e3d8b2efc02d",
+  "records": [
+    {
+      "path": "FAILED-GATE-REFERENCES.json",
+      "sha256": "8b55b4b96a9e44cb73d912ef3e29d5e7e68dce465b4a689e03feae04b0fd5970",
+      "bytes": 370,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "7ae73b3a9e1a170eeb57867469da3635c29456b2ee712d87bde0aaf1ae373e7c",
+      "bytes": 2123,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "RESULT.json",
+      "sha256": "4e262a055a885511942a9b36fff82429d9d5a6695bb85e9975f05be9a0ae1580",
+      "bytes": 1225,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "after-emitted.mjs",
+      "sha256": "a1cafb1b24a8b2ecbcc3ce35b515c8f6966bc91fa2159c82a0ded7cb507e9fd2",
+      "bytes": 10876,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "after.ts",
+      "sha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+      "bytes": 10748,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "before-emitted.mjs",
+      "sha256": "5efb29a2379a0a33278748c9440c2d3588073262c85779bcb4209a7778f8a84a",
+      "bytes": 10845,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "before.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytes": 10654,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "normalized-after.mjs",
+      "sha256": "7359ebf13811bf68d7115ebc6c1a87cbf26b565aa7eec71958f9030ab12a6c81",
+      "bytes": 10841,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    },
+    {
+      "path": "verify.cjs",
+      "sha256": "a05c0641b89c675c659d2ed9b760feb535c155721a40ec2c1dc6edef586a54b6",
+      "bytes": 4819,
+      "localHashMatches": true,
+      "localBytesMatch": true,
+      "publishedBytesEqual": true
+    }
+  ],
+  "beforeCommittedMatches": true,
+  "afterCommittedMatches": true,
+  "allCallsPreservedReported": true,
+  "callExpressionCount": 251,
+  "identityArrayValuesOrderEqual": true,
+  "normalizedEmittedProgramEqual": true,
+  "normalization": "The only runtime-emitted difference is an immediately preceding local array binding used once by the identical loop; private reviewer validated AST normalization. No runtime/test execution repeated here."
+}

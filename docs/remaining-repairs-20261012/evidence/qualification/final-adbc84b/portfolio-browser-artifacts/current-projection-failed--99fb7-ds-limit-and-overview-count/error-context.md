@@ -1,0 +1,2868 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: current-projection.spec.ts >> failed activity refresh 503 hides retained history, kinds, limit and overview count
+- Location: tests/browser/current-projection.spec.ts:103:3
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByRole('region', { name: 'Activity timeline', exact: true }).getByText(/latest 500 items/)
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByText(/latest 500 items/)
+
+```
+
+```yaml
+- link "Skip to content":
+  - /url: "#main"
+- banner:
+  - link "Capiro Home":
+    - /url: /
+    - img "Capiro"
+  - navigation "Workspace":
+    - link "Meri":
+      - /url: /meri
+    - link "Portfolio":
+      - /url: /
+    - link "Modules":
+      - /url: /modules
+  - navigation "Global actions":
+    - link "Quick log":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001?log=1
+    - link "Master calendar":
+      - /url: /calendar
+    - link "Search Portfolio":
+      - /url: /portfolio?search=1
+    - button "Updates unavailable" [disabled]
+    - button "Test account": T
+- complementary "Portfolio navigation":
+  - paragraph: Portfolio
+  - navigation "Portfolio":
+    - link "Portfolio Overview":
+      - /url: /portfolio
+      - text: Overview
+    - link "Portfolio Clients":
+      - /url: /portfolio?type=CLIENT
+      - text: Clients
+    - link "Portfolio Prospects":
+      - /url: /portfolio/prospects
+      - text: Prospects
+  - separator
+  - paragraph: Test Aerospace
+  - navigation "Client":
+    - link "Overview":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001
+    - link "Objectives":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+    - link "Calendar":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+    - link "Relationships":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/relationships
+    - link "Work":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/work
+    - link "Capabilities":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/capabilities
+    - link "Bill Tracker":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/bills
+    - link "Opportunities":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/opportunities
+    - link "Files":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001/files
+  - link "Settings":
+    - /url: /settings
+- main:
+  - navigation "Breadcrumb":
+    - link "Back to Portfolio":
+      - /url: /portfolio
+    - link "Portfolio":
+      - /url: /portfolio
+    - link "Test Aerospace":
+      - /url: /portfolio/10000000-0000-4000-8000-000000000001
+    - 'button "Switch client view: Overview"': Overview
+  - button "Quick add"
+  - button "Meri actions"
+  - button "More actions for Test Aerospace"
+  - paragraph: Client profile
+  - heading "Overview" [level=1]
+  - button "Notes"
+  - link "New objective":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?new=1
+  - text: TA
+  - heading "Test Aerospace" [level=1]
+  - text: ACTIVE Aerospace ·
+  - link "https://example.test":
+    - /url: https://example.test/
+  - paragraph: Synthetic organization for isolated UI validation.
+  - text: Focus
+  - button "+ Add focus tag"
+  - text: Owner Unassigned
+  - button "Account team · 0"
+  - region "Engagement pulse":
+    - heading "Engagement pulse" [level=2]
+    - link "Open timeline →":
+      - /url: "#activity-timeline"
+    - strong: "500"
+    - paragraph: Recent activity items
+    - strong: "0"
+    - paragraph: Account team
+    - strong: —
+    - paragraph: Objective coverage unavailable
+  - region "Client details":
+    - heading "Client details" [level=2]
+    - button "Government info"
+    - term: Primary POC at client
+    - definition: Not provided
+    - term: Main company email
+    - definition: Not provided
+    - term: Main company phone
+    - definition: Not provided
+    - term: Engagement start date
+    - definition: Not provided
+    - term: Small Business Classification
+    - definition: Not provided
+    - term: Funding priorities
+    - definition: Not provided
+    - term: Internal notes
+    - definition: Not provided
+  - heading "Objectives" [level=2]
+  - link "New objective":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?new=1
+  - link "Test outcome Draft Test minimum win":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives?objective=30000000-0000-4000-8000-000000000001
+    - strong: Test outcome
+    - text: Draft
+    - paragraph: Test minimum win
+  - link "View objectives":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+  - region "District nexus":
+    - heading "District nexus" [level=2]
+    - paragraph: 0 locations · 0 states · 0 districts
+    - button "Add facility"
+    - button "Open district map"
+    - list
+    - img "United States map illustration. No coordinate pins are available."
+    - paragraph: No facilities yet. Add a location with the plus action.
+  - heading "Client calendar" [level=2]
+  - link "Open client calendar":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+  - paragraph: Meetings, preparation, notes and debriefs for this client.
+  - link "Open calendar":
+    - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+  - region "Activity timeline":
+    - heading "Activity timeline" [level=2]
+    - button "Expand timeline ↗"
+    - text: Search activity
+    - searchbox "Search activity": Saved
+    - button "Activity type": All activity
+    - 'button "Activity dates: All dates"': All dates
+    - list:
+      - listitem:
+        - heading "Oct 10, 2026" [level=3]
+        - strong: Saved activity row 0
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 0"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 1
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 1"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 2
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 2"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 3
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 3"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 4
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 4"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 5
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 5"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 6
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 6"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 7
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 7"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 8
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 8"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 9
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 9"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 10
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 10"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 11
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 11"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 12
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 12"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 13
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 13"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 14
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 14"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 15
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 15"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 16
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 16"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 17
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 17"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 18
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 18"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 19
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 19"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 20
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 20"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 21
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 21"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 22
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 22"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 23
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 23"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 24
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 24"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 25
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 25"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 26
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 26"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 27
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 27"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 28
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 28"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 29
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 29"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 30
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 30"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 31
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 31"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 32
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 32"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 33
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 33"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 34
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 34"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 35
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 35"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 36
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 36"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 37
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 37"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 38
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 38"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 39
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 39"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 40
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 40"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 41
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 41"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 42
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 42"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 43
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 43"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 44
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 44"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 45
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 45"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 46
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 46"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 47
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 47"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 48
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 48"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 49
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 49"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 50
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 50"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 51
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 51"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 52
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 52"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 53
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 53"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 54
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 54"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 55
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 55"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 56
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 56"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 57
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 57"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 58
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 58"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 59
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 59"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 60
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 60"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 61
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 61"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 62
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 62"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 63
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 63"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 64
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 64"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 65
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 65"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 66
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 66"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 67
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 67"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 68
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 68"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 69
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 69"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 70
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 70"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 71
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 71"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 72
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 72"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 73
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 73"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 74
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 74"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 75
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 75"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 76
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 76"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 77
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 77"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 78
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 78"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 79
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 79"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 80
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 80"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 81
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 81"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 82
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 82"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 83
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 83"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 84
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 84"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 85
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 85"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 86
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 86"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 87
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 87"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 88
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 88"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 89
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 89"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 90
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 90"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 91
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 91"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 92
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 92"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 93
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 93"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 94
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 94"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 95
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 95"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 96
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 96"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 97
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 97"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 98
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 98"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 99
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 99"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 100
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 100"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 101
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 101"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 102
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 102"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 103
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 103"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 104
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 104"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 105
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 105"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 106
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 106"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 107
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 107"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 108
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 108"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 109
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 109"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 110
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 110"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 111
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 111"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 112
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 112"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 113
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 113"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 114
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 114"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 115
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 115"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 116
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 116"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 117
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 117"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 118
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 118"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 119
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 119"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 120
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 120"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 121
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 121"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 122
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 122"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 123
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 123"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 124
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 124"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 125
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 125"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 126
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 126"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 127
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 127"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 128
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 128"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 129
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 129"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 130
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 130"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 131
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 131"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 132
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 132"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 133
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 133"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 134
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 134"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 135
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 135"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 136
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 136"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 137
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 137"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 138
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 138"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 139
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 139"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 140
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 140"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 141
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 141"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 142
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 142"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 143
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 143"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 144
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 144"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 145
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 145"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 146
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 146"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 147
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 147"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 148
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 148"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 149
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 149"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 150
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 150"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 151
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 151"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 152
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 152"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 153
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 153"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 154
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 154"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 155
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 155"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 156
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 156"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 157
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 157"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 158
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 158"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 159
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 159"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 160
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 160"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 161
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 161"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 162
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 162"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 163
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 163"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 164
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 164"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 165
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 165"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 166
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 166"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 167
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 167"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 168
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 168"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 169
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 169"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 170
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 170"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 171
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 171"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 172
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 172"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 173
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 173"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 174
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 174"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 175
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 175"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 176
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 176"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 177
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 177"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 178
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 178"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 179
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 179"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 180
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 180"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 181
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 181"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 182
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 182"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 183
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 183"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 184
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 184"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 185
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 185"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 186
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 186"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 187
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 187"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 188
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 188"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 189
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 189"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 190
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 190"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 191
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 191"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 192
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 192"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 193
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 193"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 194
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 194"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 195
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 195"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 196
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 196"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 197
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 197"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 198
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 198"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 199
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 199"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 200
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 200"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 201
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 201"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 202
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 202"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 203
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 203"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 204
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 204"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 205
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 205"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 206
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 206"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 207
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 207"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 208
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 208"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 209
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 209"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 210
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 210"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 211
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 211"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 212
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 212"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 213
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 213"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 214
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 214"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 215
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 215"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 216
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 216"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 217
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 217"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 218
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 218"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 219
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 219"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 220
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 220"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 221
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 221"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 222
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 222"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 223
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 223"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 224
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 224"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 225
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 225"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 226
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 226"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 227
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 227"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 228
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 228"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 229
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 229"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 230
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 230"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 231
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 231"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 232
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 232"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 233
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 233"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 234
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 234"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 235
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 235"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 236
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 236"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 237
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 237"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 238
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 238"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 239
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 239"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 240
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 240"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 241
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 241"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 242
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 242"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 243
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 243"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 244
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 244"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 245
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 245"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 246
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 246"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 247
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 247"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 248
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 248"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 249
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 249"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 250
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 250"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 251
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 251"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 252
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 252"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 253
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 253"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 254
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 254"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 255
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 255"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 256
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 256"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 257
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 257"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 258
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 258"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 259
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 259"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 260
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 260"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 261
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 261"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 262
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 262"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 263
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 263"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 264
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 264"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 265
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 265"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 266
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 266"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 267
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 267"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 268
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 268"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 269
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 269"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 270
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 270"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 271
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 271"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 272
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 272"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 273
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 273"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 274
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 274"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 275
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 275"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 276
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 276"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 277
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 277"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 278
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 278"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 279
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 279"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 280
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 280"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 281
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 281"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 282
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 282"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 283
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 283"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 284
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 284"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 285
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 285"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 286
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 286"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 287
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 287"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 288
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 288"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 289
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 289"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 290
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 290"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 291
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 291"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 292
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 292"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 293
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 293"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 294
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 294"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 295
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 295"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 296
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 296"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 297
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 297"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 298
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 298"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 299
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 299"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 300
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 300"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 301
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 301"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 302
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 302"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 303
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 303"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 304
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 304"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 305
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 305"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 306
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 306"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 307
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 307"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 308
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 308"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 309
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 309"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 310
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 310"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 311
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 311"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 312
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 312"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 313
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 313"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 314
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 314"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 315
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 315"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 316
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 316"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 317
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 317"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 318
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 318"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 319
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 319"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 320
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 320"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 321
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 321"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 322
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 322"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 323
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 323"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 324
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 324"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 325
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 325"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 326
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 326"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 327
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 327"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 328
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 328"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 329
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 329"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 330
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 330"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 331
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 331"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 332
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 332"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 333
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 333"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 334
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 334"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 335
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 335"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 336
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 336"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 337
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 337"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 338
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 338"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 339
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 339"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 340
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 340"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 341
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 341"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 342
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 342"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 343
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 343"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 344
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 344"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 345
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 345"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 346
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 346"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 347
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 347"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 348
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 348"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 349
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 349"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 350
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 350"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 351
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 351"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 352
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 352"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 353
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 353"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 354
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 354"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 355
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 355"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 356
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 356"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 357
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 357"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 358
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 358"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 359
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 359"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 360
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 360"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 361
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 361"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 362
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 362"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 363
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 363"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 364
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 364"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 365
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 365"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 366
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 366"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 367
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 367"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 368
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 368"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 369
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 369"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 370
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 370"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 371
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 371"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 372
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 372"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 373
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 373"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 374
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 374"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 375
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 375"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 376
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 376"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 377
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 377"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 378
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 378"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 379
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 379"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 380
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 380"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 381
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 381"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 382
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 382"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 383
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 383"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 384
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 384"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 385
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 385"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 386
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 386"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 387
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 387"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 388
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 388"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 389
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 389"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 390
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 390"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 391
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 391"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 392
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 392"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 393
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 393"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 394
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 394"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 395
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 395"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 396
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 396"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 397
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 397"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 398
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 398"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 399
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 399"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 400
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 400"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 401
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 401"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 402
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 402"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 403
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 403"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 404
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 404"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 405
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 405"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 406
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 406"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 407
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 407"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 408
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 408"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 409
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 409"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 410
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 410"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 411
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 411"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 412
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 412"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 413
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 413"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 414
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 414"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 415
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 415"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 416
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 416"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 417
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 417"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 418
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 418"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 419
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 419"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 420
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 420"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 421
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 421"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 422
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 422"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 423
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 423"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 424
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 424"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 425
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 425"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 426
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 426"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 427
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 427"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 428
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 428"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 429
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 429"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 430
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 430"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 431
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 431"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 432
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 432"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 433
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 433"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 434
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 434"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 435
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 435"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 436
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 436"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 437
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 437"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 438
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 438"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 439
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 439"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 440
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 440"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 441
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 441"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 442
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 442"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 443
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 443"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 444
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 444"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 445
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 445"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 446
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 446"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 447
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 447"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 448
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 448"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 449
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 449"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 450
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 450"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 451
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 451"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 452
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 452"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 453
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 453"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 454
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 454"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 455
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 455"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 456
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 456"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 457
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 457"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 458
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 458"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 459
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 459"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 460
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 460"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 461
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 461"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 462
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 462"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 463
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 463"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 464
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 464"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 465
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 465"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 466
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 466"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 467
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 467"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 468
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 468"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 469
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 469"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 470
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 470"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 471
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 471"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 472
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 472"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 473
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 473"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 474
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 474"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 475
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 475"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 476
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 476"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 477
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 477"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 478
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 478"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 479
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 479"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 480
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 480"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 481
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 481"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 482
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 482"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 483
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 483"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 484
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 484"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 485
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 485"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 486
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 486"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 487
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 487"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 488
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 488"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 489
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 489"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 490
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 490"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 491
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 491"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 492
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 492"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 493
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 493"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 494
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 494"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 495
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 495"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 496
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 496"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 497
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 497"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 498
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 498"': ⋯
+        - text: synthetic_kind
+      - listitem:
+        - strong: Saved activity row 499
+        - time: 12:00 PM
+        - 'button "Activity actions: Saved activity row 499"': ⋯
+        - text: synthetic_kind
+    - text: 500 activities · Latest 500 items available from this history feed
+```
+
+# Test source
+
+```ts
+  52  |     await expect(
+  53  |       page.getByLabel("Sector", { exact: true }).locator("option"),
+  54  |     ).toHaveCount(3);
+  55  |     failing = true;
+  56  |     await refresh(page, "clients");
+  57  |     await expect(page.getByRole("alert")).toBeVisible();
+  58  |     await expect(title).toHaveText("Portfolio —");
+  59  |     await expect(clientCount).toHaveText("—");
+  60  |     await expect(page.getByRole("article")).toHaveCount(0);
+  61  |     await expect(
+  62  |       page.getByLabel("Sector", { exact: true }).locator("option"),
+  63  |     ).toHaveCount(1);
+  64  |     await expect(
+  65  |       page.getByLabel("Profile status", { exact: true }),
+  66  |     ).toHaveValue("ACTIVE");
+  67  |     await expect(
+  68  |       page.getByLabel("Profile status", { exact: true }),
+  69  |     ).toContainText("ACTIVE (not available)");
+  70  |     await expect(page.getByLabel("Search profiles")).toHaveValue("Test");
+  71  |     await expect(
+  72  |       page.getByRole("heading", { name: /No profiles/ }),
+  73  |     ).toHaveCount(0);
+  74  | 
+  75  |     let release!: () => void;
+  76  |     gate = new Promise<void>((resolve) => {
+  77  |       release = resolve;
+  78  |     });
+  79  |     failing = false;
+  80  |     recovered = true;
+  81  |     try {
+  82  |       await page
+  83  |         .getByRole("alert")
+  84  |         .getByRole("button", { name: "Retry" })
+  85  |         .click();
+  86  |       await expect(title).toHaveText("Portfolio —");
+  87  |       await expect(page.getByRole("article")).toHaveCount(0);
+  88  |     } finally {
+  89  |       release();
+  90  |     }
+  91  |     await expect(title).toHaveText("Portfolio 1");
+  92  |     await expect(page.getByRole("article")).toContainText(
+  93  |       "Test Aerospace refreshed",
+  94  |     );
+  95  |     await expect(page.getByLabel("Search profiles")).toHaveValue("Test");
+  96  |     await page.screenshot({
+  97  |       path: testInfo.outputPath(`catalog-recovered-${status}.png`),
+  98  |       fullPage: true,
+  99  |     });
+  100 |     expect(unexpected).toEqual([]);
+  101 |   });
+  102 | 
+  103 |   test(`failed activity refresh ${status} hides retained history, kinds, limit and overview count`, async ({
+  104 |     page,
+  105 |   }, testInfo) => {
+  106 |     const unexpected = await installFixtures(page);
+  107 |     const length = status === 503 ? 500 : 2;
+  108 |     const rows = Array.from({ length }, (_, index) => ({
+  109 |       id: `activity-${index}`,
+  110 |       title: `Saved activity row ${index}`,
+  111 |       occurredAt: "2026-10-10T12:00:00Z",
+  112 |       kind: "synthetic_kind",
+  113 |       body: null,
+  114 |       origin: "recorded",
+  115 |       sourceType: null,
+  116 |       sourceId: null,
+  117 |       dueAt: null,
+  118 |       settledAt: null,
+  119 |       pinned: false,
+  120 |     }));
+  121 |     let failing = false;
+  122 |     let currentRows = rows;
+  123 |     await page.route(
+  124 |       `**/api/backend/core/clients/${clientId}/activity*`,
+  125 |       (route) =>
+  126 |         json(
+  127 |           route,
+  128 |           failing
+  129 |             ? { message: "Synthetic current activity unavailable" }
+  130 |             : currentRows,
+  131 |           failing ? status : 200,
+  132 |         ),
+  133 |     );
+  134 |     await page.goto("/current-projection.html?mode=overview");
+  135 |     const timeline = page.getByRole("region", {
+  136 |       name: "Activity timeline",
+  137 |       exact: true,
+  138 |     });
+  139 |     const count = page
+  140 |       .getByRole("region", { name: "Engagement pulse" })
+  141 |       .getByText("Recent activity items", { exact: true })
+  142 |       .locator("../..")
+  143 |       .locator("strong");
+  144 |     await expect(
+  145 |       timeline.getByText("Saved activity row 0", { exact: true }),
+  146 |     ).toBeVisible();
+  147 |     await expect(count).toHaveText(String(length));
+  148 |     await timeline
+  149 |       .getByRole("searchbox", { name: "Search activity" })
+  150 |       .fill("Saved");
+  151 |     if (length === 500)
+> 152 |       await expect(timeline.getByText(/latest 500 items/)).toBeVisible();
+      |                                                            ^ Error: expect(locator).toBeVisible() failed
+  153 |     failing = true;
+  154 |     await refresh(page, "activity");
+  155 |     await expect(timeline.getByRole("alert")).toBeVisible();
+  156 |     await expect(
+  157 |       timeline.getByText("Saved activity row 0", { exact: true }),
+  158 |     ).toHaveCount(0);
+  159 |     await expect(count).toHaveText("—");
+  160 |     await expect(timeline.getByText(/latest 500 items/)).toHaveCount(0);
+  161 |     await expect(timeline.getByText("No activity to show.")).toHaveCount(0);
+  162 |     await timeline
+  163 |       .getByRole("button", { name: "Activity type", exact: true })
+  164 |       .click();
+  165 |     await expect(
+  166 |       page.getByRole("menuitemradio", { name: "synthetic_kind", exact: true }),
+  167 |     ).toHaveCount(0);
+  168 |     await page.keyboard.press("Escape");
+  169 |     await expect(
+  170 |       page.getByRole("heading", { name: "Test Aerospace", exact: true }),
+  171 |     ).toBeVisible();
+  172 |     await expect(
+  173 |       page.getByRole("heading", { name: "District nexus", exact: true }),
+  174 |     ).toBeVisible();
+  175 |     await expect(
+  176 |       timeline.getByRole("searchbox", { name: "Search activity" }),
+  177 |     ).toHaveValue("Saved");
+  178 |     if (status === 403) {
+  179 |       await page.setViewportSize({ width: 390, height: 844 });
+  180 |       await page.emulateMedia({ colorScheme: "dark" });
+  181 |       await timeline.screenshot({
+  182 |         path: testInfo.outputPath("activity-unavailable-phone-dark.png"),
+  183 |       });
+  184 |       expect(
+  185 |         await page.evaluate(
+  186 |           () => document.documentElement.scrollWidth <= innerWidth,
+  187 |         ),
+  188 |       ).toBe(true);
+  189 |     }
+  190 |     failing = false;
+  191 |     currentRows = [{ ...rows[0]!, title: "Saved refreshed activity" }];
+  192 |     await timeline.getByRole("button", { name: "Retry", exact: true }).click();
+  193 |     await expect(
+  194 |       timeline.getByText("Saved refreshed activity", { exact: true }),
+  195 |     ).toBeVisible();
+  196 |     await expect(count).toHaveText("1");
+  197 |     await expect(
+  198 |       timeline.getByRole("searchbox", { name: "Search activity" }),
+  199 |     ).toHaveValue("Saved");
+  200 |     expect(unexpected).toEqual([]);
+  201 |   });
+  202 | }
+  203 | 
+  204 | test("failed current client read removes its retained name from the frame and recovers", async ({
+  205 |   page,
+  206 | }) => {
+  207 |   const unexpected = await installFixtures(page);
+  208 |   let failing = false;
+  209 |   await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
+  210 |     json(
+  211 |       route,
+  212 |       failing ? { message: "Synthetic current client unavailable" } : client,
+  213 |       failing ? 403 : 200,
+  214 |     ),
+  215 |   );
+  216 |   await page.goto("/current-projection.html?mode=overview");
+  217 |   await expect(
+  218 |     page.getByRole("heading", { name: "Test Aerospace", exact: true }),
+  219 |   ).toBeVisible();
+  220 |   failing = true;
+  221 |   await refresh(page, "client");
+  222 |   await expect(page.getByRole("alert")).toBeVisible();
+  223 |   await expect(page.getByText("Test Aerospace", { exact: true })).toHaveCount(
+  224 |     0,
+  225 |   );
+  226 |   await expect(
+  227 |     page.getByRole("region", { name: "Activity timeline", exact: true }),
+  228 |   ).toHaveCount(0);
+  229 |   failing = false;
+  230 |   await page
+  231 |     .getByRole("alert")
+  232 |     .getByRole("button", { name: "Retry", exact: true })
+  233 |     .click();
+  234 |   await expect(
+  235 |     page.getByRole("heading", { name: "Test Aerospace", exact: true }),
+  236 |   ).toBeVisible();
+  237 |   expect(unexpected).toEqual([]);
+  238 | });
+  239 | 
+```

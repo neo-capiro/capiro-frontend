@@ -1,0 +1,186 @@
+{
+  "backendSource": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "frontendBaseline": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "serviceBases": "Core /api, Strategy /strategy-api, Workspace /workspace-api appended to approved actual configured origins; browser Portfolio proxy and fixed Modules gateway remain canonical. No live origin is supplied/guessed.",
+  "contracts": {
+    "identity_clients": {
+      "service": "core",
+      "method": "GET",
+      "paths": [
+        "/api/me",
+        "/api/clients",
+        "/api/clients/:id"
+      ],
+      "fixedOperations": [
+        "me.read",
+        "clients.list"
+      ],
+      "semantics": "Current tenant/user and readable client verification; query clientId is a selection hint, never authority. Preserve current ApplicationBoundary replacement.",
+      "evidence": [
+        "frontend/apps/web/src/shared/capiro/operations/settings.ts:48",
+        "frontend/apps/web/src/features/portfolio/index/queries.ts:21"
+      ]
+    },
+    "meetings": {
+      "service": "core",
+      "method": "GET",
+      "paths": [
+        "/api/engagement/meetings?clientId=:id&from=:from&to=:to",
+        "/api/engagement/meetings/:id"
+      ],
+      "fixedOperations": [
+        "engagement.meetings",
+        "engagement.meeting"
+      ],
+      "semantics": "Core allocation despite operation/path legacy Engagement naming; clientId optional for Master, from/to bounds. Controller standard_user role; current meeting/client access remains server-owned.",
+      "evidence": [
+        "frontend/apps/web/src/shared/capiro/operations/engagement.ts:187",
+        "backend/apps/api/src/engagement/engagement.controller.ts:1979",
+        "backend/apps/api/src/engagement/engagement.controller.ts:2049"
+      ]
+    },
+    "planner": {
+      "service": "strategy",
+      "method": "GET",
+      "paths": [
+        "/strategy-api/planner/bootstrap",
+        "/strategy-api/planner/tasks?archived=false[&cursor=:id]",
+        "/strategy-api/planner/tasks/:id"
+      ],
+      "fixedOperations": [
+        "planner.bootstrap",
+        "planner.tasks",
+        "planner.task"
+      ],
+      "semantics": "Canonical Planner, not Core engagement.tasks. Paginated items/nextCursor; no native public client/date query filters on tasks. Read exact task by ID even outside current page/My tasks. ACL/access returned by current owner; do not create/edit to satisfy a drilldown. Start/due civil fields retain their own dates/times/zones.",
+      "evidence": [
+        "frontend/apps/web/src/shared/capiro/operations/planner-tasks.ts:34",
+        "backend/apps/api-strategy/src/planner/planner.controller.ts:182",
+        "backend/apps/api-strategy/src/planner/planner.controller.ts:196"
+      ]
+    },
+    "master_feeds": {
+      "service": "existing mixed owners",
+      "method": "GET",
+      "fixedOperations": [
+        "planner.tasks",
+        "legiwatch.calendar",
+        "calendar.commentDeadlines",
+        "calendar.effectiveDates",
+        "intelligence.funding.search"
+      ],
+      "semantics": "Keep independent source outcomes, search/source/range filters and partial-coverage warnings; extras are existing Master Agenda composition, not invented client-wide feeds. meetings403 must not erase successful independent feeds.",
+      "evidence": [
+        "frontend/apps/web/src/features/modules/calendar/agenda-loader.ts:1",
+        "frontend/apps/web/src/features/modules/calendar/useCalendar.ts:1"
+      ]
+    },
+    "signature": {
+      "service": "core",
+      "method": "GET",
+      "paths": [
+        "/api/me/email-signature"
+      ],
+      "fixedOperations": [
+        "me.emailSignature.read"
+      ],
+      "semantics": "Current actor html nullable/enabled boolean. Preview must safely present this actor signature according to checkbox/policy; no remote image/resource load or HTML execution needed. PUT is separate optional setup, not needed with pre-provisioned signature.",
+      "evidence": [
+        "frontend/apps/web/src/features/portfolio/relationships/email.ts:106",
+        "backend/apps/api/src/users/users.controller.ts:332"
+      ]
+    },
+    "rewrite": {
+      "service": "core",
+      "method": "POST",
+      "paths": [
+        "/api/engagement/mail/rewrite"
+      ],
+      "request": {
+        "rawText": "string",
+        "recipientName": "optional string",
+        "recipientTitle": "optional string"
+      },
+      "receipt": {
+        "bodyHtml": "string",
+        "verified": "boolean"
+      },
+      "semantics": "Existing outreach_generate governed LLM action. Local Undo does not dispatch another rewrite or mail/send. Native successful rewrite is a paid/provider effect and requires separate explicit authorization; local controlled responses do not constitute native model acceptance.",
+      "evidence": [
+        "frontend/apps/web/src/features/portfolio/relationships/email/rewrite.ts:11",
+        "backend/apps/api/src/engagement/engagement.controller.ts:2381"
+      ]
+    },
+    "work": {
+      "service": "strategy and workspace",
+      "method": "GET",
+      "paths": [
+        "/strategy-api/strategies",
+        "/strategy-api/strategies/:id",
+        "/workspace-api/drafts?scope=all"
+      ],
+      "semantics": "Strategy detail must match client and strategy; Workspace all means own plus active collaborators, not tenant-wide. Preserve legacy client-name ambiguity refusal and prospect exclusion; owner text never expands record permission. Workspace ownerId comes from clerkUserId; Strategy default owner is clerkUserId and node ownerUserId is an optional string, not an asserted Core UUID.",
+      "evidence": [
+        "frontend/apps/web/src/features/portfolio/work/queries.ts:1",
+        "frontend/apps/web/src/features/portfolio/work/contracts.ts:30",
+        "backend/apps/api-strategy/src/strategy/strategy.service.ts:136",
+        "backend/apps/api-strategy/src/strategy/dto/node.dto.ts:116",
+        "backend/apps/workspace/src/drafts/drafts.controller.ts:24",
+        "backend/apps/workspace/src/drafts/drafts.service.ts:257"
+      ]
+    },
+    "owner_members": {
+      "service": "core",
+      "method": "GET",
+      "paths": [
+        "/api/tenant-members"
+      ],
+      "fixedOperations": [
+        "settings.tenantMembers"
+      ],
+      "receipt": "array {id,clerkUserId,email,name}; active memberships in current tenant only",
+      "semantics": "Exact clerkUserId equality is the verified bridge. No guessed UUID/email/name mapping. Native UsersController has no endpoint admin-only/standard_user annotation; global verified Clerk/tenant/active-membership middleware still applies. Missing/ambiguous/denied roster must preserve unresolved display and hide stale roster; null owner is unassigned, not an unresolved nonempty ID. Core client-account-owners/options has only Core UUIDs and cannot alone resolve Clerk owner IDs.",
+      "evidence": [
+        "frontend/apps/web/src/shared/capiro/operations/settings.ts:129",
+        "backend/apps/api/src/users/users.controller.ts:394",
+        "backend/apps/api/src/tenant/tenant-context.middleware.ts:111",
+        "backend/apps/api/src/tenant/tenant-context.middleware.ts:211",
+        "backend/apps/api/src/clients/client-account-owner.service.ts:35"
+      ]
+    },
+    "prospect_files": {
+      "service": "core",
+      "method": "GET",
+      "paths": [
+        "/api/engagement/attachments?prospectId=:id"
+      ],
+      "semantics": "Exact actor tenant/prospect list, unique IDs, clientId/meetingId/mailMessageId null; readiness and viewer access remain current. Local search filters only loaded authorized filenames/available supported fields; no new backend search route, upload, rewrite, extraction or storage traversal.",
+      "evidence": [
+        "frontend/apps/web/src/features/portfolio/files/prospect-files.ts:34",
+        "backend/apps/api/src/engagement/engagement.controller.ts:2897",
+        "backend/apps/api/src/engagement/engagement.service.ts:7756"
+      ]
+    },
+    "client_delete": {
+      "service": "core",
+      "methods": [
+        "GET",
+        "DELETE"
+      ],
+      "paths": [
+        "/api/engagement/attachments?clientId=:id",
+        "/api/engagement/attachments/:id"
+      ],
+      "receipt": "DELETE {ok:true}; scoped GET current attachment collection including lifecycle/readiness",
+      "semantics": "Native marks delete_pending and clears sharing before object delete; S3 failure leaves inaccessible delete_failed and 503, recoverable on same ID; completed row removal gives later lookup404. Not a durable operation receipt or universal idempotent200. Successful fresh authorized list absence describes current visibility, not proof storage erasure, prior DELETE causality, or indexed-chunk completion. No new recovery endpoint is invented.",
+      "evidence": [
+        "frontend/apps/web/src/features/portfolio/files/queries.ts:19",
+        "frontend/apps/web/src/features/portfolio/files/mutations.ts:21",
+        "backend/apps/api/src/engagement/engagement.controller.ts:2955",
+        "backend/apps/api/src/engagement/engagement.service.ts:8348",
+        "backend/apps/api/src/engagement/engagement.service.ts:8377",
+        "backend/apps/api/src/engagement/engagement.service.ts:8470"
+      ]
+    }
+  }
+}

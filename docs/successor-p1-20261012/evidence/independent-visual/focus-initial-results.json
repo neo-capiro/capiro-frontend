@@ -1,0 +1,155 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-successor-visual-review/playwright.config.ts",
+      "--grep",
+      "Files ACL pending unknown review at 1440"
+    ],
+    "configFile": "/tmp/capiro-successor-visual-review/playwright.config.ts",
+    "rootDir": "/tmp/capiro-successor-visual-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-successor-visual-review/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-successor-visual-review",
+        "testIgnore": [],
+        "testMatch": [
+          "review.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-successor-visual-review/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Files ACL pending unknown review at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 46001,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 170,
+                        "line": 14
+                      },
+                      "message": "Error: locator.boundingBox: Test timeout of 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator(':focus')\u001b[22m\n\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const focusLog:any[]=[];const captureFocus=async()=>await page.evaluate(()=>({tag:document.activeElement?.tagName,text:document.activeElement?.getAttribute('aria-label')||document.activeElement?.textContent?.slice(0,100),name:document.activeElement?.getAttribute('name'),inDialog:Boolean(document.activeElement?.closest('[role=dialog]'))}));focusLog.push(await captureFocus());const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');focusLog.push(await captureFocus());const focused=await page.evaluate(()=>{const el=document.activeElement;if(!el)return null;const r=el.getBoundingClientRect();return{x:r.x,width:r.width};});if(focused && focusLog.at(-1)?.inDialog){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                          ^\n  15 |  await writeFile(info.outputPath(label+'.focus.json'),JSON.stringify(focusLog,null,2));\n  16 | }\n  17 | for(const width of [1440,360]){\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:170)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:24:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:45:24.583Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-259ed4d424883032cab1",
+          "file": "review.spec.ts",
+          "line": 18,
+          "column": 6
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:45:22.122Z",
+    "duration": 50221.223999999995,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

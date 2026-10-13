@@ -1,0 +1,15 @@
+# Active-count contrast correction addendum
+
+**AR-01 resolved for the reviewed rendered states.** Root added only `.tabs button[aria-pressed="true"] small { color: inherit; }` for active profile-type counts. Current CSS SHA-256 is `d4d23b4f53c643a1c4da9f5174bec62f8b5fc7cd12faa9f499df1907d7fe16ca`. The four relevant source files remained byte-identical throughout these after-fix captures. The final repository freeze/combined gates remain root-owned.
+
+Independent measurements at1440px and390px confirm the active All count is now opaque white. At rest the actual opaque #242424→#0a0a0a gradient yields15.523–19.798:1. On actual pointer hover the computed gradient disappears and the solid #343434 background yields12.450:1. Four viewport PNGs preserve both states; the mobile and desktop samples were visually inspected. No global muted palette change or hidden count is needed.
+
+The corrected external run passed2/2 cases with one worker, zero retries/skips/flaky results. Remote requests, writes, unexpected API calls and page errors are empty. Owned5189 PID1336709 stopped at07:44:55UTC; the port returned ECONNREFUSED. Root5191/5197 were untouched. No application/test source edit, install, production build, provider/native call or broad replay was performed by this reviewer.
+
+The addendum's initial2-case attempt failed before reaching the count because the review helper's last broad local request handler used continue(), bypassing the previously installed synthetic fixtures. The profile never appeared. That was a harness mistake, not a product failure. Its original script/results/logs/traces remain. Only the external helper changed to fallback() for local requests; the subsequent run uses separate `results-v2.json`, artifacts and lease receipt.
+
+Root-owned additional evidence was independently read and hashed: valid before-fix red-v2 had2 light failures/2 dark passes; final green had6/6 passes comprising four both-tab/rest+hover/light+dark/1440+390 scenarios and two full-default Portfolio axe audits. The owner test actually selects All and Clients and checks both backgrounds. These are source/evidence-reviewed owner runs, not independently repeated here. Our direct after-fix captures cover All/light at two widths only.
+
+The immutable before-fix packet remains unchanged: manifest SHA `05948491c0eea43742fcd13407c67fd59c59067b446aacc977076ed6bfe5a007`. Its fifteen capture passes continue to mean capture/readiness/focus/no-effects success, not contrast acceptance. One annotation precision correction: the before packet's findings.json says fontWeight400, while its retained actual computed data is500 (10px); axe described it as normal. This does not change the4.5:1 threshold or the recorded before/final ratios.
+
+The earlier broader limits remain: synthetic fixtures, system Chromium154, no actual assistive technology, no every-route/state or400%zoom qualification, no Figma parity/native authority/provider/durability/deployment acceptance. The manual incomplete review and this focused correction do not establish full WCAG conformity.

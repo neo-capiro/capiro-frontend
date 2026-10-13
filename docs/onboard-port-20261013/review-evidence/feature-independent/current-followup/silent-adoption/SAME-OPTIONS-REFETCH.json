@@ -1,0 +1,45 @@
+{
+  "atUTC": "2026-10-13T05:20:29.774Z",
+  "method": "Exact current helper; actual QueryClient.refetchQueries; synthetic promise/status fixtures only. No React/browser/network/native request.",
+  "sourceSha256": "2efb194e7056caadcd48c13ecf49ab17f6111ce8c974bfe1b2fad52fe9290af3",
+  "results": [
+    {
+      "staleOutcome": 200,
+      "calls": 2,
+      "oldContinuation": 1,
+      "oldResult": {
+        "value": {
+          "sessionId": "A",
+          "state": "legal_accepted",
+          "plan": "paid"
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Canonical refetch of same query options cannot replace captured original dispatch signal or satisfy canceled deliberate caller",
+      "pass": false
+    },
+    {
+      "staleOutcome": 403,
+      "calls": 2,
+      "oldContinuation": 1,
+      "oldResult": {
+        "value": {
+          "sessionId": "A",
+          "state": "legal_accepted",
+          "plan": "paid"
+        }
+      },
+      "current": {
+        "sessionId": "A",
+        "state": "legal_accepted",
+        "plan": "paid"
+      },
+      "expected": "Canonical refetch of same query options cannot replace captured original dispatch signal or satisfy canceled deliberate caller",
+      "pass": false
+    }
+  ]
+}

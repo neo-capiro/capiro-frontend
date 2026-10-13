@@ -1,0 +1,59 @@
+[
+  {
+    "phase": "unit-red",
+    "result": "first invocation used repo cwd so no test files found; corrected cwd apps/web produced expected missing new mail-body module failure",
+    "logs": [
+      "unit-red.log",
+      "unit-red-corrected.log"
+    ]
+  },
+  {
+    "phase": "initial types",
+    "result": "strict optional CSS module/indexed test tuple errors corrected; later typecheck-corrected exited0",
+    "logs": [
+      "typecheck.log",
+      "typecheck-corrected.log"
+    ]
+  },
+  {
+    "phase": "first12",
+    "result": "11pass/1 broad paste assertion matched an inert source-less ProseMirror-separator caret image. Narrowed resource-bearing editor selector; added all-image exclusion in review and serialized send. No sanitizer weakening.",
+    "logs": [
+      "green.log",
+      "green-results.json"
+    ]
+  },
+  {
+    "phase": "first affected",
+    "result": "77/77pass (65preserved+12new).",
+    "logs": [
+      "affected.log",
+      "affected-results.json"
+    ]
+  },
+  {
+    "phase": "extra2",
+    "result": "source replacement Ctrl+Z cleared the seeded draft because setContent initialized a blank editor. Fixed by initial content from safe current value and receivedref initialization. Attachment test selector matched native file input and toolbar button; scoped the selector to the toolbar without changing its assertion.",
+    "logs": [
+      "extra-before.log",
+      "extra-before-results.json"
+    ]
+  },
+  {
+    "phase": "final types",
+    "result": "Full TypeScript retry killed137 under pressure; final bounded2048MiB retry after browser release exited0.",
+    "logs": [
+      "typecheck-final.log"
+    ]
+  },
+  {
+    "phase": "independent native-history review",
+    "result": "Ctrl+Z after identity invalidation restored prior native history;0/1 red. Reset EditorState history after external document replacements;45/45 final owner controls green including ordinary typing/format Undo.",
+    "logs": [
+      "history-red.log",
+      "history-red-results.json",
+      "history-green.log",
+      "history-green-results.json"
+    ]
+  }
+]

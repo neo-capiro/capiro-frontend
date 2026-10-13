@@ -1,0 +1,69 @@
+{
+  "package": {
+    "artifactSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+    "bytes": 532178,
+    "regularEntries": 187,
+    "lockIntegrityMatches": true,
+    "publicRoot": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "runtimeDependencies": {},
+    "copyDefinitions": [
+      "exports.PRICE_LOCK_COPY = 'Limited-time price \u2014 lock in $200/profile for 1 year.';",
+      "exports.PRICE_CHANGE_COPY = 'Your price is locked for 12 months from subscription; thereafter prices are subject to change.';"
+    ],
+    "copyDeclarations": [
+      "export declare const PRICE_LOCK_COPY = \"Limited-time price \\u2014 lock in $200/profile for 1 year.\";",
+      "export declare const PRICE_CHANGE_COPY = \"Your price is locked for 12 months from subscription; thereafter prices are subject to change.\";"
+    ],
+    "limit": "Static packed-byte read only. No package execution, browser graph/build qualification or new producer fetch."
+  },
+  "addedLockRecords": [
+    "node_modules/@capiro/shared",
+    "node_modules/@stripe/react-stripe-js",
+    "node_modules/@stripe/stripe-js"
+  ],
+  "removedLockRecords": [],
+  "changedExistingLockRecords": [
+    {
+      "path": "apps/web",
+      "changedKeys": [
+        "dependencies"
+      ]
+    },
+    {
+      "path": "node_modules/js-tokens",
+      "changedKeys": [
+        "dev"
+      ]
+    },
+    {
+      "path": "node_modules/loose-envify",
+      "changedKeys": [
+        "dev"
+      ]
+    },
+    {
+      "path": "node_modules/object-assign",
+      "changedKeys": [
+        "dev"
+      ]
+    },
+    {
+      "path": "node_modules/prop-types",
+      "changedKeys": [
+        "dev"
+      ]
+    },
+    {
+      "path": "node_modules/react-is",
+      "changedKeys": [
+        "dev"
+      ]
+    }
+  ],
+  "unchangedExistingLockRecords": 924
+}

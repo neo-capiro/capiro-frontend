@@ -1,0 +1,47 @@
+{
+  "source": "2b0511a7efe2047028c31269626140829db33541",
+  "rootProvidedApplicationTree": "057fd70503a8f8e9e88d5c1393182d6ec67e1651",
+  "appsWebTree": "974527d9320e96f58508113b7f3c2aa71f820b9b",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/files/FileAccess.tsx",
+      "sha256": "f7d7802180dc955eb34bbbd7b4a8cb619d40c96d6b57c9f36c9d8c9cabe9f6a9"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileMetadataStatus.tsx",
+      "sha256": "bf5ac24fe63c445fd32f0192657e12f8189d050233c105a65a3b4956f8dda59c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+      "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/useFileMetadataChange.ts",
+      "sha256": "3b7b374daf12df45e096a7c3db737d33d3f4378559fedbdc7425a4bf833b8fd5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/ui/Dialog.tsx",
+      "sha256": "34546dacd40b169114316d1b208467ef02f98f0472410d9d06c5e3b998ffd14f"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/ui/dialog-interaction.ts",
+      "sha256": "7bb04ea1509e4c3b62dec49d199a312f7e2ae8fa2dbe1b9b344cbdbf7dd129ab"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/ui/dialog.module.css",
+      "sha256": "f8ecd055d8d96fc153c9b105d31f272ee04c7bbf336c84fefe873d12f7021310"
+    },
+    {
+      "path": "packages/ui/src/shadcn/dialog.tsx",
+      "sha256": "c48b0bde6f2f458a3763d65ba30a83e83234b7e62d943dc650c738cfdd7c87d3"
+    }
+  ]
+}

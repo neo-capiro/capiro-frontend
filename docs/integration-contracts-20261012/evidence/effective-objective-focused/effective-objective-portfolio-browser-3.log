@@ -1,0 +1,30 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- effective-dates.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test effective-dates.spec.ts
+
+[WebServer] (node:247706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:247729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/effective-dates.spec.ts:4:1 › master Agenda reads publisher effective dates across excluded pages without shifting civil dates (4.2s)
+  ✓  2 tests/browser/effective-dates.spec.ts:75:1 › client Agenda and master Month never fetch the public effective-date feed (5.5s)
+  ✓  3 tests/browser/effective-dates.spec.ts:96:1 › stale effective evidence stays unavailable without publication-date fallback (4.0s)
+
+  3 passed (15.7s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

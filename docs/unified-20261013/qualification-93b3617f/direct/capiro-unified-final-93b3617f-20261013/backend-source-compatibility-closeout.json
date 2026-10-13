@@ -1,0 +1,22 @@
+{
+  "recordedUTC": "2026-10-13T06:43:02.879933+00:00",
+  "frontendSource": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "supersedes": "backend-source-updates.json meriAuthority review pending only",
+  "status": "PASS_SOURCE_COMPATIBILITY_ONLY",
+  "capirov2Pr2449": "60cf2e51129f8358e6afe5fc600ffcdb6de01759",
+  "meriPr47": "84c2ca01d0bce025a0003b6e724d675a05f2975a",
+  "report": "/tmp/capiro-meri-pr2449-compatibility-20261013/REPORT.md",
+  "manifestSha256": "4dc597d82b3ca32113f42d40024c7641e8ba2e2a643c9277ac245ff8358cceea",
+  "closed": "Missing private Capiro authority endpoint source implementation; no concrete wire mismatch found.",
+  "remaining": [
+    "real Clerk signed sid and revocation",
+    "native RLS/HTTP behavior",
+    "cross-service clocks and current admitted run",
+    "trusted service composition and activation",
+    "target musl producer/image/ABI qualification",
+    "exact unified-source admission; PR2448 admits earlier Newsletter source only"
+  ],
+  "frontendChanges": false,
+  "nativeCalls": false,
+  "activation": false
+}

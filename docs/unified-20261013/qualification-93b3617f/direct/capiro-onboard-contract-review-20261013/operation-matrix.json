@@ -1,0 +1,602 @@
+{
+  "source": "7b5a9644d30d22389b23f0e07f923c8925682047",
+  "operationCount": 36,
+  "auth": {
+    "F": "Default Clerk session JWT (getToken()), verified purchaser; no org/tenant prerequisite. Native ClerkUserGuard; do not substitute template capiro or TenantGuard.",
+    "S-read": "Default Clerk session JWT (getToken()), native TenantGuard resolves current canonical tenant and active membership; any member read.",
+    "S-write": "S-read plus exact native Clerk org-admin role and onboardingFlowVersion===1 checked server-side.",
+    "IT": "Native capability-only endpoint, no Clerk requirement; gateway should omit Authorization/cookies. Emailed 64-lowercase-hex token is credential. Fixed narrow public path.",
+    "C-member": "Clerk getToken({template:'capiro'}); Core canonical tenant/user middleware + role minimum standard_user where declared.",
+    "C-admin": "C-member plus native Core minimum user_admin (higher capiro_admin allowed by canonical rank).",
+    "P": "Public, unauthenticated; credentials omitted. No arbitrary URL or service selection.",
+    "C-session": "Clerk getToken({template:'capiro'}); Core canonical authenticated tenant/user context. GET /api/me has no additional route role annotation."
+  },
+  "rows": [
+    {
+      "id": "OB-01",
+      "group": "funnel",
+      "helper": "register",
+      "method": "POST",
+      "path": "/onboard-api/funnel/register",
+      "auth": "F",
+      "input": "firstName,lastName strings 1\u2013100; orgName 2\u2013200; exact DTO only",
+      "response": "FunnelSession: sessionId:string,state; nullable plan/payMethod/profiles/roleMode/importMode/slugFinal/tenantId/failureReason/firstName/lastName/orgName; roleDesignations/orgProfile JSON; itAdminEmails:string[],email:string,stripe:{setupIntentStatus?:string,subscriptionStatus?:string}",
+      "effectsAndBinding": "Purchaser upsert + session admission; existing provisioned session reused. No client idempotency key or complete concurrent-registration guarantee. Receipt sessionId/current actor binds subsequent flow; not new-tenant success.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:241",
+        "apps/onboard-api/src/funnel/funnel.service.ts:93",
+        "apps/onboard-api/src/funnel/funnel.service.ts:823"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-02",
+      "group": "funnel",
+      "helper": "getSession",
+      "method": "GET",
+      "path": "/onboard-api/funnel/session",
+      "auth": "F",
+      "input": "none",
+      "response": "Same native FunnelSession, including nullable names, non-null itAdminEmails and sessionId; 404 means no purchaser/session",
+      "effectsAndBinding": "Read can perform best-effort Stripe status reads; missing stripe properties mean unavailable, not failure/paid. Only this 404 maps to normal unregistered state; never treat 401/403 that way.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:247",
+        "apps/onboard-api/src/funnel/funnel.service.ts:142",
+        "apps/onboard-api/src/funnel/funnel.service.ts:696",
+        "apps/onboard-api/src/funnel/funnel.service.ts:823"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-03",
+      "group": "funnel",
+      "helper": "verifyCheck",
+      "method": "POST",
+      "path": "/onboard-api/funnel/verify-check",
+      "auth": "F",
+      "input": "none",
+      "response": "{verified:boolean}",
+      "effectsAndBinding": "Fetches Clerk email; can advance to verified. No receipt actor/session echo; correlate current attempt then refetch session.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:252",
+        "apps/onboard-api/src/funnel/funnel.service.ts:162"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-04",
+      "group": "funnel",
+      "helper": "setPlan",
+      "method": "POST",
+      "path": "/onboard-api/funnel/plan",
+      "auth": "F",
+      "input": "plan trial|paid",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Requires verified, rejects switching after payment committed (409). Ack does not echo chosen plan/version; refetch current session; do not assume generic safe POST replay.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:258",
+        "apps/onboard-api/src/funnel/funnel.service.ts:180"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-05",
+      "group": "funnel",
+      "helper": "getLegal",
+      "method": "GET",
+      "path": "/onboard-api/funnel/legal",
+      "auth": "F",
+      "input": "none",
+      "response": "Array of {docType,version,html,pdfS3Key?}; active tos and sa for current plan",
+      "effectsAndBinding": "Requires plan_selected; immutable display/acceptance must bind received versions and current plan. Optional pdfS3Key is storage identity, not a public URL; bounded inert HTML rendering needed.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:264",
+        "apps/onboard-api/src/funnel/funnel.service.ts:202"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-06",
+      "group": "funnel",
+      "helper": "acceptLegal",
+      "method": "POST",
+      "path": "/onboard-api/funnel/legal-accept",
+      "auth": "F",
+      "input": "tosVersion,saVersion 1\u201364; signerName,signerTitle,signatureName 1\u2013120; emailCopy optional boolean",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Records signed legal consent and can email copies; exact versions validated server-side. Ack is not proof email delivered, does not echo consent id/hash. Lost response must retain uncertainty; read session/signed PDF, not blind reaccept. Native deduplicates recorded session/doc/version on read-before-insert; this is not a browser idempotency key or a new signature replacement receipt.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:269",
+        "apps/onboard-api/src/funnel/funnel.service.ts:218",
+        "apps/onboard-api/src/legal/legal.service.ts:86"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-07",
+      "group": "funnel",
+      "helper": "downloadSigned",
+      "method": "GET",
+      "path": "/onboard-api/funnel/legal/signed/:docType",
+      "auth": "F",
+      "input": "docType exactly tos|sa",
+      "response": "application/pdf attachment bytes; fixed name Capiro-Terms-of-Service-signed.pdf or Capiro-Subscription-Agreement-signed.pdf; 404 no signed consent",
+      "effectsAndBinding": "Regenerates signed PDF for current purchaser session. Native controller has no explicit byte cap/hash response. Gateway must bound bytes, validate PDF content type, sanitize/replace filename, no-store and discard stale-scope results.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:284",
+        "apps/onboard-api/src/funnel/funnel.service.ts:280",
+        "apps/onboard-api/src/legal/signed-pdf.service.ts:45"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-08",
+      "group": "funnel",
+      "helper": "createSetupIntent",
+      "method": "POST",
+      "path": "/onboard-api/funnel/payment/setup-intent",
+      "auth": "F",
+      "input": "method card|ach",
+      "response": "{clientSecret:string|null}",
+      "effectsAndBinding": "TRIAL only; creates Stripe SetupIntent and updates latest intent id; each call can create another, no public idempotency input. Nullable secret means no usable Elements intent. Keep actual confirmed intent and method bound; do not automatically replay.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:296",
+        "apps/onboard-api/src/funnel/funnel.service.ts:371"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-09",
+      "group": "funnel",
+      "helper": "trialComplete",
+      "method": "POST",
+      "path": "/onboard-api/funnel/payment/trial-complete",
+      "auth": "F",
+      "input": "method card|ach|wire; billingContact? email; setupIntentId? string 1\u2013128",
+      "response": "{ok:true,method:string,setupIntentStatus?:string}",
+      "effectsAndBinding": "TRIAL only. Actual client-confirmed intent checked against purchaser; card requires succeeded; ACH permits processing/requires_action. Wire stores billing contact, not settled payment. Bind returned method and current session; no invented charge/settlement receipt.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:302",
+        "apps/onboard-api/src/funnel/funnel.service.ts:403"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-10",
+      "group": "funnel",
+      "helper": "subscribe",
+      "method": "POST",
+      "path": "/onboard-api/funnel/payment/subscribe",
+      "auth": "F",
+      "input": "profiles coerced integer 1\u2013100000; method card|ach|wire; billingContact? email",
+      "response": "{subscriptionId:string,status:string,clientSecret?:string|null,hostedInvoiceUrl?:string|null}",
+      "effectsAndBinding": "PAID only; effective quantity >= canonical MIN_CLIENT_SLOTS. Existing live subscription reused; incomplete may be canceled/replaced; fresh creation lacks public idempotency key. Receipt does not echo quantity/method/purchaser; no automatic retry or success claim from clientSecret alone.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:311",
+        "apps/onboard-api/src/funnel/funnel.service.ts:477",
+        "apps/onboard-api/src/funnel/funnel.service.ts:802"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-11",
+      "group": "funnel",
+      "helper": "paidStatus",
+      "method": "POST",
+      "path": "/onboard-api/funnel/payment/paid-status",
+      "auth": "F",
+      "input": "none",
+      "response": "{status:string,advanced:boolean}",
+      "effectsAndBinding": "Despite name, this POST can advance funnel. Wire advanced means invoice issued, not paid; ACH processing may advance; card requires active. Poll sequentially for current subscription attempt; receipt omits subscription id.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:317",
+        "apps/onboard-api/src/funnel/funnel.service.ts:564"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-12",
+      "group": "funnel",
+      "helper": "setRoles",
+      "method": "POST",
+      "path": "/onboard-api/funnel/roles",
+      "auth": "F",
+      "input": "roleMode self|invite; designations? array {email,role:super|admin,firstName? 1\u2013100,lastName? 1\u2013100}",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Requires payment_on_file; invite mode must include a super admin. Stores designation, not invitation delivery. Old UI supplies email/role only; do not require optional names or array in gateway if absent natively.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:323",
+        "apps/onboard-api/src/funnel/funnel.service.ts:593"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-13",
+      "group": "funnel",
+      "helper": "setImportPref",
+      "method": "POST",
+      "path": "/onboard-api/funnel/import-pref",
+      "auth": "F",
+      "input": "importMode self|managed",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Requires roles_designated; managed path can notify Capiro staff. Ack lacks echoed mode; read session, preserve uncertainty if response lost.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:329",
+        "apps/onboard-api/src/funnel/funnel.service.ts:619"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-14",
+      "group": "funnel",
+      "helper": "setOrg",
+      "method": "POST",
+      "path": "/onboard-api/funnel/org",
+      "auth": "F",
+      "input": "orgProfile {legalName 2\u2013200, vertical? 1\u2013100,teamSize? 1\u201350,timezone? 1\u201364,locale? 1\u201332,address? {street 1\u2013200,city 1\u2013100,state 1\u201350,zip 1\u201320}}; itAdminEmail? email",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Requires import_pref. Omit empty optional strings; no browser tenantId. Stores profile/contact, not tenant creation. Ack has no input/version echo; reread current session. Native merge preserves omitted optional fields and adds rather than replaces IT contacts; no clear/remove contract is provided.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:335",
+        "apps/onboard-api/src/funnel/funnel.service.ts:646"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-15",
+      "group": "funnel",
+      "helper": "provision",
+      "method": "POST",
+      "path": "/onboard-api/funnel/provision",
+      "auth": "F",
+      "input": "none",
+      "response": "{state,tenantId:string|null,slug:string|null,failureReason?:string|null}",
+      "effectsAndBinding": "CAS org_setup\u2192provisioning; duplicate observes provisioning/provisioned. Creates tenant/org, may send invites/email. Failure 502 can follow durable partial effects; failed state requires owner intervention/reset, not a new registration/retry loop. Only provisioned with valid tenant/slug means complete.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:341",
+        "apps/onboard-api/src/funnel/provisioning.service.ts:65",
+        "apps/onboard-api/src/funnel/provisioning.service.ts:360"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-16",
+      "group": "funnel",
+      "helper": "getStatus",
+      "method": "GET",
+      "path": "/onboard-api/funnel/status",
+      "auth": "F",
+      "input": "none",
+      "response": "{state,tenantId:string|null,slug:string|null,failureReason:string|null}",
+      "effectsAndBinding": "Read recovery path for provisioning, no sessionId in this projection; bind to current purchaser/session lifetime rather than assert unsupported echo.",
+      "refs": [
+        "apps/onboard-api/src/funnel/funnel.controller.ts:347",
+        "apps/onboard-api/src/funnel/funnel.service.ts:147"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-17",
+      "group": "setup",
+      "helper": "getState",
+      "method": "GET",
+      "path": "/onboard-api/setup/state",
+      "auth": "S-read",
+      "input": "none",
+      "response": "{complete,legacyTenant,tasks:{it_email,import,firm_ai,invites},orgName,slug,plan,importMode,imported,cap,trialEndsAt,itInvites:[{id,email,status,provider,expiresAt}]}",
+      "effectsAndBinding": "Reads allowed to any active member. Task read status includes skipped; legacy tenant returns complete=true and must show switch notice. No tenant UUID in response; current authenticated org request owns scope; never compare guessed authority.",
+      "refs": [
+        "apps/onboard-api/src/setup/setup.controller.ts:37",
+        "apps/onboard-api/src/setup/setup.service.ts:115"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-18",
+      "group": "setup",
+      "helper": "transitionTask",
+      "method": "POST",
+      "path": "/onboard-api/setup/tasks/:task/transition",
+      "auth": "S-write",
+      "input": "task it_email|import|firm_ai|invites; {from,to} each none|waiting|verifying|done; invites\u2192done rejected",
+      "response": "{task,status}",
+      "effectsAndBinding": "CAS compares exact from; 409 requires current-state reconciliation, not automatic retry with refreshed from. skipped is READ-only here. Validate task equals requested and status equals to, then refetch state.",
+      "refs": [
+        "apps/onboard-api/src/setup/setup.controller.ts:15",
+        "apps/onboard-api/src/setup/setup.controller.ts:42",
+        "apps/onboard-api/src/setup/setup.service.ts:181"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-19",
+      "group": "setup",
+      "helper": "createItInvite",
+      "method": "POST",
+      "path": "/onboard-api/setup/it-invites",
+      "auth": "S-write",
+      "input": "{email:valid email}",
+      "response": "Array of IT invite metadata, not {ok:true} and never raw capability token",
+      "effectsAndBinding": "Creates random 7-day capability + email effect, may set task waiting. Bind returned normalized email/current scope, no delivery guarantee. Lost receipt can follow invite+send; do not replay automatically.",
+      "refs": [
+        "apps/onboard-api/src/setup/setup.controller.ts:54",
+        "apps/onboard-api/src/setup/setup.service.ts:209",
+        "apps/onboard-api/src/setup/setup.service.ts:231"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-20",
+      "group": "setup",
+      "helper": "resendItInvite",
+      "method": "POST",
+      "path": "/onboard-api/setup/it-invites/:inviteId/resend",
+      "auth": "S-write",
+      "input": "inviteId UUID; no body",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Rotates capability token/expiry and sends mail; rejects already granted. Repetition can invalidate previous link. Refetch metadata; no receipt invitationId echo and no delivery guarantee.",
+      "refs": [
+        "apps/onboard-api/src/setup/setup.controller.ts:59",
+        "apps/onboard-api/src/setup/setup.service.ts:259"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-21",
+      "group": "setup",
+      "helper": "completeSetup",
+      "method": "POST",
+      "path": "/onboard-api/setup/complete",
+      "auth": "S-write",
+      "input": "none",
+      "response": "Full SetupState",
+      "effectsAndBinding": "Requires it_email done/skipped and import done; firm_ai optional. Marks invites done and stamps trial clock once; complete does not prove all invites delivered. Receipt should be current scope, complete=true, refreshed authoritative tasks.",
+      "refs": [
+        "apps/onboard-api/src/setup/setup.controller.ts:67",
+        "apps/onboard-api/src/setup/setup.service.ts:309"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-22",
+      "group": "IT",
+      "helper": "fetchItInvite",
+      "method": "GET",
+      "path": "/onboard-api/it/invite/:token",
+      "auth": "IT",
+      "input": "token exactly 64 lowercase hex",
+      "response": "{orgName,email,status,provider:string|null,providers:{microsoft:boolean,google:boolean},googleClientId:string|null}",
+      "effectsAndBinding": "Capability read, no Clerk. 404 unknown/revoked; 403 malformed/expired. Providers false disable action. Never log/persist capability in analytics; avoid arbitrary token lengths/path interpolation.",
+      "refs": [
+        "apps/onboard-api/src/it-admin/it-admin.controller.ts:20",
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:116",
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:137"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-23",
+      "group": "IT",
+      "helper": "fetchItConsentUrl",
+      "method": "POST",
+      "path": "/onboard-api/it/invite/:token/consent-url",
+      "auth": "IT",
+      "input": "same token; {provider:microsoft|google}",
+      "response": "{url:string}",
+      "effectsAndBinding": "Generates signed 30-minute OAuth state, not connection success. Exact provider HTTPS origin/path required; validate nested redirect_uri against fixed configured native callback origin/path; never synthesize state or proxy callback as a new operation.",
+      "refs": [
+        "apps/onboard-api/src/it-admin/it-admin.controller.ts:25",
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:159"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-24",
+      "group": "IT",
+      "helper": "skipItGoogleVerification",
+      "method": "POST",
+      "path": "/onboard-api/it/invite/:token/skip-google",
+      "auth": "IT",
+      "input": "same token; no body",
+      "response": "{ok:true}",
+      "effectsAndBinding": "Google-only deferred state; live capability retained. Already granted/verified is no-op; acknowledgement does not mean connected. Refetch same capability view; signed-out access intentional.",
+      "refs": [
+        "apps/onboard-api/src/it-admin/it-admin.controller.ts:32",
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:218"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-25",
+      "group": "Core",
+      "helper": "me",
+      "method": "GET",
+      "path": "/api/me",
+      "auth": "C-session",
+      "input": "none",
+      "response": "Native full me object; Onboard needs top-level billingAdmin:boolean",
+      "effectsAndBinding": "Actual response also has user.id/clerkUserId and tenant.id/role. Use existing canonical identity owner; billingAdmin alone is UI capability, not authority. 401/403 invalidates protected scope.",
+      "refs": [
+        "apps/api/src/users/users.controller.ts:99"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-26",
+      "group": "Core",
+      "helper": "searchLdaRegistrants",
+      "method": "GET",
+      "path": "/api/firm/lda-registrants",
+      "auth": "C-member",
+      "input": "query q string 2\u2013200",
+      "response": "Array {id:number,name,city:string|null,state:string|null,totalClients:number,totalFilings:number}",
+      "effectsAndBinding": "Read only; search may be global data under authenticated caller. Bound q and response count/size; failure does not mean zero results.",
+      "refs": [
+        "apps/api/src/intelligence/firm-onboarding.controller.ts:43",
+        "apps/api/src/intelligence/firm-onboarding.service.ts:77"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-27",
+      "group": "Core",
+      "helper": "getRegistrant",
+      "method": "GET",
+      "path": "/api/firm/registrant",
+      "auth": "C-member",
+      "input": "none",
+      "response": "{ldaRegistrantId:number|null,ldaRegistrantName:string|null}",
+      "effectsAndBinding": "Tenant-current read; null is unselected, not failed. Preserve omitted/error distinction.",
+      "refs": [
+        "apps/api/src/intelligence/firm-onboarding.controller.ts:48",
+        "apps/api/src/intelligence/firm-onboarding.service.ts:99"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-28",
+      "group": "Core",
+      "helper": "setRegistrant",
+      "method": "PUT",
+      "path": "/api/firm/registrant",
+      "auth": "C-admin",
+      "input": "{registrantId:integer>=1}",
+      "response": "{ldaRegistrantId:number,ldaRegistrantName:string}",
+      "effectsAndBinding": "Changes firm anchor. Validate returned id equals submitted id, invalidate candidates. No CAS version or idempotency key; late current-scope response must not overwrite newer selection.",
+      "refs": [
+        "apps/api/src/intelligence/firm-onboarding.controller.ts:53",
+        "apps/api/src/intelligence/firm-onboarding.service.ts:115"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-29",
+      "group": "Core",
+      "helper": "getImportCandidates",
+      "method": "GET",
+      "path": "/api/firm/import-candidates",
+      "auth": "C-member",
+      "input": "none",
+      "response": "{registrantId:number|null,registrantName:string|null,candidates:[{ldaClientId,name,filings,latestFilingYear:number|null,totalSpend,onboardedAs:string|null}]}",
+      "effectsAndBinding": "Bind candidates to current registrant before import; no anchor returns nulls+empty, failure must not masquerade as empty.",
+      "refs": [
+        "apps/api/src/intelligence/firm-onboarding.controller.ts:59",
+        "apps/api/src/intelligence/firm-onboarding.service.ts:136"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-30",
+      "group": "Core",
+      "helper": "createClient",
+      "method": "POST",
+      "path": "/api/clients",
+      "auth": "C-member",
+      "input": "Onboard subset {name:string1\u2013200,website?:URL with protocol optional,description?:string}; do not expand operation to all native DTO fields",
+      "response": "Full client object (at least id,name,tenantId); frontend formerly picked id/name",
+      "effectsAndBinding": "Controller class minimum standard_user, not user_admin; keep backend roles authoritative. Creates client plus detached enrichment; no idempotency key. Unknown result cannot be safely repeated; preserve draft/current-read recovery without claiming enrichment done.",
+      "refs": [
+        "apps/api/src/clients/clients.controller.ts:323",
+        "apps/api/src/clients/clients.controller.ts:343",
+        "apps/api/src/clients/clients.service.ts:1125"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-31",
+      "group": "Core",
+      "helper": "importClients",
+      "method": "POST",
+      "path": "/api/firm/import",
+      "auth": "C-admin",
+      "input": "{ldaClientIds:integer[] length1\u2013100}; old wrapper chunks larger selections",
+      "response": "{created:number,items:[{id,name,ldaClientId}],skipped:[{ldaClientId,reason}]}",
+      "effectsAndBinding": "Each id must belong to current firm's registrant; duplicates skipped using per-id transaction/lock. 402 before batch at cap, per-row skips midbatch. Validate returned ids subset of submitted ids and created==items.length, disjoint outcomes; preserve prior chunks if later failure; no all-or-nothing claim.",
+      "refs": [
+        "apps/api/src/intelligence/firm-onboarding.controller.ts:64",
+        "apps/api/src/intelligence/firm-onboarding.service.ts:181"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-32",
+      "group": "Core",
+      "helper": "getMemoryCatalog",
+      "method": "GET",
+      "path": "/api/memory/catalog",
+      "auth": "C-member",
+      "input": "none",
+      "response": "Array {type,scope:firm|client|user,label,blurb,sections:[{key,heading,prompt,example}]}",
+      "effectsAndBinding": "Public HTTP catalog includes all scopes; Onboard uses only firm-soul,firm-compass,playbook. Do not import private catalog implementation or allow arbitrary dynamic memory types.",
+      "refs": [
+        "apps/api/src/memory/memory.controller.ts:96",
+        "apps/api/src/memory/memory-catalog.ts:31"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-33",
+      "group": "Core",
+      "helper": "getFirmMemorySections",
+      "method": "GET",
+      "path": "/api/memory/items/:type/firm/sections",
+      "auth": "C-member",
+      "input": "type restricted to firm-soul|firm-compass|playbook; fixed slug firm",
+      "response": "{type,slug,title,visibility,clientId,updatedAt,exists,pendingReview:null|{candidateId,status:pending_review,submittedAt},sections:[{key,heading,owner,body,prompt,example}]}",
+      "effectsAndBinding": "Nonexistent known file returns skeleton; not 404. pendingReview is separate from active body. Validate requested type/firm slug/clientId=null; don't invent revision/CAS or treat pending contents as active.",
+      "refs": [
+        "apps/api/src/memory/memory.controller.ts:160",
+        "apps/api/src/memory/memory-candidate.service.ts:242"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-34",
+      "group": "Core",
+      "helper": "putFirmMemorySections",
+      "method": "PUT",
+      "path": "/api/memory/items/:type/firm/sections",
+      "auth": "C-admin",
+      "input": "same firm-only type; {sections:[{key:string,body:string}]}",
+      "response": "{status:'pending_review',candidateId:string,activeItemUnchanged:true} for FIRM; {ok:true,updatedAt} applies USER scope only",
+      "effectsAndBinding": "Old Onboard return type is stale. Creates pending reviewed proposal, no immediate active save, no revision/CAS. Keep draft/candidate receipt, show submitted-for-review; no auto task-complete based on old ok assumption.",
+      "refs": [
+        "apps/api/src/memory/memory.controller.ts:214",
+        "apps/api/src/memory/memory.controller.ts:241"
+      ],
+      "successHTTPStatus": 200
+    },
+    {
+      "id": "OB-35",
+      "group": "Core",
+      "helper": "inviteTeamMember",
+      "method": "POST",
+      "path": "/api/tenant-admin/team/invite",
+      "auth": "C-admin",
+      "input": "{email,role:user_admin|standard_user,firstName?:1\u2013100,lastName?:1\u2013100}; omit native redirectUrl from port operation",
+      "response": "{status:'invited',invitation:{id,email,role,firstName:string|null,lastName:string|null,createdAt,expiresAt:string|null}}",
+      "effectsAndBinding": "Revokes matching pending invite then creates Clerk invitation. Bind normalized returned email/role to intended request; ack != accepted/member or delivered mail. Unknown reply may have sent/revoked; no automatic replay.",
+      "refs": [
+        "apps/api/src/tenant-admin/tenant-admin.controller.ts:19",
+        "apps/api/src/tenant-admin/tenant-admin.controller.ts:183",
+        "apps/api/src/tenant-admin/tenant-admin.service.ts:216"
+      ],
+      "successHTTPStatus": 201
+    },
+    {
+      "id": "OB-36",
+      "group": "public",
+      "helper": "fetchConfig",
+      "method": "GET",
+      "path": "/onboard-api/public/config",
+      "auth": "P",
+      "input": "none; credentials omitted",
+      "response": "{clerkPublishableKey:string|null,stripePublishableKey:string|null,appBaseUrl,apiBaseUrl,onboardingBaseUrl,funnelEnabled:boolean,environment:string}",
+      "effectsAndBinding": "Boot read must work signed out. Public-only values; funnelEnabled and nullable provider keys are availability, not authorization. Never let response apiBaseUrl choose gateway upstream, and restrict internal/external navigation to approved destinations.",
+      "refs": [
+        "apps/onboard-api/src/public/public-config.controller.ts:8"
+      ],
+      "successHTTPStatus": 200
+    }
+  ]
+}

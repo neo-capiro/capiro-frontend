@@ -1,0 +1,156 @@
+{
+  "recordedAt": "2026-10-12T01:26:37.167Z",
+  "repository": "neo-capiro/capiro-frontend",
+  "branch": "codex/portfolio-continuation-20261011",
+  "base": "02c02d95bdf3949662b9123f425271c6491ffdab",
+  "localSourceHead": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "publishedSourceHead": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+  "exactSourceTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+  "sourceTreeIdentical": true,
+  "localSourceCommitsAfterBase": 33,
+  "publicationMethod": "Existing GitHub connector Git Data API; incremental tree batches after one oversized request timed out. No new credential action. Local history retained separately in complete Git bundle.",
+  "originalHistoryBundle": "history/portfolio-local-history-through-760dcc6.bundle",
+  "holds": [
+    "No main merge",
+    "No AWS action",
+    "No deployment",
+    "No live providers or signed-in final acceptance"
+  ],
+  "remoteCommitReadback": {
+    "sha": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "node_id": "C_kwDOVD8qFdoAKGFiYWVhYjM3YjM2ZDYwYjNlNTE4NTc1NWUxYjJjOTE2OWQ3YzkyZjM",
+    "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "author": {
+      "name": "CapiroHQ",
+      "email": "neo@capiro.ai",
+      "date": "2026-10-12T01:25:20Z"
+    },
+    "committer": {
+      "name": "CapiroHQ",
+      "email": "neo@capiro.ai",
+      "date": "2026-10-12T01:25:20Z"
+    },
+    "tree": {
+      "sha": "46417a01484727747b0a2d81b3b4f278285cb709",
+      "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/trees/46417a01484727747b0a2d81b3b4f278285cb709"
+    },
+    "message": "Preserve Portfolio continuation and frozen Tracker source for handover\n\nSource-equivalent publication of local checkpoint 760dcc6c1179312c7f4b762e64cf3af1aad60c3e; exact Git tree 46417a01484727747b0a2d81b3b4f278285cb709. The original local commit history is being preserved in the companion handover bundle. One canonical apps/web; Portfolio only. Existing capirov2 service ownership and common-shell reconciliation holds remain.\n\nnpm run check passed on this source: 998 Portfolio units, 32 foundation checks, 21 transport checks, types, pins, lint, formatting and architecture. Final combined build, production browser and hosted/signed-in acceptance remain pending. Intel Watchlist accepted-projection validation, PhoneVerification copy and the Core-404 combined entry assertion are recorded open follow-ups.\n\nSource preservation only. No main merge, AWS changes, deployment, live sends or credential action.",
+    "parents": [
+      {
+        "sha": "02c02d95bdf3949662b9123f425271c6491ffdab",
+        "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/02c02d95bdf3949662b9123f425271c6491ffdab",
+        "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/02c02d95bdf3949662b9123f425271c6491ffdab"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "remoteBranchReadback": {
+    "ref": "refs/heads/codex/portfolio-continuation-20261011",
+    "node_id": "REF_kwDOVD8qFdoAMHJlZnMvaGVhZHMvY29kZXgvcG9ydGZvbGlvLWNvbnRpbnVhdGlvbi0yMDI2MTAxMQ",
+    "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/refs/heads/codex/portfolio-continuation-20261011",
+    "object": {
+      "sha": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+      "type": "commit",
+      "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/abaeab37b36d60b3e5185755e1b2c9169d7c92f3"
+    }
+  },
+  "treeBatches": [
+    {
+      "batch": 0,
+      "entries": 50,
+      "sha": "19f0d6083f3caa45945c0564cdd44ad35a431a1d"
+    },
+    {
+      "batch": 1,
+      "entries": 50,
+      "sha": "b68232fc0e2f12bdeef3472b78f1f464358ec8e4"
+    },
+    {
+      "batch": 2,
+      "entries": 50,
+      "sha": "7be73392c2829b2574728dc33a839a9211e4f1fe"
+    },
+    {
+      "batch": 3,
+      "entries": 50,
+      "sha": "0cb248c45c8ac49bd6a793aec17c283d14dc426d"
+    },
+    {
+      "batch": 4,
+      "entries": 50,
+      "sha": "b8d8b7f3b5ea9fcf9dbe5c84bf62f001f85a135b"
+    },
+    {
+      "batch": 5,
+      "entries": 50,
+      "sha": "9dadb51bc8802cd09f074ab84b87f3000dfc25ad"
+    },
+    {
+      "batch": 6,
+      "entries": 50,
+      "sha": "debedc08b9c00cd91f0212984667c24231f7a3e0"
+    },
+    {
+      "batch": 7,
+      "entries": 50,
+      "sha": "393303a952198da99efb18203f6a0f590ea0304a"
+    },
+    {
+      "batch": 8,
+      "entries": 50,
+      "sha": "a0006fdba125d66147df7f89afe40a3a86fb37fb"
+    },
+    {
+      "batch": 9,
+      "entries": 50,
+      "sha": "66fde81b9f055b89bf56a8439ff118593e997a7f"
+    },
+    {
+      "batch": 10,
+      "entries": 50,
+      "sha": "ee652459e40f59a1b16ff434db90a253c441053b"
+    },
+    {
+      "batch": 11,
+      "entries": 50,
+      "sha": "075206ead1108681ee592a3db8b0f79eab377379"
+    },
+    {
+      "batch": 12,
+      "entries": 31,
+      "sha": "8b46cb0a496c925da8a0fb92aaf3ccca740364d9"
+    },
+    {
+      "batch": 13,
+      "entries": 23,
+      "sha": "d608efe5619813888a083889979648e7d0a98683"
+    },
+    {
+      "batch": 14,
+      "entries": 8,
+      "sha": "aae000dbed1b504d84da5e40b74cf8d87c18dca8"
+    },
+    {
+      "batch": 15,
+      "entries": 1,
+      "sha": "f5e826bf4c9c396a33c423143489bbf2d7f06b71"
+    },
+    {
+      "batch": 16,
+      "entries": 9,
+      "sha": "ee1d6f1c0653382217df97d9da91afd0fb560ada"
+    },
+    {
+      "batch": 17,
+      "entries": 6,
+      "sha": "46417a01484727747b0a2d81b3b4f278285cb709"
+    }
+  ]
+}

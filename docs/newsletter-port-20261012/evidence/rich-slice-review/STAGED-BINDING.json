@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-13T00:13:02.485929+00:00",
+  "baseHead": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "result": "all23 reviewed source files equal current staged bytes; no commit binding claimed",
+  "paths": [
+    "apps/web/package.json",
+    "apps/web/src/app/engagement/outreach/page.tsx",
+    "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+    "apps/web/src/features/modules/engagement/OutreachView.tsx",
+    "apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+    "apps/web/src/features/modules/engagement/newsletter-route.ts",
+    "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/RichText.tsx",
+    "apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+    "apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+    "apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+    "apps/web/src/shared/capiro/newsletter-routing.test.ts",
+    "apps/web/src/shared/capiro/operations/engagement.ts",
+    "apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+    "apps/web/test/browser/newsletter-rich-history.spec.ts",
+    "apps/web/test/browser/newsletter-rich.spec.ts",
+    "docs/newsletter-port-20261012/RICH-IMPLEMENTATION-PLAN.md",
+    "package-lock.json"
+  ]
+}

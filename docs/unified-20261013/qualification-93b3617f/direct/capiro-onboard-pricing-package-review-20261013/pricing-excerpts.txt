@@ -1,0 +1,45 @@
+src/index.ts:657-673
+657: 
+658: /**
+659:  * Subscribing locks the $200/slot price for this many months
+660:  * (tenants.price_lock_expires_at); the "limited-time" launch offer copy.
+661:  */
+662: export const PRICE_LOCK_MONTHS = 12;
+663: 
+664: /** Pricing headline shown wherever the $200 price appears (Ninja copy ask). */
+665: export const PRICE_LOCK_COPY = 'Limited-time price — lock in $200/profile for 1 year.';
+666: 
+667: /**
+668:  * "Prices subject to change" language reconciled with the 12-month lock
+669:  * (shown on-screen on plan selection, not buried in the legal docs).
+670:  */
+671: export const PRICE_CHANGE_COPY =
+672:   'Your price is locked for 12 months from subscription; thereafter prices are subject to change.';
+673: 
+
+dist/index.js:670-682
+670: /**
+671:  * Subscribing locks the $200/slot price for this many months
+672:  * (tenants.price_lock_expires_at); the "limited-time" launch offer copy.
+673:  */
+674: exports.PRICE_LOCK_MONTHS = 12;
+675: /** Pricing headline shown wherever the $200 price appears (Ninja copy ask). */
+676: exports.PRICE_LOCK_COPY = 'Limited-time price — lock in $200/profile for 1 year.';
+677: /**
+678:  * "Prices subject to change" language reconciled with the 12-month lock
+679:  * (shown on-screen on plan selection, not buried in the legal docs).
+680:  */
+681: exports.PRICE_CHANGE_COPY = 'Your price is locked for 12 months from subscription; thereafter prices are subject to change.';
+682: /** Per-slot monthly price for a given purchased quantity (flat $200). */
+
+dist/index.d.ts:164-173
+164:  */
+165: export declare const PRICE_LOCK_MONTHS = 12;
+166: /** Pricing headline shown wherever the $200 price appears (Ninja copy ask). */
+167: export declare const PRICE_LOCK_COPY = "Limited-time price \u2014 lock in $200/profile for 1 year.";
+168: /**
+169:  * "Prices subject to change" language reconciled with the 12-month lock
+170:  * (shown on-screen on plan selection, not buried in the legal docs).
+171:  */
+172: export declare const PRICE_CHANGE_COPY = "Your price is locked for 12 months from subscription; thereafter prices are subject to change.";
+173: /** Per-slot monthly price for a given purchased quantity (flat $200). */

@@ -1,0 +1,36 @@
+{
+  "sealedUTC": "2026-10-13T07:33:31.061976+00:00",
+  "status": "SEALED_TYPE_ONLY_REVIEW",
+  "files": [
+    {
+      "file": "REPORT.md",
+      "bytes": 1045,
+      "sha256": "28c4c9c8dec072a63083b7ccedd4b6b454eafd23165517285fe391bdd4f5ab84"
+    },
+    {
+      "file": "TYPE-ONLY-DELTA.json",
+      "bytes": 730,
+      "sha256": "c61ac8dffd5172b995db9ed9587b65fb105ca6389274d436dcdaba2e3a298b29"
+    },
+    {
+      "file": "after.ts",
+      "bytes": 708,
+      "sha256": "855c28a24d9dda89e8239babcc14f3ea0dbe921441376b30ccfc93d0a9efa367"
+    },
+    {
+      "file": "before.ts",
+      "bytes": 697,
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce"
+    },
+    {
+      "file": "emitted.js",
+      "bytes": 629,
+      "sha256": "7229d691ddf1bdbda993d4fbf069ded902c6e35b46a50bde038251ae8bc01c0b"
+    },
+    {
+      "file": "inspect.mjs",
+      "bytes": 1517,
+      "sha256": "2582554b1e408e40a75a44f20b7758851c4ce0350481c1d028beebbf93c484a8"
+    }
+  ]
+}

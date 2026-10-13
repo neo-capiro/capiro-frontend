@@ -1,0 +1,13 @@
+--- meri-action-host-fixtures.ts.before
++++ meri-action-host-fixtures.ts
+@@ -196,7 +196,9 @@
+   await expect(
+     page.getByRole("region", { name: "Returned recommendations" }),
+   ).toBeVisible();
+-  await page.getByRole("button", { name: /^Select recommendation:/ }).click();
++  await page
++    .getByRole("button", { name: /^Select recommendation\s*:/ })
++    .click();
+   await expect(page.getByLabel("Task title", { exact: true })).toHaveValue(
+     "Issue",
+   );

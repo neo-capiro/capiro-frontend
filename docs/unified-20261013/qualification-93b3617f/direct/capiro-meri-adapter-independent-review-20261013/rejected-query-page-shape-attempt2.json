@@ -1,0 +1,282 @@
+{
+  "name": "query-foreign-intent-page",
+  "route": "query",
+  "httpStatus": 200,
+  "response": {
+    "lookupId": "1ea7fef1-2cea-43f4-8829-fbb54465762a",
+    "resultReference": "63ea6c68-bfbf-4d3d-ab22-08ea727b962a",
+    "resultSha256": "0950901e66967aececbd1c60889b708a455260e6c340b12bd2180458f41deffe",
+    "classification": "recommendations",
+    "acceptedTasks": false,
+    "events": [
+      {
+        "contractVersion": "0.1.0",
+        "eventId": "77b012dc-380b-45a4-8c1c-4233dd25d5b8",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "sequence": 1,
+        "createdAt": "2026-10-12T20:00:00.032Z",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "client",
+            "resourceId": "abcdef00-0000-4000-8000-000000000009",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "type": "tool.started",
+        "data": {
+          "requestId": "bc96152d-47bc-4e46-9399-f0519c25e061",
+          "tool": "actions.query@0.2.0"
+        }
+      },
+      {
+        "contractVersion": "0.1.0",
+        "eventId": "9e025d5f-839b-4491-9d57-fb67c5fe376a",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "sequence": 2,
+        "createdAt": "2026-10-12T20:00:00.081Z",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "client",
+            "resourceId": "abcdef00-0000-4000-8000-000000000009",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "type": "tool.completed",
+        "data": {
+          "requestId": "bc96152d-47bc-4e46-9399-f0519c25e061",
+          "resultReference": "63ea6c68-bfbf-4d3d-ab22-08ea727b962a"
+        }
+      }
+    ],
+    "observation": {
+      "binding": {
+        "tenantId": "tenant",
+        "actorId": "actor",
+        "conversationId": "00000000-0000-4000-8000-000000000001",
+        "runId": "00000000-0000-4000-8000-000000000002",
+        "attemptId": "00000000-0000-4000-8000-000000000003",
+        "workerId": "00000000-0000-4000-8000-000000000004",
+        "writerFence": 1
+      },
+      "subject": {
+        "kind": "client",
+        "entityType": "client",
+        "entityIds": [
+          "abcdef00-0000-4000-8000-000000000009"
+        ],
+        "tenantId": "tenant",
+        "actorId": "actor",
+        "authorizationDecisionId": "f7f2685e-69e5-4c9f-ada6-daf8262a3798",
+        "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "client",
+            "resourceId": "abcdef00-0000-4000-8000-000000000009",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "rosterVersionId": null
+      },
+      "operation": {
+        "id": "actions.query",
+        "version": "0.2.0"
+      },
+      "argumentsSha256": "5fe2c3e8af05f96dc43d0c8f5968d0947adf4c7de225b848ff67829ca0250233",
+      "result": {
+        "kind": "action-item-client-scoped-page",
+        "contractVersion": "0.2.0",
+        "operation": {
+          "id": "query_action_items",
+          "version": "0.2.0"
+        },
+        "requestId": "ea27784d-cf40-46e3-8109-19d7b037e246",
+        "traceId": "41c122e5-c440-4e6e-afa6-1ebff593bb9e",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "subject": {
+          "kind": "client",
+          "entityType": "client",
+          "entityIds": [
+            "abcdef00-0000-4000-8000-000000000009"
+          ],
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "authorizationDecisionId": "f7f2685e-69e5-4c9f-ada6-daf8262a3798",
+          "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "scopes": [
+            {
+              "tenantId": "tenant",
+              "kind": "client",
+              "resourceId": "abcdef00-0000-4000-8000-000000000009",
+              "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          ],
+          "rosterVersionId": null
+        },
+        "window": {
+          "basis": "unbounded"
+        },
+        "argumentsSha256": "d1c72860384a6fab0beac5475e29d1498f3d8826bd07ab0ead41c872ff9ea1ba",
+        "appliedFilters": [],
+        "generatedAt": "2026-10-12T00:00:00.000Z",
+        "sources": [
+          {
+            "sourceId": "action_items_complete",
+            "authority": "derived",
+            "snapshotVersionId": null,
+            "adapterVersion": "0.2.0",
+            "status": "partial",
+            "synchronizedAt": null,
+            "asOf": null,
+            "retrievedAt": "2026-10-12T20:00:00.059Z",
+            "freshness": "unknown"
+          }
+        ],
+        "coverage": {
+          "sourcesRequested": [
+            "action_items_complete"
+          ],
+          "sourcesChecked": [
+            "action_items_complete"
+          ],
+          "sourcesUnavailable": [],
+          "enumeration": "unknown",
+          "enumerableTotal": null,
+          "returnedCount": 1,
+          "truncated": false,
+          "historySupport": "unsupported",
+          "limitations": [
+            "Native coverage is a source assertion; no qualified freshness, snapshot or exhaustive absence.",
+            "Receipt lineage does not authenticate native cursor contents or establish current source truth."
+          ]
+        },
+        "selection": {
+          "clientId": "abcdef00-0000-4000-8000-000000000009",
+          "actionItemId": null,
+          "status": null,
+          "sort": "deadline",
+          "page": 2,
+          "limit": 20,
+          "cursorApplied": true
+        },
+        "order": "deadline-asc_nulls-last_priority-desc_id-asc-owner-unconfirmed",
+        "snapshotVersionId": null,
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "scope": {
+          "actionItemId": null,
+          "status": null,
+          "sort": "deadline",
+          "page": 2,
+          "limit": 20,
+          "cursorApplied": true
+        },
+        "total": 1,
+        "returned": 1,
+        "actions": [
+          {
+            "id": "abcdef00-0000-4000-8000-000000000101",
+            "districtKey": null,
+            "clientId": "abcdef00-0000-4000-8000-000000000009",
+            "clientName": "Client",
+            "peCode": null,
+            "programId": null,
+            "deltaId": null,
+            "actionType": "protect_funding",
+            "issueTitle": "Issue",
+            "whatChanged": "Changed",
+            "whyItMatters": "Matters",
+            "recommendedAction": "Recommend",
+            "targetAudience": [],
+            "suggestedArtifactType": null,
+            "deadline": null,
+            "deadlineSource": null,
+            "ownerUserId": null,
+            "priority": 1,
+            "confidence": {},
+            "uncertainty": null,
+            "evidence": [],
+            "status": "new",
+            "dismissalReason": null,
+            "outcome": null,
+            "createdAt": "2026-10-12T00:00:00.000Z",
+            "updatedAt": "2026-10-12T00:00:00.000Z",
+            "title": "Issue",
+            "body": "Recommend",
+            "recordKind": "action_recommendation",
+            "recommendation": true,
+            "acceptedAsTask": false,
+            "nativeCompletion": {
+              "completed": false,
+              "evidence": null,
+              "establishesDeliveryOrAcceptance": false,
+              "note": "Recommendation only"
+            },
+            "sourceProof": {
+              "version": 1,
+              "owner": "action_recommendation",
+              "sourceRecordId": "abcdef00-0000-4000-8000-000000000101",
+              "currentClientId": "abcdef00-0000-4000-8000-000000000009",
+              "sourceVersion": "2026-10-12T00:00:00.000Z",
+              "contentSha256": "fdea539ca1e4351e6271ab617867c40c5d9a65e59ce6dc9a5f1806f1cf81a5ea",
+              "linkedSources": []
+            }
+          }
+        ],
+        "pageCoverage": {
+          "sourceStatus": "healthy",
+          "sourceReason": null,
+          "complete": true,
+          "partial": false,
+          "paginationComplete": true,
+          "hasMore": false,
+          "nextCursor": null,
+          "totalIsExactForScope": true,
+          "absenceSupported": false,
+          "note": "Structural page assertion only"
+        },
+        "continuation": {
+          "cursor": null,
+          "requiredReads": [],
+          "remainingSources": []
+        },
+        "evidenceReady": false,
+        "negativeAssertion": {
+          "kind": "none"
+        }
+      }
+    }
+  },
+  "expected": "receiver_accept_adapter_must_reject",
+  "request": {
+    "request": {
+      "limit": 20
+    }
+  },
+  "note": "Synthetic response with matching scope/selection fields and recomputed canonical observation digest. Unrelated native arguments/source hashes are unchanged. Public receiver acceptance is intentionally insufficient to establish request-intent correlation; not a claim this response was emitted by native services."
+}

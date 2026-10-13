@@ -1,0 +1,61 @@
+[
+  {
+    "file": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red-results.json",
+    "sha256": "bc3691354e03dff269a0d484bfcd69e9dae9c4f2027032932f6528c9b218a79e",
+    "bytes": 9567,
+    "stats": {
+      "startTime": "2026-10-13T06:14:31.774Z",
+      "duration": 11343.307999999999,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "workers": 1,
+    "projects": [
+      {
+        "name": "",
+        "retries": 0,
+        "timeout": 30000
+      }
+    ],
+    "errors": []
+  },
+  {
+    "file": "/tmp/capiro-meri-mobile-navigation-regression-20261013/green-results.json",
+    "sha256": "9f799d0d3b9127606fa96e6d36c4bf2b92d4d465e27a7274ba4805949c45a1e1",
+    "bytes": 4688,
+    "stats": {
+      "startTime": "2026-10-13T06:15:21.779Z",
+      "duration": 6251.294,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers": 1,
+    "projects": [
+      {
+        "name": "",
+        "retries": 0,
+        "timeout": 30000
+      }
+    ],
+    "errors": []
+  },
+  {
+    "file": "/tmp/capiro-meri-mobile-navigation-regression-20261013/red.log",
+    "sha256": "d0bd38968b21df790d76b3185ec1e83c23d5e4d4ce07bfd1e42b049f9dfa10fa",
+    "bytes": 4859
+  },
+  {
+    "file": "/tmp/capiro-meri-mobile-navigation-regression-20261013/green.log",
+    "sha256": "52cb34eda92fb4cfc77bfd184cf31353b4778da0f5845ff8a0c6c73464e23987",
+    "bytes": 1209
+  },
+  {
+    "file": "/tmp/capiro-meri-mobile-navigation-regression-20261013/baseline-source.json",
+    "sha256": "3ccc9606da4e35a44c5f5e713aaf602cf905651756020d3aa82d3f5176d0166f",
+    "bytes": 10429
+  }
+]

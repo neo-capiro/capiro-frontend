@@ -2,3 +2,27 @@
 *.png binary
 *.jpg binary
 *.woff2 binary
+
+# Preserve raw review logs, receipts and patches.
+docs/meri-workflow-20261013/review-evidence/** -text -whitespace
+
+# Keep raw unified regression and qualification evidence byte-exact.
+docs/unified-20261013/mobile-navigation/** -text -whitespace
+docs/unified-20261013/evidence/** -text -whitespace
+docs/unified-20261013/qualification-93b3617f/** -text -whitespace
+docs/unified-20261013/corrections/** -text -whitespace
+docs/unified-20261013/qualification-83f54f5a/** -text -whitespace
+
+# Preserve Meri Files development and independent review evidence byte-for-byte.
+docs/meri-files-20261013/development-evidence/** -text -whitespace
+docs/meri-files-20261013/qualification-iterations/** -text -whitespace
+
+# Preserve sealed Files qualification evidence byte-for-byte.
+docs/unified-20261013/qualification-90ccdd47/** -text -whitespace
+
+# Preserve bounded acceptance regression and qualification receipts byte-exact.
+docs/acceptance-20261013/verification/** -text -whitespace
+docs/acceptance-20261013/BATCH-1-INSTRUCTIONS.md -text -whitespace
+docs/acceptance-20261013/figma-targets/442-81437-variables.json -text -whitespace
+docs/acceptance-20261013/figma-targets/theme-inspection.json -text -whitespace
+docs/acceptance-20261013/validate-mapping.py -text -whitespace

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "at": "2026-10-13T09:39:58.994Z",
+  "typescript": "5.9.3",
+  "head": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+  "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+  "beforeSha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+  "afterSha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+  "beforeEmittedSha256": "5efb29a2379a0a33278748c9440c2d3588073262c85779bcb4209a7778f8a84a",
+  "afterEmittedSha256": "a1cafb1b24a8b2ecbcc3ce35b515c8f6966bc91fa2159c82a0ded7cb507e9fd2",
+  "exactEmittedBytesEqual": false,
+  "explanation": "Emitted JS differs only by immediate local array binding followed by the same for-of. Inlining that literal and removing its sole declaration yields identical printed JS.",
+  "identityArrayValuesOrderEqual": true,
+  "identityIdentifierUses": 2,
+  "initializerImmediatelyPrecedesLoop": true,
+  "normalizedEmittedProgramEqual": true,
+  "normalizedProgramSha256": "7359ebf13811bf68d7115ebc6c1a87cbf26b565aa7eec71958f9030ab12a6c81",
+  "allCallExpressionsEqual": true,
+  "callExpressionCount": 251,
+  "scope": "Static transpile/AST review only; no app execution, browser, build, install or independent full typecheck."
+}

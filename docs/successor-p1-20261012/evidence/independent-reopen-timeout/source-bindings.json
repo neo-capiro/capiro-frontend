@@ -1,0 +1,46 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "sourceFiles": [
+    {
+      "path": "apps/web/tests/browser/activity-command-reopen.spec.ts",
+      "sha256": "6ed5069fc37ed3fb54ccfaff2920fbdc51c4742c2d63faa1308211102f2bcaba",
+      "gitBlob": "4e7ceb9932eabae80468ad9de1b6941941e0d359"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery-fixtures.ts",
+      "sha256": "dfb83cecc8e800dc84634b6597b0d0dfa605ad02b9e735d5dc9c834de4336ae0",
+      "gitBlob": "34b006f0ca080bddae5a1142be1c00f04b9e990d"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-fixtures.ts",
+      "sha256": "c444a6bdd8360b3eddaf58ea98b93ca930e791d9ecbda6b22e018d064437a6ea",
+      "gitBlob": "08e0fd28d65e5a4fc9b2854b7e81caa38c423ef6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+      "sha256": "78c1b144587cc1aad6e290e8266e5e982cf4974fb93ba12bb0dcf4dfc8057916",
+      "gitBlob": "7d9bdff95b7d46d14a73b531d517c0c1af9a38df"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
+      "sha256": "8324124bf96b66d4fe4c8d6af08313c8bf9d860e419c8def8fc80b84e7706d07",
+      "gitBlob": "965b69372880943ecd07318268180fc7a1e5c6e6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+      "sha256": "3724646bf80b8872e365259d61d5bf4862bcfe2e50c4aa11ea374e4275117035",
+      "gitBlob": "672f2d2f5bb8333ad004b30ce90c7dac98bbd507"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/quick-log/command-recovery.ts",
+      "sha256": "38d3f16eb59d286b8793c183bab538f771f91d962df0e4a0804786f5ee80e107",
+      "gitBlob": "d8d09c59d3a41254a8d568d7ca18b2f26ddf5512"
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "sha256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82",
+      "gitBlob": "1f8c3d362e2f1e12dbb05b87017d500027e4e0fe"
+    }
+  ],
+  "appsWebIdenticalTo943d90c": true
+}

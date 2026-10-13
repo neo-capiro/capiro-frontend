@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "description": "Offline actual SDK producer/client public-interface qualification",
-  "scripts": { "test": "node --test qualification.test.mjs" },
+  "scripts": {
+    "test": "node --test qualification.test.mjs conversation*.test.mjs",
+    "test:cross-repository": "node --test --test-timeout=15000 conversation-cross-repository.mjs"
+  },
   "dependencies": {
     "@capiro/meri-client": "file:../meri-client",
     "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.0.tgz",

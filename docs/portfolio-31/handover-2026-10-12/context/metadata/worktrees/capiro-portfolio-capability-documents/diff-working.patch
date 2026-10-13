@@ -1,0 +1,808 @@
+diff --git a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+index d1ba0481a5674d96fd00ee40cee8db0b47f0670d..10de5b1ae4ca6e54c6b87b672505255edce96907 100644
+--- a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
++++ b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+@@ -92,13 +92,11 @@ export function CapabilityEditor({
+           </Tabs.Content>
+           <Tabs.Content value="documents" className={styles.tabPanel}>
+             <div className={styles.documents}>
+-              <p className={styles.caption}>
+-                Documents added here are scoped to this capability and also
+-                appear in the client’s Files tab.
+-              </p>
+               <EntityDocuments
+                 clientId={clientId}
+                 source={`capability:${capability.id}`}
++                description="Documents added here are scoped to this capability and also appear in the client’s Files tab."
++                emptyMessage="No documents yet for this capability."
+               />
+             </div>
+           </Tabs.Content>
+diff --git a/apps/web/src/features/portfolio/files/EntityDocuments.tsx b/apps/web/src/features/portfolio/files/EntityDocuments.tsx
+index 9a11dd06179224b088a613f7d25b951abb0285b2..4cd4bcac4642de838eec130791f500988b6ed4c6 100644
+--- a/apps/web/src/features/portfolio/files/EntityDocuments.tsx
++++ b/apps/web/src/features/portfolio/files/EntityDocuments.tsx
+@@ -1,68 +1,117 @@
+ "use client";
+ import { useState } from "react";
+-import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useFiles } from "./queries";
+ import { UploadDialog } from "./UploadDialog";
+ import { FilePreview } from "./FilePreview";
++import { signedUrl } from "./contracts";
++import { useFileNavigation } from "./navigation";
++import { DocumentState } from "./DocumentState";
++import styles from "./entity-documents.module.css";
+ // Public shared feature: sub-entity documents use the same attachment pipeline,
+ // cache, client association and readiness rules as the client's Files page.
+ export function EntityDocuments({
+   clientId,
+   source,
++  description,
++  emptyMessage = "No documents linked to this record.",
+ }: {
+   clientId: string;
+   source: string;
++  description?: string;
++  emptyMessage?: string;
+ }) {
+   const query = useFiles(clientId);
+-  const [upload, setUpload] = useState(false);
+-  const [previewId, setPreview] = useState<string>();
++  const navigation = useFileNavigation(clientId, source);
++  const view = JSON.stringify([query.readerScope, source]);
++  const [selection, setSelection] = useState<{
++    view: string;
++    upload?: boolean;
++    previewId?: string;
++  }>();
++  const active = selection?.view === view ? selection : undefined;
+   const available = query.isSuccess && !query.error;
+   const files = available
+     ? query.data.filter((file) => file.source === source)
+     : undefined;
+-  const preview = files?.find((file) => file.id === previewId);
++  const preview = files?.find((file) => file.id === active?.previewId);
+   return (
+-    <section className="stack">
+-      <header className="row between">
+-        <h3>Documents</h3>
++    <section className={styles.documents} aria-label="Documents">
++      <div>
+         <button
+-          className="button"
+-          disabled={!available}
+-          onClick={() => setUpload(true)}
++          className={`button ${styles.upload}`}
++          disabled={!available || !navigation.canWrite}
++          onClick={() => setSelection({ view, upload: true })}
+         >
+           Upload document
+         </button>
+-      </header>
+-      <QueryState
+-        pending={query.isPending}
++      </div>
++      {description && <p className={styles.caption}>{description}</p>}
++      <DocumentState
++        loading={query.isPending}
+         error={query.error}
+         retry={() => void query.refetch()}
+       />
+-      {files?.map((file) => (
+-        <button
+-          className="button ghost"
+-          key={file.id}
+-          onClick={() => setPreview(file.id)}
+-        >
+-          {file.fileName}
+-        </button>
+-      ))}
+-      {files?.length === 0 && (
+-        <p className="muted">No documents linked to this record.</p>
++      {files && files.length > 0 && (
++        <ul className={styles.list}>
++          {files.map((file) => (
++            <li key={file.id} className={styles.document}>
++              <div className={styles.row}>
++                <span className={styles.icon} aria-hidden="true">
++                  ▤
++                </span>
++                <button
++                  className={styles.name}
++                  type="button"
++                  onClick={() => setSelection({ view, previewId: file.id })}
++                >
++                  {file.fileName}
++                </button>
++                <button
++                  className={styles.download}
++                  type="button"
++                  role="link"
++                  aria-label={`Download ${file.fileName}`}
++                  disabled={
++                    !file.usable ||
++                    !signedUrl(file.downloadUrl) ||
++                    !navigation.canRead ||
++                    Boolean(navigation.pendingId)
++                  }
++                  onClick={() => void navigation.navigate(file, "download")}
++                >
++                  <span aria-hidden="true">↓</span>
++                </button>
++              </div>
++              {!file.usable && (
++                <DocumentState>
++                  This file is not available to download yet.
++                </DocumentState>
++              )}
++              {file.scanDisclosure && (
++                <p className={styles.disclosure}>{file.scanDisclosure}</p>
++              )}
++            </li>
++          ))}
++        </ul>
+       )}
+-      {upload && available && (
++      {files?.length === 0 && <DocumentState>{emptyMessage}</DocumentState>}
++      {navigation.pendingId && (
++        <DocumentState>Checking current file access…</DocumentState>
++      )}
++      {navigation.error && <DocumentState error={navigation.error} />}
++      {active?.upload && available && (
+         <UploadDialog
+           clientId={clientId}
+           source={source}
+-          onClose={() => setUpload(false)}
++          onClose={() => setSelection(undefined)}
+         />
+-      )}{" "}
++      )}
+       {preview && (
+         <FilePreview
+           key={`${preview.id}:${preview.lifecycleStatus}:${preview.scanStatus}`}
+           clientId={clientId}
+           file={preview}
+-          onClose={() => setPreview(undefined)}
++          onClose={() => setSelection(undefined)}
+         />
+       )}
+     </section>
+diff --git a/apps/web/src/features/portfolio/files/FilePreview.tsx b/apps/web/src/features/portfolio/files/FilePreview.tsx
+index e493ac69ca865043c195e0d8792e82afd6a79860..2d32e6d05569748795f90b7573ed368c72498d47 100644
+--- a/apps/web/src/features/portfolio/files/FilePreview.tsx
++++ b/apps/web/src/features/portfolio/files/FilePreview.tsx
+@@ -1,8 +1,10 @@
+ "use client";
++import { useRef } from "react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { signedUrl, type Attachment } from "./contracts";
+-import { useExtractFile } from "./mutations";
++import { useExtractFile } from "./extraction";
++import { useFileNavigation } from "./navigation";
+ export function FilePreview({
+   clientId,
+   file,
+@@ -12,7 +14,9 @@ export function FilePreview({
+   file: Attachment;
+   onClose: () => void;
+ }) {
+-  const extract = useExtractFile(clientId);
++  const opener = useRef<HTMLElement | null>(null);
++  const extract = useExtractFile(clientId, file);
++  const navigation = useFileNavigation(clientId, `${file.id}:${file.source}`);
+   const preview = file.usable ? signedUrl(file.previewUrl) : undefined;
+   const download = file.usable ? signedUrl(file.downloadUrl) : undefined;
+   return (
+@@ -20,6 +24,18 @@ export function FilePreview({
+       open
+       title={file.fileName}
+       description="Open the original file or read the service's extracted text."
++      onOpenAutoFocus={() => {
++        opener.current =
++          document.activeElement instanceof HTMLElement
++            ? document.activeElement
++            : null;
++      }}
++      onCloseAutoFocus={(event) => {
++        if (opener.current?.isConnected) {
++          event.preventDefault();
++          opener.current.focus();
++        }
++      }}
+       onOpenChange={(open) => {
+         if (!open) onClose();
+       }}
+@@ -41,30 +57,36 @@ export function FilePreview({
+         )}
+         <div className="row">
+           {preview && (
+-            <a
++            <button
++              type="button"
++              role="link"
+               className="button"
+-              href={preview}
+-              target="_blank"
+-              rel="noreferrer"
++              disabled={!navigation.canRead || Boolean(navigation.pendingId)}
++              onClick={() => void navigation.navigate(file, "preview")}
+             >
+               Open in new tab
+-            </a>
++            </button>
+           )}
+           {download && (
+-            <a
++            <button
++              type="button"
++              role="link"
+               className="button primary"
+-              href={download}
+-              target="_blank"
+-              rel="noreferrer"
++              disabled={!navigation.canRead || Boolean(navigation.pendingId)}
++              onClick={() => void navigation.navigate(file, "download")}
+             >
+               Download
+-            </a>
++            </button>
+           )}
+         </div>
++        {navigation.pendingId && (
++          <p role="status">Checking current file access…</p>
++        )}
++        <QueryState error={navigation.error} />
+         <button
+           className="button"
+-          disabled={!file.usable || extract.isPending}
+-          onClick={() => extract.mutate(file.id)}
++          disabled={!file.usable || !extract.canReadText || extract.isPending}
++          onClick={() => extract.mutate()}
+         >
+           {extract.isPending ? "Reading text…" : "Read extracted text"}
+         </button>
+diff --git a/apps/web/src/features/portfolio/files/FilesPage.tsx b/apps/web/src/features/portfolio/files/FilesPage.tsx
+index ac719ca3eab690da950ea18d3bd347921b3099d4..083fa368d8f33b45232aa7aa02cbbecc69102efe 100644
+--- a/apps/web/src/features/portfolio/files/FilesPage.tsx
++++ b/apps/web/src/features/portfolio/files/FilesPage.tsx
+@@ -26,18 +26,28 @@ export function FilesPage({
+   const [folder, setFolder] = useState<string>();
+   const [source, setSource] = useState("");
+   const [sort, setSort] = useState("created");
+-  const [selected, setSelected] = useState<string[]>([]);
++  const [checked, setChecked] = useState<{ view: string; ids: string[] }>();
++  const selected = checked?.view === query.readerScope ? checked.ids : [];
+   const [requestedAction, setAction] = useState<{
++    view: string;
+     kind: FileAction | "new-folder";
+     id: string;
+   }>();
+-  const [upload, setUpload] = useState(false);
+-  const [folderAccess, setFolderAccess] = useState(false);
++  const [uploadView, setUploadView] = useState<string>();
++  const [folderAccess, setFolderAccess] = useState<{
++    view: string;
++    folder: string | null;
++  }>();
++  const requestAction = (kind: FileAction | "new-folder", id: string) =>
++    setAction({ view: query.readerScope, kind, id });
+   const close = () => setAction(undefined);
+   const mutation = useFileChange(clientId, close);
+   const available = query.isSuccess && !query.error;
+   const files = available ? query.data : [];
+-  const currentFile = files.find((file) => file.id === requestedAction?.id);
++  const currentFile =
++    requestedAction?.view === query.readerScope
++      ? files.find((file) => file.id === requestedAction.id)
++      : undefined;
+   const action =
+     requestedAction && currentFile
+       ? { kind: requestedAction.kind, file: currentFile }
+@@ -58,15 +68,14 @@ export function FilesPage({
+             disabled={chosen.length !== 1}
+             title="Select one file to create a shared folder label"
+             onClick={() => {
+-              if (chosen[0])
+-                setAction({ kind: "new-folder", id: chosen[0].id });
++              if (chosen[0]) requestAction("new-folder", chosen[0].id);
+             }}
+           >
+             New folder
+           </button>
+           <button
+             className="button"
+-            onClick={() => setUpload(true)}
++            onClick={() => setUploadView(query.readerScope)}
+             disabled={!available}
+           >
+             Upload
+@@ -119,7 +128,12 @@ export function FilesPage({
+               <button
+                 className="button ghost"
+                 disabled={folder === undefined}
+-                onClick={() => setFolderAccess(true)}
++                onClick={() =>
++                  setFolderAccess({
++                    view: query.readerScope,
++                    folder: folder || null,
++                  })
++                }
+               >
+                 Access
+               </button>
+@@ -166,7 +180,7 @@ export function FilesPage({
+                 className="button"
+                 disabled={chosen.length !== 1}
+                 onClick={() => {
+-                  if (chosen[0]) setAction({ kind: "move", id: chosen[0].id });
++                  if (chosen[0]) requestAction("move", chosen[0].id);
+                 }}
+               >
+                 Move to folder
+@@ -181,8 +195,8 @@ export function FilesPage({
+             <FileTable
+               files={rows}
+               selected={selected}
+-              onSelect={setSelected}
+-              onAction={(kind, file) => setAction({ kind, id: file.id })}
++              onSelect={(ids) => setChecked({ view: query.readerScope, ids })}
++              onAction={(kind, file) => requestAction(kind, file.id)}
+             />
+           </section>
+         </div>
+@@ -198,11 +212,11 @@ export function FilesPage({
+       {action?.kind === "access" && (
+         <FileAccess clientId={clientId} file={action.file} onClose={close} />
+       )}
+-      {folderAccess && available && (
++      {folderAccess?.view === query.readerScope && available && (
+         <FileAccess
+           clientId={clientId}
+-          folder={folder || null}
+-          onClose={() => setFolderAccess(false)}
++          folder={folderAccess.folder}
++          onClose={() => setFolderAccess(undefined)}
+         />
+       )}
+       {(action?.kind === "move" || action?.kind === "new-folder") && (
+@@ -233,8 +247,11 @@ export function FilesPage({
+           Confirm delete
+         </button>
+       </Dialog>
+-      {upload && available && (
+-        <UploadDialog clientId={clientId} onClose={() => setUpload(false)} />
++      {uploadView === query.readerScope && available && (
++        <UploadDialog
++          clientId={clientId}
++          onClose={() => setUploadView(undefined)}
++        />
+       )}
+       {!destinations.meri && <small>Meri destination is not configured.</small>}
+     </div>
+diff --git a/apps/web/src/features/portfolio/files/UploadDialog.tsx b/apps/web/src/features/portfolio/files/UploadDialog.tsx
+index 4a7897b68f1eb5a3c14b4309b04344c3570c08ac..245fdeaca03bd092757511c685f00cd659c77674 100644
+--- a/apps/web/src/features/portfolio/files/UploadDialog.tsx
++++ b/apps/web/src/features/portfolio/files/UploadDialog.tsx
+@@ -5,7 +5,8 @@ import { useApi } from "@/shared/portfolio/api/provider";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { uploadParentFile, type UploadAttempt } from "./upload";
+ import { fileValidation } from "./contracts";
+-import { filesKey } from "./queries";
++import { currentFilesKey } from "./file-reader";
++import { useFileScope, type FileExecution } from "./file-scope";
+ type Job = {
+   id: string;
+   file: File;
+@@ -13,56 +14,93 @@ type Job = {
+   error?: string;
+   complete?: boolean;
+ };
+-export function UploadDialog({
+-  clientId,
+-  onClose,
+-  source,
+-  beforeDispatch,
+-}: {
++type UploadDialogProps = {
+   clientId: string;
+   onClose: () => void;
+   source?: string;
+   beforeDispatch?: () => void;
+-}) {
++};
++
++export function UploadDialog(props: UploadDialogProps) {
++  const scope = useFileScope(props.clientId, props.source ?? "manual");
++  return <UploadFiles key={scope.key} {...props} scope={scope} />;
++}
++
++function UploadFiles({
++  clientId,
++  onClose,
++  source = "manual",
++  beforeDispatch,
++  scope,
++}: UploadDialogProps & { scope: ReturnType<typeof useFileScope> }) {
+   const api = useApi();
+   const cache = useQueryClient();
+   const [jobs, setJobs] = useState<Job[]>([]);
+   const [busy, setBusy] = useState(false);
+-  const attempts = useRef(new Map<string, UploadAttempt>());
++  const lock = useRef(false);
++  const attempts = useRef(
++    new Map<
++      string,
++      { attempt: UploadAttempt; execution: FileExecution; guard: () => void }
++    >(),
++  );
+   const patch = (id: string, update: Partial<Job>) =>
+     setJobs((jobs) =>
+       jobs.map((job) => (job.id === id ? { ...job, ...update } : job)),
+     );
+   async function run(job: Job) {
++    if (lock.current) return;
++    lock.current = true;
+     setBusy(true);
+-    patch(job.id, { error: undefined });
+-    const attempt = attempts.current.get(job.id) ?? {};
+-    attempts.current.set(job.id, attempt);
++    let captured = attempts.current.get(job.id);
+     try {
++      if (!captured) {
++        const execution = scope.capture(true);
++        // Preserve the initiating parent hook and actor for every retry of this job.
++        const guard = () => {
++          execution.guard();
++          beforeDispatch?.();
++        };
++        captured = { execution, guard, attempt: { actor: execution.actor } };
++        attempts.current.set(job.id, captured);
++      }
++      const { execution, attempt, guard } = captured;
++      execution.signal.throwIfAborted();
++      guard();
++      patch(job.id, { error: undefined });
+       await uploadParentFile(
+         api,
+         { clientId },
+         job.file,
+         attempt,
+-        (stage) => patch(job.id, { stage }),
++        (stage) => {
++          guard();
++          patch(job.id, { stage });
++        },
+         source,
+         fetch,
+-        beforeDispatch,
++        guard,
+       );
+-      beforeDispatch?.();
++      guard();
++      await cache.invalidateQueries({
++        queryKey: currentFilesKey(cache, clientId),
++        exact: true,
++      });
++      guard();
+       patch(job.id, {
+         complete: true,
+         stage: "Uploaded · awaiting service processing",
+       });
+       attempts.current.delete(job.id);
+-      await cache.invalidateQueries({ queryKey: filesKey(clientId) });
+     } catch (error) {
++      if (captured?.execution.signal.aborted) return;
+       patch(job.id, {
+         error: error instanceof Error ? error.message : "Upload failed.",
+         stage: "Failed",
+       });
+     } finally {
+-      setBusy(false);
++      lock.current = false;
++      if (!captured?.execution.signal.aborted) setBusy(false);
+     }
+   }
+   return (
+@@ -75,12 +113,18 @@ export function UploadDialog({
+       description="Up to 25 MiB per file. Server verification and scan policy determine when a file can be opened."
+     >
+       <div className="stack">
++        {!scope.canWrite && (
++          <p role="status">
++            Uploads are unavailable in this view. Close this dialog and refresh
++            the client files.
++          </p>
++        )}
+         <label>
+           Select files
+           <input
+             type="file"
+             multiple
+-            disabled={busy}
++            disabled={busy || !scope.canWrite}
+             onChange={(event) =>
+               setJobs((jobs) => [
+                 ...jobs,
+@@ -102,7 +146,9 @@ export function UploadDialog({
+             {!job.complete && (
+               <button
+                 className="button"
+-                disabled={busy || Boolean(fileValidation(job.file))}
++                disabled={
++                  busy || !scope.canWrite || Boolean(fileValidation(job.file))
++                }
+                 onClick={() => void run(job)}
+               >
+                 {job.stage === "Failed" ? "Retry file" : "Upload file"}
+diff --git a/apps/web/src/features/portfolio/files/mutations.ts b/apps/web/src/features/portfolio/files/mutations.ts
+index 8421a1b464c7695bb425a9001bd28d6cd77af536..8714bcbe146678ba53e58a34fa718a844d0d8b10 100644
+--- a/apps/web/src/features/portfolio/files/mutations.ts
++++ b/apps/web/src/features/portfolio/files/mutations.ts
+@@ -67,21 +67,4 @@ export function useFileChange(clientId: string, onSaved?: () => void) {
+     },
+   });
+ }
+-export function useExtractFile(clientId: string) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (id: string) =>
+-      api.request(
+-        "core",
+-        `engagement/attachments/${id}/extract-text`,
+-        z.object({
+-          text: z.string(),
+-          truncated: z.boolean().optional(),
+-          disclosure: z.string().optional(),
+-        }),
+-        { method: "POST" },
+-      ),
+-    onSuccess: () => cache.invalidateQueries({ queryKey: filesKey(clientId) }),
+-  });
+-}
++export { useExtractFile } from "./extraction";
+diff --git a/apps/web/src/features/portfolio/files/queries.ts b/apps/web/src/features/portfolio/files/queries.ts
+index 7050a2992e207eb86531909ad8cc7b5ce1b8fff1..d8602a1284f9576725a09479c729db6159099732 100644
+--- a/apps/web/src/features/portfolio/files/queries.ts
++++ b/apps/web/src/features/portfolio/files/queries.ts
+@@ -1,19 +1,50 @@
+ "use client";
+-import { useQuery } from "@tanstack/react-query";
++import {
++  useQuery,
++  useQueryClient,
++  type QueryClient,
++} from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
++import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
+ import { clientFilesSchema, fileAccessForIdSchema } from "./contracts";
+-export const filesKey = (id: string) => ["client-files", id] as const;
+-export function useFiles(clientId: string) {
+-  const api = useApi();
+-  return useQuery({
+-    queryKey: filesKey(clientId),
+-    queryFn: ({ signal }) =>
+-      api.request(
++import {
++  assertFileReader,
++  currentFileReader,
++  readerFilesKey,
++  useFileReader,
++  type FileReader,
++} from "./file-reader";
++export { filesKey } from "./file-reader";
++export function filesOptions(
++  api: ApiClient,
++  cache: QueryClient,
++  clientId: string,
++  reader: FileReader | undefined = currentFileReader(cache),
++) {
++  return {
++    queryKey: readerFilesKey(clientId, reader),
++    queryFn: async ({ signal }: { signal: AbortSignal }) => {
++      assertFileReader(cache, reader);
++      const files = await api.request(
+         "core",
+         `engagement/attachments?${new URLSearchParams({ clientId })}`,
+         clientFilesSchema(clientId),
+         { signal },
+-      ),
++      );
++      assertFileReader(cache, reader);
++      return files;
++    },
++  };
++}
++export function useFiles(clientId: string) {
++  const api = useApi();
++  const cache = useQueryClient();
++  const identity = useIdentity();
++  const reader = useFileReader();
++  const query = useQuery({
++    ...filesOptions(api, cache, clientId, reader),
++    enabled: Boolean(reader),
+     refetchInterval: (query) =>
+       query.state.data?.some(
+         (f) =>
+@@ -23,6 +54,21 @@ export function useFiles(clientId: string) {
+         ? 10000
+         : false,
+   });
++  const waiting = identity.isPending || identity.isFetching;
++  return {
++    ...query,
++    readerScope: JSON.stringify(readerFilesKey(clientId, reader)),
++    isPending: waiting || (Boolean(reader) && query.isPending),
++    error:
++      query.error ??
++      (!reader && !waiting
++        ? (identity.error ??
++          new ApiError(
++            403,
++            "A current session is required to load client files.",
++          ))
++        : null),
++  };
+ }
+ export function useFileAccess(clientId: string, id?: string) {
+   const api = useApi();
+diff --git a/apps/web/src/features/portfolio/files/upload.ts b/apps/web/src/features/portfolio/files/upload.ts
+index ce97b2fe9a64ea728e84847e57ea7e4bf603e42c..4149e81e64c944fc983520950ec6ffc50484c9e9 100644
+--- a/apps/web/src/features/portfolio/files/upload.ts
++++ b/apps/web/src/features/portfolio/files/upload.ts
+@@ -1,4 +1,5 @@
+ import type { ApiClient } from "@/shared/portfolio/api/http";
++import type { ClientWriter } from "@/shared/portfolio/auth/client-writer";
+ import {
+   attachmentSchema,
+   contentType,
+@@ -8,6 +9,7 @@ import {
+   type UploadTicket,
+ } from "./contracts";
+ export interface UploadAttempt {
++  actor?: ClientWriter;
+   ticket?: UploadTicket;
+   bytesUploaded?: boolean;
+   storageUnknown?: boolean;
+@@ -74,7 +76,11 @@ export async function uploadParentFile(
+     const ticket = await api.request(
+       "core",
+       "engagement/attachments/upload-url",
+-      uploadTicketSchema,
++      uploadTicketSchema.refine(
++        (ticket) =>
++          Boolean(ticket.s3Key.trim()) && ticket.fields.key === ticket.s3Key,
++        "Unexpected upload storage reference",
++      ),
+       { method: "POST", body: { ...metadata, contentLength: file.size } },
+     );
+     const url = signedUrl(ticket.url);
+@@ -102,8 +108,15 @@ export async function uploadParentFile(
+         "Upload completion is unknown. Retry confirmation before uploading another copy.",
+       );
+     }
+-    if (!response.ok)
++    if (!response.ok) {
++      if (![400, 401, 403, 404, 413, 415, 422].includes(response.status)) {
++        attempt.storageUnknown = true;
++        throw new Error(
++          "Upload completion is unknown. Retry confirmation before uploading another copy.",
++        );
++      }
+       throw new Error("Storage upload failed. Retry this file.");
++    }
+     attempt.ticket = ticket;
+     attempt.bytesUploaded = true;
+   }
+@@ -111,26 +124,21 @@ export async function uploadParentFile(
+     throw new Error("Upload confirmation is missing its storage reference.");
+   onStage("Confirming upload");
+   beforeDispatch?.();
+-  const receiptSchema = parent.meetingId
+-    ? attachmentSchema
+-        .extend({
+-          meetingId: attachmentSchema.shape.id,
+-          s3Key: uploadTicketSchema.shape.s3Key,
+-        })
+-        .refine(
+-          (receipt) =>
+-            receipt.meetingId === parent.meetingId &&
+-            receipt.clientId === (parent.clientId ?? null) &&
+-            receipt.s3Key === attempt.ticket?.s3Key &&
+-            receipt.fileName === metadata.fileName &&
+-            receipt.contentType === metadata.contentType,
+-        )
+-    : attachmentSchema.refine(
+-        (receipt) =>
+-          receipt.clientId === parent.clientId &&
+-          receipt.fileName === metadata.fileName &&
+-          receipt.contentType === metadata.contentType,
+-      );
++  const receiptSchema = attachmentSchema
++    .extend({
++      s3Key: uploadTicketSchema.shape.s3Key,
++      meetingId: attachmentSchema.shape.id.nullable().optional(),
++    })
++    .refine(
++      (receipt) =>
++        receipt.clientId === (parent.clientId ?? null) &&
++        (!parent.meetingId || receipt.meetingId === parent.meetingId) &&
++        receipt.s3Key === attempt.ticket?.s3Key &&
++        receipt.source === source &&
++        (!attempt.actor || receipt.uploadedByUserId === attempt.actor.userId) &&
++        receipt.fileName === metadata.fileName &&
++        receipt.contentType === metadata.contentType,
++    );
+   const receipt = await api.request(
+     "core",
+     "engagement/attachments/confirm",
+diff --git a/apps/web/tests/browser/client-enrichment.spec.ts b/apps/web/tests/browser/client-enrichment.spec.ts
+index 81ba0d14329ef1c5fea1544ad49b1d763609eeb2..42690b6e6a8489c413bd94fba7499549188cc6a7 100644
+--- a/apps/web/tests/browser/client-enrichment.spec.ts
++++ b/apps/web/tests/browser/client-enrichment.spec.ts
+@@ -337,7 +337,7 @@ test("unmount during upload ticket blocks storage and confirmation", async ({
+         contentType: "application/json",
+         body: JSON.stringify({
+           url: "https://storage.example.test/upload",
+-          fields: {},
++          fields: { key: "synthetic-file-key" },
+           s3Key: "synthetic-file-key",
+         }),
+       });
+diff --git a/apps/web/tests/browser/email-compose.spec.ts b/apps/web/tests/browser/email-compose.spec.ts
+index 7df6c9f21c6db14fa90b4e105bd7b3d6c46f61ba..bb7ac646d5a3aaadb79847bedee40ac928f1149e 100644
+--- a/apps/web/tests/browser/email-compose.spec.ts
++++ b/apps/web/tests/browser/email-compose.spec.ts
+@@ -9,6 +9,7 @@ const file = {
+   contentType: "application/pdf",
+   byteSize: 12,
+   source: "email-compose",
++  s3Key: "tenants/tenant-a/engagement/test/brief.pdf",
+   folder: null,
+   viewerMode: "all",
+   viewerUserIds: [],
+diff --git a/apps/web/tests/browser/files-boundary.spec.ts b/apps/web/tests/browser/files-boundary.spec.ts
+index f13a5195340916ad84fae24f9ad4bb356ac395ed..33d2886444aacd5671977c18e96afd47f57d8d8c 100644
+--- a/apps/web/tests/browser/files-boundary.spec.ts
++++ b/apps/web/tests/browser/files-boundary.spec.ts
+@@ -54,7 +54,10 @@ for (const outcome of ["removed", "denied", "quarantined"] as const) {
+       `**/engagement/attachments/${file.id}/extract-text`,
+       (route) => {
+         changed = true;
+-        return json(route, { text: "Text from prior file state" });
++        return json(route, {
++          attachmentId: file.id,
++          text: "Text from prior file state",
++        });
+       },
+     );
+     await page.goto(`/portfolio/${clientId}/files`);
+diff --git a/apps/web/tests/files.test.ts b/apps/web/tests/files.test.ts
+index 10957ef84e6be443baf1d02abb4379121a28e1a0..eea58f7564a6e814bde0f4b48a1895d4b9439dd3 100644
+--- a/apps/web/tests/files.test.ts
++++ b/apps/web/tests/files.test.ts
+@@ -80,7 +80,11 @@ describe("upload orchestration", () => {
+         confirms++;
+         return confirms === 1
+           ? Response.json({ message: "Service unavailable" }, { status: 503 })
+-          : Response.json(record);
++          : Response.json({
++              ...record,
++              source: `capability:${id}`,
++              s3Key: "test-key",
++            });
+       });
+     const storage = vi
+       .fn<typeof fetch>()
+@@ -106,7 +110,7 @@ describe("upload orchestration", () => {
+     const request = vi.fn<typeof fetch>().mockResolvedValue(
+       Response.json({
+         url: "https://storage.example.test",
+-        fields: {},
++        fields: { key: "key" },
+         s3Key: "key",
+       }),
+     );

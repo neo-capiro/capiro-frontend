@@ -1,0 +1,78 @@
+{
+  "observedUTC": "2026-10-13T08:00:18.513152+00:00",
+  "status": "PASS_SUPPLEMENTAL_EMITTED_BOUNDARY",
+  "source": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "staticJavaScriptCount": 473,
+  "staticJavaScriptBytes": 20927613,
+  "installedRootSentinels": {
+    "MERI_TOOL_MANIFEST": 3,
+    "MERI_CAPABILITY_REGISTRY": 7,
+    "DEFENSE_BUDGET_DOMAIN_PRIMER": 3,
+    "MERI_GROUNDING_OUTREACH_KERNEL": 3,
+    "fundingCurrentCoalesceSql": 4,
+    "GRANTS_GOV_ORGANIZATION_TYPE_GROUPS": 3
+  },
+  "clientSentinelHits": [],
+  "clientReferenceManifestCount": 44,
+  "sharedReferenceManifestHits": [],
+  "broadRootClientReferenceHits": [],
+  "broadRootReferencePatterns": [
+    "@capiro/shared(?:/dist)?/index(?:\\.[cm]?js)?",
+    "@capiro/shared(?=[\\\"\\x27\\s)\\]])"
+  ],
+  "priceLockLiteral": "Limited-time price \u2014 lock in $200/profile for 1 year.",
+  "clientPricingLiteralHits": [],
+  "serverPricingLiteralHits": [
+    {
+      "path": "apps/web/.next/server/chunks/ssr/_18-wosn0a1179._.js",
+      "bytes": 219377,
+      "sha256": "c9d748c7044938832c1699d128f39ea43e1558b91aaf8a0d68a080b38e3eed78"
+    }
+  ],
+  "installedSharedArtifact": {
+    "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+    "bytes": 532178,
+    "allPackedFilesMatchInstalled": true,
+    "filesVerified": 187,
+    "rootMain": "./dist/index.js"
+  },
+  "sourceBroadRootImports": [
+    "apps/web/src/shared/capiro/onboard-pricing.server.ts"
+  ],
+  "canonicalAstGuard": {
+    "source": "scripts/architecture/dependencies.mjs",
+    "enforces": "Only server-only Onboard pricing owner, exactly named PRICE_LOCK_COPY and PRICE_CHANGE_COPY exports, no client directive; only Onboard server entry may import projection. Browser public exports remain newsletter and newsletter-render.",
+    "observedCheckArchitectureSummary": {
+      "total": 475,
+      "reviewed": 452,
+      "inheritedUnreviewed": 23,
+      "blocking": 0
+    },
+    "errors": [],
+    "executedByReviewer": false
+  },
+  "npmLs": {
+    "command": [
+      "npm",
+      "ls",
+      "--all",
+      "--json",
+      "--offline",
+      "@capiro/shared",
+      "@capiro/meri-contracts",
+      "@capiro/meri-ui-stream",
+      "@stripe/react-stripe-js",
+      "@stripe/stripe-js",
+      "axe-core"
+    ],
+    "exitCode": 0,
+    "problems": [],
+    "applicationExecution": false
+  },
+  "scope": "Supplemental emitted-artifact exclusion plus canonical source AST guard. Negative string/reference scans do not prove complete whole-program provenance, all dynamic behaviors or native/browser authority. No install/app/test/browser/build/server was executed by reviewer."
+}

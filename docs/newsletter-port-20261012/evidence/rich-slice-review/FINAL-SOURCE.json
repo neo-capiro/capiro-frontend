@@ -1,0 +1,146 @@
+{
+  "capturedAt": "2026-10-13T00:12:15.083864+00:00",
+  "baseHead": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "sourceState": "uncommitted source; no commit binding claimed",
+  "review": "bounded receiving guard and local rich editor; no native acceptance",
+  "records": [
+    {
+      "path": "apps/web/package.json",
+      "sha256": "36cd7a98306d00ef3667bbf0a47a707e7896431feb0d60638be575a70155e6ec",
+      "bytes": 1882,
+      "gitBlob": "3aebcc9ee30d21ceb6f56cc98d36d075ebf2b6f6"
+    },
+    {
+      "path": "apps/web/src/app/engagement/outreach/page.tsx",
+      "sha256": "045f081f8751bcf45a4ad737de30d3b9c616b30e054425694799facbbdcc35e4",
+      "bytes": 411,
+      "gitBlob": "eaee5064fd1118703302282e95d9dcb5f210eb43"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+      "bytes": 5925,
+      "gitBlob": "f79d100554d6146e86263851b7b765db06e9eee6"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+      "sha256": "15900285c0ece4cce17967f5842323fe40df584b25663ff8ca7d0359f8be3d0e",
+      "bytes": 1704,
+      "gitBlob": "7e319d8b7e160313b046ccfae7fd0568c35d2677"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73",
+      "bytes": 11121,
+      "gitBlob": "4aad7447dd06cd39645e7591ab5fbfd8762e556e"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "sha256": "3f50d27c9893de488a9538f699ddbc36a60cf6f4f20525bc7c87b024b449127b",
+      "bytes": 1896,
+      "gitBlob": "d25dd2a37e657036f1647a87c4d0e82126286a97"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/newsletter-route.ts",
+      "sha256": "b4c0ea0a99b4fde3358bcb0cc079381bc02a484c3f027bbc9d7508cdd17af682",
+      "bytes": 1708,
+      "gitBlob": "ee27f2bbc733e796130709cc5a5e473fb93e4fbb"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "sha256": "7ec9d3ae32de4a11446190d4ee99b43b830ec44590983d155e49a78309ddf3a5",
+      "bytes": 7766,
+      "gitBlob": "7f45ace2554959c05da91b538514788c29346ca1"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "sha256": "c252f1201084ddc3a3bbfdb19e49ae850adf7f020daa286bd7c9bb78a3418f95",
+      "bytes": 3569,
+      "gitBlob": "2276c7933f5daf9860e69d80d256c2e4fb626755"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "sha256": "4cce004224a7cc56e313bd03eda347e97dd28920ce7b4a4a789f59e373b505d0",
+      "bytes": 6504,
+      "gitBlob": "91e088a4f8ea430f5ecae49dc3babba75317d0a5"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "sha256": "92f22e482133a1454a2122bcc78b9f916836627f1b4122248507c20abd0d4158",
+      "bytes": 2897,
+      "gitBlob": "182aa871fcb6b53a096a7464640071c5be60e8c0"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichStructure.tsx",
+      "sha256": "9cc350f82297eba25cfddb937ad45934072afc0821988a4a9a052569dc879d03",
+      "bytes": 2447,
+      "gitBlob": "b4b98f0c3797381007c2508f1e238d5811cb19cb"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichText.tsx",
+      "sha256": "0c2647f8ba7beb62e1f903edbd03a7b23835561b45ed435fec0402a584ab6a59",
+      "bytes": 2224,
+      "gitBlob": "bf9ea9f235111cb719ffa8ef5fb0be8ed9a46a75"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "sha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468",
+      "bytes": 2847,
+      "gitBlob": "91f00e46a69b86b07697001acf8fdfd90324995f"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+      "sha256": "743537f90a47a6300e2e04733526043d40d593fc9a3f9b98f6ee54667866ee61",
+      "bytes": 2152,
+      "gitBlob": "68157e3340ad48f246103deec7898e5674e163ad"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+      "sha256": "8661f21e1fa15878ce2dc95eb6a5afc89bdc322a9b232ea43389534407ebf97a",
+      "bytes": 2155,
+      "gitBlob": "581ebf8979b4989aac2e26acb2a14711e887b214"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "sha256": "53b14d2f350e19a16130f02f5883deb1cb6acc13ee834b19eb7e20efaf54f74e",
+      "bytes": 1956,
+      "gitBlob": "9d9a11d5c11319d86d6fb465b02206ec0147a09e"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8",
+      "bytes": 11049,
+      "gitBlob": "8295c0adde22683904241890aa3f5783fd2ed403"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+      "sha256": "8e6fff50996b8af6e7c6c261bef64d816f36a861696125009adccf591a240c91",
+      "bytes": 567,
+      "gitBlob": "cc9da4b09423efe6468fc3546d7f326936f5ba62"
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-rich-history.spec.ts",
+      "sha256": "f155d0e2167958b685827acfaedf6ccbf6958b26ad7a4c631482c3a702390c2b",
+      "bytes": 1665,
+      "gitBlob": "fe4ffff950231191e909627bca290a81ae3f88ff"
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-rich.spec.ts",
+      "sha256": "33ec7ad0ac0d18b6b5a9cc2b3826d0bbe1809f15d738a6801f94c3fc7fdabd90",
+      "bytes": 9766,
+      "gitBlob": "b2e8146df11b85355d0952e9eec2bec733aa4b05"
+    },
+    {
+      "path": "docs/newsletter-port-20261012/RICH-IMPLEMENTATION-PLAN.md",
+      "sha256": "6ee79562c7a1932fbeabb684d85bcd33073681862d2f23599b93233e5b5677e5",
+      "bytes": 3178,
+      "gitBlob": "c029af0f87ac30366b522e5a92511e2825dd376e"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "1847b2eca0198110c55481bd2bc5c65f77e4bdf51ab07532f96771cdcfa11251",
+      "bytes": 511299,
+      "gitBlob": "03ef917e000b57de62690c83cc991c36cbcc293b"
+    }
+  ]
+}

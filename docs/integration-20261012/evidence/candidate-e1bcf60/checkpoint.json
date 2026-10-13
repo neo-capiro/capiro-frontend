@@ -1,0 +1,68 @@
+{
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "tree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
+  "portfolioBrowser": "IN_PROGRESS; no final result claimed",
+  "container": "UNRUN on this pin; prior recipe build blocked by proxy403; no bypass",
+  "artifacts": [
+    {
+      "path": "actual-server.txt",
+      "sha256": "21c889355b32eac597d1f948834e97d06bf87314d2c71726359ad80d1c2bf7d9",
+      "bytes": 3877
+    },
+    {
+      "path": "clean-install.txt",
+      "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c",
+      "bytes": 164
+    },
+    {
+      "path": "combined-check.txt",
+      "sha256": "30350a78be18d820b9dcbb7501d7991c512c991d83c97d6d3f011207c958d9ae",
+      "bytes": 731841
+    },
+    {
+      "path": "execution-checkpoint.json",
+      "sha256": "2f265d85adc1f2d99ba688ab7e14cdfb6d12163165ccae88523a446e7477df9f",
+      "bytes": 2215
+    },
+    {
+      "path": "integration-meri-desktop.png",
+      "sha256": "05fdf49c6fd96ae70df774085428f61ce75572e9311314319492dc68ad2f1489",
+      "bytes": 86155
+    },
+    {
+      "path": "integration-modules-mobile-collapsed.png",
+      "sha256": "7c5c8bddf6066c034396914d61731a6a252a0bb6ecf597a29e0269d7c59d77c7",
+      "bytes": 58291
+    },
+    {
+      "path": "integration-modules-mobile.png",
+      "sha256": "0d9b21fd138bc14690af19814a7e89c0e04221882dafe44d0ffcd1cb30c5377c",
+      "bytes": 53878
+    },
+    {
+      "path": "modules-browser.json",
+      "sha256": "0d7ca525c73427d1344f013034acdc336e53fb681be6b3d3988ff0e11aa8f1c5",
+      "bytes": 69276
+    },
+    {
+      "path": "modules-browser.txt",
+      "sha256": "79d3a8bf9416cb4b16b80a88c5268db721f955c644edfc71ebb7264b0913816f",
+      "bytes": 9395
+    },
+    {
+      "path": "production-build.txt",
+      "sha256": "1390f0e2b69177a7b33b226f36a42935841f2763e111f76fd033dbf144a239cd",
+      "bytes": 2297
+    },
+    {
+      "path": "ui-provenance-ssr.txt",
+      "sha256": "ee63f6fe368ab8b072e472187ede3d7b43f7038ad86622b7d6da74b4ec286a59",
+      "bytes": 3330
+    },
+    {
+      "path": "ui-ssr-receipt.json",
+      "sha256": "6161aa9b923b831afc737357abe1c6095d2413887f7d2c309e252f6676e8e836",
+      "bytes": 984849
+    }
+  ]
+}

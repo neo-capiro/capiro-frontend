@@ -1,0 +1,378 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-calendar/node_modules/.bin/playwright",
+      "test",
+      "--config=/tmp/capiro-remaining-calendar-evidence/playwright.config.mjs",
+      "calendar-lifecycle.spec.ts",
+      "calendar-sharing.spec.ts",
+      "--grep",
+      "client agenda filters native|upcoming opens Preparation|approved prep and attachment share|client shared feed lists"
+    ],
+    "configFile": "/tmp/capiro-remaining-calendar-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-calendar/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-calendar/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 20000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-calendar-evidence/baseline-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-lifecycle.spec.ts",
+      "file": "calendar-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client agenda filters native lifecycle status without requests or approval inference",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7504,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('columnheader', { name: 'Prep', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('columnheader', { name: 'Prep', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('columnheader', { name: 'Prep', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('columnheader', { name: 'Prep', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:124:5",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                      "column": 5,
+                      "line": 124
+                    },
+                    "snippet": "  122 |   await expect(\n  123 |     page.getByRole(\"columnheader\", { name: \"Prep\", exact: true }),\n> 124 |   ).toBeVisible();\n      |     ^\n  125 |   const prepared = page.getByRole(\"row\", { name: /Synthetic prepared/ });\n  126 |   await expect(prepared).toContainText(\"Generated\");\n  127 |   await expect(prepared).not.toContainText(\"Approved\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                        "column": 5,
+                        "line": 124
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('columnheader', { name: 'Prep', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('columnheader', { name: 'Prep', exact: true })\u001b[22m\n\n\n  122 |   await expect(\n  123 |     page.getByRole(\"columnheader\", { name: \"Prep\", exact: true }),\n> 124 |   ).toBeVisible();\n      |     ^\n  125 |   const prepared = page.getByRole(\"row\", { name: /Synthetic prepared/ });\n  126 |   await expect(prepared).toContainText(\"Generated\");\n  127 |   await expect(prepared).not.toContainText(\"Approved\");\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:124:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:01.754Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                    "column": 5,
+                    "line": 124
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e07685e932ccb6ceec0d-ed52a2f71981134fe6a5",
+          "file": "calendar-lifecycle.spec.ts",
+          "line": 111,
+          "column": 1
+        },
+        {
+          "title": "upcoming opens Preparation and retains identity across all meeting tabs",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6339,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:203:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                      "column": 7,
+                      "line": 203
+                    },
+                    "snippet": "  201 |     await expect(\n  202 |       detail.getByRole(\"button\", { name: tab, exact: true }),\n> 203 |     ).toHaveAttribute(\"aria-pressed\", \"true\");\n      |       ^\n  204 |     for (const name of [\"Information\", \"Preparation\", \"Notes\", \"Debriefs\"]) {\n  205 |       await detail.getByRole(\"button\", { name, exact: true }).click();\n  206 |       const identity = detail.getByRole(\"region\", { name: \"Meeting identity\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                        "column": 7,
+                        "line": 203
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })\u001b[22m\n\n\n  201 |     await expect(\n  202 |       detail.getByRole(\"button\", { name: tab, exact: true }),\n> 203 |     ).toHaveAttribute(\"aria-pressed\", \"true\");\n      |       ^\n  204 |     for (const name of [\"Information\", \"Preparation\", \"Notes\", \"Debriefs\"]) {\n  205 |       await detail.getByRole(\"button\", { name, exact: true }).click();\n  206 |       const identity = detail.getByRole(\"region\", { name: \"Meeting identity\" });\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:203:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:09.969Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts",
+                    "column": 7,
+                    "line": 203
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e07685e932ccb6ceec0d-e7ddc950a2991e88f350",
+          "file": "calendar-lifecycle.spec.ts",
+          "line": 192,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "calendar-sharing.spec.ts",
+      "file": "calendar-sharing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "approved prep and attachment share and selected unshare preserve other shared notes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 20114,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts",
+                        "column": 6,
+                        "line": 103
+                      },
+                      "message": "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Share artifacts', exact: true })\u001b[22m\n\n\n  101 |   await page\n  102 |     .getByRole(\"button\", { name: \"Share artifacts\", exact: true })\n> 103 |     .click();\n      |      ^\n  104 |   const dialog = page.getByRole(\"dialog\", {\n  105 |     name: \"Share artifacts with your organization?\",\n  106 |     exact: true,\n    at openSharing (/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:103:6)\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:131:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:17.152Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b37c751a053b4f2f41d4-633284c940145ea2d03b",
+          "file": "calendar-sharing.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "client shared feed lists only server-shared metadata without opening owner details or invented downloads",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 20111,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 20000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts",
+                        "column": 6,
+                        "line": 277
+                      },
+                      "message": "Error: locator.click: Test timeout of 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Shared meetings', exact: true })\u001b[22m\n\n\n  275 |   await page\n  276 |     .getByRole(\"button\", { name: \"Shared meetings\", exact: true })\n> 277 |     .click();\n      |      ^\n  278 |   const feed = page.getByRole(\"region\", { name: \"Client shared meetings\" });\n  279 |   await expect(\n  280 |     feed.getByRole(\"heading\", { name: sharingMeeting.subject }),\n    at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:277:6"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:55:38.107Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b37c751a053b4f2f41d4-e1739e5421fe4231c7a9",
+          "file": "calendar-sharing.spec.ts",
+          "line": 270,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:55:01.259Z",
+    "duration": 57352.013999999996,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

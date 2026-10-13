@@ -1,0 +1,296 @@
+{
+  "schema": "capiro-elements-migration-map/1",
+  "sourceRepository": "neo-capiro/meri-greenfield",
+  "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+  "records": [
+    {
+      "from": "apps/ui/elements-qualification/.gitignore",
+      "sourceBytes": 89,
+      "sourceSha256": "1af48596dedcd2ffe9ecd79887925b49706bcc1b7db615c1ae0187f76ddc1a53",
+      "to": "packages/qualification-elements/.gitignore",
+      "promotedBytes": 14,
+      "promotedSha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/LICENSE-AI-ELEMENTS",
+      "sourceBytes": 552,
+      "sourceSha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529",
+      "to": "packages/ui/LICENSE-AI-ELEMENTS",
+      "promotedBytes": 552,
+      "promotedSha256": "b4f9adb7c568904834d0dd6cc98d16c390d21ca32fc17ae7a267715269bd5529",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/LICENSE-SHADCN",
+      "sourceBytes": 1063,
+      "sourceSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "to": "packages/ui/LICENSE-SHADCN",
+      "promotedBytes": 1063,
+      "promotedSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/README.md",
+      "sourceBytes": 6904,
+      "sourceSha256": "3f8945c86343aaf004f31af76ce2302b172c733427aac29623fd6ebe99fa5364",
+      "to": "packages/qualification-elements/README.md",
+      "promotedBytes": 2450,
+      "promotedSha256": "41d9a2b009482d0babbfd6b10d73bcf78d92815dbfddafa504b033d79c4ab6c4",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/THIRD-PARTY-NOTICES.md",
+      "sourceBytes": 293686,
+      "sourceSha256": "426839e3d05bd6959adeff7cc7081c8e1e8aee6a4dda7668ec9ede77361ad0c1",
+      "to": "packages/ui/THIRD-PARTY-NOTICES.md",
+      "promotedBytes": 293686,
+      "promotedSha256": "426839e3d05bd6959adeff7cc7081c8e1e8aee6a4dda7668ec9ede77361ad0c1",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/component-pins.json",
+      "sourceBytes": 244217,
+      "sourceSha256": "d7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1",
+      "to": "packages/qualification-elements/baseline/component-pins.json",
+      "promotedBytes": 244217,
+      "promotedSha256": "d7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/fixture.tsx",
+      "sourceBytes": 1964,
+      "sourceSha256": "31aef5ebb83fc176cb9d1d582eb36a442d7e509d792e18cb377fe6bf9be2fdf5",
+      "to": "packages/qualification-elements/fixture.tsx",
+      "promotedBytes": 1934,
+      "promotedSha256": "ee9e1ea8f06351fc3592e099fe6fc53a1601c530659c377aa67d3335cd95eb17",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/package-lock.json",
+      "sourceBytes": 210293,
+      "sourceSha256": "104a48c4c68bcb5a3c3bb1f2d5000225a10dcf571c483a2d0dd4bb65ad5b5713",
+      "to": "packages/qualification-elements/baseline/package-lock.json",
+      "promotedBytes": 210293,
+      "promotedSha256": "104a48c4c68bcb5a3c3bb1f2d5000225a10dcf571c483a2d0dd4bb65ad5b5713",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/package.json",
+      "sourceBytes": 1168,
+      "sourceSha256": "0a105271c69413aef05b2d1ca78a40b8245c884959bce9aefe47e8a5a5815508",
+      "to": "packages/qualification-elements/package.json",
+      "promotedBytes": 1163,
+      "promotedSha256": "30a2401adff3425201c3bec97e057de0d4e3420cc7cd2a2a29f5099072a91c1a",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/qualification.test.mjs",
+      "sourceBytes": 24719,
+      "sourceSha256": "6807320c734c9b5c311523b5bc744a57a32fe1e6b2577a2124eecac777791e6d",
+      "to": "packages/qualification-elements/qualification.test.mjs",
+      "promotedBytes": 26644,
+      "promotedSha256": "22a071d944d90265fc6b7fe7a82229f5764f9ea870c1c34f680f698feda2f7f4",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/ssr-build.mjs",
+      "sourceBytes": 12283,
+      "sourceSha256": "ed52e38b553afde37e260b41f01f190990a44aa92b857c6df2ae0020fb681547",
+      "to": "packages/qualification-elements/ssr-build.mjs",
+      "promotedBytes": 11979,
+      "promotedSha256": "24aa6503338cd38ab222751823134d74ed008adf142813239b3251921021c1e8",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/ssr-runtime.mjs",
+      "sourceBytes": 6454,
+      "sourceSha256": "b5349b6eb805aee8ff34742b1d0459386d182ac5d85c6b82d7fd393a1ad4f19d",
+      "to": "packages/qualification-elements/ssr-runtime.mjs",
+      "promotedBytes": 6454,
+      "promotedSha256": "b5349b6eb805aee8ff34742b1d0459386d182ac5d85c6b82d7fd393a1ad4f19d",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/styles.css",
+      "sourceBytes": 929,
+      "sourceSha256": "ba917a42781a462a81809ad94b8321138290b94215c36c5951c87b869fba4f72",
+      "to": "packages/qualification-elements/styles.css",
+      "promotedBytes": 929,
+      "promotedSha256": "ba917a42781a462a81809ad94b8321138290b94215c36c5951c87b869fba4f72",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/toolchain-pins.json",
+      "sourceBytes": 2096,
+      "sourceSha256": "35e4b042ad178964b7f6afbd08b45a473de22bcbe21741de80e06363b79f80ca",
+      "to": "packages/qualification-elements/toolchain-pins.json",
+      "promotedBytes": 2096,
+      "promotedSha256": "35e4b042ad178964b7f6afbd08b45a473de22bcbe21741de80e06363b79f80ca",
+      "change": "byte-exact-relocation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/tsconfig.json",
+      "sourceBytes": 686,
+      "sourceSha256": "1332f1cac4262d745381d1a0d2f8e56ae44cd688b97952eb3070956f6ecfb907",
+      "to": "packages/qualification-elements/tsconfig.json",
+      "promotedBytes": 638,
+      "promotedSha256": "445c7f7027639be4472daced84d577367d79d6c92e63a77ad0e186d0b3e739e9",
+      "change": "qualification-layout-adaptation"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/ai-elements/conversation.tsx",
+      "sourceBytes": 4441,
+      "sourceSha256": "d7ac46f1e7bc8e46bc49f67c768fc93aebdf17d816397cb35a40deff7173e875",
+      "to": "packages/ui/src/ai-elements/conversation.tsx",
+      "promotedBytes": 4408,
+      "promotedSha256": "7ef993ea4a950d2448d9adbdc28a06863e7dbbb0d09b74547678c170443fe997",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/ai-elements/message.tsx",
+      "sourceBytes": 8610,
+      "sourceSha256": "19c7755740e116f221e4247f7b6d4f20b57a44e4c4fcf66d2db5e1f111476509",
+      "to": "packages/ui/src/ai-elements/message.tsx",
+      "promotedBytes": 8537,
+      "promotedSha256": "49d93e770848ce4f4222b2ef9667cc3d4d0b7957bd5e3c5f5122671a22f62767",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/ai-elements/prompt-input.tsx",
+      "sourceBytes": 39046,
+      "sourceSha256": "cf43baf5baa444b4ae06d250643b3fb2efd329c85f9b31a43e3aaf481dd27305",
+      "to": "packages/ui/src/ai-elements/prompt-input.tsx",
+      "promotedBytes": 38893,
+      "promotedSha256": "2745f684e0e8676528b667d76d5340e68e871fb274bb9fb306dfcc9fdc8a087d",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/button-group.tsx",
+      "sourceBytes": 2256,
+      "sourceSha256": "1b0147f3d6ee8770524363f9bc9a57db83de8d2a0733c6e635e51034219e4c1e",
+      "to": "packages/ui/src/shadcn/button-group.tsx",
+      "promotedBytes": 2215,
+      "promotedSha256": "b178d6a9c765369c4b380f7e3946b5fce18d61588ec30c56c3e4211100276e58",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/button.tsx",
+      "sourceBytes": 2175,
+      "sourceSha256": "208d8cf515ccd73c1ca0030a11de1ba460a9fcd6c83faafeadc000833790d22e",
+      "to": "packages/ui/src/shadcn/button.tsx",
+      "promotedBytes": 2162,
+      "promotedSha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/command.tsx",
+      "sourceBytes": 4846,
+      "sourceSha256": "53be7fe88f0ddbb2f6d97c64c07c1b4816050494880a582c92c0c3c62117b03c",
+      "to": "packages/ui/src/shadcn/command.tsx",
+      "promotedBytes": 4805,
+      "promotedSha256": "336111eeea2fe1876be00204b8f4ed84a878e611c35f1a679e0d7d6264a4c37e",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/dialog.tsx",
+      "sourceBytes": 3991,
+      "sourceSha256": "c7d128632214c9c78706a91a0616659ecf3be5119492b2ca66607bd83901b802",
+      "to": "packages/ui/src/shadcn/dialog.tsx",
+      "promotedBytes": 3978,
+      "promotedSha256": "c48b0bde6f2f458a3763d65ba30a83e83234b7e62d943dc650c738cfdd7c87d3",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/dropdown-menu.tsx",
+      "sourceBytes": 8620,
+      "sourceSha256": "d2d68bf1f4540baf814fcb20bfd487bfbba1fdfbcc533ef99e0ef862dfbf25a2",
+      "to": "packages/ui/src/shadcn/dropdown-menu.tsx",
+      "promotedBytes": 8607,
+      "promotedSha256": "5fe334620fef12a3d4923261dcff8642deab738cbad091161ff91e53170eba84",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/hover-card.tsx",
+      "sourceBytes": 1540,
+      "sourceSha256": "cf19544ba82d332ce2f882f9ae64d9e848c475f13e79fa0353492f2ce7afe1ef",
+      "to": "packages/ui/src/shadcn/hover-card.tsx",
+      "promotedBytes": 1527,
+      "promotedSha256": "b0746fd8f97056649af02f84723879b1059c8a05b98fc1d32bfea701e3552512",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/input-group.tsx",
+      "sourceBytes": 5129,
+      "sourceSha256": "d347e89600f0750a438f31559c85bb91833eeef51a56e70c2af5ef5d8d2acdd2",
+      "to": "packages/ui/src/shadcn/input-group.tsx",
+      "promotedBytes": 5032,
+      "promotedSha256": "6db695007910296e4cc8f0630261feeb30c83bf1008af42c00ad3bc3365a6b05",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/input.tsx",
+      "sourceBytes": 976,
+      "sourceSha256": "96207e020d2624fba7241b91a1f2e5a971510003b9c0becc9d0c02a535b15067",
+      "to": "packages/ui/src/shadcn/input.tsx",
+      "promotedBytes": 963,
+      "promotedSha256": "313da1cd9a309d996eb182d5491bbb3f47428d0271be846845b5de82bfa3d80e",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/select.tsx",
+      "sourceBytes": 6304,
+      "sourceSha256": "a0eefd67e05688a6318a3a86080a6951723c6b5d323e1fa92b9d1b7fee777995",
+      "to": "packages/ui/src/shadcn/select.tsx",
+      "promotedBytes": 6291,
+      "promotedSha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/separator.tsx",
+      "sourceBytes": 708,
+      "sourceSha256": "47885bfbdf6468a740999cf934b5cb563ecddb709502c2c501cea524f78d5ce3",
+      "to": "packages/ui/src/shadcn/separator.tsx",
+      "promotedBytes": 695,
+      "promotedSha256": "a9329fcc5027a235af664572e4cb55bd3697d7fc3f0362eb7f3cd669adc0d1cc",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/spinner.tsx",
+      "sourceBytes": 345,
+      "sourceSha256": "acf4f2aeb7fc29bd8aa22a6501b85dd4462d196e831dc5424be93ffdb49e21b4",
+      "to": "packages/ui/src/shadcn/spinner.tsx",
+      "promotedBytes": 332,
+      "promotedSha256": "ee0751b6dbd864163e77ead195616c9d1777a04ccda1a58dd1ced781ed61a685",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/textarea.tsx",
+      "sourceBytes": 773,
+      "sourceSha256": "0b7fc00f5a0fa6ace377c5f61ef14a30b3d190bc2761c2728ec6886809a1a0c8",
+      "to": "packages/ui/src/shadcn/textarea.tsx",
+      "promotedBytes": 760,
+      "promotedSha256": "18fc99389dfcd50059ec60da5c5ac7cfe5195ebd8cb2b2cb8cd9de30be9ddb4f",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/components/ui/tooltip.tsx",
+      "sourceBytes": 1901,
+      "sourceSha256": "f459111a16d346aaa64d1bb6557cca986f7332b150ad3a29001e8fef3aea973a",
+      "to": "packages/ui/src/shadcn/tooltip.tsx",
+      "promotedBytes": 1888,
+      "promotedSha256": "0ff01dcc2396975619d64ed8819048ea3ebd66f8baf6a63d11433a8754905ced",
+      "change": "quoted-import-specifiers-only"
+    },
+    {
+      "from": "apps/ui/elements-qualification/vendor/shadcn-ui/lib/utils.ts",
+      "sourceBytes": 166,
+      "sourceSha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+      "to": "packages/ui/src/lib/utils.ts",
+      "promotedBytes": 166,
+      "promotedSha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+      "change": "byte-exact-relocation"
+    }
+  ],
+  "limits": "Backend sources still held until independent destination verification; no deletion/admission implied."
+}

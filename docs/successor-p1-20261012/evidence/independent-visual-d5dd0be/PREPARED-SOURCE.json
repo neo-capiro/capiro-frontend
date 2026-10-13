@@ -1,0 +1,31 @@
+{
+  "commit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "appsWebTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "sourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "applicationChanges": "",
+  "root": "/workspace/capiro-p1-successor",
+  "browserNotStarted": true,
+  "sourceHashes": {
+    "apps/web/src/shared/portfolio/ui/Dialog.tsx": "97f46e6cfdb61055c53966d27e6bdd7b24fca30b5e3f1287ebdba002874a940b",
+    "apps/web/src/shared/portfolio/ui/dialog-focus.ts": "0dda1e8377cc7d8be416d5d991240cd6c16229f43e4cb5dc41c80f3163a6a5af",
+    "apps/web/tests/browser/dialog-disabled-focus.spec.ts": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355",
+    "apps/web/tests/browser/fixtures.ts": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368"
+  },
+  "unchangedControls": {
+    "review.spec.ts": {
+      "sha256": "cfba23c20d9b4da984e74c8badcd965600bf0d384d1005fa01f7a43fbf60bfb6",
+      "priorSha256": "cfba23c20d9b4da984e74c8badcd965600bf0d384d1005fa01f7a43fbf60bfb6",
+      "identical": true
+    },
+    "focus-regression.spec.ts": {
+      "sha256": "411838b98b535d56fc7744df7e450b65ee53e8745bd1a006d73544a29a3769ff",
+      "priorSha256": "411838b98b535d56fc7744df7e450b65ee53e8745bd1a006d73544a29a3769ff",
+      "identical": true
+    }
+  },
+  "fourFocusControlsIdenticalToPriorCopy": true,
+  "sharedDialogIdenticalToAcceptedSource": {
+    "apps/web/src/shared/portfolio/ui/Dialog.tsx": true,
+    "apps/web/src/shared/portfolio/ui/dialog-focus.ts": true
+  }
+}

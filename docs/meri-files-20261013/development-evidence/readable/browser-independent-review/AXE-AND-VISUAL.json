@@ -1,0 +1,239 @@
+{
+  "axe": [
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-1.json",
+      "sha256": "477104ea39df1f09b97de3ef3c50f67f0627537991a6cdc8a65c6fd228bea99f",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                "._newConversation_sgeic_65"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-2.json",
+      "sha256": "8bd78aedf83fa4e04bf665318daf98712acbce27d778ed3828e6df974a49dc50",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": []
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-3.json",
+      "sha256": "1fcd4579d70f29b3e11ab86da2911f98be14c1cc7f030a5b0f0bbc8b0bc8d940",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                "._newConversation_sgeic_65"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-4.json",
+      "sha256": "15fb969e040172d61eb454a73127fa5b13893fa0a2d81f6c69d350f27c33ef8c",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": []
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-5.json",
+      "sha256": "f02a424b05794d4f63e25cfb7aa347b7733b21e158ef1fbc647607e1d7722a63",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                ".bg-primary"
+              ],
+              "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-6.json",
+      "sha256": "a49042e33ec37a8e3625540687e6aabcf91838ded3ebcb5051106877a4e67282",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "options": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "incomplete": []
+    }
+  ],
+  "focus": [
+    {
+      "test": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "observation": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "test": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "observation": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "test": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "observation": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "test": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "observation": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    }
+  ],
+  "screenshotsViewed": [
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-native-pending.png",
+      "sha256": "814f36d2e4120d8f272a1baa70c1a99ff211327f2dcec9595acb6716cd81cfee",
+      "bytes": 126822,
+      "reviewedWith": "view_image",
+      "observation": "Word phone view is painted; fields/cards stack; metadata wraps and draft/pending/native limits remain visible."
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-native-pending.png",
+      "sha256": "5bb390206f5ec4f6342ecdff30230427b09d6766cd28f54a433523887b56b0d2",
+      "bytes": 199365,
+      "reviewedWith": "view_image",
+      "observation": "Workbook desktop view uses two columns with complete receipt and recalculation warnings visible."
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-revision.png",
+      "sha256": "59a012fd2bb3cefb30a86f40bae69cda7485d091e41f04a513460247ea0e8bf0",
+      "bytes": 183593,
+      "reviewedWith": "view_image",
+      "observation": "Workbook phone revision exposes exact parent, full-replacement acknowledgement, selected version and verification/native limits without overlapping controls."
+    },
+    {
+      "path": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytes": 49097,
+      "reviewedWith": "view_image",
+      "observation": "Phone disabled state plainly states service unavailable, exposes no connect/create controls, and retains the footer limits."
+    }
+  ],
+  "limits": "Light theme only; no new runtime/image editing. Incomplete gradient contrast is retained as incomplete, not accepted contrast. No Figma/native Office/WCAG claim."
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "PACKET-01",
+    "kind": "stale-current-status",
+    "locations": [
+      {
+        "path": "packaging/STATUS.md",
+        "line": 7
+      },
+      {
+        "path": "HANDOFF-STATUS.json",
+        "line": 26
+      }
+    ],
+    "finding": "Current status still marks final visual, production build and actual-server/runtime gates pending. Their exact d5dd receipts passed; only full Portfolio execution remains pending.",
+    "evidence": [
+      "/tmp/capiro-successor-qualification/final-d5dd0be/build-exit.json: exitCode0, sourceChangedfalse",
+      "/tmp/capiro-successor-qualification/final-d5dd0be/production-exit.json: exitCode0, sourceChangedfalse",
+      "evidence/independent-visual-d5dd0be/REPORT.md:15/15 unchanged controls passed"
+    ],
+    "correction": "Update passed gate summaries and pending label, while retaining full-Portfolio qualification pending."
+  },
+  {
+    "id": "PACKET-02",
+    "kind": "historical-command-on-current-route",
+    "locations": [
+      {
+        "path": "README.md",
+        "line": 34
+      },
+      {
+        "path": "packaging/README.md",
+        "line": 3
+      },
+      {
+        "path": "packaging/d5dd0be/README.md",
+        "line": 3
+      }
+    ],
+    "finding": "The main README links the current reviewed archive route directly to the historical usage document whose commands hardcode49f6609 and whose prose calls4862 blobs the current source. That readme is hash-bound historical evidence; direct current routing risks producing the superseded archive.",
+    "correction": "Preserve old usage bytes; point the current route to packaging/d5dd0be/README.md and include explicit d5dd create/verify commands there, clearly marking the parent usage document historical."
+  },
+  {
+    "id": "PACKET-03",
+    "kind": "superseded-scope-description",
+    "locations": [
+      {
+        "path": "STRUCTURE-REVIEW.md",
+        "line": 17
+      }
+    ],
+    "finding": "The current structure summary says the only existing-test fixture correction replaces one id-only debrief acknowledgement. Final native manual/library/voice/generated metadata fixtures and the scoped email alert assertion extend that earlier scope. The main README and final independent test-structure review describe the final change correctly.",
+    "evidence": [
+      "README.md: original meaningful tests and native fixtures paragraph",
+      "evidence/independent-final-test-structure/report.md"
+    ],
+    "correction": "Replace the initial-only fixture statement with the final bounded correction scope and preserve the explicit native-GET fixture limits."
+  }
+]

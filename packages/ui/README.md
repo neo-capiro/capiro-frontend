@@ -1,6 +1,6 @@
 # Canonical Capiro UI components
 
-Public TS-source exports: `@capiro/ui/button`, `/conversation`, `/message`, `/prompt-input`. Consumers use the public package; Next must transpile `@capiro/ui`. All adopted named exports remain in their original module. There is no root wildcard, backend/model code, qualification runner or application route.
+Public TS-source exports: `@capiro/ui/button`, `/dialog`, `/conversation`, `/message`, `/prompt-input`. Consumers use the public package; Next must transpile `@capiro/ui`. All adopted named exports remain in their original module. There is no root wildcard, backend/model code, qualification runner or application route. The Portfolio wrapper uses the existing Dialog export with application CSS; its adopted source and provenance hashes are unchanged.
 
 Seventeen files from the NEW Meri qualification are promoted into `src/` once. `provenance.json` binds every original/upstream blob/hash and exact new hash, with an inverse-checkable list of quoted import-specifier changes. Internal shadcn aliases become ordinary relative imports; algorithms, JSX, props and the original dropdown strict-optional adaptation remain unchanged. This is promotion source, not qualification acceptance.
 

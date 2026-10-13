@@ -1,0 +1,46 @@
+{
+  "credentialReview": {
+    "coverageLimits": 0,
+    "ownerDisposition": "Root independently classified both as the same plain approval-prose authorization field, direct and inside enclosing tar; no credential value. Raw scan remains unchanged.",
+    "rawCandidates": 2
+  },
+  "finalUnion": {
+    "additionalBlobs": 485,
+    "additionalPacks": 14,
+    "additionalPaths": 3832,
+    "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "priorPackBytesChanged": false,
+    "priorSourceBytesRechecked": true,
+    "result": "passed"
+  },
+  "firstUnionPreflight": {
+    "correction": "Limit incremental cache exclusion to files outside outputs/work/test-results; retain every prior path",
+    "reason": "A blanket tsbuildinfo cache exclusion also excluded the already-preserved pre-consolidation-generated/tsconfig.tsbuildinfo evidence file",
+    "result": "refused before new capture or pack writes"
+  },
+  "fullVerification": {
+    "credentialReview": "ROOT_REVIEW_REQUIRED",
+    "files": 35264,
+    "historyBundleVerified": true,
+    "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "metadataFiles": 202,
+    "packs": 166,
+    "uniqueBlobs": 9729,
+    "verified": true
+  },
+  "generatedStaging": {
+    "freshReadConfirmedAbsent": true,
+    "originalContextRemoved": false,
+    "removed": true
+  },
+  "initialCapture": {
+    "failure": "Directory not empty while removing generated .blob-staging; existing source/evidence untouched",
+    "initialManifestSha256": "901f0fc24c51bbb86df8d9523e0c0c9ef10931507670955790b32ed41700e03c",
+    "packs": 152,
+    "paths": 31432,
+    "result": "complete byte capture, scan, packs and manifest written; cleanup then exited1"
+  },
+  "reportPreparation": "First report helper invocation lacked its script working directory and failed import; rerun from handover-preparation without file changes.",
+  "scope": "preservation tooling only; product source unchanged",
+  "transport": "Any GitHub transport chunking is separate and must reconstruct exact original compressed pack bytes before verification."
+}

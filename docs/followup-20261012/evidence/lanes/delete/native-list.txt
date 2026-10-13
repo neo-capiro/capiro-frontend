@@ -1,0 +1,109 @@
+apps/api/src/engagement/engagement.service.ts @ 243248e726243c44bd4b9d24fd1ed220da18c56a; complete source SHA256 78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9
+7756:   async listAttachments(
+7757:     ctx: TenantContext,
+7758:     query: {
+7759:       prospectId?: string;
+7760:       clientId?: string;
+7761:       meetingId?: string;
+7762:       mailMessageId?: string;
+7763:       unlinked?: boolean;
+7764:     },
+7765:   ) {
+7766:     const hasParent = Boolean(
+7767:       query.prospectId || query.clientId || query.meetingId || query.mailMessageId,
+7768:     );
+7769:     if (!hasParent && !query.unlinked) {
+7770:       throw new BadRequestException('An attachment parent (or unlinked=true) is required');
+7771:     }
+7772:     await this.validateAttachmentParents(ctx, query);
+7773:     const { rows, uploaderNameById } = await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+7774:       const rows = await tx.engagementAttachment.findMany({
+7775:         where: {
+7776:           tenantId: ctx.tenantId,
+7777:           prospectId: query.prospectId ?? null,
+7778:           // Gate H a-6: a superseded row is a past version, not a document a
+7779:           // caller listing "the client's documents" should see — excluding it
+7780:           // here is what makes supersedeAttachment look like a delete to every
+7781:           // existing reader of this list, even though nothing was destroyed.
+7782:           supersededByAttachmentId: null,
+7783:           // "unlinked" = the tenant's general outreach library: files not tied
+7784:           // to any client, meeting, or mail message. Explicit opt-in (and only
+7785:           // when no parent is given) so a caller can't accidentally page the
+7786:           // whole tenant's attachments.
+7787:           ...(!hasParent && query.unlinked
+7788:             ? { prospectId: null, clientId: null, meetingId: null, mailMessageId: null }
+7789:             : {}),
+7790:           ...(query.clientId ? { clientId: query.clientId } : {}),
+7791:           ...(query.meetingId ? { meetingId: query.meetingId } : {}),
+7792:           ...(query.mailMessageId ? { mailMessageId: query.mailMessageId } : {}),
+7793:           // Client Files view ACL: default viewerMode='all' keeps every prior
+7794:           // row visible. Restricted rows only surface for their uploader or a
+7795:           // listed viewerUserIds member. Meeting/mail parent lists still honor
+7796:           // the same rule so a restricted client file cannot leak through
+7797:           // another parent path.
+7798:           OR: attachmentViewerWhere(ctx.userId),
+7799:         },
+7800:         orderBy: { createdAt: 'desc' },
+7801:       });
+7802:       // Resolve uploader display names (Meetings v2 §8 — the Documents tab shows
+7803:       // the uploader). uploadedByUserId is a bare UUID, so batch-look up the users.
+7804:       const uploaderIds = [
+7805:         ...new Set(rows.map((r) => r.uploadedByUserId).filter((v): v is string => Boolean(v))),
+7806:       ];
+7807:       const users = uploaderIds.length
+7808:         ? await tx.user.findMany({
+7809:             where: { id: { in: uploaderIds } },
+7810:             select: { id: true, firstName: true, lastName: true, email: true },
+7811:           })
+7812:         : [];
+7813:       const uploaderNameById = new Map(users.map((u) => [u.id, userDisplayName(u)]));
+7814:       return { rows, uploaderNameById };
+7815:     });
+7816:     const accessibleRows = [];
+7817:     for (const row of rows) {
+7818:       try {
+7819:         await assertHearingRecordDocumentAccess(this.prisma, ctx, row);
+7820:         await assertProspectAttachmentAccess(this.prisma, ctx, row);
+7821:         accessibleRows.push(row);
+7822:       } catch (error) {
+7823:         if (row.sourceEntityType !== 'hearing_record_brief' && !row.prospectId) throw error;
+7824:         // A removed private context must not leak its title or signed bytes.
+7825:       }
+7826:     }
+7827:     return Promise.all(
+7828:       accessibleRows.map(async (row) => {
+7829:         // Phase 1 §3.h1 — no download URL for a file that may not be used, and an
+7830:         // explicit disclosure when it was never actually scanned. A signed URL for
+7831:         // a quarantined or threat-flagged object is the download the gate exists
+7832:         // to prevent.
+7833:         const verdict = this.attachmentContent.readiness(row, this.scanner.scanRequired);
+7834:         const result = {
+7835:           ...row,
+7836:           uploadedByName: row.uploadedByUserId
+7837:             ? (uploaderNameById.get(row.uploadedByUserId) ?? null)
+7838:             : null,
+7839:           downloadUrl: verdict.usable ? await this.createAttachmentDownloadUrl(row.s3Key) : null,
+7840:           previewUrl: verdict.usable
+7841:             ? await this.createAttachmentPreviewUrl(row.s3Key, row.contentType)
+7842:             : null,
+7843:           usable: verdict.usable,
+7844:           ...(verdict.code ? { blockedReason: verdict.code } : {}),
+7845:           ...(verdict.disclosure ? { scanDisclosure: verdict.disclosure } : {}),
+7846:         };
+7847:         await assertProspectAttachmentAccess(this.prisma, ctx, row);
+7848:         return result;
+7849:       }),
+7850:     );
+7851:   }
+7852: 
+7853:   async extractAttachmentText(
+7854:     ctx: TenantContext,
+7855:     id: string,
+7856:     options: {
+7857:       clientId?: string;
+7858:       section?: number;
+7859:       contextImport?: boolean;
+7860:       contextSourceOnly?: boolean;
+7861:       signal?: AbortSignal;
+7862:     } = {},
+7863:   ) {

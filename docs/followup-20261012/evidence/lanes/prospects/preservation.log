@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:631510) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 apps/web/tests/browser/prospect-files.spec.ts:40:5 › current prospect files retain readiness and do not expose unsupported actions (2.2s)
+  ✓  2 apps/web/tests/browser/prospect-files.spec.ts:63:5 › upload loss retains one exact intent and confirms without reuploading bytes (2.2s)
+  ✓  3 apps/web/tests/browser/prospect-files.spec.ts:121:5 › wrong lineage suppresses file links and upload without broadening the request (2.1s)
+  ✓  4 apps/web/tests/browser/prospect-files.spec.ts:146:5 › deletion requires confirmation and current list, with no uncertain automatic retry (2.6s)
+  ✓  5 apps/web/tests/browser/prospect-files.spec.ts:175:5 › dismissed prospect retains historical files but cannot upload, including on mobile (4.4s)
+  ✓  6 apps/web/tests/browser/prospect-files.spec.ts:202:5 › reload preserves the original upload confirmation without reuploading bytes (6.9s)
+  ✓  7 apps/web/tests/browser/prospect-files.spec.ts:265:5 › lost upload-ticket response survives reload and requires exact original bytes before same-key recovery (6.7s)
+  ✓  8 apps/web/tests/browser/prospect-files.spec.ts:346:5 › unavailable browser recovery storage cannot issue an upload intent (3.6s)
+  ✓  9 apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts:5:5 › uncertain prospect confirmation cannot become a fresh key and second byte upload after reload (8.6s)
+
+  9 passed (40.5s)

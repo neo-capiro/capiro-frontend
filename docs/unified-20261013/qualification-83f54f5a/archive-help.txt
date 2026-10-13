@@ -1,0 +1,15 @@
+usage: archive-evidence.py [-h] [--destination DESTINATION]
+                           {inventory,build,verify,restore} directory
+
+Build, verify or restore byte-preserving evidence without traversing links.
+
+positional arguments:
+  {inventory,build,verify,restore}
+  directory
+
+options:
+  -h, --help            show this help message and exit
+  --destination DESTINATION
+
+Exit 0: complete; 1: validation/I/O failure; 2: invalid CLI arguments. Restore
+can require the uncompressed sourceBytes shown in ARCHIVE-VERIFICATION.json.

@@ -1,0 +1,154 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-onboard-execution-20261013/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-unified-figma-capture-plan-20261013/playwright.config.mjs",
+      "--project=portfolio-fixture"
+    ],
+    "configFile": "/tmp/capiro-unified-figma-capture-plan-20261013/playwright.config.mjs",
+    "rootDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-portfolio-corrected",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "actual",
+        "name": "actual",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-portfolio-corrected",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "portfolio-fixture",
+        "name": "portfolio-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-portfolio-corrected",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "modules-fixture",
+        "name": "modules-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-unified-figma-capture-plan-20261013/results-portfolio-corrected.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "capture.spec.ts",
+      "file": "capture.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Portfolio source fixture canonical /",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "portfolio-fixture",
+              "projectName": "portfolio-fixture",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:45:13.394Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-f8d408c1ec408424cea6",
+          "file": "capture.spec.ts",
+          "line": 139,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T06:45:12.014Z",
+    "duration": 12206.475,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

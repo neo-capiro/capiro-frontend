@@ -1,0 +1,17 @@
+[
+  {
+    "file": "apps/web/tests/browser/email-compose.spec.ts",
+    "messageAssertionsAdapted": 8,
+    "expectedValues": "unchanged exact strings; paragraph text joined with newline, no whitespace normalization"
+  },
+  {
+    "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+    "messageAssertionsAdapted": 7,
+    "expectedValues": "unchanged exact strings; paragraph text joined with newline, no whitespace normalization"
+  },
+  {
+    "file": "apps/web/tests/browser/mail-rewrite.spec.ts",
+    "messageAssertionsAdapted": 9,
+    "expectedValues": "unchanged exact strings; paragraph text joined with newline, no whitespace normalization"
+  }
+]

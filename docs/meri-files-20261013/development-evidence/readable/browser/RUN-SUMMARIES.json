@@ -1,0 +1,48 @@
+[
+  {
+    "run": "candidate",
+    "stats": {
+      "startTime": "2026-10-13T08:56:30.113Z",
+      "duration": 246008.99300000002,
+      "expected": 17,
+      "skipped": 0,
+      "unexpected": 10,
+      "flaky": 0
+    },
+    "config": {
+      "workers": 1,
+      "fullyParallel": false,
+      "globalTimeout": 0
+    },
+    "projects": [
+      {
+        "name": "",
+        "retries": 0,
+        "use": null
+      }
+    ]
+  },
+  {
+    "run": "corrected",
+    "stats": {
+      "startTime": "2026-10-13T09:02:17.217Z",
+      "duration": 51098.231,
+      "expected": 27,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "config": {
+      "workers": 1,
+      "fullyParallel": false,
+      "globalTimeout": 0
+    },
+    "projects": [
+      {
+        "name": "",
+        "retries": 0,
+        "use": null
+      }
+    ]
+  }
+]

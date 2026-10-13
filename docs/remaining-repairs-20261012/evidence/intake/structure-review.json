@@ -1,0 +1,47 @@
+{
+  "boundaryErrors": [],
+  "findings": [
+    {
+      "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+      "kind": "function",
+      "symbol": "RegistrationStep",
+      "line": 5,
+      "nonblank": 81,
+      "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "fileSha256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+      "proposedReview": "Cohesive existing registration form. The sole behavior-neutral addition selects the certifications presentation variant; fields, values, unknown-code preservation and payload owner are unchanged. Crossing 80 by one line does not justify splitting the form into arbitrary fragments.",
+      "approvalOwner": "root independent review; no registry edited by this owner"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "kind": "function",
+      "symbol": "ClientOverview",
+      "line": 24,
+      "nonblank": 182,
+      "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+      "proposedReview": "Existing overview composition retains read/query/error ownership and all prior child boundaries. Two-line change imports/inserts ClientDetails with current saved client and key=id. Detail field rendering and modal interaction live in cohesive new children; no new transport, writer or authority rule joins this container.",
+      "approvalOwner": "root independent review; no registry edited by this owner"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "kind": "function",
+      "symbol": "ClientViewSwitcher",
+      "line": 12,
+      "nonblank": 129,
+      "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "fileSha256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+      "proposedReview": "Owns one searchable view-picker interaction: canonical descriptor filtering, active option, local open state, navigation, accessible combobox/listbox presentation and visibility scroll. Global key lifetime is separated into useClientViewKeys and metadata belongs to canonical clientViews. Uses adopted Radix Popover/Next navigation; no persistence, API, authority, custom overlay engine or speculative destination. Keeping option rendering with local filter state makes keyboard selection auditable without a speculative generic command abstraction.",
+      "approvalOwner": "root independent review; no registry edited by this owner"
+    }
+  ]
+}

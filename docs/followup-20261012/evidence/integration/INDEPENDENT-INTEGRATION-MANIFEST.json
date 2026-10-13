@@ -1,0 +1,51 @@
+{
+  "source": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "verdict": "NO_BLOCKING_CROSS_LANE_SOURCE_DEFECT_FOUND_COMBINED_QUALIFICATION_PENDING",
+  "files": [
+    {
+      "path": "INDEPENDENT-INTEGRATION-EXISTING-ASSERTIONS.diff",
+      "bytes": 1486,
+      "sha256": "89ce8417d301a8f9dc0878da78f72534d5137dae47795174d47a8618f8373cb9"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-IDENTITY.json",
+      "bytes": 857,
+      "sha256": "1ac454120aee66169db0200d1b90bf97d6f6a0823f0768c9e9556216403af750"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-INPUTS.json",
+      "bytes": 2324,
+      "sha256": "f6e68c6cda457d489c64e02a9434d0831a14911c49abed69e33c80ab2ff5948d"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-LANE-EQUALITY.json",
+      "bytes": 8220,
+      "sha256": "6fb2249f9b8edc7b43bb9aa38af5febfd5398475ad6bef1c4a6370f505976a11"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-PRESERVATION.json",
+      "bytes": 813,
+      "sha256": "305a7dc87913476762e300be3e4b82145173efa216d9fcf2827b0b98d8813941"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-REGISTRY.json",
+      "bytes": 11307,
+      "sha256": "8c0b58cf54e00f62171712595e8bfdb9175619107da3b9bb7bf14b44c77188c7"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-REVIEW-BINDINGS.json",
+      "bytes": 11568,
+      "sha256": "87bf3bec1adada8531b9d136fcf33ad092e70ba98e7bd8ce0b28943c5918a3ef"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-REVIEW.md",
+      "bytes": 11209,
+      "sha256": "3f55192e254f1d7bbb1eb72dc36a4563139c55b73e5af8ef95af2606c2faedf5"
+    },
+    {
+      "path": "INDEPENDENT-INTEGRATION-ROW-PRESERVATION.json",
+      "bytes": 574,
+      "sha256": "ab67b628ce954afdc012f9367e83ba25fd8364850aa6056c7493b769e94b015c"
+    }
+  ]
+}

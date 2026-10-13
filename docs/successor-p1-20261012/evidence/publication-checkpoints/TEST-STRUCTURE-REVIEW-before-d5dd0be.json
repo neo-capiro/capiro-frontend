@@ -1,0 +1,60 @@
+{
+  "source": "49f6609c7277ce8701b0d38c3ba163860633e668",
+  "scope": "Changed first-party tests remain subject to modularity review; these records do not add architecture guard exemptions.",
+  "signals": [
+    {
+      "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #3",
+      "line": 196,
+      "nonblank": 82,
+      "fingerprint": "c24bfe8406f60e1da52ae6d356e41b7475dc2e7c24eacdc1cd4fcabf5b2cce4b",
+      "fileSHA256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "file": "apps/web/tests/browser/files-metadata-receipts.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 401,
+      "fingerprint": "297e2fcea744b0f411477ffb27af91483759ddc7f43b81bcd195ca211c5e4abb",
+      "fileSHA256": "3964338e9f0760a99b107a6901ca61c67dae04686e0530223e340ddb460c5429"
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-review.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 738,
+      "fingerprint": "8224e244c028797ea305e593e3a02e923397e94941100281e891a766626ccd4a",
+      "fileSHA256": "b150aed3d41440654a36cc53a99ac81f1aa59dfc096bf4382cf8f175e8162218"
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-review.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 71,
+      "nonblank": 126,
+      "fingerprint": "975b8657a5cb997c85596bde8589e920e7988ecbc53dc2a2e83ff1ccd2f4abf7",
+      "fileSHA256": "b150aed3d41440654a36cc53a99ac81f1aa59dfc096bf4382cf8f175e8162218"
+    },
+    {
+      "file": "apps/web/tests/calendar-artifact-receipts.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 45,
+      "nonblank": 210,
+      "fingerprint": "ee4ea47e0557f38a5c6356fd78efe66dd2bd676df69b33d196fb64f35af0adbf",
+      "fileSHA256": "83922ca9c25c06b8605e8417615153f0571051293770266be0b2404277c60a4a"
+    },
+    {
+      "file": "apps/web/tests/files-metadata-actions.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 67,
+      "nonblank": 118,
+      "fingerprint": "70a03126414eecd7c7c3f46e0da3ddce282ede91857be68929285523a90cb119",
+      "fileSHA256": "e90bd79de4edf1fc75f3797a470afe90a3d3fb81ebb80faab79ae1d398947868"
+    }
+  ]
+}

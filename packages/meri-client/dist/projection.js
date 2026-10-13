@@ -9,6 +9,7 @@
 // `accept` time, so later mutation of the caller's input object cannot rewrite
 // accepted history. `accepted` returns a fresh frozen array; internal state is never
 // exposed as a mutable reference.
+import { stableStringify } from './json-identity.js';
 /**
  * Raised by `acceptOrReject` on a conflict or out-of-scope outcome, so the guarded
  * data path aborts the subscription before the offending chunk is forwarded.
@@ -32,18 +33,6 @@ export function acceptOrReject(projection, event) {
         throw new ProjectionRejectionError(result);
     }
     return result;
-}
-/** Deterministic, key-sorted canonical string for immutable payload dedup. */
-function stableStringify(value) {
-    if (value === null || typeof value !== 'object')
-        return JSON.stringify(value) ?? 'null';
-    if (Array.isArray(value))
-        return `[${value.map(stableStringify).join(',')}]`;
-    const record = value;
-    return `{${Object.keys(record)
-        .sort()
-        .map((key) => `${JSON.stringify(key)}:${stableStringify(record[key])}`)
-        .join(',')}}`;
 }
 /** Recursively freezes a JSON-ish value and returns it. */
 function deepFreeze(value) {

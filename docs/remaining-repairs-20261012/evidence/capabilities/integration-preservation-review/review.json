@@ -1,0 +1,168 @@
+{
+  "reviewer": "objectives_work_intel_review",
+  "createdAtUtc": "2026-10-12T20:03:21.057141+00:00",
+  "disposition": "No blocking source or assertion-preservation defect found in this bounded read-only review.",
+  "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "sourcePins": {
+    "mail": {
+      "commit": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+      "integrationCommit": "ceed53a8c49e07c88eef064bc821a2d60a7af71d",
+      "summary": {
+        "files": 14,
+        "recordMismatches": 0,
+        "integrationMismatches": 0,
+        "currentWorkingFileMismatches": 0
+      }
+    },
+    "intake": {
+      "commit": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+      "integrationCommit": "8daaf2822f282fa1f764cf795a2bdb5668928beb",
+      "summary": {
+        "files": 34,
+        "recordMismatches": 0,
+        "integrationMismatches": 0,
+        "currentWorkingFileMismatches": 0
+      }
+    }
+  },
+  "rootHeadAtRecheck": "8daaf2822f282fa1f764cf795a2bdb5668928beb",
+  "method": [
+    "Read AGENTS.md, implementation standards, architecture, complete owner diffs, changed production modules and focused tests.",
+    "Compare committed blobs and current integrated working files with final owner source hash records.",
+    "Parse test TypeScript ASTs and compare complete existing files after only the approved representation/role adaptations.",
+    "Recompute seven exact production size findings using the repository source-only AST scanner; compare line counts and fingerprints.",
+    "Read raw owner browser-result metadata and compare Mail summary statistics; inspect final-source/historical evidence distinctions."
+  ],
+  "findings": [],
+  "assertionPreservation": [
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "baselineValueAssertions": 8,
+      "adaptedValueAssertions": 8,
+      "expectedExpressionsIdentical": true,
+      "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+      "expectedExpressions": [
+        "\"Draft retained for explicit review.\"",
+        "\"Retained draft\"",
+        "\"Draft retained for explicit review.\"",
+        "\"Draft retained for explicit review.\"",
+        "\"Draft retained for explicit review.\"",
+        "\"Draft retained for explicit review.\"",
+        "\"Draft retained for explicit review.\"",
+        "\"Prepared document for your review.\""
+      ]
+    },
+    {
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "baselineValueAssertions": 7,
+      "adaptedValueAssertions": 7,
+      "expectedExpressionsIdentical": true,
+      "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+      "expectedExpressions": [
+        "\"Verified rewritten draft.\"",
+        "original",
+        "\"Newer manual work.\"",
+        "\"Second verified revision.\"",
+        "\"Verified rewritten draft.\"",
+        "original",
+        "original"
+      ]
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+      "baselineValueAssertions": 9,
+      "adaptedValueAssertions": 9,
+      "expectedExpressionsIdentical": true,
+      "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+      "expectedExpressions": [
+        "\"Reviewed first.\\nReviewed second.\"",
+        "original",
+        "\"New manual draft.\"",
+        "\"Current reviewed draft.\"",
+        "original",
+        "\"Reopened manual draft.\"",
+        "original",
+        "original",
+        "original"
+      ]
+    },
+    {
+      "path": "apps/web/tests/browser/client-header.spec.ts",
+      "entireTestASTEquivalentAfterOnlyRoleAdaptation": true,
+      "adaptations": [
+        "menu -> named Client views listbox",
+        "Objectives menuitem -> Objectives option"
+      ]
+    }
+  ],
+  "sizeRecordCheck": {
+    "records": 7,
+    "mismatches": 0,
+    "detail": "size-record-consistency.json"
+  },
+  "sourceReview": [
+    {
+      "area": "Mail draft ownership",
+      "evidence": [
+        "apps/web/src/features/portfolio/relationships/MailCompose.tsx:68",
+        "apps/web/src/features/portfolio/relationships/MailCompose.tsx:144",
+        "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts:88"
+      ],
+      "conclusion": "Atomic text/HTML and source-key editor replacement preserve explicit review/send ownership. Rich editor does not own upload, transport, signature or authority. Formatting edits pass through existing revision invalidation; verified rewrite and guarded Undo retain captured authority and source checks."
+    },
+    {
+      "area": "Mail editor and native Undo",
+      "evidence": [
+        "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx:51",
+        "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx:68"
+      ],
+      "conclusion": "Exposed formatting uses installed editor commands and an inert allowlist for paste/preview. External document replacement resets native history; ordinary local input keeps native history. Final owner negative/positive controls explicitly cover the prior guarded-Undo bypass. No new provider or persisted draft owner is introduced."
+    },
+    {
+      "area": "Exact message adapter",
+      "evidence": [
+        "apps/web/tests/browser/mail-message-assertions.ts:4"
+      ],
+      "conclusion": "Exact expected expressions and surrounding tests remain unchanged after the adapter substitution. The adapter checks paragraph text with preserved newlines; it is intentionally not a general nested rich-document serializer. Separate rich tests assert actual markup and serialized bodyHtml."
+    },
+    {
+      "area": "Intake current read and writers",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:146",
+        "apps/web/src/features/portfolio/client-profile/TeamRoster.tsx:48"
+      ],
+      "conclusion": "Saved detail presentation remains inside the existing current-read/error gate, keyed by client. It consumes the canonical adapter and catalogs without creating writes or external verification claims. Team extraction preserves owner exclusions, canChange fencing and existing editor lifetime; ChoiceList variants change geometry without changing values or payload ownership."
+    },
+    {
+      "area": "Picker and keyboard lifetime",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx:37",
+        "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx:109",
+        "apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts:7",
+        "apps/web/src/features/portfolio/client-profile/view-switcher.module.css:49"
+      ],
+      "conclusion": "One canonical destination catalog is retained. Scoped keyboard hook cleans up and ignores editing, composition, repeats and modal events. Final scrollIntoView intentionally targets an option inside the separate scrolling list; fixed search header and popup overflow handling address the recorded short-screen defect. No superseded timeline callback is present in ced1d1b or its integration."
+    }
+  ],
+  "evidenceProvenance": [
+    {
+      "lane": "mail",
+      "finalSource": "685e550 -> ceed53a",
+      "currentOwnerReplay": "history-green-results.json:45 expected,0 skipped,0 unexpected,0 flaky;15 rich+21 local-draft+9 rewrite",
+      "historical": "Earlier final-results.json79/79 predates the native-history correction. production-snapshot and structure-review-before-history are historical, not final bindings. final-source-and-results.json contains the final hashes; all8 recorded run statistics match raw results."
+    },
+    {
+      "lane": "intake",
+      "finalSource": "ced1d1b -> 8daaf28",
+      "currentOwnerReplay": "popup-green-results.json:10 expected,0 skipped,0 unexpected,0 flaky",
+      "historical": "focused-results46/46 and earlier final-results10/10 precede the final popup scrolling fix. timeline-callback commit24ac231 and related evidence are explicitly superseded and excluded. source-hashes and structure-review now match final delivery exactly."
+    }
+  ],
+  "limits": [
+    "No independent browser execution, server, build, full TypeScript check, provider/native action or source/registry edit was performed for this audit.",
+    "Owner browser results are synthetic fixture evidence; no native acceptance or complete row acceptance is inferred.",
+    "Root worktree remains mutable outside reviewed files; this report binds the explicit committed pins and captured file hashes, not a later release freeze.",
+    "Root retains combined qualification, final architecture registration and publication ownership."
+  ],
+  "remainingBlockers": []
+}

@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-successor-visual-review/focus.config.ts"
+    ],
+    "configFile": "/tmp/capiro-successor-visual-review/focus.config.ts",
+    "rootDir": "/tmp/capiro-successor-visual-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-successor-visual-review/focus-regression-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-successor-visual-review",
+        "testIgnore": [],
+        "testMatch": [
+          "focus-regression.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-successor-visual-review/focus-regression-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "focus-regression.spec.ts",
+      "file": "focus-regression.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unknown folder save keeps settled Tab focus inside its modal",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4066,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 1500ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 1500ms exceeded while waiting on the predicate\n    at /tmp/capiro-successor-visual-review/focus-regression.spec.ts:18:108",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/focus-regression.spec.ts",
+                      "column": 108,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await page.keyboard.press('Tab');\n  17 |   try {\n> 18 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);\n     |                                                                                                            ^\n  19 |     await page.keyboard.press('Shift+Tab');\n  20 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);\n  21 |   } finally {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/focus-regression.spec.ts",
+                        "column": 108,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 1500ms exceeded while waiting on the predicate\n\n  16 |   await page.keyboard.press('Tab');\n  17 |   try {\n> 18 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);\n     |                                                                                                            ^\n  19 |     await page.keyboard.press('Shift+Tab');\n  20 |     await expect.poll(() => dialog.evaluate(el => el.contains(document.activeElement)), { timeout: 1500 }).toBe(true);\n  21 |   } finally {\n    at /tmp/capiro-successor-visual-review/focus-regression.spec.ts:18:108"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:50:42.652Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "settled-focus",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0YWciOiAiU1BBTiIsCiAgInRleHQiOiAiIiwKICAiZG9jdW1lbnRIYXNGb2N1cyI6IHRydWUsCiAgImluRGlhbG9nIjogZmFsc2UKfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/focus-regression.spec.ts",
+                    "column": 108,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "09d88f4df4b059b9d0b5-263bc9254038273e0965",
+          "file": "focus-regression.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:50:42.178Z",
+    "duration": 4935.454000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

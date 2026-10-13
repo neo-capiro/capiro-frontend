@@ -1,0 +1,201 @@
+{
+  "observedUTC": "2026-10-13T08:58:38.641523+00:00",
+  "status": "PASS_BOUNDED_OFFLINE_GATES_WITH_DOCUMENTED_INFRASTRUCTURE_RECOVERY",
+  "sourceBefore": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "portfolio": {
+    "discovered": 1139,
+    "originalShardPartitionExact": true,
+    "shards": [
+      {
+        "name": "portfolio-shard-1",
+        "count": 285,
+        "passed": 285,
+        "failed": 0,
+        "stats": {
+          "startTime": "2026-10-13T07:58:53.403Z",
+          "duration": 508045.509,
+          "expected": 285,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      },
+      {
+        "name": "portfolio-shard-2",
+        "count": 298,
+        "passed": 297,
+        "failed": 1,
+        "stats": {
+          "startTime": "2026-10-13T08:07:22.554Z",
+          "duration": 665167.064,
+          "expected": 297,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        }
+      },
+      {
+        "name": "portfolio-shard-3",
+        "count": 273,
+        "passed": 273,
+        "failed": 0,
+        "stats": {
+          "startTime": "2026-10-13T08:22:21.722Z",
+          "duration": 672841.376,
+          "expected": 273,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      },
+      {
+        "name": "portfolio-shard-4",
+        "count": 283,
+        "passed": 283,
+        "failed": 0,
+        "stats": {
+          "startTime": "2026-10-13T08:33:35.566Z",
+          "duration": 591243.082,
+          "expected": 283,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        }
+      }
+    ],
+    "firstAttemptPassed": 1138,
+    "firstAttemptFailed": 1,
+    "successfulExplicitReruns": 1,
+    "uniqueSuccessfulCoverage": 1139,
+    "actualTestExecutions": 1140,
+    "zeroTestSelectorAttempts": 1,
+    "automaticRetries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "timeoutDistributionOriginal": {
+      "30000": 1135,
+      "90000": 4
+    },
+    "rerunTimeout": 30000,
+    "originalFailureAndRerunId": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+    "originalShard2ExitStill1": true,
+    "originalFailureRawBindingsUnchanged": true,
+    "targetedScreenshot": {
+      "path": "/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-enospc-case-rerun-v2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33165,
+      "sha256": "1bef83cb011193fa4c57229b51cd29e5266614d5f5df3aa18ad78680af3cff99",
+      "dimensions": [
+        390,
+        844
+      ]
+    }
+  },
+  "modules": {
+    "uniqueCases": 297,
+    "passed": 297,
+    "automaticRetries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "timeoutDistribution": {
+      "30000": 297
+    }
+  },
+  "gates": {
+    "receipts": 16,
+    "exitZero": 14,
+    "preservedExitOne": [
+      "portfolio-shard-2",
+      "portfolio-enospc-case-rerun"
+    ],
+    "allExactSourceUnchanged": true,
+    "cleanInstallPackages": 852,
+    "nodeTestCounts": [
+      94,
+      21,
+      385
+    ],
+    "vitestTestCounts": [
+      1631,
+      288
+    ],
+    "declarationControls": 8,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "architecture": {
+      "total": 475,
+      "reviewed": 452,
+      "inheritedUnreviewed": 23,
+      "blocking": 0
+    },
+    "elementsTests": 15,
+    "elementsScope": "offline SSR fixture only",
+    "elementsReceipt": {
+      "qualified": true,
+      "receiptPath": "/workspace/capiro-unified-elements-83f54f5a-20261013/ssr/receipt.json",
+      "expectedSha256": "8433d8e08793034606ef258a05e4728e6f1069c435504defe0f8f08048112b9e",
+      "bundleBytes": 20518628,
+      "inputCount": 2807,
+      "dependencyRecords": 3155
+    },
+    "publicRendererGoldenExact": 116,
+    "publicReceivingCases": 130,
+    "publicRuntimeNames": 49,
+    "publicPackedModules": 6,
+    "productionHttpHeaderControls": 11,
+    "productionLightDarkRenders": 4,
+    "productionHistoryControls": 2,
+    "previewDefaultRoot": true,
+    "additionalHttpControls": 23,
+    "additionalViewports": [
+      1440,
+      375
+    ],
+    "servedNewsletterAssets": 179,
+    "servedNewsletterBytes": 486014,
+    "servedOnboardAssets": 6,
+    "servedOnboardBytes": 458104,
+    "actualSupplementalBrowserVersion": "154.0.8037.57"
+  },
+  "priorSealedPackets": [
+    {
+      "path": "/tmp/capiro-unified-83f54f5a-source-preservation-independent-review-20261013",
+      "manifestSha256": "79a4f9f0c88b9f4a3fb0a086743150fe7cf407ed82436d167500f8a26b0c3f2b",
+      "allManifestFilesUnchanged": true,
+      "fileCount": 19
+    },
+    {
+      "path": "/tmp/capiro-unified-83f54f5a-enospc-independent-review-20261013",
+      "manifestSha256": "3de28c6a17d462d79e91e59546c4c9d01e45738f766d13bed046316c28c33da8",
+      "allManifestFilesUnchanged": true,
+      "fileCount": 11
+    }
+  ],
+  "sourcePreservationRevalidated": {
+    "originalBindings": 807,
+    "uniquePaths": 291,
+    "finalSourcePins": 21,
+    "lockSha256": "294ba8ab0cd31f804a0d595c9f10a8edb39fdefcab60b84ef422e34cbc68fe38"
+  },
+  "rootAggregatesAgree": true,
+  "reviewerRuntimeExecution": false,
+  "limits": [
+    "337 native rows remain held",
+    "No native credentials/providers/paid models/AWS/deployment exercised",
+    "No musl or container-image qualification",
+    "No full Figma parity or assistive-technology acceptance",
+    "No whole-program provenance proof from negative client scans",
+    "Earlier source passes are not transferred to this source",
+    "Original shard2 remains FAILED; successful coverage includes one explicit same-source recovery"
+  ]
+}

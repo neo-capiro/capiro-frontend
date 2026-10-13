@@ -1,0 +1,35 @@
+## codex/portfolio-alert-channels-20261012
+ M apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
+ M apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
+ M apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
+ M apps/web/tests/browser/tracker-alert-preferences.spec.ts
+ M apps/web/tests/browser/tracker-boundary-harness.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-attempts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/core-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-access.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-contracts.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-queries.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/preference-write-lifetime.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts
+?? apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts
+?? apps/web/src/features/portfolio/client-profile/read-public.ts
+?? apps/web/tests/alert-channel-contracts.test.ts
+?? apps/web/tests/alert-channel-fixtures.ts
+?? apps/web/tests/browser/alert-channel-helpers.ts
+?? apps/web/tests/browser/alert-channel-lifetime.spec.ts
+?? apps/web/tests/browser/alert-channel-visual.spec.ts
+?? apps/web/tests/browser/alert-channels-harness.tsx
+?? apps/web/tests/browser/alert-channels.html
+?? apps/web/tests/browser/alert-channels.spec.ts
+?? docs/portfolio-31/ARCHITECTURE-REVIEW-ALERT-CHANNELS-20261012.md
+?? docs/portfolio-31/P6-ALERT-CHANNELS-20261012.md

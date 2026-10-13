@@ -1,0 +1,54 @@
+--- baseline-source/workflow-adapter.ts
++++ final-source/apps/web/src/shared/meri-actions/workflow-adapter.ts
+@@ -7,7 +7,10 @@
+ } from "@capiro/meri-contracts/action-application";
+ import type { ActionSessionReceipt } from "./session-receipt";
+ import type { ActionAttemptJournal } from "./attempt-journal";
+-import type { ActionTransport } from "./workflow-transport";
++import {
++  ActionAccessUnavailable,
++  type ActionTransport,
++} from "./workflow-transport";
+ import type {
+   ActionWorkflowPort,
+   TaskEdits,
+@@ -38,6 +41,7 @@
+   transport: ActionTransport;
+   journal: ActionAttemptJournal;
+   onAccessLost: () => void;
++  isCurrent?: () => boolean;
+   now?: () => number;
+ };
+ const refused = <T>(problem: WorkflowProblem): WorkflowReply<T> => ({
+@@ -77,6 +81,8 @@
+   private current(signal: AbortSignal) {
+     signal.throwIfAborted();
+     this.lifetime.signal.throwIfAborted();
++    if (this.options.isCurrent?.() === false)
++      throw new Error("Current client is being verified");
+     if (this.now() >= this.options.session.expiresAtMs) {
+       this.loseAccess();
+       throw new Error("Action session is unavailable");
+@@ -99,6 +105,7 @@
+     caller: AbortSignal,
+     project: (value: ActionResponseMap[R]) => T,
+   ): Promise<WorkflowReply<T>> {
++    if (this.options.isCurrent?.() === false) return refused("not-dispatched");
+     try {
+       this.current(caller);
+     } catch {
+@@ -135,9 +142,13 @@
+       this.current(signal);
+       if (this.options.journal.read().status === "pending") this.settle();
+       return { ok: true, value: result };
+-    } catch {
++    } catch (error) {
+       const problem = "unknown";
+       this.settle(problem);
++      if (error instanceof ActionAccessUnavailable && !signal.aborted) {
++        this.loseAccess();
++        return refused("access-lost");
++      }
+       return refused(problem);
+     } finally {
+       this.busy = false;

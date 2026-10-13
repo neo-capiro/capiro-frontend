@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T22:53:15.334675+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "statistics": {
+    "startTime": "2026-10-12T22:16:51.998Z",
+    "duration": 2169864.537,
+    "expected": 1118,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "testCount": 1118,
+  "attemptCount": 1118,
+  "attemptStatuses": {
+    "passed": 1118
+  },
+  "retryValues": [
+    0
+  ],
+  "fullSuiteCompleted": true,
+  "sourceUnchanged": true,
+  "status": "PASS",
+  "resultsSHA256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f",
+  "server5191Closed": true,
+  "notes": [
+    "Every final case ran once; no retries, skips or flaky cases.",
+    "Original failed checkpoints remain preserved. Native acceptance remains separate."
+  ]
+}

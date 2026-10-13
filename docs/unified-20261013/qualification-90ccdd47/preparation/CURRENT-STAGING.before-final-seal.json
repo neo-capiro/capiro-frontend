@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-13T10:40:08.422534+00:00",
+  "status": "ALL_RUNTIME_STAGED_AWAITING_INDEPENDENT_AUDIT_NO_FINAL_SEAL",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "includedOriginalRecords": 493,
+  "includedOriginalBytes": 37206196,
+  "completedPortfolioShards": {
+    "1": 285,
+    "2": 298,
+    "3": 273,
+    "4": 283
+  },
+  "portfolioFinalStatus": "COMPLETE1139/1139; exact discovery union; zero automatic retries/skips/flaky/unexpected",
+  "modulesPassed": 324,
+  "includedReviews": [
+    "source-preservation",
+    "emitted-boundary",
+    "historical-storage addendum",
+    "completed90cc Elements storage"
+  ],
+  "pending": [
+    "Final independent gate audit seal; then final publication manifest"
+  ],
+  "originalFailuresRetained": [
+    "6150 typecheck exit2 before build",
+    "90cc served-asset missing metadata preflight exit1 before HTTP"
+  ],
+  "archiveVerification": "Every included original byte reopened and equal; no originals changed",
+  "snapshotBytesBeforeThisFile": 19102208,
+  "preparationCheckpointRole": "Initial checkpoints and STAGING-AFTER-SHARD1/2 preserve earlier partial selections. Current status is newer; no final acceptance.",
+  "completedPortfolioUniquePassingIds": 1139,
+  "openConsoleObservation": "ObjectiveEditor sibling keys identical; exact same blob as83 pre-Files integration. Remains open; console not clean. Not the c330 Portfolio owner input."
+}

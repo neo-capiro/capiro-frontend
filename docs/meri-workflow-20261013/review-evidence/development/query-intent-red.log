@@ -1,0 +1,66 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ❯ tests/meri-action-correlation.test.ts (16 tests | 2 failed) 174ms
+     × refuses receiver-valid query-foreign-intent-limit rather than claiming the requested first page 7ms
+     × refuses receiver-valid query-foreign-intent-page rather than claiming the requested first page 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-correlation.test.ts > Meri captured query intent > refuses receiver-valid query-foreign-intent-limit rather than claiming the requested first page
+ FAIL  tests/meri-action-correlation.test.ts > Meri captured query intent > refuses receiver-valid query-foreign-intent-page rather than claiming the requested first page
+AssertionError: expected { ok: true, value: { …(2) } } to deeply equal { ok: false, problem: 'unknown' }
+
+- Expected
++ Received
+
+  {
+-   "ok": false,
+-   "problem": "unknown",
++   "ok": true,
++   "value": {
++     "coverageNotes": [
++       "These are recommendations. They have not been accepted as tasks.",
++       "Bounded first page: 1 returned; reported total 1 for this scope. No additional pages are fetched automatically.",
++       "Enumeration: unknown; truncated: false; history: unsupported.",
++       "Requested sources: action_items_complete; checked: action_items_complete; unavailable: none.",
++       "Native coverage is a source assertion; no qualified freshness, snapshot or exhaustive absence.",
++       "Receipt lineage does not authenticate native cursor contents or establish current source truth.",
++       "action_items_complete: partial; freshness unknown; as of unknown; synchronized unknown; retrieved 2026-10-12T20:00:00.059Z.",
++       "Page source: healthy; complete: true; partial: false; pagination complete: true; more pages: false; exact total for this scope: true; absence supported: false.",
++       "Structural page assertion only",
++       "Evidence ready: false. Continuation cursor: none supplied; required reads: 0; remaining sources: none supplied.",
++     ],
++     "items": [
++       {
++         "description": "Recommend",
++         "dueDate": null,
++         "key": "abcdef00-0000-4000-8000-000000000101",
++         "selection": {},
++         "title": "Issue",
++       },
++     ],
++   },
+  }
+
+ ❯ tests/meri-action-correlation.test.ts:134:46
+    132|       await expect(h.receive(name)).resolves.not.toHaveProperty("error…
+    133|       h.queue.push(name);
+    134|       expect(await h.port.query(h.signal())).toEqual({ ok: false, prob…
+       |                                              ^
+    135|       expect(h.journal.read()).toEqual({ status: "unresolved", problem…
+    136|       expect(h.requests).toHaveLength(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 14 passed (16)
+   Start at  05:26:02
+   Duration  540ms (transform 102ms, setup 0ms, import 213ms, tests 174ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

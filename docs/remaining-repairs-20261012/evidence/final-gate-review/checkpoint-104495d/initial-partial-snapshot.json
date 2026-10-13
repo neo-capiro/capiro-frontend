@@ -1,0 +1,26 @@
+{
+  "capturedAtUTC": "2026-10-12T20:41:39.873317+00:00",
+  "declaredPlannedTests": 1118,
+  "observedPassingLogLines": 163,
+  "unexpectedFailureLines": [
+    "  \u2718   112 tests/browser/attendance.spec.ts:126:1 \u203a Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (11.5s)",
+    "  \u2718   120 tests/browser/attendance.spec.ts:171:1 \u203a Server validation retains the join URL and confirmations for explicit correction (11.1s)",
+    "  \u2718   127 tests/browser/attendance.spec.ts:201:1 \u203a A foreign success receipt is uncertain and cannot be resent automatically or from the same form (10.4s)",
+    "  \u2718   134 tests/browser/attendance.spec.ts:234:1 \u203a Explicit removal handles a still-dispatching error and then accepts the actual removed receipt (11.1s)",
+    "  \u2718   151 tests/browser/attendance.spec.ts:330:1 \u203a Runtime disabled keeps real session status visible and forbids external actions (11.2s)",
+    "  \u2718   157 tests/browser/attendance.spec.ts:353:1 \u203a Read-only role does not fetch private attendance or expose dispatch controls (10.9s)",
+    "  \u2718   162 tests/browser/attendance.spec.ts:383:1 \u203a Meeting privacy errors and session expiry never expose a successful-looking attendance control (11.6s)",
+    "  \u2718   173 tests/browser/calendar-artifact-receipts.spec.ts:185:3 \u203a notes: replacing the client during preflight prevents dispatch (3.3s)",
+    "  \u2718   172 tests/browser/billing-summary.spec.ts:234:1 \u203a held previous-tenant response cannot appear in new tenant scope (4.5s)",
+    "  \u2718   170 tests/browser/attendance.spec.ts:410:1 \u203a Unmounting during held dispatch preflight prevents the later POST (8.1s)"
+  ],
+  "finalResultsPresent": false,
+  "finalExitPresent": true,
+  "logSnapshot": {
+    "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-meri-browser.log",
+    "sha256": "bc7039a9f32c5b3c11f3eee4c93ed53d843b05134b022314d19a27a9c3c72ad4",
+    "bytes": 54629
+  },
+  "scope": "Portfolio component specs only; not a separate Meri interaction suite",
+  "notFinal": true
+}

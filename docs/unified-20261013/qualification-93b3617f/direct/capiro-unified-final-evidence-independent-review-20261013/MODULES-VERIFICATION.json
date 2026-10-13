@@ -1,0 +1,3756 @@
+{
+  "path": "/tmp/capiro-unified-final-93b3617f-20261013/modules-browser-results.json",
+  "stats": {
+    "startTime": "2026-10-13T06:28:25.285Z",
+    "duration": 412074.738,
+    "expected": 286,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "errors": [],
+  "workers": 1,
+  "actualWorkers": 1,
+  "projects": [
+    {
+      "name": "",
+      "timeout": 30000,
+      "retries": 0,
+      "testDir": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser"
+    }
+  ],
+  "count": 286,
+  "uniqueIds": 286,
+  "timeoutCounts": {
+    "30000": 286
+  },
+  "statusCounts": {
+    "expected": 286
+  },
+  "resultStatusCounts": {
+    "passed": 286
+  },
+  "retryCounts": {
+    "0": 286
+  },
+  "rows": [
+    {
+      "id": "9399e5e31f26086deceb-ac49f2a40f69808aed4a",
+      "file": "billing-flow.spec.ts",
+      "title": "active subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-3c9b0acf79b6501203cc",
+      "file": "billing-flow.spec.ts",
+      "title": "past_due subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-d27d345fd0f66c35bcf8",
+      "file": "billing-flow.spec.ts",
+      "title": "trialing subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-71f836f1996b1936409e",
+      "file": "billing-flow.spec.ts",
+      "title": "canceled subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-f886bea1ae8a8d2cfdb1",
+      "file": "billing-flow.spec.ts",
+      "title": "none subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-d674796a7bb1e10b482c",
+      "file": "billing-flow.spec.ts",
+      "title": "comped subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-5ad12520f7a6922cab00",
+      "file": "billing-flow.spec.ts",
+      "title": "none non-subscriber can review a new subscription",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-f00cfd18fd7413cb6864",
+      "file": "billing-flow.spec.ts",
+      "title": "trialing non-subscriber can review a new subscription",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-0b7e3a22eb14f40231b8",
+      "file": "billing-flow.spec.ts",
+      "title": "active without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-58c6f49cf6265afb9eb0",
+      "file": "billing-flow.spec.ts",
+      "title": "past_due without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-000a60faf59f034047a1",
+      "file": "billing-flow.spec.ts",
+      "title": "canceled without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-d67c5f245c36217c3e8b",
+      "file": "billing-flow.spec.ts",
+      "title": "comped without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-7f3a71cfcc50f36806fc",
+      "file": "billing-flow.spec.ts",
+      "title": "disabled billing cannot open either hosted flow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-8a3cd1b433a50c8f60e6",
+      "file": "billing-flow.spec.ts",
+      "title": "checkout closes when a fresh summary reports an existing subscription",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-17a681a7faea9a3212f3",
+      "file": "billing-flow.spec.ts",
+      "title": "failed current summary prevents checkout from a previously opened form",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-92f53f3e39e87beace67",
+      "file": "billing-flow.spec.ts",
+      "title": "failed current state prevents checkout from a previously opened form",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-2a602c426d09a339e590",
+      "file": "billing-flow.spec.ts",
+      "title": "an existing-subscriber action rechecks that a subscription still exists",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-9e465ef710de2485dfde",
+      "file": "billing-flow.spec.ts",
+      "title": "portal rejects a receipt for the other hosted flow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-a57e9e204a5e875d4292",
+      "file": "billing-flow.spec.ts",
+      "title": "checkout rejects a receipt for the other hosted flow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-a7790a4dc9943035f89b",
+      "file": "billing-flow.spec.ts",
+      "title": "repeated clicks while summary revalidation is pending dispatch one portal request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-a8f2e31ad3424693ef67",
+      "file": "billing-flow.spec.ts",
+      "title": "repeated clicks while summary revalidation is pending dispatch one checkout request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-4a6d9fdadd4ccd2dd3ba",
+      "file": "billing-flow.spec.ts",
+      "title": "session replacement discards a pending hosted receipt",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-755b411b0dc4fa67bb68",
+      "file": "billing-flow.spec.ts",
+      "title": "contradictory current reads and failed initial summary expose no billing action",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9399e5e31f26086deceb-3e6abd600c70048838ee",
+      "file": "billing-flow.spec.ts",
+      "title": "session replacement during revalidation prevents dispatch from the old form",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "06180893bc08d6a2468a-9d59ed03c4b713013566",
+      "file": "calendar-visual-closeout.spec.ts",
+      "title": "compact Calendar retains scoped module navigation, history, source disclosures and mobile controls",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "fd11a3d0e6100edc747e-4697999a9e9cfa714ce0",
+      "file": "calendar.spec.ts",
+      "title": "month and week retain client scope and query end-exclusive Eastern ranges",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "fd11a3d0e6100edc747e-f17bf466c0c2e21e9578",
+      "file": "calendar.spec.ts",
+      "title": "client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "file": "effective-dates.spec.ts",
+      "title": "Modules master Government feed preserves date-only provenance and partial coverage",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "file": "effective-dates.spec.ts",
+      "title": "an empty Government page remains explicitly incomplete and forecasts unavailable",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "4c8f7e420cc033ba00ea-54662d70587443b0fb64",
+      "file": "integration.spec.ts",
+      "title": "shared product navigation and history preserve verified client hints and scoped styles",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "4c8f7e420cc033ba00ea-b539859bb125ac6030fd",
+      "file": "integration.spec.ts",
+      "title": "client replacement interrupts a write and organization replacement clears drafts and revalidates",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "4c8f7e420cc033ba00ea-326407ca30a2f0129b7e",
+      "file": "integration.spec.ts",
+      "title": "Core expiry clears the application, does not replay and cannot be escaped by changing client",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-33ab2994f08594f2df63",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch News evidence renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-3f8617a06457355ba4e4",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Florida Budget renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-f803804f41dd4ac5a8cc",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Research evidence renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-24cf4b213b2854cb92f1",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Monitoring renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-fe55a3c2a7f3df447775",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Client briefings renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-dfa2a02d497f768b5bb5",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Reports renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-0c2055eaca3e660c127b",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Trends renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-457652b660d3adbfe465",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Legacy digest renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-c4d1515a7e1e725cad3b",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Import review renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-2ba093a7e69add585568",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch Research import review renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-10331ab9c8197bfe5e7f",
+      "file": "legiwatch.spec.ts",
+      "title": "LegiWatch LegiWatch settings renders a real connected view",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-ddd8a8195edb9d4fc898",
+      "file": "legiwatch.spec.ts",
+      "title": "research continues past an empty matched page using the retained-source cursor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-525e87306f0a22279f0a",
+      "file": "legiwatch.spec.ts",
+      "title": "workflow changes invalidate a reviewed preview and enqueue only its exact current hash",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a5ac3d95daa9ac20e47c-942126efc78bbec8243b",
+      "file": "legiwatch.spec.ts",
+      "title": "monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-04933dc4d4a0ad2a1c85",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 baseline: current supplied link appears with safe external-link attributes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-8dd833895b1c1cad7a29",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 baseline: meetings retain selectable list beside current detail with Prep entry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-8876ef8a2a82fa7dbec8",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 absent preparation metadata is unavailable rather than a claimed empty collection",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-a3448ca079d5d9902aff",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: null",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-5242757b0904d5aadd24",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: ",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-3be122ab14f5300ce4b5",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: javascript:alert(1)",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-58abc40675b823deac63",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: data:text/html,hello",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-9c1743e567c73ef75a8c",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: https://name:secret@meet.example.test/",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-c5fd509830f04a07fff4",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 missing or unsafe supplied link is inactive: //meet.example.test/alpha",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-cade961638ff74958614",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 loading and denied detail never activate summary link or read its materials",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-be15e78288e5dedd84bb",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000002:30000000-0000-4000-8000-000000000001",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-085a4136d75a0fde585c",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000001:30000000-0000-4000-8000-000000000002",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-19c82c61bf4f8e338541",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 replaced detail cannot publish its late link",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-f8ee66c7a1ce63b2b857",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 phone detail stays in bounds and Escape restores its list opener",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "8480014ebeae5db125ca-2caa1907af5c677a85ac",
+      "file": "meeting-detail-current.spec.ts",
+      "title": "MS06 client replacement clears selection before a new list can expose the prior link",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-02ef152609c44cb713d5",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 200 cannot publish after user replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-93b6fda84c65a0ddd295",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 401 cannot publish after user replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-f35dfa1e1a868204b657",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 200 cannot publish after session replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-c370434e421d5bede062",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 401 cannot publish after session replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-b92adb780e07dad4e120",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 200 cannot publish after organization replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-3f3d7d9d3cbdb2506b3c",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held query 401 cannot publish after organization replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-85f19e5db5e056c4ff15",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held execution 200 cannot restore the former client's proposal or expire its replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-a6be88002660849267fa",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "Meri held execution 401 cannot restore the former client's proposal or expire its replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "65982b691e07ab8267c9-a71ba93830851740574d",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "title": "a current action401 removes private workflow state without an automatic reconnect",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "210100993445155c5ca9-157f142aa5fd31de63e4",
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "title": "375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "210100993445155c5ca9-1f10f6e706f95ac527b3",
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "title": "1440px Meri retains one visible sidebar destination per route without duplicate mobile links",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6b58fee7b296003c00fb-5e20cca92a2cde1f769b",
+      "file": "meri-action-host-navigation.spec.ts",
+      "title": "Meri unknown preparation stays fenced across cross-mode Back/Forward and reconnect",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6b58fee7b296003c00fb-e305832b4d2a8756a0dd",
+      "file": "meri-action-host-navigation.spec.ts",
+      "title": "Meri in-flight preparation stays fenced across cross-mode Back/Forward and reconnect",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6b58fee7b296003c00fb-32c24092b1a6010afee0",
+      "file": "meri-action-host-navigation.spec.ts",
+      "title": "same-client verification refetch hides actions while retaining the private draft for a current success",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-bc10d3ff55b1aa81f16d",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri actual host bootstraps only explicitly and keeps action requests behind the received context",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-d1fa2787934699eed298",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri unavailable connection exposes no automatic action dispatch",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-714d0c63aaf34c71606c",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri exact proposal requires separate approval and rechecks the identical observed command",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-4bf00e97117fafc65f85",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri dated draft controls are keyboard operable and fit 1440px",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-c5d3ffad05b6f75c40be",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri dated draft controls are keyboard operable and fit 375px",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "1b125eae841052866627-7a35cb7c00b318fd6e02",
+      "file": "meri-action-host-workflow.spec.ts",
+      "title": "Meri admitted context expiry clears an idle private draft without another request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-552c6a95f5a790ab10d2",
+      "file": "modules.spec.ts",
+      "title": "Engagement Manager primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-1343613913d3fa34df43",
+      "file": "modules.spec.ts",
+      "title": "Planner primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-988bd762ab183256e6b7",
+      "file": "modules.spec.ts",
+      "title": "Master calendar primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-bd08573526d062aaf18c",
+      "file": "modules.spec.ts",
+      "title": "Workspace primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-f9ae51209eeb6a64c854",
+      "file": "modules.spec.ts",
+      "title": "Strategies primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-9fedf8d18eb7e7656781",
+      "file": "modules.spec.ts",
+      "title": "Directory primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-a9d447e0eff9435e55ae",
+      "file": "modules.spec.ts",
+      "title": "Intelligence Center primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "c30cd39e1c87f9ff656a-af3d7c08fed1837ae449",
+      "file": "modules.spec.ts",
+      "title": "Research Portfolios primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-4c08b34864b618f46786",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich document create is explicit, preserves local content and stages only a confirmed full save",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-f527869b561963857370",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich library detail requires explicit adoption and sends the complete reviewed CAS document",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-e5b4182bbdfc62c304f5",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich save 409 retains edits until deliberate owner review and full rebase",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-ac274c68d54b0873ce50",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich save 503 retains edits until deliberate owner review and full rebase",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-2f15d08bf539f62816a2",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich explicit adoption replaces uncertain local edits without attributing the owner state",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "83dd986f0cde428e5eb3-cc994a5a9b9d78fe95fa",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "title": "rich saved preview excludes local edits and sanitizes active HTML without remote requests",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-2ee3004e3791aa588f09",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich pending create remains fenced after history close/reopen and an empty library",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-7482c935c54e21202a8c",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich pending stage stays fenced across history navigation and late 200",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-5188f03cbd7d9375bee3",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich pending stage stays fenced across history navigation and late 503",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-360bc687694c1b6b3dc4",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich unknown save after reopen needs a successful owner read and separate adoption",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-13160c50d504d88a4950",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich held save cannot restore prior private material after client replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6ef731f16be9040e8ddb-19f4dc6c3d0fe726d856",
+      "file": "newsletter-document-navigation.spec.ts",
+      "title": "rich held save cannot restore prior private material after session replacement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9d0003cacdd496d43af9-1783eaa39fdf56e1cd8f",
+      "file": "newsletter-rich-history.spec.ts",
+      "title": "text-only logo controls match the public renderer",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9d0003cacdd496d43af9-9d69395d1d16321905aa",
+      "file": "newsletter-rich-history.spec.ts",
+      "title": "typing after Undo retains editor focus and the complete new branch",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-1800f0743be0e6ff0121",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich list selection cannot mount the generic writer and Back restores the list",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-544d79c65a64bf2ac967",
+      "file": "newsletter-rich.spec.ts",
+      "title": "ordinary records retain the existing editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-8589dc42a6e95a8f255c",
+      "file": "newsletter-rich.spec.ts",
+      "title": "legacy draft deep link containing rich metadata never mounts the plain writer",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-6f7d05ac7f3911dadac7",
+      "file": "newsletter-rich.spec.ts",
+      "title": "wrong-type marker refuses editing and malformed marker fails decoding",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-08cbe94ec35fb66e420a",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich route does not call legacy, V3 or effectful owners: newsletter=10000000-0000-4000-8000-000000000007",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-259604aa0398ee82399b",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich route does not call legacy, V3 or effectful owners: newsletterStage=20000000-0000-4000-8000-000000000007",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-f19b9ce6cdca17ddcb15",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich route does not call legacy, V3 or effectful owners: newsletter=10000000-0000-4000-8000-000000000007&session=20000000-0000-4000-8000-000000000007",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-fdeef821cfdad6d76083",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich route does not call legacy, V3 or effectful owners: newsletterStage=20000000-0000-4000-8000-000000000007&newsletter=10000000-0000-4000-8000-000000000007",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-24582077ad2da852a709",
+      "file": "newsletter-rich.spec.ts",
+      "title": "rich route does not call legacy, V3 or effectful owners: newsletter=bad",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-84842f9257313357fe4b",
+      "file": "newsletter-rich.spec.ts",
+      "title": "local rich editor formats content, undoes, previews mobile and plain text without writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-444590add642128d14dc",
+      "file": "newsletter-rich.spec.ts",
+      "title": "preview isolates untrusted HTML, external images and links",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "154f2162e20efd94e0b5-dc5ee8c2650c1511e481",
+      "file": "newsletter-rich.spec.ts",
+      "title": "scope replacement and sign-out clear the local editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-17e2213ded72cb956f0a",
+      "file": "newsletter-staging.spec.ts",
+      "title": "explicit saved revision review stages only its exact references and opens the selected session",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-03228ccf4bb2e73f6bdd",
+      "file": "newsletter-staging.spec.ts",
+      "title": "lost response then reload recovers original key/version without restaging later session edits",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-cce9cd93fe087391b8ec",
+      "file": "newsletter-staging.spec.ts",
+      "title": "incompatible destination and unavailable source make zero staging calls",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-a37c6990348ab20f84b1",
+      "file": "newsletter-staging.spec.ts",
+      "title": "storage refusal blocks selection and replacement writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-165dbe7953fbbbfba691",
+      "file": "newsletter-staging.spec.ts",
+      "title": "replacement Core actor cannot recover the former actor's pending staging",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-bd010c97730754113f09",
+      "file": "newsletter-staging.spec.ts",
+      "title": "conflict and malformed receipt retain the same original staging request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-a2438a7a4e337de3ec6d",
+      "file": "newsletter-staging.spec.ts",
+      "title": "fresh source refusal before dispatch clears review and sends no staging request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-a6d1d5b3caab9df6bc54",
+      "file": "newsletter-staging.spec.ts",
+      "title": "a refreshed destination version requires fresh explicit review",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "5ec209819a3fd394a783-b37cfcc82289ffd6b976",
+      "file": "newsletter-staging.spec.ts",
+      "title": "mobile saved text review fits the viewport and supports keyboard acknowledgement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "3bd313013452371e6f67-576a7ad9051c1f178438",
+      "file": "next-modules-baseline.spec.ts",
+      "title": "MS02 verified Calendar entry dispatches only the selected client scope",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "3bd313013452371e6f67-bf615a99fa9f819d0c49",
+      "file": "next-modules-baseline.spec.ts",
+      "title": "MS03 agenda preserves both Planner start and due occurrences",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "3bd313013452371e6f67-e230c6ea5aea5572517f",
+      "file": "next-modules-baseline.spec.ts",
+      "title": "MS04 meeting failure leaves successful agenda feeds visible",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "3bd313013452371e6f67-ed93cfde4a13b5d81069",
+      "file": "next-modules-baseline.spec.ts",
+      "title": "MS05 linked task resolves beyond the current list and opens its detail",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-d24151974b6ddce226c2",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar picker and history share verified scope and discard a held former-client read",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-2a22f9a8bdfea249012c",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar denied client verification never falls back to master reads",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-7b22615528319c5d4bb6",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar wrong-client client verification never falls back to master reads",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-c0e5b291fefd6dee91ec",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar current scope label survives optional picker-list failure",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-6f69d4b731ff92c040e9",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar meeting retry preserves other feeds and reports partial empty coverage",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "44d644b8c26a5a0d4f57-a1ba15944994e44e5f6a",
+      "file": "next-modules-scope.spec.ts",
+      "title": "Calendar tenant replacement and failed current read hide prior agenda rows",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-c26283d6f93ec27fee9e",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task rejects wrong-task receipt without detail actions",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-8973256098ab4b6a0ed9",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task rejects wrong-client receipt without detail actions",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-47752d811d3b5d035a71",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "invalid task link makes no detail request and can be dismissed without losing scope",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-736d9be87e2a2d14bb63",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "task link hides prior editor after current 403, then recovers only after successful retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-998bb4fbd2b1f88257a6",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "task link hides prior editor after current 503, then recovers only after successful retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-e2e97455db5e43bbe8ce",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task follows back-forward and discards a held replaced task",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-d8c4c86c8647d58936ea",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task client replacement rejects the former read and editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-4b3d503efb8d124608f3",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task tenant replacement rejects the former read and editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-263d7b524bcec6b5589c",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "agenda link opens a done task despite default open list filter, and respects viewer access",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-0ae7498850bd0ffc85ed",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task uses current project membership when direct client is absent",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d670bbef234c16ef3571-4d3188663116186dcb3a",
+      "file": "next-modules-task-links.spec.ts",
+      "title": "linked task uses current project membership when direct client is different",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d06dbfb82040117bd09f-bda3a6ce71d951ca96c5",
+      "file": "next-modules-view-persistence.spec.ts",
+      "title": "Calendar keeps Month and chosen date across client, Master and history",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d06dbfb82040117bd09f-c942dc728431f18674db",
+      "file": "next-modules-view-persistence.spec.ts",
+      "title": "Calendar keeps Week and chosen date across client, Master and history",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d06dbfb82040117bd09f-7c1ca56c43a04ff171de",
+      "file": "next-modules-view-persistence.spec.ts",
+      "title": "Calendar keeps Agenda and chosen date across client, Master and history",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d06dbfb82040117bd09f-e0285b90f73283af4790",
+      "file": "next-modules-view-persistence.spec.ts",
+      "title": "invalid Calendar URL selection falls back to valid defaults before any date request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "cef7f3a8fb5e1a57eee3-cc373b6e606fb5d0f91f",
+      "file": "objective-destination.spec.ts",
+      "title": "each Objective-bound open/reload calls the canonical owner without an unbound session fallback",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "cef7f3a8fb5e1a57eee3-f016affc48f4def14656",
+      "file": "objective-destination.spec.ts",
+      "title": "owner refusal404 clears bound content and never falls back",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "cef7f3a8fb5e1a57eee3-5fb3d7b5c2065f7fc808",
+      "file": "objective-destination.spec.ts",
+      "title": "owner refusal409 clears bound content and never falls back",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "cef7f3a8fb5e1a57eee3-46df0099a5f8a1f3d164",
+      "file": "objective-destination.spec.ts",
+      "title": "mismatched binding and malformed Objective query never expose session content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "cef7f3a8fb5e1a57eee3-727c2ab4041dd9959991",
+      "file": "objective-destination.spec.ts",
+      "title": "a replaced Objective query hides the old observation and ignores its late response",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "60c004e14f66a84ebb77-44057e8ab05fb97bdce3",
+      "file": "objective-navigation.spec.ts",
+      "title": "Objective navigation resolves the exact saved version through Core before opening its local destination",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "60c004e14f66a84ebb77-333f42bc36b919ec7d25",
+      "file": "objective-navigation.spec.ts",
+      "title": "unsaved edits and stale Objective resolver never navigate using old campaign text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-9d312663f8fb146cba0a",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-63e90b2c55e65827de38",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "strategies owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-1245c3b803a4f33a7d0d",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "strategies owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-84403933c605a33395ae",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "strategies owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-2e29d3e93c572cae4f79",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "strategies refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-9ddecb0e9d2e5757b5c0",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-1102d9e2470f40150961",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "planner owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-3c0f059c4ef8994391cc",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "planner owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-a559e1716dfc9ca7fc97",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "planner owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-4b2b72e6259d87f3fe8a",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "planner refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-3bfce2458be189eb0c83",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-c6621368a3165561f963",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "workspace owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-76a24270bdda55f93e01",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "workspace owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-5f1c4f5cfa17522c7414",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "workspace owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-108f77863c6f2eb70185",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "workspace refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-d2a508c2c462fe59ed8e",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "replacement query and session scope hide old or late Strategy observations",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-e87e7e76d2d56acc8f41",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "Planner401 expires the shared session without replay or retained task content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d00d3ced147b02325ad4-4fb9d1e0302b43b6244f",
+      "file": "objective-work-destinations.spec.ts",
+      "title": "a changed Workspace client hint clears the saved snapshot and rechecks its owner",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a798a4968f19641d319c-799940b7399dba54c642",
+      "file": "objective-work-navigation.spec.ts",
+      "title": "strategies Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a798a4968f19641d319c-331021020e581ccc0a25",
+      "file": "objective-work-navigation.spec.ts",
+      "title": "planner Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a798a4968f19641d319c-e15308258f61f546c238",
+      "file": "objective-work-navigation.spec.ts",
+      "title": "workspace Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a798a4968f19641d319c-4322fa55e5b387664353",
+      "file": "objective-work-navigation.spec.ts",
+      "title": "saved Workspace selection is explicit and never opens the current working draft automatically",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "a798a4968f19641d319c-3d10c0b9fdface27feb1",
+      "file": "objective-work-navigation.spec.ts",
+      "title": "unsaved edits and close interrupt Strategy resolution without late navigation",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-b3a3aeebbca5d0399cc5",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard IT token replacement discards local draft and late 200 without automatic requests",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-bac872557586bd5243e5",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard IT token replacement discards local draft and late 401 without automatic requests",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-1b8d99df7dec8c2281aa",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard user replacement ignores late plan 200 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-4b90d93ff4615dbecf0c",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard user replacement ignores late plan 401 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-daf394df9b37c5a7379f",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard session replacement ignores late plan 200 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-05fd77db20459672a774",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard session replacement ignores late plan 401 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-c129402e42fed14d3d53",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard org replacement ignores late plan 200 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-3f87e35095d62f3952c2",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard org replacement ignores late plan 401 and does not repeat the write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-08072df59f5a9303eaa3",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard sign-in disposes signed-out draft and late public 200",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-b17671382bfb23628aba",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard sign-in disposes signed-out draft and late public 401",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-ea91e75c7a2d233149bb",
+      "file": "onboard-boundary.spec.ts",
+      "title": "current public401 on register preserves signed-in scope and permits authenticated legal read",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-5198b7015ece23bf87be",
+      "file": "onboard-boundary.spec.ts",
+      "title": "Onboard public requests omit the synthetic cookie while authenticated requests retain same-origin credentials",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "54ae8859b88daca24b37-96deb6fa09b136bd5bc1",
+      "file": "onboard-boundary.spec.ts",
+      "title": "current authenticated401 expires the Onboard application without replaying a request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-8139e0b8d6ef600197d4",
+      "file": "onboard-host-config.spec.ts",
+      "title": "actual OnboardHost hides feature controls until current config is received",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-daf3fc583e6fa6840367",
+      "file": "onboard-host-config.spec.ts",
+      "title": "actual OnboardHost config 401 is retryable and does not expire the signed-in application",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-e976f5b5812ec2a31024",
+      "file": "onboard-host-config.spec.ts",
+      "title": "actual OnboardHost config 503 is retryable and does not expire the signed-in application",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-04ea48001cd4c6c7a409",
+      "file": "onboard-host-config.spec.ts",
+      "title": "actual OnboardHost refuses a different Clerk application before authenticated funnel reads",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-56051b248e050d567c21",
+      "file": "onboard-host-config.spec.ts",
+      "title": "disabled self-service config exposes no registration form or funnel effects",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-f5920d48bd596744f5f3",
+      "file": "onboard-host-config.spec.ts",
+      "title": "missing service configuration stays unavailable without any onboarding reads or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-7cbdc0419043bb843b1b",
+      "file": "onboard-host-config.spec.ts",
+      "title": "registration discards an unsigned draft on sign-in and refuses a different account's saved artifact",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "075f3844cc8ec4969ec1-a6d567ebbc6ec06a8635",
+      "file": "onboard-host-config.spec.ts",
+      "title": "matching registration draft requires explicit restore and one explicit firm registration",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9edbd323283abaf0d795-bab06149e648b7e45315",
+      "file": "onboard-host-funnel.spec.ts",
+      "title": "native funnel session B revokes a held A write without replacing Clerk or advancing B",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9edbd323283abaf0d795-71171df86a0edbde2714",
+      "file": "onboard-host-funnel.spec.ts",
+      "title": "current status reads serialize without clearing an unknown write before explicit native B adoption",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9edbd323283abaf0d795-06450c772b19cca7008a",
+      "file": "onboard-host-funnel.spec.ts",
+      "title": "actual plan controls support keyboard selection without overflow at 1440px",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "9edbd323283abaf0d795-2b659ec2071c8bc04176",
+      "file": "onboard-host-funnel.spec.ts",
+      "title": "actual plan controls support keyboard selection without overflow at 375px",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-4bdcb99e19372aa89f33",
+      "file": "onboard-host-public.spec.ts",
+      "title": "actual IT page ignores held token A invite 200 after token B becomes current",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-89416962cdbe95a55f9e",
+      "file": "onboard-host-public.spec.ts",
+      "title": "actual IT page ignores held token A invite 401 after token B becomes current",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-099026c2b6e52d8cad4c",
+      "file": "onboard-host-public.spec.ts",
+      "title": "IT token replacement fences held consent 200, clears local provider step and omits ambient credentials",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-5fdb4fce02d7e3cb81d4",
+      "file": "onboard-host-public.spec.ts",
+      "title": "IT token replacement fences held consent 401, clears local provider step and omits ambient credentials",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-37f7bd64b0f46ce0a313",
+      "file": "onboard-host-public.spec.ts",
+      "title": "current IT invite 403 conceals provider actions until a deliberate successful retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-fdc14a325c9f0d64c19d",
+      "file": "onboard-host-public.spec.ts",
+      "title": "current IT invite 404 conceals provider actions until a deliberate successful retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "bed3dda6daece2853f73-f2938b7e13336071fd18",
+      "file": "onboard-host-public.spec.ts",
+      "title": "current IT invite 503 conceals provider actions until a deliberate successful retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "89777fd173b753a3989c-5063bacb1c26b597722e",
+      "file": "planner-engagement.spec.ts",
+      "title": "Planner modes use the same permitted task data and exact board assets",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "89777fd173b753a3989c-0964d903fcfc8d41ed87",
+      "file": "planner-engagement.spec.ts",
+      "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "89777fd173b753a3989c-b5ce3052322269df05b2",
+      "file": "planner-engagement.spec.ts",
+      "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "89777fd173b753a3989c-9600fbda34a87898cf29",
+      "file": "planner-engagement.spec.ts",
+      "title": "A template session deep link keeps the server state version and sends no mail",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-a818300d797addc5b35d",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held update; success preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-1f87d6262342322d5422",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held update; failure preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-61a4f488ded5fba780cd",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held update; lost receipt preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-78327263a03b71091acf",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "leaving during held update retains the original intent without continuing the old save",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-039f2063c3767bcbf981",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held snapshot; success preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-cb18463f04e7a7893e64",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held snapshot; failure preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-6bb12538db0da5930d97",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "prospect fields freeze during held snapshot; lost receipt preserves submitted text",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-8ab2e5c7dd121b9fc23b",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "leaving during held snapshot retains the original intent without continuing the old save",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-fc96c9acb570e0b08764",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "a user replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-b0ddafaacf162339e9b9",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "a tenant replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-47fe4a106e5443aa3451",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "a prospect replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "f59a1a266aa647562453-2960f7df209d2e249378",
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "title": "a client replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "4ff68bafba3514a2b3bd-0ab55ff9f97028ee5ded",
+      "file": "prospect-draft-restart-acceptance.spec.ts",
+      "title": "lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-acad55320b2b53fc31cd",
+      "file": "prospect-workspace.spec.ts",
+      "title": "prospect creation recovers its original seed and key after a lost receipt",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-2e613289ada7bfed7c82",
+      "file": "prospect-workspace.spec.ts",
+      "title": "manual content, version history and exports use only reviewed draft operations",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-9e60bd9a44e4d3338f1a",
+      "file": "prospect-workspace.spec.ts",
+      "title": "an uncertain save retains edits across navigation and requires read-back before explicit save",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-669b995ed4b1933fd8ba",
+      "file": "prospect-workspace.spec.ts",
+      "title": "a wrong prospectId never exposes the document or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-8cbb0e4f20721b001a29",
+      "file": "prospect-workspace.spec.ts",
+      "title": "a wrong tenantId never exposes the document or writes",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-9e454a7e2c430da92276",
+      "file": "prospect-workspace.spec.ts",
+      "title": "prospect Newsletter origin cannot open its sending workflow",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-edb5cd43d78fe3d4a6e8",
+      "file": "prospect-workspace.spec.ts",
+      "title": "a changed document blocks PATCH and shows the saved content for deliberate review",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-e4632844df5447d29a33",
+      "file": "prospect-workspace.spec.ts",
+      "title": "mobile prospect manual editor preserves keyboard fields and stays in the viewport",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-21dc831a385f7d744c82",
+      "file": "prospect-workspace.spec.ts",
+      "title": "leaving during save preflight aborts the write and retains the uncertain editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-a1a6cf6903d5c7ad6fc3",
+      "file": "prospect-workspace.spec.ts",
+      "title": "expired creation sends one original request and clears the authenticated editor",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-9d463163b2500798862f",
+      "file": "prospect-workspace.spec.ts",
+      "title": "reload preserves the original prospect creation seed and request key",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-b37cad0787a3c1e8589c",
+      "file": "prospect-workspace.spec.ts",
+      "title": "reload preserves uncertain manual edits and the read-back requirement",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-ed51f0f966a6b64ae76e",
+      "file": "prospect-workspace.spec.ts",
+      "title": "replacement Core actor cannot restore the former creation input after reload",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-2b52aa66e4fd42508d40",
+      "file": "prospect-workspace.spec.ts",
+      "title": "replacement Core actor cannot restore the former manual-save input after reload",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-a2d135e8b9e6579b79d2",
+      "file": "prospect-workspace.spec.ts",
+      "title": "unavailable browser journal blocks creation without a backend write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "11cac9176bd88cd5201d-1e8a163bd3da2384d354",
+      "file": "prospect-workspace.spec.ts",
+      "title": "unavailable browser journal blocks manual-save without a backend write",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "e5c4ce30762cc3efb433-16d03e6875c928f8bebb",
+      "file": "public-forms.spec.ts",
+      "title": "public form submits only displayed answers and shows the returned receipt without sign-in",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "e5c4ce30762cc3efb433-7e84295e157af2a4a593",
+      "file": "public-forms.spec.ts",
+      "title": "revoked public capability renders an unavailable state without a submission action",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-5ec7a3ef86021115e814",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 regression: All tasks defaults to named client groups and current-page counts",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-b322a51328ffcef273a9",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 scope picker preserves All tasks, disposes drafts and restores scope through history",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-ddb5e1b0ca963497ff10",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 failed current clients list removes former labels and disables picker until retry",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-570149f333c57d124eab",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 failed current task page hides groups and recovers without inventing filters",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-e929667435cb5fe923e0",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 independently verified client remains named when picker is empty",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-9b7ec54c9efeb0549dad",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 independently verified client remains named when picker is unavailable",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-daecedb2bf8b3a6f6ec0",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 replacement rejects held former task read and unverified selected client",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-daae22d660e76922e280",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-16d170a869e43df91281",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS07 regression: Workspace filters share a compact desktop row and wrap on phones",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-dad9e9924ee22b7fe16a",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS09 regression: public form uses bounded card hierarchy and keeps input on styled error",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "23bf3c282ea554de4104-f291420f4badf925d2b3",
+      "file": "remaining-modules.spec.ts",
+      "title": "MS09 preserves malformed-receipt and replaced-token controls",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6fa1842ca325e3ffbb00-81bd4dd9ca73d71e1062",
+      "file": "session.spec.ts",
+      "title": "missing configuration renders setup without issuing service requests",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6fa1842ca325e3ffbb00-8d804dc078c64c6b8e7a",
+      "file": "session.spec.ts",
+      "title": "org/session change clears prior records and sign-out removes all protected content",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6fa1842ca325e3ffbb00-5bc2da0110bdef1b3466",
+      "file": "session.spec.ts",
+      "title": "401 removes protected content and asks for sign-in without replaying a request",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "6fa1842ca325e3ffbb00-37f83310b3c5ae1cf1c0",
+      "file": "session.spec.ts",
+      "title": "development StrictMode remount establishes a valid request scope before child reads",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-78dadb5ba293bb21e2e6",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings personal renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-b64225e61938708cdd63",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings contact-info renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-ac391a9498eed6914d1a",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings branding renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-75327961b629930f42ed",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings team renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-2e1b32a86db9b1373f3c",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings integrations renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-73a16c3d6ba3b9235123",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings memory renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-457d5375751b62ac6652",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings meri-preferences renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-85e7282d504c8262fae1",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings billing renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-2c3a62f6bdfd4856ad4f",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings ai-usage renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-06829afb77d63b23247a",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings profiles renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-9f191187eed4ea4dec3c",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-a6b61b23d98f86df6266",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-tenants renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-0f22d3ef68aa3c0085d0",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-customers renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-d6555a10bd329f4839d1",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-222d0a1c4fa804ab0701",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-15f5f181fcb14dad6e19",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-personnel renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-e81c57790a9c1c981fb3",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-51ccbae799fe20068929",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-matches renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-23523699d6a24637cb06",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings hq-analyst renders compatible responses without runtime failures",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-f0b1b5748d2e74f23547",
+      "file": "settings-scenes.spec.ts",
+      "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d5fe286c4acf6dc67aa8-de6e0d004e615d64a0de",
+      "file": "settings-scenes.spec.ts",
+      "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d877ffdf71ec720167ae-ae5fd4705e13bd258c4f",
+      "file": "settings.spec.ts",
+      "title": "Personal saves the title only after a validated response and keeps signature uploads separate",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d877ffdf71ec720167ae-3d26a5f6d97f712edd95",
+      "file": "settings.spec.ts",
+      "title": "Team does not fetch private records for a standard user",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d877ffdf71ec720167ae-7a2c456b791ee086e7f2",
+      "file": "settings.spec.ts",
+      "title": "Team prevents self-removal and failed invitations remain editable without success feedback",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "id": "d877ffdf71ec720167ae-8640c530e6fcb35af5ca",
+      "file": "settings.spec.ts",
+      "title": "Mobile Personal fits the viewport and Settings sections remain keyboard accessible",
+      "status": "expected",
+      "timeout": 30000,
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    }
+  ]
+}

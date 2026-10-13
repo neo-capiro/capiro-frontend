@@ -1,0 +1,51 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 ../../../../tmp/r3-reopen-167e306-red/control.spec.ts:5:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (13.6s)
+
+
+  1) ../../../../tmp/r3-reopen-167e306-red/control.spec.ts:5:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByLabel('Title', { exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByLabel('Title', { exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      17 |   expect(saved.posts()).toHaveLength(1);
+      18 |   await page.screenshot({path:info.outputPath('reopened-before-current-authority.png')});
+    > 19 |   await expect(page.getByLabel('Title',{exact:true})).toHaveCount(0);
+         |                                                       ^
+      20 |   await expect(page.getByText(saved.original.requestId,{exact:true})).toHaveCount(0);
+      21 |  }finally{release();}
+      22 | });
+        at /tmp/r3-reopen-167e306-red/control.spec.ts:19:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/r3-reopen-167e306-red/artifacts/control-a-continuously-mou-b1e53-d-fresh-authority-completes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/r3-reopen-167e306-red/artifacts/control-a-continuously-mou-b1e53-d-fresh-authority-completes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/r3-reopen-167e306-red/artifacts/control-a-continuously-mou-b1e53-d-fresh-authority-completes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/r3-reopen-167e306-red/artifacts/control-a-continuously-mou-b1e53-d-fresh-authority-completes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/r3-reopen-167e306-red/control.spec.ts:5:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes 
+[WebServer] (node:240857) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:240878) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

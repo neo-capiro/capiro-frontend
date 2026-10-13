@@ -1,0 +1,100 @@
+[
+  {
+    "argv": [
+      "node",
+      "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "--help"
+    ],
+    "expected": 0,
+    "actual": 0,
+    "stdout": "Usage: node qualify-elements.mjs NEW_ABSOLUTE_WORK_ROOT\nDownloads only the official hash-pinned esbuild artifacts, prepares a fresh SSR receipt,\nand runs the preserved UI provenance tests. Root must not exist or be inside the checkout.\nExit 0: qualified; 1: preparation/qualification failed; 2: invalid arguments.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "node",
+      "apps/web/deployment/portfolio/qualify-elements.mjs"
+    ],
+    "expected": 2,
+    "actual": 2,
+    "stdout": "",
+    "stderr": "Usage: node qualify-elements.mjs NEW_ABSOLUTE_WORK_ROOT\nDownloads only the official hash-pinned esbuild artifacts, prepares a fresh SSR receipt,\nand runs the preserved UI provenance tests. Root must not exist or be inside the checkout.\nExit 0: qualified; 1: preparation/qualification failed; 2: invalid arguments.\n"
+  },
+  {
+    "argv": [
+      "node",
+      "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "relative"
+    ],
+    "expected": 2,
+    "actual": 2,
+    "stdout": "",
+    "stderr": "Usage: node qualify-elements.mjs NEW_ABSOLUTE_WORK_ROOT\nDownloads only the official hash-pinned esbuild artifacts, prepares a fresh SSR receipt,\nand runs the preserved UI provenance tests. Root must not exist or be inside the checkout.\nExit 0: qualified; 1: preparation/qualification failed; 2: invalid arguments.\n"
+  },
+  {
+    "argv": [
+      "node",
+      "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "/workspace/capiro-integration/shipping-invalid-work-root"
+    ],
+    "expected": 1,
+    "actual": 1,
+    "stdout": "",
+    "stderr": "work root must be outside checkout\n"
+  },
+  {
+    "argv": [
+      "node",
+      "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "/tmp"
+    ],
+    "expected": 1,
+    "actual": 1,
+    "stdout": "",
+    "stderr": "EEXIST: file already exists, mkdir '/tmp'\n"
+  },
+  {
+    "argv": [
+      "node",
+      "--input-type=module",
+      "-e",
+      "await import(\"./apps/web/deployment/portfolio/qualify-elements.mjs\")"
+    ],
+    "expected": 0,
+    "actual": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "bash",
+      "apps/web/deployment/portfolio/smoke.sh",
+      "--help"
+    ],
+    "expected": 0,
+    "actual": 0,
+    "stdout": "Usage: bash smoke.sh LOCAL_IMAGE\nRuns one unconfigured local container on an ephemeral loopback port.\nExit 0: passed; 1: container/HTTP gate failed; 2: invalid arguments.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "bash",
+      "apps/web/deployment/portfolio/smoke.sh"
+    ],
+    "expected": 2,
+    "actual": 2,
+    "stdout": "",
+    "stderr": "Usage: bash smoke.sh LOCAL_IMAGE\nRuns one unconfigured local container on an ephemeral loopback port.\nExit 0: passed; 1: container/HTTP gate failed; 2: invalid arguments.\n"
+  },
+  {
+    "argv": [
+      "bash",
+      "apps/web/deployment/portfolio/smoke.sh",
+      "--bad"
+    ],
+    "expected": 2,
+    "actual": 2,
+    "stdout": "",
+    "stderr": "Usage: bash smoke.sh LOCAL_IMAGE\nRuns one unconfigured local container on an ephemeral loopback port.\nExit 0: passed; 1: container/HTTP gate failed; 2: invalid arguments.\n"
+  }
+]

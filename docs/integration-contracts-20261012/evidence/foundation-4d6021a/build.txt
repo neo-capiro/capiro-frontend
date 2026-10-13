@@ -1,0 +1,75 @@
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 25ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1802ms
+  Running TypeScript ...
+  Finished TypeScript in 36.1s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/6) ...
+  Generating static pages using 4 workers (1/6) 
+  Generating static pages using 4 workers (2/6) 
+  Generating static pages using 4 workers (4/6) 
+✓ Generating static pages using 4 workers (6/6) in 426ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /api/backend/[service]/[...path]
+├ ƒ /api/capiro/[operation]
+├ ƒ /calendar
+├ ƒ /forms/[token]
+├ ƒ /healthz
+├ ƒ /meri
+├ ƒ /meri/fixture/cited-answer
+├ ƒ /meri/fixture/run-activity
+├ ƒ /modules
+├ ƒ /modules/[module]
+├ ƒ /portfolio
+├ ƒ /portfolio/[clientId]
+├ ƒ /portfolio/[clientId]/bills
+├ ƒ /portfolio/[clientId]/calendar
+├ ƒ /portfolio/[clientId]/capabilities
+├ ƒ /portfolio/[clientId]/files
+├ ƒ /portfolio/[clientId]/objectives
+├ ƒ /portfolio/[clientId]/opportunities
+├ ƒ /portfolio/[clientId]/relationships
+├ ƒ /portfolio/[clientId]/work
+├ ƒ /portfolio/prospects
+├ ƒ /portfolio/prospects/[prospectId]
+├ ƒ /settings/[section]
+└ ƒ /sign-in/[[...sign-in]]
+
+
+ƒ Proxy (Middleware)
+
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

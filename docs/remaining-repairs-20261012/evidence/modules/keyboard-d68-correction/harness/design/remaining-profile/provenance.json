@@ -1,0 +1,54 @@
+{
+  "captureRecordedAt": "2026-10-12T19:33:03.006745+00:00",
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "immutableVersionId": null,
+  "designBaseline": "FIGMA-BASELINE-SNAPSHOT.json",
+  "exports": [
+    {
+      "nodeId": "24:371",
+      "name": "icon/phone",
+      "width": 16,
+      "height": 16,
+      "path": "apps/web/public/design/remaining-profile/phone.svg",
+      "sha256": "66df14e84ed694495210acbf113402185859046aabb8882aaeb94a2cdce3dae1",
+      "rootTag": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "nodeId": "24:386",
+      "name": "icon/sticky-note",
+      "width": 16,
+      "height": 16,
+      "path": "apps/web/public/design/remaining-profile/sticky-note.svg",
+      "sha256": "ea1903caf9804f694b2449b7c6bd449c54385a83738bd682b94ef2fc6044b7a3",
+      "rootTag": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "nodeId": "24:375",
+      "path": "apps/web/public/design/remaining-profile/mail.svg",
+      "sha256": "6e408546bacc34da3cae57ef4a4545c1328826599bd096a2f076507c8128e3cf",
+      "copiedUnchangedFrom": "apps/web/src/features/portfolio/advocacy/assets/mail.svg",
+      "sourceCommit": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+      "provenance": "docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md:74",
+      "rootTag": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "nodeId": "24:391",
+      "path": "apps/web/public/design/remaining-profile/users.svg",
+      "sha256": "0b02d58c80d492ce1e15d28b77777d761558f6304a5e486ce0993d8dd3131785",
+      "copiedUnchangedFrom": "apps/web/src/features/portfolio/advocacy/assets/users.svg",
+      "sourceCommit": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+      "provenance": "docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md:74",
+      "rootTag": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+    },
+    {
+      "nodeId": "24:382",
+      "path": "apps/web/public/design/remaining-profile/file-text.svg",
+      "sha256": "44c3171673e553972f34198f8518b3c7eafe7460ae8e64fe0230f86e4490fa27",
+      "copiedUnchangedFrom": "apps/web/src/features/portfolio/advocacy/assets/file-text.svg",
+      "sourceCommit": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+      "provenance": "docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md:74",
+      "rootTag": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">"
+    }
+  ],
+  "comparison": "Phone/sticky-note names and 16x16 natural dimensions match frozen 411:60524 context. Export paths are original bytes. No Figma canvas changes."
+}

@@ -1,0 +1,311 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-calendar/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-p1-calendar-evidence/review.playwright.ts",
+      "calendar-meeting-receipts.spec.ts",
+      "--timeout=8000"
+    ],
+    "configFile": "/tmp/capiro-p1-calendar-evidence/review.playwright.ts",
+    "rootDir": "/workspace/capiro-p1-calendar/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-calendar-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-calendar/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "calendar-*-receipts.spec.ts"
+        ],
+        "timeout": 8000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-calendar-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-meeting-receipts.spec.ts",
+      "file": "calendar-meeting-receipts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "foreign meeting receipt retains editor: {\"id\":\"foreign\"}",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6506,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                      "column": 57,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await page.goto(\"/calendar-meeting-receipts.html\");\n   9 |   await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n> 10 |   await expect(page.getByLabel(\"Subject\",{exact:true})).toHaveValue(\"Synthetic meeting\");\n     |                                                         ^\n  11 |   await expect(page.getByText(/may have completed/)).toBeVisible();\n  12 |   await expect(page.getByRole(\"button\",{name:\"Save meeting\"})).toBeDisabled();\n  13 |  });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                        "column": 57,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n\n\n   8 |   await page.goto(\"/calendar-meeting-receipts.html\");\n   9 |   await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n> 10 |   await expect(page.getByLabel(\"Subject\",{exact:true})).toHaveValue(\"Synthetic meeting\");\n     |                                                         ^\n  11 |   await expect(page.getByText(/may have completed/)).toBeVisible();\n  12 |   await expect(page.getByRole(\"button\",{name:\"Save meeting\"})).toBeDisabled();\n  13 |  });\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:19:44.208Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                    "column": 57,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c3ef955a7493db8b7a13-2241707ad592057a82db",
+          "file": "calendar-meeting-receipts.spec.ts",
+          "line": 5,
+          "column": 2
+        },
+        {
+          "title": "foreign meeting receipt retains editor: {\"client\":{\"id\":\"foreign\",\"name\":\"Other\"}}",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6165,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                      "column": 57,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await page.goto(\"/calendar-meeting-receipts.html\");\n   9 |   await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n> 10 |   await expect(page.getByLabel(\"Subject\",{exact:true})).toHaveValue(\"Synthetic meeting\");\n     |                                                         ^\n  11 |   await expect(page.getByText(/may have completed/)).toBeVisible();\n  12 |   await expect(page.getByRole(\"button\",{name:\"Save meeting\"})).toBeDisabled();\n  13 |  });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                        "column": 57,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Subject', { exact: true })\nExpected: \u001b[32m\"Synthetic meeting\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Subject', { exact: true })\u001b[22m\n\n\n   8 |   await page.goto(\"/calendar-meeting-receipts.html\");\n   9 |   await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n> 10 |   await expect(page.getByLabel(\"Subject\",{exact:true})).toHaveValue(\"Synthetic meeting\");\n     |                                                         ^\n  11 |   await expect(page.getByText(/may have completed/)).toBeVisible();\n  12 |   await expect(page.getByRole(\"button\",{name:\"Save meeting\"})).toBeDisabled();\n  13 |  });\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:19:51.476Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                    "column": 57,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c3ef955a7493db8b7a13-b95e73f458ef4889f119",
+          "file": "calendar-meeting-receipts.spec.ts",
+          "line": 5,
+          "column": 2
+        },
+        {
+          "title": "native normalized meeting receipt succeeds and an empty location is explicitly cleared",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 8000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1211,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 5\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"location\": \"\",\u001b[39m\n\u001b[31m+   \"clientId\": \"client-one\",\u001b[39m\n\u001b[31m+   \"description\": \"\",\u001b[39m\n\u001b[31m+   \"endsAt\": \"2026-10-10T15:00:00Z\",\u001b[39m\n\u001b[31m+   \"startsAt\": \"2026-10-10T14:00:00Z\",\u001b[39m\n\u001b[31m+   \"subject\": \"Synthetic meeting\",\u001b[39m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 5\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"location\": \"\",\u001b[39m\n\u001b[31m+   \"clientId\": \"client-one\",\u001b[39m\n\u001b[31m+   \"description\": \"\",\u001b[39m\n\u001b[31m+   \"endsAt\": \"2026-10-10T15:00:00Z\",\u001b[39m\n\u001b[31m+   \"startsAt\": \"2026-10-10T14:00:00Z\",\u001b[39m\n\u001b[31m+   \"subject\": \"Synthetic meeting\",\u001b[39m\n\u001b[2m  }\u001b[22m\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:22:15",
+                    "location": {
+                      "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                      "column": 15,
+                      "line": 22
+                    },
+                    "snippet": "  20 |  await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n  21 |  await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 22 |  expect(body).toMatchObject({location:\"\"});\n     |               ^\n  23 | });\n  24 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                        "column": 15,
+                        "line": 22
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 5\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"location\": \"\",\u001b[39m\n\u001b[31m+   \"clientId\": \"client-one\",\u001b[39m\n\u001b[31m+   \"description\": \"\",\u001b[39m\n\u001b[31m+   \"endsAt\": \"2026-10-10T15:00:00Z\",\u001b[39m\n\u001b[31m+   \"startsAt\": \"2026-10-10T14:00:00Z\",\u001b[39m\n\u001b[31m+   \"subject\": \"Synthetic meeting\",\u001b[39m\n\u001b[2m  }\u001b[22m\n\n  20 |  await page.getByRole(\"button\",{name:\"Save meeting\"}).click();\n  21 |  await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n> 22 |  expect(body).toMatchObject({location:\"\"});\n     |               ^\n  23 | });\n  24 |\n    at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:22:15"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:19:58.385Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+                    "column": 15,
+                    "line": 22
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c3ef955a7493db8b7a13-f7b6ffada3fce98aa2aa",
+          "file": "calendar-meeting-receipts.spec.ts",
+          "line": 15,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:19:43.786Z",
+    "duration": 16165.350999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

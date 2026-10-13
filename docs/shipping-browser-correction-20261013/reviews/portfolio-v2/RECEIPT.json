@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "reviewedUTC": "2026-10-13T03:17:12.747235+00:00",
+  "verdict": "PASS_bounded_existing_Portfolio_gate_evidence_review",
+  "reviewMethod": "Read-only JSON/source/log/hash/PNG inspection. No tests, runtime, browser, build or native calls executed by reviewer.",
+  "source": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "currentScopedObservation": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "scopedDiffEmpty": true,
+    "scopes": [
+      "apps",
+      "packages",
+      "scripts",
+      "vendor",
+      "package.json",
+      "package-lock.json",
+      ".dockerignore",
+      "docs/architecture-size-reviews.json"
+    ],
+    "trackedWorktreeStatus": " M docs/shipping-browser-correction-20261013/IMPLEMENTATION.md\n"
+  },
+  "completedGate": {
+    "stats": {
+      "startTime": "2026-10-13T02:32:38.033Z",
+      "duration": 2245044.202,
+      "expected": 1122,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "endedUTC": "2026-10-13T03:10:03.144150+00:00",
+    "exitCode": 0,
+    "specs": 1122,
+    "tests": 1122,
+    "results": 1122,
+    "eachResultPassedAtRetryZero": true,
+    "workers": 3,
+    "repeatEach": 1,
+    "retries": 0,
+    "effectiveTimeoutCountsMs": {
+      "30000": 1118,
+      "90000": 4
+    },
+    "fullyParallel": false,
+    "sourceChanged": false
+  },
+  "inventory": {
+    "priorSource": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "originalCases": 1118,
+    "originalCasesMissing": 0,
+    "addedCases": [
+      {
+        "file": "mail-rich-compose.spec.ts",
+        "title": "ordinary formatting and typing keep native Undo after a verified rewrite with delayed selection observation"
+      },
+      {
+        "file": "mail-rich-compose.spec.ts",
+        "title": "intentional all selection still replaces text and supports Undo"
+      },
+      {
+        "file": "mail-rich-compose.spec.ts",
+        "title": "intentional partial selection still replaces text and supports Undo"
+      },
+      {
+        "file": "profile-identity-layout.spec.ts",
+        "title": "profile identity resolution replaces stale focus ownership and preserves editable layout"
+      }
+    ],
+    "firstAndSecondFullRunInventoriesAndIdsEqual": true,
+    "affectedCasesTotal": 22,
+    "affectedIncludesAllFourAddedCases": true,
+    "affectedByFile": {
+      "mail-rich-compose.spec.ts": 18,
+      "profile-identity-layout.spec.ts": 1,
+      "profile-tools-integration.spec.ts": 3
+    }
+  },
+  "preservedAttempts": {
+    "firstFull": {
+      "status": "FAILED",
+      "passed": 1121,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0,
+      "exitCode": 1,
+      "sourceChanged": false,
+      "cause": "ENOSPC writing first screenshot; later assertions were not reached"
+    },
+    "controlledSelectionSetup": {
+      "status": "SETUP_FAILED",
+      "testsExecuted": 0,
+      "exitCode": 1,
+      "cause": "External harness could not resolve @playwright/test; No tests found"
+    },
+    "controlledSelectionCorrected": {
+      "status": "PASSED",
+      "testsExecuted": 3,
+      "exitCode": 0
+    }
+  },
+  "enosPcCase": {
+    "originalFailedSpec": {
+      "title": "actual index saves the complete canonical catalog and restores it after reload",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 30000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 1,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 10889,
+              "error": {
+                "message": "Error: ENOSPC: no space left on device, write",
+                "stack": "Error: ENOSPC: no space left on device, write\n    at /workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts:71:3",
+                "location": {
+                  "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+                  "column": 3,
+                  "line": 71
+                },
+                "snippet": "  69 |   await page.reload();\n  70 |   await expect.poll(() => positions(page)).toEqual([clientId, secondId]);\n> 71 |   await page.screenshot({\n     |   ^\n  72 |     path: testInfo.outputPath(\"portfolio-saved-order-desktop.png\"),\n  73 |     fullPage: true,\n  74 |   });"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+                    "column": 3,
+                    "line": 71
+                  },
+                  "message": "Error: ENOSPC: no space left on device, write\n\n  69 |   await page.reload();\n  70 |   await expect.poll(() => positions(page)).toEqual([clientId, secondId]);\n> 71 |   await page.screenshot({\n     |   ^\n  72 |     path: testInfo.outputPath(\"portfolio-saved-order-desktop.png\"),\n  73 |     fullPage: true,\n  74 |   });\n    at /workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts:71:3"
+                },
+                {
+                  "message": "Error: apiRequestContext._wrapApiCall: ENOSPC: no space left on device, write"
+                },
+                {
+                  "message": "Error: ENOSPC: no space left on device, write"
+                },
+                {
+                  "message": "Error: End of central directory record signature not found. Either not a zip file, or file is truncated."
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-13T02:14:33.906Z",
+              "annotations": [],
+              "attachments": [],
+              "errorLocation": {
+                "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+                "column": 3,
+                "line": 71
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "d423f1d7749e0820a0f5-68aafc70df6a1a12308d",
+      "file": "portfolio-layout-integration.spec.ts",
+      "line": 31,
+      "column": 1
+    },
+    "rerunSpec": {
+      "title": "actual index saves the complete canonical catalog and restores it after reload",
+      "ok": true,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 30000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 1,
+              "parallelIndex": 1,
+              "status": "passed",
+              "duration": 12101,
+              "errors": [],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-13T02:56:41.767Z",
+              "annotations": [],
+              "attachments": []
+            }
+          ],
+          "status": "expected"
+        }
+      ],
+      "id": "d423f1d7749e0820a0f5-68aafc70df6a1a12308d",
+      "file": "portfolio-layout-integration.spec.ts",
+      "line": 31,
+      "column": 1
+    },
+    "screenshots": [
+      {
+        "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png",
+        "bytes": 99056,
+        "sha256": "e7be805270c7b78740280cd076113a54d8ea366ba31a15fc5612366da1fd50d9",
+        "width": 1440,
+        "height": 1040,
+        "completePngWithValidChunkCrcs": true
+      },
+      {
+        "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png",
+        "bytes": 82331,
+        "sha256": "c459759c611ccf0f9e74d9e823a3c11a04813d1d31ed5245eca40598f90cfb66",
+        "width": 390,
+        "height": 1425,
+        "completePngWithValidChunkCrcs": true
+      }
+    ],
+    "testSourceByteIdenticalTo158AndD4be": true,
+    "postScreenshotTail": [
+      "75-76: set mobile 390x844 and dark mode",
+      "77-84: body/card dark background assertions",
+      "85-89: no horizontal document overflow",
+      "90-93: mobile-dark screenshot",
+      "94: exactly one write",
+      "95: no unexpected request"
+    ],
+    "evidenceBasis": "Passed result, unchanged straight-line test body and complete later mobile screenshot establish tail completion. No successful trace is retained under retain-on-failure."
+  },
+  "environment": {
+    "recordedUTC": "2026-10-13T01:47:51.411Z",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "playwright": "1.61.1",
+    "browser": "154.0.8037.57",
+    "browserExecutable": "/usr/bin/chromium",
+    "platform": "linux",
+    "architecture": "x64",
+    "osRelease": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+    "cpuCount": 4,
+    "locale": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "TZ": null,
+    "browserLocale": {
+      "language": "en-US",
+      "timezone": "UTC"
+    },
+    "scope": "Local qualification only; pinned Chromium149 downloads blocked403. Not an AWS environment-equivalence claim."
+  },
+  "visualEvidence": {
+    "referencedParentReceiptAndThreeScreenshotHashesVerified": true,
+    "newIndependentVisualOrFigmaReview": false
+  },
+  "limits": [
+    "Portfolio fixture gate only; no native row acceptance, backend/provider execution, deployment acceptance, full accessibility or Figma conformance.",
+    "Actual local Chromium154 differs from original AWS pinned149; no browser environment equivalence claim.",
+    "Modules/build/actual-server gates are outside this review and were pending/running at assignment.",
+    "Whole-worktree cleanliness is not claimed: IMPLEMENTATION.md has a concurrent documentation-only edit. Runtime scoped diff is empty."
+  ],
+  "references": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-results.json",
+      "bytes": 1230191,
+      "sha256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/BOUNDED-VISUAL-REVIEW.json",
+      "bytes": 1999,
+      "sha256": "a7d9ef6e92cea06365b9349254b9de7fd5c6c5637fc8141460d4038f129a4b8f"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/FINAL-ENVIRONMENT.json",
+      "bytes": 839,
+      "sha256": "c5b1306bc27f6af28019e3b24a86ccee81ae5019822ca1899cc24ff6cdf9f89a"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-exit.json",
+      "bytes": 1039,
+      "sha256": "48aef5fb2ae7c01667e85e1a7faf06e6c7baf46e64f4814a8d37edeb8b85cdf7"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2-exit.json",
+      "bytes": 1045,
+      "sha256": "bbc953b5a6d90672b3283297db4c493501113ccbfa214d53cc076515c4aa7735"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2.log",
+      "bytes": 1375,
+      "sha256": "d7f7bd38237f9683282d2f444246fb1b7ce06b4c502ec811a48f349c33184187"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection.log",
+      "bytes": 1176,
+      "sha256": "7d82862d1a392b559b218d3d6e49ec4ff085e5c13bf49dadf60db2ded8b32248"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33238,
+      "sha256": "d3e7e3f25de1117539dc20420f2f1e2f6e6ad4e6e31cb7f734694f5d82df404d"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/desktop-rich.png",
+      "bytes": 73027,
+      "sha256": "c975fbe384002a07c44237d9be2d91ceca00c0364b3065f5ba39f1ec2646ad0e"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-artifacts/profile-tools-integration--655bc-ates-the-real-profile-cache/overview-focus-desktop.png",
+      "bytes": 183580,
+      "sha256": "dd6ef8706afe5980b63779963a450a6e9de04aa694c9105c2ec52ea9fc202453"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-exit.json",
+      "bytes": 1057,
+      "sha256": "b1486ceb8cf887ee7fbf1946607010af285eb66bd193793042f576adcd06c911"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-results.json",
+      "bytes": 1237270,
+      "sha256": "f45c2c962cc9f54743133ac2be9843c39cfec7a2a7deb6524d9d608fe9995b13"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png",
+      "bytes": 99056,
+      "sha256": "e7be805270c7b78740280cd076113a54d8ea366ba31a15fc5612366da1fd50d9",
+      "width": 1440,
+      "height": 1040,
+      "completePngWithValidChunkCrcs": true
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png",
+      "bytes": 82331,
+      "sha256": "c459759c611ccf0f9e74d9e823a3c11a04813d1d31ed5245eca40598f90cfb66",
+      "width": 390,
+      "height": 1425,
+      "completePngWithValidChunkCrcs": true
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-exit.json",
+      "bytes": 1066,
+      "sha256": "2f73c1a923451b24af94463403c95c3ce85bd851b2c54aae12f932d57d64fd39"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-results.json",
+      "bytes": 1234836,
+      "sha256": "6c40be4f1399a3a24177ead118c267a8fd48ceeb932604b35e4f62b26b106a8c"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2.log",
+      "bytes": 173053,
+      "sha256": "a73c92dbf43cdd8a250ce399498dbdff471e62b2cc6ac300a9e623e6bdd84ba5"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser.log",
+      "bytes": 174655,
+      "sha256": "587b41cdf1bc07a4368fb55fdc5c4cac8d5696b36f8e0efe1e7884e4f0a724e5"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/run-gate.py",
+      "bytes": 1344,
+      "sha256": "1c64265dfc127210f75ff6427daebab7fe516cbcf5b5f3920b61dcbc83efd371"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+      "bytes": 6128,
+      "sha256": "3f021e5d35710def2b27c2c809ca4337376c98e98102224d20316003f86a0a9e"
+    }
+  ]
+}

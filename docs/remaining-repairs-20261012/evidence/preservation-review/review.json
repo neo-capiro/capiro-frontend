@@ -1,0 +1,44 @@
+{
+  "reviewedAt": "2026-10-12T21:26:30.982268+00:00",
+  "verdict": "PASS_BOUNDED_HELPER_REVIEW",
+  "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "helpers": {
+    "preserve-evidence.py": {
+      "sha256": "c4f3f28c40b6b43fe528f1cad11500a4b561d201e7759c9dfa851315f06717f6",
+      "bytes": 4535
+    },
+    "stage-evidence.py": {
+      "sha256": "33a504ba4c8ef71012beb1c3e5cfb08dbc4e90d4fe4225b0a673fe75f2013912",
+      "bytes": 4687
+    }
+  },
+  "remainingConcreteHelperBlockers": [],
+  "resolvedReviewFindings": [
+    {
+      "id": "PRESERVE-01",
+      "finding": "Literal .git evidence is rejected by Git; non-injective encoding may collide.",
+      "resolution": "Original full/relative paths retained; reserved component encoded and both source-path and duplicate destination collisions rejected."
+    },
+    {
+      "id": "PRESERVE-02",
+      "finding": "Broad documentation staging could include unmanifested proof or leave unrelated staged source unchecked.",
+      "resolution": "Explicit control/evidence staging; all pending tracked/cached changes constrained; local/index evidence exact-set equality."
+    }
+  ],
+  "observedEncodedPathCount": 6,
+  "observedBorrowedLinks": 4,
+  "remainingExecutionPrerequisites": [
+    "All evidence producers and review writers quiescent.",
+    "Root executes ordinary Python preservation/staging at reviewed helper hashes.",
+    "Independent final committed evidence path/mode/size/hash verification."
+  ],
+  "notRun": [
+    "preserve-evidence.py",
+    "stage-evidence.py",
+    "tests",
+    "browser",
+    "Docker",
+    "build",
+    "native/provider calls"
+  ]
+}

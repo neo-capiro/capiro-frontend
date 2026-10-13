@@ -1,0 +1,1572 @@
+{
+  "method": "Read existing root-produced JSON only; no browser or tests executed by reviewer",
+  "receipts": [
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/portfolio-behavior-results.json",
+        "bytes": 1528347,
+        "sha256": "9be0975a750d63f050ea1d3a740f978a5f3c609215b60873c05b6850da1c5ef7"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:34:06.262Z",
+        "duration": 72917.621,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 2,
+      "cases": [
+        {
+          "title": "Portfolio positive control: 1440px sequential keyboard and history preserve the profile route",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 133,
+              "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(10, 10, 10)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 107049,
+              "sha256": "4c9797710b70d4f410a941257de42bf24aaba50199fdd92a7e66956649c2d722"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio positive control: 1440px logo and sector navigate while bottom owner stays outside the link",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio positive control: 390px sequential keyboard and history preserve the profile route",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 133,
+              "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(10, 10, 10)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 83670,
+              "sha256": "97e414881cdca0da61a3c890482bbd81d2f9ac7667a94d720aa5ccee5c1af132"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio positive control: 390px logo and sector navigate while bottom owner stays outside the link",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio positive control: 390px long name keeps visible keyboard focus and light token scope",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 133,
+              "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(10, 10, 10)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 84759,
+              "sha256": "f77b427b7cb7f4f8acf3ee0ef6752077c6b2e9dc5c28f39c9865d44f41eddf56"
+            },
+            {
+              "name": "long-name-theme",
+              "contentType": "application/json",
+              "bytes": 41,
+              "sha256": "b5298db2eea1740c95a14da33433c6f663ad9c2d7d3717c1a9055d16842d3134",
+              "value": {
+                "colorScheme": "light",
+                "token": "#756e69"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio positive control: 390px long name keeps visible keyboard focus and dark token scope",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 136,
+              "sha256": "82cfcafb30b1e367af36f356184b4bcb475002c301f9b3e46bae5cf44bb1043c",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(250, 250, 249)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 85041,
+              "sha256": "48d52005b96e73f4c43b329e753938612114460020fd01100eb33b5fc841223c"
+            },
+            {
+              "name": "long-name-theme",
+              "contentType": "application/json",
+              "bytes": 40,
+              "sha256": "e677fc4a069565b0a9ee8a60de6c8bcd1cfe93f77a343ead781ebd0760c2b345",
+              "value": {
+                "colorScheme": "dark",
+                "token": "#aaa29c"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio positive control: 390px card expansion leaves the real reorder control reachable",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 133,
+              "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(10, 10, 10)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 32535,
+              "sha256": "15bca3806ec74e46dbaa58b662200cb3a0121f549db564fe8fbc6e6d128c1f86"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio semantic correction: 1440px independent visible descriptions retain location, fallback and owner",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio semantic correction: 390px independent visible descriptions retain location, fallback and owner",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 402263,
+              "sha256": "c9e245f88840b070a028727d6ab69c0e3588c3ac7bd0bac4944dff9989c82b83",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 336939,
+              "sha256": "8872cb33580ed4e3e8f6db4086f04351013fce42c319c4a077a7a29f920a0797",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/shared-behavior-results.json",
+        "bytes": 2326806,
+        "sha256": "205f6c8495f4f12381b093324dc65847c6291e255e2f8ec035d6938bdbdfde1e"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:34:05.213Z",
+        "duration": 60953.618,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "Meri semantic correction: 1440px conversations footer exposes its unchanged notice within contentinfo",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "footer-in-view",
+              "contentType": "image/png",
+              "bytes": 92377,
+              "sha256": "4c850c2f0557e45590fc200a307688cc9673741ce6a5228010b2868f881cd0e8"
+            }
+          ]
+        },
+        {
+          "title": "Meri semantic correction: 1440px actions footer exposes its unchanged notice within contentinfo",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "footer-in-view",
+              "contentType": "image/png",
+              "bytes": 68909,
+              "sha256": "b6880dfecc3d7696e981752f0a78e781ef69e178882e219648df2c1b9a580620"
+            }
+          ]
+        },
+        {
+          "title": "Meri semantic correction: 390px conversations footer exposes its unchanged notice within contentinfo",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "footer-in-view",
+              "contentType": "image/png",
+              "bytes": 43152,
+              "sha256": "b0d28b3119c43f43cf96180ddb0d307a8c28c8ff54186503c4eecbc21196b551"
+            }
+          ]
+        },
+        {
+          "title": "Meri semantic correction: 390px actions footer exposes its unchanged notice within contentinfo",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "footer-in-view",
+              "contentType": "image/png",
+              "bytes": 11520,
+              "sha256": "bbf5c5b4f46c7527c94dd54603905f9d094030ccb3a52bf7e502c660b4799129"
+            }
+          ]
+        },
+        {
+          "title": "Meri positive control: phone suggestion remains reachable by keyboard and creates only a local draft",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "focused-control-style",
+              "contentType": "application/json",
+              "bytes": 134,
+              "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+              "value": {
+                "focusVisible": true,
+                "outlineStyle": "solid",
+                "outlineWidth": 2,
+                "outlineColor": "rgb(37, 99, 235)",
+                "inViewport": true
+              }
+            },
+            {
+              "name": "focused-control-page",
+              "contentType": "image/png",
+              "bytes": 67758,
+              "sha256": "49cddca1a50cadfc6d48c3fc9108a3f7bec1088ec6db8caceeddd24bcdcb66c2"
+            }
+          ]
+        },
+        {
+          "title": "Meri semantic correction: named suggestions group preserves three Start controls without becoming a focus stop",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Modules semantic correction: fixture warning remains visible in a named complementary landmark",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "meri home retains full default axe checks at 1440px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 326394,
+              "sha256": "7ba77dbc12391ef68c840b192a924c4d93547f750f645c70b0afce90bbe6dd3a",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "modules home retains full default axe checks at 1440px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 441630,
+              "sha256": "437e5aaae6bea422800057b2212c5d0543b4a6909530d470b6281096884da999",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "meri home retains full default axe checks at 390px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 282843,
+              "sha256": "ea9a3897758d4b60415f7e5e2d9fef7ce2c5307a37c6cbd4d97464f6b91853c5",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": []
+            }
+          ]
+        },
+        {
+          "title": "modules home retains full default axe checks at 390px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 397914,
+              "sha256": "36b606b232b4451508213a5462c9ac4a18ee1844ca7ead28bd073b1b54338135",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/portfolio-axe-nav-results.json",
+        "bytes": 992822,
+        "sha256": "36fef0f4b8d936b05ca9bd6d8ffac348fb0f15b67460ae1981f0813a1b187100"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:26:38.172Z",
+        "duration": 25095.119,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "Portfolio current navigation follows / and its client filter through history",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio current navigation follows /portfolio and its client filter through history",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 402263,
+              "sha256": "824a0519fd8857530fa534bbe303c07e4703c3e79983df74a5d1014888616863",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 336939,
+              "sha256": "dfa155b7b5efe3cd9e7e62ee1e7fdb7829c811d1dd478a5dd5ff619bbd7e15fd",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/portfolio-controls-results.json",
+        "bytes": 19474,
+        "sha256": "d182bd96fb20ae0a157ab0f845035e697348d83edc0d8de325e3a8c65bf66b94"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:29:33.200Z",
+        "duration": 51840.636,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 3,
+      "cases": [
+        {
+          "title": "source alerts preserve server order and provenance, accessible identity and actual profile links",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "pending feed does not render empty or successful counts",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "failure requires explicit retry and recovers without a successful empty claim",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "refresh failure suppresses cached source records until retry succeeds",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "wrong client receipt is refused rather than linked to a different client",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "ambiguous HTTP200 empty fallback describes incomplete coverage and allows refresh",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "portal role fails closed and never requests the restricted feed",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "identity lookup failure blocks the feed before explicit identity recovery",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "server authorization refusal overrides the allowed frontend role",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "expired alert session uses the shared sign-in recovery",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "mobile dark card remains scrollable, keyboard accessible and within the viewport",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "four-field readiness persists once, transitions, and refreshes the list",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "facility creation uses the selected client's endpoint and refreshes the map list",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "mail is reviewed and a provider error remains visible without automatic retry",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "capability edits invalidate the list and retain unrelated registration codes",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "navigation, permissions, session expiry and mobile layout use real feature components",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/meri-mobile-controls-results.json",
+        "bytes": 4606,
+        "sha256": "67caaf53601c41f2a846caa35ce3adbab19ee7d0db5e27e978068cb130a6da99"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:29:32.944Z",
+        "duration": 15057.176,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        },
+        {
+          "title": "1440px Meri retains one visible sidebar destination per route without duplicate mobile links",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": []
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/active-count-red-results.json",
+        "bytes": 22892,
+        "sha256": "57d6618364ab03fe1f555fb96d06901add07a1bce71ffbfc147ab08deb6c6c64"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:37:25.113Z",
+        "duration": 15707.02,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "Portfolio 1440px light active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+          ],
+          "attachments": [
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 1440px dark active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+          ],
+          "attachments": [
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px light active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+          ],
+          "attachments": [
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px dark active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+          ],
+          "attachments": [
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/active-count-red-v2-results.json",
+        "bytes": 19158,
+        "sha256": "2e7e4d8882bab749e8d0e8e3f719eeb8d7b678dc7cd318df1b13a39bb9922961"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:39:22.555Z",
+        "duration": 15199.488000000001,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "Portfolio 1440px light active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n\n  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42"
+          ],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 224,
+              "sha256": "9917d9c8b387ace137adb1f59eee9e9c31552c3fcc055ac58f384f0ba33ede2a",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(117, 110, 105)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  2.484436491271581
+                ]
+              }
+            },
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 1440px dark active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 223,
+              "sha256": "2537faedcaa759ea5151d857174fb5bf640598a9b5a02d90edb1680f2b32b4c9",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  4.954600936727166
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 294,
+              "sha256": "3598aae73589372181da6dc422d71db976d27682cfbfa0c7c3185d55d08eceb8",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  6.1776761032155605,
+                  7.87909794960765
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 223,
+              "sha256": "2537faedcaa759ea5151d857174fb5bf640598a9b5a02d90edb1680f2b32b4c9",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  4.954600936727166
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 294,
+              "sha256": "3598aae73589372181da6dc422d71db976d27682cfbfa0c7c3185d55d08eceb8",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  6.1776761032155605,
+                  7.87909794960765
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px light active profile counts retain readable contrast",
+          "status": "failed",
+          "retry": 0,
+          "errors": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n\n  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42"
+          ],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 223,
+              "sha256": "1f050cb4bf2e244efcf425f1544cc23deb84be0eecdfb39eca6bb40824d18425",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(117, 110, 105)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  2.484436491271581
+                ]
+              }
+            },
+            {
+              "name": "screenshot",
+              "contentType": "image/png",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/test-failed-1.png"
+            },
+            {
+              "name": "error-context",
+              "contentType": "text/markdown",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/error-context.md"
+            },
+            {
+              "name": "trace",
+              "contentType": "application/zip",
+              "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip"
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px dark active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 222,
+              "sha256": "2342ee6e7251260307459891e502c55178ef2f1ca82e6e9d5a83ab6dcbd675e1",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  4.954600936727166
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 293,
+              "sha256": "ea5d74b103bc07fe68e97fb26f7a4925111e2e10af5ca6e270d5ff73d876c1c8",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  6.1776761032155605,
+                  7.87909794960765
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 222,
+              "sha256": "2342ee6e7251260307459891e502c55178ef2f1ca82e6e9d5a83ab6dcbd675e1",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  4.954600936727166
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 293,
+              "sha256": "ea5d74b103bc07fe68e97fb26f7a4925111e2e10af5ca6e270d5ff73d876c1c8",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(170, 162, 156)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  6.1776761032155605,
+                  7.87909794960765
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": {
+        "path": "/tmp/capiro-unified-corrections-20261013/active-count-green-results.json",
+        "bytes": 1003678,
+        "sha256": "9623df5f0ae1301be602209f0d150e2ec3be9594a0a7b499549178ce8ed5567d"
+      },
+      "stats": {
+        "startTime": "2026-10-13T07:40:06.541Z",
+        "duration": 18535.735,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "cases": [
+        {
+          "title": "Portfolio 1440px light active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 225,
+              "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 296,
+              "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 225,
+              "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 296,
+              "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 1440px dark active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 224,
+              "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 295,
+              "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 224,
+              "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 295,
+              "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px light active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 224,
+              "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 295,
+              "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 224,
+              "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 295,
+              "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio 390px dark active profile counts retain readable contrast",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 223,
+              "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 294,
+              "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 223,
+              "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "name": "active-count-contrast",
+              "contentType": "application/json",
+              "bytes": 294,
+              "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 402263,
+              "sha256": "362c7e6970140ff50727a13e9e493ba91e74fce5bafe6642032a59ad0a851aa3",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+          "status": "passed",
+          "retry": 0,
+          "errors": [],
+          "attachments": [
+            {
+              "name": "axe-full-default-results",
+              "contentType": "application/json",
+              "bytes": 336939,
+              "sha256": "d9c5b7ea75352f57caf9c05c4eea7b61975536ebe8a850e1373ad560f9c99032",
+              "axeVersion": "4.14.0",
+              "violations": [],
+              "incomplete": [
+                {
+                  "id": "color-contrast",
+                  "nodeCount": 13
+                },
+                {
+                  "id": "label-content-name-mismatch",
+                  "nodeCount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

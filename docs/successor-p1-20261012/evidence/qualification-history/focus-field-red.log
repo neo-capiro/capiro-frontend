@@ -1,0 +1,97 @@
+
+Running 14 tests using 1 worker
+
+(node:496528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 360px (4.8s)
+  ✘   2 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 360px (7.3s)
+(node:496882) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 1440px (4.4s)
+  ✘   4 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 1440px (6.5s)
+(node:497137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 1440px and avoid cross-component render updates (4.6s)
+  ✓   6 apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 390px and avoid cross-component render updates (4.3s)
+  ✓   7 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (3.7s)
+  ✓   8 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (3.8s)
+  ✓   9 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (4.8s)
+  ✓  10 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (3.3s)
+  ✓  11 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (3.5s)
+  ✓  12 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (3.1s)
+  ✓  13 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (3.7s)
+  ✓  14 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (2.8s)
+
+
+  1) apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 360px 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       7 |       dialog.evaluate((node) => node.contains(document.activeElement)),
+       8 |     )
+    >  9 |     .toBe(true);
+         |      ^
+      10 |   for (const key of ["Tab", "Tab", "Shift+Tab", "Shift+Tab"]) {
+      11 |     await page.keyboard.press(key);
+      12 |     await expect
+        at expectContainedFocus (/workspace/capiro-p1-successor/apps/web/tests/browser/dialog-disabled-focus.spec.ts:9:6)
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/dialog-disabled-focus.spec.ts:60:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-7b941-known-dialog-focus-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-7b941-known-dialog-focus-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-7b941-known-dialog-focus-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-7b941-known-dialog-focus-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 1440px 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       7 |       dialog.evaluate((node) => node.contains(document.activeElement)),
+       8 |     )
+    >  9 |     .toBe(true);
+         |      ^
+      10 |   for (const key of ["Tab", "Tab", "Shift+Tab", "Shift+Tab"]) {
+      11 |     await page.keyboard.press(key);
+      12 |     await expect
+        at expectContainedFocus (/workspace/capiro-p1-successor/apps/web/tests/browser/dialog-disabled-focus.spec.ts:9:6)
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/dialog-disabled-focus.spec.ts:60:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-cdb72-nown-dialog-focus-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-cdb72-nown-dialog-focus-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-cdb72-nown-dialog-focus-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-successor-qualification/focus-controls-artifacts/dialog-disabled-focus-disa-cdb72-nown-dialog-focus-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 360px 
+    apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 1440px 
+  12 passed (1.1m)

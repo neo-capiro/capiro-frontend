@@ -1,0 +1,165 @@
+{
+  "sealedAt": "2026-10-13T08:45:14.069820+00:00",
+  "files": [
+    {
+      "path": "STRUCTURE-REVIEW-PROPOSAL.json",
+      "bytes": 1756,
+      "sha256": "00abd67a6cf4b9be808fa0c5f01cb8989770245b867f3328b156d004da328ca7"
+    },
+    {
+      "path": "baseline-exit.txt",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "baseline-results.json",
+      "bytes": 32144,
+      "sha256": "a3c805a028b155cd59c6e47a6c68d6230e29d5b433767ce9c47c8a2ca5515c1b"
+    },
+    {
+      "path": "baseline-source/apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "bytes": 759,
+      "sha256": "fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69"
+    },
+    {
+      "path": "baseline-source/apps/web/src/app/api/documents/[operation]/route.ts",
+      "bytes": 601,
+      "sha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1"
+    },
+    {
+      "path": "baseline-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 3237,
+      "sha256": "c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac"
+    },
+    {
+      "path": "baseline-source/apps/web/src/shared/meri-actions/connection-config.ts",
+      "bytes": 1127,
+      "sha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216"
+    },
+    {
+      "path": "baseline-source/apps/web/src/shared/meri-documents/config.ts",
+      "bytes": 413,
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+    },
+    {
+      "path": "baseline-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "bytes": 3816,
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+    },
+    {
+      "path": "baseline-source/apps/web/tests/meri-document-bounds.test.ts",
+      "bytes": 8488,
+      "sha256": "48c362a946d0f4a655faadfb240ff39d3bff856383f505547ed2d61b5a51247e"
+    },
+    {
+      "path": "baseline-source/apps/web/tests/meri-document-proxy.test.ts",
+      "bytes": 20022,
+      "sha256": "8280e1f783f439c55cca7dbc69d1625d8acc9ccdd8ee77b5e8867f875e919c2c"
+    },
+    {
+      "path": "baseline-source.json",
+      "bytes": 1584,
+      "sha256": "0b5bc921effec59d1ef48383a1a1f77a57f294d2832dafb9f0634b920551750a"
+    },
+    {
+      "path": "baseline.log",
+      "bytes": 92,
+      "sha256": "a1f1e5a7a93cc43c5d4eaf8ec9124cfe100335e77c4fa3600f2ce8527d3b599f"
+    },
+    {
+      "path": "corrected-fixtures-exit.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "corrected-fixtures-results.json",
+      "bytes": 23320,
+      "sha256": "f88355008eae2c35da8c666f5176905377e7e5403bd3600ba4096c440f16f292"
+    },
+    {
+      "path": "corrected-fixtures.log",
+      "bytes": 102,
+      "sha256": "e14f88f16051745e080d9478ed53b64817a3c9bc517dc86c84a9cf06205066c3"
+    },
+    {
+      "path": "final-exit.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "final-results.json",
+      "bytes": 24701,
+      "sha256": "db17325896a7d8c55df7d74dd5841aea22f25c382fadfe7da63c59debc134da6"
+    },
+    {
+      "path": "final-source/apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "bytes": 759,
+      "sha256": "fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69"
+    },
+    {
+      "path": "final-source/apps/web/src/app/api/documents/[operation]/route.ts",
+      "bytes": 601,
+      "sha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1"
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 3237,
+      "sha256": "c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac"
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-actions/connection-config.ts",
+      "bytes": 1127,
+      "sha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216"
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/config.ts",
+      "bytes": 413,
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "bytes": 3816,
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+    },
+    {
+      "path": "final-source/apps/web/tests/meri-document-bounds.test.ts",
+      "bytes": 8510,
+      "sha256": "66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7"
+    },
+    {
+      "path": "final-source/apps/web/tests/meri-document-proxy.test.ts",
+      "bytes": 23284,
+      "sha256": "d5e70bea39a95c394425109a78e870a8e42ab37fc249e9615cde1bed1cff3a96"
+    },
+    {
+      "path": "final-source.json",
+      "bytes": 2587,
+      "sha256": "77f83dc9251a48e861ec6692eaac77505a4d6759381c96e2a1feded12b3074dc"
+    },
+    {
+      "path": "final.log",
+      "bytes": 89,
+      "sha256": "a8de7b2209250cbccb0e1b4c157e3b53da5f4b5e879da8b5f4a00543996c383f"
+    },
+    {
+      "path": "lint-exit.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "report.md",
+      "bytes": 3252,
+      "sha256": "940203942779ea7103dbcbb1815c39f19149aae02515eefec6ae4b4284fee301"
+    },
+    {
+      "path": "structure-scan.json",
+      "bytes": 653,
+      "sha256": "89e395ef5b41d5680892b8ef9edc057292557678dd4b05fb1572851fdb819399"
+    }
+  ]
+}

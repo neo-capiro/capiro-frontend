@@ -1,0 +1,77 @@
+
+ RUN  v4.1.11 /workspace/capiro-calendar-native-status/apps/web
+
+ ❯ tests/calendar-native-lifecycle.test.ts (7 tests | 5 failed) 33ms
+     × notes accepts a native idempotent share whose original sharer was deleted 12ms
+     × debriefs accepts its real creation status and rejects the other artifact's status 1ms
+     × debriefs accepts a native idempotent share whose original sharer was deleted 5ms
+     × note create requires cleared native approval stamps 2ms
+     × note edit requires cleared native approval stamps 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/calendar-native-lifecycle.test.ts > pinned native artifact lifecycle > notes accepts a native idempotent share whose original sharer was deleted
+ FAIL  tests/calendar-native-lifecycle.test.ts > pinned native artifact lifecycle > debriefs accepts a native idempotent share whose original sharer was deleted
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/calendar-native-lifecycle.test.ts:20:69
+     18|    const artifact={...receipt,status:"approved",sharedAt:metadata.upda…
+     19|    const schema=artifactReceiptSchema(meeting,kind,actor,{action:"shar…
+     20|    expect(schema.safeParse({...meeting,[kind]:[artifact]}).success).to…
+       |                                                                     ^
+     21|    for(const invalid of [{id:"foreign"},{meetingId:"foreign"},{clientI…
+     22|     expect(schema.safeParse({...meeting,[kind]:[{...artifact,...invali…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/calendar-native-lifecycle.test.ts > pinned native artifact lifecycle > debriefs accepts its real creation status and rejects the other artifact's status
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/calendar-native-lifecycle.test.ts:14:46
+     12|   it(`${kind} accepts its real creation status and rejects the other a…
+     13|    const schema=artifactReceiptSchema(meeting,kind,actor,save);
+     14|    expect(schema.safeParse(receipt).success).toBe(true);
+       |                                              ^
+     15|    expect(schema.safeParse({...receipt,status:kind === "notes" ? "gene…
+     16|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/calendar-native-lifecycle.test.ts > pinned native artifact lifecycle > note create requires cleared native approval stamps
+ FAIL  tests/calendar-native-lifecycle.test.ts > pinned native artifact lifecycle > note edit requires cleared native approval stamps
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/calendar-native-lifecycle.test.ts:31:81
+     29|    const receipt={...metadata,status:editing ? "edited" : "draft",...c…
+     30|    expect(schema.safeParse(receipt).success).toBe(true);
+     31|    expect(schema.safeParse({...receipt,approvedAt:metadata.updatedAt})…
+       |                                                                                 ^
+     32|    expect(schema.safeParse({...receipt,approvedByUserId:actor.userId})…
+     33|    const {approvedAt,approvedByUserId,...incomplete}=receipt;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+   Start at  16:33:26
+   Duration  563ms (transform 122ms, setup 0ms, import 303ms, tests 33ms, environment 0ms)
+

@@ -1,0 +1,57 @@
+listMeetings(
+    ctx: TenantContext,
+    query: {
+      clientId?: string;
+      from?: string;
+      to?: string;
+      recipientEmails?: string[];
+      limit?: number;
+      cursor?: { startsAt: string; id: string };
+    },
+  ) {
+    const { from, to } = toDateWindow(query);
+    const cursorStartsAt = query.cursor ? parseDate(query.cursor.startsAt, 'cursor') : null;
+    const cursorWhere: Prisma.MeetingWhereInput = cursorStartsAt
+      ? {
+          OR: [
+            { startsAt: { gt: cursorStartsAt } },
+            { startsAt: cursorStartsAt, id: { gt: query.cursor!.id } },
+          ],
+        }
+      : {};
+    const take = query.limit ? Math.max(1, Math.min(101, query.limit)) : undefined;
+    return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      const baseWhere: Prisma.MeetingWhereInput = {
+        tenantId: ctx.tenantId,
+        ...ownMeetingWhere(ctx.userId),
+        startsAt: { gte: from, lt: to },
+        ...(cursorStartsAt ? { AND: [cursorWhere] } : {}),
+      };
+
+      if (!query.clientId) {
+        const rows = await tx.meeting.findMany({
+          where: baseWhere,
+          include: meetingInclude(),
+          orderBy: [{ startsAt: 'asc' }, { id: 'asc' }],
+          ...(take ? { take } : {}),
+        });
+        return this.decorateMeetings(tx, ctx, rows);
+      }
+
+      const clientAssociationWhere = await this.clientMeetingAssociationWhere(
+        tx,
+        ctx.tenantId,
+        query.clientId,
+        query.recipientEmails ?? [],
+      );
+      const where: Prisma.MeetingWhereInput = { AND: [baseWhere, clientAssociationWhere] };
+
+      const rows = await tx.meeting.findMany({
+        where,
+        include: meetingInclude(),
+        orderBy: [{ startsAt: 'asc' }, { id: 'asc' }],
+        ...(take ? { take } : {}),
+      });
+      return this.decorateMeetings(tx, ctx, rows);
+    });
+  }

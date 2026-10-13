@@ -1,0 +1,45 @@
+{
+  "findings": [
+    {
+      "id": "MA-01",
+      "severity": "P2",
+      "title": "Uncertain durable query omitted from journal",
+      "status": "corrected-in-inspected-source",
+      "evidence": "Root original source + query-journal-red-v2.log; native blobs cited in review"
+    },
+    {
+      "id": "MA-02",
+      "severity": "P2",
+      "title": "Early body rejection skipped cleanup",
+      "status": "corrected-in-inspected-source",
+      "evidence": "Independent transport lane four red controls; corrected source inspection"
+    },
+    {
+      "id": "MA-03",
+      "severity": "P2",
+      "title": "Session receipt grammar mismatch",
+      "status": "corrected-in-inspected-source",
+      "evidence": "Independent session lane seven red controls; exact PR47 owner grammar"
+    },
+    {
+      "id": "MA-04",
+      "severity": "P2",
+      "title": "Query response not bound to requested first-page intent",
+      "status": "corrected-in-inspected-source",
+      "evidence": "Independent unchanged pure probe: two before acceptances, both after refused"
+    },
+    {
+      "id": "MA-05",
+      "severity": "P2",
+      "title": "Same-client background refetch unmounted local workflow",
+      "status": "corrected-in-inspected-source",
+      "evidence": "Source-confirmed original early-return path; corrected mounted/hidden wrapper; browser NOT_RUN"
+    }
+  ],
+  "additionalOwnerFinding": {
+    "title": "Malformed401 access-loss cleanup",
+    "status": "corrected-in-inspected-source",
+    "evidence": "Root two red cases +222-case green log"
+  },
+  "finalDisposition": "No further source blocker in inspected scope; runtime/native/composition limits in correction-addendum.md"
+}

@@ -1,0 +1,87 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-visual-closeout/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-candidate-4a16148/objective-feature-control/review.playwright.ts"
+    ],
+    "configFile": "/tmp/capiro-candidate-4a16148/objective-feature-control/review.playwright.ts",
+    "rootDir": "/tmp/capiro-candidate-4a16148/objective-feature-control",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-candidate-4a16148/objective-feature-control/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-candidate-4a16148/objective-feature-control",
+        "testIgnore": [],
+        "testMatch": [
+          "control.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-candidate-4a16148/objective-feature-control/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-visual-closeout/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: Requiring @playwright/test second time, \nFirst:\nError: \n    at Object.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/lib/index.js:70:33)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object.<anonymous> (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\n    at require (node:internal/modules/helpers:153:16)\n    at Object.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/test.js:17:13)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object.<anonymous> (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:372:15)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:244:9)\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at node:internal/modules/esm/loader:643:26\n    at requireOrImport (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1147:12)\n    at loadUserConfig (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1334:46)\n    at loadConfig (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1341:22)\n    at Object.loadConfigFromFile (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1553:10)\n    at runTests (/workspace/capiro-visual-closeout/node_modules/playwright/lib/cli/testActions.js:46:18)\n    at _Command.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/lib/program.js:53:7)\n\nSecond: ",
+      "stack": "Error: Requiring @playwright/test second time, \nFirst:\nError: \n    at Object.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/lib/index.js:70:33)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object.<anonymous> (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\n    at require (node:internal/modules/helpers:153:16)\n    at Object.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/test.js:17:13)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object.<anonymous> (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at loadCJSModuleWithModuleLoad (node:internal/modules/esm/translators:372:15)\n    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:244:9)\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at node:internal/modules/esm/loader:643:26\n    at requireOrImport (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1147:12)\n    at loadUserConfig (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1334:46)\n    at loadConfig (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1341:22)\n    at Object.loadConfigFromFile (/workspace/capiro-visual-closeout/node_modules/playwright/lib/common/index.js:1553:10)\n    at runTests (/workspace/capiro-visual-closeout/node_modules/playwright/lib/cli/testActions.js:46:18)\n    at _Command.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/lib/program.js:53:7)\n\nSecond: \n    at Object.<anonymous> (/workspace/capiro-visual-closeout/node_modules/playwright/test.js:17:13)\n    at Object.<anonymous> (/workspace/capiro-contracts/node_modules/playwright/lib/index.js:65:11)\n    at Object.<anonymous> (/workspace/capiro-contracts/node_modules/playwright/test.js:17:13)"
+    },
+    {
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-10-12T11:50:37.418Z",
+    "duration": 3605.4429999999998,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

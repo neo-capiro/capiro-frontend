@@ -1,0 +1,9 @@
+{
+  "initialPrettierCheck": "FAILED: portfolio.spec.ts line wrapping only",
+  "correctedPrettierCheck": "PASS",
+  "initialLexicalHelper": "FAILED: context-free token scan is unsuitable for template/regular-expression source",
+  "firstASTHelper": "FAILED: compared SourceFile.text raw input including formatting",
+  "correctedASTHelper": "PASS: parsed node kinds, identifiers/literals and children identical, excluding raw SourceFile text and positions",
+  "parsedSemanticASTIdentical": true,
+  "patchScope": "Only whitespace line wrapping in newly added Saved facilities assertion; literals and all assertion structures preserved."
+}

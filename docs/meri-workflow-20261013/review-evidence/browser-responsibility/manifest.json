@@ -1,0 +1,31 @@
+{
+  "sealedAt": "2026-10-13T05:54:25.330983+00:00",
+  "scope": "Independent exact-source responsibility review of two Meri browser size findings only; no runtime or repository edits",
+  "files": [
+    {
+      "path": "input-verification.json",
+      "bytes": 1392,
+      "sha256": "f8bb3b191fa1a6cbca945caca61b39e08274a4da335ab9621ea76633e1165836"
+    },
+    {
+      "path": "registry-proposals.json",
+      "bytes": 2454,
+      "sha256": "bec08458f43f9958b239b91070aaf8617ffb43443f62f342b52818f29ee745e5"
+    },
+    {
+      "path": "review.md",
+      "bytes": 2891,
+      "sha256": "5feacf0029138fc75d56a86d7126f5fe319dc444f3bb99c6fb9867d5ce06af16"
+    },
+    {
+      "path": "runtime-evidence-inspection.json",
+      "bytes": 899,
+      "sha256": "33caaefe89250ecbeafdfc1bcfec5d1577310de6f2f9c7702bfdc841d6e5821c"
+    },
+    {
+      "path": "source-scan.json",
+      "bytes": 1643,
+      "sha256": "a6f4992d1e9333a34090edff31c187dd8cfa4ae3f9c32011e152858da5163be6"
+    }
+  ]
+}

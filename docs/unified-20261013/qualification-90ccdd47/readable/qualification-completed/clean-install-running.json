@@ -1,0 +1,17 @@
+{
+  "pid": 1413972,
+  "command": [
+    "env",
+    "npm_config_cache=/workspace/capiro-unified-files-corrected-npm-cache",
+    "npm",
+    "ci",
+    "--ignore-scripts"
+  ],
+  "startedUTC": "2026-10-13T09:42:11.465602+00:00",
+  "source": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  }
+}

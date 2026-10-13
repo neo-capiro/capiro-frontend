@@ -1,0 +1,30 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "checkedAt": "2026-10-12T12:08:54.562539+00:00",
+  "anchors": [
+    {
+      "name": "rootLock",
+      "path": "package-lock.json",
+      "gitObject": "48343e320a9caaf6e92f042ad3373474f8825029",
+      "unchanged": true
+    },
+    {
+      "name": "existingCommitmentView",
+      "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
+      "gitObject": "35c008c086d461e8ccf8575e07037e0956c0dc3a",
+      "unchanged": true
+    },
+    {
+      "name": "portfolioOwnerArchive",
+      "path": "docs/portfolio-31/handover-2026-10-12",
+      "gitObject": "67b25ecb1eac4d4dd618748f51660e004f5a7028",
+      "unchanged": true
+    }
+  ],
+  "currentRemoteHeads": [
+    "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0\trefs/heads/codex/portfolio-continuation-20261011",
+    "02c02d95bdf3949662b9123f425271c6491ffdab\trefs/heads/main",
+    "3cc30ff3182e8050d563516607866cf07efe2aef\trefs/heads/task/meri-ui-publish-20261011",
+    "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a\trefs/heads/task/modules-settings-20261011"
+  ]
+}

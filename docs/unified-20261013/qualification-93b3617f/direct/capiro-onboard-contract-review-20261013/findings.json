@@ -1,0 +1,82 @@
+{
+  "source": "7b5a9644d30d22389b23f0e07f923c8925682047",
+  "scope": "Inherited source versus native contracts; evolving port not executed or accepted",
+  "findings": [
+    {
+      "id": "OC-01",
+      "classification": "confirmed inherited consumer/native mismatch",
+      "priority": "P2",
+      "operation": "OB-34",
+      "finding": "Firm memory write produces pending_review receipt with activeItemUnchanged, while old consumer treats any fulfilled write as saved/covered.",
+      "requiredHandling": "Validate pending receipt and represent review submission; keep active versus proposed content distinct.",
+      "evidence": [
+        "apps/onboard-web/src/lib/capiro-api.ts:198",
+        "apps/onboard-web/src/pages/setup/AiSettingsOverlay.tsx:90",
+        "apps/api/src/memory/memory.controller.ts:240"
+      ]
+    },
+    {
+      "id": "OC-02",
+      "classification": "confirmed request/read vocabulary mismatch",
+      "priority": "P2",
+      "operation": "OB-18",
+      "finding": "SetupTaskStatus contains skipped for reads but native transition DTO excludes it.",
+      "requiredHandling": "Separate request enum from read status; use capability skip endpoint and reconcile 409.",
+      "evidence": [
+        "apps/onboard-web/src/lib/setup.ts:14",
+        "apps/onboard-api/src/setup/setup.controller.ts:15"
+      ]
+    },
+    {
+      "id": "OC-03",
+      "classification": "confirmed response type drift",
+      "priority": "P2",
+      "operation": "OB-01/02/08/10",
+      "finding": "Nullable purchaser names and payment secrets/URLs plus native sessionId/failureReason/stripe differ from old frontend interfaces.",
+      "requiredHandling": "Preserve native nullability; bind available sessionId; do not invent usable payment state.",
+      "evidence": [
+        "apps/onboard-api/src/funnel/funnel.service.ts:41",
+        "apps/onboard-api/src/funnel/funnel.service.ts:371",
+        "apps/onboard-api/src/funnel/funnel.service.ts:802"
+      ]
+    },
+    {
+      "id": "OC-04",
+      "classification": "confirmed inherited fail-open UI fallback",
+      "priority": "P2",
+      "operation": "OB-22/23",
+      "finding": "Old IT page enables Microsoft if providers metadata is absent; native view explicitly returns booleans.",
+      "requiredHandling": "Require current valid availability; unavailable metadata cannot enable action.",
+      "evidence": [
+        "apps/onboard-web/src/pages/it/ItAdminPage.tsx:100",
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:137"
+      ]
+    },
+    {
+      "id": "OC-05",
+      "classification": "gateway resource requirement, not demonstrated native failure",
+      "priority": "integration requirement",
+      "operation": "OB-07",
+      "finding": "Native signed PDF has fixed filenames/MIME but no explicit response byte ceiling; old helper buffers arbitrary size and parses untrusted filename.",
+      "requiredHandling": "Reuse bounded binary response owner and registered PDF filenames/no-store/nosniff; explicit local resource bound.",
+      "evidence": [
+        "apps/onboard-web/src/lib/funnel.ts:176",
+        "apps/onboard-api/src/funnel/funnel.controller.ts:284",
+        "apps/onboard-api/src/legal/signed-pdf.service.ts:45"
+      ]
+    },
+    {
+      "id": "OC-06",
+      "classification": "public navigation policy gap",
+      "priority": "integration requirement",
+      "operation": "OB-10/23/36",
+      "finding": "IT provider origins/paths are determinable; Stripe invoice URL is forwarded without an owner-published origin allowlist; config URLs cannot choose gateway destinations.",
+      "requiredHandling": "Exact reviewed provider/redirect policies; reject arbitrary origins, credentials and paths; preserve native callbacks.",
+      "evidence": [
+        "apps/onboard-api/src/it-admin/it-admin.service.ts:159",
+        "apps/onboard-api/src/funnel/funnel.service.ts:802",
+        "apps/onboard-api/src/public/public-config.controller.ts:8"
+      ]
+    }
+  ]
+}

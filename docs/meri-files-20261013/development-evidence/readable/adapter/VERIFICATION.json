@@ -1,0 +1,15 @@
+{
+  "capturedAt": "2026-10-13T08:52:09.464021+00:00",
+  "command": "node ../../node_modules/vitest/vitest.mjs run tests/meri-document-adapter.test.ts tests/meri-document-transport.test.ts tests/meri-document-journal.test.ts --maxWorkers=1 --reporter=json --outputFile=/tmp/capiro-meri-files-adapter-20261013/sealed-results.json",
+  "cwd": "/tmp/capiro-meri-files-execution-20261013/apps/web",
+  "exitCode": 0,
+  "passed": 77,
+  "failed": 0,
+  "pending": 0,
+  "total": 77,
+  "lintExitCode": 0,
+  "lintLogBytes": 0,
+  "boundSource": "SOURCE-BINDING.json",
+  "nativeEffects": "NOT_RUN",
+  "browserBuildInstall": "NOT_RUN"
+}

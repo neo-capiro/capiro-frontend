@@ -1,0 +1,1333 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-acceptance-batch-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.config.ts",
+      "tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+      "--workers=2",
+      "--output",
+      "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 2,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance-meeting-artifacts-reads.spec.ts",
+      "file": "acceptance-meeting-artifacts-reads.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "notes: held list conceals the saved body and recovers only current records",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7638,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 65,
+                      "line": 28
+                    },
+                    "snippet": "  26 |       .poll(async () => (await listState(page))?.fetchStatus)\n  27 |       .toBe(\"fetching\");\n> 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                 ^\n  29 |     await expect(\n  30 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  31 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 65,
+                        "line": 28
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  26 |       .poll(async () => (await listState(page))?.fetchStatus)\n  27 |       .toBe(\"fetching\");\n> 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                 ^\n  29 |     await expect(\n  30 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  31 |     ).toBeHidden();\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:45:23.598Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 65,
+                    "line": 28
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-cf96b19b70a470135427",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 14,
+          "column": 3
+        },
+        {
+          "title": "notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7475,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 67,
+                      "line": 54
+                    },
+                    "snippet": "  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 67,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:45:32.050Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 67,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-e31e747f32854a719d28",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9245,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 67,
+                      "line": 54
+                    },
+                    "snippet": "  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 67,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:45:40.271Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 67,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-31aa0201dc30170d974b",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "notes: an older released read cannot replace a newer failed read",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7384,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 65,
+                      "line": 97
+                    },
+                    "snippet": "   95 |     else expect(oldRead.transport).toBe(\"finished\");\n   96 |     await expect.poll(() => listState(page)).toEqual(refused);\n>  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n      |                                                                 ^\n   98 |     await expect(\n   99 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  100 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 65,
+                        "line": 97
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n   95 |     else expect(oldRead.transport).toBe(\"finished\");\n   96 |     await expect.poll(() => listState(page)).toEqual(refused);\n>  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n      |                                                                 ^\n   98 |     await expect(\n   99 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  100 |     ).toBeHidden();\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:45:50.257Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 65,
+                    "line": 97
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-54094ab14bdef41eb4b6",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 74,
+          "column": 3
+        },
+        {
+          "title": "notes: rejects meeting list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7169,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:45:58.365Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-570dd4094a40bb2e422b",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "notes: rejects client list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7208,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:06.269Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-cc8237fb8bb0fdd21ea5",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "notes: rejects duplicate list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7627,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:14.292Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-6283adfdeb5e202e571e",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "notes: omitted optional parent echoes preserve the original native list projection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2381,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:22.761Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-3b9ad4eec73837ed941d",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 126,
+          "column": 3
+        },
+        {
+          "title": "notes: exact native client-one parent remains usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2493,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:25.388Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-6bd5a906b5ab19f0d7da",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 148,
+          "column": 5
+        },
+        {
+          "title": "notes: exact native unscoped parent remains usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:27.897Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-c8e009a125f354ce5a03",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 148,
+          "column": 5
+        },
+        {
+          "title": "debriefs: held list conceals the saved body and recovers only current records",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7433,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 65,
+                      "line": 28
+                    },
+                    "snippet": "  26 |       .poll(async () => (await listState(page))?.fetchStatus)\n  27 |       .toBe(\"fetching\");\n> 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                 ^\n  29 |     await expect(\n  30 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  31 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 65,
+                        "line": 28
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  26 |       .poll(async () => (await listState(page))?.fetchStatus)\n  27 |       .toBe(\"fetching\");\n> 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                 ^\n  29 |     await expect(\n  30 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  31 |     ).toBeHidden();\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:30.114Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 65,
+                    "line": 28
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-aa845bec0cfb0b3c97dd",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 14,
+          "column": 3
+        },
+        {
+          "title": "debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7516,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 67,
+                      "line": 54
+                    },
+                    "snippet": "  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 67,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:38.143Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 67,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-fd90e47b114fac63311f",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9129,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 67,
+                      "line": 54
+                    },
+                    "snippet": "  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 67,
+                        "line": 54
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  52 |       await listSettled(page, \"error\");\n  53 |       await expect(page.getByRole(\"alert\")).toBeVisible();\n> 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n     |                                                                   ^\n  55 |       for (const name of [\"Edit\", \"Approve\", \"Share\", \"Unshare\", \"Export PDF\"])\n  56 |         await expect(\n  57 |           page.getByRole(\"button\", { name, exact: true }),\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:46.432Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 67,
+                    "line": 54
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-2eee2da64d72ffc3381e",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "debriefs: an older released read cannot replace a newer failed read",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7369,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                      "column": 65,
+                      "line": 97
+                    },
+                    "snippet": "   95 |     else expect(oldRead.transport).toBe(\"finished\");\n   96 |     await expect.poll(() => listState(page)).toEqual(refused);\n>  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n      |                                                                 ^\n   98 |     await expect(\n   99 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  100 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                        "column": 65,
+                        "line": 97
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Synthetic original authorized artifact body', { exact: true })\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Synthetic original authorized artifact body', { exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <p>Synthetic original authorized artifact body</p>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n   95 |     else expect(oldRead.transport).toBe(\"finished\");\n   96 |     await expect.poll(() => listState(page)).toEqual(refused);\n>  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();\n      |                                                                 ^\n   98 |     await expect(\n   99 |       page.getByRole(\"button\", { name: \"Edit\", exact: true }),\n  100 |     ).toBeHidden();\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:46:56.299Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+                    "column": 65,
+                    "line": 97
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-08e5a39e10a660966fc1",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 74,
+          "column": 3
+        },
+        {
+          "title": "debriefs: rejects meeting list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7281,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:04.361Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-f59f778338e86719f6c2",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "debriefs: rejects client list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7450,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:12.435Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-abfa1886fdd932807622",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "debriefs: rejects duplicate list provenance without body or write controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7295,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                      "column": 6,
+                      "line": 165
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39macceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                        "column": 6,
+                        "line": 165
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7merror\u001b[27m:idle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7msuccess\u001b[27m:idle\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at acceptance-meeting-artifacts-fixtures.ts:165\n\n  163 |       return `${state?.status}:${state?.fetchStatus}`;\n  164 |     })\n> 165 |     .toBe(`${status}:idle`);\n      |      ^\n  166 | }\n  167 |\n    at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:20.616Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+                    "column": 6,
+                    "line": 165
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-9b6ee1d51303515f14b8",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 105,
+          "column": 5
+        },
+        {
+          "title": "debriefs: omitted optional parent echoes preserve the original native list projection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2568,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:28.659Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-571414eff977bcd89b20",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 126,
+          "column": 3
+        },
+        {
+          "title": "debriefs: exact native client-one parent remains usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:31.514Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-aebed52305944267884b",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 148,
+          "column": 5
+        },
+        {
+          "title": "debriefs: exact native unscoped parent remains usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2269,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:47:33.895Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c87a2e333f347c95cf1c-9a506c15e7949c6f1382",
+          "file": "acceptance-meeting-artifacts-reads.spec.ts",
+          "line": 148,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T11:45:22.659Z",
+    "duration": 133645.223,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 14,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "status": "NOT_SAVED",
+  "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "files": [
+    "/tmp/capiro-source-adbc84b/source-adbc84b.zip",
+    "/tmp/capiro-source-adbc84b/SOURCE-ARCHIVE-RECEIPT.json"
+  ],
+  "failure": "library upload failed: hosted apps tools/list request failed: network",
+  "attempts": [
+    "LIBRARY-SOURCE-UPLOAD-RESULT.json",
+    "LIBRARY-SOURCE-UPLOAD-STDERR.log",
+    "LIBRARY-SOURCE-UPLOAD-NETWORK-RESULT.json",
+    "LIBRARY-SOURCE-UPLOAD-NETWORK-STDERR.log"
+  ],
+  "writeOutcome": "Both attempts failed during tool discovery, before preparing any upload; no Library ID/version created. Additional network access did not resolve this.",
+  "archiveStillPresentAndGitPublished": true
+}

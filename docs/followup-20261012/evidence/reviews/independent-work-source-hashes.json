@@ -1,0 +1,103 @@
+{
+  "reviewedAt": "2026-10-12T18:07:32.187266+00:00",
+  "base": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "currentHead": "d180d110abb2ff32ae20fee9d52caa0c51e89a07",
+  "workPatchUncommitted": true,
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+      "sha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+      "bytes": 9095
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/owners.ts",
+      "sha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+      "bytes": 719
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+      "sha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+      "bytes": 3279
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+      "sha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+      "bytes": 3445
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/work.module.css",
+      "sha256": "15f6cb5d9c9f98f5575afc8b0770a747e26ff5b0595895acc186ce6b144b1dec",
+      "bytes": 1209
+    },
+    {
+      "path": "apps/web/tests/browser/work-owners.spec.ts",
+      "sha256": "dec4f8f63a5c031fef8d3741e93ad0e8df6d7a922743d91be6f786db0169de44",
+      "bytes": 11030
+    },
+    {
+      "path": "apps/web/tests/browser/work-boundary-harness.tsx",
+      "sha256": "644218db114286722bcc47abd730b5a090ec31acdddb257625a3d7074fd700bc",
+      "bytes": 2410
+    },
+    {
+      "path": "apps/web/tests/browser/work-boundary-fixtures.ts",
+      "sha256": "3dbade8eb28c85435cbd341670eb39ccb24c50fe88c26a1d32946c6c4d270fcf",
+      "bytes": 4678
+    },
+    {
+      "path": "apps/web/tests/browser/work-owner-authority-harness.tsx",
+      "sha256": "1a537d1306e5e1f3b4b0cf7249696ce085e7087881796024bba3c9fcb868e0df",
+      "bytes": 1163
+    },
+    {
+      "path": "apps/web/tests/browser/work-documents.spec.ts",
+      "sha256": "853f368d01a0b91e87574f6de70356acd81c47e378740e28c23c3dd08a3d36d8",
+      "bytes": 3582
+    },
+    {
+      "path": "apps/web/tests/work-owner-presentation.test.ts",
+      "sha256": "71c3078795bbe9d64b3c4ab869f5c559a5af6a917f04290f447019c77828274a",
+      "bytes": 2547
+    },
+    {
+      "path": "apps/web/tests/browser/work-owner-authority.html",
+      "sha256": "22e186caec874a88cd8b1b254ceb5e4595caef7965e43c94a5c412c7af3d38ae",
+      "bytes": 361
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-harness-providers.tsx",
+      "sha256": "cf00e5c1872525771d470e254bed3c7bd3f60d13fee9e1961304c5bf6a8cd9ff",
+      "bytes": 953
+    },
+    {
+      "path": "apps/web/tests/browser/main.tsx",
+      "sha256": "ffe57cd028fbeba8b39cd9e80671f039a5d1f98c38b30199d2c07babea017370",
+      "bytes": 5825
+    },
+    {
+      "path": "apps/web/src/shared/capiro/queries.ts",
+      "sha256": "451a8381928451c2ab27357ccf0634e3008f313bbfa6a14cc6107ed585b95143",
+      "bytes": 4679
+    },
+    {
+      "path": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "sha256": "e00ffb9b2f4ed6cb033f655754b28b10a63bf989fa5c4a8ad20c36e3dd7b8cf4",
+      "bytes": 2686
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "sha256": "c0be971d8a191f4a3fb9f24073d5e271c515b922c754a0554ad7ae509b6de386",
+      "bytes": 6228
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/api/provider.tsx",
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a",
+      "bytes": 2049
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f",
+      "bytes": 3005
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts modules.spec.ts
+
+[WebServer] (node:190175) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+(node:190202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary (1.3s)
+  ✓   2 test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary (1.2s)
+  ✓   3 test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary (1.3s)
+  ✓   4 test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary (1.2s)
+  ✓   5 test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary (1.1s)
+  ✓   6 test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary (1.1s)
+  ✓   7 test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary (1.1s)
+  ✓   8 test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary (999ms)
+  ✓   9 test/browser/prospect-workspace.spec.ts:41:1 › prospect creation recovers its original seed and key after a lost receipt (1.3s)
+  ✓  10 test/browser/prospect-workspace.spec.ts:74:1 › manual content, version history and exports use only reviewed draft operations (1.3s)
+  ✓  11 test/browser/prospect-workspace.spec.ts:122:1 › an uncertain save retains edits across navigation and requires read-back before explicit save (1.2s)
+  ✓  12 test/browser/prospect-workspace.spec.ts:150:3 › a wrong prospectId never exposes the document or writes (931ms)
+  ✓  13 test/browser/prospect-workspace.spec.ts:150:3 › a wrong tenantId never exposes the document or writes (936ms)
+  ✓  14 test/browser/prospect-workspace.spec.ts:164:1 › prospect Newsletter origin cannot open its sending workflow (970ms)
+  ✓  15 test/browser/prospect-workspace.spec.ts:178:1 › a changed document blocks PATCH and shows the saved content for deliberate review (1.1s)
+  ✓  16 test/browser/prospect-workspace.spec.ts:210:1 › mobile prospect manual editor preserves keyboard fields and stays in the viewport (1.0s)
+
+  16 passed (21.1s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

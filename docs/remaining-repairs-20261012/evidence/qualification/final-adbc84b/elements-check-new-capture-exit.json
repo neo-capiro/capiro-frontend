@@ -1,0 +1,29 @@
+{
+  "name": "elements-check-new-capture",
+  "command": [
+    "env",
+    "MERI_ELEMENTS_SSR_RECEIPT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/receipt.json",
+    "MERI_ELEMENTS_SSR_RECEIPT_SHA256=8bfeb60180345f7aa6d1bcd4b27dc4f8963bddfa1c95471e1d4c2c04e7fbb1a6",
+    "MERI_ELEMENTS_SSR_CAPTURE_ROOT=/tmp/capiro-remaining-qualification/final-adbc84b/elements-captures",
+    "npm",
+    "run",
+    "check:elements"
+  ],
+  "startedUTC": "2026-10-12T20:59:24.645062+00:00",
+  "endedUTC": "2026-10-12T20:59:30.139146+00:00",
+  "durationSeconds": 5.494122693999088,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+    "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+    "applicationTree": "d7c5735280ee9af18c57059425ccef169db390c2",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

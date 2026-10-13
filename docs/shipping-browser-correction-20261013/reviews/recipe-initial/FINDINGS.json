@@ -1,0 +1,53 @@
+[
+  {
+    "id": "RECIPE-01",
+    "priority": "P2",
+    "path": "qualify-frozen-source.sh",
+    "lines": [
+      38,
+      45,
+      55
+    ],
+    "title": "Browser receipt does not cover Modules launch policy",
+    "evidence": "Portfolio and production select PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH. Modules selects CAPIRO_QA_CHROMIUM_EXECUTABLE then CAPIRO_TEST_CHROMIUM. Probe launches only the first policy; inherited distinct overrides can make Modules use another browser without its actual version receipt.",
+    "correction": "Normalize all three executable variables to one explicitly governed choice, or record and launch both resolved policies. Preserve the actual browser.version() observation and distinguish install receipt from launch receipt. Also label chromium.executablePath() as the default full-browser path, since default headless launch uses headless-shell."
+  },
+  {
+    "id": "RECIPE-02",
+    "priority": "P2",
+    "path": "qualify-frozen-source.sh",
+    "lines": [
+      55
+    ],
+    "title": "Modules failure attachments remain outside the designated evidence root",
+    "evidence": "No Modules --output override is passed. Its frozen config writes ../../test-results/modules-browser inside apps/web; PLAYWRIGHT_JSON_OUTPUT_FILE relocates JSON only. Portfolio correctly sets both report and artifact paths.",
+    "correction": "Pass --output=\"$result_dir/modules-artifacts\" to the direct workspace script: npm run test:browser:modules --workspace @capiro/web -- --output=... . Retain workers=1, no retries and existing timeout."
+  },
+  {
+    "id": "RECIPE-03",
+    "priority": "P3",
+    "path": "qualify-frozen-source.sh",
+    "lines": [
+      8,
+      9,
+      10,
+      15
+    ],
+    "title": "Outside-checkout result-directory contract is not enforced up front",
+    "evidence": "Only an absolute, nonexistent path is required. A new path inside checkout passes initial checks; the later Elements helper rejects it after install/environment/combined work. Symlinked parents need canonical resolution.",
+    "correction": "Before install, canonicalize the intended parent and checkout, reject equality/descendants, and create a new output directory without reusing old evidence."
+  },
+  {
+    "id": "RECIPE-04",
+    "priority": "P3",
+    "path": "qualify-frozen-source.sh",
+    "lines": [
+      58,
+      59,
+      60
+    ],
+    "title": "Completion does not reassert the frozen source pin",
+    "evidence": "git diff HEAD checks tracked worktree changes, but a clean changed HEAD would still produce qualification-complete. final-source.txt merely records that changed HEAD.",
+    "correction": "Repeat expected commit/root/app equality checks before completion, preserving final-source.txt and any mismatch as a failure. Keep tracked source-change checking."
+  }
+]

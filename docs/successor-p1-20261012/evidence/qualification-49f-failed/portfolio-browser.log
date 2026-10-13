@@ -1,0 +1,969 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=3
+
+[WebServer] (node:500675) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 992 tests using 3 workers
+
+(node:500723) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:500724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:500722) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (11.1s)
+  ✓    3 tests/browser/activity-actions.spec.ts:27:1 › recorded edits retain failed input, reject blank titles and refresh the scoped feed (16.9s)
+  ✓    4 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (8.7s)
+  ✓    2 tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (22.1s)
+  ✓    6 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (8.5s)
+  ✓    7 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (8.4s)
+  ✓    5 tests/browser/activity-actions.spec.ts:133:1 › settlement requires a due date, retains permission errors, prevents duplicate writes and reopens (15.8s)
+  ✓    8 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (5.9s)
+  ✓    9 tests/browser/activity-command-storage.spec.ts:9:3 › localStorage unavailable after response loss blocks replacement commands across reload (8.4s)
+  ✓   11 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (10.2s)
+  ✓   12 tests/browser/activity-command-storage.spec.ts:9:3 › indexedDB unavailable after response loss blocks replacement commands across reload (7.5s)
+  ✓   10 tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response (19.9s)
+  ✓   13 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (8.8s)
+  ✓   14 tests/browser/activity-command-storage.spec.ts:9:3 › locks unavailable after response loss blocks replacement commands across reload (8.6s)
+  ✓   16 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (9.4s)
+  ✓   17 tests/browser/activity-command-storage.spec.ts:47:3 › fence corruption cannot become an empty form or a replacement key (7.5s)
+  ✓   15 tests/browser/activity-actions.spec.ts:301:1 › expired authentication during removal uses the shared session boundary (10.6s)
+  ✓   18 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (7.5s)
+  ✓   19 tests/browser/activity-command-storage.spec.ts:47:3 › missing-fence corruption cannot become an empty form or a replacement key (8.1s)
+  ✓   21 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (5.8s)
+  ✓   22 tests/browser/activity-command-storage.spec.ts:47:3 › missing-record corruption cannot become an empty form or a replacement key (6.4s)
+  ✓   20 tests/browser/activity-pin.spec.ts:25:1 › pin/unpin persists only the note field, displays inline state and returns keyboard focus (14.2s)
+  ✓   23 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (5.5s)
+  ✓   24 tests/browser/activity-command-storage.spec.ts:47:3 › ciphertext corruption cannot become an empty form or a replacement key (7.7s)
+  ✓   26 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (5.8s)
+  ✓   25 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong client receipt and requires review before retry (13.2s)
+  ✓   27 tests/browser/activity-command-storage.spec.ts:97:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (7.0s)
+  ✓   28 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (5.1s)
+  ✓   31 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (6.0s)
+  ✓   29 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong tenant receipt and requires review before retry (11.9s)
+  ✓   32 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (6.8s)
+  ✓   30 tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed (16.9s)
+  ✓   33 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong record receipt and requires review before retry (11.7s)
+  ✓   34 tests/browser/advocacy-corrections.spec.ts:64:1 › Objectives preserves history left/current objectives right and New matter; saved source identity stays explicit (10.9s)
+  ✓   35 tests/browser/activity.spec.ts:137:1 › history failure and retry retain entered filters (10.2s)
+  ✓   38 tests/browser/advocacy-history-edit.spec.ts:41:1 › baseline: dated timeline reveals only withheld loaded events and preserves undated evidence (5.7s)
+  ✓   36 tests/browser/activity-pin.spec.ts:83:3 › pin refuses false pinned result receipt and requires review before retry (11.4s)
+  ✓   37 tests/browser/advocacy-corrections.spec.ts:111:1 › merge explicitly reviews source into kept destination, guards pending and verifies transferred evidence (14.1s)
+  ✓   39 tests/browser/advocacy-history-edit.spec.ts:77:1 › baseline: search and status operate on native title summary PE and bill fields (5.6s)
+  ✓   40 tests/browser/activity-pin.spec.ts:131:1 › readonly identity cannot open activity mutations (10.3s)
+  ✓   42 tests/browser/advocacy-history-edit.spec.ts:108:1 › baseline: failed timeline refresh conceals retained events while current matters stay reachable (5.7s)
+  ✓   44 tests/browser/advocacy-history-edit.spec.ts:128:1 › failed matter reads conceal retained rows but preserve independently current unfiltered events (7.6s)
+  ✓   43 tests/browser/activity-pin.spec.ts:152:1 › a changed note at preflight stops before PATCH and preserves edit input (13.7s)
+  ✓   45 tests/browser/advocacy-history-edit.spec.ts:157:1 › a selected status cannot join stale matter data after catalog failure (5.7s)
+  ✓   41 tests/browser/advocacy-corrections.spec.ts:171:1 › reassign moves exact reviewed record and refreshes both matter views (22.4s)
+  ✓   47 tests/browser/advocacy-history-edit.spec.ts:187:1 › exact requested detail remains independent of a failed timeline and refuses another matter receipt (5.7s)
+  ✓   49 tests/browser/advocacy-history-edit.spec.ts:215:1 › invalidated timeline success is not displayed as current (4.3s)
+  ✓   50 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final successful requires explicit judgment and exact native confirmation body (6.7s)
+  ✓   48 tests/browser/advocacy-corrections.spec.ts:199:1 › detach preserves a scoped unassigned record that can be reassigned later (16.1s)
+  ✓   46 tests/browser/activity-pin.spec.ts:205:1 › unmount during held preflight prevents PATCH after the read returns (19.1s)
+  ✓   51 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final partially_successful requires explicit judgment and exact native confirmation body (7.2s)
+  ✓   54 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final unsuccessful requires explicit judgment and exact native confirmation body (5.4s)
+  ✓   52 tests/browser/advocacy-corrections.spec.ts:237:1 › not advocacy reviews optional bounded reason and refreshes the visible history (10.8s)
+  ✓   53 tests/browser/activity-pin.spec.ts:241:1 › a lost pin response is reconciled by an explicit read without replaying the write (15.9s)
+  ✓   55 tests/browser/advocacy-history-edit.spec.ts:266:3 › linked status edit follows native outcome evidence semantics (5.8s)
+  ✓   56 tests/browser/advocacy-corrections.spec.ts:271:1 › lost response preserves submitted state and uses read-only reconciliation without repost (11.7s)
+  ✓   58 tests/browser/advocacy-history-edit.spec.ts:266:3 › unchanged-final status edit follows native outcome evidence semantics (7.3s)
+  ✓   57 tests/browser/activity-pin.spec.ts:279:1 › session expiry at preflight dispatches no activity write (9.5s)
+  ✓   60 tests/browser/advocacy-history-edit.spec.ts:304:1 › legacy current status remains editable without offering other legacy transitions (6.4s)
+  ✓   59 tests/browser/advocacy-corrections.spec.ts:292:1 › unapplied failed request remains unconfirmed and cannot silently repeat (10.2s)
+  ✓   61 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark desktop timeline keeps loaded Figma icons legible at their exact geometry (7.0s)
+  ✓   64 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark phone timeline keeps loaded Figma icons legible at their exact geometry (4.9s)
+  ✓   62 tests/browser/advocacy-history-edit.spec.ts:325:1 › fresh native source changes retain the draft and stop dispatch (7.4s)
+  ✓   63 tests/browser/advocacy-corrections.spec.ts:311:1 › leaving the feature during preflight aborts the review and prevents a late POST (10.1s)
+  ✓   66 tests/browser/advocacy-history-edit.spec.ts:360:1 › a definite native refusal allows an explicit retry without a false success (5.8s)
+  ✓   65 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown start attempt survives close and requires deliberate review before another dispatch (6.9s)
+  ✓   68 tests/browser/advocacy-history-edit.spec.ts:381:1 › unexpected acknowledgement remains unknown and reconciles by GET without replay (7.5s)
+  ✓   69 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown test attempt survives close and requires deliberate review before another dispatch (7.0s)
+  ✓   67 tests/browser/advocacy-corrections.spec.ts:344:1 › lost not-advocacy acknowledgement remains unconfirmed even when the bounded history is empty (10.7s)
+  ✓   71 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after actor change (5.0s)
+  ✓   70 tests/browser/advocacy-history-edit.spec.ts:411:1 › void acknowledgement cannot replace wrong-field readback with a success claim (6.2s)
+  ✓   73 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after client change (4.6s)
+  ✓   74 tests/browser/advocacy-history-edit.spec.ts:438:1 › another matter returned after PATCH remains unknown without late invalidation (6.0s)
+  ✓   72 tests/browser/advocacy-corrections.spec.ts:375:1 › concurrent matter changes require reload/review while preserving reason before any write (11.9s)
+  ✓   75 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after owner change (4.8s)
+  ✓   76 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after actor changes (6.7s)
+  ✓   78 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after close change (4.2s)
+  ✓   80 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after actor change (3.9s)
+  ✓   77 tests/browser/advocacy-corrections.spec.ts:406:1 › standard user retains source reads and New matter label but correction writes are unavailable (9.7s)
+  ✓   79 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after role changes (5.8s)
+  ✓   81 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after client change (5.0s)
+  ✓   83 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after source changes (6.1s)
+  ✓   84 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after owner change (5.1s)
+  ✓   82 tests/browser/advocacy-corrections.spec.ts:435:1 › unsafe or missing source does not become guessed source navigation (9.4s)
+  ✓   85 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after client changes (5.6s)
+  ✓   86 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after close change (5.6s)
+  ✓   88 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after unmount changes (5.4s)
+  ✓   87 tests/browser/advocacy-corrections.spec.ts:450:3 › empty user identity fails closed before history writes (8.9s)
+  ✓   89 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback identity interruption even after the source is restored (6.4s)
+  ✓   90 tests/browser/advocacy-history-edit.spec.ts:511:1 › closing after dispatch preserves the original attempt across reopen and does not replay (7.5s)
+  ✓   92 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback client interruption even after the source is restored (4.7s)
+  ✓   91 tests/browser/advocacy-corrections.spec.ts:450:3 › empty tenant identity fails closed before history writes (9.1s)
+  ✓   94 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback preferences interruption even after the source is restored (4.8s)
+  ✓   93 tests/browser/advocacy-history-edit.spec.ts:554:1 › a late role response cannot refresh or clear the initiating actor's uncertain save (7.2s)
+  ✓   96 tests/browser/alert-channel-lifetime.spec.ts:153:1 › a late confirmation cannot trigger a saved-state read after the client lifetime ends (5.8s)
+  ✓   98 tests/browser/alert-channel-lifetime.spec.ts:199:1 › a pending channel action disables preference edits and other channel effects (4.7s)
+  ✓   97 tests/browser/advocacy-history-edit.spec.ts:590:1 › timeline and outcome review match phone geometry with keyboard cancellation (9.0s)
+  ✓   95 tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport (19.1s)
+  ✓   99 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop light alert controls match the authored Figma fields and remain keyboard reachable (6.5s)
+  ✓  100 tests/browser/advocacy-history-edit.spec.ts:630:1 › desktop outcome review uses the exact Figma frame dimensions (7.2s)
+  ✓  101 tests/browser/alert-channels.spec.ts:16:1 › baseline: Core preferences use database identity and preserve the full native no-echo PUT (5.6s)
+  ✓  103 tests/browser/advocacy-history-edit.spec.ts:649:1 › interrupted actor lifetime prevents a held save after same-callback identity restoration (5.5s)
+  ✓  102 tests/browser/alert-channel-visual.spec.ts:9:5 › phone light alert controls match the authored Figma fields and remain keyboard reachable (7.0s)
+  ✓  104 tests/browser/alert-channels.spec.ts:46:1 › baseline: Core phone edits clear the submitted verification flag without losing native criteria (4.3s)
+  ✓  105 tests/browser/advocacy-history-edit.spec.ts:669:1 › interrupted actor lifetime prevents a held result check after same-callback role restoration (6.6s)
+  ✓  107 tests/browser/alert-channels.spec.ts:72:3 › baseline: core verification uses exact explicit requests and reads the resulting SMS opt-in (5.4s)
+  ✓  106 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable (6.8s)
+  ✓  109 tests/browser/alert-channels.spec.ts:123:3 › baseline: core test alerts use saved channels and distinguish provider acceptance from delivery (5.0s)
+  ✓  108 tests/browser/advocacy-history-edit.spec.ts:699:1 › interrupted actor lifetime prevents a held review reload after same-callback identity restoration (5.9s)
+  ✓  110 tests/browser/alert-channel-visual.spec.ts:9:5 › phone dark alert controls match the authored Figma fields and remain keyboard reachable (5.6s)
+  ✓  111 tests/browser/alert-channels.spec.ts:72:3 › baseline: intelligence verification uses exact explicit requests and reads the resulting SMS opt-in (6.7s)
+  ✓  113 tests/browser/bill-hearings.spec.ts:62:1 › lazy linked hearing evidence uses canonical IDs and preserves board client scope and supplied latest details (9.8s)
+  ✓  114 tests/browser/alert-channels.spec.ts:123:3 › baseline: intelligence test alerts use saved channels and distinguish provider acceptance from delivery (4.6s)
+  ✓  112 tests/browser/attendance.spec.ts:126:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (13.1s)
+  ✓  116 tests/browser/alert-channels.spec.ts:158:1 › Core defaults cannot authorize preferences when the separate current client read is refused (5.8s)
+  ✓  115 tests/browser/bill-hearings.spec.ts:113:1 › owner-disabled refusal stays visible and retry does not switch backend or claim empty (10.1s)
+  ✓  118 tests/browser/alert-channels.spec.ts:180:3 › core unsaved destinations disable verification and test actions without implicit saves (5.4s)
+  ✓  117 tests/browser/attendance.spec.ts:171:1 › Server validation retains the join URL and confirmations for explicit correction (12.7s)
+  ✓  120 tests/browser/alert-channels.spec.ts:180:3 › intelligence unsaved destinations disable verification and test actions without implicit saves (5.0s)
+  ✓  119 tests/browser/bill-hearings.spec.ts:141:1 › in-flight, empty and unavailable hearing states are distinct (10.1s)
+  ✓  122 tests/browser/alert-channels.spec.ts:206:1 › a changed current saved phone conceals the old challenge and requires explicit reload (6.6s)
+  ✓  121 tests/browser/attendance.spec.ts:201:1 › A foreign success receipt is uncertain and cannot be resent automatically or from the same form (12.3s)
+  ✓  124 tests/browser/alert-channels.spec.ts:248:1 › Core dormant acknowledgement displays only an actually returned development code (4.9s)
+  ✓  123 tests/browser/bill-hearings.spec.ts:169:1 › Core owner never requests Intel hearings and retains its own board details (9.5s)
+  ✓  126 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback client interruption and restoration (5.3s)
+  ✓  125 tests/browser/attendance.spec.ts:234:1 › Explicit removal handles a still-dispatching error and then accepts the actual removed receipt (10.3s)
+  ✓  128 tests/browser/alert-channels.spec.ts:274:3 › a preference PUT cannot publish after a same-callback preferences interruption and restoration (4.4s)
+  ✓  127 tests/browser/bill-hearings.spec.ts:215:1 › missing canonical hearing IDs keep evidence readable without session substitution and encrypted pointers remain unavailable (9.2s)
+  ✓  130 tests/browser/alert-channels.spec.ts:309:1 › a Core no-echo PUT with different returned settings remains unconfirmed (5.2s)
+  ✓  132 tests/browser/alert-channels.spec.ts:329:1 › a failed client refresh conceals old fields and blocks every changed operation until a current reload (5.0s)
+  ✓  131 tests/browser/bill-hearings.spec.ts:268:1 › malformed hearing receipts refuse links; retry can establish a genuine empty response (10.1s)
+  ✓  129 tests/browser/attendance.spec.ts:282:1 › Client preference saves consent once, preserves Off/stopping, and retries only DELETE (12.7s)
+  ✓  133 tests/browser/alert-channels.spec.ts:367:3 › a native 403 start refusal stays on the configured owner without a delivery claim or retry (5.3s)
+  ✓  134 tests/browser/bill-hearings.spec.ts:300:1 › hearing session expiry uses the shared sign-in recovery (9.7s)
+  ✓  136 tests/browser/alert-channels.spec.ts:367:3 › a native 404 test refusal stays on the configured owner without a delivery claim or retry (6.2s)
+  ✓  135 tests/browser/attendance.spec.ts:309:1 › A concurrent preference change requires refresh and preserves the unsaved affirmations (14.2s)
+  ✓  138 tests/browser/alert-channels.spec.ts:402:1 › a mismatched phone confirmation is unknown and cannot fabricate verification or auto-read success (7.3s)
+  ✓  137 tests/browser/bill-hearings.spec.ts:317:1 › changing client scope closes the prior bill and refuses a denied hearing read without cached evidence (10.6s)
+  ✓  140 tests/browser/alert-channels.spec.ts:448:1 › an accepted phone confirmation with an unavailable saved read cannot claim SMS opt-in (5.3s)
+  ✓  139 tests/browser/attendance.spec.ts:330:1 › Runtime disabled keeps real session status visible and forbids external actions (10.6s)
+  ✓  142 tests/browser/alert-channels.spec.ts:492:3 › a missing test result is unknown without inferred success or automatic replay (5.6s)
+  ✓  144 tests/browser/alert-channels.spec.ts:492:3 › a duplicate test result is unknown without inferred success or automatic replay (5.9s)
+  ✓  143 tests/browser/attendance.spec.ts:353:1 › Read-only role does not fetch private attendance or expose dispatch controls (10.6s)
+  ✓  141 tests/browser/bill-hearings.spec.ts:365:1 › bill update dialog matches desktop sizing and remains scrollable in mobile dark mode (19.5s)
+  ✓  145 tests/browser/alert-channels.spec.ts:492:3 › a unrequested test result is unknown without inferred success or automatic replay (4.5s)
+  ✓  148 tests/browser/alert-channels.spec.ts:514:1 › a settled verification acknowledgement cannot survive a later saved phone change (5.7s)
+  ✓  146 tests/browser/attendance.spec.ts:383:1 › Meeting privacy errors and session expiry never expose a successful-looking attendance control (9.0s)
+  ✓  149 tests/browser/alert-channels.spec.ts:557:1 › Core retains native optional email and string quiet-hours values during an unrelated edit (4.5s)
+  ✓  147 tests/browser/billing-summary-integration.spec.ts:25:1 › actual Add profile keeps creation reachable around an optional billing disclosure (12.8s)
+  ✓  151 tests/browser/alert-channels.spec.ts:589:1 › Core verification binds the normalized receipt to the exact saved legacy phone value (5.1s)
+  ✓  150 tests/browser/attendance.spec.ts:410:1 › Unmounting during held dispatch preflight prevents the later POST (11.1s)
+  ✓  152 tests/browser/billing-summary-integration.spec.ts:79:1 › actual chooser omits financial summary without billing permission while retaining profile intake (9.9s)
+  ✓  153 tests/browser/billing-summary.spec.ts:49:1 › eligible billing admin sees real supplied rows with responsive light/dark styling (10.4s)
+  ✓  154 tests/browser/attendance.spec.ts:447:1 › Leaving the client during held preference preflight prevents the later enable POST (14.3s)
+  ✓  156 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/undefined makes no financial request (6.7s)
+  ✓  155 tests/browser/bills.spec.ts:3:1 › intel search, tracking and paging retain client scope; failed untrack stays reviewable (11.6s)
+  ✓  158 tests/browser/billing-summary.spec.ts:107:3 › denied user_admin/false makes no financial request (8.9s)
+  ✓  157 tests/browser/attendance.spec.ts:489:1 › Mobile dark Send Meri dialog fits the viewport and retains accessible consent and actions (13.4s)
+  ✓  159 tests/browser/bills.spec.ts:123:1 › facility edit clears optional values instead of omitting them (13.9s)
+  ✓  160 tests/browser/billing-summary.spec.ts:107:3 › denied standard_user/true makes no financial request (8.8s)
+  ✓  161 tests/browser/calendar-artifact-receipts.spec.ts:88:3 › notes: malformed receipt preserves draft and fences repeat creation (6.6s)
+  ✓  162 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained effective date and preserves other feeds (6.5s)
+  ✓  164 tests/browser/calendar-artifact-receipts.spec.ts:104:3 › notes: uncertain creation cannot be repeated after remount (7.4s)
+  ✓  163 tests/browser/billing-summary.spec.ts:107:3 › denied client_portal_user/true makes no financial request (9.1s)
+  ✓  165 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained meeting and preserves other feeds (7.5s)
+  ✓  166 tests/browser/calendar-artifact-receipts.spec.ts:127:3 › notes: synchronous submit guard sends one creation (6.1s)
+  ✓  167 tests/browser/billing-summary.spec.ts:124:1 › collapsed disclosure requests nothing; Enter/Space expand/collapse work (9.1s)
+  ✓  168 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained hearing and preserves other feeds (7.4s)
+  ✓  169 tests/browser/calendar-artifact-receipts.spec.ts:88:3 › debriefs: malformed receipt preserves draft and fences repeat creation (6.8s)
+  ✓  171 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained task and preserves other feeds (6.0s)
+  ✓  170 tests/browser/billing-summary.spec.ts:148:1 › capiro_admin follows direct guard without the optional membership bit (9.2s)
+  ✓  172 tests/browser/calendar-artifact-receipts.spec.ts:104:3 › debriefs: uncertain creation cannot be repeated after remount (8.5s)
+  ✓  173 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained deadline and preserves other feeds (7.2s)
+  ✓  174 tests/browser/billing-summary.spec.ts:166:1 › failed GET shows no amounts; explicit retry alone restores server values (6.8s)
+  ✓  175 tests/browser/calendar-artifact-receipts.spec.ts:127:3 › debriefs: synchronous submit guard sends one creation (5.4s)
+  ✓  176 tests/browser/calendar-boundary.spec.ts:120:1 › failed client refresh removes cached names from the Calendar scope picker (5.8s)
+  ✓  178 tests/browser/calendar-artifact-receipts.spec.ts:151:3 › notes: a known refusal retains editable draft and permits deliberate retry (5.9s)
+  ✓  177 tests/browser/billing-summary.spec.ts:190:1 › canonical403 refuses financial data and shows actual permission failure (8.4s)
+  ✓  179 tests/browser/calendar-boundary.spec.ts:148:1 › meeting client selection survives failed refresh without a silent association change (9.0s)
+  ✓  180 tests/browser/calendar-artifact-receipts.spec.ts:174:3 › notes: replacing the client during preflight prevents dispatch (5.6s)
+  ✓  181 tests/browser/billing-summary.spec.ts:205:1 › permission loss and invalidation hide previously cached amounts (7.4s)
+  ✓  183 tests/browser/calendar-artifact-receipts.spec.ts:195:3 › notes: a late creation receipt cannot close the replacement client's draft (5.8s)
+  ✓  182 tests/browser/calendar-boundary.spec.ts:201:1 › a master Calendar client link cannot save after its selected client becomes unavailable (6.2s)
+  ✓  184 tests/browser/billing-summary.spec.ts:234:1 › held previous-tenant response cannot appear in new tenant scope (6.8s)
+  ✓  186 tests/browser/calendar-boundary.spec.ts:241:1 › unavailable Calendar feeds do not become a successful empty-state claim (5.3s)
+  ✓  185 tests/browser/calendar-artifact-receipts.spec.ts:231:3 › notes: native edit, approval, share and unshare receipts succeed (8.0s)
+  ✓  188 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"id":"foreign"} (3.6s)
+  ✓  187 tests/browser/billing-summary.spec.ts:262:1 › closed consumer hides a held summary response (7.0s)
+  ✓  190 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} (3.9s)
+  ✓  189 tests/browser/calendar-artifact-receipts.spec.ts:151:3 › debriefs: a known refusal retains editable draft and permits deliberate retry (5.0s)
+  ✓  192 tests/browser/calendar-meeting-receipts.spec.ts:41:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared (3.6s)
+  ✓  191 tests/browser/billing-summary.spec.ts:283:1 › no-plan values remain purchased slots and never invent paid or trial capacity (6.1s)
+  ✓  193 tests/browser/calendar-artifact-receipts.spec.ts:174:3 › debriefs: replacing the client during preflight prevents dispatch (5.4s)
+  ✓  194 tests/browser/calendar-meeting-receipts.spec.ts:62:1 › pending meeting fields cannot accept a newer unsaved draft before a valid receipt (4.7s)
+  ✓  196 tests/browser/calendar-artifact-receipts.spec.ts:195:3 › debriefs: a late creation receipt cannot close the replacement client's draft (6.2s)
+  ✓  195 tests/browser/calendar-planner.spec.ts:17:1 › Master Agenda retains scheduled starts and due dates while client Calendar stays meeting-scoped (9.1s)
+  ✓  197 tests/browser/calendar-preparation.spec.ts:4:1 › Master calendar accepts saved structured prep and renders its text without object coercion (11.5s)
+  ✓  199 tests/browser/calendar-planner.spec.ts:87:1 › invalid timed Planner source is a visible feed error (9.0s)
+  ✓  198 tests/browser/calendar-artifact-receipts.spec.ts:231:3 › debriefs: native edit, approval, share and unshare receipts succeed (11.0s)
+  ✓  202 tests/browser/calendar-artifact-receipts.spec.ts:312:3 › notes: pending fields cannot accept a later draft before a valid receipt (6.3s)
+  ✓  201 tests/browser/calendar-sync.spec.ts:13:1 › explicit Microsoft calendar-only completion with truthful processing receipt (8.7s)
+  ✓  200 tests/browser/calendar-sync-integration.spec.ts:8:1 › actual Master Calendar imports only the reviewed DST window and retains client/view/date/zone (12.9s)
+  ✓  203 tests/browser/calendar-artifact-receipts.spec.ts:312:3 › debriefs: pending fields cannot accept a later draft before a valid receipt (6.9s)
+  ✓  204 tests/browser/calendar-sync.spec.ts:39:1 › reviewed window is explicit and twelve-page partial results cannot claim resume (8.8s)
+  ✓  206 tests/browser/capability-boundary.spec.ts:10:1 › capability refresh failure removes cached cards, counts and the open editor (7.4s)
+  ✓  207 tests/browser/calendar-sync.spec.ts:66:1 › Google does not offer the Microsoft range and excludes mail (8.1s)
+  ✓  208 tests/browser/capability-boundary.spec.ts:46:1 › fit read failure removes cached targets and computed count (5.2s)
+  ✓  205 tests/browser/calendar-sync-integration.spec.ts:64:1 › actual client Calendar retains uncertain import across view changes without replay (17.4s)
+  ✓  210 tests/browser/capability-boundary.spec.ts:71:1 › editing rejects a receipt for another capability without closing the draft (6.4s)
+  ✓  211 tests/browser/capability-documents-download.spec.ts:13:1 › an authorized reader keeps keyboard download access without gaining upload access (5.4s)
+  ✓  209 tests/browser/calendar-sync.spec.ts:86:1 › unknown result survives close, route remount and returning to the initiating actor (8.1s)
+  ✓  212 tests/browser/capability-boundary.spec.ts:99:1 › late fit refresh cannot update the cache after the view unmounts (4.8s)
+  ✓  213 tests/browser/capability-documents-download.spec.ts:57:3 › the current denied list refuses a formerly available download (5.5s)
+  ✓  214 tests/browser/calendar-sync.spec.ts:114:1 › Cancel stops waiting and cannot erase the dispatched fence (8.6s)
+  ✓  215 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its actor (5.5s)
+  ✓  216 tests/browser/capability-documents-download.spec.ts:57:3 › the current failed list refuses a formerly available download (5.7s)
+  ✓  218 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its client (5.8s)
+  ✓  219 tests/browser/capability-documents-download.spec.ts:57:3 › the current removed list refuses a formerly available download (6.0s)
+  ✓  217 tests/browser/calendar-sync.spec.ts:143:1 › identity invalidation during preflight prevents POST (9.1s)
+  ✓  220 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its source (5.7s)
+  ✓  221 tests/browser/capability-documents-download.spec.ts:57:3 › the current wrong-client list refuses a formerly available download (6.0s)
+  ✓  222 tests/browser/calendar-sync.spec.ts:164:1 › identity invalidation after dispatch freezes rather than accepting late success (9.4s)
+  ✓  223 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its unmount (6.9s)
+  ✓  224 tests/browser/capability-documents-download.spec.ts:57:3 › the current wrong-source list refuses a formerly available download (5.2s)
+  ✓  227 tests/browser/capability-documents-download.spec.ts:57:3 › the current quarantined list refuses a formerly available download (6.1s)
+  ✓  225 tests/browser/calendar-sync.spec.ts:182:1 › disabled runtime and unavailable connection cannot start sync (7.7s)
+  ✓  226 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its tenant (6.6s)
+  ✓  228 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its actor changes (5.3s)
+  ✓  230 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its role (5.8s)
+  ✓  229 tests/browser/calendar-sync.spec.ts:194:1 › mobile dark pending matches dialog geometry and keyboard closure (9.1s)
+  ✓  231 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its tenant changes (5.2s)
+  ✓  232 tests/browser/capability-documents-execution.spec.ts:24:3 › capability upload sends no bytes after a held ticket outlives its invalidate (6.8s)
+  ✓  234 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its client changes (6.0s)
+  ✓  233 tests/browser/calendar-sync.spec.ts:234:1 › actual actor change while dispatched hides late receipt and preserves original actor fence (9.5s)
+  ✓  235 tests/browser/capability-documents-execution.spec.ts:69:1 › a late upload receipt cannot refresh files or announce success for another actor (6.1s)
+  ✓  236 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its source changes (5.5s)
+  ✓  238 tests/browser/capability-documents-execution.spec.ts:105:1 › a long-open capability download obtains its current authorized URL instead of navigating to the old URL (8.1s)
+  ✓  239 tests/browser/capability-documents-download.spec.ts:142:3 › a held authorized download cannot navigate after its unmount changes (5.4s)
+  ✓  237 tests/browser/calendar-sync.spec.ts:254:1 › rapid duplicate consent does not dispatch a second provider request (10.6s)
+  ✓  240 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement actor hides old filenames, preview and extracted text before its fresh authorized list (8.6s)
+  ✓  241 tests/browser/capability-documents-download.spec.ts:175:1 › closing a preview while its current read is held closes the reserved blank tab (8.4s)
+  ✓  242 tests/browser/calendar-sync.spec.ts:272:1 › disconnected accounts are honestly unavailable without reconnect controls (9.8s)
+  ✓  244 tests/browser/capability-documents-upload.spec.ts:16:3 › bytes already sent cannot start confirmation after the actor changes (7.1s)
+  ✓  243 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement tenant hides old filenames, preview and extracted text before its fresh authorized list (7.9s)
+  ✓  245 tests/browser/calendar-sync.spec.ts:290:1 › identity invalidation while idle immediately disables consent with no request (9.8s)
+  ✓  246 tests/browser/capability-documents-upload.spec.ts:16:3 › bytes already sent cannot start confirmation after the source changes (9.1s)
+  ✓  247 tests/browser/capability-documents-readers.spec.ts:13:3 › a replacement role hides old filenames, preview and extracted text before its fresh authorized list (10.0s)
+  ✓  249 tests/browser/capability-documents-upload.spec.ts:16:3 › bytes already sent cannot start confirmation after the unmount changes (5.1s)
+  ✓  250 tests/browser/capability-documents-readers.spec.ts:75:1 › revoked identity immediately removes cached document names and preview text without another file request (4.1s)
+  ✓  248 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at desktop-light (10.4s)
+  ✓  252 tests/browser/capability-documents-readers.spec.ts:104:3 › a held extracted-text receipt cannot invalidate caches or appear after actor (5.4s)
+  ✓  251 tests/browser/capability-documents-upload.spec.ts:50:3 › wrong-source keeps the exact attempt and retries confirmation without a second byte upload (6.1s)
+  ✓  253 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at desktop-dark (8.0s)
+  ✓  254 tests/browser/capability-documents-readers.spec.ts:104:3 › a held extracted-text receipt cannot invalidate caches or appear after source (4.8s)
+  ✓  255 tests/browser/capability-documents-upload.spec.ts:50:3 › unknown-storage keeps the exact attempt and retries confirmation without a second byte upload (6.1s)
+  ✓  257 tests/browser/capability-documents-readers.spec.ts:104:3 › a held extracted-text receipt cannot invalidate caches or appear after unmount (5.0s)
+  ✓  256 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-light (8.3s)
+  ✓  258 tests/browser/capability-documents-upload.spec.ts:50:3 › refused-confirmation keeps the exact attempt and retries confirmation without a second byte upload (6.5s)
+  ✓  259 tests/browser/capability-documents-readers.spec.ts:156:1 › a wrong extraction identity stays unconfirmed and never triggers a list refresh or automatic retry (6.2s)
+  ✓  261 tests/browser/capability-documents-upload.spec.ts:122:1 › a retryable job cannot transfer its original storage key to another actor (6.3s)
+  ✓  262 tests/browser/capability-documents-readers.spec.ts:200:1 › mounting Documents with invalidated identity waits for a fresh session without render-phase updates (4.9s)
+  ✓  260 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (8.7s)
+  ✓  263 tests/browser/capability-execution.spec.ts:10:3 › capability writes are disabled after identity role (4.7s)
+  ✓  265 tests/browser/capability-documents-visual.spec.ts:197:1 › the authored loading skeleton announces one status while document access is pending (4.3s)
+  ✓  264 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after actor changes (4.5s)
+  ✓  266 tests/browser/capability-execution.spec.ts:10:3 › capability writes are disabled after identity invalidate (5.7s)
+  ✓  268 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after client changes (4.3s)
+  ✓  270 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after role changes (4.4s)
+  ✓  269 tests/browser/capability-execution.spec.ts:10:3 › capability writes are disabled after identity refetch-identity (4.8s)
+  ✓  271 tests/browser/capability-fit-boundary.spec.ts:11:3 › late fit computation does not publish after invalidate changes (4.1s)
+  ✓  272 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after actor changes (5.2s)
+  ✓  273 tests/browser/capability-fit-boundary.spec.ts:40:1 › late fit computation cannot overwrite a newer successful read (5.0s)
+  ✓  274 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after client changes (6.9s)
+  ✓  275 tests/browser/capability-fit-boundary.spec.ts:75:1 › compute failure keeps an independently successful fit read available (5.2s)
+  ✓  276 tests/browser/capability-execution.spec.ts:51:5 › late capability save cannot refresh or close after unmount changes (5.2s)
+  ✓  277 tests/browser/capability-fit-boundary.spec.ts:96:1 › successful fit computation publishes the validated receipt (4.8s)
+  ✓  267 tests/browser/capability-opportunity-visual.spec.ts:14:3 › capability and opportunity guarded states render at desktop-light (28.3s)
+  ✓  278 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after actor changes (7.1s)
+  ✓  281 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after client changes (5.4s)
+  ✓  282 tests/browser/capability-execution.spec.ts:51:5 › late capability remove cannot refresh or close after unmount changes (6.4s)
+  ✓  283 tests/browser/capability-execution.spec.ts:112:1 › capability save keeps a single immutable draft in flight then refreshes and closes (6.6s)
+  ✓  279 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at desktop-light (24.8s)
+  ✓  280 tests/browser/capability-opportunity-visual.spec.ts:14:3 › capability and opportunity guarded states render at phone-dark (26.1s)
+  ✓  284 tests/browser/capability-execution.spec.ts:160:1 › capability remove confirms one existing record then refreshes the empty list (8.2s)
+  ✓  287 tests/browser/capability-execution.spec.ts:196:1 › capability create uses the existing client collection and closes after the refreshed read (5.8s)
+  ✓  286 tests/browser/capability-presentation.spec.ts:11:1 › saved Profile keeps the exact native payload and draft across Documents and closed Details (14.3s)
+  ✓  288 tests/browser/capability-registration-boundary.spec.ts:10:1 › registration client refresh failure removes the retained editor and values (4.5s)
+  ✓  285 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-light (19.2s)
+  ✓  290 tests/browser/capability-registration-boundary.spec.ts:33:1 › registration identity invalidation disables the cached administrator editor (5.5s)
+  ✓  289 tests/browser/capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create (10.6s)
+  ✓  292 tests/browser/capability-registration-boundary.spec.ts:45:1 › registration save rejects a receipt for another client and retains the draft (6.2s)
+  ✓  294 tests/browser/capability-registration-boundary.spec.ts:69:1 › late registration save cannot invalidate its original cache after unmount (5.4s)
+  ✓  293 tests/browser/capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus (10.6s)
+  ✓  291 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-dark (20.1s)
+  ✓  295 tests/browser/capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a denied client read during its PUT (6.6s)
+  ✓  297 tests/browser/capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after standard-role (6.9s)
+  ✓  298 tests/browser/capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a replaced client read during its PUT (6.6s)
+  ✓  296 tests/browser/capability-presentation.spec.ts:263:1 › saving an invalid Name inside collapsed Details reveals and focuses the field without writing (11.1s)
+  ✓  299 tests/browser/capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after role (5.5s)
+  ✓  300 tests/browser/capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a pending client read during its PUT (5.6s)
+  ✓  301 tests/browser/capability-presentation.spec.ts:295:1 › a save refusal preserves the mounted Profile draft and the explicit retry action (8.4s)
+  ✓  302 tests/browser/capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after invalidate (5.1s)
+  ✓  303 tests/browser/capability-registration-concurrency.spec.ts:84:1 › registration save does not dismiss a failed confirmation read as successful current data (5.0s)
+  ✓  305 tests/browser/capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after refetch-identity (5.2s)
+  ✓  306 tests/browser/capability-registration-reads.spec.ts:12:5 › registration read view recovers from a cached HTTP 403 failure (4.9s)
+  ✓  304 tests/browser/capability-presentation.spec.ts:331:1 › pending save remains one operation while switching capability tabs (8.8s)
+  ✓  307 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after actor (5.4s)
+  ✓  308 tests/browser/capability-registration-reads.spec.ts:12:5 › registration read view recovers from a cached HTTP 503 failure (5.6s)
+  ✓  310 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after standard-role (4.6s)
+  ✓  309 tests/browser/capability-presentation.spec.ts:373:1 › Documents tab keeps the existing source-scoped upload and file-read boundary (7.4s)
+  ✓  311 tests/browser/capability-registration-reads.spec.ts:12:5 › registration editor recovers from a cached HTTP 403 failure (3.8s)
+  ✓  312 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after invalidate (4.3s)
+  ✓  313 tests/browser/capability-registration-visual.spec.ts:19:3 › registration current-read and edit states render at desktop-light (4.8s)
+  ✓  314 tests/browser/capability-registration-reads.spec.ts:12:5 › registration editor recovers from a cached HTTP 503 failure (5.4s)
+  ✓  315 tests/browser/capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after client (3.9s)
+  ✓  317 tests/browser/capability-registration-reads.spec.ts:51:1 › registration read rejects a successful response for another native client (2.9s)
+  ✓  316 tests/browser/capability-registration-visual.spec.ts:19:3 › registration current-read and edit states render at phone-dark (4.2s)
+  ✓  318 tests/browser/capability-registration-execution.spec.ts:102:1 › registration save freezes one draft, preserves legacy codes and refreshes exact current values (4.3s)
+  ✓  319 tests/browser/capability-registration-reads.spec.ts:72:1 › a changed registration snapshot replaces stale inputs while unrelated notes preserve the local draft (4.5s)
+  ✓  321 tests/browser/capability-registration-execution.spec.ts:165:3 › registration HTTP 403 write failure preserves the draft and never retries itself (4.2s)
+  ✓  320 tests/browser/client-enrichment.spec.ts:20:1 › saved run current/proposed, sources, selection and explicit partial apply (7.4s)
+  ✓  322 tests/browser/capability-registration-reads.spec.ts:104:1 › closing registrations discards its edit lifetime and reopens from the current client (3.9s)
+  ✓  323 tests/browser/capability-registration-execution.spec.ts:165:3 › registration HTTP 503 write failure preserves the draft and never retries itself (4.2s)
+  ✓  324 tests/browser/client-enrichment.spec.ts:50:1 › ignore with reason then restore uses persisted acknowledgments (8.4s)
+  ✓  326 tests/browser/client-intake.spec.ts:4:1 › production Add profile chooser opens retained LDA intake, returns and restores focus (6.4s)
+  ✓  325 tests/browser/client-header.spec.ts:3:1 › client header supports keyboard navigation and scoped quick-add deep links (9.6s)
+  ✓  327 tests/browser/client-enrichment.spec.ts:83:1 › matter assignment explicitly applies immediately with exact receipt (7.6s)
+  ✓  329 tests/browser/committee-picker.spec.ts:92:1 › committee branches navigate without selecting; Done commits one exact parent or child (8.3s)
+  ✓  328 tests/browser/client-intake.spec.ts:60:1 › three intake steps validate, preserve input, send canonical fields and explicit intake data (14.8s)
+  ✓  330 tests/browser/client-enrichment.spec.ts:108:1 › wrong matter receipt cannot show assignment success (9.4s)
+  ✓  331 tests/browser/committee-picker.spec.ts:142:1 › search carries the full parent path and Escape discards an uncommitted change (8.9s)
+  ✓  334 tests/browser/committee-picker.spec.ts:201:1 › committee picker supports keyboard branch navigation and staged selection (8.6s)
+  ✓  332 tests/browser/client-intake.spec.ts:155:1 › create failure keeps all entered fields and never shows success (11.4s)
+  ✓  333 tests/browser/client-enrichment.spec.ts:131:1 › lost apply response freezes repeat writes even after closing/reopening (13.2s)
+  ✓  335 tests/browser/committee-picker.spec.ts:244:3 › committee picker keeps exact static icon sizes and readable layout on a phone in light mode (8.6s)
+  ✓  336 tests/browser/client-intake.spec.ts:198:1 › logo confirmation failure retries without duplicate profile creation or storage upload (10.5s)
+  ✓  337 tests/browser/client-enrichment.spec.ts:159:1 › changed finding preflight preserves review and prevents POST (8.4s)
+  ✓  338 tests/browser/committee-picker.spec.ts:244:3 › committee picker keeps exact static icon sizes and readable layout on a phone in dark mode (6.9s)
+  ✓  339 tests/browser/client-intake.spec.ts:258:1 › client header edit merges fresh remote siblings, preserves unchanged fields and returns focus (8.1s)
+  ✓  340 tests/browser/client-enrichment.spec.ts:175:1 › closing during preflight aborts before POST (8.2s)
+  ✓  341 tests/browser/current-projection.spec.ts:23:3 › failed client refresh 403 hides retained totals, choices and cards until recovery (4.4s)
+  ✓  344 tests/browser/current-projection.spec.ts:103:3 › failed activity refresh 403 hides retained history, kinds, limit and overview count (6.6s)
+  ✓  342 tests/browser/client-intake.spec.ts:332:1 › rejected client edit remains open with entered data and unchanged profile (8.2s)
+  ✓  343 tests/browser/client-enrichment.spec.ts:195:1 › standard user can read but cannot apply or ignore (8.5s)
+  ✓  345 tests/browser/current-projection.spec.ts:23:3 › failed client refresh 503 hides retained totals, choices and cards until recovery (6.4s)
+  ✓  346 tests/browser/client-intake.spec.ts:379:1 › standard member cannot edit but can confirm archive; rejected receipt never navigates (7.0s)
+  ✓  347 tests/browser/client-enrichment.spec.ts:208:1 › running review polls and cancellation is explicit and scoped (9.2s)
+  ✓  349 tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 360px (6.1s)
+  ✓  348 tests/browser/current-projection.spec.ts:103:3 › failed activity refresh 503 hides retained history, kinds, limit and overview count (9.9s)
+  ✓  350 tests/browser/client-enrichment.spec.ts:228:1 › empty/setup blocks unsafe new research and task retry (6.2s)
+  ✓  351 tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 360px (6.5s)
+  ✓  352 tests/browser/current-projection.spec.ts:204:1 › failed current client read removes its retained name from the frame and recovers (5.6s)
+  ✓  353 tests/browser/client-enrichment.spec.ts:246:1 › wrong-client response hides review; unavailable read can retry (6.7s)
+  ✓  354 tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 1440px (6.9s)
+  ✓  355 tests/browser/effective-dates.spec.ts:4:1 › master Agenda reads publisher effective dates across excluded pages without shifting civil dates (5.7s)
+  ✓  356 tests/browser/client-enrichment.spec.ts:259:1 › drawer follows desktop geometry and mobile dark layout (7.4s)
+  ✓  357 tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 1440px (6.5s)
+  ✓  358 tests/browser/effective-dates.spec.ts:76:1 › client Agenda and master Month never fetch the public effective-date feed (10.0s)
+  ✓  360 tests/browser/email-compose.spec.ts:196:1 › explicit mailbox B is shown in review and confirmed by its exact sender receipt (5.8s)
+  ✓  359 tests/browser/client-enrichment.spec.ts:291:1 › canonical upload is explicit, validates empty files and never starts research (8.2s)
+  ✓  361 tests/browser/effective-dates.spec.ts:97:1 › stale effective evidence stays unavailable without publication-date fallback (7.1s)
+  ✓  362 tests/browser/email-compose.spec.ts:243:1 › a removed reviewed mailbox is not replaced by another mailbox (6.4s)
+  ✓  363 tests/browser/client-enrichment.spec.ts:319:1 › unmount during upload ticket blocks storage and confirmation (8.1s)
+  ✓  364 tests/browser/facility-action-lifetime.spec.ts:45:1 › a facility action refuses another tenant's otherwise matching receipt (3.9s)
+  ✓  365 tests/browser/email-compose.spec.ts:266:1 › an unavailable mailbox contract leaves the draft review disabled (5.7s)
+  ✓  367 tests/browser/facility-action-lifetime.spec.ts:64:1 › a definite facility action refusal remains a deliberate retry without claiming success (3.7s)
+  ✓  368 tests/browser/email-compose.spec.ts:286:1 › overlay clicks respect context gestures and dismiss only the top email review (6.0s)
+  ✓  366 tests/browser/facility-map.spec.ts:80:1 › real coordinate pins, keyboard district selection, pan/zoom and source-backed details (10.0s)
+  ✓  369 tests/browser/facility-action-lifetime.spec.ts:84:1 › an uncertain facility action needs a current GET review before a new explicit request (5.2s)
+  ✓  370 tests/browser/email-compose.spec.ts:313:1 › invalidated successful idle identity refuses mail dispatch and retains draft (6.1s)
+  ✓  372 tests/browser/facility-action-lifetime.spec.ts:139:1 › closing a pending geocode view retains uncertainty without replay when reopened (5.8s)
+  ✓  371 tests/browser/facility-map.spec.ts:215:1 › candidate index, district resolution, queued retry and failure messages stay client-bound (8.8s)
+  ✓  374 tests/browser/facility-action-lifetime.spec.ts:169:1 › a refreshed facility source aborts obsolete action effects and retains the new address (4.2s)
+  ✓  373 tests/browser/email-compose.spec.ts:334:1 › invalidated successful idle identity refuses upload prepare dispatch (5.8s)
+  ✓  375 tests/browser/facility-map.spec.ts:300:1 › reviewed candidate selection refuses a service without a snapshot revision (6.4s)
+  ✓  376 tests/browser/facility-action-lifetime.spec.ts:207:1 › a failed current review cannot erase an uncertain facility action (4.8s)
+  ✓  377 tests/browser/email-compose.spec.ts:355:1 › contact picker and CC/BCC survive explicit review and send exact receipt (6.3s)
+  ✓  379 tests/browser/facility-action-lifetime.spec.ts:236:1 › a late geocode receipt cannot clear the initiating actor's unknown fence (5.3s)
+  ✓  378 tests/browser/facility-map.spec.ts:339:1 › a candidate conflict reloads the displayed snapshot and never falls back to the unchecked route (7.3s)
+  ✓  380 tests/browser/email-compose.spec.ts:397:1 › invalid/duplicate copied recipient retains draft and never sends (5.3s)
+  ✓  381 tests/browser/facility-action-lifetime.spec.ts:269:1 › a late candidate conflict cannot refresh a newer reviewed snapshot (4.4s)
+  ✓  383 tests/browser/email-compose.spec.ts:411:1 › upload confirmation and scan readiness stay separate before send (6.5s)
+  ✓  382 tests/browser/facility-map.spec.ts:409:1 › removal requires confirmation and does not close after a rejected delete (7.7s)
+  ✓  384 tests/browser/files-boundary.spec.ts:14:1 › a wrong-client file response fails before exposing its name or signed URLs (6.1s)
+  ✓  385 tests/browser/email-compose.spec.ts:445:1 › confirmation retry reuses storage attempt without another byte upload (6.0s)
+  ✓  386 tests/browser/facility-map.spec.ts:462:1 › a response for another client fails closed without rendering that location (7.0s)
+  ✓  387 tests/browser/files-boundary.spec.ts:37:3 › an open file preview follows the current removed list state (6.5s)
+  ✓  388 tests/browser/email-compose.spec.ts:466:1 › oversize file refuses before prepare and draft removal never deletes Files (6.6s)
+  ✓  390 tests/browser/files-boundary.spec.ts:37:3 › an open file preview follows the current denied list state (6.4s)
+  ✓  389 tests/browser/facility-map.spec.ts:481:1 › resolved representative target reports failed saves, validates receipt and avoids duplicate adds (9.3s)
+  ✓  391 tests/browser/email-compose.spec.ts:486:3 › uncertain or malformed receipt freezes send attempt (503) (6.6s)
+  ✓  392 tests/browser/files-boundary.spec.ts:37:3 › an open file preview follows the current quarantined list state (6.1s)
+  ✓  393 tests/browser/files-metadata-receipts.spec.ts:26:1 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review (7.2s)
+  ✓  394 tests/browser/email-compose.spec.ts:486:3 › uncertain or malformed receipt freezes send attempt (200) (5.9s)
+  ✓  395 tests/browser/files-boundary.spec.ts:90:1 › a mismatched folder-save receipt keeps the edit open and does not claim success (6.5s)
+  ✓  398 tests/browser/files-reader-selection.spec.ts:18:3 › Files clears checked rows and the prior preview selection when the reader changes (3.7s)
+  ✓  396 tests/browser/files-metadata-receipts.spec.ts:80:1 › a matching reordered restricted viewer set completes the save (7.2s)
+  ✘  397 tests/browser/email-compose.spec.ts:510:1 › actor change while prepare awaits causes zero storage/confirm/send (5.6s)
+(node:525780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  399 tests/browser/files-reader-selection.spec.ts:18:3 › Files clears checked rows and the prior delete selection when the reader changes (3.2s)
+  ✓  402 tests/browser/files-reader-selection.spec.ts:18:3 › Files clears checked rows and the prior file-access selection when the reader changes (3.9s)
+  ✓  400 tests/browser/files-metadata-receipts.spec.ts:135:1 › a definite access rejection retains an editable draft (6.7s)
+  ✓  401 tests/browser/email-compose.spec.ts:526:1 › unmounted actor lifetime refuses delayed upload dispatch (5.3s)
+  ✓  403 tests/browser/files-reader-selection.spec.ts:18:3 › Files clears checked rows and the prior folder-access selection when the reader changes (3.4s)
+  ✓  404 tests/browser/files-metadata-receipts.spec.ts:165:3 › a matching PATCH completing after actor replacement cannot close or update the replacement view (5.2s)
+  ✓  405 tests/browser/email-compose.spec.ts:541:1 › reply to foreign-client thread refuses before mail send (5.4s)
+  ✓  406 tests/browser/files-reader-selection.spec.ts:18:3 › Files clears checked rows and the prior upload selection when the reader changes (3.1s)
+  ✓  407 tests/browser/files-metadata-receipts.spec.ts:165:3 › a matching PATCH completing after client replacement cannot close or update the replacement view (3.9s)
+  ✓  408 tests/browser/email-compose.spec.ts:555:1 › read-only role cannot upload or send (5.3s)
+  ✓  410 tests/browser/files-metadata-receipts.spec.ts:165:3 › a matching PATCH completing after unmount replacement cannot close or update the replacement view (4.1s)
+  ✓  409 tests/browser/files.spec.ts:26:1 › Files keeps quarantined bytes unavailable and persists folder moves (7.4s)
+  ✓  411 tests/browser/email-compose.spec.ts:564:1 › mobile dark attachment strip fits, keyboard enters picker and removes recipient (6.1s)
+  ✓  412 tests/browser/files-metadata-receipts.spec.ts:214:1 › a review completing after actor replacement cannot clear the original unknown save (4.7s)
+  ✓  413 tests/browser/files.spec.ts:59:1 › Master calendar retains selected client, date and zone when switching views (7.0s)
+  ✓  414 tests/browser/email-compose.spec.ts:602:1 › prepared seed requires canonical availability and an explicit selected recipient (6.5s)
+  ✓  415 tests/browser/files-metadata-receipts.spec.ts:256:1 › an unknown draft can recover even when the reopened access query fails (8.0s)
+  ✓  416 tests/browser/global-objective.spec.ts:40:1 › visible Portfolio entry opens the guarded picker without losing filters and fits on phone (8.5s)
+  ✓  418 tests/browser/files-metadata-receipts.spec.ts:307:1 › reopening access as another reader requests that reader's current ACL (4.7s)
+  ✓  417 tests/browser/email-compose.spec.ts:649:1 › actor change during send attachment preflight causes zero mail POST (7.1s)
+  ✓  419 tests/browser/global-objective.spec.ts:92:1 › keyboard search chooses the real client and opens the existing empty four-field editor (7.8s)
+  ✓  420 tests/browser/files-metadata-receipts.spec.ts:334:1 › a contradictory folder receipt keeps the requested folder and needs current review (7.6s)
+  ✓  421 tests/browser/government.spec.ts:13:1 › directory feeds fail independently, paginate, and retain a failed add for explicit retry (10.0s)
+  ✓  422 tests/browser/global-objective.spec.ts:134:1 › Cancel and Escape are local and reopening discards previous selection (5.3s)
+  ✓  423 tests/browser/files-metadata-receipts.spec.ts:372:1 › unknown ACL save survives close/reopen and a failed review does not thaw it (8.5s)
+  ✓  425 tests/browser/global-objective.spec.ts:150:1 › loading catalog cannot continue and an empty result is explicit (4.8s)
+  ✓  424 tests/browser/government.spec.ts:123:1 › committee selection fetches every taxonomy page and preserves current/former staff (7.1s)
+  ✓  426 tests/browser/integration-defect-baselines.spec.ts:10:1 › Core client 404 keeps preferences visible and disabled with zero Intel calls (3.2s)
+  ✓  429 tests/browser/integration-defect-baselines.spec.ts:33:1 › requested phone-code copy matches Figma 1028:188442 without delivery claims (3.0s)
+  ✓  427 tests/browser/global-objective.spec.ts:173:1 › failed catalog has explicit retry and search has an empty state (7.1s)
+  ✓  430 tests/browser/linked-file-arrival.spec.ts:103:1 › the genuine activity link selects its exact current attachment without an external action (3.2s)
+  ✓  428 tests/browser/government.spec.ts:206:1 › state target details preserve encoded identity; tier clearing, reviewed mail and failed removal retain state (8.5s)
+  ✓  431 tests/browser/global-objective.spec.ts:198:1 › portal role never requests the client catalog or offers continuation (4.7s)
+  ✓  432 tests/browser/linked-file-arrival.spec.ts:137:3 › a direct arrival preserves preview keyboard and geometry at 1440px (5.1s)
+  ✓  433 tests/browser/mail-rewrite.spec.ts:102:1 › a current verified rewrite preserves the native payload and plain-text review (6.3s)
+  ✓  435 tests/browser/linked-file-arrival.spec.ts:137:3 › a direct arrival preserves preview keyboard and geometry at 390px (3.5s)
+  ✓  434 tests/browser/global-objective.spec.ts:219:1 › malformed catalog cannot masquerade as a selectable client (5.8s)
+  ✓  436 tests/browser/mail-rewrite.spec.ts:126:1 › an unverified rewrite preserves the original draft (4.9s)
+  ✓  437 tests/browser/linked-file-arrival.spec.ts:184:1 › a missing exact target reports current-list unavailability without choosing another file or replaying (4.2s)
+  ✓  438 tests/browser/global-objective.spec.ts:242:3 › objective-authority-invalidate immediately refuses a previously valid selection (5.5s)
+  ✓  440 tests/browser/linked-file-arrival.spec.ts:212:1 › a pending exact arrival waits for the authorized current list (3.6s)
+  ✓  439 tests/browser/mail-rewrite.spec.ts:144:1 › editing a pending draft discards the old result without clearing a newer attempt (6.3s)
+  ✓  441 tests/browser/global-objective.spec.ts:242:3 › objective-role-change immediately refuses a previously valid selection (5.1s)
+  ✓  442 tests/browser/linked-file-arrival.spec.ts:237:1 › a new arrival waits for an in-flight refresh instead of opening a retained cached record (3.1s)
+  ✓  445 tests/browser/linked-file-arrival.spec.ts:276:3 › an ambiguous or nonmatching file parameter never selects a different attachment: empty (3.6s)
+  ✓  443 tests/browser/mail-rewrite.spec.ts:175:1 › editing back to the original text still invalidates its earlier rewrite (5.6s)
+  ✓  444 tests/browser/global-objective.spec.ts:242:3 › objective-catalog-invalidate immediately refuses a previously valid selection (5.4s)
+  ✓  446 tests/browser/linked-file-arrival.spec.ts:276:3 › an ambiguous or nonmatching file parameter never selects a different attachment: 60000000-0000-4000-8000-000000000001&file=60000000-0000-4000-8000-000000000002 (3.8s)
+  ✓  449 tests/browser/linked-file-arrival.spec.ts:276:3 › an ambiguous or nonmatching file parameter never selects a different attachment: https%3A%2F%2Ffiles.example.test%2Funtrusted (3.3s)
+  ✓  448 tests/browser/global-objective.spec.ts:255:1 › actor change cannot publish late rows or retain the prior actor's selection (5.7s)
+  ✓  447 tests/browser/mail-rewrite.spec.ts:196:1 › closing and reopening the composer cannot accept an earlier response (7.2s)
+  ✓  450 tests/browser/linked-file-arrival.spec.ts:290:3 › a held arrival cannot transfer to a changed actor and reopen for its replacement (3.8s)
+  ✓  451 tests/browser/global-objective.spec.ts:279:1 › held catalog refresh blocks navigation and removes a vanished selected client (6.0s)
+  ✓  453 tests/browser/linked-file-arrival.spec.ts:290:3 › a held arrival cannot transfer to a changed tenant and reopen for its replacement (3.0s)
+  ✓  452 tests/browser/mail-rewrite.spec.ts:220:1 › changing and restoring recipients discards the old source without leaving pending status (6.1s)
+  ✓  455 tests/browser/linked-file-arrival.spec.ts:290:3 › a held arrival cannot transfer to a changed client and reopen for its replacement (3.6s)
+  ✓  454 tests/browser/global-objective.spec.ts:302:1 › unmount during a held read cannot navigate or reopen the picker (4.8s)
+  ✓  456 tests/browser/mail-rewrite.spec.ts:246:3 › invalidated mailbox identity discards an in-flight rewrite (6.0s)
+  ✓  457 tests/browser/linked-file-arrival.spec.ts:290:3 › a held arrival cannot transfer to a changed revoke and reopen for its replacement (3.5s)
+  ✓  458 tests/browser/global-objective.spec.ts:323:1 › session expiry refuses the catalog rather than showing cached success (5.1s)
+  ✓  460 tests/browser/linked-file-arrival.spec.ts:320:1 › a displayed arrival closes on reader replacement and stays closed when same-ID data returns (3.2s)
+  ✓  459 tests/browser/mail-rewrite.spec.ts:246:3 › actor mailbox identity discards an in-flight rewrite (5.8s)
+  ✓  462 tests/browser/linked-file-arrival.spec.ts:354:1 › failed refresh consumes the arrival while preserving the canonical error and manual retry (3.5s)
+  ✓  461 tests/browser/global-objective.spec.ts:338:1 › mobile dark dialog keeps real options and actions within the viewport (5.0s)
+  ✓  463 tests/browser/mail-rewrite.spec.ts:278:1 › invalidated idle authority refuses rewrite before dispatch (5.8s)
+  ✓  464 tests/browser/linked-file-arrival.spec.ts:384:1 › an open arrival follows current native readiness without replay or automatic extraction (3.8s)
+  ✓  467 tests/browser/meeting-documents-calendar.spec.ts:131:1 › Calendar preparation toolbar opens current saved PDF preview (9.0s)
+  ✓  465 tests/browser/global-objective.spec.ts:363:1 › actual Portfolio deep link preserves filters on close and continues through the canonical editor (13.7s)
+  ✘  466 tests/browser/manual-debrief.spec.ts:85:1 › manual debrief reviews written context, generates only on submit and saves separately (14.0s)
+  ✓  468 tests/browser/meeting-documents-calendar.spec.ts:151:1 › Calendar explicit PDF preparation opens existing composer with unverified seed then canonical availability (6.8s)
+(node:528989) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  469 tests/browser/meeting-documents.spec.ts:156:1 › preparation preview prints persisted rich Unicode content and safe source links (5.9s)
+  ✓  471 tests/browser/meeting-documents.spec.ts:193:1 › popup refusal keeps preview and saved content available (7.8s)
+  ✓  470 tests/browser/meeting-documents-calendar.spec.ts:185:1 › Calendar saved debrief Export PDF opens current persisted body (8.8s)
+  ✓  472 tests/browser/manual-debrief.spec.ts:120:1 › manual generation failure preserves source without automatic generation or save (12.5s)
+  ✓  473 tests/browser/meeting-documents.spec.ts:206:1 › debrief preview preserves saved body and light reference geometry (6.7s)
+  ✓  474 tests/browser/meeting-documents-calendar.spec.ts:202:1 › Calendar reopens the already prepared PDF after composer cancellation without another POST (10.9s)
+  ✓  476 tests/browser/meeting-documents.spec.ts:222:1 › mobile dark preparation fits viewport and loads Geist (6.4s)
+  ✓  475 tests/browser/manual-debrief.spec.ts:150:1 › leaving the meeting during manual generation refuses a late draft (8.3s)
+  ✓  478 tests/browser/meeting-documents.spec.ts:249:1 › restricted debrief never renders or prints private content (6.5s)
+  ✓  477 tests/browser/meeting-library.spec.ts:81:1 › Library uses real page/filter contract, historical qualification and calendar-preserving deep links (11.3s)
+  ✓  480 tests/browser/meeting-documents.spec.ts:260:1 › governed preparation refuses ordinary export (7.2s)
+  ✓  479 tests/browser/manual-debrief.spec.ts:173:1 › manual source respects runtime denial and mobile dark reference geometry (15.2s)
+  ✓  482 tests/browser/meeting-documents.spec.ts:268:1 › server-incompatible rich preparation offers truthful fidelity refusal and zero writes (6.2s)
+  ✓  481 tests/browser/meeting-library.spec.ts:139:1 › Library surfaces failure/retry, empty results, scoped receipt rejection and session expiry (10.1s)
+  ✓  485 tests/browser/meeting-library.spec.ts:185:1 › Library responsive dark layout keeps metadata and scope accessible (7.2s)
+  ✓  484 tests/browser/meeting-documents.spec.ts:281:1 › explicit prepare stores one verified receipt without sending (7.8s)
+  ✓  483 tests/browser/meeting-preparation.spec.ts:101:1 › edit persists only changed sections, retains failed draft, and shows saved sources (13.0s)
+  ✓  487 tests/browser/meeting-documents.spec.ts:306:1 › unknown completion freezes original attempt without retry (6.3s)
+  ✓  486 tests/browser/meeting-library.spec.ts:216:1 › Assignment requires explicit move/revoke review, retains chosen draft on conflict and retries only after review (9.2s)
+  ✓  489 tests/browser/meeting-documents.spec.ts:320:1 › invalidated identity/capability cached success refuses POST (5.1s)
+  ✓  490 tests/browser/meeting-library.spec.ts:258:1 › Assignment rejects wrong successful receipt and preserves unsaved selection (5.4s)
+  ✓  491 tests/browser/meeting-documents.spec.ts:335:1 › unmount during preflight refuses delayed storage dispatch (3.9s)
+  ✓  493 tests/browser/meeting-documents.spec.ts:349:1 › print serializer strips executable attributes/resources and preserves Unicode (3.2s)
+  ✓  488 tests/browser/meeting-preparation.spec.ts:179:1 › durable generation stays pending, failure preserves previous prep, explicit resume loads completion (19.2s)
+  ✓  492 tests/browser/meeting-library.spec.ts:284:1 › Read-only identity cannot assign or list caller archive (7.5s)
+  ✓  494 tests/browser/meeting-documents.spec.ts:363:1 › runtime-disabled environment refuses attachment creation (4.4s)
+  ✓  497 tests/browser/meeting-documents.spec.ts:374:1 › invalidated identity success refuses local print and attachment dispatch (6.1s)
+  ✓  495 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (8.4s)
+  ✓  498 tests/browser/meeting-documents.spec.ts:399:1 › changed initiating actor during preflight refuses POST and hides old content (4.6s)
+  ✓  499 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (6.7s)
+  ✘  496 tests/browser/meeting-library.spec.ts:308:1 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation (14.2s)
+  ✓  500 tests/browser/meeting-documents.spec.ts:415:1 › wrong client response refuses content and export (3.2s)
+(node:530969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  502 tests/browser/meeting-documents.spec.ts:425:1 › canonical saved access refusal retains explicit retry without exporting stale content (5.8s)
+  ✓  501 tests/browser/meeting-preparation.spec.ts:390:1 › read-only role sees saved preparation without mutation controls on mobile dark (6.4s)
+  ✓  504 tests/browser/meeting-documents.spec.ts:442:1 › keyboard closes preview and mobile close stays in its heading row (5.2s)
+  ✓  503 tests/browser/meeting-library.spec.ts:469:1 › Lost storage reply retries same-key confirmation; wrong parent receipt cannot reach extraction (9.2s)
+  ✓  505 tests/browser/meeting-preparation.spec.ts:420:1 › comprehensive briefing renders saved coverage and linked source quotations (7.5s)
+  ✓  506 tests/browser/meeting-documents.spec.ts:467:1 › actor-scoped saved cache never reveals previous actor content while new read waits (5.8s)
+  ✓  507 tests/browser/meeting-library.spec.ts:579:1 › Leaving the meeting during assignment preflight prevents a later PUT (8.3s)
+  ✓  508 tests/browser/meeting-preparation.spec.ts:495:1 › institutional draft remains in its originating review flow and omitted sharing is unknown (6.7s)
+  ✓  509 tests/browser/meeting-documents.spec.ts:487:1 › controlled close/reopen preserves unknown PDF attempt without a second POST (6.8s)
+  ✓  510 tests/browser/meeting-library.spec.ts:619:3 › Leaving the meeting while ticket is pending prevents subsequent upload or extraction dispatch (8.3s)
+  ✓  511 tests/browser/meeting-preparation.spec.ts:535:1 › structured email evidence retains attribution through unrelated edits and rejects unsafe source links (8.8s)
+  ✓  512 tests/browser/meeting-documents.spec.ts:505:1 › controlled close during preflight revokes delayed POST even after reopen (5.7s)
+  ✓  515 tests/browser/meeting-documents.spec.ts:521:1 › controlled close after dispatch withholds receipt and preserves uncertainty on reopen (5.7s)
+  ✓  513 tests/browser/meeting-library.spec.ts:619:3 › Leaving the meeting while storage is pending prevents subsequent upload or extraction dispatch (7.4s)
+  ✓  514 tests/browser/meeting-preparation.spec.ts:625:1 › completed job without an artifact receipt never claims a briefing is ready (7.0s)
+  ✓  516 tests/browser/meeting-review.spec.ts:235:1 › saved note is reviewed exactly, generation is explicit and existing editor saves separately (7.4s)
+  ✓  517 tests/browser/meeting-library.spec.ts:619:3 › Leaving the meeting while confirm is pending prevents subsequent upload or extraction dispatch (7.2s)
+  ✓  518 tests/browser/meeting-voice.spec.ts:24:1 › audio source requires explicit upload, transcript review and generation; preview URLs are released (6.9s)
+  ✓  519 tests/browser/meeting-review.spec.ts:270:1 › restricted or empty notes never enter the source picker or generation (6.2s)
+  ✓  521 tests/browser/meeting-voice.spec.ts:79:1 › quarantine blocks extraction and explicit readiness recheck retains the original upload (7.1s)
+  ✓  520 tests/browser/member-notes.spec.ts:122:1 › global entry searches real members, preserves Client handoff and closes without writes (11.3s)
+  ✓  522 tests/browser/meeting-review.spec.ts:289:1 › changed source refuses generation, refresh requires a new explicit review (6.2s)
+  ✓  523 tests/browser/meeting-voice.spec.ts:108:3 › unverified provider400 freezes the source across close/reopen without retry (6.8s)
+  ✓  525 tests/browser/meeting-review.spec.ts:332:1 › wrong-parent notes are rejected before rendering source or POST (6.6s)
+  ✓  524 tests/browser/member-notes.spec.ts:160:1 › explicit Note save sends only supported fields and displays its verified receipt (9.7s)
+  ✓  526 tests/browser/meeting-voice.spec.ts:108:3 › unverified provider500 freezes the source across close/reopen without retry (7.4s)
+  ✓  527 tests/browser/meeting-review.spec.ts:345:1 › generation failure keeps source in the existing explicit retry flow without saving (7.9s)
+  ✓  528 tests/browser/member-notes.spec.ts:207:1 › paging is explicit and an empty member search does not fabricate results (7.8s)
+  ✓  529 tests/browser/meeting-voice.spec.ts:137:1 › wrong-parent confirmation is refused and rechecking never uploads duplicate bytes (7.4s)
+  ✓  530 tests/browser/meeting-review.spec.ts:376:3 › held source preflight refuses review-actor-change before generation (7.4s)
+  ✓  531 tests/browser/member-notes.spec.ts:237:1 › search failure and retry preserve the query without writing (7.1s)
+  ✓  532 tests/browser/meeting-voice.spec.ts:164:1 › actor change during upload preparation blocks storage, confirmation and transcription (7.2s)
+  ✓  533 tests/browser/meeting-review.spec.ts:376:3 › held source preflight refuses review-identity-invalidate before generation (6.7s)
+  ✓  535 tests/browser/meeting-voice.spec.ts:188:1 › invalidated identity refuses upload dispatch despite retained stale role data (6.3s)
+  ✓  534 tests/browser/member-notes.spec.ts:266:1 › wrong member detail blocks dispatch and retains unsaved text (7.0s)
+  ✓  536 tests/browser/meeting-review.spec.ts:376:3 › held source preflight refuses review-unmount before generation (6.7s)
+  ✓  538 tests/browser/member-notes.spec.ts:291:3 › wrong contact success freezes replay and never claims a saved note (6.0s)
+  ✓  537 tests/browser/meeting-voice.spec.ts:203:1 › closing during transcription discards the late receipt and keeps the uncertain attempt frozen (6.6s)
+  ✓  540 tests/browser/member-notes.spec.ts:291:3 › wrong author success freezes replay and never claims a saved note (7.4s)
+  ✓  541 tests/browser/meeting-voice.spec.ts:233:3 › same-actor invalidation during transcription freezes the dispatched attempt across close/reopen (7.3s)
+  ✓  543 tests/browser/meeting-voice.spec.ts:233:3 › same-actor refetch during transcription freezes the dispatched attempt across close/reopen (5.0s)
+  ✓  542 tests/browser/member-notes.spec.ts:291:3 › wrong body success freezes replay and never claims a saved note (5.2s)
+  ✘  539 tests/browser/meeting-review.spec.ts:398:1 › disabled generation capability and portal role send no source generation (14.2s)
+(node:533001) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  544 tests/browser/meeting-voice.spec.ts:295:1 › invalidated identity and close during storage retain the original upload reference without repeated bytes (7.1s)
+  ✓  545 tests/browser/member-notes.spec.ts:308:1 › lost POST reply freezes automatic and explicit replay (8.1s)
+  ✓  546 tests/browser/meeting-review.spec.ts:424:1 › approval requires explicit reviewed file acknowledgement and records no scan, extraction or share (6.5s)
+  ✓  547 tests/browser/meeting-voice.spec.ts:332:1 › actual actor change during transcription cannot publish the old actor receipt or source (6.8s)
+  ✓  549 tests/browser/meeting-review.spec.ts:457:1 › unusable or nonviewer attachment never exposes approval (5.8s)
+  ✓  548 tests/browser/member-notes.spec.ts:329:1 › switching Client and Member cannot bypass an uncertain save freeze (8.6s)
+  ✓  550 tests/browser/meeting-voice.spec.ts:363:1 › unsupported memo is rejected without upload and local playback URL is released on replacement/unmount (6.2s)
+  ✓  551 tests/browser/meeting-review.spec.ts:494:1 › changed file preflight rejects old acknowledgement, requiring review of current file (5.8s)
+  ✓  552 tests/browser/member-notes.spec.ts:352:1 › pending note blocks duplicate submits before receiving a verified saved receipt (7.1s)
+  ✓  554 tests/browser/meeting-review.spec.ts:517:1 › lost approval reply freezes repeat; unapproved read cannot resolve but actual approved status can (5.4s)
+  ✓  553 tests/browser/meeting-voice.spec.ts:389:1 › voice source follows mobile dark geometry and runtime refusal (9.4s)
+  ✓  555 tests/browser/member-notes.spec.ts:386:1 › Congress target drawer reuses the same tenant-shared form without creating a client activity (6.9s)
+  ✓  556 tests/browser/meeting-review.spec.ts:550:1 › mismatched successful approval receipt freezes automatic or repeated mutation (5.8s)
+  ✓  557 tests/browser/objective-current-read.spec.ts:33:3 › cached list is hidden after 403 on a stale remount (8.9s)
+  ✓  559 tests/browser/meeting-review.spec.ts:565:1 › actual HTTP refusal leaves a deliberate retry available (5.3s)
+  ✓  558 tests/browser/member-notes.spec.ts:422:1 › known validation refusal retains draft and supports an explicit reviewed retry (7.7s)
+  ✓  560 tests/browser/objective-current-read.spec.ts:64:3 › failed list 403 preserves filters and restores only a successful current read (6.0s)
+  ✓  561 tests/browser/meeting-review.spec.ts:583:1 › role revocation during held attachment preflight sends zero approval POSTs (8.2s)
+  ✓  562 tests/browser/member-notes.spec.ts:442:1 › portal role cannot search or save member notes (8.0s)
+  ✓  563 tests/browser/objective-current-read.spec.ts:118:3 › failed summary 403 hides retained content and creation entry until recovery (3.3s)
+[WebServer] 4:28:12 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:12 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:13 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:14 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  564 tests/browser/meeting-review.spec.ts:604:1 › role loss after POST remains uncertain after the same actor role is restored (8.2s)
+  ✓  566 tests/browser/objective-current-read.spec.ts:150:3 › failed read 403 closes the selected editor and does not restore its stale draft (7.1s)
+  ✓  565 tests/browser/member-notes.spec.ts:458:1 › session expiry at preflight cannot send a note (9.0s)
+  ✓  567 tests/browser/meeting-review.spec.ts:624:1 › mobile dark saved-note review keeps source and actions within viewport (8.4s)
+  ✓  569 tests/browser/member-notes.spec.ts:471:1 › closing while detail is held sends zero POSTs and discards late results (8.8s)
+  ✓  568 tests/browser/objective-current-read.spec.ts:33:3 › cached list is hidden after 503 on a stale remount (11.4s)
+  ✓  571 tests/browser/member-notes.spec.ts:495:1 › authority invalidation during held preflight sends zero POSTs (5.9s)
+  ✓  572 tests/browser/objective-current-read.spec.ts:64:3 › failed list 503 preserves filters and restores only a successful current read (5.2s)
+  ✓  570 tests/browser/meeting-review.spec.ts:648:1 › actual client Calendar deep link reaches approval and saved-note generation without losing scope (10.2s)
+  ✓  573 tests/browser/member-notes.spec.ts:520:1 › role change after dispatch freezes the same-scope form even when role is restored (5.4s)
+  ✓  574 tests/browser/objective-current-read.spec.ts:118:3 › failed summary 503 hides retained content and creation entry until recovery (4.6s)
+[WebServer] 4:28:38 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:39 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:39 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  575 tests/browser/meeting-review.spec.ts:692:1 › source GET failures support deliberate read retry and session expiry never generates (6.2s)
+  ✓  576 tests/browser/member-notes.spec.ts:544:1 › actor change during held detail discards the old draft and sends zero POSTs (5.0s)
+[WebServer] 4:28:41 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  577 tests/browser/objective-current-read.spec.ts:150:3 › failed read 503 closes the selected editor and does not restore its stale draft (5.8s)
+  ✓  578 tests/browser/meeting-review.spec.ts:721:3 › held attachment preflight refuses review-actor-change before approval (5.8s)
+  ✓  579 tests/browser/member-notes.spec.ts:572:1 › mobile dark shared note layout stays within the viewport (6.0s)
+  ✓  580 tests/browser/objective-current-read.spec.ts:188:1 › failed current read clears delete confirmation and new-objective input (5.3s)
+  ✓  581 tests/browser/meeting-review.spec.ts:721:3 › held attachment preflight refuses review-unmount before approval (5.3s)
+  ✓  583 tests/browser/objective-current-read.spec.ts:228:1 › client replacement rejects a late former-client read and recovers the new client (4.0s)
+[WebServer] 4:28:54 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:28:54 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:1`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  582 tests/browser/objective-intake.spec.ts:6:1 › create is a full page with a fixed readiness rail, explicit back navigation and a fresh draft on re-entry (7.7s)
+  ✓  585 tests/browser/objective-current-read.spec.ts:293:1 › replacement data provider cannot receive the former session's cached editor (3.5s)
+  ✓  584 tests/browser/objective-readiness.spec.ts:22:1 › readiness shows exactly the four required fields and follows edits without creating records (8.6s)
+  ✓  586 tests/browser/objective-intake.spec.ts:65:1 › an incomplete draft saves only after an explicit action and returns to the refreshed client list (6.0s)
+  ✓  587 tests/browser/objective-receipts.spec.ts:4:1 › an unrelated create receipt never transitions or closes the objective editor (6.7s)
+  ✓  588 tests/browser/objective-readiness.spec.ts:74:1 › a pending save locks the exact draft and retains it after a failed transition (7.1s)
+  ✓  589 tests/browser/objective-intake.spec.ts:125:1 › ask chips are native keyboard choices and the phone form stays within the viewport (6.5s)
+  ✓  590 tests/browser/objective-receipts.spec.ts:38:1 › a false deletion receipt remains an error until the service confirms the exact operation (7.6s)
+[WebServer] 4:29:12 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:29:12 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:29:12 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  591 tests/browser/objective-readiness.spec.ts:131:3 › late save does not transition after actor-change (6.2s)
+[WebServer] 4:29:13 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:3`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:29:13 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:4`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+[WebServer] 4:29:13 PM [vite] (client) [console.error] Encountered two children with the same key, `30000000-0000-4000-8000-000000000001:4`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✓  592 tests/browser/objective-intake.spec.ts:174:1 › editing a ready objective retains the drawer, select interaction and exact versioned draft write (6.9s)
+  ✓  593 tests/browser/objective-receipts.spec.ts:94:1 › a wrong-client objective list is refused before content or edit actions render (6.0s)
+  ✓  594 tests/browser/objective-readiness.spec.ts:131:3 › late save does not transition after role-change (6.1s)
+  ✓  595 tests/browser/objective-intake.spec.ts:216:1 › a mismatched client response cannot populate or authorize the new objective form (5.4s)
+  ✓  596 tests/browser/opportunities.spec.ts:9:1 › matched opportunity and program paging, partial health, search and exact detail links (6.7s)
+  ✓  597 tests/browser/objective-readiness.spec.ts:131:3 › late save does not transition after invalidate (5.9s)
+  ✓  598 tests/browser/opportunity-boundary.spec.ts:5:3 › failed opportunity refresh removes cached results, counts and links while programs remain (HTTP 403) (6.7s)
+  ✓  599 tests/browser/opportunities.spec.ts:67:1 › opportunity read failures can retry without hiding an independent program feed (8.1s)
+  ✓  600 tests/browser/objective-readiness.spec.ts:131:3 › late save does not transition after unmount (7.4s)
+  ✓  601 tests/browser/opportunity-boundary.spec.ts:42:3 › failed program refresh removes cached programs and count while opportunities remain (HTTP 403) (8.3s)
+  ✓  602 tests/browser/ordered-owners.spec.ts:35:1 › four ranked owners require a deliberate save and preserve exact order (6.3s)
+  ✓  603 tests/browser/objective-readiness.spec.ts:168:1 › an objective status filter has a recoverable empty state (6.4s)
+  ✓  605 tests/browser/ordered-owners.spec.ts:83:1 › clearing Primary preserves later positions and blocks an implicit promotion (3.7s)
+  ✓  604 tests/browser/opportunity-boundary.spec.ts:5:3 › failed opportunity refresh removes cached results, counts and links while programs remain (HTTP 503) (7.5s)
+  ✓  607 tests/browser/ordered-owners.spec.ts:110:1 › unavailable historical owners keep their rank and ranked members have no roster Remove (4.0s)
+  ✓  606 tests/browser/overview-removal.spec.ts:31:1 › submission explicit confirmation, rejected request retry, exact removal and retained data (6.0s)
+  ✓  609 tests/browser/ordered-owners.spec.ts:148:1 › 409 requires read-back and a fresh deliberate versioned save, never automatic retry (6.0s)
+  ✓  608 tests/browser/opportunity-boundary.spec.ts:42:3 › failed program refresh removes cached programs and count while opportunities remain (HTTP 503) (9.6s)
+  ✓  610 tests/browser/overview-removal.spec.ts:65:1 › wrong deletion receipt freezes across close/reopen and GET-only refresh (8.8s)
+  ✓  611 tests/browser/ordered-owners.spec.ts:181:1 › an interrupted PUT remains fenced after reopening and matching read-back sends nothing (5.8s)
+  ✓  613 tests/browser/overview-removal.spec.ts:89:1 › fresh submission changes prevent DELETE (6.6s)
+  ✓  612 tests/browser/portfolio-attention.spec.ts:66:1 › source alerts preserve server order and provenance, accessible identity and actual profile links (8.4s)
+  ✓  614 tests/browser/ordered-owners.spec.ts:220:1 › background read cannot silently rebase a draft, and replacing the actor clears that editor (3.9s)
+  ✓  617 tests/browser/portfolio-index.spec.ts:40:1 › wordmark and workspace modes stay in the canonical shared application (7.9s)
+  ✓  616 tests/browser/portfolio-attention.spec.ts:109:1 › pending feed does not render empty or successful counts (8.1s)
+  ✓  615 tests/browser/overview-removal.spec.ts:100:1 › closing held submission preflight aborts before DELETE (8.4s)
+  ✓  619 tests/browser/portfolio-attention.spec.ts:131:1 › failure requires explicit retry and recovers without a successful empty claim (6.5s)
+  ✓  620 tests/browser/overview-removal.spec.ts:117:1 › Quick log Undo uses exact newly-created record rather than latest unrelated entry (9.3s)
+  ✓  621 tests/browser/portfolio-attention.spec.ts:156:1 › refresh failure suppresses cached source records until retry succeeds (5.6s)
+  ✓  618 tests/browser/portfolio-index.spec.ts:67:1 › deep links restore combined filters and legacy layout; clearing preserves chosen presentation (12.3s)
+  ✓  622 tests/browser/overview-removal.spec.ts:136:1 › wrong creator create receipt offers no Undo and blocks duplicate create (7.9s)
+  ✓  623 tests/browser/portfolio-attention.spec.ts:177:1 › wrong client receipt is refused rather than linked to a different client (5.4s)
+  ✓  624 tests/browser/portfolio-index.spec.ts:124:1 › real fields drive search/status/sector/known unassigned; no matching results has a clear recovery (7.2s)
+  ✓  626 tests/browser/portfolio-attention.spec.ts:195:1 › ambiguous HTTP200 empty fallback describes incomplete coverage and allows refresh (7.0s)
+  ✓  625 tests/browser/overview-removal.spec.ts:152:1 › lost Undo response stays uncertain and never replays deletion (8.3s)
+  ✓  627 tests/browser/portfolio-index.spec.ts:173:1 › loading and list failure expose retry without rendering a successful empty list (8.2s)
+  ✓  628 tests/browser/portfolio-attention.spec.ts:213:1 › portal role fails closed and never requests the restricted feed (6.1s)
+  ✓  630 tests/browser/portfolio-index.spec.ts:204:1 › owner filter waits for unavailable assignments and retries instead of reporting no profiles (7.1s)
+  ✓  629 tests/browser/overview-removal.spec.ts:167:1 › an unknown second create cannot leave the prior entry Undo visible (10.2s)
+  ✓  631 tests/browser/portfolio-attention.spec.ts:236:1 › identity lookup failure blocks the feed before explicit identity recovery (6.5s)
+  ✓  633 tests/browser/overview-removal.spec.ts:206:1 › mobile dark removal is responsive and retains confirmation (5.3s)
+  ✓  634 tests/browser/portfolio-attention.spec.ts:266:1 › server authorization refusal overrides the allowed frontend role (5.3s)
+  ✓  632 tests/browser/portfolio-index.spec.ts:231:1 › chooser uses native asset geometry and canonical manual intake, restoring trigger focus (10.1s)
+  ✓  636 tests/browser/portfolio-attention.spec.ts:282:1 › expired alert session uses the shared sign-in recovery (6.2s)
+  ✓  635 tests/browser/overview-removal.spec.ts:225:1 › unsupported role does not fetch history or offer mutation controls (14.2s)
+  ✓  637 tests/browser/portfolio-index.spec.ts:292:1 › permission and expired-session errors remain explicit and disable profile creation (12.1s)
+  ✓  638 tests/browser/portfolio-attention.spec.ts:299:1 › mobile dark card remains scrollable, keyboard accessible and within the viewport (9.5s)
+  ✓  641 tests/browser/portfolio-layout.spec.ts:15:1 › keyboard reorder saves canonical versioned order and reloads (11.5s)
+  ✓  640 tests/browser/portfolio-index.spec.ts:324:1 › mobile dark cards and chooser fit viewport; empty portfolio and unsupported sort stay truthful (13.5s)
+  ✓  639 tests/browser/portfolio-layout-integration.spec.ts:31:1 › actual index saves the complete canonical catalog and restores it after reload (15.2s)
+  ✓  642 tests/browser/portfolio-layout.spec.ts:57:1 › pointer rearrangement and cancel are local until Save (6.6s)
+  ✓  644 tests/browser/portfolio-layout-integration.spec.ts:98:1 › name, recent, filters and list presentation never persist a subset or overwrite saved order (7.4s)
+  ✓  643 tests/browser/portfolio.spec.ts:12:1 › four-field readiness persists once, transitions, and refreshes the list (8.7s)
+  ✓  645 tests/browser/portfolio-layout.spec.ts:81:3 › unavailable 404 keeps default cards and refuses writes (5.5s)
+  ✓  646 tests/browser/portfolio-layout-integration.spec.ts:147:1 › saved order is not requested against an unloaded catalog (6.5s)
+  ✓  647 tests/browser/portfolio.spec.ts:60:1 › facility creation uses the selected client's endpoint and refreshes the map list (7.4s)
+  ✓  648 tests/browser/portfolio-layout.spec.ts:81:3 › unavailable 503 keeps default cards and refuses writes (5.6s)
+  ✓  650 tests/browser/portfolio.spec.ts:100:1 › mail is reviewed and a provider error remains visible without automatic retry (6.2s)
+  ✓  651 tests/browser/portfolio-layout.spec.ts:99:1 › conflict retains draft and requires explicit latest order review (5.1s)
+  ✓  649 tests/browser/profile-capacity.spec.ts:51:1 › tenant slot count blocks client creation and leaves prospect and LDA browsing reachable (8.2s)
+  ✓  653 tests/browser/portfolio-layout.spec.ts:132:1 › lost successful reply blocks repeat then verifies the exact saved order (6.0s)
+  ✓  654 tests/browser/profile-capacity.spec.ts:89:1 › trial uses ten-profile allowance and does not substitute the one-client visible catalog (6.5s)
+  ✓  652 tests/browser/portfolio.spec.ts:134:1 › capability edits invalidate the list and retain unrelated registration codes (8.0s)
+  ✓  655 tests/browser/portfolio-layout.spec.ts:163:1 › wrong actor successful receipt is not published (6.6s)
+  ✓  656 tests/browser/profile-capacity.spec.ts:105:1 › failed state read blocks creation; explicit read retry restores available capacity (7.5s)
+  ✓  658 tests/browser/portfolio-layout.spec.ts:176:1 › portal role never reads or writes the layout catalog (4.8s)
+  ✓  659 tests/browser/profile-capacity.spec.ts:129:1 › fresh create preflight catches a slot consumed while the form was open and preserves input (7.3s)
+  ✓  660 tests/browser/portfolio-layout.spec.ts:191:1 › failed latest read cannot reuse the stale conflict receipt (5.4s)
+  ✓  657 tests/browser/portfolio.spec.ts:173:1 › navigation, permissions, session expiry and mobile layout use real feature components (16.0s)
+  ✓  663 tests/browser/profile-current-state.spec.ts:15:1 › profile notes conceal a failed saved-client read and prevent replacement (3.3s)
+  ✓  661 tests/browser/profile-capacity.spec.ts:165:3 › held capacity preflight cannot write after capacity-invalidate-actor (6.0s)
+  ✓  662 tests/browser/portfolio-layout.spec.ts:220:1 › expired session uses the existing sign-in boundary without a write (5.0s)
+  ✓  664 tests/browser/profile-current-state.spec.ts:34:1 › profile notes reject another client's receipt and require review before retry (3.8s)
+  ✓  666 tests/browser/portfolio-layout.spec.ts:239:1 › invalidated identity blocks a pending local draft write (5.5s)
+  ✓  665 tests/browser/profile-capacity.spec.ts:165:3 › held capacity preflight cannot write after capacity-unmount (6.1s)
+  ✓  667 tests/browser/profile-current-state.spec.ts:56:1 › profile notes retain a refused draft without reporting it saved (3.1s)
+  ✓  670 tests/browser/profile-current-state.spec.ts:72:1 › late notes receipts cannot close a replacement actor's editor (4.0s)
+  ✓  668 tests/browser/portfolio-layout.spec.ts:263:3 › late PUT cannot publish after layout-actor-change (5.3s)
+  ✓  669 tests/browser/profile-capacity.spec.ts:205:1 › unknown create reply freezes repeat creation and retains the completed form (8.2s)
+  ✓  671 tests/browser/profile-current-state.spec.ts:106:1 › failed account-team refresh conceals cached members and disables changes (3.5s)
+  ✓  672 tests/browser/portfolio-layout.spec.ts:263:3 › late PUT cannot publish after layout-catalog-change (5.4s)
+  ✓  674 tests/browser/profile-current-state.spec.ts:129:1 › failed member options cannot submit a retained selection (3.7s)
+  ✓  673 tests/browser/profile-capacity.spec.ts:249:5 › logo upload-url cannot continue after capacity-invalidate-actor (6.9s)
+  ✓  676 tests/browser/profile-current-state.spec.ts:147:1 › team add needs the requested native roster effect (3.4s)
+  ✘  675 tests/browser/portfolio-layout.spec.ts:263:3 › late PUT cannot publish after layout-unmount (5.3s)
+  ✘  678 tests/browser/profile-current-state.spec.ts:163:1 › owner assignment rejects a different returned owner (2.8s)
+  ✘  677 tests/browser/profile-capacity.spec.ts:249:5 › logo storage cannot continue after capacity-invalidate-actor (3.4s)
+
+
+  1) tests/browser/email-compose.spec.ts:510:1 › actor change while prepare awaits causes zero storage/confirm/send 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/mailbox session changed or is unverified/)
+    Expected: visible
+    Error: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:
+        1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })
+        2) <p role="alert">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/mailbox session changed or is unverified/)
+
+
+      520 |   await expect(
+      521 |     page.getByText(/mailbox session changed or is unverified/),
+    > 522 |   ).toBeVisible();
+          |     ^
+      523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });
+      524 |   expect(state.sent).toHaveLength(0);
+      525 | });
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/email-compose.spec.ts:522:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-actor-change-93420-s-zero-storage-confirm-send/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/email-compose-actor-change-93420-s-zero-storage-confirm-send/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/email-compose-actor-change-93420-s-zero-storage-confirm-send/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/email-compose-actor-change-93420-s-zero-storage-confirm-send/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/manual-debrief.spec.ts:85:1 › manual debrief reviews written context, generates only on submit and saves separately 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Review generated debrief', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review generated debrief', exact: true })
+        14 × locator resolved to <div role="dialog" tabindex="-1" id="radix-_r_1f_" data-state="open" aria-modal="true" data-slot="dialog-content" aria-labelledby="radix-_r_1g_" aria-describedby="radix-_r_1h_" class="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg b…>…</div>
+           - unexpected value "visible"
+
+
+      113 |     .getByRole("button", { name: "Save debrief", exact: true })
+      114 |     .click();
+    > 115 |   await expect(editor).not.toBeVisible();
+          |                            ^
+      116 |   expect(state.saves).toBe(1);
+      117 |   expect(unexpected).toEqual([]);
+      118 | });
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/manual-debrief.spec.ts:115:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/manual-debrief-manual-debr-82218-submit-and-saves-separately/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/manual-debrief-manual-debr-82218-submit-and-saves-separately/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/manual-debrief-manual-debr-82218-submit-and-saves-separately/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/manual-debrief-manual-debr-82218-submit-and-saves-separately/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/meeting-library.spec.ts:308:1 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Review generated debrief', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review generated debrief', exact: true })
+        14 × locator resolved to <div role="dialog" tabindex="-1" id="radix-_r_16_" data-state="open" aria-modal="true" data-slot="dialog-content" aria-labelledby="radix-_r_17_" aria-describedby="radix-_r_18_" class="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg b…>…</div>
+           - unexpected value "visible"
+
+
+      462 |     .getByRole("button", { name: "Save debrief", exact: true })
+      463 |     .click();
+    > 464 |   await expect(editor).not.toBeVisible();
+          |                            ^
+      465 |   expect(saved).toBe(true);
+      466 |   expect(unexpected).toEqual([]);
+      467 | });
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/meeting-library.spec.ts:464:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/meeting-library-Transcript-0bd6b-ytes-and-reviews-truncation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/meeting-library-Transcript-0bd6b-ytes-and-reviews-truncation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/meeting-library-Transcript-0bd6b-ytes-and-reviews-truncation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/meeting-library-Transcript-0bd6b-ytes-and-reviews-truncation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/meeting-review.spec.ts:398:1 › disabled generation capability and portal role send no source generation 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: getByRole('button', { name: 'Use saved meeting notes', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Use saved meeting notes', exact: true })
+
+
+      416 |   await expect(
+      417 |     page.getByRole("button", { name: "Use saved meeting notes", exact: true }),
+    > 418 |   ).toBeDisabled();
+          |     ^
+      419 |   await expect(
+      420 |     page.getByRole("dialog", { name: "Use saved meeting notes", exact: true }),
+      421 |   ).toHaveCount(0);
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/meeting-review.spec.ts:418:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/meeting-review-disabled-ge-2f8ac-e-send-no-source-generation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/meeting-review-disabled-ge-2f8ac-e-send-no-source-generation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/meeting-review-disabled-ge-2f8ac-e-send-no-source-generation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/meeting-review-disabled-ge-2f8ac-e-send-no-source-generation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/browser/profile-capacity.spec.ts:249:5 › logo storage cannot continue after capacity-invalidate-actor 
+
+    Test was interrupted.
+
+    Error: locator.fill: Target page, context or browser has been closed
+
+      38 |   await dialog
+      39 |     .getByLabel("Legal name *", { exact: true })
+    > 40 |     .fill("Capacity Test");
+         |      ^
+      41 |   await dialog
+      42 |     .getByLabel("Website *", { exact: true })
+      43 |     .fill("capacity.example.test");
+        at fillProfile (/workspace/capiro-p1-successor/apps/web/tests/browser/profile-capacity.spec.ts:40:6)
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/profile-capacity.spec.ts:307:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-capacity-logo-stor-0f04d-r-capacity-invalidate-actor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/profile-capacity-logo-stor-0f04d-r-capacity-invalidate-actor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-capacity-logo-stor-0f04d-r-capacity-invalidate-actor/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/profile-capacity-logo-stor-0f04d-r-capacity-invalidate-actor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/browser/profile-current-state.spec.ts:163:1 › owner assignment rejects a different returned owner 
+
+    Test was interrupted.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for getByRole('button', { name: 'Save owners' })
+        - locator resolved to <button class="button primary">Save owners</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+      175 |     .getByRole("combobox", { name: "Primary owner", exact: true })
+      176 |     .selectOption(profileMembers[2]!.id);
+    > 177 |   await page.getByRole("button", { name: "Save owners" }).click();
+          |                                                           ^
+      178 |   await expect(
+      179 |     page.getByText(/owner change result needs review/i),
+      180 |   ).toBeVisible();
+        at /workspace/capiro-p1-successor/apps/web/tests/browser/profile-current-state.spec.ts:177:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-current-state-owne-63940--a-different-returned-owner/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/profile-current-state-owne-63940--a-different-returned-owner/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-current-state-owne-63940--a-different-returned-owner/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/profile-current-state-owne-63940--a-different-returned-owner/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/browser/email-compose.spec.ts:510:1 › actor change while prepare awaits causes zero storage/confirm/send 
+    tests/browser/manual-debrief.spec.ts:85:1 › manual debrief reviews written context, generates only on submit and saves separately 
+    tests/browser/meeting-library.spec.ts:308:1 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation 
+    tests/browser/meeting-review.spec.ts:398:1 › disabled generation capability and portal role send no source generation 
+  3 interrupted
+    tests/browser/portfolio-layout.spec.ts:263:3 › late PUT cannot publish after layout-unmount ────
+    tests/browser/profile-capacity.spec.ts:249:5 › logo storage cannot continue after capacity-invalidate-actor 
+    tests/browser/profile-current-state.spec.ts:163:1 › owner assignment rejects a different returned owner 
+  314 did not run
+  671 passed (27.9m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 130
+npm error path /workspace/capiro-p1-successor/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-p1-successor/apps/web
+npm error command failed
+npm error command sh -c playwright test --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

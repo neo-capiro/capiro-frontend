@@ -1,0 +1,318 @@
+{
+  "architecture-review.json": {
+    "sha256": "975ce014a1c05ecda0f3e9058ca800c9ce7689b838487e26e99ec84bc040d6fa",
+    "bytes": 3330
+  },
+  "baseline-file-contracts.ts": {
+    "sha256": "3f2520b1d63a086ced9a6a592f4d6c1c3d5d2c55aa4cf02da8b7dab6c0bf73e7",
+    "bytes": 4656
+  },
+  "baseline-files-semantic.log": {
+    "sha256": "a28f729202eb7b7e250aea48aa71953e97cc2a64bc269fade0b58a7414495403",
+    "bytes": 2073
+  },
+  "baseline-files-semantic.test.ts": {
+    "sha256": "67da12ac54d09188bfff6934ae2f5588177ee56bd777879abc359bafc26a47ad",
+    "bytes": 623
+  },
+  "baseline.vitest.mts": {
+    "sha256": "246acff23b93f5b93744dae8b0965e241acc56b75573a2d3c888aece66d07333",
+    "bytes": 305
+  },
+  "calendar-browser-output/.last-run.json": {
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  "calendar-browser-results.json": {
+    "sha256": "df8fe45956fa3970677b38d0f4314847444902afc87a9367a25e299bee3b71db",
+    "bytes": 20465
+  },
+  "calendar-browser.log": {
+    "sha256": "548abc9f7b642e4af0308fae43898afb228784bb1e995a0093a1fc6925993e83",
+    "bytes": 2816
+  },
+  "calendar-candidate.diff": {
+    "sha256": "fc5175d8c94fd1365376bed3e96326e9fbbf4d9c99428c44af97b0f7704ab5e7",
+    "bytes": 61409
+  },
+  "calendar-final-browser-output/.last-run.json": {
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  "calendar-final-browser-results.json": {
+    "sha256": "82ea8a7077f4aa160563bd79e41761abaeddec8fb0f25d4e75a29a0743a748a7",
+    "bytes": 23726
+  },
+  "calendar-final-browser.log": {
+    "sha256": "b81f48a527218f21c4ba8f9d79d0dfaa3d824493e0c5aa4e606ebb0380eaabf7",
+    "bytes": 3301
+  },
+  "calendar-final.playwright.ts": {
+    "sha256": "a7bdde90d813c69af523ea3cf0668c4eaeda05b53abd12aa916d36bb42e58ae0",
+    "bytes": 672
+  },
+  "calendar-unit.log": {
+    "sha256": "d3aa42130fca0a405f19a9574eeb5e1389227646bd407cc28dd2ebeafd5106a8",
+    "bytes": 225
+  },
+  "calendar.playwright.ts": {
+    "sha256": "6c6c0ed48b0442c74fd6bcf345bb378e8f8320fa52894f370acd071c31cbd556",
+    "bytes": 660
+  },
+  "candidate-bindings.json": {
+    "sha256": "dfddf1d54734b9c1fd07cdad03eca97e824d08355ec1a5a13ed7700b29e0488f",
+    "bytes": 5104
+  },
+  "candidate-files-semantic.log": {
+    "sha256": "f4f465823597fb73e10ff290400e5ebadc08a54644764856d8d5a76fa5e7f9f9",
+    "bytes": 217
+  },
+  "candidate-files-semantic.test.ts": {
+    "sha256": "70f3a9a03efcc1968137421bea943b7be0d4e592e23b24646a65ba1c48a91a0b",
+    "bytes": 672
+  },
+  "candidate.vitest.mts": {
+    "sha256": "78153e130513e4999e2e734891fb2bdeab0ff67b65f1c0a26fef57480ade721b",
+    "bytes": 306
+  },
+  "changed-source-architecture-signals.json": {
+    "sha256": "b8c040a682c2879efe469d96074a319a46f690446f58f7672e1d40ce0627bda8",
+    "bytes": 1146
+  },
+  "dependency-inspection.json": {
+    "sha256": "05cf6df25ed54cf175b79756a32f7437671c794514d2a64195dbd75a6209c767",
+    "bytes": 426
+  },
+  "files-browser-output/.last-run.json": {
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  "files-browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/conflicting-acl.png": {
+    "sha256": "50d196800e0c5e2fd970e0cfb3f75eb42df6e49894014f2a52fef35373ba03d4",
+    "bytes": 125194
+  },
+  "files-browser-results.json": {
+    "sha256": "b5ad189e7906e13565d699fe92e0a60ae0ee2903d84dc9e54600beb3c055d9f0",
+    "bytes": 13921
+  },
+  "files-browser.log": {
+    "sha256": "f7119220685f2c147508c58928ec2c242c8c0a59b416c4f82f00a30430de9aa9",
+    "bytes": 2001
+  },
+  "files-candidate.diff": {
+    "sha256": "f85f47f27a1763029376c265f3a8cf806a7b799caca4a60afe2d9e57e4e65145",
+    "bytes": 48720
+  },
+  "files-unit.log": {
+    "sha256": "84e7ad219e01ae2a27e5ff2b5de9dd8407fd2507aebbca2ed66263c0f875029e",
+    "bytes": 222
+  },
+  "files.playwright.ts": {
+    "sha256": "3d38a7b8677454cf4080bec07aa231737f523d4e16abbcfa53917406ab5bd030",
+    "bytes": 645
+  },
+  "findings.json": {
+    "sha256": "c11d87ed2a42005ba40ca5f9cfd63878b1e95ece81ee4ac183e40b05084e7196",
+    "bytes": 4405
+  },
+  "independent-calendar-after-output/.last-run.json": {
+    "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+    "bytes": 45
+  },
+  "independent-calendar-after-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/pending-draft.png": {
+    "sha256": "85128f9b5aff919d68445cb63c2553a18ecc6c9d73e92122c0680f83046c5d22",
+    "bytes": 41312
+  },
+  "independent-calendar-after-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/trace.zip": {
+    "sha256": "7dd367d1da3d959a837481239994c15a5d9c5a8f22091982af663cb28e72d6b7",
+    "bytes": 178776
+  },
+  "independent-calendar-after.json": {
+    "sha256": "39c067301cfca35666e950b7fd2d0e567a4eed2fccd4eb20e5dd0498b5d48b3f",
+    "bytes": 3464
+  },
+  "independent-calendar-after.log": {
+    "sha256": "31a9489616308a6c6535a8cc53bbb18a6bd37fa0029f9313af8cca074fa12e30",
+    "bytes": 385
+  },
+  "independent-calendar-before-output/.last-run.json": {
+    "sha256": "52953808c8d3a4582c51822cdf5fcc0b0f1861a77fec70d7a9c0528022fb6cda",
+    "bytes": 96
+  },
+  "independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/draft-observation.json": {
+    "sha256": "97b7ca512d144b320f5bc5b3af73913c843c848f0906e906b552c570e3bf4236",
+    "bytes": 294
+  },
+  "independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/error-context.md": {
+    "sha256": "5394337d98787894b3b53a3c3af101a6827f515ec22e69824c087d23abbf3ac4",
+    "bytes": 3101
+  },
+  "independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/pending-draft.png": {
+    "sha256": "b88040c39574f1d5250967850bf604c001c3696437b67f5fcd6c3cae247107da",
+    "bytes": 43195
+  },
+  "independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/test-failed-1.png": {
+    "sha256": "d5f8025bee231ae5ade233696190aa5a6826df1fd1016928d93a58155207c600",
+    "bytes": 14281
+  },
+  "independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/trace.zip": {
+    "sha256": "08cc70d1d74588426823782ce0c59edec9068bc6dd95b8d899be221d782adcb5",
+    "bytes": 212826
+  },
+  "independent-calendar-before.json": {
+    "sha256": "c3f25f0e048884e57d5585ea66a5b046b9a8985dbb21d84b1059e94ac745cb4d",
+    "bytes": 7933
+  },
+  "independent-calendar-before.log": {
+    "sha256": "098aca426c1e8bf20407c6c6cb18ea756f0a692674a83c49df8143ef47e352af",
+    "bytes": 3453
+  },
+  "independent-calendar.playwright.ts": {
+    "sha256": "85e7cc547b2949e56510ce5f7c70231733ac774c68a00b5dced91e119545b6e5",
+    "bytes": 549
+  },
+  "independent-calendar.spec.ts": {
+    "sha256": "12935561b56caa9e7232df0874cbc1d53d8f931ae7ba86df8a70a5c6ee8673e0",
+    "bytes": 1997
+  },
+  "independent-contracts-replay.log": {
+    "sha256": "8c7a535a56b9cc130125678f653f0f0db2d404a2cd02b58a74b8a69e7cf909e8",
+    "bytes": 222
+  },
+  "independent-contracts.log": {
+    "sha256": "5b215355a9f82220ff672275e4d3f466e27be87a2ce0359df1fb8392098827b8",
+    "bytes": 8225
+  },
+  "independent-contracts.test.ts": {
+    "sha256": "9e33ea9c186e391e30f0cda4977802bc19a54d67a488d8d51efb5b9a3bb74992",
+    "bytes": 6728
+  },
+  "independent-review.json": {
+    "sha256": "fc99d70a39136228190c89f8049b8e0e5da2c79f6dd576f3e8d4166a5bdb912d",
+    "bytes": 8083
+  },
+  "independent.vitest.mts": {
+    "sha256": "3d0c4dd619055550f52f5968db93630cdae24d43e082bc5799a95806928f20d8",
+    "bytes": 303
+  },
+  "native-client-files.ts": {
+    "sha256": "9b983bc5ecbf7810ebf054c3e55c6d6343220eb7f3832057469e0c21da8dcfa2",
+    "bytes": 11302
+  },
+  "native-engagement.ts": {
+    "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+    "bytes": 506538
+  },
+  "report.md": {
+    "sha256": "bd70873b5a38509145b52a45c669b30119ddb57210559eb4908ad3e22b093bde",
+    "bytes": 3492
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx": {
+    "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450",
+    "bytes": 9310
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/MeetingForm.tsx": {
+    "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434",
+    "bytes": 6400
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/artifacts/api.ts": {
+    "sha256": "cee1fe8a5b7c8ace24b7fa5125e3c7c12e0cda7b391e3c6fdd868654556ad3cb",
+    "bytes": 2881
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts": {
+    "sha256": "145e2f76cb7461f7009583117d0355b1587fd55b6da18d80addbca26630ed389",
+    "bytes": 3198
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts": {
+    "sha256": "9f1ad90ab30c24fd5d6f7977a0c9770a745d5c532cb258737731d7bb3141a6e0",
+    "bytes": 3182
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/meeting-save.ts": {
+    "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f",
+    "bytes": 1447
+  },
+  "reviewed-candidates/calendar/apps/web/src/features/portfolio/calendar/mutations.ts": {
+    "sha256": "f60e03a9e739e364a54123486abee3e5eb649cf765e2b5977d847f3782056d4e",
+    "bytes": 3070
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-artifact-receipts-harness.tsx": {
+    "sha256": "064517a14a54739c73acf17249acdbac25bade672b28ac2ed575d401efb0fc73",
+    "bytes": 1624
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-artifact-receipts.html": {
+    "sha256": "34c9c6a5991883fe3f8d10f2da545e57364b62af59c4f45aad43f0892807eeb3",
+    "bytes": 306
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts": {
+    "sha256": "18d15a0e614a1b3d3c615c1e8754d2327432a485e2385140a45010bdb86adff7",
+    "bytes": 11987
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx": {
+    "sha256": "015f55816098db004dacd6defdab087ec0d25a84844c04b239740ffb57d77b7e",
+    "bytes": 1181
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-meeting-receipts.html": {
+    "sha256": "d88bcd0daf247c21f2c8dfde631552e45f15bedae060f9c450d44a94f7522fa1",
+    "bytes": 287
+  },
+  "reviewed-candidates/calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts": {
+    "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f",
+    "bytes": 3297
+  },
+  "reviewed-candidates/calendar/apps/web/tests/calendar-artifact-receipts.test.ts": {
+    "sha256": "83922ca9c25c06b8605e8417615153f0571051293770266be0b2404277c60a4a",
+    "bytes": 9994
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/FileAccess.tsx": {
+    "sha256": "f7d7802180dc955eb34bbbd7b4a8cb619d40c96d6b57c9f36c9d8c9cabe9f6a9",
+    "bytes": 5140
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/FileMetadataStatus.tsx": {
+    "sha256": "bf5ac24fe63c445fd32f0192657e12f8189d050233c105a65a3b4956f8dda59c",
+    "bytes": 1800
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/MoveFile.tsx": {
+    "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0",
+    "bytes": 3025
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/contracts.ts": {
+    "sha256": "b6489db3880eae0df2cf176920e76dcf9225cde5d668aade87b90e7a10dedc51",
+    "bytes": 5419
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/metadata-actions.ts": {
+    "sha256": "e1a54f98a41189396e1e135efb0c333933e826fe7c0f2aacca0b9b49d96fd3d7",
+    "bytes": 3234
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/metadata-attempt.ts": {
+    "sha256": "05dc352ef7b80575a1d5692f3881e85855796a38f5f608a1ac31f8d43eca5c61",
+    "bytes": 2159
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/mutations.ts": {
+    "sha256": "e4da1423dac17124164ea3de4aec3fa6d0b9bc45ff4d340166b095bda1821d03",
+    "bytes": 1513
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/queries.ts": {
+    "sha256": "d4bfab2b114044fb1068dae1211a5ea9340f1f514116aa21559aa1e0b3803716",
+    "bytes": 2791
+  },
+  "reviewed-candidates/files/apps/web/src/features/portfolio/files/useFileMetadataChange.ts": {
+    "sha256": "3b7b374daf12df45e096a7c3db737d33d3f4378559fedbdc7425a4bf833b8fd5",
+    "bytes": 2925
+  },
+  "reviewed-candidates/files/apps/web/tests/browser/files-metadata-receipts.spec.ts": {
+    "sha256": "3964338e9f0760a99b107a6901ca61c67dae04686e0530223e340ddb460c5429",
+    "bytes": 14728
+  },
+  "reviewed-candidates/files/apps/web/tests/files-metadata-actions.test.ts": {
+    "sha256": "e90bd79de4edf1fc75f3797a470afe90a3d3fb81ebb80faab79ae1d398947868",
+    "bytes": 6698
+  },
+  "reviewed-candidates/files/apps/web/tests/files-metadata-receipts.test.ts": {
+    "sha256": "59b68ec5ef115c61f363cc84f5106aff7e89e5022fba705b40f5c74d0eeeb9a4",
+    "bytes": 2714
+  },
+  "root-meeting-review-fixture.diff": {
+    "sha256": "fdbffa86ce99b393aa8dafa09c2fa17c5c3e543316ba3e144ca5f1a2352f8631",
+    "bytes": 870
+  }
+}

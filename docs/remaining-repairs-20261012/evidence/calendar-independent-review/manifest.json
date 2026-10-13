@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-12T20:09:52.121011+00:00",
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "verdict": "PASS_BOUNDED_SOURCE_REVIEW_NO_REMAINING_BLOCKER_FOUND",
+  "fileCount": 29,
+  "totalBytes": 892331,
+  "files": [
+    {
+      "path": "apps__web__src__features__portfolio__calendar__MeetingDetail.tsx",
+      "bytes": 5179,
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c"
+    },
+    {
+      "path": "apps__web__src__features__portfolio__calendar__lifecycle.ts",
+      "bytes": 2571,
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491"
+    },
+    {
+      "path": "apps__web__src__features__portfolio__calendar__sharing__api.ts",
+      "bytes": 3006,
+      "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a"
+    },
+    {
+      "path": "apps__web__src__features__portfolio__calendar__sharing__contracts.ts",
+      "bytes": 4039,
+      "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290"
+    },
+    {
+      "path": "apps__web__src__features__portfolio__calendar__sharing__useSharing.ts",
+      "bytes": 3949,
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c"
+    },
+    {
+      "path": "final-binding.json",
+      "bytes": 9120,
+      "sha256": "7fe545a64e3214d54521b21d4a573554da20983f713f24b2cf467641dd6156b0"
+    },
+    {
+      "path": "findings.json",
+      "bytes": 600,
+      "sha256": "178165497cd20634e99ccca648e7262c5db26dcfb957ac1553b96254eaf362ad"
+    },
+    {
+      "path": "interim-source-manifest.json",
+      "bytes": 1394,
+      "sha256": "936d0a100dda8f9a3d2dea45edb2685fb3c8cf58a75e663c02643a2379065789"
+    },
+    {
+      "path": "native-contract-binding.json",
+      "bytes": 1735,
+      "sha256": "c52ad25069034bc64d870ffbac35f46f16570cf83fb17e158ae9bbd321cd0d1e"
+    },
+    {
+      "path": "native-current-engagement-access.helpers.ts",
+      "bytes": 5101,
+      "sha256": "a7d28dcb3db441049d7f93a89b54cc21b097af3757a66f2934b0e5a2a560d0bf"
+    },
+    {
+      "path": "native-current-engagement.controller.ts",
+      "bytes": 83984,
+      "sha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae"
+    },
+    {
+      "path": "native-current-engagement.service.ts",
+      "bytes": 506538,
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+    },
+    {
+      "path": "owner-baseline-results.json",
+      "bytes": 21184,
+      "sha256": "58916e3e8a5969c0fa7eccb060b743c62b133a0e9d5b4dc967abc904918d324f"
+    },
+    {
+      "path": "owner-calendar-lifecycle-as-executed-final.spec.ts",
+      "bytes": 8992,
+      "sha256": "88ee26ea2586d47aa71508f8d4c86c4f21eaf2ddee247bbb6acc08adcdacfadf"
+    },
+    {
+      "path": "owner-calendar-unit-final.json",
+      "bytes": 39794,
+      "sha256": "955231b40dadce646ff32de99f9b6c5430b5aa3f8c6051c755231f9dac677ce7"
+    },
+    {
+      "path": "owner-calendar-unit-verified.json",
+      "bytes": 36981,
+      "sha256": "7dfa106d35c52984fb6a029d642a3d5ae329adc6d3775324a84a144bcb4b63fe"
+    },
+    {
+      "path": "owner-candidate-results.json",
+      "bytes": 81032,
+      "sha256": "b61ebeaa989fd075c57e762c68a2d4f7987d869fab90afc08aeca673043b9b32"
+    },
+    {
+      "path": "owner-draft-snapshot-green-results.json",
+      "bytes": 5314,
+      "sha256": "b3a19037d89d51487cddc4c9282ba3289f06becdbf92f38310b16f7049869945"
+    },
+    {
+      "path": "owner-evidence-copy.json",
+      "bytes": 4005,
+      "sha256": "6409c8f2106216ff0ccd0d4c35dc0938ae9a6b4a36bd47c13674d2016da1ce7f"
+    },
+    {
+      "path": "owner-format-final-correction.json",
+      "bytes": 370,
+      "sha256": "9da911bd6f558fc0ec267eec3c13e2926a53f670bd714c835850670779da604c"
+    },
+    {
+      "path": "owner-lease-release.json",
+      "bytes": 157,
+      "sha256": "a51a528fafa58b0cbce378070b78098b86af0c1014ffeb5eae01302100c1e519"
+    },
+    {
+      "path": "owner-lifecycle-unit-after.json",
+      "bytes": 30950,
+      "sha256": "f7ef217bcbedc0d4824a59efef7ca82565b1046355a5fdef1853a2bf418c038b"
+    },
+    {
+      "path": "owner-refresh-controls-results.json",
+      "bytes": 4550,
+      "sha256": "e898dc7dc9eb716c361ff6605f8623afe44a7185e1519a80f0c19e3c9e4f3bdd"
+    },
+    {
+      "path": "owner-sharing-unit-after.json",
+      "bytes": 8647,
+      "sha256": "e3734e6e3f35590604889e3a06b1086931f877eb646e69ce16a882fa045b26fe"
+    },
+    {
+      "path": "owner-structure-review-proposal.json",
+      "bytes": 5757,
+      "sha256": "4a850a78be6919c5cf3425ac32bdac81c7bc7e906040769a7c40ac0f5941ab8f"
+    },
+    {
+      "path": "owner-typecheck-candidate-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "report.md",
+      "bytes": 11083,
+      "sha256": "f8821f59027da6693940947beab28a91e1276ea58de1e69d7f748527b43b96e1"
+    },
+    {
+      "path": "reviewed-source-draft.json",
+      "bytes": 5514,
+      "sha256": "24eaf45615456af1d2af415833a8870b62a369e909ac6e5eefd8b1fbed3df6dd"
+    },
+    {
+      "path": "snapshot-clarification.json",
+      "bytes": 785,
+      "sha256": "33a3cc319989c839a2c68cf6ec88ab083258374067d05e85a0686c7133d8ae59"
+    }
+  ]
+}

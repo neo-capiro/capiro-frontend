@@ -1,0 +1,13 @@
+{
+  "name": "browser-positive",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+    "-p",
+    "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-positive.json"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "expectedExit": 0
+}

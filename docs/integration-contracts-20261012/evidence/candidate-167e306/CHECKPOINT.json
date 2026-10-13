@@ -1,0 +1,66 @@
+{
+  "source": "167e306fbb248c7da80a492f5b22175fb1faa11a",
+  "install": {
+    "exit": 0,
+    "packages": 847,
+    "scripts": "ignored as explicitly recorded; fresh Elements SSR qualification is separate"
+  },
+  "check": {
+    "exit": 0,
+    "rootTests": 58,
+    "transportTests": 21,
+    "applicationUnitTests": 1120,
+    "gatewayUnitTests": 94,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "architecture": {
+      "total": 407,
+      "reviewed": 382,
+      "inheritedUnreviewed": 25,
+      "blocking": 0
+    }
+  },
+  "reviewerPositiveControl": {
+    "passed": 2,
+    "failed": 0,
+    "sha256": "387456386de1a7ea677ce9711f932b93de58a3645cdd2cb556ce86ffe1efdfd7"
+  },
+  "modulesBrowser": {
+    "passed": 87,
+    "failed": 0
+  },
+  "portfolioBrowser": {
+    "passed": 71,
+    "failed": 0,
+    "interrupted": 1,
+    "unrun": 851,
+    "total": 923,
+    "exit": 130,
+    "reason": "SIGINT sent to owned Playwright PID231755 after new contract scope superseded the freeze"
+  },
+  "productionBuild": {
+    "exit": 0,
+    "buildId": "Td3RT9nAnHRieEgd4P8dK"
+  },
+  "alpineAccess": "blocked: existing proxy CONNECT403; no bypass or pin changes",
+  "prohibitedActionsPerformed": false,
+  "actualServer": {
+    "exit": 0
+  },
+  "elements": {
+    "exit": 0,
+    "tests": 15,
+    "receiptSha256": "3b417c2c5fce221129d58c94c5dde07cb24f8b28f3dce1f0f243a97c845dafd2"
+  },
+  "status": "SUPERSEDED: scope expanded at08:09UTC by explicit coordinator instruction to integrate published PR2402 and PR2403; not a complete acceptance",
+  "meriActualServer": {
+    "exit": 0,
+    "viewports": [
+      1440,
+      390
+    ],
+    "runStates": 8,
+    "errors": 0,
+    "serviceCalls": 0
+  }
+}

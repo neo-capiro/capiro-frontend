@@ -1,0 +1,2376 @@
+{
+  "frontendHead": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "frontendRootTree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+  "gitFileEntries": 9191,
+  "familyEntries": 262,
+  "categories": {
+    "static_asset": 179,
+    "asset_generator": 1,
+    "test": 37,
+    "runtime": 43,
+    "style": 2
+  },
+  "samePathCount": 0,
+  "sameBlobCount": 0,
+  "rows": [
+    {
+      "path": "apps/web/public/newsletter/capitol.png",
+      "C": "cebcd54d90c9056ba5707fe502a09f4a329d3cb7",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/capitol.svg",
+      "C": "73f25d45b29f5b023e00788c9ba10569ddb8bb2e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.png",
+      "C": "da62db86f5f0ccaf87d3e6a9b8745a40990b0a3e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/newsroom.svg",
+      "C": "9ed7052c6f65bd6b5d603aa0ba5af47587d2db51",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.png",
+      "C": "273d8477db1f72f613a9f53ef7339ac0f07b195a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/policy-desk.svg",
+      "C": "e807f7e4ad7d82383dc1de1553a65381c8f31826",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color-white.png",
+      "C": "9cbc4d422c6276096b26cd28e7f5ebd9dbc4e3dd",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-color.png",
+      "C": "cc20b3895777237ea87efbd7da18e50005dd1089",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark-white.png",
+      "C": "f796318cb061de2b182e5ca4591ce00f67fb5a65",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-dark.png",
+      "C": "64c982b7b14ee6c1631a8b2c786dcc59908b5d17",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray-black.png",
+      "C": "66af27d8a771d22e4ceb0d9a3ac3cb271f81eafb",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-gray.png",
+      "C": "ec51088fa371653ab9d4422b8d01c23e1b634285",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light-black.png",
+      "C": "715fe711912105ae60cbaa2afd11252d17d4d444",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-bluesky-light.png",
+      "C": "d2b6dba355034e9088aaa1acb7bac3e52dcca61e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color-white.png",
+      "C": "af6a62558fa7f0fa6d16e1ce2930212fda4f8f0c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-color.png",
+      "C": "7981cefb48b95f70cdf855a067020c674c390efc",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark-white.png",
+      "C": "cd9dca13b875997fe07b2eef953bf326b7ed4659",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-dark.png",
+      "C": "04dc76de0fb5689a4641499f6db1c71a09e2f9a7",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray-black.png",
+      "C": "06f611382f891e3eb740bead666a49c585c25683",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-gray.png",
+      "C": "8139b9aa7e8e84924da62e114f0eb43fe3e4d012",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light-black.png",
+      "C": "e2fedb9661b3bdba0b5bb11dd8d1fc4b46aaf769",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-discord-light.png",
+      "C": "c3aa7bb2ecd91e90895ac361ef13d3b4208a6b0f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color-white.png",
+      "C": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-color.png",
+      "C": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark-white.png",
+      "C": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-dark.png",
+      "C": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray-black.png",
+      "C": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-gray.png",
+      "C": "298b27f897064d5043273b655fcd6c621485cd42",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light-black.png",
+      "C": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-email-light.png",
+      "C": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color-white.png",
+      "C": "c9e525fd896f34b0e89676dfc237573d0b794eca",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-color.png",
+      "C": "5ff3a0127caf7d665b05a9169ec1d18bb1d3a94b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark-white.png",
+      "C": "40adb6bbbaad3d1bba1ae7a20789c28efc6ebc32",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-dark.png",
+      "C": "31923f446c181e2c18d6f0b2a198630bd247f6d3",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray-black.png",
+      "C": "e05b135af11a2b88af0137d1fd4d211d12e95050",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-gray.png",
+      "C": "34368c9850677871af94fc8ac2534776cdb276f4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light-black.png",
+      "C": "da0dd14ba4fdfba6f9216ae1b46a7d4a74bcc5a6",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-facebook-light.png",
+      "C": "c4e162a205dd82cae6d36579264787b6a0f5b49c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color-white.png",
+      "C": "ed57ec26aad0f7a43608aa13bc382e57dcb0ac91",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-color.png",
+      "C": "6991128b52d76cd98ba58946318bd35d25c60f07",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark-white.png",
+      "C": "f71e59800706159ed2cd517be1159d212f83d7f5",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-dark.png",
+      "C": "dbb5b09344151e2d1adcb12b61f89ca48061533b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray-black.png",
+      "C": "3a9227c6ab2891ee4beaa4067923b6e0c9b7a99a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-gray.png",
+      "C": "298b27f897064d5043273b655fcd6c621485cd42",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light-black.png",
+      "C": "7bd30c937fbd453257cda0bddf9290af6b127436",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-forward-light.png",
+      "C": "38c8409358124c31ff18a786c3358d83f8325ce4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-attribution.txt",
+      "C": "5de712e2355b9246c070f14c345068920f0ca18e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-icons-license.txt",
+      "C": "69403b25cdc6beb4fa65d13858e9e7aee7e2c672",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color-white.png",
+      "C": "95be9e0978c5ceb588db83cd302887f1594b902c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-color.png",
+      "C": "a84a17b7c62d926ce78523e4e741468c9fa7cf61",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark-white.png",
+      "C": "dd3c9a35d6ac31b2a4f71343172995c353fe40e7",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-dark.png",
+      "C": "4d18bf8278247a0a66b5b900422ce83caea37b2e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray-black.png",
+      "C": "1d2bf9ec5c7610fb352ccd3ace5a29c5f94554ca",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-gray.png",
+      "C": "a688a7bb1f665312fdba9fdb42f998cc04e7901f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light-black.png",
+      "C": "c1cade8a65816145d1d1ebe0fab6fb0e595a3b00",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instagram-light.png",
+      "C": "9ae122f36ab1db0c3e18a2e2f321acdb986ee2db",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color-white.png",
+      "C": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-color.png",
+      "C": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark-white.png",
+      "C": "a8b383500a120fca1c3468be1fdbfe632fd0b457",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-dark.png",
+      "C": "cab56ae3e7490fb79f9efb2f3866a2fcce014d37",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray-black.png",
+      "C": "554a9223adf28ce61dbec035671fce04df5caeba",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-gray.png",
+      "C": "175e1cc0b5bfffa3a6d5dd2e666eb3d5302ddc6f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light-black.png",
+      "C": "b04d633306b50587de75f9d32cad3b5107787a2b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-instapaper-light.png",
+      "C": "f43badc71f31c70906e915805b253581f79d1123",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color-white.png",
+      "C": "6643bdc158e1fecdd8bb91772e56e5a9e12b52c3",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-color.png",
+      "C": "54c8eb14888fee6461ab7db53d463bcec1552729",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark-white.png",
+      "C": "8d215b8d116ca477cd5a954683686b96ec7efa76",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-dark.png",
+      "C": "fc0421a7ca73d640d0abb0d42d1d19fbb6f3eb7e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray-black.png",
+      "C": "cbd2e7e08e20e2f28fdad125919fd392eaf11642",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-gray.png",
+      "C": "b2634462f50cc3fbec0cc38e2b1597f61a0ce9eb",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light-black.png",
+      "C": "855fb90c46c050695e1c0e8276607a61aa263564",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-linkedin-light.png",
+      "C": "abe14a2a68224d791fc44677ce0b9ec6123bb444",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color-white.png",
+      "C": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-color.png",
+      "C": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark-white.png",
+      "C": "7a17c4242cb56ed696285b88a2b4860f70fdaa8d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-dark.png",
+      "C": "0f8c12883648f27cd54ea510b53f8e8065d9f522",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray-black.png",
+      "C": "71bcf6849d69cb6f1d66722bf1007ca61341e4f8",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-gray.png",
+      "C": "3f091427d0820642c2821b379fa5d06392bc5b89",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light-black.png",
+      "C": "c0372b540bcac4c6687c1a981ca8d1aea644e058",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-patreon-light.png",
+      "C": "9880af1d70fd430c1a615b7c6de807525f832a77",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color-white.png",
+      "C": "170dd56cb818fe3a8e026ddcde4d9e407d4fed65",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-color.png",
+      "C": "68b0d004d39e901ccd854aea73f6391297e90d31",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark-white.png",
+      "C": "1242eb6a993da7ff65926aa776a868531de079df",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-dark.png",
+      "C": "94c28b4c755a46f1bfd097c8f295da63fc901d38",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray-black.png",
+      "C": "4b9fb8782efe1e44813daa89ea9eb790b411c6bd",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-gray.png",
+      "C": "55fe6e840da3973955b130c40bd494174e57f9fb",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light-black.png",
+      "C": "89521f62741b5090eb0b84835ed3d5ed53160b21",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-pinterest-light.png",
+      "C": "7d0059831637829f97813f52e720e03e2da12662",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color-white.png",
+      "C": "d8051bae90bc948c214abcde73f79dab88a54bf5",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-color.png",
+      "C": "a379ba8caefc53a2acad8e6ae038c56c6d0d4e8e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark-white.png",
+      "C": "4f5258174f6ce5fa48650bd8f89fb101af978785",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-dark.png",
+      "C": "ee5f252e979e88600ddd5720ccebb043235b5cf1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray-black.png",
+      "C": "40b2a7acd5a2a9d381b845321fac09242f2fae86",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-gray.png",
+      "C": "24014097f1a8cf1158c336bf8db6ca98ced913b2",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light-black.png",
+      "C": "c77523c176806955177b3ae9077512454224908a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-reddit-light.png",
+      "C": "76390638f171bae229f18f1e42b935fe8a937353",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color-white.png",
+      "C": "e923ac212a2d98738bd2b0c5fd40769f9e1d4f83",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-color.png",
+      "C": "784d664dc36f567497a3a5a00f09638030ebbe1c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark-white.png",
+      "C": "dc0c7b14206fa0cc350e73ae45aa5da932298fde",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-dark.png",
+      "C": "b4397cf99b226a33851461d941db806def8604d6",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray-black.png",
+      "C": "2fd06145e4baf3c79213727a09f295c4a8d8452b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-gray.png",
+      "C": "f43a287bbea3dbf962f7ec95a689bcf993bdc1d1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light-black.png",
+      "C": "bdd052467bc68623b192e035af04918df96c2879",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-snapchat-light.png",
+      "C": "52ec30411dc7ef1713429c322c00ea488f04e4f0",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color-white.png",
+      "C": "e84288d8974f947adcc6cba37d5150114e7caec9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-color.png",
+      "C": "26388b755a570f473dca3f2649a97d56fa571608",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark-white.png",
+      "C": "07c5522a87a8c59db464030d3a59e5cc922c2dc4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-dark.png",
+      "C": "2fc549bffe8d5dc6eacfd2485770cfabbef90331",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray-black.png",
+      "C": "8d70335261ae2815a3ff8948ae90fcb662b28c23",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-gray.png",
+      "C": "646874280aa1c62a9d8ee816a6f2c530a562115d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light-black.png",
+      "C": "f57ba4c02093285a54b7db8b041aea684e01110f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-spotify-light.png",
+      "C": "099916ec53ba114fc3e3f8603bf41e65040d0971",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color-white.png",
+      "C": "20fe3a1edd177de7c0e9549af718bc2d46f67caf",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-color.png",
+      "C": "60a5da33a9f8be118bebe980de7b37ce3dbe530f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark-white.png",
+      "C": "c77dc53103ec57a5f6bdb55927f4be8eeeb7cb63",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-dark.png",
+      "C": "e7001bd975dd41d768b370b51df817ae87d0929c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray-black.png",
+      "C": "9632bbbf8fb021ec736e994c858f25412ac197e0",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-gray.png",
+      "C": "2071c233002b1bf30bc19d423b5dc5560b0d5609",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light-black.png",
+      "C": "e18fed3d04f681773a89e0898f7eb73baac1cf70",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-telegram-light.png",
+      "C": "30fbb9fcca8bd1ef16f1286ff39fc183be919160",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color-white.png",
+      "C": "5849993b59c485880c4e99138b429d848442ff39",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-color.png",
+      "C": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark-white.png",
+      "C": "5849993b59c485880c4e99138b429d848442ff39",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-dark.png",
+      "C": "cc595c85eeb3c8018f69b24149a72629d9f4fe4d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray-black.png",
+      "C": "51e372f5215360575f1e4025b57fdcf9764d765a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-gray.png",
+      "C": "c317b5f17a2573ee4e2d035a4b7b09c066503c1f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light-black.png",
+      "C": "0caffebbe466c839836a1e9b38c8a924501a3383",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-threads-light.png",
+      "C": "7aabb2579ca7e2faffbf8187e35ab49544ab2fd6",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color-white.png",
+      "C": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-color.png",
+      "C": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark-white.png",
+      "C": "c8b1fdc8943966cbba08b437aa819bde2ef7e7f4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-dark.png",
+      "C": "9900ee3f6368d4696e6ca3b241635bb46ff59e63",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray-black.png",
+      "C": "fb1775b3e65686f4c690dee63f696e044856c11d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-gray.png",
+      "C": "0e433bcb0faaaf89abc207acb6df15f1643cc51e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light-black.png",
+      "C": "c947b846cc7b0fca5ad863c0812e5a4dee0148f1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-tiktok-light.png",
+      "C": "0ee89d7f04cc0afeb3389f5b5543dd84f820bc7a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color-white.png",
+      "C": "4d2ee18bfc729d772283b8ec0513dde9392ba63a",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-color.png",
+      "C": "6f01526138a186f6de963e8440482fb9b4df83c9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark-white.png",
+      "C": "87e8b562110b49a24525827f869864f20397a235",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-dark.png",
+      "C": "32fd5ee41604c392ae34e69178b0b8c0dbc8e9c3",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray-black.png",
+      "C": "01da933cc5c5ed2a8c8f2b3dd4a35063f6a70fce",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-gray.png",
+      "C": "2f9f0cf41b6208f9ffa7c3e660c2018bb199d132",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light-black.png",
+      "C": "1dbf856feea35de9b6fffd70cdf23b8eb2ba48ab",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitch-light.png",
+      "C": "5509d42abf1eb5dbde2f736d6003dc08640b7536",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color-white.png",
+      "C": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-color.png",
+      "C": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark-white.png",
+      "C": "32796fd2eca68c7b83aad6695202626a30925fb7",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-dark.png",
+      "C": "5a74d3b8f5787a5176521600d38023ea59fff97c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray-black.png",
+      "C": "94326c611da3185959c9fe7413e9e6fc6c09cae9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-gray.png",
+      "C": "44f9f5e4827e56fd618c673c9c135752d8fc7be4",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light-black.png",
+      "C": "55343c6c0c18c1abe254d22d5c95152dd7df4d5c",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-twitter-light.png",
+      "C": "b0e7af6d059ea285e9430a3f09820c5bd2ce5e65",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.png",
+      "C": "115a6a7ec2f212161b2e5f609abc408fe970c7a1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-update.svg",
+      "C": "1a1aeee066b358ff9dbf4381563a72bfe77aaf88",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color-white.png",
+      "C": "8a86b3cb67b41c1c9c13af1bfb1523159f5016fd",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-color.png",
+      "C": "d0a68b40ac2d7cf62f2c6df29aa5d8ca126b0248",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark-white.png",
+      "C": "b31d50a5685e4391c903503f069287d8dc9a7ba3",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-dark.png",
+      "C": "80ea079ac7f4eb93037f8bd72e88d2ac5b794af9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray-black.png",
+      "C": "874d42386d59024ce6af2b050333298fa1b075b1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-gray.png",
+      "C": "688b249ccb583b4981309431696e05c56889de14",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light-black.png",
+      "C": "e9b15ae28b2ec5d949f52491f37a6cd53dd1a861",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-website-light.png",
+      "C": "30182eac564620b0249e4eb7c1a66c6b9ded79ab",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color-white.png",
+      "C": "c6d33bee2abb9bc734bbbdca536dfde03cd337e9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-color.png",
+      "C": "f35247ff0d7b7cd4faaa816f8ddacf9cfb2f10d9",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark-white.png",
+      "C": "6a4413a1ea159c7f1519e0507b6de56f881ef367",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-dark.png",
+      "C": "bbfd8957b1e42ba351c2774d81700a9847174e22",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray-black.png",
+      "C": "13a1ae21a0c147138c872cc951c8a326308671b1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-gray.png",
+      "C": "64b1d27675e2b2b2580b567892ac9ddb14ff3625",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light-black.png",
+      "C": "c464af610c21896099f0a8cc55020f517fc80f60",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-whatsapp-light.png",
+      "C": "96c91a91a854357686d14ebc920c2c57ef4a72d1",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color-white.png",
+      "C": "6b19db2a732a6eacadf4f75438db5fca33b53f8d",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-color.png",
+      "C": "fd4ce005d8de35ef0a966186b714d1594691ba3f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark-white.png",
+      "C": "7919a71b8dc79ead2526505d8e0d35c767c34baf",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-dark.png",
+      "C": "1d041314fb3de2118d83c11044e1706936f5cd5b",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray-black.png",
+      "C": "2386f1e1b4a111da0b3a682562721503eff7257e",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-gray.png",
+      "C": "5618d902d7942f1661dd0a45ccfbcebf79197507",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light-black.png",
+      "C": "5feaa1d611705c4cc8cf2546baf3dc1295859948",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/social-youtube-light.png",
+      "C": "1e309556052514a0fa0ef38c231242f8d222119f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/public/newsletter/template-preview.svg",
+      "C": "fc807f6848353ead90d50d957956d403d8e1f33f",
+      "Q": null,
+      "four": null,
+      "category": "static_asset",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/scripts/generate-newsletter-social-icons.mjs",
+      "C": "3e4c564359590bc0fe620b70593c68fd2ae3eff6",
+      "Q": null,
+      "four": null,
+      "category": "asset_generator",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/pages/engagement/outreach/NewsletterOutreach.test.tsx",
+      "C": "37404cc426ab83a5ce4c3c002cbf1e772003b5c4",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/pages/engagement/outreach/NewsletterOutreach.tsx",
+      "C": "8e16079ecc2313d52ebb662129ca9d731324d510",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/pages/engagement/outreach/newsletter-outreach.css",
+      "C": "f10a013165c5760f959c852721d250716e31cd92",
+      "Q": null,
+      "four": null,
+      "category": "style",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/pages/engagement/outreach/v2/StepRecipientsSelect.newsletter.test.tsx",
+      "C": "dc1e2789beaf057c657a45b90d1a5666297da4af",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAdvancedImageEditor.test.tsx",
+      "C": "89340ab39484753fd7643a68a6daa00ba5c15e2a",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAdvancedImageEditor.tsx",
+      "C": "7eb4cba5a351892e77c8e38527c7eb4a04d4bc0f",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterApps.test.tsx",
+      "C": "941e52aac81f0abe768fcddabe49c009b6a29eda",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterApps.tsx",
+      "C": "6be0480976c4686fbddb6af8c9123d6aac7c507f",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAssetDetails.test.tsx",
+      "C": "ecd92a42ebe434d4f3477fa470e6247d73e1cd23",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAssetDetails.tsx",
+      "C": "32e981e4d4f7dbec18c14b189cf71fb51e58262a",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAssetFolders.tsx",
+      "C": "6139df0ca28351b3796da592258b29c2f9c856b4",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAssetRevisions.tsx",
+      "C": "e3f0f87882a1e3b186be0b349a893dc9feb8eb70",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBrandKit.test.tsx",
+      "C": "2d4168f986075878f3ddef8b2f013669f94902de",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBrandKit.tsx",
+      "C": "2bd8fd5e35030649860295c4fbaecc274e8d650c",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBundledImage.test.ts",
+      "C": "c0bc6c0ffdccbfb2397c53e0380259fd65ecb18d",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterComments.test.tsx",
+      "C": "8acf2aecdb7d72a7800f7702e56f807977e8c7d5",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterComments.tsx",
+      "C": "d23c4da5f367539037be843a0410d0abf7169aa1",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterContentStudio.test.tsx",
+      "C": "214dbac91e0ace21b4e1164ff0d713df8ed58198",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterContentStudio.tsx",
+      "C": "7dfede55db60516966f458c4e0accaf382512312",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterCreation.tsx",
+      "C": "bbc61fbcf210ccc510e1d4020bb81aed5d67547d",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterEditor.test.tsx",
+      "C": "902bbe86edd13a659b8cb231fd27425e1b36b33d",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterEditor.tsx",
+      "C": "a279b6bde38f3e1a2a22f7145dc9c042930b8caa",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterFontPicker.test.tsx",
+      "C": "d2b91899ec0769440288e710efc4ccdd1c39ca1e",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterFontPicker.tsx",
+      "C": "45f7e72226fa78ca4abe786538616da47d073c70",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAi.test.tsx",
+      "C": "5402ed313f2c2ac1b86cdee36327a2c8634edffd",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAi.tsx",
+      "C": "842f8192d12a0ea5e8755757abcd7e7c59988f5a",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAltText.test.tsx",
+      "C": "5bec8b06af01a5ceede766dedd0b622142642d53",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAltText.tsx",
+      "C": "3c785923707b40675ac79f5aab05cc187202a958",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageControls.tsx",
+      "C": "fc093df961ecc1d4f85c96fd7819794c9375b8c5",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageCropOverlay.test.tsx",
+      "C": "4f1ad9062e6942a4c86db982abe04cc2923abdc0",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageCropOverlay.tsx",
+      "C": "74313249bb593b8b6a2fb5b926027377105ce8ba",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageEditor.test.tsx",
+      "C": "56a0b628d49fe8440cc2e63873f51393d6a32fbd",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageEditor.tsx",
+      "C": "51248a9b05fac8e4b9feb3eb7bccabe3b5431316",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageFocusOverlay.test.tsx",
+      "C": "eed1326a78ed51f34a705f53949f426fd7f117ab",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageFocusOverlay.tsx",
+      "C": "5f38fca81fbfab65532c9c75b8056fb389c347cc",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageReplaceMenu.test.tsx",
+      "C": "8bf3b7aed68daef203d92a9f8f6f0897e23b2521",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageReplaceMenu.tsx",
+      "C": "23639502bdc2b084c154cbaa7149f9ddf187774c",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageRotationRuler.tsx",
+      "C": "5906c9bb30c2c3b94ccbcd236fabe0ebda7a648e",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageTextOverlay.test.tsx",
+      "C": "1f4c0012d5356e08955b170719e65fc1730cee97",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageTextOverlay.tsx",
+      "C": "850f9199bd7778d49805da0f1f4c964fefd16584",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterLinkChecker.test.tsx",
+      "C": "5cf1782179f08c921a85deab06ee02f1b961acdd",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterLinkChecker.tsx",
+      "C": "c131e8be4367f71dc51af4ff5f5bd5d1cc35ec17",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterQuickCrop.test.tsx",
+      "C": "f5cc988bf5bbcb21682e6d9c74cf0f41d88a54ef",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterQuickCrop.tsx",
+      "C": "9bfd86e7bc538f46d93d6ab37b90b2d6f51dcf2b",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterReview.test.tsx",
+      "C": "d16d3c34b3bec65f1cf61db5091ada6675747515",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterReview.tsx",
+      "C": "f61a9d17382e16bf78d374393794364f8c2a71b2",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSocialControls.test.tsx",
+      "C": "cfa0459015491a8c2cf35f126afd9159e263ad38",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSocialControls.tsx",
+      "C": "9e4eb1691940c2de9bd1a6d2431675f84930606e",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSocialShareContent.tsx",
+      "C": "8bd324b71c105689c717721ac8aed07defb2c973",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterStockImages.test.tsx",
+      "C": "0d40de68af097c8828a9cf439574e8e9a011a4df",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterStockImages.tsx",
+      "C": "48b15063807cf1b64e0ba2b9c4c567c9567342c6",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurvey.test.tsx",
+      "C": "862e2bb784dc9d5a77decd218c273e56a1f54938",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyBuilder.tsx",
+      "C": "52c5fb071036c8d17903d21e2f4fd9c606bbbeca",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyDesign.tsx",
+      "C": "9d6a774c60066ee9ddd6b62fbe6e5aa78542b98b",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyMedia.test.tsx",
+      "C": "c32f9c2683ae764489873bce2884b55b1f5505df",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyMedia.tsx",
+      "C": "7a05dbb094e0174c97c1ea567d95da8a43dc84d4",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyPreview.test.tsx",
+      "C": "9a4621100d2eebca6e526c716d34a29ec3904197",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyPreview.tsx",
+      "C": "9eddfe047b5e64fa692c52d1ca70d5a658a8870a",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterTemplateChooser.test.tsx",
+      "C": "09c38baa503844148be9e3d6808a599e2ca75196",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterTemplateChooser.tsx",
+      "C": "47e81cf9ac78a03852b18a46affc77ca1c80198e",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterThreadNotifications.tsx",
+      "C": "b130061babfa55b3e49a2e50c00151708c035d92",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoDesign.test.tsx",
+      "C": "d50a7047c8f4509bc9663486f735541292c460b0",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoDesign.tsx",
+      "C": "ffc5ff461d3a9532bf49049fa34df71728792993",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoUrlControl.test.tsx",
+      "C": "13154fcd07dae76c17ecf5ae0cb3ee264c60e250",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoUrlControl.tsx",
+      "C": "2ac64c5c8adeb8c478f7af17cd54b50ed0665ad0",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/api.account-invitations.test.ts",
+      "C": "b3292f60559840a5c3b919a75400847f9876eb93",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/api.image-revisions.test.ts",
+      "C": "e0ac145801e3791889d82db8c9f0ceb18fe7a420",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/api.ts",
+      "C": "7aad2c2f3e3df7d4535cd917d93de1375e1c5412",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/brand-context.tsx",
+      "C": "4a09c64d97515c7ab2137e6ba74b48440544e944",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/controls.tsx",
+      "C": "10519bff5da506413a351b76446dfec9590be417",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-crop.test.ts",
+      "C": "598fed54612d09de1f106017608bd89a84b2bac7",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-crop.ts",
+      "C": "77c99ae2ca59886d444ca4bf83e86169775304fc",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-fonts.test.ts",
+      "C": "98970c0432b6aa5acda95595efe036f9f545bbb2",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-text.test.ts",
+      "C": "86f55fd40d4cb575442b7c936c411c0525ddf399",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor.test.ts",
+      "C": "1e6590381215c941dcf3ace8ffbbd1782c1a5dee",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor.ts",
+      "C": "3caa82e82cd153ac5e86bbbae0396f80230c7de1",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/model.test.ts",
+      "C": "baae1b8448579229b3077cf37c641c7575007f6b",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/model.ts",
+      "C": "56dd78f57a47c726ff6e47ab22abc3178f5fa61f",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/newsletter-links.test.ts",
+      "C": "1e22876dde2d38a93f6bdaf55261a67a02d2929e",
+      "Q": null,
+      "four": null,
+      "category": "test",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/newsletter-links.ts",
+      "C": "407d15bc88a5dfd9003d7363431eacfbeb7b0206",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/newsletter.css",
+      "C": "d52b1392b8ceccf5864783ff9b7b75e38e5d0a76",
+      "Q": null,
+      "four": null,
+      "category": "style",
+      "samePath": null,
+      "sameBlobPaths": []
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/useNewsletterSurveySave.ts",
+      "C": "8034c4066ead7272bd5959305fb2307505eedcf0",
+      "Q": null,
+      "four": null,
+      "category": "runtime",
+      "samePath": null,
+      "sameBlobPaths": []
+    }
+  ],
+  "workingTreeStatus": ""
+}

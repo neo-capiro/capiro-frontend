@@ -1,0 +1,13 @@
+{
+  "name": "prepare-stored_not_released",
+  "route": "prepare",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "COMMAND_PREPARATION_REFUSED",
+      "outcome": "STORED_NOT_RELEASED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Published synthetic uncertainty: metadata disposition does not establish task success or authorize retry."
+}

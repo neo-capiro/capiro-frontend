@@ -1,0 +1,279 @@
+{
+  "scope": "Initial independent read-only completed-receipt review, not final qualification",
+  "startedUTC": "2026-10-13T02:29:30.005653+00:00",
+  "endedUTC": "2026-10-13T02:29:30.222962+00:00",
+  "source": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceTree": "02ad682840eec3b2d8091b37de9b8c45a984e542",
+    "status": ""
+  },
+  "completedReceipts": [
+    {
+      "name": "final-clean-install",
+      "exitCode": 0,
+      "startedUTC": "2026-10-13T01:45:33.656909+00:00",
+      "endedUTC": "2026-10-13T01:45:49.314791+00:00",
+      "sourceBindingVerified": true
+    },
+    {
+      "name": "final-check",
+      "exitCode": 0,
+      "startedUTC": "2026-10-13T01:46:58.449197+00:00",
+      "endedUTC": "2026-10-13T01:48:42.114680+00:00",
+      "sourceBindingVerified": true
+    },
+    {
+      "name": "final-elements",
+      "exitCode": 0,
+      "startedUTC": "2026-10-13T01:48:59.534995+00:00",
+      "endedUTC": "2026-10-13T01:49:06.726431+00:00",
+      "sourceBindingVerified": true
+    },
+    {
+      "name": "final-controlled-selection",
+      "exitCode": 1,
+      "startedUTC": "2026-10-13T01:49:24.846838+00:00",
+      "endedUTC": "2026-10-13T01:49:26.087716+00:00",
+      "sourceBindingVerified": true
+    },
+    {
+      "name": "final-controlled-selection-v2",
+      "exitCode": 0,
+      "startedUTC": "2026-10-13T01:50:31.472303+00:00",
+      "endedUTC": "2026-10-13T01:50:49.690918+00:00",
+      "sourceBindingVerified": true
+    }
+  ],
+  "combinedTests": 1479,
+  "elementsTests": 15,
+  "controlledFinalPasses": 3,
+  "failedControlledSetupPreserved": true,
+  "pendingAtReviewCutoff": [
+    "Full Portfolio browser (running receipt only; result not reviewed)",
+    "Full Modules browser",
+    "Production build",
+    "Actual-server receipt"
+  ],
+  "findingIds": [
+    "DOC-01"
+  ],
+  "documentationPrecision": "AWS locked Playwright1.61.1 and installed Chromium149; exact launched browser not captured. Local observed Chromium154. No browser-version causation established.",
+  "nativeAccepted": 0,
+  "nativeRowsHeld": 337,
+  "independentActions": "Read files/Git and verify hashes/counts; no tests, browser, server, build, install, source edits or AWS calls.",
+  "qualificationOwner": "Root ran recorded gates; independent reviewer did not rerun them.",
+  "rawSnapshots": [
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/BORROWED-LINK-REMOVAL.json",
+      "snapshot": "raw/BORROWED-LINK-REMOVAL.json",
+      "bytes": 465,
+      "sha256": "90dcad420a5709514a4f7d17ccf56d9acd66127ce3c7db29be278fc24589215d"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/FINAL-ENVIRONMENT.json",
+      "snapshot": "raw/FINAL-ENVIRONMENT.json",
+      "bytes": 839,
+      "sha256": "c5b1306bc27f6af28019e3b24a86ccee81ae5019822ca1899cc24ff6cdf9f89a"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/AWS-FAILURE-EVIDENCE.json",
+      "snapshot": "raw/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/CHROMIUM-PUBLIC-DOWNLOAD-HEAD.json",
+      "snapshot": "raw/CHROMIUM-PUBLIC-DOWNLOAD-HEAD.json",
+      "bytes": 245,
+      "sha256": "588f562645c38f80aef20d151db92a9c3b99191d000d3179f1421e36c0f70f64"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/CURRENT-CHECKPOINT.json",
+      "snapshot": "raw/CURRENT-CHECKPOINT.json",
+      "bytes": 1555,
+      "sha256": "432840f0d4b7a47f7b04c7b592a17ee21d21ca0cbaafdc5fdc25038185e26cfb"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/delayed-selection-baseline-exit.json",
+      "snapshot": "raw/delayed-selection-baseline-exit.json",
+      "bytes": 1094,
+      "sha256": "7e1ac681ef77a1214458244c501eee6b39a70cd400732a4afe4d19b0d52de5ee"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-running.json",
+      "snapshot": "raw/final-portfolio-browser-running.json",
+      "bytes": 674,
+      "sha256": "bac18d02e289e41127ff21508646628ef418d17beb255bff49283f66de1fb596"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-clean-install-exit.json",
+      "snapshot": "raw/final-clean-install-exit.json",
+      "bytes": 800,
+      "sha256": "3c933199153000f11bf664ee812383c5e8c0f6d15b776511656137123bbc9974"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-clean-install.log",
+      "snapshot": "raw/final-clean-install.log",
+      "bytes": 372,
+      "sha256": "cd390c9cdd5b41dc8e5e090a1144261951ccab82ab546cdc8a946571cd3d70fc"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-check-exit.json",
+      "snapshot": "raw/final-check-exit.json",
+      "bytes": 717,
+      "sha256": "b2a519e6ff854e25ad8ad27b52849c2b3fec9167794c50f56875d07f8fe1f73b"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-check.log",
+      "snapshot": "raw/final-check.log",
+      "bytes": 816508,
+      "sha256": "562808246edc73ada4b08dd32ba8f977063bf312df4803cbfd0666e6bd8248e9"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-exit.json",
+      "snapshot": "raw/final-elements-exit.json",
+      "bytes": 829,
+      "sha256": "35b3d4a01f787ea12e2f4efcc840c77fbbdf5549ae706e3cd4197b097265f6d4"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-elements.log",
+      "snapshot": "raw/final-elements.log",
+      "bytes": 3360,
+      "sha256": "dfad5eec7d3f778a43c77ac3b4fbda494d066c6b25a6484866f5a4e248681a5f"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-exit.json",
+      "snapshot": "raw/final-controlled-selection-exit.json",
+      "bytes": 1039,
+      "sha256": "48aef5fb2ae7c01667e85e1a7faf06e6c7baf46e64f4814a8d37edeb8b85cdf7"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection.log",
+      "snapshot": "raw/final-controlled-selection.log",
+      "bytes": 1176,
+      "sha256": "7d82862d1a392b559b218d3d6e49ec4ff085e5c13bf49dadf60db2ded8b32248"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2-exit.json",
+      "snapshot": "raw/final-controlled-selection-v2-exit.json",
+      "bytes": 1045,
+      "sha256": "bbc953b5a6d90672b3283297db4c493501113ccbfa214d53cc076515c4aa7735"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2.log",
+      "snapshot": "raw/final-controlled-selection-v2.log",
+      "bytes": 1375,
+      "sha256": "d7f7bd38237f9683282d2f444246fb1b7ce06b4c502ec811a48f349c33184187"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work/qualification.json",
+      "snapshot": "raw/elements/qualification.json",
+      "bytes": 275,
+      "sha256": "97f9e9095078244d7503c860a76fc27dbe19d12a25409fa7b5e2a0b743ea5c09"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work/ssr/receipt.json",
+      "snapshot": "raw/elements/ssr/receipt.json",
+      "bytes": 985118,
+      "sha256": "27ca20bcbbef65ae7b904eb5592327b0489ab012abb820c21e1b335e5c0b98bf"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work/runtime/process.json",
+      "snapshot": "raw/elements/runtime/process.json",
+      "bytes": 2594,
+      "sha256": "f4b52f5a0a9c8282f1586919aafe5c32086fa5fa8884906fdde1d5f4de0ebbe0"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay/playwright.config.ts",
+      "snapshot": "raw/selection-delay/playwright.config.ts",
+      "bytes": 370,
+      "sha256": "22f71745cc173c847b0b5d02b96d44b724013f9f72cfbe87084d5f1a4fa29456"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay/diagnostics.ts",
+      "snapshot": "raw/selection-delay/diagnostics.ts",
+      "bytes": 3688,
+      "sha256": "8dd2cc4fd57ccb69bade81739824d9679486f62100f5fcaff1b4b71073bf3e74"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay/specs/mail-rich-compose.spec.ts",
+      "snapshot": "raw/selection-delay/specs/mail-rich-compose.spec.ts",
+      "bytes": 14326,
+      "sha256": "90f98423bbdafbebb8c665a4c6743a9c7842877d092221486c608f63bb8be3bf"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay/results.json",
+      "snapshot": "raw/selection-delay/results.json",
+      "bytes": 532782,
+      "sha256": "b8e71b15aeef0100ce2770d265acbbd053bc221c5a4c99cd3d8cae78ba69fa7c"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/playwright.config.ts",
+      "snapshot": "raw/selection-delay-green/playwright.config.ts",
+      "bytes": 376,
+      "sha256": "dbdecdc0aebf087af4d899e7ee626e6d35bb3391246237468e86aaf9a4dff8f9"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts",
+      "snapshot": "raw/selection-delay-green/diagnostics.ts",
+      "bytes": 3688,
+      "sha256": "8dd2cc4fd57ccb69bade81739824d9679486f62100f5fcaff1b4b71073bf3e74"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts",
+      "snapshot": "raw/selection-delay-green/specs/mail-rich-compose.spec.ts",
+      "bytes": 14326,
+      "sha256": "90f98423bbdafbebb8c665a4c6743a9c7842877d092221486c608f63bb8be3bf"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/results.json",
+      "snapshot": "raw/selection-delay-green/results.json",
+      "bytes": 4188,
+      "sha256": "5b36a2073fc2f3ba7fb04b58bef30ea0a889e67e96972d4b8cee73cd2a18fac6"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green-v2/playwright.config.ts",
+      "snapshot": "raw/selection-delay-green-v2/playwright.config.ts",
+      "bytes": 379,
+      "sha256": "b8d343c4d86bbdf982ccd64beaf947417aada5c4d21e78c73ff93cf699a617f5"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green-v2/diagnostics.ts",
+      "snapshot": "raw/selection-delay-green-v2/diagnostics.ts",
+      "bytes": 3688,
+      "sha256": "8dd2cc4fd57ccb69bade81739824d9679486f62100f5fcaff1b4b71073bf3e74"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green-v2/specs/mail-rich-compose.spec.ts",
+      "snapshot": "raw/selection-delay-green-v2/specs/mail-rich-compose.spec.ts",
+      "bytes": 14326,
+      "sha256": "90f98423bbdafbebb8c665a4c6743a9c7842877d092221486c608f63bb8be3bf"
+    },
+    {
+      "source": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green-v2/results.json",
+      "snapshot": "raw/selection-delay-green-v2/results.json",
+      "bytes": 595637,
+      "sha256": "240b6191484bd9c520093cc57dbf46f4513f348f4044359cef41342a97ef980d"
+    },
+    {
+      "source": "/tmp/capiro-shipping-profile-permanent-review-20261013/REVIEW-RECEIPT.json",
+      "snapshot": "raw/doc01-repair-inputs/REVIEW-RECEIPT.json",
+      "bytes": 3860,
+      "sha256": "77f93ae09ee590412e4b4647e37be12d7cecd376775fc0fca048bcf00e6b52e1"
+    },
+    {
+      "source": "/tmp/capiro-shipping-profile-permanent-review-20261013/AWS-FAILURE-EVIDENCE.json",
+      "snapshot": "raw/doc01-repair-inputs/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    },
+    {
+      "source": "/workspace/capiro-shipping-browser-20261013/docs/shipping-browser-correction-20261013/reviews/profile-REVIEW.md",
+      "snapshot": "raw/published-profile-REVIEW.md",
+      "bytes": 4897,
+      "sha256": "9231c0a4f3a7482c74b03903b5753375223577d18099d7d64a7f78adb33ea877"
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "capturedUTC": "2026-10-13T06:45:23.617Z",
+  "browserVersion": "154.0.8037.57",
+  "target": {
+    "name": "fixture-portfolio-1440x1040-light",
+    "origin": "http://127.0.0.1:5191",
+    "path": "/",
+    "frame": "411:41421",
+    "fixture": "portfolio",
+    "classification": "Existing Portfolio component harness; Test Aerospace singleton, UI tests synthetic identity, default cards/saved sort, saved layout unavailable; not native application authority"
+  },
+  "before": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "after": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "metrics": {
+    "url": "http://127.0.0.1:5191/",
+    "title": "Portfolio component integration tests",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "dpr": 1,
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "documentSize": {
+      "width": 1440,
+      "height": 1040
+    },
+    "bodyFont": "\"Geist Test\", sans-serif, sans-serif",
+    "headings": [
+      {
+        "text": "Portfolio 1",
+        "font": "\"Geist Test\", sans-serif, sans-serif",
+        "size": "40px"
+      }
+    ],
+    "fontStatus": "loaded",
+    "fonts": [
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "200 800"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "200 800"
+      },
+      {
+        "family": "Geist Test",
+        "status": "loaded",
+        "weight": "100 900"
+      },
+      {
+        "family": "Geist Mono Test",
+        "status": "unloaded",
+        "weight": "100 900"
+      }
+    ],
+    "images": [
+      {
+        "src": "/design/411-41421-imgCapiroWordmark.png",
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 650
+      },
+      {
+        "src": "/design/411-41421-imgIcon.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon1.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon2.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon1.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon3.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon4.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon5.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/411-41421-imgIcon6.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/471-93465-imgIcon.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/471-93465-imgIcon1.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/471-93465-imgIcon2.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/471-93465-imgIcon10.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      }
+    ],
+    "designTargets": [],
+    "visibleNotices": []
+  },
+  "screenshot": {
+    "path": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-portfolio-1440x1040-light.png",
+    "sha256": "670f6706013c3a61ed6dd82f56fa49701f71d325bae0786ef68b40f7493eb543",
+    "viewportOnly": true,
+    "width": 1440,
+    "height": 1040,
+    "colorScheme": "light",
+    "animations": "disabled",
+    "locale": "en-US",
+    "timezone": "UTC"
+  },
+  "api": [
+    {
+      "method": "GET",
+      "path": "/api/backend/core/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/backend/core/clients",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/backend/core/client-account-owners",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/backend/core/me/portfolio-layout",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/backend/core/intelligence/portfolio-alerts?limit=50",
+      "status": 200
+    }
+  ],
+  "remote": [],
+  "blocked": [],
+  "unexpected": [],
+  "errors": [],
+  "limitations": "Supplemental composition capture; no authentication, backend, provider, Figma acceptance or full visual/accessibility gate. Fixture authority is synthetic. Existing notices remain untouched; no CSS/DOM overlay or content replacement."
+}

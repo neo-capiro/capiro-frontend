@@ -1,0 +1,20 @@
+[
+  {
+    "file": "apps/web/tests/browser/email-compose.spec.ts",
+    "beforeAssertions": 8,
+    "afterAssertions": 8,
+    "expectedStringsIdentical": true
+  },
+  {
+    "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+    "beforeAssertions": 7,
+    "afterAssertions": 7,
+    "expectedStringsIdentical": true
+  },
+  {
+    "file": "apps/web/tests/browser/mail-rewrite.spec.ts",
+    "beforeAssertions": 9,
+    "afterAssertions": 9,
+    "expectedStringsIdentical": true
+  }
+]

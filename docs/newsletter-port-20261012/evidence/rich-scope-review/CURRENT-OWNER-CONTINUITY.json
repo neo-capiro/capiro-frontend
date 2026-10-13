@@ -1,0 +1,103 @@
+{
+  "head": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "genericOwners": [
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+      "gitBlob": "608f1a55511561518a56f4110ba205d77445f521",
+      "semantics": "Generic Workspace document comments; no rich campaign/block reviewer or invitation contract.",
+      "currentGitBlob": "608f1a55511561518a56f4110ba205d77445f521",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "974f3de7035687206d999d87d70c53e0b3e6a4bed826fb547b4ffaf5b0b9603f"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+      "gitBlob": "64966261567c476e074aa6739bdd1b14a733b5d3",
+      "semantics": "Plain text/heading/link/image URL display and simple block editor/order/removal; does not implement rich NewsletterDesign renderer.",
+      "currentGitBlob": "64966261567c476e074aa6739bdd1b14a733b5d3",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "1bf4da484557a0c7b456253117649e713bac427d38456bb3a3ac4468d161f832"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+      "gitBlob": "70696c996e9d685769a2f9d716905bf8dbeae364",
+      "semantics": "Exact WsDocVersion/hash review into caller-selected existing V3 session with explicit acknowledgement.",
+      "currentGitBlob": "70696c996e9d685769a2f9d716905bf8dbeae364",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "944e7f10c04a7cbb54e98c176cdf3a2a2a32072f01fed30465e99cc8622070b9"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+      "gitBlob": "ffd88a8676d2aa79dd90da30b03cf8812ae12e53",
+      "semantics": "Three local presets with local search/category/preview; no persisted rich section/template library.",
+      "currentGitBlob": "ffd88a8676d2aa79dd90da30b03cf8812ae12e53",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "14875aa933d83651b8fa89492fb4f9ceaac6e64e3c0ce934bcb44b14adddb58a"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+      "gitBlob": "b8d63fac537d0790b4497ebca8399fa26a9423b1",
+      "semantics": "Generic WorkspaceDraft workflow; nine simple blocks, local builder/review and explicit saved-version V3 staging; template publication currently unavailable.",
+      "currentGitBlob": "b8d63fac537d0790b4497ebca8399fa26a9423b1",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "f9c680abf19ca5f86e780cc4e75791a09dee7163db0b192eed222b7cb88ab9cd"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/newsletter-model.ts",
+      "gitBlob": "3d73e79a64fb7dc733c06b0059bd7936e89d15b7",
+      "semantics": "Local generic NewsletterBody presets, safe href and generic document conversion; not canonical rich campaign design model.",
+      "currentGitBlob": "3d73e79a64fb7dc733c06b0059bd7936e89d15b7",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "7ee13751320b12793a9491db349538ce0dab48058bd4411abe869375175a94f6"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/staging-model.ts",
+      "gitBlob": "e7ebe775f8dd30bdd4208e572141102451dc4063",
+      "semantics": "Strict saved-version receipt and sponsor validation; not stage UUID conversion.",
+      "currentGitBlob": "e7ebe775f8dd30bdd4208e572141102451dc4063",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "e28e44e049810a413a67292b47e87b4d23bb2ea3e7c41c9bd6fcb26c00761bc5"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+      "gitBlob": "700d2c64156050e953780c2cf13a4fd110f269b9",
+      "semantics": "Generic draft/document update/snapshot ownership; local Undo/Redo; not WsNewsletterDocument revision CAS.",
+      "currentGitBlob": "700d2c64156050e953780c2cf13a4fd110f269b9",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "65f323839ea27a05cd39c45a7ce2000c9d2decbaa76c3b4bea9af45b665d815a"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+      "gitBlob": "bc396b66ad466d7899c81a7771a5d244007ed263",
+      "semantics": "Saved-version retained request/recovery/current-authority owner; preserve unchanged.",
+      "currentGitBlob": "bc396b66ad466d7899c81a7771a5d244007ed263",
+      "unchangedFromOriginalAudit": true,
+      "sha256": "355b6d8f0f2cd206dc39047570293d415e11dde4ab4b24194856e763c09fd126"
+    }
+  ],
+  "savedVersionFlowToPreserve": [
+    "apps/web/src/shared/capiro/operations/workspace-newsletter-staging.ts",
+    "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "apps/web/src/features/modules/workspace/newsletter/staging-model.ts",
+    "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts"
+  ],
+  "preservationTests": [
+    {
+      "path": "apps/web/tests/newsletter-staging.test.ts",
+      "cases": 16,
+      "caseCounting": "4 literal cases + 6 caller field cases + 6 sponsor cases",
+      "coverage": "strict routes/body, plaintext limits, sponsor binding, exact/replayed receipts"
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "cases": 9,
+      "coverage": "saved revision/session binding, lost response, storage and actor replacement, current source/state refusal, malformed receipt, mobile keyboard",
+      "observedEvidence": "/tmp/capiro-remaining-qualification/final-adbc84b/modules-browser.log; existing completed parent run, no audit rerun"
+    },
+    {
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "line": 168,
+      "coverage": "prospect-origin newsletter cannot open sending; preserve original origin constraints"
+    }
+  ],
+  "nativeExecuted": false
+}

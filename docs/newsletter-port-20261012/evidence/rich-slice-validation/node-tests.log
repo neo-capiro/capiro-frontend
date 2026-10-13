@@ -1,0 +1,214 @@
+✖ all nineteen exact design assets are local, nonempty, hash-bound and retain intrinsic SVG dimensions (1.073916ms)
+✖ the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes (0.216087ms)
+✖ Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions (0.411573ms)
+✔ no application source retains temporary Figma asset URLs or screenshot implementation imagery (0.471344ms)
+✖ all22 cited-answer Figma assets retain their exact local bytes and intrinsic geometry (2.640268ms)
+✔ cited-answer source and styling use local assets without screenshot implementation imagery (1.826716ms)
+✖ Modules shared assets retain exact native export bytes and intrinsic SVG roots (1.108749ms)
+✔ all eight canonical run states display explicit labels without inferred completion (16.142452ms)
+✔ fixture events all validate with the public browser contract; unknown scenarios fail (7.332663ms)
+✔ selected run and attempt isolate colliding message and tool request IDs (1.650749ms)
+✔ message fragments concatenate in accepted order; sparse references stay exact (3.890691ms)
+✔ unmatched completion never invents a tool name, arguments or business success (4.336747ms)
+✔ canonical safe error rendering never exposes raw text or prototype-looking codes (0.714492ms)
+✔ canonical projection owns replay and sequence repair before presentation (1.753275ms)
+✔ fixture canonical admission rejects cross-view and immutable-event conflicts (0.616264ms)
+✔ presentation does not mutate accepted events or include unsupported metadata (3.390024ms)
+✔ Settings presentation never exposes HQ or workspace management to customer standard roles (0.976799ms)
+✔ Billing mirrors both the user admin role and independent billing-admin grant (0.120313ms)
+✔ Hosted account navigation rejects unsafe schemes, misleading hosts and credentials (0.327496ms)
+✔ Bulk intelligence review excludes award-bearing, PAC, unknown, resolved and weak mappings (0.190148ms)
+✔ six local suggestions produce distinct editable draft text without executable authority (1.819275ms)
+✔ an exact reviewed source retains all signals and records their disposition (3.743679ms)
+✔ changed bytes, new signals, absent evidence and incomplete rationale require another review (0.447969ms)
+✔ reviews cannot waive boundary failures and duplicate records fail (5.794664ms)
+✔ discovers real route composition and accepts directed local imports (8.3212ms)
+✔ run workspace admits only its three approved additional public seams (1.203132ms)
+✔ rejects cycles, feature-private crossing, private package and external repository paths (0.843798ms)
+✔ rejects computed loading and undeclared server endpoints (1.204163ms)
+✔ an unallocated backend route cannot bypass the guard by changing source extension (1.095288ms)
+✔ allocated Modules and Settings may use shared adapters and the narrow Capiro gateway (2.306663ms)
+✔ size and function thresholds require explicit review instead of silent exceptions (8.414492ms)
+✔ authored stylesheets retain the same file-size review threshold (47.759383ms)
+✔ browser client resolves emitted JS imports and refuses server or Node contract entries (1.454583ms)
+✔ resolved relative imports cannot cross application and package ownership in either direction (2.830936ms)
+✔ same-owner relative edges and explicitly approved public package imports stay valid (0.555211ms)
+✔ all assigned product features are allocated (0.521099ms)
+✔ relative and alias imports cannot reverse foundation or route composition direction (2.933292ms)
+✔ Portfolio domains cross only deliberate public entries while routes compose views (1.896041ms)
+✔ Portfolio and Meri keep private feature boundaries in both directions (0.592878ms)
+✔ aliases resolve emitted JS and expose cycles or cross-owner access (0.463131ms)
+✔ only the allocated thin server adapters can import their narrow dependencies (4.698184ms)
+✔ Portfolio keeps typed boundaries and configured origins across feature, foundation and route sources (1.541624ms)
+✔ remote origins cannot hide behind template literals or deceptive localhost authorities (1.249783ms)
+✔ type imports, require calls and computed loads preserve package and feature boundaries (0.751208ms)
+✔ inherited unchanged size findings stay reported and unreviewed without pretending approval (2.512735ms)
+✔ provenance cannot approve a new path, different commit or unrelated Meri source (3.777409ms)
+✔ explicit size reviews bind one exact function and reopen after a body or signature change (5.68632ms)
+✔ file reviews never approve an unreviewed oversized function within the file (4.138377ms)
+✔ duplicate or incomplete review evidence fails instead of silently choosing an allowance (2.078507ms)
+✔ an invalidated explicit review is not silently replaced by unchanged transfer provenance (2.580187ms)
+✔ transfer canonicalization changes only the exact agreed module paths (0.438924ms)
+✔ newsletter browser boundary admits only its two governed public subpaths (0.414818ms)
+✖ shipping SSR entry is import-safe and refuses invalid/reused output before download (38.95043ms)
+✖ container smoke documents exits and rejects invalid input before Docker allocation (4.153489ms)
+✔ Docker context regression is import-safe and refuses invalid or reused outputs before allocation (558.789223ms)
+✔ newsletter declarations import/help and invalid arguments allocate no qualification resources (299.307207ms)
+✔ newsletter browser-check import/help and invalid arguments allocate no qualification resources (248.616368ms)
+✔ package binding detects byte corruption independently of filename/version (1.947559ms)
+✔ untrusted artifact paths and malformed bindings fail before file reads (0.201144ms)
+✔ file, commit and hash reject coercible nonstrings before any artifact read (0.402299ms)
+✔ all record shapes are validated before reads, including a malformed later binding (0.54758ms)
+✔ validated primitive snapshots survive reader mutation of a later input record (2.238539ms)
+ℹ tests 62
+ℹ suites 0
+ℹ pass 55
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1140.517882
+
+✖ failing tests:
+
+test at apps/web/test/assets.test.mjs:6:1
+✖ all nineteen exact design assets are local, nonempty, hash-bound and retain intrinsic SVG dimensions (1.073916ms)
+  Error: ENOENT: no such file or directory, open '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+      at readFileSync (node:fs:484:20)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/apps/web/test/assets.test.mjs:8:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+  }
+
+test at apps/web/test/assets.test.mjs:52:1
+✖ the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes (0.216087ms)
+  Error: ENOENT: no such file or directory, open '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+      at readFileSync (node:fs:484:20)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/apps/web/test/assets.test.mjs:54:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+  }
+
+test at apps/web/test/assets.test.mjs:78:1
+✖ Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions (0.411573ms)
+  Error: ENOENT: no such file or directory, open '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+      at readFileSync (node:fs:484:20)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/apps/web/test/assets.test.mjs:80:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/capiro-newsletter-port/apps/web/design/home-assets.json'
+  }
+
+test at apps/web/test/cited-answer-assets.test.mjs:6:1
+✖ all22 cited-answer Figma assets retain their exact local bytes and intrinsic geometry (2.640268ms)
+  Error: ENOENT: no such file or directory, open '/workspace/capiro-newsletter-port/apps/web/design/cited-answer-assets.json'
+      at readFileSync (node:fs:484:20)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/apps/web/test/cited-answer-assets.test.mjs:8:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/capiro-newsletter-port/apps/web/design/cited-answer-assets.json'
+  }
+
+test at apps/web/test/module-assets.test.mjs:6:1
+✖ Modules shared assets retain exact native export bytes and intrinsic SVG roots (1.108749ms)
+  Error: ENOENT: no such file or directory, open '/workspace/capiro-newsletter-port/apps/web/design/modules-shared-assets.json'
+      at readFileSync (node:fs:484:20)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/apps/web/test/module-assets.test.mjs:8:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/workspace/capiro-newsletter-port/apps/web/design/modules-shared-assets.json'
+  }
+
+test at scripts/deployment-cli.test.mjs:17:1
+✖ shipping SSR entry is import-safe and refuses invalid/reused output before download (38.95043ms)
+  AssertionError [ERR_ASSERTION]: node:internal/modules/esm/resolve:271
+      throw new ERR_MODULE_NOT_FOUND(
+            ^
+  
+  Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/workspace/capiro-newsletter-port/apps/web/deployment/portfolio/qualify-elements.mjs' imported from /workspace/capiro-newsletter-port/[eval1]
+      at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+      at moduleResolve (node:internal/modules/esm/resolve:865:10)
+      at defaultResolve (node:internal/modules/esm/resolve:992:11)
+      at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+      at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+      at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+      at #resolve (node:internal/modules/esm/loader:683:17)
+      at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+      at node:internal/modules/esm/loader:632:32
+      at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+    code: 'ERR_MODULE_NOT_FOUND',
+    url: 'file:///workspace/capiro-newsletter-port/apps/web/deployment/portfolio/qualify-elements.mjs'
+  }
+  
+  Node.js v24.19.0
+  
+  
+  1 !== 0
+  
+      at run (file:///workspace/capiro-newsletter-port/scripts/deployment-cli.test.mjs:13:10)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/scripts/deployment-cli.test.mjs:18:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts/deployment-cli.test.mjs:31:1
+✖ container smoke documents exits and rejects invalid input before Docker allocation (4.153489ms)
+  AssertionError [ERR_ASSERTION]: bash: apps/web/deployment/portfolio/smoke.sh: No such file or directory
+  
+  
+  127 !== 0
+  
+      at run (file:///workspace/capiro-newsletter-port/scripts/deployment-cli.test.mjs:13:10)
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/scripts/deployment-cli.test.mjs:32:3)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 127,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

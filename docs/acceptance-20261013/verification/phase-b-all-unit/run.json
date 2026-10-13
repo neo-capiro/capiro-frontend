@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-13T12:29:32.079297+00:00",
+  "command": [
+    "../../node_modules/.bin/vitest",
+    "run",
+    "tests/acceptance-activity-attempt.test.ts",
+    "tests/acceptance-activity-completion.test.ts",
+    "tests/acceptance-bill-search.test.ts",
+    "tests/acceptance-folder-access-actions.test.ts",
+    "tests/acceptance-folder-access-contracts.test.ts",
+    "tests/acceptance-folder-access-review.test.ts",
+    "tests/acceptance-meeting-artifacts-admission.test.ts",
+    "tests/acceptance-meeting-artifacts-query.test.ts",
+    "tests/acceptance-relationships-attempts.test.ts"
+  ],
+  "exit": 0,
+  "tests": [
+    "tests/acceptance-activity-attempt.test.ts",
+    "tests/acceptance-activity-completion.test.ts",
+    "tests/acceptance-bill-search.test.ts",
+    "tests/acceptance-folder-access-actions.test.ts",
+    "tests/acceptance-folder-access-contracts.test.ts",
+    "tests/acceptance-folder-access-review.test.ts",
+    "tests/acceptance-meeting-artifacts-admission.test.ts",
+    "tests/acceptance-meeting-artifacts-query.test.ts",
+    "tests/acceptance-relationships-attempts.test.ts"
+  ]
+}

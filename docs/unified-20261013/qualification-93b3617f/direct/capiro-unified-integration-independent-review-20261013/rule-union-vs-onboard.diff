@@ -1,0 +1,46 @@
+diff --git a/apps/web/test/browser/main.tsx b/apps/web/test/browser/main.tsx
+index 7cce3de..74a2d5a 100644
+--- a/apps/web/test/browser/main.tsx
++++ b/apps/web/test/browser/main.tsx
+@@ -1,5 +1,6 @@
+ import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
+ import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
++import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
+ import { IntegrationProbe } from "./IntegrationProbe";
+ import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
+ import { isOnboardPath } from "../../src/shared/session/onboard-route";
+@@ -63,6 +64,14 @@ function RoutedApp() {
+       />
+     );
+   }
++  if (path === "/meri/actions")
++    return (
++      <ProductShell actionWorkflow>
++        <RequireSession>
++          <MeriActionHost enabled={search.get("actions-disabled") !== "1"} />
++        </RequireSession>
++      </ProductShell>
++    );
+   if (path.startsWith("/forms/"))
+     return (
+       <>
+diff --git a/scripts/architecture/dependencies.mjs b/scripts/architecture/dependencies.mjs
+index 9cd3d75..f844249 100644
+--- a/scripts/architecture/dependencies.mjs
++++ b/scripts/architecture/dependencies.mjs
+@@ -22,10 +22,15 @@ export const publicExports = new Set([
+   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
+   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
+   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
++  '@capiro/meri-contracts/action-application',
+   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
++  '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
+ ]);
+ 
+ export const serverAdapters = new Map([
++  [`${appSource}app/api/action-followthrough/[operation]/route.ts`, new Set([
++    '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`,
++  ])],
+   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
+     '@clerk/nextjs/server', `${appSource}shared/capiro/config.ts`, `${appSource}shared/capiro/gateway.ts`, `${appSource}shared/capiro/registry.ts`,
+   ])],

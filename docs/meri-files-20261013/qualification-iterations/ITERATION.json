@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-13T09:39:38.677960+00:00",
+  "failedSource": "6150e49ce69e8d73609ed974d6f3be796b152bdd",
+  "failure": "Canonical check stopped during web typecheck: TS2345 in new Files lifetime fixture line49; inferred optional undefined keys incompatible with existing Record<string,string> helper.",
+  "correctedFile": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+  "correctedSha256": "791c8aa55576e1fcf17eda307e63c0d0751c9ce1be39bbdcf2ac8156386f429d",
+  "correction": "Context-typed readonly array; same three identity values and all assertions.",
+  "targetedTypecheckExit": 0,
+  "formatIteration": "Initial post-edit formatter found style wrapping; formatter applied to the one owned fixture only.",
+  "productionBuildAttempts": 0,
+  "remainingGateState": "All subsequent comprehensive checks, production build and browser cohorts remain unrun for6150; successor requires new frozen qualification."
+}

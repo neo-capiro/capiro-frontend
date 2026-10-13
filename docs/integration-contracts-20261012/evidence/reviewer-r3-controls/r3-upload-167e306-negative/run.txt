@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 ../../../../tmp/r3-upload-167e306-negative/control.spec.ts:6:1 › uncertain prospect confirmation cannot become a fresh key and second byte upload after reload (30.2s)
+
+
+  1) ../../../../tmp/r3-upload-167e306-negative/control.spec.ts:6:1 › uncertain prospect confirmation cannot become a fresh key and second byte upload after reload 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('button', { name: 'Upload file', exact: true })
+
+
+      32 |  await expect(area.getByRole('button',{name:'Recover original upload',exact:true})).toHaveCount(0);
+      33 |  await choose();
+    > 34 |  await area.getByRole('button',{name:'Upload file',exact:true}).click();
+         |                                                                 ^
+      35 |  await expect(area.getByText(/test.txt uploaded/)).toBeVisible();
+      36 |  writeFileSync("/tmp/r3-upload-167e306-negative/prospect-upload-duplicate.json",JSON.stringify({source:'35b6598c0456ebc9ef4cf48e20aef0e5167660b2',uploadUrlPosts:posts,bytePosts,attachments:[...records.values()],unexpected},null,2));
+      37 |  expect(unexpected).toEqual([]);
+        at /tmp/r3-upload-167e306-negative/control.spec.ts:34:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/r3-upload-167e306-negative/artifacts/control-uncertain-prospect-94110-nd-byte-upload-after-reload/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/r3-upload-167e306-negative/artifacts/control-uncertain-prospect-94110-nd-byte-upload-after-reload/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/r3-upload-167e306-negative/artifacts/control-uncertain-prospect-94110-nd-byte-upload-after-reload/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/r3-upload-167e306-negative/artifacts/control-uncertain-prospect-94110-nd-byte-upload-after-reload/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/r3-upload-167e306-negative/control.spec.ts:6:1 › uncertain prospect confirmation cannot become a fresh key and second byte upload after reload 
+[WebServer] (node:241729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:241776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

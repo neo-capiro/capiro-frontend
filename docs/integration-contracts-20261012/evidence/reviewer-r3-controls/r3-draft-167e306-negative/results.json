@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-control-167e306/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/r3-draft-167e306-negative/review.playwright.ts"
+    ],
+    "configFile": "/tmp/r3-draft-167e306-negative/review.playwright.ts",
+    "rootDir": "/tmp/r3-draft-167e306-negative",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/r3-draft-167e306-negative/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/r3-draft-167e306-negative",
+        "testIgnore": [],
+        "testMatch": [
+          "control.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/r3-draft-167e306-negative/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-control-167e306/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "control.spec.ts",
+      "file": "control.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8325,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('New prospect document title')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent uncertain prospect draft\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('New prospect document title')\u001b[22m\n\u001b[2m    12 × locator resolved to <input disabled maxlength=\"500\" data-slot=\"input\" id=\"prospect-draft-title\" value=\"Independent uncertain prospect draft\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-event…/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent uncertain prospect draft\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('New prospect document title')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent uncertain prospect draft\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('New prospect document title')\u001b[22m\n\u001b[2m    12 × locator resolved to <input disabled maxlength=\"500\" data-slot=\"input\" id=\"prospect-draft-title\" value=\"Independent uncertain prospect draft\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-event…/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent uncertain prospect draft\"\u001b[22m\n\n    at /tmp/r3-draft-167e306-negative/control.spec.ts:30:63",
+                    "location": {
+                      "file": "/tmp/r3-draft-167e306-negative/control.spec.ts",
+                      "column": 63,
+                      "line": 30
+                    },
+                    "snippet": "  28 |  expect(records.size).toBe(1);\n  29 |  await page.reload();\n> 30 |  await expect(page.getByLabel('New prospect document title')).toHaveValue('');\n     |                                                               ^\n  31 |  await expect(page.getByRole('button',{name:'Recover original draft',exact:true})).toHaveCount(0);\n  32 |  await page.getByLabel('New prospect document title').fill('Independent uncertain prospect draft');\n  33 |  await page.getByRole('button',{name:'Create manual draft',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/r3-draft-167e306-negative/control.spec.ts",
+                        "column": 63,
+                        "line": 30
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('New prospect document title')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"Independent uncertain prospect draft\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('New prospect document title')\u001b[22m\n\u001b[2m    12 × locator resolved to <input disabled maxlength=\"500\" data-slot=\"input\" id=\"prospect-draft-title\" value=\"Independent uncertain prospect draft\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-event…/>\u001b[22m\n\u001b[2m       - unexpected value \"Independent uncertain prospect draft\"\u001b[22m\n\n\n  28 |  expect(records.size).toBe(1);\n  29 |  await page.reload();\n> 30 |  await expect(page.getByLabel('New prospect document title')).toHaveValue('');\n     |                                                               ^\n  31 |  await expect(page.getByRole('button',{name:'Recover original draft',exact:true})).toHaveCount(0);\n  32 |  await page.getByLabel('New prospect document title').fill('Independent uncertain prospect draft');\n  33 |  await page.getByRole('button',{name:'Create manual draft',exact:true}).click();\n    at /tmp/r3-draft-167e306-negative/control.spec.ts:30:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:16:31.987Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/r3-draft-167e306-negative/control.spec.ts",
+                    "column": 63,
+                    "line": 30
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-59ef6e08bdf466a25cc1",
+          "file": "control.spec.ts",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T08:16:28.337Z",
+    "duration": 12458.259,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

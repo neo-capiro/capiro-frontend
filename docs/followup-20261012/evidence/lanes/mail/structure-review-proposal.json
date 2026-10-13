@@ -1,0 +1,39 @@
+{
+  "boundaryErrors": [],
+  "reviews": [
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 340,
+      "fingerprint": "0d8093e34fc3ba1d5c2c3f8b45552449760db2c4b66a59d4d765c230e5f14fcb",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "authorReview": "Canonical composer owns local recipient/body/review composition. Adds only the scoped signature-preview child and local Undo action. Rendering/sanitization lives in SignaturePreview; rewrite state and cancellation remain in useMailRewrite; authority, transport, provider effects and shared primitives remain unchanged.",
+      "sourceSha256": "c5e6e9a79aa06fadfa21ed3bbc034d4290eee040a42cc96e58db026177d9f6d1",
+      "independentAcceptance": "Root-owned; proposal only"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "kind": "function",
+      "symbol": "useMailRewrite",
+      "line": 24,
+      "nonblank": 161,
+      "fingerprint": "6798b98e516658cb4532c155035dd9a15a15ca0aa1bae5b49b61b4ef72b22bfa",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "authorReview": "Canonical local rewrite/draft attempt lifecycle owner. One prior-body snapshot shares the existing edit/source/actor invalidation and captured authority guard, keeping undo atomic with pending rewrite state. Splitting the snapshot into another hook would duplicate lifetime and cache subscriptions. No durable undo, provider dispatch or authority implementation is introduced.",
+      "sourceSha256": "65fd972f9903a4f6d8320ab28a0c425cba6ff057a5290f779f8be1d5d59fb5a1",
+      "independentAcceptance": "Root-owned; proposal only"
+    }
+  ],
+  "testStructureReview": {
+    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+    "nonblank": 404,
+    "sha256": "d362e02ebbcef43b0f744d8306fcd8a214f859a3c59785d24097dc697464d496",
+    "authorReview": "One composer fixture owns native signature/rewrite/synthetic-send routes for two explicitly assigned composer facets. Scenarios cover preview isolation, append separation and local draft lifetime. Keeping the private route setup and assertions together avoids duplicate native fixtures or production algorithm mirrors; no unrelated domains are mocked. Independent root review requested for the404-line module."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=2"
+  ],
+  "startedAt": "2026-10-12T10:20:54.958114+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T11:02:08.472181+00:00",
+  "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "statusAtFinish": ""
+}

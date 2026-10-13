@@ -1,0 +1,22 @@
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+tests/browser/activity-command-storage.spec.ts(78,10): error TS2532: Object is possibly 'undefined'.
+tests/browser/activity-command-storage.spec.ts(79,10): error TS2532: Object is possibly 'undefined'.
+tests/command-journal.test.ts(18,5): error TS2532: Object is possibly 'undefined'.
+tests/command-journal.test.ts(25,33): error TS2352: Conversion of type '{ data: { privateText: string; }; version: 1; scope: string; requestId: string; state: "acknowledged"; }' to type '{ version: 1; scope: string; requestId: string; state: "pending"; data: { privateText: string; }; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Types of property 'state' are incompatible.
+    Type '"acknowledged"' is not comparable to type '"pending"'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

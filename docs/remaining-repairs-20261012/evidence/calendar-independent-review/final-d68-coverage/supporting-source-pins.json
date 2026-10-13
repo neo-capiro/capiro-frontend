@@ -1,0 +1,67 @@
+[
+  {
+    "path": "apps/web/playwright.config.ts",
+    "sha256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82",
+    "gitBlob": "1f8c3d362e2f1e12dbb05b87017d500027e4e0fe"
+  },
+  {
+    "path": "apps/web/test/browser/playwright.config.ts",
+    "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28",
+    "gitBlob": "b02e6738105a683e3a84e4e4817e44c258d04145"
+  },
+  {
+    "path": "apps/web/test/browser/main.tsx",
+    "sha256": "93255483d7bdea3cd6610aed3cc2438cb59d1f782e5294a4645a3e97dbe4c7d0",
+    "gitBlob": "240b9595ef47e1dd42dd95e99d7b0653f987a36a"
+  },
+  {
+    "path": "apps/web/test/browser/clerk.tsx",
+    "sha256": "1fc6432fe37e193a97863f6d93ad922cd18ae48e6bb1ee2348f5f897f2403b50",
+    "gitBlob": "2edd1ac943519194504bda4d83b0948c282f39b5"
+  },
+  {
+    "path": "apps/web/test/browser/IntegrationProbe.tsx",
+    "sha256": "c752631800a25c208db8a970f903608cf145b987f155117b797cf5eada086dc3",
+    "gitBlob": "233c3de24f551fc03beefe4b76af6e20164a51a5"
+  },
+  {
+    "path": "apps/web/tests/browser/portfolio-harness-providers.tsx",
+    "sha256": "cf00e5c1872525771d470e254bed3c7bd3f60d13fee9e1961304c5bf6a8cd9ff",
+    "gitBlob": "a67a3a3274415a7539ec540722f35db6cc33514d"
+  },
+  {
+    "path": "apps/web/tests/browser/fixtures.ts",
+    "sha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368",
+    "gitBlob": "1f55a258f367fcbf2635c3b08dea3fff327d7ed7"
+  },
+  {
+    "path": "apps/web/tests/production/run-standalone.mjs",
+    "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21",
+    "gitBlob": "2eb2f32f05e68c0edb0c56186b10185d544f84ab"
+  },
+  {
+    "path": "apps/web/tests/production/verify-runtime-config.mjs",
+    "sha256": "49bf406df89d1fb5c281694c963d98dbf6c6d5804cb3d08adf4100fa92db3f8a",
+    "gitBlob": "049f9127aa33e80ce7374302264c84b65a2c65e3"
+  },
+  {
+    "path": "packages/qualification-transport/README.md",
+    "sha256": "9ca5d5ac60cc3782d5be2d9a7cab166922ed99f298d5eb0ab4a41ad5d528de83",
+    "gitBlob": "b4f986810cf2fe3e59029cbc9278ecab1bc0ec8f"
+  },
+  {
+    "path": "packages/qualification-elements/README.md",
+    "sha256": "41d9a2b009482d0babbfd6b10d73bcf78d92815dbfddafa504b033d79c4ab6c4",
+    "gitBlob": "afb7cb0d175e1396d38baa558f0256fa8670e799"
+  },
+  {
+    "path": "package.json",
+    "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49",
+    "gitBlob": "37421fb70b79b9239e5a48a6b9108ebc6eeffcdb"
+  },
+  {
+    "path": "apps/web/package.json",
+    "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14",
+    "gitBlob": "27be546aec70ab8e332846e80b6c777c3363faa6"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "observedUTC": "2026-10-13T08:26:06.812473+00:00",
+  "source": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "status": "FAILED_INITIAL_PORTFOLIO_INFRASTRUCTURE_ENOSPC_RECOVERY_PENDING",
+  "discovered": 1139,
+  "attemptedUniqueIds": 583,
+  "actualPassedCases": 582,
+  "infrastructureFailedCases": 1,
+  "remainingUnrunCount": 556,
+  "duplicates": 0,
+  "unknownIds": 0,
+  "failedCaseId": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+  "failureClassification": "ENOSPC while creating screenshot output directory at test.info().outputPath before screenshot call and final request-ledger assertion; no product assertion failure shown, but case incomplete/failed.",
+  "rootRuntimeArchiveHashVerification": {
+    "archive": "/workspace/capiro-generated-preserved-20261013/next-93b3617f.tar.gz",
+    "archiveBytes": 62949896,
+    "sha256": "443dc6e8b57d090f031800ec14a4ee0659646cbd962d16f7c67f58d78d823487",
+    "matchesRootReceipt": true,
+    "rootReportedRegularFiles": 5010,
+    "rootReportedSymlinks": 2,
+    "independentArchiveHashCheck": true,
+    "independentRetiredOriginalByteCheck": false
+  },
+  "sourceChangedByReviewer": false,
+  "runtimeExecutedByReviewer": false,
+  "deletionPerformed": false,
+  "archiveCreatedByReviewer": false
+}

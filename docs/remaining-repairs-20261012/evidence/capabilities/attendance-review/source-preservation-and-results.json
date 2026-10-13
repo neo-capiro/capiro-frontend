@@ -1,0 +1,388 @@
+{
+  "capturedAtUtc": "2026-10-12T20:59:28.291Z",
+  "pin": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "integrated": "3c64057d3a436a728cd35f05b805ce6e7e7e8577",
+  "owner": "1cbca00a471a722ed249fccb95f761853e96246a",
+  "base": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "file": "apps/web/tests/browser/attendance.spec.ts",
+  "hashes": {
+    "pin": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+    "integrated": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+    "owner": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+    "base": "42f9b3532b3c02c9eeb274e2e6d80e308f0d03f7a36b4eb913b08993b0270710"
+  },
+  "sourceEquality": true,
+  "changedFilesInIntegration": [
+    "apps/web/tests/browser/attendance.spec.ts"
+  ],
+  "productionDiffSinceFrozen": "",
+  "preservation": {
+    "beforeCount": 12,
+    "afterCount": 12,
+    "allEntireTestCallSourcesByteIdentical": true,
+    "titles": [
+      "\"Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance\"",
+      "\"Server validation retains the join URL and confirmations for explicit correction\"",
+      "\"A foreign success receipt is uncertain and cannot be resent automatically or from the same form\"",
+      "\"Explicit removal handles a still-dispatching error and then accepts the actual removed receipt\"",
+      "\"Client preference saves consent once, preserves Off/stopping, and retries only DELETE\"",
+      "\"A concurrent preference change requires refresh and preserves the unsaved affirmations\"",
+      "\"Runtime disabled keeps real session status visible and forbids external actions\"",
+      "\"Read-only role does not fetch private attendance or expose dispatch controls\"",
+      "\"Meeting privacy errors and session expiry never expose a successful-looking attendance control\"",
+      "\"Unmounting during held dispatch preflight prevents the later POST\"",
+      "\"Leaving the client during held preference preflight prevents the later enable POST\"",
+      "\"Mobile dark Send Meri dialog fits the viewport and retains accessible consent and actions\""
+    ]
+  },
+  "sizeSignals": [
+    {
+      "file": "apps/web/tests/browser/attendance.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 527,
+      "fingerprint": "104e497cbadddc6276598b633d787a5e0f32e1c5e5ba8242cb8bd4f7dc9084cf",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "baseline": {
+        "file": "apps/web/tests/browser/attendance.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 513,
+        "fingerprint": "d93b943be52aa6c7c7890fbcae6ac0b25e2e172e272ba8786f4237bf3b6fda9c"
+      }
+    }
+  ],
+  "consumers": [
+    {
+      "file": "apps/web/tests/browser/attendance.spec.ts",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "classification": "Only implicit Information-only consumer; adapted shared helper and scoped initial attachment fixture; all 12 original scenarios/assertions retained.",
+      "rootSHA256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+      "classification": "Isolated MeetingArtifacts harness; no MeetingDetail lifecycle entry.",
+      "rootSHA256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+      "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f",
+      "classification": "Isolated MeetingForm harness; no MeetingDetail lifecycle entry.",
+      "rootSHA256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-client-clear.spec.ts",
+      "sha256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede",
+      "classification": "Isolated MeetingForm harness; no MeetingDetail lifecycle entry.",
+      "rootSHA256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-boundary.spec.ts",
+      "sha256": "98b51e644314deaa4b5c2b92d14d95c5d0741fb8c11ff4f85c2e75e04017f248",
+      "classification": "Calendar feed/current-client/new-form checks; does not consume Information-only meeting content.",
+      "rootSHA256": "98b51e644314deaa4b5c2b92d14d95c5d0741fb8c11ff4f85c2e75e04017f248",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-preparation.spec.ts",
+      "sha256": "0e6e47a3e1d22d15078c2084e801a4449948988028a68429700595df13092317",
+      "classification": "Explicit Preparation button navigation.",
+      "rootSHA256": "0e6e47a3e1d22d15078c2084e801a4449948988028a68429700595df13092317",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "classification": "New intentional default-tab/identity controls; remains unchanged.",
+      "rootSHA256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "classification": "Persistent Share/Edit actions and explicit Notes navigation; original attempt barrier remains unchanged.",
+      "rootSHA256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/files.spec.ts",
+      "sha256": "8b192320d37c1abeeaa12c71aff379547e93f4cfeabd11055623af600fce3ac8",
+      "classification": "Calendar feed/view/scope preservation only; no meeting detail opened.",
+      "rootSHA256": "8b192320d37c1abeeaa12c71aff379547e93f4cfeabd11055623af600fce3ac8",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/manual-debrief.spec.ts",
+      "sha256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79",
+      "classification": "Explicit Debriefs navigation in open helper.",
+      "rootSHA256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-documents-calendar.spec.ts",
+      "sha256": "2ad5faf8dd3099bcad520b8ffac1973fe30ad8cd34e429f6f460b9f379051062",
+      "classification": "Explicit chosen Preparation/Debriefs navigation in open helper.",
+      "rootSHA256": "2ad5faf8dd3099bcad520b8ffac1973fe30ad8cd34e429f6f460b9f379051062",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-documents.spec.ts",
+      "sha256": "bf101a0fa353ae785b8ce6035acb70ee59ac46b67fc863730870c906bd623d78",
+      "classification": "Isolated document action harness; no MeetingDetail lifecycle entry.",
+      "rootSHA256": "bf101a0fa353ae785b8ce6035acb70ee59ac46b67fc863730870c906bd623d78",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-library.spec.ts",
+      "sha256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e",
+      "classification": "Detail visibility/close or persistent Client assignment action; Debriefs cases navigate explicitly.",
+      "rootSHA256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-preparation.spec.ts",
+      "sha256": "6f123f0a9c75b391f21e8d50d0d1d5a4acb5a663560da37778b2101cf38adac6",
+      "classification": "Explicit Preparation navigation in open helper.",
+      "rootSHA256": "6f123f0a9c75b391f21e8d50d0d1d5a4acb5a663560da37778b2101cf38adac6",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-review.spec.ts",
+      "sha256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331",
+      "classification": "Isolated review harness plus integration case with explicit Preparation/Debriefs navigation.",
+      "rootSHA256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/voice-integration.spec.ts",
+      "sha256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4",
+      "classification": "Explicit Debriefs navigation.",
+      "rootSHA256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/activity-actions.spec.ts",
+      "sha256": "07fa6ccaeb2b2523f7ba18f7ad947c13063281ea809d2ce7758260656cba19be",
+      "classification": "Only asserts meeting URL on a link; does not open meeting details.",
+      "rootSHA256": "07fa6ccaeb2b2523f7ba18f7ad947c13063281ea809d2ce7758260656cba19be",
+      "sourceMatches": true
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-voice.spec.ts",
+      "sha256": "7efc984fb732ee131e93c5501049a61088b713e6a346f5bc3baf188122deac82",
+      "classification": "Isolated debrief voice harness; no MeetingDetail lifecycle entry.",
+      "rootSHA256": "7efc984fb732ee131e93c5501049a61088b713e6a346f5bc3baf188122deac82",
+      "sourceMatches": true
+    }
+  ],
+  "candidate": {
+    "stats": {
+      "startTime": "2026-10-12T20:41:16.380Z",
+      "duration": 45348.248999999996,
+      "expected": 20,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers": 1,
+    "projects": [
+      {
+        "name": "",
+        "retries": 0
+      }
+    ]
+  },
+  "red": {
+    "source": "104495d4cdc8251640b922aea431fa0e169fe935",
+    "originalReport": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-browser-results.json",
+    "recordedSHA256": "e10fc92e917a903ee3f1b4888c84219c4554df97c532be871c0507a895851772",
+    "actualSHA256": "e10fc92e917a903ee3f1b4888c84219c4554df97c532be871c0507a895851772",
+    "failureCount": 7,
+    "failures": [
+      {
+        "title": "Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:130:18"
+        ]
+      },
+      {
+        "title": "Server validation retains the join URL and confirmations for explicit correction",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:185:18"
+        ]
+      },
+      {
+        "title": "A foreign success receipt is uncertain and cannot be resent automatically or from the same form",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:218:18"
+        ]
+      },
+      {
+        "title": "Explicit removal handles a still-dispatching error and then accepts the actual removed receipt",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:259:17"
+        ]
+      },
+      {
+        "title": "Runtime disabled keeps real session status visible and forbids external actions",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:341:17"
+        ]
+      },
+      {
+        "title": "Read-only role does not fetch private attendance or expose dispatch controls",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:372:17"
+        ]
+      },
+      {
+        "title": "Meeting privacy errors and session expiry never expose a successful-looking attendance control",
+        "locations": [
+          {
+            "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+            "column": 23,
+            "line": 103
+          }
+        ],
+        "messages": [
+          "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:397:17"
+        ]
+      }
+    ]
+  },
+  "priorProfileFiles": [
+    {
+      "file": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+      "nonblank": 64,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/browser/files-view-contrast.spec.ts",
+      "sha256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b",
+      "nonblank": 42,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+      "nonblank": 266,
+      "signals": 0,
+      "baselineExists": true,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+      "nonblank": 355,
+      "signals": 1,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+      "nonblank": 350,
+      "signals": 0,
+      "baselineExists": true,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab",
+      "nonblank": 173,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab",
+      "unchangedSinceProfileReview": true
+    },
+    {
+      "file": "apps/web/tests/profile-presentation.test.ts",
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125",
+      "nonblank": 60,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true,
+      "finalSHA256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125",
+      "unchangedSinceProfileReview": true
+    }
+  ]
+}

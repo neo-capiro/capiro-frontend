@@ -1,0 +1,20 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+    "kind": "function",
+    "symbol": "CapabilityEditor",
+    "fingerprint": "a25d3b92abda39420bfdd1f88e53cb4acb9ad85a066e3a97c538d79ff6dfc787",
+    "reason": "CapabilityEditor composes one capability modal lifetime: current tab, explicit initial Profile/create-Name focus and connected-opener restoration, the retained Profile form and source-scoped Documents panel, plus the existing remove confirmation. Its single useCapabilityMutation remains the only capability operation owner; actor/client/lifetime validation, transport, receipts and invalidation stay in the unchanged execution/writer/mutation modules. Moving the independent Profile draft and native form projection into CapabilityForm removes that prior responsibility from the editor. The 113-line body is predominantly the two mutually exclusive create/saved compositions and one nested confirmation; splitting the tab or confirmation markup would add pass-through ownership without isolating another state machine. Retain this exact modal composition. Files owns all document queries, upload and readiness through its public EntityDocuments export.",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+    "kind": "function",
+    "symbol": "CapabilityForm",
+    "fingerprint": "356f48fa6379550c0a14b30cc9ae0ede2e97f4904a43fca7bad35568674653ca",
+    "reason": "CapabilityForm owns one mounted local capability Profile draft and the exact existing native submission projection for create/update. Keeping token/TRL state, uncontrolled named metadata fields, conditional create/saved sections and the explicit submit footer together makes hidden Details values and tab-retained draft values part of one form. Identity, disclosure and readiness field presentation is delegated to CapabilityFields; token behavior remains in canonical TokenInput. This 128-line body does not perform transport, query/cache effects or authorization: onSave sends the same eleven-field CapabilityInput to the editor's one guarded mutation. Retain this cohesive form; extract a section only if it gains an independent lifecycle or public caller, rather than splitting the coupled draft projection and field arrangement by line count.",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  }
+]

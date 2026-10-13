@@ -1,0 +1,118 @@
+{
+  "files": {
+    "commit": "752e29f902339c990ee6fb27a2006f88af4de0f2",
+    "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+    "files": {
+      "apps/web/src/features/portfolio/files/FileAccess.tsx": {
+        "sha256": "f7d7802180dc955eb34bbbd7b4a8cb619d40c96d6b57c9f36c9d8c9cabe9f6a9",
+        "bytes": 5140
+      },
+      "apps/web/src/features/portfolio/files/FileMetadataStatus.tsx": {
+        "sha256": "bf5ac24fe63c445fd32f0192657e12f8189d050233c105a65a3b4956f8dda59c",
+        "bytes": 1800
+      },
+      "apps/web/src/features/portfolio/files/MoveFile.tsx": {
+        "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0",
+        "bytes": 3025
+      },
+      "apps/web/src/features/portfolio/files/contracts.ts": {
+        "sha256": "b6489db3880eae0df2cf176920e76dcf9225cde5d668aade87b90e7a10dedc51",
+        "bytes": 5419
+      },
+      "apps/web/src/features/portfolio/files/metadata-actions.ts": {
+        "sha256": "e1a54f98a41189396e1e135efb0c333933e826fe7c0f2aacca0b9b49d96fd3d7",
+        "bytes": 3234
+      },
+      "apps/web/src/features/portfolio/files/metadata-attempt.ts": {
+        "sha256": "05dc352ef7b80575a1d5692f3881e85855796a38f5f608a1ac31f8d43eca5c61",
+        "bytes": 2159
+      },
+      "apps/web/src/features/portfolio/files/mutations.ts": {
+        "sha256": "e4da1423dac17124164ea3de4aec3fa6d0b9bc45ff4d340166b095bda1821d03",
+        "bytes": 1513
+      },
+      "apps/web/src/features/portfolio/files/queries.ts": {
+        "sha256": "d4bfab2b114044fb1068dae1211a5ea9340f1f514116aa21559aa1e0b3803716",
+        "bytes": 2791
+      },
+      "apps/web/src/features/portfolio/files/useFileMetadataChange.ts": {
+        "sha256": "3b7b374daf12df45e096a7c3db737d33d3f4378559fedbdc7425a4bf833b8fd5",
+        "bytes": 2925
+      },
+      "apps/web/tests/browser/files-metadata-receipts.spec.ts": {
+        "sha256": "3964338e9f0760a99b107a6901ca61c67dae04686e0530223e340ddb460c5429",
+        "bytes": 14728
+      },
+      "apps/web/tests/files-metadata-actions.test.ts": {
+        "sha256": "e90bd79de4edf1fc75f3797a470afe90a3d3fb81ebb80faab79ae1d398947868",
+        "bytes": 6698
+      },
+      "apps/web/tests/files-metadata-receipts.test.ts": {
+        "sha256": "59b68ec5ef115c61f363cc84f5106aff7e89e5022fba705b40f5c74d0eeeb9a4",
+        "bytes": 2714
+      }
+    }
+  },
+  "calendar": {
+    "commit": "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab",
+    "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+    "files": {
+      "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx": {
+        "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450",
+        "bytes": 9310
+      },
+      "apps/web/src/features/portfolio/calendar/MeetingForm.tsx": {
+        "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434",
+        "bytes": 6400
+      },
+      "apps/web/src/features/portfolio/calendar/artifacts/api.ts": {
+        "sha256": "cee1fe8a5b7c8ace24b7fa5125e3c7c12e0cda7b391e3c6fdd868654556ad3cb",
+        "bytes": 2881
+      },
+      "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts": {
+        "sha256": "145e2f76cb7461f7009583117d0355b1587fd55b6da18d80addbca26630ed389",
+        "bytes": 3198
+      },
+      "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts": {
+        "sha256": "9f1ad90ab30c24fd5d6f7977a0c9770a745d5c532cb258737731d7bb3141a6e0",
+        "bytes": 3182
+      },
+      "apps/web/src/features/portfolio/calendar/meeting-save.ts": {
+        "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f",
+        "bytes": 1447
+      },
+      "apps/web/src/features/portfolio/calendar/mutations.ts": {
+        "sha256": "f60e03a9e739e364a54123486abee3e5eb649cf765e2b5977d847f3782056d4e",
+        "bytes": 3070
+      },
+      "apps/web/tests/browser/calendar-artifact-receipts-harness.tsx": {
+        "sha256": "064517a14a54739c73acf17249acdbac25bade672b28ac2ed575d401efb0fc73",
+        "bytes": 1624
+      },
+      "apps/web/tests/browser/calendar-artifact-receipts.html": {
+        "sha256": "34c9c6a5991883fe3f8d10f2da545e57364b62af59c4f45aad43f0892807eeb3",
+        "bytes": 306
+      },
+      "apps/web/tests/browser/calendar-artifact-receipts.spec.ts": {
+        "sha256": "18d15a0e614a1b3d3c615c1e8754d2327432a485e2385140a45010bdb86adff7",
+        "bytes": 11987
+      },
+      "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx": {
+        "sha256": "015f55816098db004dacd6defdab087ec0d25a84844c04b239740ffb57d77b7e",
+        "bytes": 1181
+      },
+      "apps/web/tests/browser/calendar-meeting-receipts.html": {
+        "sha256": "d88bcd0daf247c21f2c8dfde631552e45f15bedae060f9c450d44a94f7522fa1",
+        "bytes": 287
+      },
+      "apps/web/tests/browser/calendar-meeting-receipts.spec.ts": {
+        "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f",
+        "bytes": 3297
+      },
+      "apps/web/tests/calendar-artifact-receipts.test.ts": {
+        "sha256": "83922ca9c25c06b8605e8417615153f0571051293770266be0b2404277c60a4a",
+        "bytes": 9994
+      }
+    }
+  }
+}

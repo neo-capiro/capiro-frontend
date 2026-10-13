@@ -1,0 +1,21 @@
+function noteMetadataSelect() {
+  return {
+    id: true,
+    meetingId: true,
+    clientId: true,
+    authorUserId: true,
+    author: { select: { id: true, email: true, firstName: true, lastName: true } },
+    confidential: true,
+    accessLevel: true,
+    keyVersion: true,
+    // Phase 2 §d — lifecycle: decorateMeetings' notesApproved and
+    // libraryArtifactWhere both need `status` to tell existence from approval.
+    status: true,
+    approvedAt: true,
+    approvedByUserId: true,
+    sharedAt: true,
+    sharedByUserId: true,
+    createdAt: true,
+    updatedAt: true,
+  };
+}

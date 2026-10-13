@@ -1,0 +1,622 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-contracts/node_modules/.bin/playwright",
+      "test",
+      "tests/browser/email-compose.spec.ts",
+      "--grep",
+      "overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt",
+      "--repeat-each=3",
+      "--workers=3"
+    ],
+    "configFile": "/workspace/capiro-contracts/apps/web/playwright.config.ts",
+    "rootDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 3,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "email-compose.spec.ts",
+      "file": "email-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "overlay clicks respect context gestures and dismiss only the top email review",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13395,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                      "column": 5,
+                      "line": 211
+                    },
+                    "snippet": "  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                        "column": 5,
+                        "line": 211
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:53:50.794Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                    "column": 5,
+                    "line": 211
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-20d68a83359404648140",
+          "file": "email-compose.spec.ts",
+          "line": 187,
+          "column": 1
+        },
+        {
+          "title": "invalidated successful idle identity refuses mail dispatch and retains draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8724,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:05.696Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-d501ca6e53ea1145d55b",
+          "file": "email-compose.spec.ts",
+          "line": 214,
+          "column": 1
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (503)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9300,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:15.199Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-b224e964624f9fefb497",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (200)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11245,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:24.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-020b3f88640734b7769c",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        },
+        {
+          "title": "overlay clicks respect context gestures and dismiss only the top email review",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 12760,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                      "column": 5,
+                      "line": 211
+                    },
+                    "snippet": "  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                        "column": 5,
+                        "line": 211
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:53:50.753Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat1/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                    "column": 5,
+                    "line": 211
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-f6be9aff21ebe593cf8f",
+          "file": "email-compose.spec.ts",
+          "line": 187,
+          "column": 1
+        },
+        {
+          "title": "invalidated successful idle identity refuses mail dispatch and retains draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 9542,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:04.560Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-c4b98d8fe91e6d77ec16",
+          "file": "email-compose.spec.ts",
+          "line": 214,
+          "column": 1
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (503)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 9214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:14.408Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-7d857bf764e7c6d77414",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (200)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8811,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:23.641Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-b01b7730f50f3937ab59",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        },
+        {
+          "title": "overlay clicks respect context gestures and dismiss only the top email review",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 12833,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                      "column": 5,
+                      "line": 211
+                    },
+                    "snippet": "  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                        "column": 5,
+                        "line": 211
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Review email', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Review email', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Review email</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  209 |   await expect(\n  210 |     page.getByRole(\"button\", { name: \"Review email\", exact: true }),\n> 211 |   ).toBeFocused();\n      |     ^\n  212 |   expect(state.sent).toHaveLength(0);\n  213 | });\n  214 | test(\"invalidated successful idle identity refuses mail dispatch and retains draft\", async ({\n    at /workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts:211:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:53:50.713Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/email-compose-overlay-clic-69de7-s-only-the-top-email-review-repeat2/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/email-compose.spec.ts",
+                    "column": 5,
+                    "line": 211
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-6818639be61330c13947",
+          "file": "email-compose.spec.ts",
+          "line": 187,
+          "column": 1
+        },
+        {
+          "title": "invalidated successful idle identity refuses mail dispatch and retains draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 10672,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:04.903Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-3c9f7663f1b058428de1",
+          "file": "email-compose.spec.ts",
+          "line": 214,
+          "column": 1
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (503)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 8879,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:15.955Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-a2fc6e76385e960385cd",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        },
+        {
+          "title": "uncertain or malformed receipt freezes send attempt (200)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 11030,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:54:24.872Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0516bb8922d8cfb77caf-502d8900e70868787e0a",
+          "file": "email-compose.spec.ts",
+          "line": 387,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T04:53:49.639Z",
+    "duration": 46399.483,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

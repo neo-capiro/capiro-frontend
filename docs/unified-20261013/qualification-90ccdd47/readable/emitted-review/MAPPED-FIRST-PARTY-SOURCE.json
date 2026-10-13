@@ -1,0 +1,251 @@
+{
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "scopePrefixes": [
+    "apps/web/src/shared/meri-documents/",
+    "apps/web/src/features/meri/files/",
+    "apps/web/src/app/meri/files/",
+    "apps/web/src/app/api/documents/"
+  ],
+  "additional": [
+    "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+    "apps/web/src/shared/meri-actions/connection-config.ts"
+  ],
+  "sourcePaths": 21,
+  "mapOccurrences": 26,
+  "exactMapOccurrences": 24,
+  "records": [
+    {
+      "path": "apps/web/src/app/api/documents/[operation]/route.ts",
+      "map": "server/chunks/_1-9vn16wb1s1h._.js.map",
+      "sourceContentSha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1",
+      "gitSha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1",
+      "bytes": 601,
+      "exact": true,
+      "mapSha256": "00ed4927d96d3f0ddc6b27a115d19593af56a287be30318356cd25e559cd64bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/config.ts",
+      "map": "server/chunks/_1-9vn16wb1s1h._.js.map",
+      "sourceContentSha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "gitSha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytes": 413,
+      "exact": true,
+      "mapSha256": "00ed4927d96d3f0ddc6b27a115d19593af56a287be30318356cd25e559cd64bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "map": "server/chunks/_1-9vn16wb1s1h._.js.map",
+      "sourceContentSha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "gitSha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytes": 3816,
+      "exact": true,
+      "mapSha256": "00ed4927d96d3f0ddc6b27a115d19593af56a287be30318356cd25e559cd64bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/connection-config.ts",
+      "map": "server/chunks/apps_web_src_shared_0kov6ldch07kd._.js.map",
+      "sourceContentSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "gitSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "bytes": 1127,
+      "exact": true,
+      "mapSha256": "2645169bd09bcbde0e6cb29d389f7eee2d17b8504377764029cfbebc205eb2e5"
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "gitSha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytes": 4520,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-draft.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "gitSha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytes": 1828,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/workbook-draft.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "gitSha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytes": 1333,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/download-url.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "gitSha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytes": 723,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "gitSha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytes": 9558,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "gitSha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytes": 4717,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "gitSha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytes": 4481,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "gitSha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytes": 1485,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "gitSha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytes": 5461,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "gitSha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytes": 2495,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "gitSha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytes": 3870,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "gitSha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytes": 3885,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "gitSha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytes": 13082,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "gitSha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytes": 652,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "sourceContentSha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "gitSha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytes": 1456,
+      "exact": true,
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/connection-config.ts",
+      "map": "server/chunks/ssr/apps_web_src_0pvl67v8kk3yl._.js.map",
+      "sourceContentSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "gitSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "bytes": 1127,
+      "exact": true,
+      "mapSha256": "8642ac2bfb656d2b96672c9ddcc058c641fabcb750a0b9dc811cd68476426553"
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "map": "server/chunks/ssr/apps_web_src_1t49k1820bk_b._.js.map",
+      "sourceContentSha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "gitSha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytes": 604,
+      "exact": true,
+      "mapSha256": "bf2f18146139f0716d707b9e00d9395912656c75114929114140430f99bc64db"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/config.ts",
+      "map": "server/chunks/ssr/apps_web_src_1t49k1820bk_b._.js.map",
+      "sourceContentSha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "gitSha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytes": 413,
+      "exact": true,
+      "mapSha256": "bf2f18146139f0716d707b9e00d9395912656c75114929114140430f99bc64db"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/connection-config.ts",
+      "map": "server/chunks/ssr/apps_web_src_1t49k1820bk_b._.js.map",
+      "sourceContentSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "gitSha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "bytes": 1127,
+      "exact": true,
+      "mapSha256": "bf2f18146139f0716d707b9e00d9395912656c75114929114140430f99bc64db"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "map": "server/chunks/ssr/apps_web_src_shared_meri-actions_opaque-session-controller_ts_0qs38vcvp6ndu._.js.map",
+      "sourceContentSha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "gitSha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytes": 3389,
+      "exact": true,
+      "mapSha256": "991e15e5ede02303fce549bcd19ac178c9393597d85f7d02d1ab0e0e9979a6fb"
+    }
+  ],
+  "generatedSources": [
+    {
+      "virtualSource": "apps/web/src/features/meri/files/files.module.css [app-ssr] (css module)",
+      "map": "server/chunks/ssr/apps_web_src_0n_tu6-o18uhm._.js.map",
+      "mapSha256": "0007e72a0d164aceb12d365760ad3f4f96aad7adc59d4cec632d41a9d5f6d3f4",
+      "sourceContentSha256": "90fdb4b05e444a0a7fadb9b46376d46e3ff7f5e8e28f7ff20cdd9e873af1f35a",
+      "classification": "Turbopack-generated CSS module value or client-reference wrapper; not a committed source file."
+    },
+    {
+      "virtualSource": "apps/web/src/app/meri/files/MeriFilesHost.tsx/__nextjs-internal-proxy.mjs { server => \"[project]/apps/web/src/app/meri/files/MeriFilesHost.tsx\" }",
+      "map": "server/chunks/ssr/apps_web_src_1t49k1820bk_b._.js.map",
+      "mapSha256": "bf2f18146139f0716d707b9e00d9395912656c75114929114140430f99bc64db",
+      "sourceContentSha256": "2885d1eafd1fe4f5abf71a85de4c5257eef25055a5445d7c9f4b717f12a6728c",
+      "classification": "Turbopack-generated CSS module value or client-reference wrapper; not a committed source file."
+    }
+  ],
+  "initialProbeNote": "An exploratory assertion that every map source was a verbatim Git file rejected the two generated virtual modules. All actual Git TS/TSX sources matched; generated modules are classified separately, not masked or described as byte-identical source."
+}

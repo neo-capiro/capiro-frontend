@@ -1,0 +1,45 @@
+{
+  "status": "PASS_BOUNDED_OFFLINE_GATES_WITH_DOCUMENTED_INFRASTRUCTURE_RECOVERY",
+  "portfolio": {
+    "discovered": 1139,
+    "originalShardPartitionExact": true,
+    "firstAttemptPassed": 1138,
+    "firstAttemptFailed": 1,
+    "successfulExplicitReruns": 1,
+    "uniqueSuccessfulCoverage": 1139,
+    "actualTestExecutions": 1140,
+    "zeroTestSelectorAttempts": 1,
+    "automaticRetries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "timeoutDistributionOriginal": {
+      "30000": 1135,
+      "90000": 4
+    },
+    "rerunTimeout": 30000,
+    "originalFailureAndRerunId": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+    "originalShard2ExitStill1": true,
+    "originalFailureRawBindingsUnchanged": true,
+    "targetedScreenshot": {
+      "path": "/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-enospc-case-rerun-v2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33165,
+      "sha256": "1bef83cb011193fa4c57229b51cd29e5266614d5f5df3aa18ad78680af3cff99",
+      "dimensions": [
+        390,
+        844
+      ]
+    }
+  },
+  "modules": {
+    "uniqueCases": 297,
+    "passed": 297,
+    "automaticRetries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "timeoutDistribution": {
+      "30000": 297
+    }
+  },
+  "receiptCount": 16,
+  "rawEvidenceBindings": 69
+}

@@ -1,0 +1,45 @@
+{
+  "rootOwnedRegistry": {
+    "path": "scripts/architecture/reviewed-size-findings.json",
+    "sha256": "2f66cd6ddaa8445aaf0a3abf8e9e0218ed8aa4b6d38580c6e631f0f4d4147c64",
+    "bytes": 133048
+  },
+  "records": [
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "symbol": "OrdinaryEngagementScreen",
+      "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0",
+      "exactRecordEqual": true
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "symbol": "OutreachView",
+      "fingerprint": "b86cd8cb940cc4e119e7723a8b55f82a82f6d175b26b428fe9324175f2223756",
+      "exactRecordEqual": true
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "symbol": "OutreachForm",
+      "fingerprint": "d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa",
+      "exactRecordEqual": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "symbol": "WorkspaceScreen",
+      "fingerprint": "849d2840007f21da937f4b3f2c09a993d9444e3ff834a574467e10814d0d9160",
+      "exactRecordEqual": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "symbol": "RichBlockControls",
+      "fingerprint": "3cf80059dcb046d4af8f762b121a5512294ed2811c8643abdbe45adfe245cf79",
+      "exactRecordEqual": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "symbol": "RichNewsletterEditor",
+      "fingerprint": "fad466d74b21eeea140d8bc5b52297cf3719e49a622e936fd6cb0fa0212bc9e7",
+      "exactRecordEqual": true
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+Listing tests:
+  newsletter-document-lifecycle.spec.ts:13:1 › rich document create is explicit, preserves local content and stages only a confirmed full save
+  newsletter-document-lifecycle.spec.ts:84:1 › rich library detail requires explicit adoption and sends the complete reviewed CAS document
+  newsletter-document-lifecycle.spec.ts:130:3 › rich save 409 retains edits until deliberate owner review and full rebase
+  newsletter-document-lifecycle.spec.ts:130:3 › rich save 503 retains edits until deliberate owner review and full rebase
+  newsletter-document-lifecycle.spec.ts:200:1 › rich explicit adoption replaces uncertain local edits without attributing the owner state
+  newsletter-document-lifecycle.spec.ts:238:1 › rich saved preview excludes local edits and sanitizes active HTML without remote requests
+  newsletter-document-navigation.spec.ts:18:1 › rich pending create remains fenced after history close/reopen and an empty library
+  newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 200
+  newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 503
+  newsletter-document-navigation.spec.ts:123:1 › rich unknown save after reopen needs a successful owner read and separate adoption
+  newsletter-document-navigation.spec.ts:172:3 › rich held save cannot restore prior private material after client replacement
+  newsletter-document-navigation.spec.ts:172:3 › rich held save cannot restore prior private material after session replacement
+Total: 12 tests in 2 files

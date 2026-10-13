@@ -1,0 +1,62 @@
+{
+  "id": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+  "file": "mail-rich-compose.spec.ts",
+  "title": "keyboard formatting and mobile toolbar remain reachable",
+  "line": 267,
+  "test": {
+    "timeout": 30000,
+    "annotations": [],
+    "expectedStatus": "passed",
+    "projectId": "",
+    "projectName": "",
+    "results": [
+      {
+        "workerIndex": 1,
+        "parallelIndex": 1,
+        "status": "failed",
+        "duration": 5018,
+        "error": {
+          "message": "Error: ENOSPC: no space left on device, mkdir '/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable'",
+          "stack": "Error: ENOSPC: no space left on device, mkdir '/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable'\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/mail-rich-compose.spec.ts:290:23",
+          "location": {
+            "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/mail-rich-compose.spec.ts",
+            "column": 23,
+            "line": 290
+          },
+          "snippet": "  288 |   }\n  289 |   await page.screenshot({\n> 290 |     path: test.info().outputPath(\"mobile-rich.png\"),\n      |                       ^\n  291 |   });\n  292 |   expect(state.unexpected).toEqual([]);\n  293 | });"
+        },
+        "errors": [
+          {
+            "location": {
+              "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/mail-rich-compose.spec.ts",
+              "column": 23,
+              "line": 290
+            },
+            "message": "Error: ENOSPC: no space left on device, mkdir '/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable'\n\n  288 |   }\n  289 |   await page.screenshot({\n> 290 |     path: test.info().outputPath(\"mobile-rich.png\"),\n      |                       ^\n  291 |   });\n  292 |   expect(state.unexpected).toEqual([]);\n  293 | });\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/mail-rich-compose.spec.ts:290:23"
+          },
+          {
+            "message": "Error: ENOSPC: no space left on device, mkdir '/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable'"
+          }
+        ],
+        "stdout": [],
+        "stderr": [],
+        "retry": 0,
+        "startTime": "2026-10-13T08:16:44.821Z",
+        "annotations": [],
+        "attachments": [
+          {
+            "name": "trace",
+            "contentType": "application/zip",
+            "path": "/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-shard-2-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip"
+          }
+        ],
+        "errorLocation": {
+          "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/mail-rich-compose.spec.ts",
+          "column": 23,
+          "line": 290
+        }
+      }
+    ],
+    "status": "unexpected"
+  }
+}

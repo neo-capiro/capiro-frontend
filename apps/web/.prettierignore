@@ -1,0 +1,3 @@
+# Immutable public receiving fixtures retain the sealed packet's exact bytes.
+# Their byte hashes are verified in docs/meri-workflow-20261013/RECEIVING-FIXTURES.json.
+tests/fixtures/meri-actions/*.json

@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-12T21:43:45.054734+00:00",
+  "ownerBase": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "frozenRoot": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "testPath": "apps/web/tests/browser/relationships.spec.ts",
+  "beforeSha256": "ca439b6a7c7494a879a508382cff343a3e514c76091f8feca803c351fb56b9d4",
+  "sameSpecAsFrozen": true,
+  "redEvidence": {
+    "path": "/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-artifacts/relationships-person-linke-a977e-der-refusal-remains-visible/error-context.md",
+    "sha256": "ab08826eda614e732a311269756900433e855fef8e54adde70c42ad7e60439d7",
+    "bytes": 18053,
+    "message": "Not an input element",
+    "expected": "Synthetic message",
+    "retainedSnapshot": "textbox Message > paragraph Synthetic message"
+  },
+  "runtimeRerunByOwner": false,
+  "preexistingUntracked": [
+    "node_modules"
+  ]
+}

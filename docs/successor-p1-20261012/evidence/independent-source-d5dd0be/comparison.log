@@ -1,0 +1,51 @@
+{
+  "status": "PASS_FULL_SOURCE_IDENTITY",
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "gitSubtrees": {
+    "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e"
+  },
+  "archivePath": "/tmp/capiro-source-d5dd0be/source-d5dd0be.zip",
+  "archiveBytes": 498171732,
+  "archiveSHA256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+  "archiveFormat": "single-volume ZIP32, canonical accepted profile",
+  "trackedBlobs": 5006,
+  "zipMembers": 5007,
+  "trackedPayloadBytes": 589105597,
+  "perMemberInventorySHA256": "1ac06b53762855f60f8a1d4fc1343e51ce373711cee5ac8479bd26a0e2a73139",
+  "allMemberPathModeSizeGitBlobAndSHA256Match": true,
+  "exactSourceMarkerVerified": true,
+  "creatorAndFreshCanonicalReceiptsEqual": true,
+  "receipts": {
+    "creator-receipt.json": {
+      "sha256": "5fcbdf8819003e3eb51a9d8395eb70db0a10c728efb7aaf6b8c301afa0210cd9",
+      "bytes": 1586973
+    },
+    "canonical-review-receipt.json": {
+      "sha256": "5fcbdf8819003e3eb51a9d8395eb70db0a10c728efb7aaf6b8c301afa0210cd9",
+      "bytes": 1586973
+    },
+    "independent-review-receipt.json": {
+      "sha256": "1236b30d8908370947fc16a29309361ab824e0f77d973f233feb9b9098c59716",
+      "bytes": 585
+    }
+  },
+  "verifierBindings": {
+    "source_archive.py": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+    "zip_layout.py": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+    "verify-source-zip.py": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2"
+  },
+  "qualificationStatus": "PENDING_PARENT_GATES_NOT_ESTABLISHED_BY_ARCHIVE_VERIFICATION",
+  "appsWebUnchangedFrom943d90c": true,
+  "priorArchivePreserved": {
+    "commit": "943d90c459998dac4ac90a462bf5a9c880d6a736",
+    "archiveSHA256": "0f63187e7f4899060accfeed623c636c21b90b3dd27c497cea0b3bb7207efe06",
+    "archiveBytes": 498170759,
+    "action": "not modified; newd5dd0be binding is separate"
+  },
+  "cloudActions": [],
+  "archiveWrites": false,
+  "extraction": false,
+  "sourceEdits": false
+}

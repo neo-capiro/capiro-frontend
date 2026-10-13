@@ -1,0 +1,118 @@
+diff --git a/apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/files/page.tsx b/apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/files/page.tsx
+index 2a355fcda7f698168b8eeed79a6d5962b49f5561..d2f1358ac2de0cec682a133076114d499882cd18 100644
+--- a/apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/files/page.tsx
++++ b/apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/files/page.tsx
+@@ -2,14 +2,17 @@ import { FilesPage } from "@/features/portfolio/files/FilesPage";
+ import { readConfig } from "@/shared/portfolio/config/config";
+ export default async function Page({
+   params,
++  searchParams,
+ }: {
+   params: Promise<{ clientId: string }>;
++  searchParams: Promise<{ file?: string | string[] }>;
+ }) {
+-  const { clientId } = await params;
++  const [{ clientId }, { file }] = await Promise.all([params, searchParams]);
+   return (
+     <FilesPage
+       clientId={clientId}
+       destinations={readConfig(process.env).destinations}
++      linkedFileId={typeof file === "string" && file ? file : undefined}
+     />
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/files/FilesPage.tsx b/apps/web/src/features/portfolio/files/FilesPage.tsx
+index 083fa368d8f33b45232aa7aa02cbbecc69102efe..2c6cc0c946d23b6374a0ca54b5dd304652db2afb 100644
+--- a/apps/web/src/features/portfolio/files/FilesPage.tsx
++++ b/apps/web/src/features/portfolio/files/FilesPage.tsx
+@@ -12,15 +12,20 @@ import { FilePreview } from "./FilePreview";
+ import { FileAccess } from "./FileAccess";
+ import { MoveFile } from "./MoveFile";
+ import { UploadDialog } from "./UploadDialog";
++import { DocumentState } from "./DocumentState";
++import { useLinkedFileArrival } from "./linked-arrival";
+ import styles from "./files.module.css";
+ export function FilesPage({
+   clientId,
+   destinations,
++  linkedFileId,
+ }: {
+   clientId: string;
+   destinations: Destinations;
++  linkedFileId?: string;
+ }) {
+   const query = useFiles(clientId);
++  const arrival = useLinkedFileArrival(clientId, linkedFileId, query);
+   const client = useClient(clientId);
+   const [search, setSearch] = useState("");
+   const [folder, setFolder] = useState<string>();
+@@ -38,9 +43,14 @@ export function FilesPage({
+     view: string;
+     folder: string | null;
+   }>();
+-  const requestAction = (kind: FileAction | "new-folder", id: string) =>
++  const requestAction = (kind: FileAction | "new-folder", id: string) => {
++    arrival.dismiss();
+     setAction({ view: query.readerScope, kind, id });
+-  const close = () => setAction(undefined);
++  };
++  const close = () => {
++    arrival.dismiss();
++    setAction(undefined);
++  };
+   const mutation = useFileChange(clientId, close);
+   const available = query.isSuccess && !query.error;
+   const files = available ? query.data : [];
+@@ -48,8 +58,9 @@ export function FilesPage({
+     requestedAction?.view === query.readerScope
+       ? files.find((file) => file.id === requestedAction.id)
+       : undefined;
+-  const action =
+-    requestedAction && currentFile
++  const action = arrival.file
++    ? { kind: "preview" as const, file: arrival.file }
++    : requestedAction && currentFile
+       ? { kind: requestedAction.kind, file: currentFile }
+       : undefined;
+   const rows = filterFiles(files, search, folder, source, sort);
+@@ -75,7 +86,10 @@ export function FilesPage({
+           </button>
+           <button
+             className="button"
+-            onClick={() => setUploadView(query.readerScope)}
++            onClick={() => {
++              arrival.dismiss();
++              setUploadView(query.readerScope);
++            }}
+             disabled={!available}
+           >
+             Upload
+@@ -120,6 +134,11 @@ export function FilesPage({
+         error={query.error}
+         retry={() => void query.refetch()}
+       />
++      {arrival.unavailable && (
++        <DocumentState>
++          This file is unavailable in the current list.
++        </DocumentState>
++      )}
+       {available && (
+         <div className={styles.layout}>
+           <aside className={`card stack ${styles.folders}`}>
+@@ -128,12 +147,13 @@ export function FilesPage({
+               <button
+                 className="button ghost"
+                 disabled={folder === undefined}
+-                onClick={() =>
++                onClick={() => {
++                  arrival.dismiss();
+                   setFolderAccess({
+                     view: query.readerScope,
+                     folder: folder || null,
+-                  })
+-                }
++                  });
++                }}
+               >
+                 Access
+               </button>

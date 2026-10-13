@@ -1,0 +1,24 @@
+{
+  "pidWithinOwnedNamespace": 6,
+  "port": 34874,
+  "cwd": "/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011",
+  "argv": [
+    "npm",
+    "run",
+    "start",
+    "--",
+    "--port",
+    "34874"
+  ],
+  "serverAndBrowserShareBoundedOwner": true,
+  "acceptedBuild": "clean .next; no prior output reused",
+  "ready": true,
+  "servedHtmlSha256": "38b4a647f452a224997ab1c84fe8a80d97fe3aa95a4fa0756c242c0cf98a31e2",
+  "servedCssPaths": [
+    "/_next/static/chunks/18932pv-ebku5.css",
+    "/_next/static/chunks/3sn7e2o18z7df.css"
+  ],
+  "browserExitCode": 0,
+  "serverExitCode": -15,
+  "ownedServerStopped": true
+}

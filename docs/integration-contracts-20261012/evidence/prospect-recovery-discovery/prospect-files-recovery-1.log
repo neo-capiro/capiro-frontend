@@ -1,0 +1,24 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test prospect-files.spec.ts
+
+[WebServer] (node:220293) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:220349) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/prospect-files.spec.ts:40:1 › current prospect files retain readiness and do not expose unsupported actions (3.2s)
+  ✓  2 tests/browser/prospect-files.spec.ts:63:1 › upload loss retains one exact intent and confirms without reuploading bytes (3.6s)
+  ✓  3 tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request (3.0s)
+  ✓  4 tests/browser/prospect-files.spec.ts:146:1 › deletion requires confirmation and current list, with no uncertain automatic retry (4.0s)
+  ✓  5 tests/browser/prospect-files.spec.ts:175:1 › dismissed prospect retains historical files but cannot upload, including on mobile (2.8s)
+  ✓  6 tests/browser/prospect-files.spec.ts:202:1 › reload preserves the original upload confirmation without reuploading bytes (4.8s)
+
+  6 passed (23.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

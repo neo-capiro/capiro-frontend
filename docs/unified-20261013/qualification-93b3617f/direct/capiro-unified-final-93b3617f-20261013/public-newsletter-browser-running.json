@@ -1,0 +1,17 @@
+{
+  "pid": 1260509,
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "node",
+    "packages/qualification-newsletter/browser-check.mjs",
+    "/tmp/capiro-unified-final-93b3617f-20261013/public-newsletter-browser"
+  ],
+  "startedUTC": "2026-10-13T06:20:21.608952+00:00",
+  "source": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "sourceDiff": ""
+  }
+}

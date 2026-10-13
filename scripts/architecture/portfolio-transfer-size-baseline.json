@@ -1,0 +1,1169 @@
+{
+  "version": 1,
+  "commit": "02c02d95bdf3949662b9123f425271c6491ffdab",
+  "sourceRoot": "apps/portfolio-web/src/",
+  "purpose": "Exact unchanged transferred size findings remain visible and unreviewed. This inventory is provenance, not a cohesion approval.",
+  "findings": [
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
+      "kind": "function",
+      "symbol": "AdvocacyHistory",
+      "line": 17,
+      "nonblank": 148,
+      "fingerprint": "064758d7775aa767c6ee5e6f2b4fd3402f8a6a9be21bec48f0fe8bd1bf3d3f74",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/AdvocacyHistory.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+      "kind": "function",
+      "symbol": "CorrectionDialog",
+      "line": 33,
+      "nonblank": 200,
+      "fingerprint": "d7ba4f7e27fae48927d2d9db608314e7e3eae9d894bb344d5372055004d919f6",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/CorrectionDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+      "kind": "function",
+      "symbol": "MatterEditor",
+      "line": 8,
+      "nonblank": 99,
+      "fingerprint": "77035a3fa8656eec765dc55919a184d8cdc6ca82771bb69a02d1d84292c4ca9c",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/MatterEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+      "kind": "function",
+      "symbol": "RecordCard",
+      "line": 5,
+      "nonblank": 91,
+      "fingerprint": "10d82cfc146ce90be00ee248a64aaa3e979e11f4aaf1e3d9df900707fa556a35",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/RecordCard.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/RecordDialog.tsx",
+      "kind": "function",
+      "symbol": "RecordDialog",
+      "line": 7,
+      "nonblank": 85,
+      "fingerprint": "4a706fc41aa4c7093bb575fe6de38f384451c179f6cc90e7c62aed04e80b0d93",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/RecordDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/advocacy/useCorrection.ts",
+      "kind": "function",
+      "symbol": "useCorrection",
+      "line": 14,
+      "nonblank": 112,
+      "fingerprint": "881a2819371f90224633e801844b6fb061dd28d123b7bbf88416df31cb2d2744",
+      "originalFile": "apps/portfolio-web/src/features/advocacy/useCorrection.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+      "kind": "function",
+      "symbol": "BillDrawer",
+      "line": 11,
+      "nonblank": 140,
+      "fingerprint": "312f8f6d9f0b2d2dd07a5943d2af52908b4973068c324f1a6a0f37b34ebeef86",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/BillDrawer.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+      "kind": "function",
+      "symbol": "BillResults",
+      "line": 3,
+      "nonblank": 91,
+      "fingerprint": "addb69617b6fcde2f1451f5b77bb1db2443f54b07ec4e76a383d904450933d97",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/BillResults.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+      "kind": "function",
+      "symbol": "ConfiguredTracker",
+      "line": 40,
+      "nonblank": 138,
+      "fingerprint": "78b86ecd53e4a00296321e6e5d472fd8f63100f92bb1427b457adb2b08cb2b41",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/BillTrackerPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+      "kind": "function",
+      "symbol": "TrackBillDialog",
+      "line": 7,
+      "nonblank": 111,
+      "fingerprint": "f4668f1562cf58ffc1b9789cc5a6edb789287a707e3b65572cb3dd702f9c397d",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/TrackBillDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "kind": "function",
+      "symbol": "WatchlistForm",
+      "line": 93,
+      "nonblank": 186,
+      "fingerprint": "b4b83557dfdc2dc50a72ab43af56539a1fafc547a9f82ebf4728bef864d83a4a",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/WatchlistDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+      "kind": "function",
+      "symbol": "WatchlistTopics",
+      "line": 4,
+      "nonblank": 200,
+      "fingerprint": "42e521234b538b7e3f9d0989facb7c1aa38899170080a0b8fac74fa7c6475202",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/WatchlistTopics.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+      "kind": "function",
+      "symbol": "WatchlistTopics > <anonymous> #3",
+      "line": 55,
+      "nonblank": 157,
+      "fingerprint": "e8349bfe750afb4e6ec69f8b847ab26f89f59d5acdbd5771fffdc58734159bc5",
+      "originalFile": "apps/portfolio-web/src/features/bill-tracker/WatchlistTopics.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
+      "kind": "function",
+      "symbol": "BillingSummaryPanel",
+      "line": 23,
+      "nonblank": 121,
+      "fingerprint": "db98b1af33b30477da3d4d1a48036df0d63f9477aec81ca43ecb3e93cd346906",
+      "originalFile": "apps/portfolio-web/src/features/billing/BillingSummaryPanel.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "function",
+      "symbol": "CalendarPage",
+      "line": 27,
+      "nonblank": 291,
+      "fingerprint": "ade89f2addc6529672317dcf83648a933d5f039f5c3a2a8f6d46c584e75d9cb3",
+      "originalFile": "apps/portfolio-web/src/features/calendar/CalendarPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "MeetingArtifacts",
+      "line": 12,
+      "nonblank": 208,
+      "fingerprint": "c225761627054943324aa2c49d2d45b971ec70d43cd87e141404f2e2d532ddd4",
+      "originalFile": "apps/portfolio-web/src/features/calendar/MeetingArtifacts.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "MeetingArtifacts > <anonymous> #5",
+      "line": 57,
+      "nonblank": 83,
+      "fingerprint": "267831594d9e44f4bec4e80779d0534f706783ddbbb62118fc9ca3f6c077fbab",
+      "originalFile": "apps/portfolio-web/src/features/calendar/MeetingArtifacts.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "kind": "function",
+      "symbol": "MeetingDetail",
+      "line": 18,
+      "nonblank": 135,
+      "fingerprint": "f3ccfeb592e9875faa6f155044d5b306545c97ffffaa94b1c427e5add98ac235",
+      "originalFile": "apps/portfolio-web/src/features/calendar/MeetingDetail.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "kind": "function",
+      "symbol": "MeetingForm",
+      "line": 11,
+      "nonblank": 121,
+      "fingerprint": "30bc0cfb6788e448eb3c707f78caf9d0d02ee4cd2c9e53df596d7db01a587c1c",
+      "originalFile": "apps/portfolio-web/src/features/calendar/MeetingForm.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx",
+      "kind": "function",
+      "symbol": "PreferenceForm",
+      "line": 34,
+      "nonblank": 178,
+      "fingerprint": "8018059cb7cf80499eb1d67ea224fdff44d2fd1d3b087f0f43c9ea9c141db104",
+      "originalFile": "apps/portfolio-web/src/features/calendar/attendance/ClientAttendancePreferences.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx",
+      "kind": "function",
+      "symbol": "AttendancePanel",
+      "line": 36,
+      "nonblank": 195,
+      "fingerprint": "ac912c0a777e2b3060558eec8dbe6e97fc4ec95d5bc637227dbe3e85e98dfccb",
+      "originalFile": "apps/portfolio-web/src/features/calendar/attendance/MeetingAttendance.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx",
+      "kind": "function",
+      "symbol": "SendMeriDialog",
+      "line": 14,
+      "nonblank": 128,
+      "fingerprint": "7e2bc60b98bf55ff9da1d5021008f550ffa7486e023044ea44fa3dc394ed9b24",
+      "originalFile": "apps/portfolio-web/src/features/calendar/attendance/SendMeriDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
+      "kind": "function",
+      "symbol": "SessionDebriefGeneration",
+      "line": 36,
+      "nonblank": 172,
+      "fingerprint": "b27d9e47f73291d464a5ffda6ae1eaeaae7a3362a403ad21210b108cb51e1a9b",
+      "originalFile": "apps/portfolio-web/src/features/calendar/debrief/DebriefGeneration.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/debrief/voice/VoiceMemoSource.tsx",
+      "kind": "function",
+      "symbol": "VoiceSourceForm",
+      "line": 60,
+      "nonblank": 155,
+      "fingerprint": "6d08dca3a42cb8cabd8b7a6e919c32981acbfbf3ede895f361f237be64ab7d81",
+      "originalFile": "apps/portfolio-web/src/features/calendar/debrief/voice/VoiceMemoSource.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/debrief/voice/source.ts",
+      "kind": "function",
+      "symbol": "prepareVoiceSource",
+      "line": 51,
+      "nonblank": 81,
+      "fingerprint": "6179e9b58082daa79a0ad2bcd192c1f265a538d8acdd0adfe1986bb66427c256",
+      "originalFile": "apps/portfolio-web/src/features/calendar/debrief/voice/source.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/debrief/voice/useVoiceSource.ts",
+      "kind": "function",
+      "symbol": "useVoiceSource",
+      "line": 19,
+      "nonblank": 140,
+      "fingerprint": "3bb63ecda5bf173a2b8d122e3146e600a7984c03889e350551c511928004e22e",
+      "originalFile": "apps/portfolio-web/src/features/calendar/debrief/voice/useVoiceSource.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/documents/PreparationPdfAttachmentReview.tsx",
+      "kind": "function",
+      "symbol": "PreparationPdfAttachmentReview",
+      "line": 21,
+      "nonblank": 178,
+      "fingerprint": "ede5b305a87946d07900b996ca8e7694319aa51713d43fe7bc2fb1028cc9d8f0",
+      "originalFile": "apps/portfolio-web/src/features/calendar/documents/PreparationPdfAttachmentReview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/documents/SavedMeetingDocumentPreview.tsx",
+      "kind": "function",
+      "symbol": "SavedMeetingDocumentPreview",
+      "line": 17,
+      "nonblank": 112,
+      "fingerprint": "6a16b1a5608ececfac00e52b835f33b5a2f3070b651894aa98fa5edf215fe060",
+      "originalFile": "apps/portfolio-web/src/features/calendar/documents/SavedMeetingDocumentPreview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/MeetingAssignment.tsx",
+      "kind": "function",
+      "symbol": "AssignmentForm",
+      "line": 38,
+      "nonblank": 182,
+      "fingerprint": "0cf63b1aad77abd0c65a36d9b74b0648bccec3ccbc860832dac02bf85f9e3ef3",
+      "originalFile": "apps/portfolio-web/src/features/calendar/library/MeetingAssignment.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx",
+      "kind": "function",
+      "symbol": "MeetingLibrary",
+      "line": 17,
+      "nonblank": 237,
+      "fingerprint": "686df2cbfe6c5b8a8c84b764b471fc91822d40bfcfb4029ba6f5e6b3e7617977",
+      "originalFile": "apps/portfolio-web/src/features/calendar/library/MeetingLibrary.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/MeetingTranscriptUpload.tsx",
+      "kind": "function",
+      "symbol": "TranscriptForm",
+      "line": 43,
+      "nonblank": 221,
+      "fingerprint": "114d292338289d67990f83710edf6f8cfcaf39fdb15ccf7a0fac3dbd66084429",
+      "originalFile": "apps/portfolio-web/src/features/calendar/library/MeetingTranscriptUpload.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 404,
+      "fingerprint": "a95f6b72e9f6255ac0d775e788c73fa8bf33e3e40f8ad9f190019414ace61c73",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/MeetingPreparation.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+      "kind": "function",
+      "symbol": "ScopedPreparation",
+      "line": 51,
+      "nonblank": 343,
+      "fingerprint": "89889996f50fe6bbccbc1cfa293ad63d231f89bb97e23b74080eb12d077811f6",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/MeetingPreparation.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationContent.tsx",
+      "kind": "function",
+      "symbol": "PreparationContent",
+      "line": 35,
+      "nonblank": 85,
+      "fingerprint": "23df3788a08ac04d8fd5f8a3c291326db14d3c3431ad40eecf91ce9af0ba32ce",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/PreparationContent.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationContent.tsx",
+      "kind": "function",
+      "symbol": "PreparationSources",
+      "line": 120,
+      "nonblank": 92,
+      "fingerprint": "66a72c3fb66b45810c960479a549654924d232cf21ceb575876345ef229229b4",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/PreparationContent.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx",
+      "kind": "function",
+      "symbol": "PreparationEditor",
+      "line": 13,
+      "nonblank": 131,
+      "fingerprint": "a37fb2f697eb70f936b333c820f1fcc940f5513d21e951a0563820b09e5bd4e0",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/PreparationEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/PreparationSettings.tsx",
+      "kind": "function",
+      "symbol": "PreparationSettings",
+      "line": 12,
+      "nonblank": 161,
+      "fingerprint": "0552f0e2f0b004df450d8161ed606072e1bedddef51e88ab927c2371bad9ab38",
+      "originalFile": "apps/portfolio-web/src/features/calendar/preparation/PreparationSettings.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/public-event/PublicEventDetail.tsx",
+      "kind": "function",
+      "symbol": "PublicEventDetail",
+      "line": 19,
+      "nonblank": 152,
+      "fingerprint": "9dc9f2ad21b5563667c6ec2ce184ca26b2a5d3a6f91b18d8ec15c41002684f58",
+      "originalFile": "apps/portfolio-web/src/features/calendar/public-event/PublicEventDetail.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/review/MeetingAttachmentApprovals.tsx",
+      "kind": "function",
+      "symbol": "AttachmentReview",
+      "line": 25,
+      "nonblank": 120,
+      "fingerprint": "21607a947c957fc57cd11902033ecff8d690addd5c812185f12876aeb4f6fa13",
+      "originalFile": "apps/portfolio-web/src/features/calendar/review/MeetingAttachmentApprovals.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/review/SavedMeetingNotesSource.tsx",
+      "kind": "function",
+      "symbol": "SourceReview",
+      "line": 22,
+      "nonblank": 112,
+      "fingerprint": "229c2c80c5e22a8d254b60bf5d72f001bd369c61f9845528755f34497a6fe96c",
+      "originalFile": "apps/portfolio-web/src/features/calendar/review/SavedMeetingNotesSource.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/review/useAttachmentApproval.ts",
+      "kind": "function",
+      "symbol": "useAttachmentApproval",
+      "line": 18,
+      "nonblank": 112,
+      "fingerprint": "a06d6b859bd9be6ed7bcc6df28643818eb1eb98f1b5ab33d182b0ae7cbff618a",
+      "originalFile": "apps/portfolio-web/src/features/calendar/review/useAttachmentApproval.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sync/CalendarSyncDialog.tsx",
+      "kind": "function",
+      "symbol": "CalendarSyncDialog",
+      "line": 15,
+      "nonblank": 237,
+      "fingerprint": "d9cfe83645f345ac5e9523e71487a062f222f1f4aa7abf9e7f6f79af0fe74c53",
+      "originalFile": "apps/portfolio-web/src/features/calendar/sync/CalendarSyncDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sync/useCalendarSync.ts",
+      "kind": "function",
+      "symbol": "useCalendarSync",
+      "line": 22,
+      "nonblank": 139,
+      "fingerprint": "fe6d704802cfc4253e707dc583d0578d9638bca9ff96c46232b322275e31ef72",
+      "originalFile": "apps/portfolio-web/src/features/calendar/sync/useCalendarSync.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "kind": "function",
+      "symbol": "CapabilitiesPage",
+      "line": 13,
+      "nonblank": 98,
+      "fingerprint": "1f76a0cabc51dc7d777f1a55e0724dc8178fb2d11dfaf568bf5376dd3e28fa72",
+      "originalFile": "apps/portfolio-web/src/features/capabilities/CapabilitiesPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+      "kind": "function",
+      "symbol": "CapabilityEditor",
+      "line": 10,
+      "nonblank": 181,
+      "fingerprint": "24e90dfb430fed05196d573d633f17a48cc730d16ad901b3d776b247a81aec72",
+      "originalFile": "apps/portfolio-web/src/features/capabilities/CapabilityEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "kind": "function",
+      "symbol": "Registrations",
+      "line": 17,
+      "nonblank": 157,
+      "fingerprint": "3a5f8fbfc0060012b5ab5eb2792cfe4132c041507972a8ac2bc7305c3c8b1799",
+      "originalFile": "apps/portfolio-web/src/features/capabilities/Registrations.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx",
+      "kind": "function",
+      "symbol": "IntakeSession",
+      "line": 41,
+      "nonblank": 314,
+      "fingerprint": "1835e4917e19e73b7f73d1b9da364f62a3848c16fb8f4ffccb7919a3678c2fca",
+      "originalFile": "apps/portfolio-web/src/features/client-intake/ClientIntakeDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-intake/form.ts",
+      "kind": "function",
+      "symbol": "intakePayload",
+      "line": 186,
+      "nonblank": 86,
+      "fingerprint": "4470f84bb85f11bb2f8a1dbacaffa1680ba6bfcb2995d692a10f2df6e292af55",
+      "originalFile": "apps/portfolio-web/src/features/client-intake/form.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ActivityActions.tsx",
+      "kind": "function",
+      "symbol": "ActivityActions",
+      "line": 13,
+      "nonblank": 119,
+      "fingerprint": "f63633443505c424bcf5b0d552cbd1cc74c6d1e31cac60a8986eaa3dd6459939",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/ActivityActions.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "kind": "function",
+      "symbol": "ActivityTimeline",
+      "line": 16,
+      "nonblank": 107,
+      "fingerprint": "af48be7688caccf5adf6820558084dfc056c79e5ea141d52adf6f5a5ee05b9b5",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/ActivityTimeline.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
+      "kind": "function",
+      "symbol": "ClientHeader",
+      "line": 13,
+      "nonblank": 111,
+      "fingerprint": "fa3ca83c8cedeb4f1bde8b068d1485424c9862b1ebb674862bf7d2de4eeddb05",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/ClientHeader.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "kind": "function",
+      "symbol": "ClientOverview",
+      "line": 23,
+      "nonblank": 172,
+      "fingerprint": "44d2f590ad275f3d6bf3d8eb5d66ad6afa18ee3f59e48e7bfda83030bee711e2",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/ClientOverview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
+      "kind": "function",
+      "symbol": "ClientProfileActions",
+      "line": 15,
+      "nonblank": 95,
+      "fingerprint": "d278df1d920aea8ebd134f9376c58a98374c2b87ba8eb66eed8a149869068654",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/ClientProfileActions.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "kind": "function",
+      "symbol": "FacilitiesCard",
+      "line": 13,
+      "nonblank": 135,
+      "fingerprint": "0987beceeebf2ed83c0e9565c2fb6966637dcdd1885aa07d06c58c977ffaf584",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilitiesCard.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
+      "kind": "function",
+      "symbol": "FacilityDetailDialog",
+      "line": 16,
+      "nonblank": 123,
+      "fingerprint": "30ca97e72d665062d00abbf6f5e385cee91e4e56b9f1b8a2e5ed5bf0ac71032d",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilityDetailDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+      "kind": "function",
+      "symbol": "FacilityDialog",
+      "line": 9,
+      "nonblank": 142,
+      "fingerprint": "84230eb00f53752e7527a011911e39fa84e821bc927dc94c02d6d1287448b1e8",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilityDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "kind": "function",
+      "symbol": "FacilityGeocoding",
+      "line": 8,
+      "nonblank": 112,
+      "fingerprint": "4c6c4dab181480863f51f0f084fd4e0fd4cf4e5247c3a1b2d534fc2f601b96b3",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilityGeocoding.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityMap.tsx",
+      "kind": "function",
+      "symbol": "FacilityMap",
+      "line": 12,
+      "nonblank": 111,
+      "fingerprint": "41f69683526d8bd11ff15be0fcf06f66e5468bb787709fcd150f5c5b16020397",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilityMap.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityMapDialog.tsx",
+      "kind": "function",
+      "symbol": "FacilityMapDialog",
+      "line": 10,
+      "nonblank": 123,
+      "fingerprint": "326c36ef7900472634717578e2b3cd7f8e46973031997630c08f3579ce565856",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/FacilityMapDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+      "kind": "function",
+      "symbol": "QuickLog",
+      "line": 11,
+      "nonblank": 86,
+      "fingerprint": "c4da13cda28f986240ef5aaaf0a01bdd7f8539066f0d873e170a6098042d3d67",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/QuickLog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+      "kind": "function",
+      "symbol": "TeamDialog",
+      "line": 8,
+      "nonblank": 117,
+      "fingerprint": "a6105010f02473787834fe9ed2c4748fd8d8f01ca3ff1379fcbfbf49f7a37469",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/TeamDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+      "kind": "function",
+      "symbol": "useChangeActivity",
+      "line": 19,
+      "nonblank": 145,
+      "fingerprint": "f55d7f9d31b61ca435bd43bf3ee1c96aa29483c197b8e33ec36b1b537c1157d9",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/activity-mutations.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx",
+      "kind": "function",
+      "symbol": "ClientEnrichmentReview",
+      "line": 45,
+      "nonblank": 251,
+      "fingerprint": "6112737a27d33d36a6d120cfe2d4f059107b3afd6b287fc61d6d1035e1bf7b40",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/enrichment/ClientEnrichmentDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/enrichment/FindingReview.tsx",
+      "kind": "function",
+      "symbol": "FindingReview",
+      "line": 136,
+      "nonblank": 141,
+      "fingerprint": "2910063fbb5a0be01c0e11c6b0fbf517d76f452490434a31642b5a34e44bf336",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/enrichment/FindingReview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/enrichment/actions.ts",
+      "kind": "function",
+      "symbol": "executeReviewAction",
+      "line": 52,
+      "nonblank": 125,
+      "fingerprint": "f6179971b4a128b57b6e5f95d9ea6a1a38dff8c8757cfdd985f04dea7f945537",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/enrichment/actions.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/enrichment/useReviewAction.ts",
+      "kind": "function",
+      "symbol": "useReviewAction",
+      "line": 15,
+      "nonblank": 115,
+      "fingerprint": "8d85165524674480e8823c7ee7d44f4343edc4032d48d3c95d3f17ad881c463a",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/enrichment/useReviewAction.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/export/ClientProfileExport.tsx",
+      "kind": "function",
+      "symbol": "ExportSession",
+      "line": 45,
+      "nonblank": 138,
+      "fingerprint": "b524ae3eb828152fcb7c8332e93eb86947cde29530023b7ce199d3cbb66cce24",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/export/ClientProfileExport.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/past-performance/PastPerformance.tsx",
+      "kind": "function",
+      "symbol": "History",
+      "line": 41,
+      "nonblank": 91,
+      "fingerprint": "c5002a5f1f32e5136d1b7966191642ab70ba3aa0342093b747e40856214fe9d9",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/past-performance/PastPerformance.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/past-performance/RemoveSubmission.tsx",
+      "kind": "function",
+      "symbol": "RemoveSubmission",
+      "line": 16,
+      "nonblank": 96,
+      "fingerprint": "6aa9a8f84b5db000d30bc28ac563d36ce8d0f6531f5ee78a5b7fff46b12dd65e",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/past-performance/RemoveSubmission.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogUndo.tsx",
+      "kind": "function",
+      "symbol": "QuickLogUndo",
+      "line": 15,
+      "nonblank": 98,
+      "fingerprint": "eb82657aa475918785770f9be7473d20b091f722bd7aac40aebb9e36e9788c91",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/quick-log/QuickLogUndo.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
+      "kind": "function",
+      "symbol": "FocusTagSession",
+      "line": 24,
+      "nonblank": 158,
+      "fingerprint": "c25f75b538801bf9e6c98b8fcfb41f9258206cd5145ac85eeb43017567866c0b",
+      "originalFile": "apps/portfolio-web/src/features/client-profile/tags/FocusTags.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/FilePreview.tsx",
+      "kind": "function",
+      "symbol": "FilePreview",
+      "line": 6,
+      "nonblank": 83,
+      "fingerprint": "da4f5e97eb4dad89092bd4c318cbc2db389c8ebaa325212498472e095570625b",
+      "originalFile": "apps/portfolio-web/src/features/files/FilePreview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/FileTable.tsx",
+      "kind": "function",
+      "symbol": "FileTable",
+      "line": 6,
+      "nonblank": 109,
+      "fingerprint": "2a4413a0ddb6887003a9d7b9c54963e4474075926f3a87b9ead2cee0ee8634f0",
+      "originalFile": "apps/portfolio-web/src/features/files/FileTable.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "kind": "function",
+      "symbol": "FilesPage",
+      "line": 16,
+      "nonblank": 205,
+      "fingerprint": "72ec94de18069798827ab64324c7617296e0351907900e3910b2725ea98ab9cf",
+      "originalFile": "apps/portfolio-web/src/features/files/FilesPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+      "kind": "function",
+      "symbol": "UploadDialog",
+      "line": 16,
+      "nonblank": 94,
+      "fingerprint": "32f9e46933f2abadf1dac8322e80255f627866ae0e1774e67a1dac4b9de6a8f9",
+      "originalFile": "apps/portfolio-web/src/features/files/UploadDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/upload.ts",
+      "kind": "function",
+      "symbol": "uploadParentFile",
+      "line": 41,
+      "nonblank": 97,
+      "fingerprint": "00c65b81ad450f2d735d87fff4ce604162aaad7e5fe60c2920c976e462d135b7",
+      "originalFile": "apps/portfolio-web/src/features/files/upload.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/intake/csv/CsvImportDialog.tsx",
+      "kind": "function",
+      "symbol": "CsvImportDialog",
+      "line": 32,
+      "nonblank": 268,
+      "fingerprint": "ad548c84e93d1efb573557045251f11dd1412e55507e36163b96f284d22c96df",
+      "originalFile": "apps/portfolio-web/src/features/intake/csv/CsvImportDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
+      "kind": "function",
+      "symbol": "CandidateReview",
+      "line": 17,
+      "nonblank": 101,
+      "fingerprint": "768edc5eb36cb76f1c5041b563df8a32a5941ebd6506645cc85df3111191dde1",
+      "originalFile": "apps/portfolio-web/src/features/intake/registrant/CandidateReview.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/intake/registrant/FirmSearch.tsx",
+      "kind": "function",
+      "symbol": "FirmSearch",
+      "line": 7,
+      "nonblank": 82,
+      "fingerprint": "b6a5e7572edcfd00b8e3e891fe352d39fd4ed41017d4272fa53e7aabb9f4a73c",
+      "originalFile": "apps/portfolio-web/src/features/intake/registrant/FirmSearch.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+      "kind": "function",
+      "symbol": "RegistrantSession",
+      "line": 33,
+      "nonblank": 244,
+      "fingerprint": "d53051fc3fa88023a02bc3b42dbc1dee2390ad2ff06e5c449339fd1147a3ac43",
+      "originalFile": "apps/portfolio-web/src/features/intake/registrant/RegistrantImportDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+      "kind": "function",
+      "symbol": "ObjectiveEditor",
+      "line": 17,
+      "nonblank": 184,
+      "fingerprint": "5fd1ff1f4dc0b92c3bb1425f7a206591521fc8d6787c272becad228066314a73",
+      "originalFile": "apps/portfolio-web/src/features/objectives/ObjectiveEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+      "kind": "function",
+      "symbol": "ObjectivesPage",
+      "line": 14,
+      "nonblank": 163,
+      "fingerprint": "4d936a9e1537ed2dbe6e4929f4bfbdea2c4c1e754ce2f4ff43f9800e0ad998e7",
+      "originalFile": "apps/portfolio-web/src/features/objectives/ObjectivesPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+      "kind": "function",
+      "symbol": "PickerSession",
+      "line": 74,
+      "nonblank": 174,
+      "fingerprint": "358beb9d3610b78d161984b88dda7ae9cbfb1d907eca2105ca613dc718fc0208",
+      "originalFile": "apps/portfolio-web/src/features/objectives/global-create/GlobalObjectiveClientPicker.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+      "kind": "function",
+      "symbol": "OpportunitiesPage",
+      "line": 15,
+      "nonblank": 140,
+      "fingerprint": "7c9614ed5df4fc11abe98035715128acc532eef7ddeae02fcf3cc363ca266534",
+      "originalFile": "apps/portfolio-web/src/features/opportunities/OpportunitiesPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+      "kind": "function",
+      "symbol": "ProfileChoiceSession",
+      "line": 26,
+      "nonblank": 142,
+      "fingerprint": "66b5066c43283e2a9727c325c415bca1e43ffedd776bb0aeb428a2aedbe56759",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/CreateProfileDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
+      "kind": "function",
+      "symbol": "QuickLogSession",
+      "line": 12,
+      "nonblank": 82,
+      "fingerprint": "f6656ca52aef614b4f11c16e9ed0525cafc6290975039580b071f179eaa2a786",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/GlobalQuickLog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/IndexFilters.tsx",
+      "kind": "function",
+      "symbol": "IndexFilters",
+      "line": 13,
+      "nonblank": 103,
+      "fingerprint": "a90ddf3da2fb070a64179ae1c24ab6184f3ab6b686018feb3218d6f1d7027b4a",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/IndexFilters.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+      "kind": "function",
+      "symbol": "PortfolioIndex",
+      "line": 27,
+      "nonblank": 238,
+      "fingerprint": "07c18feca3ecef1a0469d7d45f7cde2e4a39d04e82fb6f9c2c8a34972e3e441a",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/PortfolioIndex.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "kind": "function",
+      "symbol": "PortfolioAttention",
+      "line": 9,
+      "nonblank": 87,
+      "fingerprint": "6d09bae3b89a88c0247db5ab2912723db581643f4b91ff6c180a4281a29392ec",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/attention/PortfolioAttention.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+      "kind": "function",
+      "symbol": "EditorSession",
+      "line": 28,
+      "nonblank": 198,
+      "fingerprint": "c4cbb2d27e715e0b8434b6b27d50ce95a0a69e748822cd85aff177a1da3f9017",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/layout/PortfolioLayoutEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+      "kind": "function",
+      "symbol": "usePortfolioLayout",
+      "line": 20,
+      "nonblank": 245,
+      "fingerprint": "8934298b9b287d89eeef09aa0522321f70d7b970ebba328a50dd81f56757782f",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/layout/usePortfolioLayout.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+      "kind": "function",
+      "symbol": "usePortfolioLayout > save",
+      "line": 106,
+      "nonblank": 87,
+      "fingerprint": "49325a39f6558e8044921f50097807dc962acfa958d6c63ae8bc13246b737fe9",
+      "originalFile": "apps/portfolio-web/src/features/portfolio/layout/usePortfolioLayout.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/NextStepEditor.tsx",
+      "kind": "function",
+      "symbol": "NextStepEditor",
+      "line": 9,
+      "nonblank": 103,
+      "fingerprint": "a27e672e6fd7202501d339b22f17525da5f342542d1e07c22e1826bd9c88d1d8",
+      "originalFile": "apps/portfolio-web/src/features/prospects/NextStepEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
+      "kind": "function",
+      "symbol": "ProspectDetail",
+      "line": 27,
+      "nonblank": 176,
+      "fingerprint": "8d662a418c6927e5c38f5357fd6b7b5563e8f2d9e929ea377cdf14b186421912",
+      "originalFile": "apps/portfolio-web/src/features/prospects/ProspectDetail.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
+      "kind": "function",
+      "symbol": "ProspectEditor",
+      "line": 9,
+      "nonblank": 106,
+      "fingerprint": "1ca69dda8efcdd5621641c0641890ef20f9dfe7199685e0c87a3f6bc81ce7ca3",
+      "originalFile": "apps/portfolio-web/src/features/prospects/ProspectEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/ProspectHistory.tsx",
+      "kind": "function",
+      "symbol": "ProspectHistory",
+      "line": 9,
+      "nonblank": 88,
+      "fingerprint": "6d36bfee1bd67202c8ca394292b4c05b9527672d8fb0c8d3a9ee459c7d84e8fa",
+      "originalFile": "apps/portfolio-web/src/features/prospects/ProspectHistory.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx",
+      "kind": "function",
+      "symbol": "ProspectPipeline",
+      "line": 18,
+      "nonblank": 125,
+      "fingerprint": "6de7f0e3319ca02c8abc26a0604775cff426b3e1d618ffda0118902946d06d90",
+      "originalFile": "apps/portfolio-web/src/features/prospects/ProspectPipeline.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+      "kind": "function",
+      "symbol": "ProspectsIndex",
+      "line": 22,
+      "nonblank": 176,
+      "fingerprint": "81ce12080a5eda26f9f9eed0061539cb379eba08e87f9ce6f3d321c880b32a0d",
+      "originalFile": "apps/portfolio-web/src/features/prospects/ProspectsIndex.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
+      "kind": "function",
+      "symbol": "BriefEditor",
+      "line": 14,
+      "nonblank": 265,
+      "fingerprint": "e24f1379bd0c1bbff091430ed15d883ecc969efa2f6de925ed9d4c923e76fc3e",
+      "originalFile": "apps/portfolio-web/src/features/prospects/brief/BriefEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/brief/BriefSource.tsx",
+      "kind": "function",
+      "symbol": "BriefSource",
+      "line": 12,
+      "nonblank": 118,
+      "fingerprint": "7aceee0c6347003b1333f3203b603fbc3a9b928d982d718f0b2900c9f2ea0785",
+      "originalFile": "apps/portfolio-web/src/features/prospects/brief/BriefSource.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+      "kind": "function",
+      "symbol": "BriefViewer",
+      "line": 16,
+      "nonblank": 130,
+      "fingerprint": "21be0ccb64af9ab16e54052821e59ee193cabdd0414509f6cd6b622f43a2955a",
+      "originalFile": "apps/portfolio-web/src/features/prospects/brief/BriefViewer.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/brief/ProspectBrief.tsx",
+      "kind": "function",
+      "symbol": "ScopedBrief",
+      "line": 53,
+      "nonblank": 113,
+      "fingerprint": "b8f8e5f8f17c3b54da2ef7d9c86378232a5a988de36a7ceb98aa66c2e5b95220",
+      "originalFile": "apps/portfolio-web/src/features/prospects/brief/ProspectBrief.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+      "kind": "function",
+      "symbol": "ContactEditor",
+      "line": 11,
+      "nonblank": 271,
+      "fingerprint": "7f6dcd6d07332c407d69eb6add39adb685b4a1eec33d3edc7bd51734758e44ff",
+      "originalFile": "apps/portfolio-web/src/features/prospects/contacts/ContactEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+      "kind": "function",
+      "symbol": "ProspectContacts",
+      "line": 10,
+      "nonblank": 89,
+      "fingerprint": "bf31e7e338fa3589bd87ee457040ce79b6fd3ac5910e4d76cc37627fbf63fe65",
+      "originalFile": "apps/portfolio-web/src/features/prospects/contacts/ProspectContacts.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+      "kind": "function",
+      "symbol": "ClientLinkDialog",
+      "line": 54,
+      "nonblank": 107,
+      "fingerprint": "abf2357ffdcabde0cfa5996d96fe1cd7df96bc82028aed55bea1b81b5c916828",
+      "originalFile": "apps/portfolio-web/src/features/prospects/conversion/ProspectClientLink.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/proposals/TemplateCatalog.tsx",
+      "kind": "function",
+      "symbol": "TemplateCatalog",
+      "line": 11,
+      "nonblank": 118,
+      "fingerprint": "cc2646107da24b49a6d15929d1306ceccc333ebfa0641c4ce5d62d3f2119f46c",
+      "originalFile": "apps/portfolio-web/src/features/prospects/proposals/TemplateCatalog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/AddTargetDialog.tsx",
+      "kind": "function",
+      "symbol": "AddTargetDialog",
+      "line": 11,
+      "nonblank": 109,
+      "fingerprint": "48f6c8183b9f36dbed8ecef9c64496fdfe085af5645cd2b0616b0a9e9704b316",
+      "originalFile": "apps/portfolio-web/src/features/relationships/AddTargetDialog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+      "kind": "function",
+      "symbol": "ContactDrawer",
+      "line": 18,
+      "nonblank": 199,
+      "fingerprint": "b22243978b8655836539d1686288a85595ecccfa36277fe01a97efe24a367188",
+      "originalFile": "apps/portfolio-web/src/features/relationships/ContactDrawer.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/ContactForm.tsx",
+      "kind": "function",
+      "symbol": "ContactForm",
+      "line": 6,
+      "nonblank": 94,
+      "fingerprint": "5968a5a1308cad6ea064ca7d06c12f38daafdb31c4b5a1dbd03a31d52510904c",
+      "originalFile": "apps/portfolio-web/src/features/relationships/ContactForm.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+      "kind": "function",
+      "symbol": "ContactMail",
+      "line": 8,
+      "nonblank": 99,
+      "fingerprint": "27738e7b42341e6f4915102f7c3a6c3e10f52fc7f0c93555b05dfcd137bb1d4b",
+      "originalFile": "apps/portfolio-web/src/features/relationships/ContactMail.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+      "kind": "function",
+      "symbol": "DirectoryResults",
+      "line": 16,
+      "nonblank": 84,
+      "fingerprint": "54664ad3162444fd0a4536d174ffd48217886a0021b0998af4e49aebd4a2ba25",
+      "originalFile": "apps/portfolio-web/src/features/relationships/DirectoryResults.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+      "kind": "function",
+      "symbol": "GovernmentRelationships",
+      "line": 14,
+      "nonblank": 122,
+      "fingerprint": "86a6f8b4d1620e2d255ce484effae1192feea990c4e6efb874a3bb85878267e4",
+      "originalFile": "apps/portfolio-web/src/features/relationships/GovernmentRelationships.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/HierarchyEditor.tsx",
+      "kind": "function",
+      "symbol": "HierarchyEditor",
+      "line": 11,
+      "nonblank": 98,
+      "fingerprint": "86c599832eb36eadb3ecd537937a08dc457ca284e8dfb4fe8c5c77bfafc5c435",
+      "originalFile": "apps/portfolio-web/src/features/relationships/HierarchyEditor.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 22,
+      "nonblank": 288,
+      "fingerprint": "51385262c74a15d7732fdd53e295e5ac9440cb6d476c70e555d16a69f9262cc1",
+      "originalFile": "apps/portfolio-web/src/features/relationships/MailCompose.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+      "kind": "function",
+      "symbol": "OrganizationRelationships",
+      "line": 31,
+      "nonblank": 181,
+      "fingerprint": "be105aad57fbacca6990e7afe7cc05ae07e98de2ca3e17d42a0d0b0fc299d0a3",
+      "originalFile": "apps/portfolio-web/src/features/relationships/RelationshipsPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+      "kind": "function",
+      "symbol": "TargetDrawer",
+      "line": 17,
+      "nonblank": 165,
+      "fingerprint": "40ac7796dbbf9e732a5da49f665601514edb78536fff887936a03a3f2c160c0f",
+      "originalFile": "apps/portfolio-web/src/features/relationships/TargetDrawer.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+      "kind": "function",
+      "symbol": "useTargetDirectory",
+      "line": 19,
+      "nonblank": 96,
+      "fingerprint": "6ee9ba80b132a8b46b92b0501012190a72d8b215fe86c8aa24bd63a3dd9ced25",
+      "originalFile": "apps/portfolio-web/src/features/relationships/directory-queries.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+      "kind": "function",
+      "symbol": "useTargetDirectory > queryFn",
+      "line": 29,
+      "nonblank": 89,
+      "fingerprint": "7c18084a425e8771dd6d3531a019736a624b56c4e7cef62ef9d5b733a163165a",
+      "originalFile": "apps/portfolio-web/src/features/relationships/directory-queries.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/RecipientFields.tsx",
+      "kind": "function",
+      "symbol": "RecipientFields",
+      "line": 8,
+      "nonblank": 142,
+      "fingerprint": "339d9732104badb0b6862511cbb671260862db794a5f20dbf83a99356fe7b37b",
+      "originalFile": "apps/portfolio-web/src/features/relationships/email/RecipientFields.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
+      "kind": "function",
+      "symbol": "sendReviewedMail",
+      "line": 27,
+      "nonblank": 84,
+      "fingerprint": "9d52e43ed9acfb11da0f3c2afa6720179d67627d9272351a21a7d1fc9892be51",
+      "originalFile": "apps/portfolio-web/src/features/relationships/email/send.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
+      "kind": "function",
+      "symbol": "useMailAttachments",
+      "line": 28,
+      "nonblank": 106,
+      "fingerprint": "5f3c80a87e8f9e2a372de8880237fa00f847974cdd91fe47475324ad6dd4f49e",
+      "originalFile": "apps/portfolio-web/src/features/relationships/email/useMailAttachments.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
+      "kind": "function",
+      "symbol": "NoteSession",
+      "line": 32,
+      "nonblank": 131,
+      "fingerprint": "6acc2499fdd204e4fda818226a3a6819e7d91a40c56f72739528d374a30bec78",
+      "originalFile": "apps/portfolio-web/src/features/relationships/member-notes/MemberNoteForm.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",
+      "kind": "function",
+      "symbol": "MemberPicker",
+      "line": 43,
+      "nonblank": 138,
+      "fingerprint": "e81406089e842e44923590e0911b9e5d13ba0eefb1c432743b01ace48ca133d0",
+      "originalFile": "apps/portfolio-web/src/features/relationships/member-notes/MemberQuickLog.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/member-notes/useMemberNote.ts",
+      "kind": "function",
+      "symbol": "useMemberNote",
+      "line": 23,
+      "nonblank": 118,
+      "fingerprint": "0780ec88cdc7848b11c12f0373d6d604ae4dbf11431710f0b5c17e444823e116",
+      "originalFile": "apps/portfolio-web/src/features/relationships/member-notes/useMemberNote.ts"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/thread/TimelineMailThread.tsx",
+      "kind": "function",
+      "symbol": "ThreadSession",
+      "line": 56,
+      "nonblank": 121,
+      "fingerprint": "da7c3383a48022a3cd22ad3e0b8b3b844d4d772e7f7ffc4dae8d5cf6d4a06d22",
+      "originalFile": "apps/portfolio-web/src/features/relationships/thread/TimelineMailThread.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+      "kind": "function",
+      "symbol": "WorkPage",
+      "line": 9,
+      "nonblank": 160,
+      "fingerprint": "80b4ecdbc45a9ade9cda54dc802ca464d169560ed978091bf30bddd9437445c3",
+      "originalFile": "apps/portfolio-web/src/features/work/WorkPage.tsx"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+      "kind": "function",
+      "symbol": "WorkspaceDocuments",
+      "line": 7,
+      "nonblank": 85,
+      "fingerprint": "f2ab44c6cb14091faf82923971e762ec2621feff508f63386f50a6992350cae4",
+      "originalFile": "apps/portfolio-web/src/features/work/WorkspaceDocuments.tsx"
+    },
+    {
+      "file": "apps/web/src/shared/portfolio/api/proxy.ts",
+      "kind": "function",
+      "symbol": "proxyRequest",
+      "line": 29,
+      "nonblank": 125,
+      "fingerprint": "23598007dfb1bbac665eaeac131baa716409c3e9da0a2fb8e245521dd32749c5",
+      "originalFile": "apps/portfolio-web/src/shared/api/proxy.ts"
+    },
+    {
+      "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+      "kind": "function",
+      "symbol": "Shell",
+      "line": 13,
+      "nonblank": 113,
+      "fingerprint": "404176224a608c383c0ad52cf9d3ee605b4afedc18fcbce65afd918b0f3d895f",
+      "originalFile": "apps/portfolio-web/src/shared/shell/Shell.tsx"
+    }
+  ]
+}

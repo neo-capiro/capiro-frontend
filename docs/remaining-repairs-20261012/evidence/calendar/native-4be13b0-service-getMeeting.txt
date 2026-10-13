@@ -1,0 +1,10 @@
+async getMeeting(ctx: TenantContext, id: string) {
+    return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      const meeting = await tx.meeting.findFirst({
+        where: { id, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+        include: meetingInclude(),
+      });
+      if (!meeting) throw new NotFoundException('Meeting not found');
+      return (await this.decorateMeetings(tx, ctx, [meeting]))[0];
+    });
+  }

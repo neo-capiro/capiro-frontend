@@ -1,0 +1,27 @@
+{
+  "pins": {
+    "strategy-planner": "0716767e8b6ff323b2516d166b22edb4d2413e57",
+    "workspace": "c05b85a29a75cbaaa8538fd7f9a97e298a23913e",
+    "calendar-handoff": "39b4ae45db578d121b18db9f95029a8c3ec293a2"
+  },
+  "calendarPrevious": "762aea0004dba51643ff370e7029de266966b74e",
+  "calendarNonDocumentationChanges": 0,
+  "changedPaths": [
+    "M\tdocs/effective-date-calendar-20261012/HANDOFF.md",
+    "A\tdocs/effective-date-calendar-20261012/evidence/SHA256SUMS-at-762aea.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/SHA256SUMS-at-7b6fdae.json",
+    "M\tdocs/effective-date-calendar-20261012/evidence/SHA256SUMS-current.json",
+    "M\tdocs/effective-date-calendar-20261012/evidence/current-published-source-matrix.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/final-publication-reconciliation.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/final-published-candidate-refresh.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/final-reconciliation-initial-error.log",
+    "A\tdocs/effective-date-calendar-20261012/evidence/final-reconciliation-pass.log",
+    "A\tdocs/effective-date-calendar-20261012/evidence/final-reconciliation.py",
+    "A\tdocs/effective-date-calendar-20261012/evidence/original-candidate-refresh-0843.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/publication-2404-reconciliation.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/published-source-matrix-at-762aea.json",
+    "A\tdocs/effective-date-calendar-20261012/evidence/published-source-matrix-at-7b6fdae.json"
+  ],
+  "frozenFrontend": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+  "execution": "Read-only preparation; no current candidate edits. Integrate new destinations only after frozen full run completes."
+}

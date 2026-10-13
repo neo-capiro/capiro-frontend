@@ -1,0 +1,66 @@
+{
+  "baseSource": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "capturedAt": "2026-10-13T08:49:46.067Z",
+  "package": {
+    "version": "0.1.2",
+    "source": "70516e5c9681917ce493bbc50e3023494f2e1209",
+    "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa"
+  },
+  "records": [
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-port.ts",
+      "bytes": 1694,
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "bytes": 13082,
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "bytes": 3885,
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "bytes": 652,
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358"
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "bytes": 1456,
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b"
+    },
+    {
+      "path": "apps/web/tests/meri-document-adapter.test.ts",
+      "bytes": 17621,
+      "sha256": "8250e9e743847bc1a293dbad8614149a69e2f60d027013c37f2885e7f349389d"
+    },
+    {
+      "path": "apps/web/tests/meri-document-transport.test.ts",
+      "bytes": 11235,
+      "sha256": "e4adbc4eda9102e0ad8c0b0d3634f81fc333b206b3353627d2c1dce1b41c9ceb"
+    },
+    {
+      "path": "apps/web/tests/meri-document-journal.test.ts",
+      "bytes": 4463,
+      "sha256": "5bb5c0ad03029a45659e655d08a672a0e25af0efd179696757efe68d23ee53dc"
+    },
+    {
+      "path": "apps/web/tests/meri-document-fixtures.ts",
+      "bytes": 1914,
+      "sha256": "2f911bba3ac2cc75dcd69781d294aa59fa4deb5fd5979e2296330b6fae7f588e"
+    },
+    {
+      "path": "apps/web/tests/meri-document-public-fixtures.ts",
+      "bytes": 4782,
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc"
+    },
+    {
+      "path": "docs/meri-files-20261013/ADAPTER-PLAN.md",
+      "bytes": 3746,
+      "sha256": "d9b9f9f37797d87179f32a622dd13fa7cf441931707251e69df02353a25b28d7"
+    }
+  ]
+}

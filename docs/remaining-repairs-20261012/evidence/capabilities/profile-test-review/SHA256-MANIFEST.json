@@ -1,0 +1,130 @@
+{
+  "createdAtUtc": "2026-10-12T20:26:40.867865+00:00",
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 2766,
+      "sha256": "b679c68c601418bf79af7fa4ce3e0246c2522bd459932f1fb922b7bdb94c2e3b"
+    },
+    {
+      "path": "all-changed-test-signals.json",
+      "bytes": 14378,
+      "sha256": "760d772014b72d0e5bf62b20088bce309c4c388296f4f9e09f0ee46b6504b043"
+    },
+    {
+      "path": "assertion-preservation.json",
+      "bytes": 6789,
+      "sha256": "cbaaa6020759685af4956751f004235207173c78ad1e178c2ecb269a3d586442"
+    },
+    {
+      "path": "audit-preservation.mjs",
+      "bytes": 3639,
+      "sha256": "5dbc2075ad285436fb5ded1d2198216e0106150ab6cba6aa1fe004627237187e"
+    },
+    {
+      "path": "audit-signals.mjs",
+      "bytes": 2295,
+      "sha256": "2962d59a955e28ae566401480584e96e2fc30952a6b26ddba22b8a5e7308f036"
+    },
+    {
+      "path": "facility-manager-review.spec.ts.patch",
+      "bytes": 2804,
+      "sha256": "22a4b6b941106407df7eb37acef83ecacb5d1a6d9d4527956446f2823a3a2d8e"
+    },
+    {
+      "path": "files-view-contrast.spec.ts.patch",
+      "bytes": 1865,
+      "sha256": "565f7cce64bde42b190c1eb38d4897f21af8e5ec94d5e38ad01cda1bc67875ae"
+    },
+    {
+      "path": "profile-current-state-actual.ts",
+      "bytes": 10852,
+      "sha256": "c61acd112f8fec0f9d71b0f3c5268926ba8c39d68e9976e125b6a6fc589099dd"
+    },
+    {
+      "path": "profile-current-state-adapted.ts",
+      "bytes": 10813,
+      "sha256": "372599d9d494bef44865cf91bcf566451b961fe3b848fb0a17abb8136b259819"
+    },
+    {
+      "path": "profile-current-state.spec.ts.patch",
+      "bytes": 2586,
+      "sha256": "29a4a6e7eab29908d96ea19daeac683914f2ed6dd7fde474ecf58ba07097947f"
+    },
+    {
+      "path": "profile-presentation.spec.ts.patch",
+      "bytes": 12795,
+      "sha256": "a4a8900278056d24eca3210bb9537c7bdaaa4c45805eb387dc40b02a0a86207b"
+    },
+    {
+      "path": "profile-presentation.test.ts.patch",
+      "bytes": 2425,
+      "sha256": "0b4f22cd61394df72a886b91811e5798e15474c3cd7360edf9fdc8799b07b7bc"
+    },
+    {
+      "path": "profile-write-lifetime-actual.ts",
+      "bytes": 13916,
+      "sha256": "24d72e71c3ed824eddc29475623320db13aa28075e0ed415f9dac721c622635c"
+    },
+    {
+      "path": "profile-write-lifetime-adapted.ts",
+      "bytes": 13877,
+      "sha256": "dc8361254fb3c37adf9c430c2e21865bf738c42b39528e9c2bc8e9f6e51fbc53"
+    },
+    {
+      "path": "profile-write-lifetime.spec.ts.patch",
+      "bytes": 4282,
+      "sha256": "492b8003e23f3fad6763766256a20e4fdcd4658b3416b9e813179d0c70418127"
+    },
+    {
+      "path": "review.json",
+      "bytes": 26167,
+      "sha256": "61d7237f51c9574bdfbc067d3616c255281ba8442d0825c752804f0b810ed57c"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/facility-manager-review.spec.ts",
+      "bytes": 2478,
+      "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/files-view-contrast.spec.ts",
+      "bytes": 1573,
+      "sha256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/profile-current-state.spec.ts",
+      "bytes": 10763,
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/profile-presentation.spec.ts",
+      "bytes": 12186,
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "bytes": 13448,
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "bytes": 5837,
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab"
+    },
+    {
+      "path": "reviewed-source/apps/web/tests/profile-presentation.test.ts",
+      "bytes": 2137,
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125"
+    },
+    {
+      "path": "timeline-presentation-lifetime.spec.ts.patch",
+      "bytes": 6295,
+      "sha256": "1a0793d6b86c91e70b6797c653c5e6f08f4455f4818ecd1f1812fbdc4f389529"
+    },
+    {
+      "path": "tooling-binding.json",
+      "bytes": 508,
+      "sha256": "54b060f553ff03422c840847341833606ae986eef3fb1ed6fa71dabc42f4809c"
+    }
+  ]
+}

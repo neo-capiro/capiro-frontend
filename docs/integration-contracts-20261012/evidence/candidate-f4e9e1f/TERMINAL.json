@@ -1,0 +1,41 @@
+{
+  "archivedAt": "2026-10-12T09:52:58.936605+00:00",
+  "head": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+  "tree": "5b581773e4f8b6942e916a3ed3705bfa688d9bee",
+  "srcTree": "320ec093ebb23a3dc2be321b6b88244b97008202",
+  "portfolioExecution": {
+    "head": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+    "tree": "5b581773e4f8b6942e916a3ed3705bfa688d9bee",
+    "statusAtStart": "",
+    "command": [
+      "npm",
+      "run",
+      "test:browser",
+      "--",
+      "--workers=2"
+    ],
+    "startedAt": "2026-10-12T09:10:41.745641+00:00",
+    "state": "finished",
+    "exitCode": 0,
+    "finishedAt": "2026-10-12T09:52:38.666453+00:00",
+    "headAtFinish": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+    "statusAtFinish": ""
+  },
+  "portfolioStats": {
+    "startTime": "2026-10-12T09:10:42.885Z",
+    "duration": 2515724.377,
+    "expected": 929,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "modulesStats": {
+    "startTime": "2026-10-12T09:04:57.104Z",
+    "duration": 158967.44100000002,
+    "expected": 97,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "acceptance": "Author exact-source offline qualification only. Native/live/image/Figma acceptance and337 Portfolio rows remain open."
+}

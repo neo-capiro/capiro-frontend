@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:578461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:19:6 › Files ACL pending unknown review at 1440 (18.4s)
+  ✓   2 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:28:6 › Files folder unknown review at 1440 (15.3s)
+  ✓   3 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:31:6 › Meeting pending unknown at 1440 (12.0s)
+  ✓   4 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:34:45 › Calendar notes pending unknown at 1440 (10.2s)
+  ✓   5 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:34:45 › Calendar debriefs pending unknown at 1440 (11.9s)
+  ✓   6 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:19:6 › Files ACL pending unknown review at 360 (18.3s)
+  ✓   7 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:28:6 › Files folder unknown review at 360 (11.6s)
+  ✓   8 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:31:6 › Meeting pending unknown at 360 (10.5s)
+  ✓   9 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:34:45 › Calendar notes pending unknown at 360 (8.8s)
+  ✓  10 ../../tmp/capiro-final-visual-d5dd0be/review.spec.ts:34:45 › Calendar debriefs pending unknown at 360 (9.3s)
+
+  10 passed (2.2m)

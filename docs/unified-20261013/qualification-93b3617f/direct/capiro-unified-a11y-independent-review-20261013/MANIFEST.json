@@ -1,0 +1,67 @@
+{
+  "sealedUTC": "2026-10-13T07:20:38.531389+00:00",
+  "status": "SEALED_STATIC_REVIEW_NO_SOURCE_BLOCKER_RENDERED_QUALIFICATION_OUTSTANDING",
+  "sourceHead": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "files": [
+    {
+      "file": "INPUT-VERIFICATION.json",
+      "bytes": 16127,
+      "sha256": "0b7d2843c7fd225a9ca5b25d1157ef6b33e2bdff0393b4e2a3f58d914d08a847"
+    },
+    {
+      "file": "REPORT.md",
+      "bytes": 8722,
+      "sha256": "33602e236992bf914c7456a6c1782ce0d47dc94c07bac83048840e41fea0a3f6"
+    },
+    {
+      "file": "STRUCTURE-SIGNALS.json",
+      "bytes": 2825,
+      "sha256": "f599c2e82016ce1e87d3fb34fb2e8e61197437b341251e159cd44413820f789a"
+    },
+    {
+      "file": "inspect-structure.mjs",
+      "bytes": 882,
+      "sha256": "144b1c67914043857c2756f72e0069bb8b9f3f6d10ddfcc5a13ef889123a4cfa"
+    },
+    {
+      "file": "review-inputs.py",
+      "bytes": 5127,
+      "sha256": "f20d704808aa1b846b4bc059d3afdb3bdb6416a3f1ca016183003ec9e843bccd"
+    },
+    {
+      "file": "reviewed-proposal/ALL-PROPOSED.patch",
+      "bytes": 6479,
+      "sha256": "28d68a58f14c51131cfb56ce3c35ca03ca8cbaea7e2ee43112910717e55bd19e"
+    },
+    {
+      "file": "reviewed-proposal/REPORT.md",
+      "bytes": 9156,
+      "sha256": "bb639be3b1e94ed395b2801f0862786c658cc8d7b41f0a089e90ad0a11693263"
+    },
+    {
+      "file": "reviewed-proposal/SOURCE-PINS.json",
+      "bytes": 6475,
+      "sha256": "b0fe5216884ed7f8a0dc349dee48f18bafeb50206b45bd55a5459c4fbd076db9"
+    },
+    {
+      "file": "reviewed-proposal/VERIFICATION-PLAN.md",
+      "bytes": 6892,
+      "sha256": "642ca7c95c01628b80a8d6e50ad73948f142b89323557feed2755885670d5077"
+    },
+    {
+      "file": "reviewed-tests/accessibility.ts",
+      "bytes": 697,
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce"
+    },
+    {
+      "file": "reviewed-tests/portfolio-home-accessibility.spec.ts",
+      "bytes": 914,
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2"
+    },
+    {
+      "file": "reviewed-tests/shared-home-accessibility.spec.ts",
+      "bytes": 1006,
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf"
+    }
+  ]
+}

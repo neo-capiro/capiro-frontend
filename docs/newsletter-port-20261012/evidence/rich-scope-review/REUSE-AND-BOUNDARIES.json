@@ -1,0 +1,48 @@
+{
+  "head": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "owners": [
+    {
+      "owner": "Modules Workspace",
+      "existing": "WorkspaceScreen/WorkspaceDraft and NewsletterWorkflow",
+      "guidance": "Entry composition and generic workflow remain; add a distinct cohesive rich document lifecycle inside the existing feature. Do not branch by product=Newsletter alone: prospect origin and rich/generic identities are different."
+    },
+    {
+      "owner": "Shared Module UI",
+      "existing": "shared/module-ui/{controls,layout,Modal,SelectInput,Tabs,DataTable}",
+      "guidance": "Reuse labels/actions/status/error/retry/modal focus and adopted Radix primitives. Modal return focus only to connected opener. No old Modal/router/auth restoration."
+    },
+    {
+      "owner": "Shared current transport",
+      "existing": "shared/capiro/{registry,contracts,http,queries,CapiroBoundary}",
+      "guidance": "Fixed operation request/response boundary, scoped abort, no automatic mutation retries, current query-only data. Rich backend DTO adapters/decoders and necessary multipart descriptors are root-owned additions."
+    },
+    {
+      "owner": "Shared application lifetime",
+      "existing": "shared/session/{ApplicationBoundary,SelectedClient,client-route}",
+      "guidance": "Current session/org/client remount and service-verified selected-client semantics. Document/review/stage route lifetime still needs a domain key; routeClientId recognizes modules but not historical /workspace URLs, so thin compatibility routes must redirect/compose deliberately."
+    },
+    {
+      "owner": "Retained intent boundary",
+      "existing": "shared/session/recovery/{useRetainedIntent,journal}",
+      "guidance": "Reuse only where the rich operation has a matching explicit replay contract. Domain verifies current actor/source before hydration/dispatch and binds original receipt. Do not rename saved-version fields or invent idempotency for create/save."
+    },
+    {
+      "owner": "Governed pure model/renderer",
+      "existing": "@capiro/shared/newsletter and @capiro/shared/newsletter-render",
+      "guidance": "Use the installed immutable two-export package. Qualification workspace is test-only, not app import target. Canonical types/render/sanitization, font/social helpers own semantics; feature owns local selection/draft state. Package interface types do not replace runtime receipt validation."
+    },
+    {
+      "owner": "Rich editor decomposition",
+      "existing": "Proposed draft/revision hook, canvas/selected-block, preview/review and later assets/image tools",
+      "guidance": "Separate real lifecycle responsibilities, not line-count shards. Original NewsletterEditor is3296 nonblank lines; copy as reference only. Coordinate root routes/shared styles/operation/schema/registry files before edits."
+    }
+  ],
+  "sourceEdits": false,
+  "rootCoordination": [
+    "Rich fixed operation names/validators and optional upload paths",
+    "Typed metadata.newsletterStageId projection and receiver discrimination",
+    "Thin compatibility routes preserving auth/client context; no new public authoring exemption",
+    "Shared primitive/style changes only if a real missing interface is established",
+    "Later exact source size/fingerprint records and combined acceptance"
+  ]
+}

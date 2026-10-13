@@ -1,0 +1,74 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilitiesCard",
+    "fingerprint": "e604ea969b9d865f57c11f13508d811fc95784efbdc6912d52459f93e18c6fe1",
+    "reason": "Owns one facilities-card presentation and its card/detail/map selection. It derives visible counts and current selected IDs from the qualified useFacilities read, then composes dedicated map and dialog owners. It does not construct native writes, parse receipts, or manage their lifetime. The selection resets belong together because all three views share the same current facility collection.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
+    "kind": "function",
+    "symbol": "FacilityDetailDialog",
+    "fingerprint": "a17f402ff9b58624e00643c490114a01cc9735349ff2ce6e7a81d0fec0aea6fb",
+    "reason": "Owns presentation and opening/closing of one current facility detail, with subordinate edit/remove dialogs. Delegation selection, notes/stats, and related navigation all describe that same selected facility. Native writes are delegated to separate facility and target owners; representation reads remain in the dedicated query module. The availability prop gates actions while the parent source is unqualified.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "kind": "function",
+    "symbol": "FacilityGeocoding",
+    "fingerprint": "3c188ece6471525d8303f1b6ed0bf7f7b50d4cebf80b5a452ec6659094809874",
+    "reason": "Structurally owns one address-resolution section: native geocode status, reviewed candidate options, resolve/retry actions, and the resulting status/error presentation. Native route/receipt work remains in useFacilityAction. This presentation size review does not qualify that inherited hook: its missing actor/source/lifetime protection is explicitly assigned to a separate follow-on and the fingerprint will be rereviewed if that changes the view.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+    "kind": "function",
+    "symbol": "ProfileTeamEditor",
+    "fingerprint": "f86f79366352c576ca839de56283b65c96ed8316d9ab61f02c846f2ae134be5b",
+    "reason": "Owns the account-team editor presentation and its local member/role draft. It renders the current roster, delegates controlled member/owner fields, and displays the dedicated controller result. Role input clearing occurs only after that controller reports a matching effect. Native request bodies, membership/owner receipt checks, authority, source revisions, and async lifetime are separate modules; the owner designation and actual membership role are one roster-row responsibility.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+    "kind": "function",
+    "symbol": "FacilityFields",
+    "fingerprint": "e182503baa60d1b91d087cc4e5b63e38bf22ba8c923af1310231c4184207fe8a",
+    "reason": "Owns only the existing facility form field projection: names, defaults, native input constraints, accessibility labels, and the shared district explanation. It has no requests, query state, permission decisions, receipts, or dialog lifecycle. Splitting individual labels into separate stateful components would not create a clearer responsibility.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useFacilityWriter.ts",
+    "kind": "function",
+    "symbol": "useFacilityWriter",
+    "fingerprint": "680cf586f0e45edbe31d518cb77510ee71708159fc99edc3bd2c646ac00d79e6",
+    "reason": "Owns one facility CRUD attempt lifecycle across create/edit/remove: explicit dispatch, captured actor/source, pending or unknown attempt, completion effects, saved-state review, and deliberate restart. Native command preflight and receipt validation live in facility-writer; cache attempt persistence lives in facility-attempt; fields and status views are separate. Those branches all enforce the same facility attempt rather than unrelated workflows. No provider actions are included.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useProfileNotesEditor.ts",
+    "kind": "function",
+    "symbol": "useProfileNotesEditor",
+    "fingerprint": "55571cc9b2ffe1b24bf9c09a89d285ef7d3ac65c4d2d97b2342de94f961eeaa0",
+    "reason": "Owns a single controlled notes draft and its saved-source lifecycle. Initial draft, changed saved baseline, explicit save, unknown/refusal handling, and saved-state review are coupled to that draft. Native payload and receipt validation are delegated to notes-writer; current reads and canonical authority are separate. The hook performs no team, facility, navigation, or UI layout work.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts",
+    "kind": "function",
+    "symbol": "useProfileTeamEditor",
+    "fingerprint": "c7350d093b1af5abcfd8fe5be3c443e3a6ad4cd0e049ce65dd62070be2fa7e79",
+    "reason": "Owns one account-team change lifecycle for the current roster and options: authorization-derived availability, explicit change, exact effect completion, retained uncertainty, and current-roster review. Native add/remove/owner contracts remain in team-writer/profile-receipts, and member/role field state remains in the view. Roster and owner cache refreshes are consequences of the same team change and do not introduce another responsibility.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  }
+]

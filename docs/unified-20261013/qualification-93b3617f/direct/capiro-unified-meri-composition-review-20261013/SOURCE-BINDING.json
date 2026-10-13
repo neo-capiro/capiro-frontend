@@ -1,0 +1,407 @@
+{
+  "createdUTC": "2026-10-13T06:06:35.489135+00:00",
+  "method": "Read-only file/git inspection and SHA-256 computation; no test, application, install, build, server, browser, native or provider execution.",
+  "repository": "/workspace/capiro-onboard-port-20261013",
+  "branch": "integration/capiro-unified-20261013",
+  "requestedCommit": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "reviewedSuccessor": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "observedHEAD": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "workingTreeStatus": "",
+  "initialAppTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "finalAppTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "publishedMeri": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+  "publishedOnboard": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+  "metadataOnlySuccessorPaths": [
+    "docs/unified-20261013/SUPERSEDED-REVIEW.json",
+    "scripts/architecture/reviewed-size-findings.json"
+  ],
+  "files": [
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "blob": "e2a61f24fdef5faaf12c9f099e6f88427b1eb607",
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b",
+      "bytes": 4336,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SessionContext.tsx",
+      "blob": "4baf30b9b376c13f28533884f7e87bcda0c9034a",
+      "sha256": "5869d87594d68f0d0c73f696df6b4923bddd0bca444014e40524c7d48b812015",
+      "bytes": 1097,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SelectedClient.tsx",
+      "blob": "0927c45d71902a5c705f453f2b5393fd89fc9b4f",
+      "sha256": "9f08ff7be144494042a2147e84adb815d9e7a4e92e90b0bf5277cc44caab1a34",
+      "bytes": 2237,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/session/onboard-route.ts",
+      "blob": "beb7d7b78bd48da08d13afbb0948c2e613574b18",
+      "sha256": "b636da7b72f927c800f557552748371c2d52c883e5560a2d4fff42f87b7c6d1e",
+      "bytes": 523,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "blob": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+      "bytes": 1296,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/session/request-lifetime.ts",
+      "blob": "3d3a18d9da500e4892aedfe9f25ae86e69b03c05",
+      "sha256": "77a0c8646b0e97d4a87c5129d6c7842432e7444b47ef0c44b222bf096060bb28",
+      "bytes": 496,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/api/provider.tsx",
+      "blob": "9d3cb70323ae5d9269261af4349da4c66fb42f26",
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a",
+      "bytes": 2049,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "blob": "6a2096e2c4ee95a13dfdf97d5bcc74bf56e847bc",
+      "sha256": "395f9979790f7cd9c4d95f6ecc4fd5db899270ee968c08a596b6e1011bda04a1",
+      "bytes": 3482,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "blob": "24b8e90a9869433e62ec16d68c3b2b65c41f03e9",
+      "sha256": "0899d9f0735a77b0b0a76c581776d4a6d7e16915633c36dec332d7c2602ead01",
+      "bytes": 6365,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "blob": "caf06c14f4c7f44fa3b43c0220c7f84336dc88f7",
+      "sha256": "6958576b47300c028c5e8fdda6d294f29299f0e313134f4155522adb56895933",
+      "bytes": 11269,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-public.ts",
+      "blob": "ed55563d2ad7ff57a2fbdce68348942103452f83",
+      "sha256": "bd4fa314aa19a1db87cb6abe919eb676057ebb645134169df4744d62d92fa01f",
+      "bytes": 1736,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/app/api/capiro/[operation]/route.ts",
+      "blob": "bce0afca0bea8344b730cd8819792c6d644bd075",
+      "sha256": "d515dad0473b6da16edeba60f318f74c41e84867afaccb7c624deca75009cb2d",
+      "bytes": 1313,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "blob": "63b2dd41583f9523f421049bd1556f07516be75b",
+      "sha256": "904e5ee690d80902056606222c1fc772486d11b990ba86cd2f6d27ca86baeaec",
+      "bytes": 1469,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "blob": "9822f50260bfc8489d95c0ee5e93b0abdef54f4d",
+      "sha256": "5e48a151acc4fae1ebc679729659295f8b6fe29eafd2197826c4660367193a83",
+      "bytes": 1572,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/page.tsx",
+      "blob": "c600e08c6a68d8274ef498bf31c900f6f4952d99",
+      "sha256": "b3da4c9cf8633b3e3044a19fb20e747a1af3f4ee1f4fd80722f64cb4beb3191c",
+      "bytes": 502,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "blob": "4c4a510934836f0c83cd36f4ff3f266eb2ba11bd",
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21",
+      "bytes": 3873,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "blob": "7f38b002cf68609ad03b0525d330967b37bb9e6b",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "bytes": 3597,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "blob": "94a1b5da56677e3ea13a517f3107ab81b9a29b06",
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "bytes": 1241,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "blob": "769bd1fa9c62bba4949351cee17f9ab487d028f2",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "bytes": 391,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "blob": "cce2ed568724c0f8f90ed14b167e1987d3519dd9",
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458",
+      "bytes": 8265,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "blob": "45a88a29c8e6f334a133a3917dfbee0b84ce0b09",
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "bytes": 2038,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "blob": "4f17e9817795c6e93ee57278319d34002170938e",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "bytes": 1640,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "blob": "52f64ae5dedcfa61f472b5ad20ddf728dc4888f3",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471",
+      "bytes": 474,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "blob": "1ea802e91677008dfe76221e3acf122e7a628d3b",
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "bytes": 2843,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "blob": "07a204d245df60e88c6a9309d452625b6f216bf1",
+      "sha256": "a6f35fcd97672184101b6d77a609e6470c8f73da620a6ca1e8ecc39024154d26",
+      "bytes": 589,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/src/app/_onboard/OnboardHost.tsx",
+      "blob": "210e372373a01b6eac5aac186ec8aa87c8f95448",
+      "sha256": "2de3e91dde899ba716bf8fa719e2eee4ca240bac0ce80f851d31705781f2a4f6",
+      "bytes": 3038,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "blob": "74a2d5aa5061e7f3445ff69e7498e2f886a8139e",
+      "sha256": "6e3d15d564a2914d804f09e5120579970898b5a386d6c5187a1f4088f6716460",
+      "bytes": 5767,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "blob": "b52ead1e64b280370f925ceaf51bdf52fecb841c",
+      "sha256": "05a06a5d4f6202aa6d54c5786398717080999def5e95f943a77e17e58ed81dc1",
+      "bytes": 5220,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-lifetime.spec.ts",
+      "blob": "82636f5f71f6bd3e33b69e5615ee26a60e1c1e32",
+      "sha256": "6fe8099cfaa09001f93410e024b20318cec051865aee0c3f3201fb5bc9cf4e2e",
+      "bytes": 5688,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-workflow.spec.ts",
+      "blob": "799a2750f2295e92ed3f39f94f46e5887eaa2307",
+      "sha256": "5f8314c371b2b0bc88406a11d3be203d863ec6610fced75ed02c9e02005a279f",
+      "bytes": 8852,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-host.test.ts",
+      "blob": "7da50aed491102453ba9d0721c358b9a266a6414",
+      "sha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+      "bytes": 15218,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-host-public.spec.ts",
+      "blob": "72e1131a4e74bf3277fda69967579fcef93fbc36",
+      "sha256": "dbc8e28f4fee6d8aedee0267683aaf76a6ed2500e8b02830b0a09fc8b051e105",
+      "bytes": 6734,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-host-config.spec.ts",
+      "blob": "faedea0d9083bb57d756b5fb9e1b6db4a6e88abc",
+      "sha256": "32d63550b7a0c01807f0f3bb08251308de625b3df09cbe9e7665903b5b853319",
+      "bytes": 8417,
+      "worktreeMatches": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-boundary.spec.ts",
+      "blob": "b86498956bed70a97a9d6063413a105a510cc0cd",
+      "sha256": "2e1485bc5d9b55d0f34da0c77b03872d318e225d86944a095f18061f992d660a",
+      "bytes": 11223,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/unified-20261013/PLAN.md",
+      "blob": "51ff753f7df838a16b1f0b341580e136876cca96",
+      "sha256": "469d55c93dcda84bd62221357d781aa2bae6fd938987d774024934139f40a456",
+      "bytes": 3590,
+      "worktreeMatches": true
+    },
+    {
+      "path": "docs/unified-20261013/INPUTS-AND-PRESERVATION.json",
+      "blob": "8e07772ef5f37446bdec364c29adfff8dedc3cc3",
+      "sha256": "a8431931a5266c5184a166b423dfc4d599ba80e22b1400f2ba662939efc01107",
+      "bytes": 132643,
+      "worktreeMatches": true
+    }
+  ],
+  "comparisons": [
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/features/meri",
+      "ownerObject": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "combinedObject": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/meri-actions",
+      "ownerObject": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "combinedObject": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/app/meri",
+      "ownerObject": "3ea9b41f5ebf185cf42e58b117f3c53253366b63",
+      "combinedObject": "3ea9b41f5ebf185cf42e58b117f3c53253366b63",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/shell",
+      "ownerObject": "7987a3692744b235a091841a3099beb0cf40f0a9",
+      "combinedObject": "7987a3692744b235a091841a3099beb0cf40f0a9",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/portfolio/api",
+      "ownerObject": "d353785764d7eae858569159c2b0b6f62e228f9c",
+      "combinedObject": "d353785764d7eae858569159c2b0b6f62e228f9c",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "ownerObject": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "combinedObject": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/session/SelectedClient.tsx",
+      "ownerObject": "0927c45d71902a5c705f453f2b5393fd89fc9b4f",
+      "combinedObject": "0927c45d71902a5c705f453f2b5393fd89fc9b4f",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/src/shared/session/request-lifetime.ts",
+      "ownerObject": "3d3a18d9da500e4892aedfe9f25ae86e69b03c05",
+      "combinedObject": "3d3a18d9da500e4892aedfe9f25ae86e69b03c05",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/shared/session",
+      "ownerObject": "29dfea1745b20ce3195be77680a5ccb9e129e2ec",
+      "combinedObject": "29dfea1745b20ce3195be77680a5ccb9e129e2ec",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "ownerObject": "6a2096e2c4ee95a13dfdf97d5bcc74bf56e847bc",
+      "combinedObject": "6a2096e2c4ee95a13dfdf97d5bcc74bf56e847bc",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "ownerObject": "24b8e90a9869433e62ec16d68c3b2b65c41f03e9",
+      "combinedObject": "24b8e90a9869433e62ec16d68c3b2b65c41f03e9",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "ownerObject": "caf06c14f4c7f44fa3b43c0220c7f84336dc88f7",
+      "combinedObject": "caf06c14f4c7f44fa3b43c0220c7f84336dc88f7",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/app/_onboard",
+      "ownerObject": "afa094aa1b6b284b09e732825a767fd0c98c3922",
+      "combinedObject": "afa094aa1b6b284b09e732825a767fd0c98c3922",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/features/onboard",
+      "ownerObject": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "combinedObject": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "identical": true
+    },
+    {
+      "ownerCommit": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "path": "apps/web/src/shared/capiro/operations/onboard-public.ts",
+      "ownerObject": "ed55563d2ad7ff57a2fbdce68348942103452f83",
+      "combinedObject": "ed55563d2ad7ff57a2fbdce68348942103452f83",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "ownerObject": "b52ead1e64b280370f925ceaf51bdf52fecb841c",
+      "combinedObject": "b52ead1e64b280370f925ceaf51bdf52fecb841c",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/test/browser/meri-action-host-lifetime.spec.ts",
+      "ownerObject": "82636f5f71f6bd3e33b69e5615ee26a60e1c1e32",
+      "combinedObject": "82636f5f71f6bd3e33b69e5615ee26a60e1c1e32",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/test/browser/meri-action-host-workflow.spec.ts",
+      "ownerObject": "799a2750f2295e92ed3f39f94f46e5887eaa2307",
+      "combinedObject": "799a2750f2295e92ed3f39f94f46e5887eaa2307",
+      "identical": true
+    },
+    {
+      "ownerCommit": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "path": "apps/web/tests/meri-action-host.test.ts",
+      "ownerObject": "7da50aed491102453ba9d0721c358b9a266a6414",
+      "combinedObject": "7da50aed491102453ba9d0721c358b9a266a6414",
+      "identical": true
+    }
+  ]
+}

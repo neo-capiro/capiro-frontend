@@ -1,0 +1,130 @@
+
+Running 3 tests using 1 worker
+
+(node:456140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"id":"foreign"} (6.5s)
+(node:456274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} (6.2s)
+(node:456406) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/calendar-meeting-receipts.spec.ts:15:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared (1.2s)
+
+
+  1) apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"id":"foreign"} 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Subject', { exact: true })
+    Expected: "Synthetic meeting"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Subject', { exact: true })
+
+
+       8 |   await page.goto("/calendar-meeting-receipts.html");
+       9 |   await page.getByRole("button",{name:"Save meeting"}).click();
+    > 10 |   await expect(page.getByLabel("Subject",{exact:true})).toHaveValue("Synthetic meeting");
+         |                                                         ^
+      11 |   await expect(page.getByText(/may have completed/)).toBeVisible();
+      12 |   await expect(page.getByRole("button",{name:"Save meeting"})).toBeDisabled();
+      13 |  });
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--8c155--retains-editor-id-foreign-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Subject', { exact: true })
+    Expected: "Synthetic meeting"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Subject', { exact: true })
+
+
+       8 |   await page.goto("/calendar-meeting-receipts.html");
+       9 |   await page.getByRole("button",{name:"Save meeting"}).click();
+    > 10 |   await expect(page.getByLabel("Subject",{exact:true})).toHaveValue("Synthetic meeting");
+         |                                                         ^
+      11 |   await expect(page.getByText(/may have completed/)).toBeVisible();
+      12 |   await expect(page.getByRole("button",{name:"Save meeting"})).toBeDisabled();
+      13 |  });
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:10:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--090d1-ient-id-foreign-name-Other-/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/calendar-meeting-receipts.spec.ts:15:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared 
+
+    Error: expect(received).toMatchObject(expected)
+
+    - Expected  - 1
+    + Received  + 5
+
+      Object {
+    -   "location": "",
+    +   "clientId": "client-one",
+    +   "description": "",
+    +   "endsAt": "2026-10-10T15:00:00Z",
+    +   "startsAt": "2026-10-10T14:00:00Z",
+    +   "subject": "Synthetic meeting",
+      }
+
+      20 |  await page.getByRole("button",{name:"Save meeting"}).click();
+      21 |  await expect(page.getByRole("dialog")).toHaveCount(0);
+    > 22 |  expect(body).toMatchObject({location:""});
+         |               ^
+      23 | });
+      24 |
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-meeting-receipts.spec.ts:22:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-meeting-receipts--5229e-ation-is-explicitly-cleared/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"id":"foreign"} 
+    apps/web/tests/browser/calendar-meeting-receipts.spec.ts:5:2 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} 
+    apps/web/tests/browser/calendar-meeting-receipts.spec.ts:15:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared 

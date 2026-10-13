@@ -1,0 +1,129 @@
+
+Running 3 tests using 1 worker
+
+(node:636169) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status (6.5s)
+(node:636346) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px (6.3s)
+(node:636501) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px (6.1s)
+
+
+  1) tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('section').filter({ has: getByRole('heading', { name: 'Upcoming work', exact: true }) }).getByText('Synthetic first upcoming step', { exact: true }).locator('..').getByText('active', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('section').filter({ has: getByRole('heading', { name: 'Upcoming work', exact: true }) }).getByText('Synthetic first upcoming step', { exact: true }).locator('..').getByText('active', { exact: true })
+
+
+      77 |     .getByText("Synthetic independent upcoming step", { exact: true })
+      78 |     .locator("..");
+    > 79 |   await expect(first.getByText("active", { exact: true })).toBeVisible();
+         |                                                            ^
+      80 |   await expect(first.getByText("in progress", { exact: true })).toHaveCount(0);
+      81 |   await expect(second.getByText("in progress", { exact: true })).toBeVisible();
+      82 |   await expect(second.getByText("active", { exact: true })).toHaveCount(0);
+        at /workspace/capiro-next-work/apps/web/tests/browser/work-owners.spec.ts:79:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('row').filter({ hasText: 'Synthetic current briefing draft' }).getByLabel('Owner: Synthetic Jordan Clayton')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('row').filter({ hasText: 'Synthetic current briefing draft' }).getByLabel('Owner: Synthetic Jordan Clayton')
+
+
+      92 |     await expect(
+      93 |       documentRow(page).getByLabel(`Owner: ${member.name}`),
+    > 94 |     ).toBeVisible();
+         |       ^
+      95 |     await expect(
+      96 |       firstStrategy(page).getByText(`Owner: ${member.name}`, { exact: true }),
+      97 |     ).toHaveCount(3);
+        at /workspace/capiro-next-work/apps/web/tests/browser/work-owners.spec.ts:94:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('row').filter({ hasText: 'Synthetic current briefing draft' }).getByLabel('Owner: Synthetic Jordan Clayton')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('row').filter({ hasText: 'Synthetic current briefing draft' }).getByLabel('Owner: Synthetic Jordan Clayton')
+
+
+      92 |     await expect(
+      93 |       documentRow(page).getByLabel(`Owner: ${member.name}`),
+    > 94 |     ).toBeVisible();
+         |       ^
+      95 |     await expect(
+      96 |       firstStrategy(page).getByText(`Owner: ${member.name}`, { exact: true }),
+      97 |     ).toHaveCount(3);
+        at /workspace/capiro-next-work/apps/web/tests/browser/work-owners.spec.ts:94:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status ─
+    tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px 
+    tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px 

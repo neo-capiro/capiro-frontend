@@ -1,0 +1,2581 @@
+{
+  "schema": "capiro-independent-modules-completion-addendum/1",
+  "reviewedAtUTC": "2026-10-12T22:17:27.092115+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "status": "MODULES_PASSED_PORTFOLIO_ACTIVE_NO_FINAL_VERDICT",
+  "gateReceipt": {
+    "name": "modules-browser",
+    "command": [
+      "env",
+      "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+      "npm",
+      "run",
+      "test:browser:modules",
+      "--workspace",
+      "@capiro/web",
+      "--",
+      "--workers=1",
+      "--timeout=60000",
+      "--retries=0",
+      "--output=/tmp/capiro-remaining-qualification/final-1585438/modules-browser-artifacts"
+    ],
+    "startedUTC": "2026-10-12T22:11:51.158588+00:00",
+    "endedUTC": "2026-10-12T22:16:20.468223+00:00",
+    "durationSeconds": 269.3096641309967,
+    "exitCode": 0,
+    "sourceBefore": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "stats": {
+    "startTime": "2026-10-12T22:11:51.833Z",
+    "duration": 268592.838,
+    "expected": 208,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "workers": 1,
+  "retries": 0,
+  "recordCount": 208,
+  "records": [
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "active subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "past_due subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "trialing subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "canceled subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "none subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "comped subscriber adds profiles through the portal, never checkout",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 73,
+      "title": "none non-subscriber can review a new subscription",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 73,
+      "title": "trialing non-subscriber can review a new subscription",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "active without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "past_due without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "canceled without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "comped without a subscription does not infer checkout eligibility",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 120,
+      "title": "disabled billing cannot open either hosted flow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 131,
+      "title": "checkout closes when a fresh summary reports an existing subscription",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 157,
+      "title": "failed current summary prevents checkout from a previously opened form",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 157,
+      "title": "failed current state prevents checkout from a previously opened form",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 182,
+      "title": "an existing-subscriber action rechecks that a subscription still exists",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 199,
+      "title": "portal rejects a receipt for the other hosted flow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 199,
+      "title": "checkout rejects a receipt for the other hosted flow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 228,
+      "title": "repeated clicks while summary revalidation is pending dispatch one portal request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 228,
+      "title": "repeated clicks while summary revalidation is pending dispatch one checkout request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 274,
+      "title": "session replacement discards a pending hosted receipt",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 315,
+      "title": "contradictory current reads and failed initial summary expose no billing action",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 347,
+      "title": "session replacement during revalidation prevents dispatch from the old form",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "calendar-visual-closeout.spec.ts",
+      "line": 6,
+      "title": "compact Calendar retains scoped module navigation, history, source disclosures and mobile controls",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "calendar.spec.ts",
+      "line": 35,
+      "title": "month and week retain client scope and query end-exclusive Eastern ranges",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "calendar.spec.ts",
+      "line": 90,
+      "title": "client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "effective-dates.spec.ts",
+      "line": 8,
+      "title": "Modules master Government feed preserves date-only provenance and partial coverage",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "effective-dates.spec.ts",
+      "line": 49,
+      "title": "an empty Government page remains explicitly incomplete and forecasts unavailable",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 37,
+      "title": "shared product navigation and history preserve verified client hints and scoped styles",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 120,
+      "title": "client replacement interrupts a write and organization replacement clears drafts and revalidates",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 169,
+      "title": "Core expiry clears the application, does not replay and cannot be escaped by changing client",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch News evidence renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Florida Budget renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Research evidence renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Monitoring renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Client briefings renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Reports renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Trends renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Legacy digest renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Import review renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch Research import review renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "LegiWatch LegiWatch settings renders a real connected view",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 48,
+      "title": "research continues past an empty matched page using the retained-source cursor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 96,
+      "title": "workflow changes invalidate a reviewed preview and enqueue only its exact current hash",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 169,
+      "title": "monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 44,
+      "title": "MS06 baseline: current supplied link appears with safe external-link attributes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 56,
+      "title": "MS06 baseline: meetings retain selectable list beside current detail with Prep entry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 83,
+      "title": "MS06 absent preparation metadata is unavailable rather than a claimed empty collection",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: null",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: ",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: javascript:alert(1)",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: data:text/html,hello",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: https://name:secret@meet.example.test/",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "MS06 missing or unsafe supplied link is inactive: //meet.example.test/alpha",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 123,
+      "title": "MS06 loading and denied detail never activate summary link or read its materials",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000002:30000000-0000-4000-8000-000000000001",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000001:30000000-0000-4000-8000-000000000002",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 183,
+      "title": "MS06 replaced detail cannot publish its late link",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 209,
+      "title": "MS06 phone detail stays in bounds and Escape restores its list opener",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 239,
+      "title": "MS06 client replacement clears selection before a new list can expose the prior link",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Engagement Manager primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Planner primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Master calendar primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Workspace primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Strategies primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Directory primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Intelligence Center primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "Research Portfolios primary route renders through the canonical session/API boundary",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 74,
+      "title": "explicit saved revision review stages only its exact references and opens the selected session",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 129,
+      "title": "lost response then reload recovers original key/version without restaging later session edits",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 172,
+      "title": "incompatible destination and unavailable source make zero staging calls",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 218,
+      "title": "storage refusal blocks selection and replacement writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 237,
+      "title": "replacement Core actor cannot recover the former actor's pending staging",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 275,
+      "title": "conflict and malformed receipt retain the same original staging request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 305,
+      "title": "fresh source refusal before dispatch clears review and sends no staging request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 329,
+      "title": "a refreshed destination version requires fresh explicit review",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 356,
+      "title": "mobile saved text review fits the viewport and supports keyboard acknowledgement",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 4,
+      "title": "MS02 verified Calendar entry dispatches only the selected client scope",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 27,
+      "title": "MS03 agenda preserves both Planner start and due occurrences",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 53,
+      "title": "MS04 meeting failure leaves successful agenda feeds visible",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 74,
+      "title": "MS05 linked task resolves beyond the current list and opens its detail",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 13,
+      "title": "Calendar picker and history share verified scope and discard a held former-client read",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "Calendar denied client verification never falls back to master reads",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "Calendar wrong-client client verification never falls back to master reads",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 91,
+      "title": "Calendar current scope label survives optional picker-list failure",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 106,
+      "title": "Calendar meeting retry preserves other feeds and reports partial empty coverage",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 144,
+      "title": "Calendar tenant replacement and failed current read hide prior agenda rows",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 14,
+      "title": "linked task rejects wrong-task receipt without detail actions",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 14,
+      "title": "linked task rejects wrong-client receipt without detail actions",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 40,
+      "title": "invalid task link makes no detail request and can be dismissed without losing scope",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 62,
+      "title": "task link hides prior editor after current 403, then recovers only after successful retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 62,
+      "title": "task link hides prior editor after current 503, then recovers only after successful retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 106,
+      "title": "linked task follows back-forward and discards a held replaced task",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 150,
+      "title": "linked task client replacement rejects the former read and editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 150,
+      "title": "linked task tenant replacement rejects the former read and editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 195,
+      "title": "agenda link opens a done task despite default open list filter, and respects viewer access",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 216,
+      "title": "linked task uses current project membership when direct client is absent",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 216,
+      "title": "linked task uses current project membership when direct client is different",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "Calendar keeps Month and chosen date across client, Master and history",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "Calendar keeps Week and chosen date across client, Master and history",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "Calendar keeps Agenda and chosen date across client, Master and history",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 54,
+      "title": "invalid Calendar URL selection falls back to valid defaults before any date request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 43,
+      "title": "each Objective-bound open/reload calls the canonical owner without an unbound session fallback",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 96,
+      "title": "owner refusal404 clears bound content and never falls back",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 96,
+      "title": "owner refusal409 clears bound content and never falls back",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 122,
+      "title": "mismatched binding and malformed Objective query never expose session content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 141,
+      "title": "a replaced Objective query hides the old observation and ignores its late response",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-navigation.spec.ts",
+      "line": 28,
+      "title": "Objective navigation resolves the exact saved version through Core before opening its local destination",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-navigation.spec.ts",
+      "line": 93,
+      "title": "unsaved edits and stale Objective resolver never navigate using old campaign text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "strategies owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "strategies owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "strategies owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "strategies refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "planner owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "planner owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "planner owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "planner refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "workspace owner404 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "workspace owner409 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "workspace owner503 removes the prior observation with no fallback or automatic retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "workspace refuses changed and malformed bindings before exposing resource content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 220,
+      "title": "replacement query and session scope hide old or late Strategy observations",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 294,
+      "title": "Planner401 expires the shared session without replay or retained task content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 323,
+      "title": "a changed Workspace client hint clears the saved snapshot and rechecks its owner",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "strategies Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "planner Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "workspace Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 124,
+      "title": "saved Workspace selection is explicit and never opens the current working draft automatically",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 183,
+      "title": "unsaved edits and close interrupt Strategy resolution without late navigation",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 112,
+      "title": "Planner modes use the same permitted task data and exact board assets",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 163,
+      "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 218,
+      "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 279,
+      "title": "A template session deep link keeps the server state version and sends no mail",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held update; success preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held update; failure preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held update; lost receipt preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 166,
+      "title": "leaving during held update retains the original intent without continuing the old save",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held snapshot; success preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held snapshot; failure preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect fields freeze during held snapshot; lost receipt preserves submitted text",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 166,
+      "title": "leaving during held snapshot retains the original intent without continuing the old save",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "a user replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "a tenant replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "a prospect replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "a client replacement during PATCH cannot restore or finish the former editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-draft-restart-acceptance.spec.ts",
+      "line": 6,
+      "title": "lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 41,
+      "title": "prospect creation recovers its original seed and key after a lost receipt",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 76,
+      "title": "manual content, version history and exports use only reviewed draft operations",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 124,
+      "title": "an uncertain save retains edits across navigation and requires read-back before explicit save",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 152,
+      "title": "a wrong prospectId never exposes the document or writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 152,
+      "title": "a wrong tenantId never exposes the document or writes",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 168,
+      "title": "prospect Newsletter origin cannot open its sending workflow",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 182,
+      "title": "a changed document blocks PATCH and shows the saved content for deliberate review",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 214,
+      "title": "mobile prospect manual editor preserves keyboard fields and stays in the viewport",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 237,
+      "title": "leaving during save preflight aborts the write and retains the uncertain editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 274,
+      "title": "expired creation sends one original request and clears the authenticated editor",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 296,
+      "title": "reload preserves the original prospect creation seed and request key",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 331,
+      "title": "reload preserves uncertain manual edits and the read-back requirement",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 359,
+      "title": "replacement Core actor cannot restore the former creation input after reload",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 359,
+      "title": "replacement Core actor cannot restore the former manual-save input after reload",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 427,
+      "title": "unavailable browser journal blocks creation without a backend write",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 427,
+      "title": "unavailable browser journal blocks manual-save without a backend write",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "public-forms.spec.ts",
+      "line": 5,
+      "title": "public form submits only displayed answers and shows the returned receipt without sign-in",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "public-forms.spec.ts",
+      "line": 52,
+      "title": "revoked public capability renders an unavailable state without a submission action",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 63,
+      "title": "MS08 regression: All tasks defaults to named client groups and current-page counts",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 105,
+      "title": "MS08 scope picker preserves All tasks, disposes drafts and restores scope through history",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 148,
+      "title": "MS08 failed current clients list removes former labels and disables picker until retry",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 180,
+      "title": "MS08 failed current task page hides groups and recovers without inventing filters",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 214,
+      "title": "MS08 independently verified client remains named when picker is empty",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 214,
+      "title": "MS08 independently verified client remains named when picker is unavailable",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 236,
+      "title": "MS08 replacement rejects held former task read and unverified selected client",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 277,
+      "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 338,
+      "title": "MS07 regression: Workspace filters share a compact desktop row and wrap on phones",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 408,
+      "title": "MS09 regression: public form uses bounded card hierarchy and keeps input on styled error",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 467,
+      "title": "MS09 preserves malformed-receipt and replaced-token controls",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 7,
+      "title": "missing configuration renders setup without issuing service requests",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 20,
+      "title": "org/session change clears prior records and sign-out removes all protected content",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 53,
+      "title": "401 removes protected content and asks for sign-in without replaying a request",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 69,
+      "title": "development StrictMode remount establishes a valid request scope before child reads",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings personal renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings contact-info renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings branding renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings team renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings integrations renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings memory renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings meri-preferences renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings billing renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings ai-usage renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings profiles renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-tenants renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-customers renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-personnel renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-matches renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-analyst renders compatible responses without runtime failures",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 59,
+      "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 95,
+      "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 8,
+      "title": "Personal saves the title only after a validated response and keeps signature uploads separate",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 46,
+      "title": "Team does not fetch private records for a standard user",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 64,
+      "title": "Team prevents self-removal and failed invitations remain editable without success feedback",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 118,
+      "title": "Mobile Personal fits the viewport and Settings sections remain keyboard accessible",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    }
+  ],
+  "failureCorrectionCase": [
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 277,
+      "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+      "status": "expected",
+      "attempts": [
+        {
+          "status": "passed",
+          "retry": 0
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-exit.json",
+      "bytes": 1002,
+      "sha256": "6f074b687aba8936f12639adac955a0b916312604809b29a9f1b3338fe55b9b1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-results.json",
+      "bytes": 229158,
+      "sha256": "a702239c8a547b7811a4a719e060df09448d822d4873daa3b2648e3d5aefff6d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser.log",
+      "bytes": 30771,
+      "sha256": "9d406fe41ca08f61af6ff00a2af2db772b61aede28d63a578aa0e59d4de84a5d"
+    }
+  ],
+  "limit": "Synthetic Modules fixture suite, not native services. Portfolio1118 started per root notification and remains active; no current progress count or final verdict is asserted."
+}

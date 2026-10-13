@@ -1,0 +1,36 @@
+{
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "specSHA256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+  "productionFiles": [
+    {
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "baseSHA256": "7e31e5655e2d9a2340aa2c0bf041f9d4cf8ed13b5b6f0dfbc2dde60154437ae7",
+      "candidateSHA256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email.ts",
+      "baseSHA256": "4d7567992ab3bb82bba15bbb37bfdd2609a54eff57f0850a16a7e363e3c1583c",
+      "candidateSHA256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "baseSHA256": "f06875f0059a1bb4df4a4b103af85fd94fda3723c8abda651b15289cf3f7f735",
+      "candidateSHA256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/email.module.css",
+      "baseSHA256": "7e9288cab39848b984e5f38ee1615e9dc83d76c3b0c0abb862517c4fd7da6808",
+      "candidateSHA256": "eb20898dd2c2d4fa287059fddcce7a05f484649f901b1bf1a3a665e0a6ba93ae"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "baseSHA256": "65fd972f9903a4f6d8320ab28a0c425cba6ff057a5290f779f8be1d5d59fb5a1",
+      "candidateSHA256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85"
+    }
+  ],
+  "newFiles": "Untracked new rich-editor helpers remain on disk but are unreachable from restored base production imports.",
+  "trackedProductionDiffFromBase": "",
+  "runnerExitCode": 1,
+  "restoredExactly": true,
+  "specUnchanged": true
+}

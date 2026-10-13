@@ -1,0 +1,14 @@
+Independent review accepts both requested browser size findings at their exact final bytes. No source, test, registry or previous evidence packet was changed. Only source reads and the canonical static AST scanner ran; no tests/browser/server/build ran in this review.
+
+`actionHostFixture`,109 nonblank lines, remains one cohesive synthetic HTTP fixture for the real frontend host. Its response queue, request/header ledger and entered/released/completed barriers describe the same intercepted request lifetime. It reuses the established operation fixtures and remote-request guard, and loads public wire fixtures unchanged. It does not implement application workflow, authorization, approval, receiving validation or durable state. The shared instrumentation is needed to distinguish an issued request from a forbidden repeat and a late completion from current publication.
+
+The navigation callback,86 nonblank lines, is an actual scenario callback rather than a describe group. It verifies one uncertain preparation fence across an ordered Modules navigation and Back/Forward/reconnect lifetime, parameterized by acknowledged unknown versus a held request. Private-view removal and exact operation counts remain beside the transitions they constrain. The test uses explicit request-entry/completion barriers and deliberate reconnection; it introduces no automatic retry or reconstructed durable state. Splitting the sequence would weaken the cross-navigation invariant or hide its causal assertions in helpers.
+
+Both source hashes and both function fingerprints exactly match the supplied `FINAL-SOURCE-REVIEW.json` and author `STRUCTURE-REVIEW.json`. These two files have no other size findings. The locator correction is outside the reviewed functions; acceptance does not remove the author packet's original failing locator evidence.
+
+| Finding | Full source SHA256 | Function fingerprint |
+| --- | --- | --- |
+| fixtures.ts:72 actionHostFixture | `2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7` | `7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b` |
+| navigation.spec.ts:16 callback | `05a06a5d4f6202aa6d54c5786398717080999def5e95f943a77e17e58ed81dc1` | `f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832` |
+
+`registry-proposals.json` contains two independently accepted exact records and no rejected records. Root owns their integration. Runtime evidence was inspected read-only: the hash-matching root JSON reports18 expected passes, zero skipped/unexpected/flaky, one worker, zero retries,30-second timeout and no top-level errors. That is root-run synthetic browser evidence with system Chromium154 and borrowed development dependencies, not an independent rerun or frozen full qualification. Native authorization, approval and task/provider effects, deployment, full accessibility and Figma acceptance remain outside this review.

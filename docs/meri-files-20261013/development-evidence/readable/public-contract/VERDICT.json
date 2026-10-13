@@ -1,0 +1,47 @@
+{
+  "status": "PUBLIC_CONTRACT_AVAILABLE_SOURCE_REVIEW_COMPLETE",
+  "closedBlocker": "DOC-CONTRACT-01",
+  "source": "70516e5c9681917ce493bbc50e3023494f2e1209",
+  "package": "@capiro/meri-contracts",
+  "version": "0.1.2",
+  "artifact": {
+    "path": "/tmp/capiro-meri-document-public-contract-20261013/input/capiro-meri-contracts-0.1.2.tgz",
+    "bytes": 228048,
+    "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+    "gitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af"
+  },
+  "exports": [
+    "./document-application",
+    "./document-application/schema"
+  ],
+  "functions": [
+    "receiveDocumentRequest",
+    "receiveDocumentResponse",
+    "receiveDocumentDownload"
+  ],
+  "formats": [
+    "docx",
+    "txt",
+    "xlsx"
+  ],
+  "configuredFamily": "exactly one create_word OR create_excel per trusted application; no mixed-family mount inferred",
+  "olderPackageMembersUnchanged": 13,
+  "olderChangedMembers": [
+    "package.json",
+    "README.md"
+  ],
+  "integrationConstraints": [
+    "Use exact locally branded request and version objects",
+    "Network acquisition bounded separately from buffered JSON receiver",
+    "Cancel unconsumed responses on binary preflight refusal or late acquisition",
+    "Correlate session/request lifetime separately; private execution fingerprint and current authority are not proven by public receiving",
+    "Fence unknown writes; do not auto-retry or allocate fresh delivery after ambiguity"
+  ],
+  "sourceOnly": true,
+  "testsRun": false,
+  "frontendChanged": false,
+  "privateBackendImplementationCopied": false,
+  "nativeQualified": false,
+  "runtimeActivation": false,
+  "CommitmentsUI": false
+}

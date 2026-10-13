@@ -1,0 +1,290 @@
+[
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      ".monogram"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._headerActions_1tf87_218 > .primary"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._coverage_1tf87_31 > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      ".row > small"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._pulse_1tf87_10 > div:nth-child(2) > strong"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(2) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(3) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(4) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(5) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(6) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._tabs_1tf87_137 > .primary"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      ".primary > small"
+    ],
+    "status": "CONFIRMED_CONTRAST_FAILURE",
+    "reason": "AR-01; light-mode count3.098\u20133.951, not cleared by green axe."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._profileLogo_1tf87_101"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "rule": "label-content-name-mismatch",
+    "target": [
+      ".monogram"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Synthetic visible account initial T is exposed as button Test account in browser accessibility tree. Symbol and expanded account name agree in this fixture; actual Clerk/native AT remains untested."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      ".monogram"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._headerActions_1tf87_218 > .primary"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._coverage_1tf87_31 > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      ".row > small"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._pulse_1tf87_10 > div:nth-child(2) > strong"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(2) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(3) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(4) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(5) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(6) > .eyebrow"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._tabs_1tf87_137 > .primary"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      ".primary > small"
+    ],
+    "status": "CONFIRMED_CONTRAST_FAILURE",
+    "reason": "AR-01; light-mode count3.098\u20133.951, not cleared by green axe."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._profileLogo_1tf87_101"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "rule": "label-content-name-mismatch",
+    "target": [
+      ".monogram"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Synthetic visible account initial T is exposed as button Test account in browser accessibility tree. Symbol and expanded account name agree in this fixture; actual Clerk/native AT remains untested."
+  },
+  {
+    "test": "meri home retains full default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._newConversation_sgeic_65"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "modules home retains full default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "span[aria-hidden=\"true\"]"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Arrow is decorative aria-hidden; adjacent Open Engagement text has an exposed link name and measured white-on-gradient contrast >=15.523."
+  },
+  {
+    "test": "modules home retains full default axe checks at 1440px",
+    "rule": "color-contrast",
+    "target": [
+      "._primaryOpen_10khq_192"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  },
+  {
+    "test": "modules home retains full default axe checks at 390px",
+    "rule": "color-contrast",
+    "target": [
+      "._primaryOpen_10khq_192"
+    ],
+    "status": "MANUAL_RENDER_REVIEW_SUPPORTED",
+    "reason": "Actual computed opaque gradient endpoints and opacity/filter chain reviewed; contrast bounds exceed4.5 for sampled text."
+  }
+]

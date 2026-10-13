@@ -1,0 +1,28 @@
+diff --git a/apps/web/src/features/portfolio/files/mutations.ts b/apps/web/src/features/portfolio/files/mutations.ts
+index 67acb01..2d039ac 100644
+--- a/apps/web/src/features/portfolio/files/mutations.ts
++++ b/apps/web/src/features/portfolio/files/mutations.ts
+@@ -2,7 +2,7 @@
+ import { useMutation, useQueryClient } from "@tanstack/react-query";
+ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { acknowledged } from "@/shared/portfolio/api/http";
++import { deleteClientFile } from "./deletion";
+ import { filesKey } from "./queries";
+ export type FileChange =
+   | { kind: "delete"; id: string }
+@@ -18,13 +18,7 @@ export function useFileChange(clientId: string, onSaved?: () => void) {
+   return useMutation({
+     mutationFn: (change: FileChange) => {
+       const base = `clients/${clientId}/files`;
+-      if (change.kind === "delete")
+-        return api.request(
+-          "core",
+-          `engagement/attachments/${change.id}`,
+-          acknowledged,
+-          { method: "DELETE" },
+-        );
++      if (change.kind === "delete") return deleteClientFile(api, change.id);
+       const body = {
+         viewerMode: change.viewerMode,
+         viewerUserIds: change.viewerUserIds,

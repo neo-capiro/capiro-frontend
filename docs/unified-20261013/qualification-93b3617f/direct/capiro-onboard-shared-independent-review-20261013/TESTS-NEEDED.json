@@ -1,0 +1,64 @@
+{
+  "execution": "None of these controls run by this reviewer. Existing author tests read statically only.",
+  "tests": [
+    {
+      "id": "OBT-01",
+      "priority": "required for OBSH-01",
+      "cases": [
+        "Empty and malformed UUID receipt rejected; valid UUID with foreign name rejected; proper native UUID/exact submitted name accepted",
+        "Mutate caller body.name while response held: validate against captured original submitted value",
+        "No normalized-name invention: exact submitted whitespace/case retained at adapter boundary; UI trimming remains UI-owned",
+        "One dispatch only; malformed acknowledgement leaves attempt unknown and retained draft; no Added increment or downstream import-completion call"
+      ]
+    },
+    {
+      "id": "OBT-02",
+      "priority": "shared rendered boundary qualification",
+      "cases": [
+        "Hold authenticated request A, replace user/session/org independently, release success and401: old result cannot populate new cache or expire new actor",
+        "Hold public config/invite tokenA, navigate tokenB, release A200/401: no old private data and no new-token scope expiry",
+        "Loading to signed-out to signed-in replaces intended cache/editor/transport owners; current Clerk signup carry-over remains recoverable",
+        "Public capability401 does not expire authenticated app scope; protected401 still expires and client-only URL navigation cannot revive it"
+      ]
+    },
+    {
+      "id": "OBT-03",
+      "priority": "host/current-config qualification",
+      "cases": [
+        "Config absent/malformed/failed refetch/Clerk key mismatch leaves protected actions unavailable and no fallback upstream",
+        "Configured IT route works with no Clerk keys and never instantiates Clerk-dependent feature flow",
+        "Config refetch/remount preserves journal unknown fences and retained draft where promised; stale config cannot admit consent/navigation",
+        "Internal appBaseUrl override never causes unsupported legacy route navigation; explicit subscription-control case"
+      ]
+    },
+    {
+      "id": "OBT-04",
+      "priority": "feature-owner coordination; source-traced risk not browser-confirmed defect",
+      "cases": [
+        "Funnel A sessionId current; hold write; publish authoritative same-actor funnel B sessionId; late A200/401 cannot update/advance B or reuse A payment/legal state",
+        "Current funnel-session query failure/refetch blocks fresh effect admission; cache success alone is not authority",
+        "Do not require fake receipt sessionId echo: minimal native ack stays minimal; guard owner/current-read generation instead"
+      ]
+    },
+    {
+      "id": "OBT-05",
+      "priority": "gateway preservation",
+      "cases": [
+        "Funnel and setup choose default Clerk session; Core and existing Modules/Settings choose capiro template; request fields cannot choose auth mode",
+        "Public operation cross-namespace/unknown/path traversal/wrong method/cross-origin mutations refuse before auth/upstream",
+        "Inbound cookies/Authorization/tenant headers do not propagate; protected bearer comes only from trusted callback; public bearer omitted",
+        "Existing Planner public forms preserve semantics after helper extraction",
+        "PDF bad MIME/empty/oversize streaming response rejects; safe filenames remain fixed; interrupted old scope cannot deliver old download"
+      ]
+    },
+    {
+      "id": "OBT-06",
+      "priority": "prior schema review follow-through",
+      "cases": [
+        "Nonempty/valid native funnel, subscription and setup-invite identifiers; integer counts where native owns Int/count",
+        "Keep native empty/trimmed stored organization projection distinct from strict outgoing DTO; stored optional nested fields handled deliberately",
+        "Existing request/receipt adapter assertions: import distinct-ID conservation including duplicate input; pending firm memory; matching task and recipient role; selected provider and exact callback prefix"
+      ]
+    }
+  ]
+}

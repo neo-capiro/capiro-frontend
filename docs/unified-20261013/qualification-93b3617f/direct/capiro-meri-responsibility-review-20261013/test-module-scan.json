@@ -1,0 +1,171 @@
+[
+  {
+    "file": "apps/web/tests/meri-action-adapter.test.ts",
+    "sourceSha256": "856c3eb83198389a34af0e809e061cfe6a3d972d4f539670d5c204acd617d898",
+    "nonblank": 105,
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "sourceSha256": "0a5f237c77d3ad841dc7ad02e12d5e80ce8ef2115b327286526768f282a843d4",
+    "nonblank": 319,
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 28,
+        "nonblank": 86,
+        "fingerprint": "eb3d9373979c7046c089b6ce501e64b5dd01528853b56e19dda6196f78fde8a3"
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 115,
+        "nonblank": 109,
+        "fingerprint": "7629ac2f7de3ccefce7ecbc8521a9c0138c8a7730e42852530ddac16fb114d92"
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 225,
+        "nonblank": 99,
+        "fingerprint": "b561f986fec284fc08df17ae2e72825302f53ec6c80a72cab6dc02279b3f3b03"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-correlation.test.ts",
+    "sourceSha256": "e3ead8a4f48fab4045cba61579f10e1fe35a9a36cd8edc31f43eba025e98db44",
+    "nonblank": 144,
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-fixtures.ts",
+    "sourceSha256": "299c822b95bc51273bb8cd29516b758726103d043b96e52f20c46a390bd3f3a7",
+    "nonblank": 127,
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "sourceSha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+    "nonblank": 431,
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-host.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 431,
+        "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e"
+      },
+      {
+        "file": "apps/web/tests/meri-action-host.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 93,
+        "nonblank": 142,
+        "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239"
+      },
+      {
+        "file": "apps/web/tests/meri-action-host.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 317,
+        "nonblank": 119,
+        "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-lifetime.test.ts",
+    "sourceSha256": "0bef23ea97b3412ae021e9385603704dda3a8be1c656ade1172e0e15583cb831",
+    "nonblank": 191,
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "sourceSha256": "07254bbdfa5125be25e1e07f889416a7c3b4bc960e7bbc5e3ca75bc6cf68d1e1",
+    "nonblank": 403,
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 403,
+        "fingerprint": "9ce12481d47b2d9e8d6c76b2321e1cff30ed63167273bf91494238468924f89c"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 42,
+        "nonblank": 90,
+        "fingerprint": "b9af5b36f5f757188b08bf5d8545fb92e2c79e963026f03e97c6ffe432954652"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 133,
+        "nonblank": 185,
+        "fingerprint": "a7c580f4e30ba47547daad81f30ec27ef4fbc4361c1b2dec74623bc900d246f0"
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 319,
+        "nonblank": 89,
+        "fingerprint": "fdfb1367fc9055cca78fb45c9e405981812fd6dbdb71fdc2dc46b4451cda5ae2"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-session.test.ts",
+    "sourceSha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+    "nonblank": 171,
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-session.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 51,
+        "nonblank": 124,
+        "fingerprint": "b8ac4e07f4a79b20459e0939db7675599fc01fff4fa5dc40652a4432ebc8b899"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-transport.test.ts",
+    "sourceSha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+    "nonblank": 369,
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 85,
+        "nonblank": 105,
+        "fingerprint": "d32ed4825ac4ec996bbd53eed1e20afcd4e2c955e83b79708c89ccc80af3d67a"
+      },
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #5",
+        "line": 241,
+        "nonblank": 134,
+        "fingerprint": "4d0eb5078e7c3b1b5e1fbe056f1157b34f5121ef823c0ac0b8c738d072f9fd14"
+      }
+    ]
+  },
+  {
+    "file": "apps/web/test/action-workflow.test.mjs",
+    "sourceSha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742",
+    "nonblank": 372,
+    "findings": []
+  }
+]

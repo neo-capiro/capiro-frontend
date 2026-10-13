@@ -1,0 +1,52 @@
+{
+  "nodeCounts": [
+    59,
+    21
+  ],
+  "vitestCounts": [
+    1282,
+    117
+  ],
+  "total": 1479,
+  "architectureErrors": [],
+  "sizeSummary": {
+    "total": 427,
+    "reviewed": 403,
+    "inheritedUnreviewed": 24,
+    "blocking": 0
+  },
+  "commandStages": [
+    "> capiro-frontend@0.1.0 check",
+    "> npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web",
+    "> capiro-frontend@0.1.0 check:packages",
+    "> node scripts/public-packages.mjs",
+    "> capiro-frontend@0.1.0 typecheck",
+    "> npm run typecheck --workspaces --if-present",
+    "> @capiro/web@0.1.0 typecheck",
+    "> tsc --noEmit",
+    "> @capiro/meri-client@0.1.0 typecheck",
+    "> tsc -p tsconfig.json --noEmit",
+    "> @capiro/qualification-elements@0.0.0 typecheck",
+    "> tsc -p tsconfig.json",
+    "> @capiro/ui@0.0.0 typecheck",
+    "> tsc -p tsconfig.json",
+    "> capiro-frontend@0.1.0 test",
+    "> node --test scripts/*.test.mjs apps/web/test/*.test.mjs",
+    "> capiro-frontend@0.1.0 architecture",
+    "> node scripts/architecture.mjs",
+    "> capiro-frontend@0.1.0 test:transport",
+    "> npm test --workspace @capiro/qualification-transport",
+    "> @capiro/qualification-transport@0.0.0 test",
+    "> node --test qualification.test.mjs",
+    "> @capiro/web@0.1.0 lint",
+    "> eslint src tests",
+    "> @capiro/web@0.1.0 format:check",
+    "> prettier --check src test tests *.json *.ts *.mjs",
+    "> capiro-frontend@0.1.0 test:portfolio",
+    "> npm test --workspace @capiro/web",
+    "> @capiro/web@0.1.0 test",
+    "> vitest run",
+    "> @capiro/web@0.1.0 test:capiro",
+    "> vitest run --config src/shared/capiro/vitest.config.mts"
+  ]
+}

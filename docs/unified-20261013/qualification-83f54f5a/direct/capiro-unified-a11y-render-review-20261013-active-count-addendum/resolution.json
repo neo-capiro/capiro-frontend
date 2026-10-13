@@ -1,0 +1,60 @@
+{
+  "finding": "AR-01",
+  "status": "RESOLVED_REVIEWED_STATES",
+  "cssSHA256": "d4d23b4f53c643a1c4da9f5174bec62f8b5fc7cd12faa9f499df1907d7fe16ca",
+  "independentCases": 2,
+  "independentStates": [
+    "All active, light,1440,rest+hover",
+    "All active, light,390,rest+hover"
+  ],
+  "sourceUnchangedDuringCapture": true,
+  "beforePacketManifestSHA256": "05948491c0eea43742fcd13407c67fd59c59067b446aacc977076ed6bfe5a007",
+  "ownerEvidence": [
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-red-v2-results.json",
+      "sha256": "2e7e4d8882bab749e8d0e8e3f719eeb8d7b678dc7cd318df1b13a39bb9922961",
+      "bytes": 19158,
+      "stats": {
+        "startTime": "2026-10-13T07:39:22.555Z",
+        "duration": 15199.488000000001,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "timeout": 30000
+        }
+      ]
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-green-results.json",
+      "sha256": "9623df5f0ae1301be602209f0d150e2ec3be9594a0a7b499549178ce8ed5567d",
+      "bytes": 1003678,
+      "stats": {
+        "startTime": "2026-10-13T07:40:06.541Z",
+        "duration": 18535.735,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "timeout": 30000
+        }
+      ]
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-final-spec.ts",
+      "sha256": "8c0949fe589bc9d70ce908fdc65cc7da4244be243f72bcf4580dda659d311da9",
+      "bytes": 3020
+    }
+  ],
+  "remainingLimits": "See review.md; no blanket accessibility/native acceptance"
+}

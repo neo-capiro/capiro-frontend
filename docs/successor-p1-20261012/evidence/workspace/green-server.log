@@ -1,0 +1,11 @@
+file:///workspace/capiro-visual-closeout/node_modules/vite/dist/node/chunks/node.js:14706
+			throw new Error(`Port ${port} is already in use`);
+			      ^
+
+Error: Port 5298 is already in use
+    at httpServerStart (file:///workspace/capiro-visual-closeout/node_modules/vite/dist/node/chunks/node.js:14706:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async preview (file:///workspace/capiro-visual-closeout/node_modules/vite/dist/node/chunks/node.js:35726:2)
+    at async file:///tmp/capiro-p1-workspace-20261012/server.mjs:52:1
+
+Node.js v24.19.0

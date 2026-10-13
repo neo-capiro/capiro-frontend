@@ -1,0 +1,57 @@
+--- /tmp/capiro-newsletter-lifecycle-browser-20261013/first-source/newsletter-document-lifecycle.spec.ts	2026-10-13 03:47:11.221248468 +0000
++++ /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts	2026-10-13 03:49:19.117930924 +0000
+@@ -240,7 +240,9 @@
+ }) => {
+   const fixture = await documentFixture(page);
+   await enterEditor(page);
++  const historyLength = await page.evaluate(() => history.length);
+   await adoptDocument(page);
++  expect(await page.evaluate(() => history.length)).toBe(historyLength);
+   await page
+     .getByLabel("Subject", { exact: true })
+     .fill("Unsaved private subject");
+@@ -254,9 +256,7 @@
+     }),
+   );
+   await button(page, "Preview saved state").click();
+-  const frame = page.frameLocator(
+-    'iframe[title="Saved newsletter preview"]',
+-  );
++  const frame = page.frameLocator('iframe[title="Saved newsletter preview"]');
+   await expect(
+     frame.getByRole("heading", { name: "Saved owner heading" }),
+   ).toBeVisible();
+@@ -276,10 +276,33 @@
+   await expect(
+     page.getByText("Saved owner plain text", { exact: true }),
+   ).toBeVisible();
++  expect(await page.evaluate(() => history.length)).toBe(historyLength);
++  fixture.queue("preview", (route) =>
++    route.fulfill({
++      json: {
++        html: "<h1>Next saved owner heading</h1>",
++        plainText: "Next saved plain text",
++        checks: [],
++      },
++    }),
++  );
++  await button(page, "Preview saved state").click();
++  await expect(
++    frame.getByRole("heading", { name: "Next saved owner heading" }),
++  ).toBeVisible();
++  await expect(
++    frame.getByRole("heading", { name: "Saved owner heading", exact: true }),
++  ).toHaveCount(0);
++  expect(await page.evaluate(() => history.length)).toBe(historyLength);
+   expect(fixture.calls("preview")).toEqual([
+     {
+       operation: "preview",
+       method: "POST",
++      input: { params: { id: documentId }, body: { liveMergeTags: false } },
++    },
++    {
++      operation: "preview",
++      method: "POST",
+       input: { params: { id: documentId }, body: { liveMergeTags: false } },
+     },
+   ]);

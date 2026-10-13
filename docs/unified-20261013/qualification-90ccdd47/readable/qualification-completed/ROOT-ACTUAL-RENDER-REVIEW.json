@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-13T09:49:58.247116+00:00",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "captures": [
+    {
+      "path": "production/production-meri-files-1440-dark.png",
+      "sha256": "4da887995f880d1b8f1f5a3a9e5eb4de6043995c8580e09b5490d0fdffda99f7"
+    },
+    {
+      "path": "production/production-meri-files-390-light.png",
+      "sha256": "94fb62fe646da005137daac06ffdb5bbc49d061d45c0c915ba7161643c569864"
+    }
+  ],
+  "observations": [
+    "Actual unconfigured server visibly shows Connection setup required, without a document connect/create action. Header and Files navigation render at both inspected widths; setup copy wraps on phone.",
+    "The existing Meri shell remains light even under the dark preference. These captures do not establish dark-theme parity for configured Files or full Figma/layout acceptance.",
+    "Configured Files desktop/phone editor, revision, native-limit and focus captures were separately inspected in the development review; final synthetic browser cohort is running."
+  ],
+  "limits": [
+    "No live sign-in/native Office/provider behavior",
+    "No all-route/all-zoom/assistive-technology or full WCAG/design acceptance"
+  ]
+}

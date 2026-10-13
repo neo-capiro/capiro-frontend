@@ -1,0 +1,43 @@
+{
+  "utc": "2026-10-13T10:44:07.521478+00:00",
+  "status": "SEALED_PUBLICATION_OFFLINE_GATES_WITH_PRESERVED_HARNESS_RECOVERY",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "includedOriginalRecords": 511,
+  "includedOriginalBytes": 38198796,
+  "completedPortfolioShards": {
+    "1": 285,
+    "2": 298,
+    "3": 273,
+    "4": 283
+  },
+  "portfolioFinalStatus": "COMPLETE1139/1139; exact discovery union; zero automatic retries/skips/flaky/unexpected",
+  "modulesPassed": 324,
+  "includedReviews": [
+    "source-preservation",
+    "emitted-boundary",
+    "historical-storage addendum",
+    "completed90cc Elements storage"
+  ],
+  "pending": [],
+  "originalFailuresRetained": [
+    "6150 typecheck exit2 before build",
+    "90cc served-asset missing metadata preflight exit1 before HTTP"
+  ],
+  "archiveVerification": "Every included original byte reopened and equal; no originals changed",
+  "snapshotBytesBeforeThisFile": 19102208,
+  "preparationCheckpointRole": "Initial checkpoints and STAGING-AFTER-SHARD1/2 preserve earlier partial selections. Current status is newer; no final acceptance.",
+  "completedPortfolioUniquePassingIds": 1139,
+  "openConsoleObservation": "ObjectiveEditor sibling keys identical; exact same blob as83 pre-Files integration. Remains open; console not clean. Not the c330 Portfolio owner input.",
+  "finalIndependentAudit": {
+    "root": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013",
+    "manifestSha256": "8d39e780d731db61823e98490371d18233a0912632b5ee1a0370ea22f210711c"
+  },
+  "remainingAcceptanceLimits": [
+    "open inherited console reconciliation issue",
+    "76 lint warnings and23 inherited architecture signals",
+    "native337/default-disabled authority",
+    "Office rendering/recalculation",
+    "fullFigma/theme/AT/WCAG",
+    "musl/image/deployment"
+  ]
+}

@@ -1,0 +1,27 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import ts from '/workspace/capiro-onboard-port-20261013/node_modules/typescript/lib/typescript.js';
+const out='/tmp/capiro-onboard-feature-independent-review-20261013',author='/tmp/capiro-onboard-port-evidence-20261013',root='/workspace/capiro-onboard-port-20261013',before=author+'/cohesive-extraction/before',current=out+'/initial-source/apps/web/src/features/onboard';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const parse=p=>ts.createSourceFile(p,fs.readFileSync(p,'utf8'),ts.ScriptTarget.Latest,true);
+const normalize=n=>{const value={kind:n.kind};if(typeof n.text==='string'&&!ts.isSourceFile(n))value.text=n.text;const children=[];ts.forEachChild(n,c=>{children.push(normalize(c))});value.children=children;return value;};
+const eq=(a,b)=>JSON.stringify(normalize(a))===JSON.stringify(normalize(b));
+const fn=(ast,name)=>ast.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);
+const oldBilling=parse(before+'/BillingPage.tsx');
+const moves=[['F1PayTrial','TrialBilling'],['F1PayPaid','PaidBilling']].map(([a,b])=>({from:a,to:b,equalFunctionBodyAST:eq(fn(oldBilling,a).body,fn(parse(current+'/pages/funnel/'+b+'.tsx'),b).body)}));
+const original=parse(before+'/ImportOverlay.tsx'),importFn=fn(original,'ImportOverlay'),hook=fn(parse(current+'/pages/setup/useImportWorkflow.ts'),'useImportWorkflow');
+const gate=importFn.body.statements.findIndex(n=>ts.isIfStatement(n)&&ts.isReturnStatement(n.thenStatement)&&n.thenStatement.expression?.getText(original).includes('<Modal'));
+const oldStatements=importFn.body.statements.slice(0,gate),newStatements=hook.body.statements.slice(0,-1);
+moves.push({from:'ImportOverlay controller',to:'useImportWorkflow',oldStatements:oldStatements.length,newStatements:newStatements.length,equalStatementAST:oldStatements.length===newStatements.length&&oldStatements.every((n,i)=>eq(n,newStatements[i]))});
+const producer=author+'/source/7b5a9644d30d22389b23f0e07f923c8925682047/apps/onboard-web';
+const oldPath=producer+'/src/lib/funnel.draft.test.ts',newPath=out+'/initial-source/apps/web/tests/onboard-registration-draft.test.ts';
+const group=ast=>ast.statements.filter(n=>ts.isExpressionStatement(n)&&ts.isCallExpression(n.expression)&&n.expression.expression.getText(ast)==='describe');
+const og=group(parse(oldPath)),ng=group(parse(newPath));
+const originalTests={source:oldPath,sourceSha256:hash(fs.readFileSync(oldPath)),newFile:newPath,newSha256:hash(fs.readFileSync(newPath)),originalGroups:og.length,currentGroups:ng.length,originalGroupASTsPreserved:og.every((n,i)=>eq(n,ng[i]))};
+const assets=JSON.parse(fs.readFileSync(author+'/correction-handoff/ASSET-PRESERVATION.json','utf8')).assets.map(a=>{
+ const name=a.path.split('/onboard/')[1],old=producer+(name.startsWith('fonts/')?'/src/assets/':'/public/')+name;
+ const legacy=fs.readFileSync(old),present=fs.readFileSync(root+'/'+a.path);
+ return {path:a.path,producerPath:old,bytes:present.length,sha256:hash(present),sameProducerBytes:legacy.equals(present),sameAuthorHash:hash(present)===a.sha256};
+});
+const result={atUTC:new Date().toISOString(),method:'Independent static AST and byte comparison; no application execution',moves,originalTests,assets};
+fs.writeFileSync(out+'/PRESERVATION-CHECK.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

@@ -1,0 +1,159 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- ordered-owners.spec.ts profile-current-state.spec.ts portfolio-layout-integration.spec.ts portfolio-index.spec.ts current-projection.spec.ts capability-presentation.spec.ts --workers=2
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test ordered-owners.spec.ts profile-current-state.spec.ts portfolio-layout-integration.spec.ts portfolio-index.spec.ts current-projection.spec.ts capability-presentation.spec.ts --workers=2
+
+[WebServer] (node:370436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 41 tests using 2 workers
+
+(node:370456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:370455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/current-projection.spec.ts:23:3 › failed client refresh 403 hides retained totals, choices and cards until recovery (5.7s)
+  ✓   2 tests/browser/capability-presentation.spec.ts:11:1 › saved Profile keeps the exact native payload and draft across Documents and closed Details (9.5s)
+  ✓   3 tests/browser/current-projection.spec.ts:103:3 › failed activity refresh 403 hides retained history, kinds, limit and overview count (5.8s)
+  ✓   5 tests/browser/current-projection.spec.ts:23:3 › failed client refresh 503 hides retained totals, choices and cards until recovery (4.2s)
+  ✘   4 tests/browser/capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create (9.2s)
+(node:370938) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 tests/browser/current-projection.spec.ts:103:3 › failed activity refresh 503 hides retained history, kinds, limit and overview count (7.3s)
+  ✓   8 tests/browser/current-projection.spec.ts:204:1 › failed current client read removes its retained name from the frame and recovers (4.4s)
+  ✓   9 tests/browser/ordered-owners.spec.ts:35:1 › four ranked owners require a deliberate save and preserve exact order (2.2s)
+  ✓  10 tests/browser/ordered-owners.spec.ts:83:1 › clearing Primary preserves later positions and blocks an implicit promotion (1.7s)
+  ✘   7 tests/browser/capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus (12.2s)
+(node:371285) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 tests/browser/ordered-owners.spec.ts:110:1 › unavailable historical owners keep their rank and ranked members have no roster Remove (1.9s)
+  ✓  13 tests/browser/ordered-owners.spec.ts:148:1 › 409 requires read-back and a fresh deliberate versioned save, never automatic retry (3.4s)
+  ✓  12 tests/browser/capability-presentation.spec.ts:263:1 › saving an invalid Name inside collapsed Details reveals and focuses the field without writing (5.7s)
+  ✓  14 tests/browser/ordered-owners.spec.ts:181:1 › an interrupted PUT remains fenced after reopening and matching read-back sends nothing (2.5s)
+  ✓  16 tests/browser/ordered-owners.spec.ts:220:1 › background read cannot silently rebase a draft, and replacing the actor clears that editor (2.8s)
+  ✓  15 tests/browser/capability-presentation.spec.ts:295:1 › a save refusal preserves the mounted Profile draft and the explicit retry action (4.6s)
+  ✓  17 tests/browser/portfolio-index.spec.ts:40:1 › wordmark and workspace modes stay in the canonical shared application (3.6s)
+  ✓  18 tests/browser/capability-presentation.spec.ts:331:1 › pending save remains one operation while switching capability tabs (4.8s)
+  ✓  19 tests/browser/portfolio-index.spec.ts:67:1 › deep links restore combined filters and legacy layout; clearing preserves chosen presentation (6.9s)
+  ✓  20 tests/browser/capability-presentation.spec.ts:373:1 › Documents tab keeps the existing source-scoped upload and file-read boundary (5.1s)
+  ✓  21 tests/browser/portfolio-index.spec.ts:124:1 › real fields drive search/status/sector/known unassigned; no matching results has a clear recovery (4.3s)
+  ✓  22 tests/browser/portfolio-layout-integration.spec.ts:31:1 › actual index saves the complete canonical catalog and restores it after reload (8.1s)
+  ✓  23 tests/browser/portfolio-index.spec.ts:173:1 › loading and list failure expose retry without rendering a successful empty list (6.4s)
+  ✓  24 tests/browser/portfolio-layout-integration.spec.ts:98:1 › name, recent, filters and list presentation never persist a subset or overwrite saved order (3.7s)
+  ✓  26 tests/browser/portfolio-layout-integration.spec.ts:147:1 › saved order is not requested against an unloaded catalog (2.5s)
+  ✓  25 tests/browser/portfolio-index.spec.ts:204:1 › owner filter waits for unavailable assignments and retries instead of reporting no profiles (4.8s)
+  ✓  27 tests/browser/profile-current-state.spec.ts:15:1 › profile notes conceal a failed saved-client read and prevent replacement (2.3s)
+  ✓  29 tests/browser/profile-current-state.spec.ts:34:1 › profile notes reject another client's receipt and require review before retry (2.2s)
+  ✓  28 tests/browser/portfolio-index.spec.ts:231:1 › chooser uses native asset geometry and canonical manual intake, restoring trigger focus (6.0s)
+  ✓  30 tests/browser/profile-current-state.spec.ts:56:1 › profile notes retain a refused draft without reporting it saved (2.0s)
+  ✓  32 tests/browser/profile-current-state.spec.ts:72:1 › late notes receipts cannot close a replacement actor's editor (2.4s)
+  ✓  33 tests/browser/profile-current-state.spec.ts:106:1 › failed account-team refresh conceals cached members and disables changes (2.5s)
+  ✓  31 tests/browser/portfolio-index.spec.ts:292:1 › permission and expired-session errors remain explicit and disable profile creation (5.7s)
+  ✓  34 tests/browser/profile-current-state.spec.ts:129:1 › failed member options cannot submit a retained selection (2.2s)
+  ✓  36 tests/browser/profile-current-state.spec.ts:147:1 › team add needs the requested native roster effect (1.9s)
+  ✓  35 tests/browser/portfolio-index.spec.ts:324:1 › mobile dark cards and chooser fit viewport; empty portfolio and unsupported sort stay truthful (6.4s)
+  ✓  37 tests/browser/profile-current-state.spec.ts:163:1 › owner assignment rejects a different returned owner (2.6s)
+  ✓  38 tests/browser/profile-current-state.spec.ts:188:1 › failed facilities refresh conceals saved locations and closes their detail (1.4s)
+  ✓  39 tests/browser/profile-current-state.spec.ts:213:1 › a removed facility selection does not reopen when that ID returns (1.4s)
+  ✓  40 tests/browser/profile-current-state.spec.ts:235:1 › unknown facility creation stays fenced after closing and reopening (1.6s)
+  ✓  41 tests/browser/profile-current-state.spec.ts:258:1 › identity invalidation disables facility creation despite a cached role (1.5s)
+
+
+  1) tests/browser/capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator: getByRole('dialog', { name: 'New capability', exact: true }).getByLabel('Name', { exact: true })
+    Expected: focused
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New capability', exact: true }).getByLabel('Name', { exact: true })
+
+
+      144 |     exact: true,
+      145 |   });
+    > 146 |   await expect(editor.getByLabel("Name", { exact: true })).toBeFocused();
+          |                                                            ^
+      147 |   await expect(editor.getByRole("tab")).toHaveCount(0);
+      148 |   await expect(editor.getByLabel("PE numbers", { exact: true })).toHaveCount(0);
+      149 |   await expect(
+        at /workspace/capiro-visual-closeout/apps/web/tests/browser/capability-presentation.spec.ts:146:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-presentation-cr-60a1f-after-its-one-native-create/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/capability-presentation-cr-60a1f-after-its-one-native-create/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-presentation-cr-60a1f-after-its-one-native-create/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/capability-presentation-cr-60a1f-after-its-one-native-create/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator: getByRole('dialog', { name: 'New capability', exact: true }).getByLabel('Name', { exact: true })
+    Expected: focused
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New capability', exact: true }).getByLabel('Name', { exact: true })
+
+
+      254 |     exact: true,
+      255 |   });
+    > 256 |   await expect(create.getByLabel("Name", { exact: true })).toBeFocused();
+          |                                                            ^
+      257 |   await page.keyboard.press("Escape");
+      258 |   await expect(create).toHaveCount(0);
+      259 |   await expect(add).toBeFocused();
+        at /workspace/capiro-visual-closeout/apps/web/tests/browser/capability-presentation.spec.ts:256:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-presentation-ta-a0f6a-s-and-restores-opener-focus/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/capability-presentation-ta-a0f6a-s-and-restores-opener-focus/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-presentation-ta-a0f6a-s-and-restores-opener-focus/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/capability-presentation-ta-a0f6a-s-and-restores-opener-focus/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create 
+    tests/browser/capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus 
+  39 passed (1.6m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-visual-closeout/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-visual-closeout/apps/web
+npm error command failed
+npm error command sh -c playwright test ordered-owners.spec.ts profile-current-state.spec.ts portfolio-layout-integration.spec.ts portfolio-index.spec.ts current-projection.spec.ts capability-presentation.spec.ts --workers=2
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

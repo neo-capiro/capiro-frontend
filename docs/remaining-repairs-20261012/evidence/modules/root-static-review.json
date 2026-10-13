@@ -1,0 +1,45 @@
+{
+  "reviewer": "root",
+  "stage": "independent static review before lane browser qualification",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+      "sha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+      "sha256": "87bef46fbafa2e42329fd9461de0400655b771270d1299cec9da34831228dd71"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/planner.module.css",
+      "sha256": "302518640ab5df03246b1de0fc062ca9ecc46bb7ed84fc2ce90868850e02f20e"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+      "sha256": "48fd2aae2553a13ed60b9cf5936f86f0884b58e16ee051c02b529fdc37e21c3c"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-client-groups.ts",
+      "sha256": "547f438fdf4d07584818eecd36e462cba1f7e82e60019511f33aa4cde87d4c73"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerClientScope.tsx",
+      "sha256": "76bb8109cc23c39429716423a5b4327439b654335b503a7b7722bc969304f4bd"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/public-form.module.css",
+      "sha256": "8abb4e6facf34ca80e92160af79a9f011cd9608d76322fc48a9830ab2ee94fa8"
+    }
+  ],
+  "findings": [],
+  "conclusion": "Grouping is a pure permitted-page presentation, preserves direct-vs-project OR filter, unknown and multi-client cases, and derives names only from current records. Canonical URL client boundary retained. Form transport/lifetimes unchanged, truthful received receipt remains. Dynamic summaries clearly limit counts to displayed page. Geometry, keyboard, scope replacement and original full browser assertions still require execution."
+}

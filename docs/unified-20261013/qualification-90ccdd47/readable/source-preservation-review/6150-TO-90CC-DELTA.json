@@ -1,0 +1,236 @@
+{
+  "allChangedPaths": [
+    {
+      "path": ".gitattributes",
+      "before": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b90d22d5253076a7ceea35321e96f7cc8bb9dd98"
+      },
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8f105fd5caa5c340de0baef5e770c97b88335ca1"
+      }
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "before": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4da4090e683fcada9d7ffa7d2d6ff46e54fab6ca"
+      },
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6cc7abed63623e5940a9839822cc16a995437d16"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/FROZEN-SOURCE.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ce591b971e953857ecce660b2b797ad30a4b2db3"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/INTEGRATION-RESOLUTION.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bdbc3c5fe8ebf37746e05f6649f09b09948cd6bc"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/ITERATION.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f7dc45510d69d453e20887efbd499986c7d07666"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/MANIFEST.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bd7932270755fd6ecaad1c847cbf020dcb1ff713"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/README.md",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a2852852012672becbc73109f3f0d4dddad55ac9"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/check-exit.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "95ebbf8dcbb06b67f5fd0f5a072f9ae9b7911e06"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/check.log",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "45cab42db79cee15581bf6636fdeb8a00206e28f"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/clean-install-exit.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "773533df8ba6c43510bbfa31448a0e8fbfc35c96"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/clean-install.log",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "74bcd312a39a3698368da71f533e53c6d1713d86"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/identity-fixture-format.log",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3c3b70187e2630630a9d4f0cf678218c957a680f"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/qualification-iterations/identity-fixture-typecheck-green.log",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "65074222678ace016287167db1d6e48f47437353"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/FAILED-GATE-REFERENCES.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "30b30bf7659f69671a583e56cc880498e891dced"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/REPORT.md",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bac82df5fc51816a371e5bfa8cbe9567db454aa0"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/RESULT.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7982b18d45d917a010fdbc07583c882ab46004f8"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/SHA256-INDEX.json",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82a6a2d6d6fae39f1b7f1619fd0908fe56e0a08c"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/after-emitted.mjs",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7b1002814104250f86d9bc9129689c18aac26bdd"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/after.ts",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6cc7abed63623e5940a9839822cc16a995437d16"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/before-emitted.mjs",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f10916c575abdb69bfc9f9f00acc65f0e54459ad"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/before.ts",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4da4090e683fcada9d7ffa7d2d6ff46e54fab6ca"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/normalized-after.mjs",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0afdad2a53b95004e79277e3d23ece21eedef5dc"
+      }
+    },
+    {
+      "path": "docs/meri-files-20261013/typing-review/verify.cjs",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f60980325cde4078b00576d7f1a49bc14a6eb249"
+      }
+    }
+  ],
+  "activeSourceDelta": [
+    {
+      "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "before": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4da4090e683fcada9d7ffa7d2d6ff46e54fab6ca"
+      },
+      "after": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6cc7abed63623e5940a9839822cc16a995437d16"
+      }
+    }
+  ],
+  "runtimeTreeUnchanged": true,
+  "lockUnchanged": true
+}

@@ -1,0 +1,28 @@
+Listing tests:
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:131:5 › readonly identity cannot open activity mutations
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:279:5 › session expiry at preflight dispatches no activity write
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:15:5 › profile notes conceal a failed saved-client read and prevent replacement
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:34:5 › profile notes reject another client's receipt and require review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:56:5 › profile notes retain a refused draft without reporting it saved
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:188:5 › failed facilities refresh conceals saved locations and closes their detail
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:213:5 › a removed facility selection does not reopen when that ID returns
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:235:5 › unknown facility creation stays fenced after closing and reopening
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:262:5 › identity invalidation disables facility creation despite a cached role
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:206:5 › closing a pending facility create keeps the unknown fence when its view reopens
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:248:5 › a similar current facility cannot be claimed as an unknown creation receipt
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:286:5 › a changed saved facility cannot be overwritten by an older open draft
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:321:5 › a late facility result cannot escape its original actor's unknown fence
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:45:5 › a facility action refuses another tenant's otherwise matching receipt
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:64:5 › a definite facility action refusal remains a deliberate retry without claiming success
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:84:5 › an uncertain facility action needs a current GET review before a new explicit request
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:169:5 › a refreshed facility source aborts obsolete action effects and retains the new address
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:207:5 › a failed current review cannot erase an uncertain facility action
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts:8:7 › current profile dialogs fit 1440px and avoid cross-component render updates
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts:8:7 › current profile dialogs fit 390px and avoid cross-component render updates
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:86:5 › an absent current file is unavailable, not a deletion confirmation
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:134:5 › pending current deletion stays fenced until a later explicit review reports a recoverable file
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 403 revokes all cached file actions until successful recovery
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 503 revokes all cached file actions until successful recovery
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:340:7 › a superseded current read returning 200 cannot replace or poison newer client files
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:340:7 › a superseded current read returning 403 cannot replace or poison newer client files
+Total: 26 tests in 6 files

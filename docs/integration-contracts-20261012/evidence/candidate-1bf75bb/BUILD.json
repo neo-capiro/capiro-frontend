@@ -1,0 +1,27 @@
+{
+  "source": "1bf75bb09dab2d0d8b9cc28957d124ed20431050",
+  "buildId": "GDfV9FMQ94ToV66tGl1e-",
+  "prerenderedRoutes": [
+    "/_global-error"
+  ],
+  "files": {
+    "BUILD_ID": {
+      "exists": true,
+      "sha256": "a3d695fe7ad809eab5febb7f7df03a42efe3deb5178d6275094b86f46d183cf9",
+      "bytes": 21
+    },
+    "prerender-manifest.json": {
+      "exists": true,
+      "sha256": "dc32e7498c68bacaadda92eb491069e7c4b66745083de01793fd1b29a50ebd31",
+      "bytes": 1087
+    },
+    "server/app/meri.html": {
+      "exists": false
+    },
+    "standalone/apps/web/server.js": {
+      "exists": true,
+      "sha256": "2675d9038e95dd23a14f45fbfbc4684aca589f83d85b59390a556829a5734bec",
+      "bytes": 7950
+    }
+  }
+}

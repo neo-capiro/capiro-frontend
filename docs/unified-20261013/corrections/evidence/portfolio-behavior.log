@@ -1,0 +1,40 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=2 portfolio-accessibility-interaction.spec.ts portfolio-accessibility-semantics.spec.ts portfolio-home-accessibility.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=2 portfolio-accessibility-interaction.spec.ts portfolio-accessibility-semantics.spec.ts portfolio-home-accessibility.spec.ts
+
+[WebServer] (node:1329837) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 2 workers
+
+(node:1329869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1329870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/portfolio-accessibility-semantics.spec.ts:9:3 › Portfolio semantic correction: 1440px independent visible descriptions retain location, fallback and owner (11.2s)
+  ✓   1 tests/browser/portfolio-accessibility-interaction.spec.ts:21:3 › Portfolio positive control: 1440px sequential keyboard and history preserve the profile route (15.8s)
+  ✓   3 tests/browser/portfolio-accessibility-semantics.spec.ts:9:3 › Portfolio semantic correction: 390px independent visible descriptions retain location, fallback and owner (12.9s)
+  ✓   4 tests/browser/portfolio-accessibility-interaction.spec.ts:46:3 › Portfolio positive control: 1440px logo and sector navigate while bottom owner stays outside the link (15.1s)
+  ✓   5 tests/browser/portfolio-home-accessibility.spec.ts:6:3 › Portfolio home preserves accessible names, descriptions and default axe checks at 1440px (11.1s)
+  ✓   6 tests/browser/portfolio-accessibility-interaction.spec.ts:21:3 › Portfolio positive control: 390px sequential keyboard and history preserve the profile route (11.6s)
+  ✓   7 tests/browser/portfolio-home-accessibility.spec.ts:6:3 › Portfolio home preserves accessible names, descriptions and default axe checks at 390px (7.6s)
+  ✓   8 tests/browser/portfolio-accessibility-interaction.spec.ts:46:3 › Portfolio positive control: 390px logo and sector navigate while bottom owner stays outside the link (8.7s)
+  ✓   9 tests/browser/portfolio-accessibility-interaction.spec.ts:87:3 › Portfolio positive control: 390px long name keeps visible keyboard focus and light token scope (7.9s)
+  ✓  10 tests/browser/portfolio-accessibility-interaction.spec.ts:87:3 › Portfolio positive control: 390px long name keeps visible keyboard focus and dark token scope (6.7s)
+  ✓  11 tests/browser/portfolio-accessibility-interaction.spec.ts:126:1 › Portfolio positive control: 390px card expansion leaves the real reorder control reachable (4.5s)
+
+  11 passed (1.2m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

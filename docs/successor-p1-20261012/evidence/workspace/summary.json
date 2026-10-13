@@ -1,0 +1,29 @@
+{
+  "finding": "PROS-F02",
+  "row": "PROS-024",
+  "commit": "bd7f77f8601da883c54ae700ce32e2748cadd24d",
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "productionFiles": [
+    "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx"
+  ],
+  "productionLinesAdded": 2,
+  "newBrowserCases": 12,
+  "redExpectedFailures": 6,
+  "focusedBrowserPassed": 29,
+  "modelUnitPassed": 9,
+  "typecheck": "pass",
+  "lint": "pass",
+  "format": "pass",
+  "architecture": {
+    "errors": 0,
+    "changedSourceReviewRequired": 1,
+    "owner": "root"
+  },
+  "nativeWork": "not run",
+  "independentReview": {
+    "accepted": true,
+    "extraProbesPassed": 3,
+    "replayedNewControlsPassed": 12,
+    "evidence": "/tmp/capiro-p1-independent-review/workspace-review.json"
+  }
+}

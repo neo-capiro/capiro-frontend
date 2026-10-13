@@ -1,0 +1,846 @@
+{
+  "files": [
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/PLAN.md",
+      "destination": "evidence/lanes/mail/PLAN.md",
+      "bytes": 1586,
+      "sha256": "92b4b7dce43fcfb07bc581c68d125eb2e3d5f43896f6fea5c3b9ef18a62e04a2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/REPORT.md",
+      "destination": "evidence/lanes/mail/REPORT.md",
+      "bytes": 7437,
+      "sha256": "3e720cce2446318334dea86b51a7dd4f76db8d9f1d13f473e3cf661272a2f325"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/SOURCE-AND-RESULTS.json",
+      "destination": "evidence/lanes/mail/SOURCE-AND-RESULTS.json",
+      "bytes": 2029,
+      "sha256": "24d9b5d3de1a6a423b5962208237ed8d1d6d62183c732a056209f9b413afa6b0"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/after.log",
+      "destination": "evidence/lanes/mail/after.log",
+      "bytes": 8811,
+      "sha256": "6a983466e8889f88fc658a355a7e08073673d392a5a3a77346a1934e7c33c99e"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/architecture-final.json",
+      "destination": "evidence/lanes/mail/architecture-final.json",
+      "bytes": 747838,
+      "sha256": "1ac2b03ddcf960876190efcd66ecbe78f7740a955a098852c89f5288d26369f4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/architecture.json",
+      "destination": "evidence/lanes/mail/architecture.json",
+      "bytes": 747838,
+      "sha256": "1ac2b03ddcf960876190efcd66ecbe78f7740a955a098852c89f5288d26369f4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/.last-run.json",
+      "destination": "evidence/lanes/mail/before-output/.last-run.json",
+      "bytes": 684,
+      "sha256": "04095b2d3727735d58a1b8bfbf7f9a9dcd66524db53bc74ae1c7543d7dc4b02b"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/error-context.md",
+      "bytes": 13826,
+      "sha256": "b34b386169d355f07805ec9cfff15e2c1456e2e38fa0be953278ffdcbfa1d673"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "bytes": 72348,
+      "sha256": "67c68e1701ad4db7a72f2ac70c778b7b1fe72526007dae447c2c8a5f34eac857"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/trace.zip",
+      "bytes": 534313,
+      "sha256": "103b05ab9daf857864eb0986c606ffbf47d55a56e770add141727804ec52227f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/error-context.md",
+      "bytes": 13826,
+      "sha256": "2110e9a6edca52118b0daf0d59032990b47af1f591da1495c65002df2b4ed415"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "bytes": 72348,
+      "sha256": "67c68e1701ad4db7a72f2ac70c778b7b1fe72526007dae447c2c8a5f34eac857"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/trace.zip",
+      "bytes": 553430,
+      "sha256": "c7571345ced8e15db730d62344c836f9d127dc618a46215c2d79607b520c0eb4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/error-context.md",
+      "bytes": 13830,
+      "sha256": "0aa2c0f8b298ef92a140e8c240595496ace0284fd40519f0465e27d36d8ec8a1"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/test-failed-1.png",
+      "bytes": 72348,
+      "sha256": "67c68e1701ad4db7a72f2ac70c778b7b1fe72526007dae447c2c8a5f34eac857"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/trace.zip",
+      "bytes": 534542,
+      "sha256": "e0b06a75bf3634df0ae656103ecbf60ac6be8fde37ce86f68200a0b3eb998d90"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/error-context.md",
+      "bytes": 13832,
+      "sha256": "dd74bd1992eb294f08d5b1c1b78bf79c05243916fa6042ab30992788c3dbc180"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "bytes": 72350,
+      "sha256": "cfdddd46a1178c34365226c1c3eb1ad5b8daa0e9576f88c7b00be3be940d56b2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/trace.zip",
+      "bytes": 553966,
+      "sha256": "6a2177c77b2add8dd9691775a99790e946263d921985f62b29ce67d762333f1f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/error-context.md",
+      "bytes": 13872,
+      "sha256": "bddf281f48567352a3b274c86833fc338cb2ba550de4b8eca8bf4c9af1fa7232"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/test-failed-1.png",
+      "bytes": 72350,
+      "sha256": "cfdddd46a1178c34365226c1c3eb1ad5b8daa0e9576f88c7b00be3be940d56b2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/trace.zip",
+      "bytes": 489846,
+      "sha256": "afa9b4849ff4452d7bb7b6bfa8068e7a02a2720cc664e547a05896beae50b4cb"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/error-context.md",
+      "bytes": 13850,
+      "sha256": "147201cc29ac380c209081fa2347f1df82f1d9e9ccd83fe88a0bb87fa36020ac"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/test-failed-1.png",
+      "bytes": 72350,
+      "sha256": "cfdddd46a1178c34365226c1c3eb1ad5b8daa0e9576f88c7b00be3be940d56b2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/trace.zip",
+      "bytes": 510727,
+      "sha256": "7bcf85b06c4974998a3bd9905292e6c29453badf989ad0ff1ba60d4722687a86"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/error-context.md",
+      "bytes": 13831,
+      "sha256": "3fc506811b6f89844b5e4e481a3ec91cc32b644fce1cf7267599ff58092c369f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/test-failed-1.png",
+      "bytes": 72350,
+      "sha256": "cfdddd46a1178c34365226c1c3eb1ad5b8daa0e9576f88c7b00be3be940d56b2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/trace.zip",
+      "bytes": 488575,
+      "sha256": "d31b6b1d03b7cab29f74810cf3b83ddc81cb8b2209b152700fdf58c651001907"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md",
+      "bytes": 13872,
+      "sha256": "39dc235b489360fe8a5c89b668fad26217d4cd664af7b3c053df30f99d3909ba"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png",
+      "bytes": 72348,
+      "sha256": "67c68e1701ad4db7a72f2ac70c778b7b1fe72526007dae447c2c8a5f34eac857"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip",
+      "bytes": 508010,
+      "sha256": "51e37b0a035ad4ab8e87de7f547a3d79769d4841be2405090118468ca5835fc3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md",
+      "bytes": 14510,
+      "sha256": "b0df128ed6d9277df255c959f5651069b87086ccfdb5a39ed195662133f1dbb4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png",
+      "bytes": 73105,
+      "sha256": "db523b36ac6f7341fedae3e8a257ab067cad79f513527aa5ad752fbbf1e03d04"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip",
+      "bytes": 715243,
+      "sha256": "4268802060451eef6a9620627e71b8f16a77206ebb718c54348587d5d166a93a"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/error-context.md",
+      "bytes": 14460,
+      "sha256": "de1f57cc7b4432985b40b841f1fcef5eac381fd37f9ba74421df52ce141328fb"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/test-failed-1.png",
+      "bytes": 73103,
+      "sha256": "74b3d1ef3209d3504800eb9be2d488294a8b692924b9dcea582f7a24b268e641"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/trace.zip",
+      "bytes": 733903,
+      "sha256": "73f5f7dbf49d402c767488bc49f6a9cbdd946d02bda3838e7b755f07236d816b"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/error-context.md",
+      "bytes": 14451,
+      "sha256": "06f977c05b81a0fb98cfde7b9f7e153760d10f412c83b8cdd42e10c085cce97f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/test-failed-1.png",
+      "bytes": 73096,
+      "sha256": "3431644c43837291d1f2270ebfae5dd37a272eff93c15793b79aab445714b1ac"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/trace.zip",
+      "bytes": 688772,
+      "sha256": "bdde4215953bc39d740820d441903caedf502034a40652d726cde5b0b2383673"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/error-context.md",
+      "bytes": 14516,
+      "sha256": "0af8c1d1bd276a2b6aaa9a200e75a36d6f8ce61a38b894013e12e39c8893276f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/test-failed-1.png",
+      "bytes": 72411,
+      "sha256": "e9a3664cd0443f341eca25f3e398ddb0da82a658a6c40bbaad3443689231d4cb"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/trace.zip",
+      "bytes": 673506,
+      "sha256": "bdcbbd98b966cebd3d8cdc7b611b2ef0fc0e6377c859eee49224354073e398fe"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/error-context.md",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/error-context.md",
+      "bytes": 13834,
+      "sha256": "d3c7cc790a0ae32726fa4c335c75a8fd6d633f91d890a2b491a3f90853e5ac4c"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/test-failed-1.png",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/test-failed-1.png",
+      "bytes": 72348,
+      "sha256": "67c68e1701ad4db7a72f2ac70c778b7b1fe72526007dae447c2c8a5f34eac857"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/trace.zip",
+      "destination": "evidence/lanes/mail/before-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/trace.zip",
+      "bytes": 512216,
+      "sha256": "ce0f7efdeade3e2948e9e983c0e225a17df27c2ee0db90691c60aa52f815d9f6"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before-results.json",
+      "destination": "evidence/lanes/mail/before-results.json",
+      "bytes": 82614,
+      "sha256": "c9b4a5565fe649c1c49d303be59c01c2ab336534adea4c8c4acf7c7c1d013f22"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/before.log",
+      "destination": "evidence/lanes/mail/before.log",
+      "bytes": 44130,
+      "sha256": "ed39575d406537696f20f757efadf7d40ef28382e6688f20bb4d0a2fa212a860"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/.last-run.json",
+      "destination": "evidence/lanes/mail/broad-after-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "destination": "evidence/lanes/mail/broad-after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72966,
+      "sha256": "556c107b564b679950722143ae4ff1afcac7a65fe6faa538cdd557179c1513bd"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "destination": "evidence/lanes/mail/broad-after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 35266,
+      "sha256": "d5871e961cdf01c4ddb263dff4e053e4db413a67db472da0e58abddb3df011b7"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "destination": "evidence/lanes/mail/broad-after-output/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "bytes": 103470,
+      "sha256": "951d68def9c838068af848d8adf2b8062a651acf646213fcdd4301509a579789"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "destination": "evidence/lanes/mail/broad-after-output/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "bytes": 140427,
+      "sha256": "5f21b40770322494cf84979cb9e3ed9560c45715ec391abbbaf52d329c7b1273"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "destination": "evidence/lanes/mail/broad-after-output/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "bytes": 57451,
+      "sha256": "f0f9a0a8b45842423f72b08829a4cce04aa3a953d1a4fbac0f0639df723fb9df"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "destination": "evidence/lanes/mail/broad-after-output/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "bytes": 59424,
+      "sha256": "12ce1a0735e03dc543299afcb02d8d4b26075ce75c86d73f14c835f868b594c1"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-output/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "destination": "evidence/lanes/mail/broad-after-output/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "bytes": 42775,
+      "sha256": "39ea91de9a294348cce17bf26492811477fa00563074a9804236bad445494a4f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/broad-after-results.json",
+      "destination": "evidence/lanes/mail/broad-after-results.json",
+      "bytes": 68060,
+      "sha256": "069070f0dc68bc56aecb9bea17101af080e4e5e8fae0031e2cab2871a3810324"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/browser-output/.last-run.json",
+      "destination": "evidence/lanes/mail/browser-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "destination": "evidence/lanes/mail/browser-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72966,
+      "sha256": "556c107b564b679950722143ae4ff1afcac7a65fe6faa538cdd557179c1513bd"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "destination": "evidence/lanes/mail/browser-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 32171,
+      "sha256": "f6f2de98c02def5e8f781ac80893fdc04b8a73d0ec047abd21a52d9bea846623"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/browser-results.json",
+      "destination": "evidence/lanes/mail/browser-results.json",
+      "bytes": 21208,
+      "sha256": "12b2810bf7b011ec0d94588fab10007e87cdeaece5f2b0fe1af1c59339ef3ec0"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/browser.config.ts",
+      "destination": "evidence/lanes/mail/browser.config.ts",
+      "bytes": 718,
+      "sha256": "96553bfb8de1296127ad20c992b8834dd3a614589a860228b25d073eb941df98"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview-output/.last-run.json",
+      "destination": "evidence/lanes/mail/desktop-preview-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview-output/desktop-preview-saved-sign-5362b-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "destination": "evidence/lanes/mail/desktop-preview-output/desktop-preview-saved-sign-5362b-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 66798,
+      "sha256": "ca91419a646bee72a567e5e7c98cc32b0c3cae6b26187f37b9757d2299f66f17"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview-output/desktop-preview-saved-sign-5362b-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "destination": "evidence/lanes/mail/desktop-preview-output/desktop-preview-saved-sign-5362b-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 34236,
+      "sha256": "ddbaf3680c294a42acf822ae31f80a49589878f71c5a842de59ae68facad04a4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview-results.json",
+      "destination": "evidence/lanes/mail/desktop-preview-results.json",
+      "bytes": 3099,
+      "sha256": "6dbb30e95757373270993294be9fadb6505b9743d2b57e316e1b71dba0f685f1"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview.config.ts",
+      "destination": "evidence/lanes/mail/desktop-preview.config.ts",
+      "bytes": 642,
+      "sha256": "47521aa75e6613d7b70dfbf0598a7e297e405e2b39d3e8d07f029ff5f64c3eca"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview.log",
+      "destination": "evidence/lanes/mail/desktop-preview.log",
+      "bytes": 375,
+      "sha256": "6746fb55267ac6a6d38b0b690a7b3948a58e79362f1879961e25e53a5f8ce5c8"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/desktop-preview.spec.ts",
+      "destination": "evidence/lanes/mail/desktop-preview.spec.ts",
+      "bytes": 14941,
+      "sha256": "a445358521b8ee73e4db3f4603a30f6bde05cfaa64bdeb4d64d0981b4728fa7f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/final-local.log",
+      "destination": "evidence/lanes/mail/final-local.log",
+      "bytes": 2776,
+      "sha256": "da07c7079e2e23d840466a4bcea2bab1029337581b5e680b9d6196825a49f455"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/focused-after.log",
+      "destination": "evidence/lanes/mail/focused-after.log",
+      "bytes": 5205,
+      "sha256": "4556a9b1dd4e7227c816999541e8825ccdb9e466e3a63c69b62497bd78defa34"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/format-check.log",
+      "destination": "evidence/lanes/mail/format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/format-final.log",
+      "destination": "evidence/lanes/mail/format-final.log",
+      "bytes": 156,
+      "sha256": "44a00895b4a13b0835f1fdb2a4ca1f2951b87a79c6424fbd4c576ae6a9febe80"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/format.log",
+      "destination": "evidence/lanes/mail/format.log",
+      "bytes": 424,
+      "sha256": "160ae950cc2b700c1e1646a8ef54ad905850277e620faa653e6f5e41104b4b80"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/independent-prospect-review.md",
+      "destination": "evidence/lanes/mail/independent-prospect-review.md",
+      "bytes": 5555,
+      "sha256": "8bd4c0b6b376d24e40eba3c3aad0ed43f6db51c5830ae338c25b2382063ca1ef"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/intermediate-harness-output/.last-run.json",
+      "destination": "evidence/lanes/mail/intermediate-harness-output/.last-run.json",
+      "bytes": 96,
+      "sha256": "f12fced4c8cecf4e581b7c293c4aba81d6920fa1920b0088ecf08c61f9dd8e07"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md",
+      "destination": "evidence/lanes/mail/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md",
+      "bytes": 12051,
+      "sha256": "fc44f5aa6d293bb9d50462765c328d4690486d47aa7d6a1724880f1f5189c094"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png",
+      "destination": "evidence/lanes/mail/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png",
+      "bytes": 72100,
+      "sha256": "ef63b5521077ffd1056b284ea40323d4d9486ebdda9a6eeff601eb5bc015c03c"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip",
+      "destination": "evidence/lanes/mail/intermediate-harness-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip",
+      "bytes": 551809,
+      "sha256": "e13ef9e0019d9080fb27ff04cd5011352614667ffe5d49408ae198ce2667c88c"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/intermediate-harness-results.json",
+      "destination": "evidence/lanes/mail/intermediate-harness-results.json",
+      "bytes": 22968,
+      "sha256": "ec3c500d6233ec36fc1332efb51cc5258ec8710bec7c2928eeff0c83452df19a"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/lint-final.log",
+      "destination": "evidence/lanes/mail/lint-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/lint.log",
+      "destination": "evidence/lanes/mail/lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before-output/.last-run.json",
+      "destination": "evidence/lanes/mail/map-link-before-output/.last-run.json",
+      "bytes": 96,
+      "sha256": "3ea209676734ecfb570a8096ae9746e5e04707fa5cdfd990bb5c85ce2378ec9b"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md",
+      "destination": "evidence/lanes/mail/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md",
+      "bytes": 13024,
+      "sha256": "6ac4bfd44251784f687bc4d398b7373a04a91e4e832f7d255d57f50ac47e909b"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png",
+      "destination": "evidence/lanes/mail/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png",
+      "bytes": 73105,
+      "sha256": "db523b36ac6f7341fedae3e8a257ab067cad79f513527aa5ad752fbbf1e03d04"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip",
+      "destination": "evidence/lanes/mail/map-link-before-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip",
+      "bytes": 737956,
+      "sha256": "abb5ae56372a6c35502c794f98698f354b8e860d34d2f2c5fd1a9418ea3d9eb4"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before-results.json",
+      "destination": "evidence/lanes/mail/map-link-before-results.json",
+      "bytes": 8217,
+      "sha256": "6f70dfbe5d820d449007c22434e6fd7e704b5aee5e2b42b8b33ece4aee2cc716"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/map-link-before.log",
+      "destination": "evidence/lanes/mail/map-link-before.log",
+      "bytes": 3200,
+      "sha256": "64f09228c9b16d4eddf3401fc3aee016a737367e79ee356c9b27fa0cb4544bc3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/native-signature-append.txt",
+      "destination": "evidence/lanes/mail/native-signature-append.txt",
+      "bytes": 8044,
+      "sha256": "b645a237943218d83a58240a92c7c9424aa5c01ca8a6e19cb8c74b625d30f645"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/native-signature-sanitizer.txt",
+      "destination": "evidence/lanes/mail/native-signature-sanitizer.txt",
+      "bytes": 7053,
+      "sha256": "dc6bc9d6847df8a125dfa422835544d03f2cdbb9e96b88f94fb1a07bd61cafaa"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/native-users-controller.txt",
+      "destination": "evidence/lanes/mail/native-users-controller.txt",
+      "bytes": 16950,
+      "sha256": "d7cc8867f6a11f6ca9fc8e4c3dc6c640ecab2c73ce661e51affed17dc7057a20"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/server.log",
+      "destination": "evidence/lanes/mail/server.log",
+      "bytes": 1046,
+      "sha256": "e968452cdfac5bcc6100c0b4515fb4fef8a5382b9f95468985afdc1237931016"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/server.pid",
+      "destination": "evidence/lanes/mail/server.pid",
+      "bytes": 7,
+      "sha256": "a69eee9a89cfa85f780a1e978001aadf9cc890b62ef2824207d6adc2e2d20c82"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/MailCompose.before.tsx",
+      "destination": "evidence/lanes/mail/signature-current/MailCompose.before.tsx",
+      "bytes": 13034,
+      "sha256": "c5e6e9a79aa06fadfa21ed3bbc034d4290eee040a42cc96e58db026177d9f6d1"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/REPORT.md",
+      "destination": "evidence/lanes/mail/signature-current/REPORT.md",
+      "bytes": 5143,
+      "sha256": "e1b2ba90d7d66deb06f92812a8f9cd51103945d3e2db44ead14769904cbcc642"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/.last-run.json",
+      "destination": "evidence/lanes/mail/signature-current/after-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72968,
+      "sha256": "0a607a31b59fba4c34dda72d7575419115ef6aa86a99cd59face0d10a895f386"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 35266,
+      "sha256": "d5871e961cdf01c4ddb263dff4e053e4db413a67db472da0e58abddb3df011b7"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "bytes": 103469,
+      "sha256": "9f084aceae03d63096662adb33ee6578be86dbb02ea7ccde19498a82007aecc3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "bytes": 140435,
+      "sha256": "b25ec8f005f7ed4fcbc727d5801c5c6f93f8a9ff166781b748d1bc0f4d37fb03"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "bytes": 57451,
+      "sha256": "f0f9a0a8b45842423f72b08829a4cce04aa3a953d1a4fbac0f0639df723fb9df"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "bytes": 59424,
+      "sha256": "12ce1a0735e03dc543299afcb02d8d4b26075ce75c86d73f14c835f868b594c1"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-output/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "destination": "evidence/lanes/mail/signature-current/after-output/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "bytes": 42775,
+      "sha256": "39ea91de9a294348cce17bf26492811477fa00563074a9804236bad445494a4f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after-results.json",
+      "destination": "evidence/lanes/mail/signature-current/after-results.json",
+      "bytes": 71304,
+      "sha256": "750ca5e621ce2c1510b531dbe943221c04fe69e330996b1ea143c2c38917ceea"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after.config.ts",
+      "destination": "evidence/lanes/mail/signature-current/after.config.ts",
+      "bytes": 750,
+      "sha256": "c5f85ebed16d6290e136cc8fa19d73953e7c684772b28281483565e0e4eb5472"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/after.log",
+      "destination": "evidence/lanes/mail/signature-current/after.log",
+      "bytes": 9244,
+      "sha256": "f68a5b39fc3a725a9fec98a4f4b9b35f1050e914c2bfe2e3fe30808fcd51f2d3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/architecture.json",
+      "destination": "evidence/lanes/mail/signature-current/architecture.json",
+      "bytes": 747838,
+      "sha256": "bf9bf800f58d62c6cecd40cdfb02c470c302baeff3c2eb88e0c1141ab23b3f0f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/.last-run.json",
+      "destination": "evidence/lanes/mail/signature-current/before-output/.last-run.json",
+      "bytes": 194,
+      "sha256": "05fb12907cc013d1d5b0eedbb9b92b4a0a20597cfe5a243720fbd83e05dc74b8"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/error-context.md",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/error-context.md",
+      "bytes": 9585,
+      "sha256": "8e969f05b6db36a01d047355504f6ee043876512e82a269e9a2fd0a53e5f29c3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/test-failed-1.png",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/test-failed-1.png",
+      "bytes": 87638,
+      "sha256": "2e95c340154eab6790cd6f88a9e45eaf8c8e97ba97db002785976dd5f4b44c83"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/trace.zip",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/trace.zip",
+      "bytes": 831336,
+      "sha256": "1ee793713b1d29f20e80b7f857f121b0c1aca2c98f7989287ca9e8ae455d015f"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/error-context.md",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/error-context.md",
+      "bytes": 9737,
+      "sha256": "db76a071b2c85f67ae219b5f4193bdd82f30d62f2292b34414b93d11a9ca30ab"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/test-failed-1.png",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/test-failed-1.png",
+      "bytes": 86670,
+      "sha256": "685e2bb2a006f0a63053cd0c688e7ef9596b1708852f9694912515eec7c7ce67"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/trace.zip",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/trace.zip",
+      "bytes": 741409,
+      "sha256": "688dca0ecb4c6a902d09ccb190586051eddbe3f627469255b7e776bc252bc118"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/error-context.md",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/error-context.md",
+      "bytes": 9598,
+      "sha256": "e3292047314833651334341837fd56f982e812e9d75797d809d101ac8915228b"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/test-failed-1.png",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/test-failed-1.png",
+      "bytes": 87638,
+      "sha256": "2e95c340154eab6790cd6f88a9e45eaf8c8e97ba97db002785976dd5f4b44c83"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/trace.zip",
+      "destination": "evidence/lanes/mail/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/trace.zip",
+      "bytes": 757068,
+      "sha256": "05066af3f9478706150d3533ca33cfac44e75ae65e644978af1d42011792efae"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-results.json",
+      "destination": "evidence/lanes/mail/signature-current/before-results.json",
+      "bytes": 19718,
+      "sha256": "b06fe7e25ec5c15490cc7569b7e8e30fcf22791214795c361a234f45897e57a3"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before-source.json",
+      "destination": "evidence/lanes/mail/signature-current/before-source.json",
+      "bytes": 5136,
+      "sha256": "5d24717ff08c303f7a4641acd5199e90b3068483d0ced4c420bf90adff6f84c8"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before.config.ts",
+      "destination": "evidence/lanes/mail/signature-current/before.config.ts",
+      "bytes": 752,
+      "sha256": "bdaca717218de939aca72b440220372c4d7fbb9ec83eb7071ba5f39138e46a69"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/before.log",
+      "destination": "evidence/lanes/mail/signature-current/before.log",
+      "bytes": 9415,
+      "sha256": "2340faf6675392db22a574572937524cd290f4a8e500ef67f5a3e89b483fbc91"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/browser-release.json",
+      "destination": "evidence/lanes/mail/signature-current/browser-release.json",
+      "bytes": 383,
+      "sha256": "9a92cd4000aea47da107d52e020bebcc8c91d75e83a71488fb2ee0277d12f39c"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/final-source-and-results.json",
+      "destination": "evidence/lanes/mail/signature-current/final-source-and-results.json",
+      "bytes": 2251,
+      "sha256": "4b9df03772a9f1c6a45328f17d251af531e7fb19cc81300e0e838c4f85a029d5"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/format.log",
+      "destination": "evidence/lanes/mail/signature-current/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/lint.log",
+      "destination": "evidence/lanes/mail/signature-current/lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/server.log",
+      "destination": "evidence/lanes/mail/signature-current/server.log",
+      "bytes": 308,
+      "sha256": "ba461a1a6546acc10923b9d53bec972a902b8997a13f94f3466b1754949a5653"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/structure-review-proposal.json",
+      "destination": "evidence/lanes/mail/signature-current/structure-review-proposal.json",
+      "bytes": 1635,
+      "sha256": "f15c7acc27be59a49e966b71b80077f800381b14a4d6fd1668b2f25a17da9511"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/typecheck.log",
+      "destination": "evidence/lanes/mail/signature-current/typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/unavailable-review.png",
+      "destination": "evidence/lanes/mail/signature-current/unavailable-review.png",
+      "bytes": 29583,
+      "sha256": "f766b46c4f155088418b2fe62de97c3b6d66ab1bcc44833f1269645332351d65"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/visual-output/.last-run.json",
+      "destination": "evidence/lanes/mail/signature-current/visual-output/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/visual-results.json",
+      "destination": "evidence/lanes/mail/signature-current/visual-results.json",
+      "bytes": 3121,
+      "sha256": "cac559332da1db11d7f400889a80c813bd5a7fed61f49847b089fda1f6887f1e"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/visual.config.ts",
+      "destination": "evidence/lanes/mail/signature-current/visual.config.ts",
+      "bytes": 671,
+      "sha256": "d3d9512bb8222378dc0ac73a229427d7576a0ded7a6b3b9b0e92bf2e35edfc80"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/visual.log",
+      "destination": "evidence/lanes/mail/signature-current/visual.log",
+      "bytes": 379,
+      "sha256": "b3a03f7e7fb237cad8348399a7784a81d91510606e1262531a68d73cee3909f2"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/signature-current/visual.spec.ts",
+      "destination": "evidence/lanes/mail/signature-current/visual.spec.ts",
+      "bytes": 17723,
+      "sha256": "e059dcea9ffc4f458c193e0d7a797e5408d7522fafd41fea9bc8846657585b14"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/structure-review-proposal.json",
+      "destination": "evidence/lanes/mail/structure-review-proposal.json",
+      "bytes": 2530,
+      "sha256": "6db52430e82071ce502519e2c38811626dcbbc8aa1d87c219ccfdd7f10cd7e53"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/typecheck-final.log",
+      "destination": "evidence/lanes/mail/typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/typecheck.log",
+      "destination": "evidence/lanes/mail/typecheck.log",
+      "bytes": 94,
+      "sha256": "6301aa1c467edef99eb98cd7f5ad2f2d673c57a705f61ffcef2b1833b61ca27a"
+    },
+    {
+      "origin": "/tmp/capiro-next-mail-evidence/unit.log",
+      "destination": "evidence/lanes/mail/unit.log",
+      "bytes": 223,
+      "sha256": "690be01c83e224a1ca41b8d2668f41b8c5ba97f208509c3dc74e69586a85eb57"
+    },
+    {
+      "origin": "/tmp/capiro-next-prospect-files-evidence/independent-mail-review-addendum.md",
+      "destination": "evidence/reviews/independent-mail-review-addendum.md",
+      "bytes": 4625,
+      "sha256": "7a78bd584a26e408e74a467cde53d43253fae4159ab9560573d485bae6dc97ee"
+    },
+    {
+      "origin": "/tmp/capiro-next-prospect-files-evidence/independent-mail-review.md",
+      "destination": "evidence/reviews/independent-mail-review.md",
+      "bytes": 7144,
+      "sha256": "079598c31ec02a90a7dcb8a9022e0e9f36a94b6c85c1efd70d211d75fcc77ae5"
+    }
+  ],
+  "count": 140,
+  "bytes": 16720234
+}

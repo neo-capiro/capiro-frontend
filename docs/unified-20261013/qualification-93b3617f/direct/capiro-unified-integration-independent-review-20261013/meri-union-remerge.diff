@@ -1,0 +1,112 @@
+commit 022725e3d464ffa8c07be2f0d139343a270c31ed
+Merge: 8e93253 fc6f8ee
+Author: NEO MARTINEZ <neo@capiro.ai>
+
+    Integrate governed Meri host into the unified application
+
+diff --git a/apps/web/package.json b/apps/web/package.json
+remerge CONFLICT (content): Merge conflict in apps/web/package.json
+index 8746535..cb490bb 100644
+--- a/apps/web/package.json
++++ b/apps/web/package.json
+@@ -41,13 +41,10 @@
+     "d3-geo": "3.1.1",
+     "lucide-react": "0.577.0",
+     "radix-ui": "1.7.0",
+-<<<<<<< 8e93253 (Preserve published shipping qualification evidence)
+     "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+     "@stripe/react-stripe-js": "3.10.0",
+-    "@stripe/stripe-js": "5.10.0"
+-=======
++    "@stripe/stripe-js": "5.10.0",
+     "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz"
+->>>>>>> fc6f8ee (Preserve sealed Meri review logs and regression baselines)
+   },
+   "devDependencies": {
+     "@playwright/test": "1.61.1",
+diff --git a/apps/web/test/browser/main.tsx b/apps/web/test/browser/main.tsx
+remerge CONFLICT (content): Merge conflict in apps/web/test/browser/main.tsx
+index 8c2fc3a..74a2d5a 100644
+--- a/apps/web/test/browser/main.tsx
++++ b/apps/web/test/browser/main.tsx
+@@ -1,9 +1,6 @@
+-<<<<<<< 8e93253 (Preserve published shipping qualification evidence)
+ import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
+ import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
+-=======
+ import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
+->>>>>>> fc6f8ee (Preserve sealed Meri review logs and regression baselines)
+ import { IntegrationProbe } from "./IntegrationProbe";
+ import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
+ import { isOnboardPath } from "../../src/shared/session/onboard-route";
+@@ -48,7 +45,6 @@ function SessionProbe() {
+ function RoutedApp() {
+   const path = usePathname();
+   const search = useSearchParams();
+-<<<<<<< 8e93253 (Preserve published shipping qualification evidence)
+   if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
+     return <OnboardBoundaryProbe />;
+   if (isOnboardPath(path)) {
+@@ -68,7 +64,6 @@ function RoutedApp() {
+       />
+     );
+   }
+-=======
+   if (path === "/meri/actions")
+     return (
+       <ProductShell actionWorkflow>
+@@ -77,7 +72,6 @@ function RoutedApp() {
+         </RequireSession>
+       </ProductShell>
+     );
+->>>>>>> fc6f8ee (Preserve sealed Meri review logs and regression baselines)
+   if (path.startsWith("/forms/"))
+     return (
+       <>
+diff --git a/package-lock.json b/package-lock.json
+remerge CONFLICT (content): Merge conflict in package-lock.json
+index f895f4a..7b74284 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -64,11 +64,8 @@
+       "name": "@capiro/web",
+       "version": "0.1.0",
+       "dependencies": {
+-<<<<<<< 8e93253 (Preserve published shipping qualification evidence)
+         "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+-=======
+         "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz",
+->>>>>>> fc6f8ee (Preserve sealed Meri review logs and regression baselines)
+         "@capiro/ui": "0.0.0",
+         "@clerk/nextjs": "7.9.14",
+         "@fontsource/newsreader": "5.3.0",
+diff --git a/scripts/architecture/reviewed-size-findings.json b/scripts/architecture/reviewed-size-findings.json
+remerge CONFLICT (content): Merge conflict in scripts/architecture/reviewed-size-findings.json
+index 3c52ae5..ec55299 100644
+--- a/scripts/architecture/reviewed-size-findings.json
++++ b/scripts/architecture/reviewed-size-findings.json
+@@ -1623,7 +1623,6 @@
+     "reviewedOn": "2026-10-12"
+   },
+   {
+-<<<<<<< 8e93253 (Preserve published shipping qualification evidence)
+     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+     "kind": "function",
+     "symbol": "<anonymous>",
+@@ -2090,7 +2089,8 @@
+     "reason": "One finite synthetic saved-document fixture composes existing local-network, operation and client-session fixture owners; captures complete request bodies and intercepted dispatch timing; queues bounded explicit response variants. It does not replace production parsers, controller/journal or application boundary. Colocated request capture, response queue and observable isolation records make late-settlement and CAS controls auditable. The two suites partition document transitions versus navigation/authority lifetime; no duplicate production validator or unrelated subsystem. Canonical architecture discovery omits browser tests, so this is an explicit manual review under the same size/semantic policy, not a guard waiver.",
+     "reviewedBy": "core_intake_review (independent)",
+     "reviewedOn": "2026-10-13"
+-=======
++  },
++  {
+     "file": "apps/web/src/shared/shell/Sidebar.tsx",
+     "kind": "function",
+     "symbol": "Sidebar",
+@@ -2233,6 +2233,5 @@
+     "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+     "reviewedOn": "2026-10-13",
+     "reason": "One86-line real-browser scenario callback verifies the same uncertain preparation invariant across ordered Modules navigation, Back, deliberate reconnect, late completion, Forward/Back and a second reconnect. Parameterizing acknowledged-unknown and still-in-flight states preserves that single invariant without reconstructing durable state. URL/private-view assertions and exact query/draft/prepare/execute counts are adjacent to their transitions; fixture helpers own setup and real request completion barriers. Keeping this causal sequence together preserves test meaning better than splitting it into independently reset tests."
+->>>>>>> fc6f8ee (Preserve sealed Meri review logs and regression baselines)
+   }
+ ]

@@ -1,0 +1,20 @@
+[
+  {
+    "run": "objectives-independent-results.json",
+    "failedCases": 1,
+    "reason": "Overview contains Objectives and District Nexus error alerts; the first summary probe used an ambiguous page-wide alert locator. The revised probe scopes the ObjectiveSummary section.",
+    "sourceChanged": false
+  },
+  {
+    "run": "objectives-summary-corrected-results.json",
+    "failedCases": 1,
+    "reason": "Overview retains a separate New objective navigation link outside ObjectiveSummary. The second probe incorrectly required every page-wide New objective link to disappear. Scope was narrowed to the gated summary entry. The separate navigation is not a cached-record display; the destination creation branch is guarded by records.",
+    "sourceChanged": false
+  },
+  {
+    "run": "prospects-independent-results.json",
+    "failedCases": 2,
+    "reason": "After successful detail retry the existing editing boolean reopens an editor initialized from the newly read record. This makes the background heading aria-hidden. The first completion assertion incorrectly searched the accessibility tree for that heading. Corrected probes assert the fresh editor value, close the dialog, then assert the current heading. No stale input was visible during failure or held retry.",
+    "sourceChanged": false
+  }
+]

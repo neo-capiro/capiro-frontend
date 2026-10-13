@@ -1,0 +1,150 @@
+{
+  "scope": "Sealed correction addendum; initial authoring packet unchanged",
+  "files": [
+    {
+      "path": "FINAL-SOURCE-REVIEW.json",
+      "bytes": 3319,
+      "sha256": "4f3a47c78b617f33707e8b4942cb37c5c20423df9fce7f5d429619ff0b5e3abd"
+    },
+    {
+      "path": "PRESERVATION-FINAL.json",
+      "bytes": 13077,
+      "sha256": "9b9c227e406d0ce45d4b8e463d8426034d644ce1c18ca03562fbf74afed4b9a8"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3304,
+      "sha256": "592bd3fa1d5c036533116fb83229d39154dd6eddbdff48bbcd76e968c7e3a8c6"
+    },
+    {
+      "path": "RUNTIME-RECEIPT.json",
+      "bytes": 937,
+      "sha256": "c1f1a01c73d134e53d8e6181096be42fa4dfd5eb9b49842c7634c32cb3a3a9df"
+    },
+    {
+      "path": "SOURCE-CHANGE.json",
+      "bytes": 1950,
+      "sha256": "c3f0f50ce47e2345130d572e7981957dfc2fe279714f46e4347c0827ef69a88b"
+    },
+    {
+      "path": "STRUCTURE-REVIEW.json",
+      "bytes": 2432,
+      "sha256": "f67a79af9e246d40a0899e13551487efb3721c3a3b5eb249211b302a851e7419"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "initial-results.json",
+      "bytes": 27240,
+      "sha256": "908749501a62293ce053dcf5e93c18ee10af54bf7dc2714c8365d8cef4e3e081"
+    },
+    {
+      "path": "initial.log",
+      "bytes": 12218,
+      "sha256": "c386d777d4f4b8609ece9691fb2e5e3ac9afedc37965389b736d9f543e66fb55"
+    },
+    {
+      "path": "locator-correction-results.json",
+      "bytes": 22116,
+      "sha256": "bfb262149537eb1c7aab6f9302bf91b7b501dbc880df5015296a263d1d1bde83"
+    },
+    {
+      "path": "locator-correction.log",
+      "bytes": 3317,
+      "sha256": "9b40ba8fbeda3e1962ad4dbe7cacb04a9b0e84ea4f113e7f1d8d2f69c9cbe642"
+    },
+    {
+      "path": "meri-action-host-fixtures.ts.before",
+      "bytes": 7489,
+      "sha256": "eb66feeb23d9844913fa412050548ad6803f6fb33de053483508a70ad7ca7fb4"
+    },
+    {
+      "path": "meri-action-host-fixtures.ts.patch",
+      "bytes": 471,
+      "sha256": "0b1648c4eb94c0f4dd5d86ed4b3d335c7ad67bf6a1658733ee54918aaf0daf80"
+    },
+    {
+      "path": "meri-action-host-lifetime--15a27-lish-after-user-replacement/error-context.md",
+      "bytes": 12101,
+      "sha256": "7604ee6c3bc24b52c67662e53e8092dc05c31e6ce50cc6d68fe7aafac4e296c6"
+    },
+    {
+      "path": "meri-action-host-lifetime--15a27-lish-after-user-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip",
+      "bytes": 651421,
+      "sha256": "d0acc96df60ef62daacf6839cc1976d291a099329816bffd2459a49c48a824e3"
+    },
+    {
+      "path": "meri-action-host-lifetime--d0b39-lish-after-user-replacement/error-context.md",
+      "bytes": 12101,
+      "sha256": "d8f4f6e98993e7ddece1fe99254666ca2067c95ad1ba9893a2612742f8430a81"
+    },
+    {
+      "path": "meri-action-host-lifetime--d0b39-lish-after-user-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip",
+      "bytes": 608210,
+      "sha256": "e19790ecb85e271d020079cd2471d0f3bc424ff18d2cd8cd1996eda7660ef410"
+    },
+    {
+      "path": "meri-action-host-lifetime--e1f41-h-after-session-replacement/error-context.md",
+      "bytes": 12104,
+      "sha256": "9c03ce42ce1ae7947ddab8ebf1f5c04a1cdeb408a29d44eba71346dc8fa69dea"
+    },
+    {
+      "path": "meri-action-host-lifetime--e1f41-h-after-session-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip",
+      "bytes": 586597,
+      "sha256": "8241ca485bb871aff18fc293ced3dfda04decc4f16e64cd706c06aa6be403062"
+    },
+    {
+      "path": "meri-action-host-lifetime--f055f-h-after-session-replacement/error-context.md",
+      "bytes": 6121,
+      "sha256": "c2750acd66753f37f089ae66c5d0e33e63dbb92ac84f9bacbefeabcf46736595"
+    },
+    {
+      "path": "meri-action-host-lifetime--f055f-h-after-session-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip",
+      "bytes": 648754,
+      "sha256": "5574d1f83fc5f9dfe37c4c3afa96163e066e85aebd196cb3f36a2ad65d9a3548"
+    },
+    {
+      "path": "meri-action-host-workflow.spec.ts.before",
+      "bytes": 8849,
+      "sha256": "1045f25a60333640afa081942e82edcbc3c8aaf975e41cbc271ce32bbfd8b9cb"
+    },
+    {
+      "path": "meri-action-host-workflow.spec.ts.patch",
+      "bytes": 376,
+      "sha256": "eb48ec88a30231ffc4eb16f2b0c520ad196667374736aa66bfecdcdad8d93ec2"
+    },
+    {
+      "path": "meri-actions-1440.png",
+      "bytes": 194814,
+      "sha256": "c6f35c808c7e4d693eb1dd073b47a9b7e865064721ff953ade372376cd9effd3"
+    },
+    {
+      "path": "meri-actions-375.png",
+      "bytes": 147764,
+      "sha256": "b97f1c450f857e8f7ecca4fc149df97793565f17ca01c7cc6da547cc23d4945d"
+    }
+  ]
+}

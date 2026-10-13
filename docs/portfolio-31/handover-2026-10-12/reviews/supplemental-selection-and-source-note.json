@@ -1,0 +1,91 @@
+{
+  "status": "READ_ONLY_SUPPLEMENT_NOT_APPLIED",
+  "preparedOn": "2026-10-12",
+  "owner": "/root/portfolio_prospects_files",
+  "originalProposal": {
+    "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/portable-evidence-and-ledger-proposal.json",
+    "sha256": "744d1dee20e40179e7fe7fedc1f502c405b1d9f2c945520c88676f7881165ef6",
+    "unchanged": true
+  },
+  "selectionAdditions": [
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/pr4-source-advance-e141-e413-3cc-20261012.zip",
+      "destination": "integrations/coordination/pr4-source-advance-e141-e413-3cc-20261012.zip",
+      "description": "Exact78-file plus1-file PR4 advance inventories and shared architecture/route source readbacks; current observed3cc, no integration/runtime claim.",
+      "sha256": "e5c536c87244b52a1ab6ff0d4e05b53edb8ea2ceab20ef9dbc2d776b2b6c2605"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/PR4-SOURCE-ADVANCE-20261012.md",
+      "destination": "integrations/coordination/PR4-SOURCE-ADVANCE-20261012.md",
+      "description": "Historical e141 packet retained; current source advance and canonical architecture integration seam.",
+      "sha256": "8e73bdfb9be298d7f3a72d52a6e7a770d9cc6f45084016aa3d62a70e0f76cdd2"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/context-roots.json",
+      "destination": "integrations/p4-handover/context-roots.json",
+      "description": "Exact directly used authored/read-only context locations for exhaustive new-session preservation.",
+      "sha256": "5750ecb4318d14f2dd954965936dfef5252fed50404e4c2d1621f5521f90ac80"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/RATIONALE-AND-OPEN-HANDOFF.md",
+      "destination": "integrations/p4-handover/RATIONALE-AND-OPEN-HANDOFF.md",
+      "description": "Unsummed evidence rationale and explicit open preservation-stop findings.",
+      "sha256": "ac9201d821f0154c3affe93dabc51f0f17e2acd146535356b39f74196fb9fd3a"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/watchlist-review-preservation-20261012/review.json",
+      "destination": "integrations/watchlist/open-independent-review.json",
+      "description": "P3 exact provisional source/native read receipt for OPEN Intel accepted-projection/mixed-read finding; no fixing test or acceptance.",
+      "sha256": "007d092a8ea74744c528ddf4a92b2292aeebf35d0b5c0f47983cf679c86e2014"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/watchlist-review-preservation-20261012/REVIEW.md",
+      "destination": "integrations/watchlist/OPEN-ACCEPTED-PROJECTION-REVIEW.md",
+      "description": "P3 open finding/restart correction and separately unapplied PhoneVerification copy follow-up.",
+      "sha256": "393e804ed44744ebd2ef12477ce45bf4f8ce008c1eca8d15cb7faf94530b9a41"
+    }
+  ],
+  "selectionValidation": {
+    "additionalItems": 6,
+    "additionalBytes": 755893,
+    "currentCanonicalItemsWhenChecked": 62,
+    "allExactHashesVerified": true,
+    "allDestinationsUniqueAgainstCanonicalAndOriginalProposal": true
+  },
+  "rootReportedCommittedCheckpoints": {
+    "core109": "d4c613985b69bc80cd3af28ed2c48c29335c770d",
+    "alertChannels": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+    "watchlist": "ac66c0610323a4f20bcbe7a36d4a7ed772c11c8c",
+    "verification": "Git commit objects exist locally; integration/preimage review reported by root. This supplement does not claim a new combined gate."
+  },
+  "ledgerBindingProposal": [
+    {
+      "id": "tracker-personal-preferences-and-explicit-channel-actions",
+      "source_commits": [
+        "760dcc6c1179312c7f4b762e64cf3af1aad60c3e"
+      ],
+      "replacesOnly": "The original pending commit placeholder, after root verifies the canonical group paths/reports at this commit.",
+      "limits": [
+        "PhoneVerification copy follow-up remains separately OPEN/unapplied.",
+        "Original frozen candidate02 72/74 plus affected11/11 remain separate evidence.",
+        "No audit row is closed; acceptedComplete remains0; final root gates and signed-in acceptance remain unclaimed."
+      ]
+    }
+  ],
+  "currentMeriObservation": {
+    "head": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "base": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "commits": 8,
+    "changedFiles": 199,
+    "state": "open",
+    "draft": true,
+    "qualification": "SOURCE PRESERVATION ONLY; latest observed exact metadata, refresh on next integration."
+  },
+  "openItems": [
+    "Intel Watchlist returned accepted targeting projection/mixed-read receipt finding.",
+    "Root PhoneVerification requested-state copy correction.",
+    "Old Core Configure-entry browser assertion adjustment.",
+    "Final root check/build/actual-production/browser and source-bound reconciliation/signed-in acceptance."
+  ],
+  "canonicalMutationPerformed": false
+}

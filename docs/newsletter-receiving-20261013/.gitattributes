@@ -1,0 +1,5 @@
+# Raw evidence is hash-bound; preserve recorded bytes.
+*.log -text -whitespace
+*.zip -text
+*.png -text
+error-context.md -text -whitespace

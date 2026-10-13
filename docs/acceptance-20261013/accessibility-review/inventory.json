@@ -1,0 +1,4771 @@
+{
+  "schemaVersion": 1,
+  "reviewKind": "Read-only manual review of retained axe incomplete evidence; no runtime/source changes",
+  "reviewedAtUtc": "2026-10-13T11:19:41.488458+00:00",
+  "source": {
+    "applicationCommit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "publishedHead": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "rootTree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "sourcePins": [
+      {
+        "path": "apps/web/src/app/globals.css",
+        "gitBlob": "458af240428c6c7606c3d520edd47ebfe1a2ca77",
+        "sha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+        "workingBytesEqualFrozen": true,
+        "priorRenderBeforeSourceSha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+        "equalsPriorRenderPin": true
+      },
+      {
+        "path": "apps/web/src/shared/shell/Sidebar.tsx",
+        "gitBlob": "e1f14302be3be0407408f5ff29ae26987b7e7aa2",
+        "sha256": "12e5e2e3c9a2e6164325aef1f50913f7b31e2d48c900b06e8b2fa0532a56ebcc",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/src/shared/shell/shell.module.css",
+        "gitBlob": "71ed4b84a1a52215e42ac91edab4904d3622b2a6",
+        "sha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/src/shared/shell/ProductShell.tsx",
+        "gitBlob": "9e281d6d09188fdac5789d4f25a3ca65ba24c975",
+        "sha256": "b932108451d21c2f693ee5ad91857fa2beef68b95626b0888bf75bc4c35d8cb8",
+        "workingBytesEqualFrozen": true,
+        "priorRenderBeforeSourceSha256": "65e4754e186893f8956d6bf3e0580f6a8e0b1e5c782ceefc88d282208859b4d1",
+        "equalsPriorRenderPin": false
+      },
+      {
+        "path": "apps/web/src/shared/portfolio/styles.css",
+        "gitBlob": "57d900add164013b700b09ca635e411be99d85e3",
+        "sha256": "bd34a401be0625c70d09f2be7767205599092f009c5535553aa8ea4ca6ec4061",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+        "gitBlob": "c9666b0ef79975bfb13f430e5ffe40fc9bd37ce5",
+        "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+        "workingBytesEqualFrozen": true,
+        "priorRenderBeforeSourceSha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+        "equalsPriorRenderPin": true
+      },
+      {
+        "path": "apps/web/src/features/modules/hub/ModuleHub.tsx",
+        "gitBlob": "298ff6f5918eb5c31ed1d7adcce7c68a99e6beac",
+        "sha256": "20645a9c0d76ebb8e6ca7a0b746bac61561d425a2f9bbc71f778c575cf28d6fc",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/src/features/modules/hub/hub.module.css",
+        "gitBlob": "1e747bf80bc4d1911d0055a6271255625baa8770",
+        "sha256": "f05747a8435190f9d159e26b312b24f5464b79a66c44dc34badbe2746eb135f1",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "gitBlob": "57218ac80ed4ff454285d67b3b4a667c746be01e",
+        "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+        "workingBytesEqualFrozen": true,
+        "priorRenderBeforeSourceSha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+        "equalsPriorRenderPin": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+        "gitBlob": "5f43e3560646c57ccd588484d3704e1b7c811db1",
+        "sha256": "d4d23b4f53c643a1c4da9f5174bec62f8b5fc7cd12faa9f499df1907d7fe16ca",
+        "workingBytesEqualFrozen": true,
+        "priorRenderBeforeSourceSha256": "7f2eaa718ee225f0ccb77f5043c65d0c3fe6ea18dc4b5b7838d102295b3bcb05",
+        "equalsPriorRenderPin": false
+      },
+      {
+        "path": "apps/web/tests/browser/clerk.tsx",
+        "gitBlob": "ce6a530fbcb9ded7bf5e31940e5e74c558f0d1b4",
+        "sha256": "4d33465d536a14f819e1596f9563e168a02538a545f388b60ee3ef7a58a946ce",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+        "gitBlob": "aaae598d5de1f03ebab60aac2f1caa4d53edce73",
+        "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+        "gitBlob": "0e73c9c08f427faaa6994221dd48273e7823504c",
+        "sha256": "8c0949fe589bc9d70ce908fdc65cc7da4244be243f72bcf4580dda659d311da9",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/test/browser/meri-files-workflow.spec.ts",
+        "gitBlob": "966560a7d232257b14aaa0cd8353660eb2cae573",
+        "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/test/browser/meri-files-navigation.spec.ts",
+        "gitBlob": "b59f59ad2500745f7cebef05ba2dfaa38d57a6e6",
+        "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+        "workingBytesEqualFrozen": true
+      },
+      {
+        "path": "apps/web/test/accessibility.ts",
+        "gitBlob": "d0cc8d7e8d88d87efd9e8b2db935e91edd22e8a9",
+        "sha256": "855c28a24d9dda89e8239babcc14f3ea0dbe921441376b30ccfc93d0a9efa367",
+        "workingBytesEqualFrozen": true
+      }
+    ]
+  },
+  "summary": {
+    "axeReports": 12,
+    "reportsWithIncomplete": 8,
+    "reportsWithoutIncomplete": 4,
+    "violations": 0,
+    "incompleteNodeRuleOccurrences": 35,
+    "rules": {
+      "color-contrast": 33,
+      "label-content-name-mismatch": 2
+    },
+    "dispositions": {
+      "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED": 28,
+      "RESOLVED_DECORATIVE_REDUNDANCY": 3,
+      "RESOLVED_EXACT90_CAPTURED_CONTRAST": 2,
+      "RESOLVED_MANUAL_FIXTURE_NAME": 2
+    },
+    "newConfirmedSourceDefects": 0
+  },
+  "sourceReports": [
+    {
+      "name": "modules-browser-results.json",
+      "pathMap": "/workspace/capiro-unified-90ccdd47-publication-20261013/ORIGINAL-PATH-MAP.json",
+      "sha256": "4c4be4783affcdb4e78334e438f5d0d2d5b4a183acb41868b6fe61b9c44f1af1",
+      "bytes": 5339214,
+      "archive": "/workspace/capiro-unified-90ccdd47-publication-20261013/completed-objects.zip",
+      "member": "sha256/4c4be4783affcdb4e78334e438f5d0d2d5b4a183acb41868b6fe61b9c44f1af1",
+      "stats": {
+        "startTime": "2026-10-13T09:48:48.807Z",
+        "duration": 326507.791,
+        "expected": 324,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "name": "portfolio-shard-3-results.json",
+      "pathMap": "/workspace/capiro-unified-90ccdd47-publication-20261013/RELEASED-3-PATH-MAP.json",
+      "sha256": "8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "bytes": 1821581,
+      "archive": "/workspace/capiro-unified-90ccdd47-publication-20261013/released-3-objects.zip",
+      "member": "sha256/8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "stats": {
+        "startTime": "2026-10-13T10:13:41.978Z",
+        "duration": 659767.9619999999,
+        "expected": 273,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "reports": [
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-747a8fc851a583c6e43e",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 352515,
+      "sha256": "ee0b67e76d4955617abd351d7e0cd154145f7ec0121c0c7b9b4500cc2b84fdd6",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-01",
+      "fixtureClock": true,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-01-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._newConversation_sgeic_65"
+          ],
+          "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+                  "target": [
+                    "._newConversation_sgeic_65"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "meri-1440-light",
+              "selector": "._newConversation_sgeic_65",
+              "text": "New conversation",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Desktop shared New conversation button, not Files document/editor text. Retained screenshots and prior Meri computed white/opaque dark-gradient endpoints support15.5229:1 minimum. Exact90 Files current computed ancestor/opacity chain was not retained; disabled .bg-primary selector also needs current computed confirmation.",
+          "requiredRenderedCheck": "R1",
+          "sourceRefs": [
+            "apps/web/src/shared/shell/Sidebar.tsx:52",
+            "apps/web/src/shared/shell/shell.module.css:81"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 1
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-58fd5c7608e906873c52",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 310759,
+      "sha256": "7fbc63c5f88d2f0f3204dec82154423628bd067ddf39e5f6525e110fb7a1a341",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-02",
+      "fixtureClock": true,
+      "incompleteNodes": [],
+      "incompleteRuleCount": 0,
+      "incompleteNodeCount": 0
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-8709ec0312c46a1e9cf6",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 350498,
+      "sha256": "6e910fa57b845eb223060461ba834e386df6e7e3664a8c8288e3e3fa05fa43c3",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-03",
+      "fixtureClock": true,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-03-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._newConversation_sgeic_65"
+          ],
+          "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+                  "target": [
+                    "._newConversation_sgeic_65"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "meri-1440-light",
+              "selector": "._newConversation_sgeic_65",
+              "text": "New conversation",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Desktop shared New conversation button, not Files document/editor text. Retained screenshots and prior Meri computed white/opaque dark-gradient endpoints support15.5229:1 minimum. Exact90 Files current computed ancestor/opacity chain was not retained; disabled .bg-primary selector also needs current computed confirmation.",
+          "requiredRenderedCheck": "R1",
+          "sourceRefs": [
+            "apps/web/src/shared/shell/Sidebar.tsx:52",
+            "apps/web/src/shared/shell/shell.module.css:81"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 1
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-4b7cb3591848b938f99e",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 308742,
+      "sha256": "7333e2dca69da59e756636d808776764b6bec9caf5a027793dd3d186c670dfb6",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-04",
+      "fixtureClock": true,
+      "incompleteNodes": [],
+      "incompleteRuleCount": 0,
+      "incompleteNodeCount": 0
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-ba58a52ddda944c5e62e",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 217504,
+      "sha256": "a5c1bff3c2bfc223e6c45cfc1b2da9581545d312c6b8828eda67a40560a62bbb",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-05",
+      "fixtureClock": true,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-05-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".bg-primary"
+          ],
+          "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+                  "target": [
+                    ".bg-primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "meri-1440-light",
+              "selector": "._newConversation_sgeic_65",
+              "text": "New conversation",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Desktop shared New conversation button, not Files document/editor text. Retained screenshots and prior Meri computed white/opaque dark-gradient endpoints support15.5229:1 minimum. Exact90 Files current computed ancestor/opacity chain was not retained; disabled .bg-primary selector also needs current computed confirmation.",
+          "requiredRenderedCheck": "R1",
+          "sourceRefs": [
+            "apps/web/src/shared/shell/Sidebar.tsx:52",
+            "apps/web/src/shared/shell/shell.module.css:81"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 1
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "0975b53fce585a7e75b8-5701cb347d13380a0b23",
+      "testFile": "meri-files-workflow.spec.ts",
+      "testTitle": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 176622,
+      "sha256": "c681a5c9d83274fbab7a45a0ac09ebf47a1a56ffdeb3dcc53a1494564b5b002a",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-06",
+      "fixtureClock": true,
+      "incompleteNodes": [],
+      "incompleteRuleCount": 0,
+      "incompleteNodeCount": 0
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "38e2e613e1e0deed77fa-02f72671c7e6d82d3e99",
+      "testFile": "shared-home-accessibility.spec.ts",
+      "testTitle": "meri home retains full default axe checks at 1440px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 327035,
+      "sha256": "f6280c630c670d2faa5f96c028196794423f9548a3002ca94c765389e3beaaf3",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T09:54:10.114Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-07",
+      "fixtureClock": false,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-07-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._newConversation_sgeic_65"
+          ],
+          "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+                  "target": [
+                    "._newConversation_sgeic_65"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "meri-1440-light",
+              "selector": "._newConversation_sgeic_65",
+              "text": "New conversation",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Desktop shared New conversation button, not Files document/editor text. Retained screenshots and prior Meri computed white/opaque dark-gradient endpoints support15.5229:1 minimum. Exact90 Files current computed ancestor/opacity chain was not retained; disabled .bg-primary selector also needs current computed confirmation.",
+          "requiredRenderedCheck": "R1",
+          "sourceRefs": [
+            "apps/web/src/shared/shell/Sidebar.tsx:52",
+            "apps/web/src/shared/shell/shell.module.css:81"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 1
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "38e2e613e1e0deed77fa-d19f7b1183780eb8a04d",
+      "testFile": "shared-home-accessibility.spec.ts",
+      "testTitle": "modules home retains full default axe checks at 1440px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 441630,
+      "sha256": "b10ae714b13a604ec190467497c0949c17eea4b3016f0cb5909f17f0d6db8be9",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T09:54:11.942Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/modules",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-08",
+      "fixtureClock": false,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-08-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "span[aria-hidden=\"true\"]"
+          ],
+          "html": "<span aria-hidden=\"true\">\u2192</span>",
+          "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "messageKey": "nonBmp"
+              },
+              "message": "Element content contains only non-text characters",
+              "relatedNodes": []
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "modules-1440-light",
+              "selector": "span[aria-hidden=\"true\"]",
+              "text": "\u2192",
+              "ariaHidden": "true",
+              "fontSize": "16px",
+              "fontWeight": "400",
+              "foreground": [
+                117.0,
+                110.0,
+                105.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  245.0,
+                  245.0,
+                  244.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 4.59341287788919,
+              "maximumRatio": 4.59341287788919,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_DECORATIVE_REDUNDANCY",
+          "reason": "The noninteractive arrow decorates two fully written explanations inside How modules and profiles relate. It adds no independent instruction or control. Prior computed contrast is4.5934:1; no text or interaction is hidden to resolve this warning.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/src/features/modules/hub/ModuleHub.tsx:143"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-08-02",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._primaryOpen_10khq_192"
+          ],
+          "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+                  "target": [
+                    "._primaryOpen_10khq_192"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "modules-1440-light",
+              "selector": "._primaryOpen_10khq_192",
+              "text": "Open Engagement",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Open Engagement text uses white on opaque #242424\u2192#0a0a0a; prior corresponding width computed capture supports15.5229:1 minimum. Retain this as source/prior-render support, requiring a current computed binding for all interactive states.",
+          "requiredRenderedCheck": "R2",
+          "sourceRefs": [
+            "apps/web/src/features/modules/hub/hub.module.css:192"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 2
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "38e2e613e1e0deed77fa-be0e2093ac3351ffb7be",
+      "testFile": "shared-home-accessibility.spec.ts",
+      "testTitle": "meri home retains full default axe checks at 390px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 284984,
+      "sha256": "b49bcf4700737945a028a7c2c4470882d5636d44fbedaf550c735f7096f04dbf",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T09:54:13.461Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/meri",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-09",
+      "fixtureClock": false,
+      "incompleteNodes": [],
+      "incompleteRuleCount": 0,
+      "incompleteNodeCount": 0
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "38e2e613e1e0deed77fa-82193fd37f414da2a6c2",
+      "testFile": "shared-home-accessibility.spec.ts",
+      "testTitle": "modules home retains full default axe checks at 390px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 397914,
+      "sha256": "e08d8e7c42e2bc81da4805f8a9219b3c9263b848fb432d2ccd7bb35d4166d54e",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T09:54:14.988Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5197/modules",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-10",
+      "fixtureClock": false,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-10-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._primaryOpen_10khq_192"
+          ],
+          "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+                  "target": [
+                    "._primaryOpen_10khq_192"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "modules-390-light",
+              "selector": "._primaryOpen_10khq_192",
+              "text": "Open Engagement",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Open Engagement text uses white on opaque #242424\u2192#0a0a0a; prior corresponding width computed capture supports15.5229:1 minimum. Retain this as source/prior-render support, requiring a current computed binding for all interactive states.",
+          "requiredRenderedCheck": "R2",
+          "sourceRefs": [
+            "apps/web/src/features/modules/hub/hub.module.css:192"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 1,
+      "incompleteNodeCount": 1
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "f970938e1026df9b7844-e5375f1902c3240f23a8",
+      "testFile": "portfolio-home-accessibility.spec.ts",
+      "testTitle": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 402263,
+      "sha256": "e4a5ef60108aeee816e7cc6541550d2fc2f83c2d4ee7ca82d891288ed7896f06",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T10:19:28.554Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5191/",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-11",
+      "fixtureClock": false,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-11-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".monogram"
+          ],
+          "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+                  "target": [
+                    ".monogram"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": ".monogram",
+              "text": "T",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-02",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._headerActions_19dlr_221 > .primary"
+          ],
+          "html": "<button class=\"button primary\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\">",
+                  "target": [
+                    "._headerActions_19dlr_221 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "._headerActions_1tf87_218 > .primary",
+              "text": "Add profile",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-03",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._coverage_19dlr_31 > .eyebrow"
+          ],
+          "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "._coverage_1tf87_31 > .eyebrow",
+              "text": "Portfolio pulse",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-04",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".row > small"
+          ],
+          "html": "<small>of work linked<br>to an objective</small>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.8pt (11.6667px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": ".row > small",
+              "text": "of work linkedto an objective",
+              "ariaHidden": null,
+              "fontSize": "11.6667px",
+              "fontWeight": "400",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-05",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._pulse_19dlr_10 > div:nth-child(2) > strong"
+          ],
+          "html": "<strong>1</strong>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "16.5pt (22px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+              "text": "1",
+              "ariaHidden": null,
+              "fontSize": "22px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-06",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Clients</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "div:nth-child(2) > .eyebrow",
+              "text": "Clients",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-07",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Need attention</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "div:nth-child(3) > .eyebrow",
+              "text": "Need attention",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-08",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(4) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Objectives</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "div:nth-child(4) > .eyebrow",
+              "text": "Objectives",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-09",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(5) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Off track</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "div:nth-child(5) > .eyebrow",
+              "text": "Off track",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-10",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(6) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Strategies</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "div:nth-child(6) > .eyebrow",
+              "text": "Strategies",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-11",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._tabs_19dlr_137 > .primary"
+          ],
+          "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+                  "target": [
+                    "._tabs_19dlr_137 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "._tabs_1tf87_137 > .primary",
+              "text": "All 1",
+              "ariaHidden": null,
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-12",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".primary > small"
+          ],
+          "html": "<small>1</small>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "7.5pt (10px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+                  "target": [
+                    "._tabs_19dlr_137 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": ".primary > small",
+              "text": "1",
+              "ariaHidden": null,
+              "fontSize": "10px",
+              "fontWeight": "500",
+              "foreground": [
+                117.0,
+                110.0,
+                105.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 3.0977356477519926,
+              "maximumRatio": 3.9508970983319927,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_EXACT90_CAPTURED_CONTRAST",
+          "reason": "Exact90 active-count-contrast attachments at this width show opaque white text on #242424\u2192#0a0a0a at rest (minimum15.5229:1), and #343434 on hover (12.4496:1), light and dark. Current CSS inherits active button text color. Prior AR-01 failure is resolved for these states.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/src/features/portfolio/index/portfolio.module.css:147"
+          ],
+          "supportingCurrentAttachments": [
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 225,
+              "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 296,
+              "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 225,
+              "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 296,
+              "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+              "value": {
+                "width": 1440,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 224,
+              "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 295,
+              "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 224,
+              "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 295,
+              "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+              "value": {
+                "width": 1440,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-13",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._profileLogo_19dlr_101"
+          ],
+          "html": "<span class=\"_profileLogo_19dlr_101\" aria-hidden=\"true\">TA</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<span class=\"_profileLogo_19dlr_101\" aria-hidden=\"true\">TA</span>",
+                  "target": [
+                    "._profileLogo_19dlr_101"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": "._profileLogo_1tf87_101",
+              "text": "TA",
+              "ariaHidden": "true",
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_DECORATIVE_REDUNDANCY",
+          "reason": "TA is a redundant logo/initial beside the complete visible client name; the profile link supplies that name and the adjacent visible sector/location supplies its accessible description. Its decorative treatment is justified by duplication, not merely by aria-hidden. Prior rendered white/gradient ratio also exceeds4.5.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/src/features/portfolio/index/ProfileResults.tsx:103",
+            "apps/web/src/features/portfolio/index/ProfileResults.tsx:144"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-11-14",
+          "rule": "label-content-name-mismatch",
+          "impact": "serious",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "target": [
+            ".monogram"
+          ],
+          "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+          "failureSummary": "Fix any of the following:\n  Unable to determine if the visible text is part of the accessible name",
+          "checks": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "data": null,
+              "message": "Unable to determine if the visible text is part of the accessible name",
+              "relatedNodes": []
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-1440-light",
+              "selector": ".monogram",
+              "text": "T",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_MANUAL_FIXTURE_NAME",
+          "reason": "Exact captured HTML shows symbolic account initial T and accessible name Test account, which includes T and identifies the control. This synthetic Clerk fixture is not the Portfolio profile link or a real account-provider audit.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/tests/browser/clerk.tsx:15"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 2,
+      "incompleteNodeCount": 14
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "f970938e1026df9b7844-278e7fa9247b593154c3",
+      "testFile": "portfolio-home-accessibility.spec.ts",
+      "testTitle": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "axe-full-default-results",
+      "bytes": 336939,
+      "sha256": "a309d346d4f96b107a5e61cca5bba07c6f219b158b2472642910fda4d60c6568",
+      "testEngine": {
+        "name": "axe-core",
+        "version": "4.14.0"
+      },
+      "timestamp": "2026-10-13T10:19:33.671Z",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "url": "http://127.0.0.1:5191/",
+      "toolOptions": {
+        "reporter": "v1"
+      },
+      "violationCount": 0,
+      "inventoryId": "AXE-12",
+      "fixtureClock": false,
+      "incompleteNodes": [
+        {
+          "occurrenceId": "AXE-12-01",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".monogram"
+          ],
+          "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "10.5pt (14px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+                  "target": [
+                    ".monogram"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": ".monogram",
+              "text": "T",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-02",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._headerActions_19dlr_221 > .primary"
+          ],
+          "html": "<button class=\"button primary\">",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\">",
+                  "target": [
+                    "._headerActions_19dlr_221 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "._headerActions_1tf87_218 > .primary",
+              "text": "Add profile",
+              "ariaHidden": null,
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-03",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._coverage_19dlr_31 > .eyebrow"
+          ],
+          "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "._coverage_1tf87_31 > .eyebrow",
+              "text": "Portfolio pulse",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-04",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".row > small"
+          ],
+          "html": "<small>of work linked<br>to an objective</small>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.8pt (11.6667px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": ".row > small",
+              "text": "of work linkedto an objective",
+              "ariaHidden": null,
+              "fontSize": "11.6667px",
+              "fontWeight": "400",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-05",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._pulse_19dlr_10 > div:nth-child(2) > strong"
+          ],
+          "html": "<strong>1</strong>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "16.5pt (22px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+              "text": "1",
+              "ariaHidden": null,
+              "fontSize": "22px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-06",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(2) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Clients</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "div:nth-child(2) > .eyebrow",
+              "text": "Clients",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-07",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(3) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Need attention</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "div:nth-child(3) > .eyebrow",
+              "text": "Need attention",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-08",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(4) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Objectives</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "div:nth-child(4) > .eyebrow",
+              "text": "Objectives",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-09",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(5) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Off track</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "div:nth-child(5) > .eyebrow",
+              "text": "Off track",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-10",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "div:nth-child(6) > .eyebrow"
+          ],
+          "html": "<span class=\"eyebrow\">Strategies</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "8.3pt (11px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<section class=\"_pulse_19dlr_10\" aria-label=\"Portfolio pulse\">",
+                  "target": [
+                    "._pulse_19dlr_10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "div:nth-child(6) > .eyebrow",
+              "text": "Strategies",
+              "ariaHidden": null,
+              "fontSize": "11px",
+              "fontWeight": "500",
+              "foreground": [
+                168.0,
+                162.0,
+                158.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 6.155072577340432,
+              "maximumRatio": 7.85026908396286,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-11",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._tabs_19dlr_137 > .primary"
+          ],
+          "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+                  "target": [
+                    "._tabs_19dlr_137 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "._tabs_1tf87_137 > .primary",
+              "text": "All 1",
+              "ariaHidden": null,
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "SUPPORTED_PRIOR_RENDER_CURRENT_CHECK_REQUIRED",
+          "reason": "Prior corresponding Portfolio computed capture and current CSS support sufficient rest contrast. Pulse labels use#a8a29e (minimum6.1551:1); primary text/count/avatar use white (minimum15.5229:1). This occurrence lacks its own exact90 computed ancestor capture, so it is not upgraded to an exact-current rendered resolution.",
+          "requiredRenderedCheck": "R3",
+          "sourceRefs": [
+            "apps/web/src/shared/portfolio/styles.css:26",
+            "apps/web/src/features/portfolio/index/portfolio.module.css:10"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-12",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            ".primary > small"
+          ],
+          "html": "<small>1</small>",
+          "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "7.5pt (10px)",
+                "fontWeight": "normal",
+                "messageKey": "shortTextContent",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element content is too short to determine if it is actual text content",
+              "relatedNodes": [
+                {
+                  "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+                  "target": [
+                    "._tabs_19dlr_137 > .primary"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": ".primary > small",
+              "text": "1",
+              "ariaHidden": null,
+              "fontSize": "10px",
+              "fontWeight": "500",
+              "foreground": [
+                117.0,
+                110.0,
+                105.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 3.0977356477519926,
+              "maximumRatio": 3.9508970983319927,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_EXACT90_CAPTURED_CONTRAST",
+          "reason": "Exact90 active-count-contrast attachments at this width show opaque white text on #242424\u2192#0a0a0a at rest (minimum15.5229:1), and #343434 on hover (12.4496:1), light and dark. Current CSS inherits active button text color. Prior AR-01 failure is resolved for these states.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/src/features/portfolio/index/portfolio.module.css:147"
+          ],
+          "supportingCurrentAttachments": [
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 224,
+              "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 295,
+              "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 224,
+              "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 295,
+              "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+              "value": {
+                "width": 390,
+                "colorScheme": "light",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 223,
+              "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 294,
+              "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 223,
+              "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "hover",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "none",
+                  "solidBackground": "rgb(52, 52, 52)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  12.449637244033978
+                ]
+              }
+            },
+            {
+              "report": "portfolio-shard-3-results.json",
+              "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+              "testFile": "portfolio-active-count-contrast.spec.ts",
+              "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+              "attempt": 0,
+              "resultStatus": "passed",
+              "attachmentName": "active-count-contrast",
+              "bytes": 294,
+              "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+              "value": {
+                "width": 390,
+                "colorScheme": "dark",
+                "state": "rest",
+                "colors": {
+                  "foreground": "rgb(255, 255, 255)",
+                  "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+                  "solidBackground": "rgba(0, 0, 0, 0)",
+                  "countOpacity": "1",
+                  "buttonOpacity": "1"
+                },
+                "contrasts": [
+                  15.522910417680388,
+                  19.79814571052481
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-13",
+          "rule": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "tags": [
+            "cat.color",
+            "wcag2aa",
+            "wcag143",
+            "TTv5",
+            "TT13.c",
+            "EN-301-549",
+            "EN-9.1.4.3",
+            "ACT",
+            "RGAAv4",
+            "RGAA-3.2.1"
+          ],
+          "target": [
+            "._profileLogo_19dlr_101"
+          ],
+          "html": "<span class=\"_profileLogo_19dlr_101\" aria-hidden=\"true\">TA</span>",
+          "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient",
+          "checks": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "data": {
+                "contrastRatio": 0,
+                "fontSize": "9.0pt (12px)",
+                "fontWeight": "normal",
+                "messageKey": "bgGradient",
+                "expectedContrastRatio": "4.5:1"
+              },
+              "message": "Element's background color could not be determined due to a background gradient",
+              "relatedNodes": [
+                {
+                  "html": "<span class=\"_profileLogo_19dlr_101\" aria-hidden=\"true\">TA</span>",
+                  "target": [
+                    "._profileLogo_19dlr_101"
+                  ]
+                }
+              ]
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": "._profileLogo_1tf87_101",
+              "text": "TA",
+              "ariaHidden": "true",
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_DECORATIVE_REDUNDANCY",
+          "reason": "TA is a redundant logo/initial beside the complete visible client name; the profile link supplies that name and the adjacent visible sector/location supplies its accessible description. Its decorative treatment is justified by duplication, not merely by aria-hidden. Prior rendered white/gradient ratio also exceeds4.5.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/src/features/portfolio/index/ProfileResults.tsx:103",
+            "apps/web/src/features/portfolio/index/ProfileResults.tsx:144"
+          ]
+        },
+        {
+          "occurrenceId": "AXE-12-14",
+          "rule": "label-content-name-mismatch",
+          "impact": "serious",
+          "help": "Elements must have their visible text as part of their accessible name",
+          "tags": [
+            "cat.semantics",
+            "wcag21a",
+            "wcag253",
+            "EN-301-549",
+            "EN-9.2.5.3",
+            "RGAAv4",
+            "RGAA-6.1.5"
+          ],
+          "target": [
+            ".monogram"
+          ],
+          "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+          "failureSummary": "Fix any of the following:\n  Unable to determine if the visible text is part of the accessible name",
+          "checks": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "data": null,
+              "message": "Unable to determine if the visible text is part of the accessible name",
+              "relatedNodes": []
+            }
+          ],
+          "priorComputedSupport": [
+            {
+              "artifact": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+              "capture": "portfolio-390-light",
+              "selector": ".monogram",
+              "text": "T",
+              "ariaHidden": null,
+              "fontSize": "14px",
+              "fontWeight": "600",
+              "foreground": [
+                255.0,
+                255.0,
+                255.0,
+                1.0
+              ],
+              "effectiveBackgroundEndpoints": [
+                [
+                  36.0,
+                  36.0,
+                  36.0,
+                  1.0
+                ],
+                [
+                  10.0,
+                  10.0,
+                  10.0,
+                  1.0
+                ]
+              ],
+              "minimumRatio": 15.522910417680388,
+              "maximumRatio": 19.79814571052481,
+              "unsupported": [],
+              "scope": "Prior rendered capture; not a new exact90 browser measurement."
+            }
+          ],
+          "disposition": "RESOLVED_MANUAL_FIXTURE_NAME",
+          "reason": "Exact captured HTML shows symbolic account initial T and accessible name Test account, which includes T and identifies the control. This synthetic Clerk fixture is not the Portfolio profile link or a real account-provider audit.",
+          "requiredRenderedCheck": null,
+          "sourceRefs": [
+            "apps/web/tests/browser/clerk.tsx:15"
+          ]
+        }
+      ],
+      "incompleteRuleCount": 2,
+      "incompleteNodeCount": 14
+    }
+  ],
+  "otherExact90ComputedAttachments": [
+    {
+      "report": "modules-browser-results.json",
+      "testId": "9e06737cde5cc087cc47-beffcd4a14c7b6e0102f",
+      "testFile": "meri-files-navigation.spec.ts",
+      "testTitle": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 134,
+      "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "9e06737cde5cc087cc47-beffcd4a14c7b6e0102f",
+      "testFile": "meri-files-navigation.spec.ts",
+      "testTitle": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 134,
+      "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "9e06737cde5cc087cc47-9fc5d2f750265c743b66",
+      "testFile": "meri-files-navigation.spec.ts",
+      "testTitle": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 134,
+      "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "9e06737cde5cc087cc47-9fc5d2f750265c743b66",
+      "testFile": "meri-files-navigation.spec.ts",
+      "testTitle": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 134,
+      "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "modules-browser-results.json",
+      "testId": "7d4ca6271e9c7771256d-dd60e87ab3fafdf47658",
+      "testFile": "shared-home-accessibility-interaction.spec.ts",
+      "testTitle": "Meri positive control: phone suggestion remains reachable by keyboard and creates only a local draft",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 134,
+      "sha256": "bda34c820d21cc7d17cf0b7072590e4a0e7c7bb41e8f06bb38f682570e820847",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(37, 99, 235)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-adcdae529f847f957711",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 1440px sequential keyboard and history preserve the profile route",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 133,
+      "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(10, 10, 10)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-2a6883d3578b20b348f5",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px sequential keyboard and history preserve the profile route",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 133,
+      "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(10, 10, 10)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-5f36672f76c4696a574d",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px long name keeps visible keyboard focus and light token scope",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 133,
+      "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(10, 10, 10)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-5f36672f76c4696a574d",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px long name keeps visible keyboard focus and light token scope",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "long-name-theme",
+      "bytes": 41,
+      "sha256": "b5298db2eea1740c95a14da33433c6f663ad9c2d7d3717c1a9055d16842d3134",
+      "value": {
+        "colorScheme": "light",
+        "token": "#756e69"
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-9a73f221c06f38c90c53",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px long name keeps visible keyboard focus and dark token scope",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 136,
+      "sha256": "82cfcafb30b1e367af36f356184b4bcb475002c301f9b3e46bae5cf44bb1043c",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(250, 250, 249)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-9a73f221c06f38c90c53",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px long name keeps visible keyboard focus and dark token scope",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "long-name-theme",
+      "bytes": 40,
+      "sha256": "e677fc4a069565b0a9ee8a60de6c8bcd1cfe93f77a343ead781ebd0760c2b345",
+      "value": {
+        "colorScheme": "dark",
+        "token": "#aaa29c"
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "e35b09408a83dc99313a-e7e37eacbd024ec8a4a3",
+      "testFile": "portfolio-accessibility-interaction.spec.ts",
+      "testTitle": "Portfolio positive control: 390px card expansion leaves the real reorder control reachable",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "focused-control-style",
+      "bytes": 133,
+      "sha256": "a52b937480a8a7c7b52e2de12986be4b37407cbc7a4c15e31f912dd33edcc39e",
+      "value": {
+        "focusVisible": true,
+        "outlineStyle": "solid",
+        "outlineWidth": 2,
+        "outlineColor": "rgb(10, 10, 10)",
+        "inViewport": true
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 225,
+      "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+      "value": {
+        "width": 1440,
+        "colorScheme": "light",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 296,
+      "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+      "value": {
+        "width": 1440,
+        "colorScheme": "light",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 225,
+      "sha256": "edc83ac6dbce3bb7133998eb612aa175e9ad26ab21879a9d041e2767ba0b8d38",
+      "value": {
+        "width": 1440,
+        "colorScheme": "light",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 296,
+      "sha256": "f67d9aa4b2e84ffa319c4d99d32ae1c8550d36860f48cc67e1a55dc58fc9ce4b",
+      "value": {
+        "width": 1440,
+        "colorScheme": "light",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 224,
+      "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+      "value": {
+        "width": 1440,
+        "colorScheme": "dark",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 295,
+      "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+      "value": {
+        "width": 1440,
+        "colorScheme": "dark",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 224,
+      "sha256": "1fe1908fc885ff362cf2a1717cd10d8b2f94669c9231e257ca18ea7b72379461",
+      "value": {
+        "width": 1440,
+        "colorScheme": "dark",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-57d14e744871a5e48236",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 1440px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 295,
+      "sha256": "c3a4a698f90c238f8d83390a56a0dc422ca7a35ab438af9c770250d76009462f",
+      "value": {
+        "width": 1440,
+        "colorScheme": "dark",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 224,
+      "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+      "value": {
+        "width": 390,
+        "colorScheme": "light",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 295,
+      "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+      "value": {
+        "width": 390,
+        "colorScheme": "light",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 224,
+      "sha256": "631863a79c715d0bfc5da24b77de497ff6482b8d9c5a993a3e231e8ae6398334",
+      "value": {
+        "width": 390,
+        "colorScheme": "light",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-569b0d16c101e808d362",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px light active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 295,
+      "sha256": "1aeeed2b54ac20b3e5ceb34b0e82e1bfd2ef9ed03c8f73328e014a5c0f070779",
+      "value": {
+        "width": 390,
+        "colorScheme": "light",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 223,
+      "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+      "value": {
+        "width": 390,
+        "colorScheme": "dark",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 294,
+      "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+      "value": {
+        "width": 390,
+        "colorScheme": "dark",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 223,
+      "sha256": "ea2594ff2670d672b6ebb134f01e8a911fe6ed6ad61b42e348ed81fb5ead6742",
+      "value": {
+        "width": 390,
+        "colorScheme": "dark",
+        "state": "hover",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "none",
+          "solidBackground": "rgb(52, 52, 52)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          12.449637244033978
+        ]
+      }
+    },
+    {
+      "report": "portfolio-shard-3-results.json",
+      "testId": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+      "testFile": "portfolio-active-count-contrast.spec.ts",
+      "testTitle": "Portfolio 390px dark active profile counts retain readable contrast",
+      "attempt": 0,
+      "resultStatus": "passed",
+      "attachmentName": "active-count-contrast",
+      "bytes": 294,
+      "sha256": "13cf51f2230a20c278c5a63056f5e6754533a4436de3ef190dadf77ae9bc3a66",
+      "value": {
+        "width": 390,
+        "colorScheme": "dark",
+        "state": "rest",
+        "colors": {
+          "foreground": "rgb(255, 255, 255)",
+          "background": "linear-gradient(173deg, rgb(36, 36, 36), rgb(10, 10, 10))",
+          "solidBackground": "rgba(0, 0, 0, 0)",
+          "countOpacity": "1",
+          "buttonOpacity": "1"
+        },
+        "contrasts": [
+          15.522910417680388,
+          19.79814571052481
+        ]
+      }
+    }
+  ],
+  "contrastCalculations": {
+    "method": "WCAG sRGB relative luminance (linearization threshold0.04045), (Llighter+0.05)/(Ldarker+0.05). Opaque grayscale two-stop gradient endpoints bound interior luminance; this requires actual opacity/filter/background assumptions to hold. A reported axe contrastRatio0 for bgGradient/shortTextContent means uncomputed, not0:1.",
+    "conservativeNormalTextThreshold": 4.5,
+    "values": [
+      {
+        "foreground": "#ffffff",
+        "background": "#242424",
+        "ratio": 15.522910417680388
+      },
+      {
+        "foreground": "#ffffff",
+        "background": "#0a0a0a",
+        "ratio": 19.79814571052481
+      },
+      {
+        "foreground": "#ffffff",
+        "background": "#343434",
+        "ratio": 12.449637244033978
+      },
+      {
+        "foreground": "#a8a29e",
+        "background": "#242424",
+        "ratio": 6.155072577340432
+      },
+      {
+        "foreground": "#a8a29e",
+        "background": "#0a0a0a",
+        "ratio": 7.85026908396286
+      },
+      {
+        "foreground": "#756e69",
+        "background": "#f5f5f4",
+        "ratio": 4.59341287788919
+      },
+      {
+        "foreground": "#756e69",
+        "background": "#ffffff",
+        "ratio": 5.011050710200293
+      }
+    ]
+  },
+  "viewedScreenshots": [
+    {
+      "pathMap": "/workspace/capiro-unified-90ccdd47-publication-20261013/ORIGINAL-PATH-MAP.json",
+      "lane": "modules-artifacts",
+      "path": "meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "kind": "file",
+      "mode": 384,
+      "mtimeNs": 1791885037231006562,
+      "bytes": 80621,
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "storage": {
+        "archive": "completed-objects.zip",
+        "member": "sha256/f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379"
+      },
+      "manuallyViewed": true,
+      "limit": "Same qualified flow, representative retained state; native-pending captures precede the final revision-state axe call."
+    },
+    {
+      "pathMap": "/workspace/capiro-unified-90ccdd47-publication-20261013/ORIGINAL-PATH-MAP.json",
+      "lane": "modules-artifacts",
+      "path": "meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-native-pending.png",
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-native-pending.png",
+      "kind": "file",
+      "mode": 384,
+      "mtimeNs": 1791885023054529628,
+      "bytes": 157780,
+      "sha256": "6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb",
+      "storage": {
+        "archive": "completed-objects.zip",
+        "member": "sha256/6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb"
+      },
+      "manuallyViewed": true,
+      "limit": "Same qualified flow, representative retained state; native-pending captures precede the final revision-state axe call."
+    },
+    {
+      "pathMap": "/workspace/capiro-unified-90ccdd47-publication-20261013/ORIGINAL-PATH-MAP.json",
+      "lane": "modules-artifacts",
+      "path": "meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-native-pending.png",
+      "originalPath": "/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-modules-browser-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-native-pending.png",
+      "kind": "file",
+      "mode": 384,
+      "mtimeNs": 1791885034034891787,
+      "bytes": 164172,
+      "sha256": "4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54",
+      "storage": {
+        "archive": "completed-objects.zip",
+        "member": "sha256/4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54"
+      },
+      "manuallyViewed": true,
+      "limit": "Same qualified flow, representative retained state; native-pending captures precede the final revision-state axe call."
+    }
+  ],
+  "priorEvidence": [
+    {
+      "path": "/tmp/capiro-unified-a11y-render-review-20261013/before-source.json",
+      "sha256": "26e02f69ff25c6cfad1729623ed434af94c8547d2642292e036a6751e46719fb",
+      "bytes": 1932
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-render-review-20261013/computed-contrast.json",
+      "sha256": "5a39ae015611453e43be279e7273e686426d31fd552eb42a58c1416ab5649ea3",
+      "bytes": 189427
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-render-review-20261013/incomplete-dispositions.json",
+      "sha256": "fbfa79e9f71fd5e127c6b31c289cd4cb95edb837bff345356db063ace63b5dc3",
+      "bytes": 12230
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-render-review-20261013/review.md",
+      "sha256": "ebbe32cdd32c78f1ee48029b1e56679eff3ce5b3ec06209daf9b4d6ebef9904a",
+      "bytes": 5618
+    },
+    {
+      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/resolution.json",
+      "sha256": "6a5cf4bf540b61ab5248da825b7c16d79dcf0aeef49c73e915a5a6e50776c64a",
+      "bytes": 1790
+    },
+    {
+      "path": "/tmp/capiro-unified-90ccdd47-final-gate-independent-review-20261013/BROWSER-ATTACHMENTS-AND-AXE.json",
+      "sha256": "12362b39096a2f7c4bf954d8e3508390b29ea1f4500f3ec2d9b54156c87e6531",
+      "bytes": 50105
+    }
+  ],
+  "currentRenderChecks": {
+    "R1": "At1440px, capture New conversation computed foreground/background stops, opacity/filter/blend and ancestor chain on Files DOCX/XLSX/disabled and Meri; rest/hover/focus, light and dark preference. Confirm disabled .bg-primary corresponds to same control.390px omits desktop sidebar; verify mobile equivalent controls/focus remain reachable.",
+    "R2": "At1440px and390px, capture Open Engagement rest/hover/focus foreground/background/ancestor effects, light/dark. Preserve label and destination.",
+    "R3": "At1440px and390px, capture remaining Portfolio avatar/Add profile/pulse labels/client count/active All text computed chain, including hover/focus where interactive and both themes. Active count exact90 rest/hover already proved; do not regress its color inheritance.",
+    "R4": "Root rendered semantic/navigation checks: preserve profile h2, exact Open <client> link name with visible sector/location description, keyboard navigation and history, focus visibility; actual Clerk control naming remains outside synthetic avatar proof. Recheck long names and320/390px reflow/zoom; do not claim screen-reader acceptance without AT run."
+  },
+  "limits": [
+    "No new browser, server, test, build, provider or native call. No source edits.",
+    "All artifacts are synthetic Chromium fixtures, not native data/auth/provider acceptance.",
+    "12 reports are not12 failing checks;0 automated violations is not full accessibility acceptance.",
+    "4 phone reports have no incomplete nodes; that is bounded automated evidence only.",
+    "Files axe timestamp is deliberately frozen fixture time2026-10-12; report qualification occurred2026-10-13.",
+    "Current Files dark rendering, all component states, zoom, forced colors, other browsers and screen readers are not fully accepted by these artifacts.",
+    "Historical active-count contrast failure remains preserved; exact90 and addendum establish only reviewed states resolved."
+  ]
+}

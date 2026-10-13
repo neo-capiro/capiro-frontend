@@ -1,0 +1,10 @@
+
+> capiro-frontend@0.1.0 test:docker-context
+> node scripts/docker-context-regression.mjs --artifacts /tmp/capiro-remaining-docker-evidence/context-frozen-d68c2dc
+
+{"artifactRoot":"/tmp/capiro-remaining-docker-evidence/context-frozen-d68c2dc","checks":33,"applicationFiles":12,"passed":true}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

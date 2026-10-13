@@ -1,0 +1,647 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/final-handoff-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "final-presentation.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/final-handoff-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "final-presentation.spec.ts",
+      "file": "final-presentation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "facilities manager shows saved cards and inline editable fields at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3384,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:37.685Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-facilit-41816-e-editable-fields-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-2b8e67e8889bd88e1c43",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 92,
+          "column": 7
+        },
+        {
+          "title": "timeline groups dates and expands the existing filtered feed at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3280,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:41.464Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-timelin-dcc42-ing-filtered-feed-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-92dae5d12231c498ee0c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 144,
+          "column": 7
+        },
+        {
+          "title": "Files source chips and folder cards retain native provenance at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2641,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:44.890Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-Files-s-ec2f1-native-provenance-at-1440px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-1539b5580b4ec7308391",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 232,
+          "column": 7
+        },
+        {
+          "title": "facilities manager shows saved cards and inline editable fields at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2715,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:47.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-facilit-c1494-ne-editable-fields-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-227e632314edba92820b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 92,
+          "column": 7
+        },
+        {
+          "title": "timeline groups dates and expands the existing filtered feed at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3212,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:50.468Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-timelin-4d972-ting-filtered-feed-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-963574ff81020fa54abf",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 144,
+          "column": 7
+        },
+        {
+          "title": "Files source chips and folder cards retain native provenance at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:53.823Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-Files-s-bddbd--native-provenance-at-360px/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-e43d294de193c26d55a6",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 232,
+          "column": 7
+        },
+        {
+          "title": "facilities manager saves inline edits through the existing receipt contract",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2655,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:56.537Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-facilit-884f9-e-existing-receipt-contract/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-8a6f8c4be4daa37dbdf3",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 291,
+          "column": 5
+        },
+        {
+          "title": "facilities manager preserves the unknown create fence across close and reopen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2924,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:16:59.319Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-facilit-69efe-nce-across-close-and-reopen/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-591847f55852bfb00c5a",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-presentation.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "inline facility recovery adopts the reviewed record after remote update",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1557,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:02.387Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-inline--f9ada--record-after-remote-update/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-764350a913d802cdb815",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "inline facility recovery adopts the reviewed record after uncertain applied edit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1683,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:04.037Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-inline--e61f4-fter-uncertain-applied-edit/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-c36fb3f4e108769d3154",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "uncertain activity stays fenced through expand and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2758,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:05.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-uncerta-96b53-d-through-expand-and-return/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-5d42f5d52ed2f87f1d28",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "uncertain activity stays fenced through native pinned regrouping",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2797,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:08.704Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-uncerta-52f49-gh-native-pinned-regrouping/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-a6b97ae24fd9065e8194",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "pending activity stays fenced while its response is held across expand and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2760,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:11.638Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-pending-7515f-ld-across-expand-and-return/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-df3d2a440e04ef5a89e0",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "expanded Log activity reuses the existing Quick log uncertain creation owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2830,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:14.522Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/final-handoff-green/final-presentation-expande-7ae29-og-uncertain-creation-owner/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8058caf7281e098d5c2a-bea004cc1b670839f5f7",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 138,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:16:37.245Z",
+    "duration": 40321.229,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

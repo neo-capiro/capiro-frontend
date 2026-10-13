@@ -1,0 +1,24 @@
+# Final independent acceptance-checkpoint audit
+
+**Accepted for the recorded offline checkpoint scope. No unresolved audit finding.** The completion receipt is dated 13 October 2026, 14:09:26 UTC; the reviewer checked the clean source at 14:09:55 UTC. This audit was read-only and ran no application tests, browser, build, installation or scanner.
+
+Verification source is `ae8da60e6d63d02b65a6ff9eb71c90554f213a10` (tree `42a399811e0f9ba7e67f77ab01e4e5d6b85aab88`, app tree `43ff317df65aa2fe490dc732ebb497ed2cfe3915`). The sole completed production build and clean installation belong to `0ba64efcd5372291d9b9cc7b8a2cd1f600c25fe6`. The successor changes only the new actual-server probe's alert locator to scope it to `main`; product, asset, configuration, package and lock inputs are identical. Reuse is explicit, supported by the prior sealed build-input/95-trace-manifest review and the unchanged BUILD_ID SHA256 `2bab56cdc59b2cc19131f81b456de80f9ef83c24527043d5cea3fa0bf61eacec`. This is not a claim of a second completed build or clean installation on ae8da.
+
+| Completed gate | Verified result |
+| --- | --- |
+| Portfolio, four sequential shards | **322 + 331 + 299 + 314 = 1,266** unique passes; exact discovery ID set, no missing/extra/duplicate IDs |
+| Shared browser full recovery | **350/350** passes; exact same ID set as the original full attempt |
+| Canonical checks | 97 root, 21 transport, 1,926 web, 288 Capiro, 385 Newsletter and 8 declaration controls; types/format pass |
+| Elements / public Newsletter browser | 15 controls; 116 renderer + 130 receiving cases |
+| Actual standalone / additions | 30 observations including four light/dark desktop/mobile Meri cases; 23 additional HTTP observations, 6 Onboard assets, 2 additional viewports |
+| Served Newsletter assets | 179 responses with expected bytes/hashes |
+
+All five completed browser reports have one result per test, zero automatic retries, execution skips, flaky outcomes or global errors. They use two workers and the original 30-second default; four Portfolio cases retain their explicitly declared 90-second timeout. The `--list` discovery JSON marks inventory rows skipped because they were not executed by discovery; that is kept separate from the zero-skip execution results. Every completed verifier receipt binds unchanged clean ae8da source before/after. Actual standalone and public browser reports record zero page errors within their stated scope; this is not a general clean-console or accessibility claim. Lint retains **82 warnings, zero errors**. Architecture retains **481 findings: 459 reviewed, 22 inherited unreviewed, zero blocking/error findings**; the earlier exact 21 changed-production responsibility reviews remain applicable.
+
+All **351 original test/spec blobs** remain byte-identical to published `5875e240c7b266a0e63903c4d0ed9b30c08d4d9a`. All seven input pins remain ancestors. The preserved remote refresh at **14:06:59 UTC** matches the earlier receipt for all seven inputs, main `02c02d95bdf3949662b9123f425271c6491ffdab`, and published integration `5875e240c7b266a0e63903c4d0ed9b30c08d4d9a`. No new remote lookup was performed by this reviewer.
+
+The failure chain remains intact: (1) original 0ba build failed during standalone copying with ENOSPC, followed by the identical same-source command succeeding; (2) original actual-server probe failed on a broad alert locator also matching Next's route announcer, followed by the one-line verifier correction and successful actual-server replay; (3) original shared run remains **349 passed / one screenshot-storage ENOSPC failure**, including secondary incomplete-trace errors, followed by a separately recorded full 350-case recovery after capacity restoration. No failed attempt was relabeled pass. The formerly affected task case now passes with its saved screenshot. Complete generated-output/dependency archive verification and aliases are recorded in the two prior sealed preservation addenda; their seals and all declared packet members were reverified here.
+
+**All 337 native Portfolio acceptance rows remain open; zero rows are accepted by this audit.** The original reconciliation records 23 implementation gaps, 181 evidence gaps and 133 authentic dependency gaps; the separately preserved post-batch delta describes bounded repaired facets without replacing whole-row acceptance. Live identity/RLS/provider authority, Office generation/rendering/recalculation, live workflow activation, full Figma/WCAG/assistive-technology validation, musl image qualification and deployment remain unqualified. The separately authorized Meri 0.1.3 successor is outside this frozen checkpoint.
+
+Exact case IDs, receipts, source comparisons, native-ledger counts and input hashes are in the adjacent JSON files. Raw evidence remains under `/workspace/capiro-unified-acceptance-corrected-20261013` and the retained original attempt under `/workspace/capiro-unified-acceptance-final-20261013`.

@@ -1,0 +1,39 @@
+{
+  "sealedUTC": "2026-10-13T07:01:32.019669+00:00",
+  "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "status": "COMPLETED_SHARDS_SUPPORTED_OUTER_FAILED_FULL_GATE_PENDING",
+  "fileCount": 6,
+  "bytes": 350971,
+  "files": [
+    {
+      "path": "OUTER-PROGRESS-SNAPSHOT.json",
+      "bytes": 31647,
+      "sha256": "382b060fb19775a1eef8f5a6a7bed03db7da38178f6244d2461a1f53676e5351"
+    },
+    {
+      "path": "RAW-EVIDENCE-BINDINGS.json",
+      "bytes": 2140,
+      "sha256": "303c56f29d3cbd79c1c774a1a9d63cc7d55a2d8ccbedbd5f1d9ad4af3718c392"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3631,
+      "sha256": "44a765e11bcf3b7a76448e3f1c323f05a1e6ece33807936270ad26105207947d"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 308517,
+      "sha256": "6ad45135cf67a228d36b5a7c7385eeec9844928eacda498fee139071a51796d9"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 742,
+      "sha256": "724fe225dc1fd6083ea10c8948fd07357f07bd875a90b51724b3bdaa75836047"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4294,
+      "sha256": "86650eecb6bbf061fe5ed230aae578a04e5de3e1d14a2ac4c9cbeffa2a2b7808"
+    }
+  ]
+}

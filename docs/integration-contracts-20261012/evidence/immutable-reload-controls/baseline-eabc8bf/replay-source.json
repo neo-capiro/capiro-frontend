@@ -1,0 +1,26 @@
+{
+  "head": "eabc8bf8b1d28ce3e3c65993624ea967614a45b2",
+  "tree": "36b035629a575017fb65c855d91b9fd35231cd17",
+  "status": "?? node_modules\n",
+  "canonicalControlSHA256": "80dfa0fa7c53dc3079055c97777938466d3cbab6e4d66a3c2a38c5e616128815",
+  "executedControlSHA256": "f288500e592c4e1dbc8ff1e0cc6c9b9627dbe34f53f3c8d39a96557db1a25530",
+  "substitutions": [
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/browser/activity-command-fixtures'",
+      "\"/workspace/capiro-control-eabc/apps/web/tests/browser/activity-command-fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/activity-command-fixtures'",
+      "\"/workspace/capiro-control-eabc/apps/web/tests/activity-command-fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/browser/fixtures'",
+      "\"/workspace/capiro-control-eabc/apps/web/tests/browser/fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/evidence/reload-duplicate.json'",
+      "\"/tmp/reload-negative-eabc-1/reload-duplicate.json\""
+    ]
+  ],
+  "baselineSourceLabel": "eabc8bf8b1d28ce3e3c65993624ea967614a45b2"
+}

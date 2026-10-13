@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/workspace/capiro-remaining/node_modules/.bin/eslint",
+    "--config",
+    "/workspace/capiro-remaining/apps/web/eslint.config.mjs",
+    "packages/qualification-newsletter/fixed-clock.mjs",
+    "packages/qualification-newsletter/browser-entry.mjs",
+    "packages/qualification-newsletter/browser-check.mjs",
+    "packages/qualification-newsletter/qualification.test.mjs",
+    "packages/qualification-newsletter/declarations.mjs",
+    "scripts/newsletter-cli.test.mjs"
+  ],
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "exitCode": 0
+}

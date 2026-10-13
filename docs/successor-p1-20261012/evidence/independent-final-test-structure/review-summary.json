@@ -1,0 +1,35 @@
+{
+  "reviewedAt": "2026-10-12T17:00:35.182269+00:00",
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "sourceTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "baselineCommit": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "counts": {
+    "signals": 16,
+    "newOrChangedResponsibilityReviews": 7,
+    "exactCarriedReviews": 5,
+    "unchangedInheritedFunctions": 4,
+    "publicationRecordsToAddOrUpdateAgainstPriorSix": 9
+  },
+  "decision": "Accept bounded changed test responsibilities; no actual responsibility defect found. Preserve inherited function status and fixture evidence limits.",
+  "testsRun": false,
+  "sourceEdits": false,
+  "dependenciesOrServersTouched": false,
+  "reviewMethod": "Read final pinned test diff and relevant surrounding test/fixture responsibilities; recompute static AST fingerprints for both pinned revisions. Prior six-record JSON was read from the parent-owned working documentation (not present in the final app commit); source binding is 49f6609 as declared by that record.",
+  "fixtureEvidenceLimits": [
+    {
+      "file": "apps/web/tests/browser/meeting-library.spec.ts:359",
+      "classification": "inherited fixture-content limitation, not a new responsibility defect",
+      "detail": "The unchanged GET row following the corrected POST response still contains status:draft and sharedAt:null for a debrief. The corrected POST now returns generated metadata. This scenario proves upload/extraction/review/save separation and receipt plumbing; it does not establish native GET lifecycle/sharing projection. The separate independent final Calendar controls use native-absent debrief share stamps and verify unavailable captions."
+    },
+    {
+      "file": "apps/web/tests/calendar-native-lifecycle.test.ts:59",
+      "classification": "focused parser fixture limitation, not a responsibility defect",
+      "detail": "The note-share positive case inherits cleared approval stamps from the create fixture while changing status to approved. It exercises selected sharing/attribution validation only; it is not a full native approved-note row oracle. The independent native parser controls use stamped approved-note fixtures and independently verify current approver and save-stamp clearing."
+    }
+  ],
+  "publicationNotes": [
+    "Update parent TEST-STRUCTURE-REVIEW source pin from49f to d5dd0be and six-signal description to16; keep all four inherited function signals visible without newly approving them.",
+    "Nine records are additions or updates relative to the prior six-record file: six newly listed accepted signals plus changed meeting-review file/setup and updated containing-file hash for the unchanged Calendar describe function. Three exact prior records are unchanged.",
+    "New responsibility reviews do not claim native execution, behavior test success, or retrospective approval of failed source. Full gates remain root-owned."
+  ]
+}

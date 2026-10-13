@@ -1,0 +1,19 @@
+
+Running 12 tests using 1 worker
+
+(node:636913) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status (1.8s)
+  ✓   2 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px (1.5s)
+  ✓   3 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px (1.3s)
+  ✓   4 tests/browser/work-owners.spec.ts:142:1 › null nodes stay unassigned while unknown, empty and Core UUID owners remain unresolved (1.3s)
+  ✓   5 tests/browser/work-owners.spec.ts:164:3 › a new member read with 403 withholds previous labels and retry admits only the new response (1.4s)
+  ✓   6 tests/browser/work-owners.spec.ts:164:3 › a new member read with 503 withholds previous labels and retry admits only the new response (1.8s)
+  ✓   7 tests/browser/work-owners.spec.ts:213:1 › malformed member data is unavailable while documents and node destinations remain usable (1.1s)
+  ✓   8 tests/browser/work-owners.spec.ts:241:3 › a held member result cannot cross actual application user replacement (1.4s)
+  ✓   9 tests/browser/work-owners.spec.ts:241:3 › a held member result cannot cross actual application session replacement (1.4s)
+  ✓  10 tests/browser/work-owners.spec.ts:241:3 › a held member result cannot cross actual application organization replacement (1.5s)
+  ✓  11 tests/browser/work-owners.spec.ts:241:3 › a held member result cannot cross actual application client replacement (1.8s)
+  ✓  12 tests/browser/work-owners.spec.ts:318:1 › member-read session expiry removes owner labels and Work through the shared application boundary (1.3s)
+
+  12 passed (18.6s)

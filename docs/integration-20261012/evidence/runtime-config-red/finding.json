@@ -1,0 +1,11 @@
+{
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "sourceTree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
+  "status": "OPEN_SOURCE_FINDING",
+  "scope": "Runtime shared-auth initialization on a direct Meri entry; no credentials or provider traffic used.",
+  "evidence": "Meri static HTML serializes ApplicationBoundary.publishableKey as undefined. The prerender route projection includes /meri, both Meri fixture pages and /settings. Root layout reads readCapiroConfig(process.env), whose authConfigured requires server-only Clerk configuration supplied at runtime.",
+  "impact": "A direct prerendered Meri load can retain the build-time unconfigured shared-session boundary after runtime auth configuration; dynamic Portfolio entry can behave differently.",
+  "installedPrimaryGuide": "node_modules/next/dist/docs/01-app/02-guides/environment-variables.md:194-234 documents request-time dynamic rendering for runtime environment initialization.",
+  "plannedCorrection": "Make common runtime configuration resolve during request rendering; add production-artifact regression. Preserve current full run and repair in the separate candidate before shipping.",
+  "liveClerkMatrix": "Unrun; artifact reproduction does not claim authenticated/live acceptance."
+}

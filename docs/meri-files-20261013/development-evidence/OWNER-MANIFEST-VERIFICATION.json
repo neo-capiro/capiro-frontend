@@ -1,0 +1,93 @@
+[
+  {
+    "lane": "adapter",
+    "path": "/tmp/capiro-meri-files-adapter-20261013/MANIFEST.json",
+    "sha256": "8fe14244d450234294a56c168d20787d0c2fd1d5dde2f3f5f462cdfe9637dfeb",
+    "recordsVerified": 78,
+    "mismatches": []
+  },
+  {
+    "lane": "ui",
+    "path": "/tmp/capiro-meri-files-ui-evidence-20261013/MANIFEST.json",
+    "sha256": "7b7b2f92956bf7a392978f7979c38adb7b0078a271049cfa0e273e88594dd0c3",
+    "recordsVerified": 0,
+    "mismatches": []
+  },
+  {
+    "lane": "proxy",
+    "path": "/tmp/capiro-meri-document-proxy-tests-20261013/SHA256-INDEX.json",
+    "sha256": "167036efd90644857ca522e418099e107304f7cf9b46bddcb16bba551cb5dba2",
+    "recordsVerified": 32,
+    "mismatches": []
+  },
+  {
+    "lane": "browser",
+    "path": "/workspace/capiro-meri-files-browser-evidence-20261013/SHA256-INDEX.json",
+    "sha256": "8ad29898e311e324ecc9d262094f84d9d9fe593717a56cdc52264b40f668b4b4",
+    "recordsVerified": 148,
+    "mismatches": []
+  },
+  {
+    "lane": "integration-review",
+    "path": "/tmp/capiro-meri-files-root-integration-review-20261013/MANIFEST.json",
+    "sha256": "69a75a8aef1650b4d90ef6a28e6641fc5e82e067fa3c322ba95d71727e04d641",
+    "recordsVerified": 13,
+    "mismatches": []
+  },
+  {
+    "lane": "standalone-review",
+    "path": "/tmp/capiro-meri-files-standalone-review-20261013/MANIFEST.json",
+    "sha256": "aef0e55dc167bd0b0a462aa23726debe9e4d2e47d54e33fc729e331793455673",
+    "recordsVerified": 6,
+    "mismatches": []
+  },
+  {
+    "lane": "public-contract",
+    "path": "/tmp/capiro-meri-document-public-contract-20261013/MANIFEST.json",
+    "sha256": "96341e8ce989a2945a238337248e73ba025c3643c5b8a41dfab9d8ae4b41dfb5",
+    "recordsVerified": 36,
+    "mismatches": []
+  },
+  {
+    "lane": "pr56-operation-review",
+    "path": "/tmp/capiro-meri-pr56-operation-review-20261013/MANIFEST.json",
+    "sha256": "82ee41f71628de1832d8ae88a0f8df94c5656cac3fec8450d8df9f0df4875be4",
+    "recordsVerified": 0,
+    "mismatches": []
+  },
+  {
+    "lane": "root-development",
+    "path": "/tmp/capiro-meri-files-development-20261013/MANIFEST.json",
+    "sha256": "d4f89ee7be69a1b12a5a5d94bfb2d9b0017b956da46c7da91673298530e3c6fc",
+    "recordsVerified": 23,
+    "mismatches": []
+  },
+  {
+    "lane": "storage-preservation",
+    "path": "/workspace/capiro-final-storage-20261013/MANIFEST.json",
+    "sha256": "8b204f762256b1529f78951f46e7e154495b4cbbe21a0fdfb235452b104a1a99",
+    "recordsVerified": 20,
+    "mismatches": []
+  },
+  {
+    "lane": "browser-independent-review",
+    "path": "/tmp/capiro-meri-files-browser-independent-review-20261013/MANIFEST.json",
+    "sha256": "00dfb7c6a6d0c5b06a1797a9fb600fa3adf7fc5dc49aff775e7e85c1b2a3860e",
+    "recordsVerified": 10,
+    "mismatches": []
+  },
+  {
+    "lane": "browser-independent-addendum",
+    "path": "/tmp/capiro-meri-files-browser-independent-addendum-20261013/MANIFEST.json",
+    "sha256": "53fab7117b9cbf765db5f02477a273c20fa918d39f6040242418e8d166cc84c0",
+    "recordsVerified": 3,
+    "mismatches": []
+  },
+  {
+    "lane": "source-preservation-review",
+    "path": "/tmp/capiro-meri-files-preservation-review-20261013/MANIFEST.json",
+    "sha256": "c5d354d15113a360f227e258bad9c0050d1d06c4610f20aeb03c0e3924fde7e9",
+    "recordsVerified": 12,
+    "mismatches": []
+  }
+]

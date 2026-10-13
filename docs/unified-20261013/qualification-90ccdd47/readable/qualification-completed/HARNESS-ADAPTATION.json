@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-13T09:40:31.316500+00:00",
+  "priorHarness": "/workspace/capiro-unified-files-final-20261013",
+  "changes": [
+    "Distinct output/cache/elements/artifact paths; exact frozen source remains dynamically loaded from FROZEN-SOURCE.json"
+  ],
+  "assertions": "No gate commands, expectations, test IDs, worker counts, retries, timeouts or production probes changed. First6150attempt is preserved failed during typecheck; it performed no production build."
+}

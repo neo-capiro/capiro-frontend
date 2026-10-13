@@ -1,0 +1,195 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-calendar-native-status/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-calendar-native-status-evidence/browser.config.ts",
+      "calendar-client-clear.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-calendar-native-status-evidence/browser.config.ts",
+    "rootDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-calendar-native-status-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "calendar-client-clear.spec.ts",
+          "calendar-artifact-receipts.spec.ts",
+          "calendar-meeting-receipts.spec.ts",
+          "manual-debrief.spec.ts",
+          "meeting-library.spec.ts",
+          "voice-integration.spec.ts",
+          "meeting-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-calendar-native-status-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-client-clear.spec.ts",
+      "file": "calendar-client-clear.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "existing meeting No client sends explicit null and accepts native clear receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1210,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:38:17.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-6401df2160b6716e251e",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 20,
+          "column": 3
+        },
+        {
+          "title": "existing meeting No client sends explicit null and rejects old association",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1055,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:38:18.566Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-241d11c589404ece0a72",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 20,
+          "column": 3
+        },
+        {
+          "title": "new unscoped meeting omits clientId and accepts backend association",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 961,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:38:19.635Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-006336195dc4c19ac773",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 46,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:38:16.713Z",
+    "duration": 4009.8509999999997,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

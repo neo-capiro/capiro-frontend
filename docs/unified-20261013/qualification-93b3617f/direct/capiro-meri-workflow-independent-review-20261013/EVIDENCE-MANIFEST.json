@@ -1,0 +1,318 @@
+{
+  "sealedUTC": "2026-10-13T02:49:17.415281+00:00",
+  "scope": "Independent static inactive Meri action UI/controller review; no native or runtime acceptance",
+  "count": 62,
+  "bytes": 244498,
+  "files": [
+    {
+      "path": "CAPTURE-TIMING.json",
+      "bytes": 426,
+      "sha256": "d317b75f93b0f2426eaeac93317d2fe05b518b5c9f43ef28b215cc22fcf11fc3"
+    },
+    {
+      "path": "FINAL-SOURCE-BINDING.json",
+      "bytes": 2847,
+      "sha256": "fe0580ebca269c986c5c65e2dfc9920b6f62f321396393c65eb14fb1df5fe22b"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 4308,
+      "sha256": "80ab9b0d52b38bcff471acc8fa6a9210c5ad274b077cc56d14a257dd2d8f575a"
+    },
+    {
+      "path": "FOCUS-CORRECTION.patch",
+      "bytes": 304,
+      "sha256": "098d8d07ef075503be3bd1bcaf3832e12ffa41efb10342991bf07c71abcd3a56"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 6783,
+      "sha256": "581776f1a37e3164fee1a51e9ae19f279e39591236014a111b3a711cefd6933d"
+    },
+    {
+      "path": "SOURCE-BINDING.json",
+      "bytes": 8905,
+      "sha256": "6d4eaaafbdc375a1ff0724d66425d45ded0046822d07853daf5c146b9afd10cf"
+    },
+    {
+      "path": "WORKTREE-STATUS.txt",
+      "bytes": 129,
+      "sha256": "4184b8a08e7d0c53c5ff55549eca175032f36885dcb743e245d866043d4e6f1b"
+    },
+    {
+      "path": "author/MANIFEST.json",
+      "bytes": 3297,
+      "sha256": "dd777628a1e4c089e79aa72d18140134280c12e073cae74b50524f33b91c10a8"
+    },
+    {
+      "path": "author/REPORT.md",
+      "bytes": 4358,
+      "sha256": "d266587f4b61914c225fec63af877d19c860c7f4144d907ebbeba6832a1dd87a"
+    },
+    {
+      "path": "author/STRUCTURE-REVIEW.json",
+      "bytes": 10252,
+      "sha256": "e63cf9f7fedd1d05e2fe0e28f6559d28fe4290f986da81d8c0dc8b8095ae3b23"
+    },
+    {
+      "path": "author/controller-unit.log",
+      "bytes": 2296,
+      "sha256": "5c3e557676b121906ad1aa0b23ebdfec5f8bcee443631ac7a7fdb1fa0580a871"
+    },
+    {
+      "path": "author/handoff-bindings.json",
+      "bytes": 1657,
+      "sha256": "d2acf20c75ef549cd8a9cbe4abf7bcfbcd7edbb321c31a9577c0ca81c9494d9d"
+    },
+    {
+      "path": "author/unit-receipt.json",
+      "bytes": 4409,
+      "sha256": "16402e5850acbf3f56a89e2bad8b49f07b2f5dff839267cd7da47dd6180534ca"
+    },
+    {
+      "path": "author-focus/MANIFEST.json",
+      "bytes": 1132,
+      "sha256": "92bdace60c4b94b271ffb75c4d94100a88b0547a370f400ec517c509b638609b"
+    },
+    {
+      "path": "author-focus/REPORT.md",
+      "bytes": 830,
+      "sha256": "e8c13ea0bd36f8bb36212c01924b0dad9562b4cb48069749fef7c5b48887e0d2"
+    },
+    {
+      "path": "author-focus/focus-style.patch",
+      "bytes": 374,
+      "sha256": "bcd9b9086cde783fc4e41b3382ba397c5a4326ea4ef7f091ee94cde983d67ae0"
+    },
+    {
+      "path": "author-focus/format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "author-focus/review.json",
+      "bytes": 1489,
+      "sha256": "9a9ddada2a94cebb99111e175860b1fa9f44a67f3afb0b192674bbeb5eef7096"
+    },
+    {
+      "path": "author-focus/source-hashes.json",
+      "bytes": 3095,
+      "sha256": "c3b386b37d67e743cebb34b0219bb23cb52b99457d3a4209a9bd686fd4d5197f"
+    },
+    {
+      "path": "author-refusal/MANIFEST.json",
+      "bytes": 2092,
+      "sha256": "64d037a2a37914ea5fd710d501665591293efde402ad059419e014d0f82b2c54"
+    },
+    {
+      "path": "author-refusal/REPORT.md",
+      "bytes": 1528,
+      "sha256": "26ff56b4371caffc7d8cd01ddba012d9816895268d808b61d1b09fcb03bdebcf"
+    },
+    {
+      "path": "author-refusal/after-action-workflow-state.ts",
+      "bytes": 6273,
+      "sha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4"
+    },
+    {
+      "path": "author-refusal/after-action-workflow.test.mjs",
+      "bytes": 13444,
+      "sha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742"
+    },
+    {
+      "path": "author-refusal/after-receipt.json",
+      "bytes": 829,
+      "sha256": "ed268e14e5ca33400839ecf909b3ef085491727216c67c334c5206157048dea1"
+    },
+    {
+      "path": "author-refusal/after-unit.log",
+      "bytes": 2823,
+      "sha256": "f8dadbb79463013ffdb901ef027029364a18453c8a2c4c48f71299c87f9f00f5"
+    },
+    {
+      "path": "author-refusal/before-action-workflow-state.ts",
+      "bytes": 6162,
+      "sha256": "c45f4c358f35e07da3de7e2c14c2e15540dbe03e40558cde12192f497d6793e9"
+    },
+    {
+      "path": "author-refusal/before-action-workflow.test.mjs",
+      "bytes": 13444,
+      "sha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742"
+    },
+    {
+      "path": "author-refusal/before-receipt.json",
+      "bytes": 829,
+      "sha256": "24732e7fe812ce5cc1290ffa9327f0e83096beca24083727328d5815d1baaa92"
+    },
+    {
+      "path": "author-refusal/before-unit.log",
+      "bytes": 7247,
+      "sha256": "56d13579c628ca5667e5c78c4b1986eec10f4c96f99ce29119b55787e964f0b6"
+    },
+    {
+      "path": "author-refusal/format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "author-refusal/owned-correction.patch",
+      "bytes": 3051,
+      "sha256": "f9813966c04c99d3c1cc413eecf10688d4ea32211592a19b5d48c9c8083c776e"
+    },
+    {
+      "path": "author-refusal/review.json",
+      "bytes": 2104,
+      "sha256": "c6fffc9d730d870ea569e681175588decea275672280fa6398bb5b5def3133bc"
+    },
+    {
+      "path": "author-refusal/source-review.json",
+      "bytes": 4757,
+      "sha256": "42ffe41687030c2319911f0ebd63bbea05c6724464773de547eb326afb1bfae6"
+    },
+    {
+      "path": "capture-review.py",
+      "bytes": 6982,
+      "sha256": "47ab51875d1658680cc41dd275090d0930c9bbf3eb7faf18450727ef95e7796c"
+    },
+    {
+      "path": "context/apps/web/src/app/globals.css",
+      "bytes": 1113,
+      "sha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd"
+    },
+    {
+      "path": "context/apps/web/src/app/layout.tsx",
+      "bytes": 1201,
+      "sha256": "47e90e4269dd55a75bf05e91b010ddcdeb86c716d821ee240e3cffc8a204a1fd"
+    },
+    {
+      "path": "context/packages/ui/src/shadcn/button.tsx",
+      "bytes": 2162,
+      "sha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "bytes": 3851,
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "bytes": 2897,
+      "sha256": "ea51c88a19018e117b85fcccb052034db08e3f8a39482d0bebaaaf23a34fcd20"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "bytes": 1978,
+      "sha256": "7f9c2be4d30e327ba98415d839a879808157447bdab5139522945c86d7ba8b55"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "bytes": 2414,
+      "sha256": "f38f997a7418b5285337a60c57d781895493d0c3e8f9ea854eab0d8bc091dec5"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "bytes": 2123,
+      "sha256": "096ce01abc55d053583f23c64dc8db85baec6ad2b61c9c72da913714099f9f3e"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "bytes": 6273,
+      "sha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/workflow-problems.ts",
+      "bytes": 2004,
+      "sha256": "6c9c27003d7461210b78f978070126794f304f668a5e18695d45720a0ca44b1c"
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/actions/workflow.module.css",
+      "bytes": 2690,
+      "sha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee"
+    },
+    {
+      "path": "final-source/apps/web/test/action-workflow.test.mjs",
+      "bytes": 13444,
+      "sha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742"
+    },
+    {
+      "path": "final-source/docs/meri-workflow-20261013/PLAN.md",
+      "bytes": 4157,
+      "sha256": "9a1819a3366dbac475a746295154633e325189400132555e712caf275deec241"
+    },
+    {
+      "path": "handoff/contracts-readme.json",
+      "bytes": 7010,
+      "sha256": "39d78ac9b253c124c85eb14d3fd6a150ac2fec39a1644db9ef482cbc2407819f"
+    },
+    {
+      "path": "handoff/handoff-0.json",
+      "bytes": 4530,
+      "sha256": "68089c0b89d588b1f0d7e19b67608669e8b967a8945deb06a2444cc08a126119"
+    },
+    {
+      "path": "handoff/handoff-3.json",
+      "bytes": 13736,
+      "sha256": "9e507e19a507e61aa7db5f82ac4406903a630c06983e5265f015d59a4dcc9653"
+    },
+    {
+      "path": "handoff/handoff-4.json",
+      "bytes": 1939,
+      "sha256": "be67de53ae17f6b94e178104c9e7b5debe2f83c158e462a1d70918fb1d4f7ddb"
+    },
+    {
+      "path": "original/workflow.module.css",
+      "bytes": 2801,
+      "sha256": "692cf3f5ec282a291ece77f57d85d1334e0f9b09e8781f508bd2ead125b500c2"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "bytes": 3851,
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "bytes": 2897,
+      "sha256": "ea51c88a19018e117b85fcccb052034db08e3f8a39482d0bebaaaf23a34fcd20"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "bytes": 1978,
+      "sha256": "7f9c2be4d30e327ba98415d839a879808157447bdab5139522945c86d7ba8b55"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "bytes": 2414,
+      "sha256": "f38f997a7418b5285337a60c57d781895493d0c3e8f9ea854eab0d8bc091dec5"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "bytes": 2123,
+      "sha256": "096ce01abc55d053583f23c64dc8db85baec6ad2b61c9c72da913714099f9f3e"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "bytes": 6162,
+      "sha256": "c45f4c358f35e07da3de7e2c14c2e15540dbe03e40558cde12192f497d6793e9"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/workflow-problems.ts",
+      "bytes": 2004,
+      "sha256": "6c9c27003d7461210b78f978070126794f304f668a5e18695d45720a0ca44b1c"
+    },
+    {
+      "path": "source/apps/web/src/features/meri/actions/workflow.module.css",
+      "bytes": 2690,
+      "sha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee"
+    },
+    {
+      "path": "source/apps/web/test/action-workflow.test.mjs",
+      "bytes": 11311,
+      "sha256": "c0c2d8f500005239338582992cb76b7de292fbeae596dc963e6542ae4b2166c6"
+    },
+    {
+      "path": "source/docs/meri-workflow-20261013/PLAN.md",
+      "bytes": 4157,
+      "sha256": "9a1819a3366dbac475a746295154633e325189400132555e712caf275deec241"
+    }
+  ]
+}

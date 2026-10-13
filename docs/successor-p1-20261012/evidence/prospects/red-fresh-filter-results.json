@@ -1,0 +1,237 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-prospect-current-read/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter.config.mts",
+      "--grep",
+      "earlier filter cache is fresh"
+    ],
+    "configFile": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter.config.mts",
+    "rootDir": "/workspace/capiro-prospect-current-read/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-prospect-current-read/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/prospect-current-read.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "prospect-current-read.spec.ts",
+      "file": "prospect-current-read.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "returning from a 403 filtered failure requires a new read even when the earlier filter cache is fresh",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7299,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69",
+                    "location": {
+                      "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                      "column": 69,
+                      "line": 213
+                    },
+                    "snippet": "  211 |     const reads = control.reads();\n  212 |     await page.getByLabel(\"Search prospects\").fill(\"\");\n> 213 |     await expect(page.getByRole(\"link\", { name: /Test Prospect/ })).toHaveCount(\n      |                                                                     ^\n  214 |       0,\n  215 |     );\n  216 |     await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                        "column": 69,
+                        "line": 213
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  211 |     const reads = control.reads();\n  212 |     await page.getByLabel(\"Search prospects\").fill(\"\");\n> 213 |     await expect(page.getByRole(\"link\", { name: /Test Prospect/ })).toHaveCount(\n      |                                                                     ^\n  214 |       0,\n  215 |     );\n  216 |     await expect(\n    at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:30:24.137Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                    "column": 69,
+                    "line": 213
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3047b0e6adfea16ad6c4-cef36d92c8ae194ea952",
+          "file": "prospect-current-read.spec.ts",
+          "line": 199,
+          "column": 3
+        },
+        {
+          "title": "returning from a 503 filtered failure requires a new read even when the earlier filter cache is fresh",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8582,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69",
+                    "location": {
+                      "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                      "column": 69,
+                      "line": 213
+                    },
+                    "snippet": "  211 |     const reads = control.reads();\n  212 |     await page.getByLabel(\"Search prospects\").fill(\"\");\n> 213 |     await expect(page.getByRole(\"link\", { name: /Test Prospect/ })).toHaveCount(\n      |                                                                     ^\n  214 |       0,\n  215 |     );\n  216 |     await expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                        "column": 69,
+                        "line": 213
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: /Test Prospect/ })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: /Test Prospect/ })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  211 |     const reads = control.reads();\n  212 |     await page.getByLabel(\"Search prospects\").fill(\"\");\n> 213 |     await expect(page.getByRole(\"link\", { name: /Test Prospect/ })).toHaveCount(\n      |                                                                     ^\n  214 |       0,\n  215 |     );\n  216 |     await expect(\n    at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:30:32.248Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts",
+                    "column": 69,
+                    "line": 213
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3047b0e6adfea16ad6c4-1e87f5dfa7030ef663bb",
+          "file": "prospect-current-read.spec.ts",
+          "line": 199,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:30:23.673Z",
+    "duration": 17536.745,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

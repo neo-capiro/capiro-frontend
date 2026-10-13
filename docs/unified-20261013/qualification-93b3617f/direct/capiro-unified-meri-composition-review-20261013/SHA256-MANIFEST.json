@@ -1,0 +1,31 @@
+{
+  "sealedUTC": "2026-10-13T06:07:58.243633+00:00",
+  "source": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "files": [
+    {
+      "path": "DISPOSITION.json",
+      "bytes": 1096,
+      "sha256": "8600db799b4472c25f58c98a15f6dcff376131192436dfdf11a05c8051d9170a"
+    },
+    {
+      "path": "SOURCE-BINDING.json",
+      "bytes": 16229,
+      "sha256": "1f47560addf632690237afd8ba793414b17b635e4b99c005b54d49cf02705f68"
+    },
+    {
+      "path": "boundary-vs-meri.patch",
+      "bytes": 4514,
+      "sha256": "a26869f0355efc7f6ba2e75ffcfc7e1bb46cc089f9b44b5f362f542bdc08f870"
+    },
+    {
+      "path": "proxy-vs-onboard.patch",
+      "bytes": 303,
+      "sha256": "d568912ad3d2afeb765db742f2b8ab4853480724681d1c537b4065c8f01baf9c"
+    },
+    {
+      "path": "review.md",
+      "bytes": 7504,
+      "sha256": "43631a49ec445f5b7b3ad71cb7629e65ef82338261294fe9ee1304320ce5d508"
+    }
+  ]
+}

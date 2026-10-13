@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-12T02:12:44.584Z",
+  "operation": "create_tree with177 already-created immutable blob references",
+  "baseTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "GitHub API error 422: {\"message\":\"Sorry, your request timed out.  It's likely that your input was too large to process.  Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub.\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#create-a-tree\",\"status\":\"422\"}"
+      }
+    ],
+    "structuredContent": {
+      "error": "GitHub API error 422: {\"message\":\"Sorry, your request timed out.  It's likely that your input was too large to process.  Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub.\",\"documentation_url\":\"https://docs.github.com/rest/git/trees#create-a-tree\",\"status\":\"422\"}",
+      "error_code": "INVALID_ARGUMENT",
+      "error_data": {
+        "message": "Sorry, your request timed out.  It's likely that your input was too large to process.  Consider building the tree incrementally, or building the commits you need in a local clone of the repository and then pushing them to GitHub.",
+        "documentation_url": "https://docs.github.com/rest/git/trees#create-a-tree",
+        "status": "422"
+      }
+    },
+    "isError": true
+  },
+  "recovery": "Use sequential smaller trees with at most12 entries and16MiB cumulative referenced file bytes, then verify the final exact local tree before any ref update. This is a GitHub request-size/processing limit, not a credential failure."
+}

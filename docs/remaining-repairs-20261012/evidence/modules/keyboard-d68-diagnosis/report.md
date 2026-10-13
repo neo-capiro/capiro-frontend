@@ -1,0 +1,11 @@
+# MS08 keyboard failure diagnosis at d68c2dc
+
+The failed Group by assertion is a test synchronization race against the adopted Select's deferred arrow-key focus, supported by the preserved trace and installed source. No product repair is indicated by this evidence. No source was edited and no browser replay ran during diagnosis.
+
+The successful scope sequence opens on `Scope · All clients`, then its after-ArrowDown snapshot highlights `Current Aerospace` before the next Enter. The grouping sequence opens correctly on `Group by · Client` at 235834.514ms. Its ArrowDown input occurs at 235836.700ms. Both the after-ArrowDown snapshot and the next Enter input at 235840.147ms reuse the same complete DOM from immediately after opening: Client remains highlighted/selected, None is not highlighted. Enter therefore selects Client and closes; the final expected None assertion truthfully fails. The 3.447ms between key inputs is not a readiness guarantee.
+
+Installed Radix Select 2.3.8 intentionally schedules arrow navigation with `setTimeout(() => focusFirst(candidateNodes))` (dist/index.mjs:522). `data-highlighted` reflects its focus state. The owned SelectInput and Group by consumer delegate keyboard behavior to that canonical primitive. Test, Planner consumer, wrapper, adopted Select source and lockfile are byte-identical between adbc and d68. The original 207-pass/1-fail run is preserved; the earlier 208-pass run does not negate this demonstrated race.
+
+Minimal proposed correction: keep both keyboard-only Enter→ArrowDown→Enter interactions but assert trigger focus, open/expanded listbox plus current-option focus, then exact next-option focus before final Enter. Preserve selected client, task visibility, None value, one-table assertion and final regroup/screenshot. No sleeps, retries, larger timeouts, click substitution, implementation change or assertion weakening. The only matching immediate arrow/Enter sequences in the nearby added remaining/next Modules tests are these two interactions.
+
+Root approval and a focused browser lease are requested for this test-only correction. Validation is not claimed yet. Raw selected snapshots, action timings, hashes and original test bytes are retained in this packet.

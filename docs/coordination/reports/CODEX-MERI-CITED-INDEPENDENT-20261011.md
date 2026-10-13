@@ -1,0 +1,31 @@
+# Independent Meri cited-answer preservation review — 11 October 2026
+
+**ACCEPT_SOURCE_PRESERVATION_ONLY.** This is not combined Portfolio integration, authenticated product, runtime, AWS, G1, security or release acceptance.
+
+Reviewed author head `852efe105151152d24681386bedb93c0658b2cbc`, tree `4eaf45af289d38bc69eaccf06b8596f4bcbbb02a`, against local Home base `85e96b968a3e984407886b2e06536b20810eccef`, tree `9d662c6d1090af8211a459e9ff95310242ec21da` (remote PR4 source-equivalent `ad04c660a8a181aa99b4786bf51926dd4957ea3a`). Review ran in a separate frozen worktree. No application source, dependency, vendor, package, lock, route, backend or author branch changed during review.
+
+## Preservation and boundaries
+
+- Independently enumerated the exact trees: **80 changed paths; 905 of 912 base blobs unchanged**. Seven overlapping fixture/shared presentation files are intentional. Every original test file is unchanged; Portfolio, package and lock blobs outside this overlap are preserved.
+- All **41 indexed author evidence files** match retained SHA-256/size and exact committed Git bytes, including original CRLF/progress build logs. This confirms the author's final evidence-only raw-byte correction.
+- Independently hashed **33 of 35 recovered PR1 files** against the recorded original Git blob identities. The only departures are Sidebar (preserved Home Routines plus cited routing/assets) and cited-answer CSS (white, 1px solid follow-up buttons). All **22 static assets and their original manifest** match their recorded byte/hash identities.
+- The route remains a thin two-import composition of the existing shell and cohesive 77-line Meri feature. Shared shell/Composer asset selection defaults to Home. It reuses public shadcn Button and AI Elements PromptInput owners, without a second orchestration/data/authorization layer or changed public contract. Source review found no private backend or cross-feature imports, new provider credentials, database access or claimed live endpoint.
+- The public transport `0.1.0` boundary and its original fixtures remain unchanged. The answer, identities, scope, counts and sources are visibly synthetic. Sources disclose the absent authorized records. Local draft/copy/source interactions do not pretend to persist or create tasks/artifacts; unavailable actions and modes remain disabled.
+
+## Independent execution
+
+`npm run check` **PASS**: public-package byte pins, all workspace TypeScript checks, **19 root tests**, architecture checks and **21 original transport tests**, with no skipped/weakened assertions. Clean actual `npm run build` **PASS** using the existing Next 16.4.0 Turbopack pipeline; `/`, `/meri`, `/meri/fixture/cited-answer` and not-found generated successfully.
+
+The reviewer copied immutable installed dependency bytes into review-owned ignored directories because Turbopack requires in-root resolution. Borrowed dependencies were read only; no install, vendor patch, lock update or network Git fetch occurred. Build/check used the same supported offline CI settings recorded by the author: `CI=true`, `__NEXT_AGENT_UPGRADE=security`, `NEXT_TELEMETRY_DISABLED=1`, `NEXT_IGNORE_INCORRECT_LOCKFILE=1`, `NPM_CONFIG_OFFLINE=true`. This does not prove fresh installation or npm security audit.
+
+Actual independent Playwright checks ran sequentially after the heavy build against an owned production server. **Six groups PASS**: desktop geometry and every visible SVG asset family plus 62×20 mask; source selection/disclosure, draft focus, real clipboard copy and keyboard navigation; cited-to-blank-Home navigation, Home Routines/625px starters/wordmark/local draft reset; root link and denied-clipboard feedback; 390px mobile with contained table scroll and three labelled mode buttons; zero page errors, zero external requests and GET-only fixture requests. Server and browser physical cleanup are retained in the receipts. The browser uses the existing local preview executable and disabled sandbox; this is UI verification only, never AWS sandbox qualification.
+
+Fresh independent Figma design context and screenshot used the approved file `Zc2dEN5aLU47dVdsewDmiJ`, frame `442:81682`. The full **1440×1040 screenshot is 113754 bytes, SHA-256 `cfd71647bd291eb6ba448ef58ce45d6a42d0ba363e635790b672fcc2d4b85627`**, identical to the pinned original target. Independent desktop, mobile and preserved Home renders were visually inspected. Target geometry/assets and the corrected follow-up buttons match; synthetic/not-saved text, unavailable actions and fixture footer are deliberate disclosures. No temporary Figma URLs or screenshot-as-interface assets were introduced.
+
+The first attempt to persist the full inline screenshot exceeded the execution argument limit and was rejected before process creation. Chunked local transport then produced the exact screenshot hash. This was a reviewer transport limit, not a product defect or altered screenshot. The first review-evidence staging pass warned of CRLF normalization and flagged original CLI progress whitespace; a narrowly scoped review-only `.gitattributes` marks raw `.bin` receipts as non-text/non-diff. Raw bytes were restaged and verified against the index; authored documentation remains subject to whitespace checks.
+
+## Integration limits and next step
+
+The owner's latest shared frontend handoff requires the canonical **`apps/web` application**, one reviewed image and `HeaderFrame.tsx` as the common header owner. That newer Portfolio continuation is local/unpublished and absent from this older-base candidate. **Do not ship this tree by itself over the shared preview, merge it as a complete frontend, or replace newer Portfolio/Modules work.** Root must first obtain and review the canonical continuation, reconcile the seven shared paths against its actual header/routes, then run combined cross-product/type/build/browser acceptance. Preserve both original branches and this immutable reviewed source until that consolidation is verified.
+
+No AWS action, publication, merge, authenticated backend/source call or production change occurred. Independent evidence is under `../../qualification/candidates/cited-consolidation-20261011/independent-review/`; it includes actual command streams/hashes, source/evidence/asset integrity, fresh Figma captures, browser geometry/screenshots and physical cleanup.

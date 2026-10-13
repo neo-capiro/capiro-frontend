@@ -1,0 +1,38 @@
+{
+  "mode": "Static parser only; no application import, test, typecheck, full architecture gate or runtime execution",
+  "parser": "scripts/architecture/scan.mjs",
+  "findings": [
+    {
+      "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 44,
+      "nonblank": 216,
+      "fingerprint": "df3410523e877164db7fb8a114061507e35b3ba0a86bbaeef6871ebf3c216232"
+    },
+    {
+      "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 261,
+      "nonblank": 104,
+      "fingerprint": "3ae4d00c51c7f5a936bd26db0c11451fba1c08da0211d70eef1ee4d4b62ae335"
+    },
+    {
+      "file": "apps/web/src/shared/capiro/onboard-core-api.ts",
+      "kind": "function",
+      "symbol": "createOnboardCoreApi",
+      "line": 15,
+      "nonblank": 105,
+      "fingerprint": "ee94ca8f78a55cc086db9fe832b3be7c2322b2bd068a3b182bbe57dd89cb4fef"
+    },
+    {
+      "file": "apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 32,
+      "nonblank": 119,
+      "fingerprint": "c7f83e4372bae32eadf5833c491240ab9074cb67c56eea974833f9f9b2569a7d"
+    }
+  ]
+}

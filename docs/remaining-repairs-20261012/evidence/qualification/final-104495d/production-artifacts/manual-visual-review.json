@@ -1,0 +1,18 @@
+{
+  "reviewedUTC": "2026-10-12T20:29:42.685291+00:00",
+  "source": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "buildId": "3iUKAoD4mmM7JLQlh3fho",
+  "reviewer": "root",
+  "manuallyInspected": [
+    {
+      "file": "production-portfolio-1440-light.png",
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "file": "production-portfolio-390-dark.png",
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    }
+  ],
+  "finding": "Desktop light and phone dark setup renderings are legible and contained; brand mark, spacing, heading and setup instructions render without overlapping or clipping.",
+  "scope": "Actual credential-free standalone setup presentation only; not authenticated feature Figma/native acceptance. Automated standalone check covers all4 light/dark desktop/mobile combinations plus cross-mode/history."
+}

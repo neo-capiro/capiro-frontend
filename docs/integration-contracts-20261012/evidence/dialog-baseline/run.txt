@@ -1,0 +1,252 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/shared-dialog-layout.spec.ts --repeat-each=5 --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/shared-dialog-layout.spec.ts --repeat-each=5 --workers=3
+
+[WebServer] (node:159734) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 40 tests using 3 workers
+
+(node:159778) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:159772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:159771) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (10.2s)
+  ✓   1 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (10.9s)
+  ✓   3 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.2s)
+  ✓   5 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (9.9s)
+  ✓   7 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (4.8s)
+  ✘   4 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (16.7s)
+(node:160444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (16.5s)
+(node:160500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (8.2s)
+  ✓   9 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (10.9s)
+  ✓  11 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (6.5s)
+  ✓  10 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (10.7s)
+  ✓  13 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (6.1s)
+  ✓  12 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (9.4s)
+  ✓  14 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (9.7s)
+  ✓  15 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (7.3s)
+  ✓  16 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (6.7s)
+  ✓  17 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (7.7s)
+  ✓  18 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (5.9s)
+(node:161142) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (6.4s)
+  ✓  20 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (6.7s)
+  ✓  22 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (6.7s)
+  ✓  23 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (6.1s)
+  ✓  24 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (4.8s)
+(node:161447) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (3.3s)
+  ✘  21 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (14.0s)
+(node:161582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (7.0s)
+  ✘  26 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.6s)
+(node:161791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (5.6s)
+  ✓  30 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (6.3s)
+  ✓  29 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (10.4s)
+  ✓  31 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (5.2s)
+  ✓  32 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (6.2s)
+  ✓  33 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (5.3s)
+  ✓  34 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (7.1s)
+  ✓  35 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (4.5s)
+  ✓  37 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (3.9s)
+  ✓  36 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (4.2s)
+  ✓  38 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (2.4s)
+  ✓  39 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (2.6s)
+  ✓  40 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (2.3s)
+
+
+  1) tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Edit objective', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      198 |         await expect(dialog).toBeVisible();
+      199 |         await page.mouse.click(4, 4);
+    > 200 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      201 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      202 |           0,
+      203 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/shared-dialog-layout.spec.ts:200:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Edit objective', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      198 |         await expect(dialog).toBeVisible();
+      199 |         await page.mouse.click(4, 4);
+    > 200 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      201 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      202 |           0,
+      203 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/shared-dialog-layout.spec.ts:200:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop-repeat1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/shared-dialog-layout-drawe-72c76-verlay-and-focus-on-desktop-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Test report.pdf', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Test report.pdf', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      198 |         await expect(dialog).toBeVisible();
+      199 |         await page.mouse.click(4, 4);
+    > 200 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      201 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      202 |           0,
+      203 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/shared-dialog-layout.spec.ts:200:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat3/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat3/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat3/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Test report.pdf', exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Test report.pdf', exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      198 |         await expect(dialog).toBeVisible();
+      199 |         await page.mouse.click(4, 4);
+    > 200 |         await expect(dialog).toHaveCount(0);
+          |                              ^
+      201 |         await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCount(
+      202 |           0,
+      203 |         );
+        at /workspace/capiro-contracts/apps/web/tests/browser/shared-dialog-layout.spec.ts:200:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat4/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat4/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat4/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop-repeat4/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+    tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop 
+    tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop 
+    tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop 
+  36 passed (2.1m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test tests/browser/shared-dialog-layout.spec.ts --repeat-each=5 --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

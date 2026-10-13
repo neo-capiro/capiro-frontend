@@ -1,0 +1,83 @@
+{
+  "sealedUTC": "2026-10-13T20:56:18.047615+00:00",
+  "status": "PASS_BOUNDED_FINAL_PUBLICATION_AUDIT",
+  "fileCount": 15,
+  "regularBytes": 63673,
+  "files": [
+    {
+      "path": "ARCHIVE-VERIFICATION.json",
+      "bytes": 426,
+      "sha256": "6d43a7fcf8ac9e9f05a7fb23d74a66210ef167ec20b1f4cae334e6002d9f7f1a"
+    },
+    {
+      "path": "AUDIT-SUMMARY.json",
+      "bytes": 1271,
+      "sha256": "16445fb9f79b39c80d3ab29355627f3998dffbabba81ea1f6d97cffb65a97cf4"
+    },
+    {
+      "path": "GATE-RECONCILIATION.json",
+      "bytes": 9642,
+      "sha256": "47254d54f00ce7c0273a4c1a3b9c21929554be2329bb8d97d678c3b7c870e377"
+    },
+    {
+      "path": "INDEX-STAGING-OBSERVATION.json",
+      "bytes": 632,
+      "sha256": "90e6aa5d98a70d68d1ed2b31fcfd627c42615b46626471d1e4858b9f2935fb21"
+    },
+    {
+      "path": "INDEX-VERIFICATION.json",
+      "bytes": 9955,
+      "sha256": "37ef70e3172ed934280e2646daef2e4b394aef68b7328cbc932763cb854834f8"
+    },
+    {
+      "path": "ORIGINAL-INVENTORY-COMPARISON.json",
+      "bytes": 1948,
+      "sha256": "69357bf7865cb1e0fff65429993dce54490024a34845769cb5dab8d5caaad18a"
+    },
+    {
+      "path": "RELOCATION-VERIFICATION.json",
+      "bytes": 1249,
+      "sha256": "69f2dcc2cf7d31ea7d89f76b074e19218664f589ee2adc139a35fef5101131bc"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 8456,
+      "sha256": "6c7b637793ff32a46b1ea9fc8a553099d203c5254bf7c144329bef0bb27d0418"
+    },
+    {
+      "path": "SOURCE-PUBLICATION-BOUNDARY.json",
+      "bytes": 2754,
+      "sha256": "23385b5ecdc560a1ce7ad7f54df9570943508e6704a2e204dc287b1b4fba610c"
+    },
+    {
+      "path": "STAGED-COPY-VERIFICATION.json",
+      "bytes": 5441,
+      "sha256": "9112fe1be6a4d00ca6aa1bf45722966ae505f1025f6d8387412536654c4711aa"
+    },
+    {
+      "path": "VERIFICATION-SUMMARY.json",
+      "bytes": 438,
+      "sha256": "4f9ca8bdc2a5de01e45ba462ffbf87babd44c4645d4d3de86d6ae767eeef180c"
+    },
+    {
+      "path": "gate-reconciliation.log",
+      "bytes": 682,
+      "sha256": "ea84f98bd8ecc1d39389e3892011c7d76364b3019cd8765f0f09cae0be0f8a2f"
+    },
+    {
+      "path": "reconcile_gates.py",
+      "bytes": 8358,
+      "sha256": "96adc177b5fe36b00ae932b596499cb6b386e99ed7e8fd47523269ed6c7922b5"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 416,
+      "sha256": "53d960c9b1ec7b1a6a755a2ed0ff3361f510f431eeb2cfe22320fb26c2b7bac2"
+    },
+    {
+      "path": "verify_packet.py",
+      "bytes": 12005,
+      "sha256": "e893370dda66209bc5cc5f8b7b67e4bf62b68c909cbfda2138fdc37b34e8e8cb"
+    }
+  ]
+}

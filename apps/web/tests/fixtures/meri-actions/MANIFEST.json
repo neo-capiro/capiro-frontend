@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "sealedUTC": "2026-10-13T04:46:44.432255+00:00",
+  "files": [
+    {
+      "path": "ADAPTER-CONTROLS.json",
+      "bytes": 3448,
+      "sha256": "45a43b2246b8c571a1d62d461dffe019129a80302b6fe7538758cb0ae358fa27"
+    },
+    {
+      "path": "CONTEXT.json",
+      "bytes": 5635,
+      "sha256": "3eedc7f1a73b571fbd61c470997b156c4530d46017d161cb22381cfbac9c39f4"
+    },
+    {
+      "path": "INDEX.json",
+      "bytes": 10502,
+      "sha256": "74945ba279ac7c33a3c01217b2b7511017542752e1f179a3059eedabeb425b28"
+    },
+    {
+      "path": "RECEIVER-RESULTS.json",
+      "bytes": 11452,
+      "sha256": "d8add55a696f25497d72ac6e74a088e1a755dfb4002d5daddb106bf47fdcadce"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6361,
+      "sha256": "075039bf231bfbf1c01e441850e5276289436f0308344a5e6bb7d0e172b4c9e5"
+    },
+    {
+      "path": "SOURCE-READS.json",
+      "bytes": 6109,
+      "sha256": "669b0c3ac2574be13e48fb96b7b55a96cfea632bc1091ceef77dee4020c274ea"
+    },
+    {
+      "path": "fixtures/approval-refused-but-unknown.json",
+      "bytes": 356,
+      "sha256": "6831f90ad43d7419bae5524b584c1764c0380c56c264c5c994f965597377cdc6"
+    },
+    {
+      "path": "fixtures/draft-canonical-date.json",
+      "bytes": 2920,
+      "sha256": "29febc1341d6a008b7b3d696df0329d9834e1dc0d76530d27cb4d48c447f02c0"
+    },
+    {
+      "path": "fixtures/draft-foreign-query-handle.json",
+      "bytes": 2953,
+      "sha256": "ab012223d1cbea1832c06d5eb38641a416fb64762b896c44d800eea299bf5b47"
+    },
+    {
+      "path": "fixtures/draft-forged-action-lineage.json",
+      "bytes": 2889,
+      "sha256": "b03e6a37101ed0487b252f2574b505658c9b3500ce5af2112347e0999941d2e8"
+    },
+    {
+      "path": "fixtures/draft-forged-recommendation.json",
+      "bytes": 2886,
+      "sha256": "2b3d0e909320ef181e51e8aacd2de3bee3856fc662b6081f9dcbcab9faf52985"
+    },
+    {
+      "path": "fixtures/draft-forged-task-hash.json",
+      "bytes": 2825,
+      "sha256": "83b7b7423f7d3ea71ffc8b484bf11ba24244fee4459a80e2b7eb36d4759bb3d2"
+    },
+    {
+      "path": "fixtures/draft-raw-html-date.json",
+      "bytes": 2873,
+      "sha256": "a1a1496d24b3b1c36a2551ee58c4f63586d2f21f83ad72fbb5eaeec6c2170429"
+    },
+    {
+      "path": "fixtures/draft.json",
+      "bytes": 3226,
+      "sha256": "dc6d20c231c46a37e603bc6ca3311518ee2f99cd89346b4e6b20a88ae9142abd"
+    },
+    {
+      "path": "fixtures/error-access_denied.json",
+      "bytes": 327,
+      "sha256": "d46fd0b264e28fe5b23f63db8b4dc6a3fc382083bf8572fde8ed0856b9809629"
+    },
+    {
+      "path": "fixtures/error-cancelled.json",
+      "bytes": 319,
+      "sha256": "53bb31bd7b3ae5483a26a6f8725243dc27e1c49bdc57d176b4e9d97fd53cee49"
+    },
+    {
+      "path": "fixtures/error-command_outcome_unknown.json",
+      "bytes": 340,
+      "sha256": "9a7fbcb42965bdb24d579cbda8281c8c79bfd0f406c95f277732b6e936caa6b5"
+    },
+    {
+      "path": "fixtures/error-deadline.json",
+      "bytes": 317,
+      "sha256": "54f4ab7f6c018bf4edf1e077a5bf932d3424e089ec28758e0b1fefbc87835f83"
+    },
+    {
+      "path": "fixtures/error-unauthenticated.json",
+      "bytes": 331,
+      "sha256": "7d0d73274ab87c5212ad1c8ed0eb4b087c0e67504f51ecf2a03f3840fc949887"
+    },
+    {
+      "path": "fixtures/execute-approval-pending.json",
+      "bytes": 1771,
+      "sha256": "b0c8d5a733030d295e82cbe5a8bac6231491190c49eb8946b1692f94cabec2c5"
+    },
+    {
+      "path": "fixtures/execute-canonical-date.json",
+      "bytes": 1735,
+      "sha256": "7a05f9f166cf1a3bb6f12cfb26f07106d5092ad2fcd84df737c5619dee5fd9e7"
+    },
+    {
+      "path": "fixtures/execute-error-with-success-status.json",
+      "bytes": 304,
+      "sha256": "9ef70fc8b94f74c6f65a2db6bd9c0fc889c50c426a2ced650e3cea1ff03a5b9d"
+    },
+    {
+      "path": "fixtures/execute-failed-as-observed.json",
+      "bytes": 1673,
+      "sha256": "24919d32ba5ada2068e4b91080c0afca84b127555ce63a47c8e3d7fdb02a25ad"
+    },
+    {
+      "path": "fixtures/execute-foreign-actor.json",
+      "bytes": 1736,
+      "sha256": "d3dd3e7c0c067f0f7d3822ce7292d5c3952ae897d07b916a5699a2a88a4fa0b7"
+    },
+    {
+      "path": "fixtures/execute-foreign-command-hash.json",
+      "bytes": 1688,
+      "sha256": "2340d5a9961ad233033e0f1c3dfaffd40d01420834123bee5d33219ceef98ae6"
+    },
+    {
+      "path": "fixtures/execute-foreign-command.json",
+      "bytes": 1679,
+      "sha256": "2ef942bc89f9a2623515a715e0156a46ba439877fb71585f0b6bc1100e50511f"
+    },
+    {
+      "path": "fixtures/execute-foreign-idempotency.json",
+      "bytes": 1688,
+      "sha256": "4a55587802b43d31568a5f92711409e6edc343798e4abc3b761e63bc606a9bf7"
+    },
+    {
+      "path": "fixtures/execute-foreign-task-client.json",
+      "bytes": 1716,
+      "sha256": "d607c60ec621054567d9cbb91fa5f4667bf775f322da14d08b6ec11b55900971"
+    },
+    {
+      "path": "fixtures/execute-foreign-task-date.json",
+      "bytes": 1742,
+      "sha256": "350f23c92efe9d333e5cefbd377db3b2731a0c8cc9626cc962ea9dacb8bca887"
+    },
+    {
+      "path": "fixtures/execute-foreign-task-title.json",
+      "bytes": 1693,
+      "sha256": "75a9ad87526f6a905c132e22328ea802ceadd460f63c3d361d5ab05cc2b8a23e"
+    },
+    {
+      "path": "fixtures/execute-forged-tenant-scope.json",
+      "bytes": 1669,
+      "sha256": "ebca5870506161b151195bb45fc942a3126a267ebdf5d2e601ef679c0bd5351c"
+    },
+    {
+      "path": "fixtures/execute-indeterminate.json",
+      "bytes": 267,
+      "sha256": "cd74b3a2284f0ddfc8d9389b79dd5770f3f5268eb164170d3d326009916e0f6e"
+    },
+    {
+      "path": "fixtures/execute-observed.json",
+      "bytes": 3138,
+      "sha256": "8d1fc6912893b8d4dac3421cc6153c4b2aa5e233bb9ddfd3fbddcfcb20c1375a"
+    },
+    {
+      "path": "fixtures/execute-recovered-worker.json",
+      "bytes": 1788,
+      "sha256": "52e4c595141239aba7f2004756114bc82052dc40d66516f751379796251593e6"
+    },
+    {
+      "path": "fixtures/execute-refusal-wrong-status.json",
+      "bytes": 306,
+      "sha256": "376eb023118c2b06cc1b82360357be0ab262bed4f7a66c5d86dcc4ae54159667"
+    },
+    {
+      "path": "fixtures/execute-replay.json",
+      "bytes": 3136,
+      "sha256": "f8afd3fd43c799eb62b72a08834b7897b46af880e5635b9577e02c7348fdc6b1"
+    },
+    {
+      "path": "fixtures/prepare-canonical-date.json",
+      "bytes": 4562,
+      "sha256": "daf4cce6f4696155269a3ea89abcf7727d7dee50056cfe37ca665bf245650a9d"
+    },
+    {
+      "path": "fixtures/prepare-claims-approved.json",
+      "bytes": 4455,
+      "sha256": "c5f218fe2141904c0c29f16469ada2130ae5ea500116098f704c9a25e11c4da9"
+    },
+    {
+      "path": "fixtures/prepare-coherent-task-substitution.json",
+      "bytes": 4535,
+      "sha256": "43e3518cbc51811cfaa1e5d0c4cca86d17faac6f8e6350a586ed9eb4dd0fbec6"
+    },
+    {
+      "path": "fixtures/prepare-foreign-supporting-draft.json",
+      "bytes": 4531,
+      "sha256": "b1f0f957feaccb22ebf4d1dbcdd7a57184e4c2c38e2ee1f24209d688f33fb687"
+    },
+    {
+      "path": "fixtures/prepare-forged-command-hash.json",
+      "bytes": 4455,
+      "sha256": "459f510f14496a8ba8cbc1c0f7c825308d021bbda06747dd223fc70dcc656b15"
+    },
+    {
+      "path": "fixtures/prepare-forged-reviewed-task.json",
+      "bytes": 4471,
+      "sha256": "a679d8fe167f921070ec1afbd5100df5c649086a37444d4539dd610a10706b1b"
+    },
+    {
+      "path": "fixtures/prepare-forged-stable-lineage.json",
+      "bytes": 4491,
+      "sha256": "770381966ac1cf0277a5e005b6485b57d18735db97bc11862c2392ff1e4c8b20"
+    },
+    {
+      "path": "fixtures/prepare-not_stored.json",
+      "bytes": 293,
+      "sha256": "15dd99c30d3cca4570622b6a0be576252b95da4c1ae82a0c635f2ea5be7732d3"
+    },
+    {
+      "path": "fixtures/prepare-read_unavailable.json",
+      "bytes": 305,
+      "sha256": "7db1267411322bbe7e0de5e760d46dc020f5c0447b8392363d841f08f44f1cc8"
+    },
+    {
+      "path": "fixtures/prepare-recovered-worker.json",
+      "bytes": 4651,
+      "sha256": "c7a98d65023e2fce0ad0aa1fe003e8532f3c7a0936b5af5f50bf813a8d2f063d"
+    },
+    {
+      "path": "fixtures/prepare-result_not_released.json",
+      "bytes": 311,
+      "sha256": "ee8c230bbc0a9dbbcbe2d6bdba7cece897bc868f15b273445ef602bfe557ca48"
+    },
+    {
+      "path": "fixtures/prepare-stored_not_released.json",
+      "bytes": 365,
+      "sha256": "d2d4820e7a0dbdd03965efcce15de210f486e102f73c3f2525792d6837378665"
+    },
+    {
+      "path": "fixtures/prepare-unknown.json",
+      "bytes": 341,
+      "sha256": "de1688be05172e853710f15f74c25773f2b1806f3cbe775e92dc1ff110d4f051"
+    },
+    {
+      "path": "fixtures/prepare.json",
+      "bytes": 7339,
+      "sha256": "1dd5ab4de7b86d0d1931474b1a4d3b06cdc33b4d099723ce05a943c1f7e02bbd"
+    },
+    {
+      "path": "fixtures/query-forged-event-handle.json",
+      "bytes": 9743,
+      "sha256": "1bde7f8bdf1d52380b20e9596758d2dc549ebdc519cca94b6a9d9839fffdc518"
+    },
+    {
+      "path": "fixtures/query-forged-event-lineage.json",
+      "bytes": 9745,
+      "sha256": "981ac53a9d3a190de28705ac6db125a7e6659b547e3d5af201f548759a8998db"
+    },
+    {
+      "path": "fixtures/query-forged-result-hash.json",
+      "bytes": 9727,
+      "sha256": "7c674e3e02a922b670b1903efc0c801c4cf29fe64e87018e7d3d1f3ba0151a88"
+    },
+    {
+      "path": "fixtures/query-interleaved-sequence.json",
+      "bytes": 9803,
+      "sha256": "c3632bcc0c9bf0ea36da33ddda23211c3a3cabca810ea0948f7b9edfdeb4ca2d"
+    },
+    {
+      "path": "fixtures/query-recommendation-accepted.json",
+      "bytes": 9737,
+      "sha256": "3cf8373c3afce6c172c4d2eb7aba8acfc96a825a2df755defa3b841701fd9f86"
+    },
+    {
+      "path": "fixtures/query.json",
+      "bytes": 9818,
+      "sha256": "b6dffd40ec9f9fda72cb4319ea0eafc9ec1a2a8448bf5808a6c5ba12421c1e6b"
+    },
+    {
+      "path": "public-test-sources/action-application-independent.test.mjs",
+      "bytes": 10140,
+      "sha256": "1f36f3c52797ded705398531a95d71c8fe1af2c199c87a27abc9a00cff3e0b71"
+    },
+    {
+      "path": "public-test-sources/action-application-public-types.ts",
+      "bytes": 1226,
+      "sha256": "d5cd4849dc6995190576af3fb3b1fb23aec064f465d7c3506e76d15a2fa3c9b7"
+    },
+    {
+      "path": "public-test-sources/action-application-public.test.mjs",
+      "bytes": 3996,
+      "sha256": "d026903348250dfc0bc881fb4cd7125d7d3f163dc80e2fc9f6e74c8738bb758e"
+    },
+    {
+      "path": "public-test-sources/wire-fixtures.json",
+      "bytes": 32825,
+      "sha256": "a9c795ea12314018fa2bb708d22492c48aeb2ce1ace874d91b678d1ef3cf0ff9"
+    },
+    {
+      "path": "receiver.log",
+      "bytes": 52,
+      "sha256": "77fd5433ff3684f208444be7f9e1f7b313f4d1a57e6059745bb12f020efe0d1d"
+    },
+    {
+      "path": "verify-fixtures.mjs",
+      "bytes": 14670,
+      "sha256": "bb18cd4bd03c223fe8efe337ced2cdad79a4766b2022d6ac0a5cbda7a56236f3"
+    }
+  ],
+  "fileCount": 62,
+  "totalBytes": 260385
+}

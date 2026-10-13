@@ -1,0 +1,3 @@
+Usage: node scripts/architecture.mjs
+Exit 0: no violations or new/changed unreviewed size findings; exit 1: boundary/review failure; exit 2: setup failure.
+All size signals are reported. Exact pinned transfer matches remain inherited and unreviewed.

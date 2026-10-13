@@ -1,0 +1,18 @@
+{
+  "capturedAtUtc": "2026-10-12T19:38:23.708235+00:00",
+  "finding": "MS06-INDEP-01",
+  "sourceDisposition": "Resolved in reviewed source; browser execution remains root-owned",
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+      "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "sha256": "5f304b07d2698fa3e4a3c60b66649d7dbfcae2259e91850912d981581515b5da"
+    }
+  ],
+  "reason": "Render-synchronized selectionScope compares both clientId and mode, clears selected before any committed rendering with a changed scope, and leaves search/date/visibility state unchanged. No second selected state or effect-delayed stale commit. Current query cancellation remains the existing useCapiroQuery owner.",
+  "testReview": "New actual-screen regression replaces verified client and requires replacement row with empty Selected meeting and no old Join link. This verifies integrated behavior. Because ApplicationBoundary already keys client context, it does not independently isolate the reusable hook reset from that outer remount; do not claim this one case proves the hook fix in isolation.",
+  "remainingBlockers": []
+}

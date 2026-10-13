@@ -1,0 +1,36 @@
+{
+  "sealedAt": "2026-10-13T09:03:59.970960+00:00",
+  "classification": "Static source acceptance only; new standalone checks UNRUN",
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 3450,
+      "sha256": "b6aaef1ef0ad90ef9524320fd95d7572fd93fc88ce1771522b69bbd13b548e11"
+    },
+    {
+      "path": "SOURCE-AND-AST.json",
+      "bytes": 6186,
+      "sha256": "9c32f2d5a3b0849e05b26b2de18edc9d16d1894562f89380dc42e50fba3f604f"
+    },
+    {
+      "path": "run-standalone.mjs.source.txt",
+      "bytes": 5624,
+      "sha256": "4abd010336b73d1358724bb8c1eef26267cd4b77b82e509afeca28125842dbef"
+    },
+    {
+      "path": "tracked-diff.patch",
+      "bytes": 2332,
+      "sha256": "d01acc5b6fc8f10852eeacd97e04f8ecf4d7addfa7561f8c6f7a893c67ea3940"
+    },
+    {
+      "path": "verify-documents.mjs.source.txt",
+      "bytes": 2694,
+      "sha256": "873eb842ee558bf6904642242166bc8a9765f304a64f8c3ab5f54c312ee83acd"
+    },
+    {
+      "path": "verify-standalone.mjs.source.txt",
+      "bytes": 7762,
+      "sha256": "7494d541b60c8619134783ade79a9ba1bc0646f22bbbe1ff346be1dbb055fda1"
+    }
+  ]
+}

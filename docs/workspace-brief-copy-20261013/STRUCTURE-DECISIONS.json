@@ -1,0 +1,97 @@
+{
+  "sourceCommit": "7c961cd675dc79282f348e89489198b410f82442",
+  "decision": "Accept all eight exact feature responsibility signals; root owns registry integration",
+  "scanner": "Reviewer reused canonical scanModule on exactly eight already-reviewed files to independently bind current function fingerprints; no application/test execution or full architecture gate",
+  "ownerProposalSha256": "ec83adae0f0c8ee032e74f11112652566f7bc05807f1bd165c57fad773c5554a",
+  "records": [
+    {
+      "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "kind": "function",
+      "symbol": "DraftEditor",
+      "line": 33,
+      "nonblank": 202,
+      "fingerprint": "a430dcf49a60b1889c2e4e56d8ec8340df338cb91e500c1711007490941f071d",
+      "sourceSha256": "0ce6193922e23b0239bcc8eff950404475606f6bed862c063cf6383899d15f66",
+      "decision": "accepted",
+      "reason": "Existing parent document editing and history presentation remain cohesive. Addition composes copied-tab links and excludes bound bodies from ordinary content projection; canonical copied-tab command lifecycle is separate. No new transport or authority owner."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "kind": "function",
+      "symbol": "WorkspaceScreen",
+      "line": 36,
+      "nonblank": 209,
+      "fingerprint": "9aa643c307cfc5f36a2b2f81a2e587413920dbb9cb916425ea9eed2044f3dcfc",
+      "sourceSha256": "1a5ce21e41666541246b3095207942f499f43ec12c2818af524592485bdc3ffa",
+      "decision": "accepted",
+      "reason": "Existing Workspace route/list/create container receives a single early delegation to BriefCopyRoute for exact copy query keys. Parsing, admission and command behavior remain in the new cohesive feature rather than expanding this route container."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/brief-copy/BriefCopyFlow.tsx",
+      "kind": "function",
+      "symbol": "CopyWorkflow",
+      "line": 16,
+      "nonblank": 88,
+      "fingerprint": "4ee101b76b96335581242283c510786ff005dfc5d5f94f81dbd877d617d670d5",
+      "sourceSha256": "46bf2e7bb5be8375d136b37a7c1eb5b2ccaa0d6a107cb46ca16ce665ae8bfe23",
+      "decision": "accepted",
+      "reason": "Presentation of one copy lifecycle: recovery unavailable, retained command, existing editor, created receipt result, or explicit initial copy. It delegates body editing and all durable lifecycle behavior; this is one stateful workflow presentation responsibility."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/brief-copy/CopyBodyEditor.tsx",
+      "kind": "function",
+      "symbol": "CopyBodyEditor",
+      "line": 9,
+      "nonblank": 122,
+      "fingerprint": "c8682471dbf98f94665e6a9218408eb5e605adb6b42071f9b98c8e592cc9f617",
+      "sourceSha256": "2022269b2295197fd11d537e507ac0d9e845193dbd731dc974957205d008c1fe",
+      "decision": "accepted",
+      "reason": "One local complete-body editing surface switches between explicit JSON application and canonical section editing/preview. It owns draft-only presentation and mode errors; body admission and section replacement are separate pure functions. It owns neither API nor persistence. Rejected section identities are tracked within this same local body-admission responsibility until corrected or explicitly replaced via JSON."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/brief-copy/CopyEditor.tsx",
+      "kind": "function",
+      "symbol": "CopyEditor",
+      "line": 10,
+      "nonblank": 91,
+      "fingerprint": "ba8f0f269a5676bf19489d00697b5e770de3087e85b7878bcd48bde2a4803ce3",
+      "sourceSha256": "e2493c598eb6290eafacccde7e3680df49ad4ef7da9460fabb04936a062e1285",
+      "decision": "accepted",
+      "reason": "One exact copied-tab draft form owns local name/body, source/current comparison, and explicit atomic-save input. Rendering delegates section/JSON editing and history; command execution and recovery remain in the hook. No parallel transport or legacy writes. Final display-only refinement keeps all five identifiers behind native details/summary and retains visible Core version; save input and lifecycle are unchanged."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/brief-copy/useBriefCopyCommand.ts",
+      "kind": "function",
+      "symbol": "useBriefCopyCommand",
+      "line": 33,
+      "nonblank": 238,
+      "fingerprint": "0bf1259b22905d9ca20c3e2c68aaa1777a8e3f6dbed271904f8e2f7950f489b9",
+      "sourceSha256": "a4f44d9ccf8bc009ffa05ebdbdb098afd7acc0d7a01355405857d76adfc0535c",
+      "decision": "accepted",
+      "reason": "One retained atomic command lifecycle coordinates canonical storage, serialized current journal observation, explicit submit/replay, receipt reconciliation and state-conflict retirement. These transitions share the same scope/lifetime/intent. DTOs, body semantics, receipt comparisons, network operations and storage implementation are separate canonical owners. The size signal remains visible; no generic transaction framework introduced."
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+      "kind": "function",
+      "symbol": "useNewsletter",
+      "line": 12,
+      "nonblank": 149,
+      "fingerprint": "5d3d8a2c411df85a16dc9b7974d9ac1b34514927b26a103146edc57aa8fd8837",
+      "sourceSha256": "2840ca88ad826912f512f4aa3f0d1b7d052c8ecaf5c22d6e21f4ecac974f2ce8",
+      "decision": "accepted",
+      "reason": "Existing newsletter edit/undo/save lifecycle keeps its responsibility. The narrow delta excludes bound Core copies consistently from initialization, target selection and returned document identity. It neither implements copied-tab mutation nor projects bound rich bodies into legacy updates."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+      "kind": "function",
+      "symbol": "BriefViewer",
+      "line": 17,
+      "nonblank": 142,
+      "fingerprint": "cc49e21117e2077b288f1f2805bd762937cdfebf4f8ecb8d7b49ad686530e69b",
+      "sourceSha256": "9fe621b2b85e21aeef7350f213b2d548dcd29b7240f37e0b8fe0c7063ca1d84f",
+      "decision": "accepted",
+      "reason": "Existing saved brief/history/refresh view adds a delegated source-link presentation. Exact tuple construction lives in WorkspaceCopyLink; no Workspace transport, copy execution or durable state is added to this Portfolio viewer."
+    }
+  ],
+  "limits": "Sparse-checkout aggregate blockers are not waived. This accepts these exact eight responsibilities only; no registry edits."
+}

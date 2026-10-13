@@ -1,0 +1,163 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-delete/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-next-delete-evidence/playwright.config.ts",
+      "--grep",
+      "unknown deletion survives"
+    ],
+    "configFile": "/tmp/capiro-next-delete-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-next-delete-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-delete-evidence/browser-red-dispatch",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-next-delete-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "guarded.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-delete-evidence/browser-red-dispatch.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "guarded.spec.ts",
+      "file": "guarded.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unknown deletion survives close/reopen until deliberate current review and a new confirmation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8207,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Confirm delete</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Confirm delete</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:53:5",
+                    "location": {
+                      "file": "/workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+                      "column": 5,
+                      "line": 53
+                    },
+                    "snippet": "  51 |   await expect(\n  52 |     dialog.getByRole(\"button\", { name: \"Confirm delete\" }),\n> 53 |   ).toBeDisabled();\n     |     ^\n  54 |   await expect(dialog.getByText(/deletion outcome is unknown/)).toBeVisible();\n  55 |   await page.screenshot({\n  56 |     path: info.outputPath(\"delete-unknown-desktop.png\"),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+                        "column": 5,
+                        "line": 53
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Confirm delete</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  51 |   await expect(\n  52 |     dialog.getByRole(\"button\", { name: \"Confirm delete\" }),\n> 53 |   ).toBeDisabled();\n     |     ^\n  54 |   await expect(dialog.getByText(/deletion outcome is unknown/)).toBeVisible();\n  55 |   await page.screenshot({\n  56 |     path: info.outputPath(\"delete-unknown-desktop.png\"),\n    at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:53:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:19:43.008Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+                    "column": 5,
+                    "line": 53
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-51512d45ede41d7abaab",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 21,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T18:19:42.475Z",
+    "duration": 9141.453,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

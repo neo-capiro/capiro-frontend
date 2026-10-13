@@ -1,0 +1,82 @@
+[
+  {
+    "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "kind": "function",
+    "symbol": "write",
+    "line": 182,
+    "nonblank": 90,
+    "fingerprint": "88c0936120dc53e0d3947280754efbb93502e00f67ccdf930dd24bfab7372d0d",
+    "authorResponsibilityRationale": "One synchronous reservation-to-settlement transaction: claim the canonical journal before await, fingerprint immutable intent, dispatch once, correlate the public receipt, conservatively retain uncertainty, and recheck ownership after synchronous settlement notifications. Splitting this sequence would obscure the atomic fences; HTTP decoding and cache generation already have separate cohesive owners. No backend generation or authorization logic is implemented here.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 465,
+    "fingerprint": "3596be051b535332d316cd5fd8ba6a7b2aa220f61b94536e335613a5243fcf50",
+    "authorResponsibilityRationale": "Tests for the single public DocumentWorkflow port, separated into native receiving/projection, scope/immutable identity, and uncertainty/lifetime groups. They share only synthetic fixture helpers and actual public receiving, with no unrelated subsystem setup.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "line": 22,
+    "nonblank": 124,
+    "fingerprint": "e31ed75169ca6df49e0ee2b2a1ab24f1dc633c13f6b4dcfc40004a3daddf1d8c",
+    "authorResponsibilityRationale": "The group tests public-format receiving and immutable presentation boundaries: DOCX/TXT/XLSX, captured content, replacement revision, malformed/family inputs, foreign handles and explicit ID admission.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "line": 147,
+    "nonblank": 116,
+    "fingerprint": "14f8dd5d0579bdc68efc2719e28d3b85fa64beaea956b1cd8ed98fd953e65b6e",
+    "authorResponsibilityRationale": "The group tests context/client/family and known immutable identity rejection independently of public wire validity; several controls prove the public receiver first accepts the deliberate foreign receipt.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "line": 264,
+    "nonblank": 205,
+    "fingerprint": "3a59f8ae600d8668aae0bdca2e45df18dedb51e183fcdb3f6c8a33fb50dacf68",
+    "authorResponsibilityRationale": "The group tests one document write/lifetime contract: interrupted create/revise, repeats, finite dispositions, clear/pause/expiry/disposal and revocation. The function is a declarative collection of independent cases, not a long application algorithm.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "line": 47,
+    "nonblank": 149,
+    "fingerprint": "f8fd3e019e058c4648674518725b33942ba4db58443103412ea09de2f84e0746",
+    "authorResponsibilityRationale": "The group verifies the bounded fixed JSON document transport with actual Response streams: exact route/bearer/redirect behavior, media/length refusal, incremental cap, fatal UTF8, pre-abort and hanging/late cleanup.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "line": 197,
+    "nonblank": 135,
+    "fingerprint": "970f8468b1e1415d0d148b8fb5c2c1c2a0f9c5591bad4f5ad1b87f678b7da118",
+    "authorResponsibilityRationale": "The group verifies the public binary receiving boundary: exact request/version, branded version, all required headers, hash/count, unfinished-body abort and validated JSON error disposition.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  },
+  {
+    "file": "apps/web/tests/meri-document-journal.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "line": 14,
+    "nonblank": 111,
+    "fingerprint": "a61f7c43ca47dd1c2fef235dd46a87be623b53b11bf09776b77c93d938389540",
+    "authorResponsibilityRationale": "The group tests one canonical QueryClient generation lifetime: shared context, field-by-field isolation, cache clear/replacement, pre-dispatch and settlement reentrancy, and no draft/credential storage.",
+    "independentReview": "requested from objectives_work_intel_review; root owns registry integration"
+  }
+]

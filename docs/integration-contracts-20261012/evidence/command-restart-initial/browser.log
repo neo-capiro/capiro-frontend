@@ -1,0 +1,26 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test activity-command-restart.spec.ts activity-command.spec.ts
+
+[WebServer] (node:215405) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:215424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (4.7s)
+  ✓  2 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (3.0s)
+  ✓  3 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (1.9s)
+  ✓  4 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (3.3s)
+  ✓  5 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (3.1s)
+  ✓  6 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (2.5s)
+  ✓  7 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (2.3s)
+  ✓  8 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (3.6s)
+
+  8 passed (25.9s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

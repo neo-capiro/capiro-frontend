@@ -1,0 +1,99 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test prospect-files.spec.ts activity-command-recovery.spec.ts activity-command-restart.spec.ts activity-command-storage.spec.ts activity-command.spec.ts
+
+[WebServer] (node:222365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 31 tests using 1 worker
+
+(node:222404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (8.7s)
+  ✓   2 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (6.8s)
+  ✓   3 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (6.5s)
+  ✓   4 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (5.1s)
+  ✓   5 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (6.8s)
+  ✓   6 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (7.0s)
+  ✓   7 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (7.8s)
+  ✓   8 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (5.9s)
+  ✓   9 tests/browser/activity-command-storage.spec.ts:9:3 › localStorage unavailable after response loss blocks replacement commands across reload (4.8s)
+  ✓  10 tests/browser/activity-command-storage.spec.ts:9:3 › indexedDB unavailable after response loss blocks replacement commands across reload (5.5s)
+  ✓  11 tests/browser/activity-command-storage.spec.ts:9:3 › locks unavailable after response loss blocks replacement commands across reload (5.0s)
+  ✓  12 tests/browser/activity-command-storage.spec.ts:47:3 › fence corruption cannot become an empty form or a replacement key (5.0s)
+  ✓  13 tests/browser/activity-command-storage.spec.ts:47:3 › missing-fence corruption cannot become an empty form or a replacement key (4.7s)
+  ✓  14 tests/browser/activity-command-storage.spec.ts:47:3 › missing-record corruption cannot become an empty form or a replacement key (4.6s)
+  ✓  15 tests/browser/activity-command-storage.spec.ts:47:3 › ciphertext corruption cannot become an empty form or a replacement key (4.7s)
+  ✓  16 tests/browser/activity-command-storage.spec.ts:97:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (4.7s)
+  ✓  17 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (4.2s)
+  ✓  18 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (2.7s)
+  ✓  19 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (4.3s)
+  ✓  20 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (3.9s)
+  ✓  21 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (3.4s)
+  ✓  22 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (2.2s)
+  ✓  23 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (3.2s)
+  ✓  24 tests/browser/prospect-files.spec.ts:40:1 › current prospect files retain readiness and do not expose unsupported actions (2.0s)
+  ✓  25 tests/browser/prospect-files.spec.ts:63:1 › upload loss retains one exact intent and confirms without reuploading bytes (2.4s)
+  ✘  26 tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request (2.1s)
+(node:224279) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 tests/browser/prospect-files.spec.ts:146:1 › deletion requires confirmation and current list, with no uncertain automatic retry (3.3s)
+  ✓  28 tests/browser/prospect-files.spec.ts:175:1 › dismissed prospect retains historical files but cannot upload, including on mobile (2.2s)
+  ✓  29 tests/browser/prospect-files.spec.ts:202:1 › reload preserves the original upload confirmation without reuploading bytes (4.2s)
+  ✓  30 tests/browser/prospect-files.spec.ts:265:1 › lost upload-ticket response survives reload and requires exact original bytes before same-key recovery (4.4s)
+  ✓  31 tests/browser/prospect-files.spec.ts:348:1 › unavailable browser recovery storage cannot issue an upload intent (2.2s)
+
+
+  1) tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('alert')
+    Expected: visible
+    Error: strict mode violation: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('alert') resolved to 2 elements:
+        1) <div role="alert" class="status error">…</div> aka getByRole('alert').first()
+        2) <div role="alert">…</div> aka getByRole('alert').nth(1)
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('alert')
+
+
+      137 |   await page.goto(`/portfolio/prospects/${prospectId}`);
+      138 |   const area = files(page);
+    > 139 |   await expect(area.getByRole("alert")).toBeVisible();
+          |                                         ^
+      140 |   await expect(area.getByRole("link")).toHaveCount(0);
+      141 |   await expect(
+      142 |     area.getByRole("button", { name: "Upload file", exact: true }),
+        at /workspace/capiro-contracts/apps/web/tests/browser/prospect-files.spec.ts:139:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/prospect-files-wrong-linea-ca961-hout-broadening-the-request/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/prospect-files-wrong-linea-ca961-hout-broadening-the-request/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/prospect-files-wrong-linea-ca961-hout-broadening-the-request/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/prospect-files-wrong-linea-ca961-hout-broadening-the-request/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request 
+  30 passed (2.4m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test prospect-files.spec.ts activity-command-recovery.spec.ts activity-command-restart.spec.ts activity-command-storage.spec.ts activity-command.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

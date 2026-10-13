@@ -1,0 +1,249 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-mail/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-mail-evidence/playwright.config.mjs",
+      "--grep",
+      "source replacement retires|toolbar Attach file"
+    ],
+    "configFile": "/tmp/capiro-remaining-mail-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "mail-rich-compose.spec.ts",
+          "email-compose.spec.ts",
+          "mail-local-draft.spec.ts",
+          "mail-rewrite.spec.ts",
+          "thread-mail.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-mail-evidence/extra-before-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mail-rich-compose.spec.ts",
+      "file": "mail-rich-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "source replacement retires editor history and rich Meri Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10779,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"Verified rewrite.\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_7_\" class=\"tiptap ProseMirror _messageBody_1r7cj_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"Verified rewrite.\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_7_\" class=\"tiptap ProseMirror _messageBody_1r7cj_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:333:31",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                      "column": 31,
+                      "line": 333
+                    },
+                    "snippet": "  331 |   ).toHaveCount(0);\n  332 |   await message(page).press(\"ControlOrMeta+z\");\n> 333 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n      |                               ^\n  334 |   expect(state.sends).toHaveLength(0);\n  335 | });\n  336 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 31,
+                        "line": 333
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"Verified rewrite.\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_7_\" class=\"tiptap ProseMirror _messageBody_1r7cj_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  331 |   ).toHaveCount(0);\n  332 |   await message(page).press(\"ControlOrMeta+z\");\n> 333 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n      |                               ^\n  334 |   expect(state.sends).toHaveLength(0);\n  335 | });\n  336 |\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:333:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:39:33.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                    "column": 31,
+                    "line": 333
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-ea76992044eae2717db1",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 317,
+          "column": 1
+        },
+        {
+          "title": "toolbar Attach file opens the existing attachment picker with no extra request",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4424,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Attach file', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" class=\"button ghost\">Attach file</button> aka getByLabel('Message formatting').getByRole('button', { name: 'Attach file' })\n    2) <input type=\"file\"/> aka getByLabel('Attach file')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Attach file', exact: true })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Attach file', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" class=\"button ghost\">Attach file</button> aka getByLabel('Message formatting').getByRole('button', { name: 'Attach file' })\n    2) <input type=\"file\"/> aka getByLabel('Attach file')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Attach file', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:343:72",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                      "column": 72,
+                      "line": 343
+                    },
+                    "snippet": "  341 |   await format(page, \"Bold\");\n  342 |   const chooserPromise = page.waitForEvent(\"filechooser\");\n> 343 |   await page.getByRole(\"button\", { name: \"Attach file\", exact: true }).click();\n      |                                                                        ^\n  344 |   const chooser = await chooserPromise;\n  345 |   expect(await chooser.element().getAttribute(\"type\")).toBe(\"file\");\n  346 |   expect("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 72,
+                        "line": 343
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Attach file', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" class=\"button ghost\">Attach file</button> aka getByLabel('Message formatting').getByRole('button', { name: 'Attach file' })\n    2) <input type=\"file\"/> aka getByLabel('Attach file')\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Attach file', exact: true })\u001b[22m\n\n\n  341 |   await format(page, \"Bold\");\n  342 |   const chooserPromise = page.waitForEvent(\"filechooser\");\n> 343 |   await page.getByRole(\"button\", { name: \"Attach file\", exact: true }).click();\n      |                                                                        ^\n  344 |   const chooser = await chooserPromise;\n  345 |   expect(await chooser.element().getAttribute(\"type\")).toBe(\"file\");\n  346 |   expect(\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:343:72"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 31,
+                        "line": 342
+                      },
+                      "message": "Error: page.waitForEvent: Test ended.\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================\n\n  340 |   const state = await setup(page);\n  341 |   await format(page, \"Bold\");\n> 342 |   const chooserPromise = page.waitForEvent(\"filechooser\");\n      |                               ^\n  343 |   await page.getByRole(\"button\", { name: \"Attach file\", exact: true }).click();\n  344 |   const chooser = await chooserPromise;\n  345 |   expect(await chooser.element().getAttribute(\"type\")).toBe(\"file\");\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:342:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:39:45.671Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                    "column": 72,
+                    "line": 343
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-e582470ca4ab9364df37",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 337,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:39:32.923Z",
+    "duration": 17768.783,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

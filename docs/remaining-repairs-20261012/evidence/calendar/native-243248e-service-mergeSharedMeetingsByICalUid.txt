@@ -1,0 +1,53 @@
+function mergeSharedMeetingsByICalUid<T extends GroupableMeeting>(
+  rows: T[],
+): Array<T & { notetakers: string[]; groupedMeetingIds: string[] }> {
+  const sharedKey = (m: GroupableMeeting): number => (m.sharedAt ?? m.startsAt).getTime();
+  const notetakersOf = (group: T[]): string[] => [
+    ...new Set(
+      group
+        .filter((g) => g.meri != null)
+        .map((g) => g.contributors[0]?.name)
+        .filter((n): n is string => Boolean(n)),
+    ),
+  ];
+  const mergeContributors = (ordered: T[]): MeetingContributor[] => {
+    const byUser = new Map<string, MeetingContributor>();
+    for (const r of ordered) {
+      for (const c of r.contributors) {
+        const existing = byUser.get(c.userId);
+        if (existing) {
+          existing.artifacts = [...new Set([...existing.artifacts, ...c.artifacts])];
+        } else {
+          byUser.set(c.userId, { ...c, artifacts: [...c.artifacts] });
+        }
+      }
+    }
+    return [...byUser.values()];
+  };
+
+  const out: Array<T & { notetakers: string[]; groupedMeetingIds: string[] }> = [];
+  const seen = new Set<string>();
+  for (const row of rows) {
+    if (!row.iCalUId) {
+      out.push({ ...row, notetakers: notetakersOf([row]), groupedMeetingIds: [row.id] });
+      continue;
+    }
+    if (seen.has(row.iCalUId)) continue;
+    seen.add(row.iCalUId);
+    const group = rows.filter((r) => r.iCalUId === row.iCalUId);
+    if (group.length === 1) {
+      out.push({ ...row, notetakers: notetakersOf(group), groupedMeetingIds: [row.id] });
+      continue;
+    }
+    const ordered = [...group].sort((a, b) => sharedKey(a) - sharedKey(b));
+    const primary = ordered[0]!;
+    out.push({
+      ...primary,
+      contributors: mergeContributors(ordered),
+      notesApproved: group.some((g) => g.notesApproved),
+      notetakers: notetakersOf(ordered),
+      groupedMeetingIds: ordered.map((g) => g.id),
+    });
+  }
+  return out;
+}

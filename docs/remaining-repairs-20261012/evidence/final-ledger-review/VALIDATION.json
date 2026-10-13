@@ -1,0 +1,37 @@
+{
+  "frozenSource": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "originalDocumentRestoredByRemovingOnlyAddedAuditFields": true,
+  "all18FindingOriginalFieldsAnd34RowMetadataObjectsUnchanged": true,
+  "all345OriginalRowStatusObjectsUnchanged": true,
+  "inScope337Open": true,
+  "excluded8Unchanged": true,
+  "newFullRowsAccepted": 0,
+  "findingCount": 18,
+  "mappedUniqueRows": 34,
+  "unmappedInScopeRows": 303,
+  "mappedCommitPatchesIdentical": 13,
+  "latestMappedPathsIdentical": 132,
+  "unmappedRuntimePaths": [],
+  "excludedHistoricalCallbackNotIntegrated": true,
+  "combinedGates": "NOT_CLAIMED",
+  "originalBindings": [
+    {
+      "path": "/workspace/capiro-followup/docs/followup-20261012/evidence/triage/REMAINING-18.json",
+      "git": "7aca86e7d64cfdb85d09d424a07e6186339fc24c:docs/followup-20261012/evidence/triage/REMAINING-18.json",
+      "sha256": "ea3f7b6fc210cdc4e23afcd82b01c23b7b07dd5da9b5fc7c68e53c0bc5372ec1",
+      "matchesFrozenGitBlob": true
+    },
+    {
+      "path": "/workspace/capiro-followup/docs/followup-20261012/evidence/triage/UNCHANGED-ROW-STATUS-REFERENCE.json",
+      "git": "7aca86e7d64cfdb85d09d424a07e6186339fc24c:docs/followup-20261012/evidence/triage/UNCHANGED-ROW-STATUS-REFERENCE.json",
+      "sha256": "bd08c852b5c55cd04183ab2cc552f9588bc6b380cfad806f1c9afb5df765a989",
+      "matchesFrozenGitBlob": true
+    },
+    {
+      "path": "/workspace/capiro-followup/docs/followup-20261012/evidence/triage/PORTFOLIO-337-REMAINING-ASSESSMENT.json",
+      "git": "7aca86e7d64cfdb85d09d424a07e6186339fc24c:docs/followup-20261012/evidence/triage/PORTFOLIO-337-REMAINING-ASSESSMENT.json",
+      "sha256": "aaf0bf2670d9e247112c96276b7d1a989fb16106f129485c0a858b0380f50ff2",
+      "matchesFrozenGitBlob": true
+    }
+  ]
+}

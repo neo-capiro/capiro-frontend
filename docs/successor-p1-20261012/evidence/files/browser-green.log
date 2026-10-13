@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:453926) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 apps/web/tests/browser/files-metadata-receipts.spec.ts:21:1 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review (14.7s)
+  ✓  2 apps/web/tests/browser/files-metadata-receipts.spec.ts:75:1 › a contradictory folder receipt keeps the requested folder and needs current review (7.6s)
+  ✓  3 apps/web/tests/browser/files-metadata-receipts.spec.ts:113:1 › unknown ACL save survives close/reopen and a failed review does not thaw it (8.3s)
+
+  3 passed (33.6s)

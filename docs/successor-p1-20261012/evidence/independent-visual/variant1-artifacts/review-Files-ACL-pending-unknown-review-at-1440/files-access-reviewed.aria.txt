@@ -1,0 +1,20 @@
+- 'dialog "Access: Test report.pdf"':
+  - banner:
+    - 'heading "Access: Test report.pdf" [level=2]'
+    - button "Close"
+  - paragraph: Choose who on your team can view these files. The uploader retains access.
+  - group "Who can view":
+    - text: Who can view
+    - radio "All team members"
+    - text: All team members
+    - radio "Specific people" [checked]
+    - text: Specific people
+  - checkbox "Alexandria Montgomery-Washingtonalexandria.long@example.test"
+  - text: Alexandria Montgomery-Washingtonalexandria.long@example.test
+  - checkbox "Christopher Andersonchristopher@example.test"
+  - text: Christopher Andersonchristopher@example.test An empty selection grants access only to the uploader.
+  - button "Save access"
+  - status:
+    - paragraph: "Current saved access: Specific people"
+    - paragraph: "Current selected viewers: Alexandria Montgomery-Washington, Christopher Anderson"
+    - text: This is the current saved state. It does not confirm the earlier save. Review your retained draft before saving again.

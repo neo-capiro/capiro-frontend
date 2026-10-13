@@ -1,0 +1,314 @@
+{
+  "snapshotRecordedAt": "2026-10-12T19:26:24.606302+00:00",
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "findingFrames": {
+    "CP-04": [
+      "411:58068",
+      "411:58269"
+    ],
+    "CP-05": [
+      "411:48826",
+      "411:60193",
+      "411:60524"
+    ],
+    "CP-06": [
+      "411:52484",
+      "411:53189"
+    ]
+  },
+  "immutableVersionId": null,
+  "versionLimit": "Tools returned node IDs and raw context but no immutable file version ID. No Figma writes were performed. These exact captured bytes are the current implementation targets; do not silently replace after design edits.",
+  "storage": "New current captures only local; root owns GitHub-preserved evidence publication. Original CP04/05/06 assessment captures remain in preserved PR11 packet and Git.",
+  "assetLimit": "New SVG URLs exist in context but are not downloaded yet. Screenshot URL returned403; permitted embedded-base64 fallback captured facility parent. Inline timeline48826 screenshot remains ancestor-clipped; expanded60524 screenshot is unoccluded.",
+  "tokenFiles": "No independent token file returned; raw design-context style text parts preserve exact typography/colors/geometry. Existing repository tokens remain source-controlled.",
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826-part0.txt",
+      "size": 47607,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261409+00:00",
+      "sha256": "5270efa9c75fb7db6a35df5e30c05736a3339d3af782c19988ae9f013d342976"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826-part1.txt",
+      "size": 551,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261444+00:00",
+      "sha256": "b58dc338a3f51f25262569e60a0f5a2aa5df3164f8516284804c099561f00454"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826-part2.txt",
+      "size": 83,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261492+00:00",
+      "sha256": "383e85e9752ba1176645532cb7d43bff03794e7de3b09ec708c0e4cbd58381ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826-part3.txt",
+      "size": 705,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261512+00:00",
+      "sha256": "d8b5e1ef411f7289c9925a9187345d7d173dff7c88a13fb0b6bd522f640c6e20"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826-part4.txt",
+      "size": 354,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261524+00:00",
+      "sha256": "2e19f0f686eb2692330310c67176ac4ef37aeee8ae904a3cf737360471b305c7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826.json",
+      "size": 57179,
+      "capturedOrExtractedAt": "2026-10-12T19:21:19.890544+00:00",
+      "sha256": "84ded24e51ef9224d51277dfdb2e793257dd37b525d83f26be8e0c173d9c656a"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-48826.png",
+      "size": 4538,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.261545+00:00",
+      "sha256": "6cd4db2539c7cbbd152d728e3520725fb387e209c467c6335b63bee3f041dc0e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part0.txt",
+      "size": 84016,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260642+00:00",
+      "sha256": "d88c10a756ceb50391474d2896539effe32d330d9d901159be3578da16b401ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part1.txt",
+      "size": 551,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260679+00:00",
+      "sha256": "b58dc338a3f51f25262569e60a0f5a2aa5df3164f8516284804c099561f00454"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part2.txt",
+      "size": 83,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260693+00:00",
+      "sha256": "383e85e9752ba1176645532cb7d43bff03794e7de3b09ec708c0e4cbd58381ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part3.txt",
+      "size": 1483,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260706+00:00",
+      "sha256": "b9773bf9a7b5f31ea44e1c6d238b715385c1d22ec2f9d552d20aa5c8b289d98f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part4.txt",
+      "size": 2726,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260720+00:00",
+      "sha256": "4e30190590689b843fc0add2a6b2ac50b96de7a4b156b1c9dcea020f45328070"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484-part5.txt",
+      "size": 354,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260733+00:00",
+      "sha256": "2e19f0f686eb2692330310c67176ac4ef37aeee8ae904a3cf737360471b305c7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484.json",
+      "size": 224265,
+      "capturedOrExtractedAt": "2026-10-12T19:21:20.306558+00:00",
+      "sha256": "0f324bed67f5161cafc8c179238ed2e2b63644eb6455425a6b5d83a2e6304cd0"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-52484.png",
+      "size": 98950,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.260896+00:00",
+      "sha256": "1ae2ec18cda41820d06b20debf41adacb51003c799e051b431215026fbb089da"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part0.txt",
+      "size": 58431,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258049+00:00",
+      "sha256": "173a842d83e72580a9777066112205b4e159981e46a54cfdf898c5bc1c2ab8e8"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part1.txt",
+      "size": 551,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258088+00:00",
+      "sha256": "b58dc338a3f51f25262569e60a0f5a2aa5df3164f8516284804c099561f00454"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part2.txt",
+      "size": 83,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258106+00:00",
+      "sha256": "383e85e9752ba1176645532cb7d43bff03794e7de3b09ec708c0e4cbd58381ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part3.txt",
+      "size": 1359,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258121+00:00",
+      "sha256": "b500dd2be3b4058f18fab8c87a37451e9db1f5043765c85595dfc077b82d81b3"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part4.txt",
+      "size": 2726,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258137+00:00",
+      "sha256": "4e30190590689b843fc0add2a6b2ac50b96de7a4b156b1c9dcea020f45328070"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189-part5.txt",
+      "size": 354,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258151+00:00",
+      "sha256": "2e19f0f686eb2692330310c67176ac4ef37aeee8ae904a3cf737360471b305c7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189.json",
+      "size": 153147,
+      "capturedOrExtractedAt": "2026-10-12T19:22:08.556179+00:00",
+      "sha256": "2be14b8b65f2baae6874e7d81ff35ed84e9432df6a4e61f975a6c538763dda31"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-53189.png",
+      "size": 65411,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.258260+00:00",
+      "sha256": "291b5a6eeddf2a68a602388ccc5c27ca805f2c93e687e281be20a243a82778d8"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-part0.txt",
+      "size": 69169,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.262140+00:00",
+      "sha256": "276f67c03a8ad9fc240d9eaadec9dcebe9ab89b05aa729dcaf34f9bcfdda3b31"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-part1.txt",
+      "size": 298,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.262181+00:00",
+      "sha256": "9a7b8e4016e3d36874ab6a2fdf5bf98a0e8819ef52d30e96665d9a821884a65f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-screenshot-part0.txt",
+      "size": 178,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.256931+00:00",
+      "sha256": "6245967ce519776cd8d6630a4e829a31e51b2e3ccb71340a99a791a88ccba491"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-screenshot-part2.txt",
+      "size": 417,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.257392+00:00",
+      "sha256": "b36d0ce93f88a984b06c9f7950191ca06719e82b47bba6c7ca8414a0b7e3a6fa"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-screenshot.json",
+      "size": 233732,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.092863+00:00",
+      "sha256": "d91f0d18334f8a97ed4a4f45ad42b4365e846d9caf2bf89ec6c3b7498dad1c86"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068-screenshot.png",
+      "size": 174662,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.257337+00:00",
+      "sha256": "b8bd51a653722c09ff870cabccc97add38c4a805183c31062cba7e58b95a23d7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58068.json",
+      "size": 77641,
+      "capturedOrExtractedAt": "2026-10-12T19:21:19.518532+00:00",
+      "sha256": "d043b0dd8621a5c1d181c2ded6f1411d8e5f3205498b9c56306674a062166e65"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269-part0.txt",
+      "size": 20685,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259032+00:00",
+      "sha256": "25ebd4b68f918f241065f98ac9796ad87e9190fb7cfa4f71284e45ff529d2bc7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269-part1.txt",
+      "size": 551,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259058+00:00",
+      "sha256": "b58dc338a3f51f25262569e60a0f5a2aa5df3164f8516284804c099561f00454"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269-part2.txt",
+      "size": 83,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259073+00:00",
+      "sha256": "383e85e9752ba1176645532cb7d43bff03794e7de3b09ec708c0e4cbd58381ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269-part3.txt",
+      "size": 1141,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259128+00:00",
+      "sha256": "2abf9233a5916f2cb8ca6ad1983d3b40c3462c4d941fe7049aea4a809c209b44"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269-part4.txt",
+      "size": 354,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259146+00:00",
+      "sha256": "2e19f0f686eb2692330310c67176ac4ef37aeee8ae904a3cf737360471b305c7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269.json",
+      "size": 202388,
+      "capturedOrExtractedAt": "2026-10-12T19:22:08.200167+00:00",
+      "sha256": "a111db2b7e01c2edddeb98e9ffe05c6cd496044605f8d0f05ebecf2bbbddd6e6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-58269.png",
+      "size": 133919,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259356+00:00",
+      "sha256": "1e26eb4ed2e69015c36e738e4b7f17cbd0695665fb5395b3a8881a8e7846fa4e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60193-part0.txt",
+      "size": 41304,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259676+00:00",
+      "sha256": "7d6b78f56e06473b19438ee2220f61f197b048c16f23748b0e901d5ded419160"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60193-part1.txt",
+      "size": 298,
+      "capturedOrExtractedAt": "2026-10-12T19:22:29.259708+00:00",
+      "sha256": "9a7b8e4016e3d36874ab6a2fdf5bf98a0e8819ef52d30e96665d9a821884a65f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60193.json",
+      "size": 46670,
+      "capturedOrExtractedAt": "2026-10-12T19:22:07.700150+00:00",
+      "sha256": "12be1eabe655c716e47f95b331c9ea1504e9fba5de3e23b91f6ed8a96921434e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part0.txt",
+      "size": 36740,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441033+00:00",
+      "sha256": "ab0cacec279fab57babd87ccd86b185a8ef15f6be688cee288e45464ebf14c28"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part1.txt",
+      "size": 551,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441067+00:00",
+      "sha256": "b58dc338a3f51f25262569e60a0f5a2aa5df3164f8516284804c099561f00454"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part2.txt",
+      "size": 83,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441085+00:00",
+      "sha256": "383e85e9752ba1176645532cb7d43bff03794e7de3b09ec708c0e4cbd58381ac"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part3.txt",
+      "size": 1229,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441102+00:00",
+      "sha256": "e8314727e64a61fcf2ed3cbc56e2b245f92335ed319b20675a05b0abcc82edc8"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part4.txt",
+      "size": 859,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441117+00:00",
+      "sha256": "6b59823e7d5116cfa2e5420055e6b8f45a30fcf06e62a5e54923ca865b2fabba"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524-part5.txt",
+      "size": 354,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441130+00:00",
+      "sha256": "2e19f0f686eb2692330310c67176ac4ef37aeee8ae904a3cf737360471b305c7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524.json",
+      "size": 231892,
+      "capturedOrExtractedAt": "2026-10-12T19:22:54.621727+00:00",
+      "sha256": "f2f76a85a74446c2ed7cc311c1e7c310c1bad3a44f8a65614b55e7376bef692c"
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/figma-411-60524.png",
+      "size": 142829,
+      "capturedOrExtractedAt": "2026-10-12T19:23:09.441428+00:00",
+      "sha256": "2d30e1f1888371cc95d90970d873db2fbaf94dbfced5689197b0271991e33da4"
+    }
+  ]
+}

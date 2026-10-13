@@ -1,0 +1,103 @@
+private async decorateMeetings<
+    T extends {
+      id: string;
+      createdByUserId: string | null;
+      sharedByUserId: string | null;
+      notes: Array<{ status: string }>;
+      debriefs: Array<{ status: MeetingDebriefStatus }>;
+      preps: Array<{ status: MeetingPrepStatus }>;
+    },
+  >(tx: Prisma.TransactionClient, ctx: TenantContext, rows: T[]) {
+    const userIds = [
+      ...new Set(
+        rows
+          .flatMap((r) => [r.createdByUserId, r.sharedByUserId])
+          .filter((v): v is string => Boolean(v)),
+      ),
+    ];
+    const meetingIds = rows.map((r) => r.id);
+    const [users, sessions] = await Promise.all([
+      userIds.length
+        ? tx.user.findMany({
+            where: { id: { in: userIds } },
+            select: { id: true, firstName: true, lastName: true, email: true },
+          })
+        : Promise.resolve([] as Array<{ id: string }>),
+      meetingIds.length
+        ? tx.meetingBotSession.findMany({
+            where: { tenantId: ctx.tenantId, meetingId: { in: meetingIds } },
+            select: { meetingId: true, status: true, error: true },
+            orderBy: { createdAt: 'desc' },
+          })
+        : Promise.resolve([] as Array<{ meetingId: string; status: string; error: string | null }>),
+    ]);
+    const nameById = new Map(
+      (
+        users as Array<{
+          id: string;
+          firstName?: string | null;
+          lastName?: string | null;
+          email?: string | null;
+        }>
+      ).map((u) => [u.id, userDisplayName(u)]),
+    );
+    const latestSessionByMeeting = new Map<string, { status: string; error: string | null }>();
+    for (const s of sessions) {
+      if (!latestSessionByMeeting.has(s.meetingId))
+        latestSessionByMeeting.set(s.meetingId, { status: s.status, error: s.error });
+    }
+
+    return Promise.all(
+      rows.map(async (row) => {
+        // Phase 2 §d: a note counts here only once APPROVED — existence alone is
+        // not approval (that was the pre-Phase-2 bug this fixes).
+        const visibleRpPreps=await filterResearchPortfolioMeetingPreps(tx,ctx,row.preps as Array<{generatedFrom?:unknown}>);
+        row.preps.splice(0,row.preps.length,...visibleRpPreps as typeof row.preps);
+        const hasApprovedNote = row.notes.some((n) => n.status === 'approved');
+        const artifacts: Array<'prep' | 'notes' | 'debrief'> = [];
+        if (row.preps[0]?.status === MeetingPrepStatus.approved) artifacts.push('prep');
+        if (hasApprovedNote) artifacts.push('notes');
+        if (row.debriefs.some((d) => d.status === MeetingDebriefStatus.approved)) {
+          artifacts.push('debrief');
+        }
+        const contributors = row.createdByUserId
+          ? [
+              {
+                userId: row.createdByUserId,
+                name: nameById.get(row.createdByUserId) ?? null,
+                artifacts,
+              },
+            ]
+          : [];
+        const latestSession = latestSessionByMeeting.get(row.id) ?? null;
+        const visiblePreps = [] as typeof row.preps;
+        for (const prep of row.preps) {
+          const value = prep as typeof prep & {
+            generatedFrom?: {
+              briefing?: unknown;
+              grounding?: { sources?: import('./meeting-prep-grounding.js').PrepEvidenceSource[] };
+            };
+          };
+          if (value.generatedFrom?.briefing) {
+            try {
+              await assertSavedMeetingPrepAccess(tx, ctx, value.generatedFrom);
+            } catch {
+              continue;
+            }
+          }
+          visiblePreps.push(prep);
+        }
+        return {
+          ...row,
+          preps: visiblePreps as T['preps'],
+          notesApproved: hasApprovedNote,
+          meri: coarseMeriState(latestSession?.status ?? null),
+          meriError: meriFailureReason(latestSession?.status ?? null, latestSession?.error ?? null),
+          contributors,
+          sharedBy: row.sharedByUserId
+            ? { userId: row.sharedByUserId, name: nameById.get(row.sharedByUserId) ?? null }
+            : null,
+        };
+      }),
+    );
+  }

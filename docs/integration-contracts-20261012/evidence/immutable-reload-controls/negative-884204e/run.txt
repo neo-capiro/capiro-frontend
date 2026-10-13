@@ -1,0 +1,51 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 ../../../../tmp/reload-negative-884204e-1/replay.spec.ts:14:1 › reload retains an uncertain original command instead of creating a duplicate activity and task (9.1s)
+
+
+  1) ../../../../tmp/reload-negative-884204e-1/replay.spec.ts:14:1 › reload retains an uncertain original command instead of creating a duplicate activity and task 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('Title', { exact: true })
+    Expected: ""
+    Received: "Independent restart duplicate activity"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Title', { exact: true })
+        13 × locator resolved to <input disabled required="" name="title" maxlength="300" value="Independent restart duplicate activity"/>
+           - unexpected value "Independent restart duplicate activity"
+
+
+      41 |  expect(commands.size).toBe(1);
+      42 |  await page.reload();
+    > 43 |  await expect(page.getByLabel('Title',{exact:true})).toHaveValue('');
+         |                                                      ^
+      44 |  await expect(page.getByRole('button',{name:'Read saved command'})).toHaveCount(0);
+      45 |  await page.screenshot({path:info.outputPath('reload-lost-recovery.png')});
+      46 |  await fill(page);
+        at /tmp/reload-negative-884204e-1/replay.spec.ts:43:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/reload-negative-884204e-1/artifacts/replay-reload-retains-an-u-8e031-duplicate-activity-and-task/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/reload-negative-884204e-1/replay.spec.ts:14:1 › reload retains an uncertain original command instead of creating a duplicate activity and task 
+[WebServer] (node:226607) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:226626) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -1,0 +1,60 @@
+import { describe, expect, it } from "vitest";
+import {
+  activityDayLabel,
+  activityKindPresentation,
+  groupActivityDays,
+} from "../src/features/portfolio/client-profile/activity-presentation";
+import type { Activity } from "../src/features/portfolio/client-profile/contracts";
+const record = (id: string, occurredAt: string): Activity => ({
+  id,
+  occurredAt,
+  kind: "note",
+  title: id,
+  body: null,
+  sourceType: null,
+  sourceId: null,
+  origin: "recorded",
+  dueAt: null,
+  settledAt: null,
+  pinned: false,
+});
+describe("timeline presentation preserves native chronology and local dates", () => {
+  it("groups across the fall DST day without using UTC midnight", () => {
+    const rows = [
+      record("next", "2026-11-02T08:00:00Z"),
+      record("late", "2026-11-02T07:59:59Z"),
+      record("early", "2026-11-01T07:00:00Z"),
+      record("prior", "2026-11-01T06:59:59Z"),
+    ];
+    expect(
+      groupActivityDays(rows, "America/Los_Angeles").map(({ day, items }) => [
+        day,
+        items.map((item) => item.id),
+      ]),
+    ).toEqual([
+      ["2026-11-02", ["next"]],
+      ["2026-11-01", ["late", "early"]],
+      ["2026-10-31", ["prior"]],
+    ]);
+  });
+  it("does not move a pinned or otherwise nonchronological native record", () => {
+    const rows = [
+      record("pinned", "2026-10-01T12:00:00Z"),
+      record("new", "2026-10-12T12:00:00Z"),
+      record("old", "2026-10-01T11:00:00Z"),
+    ];
+    rows[0]!.pinned = true;
+    expect(
+      groupActivityDays(rows, "UTC").flatMap(({ items }) => items),
+    ).toEqual(rows);
+  });
+  it("labels yesterday over the year boundary without elapsed-hour arithmetic", () => {
+    expect(activityDayLabel("2025-12-31", "2026-01-01")).toBe("Yesterday");
+    expect(activityDayLabel("2026-01-01", "2026-01-01")).toBe("Today");
+    expect(activityDayLabel("2024-01-01", "2026-01-01")).toBe("Jan 1, 2024");
+  });
+  it("unknown native kinds receive no invented category or asset mapping", () => {
+    expect(activityKindPresentation("new_native_kind")).toEqual({ glyph: "·" });
+    expect(activityKindPresentation("__proto__")).toEqual({ glyph: "·" });
+  });
+});

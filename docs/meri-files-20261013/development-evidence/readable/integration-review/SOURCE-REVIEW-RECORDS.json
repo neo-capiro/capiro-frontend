@@ -1,0 +1,87 @@
+[
+  {
+    "path": "apps/web/src/shared/shell/Sidebar.tsx",
+    "sha256": "12e5e2e3c9a2e6164325aef1f50913f7b31e2d48c900b06e8b2fa0532a56ebcc",
+    "reviewer": "Codex independent Meri Files integration review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/INDEPENDENT-REVIEW.md",
+    "rationale": "The existing Meri navigation owns destinations, active-state presentation and client-scoped links. This change enables the existing Files destination and corrects current-route selection; other unavailable destinations stay disabled. It introduces no document state, transport or authority logic. A separate Files-specific navigation owner would duplicate this shell responsibility.",
+    "functions": [
+      {
+        "name": "Sidebar",
+        "nonblankLines": 116
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/shell/Sidebar.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+    "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+    "reviewer": "Codex independent Meri Files integration review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/INDEPENDENT-REVIEW.md",
+    "rationale": "One Word input and full-replacement confirmation form owns its field labels, format choice, guidance and explicit submit. Draft mapping and request execution live in separate cohesive owners. Keeping its conditional form/acknowledgement together preserves visible context; there is no transport or authority logic to extract.",
+    "functions": [
+      {
+        "name": "DocumentEditor",
+        "nonblankLines": 112
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/meri/files/DocumentEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+    "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+    "reviewer": "Codex independent Meri Files integration review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/INDEPENDENT-REVIEW.md",
+    "rationale": "One selected immutable-version panel owns supplied-ID inspection, bounded view-local version selection, metadata and explicit version-bound controls. Structural inspection rendering is already separate, while the controller owns requests and Blob URL allocation. The JSX remains a cohesive presentation of one selected receipt; splitting to reduce line count would scatter its state-dependent controls.",
+    "functions": [
+      {
+        "name": "DocumentVersionPanel",
+        "nonblankLines": 146
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/meri/files/DocumentVersionPanel.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+    "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+    "reviewer": "Codex independent Meri Files integration review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/INDEPENDENT-REVIEW.md",
+    "rationale": "One typed-workbook input form owns title, complete sheet JSON, example/help, replacement acknowledgement and explicit submit. It neither selects a different operation family nor validates the backend schema; local syntax guidance and public request admission remain separate. The contextual form stays together without duplicated state.",
+    "functions": [
+      {
+        "name": "WorkbookEditor",
+        "nonblankLines": 111
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/meri/files/WorkbookEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+    "reviewer": "Codex independent Meri Files integration review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/INDEPENDENT-REVIEW.md",
+    "rationale": "One reserved-write lifecycle claims the shared journal synchronously, fingerprints admitted immutable intent, dispatches once, correlates the returned receipt and settles conservatively. Post-hash/pre-dispatch/post-settlement ownership checks remain adjacent to the transitions they protect. HTTP receiving and cache-generation ownership are separate. Extracting steps merely to drop below80 would obscure reentrant cancellation and attempt fencing.",
+    "functions": [
+      {
+        "name": "write",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/meri-documents/workflow-adapter.ts: function over80 nonblank lines requires review"
+    ]
+  }
+]

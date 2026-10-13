@@ -1,0 +1,95 @@
+{
+  "source": "eabc8bf8b1d28ce3e3c65993624ea967614a45b2",
+  "original": {
+    "requestId": "b5f5c472-5616-476a-9b0d-9026cd593b62",
+    "activity": {
+      "kind": "note",
+      "title": "Independent restart duplicate activity",
+      "body": "Same deliberate activity content after an uncertain commit"
+    },
+    "followUp": {
+      "assigneeUserId": "a1000000-0000-4000-8000-000000000007"
+    }
+  },
+  "posts": [
+    {
+      "path": "/api/backend/core/clients/10000000-0000-4000-8000-000000000001/activity-commands",
+      "method": "POST",
+      "body": {
+        "requestId": "b5f5c472-5616-476a-9b0d-9026cd593b62",
+        "activity": {
+          "kind": "note",
+          "title": "Independent restart duplicate activity",
+          "body": "Same deliberate activity content after an uncertain commit"
+        },
+        "followUp": {
+          "assigneeUserId": "a1000000-0000-4000-8000-000000000007"
+        }
+      }
+    },
+    {
+      "path": "/api/backend/core/clients/10000000-0000-4000-8000-000000000001/activity-commands",
+      "method": "POST",
+      "body": {
+        "requestId": "167b3ade-4dae-4797-bcfe-de463c22cf0c",
+        "activity": {
+          "kind": "note",
+          "title": "Independent restart duplicate activity",
+          "body": "Same deliberate activity content after an uncertain commit"
+        },
+        "followUp": {
+          "assigneeUserId": "a1000000-0000-4000-8000-000000000007"
+        }
+      }
+    }
+  ],
+  "committedReceipts": [
+    {
+      "receiptVersion": 1,
+      "commandId": "fed62876-3b7a-4786-aba5-3549ee7fa1e5",
+      "requestId": "b5f5c472-5616-476a-9b0d-9026cd593b62",
+      "version": 12,
+      "tenantId": "a1000000-0000-4000-8000-000000000002",
+      "clientId": "10000000-0000-4000-8000-000000000001",
+      "actorUserId": "a1000000-0000-4000-8000-000000000001",
+      "status": "completed",
+      "reason": null,
+      "activity": {
+        "id": "8bc940a3-b9d8-43ec-94f7-701a067cb9fb",
+        "personId": null,
+        "available": true
+      },
+      "followUp": {
+        "owner": "planner",
+        "requestId": "fed62876-3b7a-4786-aba5-3549ee7fa1e5",
+        "assigneeUserId": "a1000000-0000-4000-8000-000000000007",
+        "state": "completed",
+        "taskId": "synthetic-task-1"
+      }
+    },
+    {
+      "receiptVersion": 1,
+      "commandId": "4611adf1-664e-4b75-9bc7-7e869616cce5",
+      "requestId": "167b3ade-4dae-4797-bcfe-de463c22cf0c",
+      "version": 12,
+      "tenantId": "a1000000-0000-4000-8000-000000000002",
+      "clientId": "10000000-0000-4000-8000-000000000001",
+      "actorUserId": "a1000000-0000-4000-8000-000000000001",
+      "status": "completed",
+      "reason": null,
+      "activity": {
+        "id": "a0ea8621-0a1e-4ea4-b1a2-3ba81df2e997",
+        "personId": null,
+        "available": true
+      },
+      "followUp": {
+        "owner": "planner",
+        "requestId": "4611adf1-664e-4b75-9bc7-7e869616cce5",
+        "assigneeUserId": "a1000000-0000-4000-8000-000000000007",
+        "state": "completed",
+        "taskId": "synthetic-task-2"
+      }
+    }
+  ],
+  "unexpected": []
+}

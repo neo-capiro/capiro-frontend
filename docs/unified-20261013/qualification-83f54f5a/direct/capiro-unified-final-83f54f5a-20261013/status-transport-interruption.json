@@ -1,0 +1,7 @@
+{
+  "utc": "2026-10-13T07:58:10.152787+00:00",
+  "action": "Read-only Git/status command creation",
+  "toolError": "Failed to create unified exec process: exec-server transport disconnected",
+  "impact": "Subsequent read succeeded; existing browser run continued to at least211completed cases. No gate failed/restarted and no application source changed.",
+  "cause": "Unproven environment transport interruption"
+}

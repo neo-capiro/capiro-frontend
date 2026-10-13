@@ -1,0 +1,32 @@
+{
+  "name": "final-controlled-selection",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "--config=/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/playwright.config.ts",
+    "--grep",
+    "ordinary formatting and typing",
+    "--workers=3",
+    "--repeat-each=3"
+  ],
+  "startedUTC": "2026-10-13T01:49:24.846838+00:00",
+  "endedUTC": "2026-10-13T01:49:26.087716+00:00",
+  "durationSeconds": 1.2409059479978168,
+  "exitCode": 1,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

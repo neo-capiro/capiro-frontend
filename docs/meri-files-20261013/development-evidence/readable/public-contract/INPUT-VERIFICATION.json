@@ -1,0 +1,149 @@
+{
+  "verifiedAt": "2026-10-13T08:10:55.927757+00:00",
+  "sourceCommit": "70516e5c9681917ce493bbc50e3023494f2e1209",
+  "records": [
+    {
+      "path": "packages/contracts/README.md",
+      "localPath": "/tmp/capiro-meri-document-public-contract-20261013/input/README.md",
+      "gitBlob": "36fe1d21432358dece0edb67317219e1ab4d14c2",
+      "bytes": 14061,
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/70516e5c9681917ce493bbc50e3023494f2e1209/packages/contracts/README.md"
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "localPath": "/tmp/capiro-meri-document-public-contract-20261013/input/package.json",
+      "gitBlob": "f53cfa9fdbc943da29becd5b206dc3d024ad0767",
+      "bytes": 2129,
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/70516e5c9681917ce493bbc50e3023494f2e1209/packages/contracts/package.json"
+    },
+    {
+      "path": "docs/qualification/candidates/document-contract-20261013/integration/capiro-meri-contracts-0.1.2.tgz",
+      "localPath": "/tmp/capiro-meri-document-public-contract-20261013/input/capiro-meri-contracts-0.1.2.tgz",
+      "gitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af",
+      "bytes": 228048,
+      "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/70516e5c9681917ce493bbc50e3023494f2e1209/docs/qualification/candidates/document-contract-20261013/integration/capiro-meri-contracts-0.1.2.tgz"
+    }
+  ],
+  "regularFiles": 19,
+  "members": [
+    {
+      "path": "package/dist/action-application.metadata.json",
+      "bytes": 1980,
+      "sha256": "9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/action-application.schema.json",
+      "bytes": 67726,
+      "sha256": "a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/document-application.metadata.json",
+      "bytes": 1996,
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/document-application.schema.json",
+      "bytes": 34642,
+      "sha256": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/meri.schema.json",
+      "bytes": 50043,
+      "sha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/package.json",
+      "bytes": 2129,
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/README.md",
+      "bytes": 14061,
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/THIRD-PARTY-NOTICES.md",
+      "bytes": 3841,
+      "sha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/action-application.mjs",
+      "bytes": 1480808,
+      "sha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/browser.mjs",
+      "bytes": 466002,
+      "sha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/document-application.mjs",
+      "bytes": 498894,
+      "sha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/metadata.mjs",
+      "bytes": 533,
+      "sha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/validate.mjs",
+      "bytes": 3311,
+      "sha256": "c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/action-application.d.ts",
+      "bytes": 17721,
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/browser.d.ts",
+      "bytes": 166,
+      "sha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/contracts.d.ts",
+      "bytes": 4090,
+      "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/document-application.d.ts",
+      "bytes": 23960,
+      "sha256": "1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/index.d.ts",
+      "bytes": 85,
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "mode": "0o600"
+    },
+    {
+      "path": "package/dist/metadata.d.ts",
+      "bytes": 485,
+      "sha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "mode": "0o600"
+    }
+  ],
+  "readmeAndManifestExact": true,
+  "sourceOnly": true
+}

@@ -1,0 +1,25 @@
+{
+  "pid": 1402218,
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-unified-final-83f54f5a-20261013/portfolio-enospc-case-rerun-results.json",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=2",
+    "mail-rich-compose.spec.ts",
+    "--grep",
+    "^keyboard formatting and mobile toolbar remain reachable$",
+    "--output=/workspace/capiro-unified-runtime-tmp-20261013/83f54f5a-portfolio-enospc-case-rerun-artifacts"
+  ],
+  "startedUTC": "2026-10-13T08:43:26.920716+00:00",
+  "source": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  }
+}

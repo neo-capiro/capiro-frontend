@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:1336740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 1440px has actual rest and hover contrast (3.7s)
+  ✓  2 ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 390px has actual rest and hover contrast (2.4s)
+
+  2 passed (7.0s)

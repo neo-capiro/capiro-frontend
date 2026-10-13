@@ -1,0 +1,567 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-delete/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-next-delete-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-next-delete-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-next-delete-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-delete-evidence/browser-dispatch-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-next-delete-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "guarded.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-delete-evidence/browser-dispatch-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "guarded.spec.ts",
+      "file": "guarded.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unknown deletion survives close/reopen until deliberate current review and a new confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3731,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:23.060Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-51512d45ede41d7abaab",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "an absent current file is unavailable, not a deletion confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2745,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:27.108Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-an-absent-current--5503e-not-a-deletion-confirmation/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-73cf0d46f2d849753e73",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 86,
+          "column": 5
+        },
+        {
+          "title": "pending current deletion stays fenced until a later explicit review reports a recoverable file",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2527,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:29.929Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-pending-current-de-87562--reports-a-recoverable-file/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-6dcc7782cc5f147a78bd",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 134,
+          "column": 5
+        },
+        {
+          "title": "a definite deletion refusal does not impose an unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1280,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:32.541Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-definite-deletio-071b6-not-impose-an-unknown-fence/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-ac86bfd3cc8178708727",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 170,
+          "column": 5
+        },
+        {
+          "title": "a failed explicit current read 403 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1760,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:33.858Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-failed-explicit--9b36e-s-until-successful-recovery/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-cb952638dcc4f5223442",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a failed explicit current read 503 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3046,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:35.668Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-failed-explicit--6c27f-s-until-successful-recovery/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-ea3514361196c1861723",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after actor replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1706,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:38.776Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-late-deletion-re-6fcbe-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-dc3c30c11616f84773e5",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after client replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1473,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:40.535Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-late-deletion-re-e9f09-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-1a691d9f8ce8626d9aa4",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after unmount replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:42.054Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-late-deletion-re-2c601-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-dd5652ad89d47aae48be",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a current read completing after actor replacement cannot release the old fence or leak its state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1610,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:43.577Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-current-read-com-c1da1-old-fence-or-leak-its-state/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-a24e5a774d6d6c5f1fe4",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 307,
+          "column": 5
+        },
+        {
+          "title": "a superseded current read returning 200 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1366,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:45.256Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-superseded-curre-e91e0-r-poison-newer-client-files/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-dc776169543aa7ce08c3",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        },
+        {
+          "title": "a superseded current read returning 403 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1340,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T18:20:46.670Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-delete-evidence/browser-dispatch-green/guarded-a-superseded-curre-7aa23-r-poison-newer-client-files/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "70ab6d5d90e107831ed4-23253591c3cf4b5665ef",
+          "file": "../../workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T18:20:22.565Z",
+    "duration": 25585,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

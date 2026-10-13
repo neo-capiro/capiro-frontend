@@ -1,0 +1,94 @@
+
+Running 3 tests using 1 worker
+
+(node:528638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send (5.6s)
+(node:528856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send (6.8s)
+(node:529215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send (7.3s)
+
+
+  1) ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/mailbox session changed or is unverified/)
+    Expected: visible
+    Error: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:
+        1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })
+        2) <p role="alert">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/mailbox session changed or is unverified/)
+
+
+      520 |   await expect(
+      521 |     page.getByText(/mailbox session changed or is unverified/),
+    > 522 |   ).toBeVisible();
+          |     ^
+      523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });
+      524 |   expect(state.sent).toHaveLength(0);
+      525 | });
+        at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/mailbox session changed or is unverified/)
+    Expected: visible
+    Error: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:
+        1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })
+        2) <p role="alert">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/mailbox session changed or is unverified/)
+
+
+      520 |   await expect(
+      521 |     page.getByText(/mailbox session changed or is unverified/),
+    > 522 |   ).toBeVisible();
+          |     ^
+      523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });
+      524 |   expect(state.sent).toHaveLength(0);
+      525 | });
+        at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send 
+    ../../tmp/capiro-email-actor-review/original-email-compose.spec.ts:510:5 › actor change while prepare awaits causes zero storage/confirm/send 
+  1 passed (26.4s)

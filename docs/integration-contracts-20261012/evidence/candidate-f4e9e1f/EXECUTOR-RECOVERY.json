@@ -1,0 +1,21 @@
+{
+  "verifiedAt": [
+    "2026-10-12T09:07:17Z",
+    "2026-10-12T09:08:23Z"
+  ],
+  "source": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+  "modulesOriginalProcess": 266960,
+  "modulesTerminal": {
+    "startTime": "2026-10-12T09:04:57.104Z",
+    "duration": 158967.44100000002,
+    "expected": 97,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "check": "Original terminal logs passed; old execution handle cannot reattach. Separate named check-confirmed runs unchanged source with durable exit receipt. No counts combined.",
+  "portfolio1bf75bb": "Deliberate SIGINT before disconnect;216pass6fail2interrupted704unrun. Archived.",
+  "portfolioF4e9e1f": "Not yet started at recovery",
+  "buildF4e9e1f": "Not yet started at recovery; first build then launched",
+  "mountedControlF4e9e1f": "Not yet started at recovery; first control then launched"
+}

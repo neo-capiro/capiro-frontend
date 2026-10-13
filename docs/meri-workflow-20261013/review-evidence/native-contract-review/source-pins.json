@@ -1,0 +1,150 @@
+{
+  "repository": "neo-capiro/meri-greenfield",
+  "ref": "84c2ca01d0bce025a0003b6e724d675a05f2975a",
+  "sourceAcceptedAt": "1afbb5a53ebbf0eca9252b3b09ceb3e404918151",
+  "files": [
+    {
+      "path": "apps/control/action-host/application-adapters/README.md",
+      "gitBlob": "e513c4c185e1342965b6eb8319e1e51865d189c0",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/README.md",
+      "lineCount": 48
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/authority-http.mjs",
+      "gitBlob": "baf528e5c2a7eca61090c6dd83e7650ce92e250e",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/authority-http.mjs",
+      "lineCount": 35
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/context-adapter.mjs",
+      "gitBlob": "7a06ec8c8f1bb32d87214ca25d350bc4c0b91eec",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/context-adapter.mjs",
+      "lineCount": 32
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/mount.mjs",
+      "gitBlob": "e915f0557faa850193ba655bf7798806a4d92c0c",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/mount.mjs",
+      "lineCount": 24
+    },
+    {
+      "path": "apps/control/action-host/session/README.md",
+      "gitBlob": "cc52002fcf86864103d81eb01b65fc7597ec0376",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/session/README.md",
+      "lineCount": 58
+    },
+    {
+      "path": "apps/control/action-host/session/owner.mjs",
+      "gitBlob": "9ec0c2970949f1c66eb790aa53c2170a00c8a581",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/session/owner.mjs",
+      "lineCount": 56
+    },
+    {
+      "path": "apps/control/action-host/session/http.mjs",
+      "gitBlob": "11aaf4cde044c54abf1ecd22d306d8a1dfc5ab04",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/session/http.mjs",
+      "lineCount": 31
+    },
+    {
+      "path": "apps/control/action-host/index.mjs",
+      "gitBlob": "2834f5f225b9a01b5288b67d381de4022174dbbb",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/index.mjs",
+      "lineCount": 16
+    },
+    {
+      "path": "apps/control/action-application/README.md",
+      "gitBlob": "8c8f6dad2997e9dad18d5f7bac84e4648f0f506b",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-application/README.md",
+      "lineCount": 23
+    },
+    {
+      "path": "packages/contracts/action-authority-0.2/validate.mjs",
+      "gitBlob": "391e047b61fac0fab12ae061768e50dbcfc61e6a",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/packages/contracts/action-authority-0.2/validate.mjs",
+      "lineCount": 13
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/adapters.test.mjs",
+      "gitBlob": "02119cbfb8f8bbdbf70622e49a4ef2b8e23a76b8",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/adapters.test.mjs",
+      "lineCount": 29
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/authority-independent.test.mjs",
+      "gitBlob": "067bd5139663f29a05019ad14d39a774cc6ce913",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/authority-independent.test.mjs",
+      "lineCount": 30
+    },
+    {
+      "path": "apps/control/action-host/application-adapters/context-independent.test.mjs",
+      "gitBlob": "2dfa88698e0d6dee661c10ec675d2fbc934faea8",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/context-independent.test.mjs",
+      "lineCount": 37
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-APPLICATION-ADAPTERS-20261013.md",
+      "gitBlob": "eb056d75d6527bd383d9d66f6910120809c252fd",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/coordination/reports/CODEX-APPLICATION-ADAPTERS-20261013.md",
+      "lineCount": 49
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-CAPIRO-APPLICATION-AUTHORITY-REQUEST-20261013.md",
+      "gitBlob": "0762bc4877875f6e5d5adeabbb71cdd984d35c06",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/coordination/reports/CODEX-CAPIRO-APPLICATION-AUTHORITY-REQUEST-20261013.md",
+      "lineCount": 48
+    },
+    {
+      "path": "docs/coordination/reports/CODEX-CAPIRO-CLERK-SESSION-READ-20261013.md",
+      "gitBlob": "b48c1356dc2af909e3d59b5e5730be368ee10a18",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/coordination/reports/CODEX-CAPIRO-CLERK-SESSION-READ-20261013.md",
+      "lineCount": 28
+    },
+    {
+      "path": "docs/qualification/candidates/application-adapters-20261013/integration/integrated-check.json",
+      "gitBlob": "4ba4c8047d4efc27103a3f23f6869fe1fd6ed776",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/qualification/candidates/application-adapters-20261013/integration/integrated-check.json",
+      "lineCount": 51
+    },
+    {
+      "path": "docs/qualification/candidates/application-adapters-20261013/integration/mounted-http.json",
+      "gitBlob": "2ef31f4a6b36402e9116f6c4cffd22fccafdb53d",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/qualification/candidates/application-adapters-20261013/integration/mounted-http.json",
+      "lineCount": 37
+    },
+    {
+      "path": "docs/qualification/candidates/application-adapters-20261013/integration/integrated-check.stdout.bin",
+      "gitBlob": "d09115f4c4e36b2eb03b6202258bc35448d3b9fa",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/qualification/candidates/application-adapters-20261013/integration/integrated-check.stdout.bin",
+      "lineCount": 254
+    },
+    {
+      "path": "docs/qualification/candidates/application-adapters-20261013/integration/mounted-http.stdout.bin",
+      "gitBlob": "482a4b241dcf9853d221aaac7949c84e8122524c",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/qualification/candidates/application-adapters-20261013/integration/mounted-http.stdout.bin",
+      "lineCount": 2
+    },
+    {
+      "path": "docs/qualification/candidates/application-adapters-20261013/integration/publication.json",
+      "gitBlob": "208be59eb487e32b63af3eb11d49c7bed1477896",
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/docs/qualification/candidates/application-adapters-20261013/integration/publication.json",
+      "lineCount": 34
+    }
+  ],
+  "comments": [
+    {
+      "id": 6138126976,
+      "url": "https://github.com/neo-capiro/meri-greenfield/pull/47#issuecomment-6138126976",
+      "createdAt": "2026-10-13T04:18:01Z",
+      "updatedAt": "2026-10-13T04:18:01Z",
+      "body": "Exact backend-owner relay packet is ready now.\n\nPrivate wire pin: `7ad86d7acc1234e446cacb61c8e7f00b4bf989ab`, `packages/contracts/action-authority-0.2/validate.mjs` (accepted source `1afbb5a53ebbf0eca9252b3b09ceb3e404918151`). Implement POST `/api/clio/application-authority/identity` with `{}` → `{principal:{tenantId,actorId},identityRevision,checkedAtMs,expiresAtMs}`; POST `/api/clio/application-authority/context` with `{identitySha256,conversationId,clientId}` → `{identitySha256,principal:{tenantId,actorId},identityRevision,conversationId,selectedClientId,contextRevision,checkedAtMs,expiresAtMs}`.\n\nExisting capirov2 owners at `4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace`: `apps/api/src/auth/clerk.service.ts:77` (verified claims), `:69` (existing backend client), `apps/api/src/tenant/tenant-context.middleware.ts:111` (verified principal/current membership), `apps/api/src/meri/meri.service.ts:873` (active owned conversation), `:955` (nonarchived client), and `apps/api/src/context/context-security-scope.service.ts:27` (current ethical walls). Reuse these owners; require an existing matching nonnull conversation client. Actor is backend TenantContext.userId. No browser scope or Meri run/fence/grant/approval authority is admitted.\n\nPinned `@clerk/backend@1.34.0` supports the narrow online read `clerkService.backend.sessions.getSession(verifiedClaims.sid)` → GET session by ID. Verify signed sid/subject against returned session/user, require active status and unexpired original bounds, and fail closed on absence, mismatch, revocation, expiry, outage or timeout. No session/token mutation, refresh or creation. Preserve stable security-relevant revisions, excluding activity timestamps. Existing signed token without sid must refuse; no template or token-flow change is authorized by this request.\n\nReuse the existing Capiro backend client and server key only; never copy the key into Meri/frontend. No new credential, permission, role or network expansion is requested. If current access cannot do the read, report it rather than expanding scope. Exact SDK source/metadata and interface limits: https://github.com/neo-capiro/meri-greenfield/blob/a83a48c54b8f4bb6101493ca1343e8c376ce910c/docs/coordination/reports/CODEX-CAPIRO-CLERK-SESSION-READ-20261013.md . Full active-conversation/context request: https://github.com/neo-capiro/meri-greenfield/blob/7ad86d7acc1234e446cacb61c8e7f00b4bf989ab/docs/coordination/reports/CODEX-CAPIRO-APPLICATION-AUTHORITY-REQUEST-20261013.md .\n\nMeri client/context/mount source is independently accepted; 245/245 integrated checks and the actual two-listener synthetic HTTP flow pass. Real Capiro endpoints, admitted product currentRun and deployment remain separate. No live Clerk call or credential access occurred here."
+    },
+    {
+      "id": 6138127711,
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/16#issuecomment-6138127711",
+      "createdAt": "2026-10-13T04:18:05Z",
+      "updatedAt": "2026-10-13T04:18:05Z",
+      "body": "Meri application mounting continuation published as https://github.com/neo-capiro/meri-greenfield/pull/47 . Exact source/evidence pin `7ad86d7acc1234e446cacb61c8e7f00b4bf989ab`; later `a83a48c54b8f4bb6101493ca1343e8c376ce910c` adds only the backend-owner Clerk interface supplement.\n\n`createApplicationActionHost` now composes concrete fixed-route authority HTTP adapters, the server-prebound canonical currentRun join, opaque session issuance and the four action routes. Mounting recipe: https://github.com/neo-capiro/meri-greenfield/blob/7ad86d7acc1234e446cacb61c8e7f00b4bf989ab/apps/control/action-host/application-adapters/README.md . PR46's same-origin session bootstrap and public0.1.1 action receiver are unchanged: native credential only for session issuance; returned opaque credential for query/draft/prepare/execute; browser hints never grant scope or approval.\n\nRoot 245/245 plus separate two-listener loopback replay pass; explicit approval remains mandatory, same proposal replay has no extra effect, revocation returns401. These are isolated synthetic authority/run/source/persistence tests, not live identity or browser deployment. Capiro's exact endpoint implementation request and the required existing-credential Clerk session read are in PR47; parent is relaying to that owner. A real admitted Meri currentRun owner is still required. No frontend source edits, new credentials, permissions or source activation occurred in this lane."
+    }
+  ],
+  "scope": "Read-only source and retained evidence review; no new checks executed"
+}

@@ -1,0 +1,71 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/shared-dialog-layout.spec.ts tests/browser/email-compose.spec.ts --grep canonical layout|overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt --repeat-each=3 --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/shared-dialog-layout.spec.ts tests/browser/email-compose.spec.ts --grep canonical layout|overlay clicks|invalidated successful idle identity refuses mail dispatch|uncertain or malformed receipt freezes send attempt --repeat-each=3 --workers=3
+
+[WebServer] (node:167062) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 36 tests using 3 workers
+
+(node:167082) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:167081) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:167083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (8.4s)
+  ✓   2 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (9.3s)
+  ✓   1 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.8s)
+  ✓   4 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (8.2s)
+  ✓   5 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (11.0s)
+  ✓   6 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (11.7s)
+  ✓   7 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (9.0s)
+  ✓   8 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (10.2s)
+  ✓  10 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (9.2s)
+  ✓   9 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (11.5s)
+  ✓  11 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (10.9s)
+(node:167877) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (9.0s)
+  ✓  12 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (9.1s)
+  ✓  15 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (6.1s)
+  ✓  14 tests/browser/email-compose.spec.ts:187:1 › overlay clicks respect context gestures and dismiss only the top email review (7.5s)
+  ✓  16 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (12.2s)
+  ✓  17 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (8.8s)
+  ✓  18 tests/browser/email-compose.spec.ts:214:1 › invalidated successful idle identity refuses mail dispatch and retains draft (9.1s)
+  ✓  20 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (7.5s)
+  ✓  21 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (503) (8.5s)
+  ✓  19 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (11.9s)
+  ✓  22 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (7.6s)
+  ✓  23 tests/browser/email-compose.spec.ts:387:3 › uncertain or malformed receipt freezes send attempt (200) (6.8s)
+(node:168445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (7.3s)
+  ✓  26 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (4.5s)
+  ✓  25 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (7.5s)
+  ✓  27 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (5.3s)
+  ✓  29 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (4.5s)
+  ✓  28 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (7.7s)
+  ✓  30 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (4.5s)
+  ✓  31 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (5.7s)
+  ✓  32 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (4.0s)
+  ✓  33 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (2.5s)
+  ✓  34 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (2.6s)
+  ✓  35 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (2.6s)
+  ✓  36 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (2.3s)
+
+  36 passed (1.9m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

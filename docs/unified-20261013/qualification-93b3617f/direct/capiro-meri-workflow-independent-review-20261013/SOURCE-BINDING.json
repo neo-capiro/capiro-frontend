@@ -1,0 +1,213 @@
+{
+  "reviewedUTC": "2026-10-13T02:44:27.475043+00:00",
+  "baseCommit": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "candidateState": "Uncommitted inactive additions; exact file hashes, not a candidate commit pin",
+  "sourceFiles": [
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "snapshot": "source/apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "bytes": 3851,
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "snapshot": "source/apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "bytes": 2897,
+      "sha256": "ea51c88a19018e117b85fcccb052034db08e3f8a39482d0bebaaaf23a34fcd20"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "snapshot": "source/apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "bytes": 1978,
+      "sha256": "7f9c2be4d30e327ba98415d839a879808157447bdab5139522945c86d7ba8b55"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "snapshot": "source/apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "bytes": 2414,
+      "sha256": "f38f997a7418b5285337a60c57d781895493d0c3e8f9ea854eab0d8bc091dec5"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "snapshot": "source/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "bytes": 2123,
+      "sha256": "096ce01abc55d053583f23c64dc8db85baec6ad2b61c9c72da913714099f9f3e"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "snapshot": "source/apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "bytes": 6162,
+      "sha256": "c45f4c358f35e07da3de7e2c14c2e15540dbe03e40558cde12192f497d6793e9"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/workflow-problems.ts",
+      "snapshot": "source/apps/web/src/features/meri/actions/workflow-problems.ts",
+      "bytes": 2004,
+      "sha256": "6c9c27003d7461210b78f978070126794f304f668a5e18695d45720a0ca44b1c"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/features/meri/actions/workflow.module.css",
+      "snapshot": "source/apps/web/src/features/meri/actions/workflow.module.css",
+      "bytes": 2690,
+      "sha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test/action-workflow.test.mjs",
+      "snapshot": "source/apps/web/test/action-workflow.test.mjs",
+      "bytes": 11311,
+      "sha256": "c0c2d8f500005239338582992cb76b7de292fbeae596dc963e6542ae4b2166c6"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/docs/meri-workflow-20261013/PLAN.md",
+      "snapshot": "source/docs/meri-workflow-20261013/PLAN.md",
+      "bytes": 4157,
+      "sha256": "9a1819a3366dbac475a746295154633e325189400132555e712caf275deec241"
+    }
+  ],
+  "contextAndEvidence": [
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/app/globals.css",
+      "snapshot": "context/apps/web/src/app/globals.css",
+      "bytes": 1113,
+      "sha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/src/app/layout.tsx",
+      "snapshot": "context/apps/web/src/app/layout.tsx",
+      "bytes": 1201,
+      "sha256": "47e90e4269dd55a75bf05e91b010ddcdeb86c716d821ee240e3cffc8a204a1fd"
+    },
+    {
+      "path": "/workspace/capiro-meri-workflow-20261013/packages/ui/src/shadcn/button.tsx",
+      "snapshot": "context/packages/ui/src/shadcn/button.tsx",
+      "bytes": 2162,
+      "sha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/REPORT.md",
+      "snapshot": "author/REPORT.md",
+      "bytes": 4358,
+      "sha256": "d266587f4b61914c225fec63af877d19c860c7f4144d907ebbeba6832a1dd87a"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/MANIFEST.json",
+      "snapshot": "author/MANIFEST.json",
+      "bytes": 3297,
+      "sha256": "dd777628a1e4c089e79aa72d18140134280c12e073cae74b50524f33b91c10a8"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/unit-receipt.json",
+      "snapshot": "author/unit-receipt.json",
+      "bytes": 4409,
+      "sha256": "16402e5850acbf3f56a89e2bad8b49f07b2f5dff839267cd7da47dd6180534ca"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/controller-unit.log",
+      "snapshot": "author/controller-unit.log",
+      "bytes": 2296,
+      "sha256": "5c3e557676b121906ad1aa0b23ebdfec5f8bcee443631ac7a7fdb1fa0580a871"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/STRUCTURE-REVIEW.json",
+      "snapshot": "author/STRUCTURE-REVIEW.json",
+      "bytes": 10252,
+      "sha256": "e63cf9f7fedd1d05e2fe0e28f6559d28fe4290f986da81d8c0dc8b8095ae3b23"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/checkpoint-ui-only/handoff-bindings.json",
+      "snapshot": "author/handoff-bindings.json",
+      "bytes": 1657,
+      "sha256": "d2acf20c75ef549cd8a9cbe4abf7bcfbcd7edbb321c31a9577c0ca81c9494d9d"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/handoff/contracts-readme.json",
+      "snapshot": "handoff/contracts-readme.json",
+      "bytes": 7010,
+      "sha256": "39d78ac9b253c124c85eb14d3fd6a150ac2fec39a1644db9ef482cbc2407819f"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/handoff/handoff-0.json",
+      "snapshot": "handoff/handoff-0.json",
+      "bytes": 4530,
+      "sha256": "68089c0b89d588b1f0d7e19b67608669e8b967a8945deb06a2444cc08a126119"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/handoff/handoff-3.json",
+      "snapshot": "handoff/handoff-3.json",
+      "bytes": 13736,
+      "sha256": "9e507e19a507e61aa7db5f82ac4406903a630c06983e5265f015d59a4dcc9653"
+    },
+    {
+      "path": "/tmp/capiro-meri-workflow-evidence/handoff/handoff-4.json",
+      "snapshot": "handoff/handoff-4.json",
+      "bytes": 1939,
+      "sha256": "be67de53ae17f6b94e178104c9e7b5debe2f83c158e462a1d70918fb1d4f7ddb"
+    }
+  ],
+  "authorManifestVerifiedEntries": 18,
+  "authorUnitControllerAndTestSourceMatchesCurrent": true,
+  "sourceDeltaSinceUnitRun": "Only approved five-line CSS focus override deletion; nine other files byte-identical",
+  "authorObservedTests": 21,
+  "reviewerExecutedTests": 0,
+  "sourceRefSearch": [
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "line": 61,
+      "text": "export interface ActionWorkflowPort {"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "line": 2,
+      "text": "  ActionWorkflowPort,"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "line": 48,
+      "text": "export class ActionWorkflowController {"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "line": 49,
+      "text": "  #port: ActionWorkflowPort;"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "line": 56,
+      "text": "  constructor(port: ActionWorkflowPort) {"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 5,
+      "text": "import type { ActionWorkflowPort } from \"./action-workflow-port\";"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 6,
+      "text": "import { ActionWorkflowController } from \"./action-workflow-state\";"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 14,
+      "text": "export function MeriActionWorkflow({"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 19,
+      "text": "  port: ActionWorkflowPort | null;"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 48,
+      "text": "function ConnectedWorkflow({ port }: { port: ActionWorkflowPort }) {"
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "line": 49,
+      "text": "  const controller = useMemo(() => new ActionWorkflowController(port), [port]);"
+    }
+  ],
+  "cssRingDefinitions": [],
+  "sourceWrites": false,
+  "runtimeActions": 0,
+  "networkOrNativeActions": 0
+}

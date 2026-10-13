@@ -1,0 +1,155 @@
+{
+  "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "sourceRoot": "/workspace/capiro-onboard-port-20261013",
+  "createdUTC": "2026-10-13T07:01:42.508748+00:00",
+  "allComparedToGit": true,
+  "sourceMutated": false,
+  "runtimeExecuted": false,
+  "patches": [
+    {
+      "patch": "01-confirmed-product.patch",
+      "files": [
+        "apps/web/src/app/globals.css",
+        "apps/web/src/shared/shell/ProductShell.tsx",
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "sha256": "fee434f5d8fea546d88acc17503fbb15d8bfab08063c00597bc15b3c4e8689ca"
+    },
+    {
+      "patch": "02-fixture-landmarks.patch",
+      "files": [
+        "apps/web/test/browser/main.tsx"
+      ],
+      "sha256": "9313c983fefddffef45509012f104203f6d5b7f02575c701a8d3c2b4e7983593"
+    },
+    {
+      "patch": "03-incomplete-semantic-followup.patch",
+      "files": [
+        "apps/web/src/features/meri/MeriSuggestions.tsx",
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx"
+      ],
+      "sha256": "61d2154d2485570be5ac9b910f3f8740629abd03708e6b9bf8bc63df6df29e65"
+    }
+  ],
+  "files": [
+    {
+      "file": "apps/web/src/app/globals.css",
+      "sourceBytes": 1113,
+      "sourceSha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd",
+      "gitBlob": "e0f097755fde0984a1cf7bda989b9cd80898b30a",
+      "candidateSha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+      "candidateBytes": 1113
+    },
+    {
+      "file": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sourceBytes": 1668,
+      "sourceSha256": "d7942d79955c8cbe1c1929f3d551118eef701c4b1ade6d92cbbd3858bdf3dad3",
+      "gitBlob": "4ae56be9c7c2e39052279a2b531c7e7cba7c0be0",
+      "candidateSha256": "65e4754e186893f8956d6bf3e0580f6a8e0b1e5c782ceefc88d282208859b4d1",
+      "candidateBytes": 1727
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "sourceBytes": 3924,
+      "sourceSha256": "eed2354e2a105d16a151c48814cc4c30bb0e48977cae2b2328cd0ad76decb605",
+      "gitBlob": "e4160502475b454d0bc640b2dae0321b7f0b714e",
+      "candidateSha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+      "candidateBytes": 4234
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "sourceBytes": 8129,
+      "sourceSha256": "ba90259ff3c7a52e8d330f4eb6bfe2255634badd8934981df90d434d13971a3b",
+      "gitBlob": "51828ae16b37b0bb4c2f58052798811c19f9b941",
+      "candidateSha256": "7f2eaa718ee225f0ccb77f5043c65d0c3fe6ea18dc4b5b7838d102295b3bcb05",
+      "candidateBytes": 8306
+    },
+    {
+      "file": "apps/web/test/browser/main.tsx",
+      "sourceBytes": 5767,
+      "sourceSha256": "6e3d15d564a2914d804f09e5120579970898b5a386d6c5187a1f4088f6716460",
+      "gitBlob": "74a2d5aa5061e7f3445ff69e7498e2f886a8139e",
+      "candidateSha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c",
+      "candidateBytes": 5847
+    },
+    {
+      "file": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "sourceBytes": 1944,
+      "sourceSha256": "1e4b5b89cb2c8d75d62d50baa007dd81763d86c4c5ca0c6c38b39c68744e84fb",
+      "gitBlob": "895a7ce6478cf49eec41dc44a2aaaab769805bc1",
+      "candidateSha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2",
+      "candidateBytes": 1988
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "sourceBytes": 3454,
+      "sourceSha256": "c560ca0e5bf6fa474656927803d6c6f6fea468e29d1d1e9348bc6938af56d15c",
+      "gitBlob": "849c00c560643e35c6992bdc15248de40906f469",
+      "candidateSha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+      "candidateBytes": 3478
+    },
+    {
+      "file": "apps/web/src/shared/portfolio/styles.css",
+      "sourceBytes": 10136,
+      "sourceSha256": "bd34a401be0625c70d09f2be7767205599092f009c5535553aa8ea4ca6ec4061",
+      "gitBlob": "57d900add164013b700b09ca635e411be99d85e3"
+    },
+    {
+      "file": "apps/web/src/shared/shell/shell.module.css",
+      "sourceBytes": 2897,
+      "sourceSha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+      "gitBlob": "71ed4b84a1a52215e42ac91edab4904d3622b2a6"
+    },
+    {
+      "file": "apps/web/src/features/modules/hub/hub.module.css",
+      "sourceBytes": 4085,
+      "sourceSha256": "f05747a8435190f9d159e26b312b24f5464b79a66c44dc34badbe2746eb135f1",
+      "gitBlob": "1e747bf80bc4d1911d0055a6271255625baa8770"
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio.spec.ts",
+      "sourceBytes": 8561,
+      "sourceSha256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b",
+      "gitBlob": "fc4bfb4095f7834389cfaa6407fb72e03ef3b16c"
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-attention.spec.ts",
+      "sourceBytes": 11844,
+      "sourceSha256": "0914b2413858bb84308803185c0f80a976dbcfb53c1c58e22b4c1f2b6f731420",
+      "gitBlob": "afcaf33fb514e5f0689a75a144a9ca77eb130219"
+    },
+    {
+      "file": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "sourceBytes": 5018,
+      "sourceSha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056",
+      "gitBlob": "ea73d34662c27b4cf7592d381bdc0c679c6f6bbb"
+    },
+    {
+      "file": "apps/web/test/browser/fixtures.ts",
+      "sourceBytes": 1917,
+      "sourceSha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467",
+      "gitBlob": "3490d2afba6db97b0d3ef68368ac96ac5f080727"
+    },
+    {
+      "file": "apps/web/tests/browser/fixtures.ts",
+      "sourceBytes": 11227,
+      "sourceSha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368",
+      "gitBlob": "1f55a258f367fcbf2635c3b08dea3fff327d7ed7"
+    },
+    {
+      "file": "apps/web/tests/browser/clerk.tsx",
+      "sourceBytes": 506,
+      "sourceSha256": "4d33465d536a14f819e1596f9563e168a02538a545f388b60ee3ef7a58a946ce",
+      "gitBlob": "ce6a530fbcb9ded7bf5e31940e5e74c558f0d1b4"
+    },
+    {
+      "file": "apps/web/test/browser/font.css",
+      "sourceBytes": 413,
+      "sourceSha256": "5a360a3b08787b40537f4592061d2bb7478dcdcd8d2de7a64f44b619ea72ba39",
+      "gitBlob": "d84bc671f7986092f4b0b0f2d95556b6c865ac46"
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "inspectedCheckout": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+  "integrationReviewPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "results": [
+    {
+      "file": "apps/api/src/engagement/engagement.controller.ts",
+      "versions": [
+        {
+          "pin": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+          "fileSha256": "fa9b07bfa54c122ce749b366d00781cc88b837aa5e4f02681faa4b52d7890666",
+          "symbols": {
+            "ArtifactRefDto": {
+              "sha256": "6aeae820f22d4cd9682f7f490306e6f86737d20ec67d164e849a43655de24100",
+              "line": 272
+            },
+            "ShareArtifactsDto": {
+              "sha256": "b6ba2afa76a2d95043b3a3f5e1a219b1f1c02f646aa78ccf15582466de323793",
+              "line": 280
+            },
+            "shareArtifacts": {
+              "sha256": "d1e6932052edfa521eb774730944de8f06b263a0a431cc9fb3cfe7d9892e9cff",
+              "line": 2089
+            },
+            "unshareArtifacts": {
+              "sha256": "a32d285a1c4ad0b3f6f4b225f5af8b1bbc7a48b45543136c04865471f2bb9728",
+              "line": 2098
+            },
+            "sharedMeetings": {
+              "sha256": "f027ec721e908e03453fb47c1d9586149d778a590f864600eebf53ae28c404b9",
+              "line": 2383
+            }
+          }
+        },
+        {
+          "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+          "fileSha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae",
+          "symbols": {
+            "ArtifactRefDto": {
+              "sha256": "6aeae820f22d4cd9682f7f490306e6f86737d20ec67d164e849a43655de24100",
+              "line": 273
+            },
+            "ShareArtifactsDto": {
+              "sha256": "b6ba2afa76a2d95043b3a3f5e1a219b1f1c02f646aa78ccf15582466de323793",
+              "line": 281
+            },
+            "shareArtifacts": {
+              "sha256": "d1e6932052edfa521eb774730944de8f06b263a0a431cc9fb3cfe7d9892e9cff",
+              "line": 2114
+            },
+            "unshareArtifacts": {
+              "sha256": "a32d285a1c4ad0b3f6f4b225f5af8b1bbc7a48b45543136c04865471f2bb9728",
+              "line": 2123
+            },
+            "sharedMeetings": {
+              "sha256": "f027ec721e908e03453fb47c1d9586149d778a590f864600eebf53ae28c404b9",
+              "line": 2408
+            }
+          }
+        }
+      ],
+      "comparison": [
+        {
+          "name": "ArtifactRefDto",
+          "identical": true
+        },
+        {
+          "name": "ShareArtifactsDto",
+          "identical": true
+        },
+        {
+          "name": "shareArtifacts",
+          "identical": true
+        },
+        {
+          "name": "unshareArtifacts",
+          "identical": true
+        },
+        {
+          "name": "sharedMeetings",
+          "identical": true
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/engagement/engagement.service.ts",
+      "versions": [
+        {
+          "pin": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+          "fileSha256": "b0a12dbce2157701bafdba36bead922de2e274216de9c00a2b0c797dcbf93df0",
+          "symbols": {
+            "listMeetings": {
+              "sha256": "b4d038a410d3cf148c0b665dadada511512e40a6a9ce033ddf6dc1d54ff64501",
+              "line": 1355
+            },
+            "getMeeting": {
+              "sha256": "0e85a52b120d91e44dacc0b44cbd0a1976a706548bb599391be0a03d06fb9fe3",
+              "line": 1413
+            },
+            "shareArtifacts": {
+              "sha256": "4357f59e8da56550940468c83b5bfd5befef1ccae69c79d13564ed7b61ba124f",
+              "line": 1809
+            },
+            "unshareArtifacts": {
+              "sha256": "17e21cd0e40f1ba0a6023da14a53a666415cb5c40b53d14bd89234a494e1c03a",
+              "line": 1878
+            },
+            "loadArtifactShareState": {
+              "sha256": "4dedeaca4214d0c08886a7c637d9b3e5d28fd6b08e463e50c91370794bc70faa",
+              "line": 1920
+            },
+            "stampArtifactShared": {
+              "sha256": "cf19ffecdbe02ee1f09923ed51f6c135bdab47d02c7510b53d46031bd5fc8162",
+              "line": 2064
+            },
+            "clearArtifactShared": {
+              "sha256": "1e989df8d8307dd97c1583c12dc80572c71b96bc3b82d64c1ca2e4aa0c672592",
+              "line": 2086
+            },
+            "recomputeMeetingVisibility": {
+              "sha256": "d1346007eeca73132f66b7f297c21698a24bff6b79764bc9b81841fc73f65d2c",
+              "line": 2108
+            },
+            "listSharedMeetingsForClient": {
+              "sha256": "6bf21b5bbe72701e3268afe6287557f78f51ea0c434ebf982ba42ec4d153dec9",
+              "line": 2324
+            },
+            "filterToSharedArtifacts": {
+              "sha256": "06ad0b921a7439ab41939398b4ce9bf287d4d1e660ec8b876dba51d8e882b7a7",
+              "line": 2362
+            },
+            "decorateMeetings": {
+              "sha256": "3f897982b669b99ce3bbf5dfe476d5b755850f27a3a9665e7c69a8f290e5a57b",
+              "line": 2392
+            },
+            "listAttachments": {
+              "sha256": "a25ae6b0958ce2de64609be3156699c204408d171f64b83321028b00319f09d1",
+              "line": 7654
+            },
+            "meetingInclude": {
+              "sha256": "10932255adae473e80cc2948d2cc39ada31fad7e9a8bef4ce9b47518692fe18b",
+              "line": 10750
+            },
+            "noteMetadataSelect": {
+              "sha256": "875d4aaab72128ef475454715199578dce5ca7f62b91ba96e5d26a63b0ac2c09",
+              "line": 10836
+            },
+            "debriefMetadataSelect": {
+              "sha256": "e04de502b410cc3e774217a074dd16a902fe905622f08d9631dba0d7374a4dea",
+              "line": 10858
+            },
+            "mergeSharedMeetingsByICalUid": {
+              "sha256": "a81718bf79613fc634fa5ea5463330270f6c101d12fd691b26e82044ecf8f1d7",
+              "line": 10944
+            }
+          }
+        },
+        {
+          "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+          "fileSha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+          "symbols": {
+            "listMeetings": {
+              "sha256": "b4d038a410d3cf148c0b665dadada511512e40a6a9ce033ddf6dc1d54ff64501",
+              "line": 1390
+            },
+            "getMeeting": {
+              "sha256": "0e85a52b120d91e44dacc0b44cbd0a1976a706548bb599391be0a03d06fb9fe3",
+              "line": 1448
+            },
+            "shareArtifacts": {
+              "sha256": "4357f59e8da56550940468c83b5bfd5befef1ccae69c79d13564ed7b61ba124f",
+              "line": 1844
+            },
+            "unshareArtifacts": {
+              "sha256": "17e21cd0e40f1ba0a6023da14a53a666415cb5c40b53d14bd89234a494e1c03a",
+              "line": 1913
+            },
+            "loadArtifactShareState": {
+              "sha256": "4dedeaca4214d0c08886a7c637d9b3e5d28fd6b08e463e50c91370794bc70faa",
+              "line": 1955
+            },
+            "stampArtifactShared": {
+              "sha256": "cf19ffecdbe02ee1f09923ed51f6c135bdab47d02c7510b53d46031bd5fc8162",
+              "line": 2099
+            },
+            "clearArtifactShared": {
+              "sha256": "1e989df8d8307dd97c1583c12dc80572c71b96bc3b82d64c1ca2e4aa0c672592",
+              "line": 2121
+            },
+            "recomputeMeetingVisibility": {
+              "sha256": "d1346007eeca73132f66b7f297c21698a24bff6b79764bc9b81841fc73f65d2c",
+              "line": 2143
+            },
+            "listSharedMeetingsForClient": {
+              "sha256": "6bf21b5bbe72701e3268afe6287557f78f51ea0c434ebf982ba42ec4d153dec9",
+              "line": 2359
+            },
+            "filterToSharedArtifacts": {
+              "sha256": "06ad0b921a7439ab41939398b4ce9bf287d4d1e660ec8b876dba51d8e882b7a7",
+              "line": 2397
+            },
+            "decorateMeetings": {
+              "sha256": "3f897982b669b99ce3bbf5dfe476d5b755850f27a3a9665e7c69a8f290e5a57b",
+              "line": 2427
+            },
+            "listAttachments": {
+              "sha256": "3a2f76b5c09cd40a14a2865271590c4803e095402979aeddfb8c373dd5fe4132",
+              "line": 7756
+            },
+            "meetingInclude": {
+              "sha256": "10932255adae473e80cc2948d2cc39ada31fad7e9a8bef4ce9b47518692fe18b",
+              "line": 10923
+            },
+            "noteMetadataSelect": {
+              "sha256": "875d4aaab72128ef475454715199578dce5ca7f62b91ba96e5d26a63b0ac2c09",
+              "line": 11009
+            },
+            "debriefMetadataSelect": {
+              "sha256": "e04de502b410cc3e774217a074dd16a902fe905622f08d9631dba0d7374a4dea",
+              "line": 11031
+            },
+            "mergeSharedMeetingsByICalUid": {
+              "sha256": "a81718bf79613fc634fa5ea5463330270f6c101d12fd691b26e82044ecf8f1d7",
+              "line": 11117
+            }
+          }
+        }
+      ],
+      "comparison": [
+        {
+          "name": "listMeetings",
+          "identical": true
+        },
+        {
+          "name": "getMeeting",
+          "identical": true
+        },
+        {
+          "name": "shareArtifacts",
+          "identical": true
+        },
+        {
+          "name": "unshareArtifacts",
+          "identical": true
+        },
+        {
+          "name": "loadArtifactShareState",
+          "identical": true
+        },
+        {
+          "name": "stampArtifactShared",
+          "identical": true
+        },
+        {
+          "name": "clearArtifactShared",
+          "identical": true
+        },
+        {
+          "name": "recomputeMeetingVisibility",
+          "identical": true
+        },
+        {
+          "name": "listSharedMeetingsForClient",
+          "identical": true
+        },
+        {
+          "name": "filterToSharedArtifacts",
+          "identical": true
+        },
+        {
+          "name": "decorateMeetings",
+          "identical": true
+        },
+        {
+          "name": "listAttachments",
+          "identical": false
+        },
+        {
+          "name": "meetingInclude",
+          "identical": true
+        },
+        {
+          "name": "noteMetadataSelect",
+          "identical": true
+        },
+        {
+          "name": "debriefMetadataSelect",
+          "identical": true
+        },
+        {
+          "name": "mergeSharedMeetingsByICalUid",
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,664 @@
+{
+  "at": "2026-10-13T11:49:18.982942+00:00",
+  "head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "production_diff_empty": true,
+  "portfolio_current_baseline": {
+    "passed": 26,
+    "failed": 78,
+    "cases": [
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity filtering retains uncertainty after 503 without an observed change until deliberate review",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity filtering retains uncertainty after 503 after the synthetic change until deliberate review",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity filtering retains uncertainty after wrong-client receipt until deliberate review",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity filtering retains uncertainty after wrong-tenant receipt until deliberate review",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity filtering retains uncertainty after wrong-activity receipt until deliberate review",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity definite refusal remains retryable after filtering",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity dispatched pending write stays fenced through filtering and uncertain completion",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity readonly actor cannot acquire write eligibility by filtering",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-activity-lifetime.spec.ts",
+        "title": "activity expired preflight cannot dispatch a write after filter reappearance",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-contact-mail.spec.ts",
+        "title": "contact thread admits the exact requested ID for direct and recipient-derived null or other-client histories",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-contact-mail.spec.ts",
+        "title": "contact thread refuses a different returned thread ID even when its client and recipients match",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-contact-mail.spec.ts",
+        "title": "failed current contact history removes previous messages and draft until a successful explicit read",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-contact-mail.spec.ts",
+        "title": "failed current contact detail removes previous messages and draft until a successful explicit read",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-contact-mail.spec.ts",
+        "title": "a held former-client contact thread cannot surface after the route selects another client",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "an ambiguous folder PATCH freezes the exact draft through close and reopen",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "an unknown folder intent survives actor navigation without entering another actor's form",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a folder attempt fences two synchronous submits before its response arrives",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a pending folder attempt cannot be dispatched again after an actor round-trip",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a matching folder PATCH after actor replacement cannot close the replacement dialog",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a matching folder PATCH after tenant replacement cannot close the replacement dialog",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a matching folder PATCH after client replacement cannot close the replacement dialog",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a matching folder PATCH after unmount cannot invalidate the departed view",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "folder dispatch rechecks authority synchronously before sending a stale form",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-lifetime.spec.ts",
+        "title": "a current read-only actor can inspect folder controls but cannot save access",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects count-only acknowledgment, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects foreign folder, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects foreign unfiled group, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects contradictory access mode, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects missing requested viewer, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects additional viewer, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects negative count, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL rejects fractional count, retains intent and fences another write",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL accepts the native reordered viewer set and trimmed folder",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL accepts a native zero-count unfiled response without inventing folder inheritance",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-folder-access-receipts.spec.ts",
+        "title": "folder ACL allows a corrected explicit save after a definite 422 rejection",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "notes: a held read conceals an open editor without discarding its local draft",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "notes: a failed read refuses an obsolete editor submit before dispatch",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "notes: an already opened share confirmation cannot dispatch after list refusal",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "debriefs: a held read conceals an open editor without discarding its local draft",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "debriefs: a failed read refuses an obsolete editor submit before dispatch",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "debriefs: an already opened share confirmation cannot dispatch after list refusal",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-dialogs.spec.ts",
+        "title": "debrief preview conceals cached content and printing after parent list refusal",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-lifetime.spec.ts",
+        "title": "notes: pending then uncertain creation survives list refusal and recovery without replay",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-lifetime.spec.ts",
+        "title": "notes: replacing a meeting client requires its own current list receipt",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-lifetime.spec.ts",
+        "title": "debriefs: pending then uncertain creation survives list refusal and recovery without replay",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-lifetime.spec.ts",
+        "title": "debriefs: replacing a meeting client requires its own current list receipt",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-objective-keys.spec.ts",
+        "title": "actual ObjectiveEditor has independent destination panels without duplicate sibling-key warnings",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-objective-keys.spec.ts",
+        "title": "a persisted Objective version remounts both destination selections and resolves only the new version",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-objective-keys.spec.ts",
+        "title": "both held destination resolutions abort on editor close without late navigation",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-objective-keys.spec.ts",
+        "title": "both held destination resolutions abort on editor client without late navigation",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-portfolio-incompletes.spec.ts",
+        "title": "Portfolio incomplete contrast and names are reviewed at 1440px light",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-portfolio-incompletes.spec.ts",
+        "title": "Portfolio incomplete contrast and names are reviewed at 1440px dark",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-portfolio-incompletes.spec.ts",
+        "title": "Portfolio incomplete contrast and names are reviewed at 390px light",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-portfolio-incompletes.spec.ts",
+        "title": "Portfolio incomplete contrast and names are reviewed at 390px dark",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief history 403 current read hides cached selection until held recovery succeeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "selected brief version 403 current read withholds its cached document through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief refresh 403 current read removes prior comparison through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief source 403 current read withholds current evidence while retaining immutable citation facts",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief history 503 current read hides cached selection until held recovery succeeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "selected brief version 503 current read withholds its cached document through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief refresh 503 current read removes prior comparison through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-brief-current.spec.ts",
+        "title": "brief source 503 current read withholds current evidence while retaining immutable citation facts",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-client-link.spec.ts",
+        "title": "existing-client 403 current read revokes old selection and requires fresh confirmation after held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-client-link.spec.ts",
+        "title": "existing-client 503 current read revokes old selection and requires fresh confirmation after held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-client-link.spec.ts",
+        "title": "changing client search cannot dispatch a confirmation from a previous result set",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-contacts.spec.ts",
+        "title": "contacts 403 current read removes cached contacts and editor through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-contacts.spec.ts",
+        "title": "contacts 503 current read removes cached contacts and editor through held recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-prospect-contacts.spec.ts",
+        "title": "held contact recovery cannot resurrect an old editor after route replacement",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current people 403 conceals roster and dirty drawer until an explicit successful recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current people 503 conceals roster and dirty drawer until an explicit successful recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current target-list denial closes former target detail and recovers without restoring its selection",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "failed current recommendations conceal old suggestions while the independent target list remains usable",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current congress directory failure removes stale choices and retains independent feeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current staff directory failure removes stale choices and retains independent feeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current state directory failure removes stale choices and retains independent feeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "current committee directory failure removes stale choices and retains independent feeds",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-relationships.spec.ts",
+        "title": "failed current target detail removes old positions and the open mail draft until reviewed again",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: held list conceals the saved body and recovers only current records",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: an older released read cannot replace a newer failed read",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: rejects meeting list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: rejects client list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: rejects duplicate list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: omitted optional parent echoes preserve the original native list projection",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: exact native client-one parent remains usable",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "notes: exact native unscoped parent remains usable",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: held list conceals the saved body and recovers only current records",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: an older released read cannot replace a newer failed read",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: rejects meeting list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: rejects client list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: rejects duplicate list provenance without body or write controls",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: omitted optional parent echoes preserve the original native list projection",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: exact native client-one parent remains usable",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-meeting-artifacts-reads.spec.ts",
+        "title": "debriefs: exact native unscoped parent remains usable",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "a held current search conceals old results and fences Track until the new response",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "a cached search followed by 403 removes selection; held retry cannot resurrect it",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "a cached search followed by 503 removes selection; held retry cannot resurrect it",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "a successful empty reread cannot keep an absent bill selected for tracking",
+        "status": "failed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "query replacement clears prior selection while its new search is held",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "jurisdiction replacement clears prior selection while its new search is held",
+        "status": "passed"
+      },
+      {
+        "file": "acceptance-bill-search.spec.ts",
+        "title": "client replacement cancels a held former-client search and starts with no selection",
+        "status": "passed"
+      }
+    ]
+  },
+  "original_exact_baseline": {
+    "passed": 24,
+    "failed": 80
+  },
+  "corrections": "Meeting omitted parent fields changed to positive compatibility controls using native published interfaces; Bill403 uses canonical QueryState error copy. Original failures and preimages preserved. Meri unavailable Send locator corrected only in unreached tail; theme baseline replays separately.",
+  "scope": "Source defects and bounded fixture controls only. All337 native rows OPEN. No native/backend/provider effects.",
+  "source_files": [
+    {
+      "path": "apps/web/test/browser/acceptance-meri-theme.spec.ts",
+      "sha256": "d00d53ea2ca18eafb4f711aec8cc011c558699128f3531552977773a808aff1b"
+    },
+    {
+      "path": "apps/web/test/browser/acceptance-shared-incompletes.spec.ts",
+      "sha256": "b06f1f11c3ab9c251bdd1dbf882b2b5674ee94009704b4d62e6e804f13c7e758"
+    },
+    {
+      "path": "apps/web/test/rendered-contrast.ts",
+      "sha256": "20d02577fcccd4224e8e3d75cccd4ac991b8762df661391b50ec320fe64ce744"
+    },
+    {
+      "path": "apps/web/tests/acceptance-meeting-artifacts-query.test.ts",
+      "sha256": "7b76d9eeb5fe0eb8155d292644db2e91dbe01c72f8d87e1bf101bce815a1bc3d"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-activity-fixtures.ts",
+      "sha256": "72d6897197778a5978378037c8234565f192b5f2ee1c6d805e043f95d6c31d9a"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-activity-lifetime.spec.ts",
+      "sha256": "34ad923241719dab5bc89203059fa249453d388dce1bd02dc61f44f87b9b5dd7"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-bill-search-fixtures.ts",
+      "sha256": "ecd76ed6c0f955ed9d78d72c603401e93a95fdbea60b5d1872257d587dd40c16"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-bill-search-harness.tsx",
+      "sha256": "48605208cd204c5a293a262d324ddb4dbe284d159f94ccd8f536628f4a866fe9"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-bill-search.spec.ts",
+      "sha256": "a649e4e892a6d9fd5f278755a1738179d1cc0c19e27cdd03db26fb21a23fc581"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-contact-mail.spec.ts",
+      "sha256": "58f3b97c5214049e4bbfd522d3f443c30e2cbb813f3cbb5cc435143c6adb9a0e"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-folder-access-fixtures.ts",
+      "sha256": "02ff0048a631e8dd62dccb31a80806fa6adf80b1ce337a0fa491eac189a13f95"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-folder-access-lifetime.spec.ts",
+      "sha256": "85d3b02c0d719ca1f9dfce0ccadc1e108e01f492485487ead6d43d877e4b771f"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-folder-access-receipts.spec.ts",
+      "sha256": "afa729b191a65f8f63926fac658b52a4e0430be635d388077f5cd9bb12a8a0e9"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-data.ts",
+      "sha256": "bc718678f6b442579f32724e3d8b6717b8377fe819965236e27eb592e56acfbc"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-dialogs.spec.ts",
+      "sha256": "57263e9f5ba1cc9114a57a58c9842935dee6d70bda658bf069a8d42aaf15645d"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts",
+      "sha256": "38461b6267d772278d6fb816948da092d39cbeb251bf96c26e6489ffcad0d660"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-harness.tsx",
+      "sha256": "7ea96123605624b0ec83bf25f319484ccd2ace56fa78e25d85c5094a83bf88b7"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-lifetime.spec.ts",
+      "sha256": "afcf0cc164252539b41aa14e01c79623b6f7b840f0d6c76e3040b78b170a1505"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts",
+      "sha256": "6dea373ab57ebfb588aeca8346136185f8f0519efcdfd10b9a39e3ea0841acef"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-objective-keys-fixtures.ts",
+      "sha256": "224cae3de7c601ee4ffbbd8a2c3d2f1f33ddea336e489aa05c732654518c82a9"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-objective-keys.spec.ts",
+      "sha256": "026fb0ac242fbf979824be5e73305408786092896e0b5992a555aa52d71d67e5"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-portfolio-incompletes.spec.ts",
+      "sha256": "dda6c730a9ce727dc1a1509722adc1d31cba7475afcc28e68524fb33f016d35d"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-prospect-brief-current.spec.ts",
+      "sha256": "cc4786d471d88f3f2c71f4b8117e636d0353a848b227f1d0e484f74fec4935ce"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-prospect-brief-fixtures.ts",
+      "sha256": "b54dcbbea5f9fddfb90a64f00fcf1ede4682591269f2c79b0e48aa93db6abf0d"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-prospect-client-link.spec.ts",
+      "sha256": "fe0e69e71ffe93e65585d0867b14f18d1bd6cf58bb89cb2af25a9ba65ab85cf0"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-prospect-contacts.spec.ts",
+      "sha256": "cecd9b540293f6da318726a5de151eb8b8d617deeebb40eb1a92c204154f1d24"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-prospect-fixtures.ts",
+      "sha256": "eb2371c4e49310c68e77ed299746d2fd21dcc71346a0d1b7fe43ea6e1cf12a2e"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-relationships-fixtures.ts",
+      "sha256": "8996979d37c55448d845562ea30db101b139aef7c4b71be3d723708ac846d8e3"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-relationships-probe.tsx",
+      "sha256": "879c0e958a35038f21d7a470ed6879f500412221065b89ad398b7116b89c40c4"
+    },
+    {
+      "path": "apps/web/tests/browser/acceptance-relationships.spec.ts",
+      "sha256": "ea314c3ae8c888e9336e0704761f0d98c0b52adcf34b7655b4ae5145f6fbfa6a"
+    },
+    {
+      "path": "apps/web/tests/browser/main.tsx",
+      "sha256": "5d7ad4b0e28e7d6a2adcdb67bc363042018947675e0f92df8d2d89495519ab0f"
+    }
+  ]
+}

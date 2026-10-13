@@ -1,0 +1,40 @@
+{
+  "checkNodeCounts": [
+    94,
+    21,
+    385
+  ],
+  "checkNodePass": [
+    94,
+    21,
+    385
+  ],
+  "checkNodeFail": [
+    0,
+    0,
+    0
+  ],
+  "vitestCounts": [
+    1631,
+    288
+  ],
+  "declarations": 8,
+  "architecture": {
+    "sizeSummary": {
+      "total": 475,
+      "reviewed": 451,
+      "inheritedUnreviewed": 24,
+      "blocking": 0
+    },
+    "errors": []
+  },
+  "lintSummary": [
+    "\u2716 76 problems (0 errors, 76 warnings)"
+  ],
+  "installSummary": [
+    "added 852 packages in 17s"
+  ],
+  "elementsNodeTests": [
+    15
+  ]
+}

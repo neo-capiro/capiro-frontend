@@ -1,0 +1,8 @@
+{
+  "prefix":"RELEASED-2",
+  "scope":"Root explicitly released completed298-case Portfolio shard2. Shards3/4/progress remain excluded and no overall acceptance is claimed.",
+  "groups":[
+    {"lane":"portfolio-shard-2","root":"/workspace/capiro-unified-files-corrected-20261013","paths":["portfolio-shard-2-running.json","portfolio-shard-2-exit.json","portfolio-shard-2-results.json","portfolio-shard-2.log"]},
+    {"lane":"portfolio-shard-2-artifacts","root":"/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts"}
+  ]
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+    "entireFileASTEquivalentAfterOnlyApprovedLabelChanges": true,
+    "printedFormattingIdentical": false,
+    "adaptations": [
+      {
+        "line": 243,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 245,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 249,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 252,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 264,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 268,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      }
+    ],
+    "baselineTestTitles": [
+      "\"profile notes conceal a failed saved-client read and prevent replacement\"",
+      "\"profile notes reject another client's receipt and require review before retry\"",
+      "\"profile notes retain a refused draft without reporting it saved\"",
+      "\"late notes receipts cannot close a replacement actor's editor\"",
+      "\"failed account-team refresh conceals cached members and disables changes\"",
+      "\"failed member options cannot submit a retained selection\"",
+      "\"team add needs the requested native roster effect\"",
+      "\"owner assignment rejects a different returned owner\"",
+      "\"failed facilities refresh conceals saved locations and closes their detail\"",
+      "\"a removed facility selection does not reopen when that ID returns\"",
+      "\"unknown facility creation stays fenced after closing and reopening\"",
+      "\"identity invalidation disables facility creation despite a cached role\""
+    ],
+    "finalTestTitles": [
+      "\"profile notes conceal a failed saved-client read and prevent replacement\"",
+      "\"profile notes reject another client's receipt and require review before retry\"",
+      "\"profile notes retain a refused draft without reporting it saved\"",
+      "\"late notes receipts cannot close a replacement actor's editor\"",
+      "\"failed account-team refresh conceals cached members and disables changes\"",
+      "\"failed member options cannot submit a retained selection\"",
+      "\"team add needs the requested native roster effect\"",
+      "\"owner assignment rejects a different returned owner\"",
+      "\"failed facilities refresh conceals saved locations and closes their detail\"",
+      "\"a removed facility selection does not reopen when that ID returns\"",
+      "\"unknown facility creation stays fenced after closing and reopening\"",
+      "\"identity invalidation disables facility creation despite a cached role\""
+    ],
+    "testTitlesIdentical": true
+  },
+  {
+    "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+    "entireFileASTEquivalentAfterOnlyApprovedLabelChanges": true,
+    "printedFormattingIdentical": false,
+    "adaptations": [
+      {
+        "line": 225,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 225,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 237,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 240,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 254,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 256,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 269,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 274,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 334,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 334,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      },
+      {
+        "line": 348,
+        "role": "button",
+        "from": "Add facility",
+        "to": "Save facility"
+      },
+      {
+        "line": 348,
+        "role": "dialog",
+        "from": "Add facility",
+        "to": "Facilities: Synthetic profile client"
+      }
+    ],
+    "baselineTestTitles": [
+      "\"a matching notes clear uses only the native notes PUT and closes once\"",
+      "\"a refreshed notes source fences a late receipt and retains the local draft for review\"",
+      "\"owner membership role mismatches stay unknown and preserve the role draft\"",
+      "\"an owner's successfully updated membership role remains visible on the single owner row\"",
+      "\"a successfully removed member option leaves the retained choice unavailable\"",
+      "\"late team receipts do not report success or invalidate a replacement client view\"",
+      "\"closing a pending facility create keeps the unknown fence when its view reopens\"",
+      "\"a similar current facility cannot be claimed as an unknown creation receipt\"",
+      "\"a changed saved facility cannot be overwritten by an older open draft\"",
+      "\"a late facility result cannot escape its original actor's unknown fence\""
+    ],
+    "finalTestTitles": [
+      "\"a matching notes clear uses only the native notes PUT and closes once\"",
+      "\"a refreshed notes source fences a late receipt and retains the local draft for review\"",
+      "\"owner membership role mismatches stay unknown and preserve the role draft\"",
+      "\"an owner's successfully updated membership role remains visible on the single owner row\"",
+      "\"a successfully removed member option leaves the retained choice unavailable\"",
+      "\"late team receipts do not report success or invalidate a replacement client view\"",
+      "\"closing a pending facility create keeps the unknown fence when its view reopens\"",
+      "\"a similar current facility cannot be claimed as an unknown creation receipt\"",
+      "\"a changed saved facility cannot be overwritten by an older open draft\"",
+      "\"a late facility result cannot escape its original actor's unknown fence\""
+    ],
+    "testTitlesIdentical": true
+  }
+]

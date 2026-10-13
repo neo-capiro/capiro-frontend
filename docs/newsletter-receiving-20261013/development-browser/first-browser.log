@@ -1,0 +1,91 @@
+
+Running 12 tests using 1 worker
+
+(node:1154421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:13:1 › rich document create is explicit, preserves local content and stages only a confirmed full save (1.4s)
+  ✓   2 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:84:1 › rich library detail requires explicit adoption and sends the complete reviewed CAS document (1.4s)
+  ✓   3 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:130:3 › rich save 409 retains edits until deliberate owner review and full rebase (1.7s)
+  ✓   4 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:130:3 › rich save 503 retains edits until deliberate owner review and full rebase (1.5s)
+  ✓   5 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:200:1 › rich explicit adoption replaces uncertain local edits without attributing the owner state (1.5s)
+  ✓   6 apps/web/test/browser/newsletter-document-lifecycle.spec.ts:238:1 › rich saved preview excludes local edits and sanitizes active HTML without remote requests (1.5s)
+  ✓   7 apps/web/test/browser/newsletter-document-navigation.spec.ts:18:1 › rich pending create remains fenced after history close/reopen and an empty library (1.8s)
+  ✘   8 apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 200 (30.2s)
+(node:1154933) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 503 (30.2s)
+(node:1155138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 apps/web/test/browser/newsletter-document-navigation.spec.ts:123:1 › rich unknown save after reopen needs a successful owner read and separate adoption (2.0s)
+  ✓  11 apps/web/test/browser/newsletter-document-navigation.spec.ts:172:3 › rich held save cannot restore prior private material after client replacement (1.5s)
+  ✓  12 apps/web/test/browser/newsletter-document-navigation.spec.ts:172:3 › rich held save cannot restore prior private material after session replacement (1.4s)
+
+
+  1) apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 200 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goBack: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for navigation until "load"
+
+
+       95 |       page.getByText("stage in progress…", { exact: true }),
+       96 |     ).toBeVisible();
+    >  97 |     await page.goBack();
+          |                ^
+       98 |     await expect(
+       99 |       page.getByRole("heading", { name: "Workspace", exact: true }),
+      100 |     ).toBeVisible();
+        at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts:97:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-e95a8-ory-navigation-and-late-200/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 503 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goBack: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for navigation until "load"
+
+
+       95 |       page.getByText("stage in progress…", { exact: true }),
+       96 |     ).toBeVisible();
+    >  97 |     await page.goBack();
+          |                ^
+       98 |     await expect(
+       99 |       page.getByRole("heading", { name: "Workspace", exact: true }),
+      100 |     ).toBeVisible();
+        at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts:97:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-newsletter-lifecycle-browser-20261013/first-artifacts/newsletter-document-naviga-3d2dc-ory-navigation-and-late-503/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 200 
+    apps/web/test/browser/newsletter-document-navigation.spec.ts:67:3 › rich pending stage stays fenced across history navigation and late 503 
+  10 passed (1.3m)

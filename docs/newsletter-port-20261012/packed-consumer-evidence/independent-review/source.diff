@@ -1,0 +1,149 @@
+diff --git a/docs/newsletter-port-20261012/HANDOVER.md b/docs/newsletter-port-20261012/HANDOVER.md
+index 6fcdbba..bab3a2a 100644
+--- a/docs/newsletter-port-20261012/HANDOVER.md
++++ b/docs/newsletter-port-20261012/HANDOVER.md
+@@ -2,7 +2,7 @@
+ 
+ This separate branch preserves the original 179 newsletter public assets at their existing `/newsletter/*` paths. All 486,014 decoded bytes match the original C/W Git blobs, byte lengths and pinned SHA-256 inventory. The 172 PNGs, five SVGs and two attribution/license files are unchanged. This is the first bounded slice of the rich newsletter port; it does not establish rich editor, delivery, native backend or deployed-origin acceptance.
+ 
+-The branch starts at frontend `adbc84b2251fe6b06cb7f75030026fba5b4ff498`. PR15 qualification and its later corrections remain on `integration/capiro-remaining-20261012`. No source under `apps/web/src`, shared shell/session/client/operation boundary, root manifest or lockfile changes in this slice. The current generic newsletter builder and exact saved-version OutreachV3 flow retain their original source.
++The branch starts at frontend `adbc84b2251fe6b06cb7f75030026fba5b4ff498`. PR15 qualification and its later corrections remain on `integration/capiro-remaining-20261012`. Slice1 changed no application source or manifests. Slice2 adds only the governed package, qualification workspace, exact two-export allowlist and root manifest/lock/check discovery; `apps/web/src` and the shared shell/session/client/operation boundary remain unchanged. The current generic newsletter builder and exact saved-version OutreachV3 flow retain their original source.
+ 
+ ## Source and evidence
+ 
+@@ -18,7 +18,7 @@ Five copied directory receipts contained temporary GitHub download URL credentia
+ 
+ ## Coordinated next slices
+ 
+-Follow the [implementation outline](scope-audit/OUTLINE.md). The backend already owns public `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render` exports in `@capiro/shared@0.0.0`, over five pure modules. The inspected handoff does not supply a packed artifact with entry provenance and consumer qualification. The backend package owner must supply or identify that immutable distribution; the frontend integration owner will verify packed imports, declarations, browser-safe closure and render behavior before making vendor, manifest and lock changes. No replacement DTO, renderer, version or private-checkout import is proposed.
++Follow the [implementation outline](scope-audit/OUTLINE.md). The backend already owns public `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render` exports in `@capiro/shared@0.0.0`, over five pure modules. The backend package owner subsequently supplied the immutable distribution at `62d057b4a17b2c038920f10b93e83e51e46239bc`, built from `fe50dc1c2de1660a036e338cf81acdcf0f2fb26a`. Slice2 now vendors that exact artifact and verifies actual packed imports, declarations, browser closure and original renderer behavior. See [package consumption](PACKED-CONSUMER.md) and its linked qualification evidence. This closes the missing-distribution prerequisite only. No replacement DTO, renderer, version or private-checkout import is proposed.
+ 
+ Modules Workspace will own the rich document/revision editor, assets and review; Modules Engagement will own the rich stage/legacy record destination. Thin compatibility routes use the existing shared application shell. The current Outreach record validator strips `metadata.newsletterStageId`; the port must preserve the canonical rich-record distinction before dispatching records to the proper editor. Its presence is not evidence of a live data-loss event.
+ 
+diff --git a/package-lock.json b/package-lock.json
+index 48343e3..dbf7e95 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -523,10 +523,19 @@
+       "resolved": "packages/qualification-elements",
+       "link": true
+     },
++    "node_modules/@capiro/qualification-newsletter": {
++      "resolved": "packages/qualification-newsletter",
++      "link": true
++    },
+     "node_modules/@capiro/qualification-transport": {
+       "resolved": "packages/qualification-transport",
+       "link": true
+     },
++    "node_modules/@capiro/shared": {
++      "version": "0.0.0",
++      "resolved": "file:vendor/capiro-shared-0.0.0.tgz",
++      "integrity": "sha512-CK2DLxUPCTs+PkBwx8GOjRLfh6jssTddIX2zgxiFw2hjVcHLF65oA8vJJ+LIR00r9XBnxFdYYoD2ZAkgY698Sw=="
++    },
+     "node_modules/@capiro/ui": {
+       "resolved": "packages/ui",
+       "link": true
+@@ -13981,6 +13990,21 @@
+         "node": ">=24 <25"
+       }
+     },
++    "packages/qualification-newsletter": {
++      "name": "@capiro/qualification-newsletter",
++      "version": "0.0.0",
++      "dependencies": {
++        "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0.tgz"
++      },
++      "devDependencies": {
++        "@playwright/test": "1.61.1",
++        "typescript": "5.9.3",
++        "vite": "8.3.4"
++      },
++      "engines": {
++        "node": ">=24 <25"
++      }
++    },
+     "packages/qualification-transport": {
+       "name": "@capiro/qualification-transport",
+       "version": "0.0.0",
+diff --git a/package.json b/package.json
+index 37421fb..8ff3a6d 100644
+--- a/package.json
++++ b/package.json
+@@ -20,12 +20,14 @@
+     "check:packages": "node scripts/public-packages.mjs",
+     "test:transport": "npm test --workspace @capiro/qualification-transport",
+     "check:elements": "npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements",
+-    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web",
++    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web && npm run test:newsletter",
+     "test:portfolio": "npm test --workspace @capiro/web",
+     "test:browser": "npm run test:browser --workspace @capiro/web --",
+     "test:production": "node apps/web/tests/production/run-standalone.mjs",
+     "test:docker-context": "node scripts/docker-context-regression.mjs",
+-    "test:browser:modules": "npm run test:browser:modules --workspace @capiro/web"
++    "test:browser:modules": "npm run test:browser:modules --workspace @capiro/web",
++    "test:newsletter": "npm test --workspace @capiro/qualification-newsletter && npm run test:declarations --workspace @capiro/qualification-newsletter",
++    "test:newsletter:browser": "node packages/qualification-newsletter/browser-check.mjs"
+   },
+   "devDependencies": {
+     "@types/node": "24.0.0",
+diff --git a/scripts/architecture.test.mjs b/scripts/architecture.test.mjs
+index 9a4ee2d..0047a5b 100644
+--- a/scripts/architecture.test.mjs
++++ b/scripts/architecture.test.mjs
+@@ -307,3 +307,12 @@ test('transfer canonicalization changes only the exact agreed module paths', ()
+   assert.ok(moved.includes("import('@/shared/portfolio/api/http')"));
+   assert.ok(moved.includes("const unchanged = '@/features/portfolio/public'"));
+ });
++
++test('newsletter browser boundary admits only its two governed public subpaths', () => {
++  const file = 'apps/web/src/features/modules/workspace/Newsletter.ts';
++  const accepted = "import '@capiro/shared/newsletter'; import '@capiro/shared/newsletter-render';";
++  assert.deepEqual(inspectSources(new Map([[file, accepted]])).errors, []);
++  for (const specifier of ['@capiro/shared', '@capiro/shared/money', '@capiro/shared/newsletter-fonts', '@capiro/shared/src/newsletter', '@capiro/shared/dist/newsletter']) {
++    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
++  }
++});
+diff --git a/scripts/architecture/dependencies.mjs b/scripts/architecture/dependencies.mjs
+index b8d5a5e..ee2e293 100644
+--- a/scripts/architecture/dependencies.mjs
++++ b/scripts/architecture/dependencies.mjs
+@@ -13,6 +13,7 @@ export const publicExports = new Set([
+   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
+   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
+   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
++  '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
+ ]);
+ 
+ export const serverAdapters = new Map([
+diff --git a/scripts/public-packages.mjs b/scripts/public-packages.mjs
+index f9152a3..cedb8f1 100644
+--- a/scripts/public-packages.mjs
++++ b/scripts/public-packages.mjs
+@@ -33,8 +33,10 @@ function main(argv) {
+   if (argv.length === 1 && argv[0] === '--help') { console.log(usage); return; }
+   if (argv.length) throw Error(usage);
+   const vendor = fileURLToPath(new URL('../vendor/', import.meta.url));
+-  const manifest = JSON.parse(readFileSync(path.join(vendor, 'meri-public-packages.json'), 'utf8'));
+-  console.log(JSON.stringify({ schema: manifest.schema, records: verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))) }, null, 2));
++  const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json']
++    .map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
++  const records = manifests.flatMap(manifest => verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))));
++  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records }, null, 2));
+ }
+ 
+ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+diff --git a/vendor/README.md b/vendor/README.md
+index 26e7d8c..ff79e86 100644
+--- a/vendor/README.md
++++ b/vendor/README.md
+@@ -5,3 +5,9 @@ These immutable npm artifacts come from deliberate public exports in the separat
+ The0.1.0 distributions passed distinct independent source and packed-consumer review and are accepted for this offline migration. [Owner acceptance](../docs/coordination/CODEX-FRONTEND-MIGRATION-ACCEPTANCE.md) records the scope and review bindings. Updating them requires a reviewed producing commit, actual pack/entry/consumer verification and explicit metadata/lock updates. Wire contracts remain backend-owned. Existing0.1.0 schema bytes are unchanged; this work adds public distribution and trusted stream packaging, not new wire fields.
+ 
+ The contract validator is qualified for wire JSON parsed in the validator's own JavaScript realm. Arbitrary foreign-realm/prototype objects are not accepted as a supported integration boundary. No public package supplies server authorization or an authenticated endpoint.
++
++## Newsletter distribution
++
++`newsletter-public-packages.json` binds the separate Capiro backend's private `@capiro/shared@0.0.0` artifact, built from `fe50dc1c2de1660a036e338cf81acdcf0f2fb26a` and distributed at `62d057b4a17b2c038920f10b93e83e51e46239bc`. Identify this input by its immutable SHA256/SHA512 and producing commits, not its unrevised version string. It is 510,772 bytes with 182 regular entries; SHA256 is `697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab`.
++
++Only `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render` are approved browser imports. They close over five pure packed modules; the artifact's other exports remain outside the frontend allowlist. The qualification workspace consumes these actual public entries. No application dependency or native operation is enabled by this addition. See [bounded consumer qualification](../docs/newsletter-port-20261012/PACKED-CONSUMER.md). Rich newsletter stage identities remain distinct from saved document-version identities.

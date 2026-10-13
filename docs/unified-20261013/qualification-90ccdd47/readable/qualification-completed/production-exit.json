@@ -1,0 +1,32 @@
+{
+  "name": "production",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "ONBOARD_API_BASE_URL=",
+    "MERI_ACTION_WORKFLOW_ENABLED=",
+    "npm",
+    "run",
+    "test:production",
+    "--",
+    "/workspace/capiro-unified-files-corrected-20261013/production"
+  ],
+  "startedUTC": "2026-10-13T09:46:02.070426+00:00",
+  "endedUTC": "2026-10-13T09:46:10.280648+00:00",
+  "durationSeconds": 8.210252093005693,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}
