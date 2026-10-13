@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import {
   commentPage,
   commentRecord,
-} from "../../../../tests/comment-calendar-fixtures";
+} from "../../../shared/federal-register/comment-deadline-fixtures";
 import { createCapiroApi } from "../../../shared/capiro/http";
 import { capiroOperations } from "../../../shared/capiro/registry";
 import { loadAgendaSources, loadFunding, loadPlanner } from "./agenda-loader";
