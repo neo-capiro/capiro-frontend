@@ -8,6 +8,8 @@ const config: NextConfig = {
   transpilePackages: ["@capiro/ui"],
   poweredByHeader: false,
   turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },
+  // Qualification worktrees retain build evidence, not reusable compiler caches.
+  experimental: { turbopackFileSystemCacheForBuild: false },
   async headers() {
     return [
       {
