@@ -1,6 +1,7 @@
 import { useSyncExternalStore, type ReactNode } from "react";
 
 type TestSession = {
+  providerStatus: "loading" | "error" | "ready" | "degraded";
   isLoaded: boolean;
   userId: string | null;
   sessionId: string | null;
@@ -10,6 +11,11 @@ type TestSession = {
   lastName?: string;
 };
 const initial: TestSession = {
+  providerStatus:
+    new URLSearchParams(window.location.search).get("providerStatus") ===
+    "loading"
+      ? "loading"
+      : "ready",
   isLoaded: true,
   userId: "test-user",
   sessionId: "test-session",
@@ -39,13 +45,18 @@ export function ClerkProvider({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 export function ClerkLoaded({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  const current = useSyncExternalStore(subscribe, () => session);
+  return ["ready", "degraded"].includes(current.providerStatus) ? (
+    <>{children}</>
+  ) : null;
 }
-export function ClerkLoading() {
-  return null;
+export function ClerkLoading({ children }: { children: ReactNode }) {
+  const current = useSyncExternalStore(subscribe, () => session);
+  return current.providerStatus === "loading" ? <>{children}</> : null;
 }
-export function ClerkFailed() {
-  return null;
+export function ClerkFailed({ children }: { children: ReactNode }) {
+  const current = useSyncExternalStore(subscribe, () => session);
+  return current.providerStatus === "error" ? <>{children}</> : null;
 }
 export function SignIn() {
   return <p>Explicit test sign-in screen</p>;
