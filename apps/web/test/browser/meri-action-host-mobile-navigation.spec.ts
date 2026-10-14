@@ -29,8 +29,14 @@ async function expectRoute(
   await expect(page).toHaveURL(destination === "home" ? homeUrl : actionUrl());
   if (destination === "home") {
     await expect(
-      page.getByLabel("Message draft", { exact: true }),
+      page.getByRole("heading", {
+        name: "Conversations unavailable",
+        exact: true,
+      }),
     ).toBeVisible();
+    await expect(page.getByLabel("Message draft", { exact: true })).toHaveCount(
+      0,
+    );
   } else {
     await expect(
       page.getByRole("button", { name: "Connect action service", exact: true }),

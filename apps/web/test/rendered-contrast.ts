@@ -69,6 +69,7 @@ export async function expectRenderedContrast(
       blockers.push(`Unsupported compositing: ${JSON.stringify(ancestor)}`);
   }
   let backgrounds: string[] | undefined;
+  const overlays: { channels: number[]; alpha: number }[] = [];
   for (const ancestor of evidence.ancestors) {
     if (ancestor.image !== "none") {
       const stops = ancestor.image.match(/rgba?\([^)]+\)/g);
@@ -96,10 +97,46 @@ export async function expectRenderedContrast(
       ancestor.background !== "rgba(0, 0, 0, 0)" &&
       ancestor.background !== "transparent"
     ) {
+      const channels = ancestor.background.match(/[\d.]+/g)?.map(Number);
+      if (
+        !/^rgba?\(/.test(ancestor.background) ||
+        !channels ||
+        ![3, 4].includes(channels.length) ||
+        channels.some((value) => !Number.isFinite(value))
+      ) {
+        blockers.push(`Unsupported solid background: ${ancestor.background}`);
+        break;
+      }
+      const alpha = channels[3] ?? 1;
+      if (
+        alpha < 0 ||
+        alpha > 1 ||
+        channels.slice(0, 3).some((value) => value < 0 || value > 255)
+      ) {
+        blockers.push(`Invalid solid background: ${ancestor.background}`);
+        break;
+      }
+      if (alpha < 1) {
+        overlays.push({ channels: channels.slice(0, 3), alpha });
+        continue;
+      }
       backgrounds = [ancestor.background];
       break;
     }
   }
+  backgrounds = backgrounds?.map((background) => {
+    let channels = background
+      .match(/[\d.]+/g)!
+      .map(Number)
+      .slice(0, 3);
+    for (const overlay of [...overlays].reverse())
+      channels = channels.map(
+        (value, index) =>
+          overlay.channels[index]! * overlay.alpha +
+          value * (1 - overlay.alpha),
+      );
+    return `rgb(${channels.join(", ")})`;
+  });
   const foreground = luminance(evidence.foreground);
   const values = backgrounds?.map(luminance) ?? [];
   const contrasts = values.map(
@@ -115,7 +152,7 @@ export async function expectRenderedContrast(
     contrasts.push(1);
   await info.attach(`rendered-contrast-${label}`, {
     body: JSON.stringify(
-      { ...evidence, backgrounds, contrasts, blockers },
+      { ...evidence, overlays, backgrounds, contrasts, blockers },
       null,
       2,
     ),

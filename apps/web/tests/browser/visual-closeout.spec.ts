@@ -136,7 +136,16 @@ test("Portfolio Customize retains unavailable guards and keyboard-accessible fil
   await header.getByRole("button", { name: "Customize", exact: true }).click();
   await expect(
     page.getByRole("button", { name: /Drag .* to rearrange/ }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: /^Move .* (earlier|later)$/ }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "Save order", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByText("Saved profile ordering is unavailable", { exact: false }),
+  ).toBeVisible();
   await expect(page.getByText(/Changes stay local until/)).toHaveCount(0);
   await expect(
     page.getByText(

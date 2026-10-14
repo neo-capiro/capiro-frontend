@@ -19,8 +19,14 @@ for (const width of [1440, 390]) {
       await page.goto(`/${mode}`);
       if (mode === "meri") {
         await expect(
-          page.getByLabel("Message draft", { exact: true }),
+          page.getByRole("heading", { name: "Meri", exact: true }),
         ).toBeVisible();
+        await expect(
+          page.getByLabel("Message draft", { exact: true }),
+        ).toHaveCount(0);
+        await expect(page.locator("body")).not.toContainText(
+          "Good morning, Jordan",
+        );
       } else {
         await expect(
           page.getByLabel("Client profile scope", { exact: true }),

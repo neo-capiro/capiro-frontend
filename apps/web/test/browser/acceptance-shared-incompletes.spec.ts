@@ -35,7 +35,7 @@ for (const width of [1440, 390]) {
         });
         const route =
           view === "home"
-            ? `/meri?clientId=${actionClient.id}`
+            ? `/meri/fixture/home?clientId=${actionClient.id}`
             : view === "modules"
               ? `/modules?clientId=${actionClient.id}`
               : filesUrl(actionClient.id, view === "xlsx" ? "xlsx" : "docx") +
@@ -48,7 +48,7 @@ for (const width of [1440, 390]) {
         else if (view === "modules")
           await expect(
             page.getByRole("heading", {
-              name: "Everything in Capiro, across the whole firm",
+              name: /^Everything in Capiro/,
             }),
           ).toBeVisible();
         else if (view !== "unavailable")
@@ -59,12 +59,20 @@ for (const width of [1440, 390]) {
             ? page.getByRole("link", { name: "Open Engagement", exact: true })
             : width === 1440
               ? page.getByRole("button", {
-                  name: "New conversation",
+                  name: view === "home" ? "New conversation" : "Files",
                   exact: true,
                 })
               : page
                   .getByRole("navigation", { name: "Meri sections" })
                   .getByRole("link", { name: "Files", exact: true });
+        if (view !== "home" && view !== "modules")
+          await expect(
+            page.getByRole("button", {
+              name: "New conversation",
+              exact: true,
+              includeHidden: true,
+            }),
+          ).toBeDisabled();
         await page.mouse.move(0, 0);
         await expectRenderedContrast(control, info, "rest");
         await control.hover();

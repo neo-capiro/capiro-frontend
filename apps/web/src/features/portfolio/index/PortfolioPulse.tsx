@@ -14,7 +14,12 @@ export function PortfolioPulse({ clients }: { clients?: Client[] }) {
           </small>
         </div>
       </div>
-      <div className={styles.pulseStats}>
+      <div
+        className={styles.pulseStats}
+        role="region"
+        aria-label="Portfolio pulse metrics"
+        tabIndex={0}
+      >
         {[
           [
             "Clients",

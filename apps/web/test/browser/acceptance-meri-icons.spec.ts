@@ -7,12 +7,12 @@ async function filter(icon: Locator) {
 }
 
 for (const colorScheme of ["light", "dark"] as const) {
-  test(`Meri exact navigation assets retain visible icon treatment in ${colorScheme}`, async ({
+  test(`Meri explicit fixture navigation assets retain visible icon treatment in ${colorScheme}`, async ({
     page,
   }) => {
     const fixture = await filesFixture(page);
     await page.emulateMedia({ colorScheme });
-    await page.goto(`/meri?clientId=${actionClient.id}`);
+    await page.goto(`/meri/fixture/home?clientId=${actionClient.id}`);
     await expect(
       page.getByLabel("Message draft", { exact: true }),
     ).toBeVisible();

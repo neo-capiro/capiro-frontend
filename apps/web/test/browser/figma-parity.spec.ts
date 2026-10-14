@@ -86,7 +86,7 @@ for (const width of [1440, 390])
             .boundingBox();
           expect(attention!.y).toBeLessThan(profiles!.y);
           const pulse = await page
-            .getByRole("region", { name: "Portfolio pulse" })
+            .getByRole("region", { name: "Portfolio pulse", exact: true })
             .boundingBox();
           expect(pulse!.height).toBeLessThanOrEqual(120);
           await page

@@ -2145,10 +2145,10 @@
     "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
     "kind": "function",
     "symbol": "PortfolioAttention",
-    "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c",
-    "reason": "Existing attention list/status/retry presentation owner. A note role makes the already-labelled count semantically valid; it adds no query, aggregation, mutation or state responsibility. Independent exact-source review: docs/unified-20261013/corrections/A11Y-STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "020cb2931bda740706e7755dce3dac807f49d3414257cc6ee5c08331dc766ebb",
+    "reason": "Independent exact responsibility/fingerprint review accepts cohesive existing presentation or strict rendered-contrast verification; unchanged auth/transport and unsupported effect rejection, with explicit accessibility controls. See docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/shared/shell/Sidebar.tsx",
@@ -2595,10 +2595,10 @@
     "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "6f4403012a92478d6f59fc3d444d96341ad668b69f5721d155dcf5adf1ebc420",
-    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "fingerprint": "4d10a14ea676bf471bf93e4bf116252ed46946ae322f39a6741e8c084c3a528f",
+    "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14",
-    "reason": "Canonical Portfolio index/header/pulse/cards/profile chooser responsive presentation. Selectors preserve shared global styles and truthful availability, without adding authority, state or a second workflow. Extraction solely for this size threshold would scatter coupled responsive geometry. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+    "reason": "Independent exact responsibility/fingerprint review accepts cohesive existing presentation or strict rendered-contrast verification; unchanged auth/transport and unsupported effect rejection, with explicit accessibility controls. See docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md."
   },
   {
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
@@ -2608,5 +2608,14 @@
     "reviewedBy": "Codex independent outreach_review; root exact-source verification",
     "reviewedOn": "2026-10-14",
     "reason": "Existing Portfolio header/navigation/session composition. Shared HeaderFrame owns geometry; canonical ModeLink owns scoped product routes; existing global actions and mobile navigation stay reachable. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+  },
+  {
+    "file": "apps/web/test/rendered-contrast.ts",
+    "kind": "function",
+    "symbol": "expectRenderedContrast",
+    "fingerprint": "e261c4fa73ac01348cdc63fa707cd195d80c5d5baed19de6f43186a1b48b7f66",
+    "reason": "Independent exact responsibility/fingerprint review accepts cohesive existing presentation or strict rendered-contrast verification; unchanged auth/transport and unsupported effect rejection, with explicit accessibility controls. See docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
   }
 ]
