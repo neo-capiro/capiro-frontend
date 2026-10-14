@@ -1,6 +1,6 @@
 "use client";
-import { useId, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useId, useLayoutEffect, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { workspaceDocumentOperations } from "@/shared/capiro/operations/workspace-documents";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -11,11 +11,16 @@ export function ObjectiveSavedVersion({
 }: {
   draftId: string;
   disabled: boolean;
-  onOpen: (versionId: string) => void;
+  onOpen: (versionId: string, isCurrent: () => boolean) => void;
 }) {
   const api = useApi(),
     id = useId();
   const [versionId, setVersionId] = useState("");
+  const selected = useRef(versionId);
+  useLayoutEffect(() => {
+    selected.current = versionId;
+  }, [versionId]);
+  const cache = useQueryClient();
   const versions = useQuery({
     queryKey: ["objective-saved-versions", draftId],
     enabled: !disabled,
@@ -69,7 +74,25 @@ export function ObjectiveSavedVersion({
               disabled ||
               !versions.data.some((version) => version.id === versionId)
             }
-            onClick={() => onOpen(versionId)}
+            onClick={() => {
+              const capturedVersion = versionId,
+                source = versions.data;
+              onOpen(capturedVersion, () => {
+                const current = cache.getQueryState([
+                  "objective-saved-versions",
+                  draftId,
+                ]);
+                return Boolean(
+                  current &&
+                  selected.current === capturedVersion &&
+                  current.data === source &&
+                  current.status === "success" &&
+                  current.fetchStatus === "idle" &&
+                  !current.isInvalidated &&
+                  !current.error,
+                );
+              });
+            }}
           >
             Open Objective-bound Workspace saved revision
           </button>

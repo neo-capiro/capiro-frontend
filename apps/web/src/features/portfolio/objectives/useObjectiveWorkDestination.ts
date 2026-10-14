@@ -28,9 +28,19 @@ export function useObjectiveWorkDestination(
     kind: ObjectiveWorkKind,
     resourceId: string,
     versionId: string,
+    selection: {
+      taskVersion?: number;
+      snapshotHash?: string;
+      isCurrent?: () => boolean;
+    } = {},
   ) {
     if (disabled || active.current) return;
     const controller = new AbortController();
+    const captured = { ...selection };
+    const current = () =>
+      active.current === controller &&
+      !controller.signal.aborted &&
+      (captured.isCurrent?.() ?? true);
     active.current = controller;
     setBusy(true);
     setError(undefined);
@@ -47,19 +57,22 @@ export function useObjectiveWorkDestination(
         versionId,
         query,
         controller.signal,
+        captured,
       );
-      controller.signal.throwIfAborted();
+      if (!current()) return;
       router.push(href);
     } catch (cause) {
-      if (!controller.signal.aborted)
+      if (current())
         setError(
           cause instanceof Error
             ? cause
             : new Error("Objective destination unavailable."),
         );
     } finally {
-      if (active.current === controller) active.current = null;
-      setBusy(false);
+      if (active.current === controller) {
+        active.current = null;
+        setBusy(false);
+      }
     }
   }
   return { open, busy, error };

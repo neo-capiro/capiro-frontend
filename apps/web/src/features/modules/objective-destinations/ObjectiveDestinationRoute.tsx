@@ -6,7 +6,7 @@ import {
   requireObjectiveBinding,
   type ObjectiveDestinationQuery,
 } from "../../../shared/capiro/operations/objective-destination-binding";
-import { requireObjectiveWorkspace } from "../../../shared/capiro/operations/objective-work-destinations";
+import { useWorkspaceObservation } from "./useWorkspaceObservation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ObjectiveDestinationFrame,
@@ -22,6 +22,7 @@ type Kind = "strategy" | "planner_task" | "workspace_saved_revision";
 type Selection = {
   query: ObjectiveDestinationQuery;
   ids: Record<string, string>;
+  snapshotHash?: string;
 };
 function checked<Value>(
   value: Value | undefined,
@@ -84,22 +85,24 @@ function PlannerDestination({ query, ids }: Selection) {
     </ObjectiveDestinationFrame>
   );
 }
-function WorkspaceDestination({ query, ids }: Selection) {
+function WorkspaceDestination({ query, ids, snapshotHash }: Selection) {
   const result = useCapiroQuery("workspace.objectiveDestination", {
     params: { draftId: ids.draftId!, versionId: ids.versionId! },
     query,
   });
-  const current = checked(
+  const current = useWorkspaceObservation(
     result.data,
-    (v) => requireObjectiveWorkspace(v, ids.draftId!, ids.versionId!, query),
-    result.error,
+    ids.draftId!,
+    ids.versionId!,
+    query,
+    snapshotHash,
   );
   return (
     <ObjectiveDestinationFrame
       title="Objective saved Workspace revision"
       selected={query}
-      loading={result.loading}
-      error={current.error}
+      loading={result.loading || current.loading}
+      error={result.error ?? current.error}
       reload={result.reload}
     >
       {current.value && <ObjectiveWorkspaceView value={current.value} />}
@@ -119,12 +122,35 @@ export function ObjectiveDestinationRoute({
   children: ReactNode;
 }) {
   const params = useSearchParams();
-  if (!params.has("objectiveId") && !params.has("objectiveVersion"))
+  if (
+    !params.has("objectiveId") &&
+    !params.has("objectiveVersion") &&
+    !params.has("snapshotHash")
+  )
     return children;
-  const selected = readObjectiveLocation(params, resourceKeys[kind]);
+  const bounded = new URLSearchParams(params);
+  const snapshotHash =
+    kind === "workspace_saved_revision"
+      ? (bounded.get("snapshotHash") ?? undefined)
+      : undefined;
+  if (kind === "workspace_saved_revision" && bounded.has("snapshotHash")) {
+    if (
+      bounded.getAll("snapshotHash").length !== 1 ||
+      !/^[a-f0-9]{64}$/.test(snapshotHash!)
+    )
+      return <ObjectiveDestinationUnavailable />;
+    bounded.delete("snapshotHash");
+  }
+  const selected = readObjectiveLocation(bounded, resourceKeys[kind]);
   if (!selected) return <ObjectiveDestinationUnavailable />;
   // The ordinary editor is not mounted while a bound read is selected.
   if (kind === "strategy") return <StrategyDestination {...selected} />;
   if (kind === "planner_task") return <PlannerDestination {...selected} />;
-  return <WorkspaceDestination {...selected} />;
+  return (
+    <WorkspaceDestination
+      key={JSON.stringify([selected, snapshotHash])}
+      {...selected}
+      snapshotHash={snapshotHash}
+    />
+  );
 }

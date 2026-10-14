@@ -610,7 +610,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reason": "One selected contact’s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1297,10 +1297,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
     "kind": "function",
     "symbol": "ObjectiveWorkPicker",
-    "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
-    "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "6c366c1c21e11f17df37eefdcf05aff43c73804bf7b9768586a0222be9cb9e54",
+    "reason": "One existing-resource selection and pagination interaction owns explicit pinned choice and current choice cache lineage. Owner resolution, task version/schema and snapshot integrity are delegated to canonical resource readers and receiving modules; navigation/lifetime belongs to useObjectiveWorkDestination; exact saved-version roster has its own component. No authority, persistence or editor is embedded.",
+    "reviewedBy": "Codex independent parent frontend review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/calendar/calendar.module.css",
@@ -1415,7 +1415,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2380,7 +2380,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2562,6 +2562,15 @@
     "fingerprint": "e314439748df16762631523e8e58eab72e03499a787af7d9b402fa980a2bbf86",
     "reason": "One existing submitted order validates the complete captured authorized catalog, freezes it across dispatch, verifies receipt version/order and checks current cache lineage before installation. Unknown and conflict handling stay in the same existing transaction owner; no automatic retry or independent persistence. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
     "reviewedBy": "Codex frontend integration owner with independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveSavedVersion.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveSavedVersion",
+    "fingerprint": "104621c36e9d04b45ada4a00d520b577cf7b490c6459622c124c308357e17118",
+    "reason": "One exact saved-version roster and explicit read-selection gate owns its current query/selection cache lineage. Canonical API handles transport; owner receipt binding and full snapshot hash verification live in the receiving module. No mutable working draft, command, persistence or authorization responsibility is added.",
+    "reviewedBy": "Codex independent parent frontend review",
     "reviewedOn": "2026-10-14"
   }
 ]
