@@ -92,7 +92,12 @@ export function ModuleHub() {
   return (
     <div className={styles.hub} data-design-target="411:93787">
       <PageHeader
-        title="Everything in Capiro, across the whole firm"
+        title={
+          <>
+            Everything in Capiro
+            <span className={styles.desktopTitle}>, across the whole firm</span>
+          </>
+        }
         eyebrow="Modules"
         titleAccessory={<ModuleHubInformation />}
         actions={

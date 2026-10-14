@@ -230,7 +230,9 @@ test("the complete capability page fits the 320px viewport including its shared 
   const controls = [
     header.getByRole("button", { name: "Toggle navigation", exact: true }),
     header.getByRole("link", { name: "Capiro Home", exact: true }),
-    header.getByRole("button", { name: "Switch workspace", exact: true }),
+    header.getByRole("link", { name: "Meri", exact: true }),
+    header.getByRole("link", { name: "Portfolio", exact: true }),
+    header.getByRole("link", { name: "Modules", exact: true }),
     header.getByRole("link", { name: "Quick log", exact: true }),
     header.getByRole("link", { name: "Master calendar", exact: true }),
     header.getByRole("link", { name: "Search Portfolio", exact: true }),

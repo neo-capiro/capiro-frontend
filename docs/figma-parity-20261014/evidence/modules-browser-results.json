@@ -1,0 +1,881 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-figma-parity-20261014/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "figma-parity.spec.ts",
+      "service-error-feedback.spec.ts",
+      "integration.spec.ts",
+      "next-modules-scope.spec.ts"
+    ],
+    "configFile": "/workspace/capiro-figma-parity-20261014/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-figma-parity-20261014/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-figma-parity-20261014/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-figma-parity-20261014/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-figma-parity-20261014/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "figma-parity.spec.ts",
+      "file": "figma-parity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "portfolio 1440 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3557,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:03.331Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJoZWFkaW5ncyI6IFsKICAgIHsKICAgICAgInRleHQiOiAiUG9ydGZvbGlvIDEiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDI2NCwKICAgICAgICAieSI6IDEyNi45Mzc1LAogICAgICAgICJ3aWR0aCI6IDE3OC44MjgxMjUsCiAgICAgICAgImhlaWdodCI6IDQ0LAogICAgICAgICJ0b3AiOiAxMjYuOTM3NSwKICAgICAgICAicmlnaHQiOiA0NDIuODI4MTI1LAogICAgICAgICJib3R0b20iOiAxNzAuOTM3NSwKICAgICAgICAibGVmdCI6IDI2NAogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJUZXN0IEFlcm9zcGFjZSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMzM3LAogICAgICAgICJ5IjogNTg4LAogICAgICAgICJ3aWR0aCI6IDExMC45MDYyNSwKICAgICAgICAiaGVpZ2h0IjogMjAuMjUsCiAgICAgICAgInRvcCI6IDU4OCwKICAgICAgICAicmlnaHQiOiA0NDcuOTA2MjUsCiAgICAgICAgImJvdHRvbSI6IDYwOC4yNSwKICAgICAgICAibGVmdCI6IDMzNwogICAgICB9CiAgICB9CiAgXSwKICAiYXNzZXRzIjogWwogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDExLTQxNDIxLWltZ0NhcGlyb1dvcmRtYXJrLnBuZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOTIwLAogICAgICAibmF0dXJhbEhlaWdodCI6IDY1MCwKICAgICAgIndpZHRoIjogNzcsCiAgICAgICJoZWlnaHQiOiAyNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdJY29uLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdJY29uMS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80MTEtNDE0MjEtaW1nSWNvbjIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDExLTQxNDIxLWltZ0ljb24zLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdJY29uNC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80MTEtNDE0MjEtaW1nSWNvbjUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDExLTQxNDIxLWltZ0ljb242LnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQ3MS05MzQ2NS1pbWdJY29uLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQ3MS05MzQ2NS1pbWdJY29uMS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80NzEtOTM0NjUtaW1nSWNvbjIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDcxLTkzNDY1LWltZ0ljb24xMC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0KICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-99f36e6c22d48a964717",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "modules 1440 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:07.227Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJoZWFkaW5ncyI6IFsKICAgIHsKICAgICAgInRleHQiOiAiRXZlcnl0aGluZyBpbiBDYXBpcm8sIGFjcm9zcyB0aGUgd2hvbGUgZmlybSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMjY0LAogICAgICAgICJ5IjogMTI3LjI5Njg3NSwKICAgICAgICAid2lkdGgiOiA0NzYuNjg3NSwKICAgICAgICAiaGVpZ2h0IjogMzEuMTg3NSwKICAgICAgICAidG9wIjogMTI3LjI5Njg3NSwKICAgICAgICAicmlnaHQiOiA3NDAuNjg3NSwKICAgICAgICAiYm90dG9tIjogMTU4LjQ4NDM3NSwKICAgICAgICAibGVmdCI6IDI2NAogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJNb2R1bGVzIMK3IHRoZSB3aG9sZSBmaXJtIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAyODksCiAgICAgICAgInkiOiAyMDMuNDg0Mzc1LAogICAgICAgICJ3aWR0aCI6IDUwOC41LAogICAgICAgICJoZWlnaHQiOiAyMC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDIwMy40ODQzNzUsCiAgICAgICAgInJpZ2h0IjogNzk3LjUsCiAgICAgICAgImJvdHRvbSI6IDIyMy43ODEyNSwKICAgICAgICAibGVmdCI6IDI4OQogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJDbGllbnQgcHJvZmlsZSDCtyBqdXN0IHRoYXQgY2xpZW50IiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA4NzQuNSwKICAgICAgICAieSI6IDIwMy40ODQzNzUsCiAgICAgICAgIndpZHRoIjogNTA4LjUsCiAgICAgICAgImhlaWdodCI6IDIwLjI5Njg3NSwKICAgICAgICAidG9wIjogMjAzLjQ4NDM3NSwKICAgICAgICAicmlnaHQiOiAxMzgzLAogICAgICAgICJib3R0b20iOiAyMjMuNzgxMjUsCiAgICAgICAgImxlZnQiOiA4NzQuNQogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJSdW4gdGhlIHdvcmsiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDI2NCwKICAgICAgICAieSI6IDMxMC40Njg3NSwKICAgICAgICAid2lkdGgiOiAxMTQ0LAogICAgICAgICJoZWlnaHQiOiAxNC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDMxMC40Njg3NSwKICAgICAgICAicmlnaHQiOiAxNDA4LAogICAgICAgICJib3R0b20iOiAzMjQuNzY1NjI1LAogICAgICAgICJsZWZ0IjogMjY0CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkVuZ2FnZW1lbnQiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDMyNywKICAgICAgICAieSI6IDM2NC4zMTI1LAogICAgICAgICJ3aWR0aCI6IDgzLjMxMjUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogMzY0LjMxMjUsCiAgICAgICAgInJpZ2h0IjogNDEwLjMxMjUsCiAgICAgICAgImJvdHRvbSI6IDM4My4yMDMxMjUsCiAgICAgICAgImxlZnQiOiAzMjcKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiV29ya3NwYWNlIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA2MTgsCiAgICAgICAgInkiOiAzNjQuMzEyNSwKICAgICAgICAid2lkdGgiOiA3NS4zNzUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogMzY0LjMxMjUsCiAgICAgICAgInJpZ2h0IjogNjkzLjM3NSwKICAgICAgICAiYm90dG9tIjogMzgzLjIwMzEyNSwKICAgICAgICAibGVmdCI6IDYxOAogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJQbGFubmVyIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA5MDksCiAgICAgICAgInkiOiAzNjQuMzEyNSwKICAgICAgICAid2lkdGgiOiA1MC41MTU2MjUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogMzY0LjMxMjUsCiAgICAgICAgInJpZ2h0IjogOTU5LjUxNTYyNSwKICAgICAgICAiYm90dG9tIjogMzgzLjIwMzEyNSwKICAgICAgICAibGVmdCI6IDkwOQogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJTdHJhdGVnaWVzIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxMjAwLAogICAgICAgICJ5IjogMzY0LjMxMjUsCiAgICAgICAgIndpZHRoIjogNjkuMzEyNSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiAzNjQuMzEyNSwKICAgICAgICAicmlnaHQiOiAxMjY5LjMxMjUsCiAgICAgICAgImJvdHRvbSI6IDM4My4yMDMxMjUsCiAgICAgICAgImxlZnQiOiAxMjAwCiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIktub3cgdGhlIGxhbmRzY2FwZSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMjY0LAogICAgICAgICJ5IjogNjc0Ljc2NTYyNSwKICAgICAgICAid2lkdGgiOiAxMTQ0LAogICAgICAgICJoZWlnaHQiOiAxNC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDY3NC43NjU2MjUsCiAgICAgICAgInJpZ2h0IjogMTQwOCwKICAgICAgICAiYm90dG9tIjogNjg5LjA2MjUsCiAgICAgICAgImxlZnQiOiAyNjQKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiSW50ZWxsaWdlbmNlIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzMjcsCiAgICAgICAgInkiOiA3MjguNjA5Mzc1LAogICAgICAgICJ3aWR0aCI6IDc3LjE3MTg3NSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiA3MjguNjA5Mzc1LAogICAgICAgICJyaWdodCI6IDQwNC4xNzE4NzUsCiAgICAgICAgImJvdHRvbSI6IDc0Ny41LAogICAgICAgICJsZWZ0IjogMzI3CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkRpcmVjdG9yeSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogOTkzLAogICAgICAgICJ5IjogNzI4LjYwOTM3NSwKICAgICAgICAid2lkdGgiOiA2Mi4zNzUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogNzI4LjYwOTM3NSwKICAgICAgICAicmlnaHQiOiAxMDU1LjM3NSwKICAgICAgICAiYm90dG9tIjogNzQ3LjUsCiAgICAgICAgImxlZnQiOiA5OTMKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiUmVzZWFyY2ggUG9ydGZvbGlvcyIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMTI0MiwKICAgICAgICAieSI6IDcyOC42MDkzNzUsCiAgICAgICAgIndpZHRoIjogMTI5LjY3MTg3NSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiA3MjguNjA5Mzc1LAogICAgICAgICJyaWdodCI6IDEzNzEuNjcxODc1LAogICAgICAgICJib3R0b20iOiA3NDcuNSwKICAgICAgICAibGVmdCI6IDEyNDIKICAgICAgfQogICAgfQogIF0sCiAgImFzc2V0cyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0NhcGlyb1dvcmRtYXJrLnBuZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOTIwLAogICAgICAibmF0dXJhbEhlaWdodCI6IDY1MCwKICAgICAgIndpZHRoIjogNzcsCiAgICAgICJoZWlnaHQiOiAyNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjEuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjQuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjYuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nQ2FwaXJvMzFQcm9maWxlUGljdHVyZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMzIsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMzIsCiAgICAgICJ3aWR0aCI6IDMyLAogICAgICAiaGVpZ2h0IjogMzIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uNy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uOC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uOS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMTAuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjExLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24xMi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMTMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjE0LnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24xNS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uSGFuZHNoYWtlLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOCwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxOCwKICAgICAgIndpZHRoIjogMTgsCiAgICAgICJoZWlnaHQiOiAxOAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb25GaWxlVGV4dC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTgsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTgsCiAgICAgICJ3aWR0aCI6IDE4LAogICAgICAiaGVpZ2h0IjogMTgKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdMdWNpZGVMaXN0VG9kby5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMjQsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMjQsCiAgICAgICJ3aWR0aCI6IDI0LAogICAgICAiaGVpZ2h0IjogMjQKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdMdWNpZGVSb3V0ZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMjQsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMjQsCiAgICAgICJ3aWR0aCI6IDI0LAogICAgICAiaGVpZ2h0IjogMjQKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdMdWNpZGVSYWRhci5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMjQsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMjQsCiAgICAgICJ3aWR0aCI6IDI0LAogICAgICAiaGVpZ2h0IjogMjQKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uVXNlcnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE4LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE4LAogICAgICAid2lkdGgiOiAxOCwKICAgICAgImhlaWdodCI6IDE4CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nTHVjaWRlRm9sZGVycy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMjQsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMjQsCiAgICAgICJ3aWR0aCI6IDI0LAogICAgICAiaGVpZ2h0IjogMjQKICAgIH0KICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-ac0b9e2c781896a03059",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "meri 1440 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3683,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:11.329Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJoZWFkaW5ncyI6IFsKICAgIHsKICAgICAgInRleHQiOiAiUmVjZW50IiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDU5OCwKICAgICAgICAid2lkdGgiOiAyMDAsCiAgICAgICAgImhlaWdodCI6IDE0LjI5Njg3NSwKICAgICAgICAidG9wIjogNTk4LAogICAgICAgICJyaWdodCI6IDIxNiwKICAgICAgICAiYm90dG9tIjogNjEyLjI5Njg3NSwKICAgICAgICAibGVmdCI6IDE2CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIk1lcmkiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDQ3OCwKICAgICAgICAieSI6IDI3OSwKICAgICAgICAid2lkdGgiOiA3MTYsCiAgICAgICAgImhlaWdodCI6IDQ0LAogICAgICAgICJ0b3AiOiAyNzksCiAgICAgICAgInJpZ2h0IjogMTE5NCwKICAgICAgICAiYm90dG9tIjogMzIzLAogICAgICAgICJsZWZ0IjogNDc4CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkNvbnZlcnNhdGlvbnMgdW5hdmFpbGFibGUiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDQ3OCwKICAgICAgICAieSI6IDQ1OCwKICAgICAgICAid2lkdGgiOiA3MTYsCiAgICAgICAgImhlaWdodCI6IDMxLAogICAgICAgICJ0b3AiOiA0NTgsCiAgICAgICAgInJpZ2h0IjogMTE5NCwKICAgICAgICAiYm90dG9tIjogNDg5LAogICAgICAgICJsZWZ0IjogNDc4CiAgICAgIH0KICAgIH0KICBdLAogICJhc3NldHMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3dvcmRtYXJrLnBuZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOTIwLAogICAgICAibmF0dXJhbEhlaWdodCI6IDY1MCwKICAgICAgIndpZHRoIjogNzcsCiAgICAgICJoZWlnaHQiOiAyNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvbW9kZS1tZXJpLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvbW9kZS1wb3J0Zm9saW8uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tb2RlLW1vZHVsZXMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9xdWljay1sb2cuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9jYWxlbmRhci5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3NlYXJjaC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3VwZGF0ZXMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9wcm9maWxlLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAzMiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAzMiwKICAgICAgIndpZHRoIjogMzIsCiAgICAgICJoZWlnaHQiOiAzMgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcGx1cy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3NlYXJjaC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NvbnZlcnNhdGlvbnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9maWxlcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3J1bnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9hcHByb3ZhbHMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tZW1vcnkuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9yb3V0aW5lcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2RhdGEtYWNjZXNzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvY2hldnJvbi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0KICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-e150365c4e8218c65161",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "meri-fixture 1440 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3213,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:15.028Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJoZWFkaW5ncyI6IFsKICAgIHsKICAgICAgInRleHQiOiAiUmVjZW50IiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDU5OCwKICAgICAgICAid2lkdGgiOiAyMDAsCiAgICAgICAgImhlaWdodCI6IDE0LjI5Njg3NSwKICAgICAgICAidG9wIjogNTk4LAogICAgICAgICJyaWdodCI6IDIxNiwKICAgICAgICAiYm90dG9tIjogNjEyLjI5Njg3NSwKICAgICAgICAibGVmdCI6IDE2CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkdvb2QgbW9ybmluZywgSm9yZGFuLiIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogNDc4LAogICAgICAgICJ5IjogMjc5LAogICAgICAgICJ3aWR0aCI6IDcxNiwKICAgICAgICAiaGVpZ2h0IjogNDQsCiAgICAgICAgInRvcCI6IDI3OSwKICAgICAgICAicmlnaHQiOiAxMTk0LAogICAgICAgICJib3R0b20iOiAzMjMsCiAgICAgICAgImxlZnQiOiA0NzgKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiUmVzZWFyY2giLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDQ5NiwKICAgICAgICAieSI6IDU5MS4xODc1LAogICAgICAgICJ3aWR0aCI6IDYyLjQ1MzEyNSwKICAgICAgICAiaGVpZ2h0IjogMjAuMjk2ODc1LAogICAgICAgICJ0b3AiOiA1OTEuMTg3NSwKICAgICAgICAicmlnaHQiOiA1NTguNDUzMTI1LAogICAgICAgICJib3R0b20iOiA2MTEuNDg0Mzc1LAogICAgICAgICJsZWZ0IjogNDk2CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkNyZWF0ZSBhIGJyaWVmIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA3MzgsCiAgICAgICAgInkiOiA1OTEuMTg3NSwKICAgICAgICAid2lkdGgiOiA5MC4wMzEyNSwKICAgICAgICAiaGVpZ2h0IjogMjAuMjk2ODc1LAogICAgICAgICJ0b3AiOiA1OTEuMTg3NSwKICAgICAgICAicmlnaHQiOiA4MjguMDMxMjUsCiAgICAgICAgImJvdHRvbSI6IDYxMS40ODQzNzUsCiAgICAgICAgImxlZnQiOiA3MzgKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiQW5hbHl6ZSBhIGZpbGUiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDk4MCwKICAgICAgICAieSI6IDU5MS4xODc1LAogICAgICAgICJ3aWR0aCI6IDg5LjAzMTI1LAogICAgICAgICJoZWlnaHQiOiAyMC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDU5MS4xODc1LAogICAgICAgICJyaWdodCI6IDEwNjkuMDMxMjUsCiAgICAgICAgImJvdHRvbSI6IDYxMS40ODQzNzUsCiAgICAgICAgImxlZnQiOiA5ODAKICAgICAgfQogICAgfQogIF0sCiAgImFzc2V0cyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvd29yZG1hcmsucG5nIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE5MjAsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogNjUwLAogICAgICAid2lkdGgiOiA3NywKICAgICAgImhlaWdodCI6IDI2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tb2RlLW1lcmkuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tb2RlLXBvcnRmb2xpby5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21vZGUtbW9kdWxlcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3F1aWNrLWxvZy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NhbGVuZGFyLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc2VhcmNoLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvdXBkYXRlcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3Byb2ZpbGUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDMyLAogICAgICAibmF0dXJhbEhlaWdodCI6IDMyLAogICAgICAid2lkdGgiOiAzMiwKICAgICAgImhlaWdodCI6IDMyCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9wbHVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc2VhcmNoLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvY29udmVyc2F0aW9ucy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2ZpbGVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcnVucy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2FwcHJvdmFscy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21lbW9yeS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3JvdXRpbmVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvZGF0YS1hY2Nlc3Muc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9jaGV2cm9uLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcGx1cy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NoZXZyb24uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9zZW5kLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc3BhcmtsZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3NwYXJrbGUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9zcGFya2xlLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-9e0b3338aca7d48a75cb",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "portfolio 390 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3043,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:18.259Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAiaGVhZGluZ3MiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIlBvcnRmb2xpbyAxIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDE1My45Mzc1LAogICAgICAgICJ3aWR0aCI6IDE1MCwKICAgICAgICAiaGVpZ2h0IjogMjIsCiAgICAgICAgInRvcCI6IDE1My45Mzc1LAogICAgICAgICJyaWdodCI6IDE2NiwKICAgICAgICAiYm90dG9tIjogMTc1LjkzNzUsCiAgICAgICAgImxlZnQiOiAxNgogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJUZXN0IEFlcm9zcGFjZSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogODksCiAgICAgICAgInkiOiAxMTExLjcxODc1LAogICAgICAgICJ3aWR0aCI6IDExMC45MDYyNSwKICAgICAgICAiaGVpZ2h0IjogMjAuMjUsCiAgICAgICAgInRvcCI6IDExMTEuNzE4NzUsCiAgICAgICAgInJpZ2h0IjogMTk5LjkwNjI1LAogICAgICAgICJib3R0b20iOiAxMTMxLjk2ODc1LAogICAgICAgICJsZWZ0IjogODkKICAgICAgfQogICAgfQogIF0sCiAgImFzc2V0cyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdDYXBpcm9Xb3JkbWFyay5wbmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTkyMCwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiA2NTAsCiAgICAgICJ3aWR0aCI6IDc3LAogICAgICAiaGVpZ2h0IjogMjYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80MTEtNDE0MjEtaW1nSWNvbi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80MTEtNDE0MjEtaW1nSWNvbjEuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDExLTQxNDIxLWltZ0ljb24yLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdJY29uMy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80MTEtNDE0MjEtaW1nSWNvbjQuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDExLTQxNDIxLWltZ0ljb241LnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQxMS00MTQyMS1pbWdJY29uNi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80NzEtOTM0NjUtaW1nSWNvbi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vNDcxLTkzNDY1LWltZ0ljb24xLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi80NzEtOTM0NjUtaW1nSWNvbjIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduLzQ3MS05MzQ2NS1pbWdJY29uMTAuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-25173afa0038f30ef5e8",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "modules 390 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2972,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:21.317Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAiaGVhZGluZ3MiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkV2ZXJ5dGhpbmcgaW4gQ2FwaXJvLCBhY3Jvc3MgdGhlIHdob2xlIGZpcm0iLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDE2LAogICAgICAgICJ5IjogMTUwLjI5Njg3NSwKICAgICAgICAid2lkdGgiOiAyMjQuMjAzMTI1LAogICAgICAgICJoZWlnaHQiOiAzMS4xODc1LAogICAgICAgICJ0b3AiOiAxNTAuMjk2ODc1LAogICAgICAgICJyaWdodCI6IDI0MC4yMDMxMjUsCiAgICAgICAgImJvdHRvbSI6IDE4MS40ODQzNzUsCiAgICAgICAgImxlZnQiOiAxNgogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJNb2R1bGVzIMK3IHRoZSB3aG9sZSBmaXJtIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzMywKICAgICAgICAieSI6IDI3Mi40ODQzNzUsCiAgICAgICAgIndpZHRoIjogMzI0LAogICAgICAgICJoZWlnaHQiOiAyMC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDI3Mi40ODQzNzUsCiAgICAgICAgInJpZ2h0IjogMzU3LAogICAgICAgICJib3R0b20iOiAyOTIuNzgxMjUsCiAgICAgICAgImxlZnQiOiAzMwogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJDbGllbnQgcHJvZmlsZSDCtyBqdXN0IHRoYXQgY2xpZW50IiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzMywKICAgICAgICAieSI6IDM2Mi40Njg3NSwKICAgICAgICAid2lkdGgiOiAzMjQsCiAgICAgICAgImhlaWdodCI6IDIwLjI5Njg3NSwKICAgICAgICAidG9wIjogMzYyLjQ2ODc1LAogICAgICAgICJyaWdodCI6IDM1NywKICAgICAgICAiYm90dG9tIjogMzgyLjc2NTYyNSwKICAgICAgICAibGVmdCI6IDMzCiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIlJ1biB0aGUgd29yayIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMTYsCiAgICAgICAgInkiOiA0NjcuNDUzMTI1LAogICAgICAgICJ3aWR0aCI6IDM1OCwKICAgICAgICAiaGVpZ2h0IjogMTQuMjk2ODc1LAogICAgICAgICJ0b3AiOiA0NjcuNDUzMTI1LAogICAgICAgICJyaWdodCI6IDM3NCwKICAgICAgICAiYm90dG9tIjogNDgxLjc1LAogICAgICAgICJsZWZ0IjogMTYKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiRW5nYWdlbWVudCIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogNzksCiAgICAgICAgInkiOiA1MjEuMjk2ODc1LAogICAgICAgICJ3aWR0aCI6IDgzLjMxMjUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogNTIxLjI5Njg3NSwKICAgICAgICAicmlnaHQiOiAxNjIuMzEyNSwKICAgICAgICAiYm90dG9tIjogNTQwLjE4NzUsCiAgICAgICAgImxlZnQiOiA3OQogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJXb3Jrc3BhY2UiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDc5LAogICAgICAgICJ5IjogNzk1LjI5Njg3NSwKICAgICAgICAid2lkdGgiOiA3NS4zNzUsCiAgICAgICAgImhlaWdodCI6IDE4Ljg5MDYyNSwKICAgICAgICAidG9wIjogNzk1LjI5Njg3NSwKICAgICAgICAicmlnaHQiOiAxNTQuMzc1LAogICAgICAgICJib3R0b20iOiA4MTQuMTg3NSwKICAgICAgICAibGVmdCI6IDc5CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIlBsYW5uZXIiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDc5LAogICAgICAgICJ5IjogMTA2OS4yOTY4NzUsCiAgICAgICAgIndpZHRoIjogNTAuNTE1NjI1LAogICAgICAgICJoZWlnaHQiOiAxOC44OTA2MjUsCiAgICAgICAgInRvcCI6IDEwNjkuMjk2ODc1LAogICAgICAgICJyaWdodCI6IDEyOS41MTU2MjUsCiAgICAgICAgImJvdHRvbSI6IDEwODguMTg3NSwKICAgICAgICAibGVmdCI6IDc5CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIlN0cmF0ZWdpZXMiLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDc5LAogICAgICAgICJ5IjogMTM0My4yOTY4NzUsCiAgICAgICAgIndpZHRoIjogNjkuMzEyNSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiAxMzQzLjI5Njg3NSwKICAgICAgICAicmlnaHQiOiAxNDguMzEyNSwKICAgICAgICAiYm90dG9tIjogMTM2Mi4xODc1LAogICAgICAgICJsZWZ0IjogNzkKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiS25vdyB0aGUgbGFuZHNjYXBlIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDE2MDMuNzUsCiAgICAgICAgIndpZHRoIjogMzU4LAogICAgICAgICJoZWlnaHQiOiAxNC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDE2MDMuNzUsCiAgICAgICAgInJpZ2h0IjogMzc0LAogICAgICAgICJib3R0b20iOiAxNjE4LjA0Njg3NSwKICAgICAgICAibGVmdCI6IDE2CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkludGVsbGlnZW5jZSIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogNzksCiAgICAgICAgInkiOiAxNjU3LjU5Mzc1LAogICAgICAgICJ3aWR0aCI6IDc3LjE3MTg3NSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiAxNjU3LjU5Mzc1LAogICAgICAgICJyaWdodCI6IDE1Ni4xNzE4NzUsCiAgICAgICAgImJvdHRvbSI6IDE2NzYuNDg0Mzc1LAogICAgICAgICJsZWZ0IjogNzkKICAgICAgfQogICAgfSwKICAgIHsKICAgICAgInRleHQiOiAiRGlyZWN0b3J5IiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA3OSwKICAgICAgICAieSI6IDE5MzEuNTkzNzUsCiAgICAgICAgIndpZHRoIjogNjIuMzc1LAogICAgICAgICJoZWlnaHQiOiAxOC44OTA2MjUsCiAgICAgICAgInRvcCI6IDE5MzEuNTkzNzUsCiAgICAgICAgInJpZ2h0IjogMTQxLjM3NSwKICAgICAgICAiYm90dG9tIjogMTk1MC40ODQzNzUsCiAgICAgICAgImxlZnQiOiA3OQogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJSZXNlYXJjaCBQb3J0Zm9saW9zIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiA3OSwKICAgICAgICAieSI6IDIyMDUuNTkzNzUsCiAgICAgICAgIndpZHRoIjogMTI5LjY3MTg3NSwKICAgICAgICAiaGVpZ2h0IjogMTguODkwNjI1LAogICAgICAgICJ0b3AiOiAyMjA1LjU5Mzc1LAogICAgICAgICJyaWdodCI6IDIwOC42NzE4NzUsCiAgICAgICAgImJvdHRvbSI6IDIyMjQuNDg0Mzc1LAogICAgICAgICJsZWZ0IjogNzkKICAgICAgfQogICAgfQogIF0sCiAgImFzc2V0cyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0NhcGlyb1dvcmRtYXJrLnBuZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOTIwLAogICAgICAibmF0dXJhbEhlaWdodCI6IDY1MCwKICAgICAgIndpZHRoIjogNzcsCiAgICAgICJoZWlnaHQiOiAyNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjEuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjQuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjYuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nQ2FwaXJvMzFQcm9maWxlUGljdHVyZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMzIsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMzIsCiAgICAgICJ3aWR0aCI6IDMyLAogICAgICAiaGVpZ2h0IjogMzIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjcuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb244LnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uOS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjEwLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMTEuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24xMi5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbjEzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uMTQuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0ljb24xNS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvbkhhbmRzaGFrZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTgsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTgsCiAgICAgICJ3aWR0aCI6IDE4LAogICAgICAiaGVpZ2h0IjogMTgKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9tb2R1bGVzL3NoYXJlZC9pbWdJY29uRmlsZVRleHQuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE4LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE4LAogICAgICAid2lkdGgiOiAxOCwKICAgICAgImhlaWdodCI6IDE4CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nTHVjaWRlTGlzdFRvZG8uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDI0LAogICAgICAibmF0dXJhbEhlaWdodCI6IDI0LAogICAgICAid2lkdGgiOiAyNCwKICAgICAgImhlaWdodCI6IDI0CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nTHVjaWRlUm91dGUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDI0LAogICAgICAibmF0dXJhbEhlaWdodCI6IDI0LAogICAgICAid2lkdGgiOiAyNCwKICAgICAgImhlaWdodCI6IDI0CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nTHVjaWRlUmFkYXIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDI0LAogICAgICAibmF0dXJhbEhlaWdodCI6IDI0LAogICAgICAid2lkdGgiOiAyNCwKICAgICAgImhlaWdodCI6IDI0CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vbW9kdWxlcy9zaGFyZWQvaW1nSWNvblVzZXJzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxOCwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxOCwKICAgICAgIndpZHRoIjogMTgsCiAgICAgICJoZWlnaHQiOiAxOAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL21vZHVsZXMvc2hhcmVkL2ltZ0x1Y2lkZUZvbGRlcnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDI0LAogICAgICAibmF0dXJhbEhlaWdodCI6IDI0LAogICAgICAid2lkdGgiOiAyNCwKICAgICAgImhlaWdodCI6IDI0CiAgICB9CiAgXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-6d0317fcabb34d739241",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "meri 390 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2883,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:24.306Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAiaGVhZGluZ3MiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIlJlY2VudCIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMCwKICAgICAgICAieSI6IDAsCiAgICAgICAgIndpZHRoIjogMCwKICAgICAgICAiaGVpZ2h0IjogMCwKICAgICAgICAidG9wIjogMCwKICAgICAgICAicmlnaHQiOiAwLAogICAgICAgICJib3R0b20iOiAwLAogICAgICAgICJsZWZ0IjogMAogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJNZXJpIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDI4NiwKICAgICAgICAid2lkdGgiOiAzNTgsCiAgICAgICAgImhlaWdodCI6IDMzLAogICAgICAgICJ0b3AiOiAyODYsCiAgICAgICAgInJpZ2h0IjogMzc0LAogICAgICAgICJib3R0b20iOiAzMTksCiAgICAgICAgImxlZnQiOiAxNgogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJDb252ZXJzYXRpb25zIHVuYXZhaWxhYmxlIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAxNiwKICAgICAgICAieSI6IDQ1NCwKICAgICAgICAid2lkdGgiOiAzNTgsCiAgICAgICAgImhlaWdodCI6IDMxLAogICAgICAgICJ0b3AiOiA0NTQsCiAgICAgICAgInJpZ2h0IjogMzc0LAogICAgICAgICJib3R0b20iOiA0ODUsCiAgICAgICAgImxlZnQiOiAxNgogICAgICB9CiAgICB9CiAgXSwKICAiYXNzZXRzIjogWwogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS93b3JkbWFyay5wbmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTkyMCwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiA2NTAsCiAgICAgICJ3aWR0aCI6IDc3LAogICAgICAiaGVpZ2h0IjogMjYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21vZGUtbWVyaS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21vZGUtcG9ydGZvbGlvLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvbW9kZS1tb2R1bGVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcXVpY2stbG9nLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvY2FsZW5kYXIuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9zZWFyY2guc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS91cGRhdGVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcHJvZmlsZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMzIsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMzIsCiAgICAgICJ3aWR0aCI6IDMyLAogICAgICAiaGVpZ2h0IjogMzIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3BsdXMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc2VhcmNoLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NvbnZlcnNhdGlvbnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvZmlsZXMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcnVucy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9hcHByb3ZhbHMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvbWVtb3J5LnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3JvdXRpbmVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2RhdGEtYWNjZXNzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NoZXZyb24uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9CiAgXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-88c0e64e8b4445e3ea15",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "meri-fixture 390 approved comparison and existing interaction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:27.203Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAiaGVhZGluZ3MiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIlJlY2VudCIsCiAgICAgICJyZWN0IjogewogICAgICAgICJ4IjogMCwKICAgICAgICAieSI6IDAsCiAgICAgICAgIndpZHRoIjogMCwKICAgICAgICAiaGVpZ2h0IjogMCwKICAgICAgICAidG9wIjogMCwKICAgICAgICAicmlnaHQiOiAwLAogICAgICAgICJib3R0b20iOiAwLAogICAgICAgICJsZWZ0IjogMAogICAgICB9CiAgICB9LAogICAgewogICAgICAidGV4dCI6ICJHb29kIG1vcm5pbmcsIEpvcmRhbi4iLAogICAgICAicmVjdCI6IHsKICAgICAgICAieCI6IDE2LAogICAgICAgICJ5IjogMjg2LAogICAgICAgICJ3aWR0aCI6IDM1OCwKICAgICAgICAiaGVpZ2h0IjogMzMsCiAgICAgICAgInRvcCI6IDI4NiwKICAgICAgICAicmlnaHQiOiAzNzQsCiAgICAgICAgImJvdHRvbSI6IDMxOSwKICAgICAgICAibGVmdCI6IDE2CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIlJlc2VhcmNoIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzNCwKICAgICAgICAieSI6IDU4My41OTM3NSwKICAgICAgICAid2lkdGgiOiA2Mi40NTMxMjUsCiAgICAgICAgImhlaWdodCI6IDIwLjI5Njg3NSwKICAgICAgICAidG9wIjogNTgzLjU5Mzc1LAogICAgICAgICJyaWdodCI6IDk2LjQ1MzEyNSwKICAgICAgICAiYm90dG9tIjogNjAzLjg5MDYyNSwKICAgICAgICAibGVmdCI6IDM0CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkNyZWF0ZSBhIGJyaWVmIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzNCwKICAgICAgICAieSI6IDcxMC42ODc1LAogICAgICAgICJ3aWR0aCI6IDkwLjAzMTI1LAogICAgICAgICJoZWlnaHQiOiAyMC4yOTY4NzUsCiAgICAgICAgInRvcCI6IDcxMC42ODc1LAogICAgICAgICJyaWdodCI6IDEyNC4wMzEyNSwKICAgICAgICAiYm90dG9tIjogNzMwLjk4NDM3NSwKICAgICAgICAibGVmdCI6IDM0CiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJ0ZXh0IjogIkFuYWx5emUgYSBmaWxlIiwKICAgICAgInJlY3QiOiB7CiAgICAgICAgIngiOiAzNCwKICAgICAgICAieSI6IDgzNy43ODEyNSwKICAgICAgICAid2lkdGgiOiA4OS4wMzEyNSwKICAgICAgICAiaGVpZ2h0IjogMjAuMjk2ODc1LAogICAgICAgICJ0b3AiOiA4MzcuNzgxMjUsCiAgICAgICAgInJpZ2h0IjogMTIzLjAzMTI1LAogICAgICAgICJib3R0b20iOiA4NTguMDc4MTI1LAogICAgICAgICJsZWZ0IjogMzQKICAgICAgfQogICAgfQogIF0sCiAgImFzc2V0cyI6IFsKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvd29yZG1hcmsucG5nIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE5MjAsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogNjUwLAogICAgICAid2lkdGgiOiA3NywKICAgICAgImhlaWdodCI6IDI2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tb2RlLW1lcmkuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9tb2RlLXBvcnRmb2xpby5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21vZGUtbW9kdWxlcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3F1aWNrLWxvZy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NhbGVuZGFyLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc2VhcmNoLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvdXBkYXRlcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3Byb2ZpbGUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDMyLAogICAgICAibmF0dXJhbEhlaWdodCI6IDMyLAogICAgICAid2lkdGgiOiAzMiwKICAgICAgImhlaWdodCI6IDMyCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9wbHVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3NlYXJjaC5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9jb252ZXJzYXRpb25zLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2ZpbGVzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3J1bnMuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAwLAogICAgICAiaGVpZ2h0IjogMAogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvYXBwcm92YWxzLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMCwKICAgICAgImhlaWdodCI6IDAKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL21lbW9yeS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9yb3V0aW5lcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9kYXRhLWFjY2Vzcy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDAsCiAgICAgICJoZWlnaHQiOiAwCiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9jaGV2cm9uLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvcGx1cy5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL2NoZXZyb24uc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9zZW5kLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICIvZGVzaWduL2hvbWUvc3BhcmtsZS5zdmciLAogICAgICAibmF0dXJhbFdpZHRoIjogMTYsCiAgICAgICJuYXR1cmFsSGVpZ2h0IjogMTYsCiAgICAgICJ3aWR0aCI6IDE2LAogICAgICAiaGVpZ2h0IjogMTYKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiL2Rlc2lnbi9ob21lL3NwYXJrbGUuc3ZnIiwKICAgICAgIm5hdHVyYWxXaWR0aCI6IDE2LAogICAgICAibmF0dXJhbEhlaWdodCI6IDE2LAogICAgICAid2lkdGgiOiAxNiwKICAgICAgImhlaWdodCI6IDE2CiAgICB9LAogICAgewogICAgICAic3JjIjogIi9kZXNpZ24vaG9tZS9zcGFya2xlLnN2ZyIsCiAgICAgICJuYXR1cmFsV2lkdGgiOiAxNiwKICAgICAgIm5hdHVyYWxIZWlnaHQiOiAxNiwKICAgICAgIndpZHRoIjogMTYsCiAgICAgICJoZWlnaHQiOiAxNgogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f932ba69dadc45ddbe67-3abe22c114fe2db39256",
+          "file": "figma-parity.spec.ts",
+          "line": 33,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "integration.spec.ts",
+      "file": "integration.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "shared product navigation and history preserve verified client hints and scoped styles",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4357,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:29.742Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-54662d70587443b0fb64",
+          "file": "integration.spec.ts",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "client replacement interrupts a write and organization replacement clears drafts and revalidates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3111,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:34.108Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-b539859bb125ac6030fd",
+          "file": "integration.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "Core expiry clears the application, does not replay and cannot be escaped by changing client",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2750,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:37.232Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c8f7e420cc033ba00ea-326407ca30a2f0129b7e",
+          "file": "integration.spec.ts",
+          "line": 169,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "next-modules-scope.spec.ts",
+      "file": "next-modules-scope.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Calendar picker and history share verified scope and discard a held former-client read",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4024,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:40.006Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-d24151974b6ddce226c2",
+          "file": "next-modules-scope.spec.ts",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "Calendar denied client verification never falls back to master reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:44.040Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-2a22f9a8bdfea249012c",
+          "file": "next-modules-scope.spec.ts",
+          "line": 67,
+          "column": 3
+        },
+        {
+          "title": "Calendar wrong-client client verification never falls back to master reads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:46.366Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-7b22615528319c5d4bb6",
+          "file": "next-modules-scope.spec.ts",
+          "line": 67,
+          "column": 3
+        },
+        {
+          "title": "Calendar current scope label survives optional picker-list failure",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:49.724Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-c0e5b291fefd6dee91ec",
+          "file": "next-modules-scope.spec.ts",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "Calendar meeting retry preserves other feeds and reports partial empty coverage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:52.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-6f69d4b731ff92c040e9",
+          "file": "next-modules-scope.spec.ts",
+          "line": 106,
+          "column": 1
+        },
+        {
+          "title": "Calendar tenant replacement and failed current read hide prior agenda rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:54.423Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "44d644b8c26a5a0d4f57-a1ba15944994e44e5f6a",
+          "file": "next-modules-scope.spec.ts",
+          "line": 144,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "service-error-feedback.spec.ts",
+      "file": "service-error-feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "saved layout404 reports unavailable while retaining actual ordinary profiles and refusing reorder writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2253,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:57.051Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b2498c22409be7b594cc-48e7e34deeba1a329117",
+          "file": "service-error-feedback.spec.ts",
+          "line": 29,
+          "column": 1
+        },
+        {
+          "title": "Objectives404 shows the explicit error and never opens stale records or a new-objective editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2241,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:31:59.314Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b2498c22409be7b594cc-8f5b79156b8e91e6c871",
+          "file": "service-error-feedback.spec.ts",
+          "line": 60,
+          "column": 1
+        },
+        {
+          "title": "strategies.proposals failure does not invent counts; proposals failure retries only the existing read",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:32:01.566Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b2498c22409be7b594cc-d9232b74fd994fb3cd7a",
+          "file": "service-error-feedback.spec.ts",
+          "line": 92,
+          "column": 3
+        },
+        {
+          "title": "strategies.list failure does not invent counts; proposals failure retries only the existing read",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T11:32:03.946Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b2498c22409be7b594cc-356f1fcd34fc3037d810",
+          "file": "service-error-feedback.spec.ts",
+          "line": 92,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T11:30:51.225Z",
+    "duration": 75290.02,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

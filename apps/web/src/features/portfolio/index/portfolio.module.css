@@ -24,12 +24,12 @@
   gap: 6px;
   min-width: 0;
 }
-.pulse > div + div {
+.pulseStats > div {
   border-left: 1px solid #2b2b2b;
   padding-left: 20px;
 }
 .pulse .coverage {
-  flex: 2;
+  flex: 0 0 300px;
 }
 .pulse strong {
   font-size: 22px;
@@ -170,10 +170,10 @@
     gap: 20px;
     padding: 20px;
   }
-  .pulse > div {
+  .pulseStats > div {
     flex-basis: 25%;
   }
-  .pulse > div + div {
+  .pulseStats > div {
     padding-left: 0;
     border: 0;
   }
@@ -212,7 +212,8 @@
   transform: translateY(-50%);
   color: var(--muted-foreground);
 }
-.indexHeader {
+:global(.pageHeader).indexHeader {
+  align-items: flex-end;
   margin-bottom: 0;
 }
 :global(.page).indexPage {
@@ -491,4 +492,104 @@
 }
 .tabs[inert] {
   opacity: 0.5;
+}
+
+/* The attention summary precedes profiles on the approved phone frame. */
+.columns > section {
+  grid-column: 1;
+  grid-row: 1;
+}
+.columns > :not(section) {
+  grid-column: 2;
+  grid-row: 1;
+}
+@media (max-width: 1100px) {
+  .columns > section,
+  .columns > :not(section) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+@media (max-width: 680px) {
+  :global(.pageHeader).indexHeader {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 16px 8px;
+  }
+  .title {
+    font-size: 20px;
+    letter-spacing: -0.4px;
+  }
+  .headerActions {
+    display: contents;
+  }
+  .createProfile {
+    justify-self: end;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .ownerFilter {
+    grid-column: 1;
+    grid-row: 2;
+    width: 150px;
+    flex-basis: auto;
+  }
+  .headerActions .search {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+    width: 100%;
+  }
+  .customize {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+  .pulse {
+    display: block;
+    padding: 14px 16px;
+    min-height: 102px;
+  }
+  .pulse .coverage {
+    display: block;
+  }
+  .coverage > :global(.eyebrow) {
+    display: none;
+  }
+  .pulse .coverage strong {
+    font-size: 24px;
+  }
+  .pulse strong {
+    font-size: 16px;
+  }
+  .pulseStats {
+    overflow-x: auto;
+    gap: 12px;
+    margin-top: 12px;
+    padding-bottom: 1px;
+  }
+  .pulseStats > div {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #ffffff05;
+  }
+}
+.pulse .pulseStats {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+.pulseStats > div {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+}
+@media (max-width: 680px) {
+  .pulseStats > div {
+    display: flex;
+    flex: 0 0 auto;
+  }
 }

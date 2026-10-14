@@ -11,7 +11,7 @@ export function PageHeader({
   actions,
   titleAccessory,
 }: {
-  title: string;
+  title: ReactNode;
   eyebrow?: string;
   description?: string;
   actions?: ReactNode;
