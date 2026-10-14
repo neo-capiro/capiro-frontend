@@ -1,0 +1,132 @@
+{
+  "schema": "capiro-consolidated-preview-release/1",
+  "parentCommit": "6dcb3923cec125be94fc72e80e31bec635687cd2",
+  "runtimeSourceCommit": "6dcb3923cec125be94fc72e80e31bec635687cd2",
+  "preservedCommits": [
+    "348c98dfe1962fac962157eb785732281a282d06",
+    "d034866de50ac006a9cf49607f6d9e9d63c9b150",
+    "6dcb3923cec125be94fc72e80e31bec635687cd2"
+  ],
+  "rollbackSourceCommit": "7e170defb9442aa3ce0fd1d5b14060af831ce8d0",
+  "rollbackTree": "39f7b9735658e38381ef44361f7123c558e7a51f",
+  "runtimeBytesDifferFromParent": false,
+  "qualification": {
+    "aggregateExit": 0,
+    "buildExit": 0,
+    "standalone": 36,
+    "standalonePageErrors": [],
+    "freshElements": 15,
+    "freshSSRReceiptSha256": "455673005e9785d0685a5fce03987c41f553528ec8aca67078c01c9e6c701a74",
+    "previousApplicableBrowserRegressions": 36
+  },
+  "meriPhone": {
+    "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+    "nodeId": "449:88256",
+    "authoredViewport": [
+      390,
+      844
+    ],
+    "nativeParity": "unverified"
+  },
+  "imageDigest": null,
+  "s3Version": null,
+  "archiveSha256": null,
+  "nativeAcceptance": "all337 rows remain open; no deployment/live test",
+  "files": [
+    {
+      "path": "docs/release-candidate-20261014/HANDOFF.md",
+      "bytes": 7443,
+      "sha256": "900d5517ae4e478579e17311853d25ca9456a8bd817e22828ac8db9af943ab65"
+    },
+    {
+      "path": "docs/release-candidate-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 938,
+      "sha256": "bd064a503b7fd2be1a0dd71fe6956425ae9d7af1ae84cad27c15e8a82ed96159"
+    },
+    {
+      "path": "docs/release-candidate-20261014/NATIVE-NEXT.md",
+      "bytes": 4346,
+      "sha256": "cd38b621ea1748aca21650c421b4aab07ce87dd20752f0ca35a44ae7ed1e9bf8"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/aggregate-check.log.raw.json",
+      "bytes": 1341721,
+      "sha256": "d0452ad9aef28863d062ebff187a5fbe72130d7f5a43bb1e4c3494b2038ef0aa"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/build.log.raw.json",
+      "bytes": 3798,
+      "sha256": "4dfc11aa849437922a62c0f4c1467077bf5e6c3bfc8be7414f68c89ba1bfacf6"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/elements-final.log.raw.json",
+      "bytes": 4598,
+      "sha256": "d63b2fde09a0449dea46e76b861dd31e2c4c955990f40b9914acc5f9ce8990ad"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/elements-qualification.log.raw.json",
+      "bytes": 965,
+      "sha256": "d3bfccad2952a50e81cb8cd3258ca873cda9be219d5e16ed21df9e4f22bd3b3c"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/elements-qualified.log.raw.json",
+      "bytes": 8238,
+      "sha256": "b0deefe2acdb83d507a90b83fcde4f01a68f51ce85bec9029d5af76ba6c7ead7"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/elements-ssr-receipt.json",
+      "bytes": 984988,
+      "sha256": "455673005e9785d0685a5fce03987c41f553528ec8aca67078c01c9e6c701a74"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/standalone-preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/standalone-production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/release-candidate-20261014/evidence/standalone.log.raw.json",
+      "bytes": 12110,
+      "sha256": "9c82d113de1978530cb46e0fffb13dd8b0f5a1de2cea681d6ddf9be29c81b55e"
+    },
+    {
+      "path": "docs/release-candidate-20261014/meri-mobile-449-88256.context.txt",
+      "bytes": 21360,
+      "sha256": "09773907a122f90ab8b831591a4d7f6fa90f1dcc2325d11e82da1c63e061360b"
+    },
+    {
+      "path": "docs/release-candidate-20261014/meri-mobile-449-88256.png",
+      "bytes": 36394,
+      "sha256": "72eee8b77605c46a06959c4a8c08c30885125a472da950182db75d9cabf2fe7c"
+    },
+    {
+      "path": "docs/release-candidate-20261014/meri-mobile-discovery.json",
+      "bytes": 3629,
+      "sha256": "e5706decc87f46cb9949b6a2228c52d2a7c267257e25d0039b212b184f8f2411"
+    },
+    {
+      "path": "docs/release-candidate-20261014/prepare-source-archive.py",
+      "bytes": 1734,
+      "sha256": "6a891ff85af8db3a4e6462802c74d72c15bc8c7d0e4a5fbbda1247c09d46c83c"
+    },
+    {
+      "path": "docs/release-candidate-20261014/release-delta-vs-pr36.tsv",
+      "bytes": 3291,
+      "sha256": "e03d52b508e5eaa25a95dc65e014c5c801864434ef94a498973817a11750df0c"
+    },
+    {
+      "path": "packages/qualification-elements/promotion-pins.json",
+      "bytes": 10724,
+      "sha256": "489b3ed8973801e162f35b8cb53f5d8194cdc1aea8c60d73bb30b4bfe046fdfd"
+    },
+    {
+      "path": "packages/qualification-elements/qualification.test.mjs",
+      "bytes": 26896,
+      "sha256": "7f76cf3b365fcc4b237fc65d4ee9cebc4e7c44f9dd71dd5cb51b50b7dc6bfb4a"
+    }
+  ]
+}
