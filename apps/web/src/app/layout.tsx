@@ -11,6 +11,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Capiro",
   description: "Government affairs workspace",
+  icons: { icon: { url: "/onboard/favicon.svg", type: "image/svg+xml" } },
 };
 
 export default async function RootLayout({

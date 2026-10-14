@@ -17,6 +17,7 @@ assert.ok(
 const results = [];
 for (const [path, status, text] of [
   ["/healthz", 200, '"status":"ok"'],
+  ["/favicon.ico", 308, ""],
   ["/portfolio", 200, "Portfolio setup required"],
   ["/calendar", 200, "Portfolio setup required"],
   ["/meri/files", 200, "Connection setup required"],
@@ -34,12 +35,31 @@ for (const [path, status, text] of [
     signal: AbortSignal.timeout(10_000),
   });
   assert.equal(response.status, status, path);
+  if (path === "/favicon.ico") {
+    assert.equal(response.headers.get("location"), "/onboard/favicon.svg");
+    assert.equal(response.headers.get("set-cookie"), null);
+    const icon = await fetch(
+      new URL(response.headers.get("location"), origin),
+      {
+        signal: AbortSignal.timeout(10_000),
+      },
+    );
+    assert.equal(icon.status, 200);
+    assert.match(icon.headers.get("content-type") ?? "", /^image\/svg\+xml/);
+    assert.ok((await icon.text()).includes('viewBox="0 0 32 32"'));
+  }
   if (new URL(origin + path).pathname === "/settings")
     assert.equal(
       new URL(response.headers.get("location"), origin).href,
       `${origin}/settings/personal${new URL(origin + path).search}`,
     );
-  assert.ok((await response.text()).includes(text), path);
+  const responseText = await response.text();
+  assert.ok(responseText.includes(text), path);
+  if (path === "/portfolio")
+    assert.match(
+      responseText,
+      /<link\b[^>]*rel="icon"[^>]*href="\/onboard\/favicon\.svg"/,
+    );
   assert.equal(response.headers.get("x-content-type-options"), "nosniff", path);
   assert.equal(response.headers.get("x-frame-options"), "DENY", path);
   assert.equal(response.headers.get("x-powered-by"), null, path);
