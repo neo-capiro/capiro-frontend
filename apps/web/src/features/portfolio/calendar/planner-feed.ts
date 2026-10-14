@@ -46,3 +46,8 @@ export function plannerCalendarItems(
     ];
   });
 }
+
+/** All at most two current occurrences of one admitted task, without an agenda range. */
+export function plannerCalendarOccurrences(value: unknown): CalendarItem[] {
+  return plannerCalendarItems(taskSchema.parse(value), "", "~");
+}

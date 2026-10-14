@@ -1,6 +1,7 @@
 import type { ModuleSlug } from "../../shared/shell/module-catalog";
 import { CalendarScreen } from "./calendar/CalendarScreen";
 import { DirectoryScreen } from "./directory/DirectoryScreen";
+import { ObjectiveDirectoryDestination } from "./directory/ObjectiveDirectoryDestination";
 import { EngagementScreen } from "./engagement/EngagementScreen";
 import { IntelligenceScreen } from "./intelligence/IntelligenceScreen";
 import { PlannerScreen } from "./planner/PlannerScreen";
@@ -15,7 +16,11 @@ export function ModuleScreen({ module }: { module: ModuleSlug }) {
     case "calendar":
       return <CalendarScreen />;
     case "directory":
-      return <DirectoryScreen />;
+      return (
+        <ObjectiveDirectoryDestination>
+          <DirectoryScreen />
+        </ObjectiveDirectoryDestination>
+      );
     case "engagement":
       return <EngagementScreen />;
     case "intelligence":

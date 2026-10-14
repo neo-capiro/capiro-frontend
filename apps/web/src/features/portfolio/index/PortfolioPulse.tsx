@@ -14,18 +14,23 @@ export function PortfolioPulse({ clients }: { clients?: Client[] }) {
           </small>
         </div>
       </div>
-      {[
-        ["Clients", clients?.filter((c) => c.profileType === "CLIENT").length],
-        ["Need attention", undefined],
-        ["Objectives", undefined],
-        ["Off track", undefined],
-        ["Strategies", undefined],
-      ].map(([label, count]) => (
-        <div key={label}>
-          <strong>{count ?? "—"}</strong>
-          <span className="eyebrow">{label}</span>
-        </div>
-      ))}
+      <div className={styles.pulseStats}>
+        {[
+          [
+            "Clients",
+            clients?.filter((c) => c.profileType === "CLIENT").length,
+          ],
+          ["Need attention", undefined],
+          ["Objectives", undefined],
+          ["Off track", undefined],
+          ["Strategies", undefined],
+        ].map(([label, count]) => (
+          <div key={label}>
+            <strong>{count ?? "—"}</strong>
+            <span className="eyebrow">{label}</span>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

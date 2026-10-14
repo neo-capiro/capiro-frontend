@@ -9,6 +9,13 @@ export function readMeriConnectionConfig(
     config.authConfigured &&
     config.issues.length === 0 &&
     Boolean(config.services.meri);
+  const conversationOrigin = config.services.meri
+    ? new URL(config.services.meri)
+    : undefined;
+  const conversationAvailable =
+    available &&
+    conversationOrigin?.protocol === "https:" &&
+    conversationOrigin.pathname === "/";
   const operation: "create_word" | "create_excel" | null =
     env.MERI_DOCUMENT_OPERATION === "create_word" ||
     env.MERI_DOCUMENT_OPERATION === "create_excel"
@@ -17,6 +24,9 @@ export function readMeriConnectionConfig(
   return {
     baseUrl: config.services.meri,
     actionEnabled: available && env.MERI_ACTION_WORKFLOW_ENABLED === "true",
+    conversationEnabled:
+      conversationAvailable &&
+      env.MERI_CONVERSATION_WORKFLOW_ENABLED === "true",
     documentEnabled:
       available &&
       env.MERI_DOCUMENT_WORKFLOW_ENABLED === "true" &&
@@ -30,7 +40,10 @@ export function readOpaqueSessionConfig(
 ) {
   const config = readMeriConnectionConfig(env);
   return {
-    enabled: config.actionEnabled || config.documentEnabled,
+    enabled:
+      config.actionEnabled ||
+      config.documentEnabled ||
+      config.conversationEnabled,
     baseUrl: config.baseUrl,
   };
 }

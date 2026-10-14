@@ -251,6 +251,10 @@
   }
 }
 @media (max-width: 680px) {
+  .desktopTitle,
+  .chips {
+    display: none;
+  }
   .relationship {
     display: block;
   }

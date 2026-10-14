@@ -1,4 +1,5 @@
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
+import { ObjectiveCalendarDestination } from "@/features/portfolio/calendar/ObjectiveCalendarDestination";
 import { readConfig } from "@/shared/portfolio/config/config";
 export default async function Page({
   params,
@@ -7,9 +8,11 @@ export default async function Page({
 }) {
   const { clientId } = await params;
   return (
-    <CalendarPage
-      clientId={clientId}
-      destinations={readConfig(process.env).destinations}
-    />
+    <ObjectiveCalendarDestination expectedClientId={clientId}>
+      <CalendarPage
+        clientId={clientId}
+        destinations={readConfig(process.env).destinations}
+      />
+    </ObjectiveCalendarDestination>
   );
 }

@@ -1,0 +1,110 @@
+
+> capiro-frontend@0.1.0 test:transport
+> npm test --workspace @capiro/qualification-transport
+
+
+> @capiro/qualification-transport@0.0.0 test
+> node --test qualification.test.mjs conversation*.test.mjs
+
+✔ pre-dispatch submit retry failure preserves earlier unknown write (82.792557ms)
+✔ pre-dispatch cancel retry failure preserves earlier unknown write (18.717916ms)
+✔ late 401 after dispose cannot revoke a replacement context (6.299053ms)
+✔ late 401 after abort cannot revoke a replacement context (0.954016ms)
+✔ late 401 after unavailable cannot revoke a replacement context (5.208837ms)
+✔ late 403 after dispose cannot revoke a replacement context (1.048615ms)
+✔ late 403 after abort cannot revoke a replacement context (0.819107ms)
+✔ late 403 after unavailable cannot revoke a replacement context (0.681575ms)
+✔ owned SDK messages and errors clear when its connection is disposed (104.564172ms)
+✔ conversation message-metadata payload cannot bypass public event admission (5.152995ms)
+✔ conversation start payload cannot bypass public event admission (27.517474ms)
+✔ conversation finish payload cannot bypass public event admission (3.437155ms)
+✔ conversation error payload cannot bypass public event admission (2.790173ms)
+✔ outer event ID diagnostics cannot expose unadmitted content (4.147953ms)
+✔ SDK chunk schema diagnostics cannot expose unadmitted content (4.604325ms)
+✔ SDK JSON parser diagnostics cannot expose unadmitted content (2.84986ms)
+✔ synchronous replacement during 401 cleanup receives no stale access-loss callback (1.6087ms)
+✔ synchronous replacement during 403 cleanup receives no stale access-loss callback (1.213588ms)
+✔ held actual Chat stop ends observation without durable cancellation (265.336243ms)
+✔ held actual Chat dispose ends observation without durable cancellation (39.414287ms)
+✔ history loading retires a held stream and hides its observation until the admitted read completes (67.565906ms)
+✔ current-context loss hides a held stream, rejects its next event and permits only explicit recovery (23.461286ms)
+✔ expiry during a held stream clears observation and refuses recovery without another session (13.384907ms)
+✔ malformed partial history tip substituted for nextSequence stays hidden until a valid admitted recovery (53.166145ms)
+✔ malformed partial history false complete-page marker stays hidden until a valid admitted recovery (40.839948ms)
+✔ malformed partial history short page claiming further data stays hidden until a valid admitted recovery (47.077596ms)
+✔ malformed partial history noncontiguous page sequence stays hidden until a valid admitted recovery (13.395221ms)
+✔ admitted stored prompt cannot change on a subsequent history read (8.017556ms)
+✔ admitted stored requested window cannot change on a subsequent history read (2.059826ms)
+✔ admitted stored normalized window cannot change on a subsequent history read (6.123205ms)
+✔ admitted stored skill version cannot change on a subsequent history read (1.778801ms)
+✔ admitted stored skill manifest hash cannot change on a subsequent history read (6.236691ms)
+✔ admitted stored skill prose hash cannot change on a subsequent history read (1.886931ms)
+✔ subscription media application/json is cancelled without consuming a cursor, then GET can recover (13.620664ms)
+✔ subscription media text/plain is cancelled without consuming a cursor, then GET can recover (12.581572ms)
+✔ subscription media text/event-stream; charset=iso-8859-1 is cancelled without consuming a cursor, then GET can recover (32.790025ms)
+✔ unfinished UTF8 at original wire EOF fails before any event admission (14.517375ms)
+✔ request deadline ends a held observation while keeping its last admitted cursor recoverable (10.480826ms)
+✔ public10000 identity bound requires a fresh admitted history checkpoint before GET recovery (6891.398134ms)
+✔ closed POST subscription starts at zero despite advertised stored tip; finish is observation only (109.838206ms)
+✔ partial history acknowledges only observed page; actual SDK GET resumes at60, not advertised200 (71.530023ms)
+✔ outer ID rejects before cursor consumption; real reconnect can still admit sequence1 (26.558131ms)
+✔ missing ID rejects before cursor consumption; real reconnect can still admit sequence1 (16.969209ms)
+✔ nontransient data rejects before cursor consumption; real reconnect can still admit sequence1 (32.165574ms)
+✔ native text rejects before cursor consumption; real reconnect can still admit sequence1 (27.999104ms)
+✔ public receiver refuses identical replay and retains the last admitted cursor (14.21492ms)
+✔ public receiver refuses immutable-ID reuse and retains the last admitted cursor (8.58994ms)
+✔ public receiver refuses gap and retains the last admitted cursor (5.173134ms)
+✔ public receiver refuses foreign attempt and retains the last admitted cursor (5.629908ms)
+✔ public receiver refuses foreign worker and retains the last admitted cursor (5.56424ms)
+✔ public receiver refuses foreign fence and retains the last admitted cursor (25.447604ms)
+✔ public receiver refuses foreign scope and retains the last admitted cursor (4.189854ms)
+✔ split UTF8 and SSE boundaries pass through the actual SDK unchanged (43.868122ms)
+✔ invalid original UTF8 errors before SDK data or cursor admission and cancels its body (2.236877ms)
+✔ unfinished oversized SSE frame errors before SDK data or cursor admission and cancels its body (3.274376ms)
+✔ oversized admitted-looking event is bounded by public event receiver separately from wire segment (252.337206ms)
+✔ malformed 401 revokes before JSON admission and clears prior content (2.392867ms)
+✔ malformed 403 revokes before JSON admission and clears prior content (1.280357ms)
+✔ lost submit acknowledgement fences new intent and explicit retry preserves exact original bytes (0.969379ms)
+✔ current session and selected client are correlated before first view publication (1.280798ms)
+✔ held submit and late stream cannot repopulate disposed lifetime; disposal makes no durable cancel (0.526987ms)
+✔ explicit cancellation preserves a completed receipt; subscription detach never calls cancel (4.394006ms)
+✔ HTTP204 reconnect ends observation without completing the run (1.012443ms)
+✔ all ten frozen variants compose through the real factory + external Chat and project exactly once in order (299.098421ms)
+✔ split SSE / UTF-8 byte boundaries do not corrupt frames (real factory path) (74.433067ms)
+✔ duplicate replay of the same eventId and payload is idempotent (32.07561ms)
+✔ immutable eventId conflict aborts the subscription and preserves the last contiguous cursor (18.904304ms)
+✔ duplicate sequence bound to a different eventId aborts the subscription (11.583505ms)
+✔ a gap pauses the cursor and is repaired by the missing event (real factory path) (7.431171ms)
+✔ multiple runs and attempts share one conversation-wide sequence (real factory path) (30.255981ms)
+✔ malformed custom data is rejected on the guard boundary before onData/admission (1.893602ms)
+✔ the dataPartSchemas runtime/type key mismatch is reproduced at this exact pin (5.98001ms)
+✔ unexpected native reasoning/tool/text frames are rejected (real factory path) (8.223048ms)
+✔ run.error is rendered by approved code or generic text, never the raw message (0.245532ms)
+✔ HTTP 204 reconnect via chat.resumeStream uses the authorized conversation URL and cursor header (0.516242ms)
+✔ incremental reconnect via chat.resumeStream requests the last accepted sequence and appends (13.239007ms)
+✔ stop/dispose on a held-open pending stream admit nothing, issue no durable cancel, and leave run status unchanged (13.120312ms)
+✔ projection snapshots inputs: mutating raw/nested input cannot rewrite accepted history (0.783786ms)
+✔ projection snapshots committed inputs and nested payloads; factory path is immune to later mutation (7.867805ms)
+✔ a completed stream outcome does not mark the run complete without an authoritative run.status (0.281175ms)
+✔ prototype-looking run error codes use only the generic safe string (0.131213ms)
+✔ mutating factory view input cannot change send or reconnect conversation identity (6.287244ms)
+✔ missing endpoint fails before subscription allocation or fetch (0.248707ms)
+✔ public browser validator guards the actual composed SDK stream and rejects nested extras (61.566338ms)
+ℹ tests 84
+ℹ suites 0
+ℹ pass 84
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8119.488941
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

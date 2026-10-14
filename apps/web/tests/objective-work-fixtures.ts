@@ -81,6 +81,9 @@ export const boundTask = {
 };
 export const boundWorkspace = {
   ...revision,
+  // SHA-256 of the canonical saved snapshot, independently computed by the fixture owner.
+  snapshotHash:
+    "c2944cf75c4f17cb3ba720a569718d45906ac3f958ee0189707f1d2ac959441c",
   clientId,
   destination: {
     ...binding,
