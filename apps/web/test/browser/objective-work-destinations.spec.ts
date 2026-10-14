@@ -109,7 +109,7 @@ for (const item of cases) {
       .getByRole("link", { name: "Meri", exact: true })
       .click();
     await expect(
-      page.getByRole("heading", { name: "Good morning, Jordan." }),
+      page.getByRole("heading", { name: "Meri", exact: true }),
     ).toBeVisible();
     await page.goBack();
     await expect(
@@ -118,7 +118,7 @@ for (const item of cases) {
     expect(reads).toBe(3);
     await page.goForward();
     await expect(
-      page.getByRole("heading", { name: "Good morning, Jordan." }),
+      page.getByRole("heading", { name: "Meri", exact: true }),
     ).toBeVisible();
     await page.goBack();
     await expect(

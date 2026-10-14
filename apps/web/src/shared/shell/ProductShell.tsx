@@ -10,12 +10,14 @@ export function ProductShell({
   assetSet = "home",
   actionWorkflow = false,
   documentWorkflow = false,
+  fixture = false,
 }: {
   children: React.ReactNode;
   designTarget?: string;
   assetSet?: "home" | "cited-answer";
   actionWorkflow?: boolean;
   documentWorkflow?: boolean;
+  fixture?: boolean;
 }) {
   return (
     <>
@@ -23,7 +25,7 @@ export function ProductShell({
         <Header assetSet={assetSet} />
         <MeriMobileNavigation />
         <div className={styles.workspace}>
-          <Sidebar assetSet={assetSet} />
+          <Sidebar assetSet={assetSet} fixture={fixture} />
           <main id="main-content" className={styles.main}>
             {actionWorkflow || documentWorkflow ? (
               children
@@ -35,21 +37,19 @@ export function ProductShell({
       </div>
       <footer className={styles.fixtureNotice}>
         <div role="note">
-          {actionWorkflow || documentWorkflow ? (
-            <>
-              <strong>
-                Conversation and workspace samples remain disconnected.
-              </strong>{" "}
-              {documentWorkflow
-                ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
-                : "Recommendation actions require a verified action connection."}
-            </>
-          ) : (
+          {fixture ? (
             <>
               <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
               recent titles, answer, citations and approval counts are samples.
-              No signed-in identity, authorized source data or sending is
-              available. Drafts stay in this page only.
+              Drafts stay in this page only.
+            </>
+          ) : (
+            <>
+              {documentWorkflow
+                ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
+                : actionWorkflow
+                  ? "Recommendation actions require a verified action connection."
+                  : "Conversation service is unavailable. Client and account details come from the connected Capiro services."}
             </>
           )}
         </div>

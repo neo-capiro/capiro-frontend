@@ -12,16 +12,15 @@ import {
 } from "./meri-action-host-fixtures";
 import { operationFixtures, testIdentity } from "./fixtures";
 
-const homeUrl = `/meri?clientId=${actionClient.id}`;
+const homeUrl = `/meri/fixture/home?clientId=${actionClient.id}`;
 const notices = {
   conversations:
-    "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
-  actions:
-    "Conversation and workspace samples remain disconnected. Recommendation actions require a verified action connection.",
+    "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. Drafts stay in this page only.",
+  actions: "Recommendation actions require a verified action connection.",
 };
 for (const width of [1440, 390]) {
   for (const mode of ["conversations", "actions"] as const) {
-    test(`Meri semantic correction: ${width}px ${mode} footer exposes its unchanged notice within contentinfo`, async ({
+    test(`Meri semantic correction: ${width}px ${mode} footer exposes its scoped notice within contentinfo`, async ({
       page,
     }, testInfo) => {
       const fixture = await actionHostFixture(page);

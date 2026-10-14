@@ -19,7 +19,7 @@ export function MeriFixtureEntry() {
       </p>
       <div className={styles.links}>
         <Button asChild className={styles.open}>
-          <a href="/meri">Open Meri Home</a>
+          <a href="/meri/fixture/home">Open Meri Home fixture</a>
         </Button>
         <Button asChild variant="outline" className={styles.openSecondary}>
           <a href="/meri/fixture/cited-answer">Open cited answer</a>

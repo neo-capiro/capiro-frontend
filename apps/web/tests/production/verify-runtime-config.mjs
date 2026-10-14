@@ -10,6 +10,7 @@ export async function verifyRuntimeConfig(app) {
     "/",
     "/portfolio",
     "/meri",
+    "/meri/fixture/home",
     "/meri/fixture/cited-answer",
     "/meri/fixture/run-activity",
     "/modules",

@@ -1,28 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { Button } from "@capiro/ui/button";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
-import { MeriComposer } from "./MeriComposer";
-import { MeriSuggestions } from "./MeriSuggestions";
-import { selectSuggestion } from "./suggestions.mjs";
+import Link from "next/link";
+import { useIdentity } from "../../shared/portfolio/auth/identity";
+import { QueryState } from "../../shared/portfolio/ui/QueryState";
+import { useSelectedClient } from "../../shared/session/SelectedClient";
+import { scopedHref } from "../../shared/session/client-route";
 import styles from "./home.module.css";
 
+/** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome() {
-  const [draft, setDraft] = useState("");
-  const textarea = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    const reset = () => {
-      setDraft("");
-      textarea.current?.focus();
-    };
-    window.addEventListener("meri:reset-local-draft", reset);
-    return () => window.removeEventListener("meri:reset-local-draft", reset);
-  }, []);
-  const select = (id: string) => {
-    setDraft(selectSuggestion(id));
-    textarea.current?.focus();
-  };
+  const identity = useIdentity();
+  const selected = useSelectedClient();
+  const current =
+    identity.isSuccess && !identity.isFetching && !identity.error
+      ? identity.data
+      : undefined;
+  const clientId =
+    selected.state === "authorized-client" ? selected.client.id : undefined;
   return (
     <div className={styles.home}>
       <div className={styles.scopeRow}>
@@ -32,27 +28,58 @@ export function MeriHome() {
             variant="outline"
             className={styles.scopeButton}
             disabled
-            title="Synthetic Anduril fixture; no client authorization"
+            title="Choose client scope from Portfolio"
           >
             <DesignIcon name="chevron" />
-            Anduril
+            {selected.state === "authorized-client"
+              ? selected.client.name
+              : "No client selected"}
           </Button>
-          <span
-            className={styles.status}
-            title="Prototype label only; no authorized source data"
-          >
-            Your authorized data
-          </span>
         </div>
         <span className={styles.meriWordmark} role="img" aria-label="Meri" />
       </div>
       <div className={styles.welcomeGroup}>
         <div className={styles.welcome}>
-          <h1>Good morning, Jordan.</h1>
-          <p>What would you like to work on?</p>
+          <h1>Meri</h1>
         </div>
-        <MeriComposer draft={draft} onDraft={setDraft} textareaRef={textarea} />
-        <MeriSuggestions onSelect={select} />
+        <QueryState
+          pending={identity.isFetching}
+          error={identity.error}
+          retry={() => void identity.refetch()}
+        />
+        {current && (
+          <p>
+            {current.user.firstName
+              ? `Welcome, ${current.user.firstName}.`
+              : "Welcome."}
+          </p>
+        )}
+        <section aria-label="Current client">
+          {selected.state === "authorized-client" ? (
+            <p>Selected client: {selected.client.name}</p>
+          ) : (
+            <p>
+              Choose a permitted client from Portfolio to work in its scope.
+            </p>
+          )}
+          <Link href="/">Open Portfolio</Link>
+        </section>
+        <section aria-labelledby="conversation-availability">
+          <h2 id="conversation-availability">Conversations unavailable</h2>
+          <p>
+            This workspace has no connected conversation service. Recent
+            conversations and approval counts cannot be loaded.
+          </p>
+        </section>
+        <section aria-label="Available Meri workspaces">
+          <Link href={scopedHref("/meri/files", clientId)}>
+            Open document files
+          </Link>{" "}
+          <Link href={scopedHref("/meri/actions", clientId)}>
+            Open recommendation actions
+          </Link>
+          <p>Each workspace reports its connection status when opened.</p>
+        </section>
       </div>
     </div>
   );

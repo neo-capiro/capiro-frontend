@@ -3,7 +3,7 @@ import { MeriCitedAnswer } from "../../../../features/meri/MeriCitedAnswer";
 
 export default function CitedAnswerFixturePage() {
   return (
-    <ProductShell designTarget="442:81682" assetSet="cited-answer">
+    <ProductShell fixture designTarget="442:81682" assetSet="cited-answer">
       <MeriCitedAnswer />
     </ProductShell>
   );
