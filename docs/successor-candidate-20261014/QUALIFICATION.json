@@ -1,0 +1,161 @@
+{
+  "sourceCommit": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+  "source": {
+    "repositoryTree": "7d889e643a070021f9376d92136a9fa1d4e9a270",
+    "applicationTree": "0adbb478fa0f2dba7322404950ea39b597d26192",
+    "runtimeTree": "ca10782002daf4d9696c0332f4736cd32374ea1f",
+    "sourceCommit": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+    "lockfileChangedFromPR25": false,
+    "mergeTreeAgainstInspectedMain": "7d889e643a070021f9376d92136a9fa1d4e9a270"
+  },
+  "frozenPR25Head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "completedAt": "2026-10-14T04:08:28.007351+00:00",
+  "install": {
+    "fresh": true,
+    "lifecycleScripts": false,
+    "lockfileChanged": false
+  },
+  "passed": {
+    "fullRepositoryCheck": true,
+    "rootControls": 111,
+    "transportCases": 84,
+    "webUnitCases": 2255,
+    "capiroUnitCases": 442,
+    "newsletterCases": 385,
+    "newsletterDeclarations": true,
+    "types": true,
+    "publicPackages": true,
+    "webLint": {
+      "errors": 0,
+      "warnings": 81
+    },
+    "webFormatting": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 468,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "errors": 0
+    },
+    "productionBuild": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true,
+    "distinctBrowserCases": 217,
+    "browserReports": {
+      "portfolio": {
+        "startTime": "2026-10-14T03:59:42.156Z",
+        "duration": 427068.077,
+        "expected": 92,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "modules": {
+        "startTime": "2026-10-14T03:59:44.283Z",
+        "duration": 393562.284,
+        "expected": 111,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "newsletter": {
+        "startTime": "2026-10-14T04:06:24.972Z",
+        "duration": 33364.026,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "api": {
+        "startTime": "2026-10-14T04:07:03.551Z",
+        "duration": 9397.956,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "ancestry": [
+    {
+      "pr": 25,
+      "head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 26,
+      "head": "348bf98481268a5f06e26a924f0985b242265cbb",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 27,
+      "head": "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 28,
+      "head": "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 29,
+      "head": "247de58f00a1fea50c25a3400463103885014f4f",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 30,
+      "head": "93ad8792a95bfc1a15a691c608b5fe98f0ca7956",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 31,
+      "head": "3059abec94e2d6b9790758bb9563afdb8091b143",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    },
+    {
+      "pr": 32,
+      "head": "6eeac2b95f5775447e9dd8ec25b9c556686d39e4",
+      "ancestorOfCandidate": true,
+      "predecessorAncestor": true
+    }
+  ],
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8"
+    }
+  ],
+  "nativeAccepted": 0,
+  "nativeRowsStillOpen": 337,
+  "mergeReadiness": {
+    "pr25to32": "Draft, MERGEABLE/CLEAN at inspected bases",
+    "hostedChecks": "No head statusCheckRollup",
+    "actionsWorkflows": 0,
+    "rulesets": [],
+    "classicBranchProtection": "Unverified: GitHub integration HTTP403; no escalation attempted",
+    "mergePerformed": false
+  },
+  "limits": [
+    "Synthetic browser receipts and fixtures do not establish native acceptance",
+    "No fresh all337 semantic audit, full-frame design or assistive-technology certification",
+    "No signed-in live account, service persistence, provider/payment, Docker/image or AWS qualification",
+    "No live/security/credentials/config/data-changing action, merge or deployment",
+    "Meri0.1.3 retained;0.1.5 compatibility review pending",
+    "Clerk configuration approval granted; management login access unavailable per coordinator"
+  ]
+}
