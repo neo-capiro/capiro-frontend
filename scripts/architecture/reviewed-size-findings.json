@@ -2694,9 +2694,9 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "2f3cb81a0c8e9cc2b97d9f3779cd9d945369a1d291db7d7c60f5f9cbed97a5b2",
-    "reason": "Existing ordinary route/client/view composition now records explicit view intent in the URL, preserves client selectors, and restores default overview when absent/invalid. Objective/Newsletter destination branches and current auth/client query ownership remain unchanged.",
-    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
+    "reason": "This screen composes one Engagement route, current client catalog and selected view. Existing query owners handle scope/lifetime; view changes preserve URL/history/client intent and clear stale Outreach hints. Catalog loading/error disables the picker and exposes explicit retry while independently healthy queries remain usable. Presentation delegates to existing feature panels. These states govern the same route admission and do not create another workflow.",
+    "reviewedBy": "Codex outreach_review",
     "reviewedOn": "2026-10-14"
   },
   {
@@ -2715,6 +2715,15 @@
     "fingerprint": "fc64a5509eb663338e3ad710e66e76ca43ad56ec09ec0dd8f62a7f16a987d0be",
     "reason": "One task-detail closeout workflow suite with shared canonical local fixtures covers inline edit/readback/permissions, duplicate/pending/native submission, same-ID version admission, nested cancellation and breakpoint draft continuity. Tests assert observable payloads/control behavior; no arbitrary split or weakened baseline assertions.",
     "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+    "kind": "function",
+    "symbol": "AddTimeForm",
+    "fingerprint": "1d843d2916cdfc1fc03548fcc1de6f2081d818cf32c70bae42dee836a8f38f6f",
+    "reason": "This is the sole time-entry form assembly. It delegates draft, synchronous dispatch admission and generation retirement to canonical useAddTime and useCapiroMutation owners. The disabled native fieldset and guarded Cancel render the same pending transaction; project selection, duration, description and billable fields constrain that transaction. No parallel request or lifetime implementation is introduced.",
+    "reviewedBy": "Codex outreach_review; Codex independent_fix_review",
     "reviewedOn": "2026-10-14"
   }
 ]
