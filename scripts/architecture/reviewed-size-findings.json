@@ -2698,5 +2698,23 @@
     "reason": "Accepted the larger test-only file as one Strategy compatibility workflow suite with one local fixture owner and 16 desktop cases: mixed queues, light/dark audit, selective original/approved indexes, unsupported-only Reject, opaque approved audit, stale refusal, synchronous duplicate exclusion, replacement/disposal and terminal statuses. Fixture responses are synthetic and every case rejects external requests/page errors. No unrelated feature behavior, production hooks or weakened existing assertion is introduced.",
     "reviewedBy": "/root/strategy_compatibility_independent_review",
     "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "TaskDetail",
+    "fingerprint": "420e51976d843b703adb1ba284aa694db956bed0580ec5cbb282c6ee6e769f93",
+    "reason": "One task detail composition owns comment/archive pending fencing and existing nested actions; canonical mutations own transport and lifetime.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskSubtasks.tsx",
+    "kind": "function",
+    "symbol": "TaskSubtasks",
+    "fingerprint": "b453b02718b5f8d863eeab492f1a3bd5ef9291ebd16b0e62b1227705799319e7",
+    "reason": "One parent-scoped subtask page admits current parent/cursor receipts, controls explicit paging and preserves scoped navigation. Canonical query owns transport/lifetime; linked detail rechecks child receipt.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
   }
 ]

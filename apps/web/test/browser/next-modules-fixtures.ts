@@ -89,7 +89,12 @@ export async function setup(
     "engagement.notes": [],
     "engagement.debriefs": [],
     "planner.bootstrap": bootstrap,
-    "planner.tasks": { items: [nextTask], nextCursor: null },
+    "planner.tasks": (input: unknown) => ({
+      items: (input as { query?: { parentId?: string } }).query?.parentId
+        ? []
+        : [nextTask],
+      nextCursor: null,
+    }),
     "planner.task": nextTask,
     "planner.task.events": [],
     "planner.task.attachments": [],

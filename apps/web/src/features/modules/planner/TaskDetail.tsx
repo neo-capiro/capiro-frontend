@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { useRef, useState } from "react";
 import type {
   PlannerPerson,
   PlannerProject,
   PlannerTask,
 } from "../../../shared/capiro/operations/planner-schemas";
-import { useCapiroQuery } from "../../../shared/capiro/queries";
+import {
+  useCapiroMutation,
+  useCapiroQuery,
+} from "../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
@@ -22,6 +24,7 @@ import { assigneeName, dayLabel, minutesLabel } from "./task-presentation";
 import { TaskAttachments } from "./TaskAttachments";
 import { TaskEditor } from "./TaskEditor";
 import { TaskDetailFields } from "./TaskDetailFields";
+import { TaskSubtasks } from "./TaskSubtasks";
 import detailStyles from "./task-detail.module.css";
 import { AddTimeDialog } from "./TimeDialogs";
 type Props = {
@@ -33,54 +36,51 @@ type Props = {
 };
 type Model = ReturnType<typeof useDetail>;
 function useDetail({ task, onSaved }: Props) {
-  const api = useCapiro();
   const [edit, setEdit] = useState(false),
     [subtask, setSubtask] = useState(false),
     [time, setTime] = useState(false),
     [comment, setComment] = useState(""),
-    [error, setError] = useState<string>(),
-    [busy, setBusy] = useState(false);
+    [subtaskRevision, setSubtaskRevision] = useState(0);
+  const active = useRef(false);
   const events = useCapiroQuery("planner.task.events", {
-      params: { id: task.id },
-    }),
-    children = useCapiroQuery("planner.tasks", {
-      query: { parentId: task.id },
-    });
+    params: { id: task.id },
+  });
+  const commentMutation = useCapiroMutation("planner.task.comment");
+  const archiveMutation = useCapiroMutation("planner.task.update");
   const writable = ["admin", "editor"].includes(task.access);
   const addComment = async (event: React.FormEvent) => {
     event.preventDefault();
-    setBusy(true);
-    setError(undefined);
+    if (active.current || task.access === "viewer") return;
+    active.current = true;
+    const submitted = comment;
+    archiveMutation.reset();
     try {
-      await api.request("planner.task.comment", {
+      await commentMutation.run({
         params: { id: task.id },
-        body: { kind: "comment", text: comment },
+        body: { kind: "comment", text: submitted },
       });
-      setComment("");
+      setComment((current) => (current === submitted ? "" : current));
       events.reload();
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "Unable to add comment.",
-      );
+    } catch {
+      // Canonical mutation state retains the failure; an uncertain write is never replayed.
     } finally {
-      setBusy(false);
+      active.current = false;
     }
   };
   const archive = async () => {
-    setBusy(true);
-    setError(undefined);
+    if (active.current || !writable) return;
+    active.current = true;
+    commentMutation.reset();
     try {
-      await api.request("planner.task.update", {
+      await archiveMutation.run({
         params: { id: task.id },
         body: { data: {}, version: task.version, archived: !task.archived },
       });
       onSaved();
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "Unable to update task.",
-      );
+    } catch {
+      // Canonical mutation state owns errors and view-generation disposal.
     } finally {
-      setBusy(false);
+      active.current = false;
     }
   };
   return {
@@ -92,13 +92,15 @@ function useDetail({ task, onSaved }: Props) {
     setTime,
     comment,
     setComment,
-    error,
-    busy,
+    error: commentMutation.error?.message ?? archiveMutation.error?.message,
+    busy: commentMutation.pending || archiveMutation.pending,
+    isPending: () => active.current,
     events,
-    children,
     writable,
     addComment,
     archive,
+    subtaskRevision,
+    refreshSubtasks: () => setSubtaskRevision((revision) => revision + 1),
   };
 }
 export function TaskDetail(props: Props) {
@@ -109,14 +111,21 @@ export function TaskDetail(props: Props) {
         className={`${dialogStyles.taskDialog} ${detailStyles.dialog}`}
         open
         onOpenChange={(open) => {
-          if (!open) props.onClose();
+          if (!open && !m.isPending()) props.onClose();
         }}
         title={props.task.name}
         description={props.task.description || "Task details"}
         footer={
           <div className={detailStyles.footerActions}>
             <TaskDetailActions props={props} model={m} />
-            <ActionButton onClick={props.onClose}>Close</ActionButton>
+            <ActionButton
+              disabled={m.busy}
+              onClick={() => {
+                if (!m.isPending()) props.onClose();
+              }}
+            >
+              Close
+            </ActionButton>
           </div>
         }
       >
@@ -129,12 +138,25 @@ export function TaskDetail(props: Props) {
             people={props.people}
             projects={props.projects}
           />
-          <SubtaskPanel model={m} />
+          <TaskSubtasks
+            key={`${props.task.id}:${m.subtaskRevision}`}
+            taskId={props.task.id}
+            writable={m.writable}
+            busy={m.busy}
+            isPending={m.isPending}
+            onAdd={() => m.setSubtask(true)}
+            onNavigate={props.onClose}
+          />
           <TaskAttachments
             taskId={props.task.id}
             writable={props.task.access !== "viewer" && !props.task.archived}
           />
-          <ActionButton disabled={!m.writable} onClick={() => m.setTime(true)}>
+          <ActionButton
+            disabled={!m.writable || m.busy}
+            onClick={() => {
+              if (!m.isPending()) m.setTime(true);
+            }}
+          >
             Add time
           </ActionButton>
           <TaskActivity task={props.task} model={m} />
@@ -156,7 +178,7 @@ export function TaskDetail(props: Props) {
       <TaskEditor
         open={m.subtask}
         onClose={() => m.setSubtask(false)}
-        onSaved={m.children.reload}
+        onSaved={m.refreshSubtasks}
         parentId={props.task.id}
         projectId={props.task.memberships[0]?.projectId}
         people={props.people}
@@ -217,34 +239,6 @@ function TaskSummary({ props, model: m }: { props: Props; model: Model }) {
     </>
   );
 }
-function SubtaskPanel({ model: m }: { model: Model }) {
-  return (
-    <Panel
-      title="Subtasks"
-      actions={
-        <ActionButton disabled={!m.writable} onClick={() => m.setSubtask(true)}>
-          + Subtask
-        </ActionButton>
-      }
-    >
-      <StatusPanel
-        loading={m.children.loading}
-        error={m.children.error}
-        onRetry={m.children.reload}
-        empty={m.children.data?.items.length === 0 ? "No subtasks" : undefined}
-      >
-        <div className={styles.detail}>
-          {m.children.data?.items.map((child) => (
-            <div key={child.id} className={styles.inline}>
-              <Badge>{child.status.replaceAll("_", " ")}</Badge>
-              <span>{child.name}</span>
-            </div>
-          ))}
-        </div>
-      </StatusPanel>
-    </Panel>
-  );
-}
 function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
   return (
     <>
@@ -267,22 +261,28 @@ function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
           </div>
         </StatusPanel>
       </Panel>
-      <form onSubmit={(event) => void m.addComment(event)}>
-        <Field label="Comment" htmlFor="task-comment">
-          <TextArea
-            id="task-comment"
-            value={m.comment}
-            onChange={(event) => m.setComment(event.target.value)}
-            required
-            maxLength={20000}
-          />
-        </Field>
-        <ActionButton
-          type="submit"
+      <form aria-busy={m.busy} onSubmit={(event) => void m.addComment(event)}>
+        <fieldset
           disabled={m.busy || task.access === "viewer"}
+          className={styles.editorFields}
         >
-          Post comment
-        </ActionButton>
+          <Field label="Comment" htmlFor="task-comment">
+            <TextArea
+              id="task-comment"
+              disabled={m.busy || task.access === "viewer"}
+              value={m.comment}
+              onChange={(event) => m.setComment(event.target.value)}
+              required
+              maxLength={20000}
+            />
+          </Field>
+          <ActionButton
+            type="submit"
+            disabled={m.busy || task.access === "viewer"}
+          >
+            Post comment
+          </ActionButton>
+        </fieldset>
       </form>
     </>
   );
@@ -302,7 +302,12 @@ function TaskDetailActions({
       <Badge tone={task.priority === "high" ? "danger" : "neutral"}>
         {task.priority}
       </Badge>
-      <ActionButton disabled={!m.writable} onClick={() => m.setEdit(true)}>
+      <ActionButton
+        disabled={!m.writable || m.busy}
+        onClick={() => {
+          if (!m.isPending()) m.setEdit(true);
+        }}
+      >
         Edit task
       </ActionButton>
       <ActionButton
