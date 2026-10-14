@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { PlannerProject } from "../../../shared/capiro/operations/planner-schemas";
 import {
@@ -39,13 +39,27 @@ export function TimeExportDialog({
     [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
   const active = useRef<AbortController | null>(null);
-  useEffect(() => () => active.current?.abort(), []);
+  useLayoutEffect(
+    () => () => {
+      active.current?.abort();
+      active.current = null;
+      setBusy(false);
+    },
+    [api, open, week, userId, timeAdmin],
+  );
+  const cancel = () => {
+    active.current?.abort();
+    active.current = null;
+    setBusy(false);
+    onClose();
+  };
   const run = async (event: React.FormEvent) => {
     event.preventDefault();
-    setBusy(true);
-    setError(undefined);
+    if (active.current || !open) return;
     const controller = new AbortController();
     active.current = controller;
+    setBusy(true);
+    setError(undefined);
     try {
       let cursor: string | undefined, revision: string | undefined;
       const rows: (string | number)[][] = [
@@ -75,6 +89,8 @@ export function TimeExportDialog({
           },
           { signal: controller.signal },
         );
+        controller.signal.throwIfAborted();
+        if (active.current !== controller) return;
         if (result.unavailableEntries)
           throw new Error(
             "Some entries became unavailable. Review access before exporting.",
@@ -96,6 +112,8 @@ export function TimeExportDialog({
         if (pages === 99)
           throw new Error("Choose a smaller date range to export this work.");
       }
+      controller.signal.throwIfAborted();
+      if (active.current !== controller) return;
       const csv = rows.map((row) => row.map(csvCell).join(",")).join("\r\n");
       const url = URL.createObjectURL(
         new Blob([csv], { type: "text/csv;charset=utf-8" }),
@@ -107,24 +125,22 @@ export function TimeExportDialog({
       setTimeout(() => URL.revokeObjectURL(url), 0);
       onClose();
     } catch (cause) {
-      if (!controller.signal.aborted)
+      if (!controller.signal.aborted && active.current === controller)
         setError(
           cause instanceof Error ? cause.message : "Unable to export time.",
         );
     } finally {
-      if (!controller.signal.aborted) setBusy(false);
-      active.current = null;
+      if (active.current === controller) {
+        active.current = null;
+        setBusy(false);
+      }
     }
   };
   return (
     <Modal
       open={open}
       onOpenChange={(next) => {
-        if (!next) {
-          active.current?.abort();
-          setBusy(false);
-          onClose();
-        }
+        if (!next) cancel();
       }}
       title="Export time entries"
       description="Export all pages at one authorized data revision."
@@ -135,6 +151,7 @@ export function TimeExportDialog({
             id="export-scope"
             className={styles.select}
             value={scope}
+            disabled={busy}
             onChange={(event) => setScope(event.target.value as typeof scope)}
           >
             <option value="personal">Personal</option>
@@ -149,6 +166,7 @@ export function TimeExportDialog({
               id="export-project"
               className={styles.select}
               value={projectId}
+              disabled={busy}
               onChange={(event) => setProject(event.target.value)}
               required
             >
@@ -167,6 +185,7 @@ export function TimeExportDialog({
             id="export-from"
             required
             value={fromOn}
+            disabled={busy}
             onChange={(event) => setFrom(event.target.value)}
           />
         </Field>
@@ -177,6 +196,7 @@ export function TimeExportDialog({
             min={fromOn}
             required
             value={throughOn}
+            disabled={busy}
             onChange={(event) => setThrough(event.target.value)}
           />
         </Field>
@@ -186,13 +206,7 @@ export function TimeExportDialog({
           </p>
         )}
         <div className={`${styles.footer} ${styles.wide}`}>
-          <ActionButton
-            type="button"
-            onClick={() => {
-              active.current?.abort();
-              onClose();
-            }}
-          >
+          <ActionButton type="button" onClick={cancel}>
             Cancel
           </ActionButton>
           <ActionButton primary type="submit" disabled={busy}>
