@@ -14,6 +14,7 @@ const origin = "https://frontend.synthetic.invalid";
 const clientId = "10000000-0000-4000-8000-000000000001";
 const env = {
   CORE_API_BASE_URL: "https://backend.synthetic.invalid/api",
+  STRATEGY_API_BASE_URL: "https://backend.synthetic.invalid/strategy-api",
   WORKSPACE_API_BASE_URL: "https://backend.synthetic.invalid/workspace-api",
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_live_c3ludGhldGljJA==",
   CLERK_SECRET_KEY: "sk_live_synthetic",
@@ -53,6 +54,7 @@ function portfolio() {
 }
 
 it.each([
+  ["GET", "me/portfolio-layout"],
   ["GET", `clients/${clientId}/objectives`],
   ["POST", `clients/${clientId}/objectives`],
   ["PATCH", `clients/${clientId}/objectives?objectiveId=${clientId}`],
@@ -81,7 +83,7 @@ it.each([
       URL,
       RequestInit,
     ];
-    expect(url.pathname).toMatch(/^\/api\/(clients|federal-register)\//);
+    expect(url.pathname).toMatch(/^\/api\/(clients|federal-register|me)\//);
     expect(url.pathname).not.toContain("/api/api/");
     expect(new Headers(options.headers).has("origin")).toBe(false);
   },
@@ -158,5 +160,49 @@ it.each([
       message,
     });
     expect(upstream).toHaveBeenCalledTimes(1);
+  },
+);
+
+it.each([404, 502])(
+  "proposals%s preserves native status and sanitized error through the fixed gateway and client",
+  async (status) => {
+    const upstream = vi.fn(async () =>
+      Response.json(
+        { message: "Synthetic private route/provider diagnostics" },
+        { status, headers: { "Set-Cookie": "synthetic=private" } },
+      ),
+    );
+    const api = createCapiroApi(capiroOperations, {
+      fetcher: async (url, init) =>
+        handleCapiroRequest(
+          new Request(new URL(String(url), origin), {
+            ...init,
+            headers: { ...init?.headers, Origin: origin },
+          }),
+          "strategies.proposals",
+          capiroOperations,
+          readCapiroConfig(env),
+          async () => "synthetic-session-token",
+          upstream,
+        ),
+    });
+    await expect(api.request("strategies.proposals", {})).rejects.toMatchObject(
+      {
+        status,
+        message:
+          status === 404
+            ? message
+            : "The service is unavailable. Please retry.",
+      },
+    );
+    expect(upstream).toHaveBeenCalledTimes(1);
+    const [url, init] = upstream.mock.calls[0]! as unknown as [
+      URL,
+      RequestInit,
+    ];
+    expect(new URL(String(url)).pathname).toBe(
+      "/strategy-api/agents/change-sets",
+    );
+    expect(init.method).toBe("GET");
   },
 );

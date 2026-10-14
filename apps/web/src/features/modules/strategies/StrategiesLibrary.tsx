@@ -108,7 +108,12 @@ export function StrategiesLibrary({
         >
           <h2>Watcher proposals</h2>
           <strong>
-            {proposals.loading || proposals.error ? "—" : pendingCount}
+            {query.loading ||
+            query.error ||
+            proposals.loading ||
+            proposals.error
+              ? "—"
+              : pendingCount}
           </strong>
         </button>
         <button
@@ -128,6 +133,13 @@ export function StrategiesLibrary({
           </strong>
         </article>
       </div>
+      <StatusPanel
+        error={
+          proposals.error &&
+          `Watcher proposals unavailable. ${proposals.error.message}`
+        }
+        onRetry={proposals.reload}
+      />
       <div className={styles.filters}>
         <div className={styles.actions}>
           <SelectInput
@@ -164,7 +176,9 @@ export function StrategiesLibrary({
             ]}
           />
         </div>
-        <span className={styles.muted}>{rows.length} strategies</span>
+        <span className={styles.muted}>
+          {query.loading || query.error ? "—" : rows.length} strategies
+        </span>
       </div>
       <StatusPanel
         loading={query.loading}
