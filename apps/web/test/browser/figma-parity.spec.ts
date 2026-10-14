@@ -54,7 +54,13 @@ for (const width of [1440, 390])
       });
       await page.goto(view.path);
       await expect(
-        page.getByRole("heading", { name: view.heading, exact: true }),
+        page.getByRole("heading", {
+          name:
+            view.name === "meri-fixture" && width === 390
+              ? "What would you like to work on?"
+              : view.heading,
+          exact: true,
+        }),
       ).toBeVisible();
       await page.evaluate(() => document.fonts.ready);
       if (width === 390) {

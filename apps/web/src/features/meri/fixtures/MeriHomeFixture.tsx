@@ -24,7 +24,7 @@ export function MeriHomeFixture() {
     textarea.current?.focus();
   };
   return (
-    <div className={styles.home}>
+    <div className={`${styles.home} ${styles.fixtureHome}`}>
       <div className={styles.scopeRow}>
         <div className={styles.scope}>
           <Button
@@ -48,8 +48,14 @@ export function MeriHomeFixture() {
       </div>
       <div className={styles.welcomeGroup}>
         <div className={styles.welcome}>
-          <h1>Good morning, Jordan.</h1>
-          <p>What would you like to work on?</p>
+          <h1>
+            <span className={styles.desktopOnly}>Good morning, Jordan.</span>
+            <span className={styles.phoneOnly}>
+              What would you like <br />
+              to work on?
+            </span>
+          </h1>
+          <p className={styles.desktopOnly}>What would you like to work on?</p>
         </div>
         <MeriComposer draft={draft} onDraft={setDraft} textareaRef={textarea} />
         <MeriSuggestions onSelect={select} />

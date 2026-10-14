@@ -1,3 +1,4 @@
+import type { FocusEvent } from "react";
 import { Button } from "@capiro/ui/button";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
 import { suggestions } from "./suggestions.mjs";
@@ -8,6 +9,9 @@ export function MeriSuggestions({
 }: {
   onSelect: (id: string) => void;
 }) {
+  const reveal = (event: FocusEvent<HTMLButtonElement>) => {
+    event.currentTarget.scrollIntoView({ block: "nearest", inline: "center" });
+  };
   return (
     <>
       <div
@@ -26,13 +30,23 @@ export function MeriSuggestions({
                 variant="ghost"
                 className={styles.start}
                 aria-label={`Start ${item.title.toLowerCase()} draft`}
+                onFocus={reveal}
                 onClick={() => onSelect(item.id)}
               >
                 Start
               </Button>
             </div>
             <h2>{item.title}</h2>
-            <p>{item.description}</p>
+            <p>
+              <span className={styles.desktopOnly}>{item.description}</span>
+              <span className={styles.phoneOnly}>
+                {item.id === "research"
+                  ? "Find sourced answers"
+                  : item.id === "brief"
+                    ? "Build a verified file"
+                    : item.description}
+              </span>
+            </p>
           </section>
         ))}
       </div>
@@ -43,6 +57,7 @@ export function MeriSuggestions({
             type="button"
             variant="ghost"
             className={styles.start}
+            onFocus={reveal}
             onClick={() => onSelect(item.id)}
           >
             {item.title}
