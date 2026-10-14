@@ -2743,5 +2743,14 @@
     "reason": "One bounded export-attempt lifecycle captures one input and revision, reads at most100pages, and emits one CSV only while its cancellation and active-attempt identity remain current. Every post-await and output boundary checks the same owner; final cleanup cannot release a newer reopened export. Canonical API owns validated receipts and authority.",
     "reviewedBy": "Codex independent_fix_review",
     "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b",
+    "reason": "One real CSV pagination/download control shares setup, exact request assertions, duplicate native submission admission and escaping/readback. These assertions observe the same export transaction and receipt; no unrelated behavior is mixed in, and splitting solely by line count would fragment its ordered evidence.",
+    "reviewedBy": "Codex outreach_review",
+    "reviewedOn": "2026-10-14"
   }
 ]
