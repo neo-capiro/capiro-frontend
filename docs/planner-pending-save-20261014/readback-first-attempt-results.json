@@ -1,0 +1,363 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-portfolio-modules-acceptance-20261014/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "planner-engagement.spec.ts"
+    ],
+    "configFile": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "planner-engagement.spec.ts",
+      "file": "planner-engagement.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Planner modes use the same permitted task data and exact board assets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2011,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:51:52.311Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-5063bacb1c26b597722e",
+          "file": "planner-engagement.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30178,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                        "column": 73,
+                        "line": 253
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Close dialog', exact: true })\u001b[22m\n\n\n  251 |     page.getByRole(\"dialog\", { name: \"Edit task\", exact: true }),\n  252 |   ).toBeHidden();\n> 253 |   await page.getByRole(\"button\", { name: \"Close dialog\", exact: true }).click();\n      |                                                                         ^\n  254 |   await page.reload();\n  255 |   await page\n  256 |     .getByRole(\"button\", { name: \"Test updated work\", exact: true })\n    at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:253:73"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:51:54.530Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/test-failed-1.png"
+                    },
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-0964d903fcfc8d41ed87",
+          "file": "planner-engagement.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "Planner pending writes freeze the submitted draft and dismissal until rejection at 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:52:25.368Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-5c08b4ac5a3350c6c292",
+          "file": "planner-engagement.spec.ts",
+          "line": 269,
+          "column": 3
+        },
+        {
+          "title": "Planner pending writes freeze the submitted draft and dismissal until rejection at 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2402,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:52:28.050Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-c07afeddd096c68ae649",
+          "file": "planner-engagement.spec.ts",
+          "line": 269,
+          "column": 3
+        },
+        {
+          "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2573,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:52:30.471Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-b5ce3052322269df05b2",
+          "file": "planner-engagement.spec.ts",
+          "line": 327,
+          "column": 1
+        },
+        {
+          "title": "A template session deep link keeps the server state version and sends no mail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1728,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:52:33.065Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-9600fbda34a87898cf29",
+          "file": "planner-engagement.spec.ts",
+          "line": 388,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T12:51:45.901Z",
+    "duration": 49085.297000000006,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

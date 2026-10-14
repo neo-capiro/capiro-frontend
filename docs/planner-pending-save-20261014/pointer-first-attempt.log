@@ -1,0 +1,105 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts planner-engagement.spec.ts
+
+[WebServer] (node:310633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:310680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/planner-engagement.spec.ts:114:1 › Planner modes use the same permitted task data and exact board assets (2.3s)
+  ✓  2 test/browser/planner-engagement.spec.ts:165:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields (5.1s)
+  ✘  3 test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 1440 (2.2s)
+(node:310924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 390 (2.2s)
+(node:311078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 test/browser/planner-engagement.spec.ts:338:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width (2.2s)
+  ✓  6 test/browser/planner-engagement.spec.ts:399:1 › A template session deep link keeps the server state version and sends no mail (1.9s)
+
+
+  1) test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 1440 
+
+    Error: locator.scrollIntoViewIfNeeded: Error: strict mode violation: getByLabel('Assignee', { exact: true }) resolved to 2 elements:
+        1) <button dir="ltr" type="button" role="combobox" data-state="closed" data-size="default" aria-expanded="false" aria-label="Assignee" aria-autocomplete="none" data-slot="select-trigger" class="border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it…>…</button> aka locator('#main-content').getByLabel('Assignee')
+        2) <button dir="ltr" type="button" role="combobox" id="task-assignee" data-state="closed" data-size="default" aria-expanded="false" aria-autocomplete="none" data-slot="select-trigger" class="border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items…>…</button> aka getByRole('combobox', { name: 'Assignee' })
+
+    Call log:
+      - waiting for getByLabel('Assignee', { exact: true })
+
+
+      305 |       for (const label of ["Assignee", "Priority", "Status"]) {
+      306 |         const trigger = page.getByLabel(label, { exact: true });
+    > 307 |         await trigger.scrollIntoViewIfNeeded();
+          |                       ^
+      308 |         const box = await trigger.boundingBox();
+      309 |         expect(box).not.toBeNull();
+      310 |         await page.mouse.click(
+        at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:307:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 390 
+
+    Error: locator.scrollIntoViewIfNeeded: Error: strict mode violation: getByLabel('Assignee', { exact: true }) resolved to 2 elements:
+        1) <button dir="ltr" type="button" role="combobox" data-state="closed" data-size="default" aria-expanded="false" aria-label="Assignee" aria-autocomplete="none" data-slot="select-trigger" class="border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it…>…</button> aka locator('#main-content').getByLabel('Assignee')
+        2) <button dir="ltr" type="button" role="combobox" id="task-assignee" data-state="closed" data-size="default" aria-expanded="false" aria-autocomplete="none" data-slot="select-trigger" class="border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items…>…</button> aka getByRole('combobox', { name: 'Assignee' })
+
+    Call log:
+      - waiting for getByLabel('Assignee', { exact: true })
+
+
+      305 |       for (const label of ["Assignee", "Priority", "Status"]) {
+      306 |         const trigger = page.getByLabel(label, { exact: true });
+    > 307 |         await trigger.scrollIntoViewIfNeeded();
+          |                       ^
+      308 |         const box = await trigger.boundingBox();
+      309 |         expect(box).not.toBeNull();
+      310 |         await page.mouse.click(
+        at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:307:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 1440 
+    test/browser/planner-engagement.spec.ts:269:3 › Planner pending writes freeze the submitted draft and dismissal until rejection at 390 
+  4 passed (24.4s)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts planner-engagement.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

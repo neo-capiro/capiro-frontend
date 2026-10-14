@@ -1,0 +1,30 @@
+
+> capiro-frontend@0.1.0 test:production
+> node apps/web/tests/production/run-standalone.mjs docs/planner-pending-save-20261014/standalone
+
+{"runtimeConfigEntries":["/","/portfolio","/meri","/meri/fixture/home","/meri/fixture/cited-answer","/meri/fixture/run-activity","/modules","/settings","/settings/personal","/sign-in"],"cached":[]}
+node:internal/fs/promises:679
+  return await PromisePrototypeThen(
+         ^
+
+Error: ENOSPC: no space left on device, copyfile '/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/.next/static/chunks/2h6uqyjbbw12s.js' -> '/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/.next/standalone/apps/web/.next/static/chunks/2h6uqyjbbw12s.js'
+    at async copyFile (node:internal/fs/promises:679:10)
+    at async _copyFile (node:internal/fs/cp/cp:261:3)
+    at async copyDir (node:internal/fs/cp/cp:330:19)
+    at async mkDirAndCopy (node:internal/fs/cp/cp:319:3)
+    at async copyDir (node:internal/fs/cp/cp:330:19)
+    at async mkDirAndCopy (node:internal/fs/cp/cp:319:3)
+    at async file:///workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/tests/production/run-standalone.mjs:46:1 {
+  errno: -28,
+  code: 'ENOSPC',
+  syscall: 'copyfile',
+  path: '/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/.next/static/chunks/2h6uqyjbbw12s.js',
+  dest: '/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/.next/standalone/apps/web/.next/static/chunks/2h6uqyjbbw12s.js'
+}
+
+Node.js v24.19.0
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
