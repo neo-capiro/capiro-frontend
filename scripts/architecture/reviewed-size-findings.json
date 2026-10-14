@@ -1096,15 +1096,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
-    "kind": "function",
-    "symbol": "Shell",
-    "fingerprint": "a7e91183d3f64217de0406c57968ba6de11d16686147b508bfdfbb375f88c95a",
-    "reason": "This component remains a shared Portfolio chrome composer. HeaderFrame and WorkspaceSwitcher own common structure/navigation; PortfolioNavigation owns the sidebar. Canonical home/settings links replace sibling-host assumptions, without changing feature transport or session ownership.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
     "kind": "function",
     "symbol": "BillingSummaryPanel",
@@ -2520,24 +2511,6 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
-    "kind": "function",
-    "symbol": "PortfolioIndex",
-    "fingerprint": "01e4df693054c926f2c637dc628c8ef57a10e84870f4ea4a2c81c8315905e1f6",
-    "reason": "Existing index composition keeps roster presentation and URL filters; eligible count now belongs beside the single canonical layout hook in PortfolioProfiles. No transport, authority or new feature owner is added. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
-    "reviewedBy": "Codex frontend integration owner with independent outreach_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "9bd04d2d1b16480be227e2e71802108b8549fbabc44b561c66bc71469ae5ba02",
-    "reason": "Existing Portfolio index presentation stylesheet; the sole addition dims the temporarily inert local filter/navigation region during inline customization. No domain responsibility, global selector, geometry, asset, token or other feature styling is added. Exact scope reviewed in docs/customize-entry-20261014/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex frontend integration owner",
-    "reviewedOn": "2026-10-14"
-  },
-  {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "file",
     "symbol": "<module>",
@@ -2599,5 +2572,41 @@
     "reason": "Independent review accepted one existing Strategies library presentation/filter/archive interaction. Inline proposals unavailable feedback and dependency-aware counts delegate transport/admission/reload to the canonical query and StatusPanel; no new workflow, endpoint, authority or fallback dataset is added. See docs/service-error-feedback-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
+    "kind": "function",
+    "symbol": "ModuleHub",
+    "fingerprint": "e3cf3848494045e7e265bff95a44702fcf22e15f61bb91bf89dfb99487d46ab7",
+    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "reviewedOn": "2026-10-14",
+    "reason": "One module catalogue/scope/group composition; cards, information and relationship surfaces remain delegated. Responsive title reuses the existing shared PageHeader and does not add a new state or workflow. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "function",
+    "symbol": "PortfolioIndex",
+    "fingerprint": "ef0940d606679f37299017516cf986b6e9364d9a77f2d008c17c718ef498d257",
+    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "reviewedOn": "2026-10-14",
+    "reason": "One existing portfolio index filter/dialog/owner/profile composition. Responsive header classes and DOM attention ordering preserve canonical query, creation, saved layout and attention owners. No authority, API or persistence responsibility is added. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6f4403012a92478d6f59fc3d444d96341ad668b69f5721d155dcf5adf1ebc420",
+    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "reviewedOn": "2026-10-14",
+    "reason": "Canonical Portfolio index/header/pulse/cards/profile chooser responsive presentation. Selectors preserve shared global styles and truthful availability, without adding authority, state or a second workflow. Extraction solely for this size threshold would scatter coupled responsive geometry. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+  },
+  {
+    "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+    "kind": "function",
+    "symbol": "Shell",
+    "fingerprint": "74ff011f5a56e14bc4e013e6063db13526bd052a14e170431093960f4bdc6af4",
+    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "reviewedOn": "2026-10-14",
+    "reason": "Existing Portfolio header/navigation/session composition. Shared HeaderFrame owns geometry; canonical ModeLink owns scoped product routes; existing global actions and mobile navigation stay reachable. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
   }
 ]

@@ -31,6 +31,7 @@ export function Shell({
       </a>
       <HeaderFrame
         className={styles.header}
+        mobileModeRow
         leading={
           <button
             className={`button ghost iconButton ${styles.mobileToggle}`}

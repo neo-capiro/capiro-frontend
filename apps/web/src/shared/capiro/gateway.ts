@@ -21,6 +21,7 @@ import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
 
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
+import { reportStrategyValidation } from "./strategy-validation-diagnostic";
 
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
@@ -57,6 +58,7 @@ async function serviceResponse(
   base: string,
   signal: AbortSignal,
   publicCapability: boolean,
+  diagnosticKey?: string,
 ): Promise<Response> {
   if (!response.ok)
     return serviceErrorResponse(response, operation, signal, publicCapability);
@@ -85,13 +87,29 @@ async function serviceResponse(
   const upstream = (operation.upstreamResponse ?? operation.response).safeParse(
     payload,
   );
-  if (!upstream.success)
+  if (!upstream.success) {
+    reportStrategyValidation(
+      diagnosticKey,
+      operation,
+      "upstream",
+      upstream.error,
+      payload,
+    );
     return jsonError(502, "The service returned an unexpected response.");
+  }
   const parsed = operation.response.safeParse(
     browserHandoff(upstream.data, operation, input, base),
   );
-  if (!parsed.success)
+  if (!parsed.success) {
+    reportStrategyValidation(
+      diagnosticKey,
+      operation,
+      "browser",
+      parsed.error,
+      upstream.data,
+    );
     return jsonError(502, "The service returned an unexpected response.");
+  }
   return response.status === 204
     ? new Response(null, {
         status: 204,
@@ -118,6 +136,7 @@ async function dispatch(
   fetcher: typeof fetch,
   signal: AbortSignal,
   files: readonly CapiroUploadFile[] = [],
+  diagnosticKey?: string,
 ): Promise<Response> {
   let url: URL;
   try {
@@ -164,6 +183,7 @@ async function dispatch(
       base,
       signal,
       token === null,
+      diagnosticKey,
     );
   } catch {
     return signal.aborted
@@ -337,5 +357,6 @@ export async function handleCapiroRequest(
     fetcher,
     signal,
     files,
+    key,
   );
 }

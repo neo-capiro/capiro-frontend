@@ -79,7 +79,7 @@ export function PortfolioIndex({
     <Shell destinations={destinations}>
       <div className={`page ${styles.indexPage}`}>
         <header className={`pageHeader ${styles.indexHeader}`}>
-          <div className="stack" style={{ gap: 6 }}>
+          <div className="stack" style={{ gap: 10 }}>
             <p className="eyebrow">Your client portfolio</p>
             <h1 className={styles.title}>
               Portfolio <span>{records?.length ?? "—"}</span>
@@ -105,7 +105,7 @@ export function PortfolioIndex({
               />
             </label>
             <button
-              className="button"
+              className={`button ${styles.customize}`}
               ref={customizeTrigger}
               aria-expanded={customizing}
               onClick={() => setCustomizing(true)}
@@ -113,7 +113,7 @@ export function PortfolioIndex({
               Customize
             </button>
             <button
-              className="button primary"
+              className={`button primary ${styles.createProfile}`}
               disabled={!permitted}
               onClick={() => setCreating(true)}
             >
@@ -156,6 +156,7 @@ export function PortfolioIndex({
           />
         )}
         <div className={styles.columns}>
+          {records && <PortfolioAttention clients={records} />}
           <section className="stack" aria-label="Portfolio profiles">
             <IndexNavigation
               records={records}
@@ -264,7 +265,6 @@ export function PortfolioIndex({
               </button>
             )}
           </section>
-          {records && <PortfolioAttention clients={records} />}
         </div>
         {records && <GlobalQuickLog clients={records} />}
         <CreateProfileDialog

@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { ScopedLink } from "./ScopedLink";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
 import styles from "./module-shell.module.css";
 import { ModuleAsset } from "./ModuleAsset";
 
 export function ModuleNavigation({ active }: { active?: ModuleSlug | "hub" }) {
   const [expanded, setExpanded] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
   return (
     <>
       <button
         type="button"
+        ref={toggle}
         className={styles.mobileNavToggle}
         aria-expanded={expanded}
         aria-controls="module-navigation"
@@ -23,11 +25,18 @@ export function ModuleNavigation({ active }: { active?: ModuleSlug | "hub" }) {
       <aside
         className={`${styles.navigation} ${expanded ? styles.expanded : ""}`}
         id="module-navigation"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setExpanded(false);
+            toggle.current?.focus();
+          }
+        }}
       >
         <p className={styles.navEyebrow}>Modules</p>
         <nav aria-label="Modules">
           <ScopedLink
             href="/modules"
+            onClick={() => setExpanded(false)}
             className={active === "hub" ? styles.current : ""}
             aria-current={active === "hub" ? "page" : undefined}
           >

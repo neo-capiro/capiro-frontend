@@ -109,33 +109,6 @@
 button.mobileToggle {
   display: none;
 }
-.phoneMode {
-  display: none;
-}
-.workspaceMenu {
-  z-index: 70;
-  min-width: 190px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px;
-  box-shadow: var(--shadow);
-}
-.workspaceMenu > a,
-.workspaceMenu > span {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  outline: none;
-}
-.workspaceMenu [data-highlighted] {
-  background: var(--muted);
-}
-.workspaceMenu [data-disabled] {
-  color: var(--muted-foreground);
-}
 .avatar {
   display: flex;
   align-items: center;
@@ -150,8 +123,6 @@ button.mobileToggle {
   }
   .modes img,
   .actions img,
-  .phoneMode img,
-  .workspaceMenu img,
   .sidebar img {
     filter: invert(0.9);
   }
@@ -188,17 +159,6 @@ button.mobileToggle {
   .actions {
     gap: 0;
   }
-  .modes {
-    display: none;
-  }
-  .phoneMode {
-    display: block;
-  }
-  .phoneMode > button {
-    width: 36px;
-    height: 36px;
-    padding: 8px;
-  }
   .actions :global(.iconButton) {
     width: 30px;
     height: 36px;
@@ -206,6 +166,9 @@ button.mobileToggle {
   }
   button.mobileToggle {
     display: flex;
+    position: absolute;
+    top: 61px;
+    left: 12px;
     width: 28px;
     padding: 4px;
   }
@@ -213,7 +176,8 @@ button.mobileToggle {
     display: none;
     position: fixed;
     z-index: 30;
-    top: 65px;
+    top: 108px;
+    height: calc(100dvh - 108px);
     width: 232px;
     box-shadow: 12px 0 20px #0002;
   }
