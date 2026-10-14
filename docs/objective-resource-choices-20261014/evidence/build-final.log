@@ -1,0 +1,97 @@
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 34ms
+- Experiments (use with caution):
+  ⨯ turbopackFileSystemCacheForBuild
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 73s
+  Running TypeScript ...
+  Finished TypeScript in 20.4s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/24) ...
+  Generating static pages using 4 workers (6/24) 
+  Generating static pages using 4 workers (12/24) 
+  Generating static pages using 4 workers (18/24) 
+✓ Generating static pages using 4 workers (24/24) in 674ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /accept-invite
+├ ƒ /admins
+├ ƒ /api/action-followthrough/[operation]
+├ ƒ /api/backend/[service]/[...path]
+├ ƒ /api/capiro/[operation]
+├ ƒ /api/documents/[operation]
+├ ƒ /billing
+├ ƒ /calendar
+├ ƒ /clients
+├ ƒ /confirm
+├ ƒ /engagement/outreach
+├ ƒ /forms/[token]
+├ ƒ /healthz
+├ ƒ /it/[token]
+├ ƒ /it/done
+├ ƒ /it/error
+├ ƒ /legal
+├ ƒ /meri
+├ ƒ /meri/actions
+├ ƒ /meri/files
+├ ƒ /meri/fixture/cited-answer
+├ ƒ /meri/fixture/home
+├ ƒ /meri/fixture/run-activity
+├ ƒ /modules
+├ ƒ /modules/[module]
+├ ƒ /org
+├ ƒ /plan
+├ ƒ /portfolio
+├ ƒ /portfolio/[clientId]
+├ ƒ /portfolio/[clientId]/bills
+├ ƒ /portfolio/[clientId]/calendar
+├ ƒ /portfolio/[clientId]/capabilities
+├ ƒ /portfolio/[clientId]/files
+├ ƒ /portfolio/[clientId]/objectives
+├ ƒ /portfolio/[clientId]/opportunities
+├ ƒ /portfolio/[clientId]/relationships
+├ ƒ /portfolio/[clientId]/work
+├ ƒ /portfolio/prospects
+├ ƒ /portfolio/prospects/[prospectId]
+├ ƒ /register
+├ ƒ /settings/[section]
+├ ƒ /setup
+├ ƒ /sign-in/[[...sign-in]]
+└ ƒ /verify
+
+
+ƒ Proxy (Middleware)
+
+ƒ  (Dynamic)  server-rendered on demand
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

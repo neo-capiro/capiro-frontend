@@ -11,6 +11,10 @@ const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
 const previewOwner = `${appSource}shared/preview/`;
 const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
+const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
+function approvedSnapshotImport(file, entry) {
+  return file === objectiveSnapshotOwner && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
+}
 
 function approvedPricingImport(file, module, entry) {
   return file === pricingOwner && entry.specifier === '@capiro/shared'
@@ -93,7 +97,7 @@ export function inspectDependencies(file, module, files, approvedExports = publi
     const { specifier } = entry;
     if (specifier === null) { errors.push(`${file}: computed import forbidden`); continue; }
     if (/meri-greenfield|capirov2|apps\/api|^https?:|^node:/.test(specifier)) errors.push(`${file}: restricted runtime/repository import ${specifier}`);
-    if (specifier === '@capiro/shared' ? !approvedPricingImport(file, module, entry) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
+    if (specifier === '@capiro/shared' ? !(approvedPricingImport(file, module, entry) || approvedSnapshotImport(file, entry)) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
     const { local, resolved } = resolveImport(file, specifier, files);
     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
     if (!local) continue;

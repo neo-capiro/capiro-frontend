@@ -294,3 +294,51 @@ it("gateway uses configured Core /api and normal bearer; no auth means no owner 
   ).toBe(401);
   expect(fetcher).not.toHaveBeenCalled();
 });
+
+it("captures Directory owner selectors before awaiting and retains that exact navigation input", async () => {
+  const mutable = { ...query };
+  const api = createApiClient(async () => {
+    mutable.clientId = taskId;
+    mutable.objectiveId = taskId;
+    mutable.objectiveVersion = 2;
+    return Response.json(boundDirectory);
+  });
+  const href = await resolveObjectiveWork(
+    api,
+    "directory_target",
+    targetId,
+    "",
+    mutable,
+    new AbortController().signal,
+  );
+  const selected = new URL(href, "http://local.test").searchParams;
+  expect(Object.fromEntries(selected)).toEqual({
+    targetId,
+    ...query,
+    objectiveVersion: "1",
+  });
+});
+for (const status of [200, 503])
+  it(`refuses Directory ${status} continuation when captured selection is replaced`, async () => {
+    let current = true;
+    const selection = { isCurrent: () => current };
+    const api = createApiClient(async () => {
+      current = false;
+      selection.isCurrent = () => true;
+      return Response.json(
+        status === 200 ? boundDirectory : { message: "Unavailable" },
+        { status },
+      );
+    });
+    await expect(
+      resolveObjectiveWork(
+        api,
+        "directory_target",
+        targetId,
+        "",
+        query,
+        new AbortController().signal,
+        selection,
+      ),
+    ).rejects.toMatchObject({ name: "AbortError" });
+  });

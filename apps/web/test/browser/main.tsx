@@ -11,6 +11,7 @@ import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientF
 import { ObjectivesPage } from "../../src/features/portfolio/objectives/ObjectivesPage";
 import { ClientOverview } from "../../src/features/portfolio/client-profile/ClientOverview";
 import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage";
+import { ObjectiveCalendarDestination } from "../../src/features/portfolio/calendar/ObjectiveCalendarDestination";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
 import { MeriHome } from "../../src/features/meri/MeriHome";
@@ -121,7 +122,9 @@ function RoutedApp() {
     return (
       <div data-portfolio-root>
         <RequireSession>
-          <CalendarPage destinations={{}} />
+          <ObjectiveCalendarDestination>
+            <CalendarPage destinations={{}} />
+          </ObjectiveCalendarDestination>
         </RequireSession>
       </div>
     );
