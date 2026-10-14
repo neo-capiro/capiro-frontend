@@ -1,0 +1,377 @@
+{
+  "baseSource": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "qualifiedSource": "8660283cb246774921823d5a96df7a37129fef58",
+  "hashBasis": "Git index blobs; manifest itself excluded",
+  "entries": [
+    {
+      "path": "apps/web/src/features/modules/planner/AdvancedTaskFields.tsx",
+      "bytes": 3182,
+      "sha256": "3f4174172f8770d253b057e832609abf0d835914da523f187d5ad52221c34ee4"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDefinitionFields.tsx",
+      "bytes": 3351,
+      "sha256": "cacdea71210542659736ba676bee589f2c54868b4b7d4894aa386779b36e54a9"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+      "bytes": 5414,
+      "sha256": "c07e1e81bca08936650c7bd506622ff88a33c3816894087685d69f34f9f1e3a3"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorBody.tsx",
+      "bytes": 2556,
+      "sha256": "1a47f745132f3400fc76b6c31f7cf5c1847fdd7ecdba007016c2832248799d43"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorFields.tsx",
+      "bytes": 3359,
+      "sha256": "99fe98329b060276f0e60e36efc08dd9bcd73a01ba73e878d864b961e8b7ff51"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskProjectFields.tsx",
+      "bytes": 3761,
+      "sha256": "20af6008fe519f3af6100e406abed1af10425a576b8977d4cd32a28272101190"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskScheduleFields.tsx",
+      "bytes": 2130,
+      "sha256": "fad5b59114df279dffe25826d792bc833e327bb052e98b03976f2ac0f704a360"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-dialog.module.css",
+      "bytes": 2640,
+      "sha256": "e74acc80d6cba64ff78c233229771b3fc3ed08a02b386aeebd17d8cc3b2e9e0d"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-task-body.spec.ts",
+      "bytes": 12100,
+      "sha256": "4b8ea533fa933512e8159f4068aa4fdfa94a511fd2918050793d80eb4b1307c0"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-task-drawer.spec.ts",
+      "bytes": 8669,
+      "sha256": "59fbb893cd25f35fdda1f14b887acce8f75c903bdf0743320b627d5fd9bc7094"
+    },
+    {
+      "path": "apps/web/test/browser/planner-engagement.spec.ts",
+      "bytes": 15749,
+      "sha256": "80f17cb09c90db95120ed3ffff90150f8323a1aabf3b976d6cc09ce68935321f"
+    },
+    {
+      "path": "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+      "bytes": 24368,
+      "sha256": "1fd18c5bbecc2c5b9b36e38f7a4a53d44162901ba769e00761de159b2b233d07"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/BINDING-BLOCKERS.md",
+      "bytes": 2195,
+      "sha256": "65068f87de90b5a2602927160ab7a33240d07d836f76b2f6146458ad23ac405d"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/COVERAGE.json",
+      "bytes": 1199,
+      "sha256": "caadcae03b1fd6d19eda53f248f6f05bbce1029bd0bc65af727e6f3f3c9782ec"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/HANDOFF.md",
+      "bytes": 5827,
+      "sha256": "32174cf9bea702412e6efa4f39e88a6cacd4f9988261faf8ca72a8386c6c6ce3"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 3118,
+      "sha256": "f16fc4c3da5a8444cf2113e811f5050455aa7b8c52e521e92fcdd83b89594fc2"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/PLAN.md",
+      "bytes": 1725,
+      "sha256": "cccad9741d0398fd662902b587398e48b6815fc3e4ea24229ba61873ab0fb3b1"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/PRIOR-SIZE-REVIEWS.json",
+      "bytes": 2506,
+      "sha256": "db0a09f6491fb10707f455f0967dab7ac033ef1386ad45043b53a644a2a52147"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/architecture-before-review.json.gz.json",
+      "bytes": 146779,
+      "sha256": "2593e69bc6235d759ff11f33f369e2cdb845e89dd298dd49be69884678f11b98"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/architecture-final.json.gz.json",
+      "bytes": 146935,
+      "sha256": "a92c0972ef2a72b3cb35d5b6975b15002e940082a5b4415157eafd25bfe5f50c"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser-results.json.gz.json",
+      "bytes": 2689552,
+      "sha256": "65ec7add351549ab8f95699dafb68603d456ac422e68aa1609b4d0f85445fbe5"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser.log.gz.json",
+      "bytes": 4282,
+      "sha256": "add3dea93ab1aaa3f3ab59c1567e1ae0345f60856eaa5be82c0ffc528cb886a2"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "bytes": 102409,
+      "sha256": "d002b3f99539d302715c5555671e58faf34ffcc141e057817b83161d98605c66"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "bytes": 102409,
+      "sha256": "d002b3f99539d302715c5555671e58faf34ffcc141e057817b83161d98605c66"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 99915,
+      "sha256": "08452107a657f79bff7d8fbff7a55663feb9869c97e8bb82518a7dd3cdcfed30"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 100186,
+      "sha256": "1f99ad02ae5c39a1cfacce3446d7e42274959b967be847b436b0ab11ad131955"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 99915,
+      "sha256": "08452107a657f79bff7d8fbff7a55663feb9869c97e8bb82518a7dd3cdcfed30"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 100186,
+      "sha256": "1f99ad02ae5c39a1cfacce3446d7e42274959b967be847b436b0ab11ad131955"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 94666,
+      "sha256": "5e25e5e68d03701e2abb2ff597e2613d6f39e07414ae370be5390bc4782d2f2c"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 97637,
+      "sha256": "7f039042c746ea72a5a60d643f09c557fd8affd61a98f99be7b624428a527bba"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/desktop-long-description.png",
+      "bytes": 152352,
+      "sha256": "25eafa58c754a5b035a4a8c09894ca445ab47d61d0ff89677f75e576765fd521"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 94666,
+      "sha256": "5e25e5e68d03701e2abb2ff597e2613d6f39e07414ae370be5390bc4782d2f2c"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 97637,
+      "sha256": "7f039042c746ea72a5a60d643f09c557fd8affd61a98f99be7b624428a527bba"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/desktop-long-description.png",
+      "bytes": 152352,
+      "sha256": "25eafa58c754a5b035a4a8c09894ca445ab47d61d0ff89677f75e576765fd521"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 108245,
+      "sha256": "3b2955d884e035555b92b185a87dedcc621cb58e2f58f13d528541981f365ad4"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 108245,
+      "sha256": "3b2955d884e035555b92b185a87dedcc621cb58e2f58f13d528541981f365ad4"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151948,
+      "sha256": "2aba53932a87eae7db57f3272cb1484ac88fc48fddc665f19608b6f94ac7ad4b"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151948,
+      "sha256": "2aba53932a87eae7db57f3272cb1484ac88fc48fddc665f19608b6f94ac7ad4b"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/next-modules-scope-Calenda-696ed-orts-partial-empty-coverage/independent-feeds.png",
+      "bytes": 128386,
+      "sha256": "6bb87a15064b8775d93e013d08e95efcefb92b149526c12740b99ca0b8daff7c"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/browser/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "bytes": 107757,
+      "sha256": "f24440c82a78086b9a3dcde3ae837c2256e4f67d5a1a5ec79f96742f553c41a7"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/build.log.gz.json",
+      "bytes": 1397,
+      "sha256": "ef3f6050dc42e5e85e7f993ff8caa458d3cbcda5de0e5ea638b78663e3577bc8"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/check-duplicate-review.log.gz.json",
+      "bytes": 153943,
+      "sha256": "4254854f291242f677669eb236dbee362b6380c12381f68dbc57a94fa681015f"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/check.log.gz.json",
+      "bytes": 168564,
+      "sha256": "b321f6646203d40b1acfb8795501a80423a8638ed4784a20fd7cc8f5959dd4a0"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/pre-review/browser.log.gz.json",
+      "bytes": 2069,
+      "sha256": "c52feef3ef0da5ab3a71dc9aa597c274c37322991faa568a054b7fc3b569e7ae"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone.log.gz.json",
+      "bytes": 1969,
+      "sha256": "4806d086330b27e1da6ac6377bdd83b5b2db70a3e459539b88c417233bd5d564"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-1440-dark.png",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-1440-light.png",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-390-dark.png",
+      "bytes": 52486,
+      "sha256": "1eece3d52085b716f3e73ae3311e65b17d2d944e7ed1a9ea217e2889d55a3ba3"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-390-light.png",
+      "bytes": 26099,
+      "sha256": "e634b78347bffa29323c5871d502eebdd0894757f25225ae403f22093e63c520"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-error-1440-dark.png",
+      "bytes": 204767,
+      "sha256": "d848d5e0714f7b3d1761efd60b8f4e5bf281d66a57cbad68e522ea0d57c3d310"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-error-1440-light.png",
+      "bytes": 111179,
+      "sha256": "c94e064dabb5285f9e053bdb330a9183f5ae1d7fc69ecbac8e354e723879eaee"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-error-390-dark.png",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-error-390-light.png",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-files-1440-dark.png",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-files-1440-light.png",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/standalone/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/desktop-task-body-20261014/types.log.gz.json",
+      "bytes": 384,
+      "sha256": "0a31f60cd1652bbbb7f789e2e6021a10bd8c190aaa561a782ec6807ef8ae5a19"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 211307,
+      "sha256": "6a82de957a4b7aecb4a9133220a5dd11fd94edcd141fc6ce796b00e95cf6f643"
+    }
+  ]
+}

@@ -21,6 +21,8 @@ import dialogStyles from "./task-dialog.module.css";
 import { assigneeName, dayLabel, minutesLabel } from "./task-presentation";
 import { TaskAttachments } from "./TaskAttachments";
 import { TaskEditor } from "./TaskEditor";
+import { TaskDetailFields } from "./TaskDetailFields";
+import detailStyles from "./task-detail.module.css";
 import { AddTimeDialog } from "./TimeDialogs";
 type Props = {
   task: PlannerTask;
@@ -104,16 +106,29 @@ export function TaskDetail(props: Props) {
   return (
     <>
       <Modal
-        className={dialogStyles.taskDialog}
+        className={`${dialogStyles.taskDialog} ${detailStyles.dialog}`}
         open
         onOpenChange={(open) => {
           if (!open) props.onClose();
         }}
         title={props.task.name}
         description={props.task.description || "Task details"}
+        footer={
+          <div className={detailStyles.footerActions}>
+            <TaskDetailActions props={props} model={m} />
+            <ActionButton onClick={props.onClose}>Close</ActionButton>
+          </div>
+        }
       >
         <div className={styles.drawerContent}>
-          <TaskSummary props={props} model={m} />
+          <div className={detailStyles.legacySummary}>
+            <TaskSummary props={props} model={m} />
+          </div>
+          <TaskDetailFields
+            task={props.task}
+            people={props.people}
+            projects={props.projects}
+          />
           <SubtaskPanel model={m} />
           <TaskAttachments
             taskId={props.task.id}
@@ -166,19 +181,7 @@ function TaskSummary({ props, model: m }: { props: Props; model: Model }) {
   return (
     <>
       <div className={styles.tools}>
-        <Badge>{task.status.replaceAll("_", " ")}</Badge>
-        <Badge tone={task.priority === "high" ? "danger" : "neutral"}>
-          {task.priority}
-        </Badge>
-        <ActionButton disabled={!m.writable} onClick={() => m.setEdit(true)}>
-          Edit task
-        </ActionButton>
-        <ActionButton
-          disabled={!m.writable || m.busy}
-          onClick={() => void m.archive()}
-        >
-          {task.archived ? "Restore" : "Archive"}
-        </ActionButton>
+        <TaskDetailActions props={props} model={m} />
       </div>
       <dl className={styles.miniGrid}>
         <div>
@@ -281,6 +284,33 @@ function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
           Post comment
         </ActionButton>
       </form>
+    </>
+  );
+}
+
+function TaskDetailActions({
+  props,
+  model: m,
+}: {
+  props: Props;
+  model: Model;
+}) {
+  const task = props.task;
+  return (
+    <>
+      <Badge>{task.status.replaceAll("_", " ")}</Badge>
+      <Badge tone={task.priority === "high" ? "danger" : "neutral"}>
+        {task.priority}
+      </Badge>
+      <ActionButton disabled={!m.writable} onClick={() => m.setEdit(true)}>
+        Edit task
+      </ActionButton>
+      <ActionButton
+        disabled={!m.writable || m.busy}
+        onClick={() => void m.archive()}
+      >
+        {task.archived ? "Restore" : "Archive"}
+      </ActionButton>
     </>
   );
 }

@@ -1872,15 +1872,6 @@
     "reviewedOn": "2026-10-13"
   },
   {
-    "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
-    "kind": "function",
-    "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0",
-    "reason": "Owns the ordinary Engagement screen: tab/scope selection, existing client/meeting reads and composition of separately owned child workflows. The new outer EngagementScreen separates rich route discrimination before these queries mount; this function contains no rich document retrieval, persistence, renderer or dispatch implementation. The keyed Outreach child disposes selection on destination replacement. The 130-line body is predominantly existing tab composition; splitting it solely for size would obscure the single screen lifetime. See docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md#ordinaryengagementscreen.",
-    "reviewedBy": "Codex independent modules_settings_review",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachForm",
@@ -2622,17 +2613,44 @@
     "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
     "kind": "function",
     "symbol": "TaskForm",
-    "fingerprint": "5640d80741e257a4ed259e435e9408bc2e1aa0a17be1888b531f666500945666",
-    "reason": "Independent merged-source review accepted the same task draft/versioned mutation/pending/error/form presentation owner. Exact PR44 synchronous pending ref and owner-token cleanup, native fieldset and all six explicit Select disabled controls remain. Feature-local content/footer layout adds no API, serialization or authority responsibility; canonical transport/lifetime remains unchanged. See docs/desktop-details-20261014/INDEPENDENT-REVIEW.md.",
+    "fingerprint": "e1f6859972da30b1c2157a7c22dd38a001947b634d84e1412aebbcb603ad4422",
+    "reason": "One canonical task draft/versioned mutation/pending/error controller remains mounted above viewport presentation; delegates field implementation and preserves membership IDs/positions. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+    "file": "apps/web/src/features/modules/planner/TaskProjectFields.tsx",
     "kind": "function",
-    "symbol": "TaskScheduleFields",
-    "fingerprint": "a5b4fb710f1c8a35bcf53061230b202d7c3790b25a3581605ce77867fcc6bea4",
-    "reason": "Independent merged-source review accepted the same approved PR44 civil start/due/time-zone/status/priority/estimate controls and explicit disabled prop. No new state, transport or domain responsibility. See docs/desktop-details-20261014/INDEPENDENT-REVIEW.md.",
+    "symbol": "TaskProjectFields",
+    "fingerprint": "d51836f3ec58dff66f02f5e8a33f4cf515b48880e06f67da3644fd5911c8d679",
+    "reason": "Canonical project membership/section presentation with explicit current project edit walls, saved unavailable preservation and desktop-only admission; no service or authority responsibility. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailFields",
+    "fingerprint": "27695f2eb100f5e4adc0433ad401b9269a35203c89f03e2b46f4632f9e766cab",
+    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+    "kind": "function",
+    "symbol": "EngagementOverview",
+    "fingerprint": "b59c0963a35421238b31cff2646a324b1ba4f3fac4fa8117461c1117414c6ef9",
+    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "kind": "function",
+    "symbol": "OrdinaryEngagementScreen",
+    "fingerprint": "849de8e656b06ae97fbe90b3d9504cd046666071787ca843995f66c26d20f9b3",
+    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
   },
