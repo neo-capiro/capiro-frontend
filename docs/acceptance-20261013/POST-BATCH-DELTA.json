@@ -324,6 +324,44 @@
       "modulesMeriPassed": 507,
       "skipped": 0,
       "flaky": 0
+    },
+    {
+      "batch": "desktop-details-20261014",
+      "qualifiedSource": "8de8d0ebefa61b4c97e442c87ce9b6f3ec42f772",
+      "baseSource": "20568813c9dc9ce161962e159e0a3751a196195c",
+      "integratedPR44Source": "bded987746d1f1a263bb4209c90b21ac5c978f40",
+      "scope": "Desktop Planner drawer/long-content/footer and pending-save controls; Objective/Engagement captures only",
+      "modulesDesktopSharedPassed": 79,
+      "portfolioCapturePassed": 4,
+      "skipped": 0,
+      "flaky": 0,
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "activeObjectiveFullpageParity": "OPEN_NOT_IMPLEMENTED",
+      "mobileParity": "DEFERRED_PR43_EXCLUDED",
+      "evidence": "../desktop-details-20261014/HANDOFF.md"
+    }
+  ],
+  "local_execution_batches": [
+    {
+      "batch": "planner-pending-save-20261014",
+      "baseSource": "ee9d872743f44f927fa924eebd764da8e093888c",
+      "evidence": "docs/planner-pending-save-20261014/HANDOFF.md",
+      "audit_ids": [
+        "ENG-tasks_create",
+        "ENG-tasks_update",
+        "CORE-001",
+        "CORE-012",
+        "CORE-098"
+      ],
+      "status": "LOCAL_FIXTURE_SUBCRITERIA_EXECUTED_NATIVE_OPEN",
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "localEvidence": {
+        "Modules": "6 Playwright cases: required-name validation, held create rejection, native and all six Radix controls frozen, dismissal fenced at1440/390; create/edit/versioned-write/reload/reopening via stateful local fixture; existing Planner views, Engagement tabs/notes, template deep link",
+        "Portfolio": "15 existing Playwright cases: lists/filters/loading/retry/permission/session errors, intake chooser focus, saved catalog Customize/filter restoration, mobile save and unavailable order honesty"
+      },
+      "remaining_native_criteria": "No signed-in live API, backend persistence, receiving-route/config/data binding, role/client/account transitions, selected Figma full acceptance or Meri runtime qualification performed. ENG task lineage to clientfollowup remains owner-dependent. Synthetic local persistence is not service persistence. Preserve all original row criteria and OPEN_FINAL_ACCEPTANCE states."
     }
   ]
 }

@@ -19,4 +19,8 @@ export type Draft = Pick<
   | "dependencies"
   | "recurrence"
 >;
-export type TaskFormModel = { data: Draft; setData: (data: Draft) => void };
+export type TaskFormModel = {
+  data: Draft;
+  setData: (data: Draft) => void;
+  disabled?: boolean;
+};

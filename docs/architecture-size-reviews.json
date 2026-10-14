@@ -1532,15 +1532,15 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/AdvancedTaskFields.tsx",
-    "sha256": "7deae059fa6eab313299076d510e99a33e37d835eca18fa0e44bbe73927fea82",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "AdvancedTaskFields.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "7ebf5571844b4e3598cbbcd5dfacb6929b3f7146578e39691ca08a5a19dded72",
+    "reviewer": "Codex independent outreach_review",
+    "reviewedAt": "2026-10-14",
+    "evidence": "docs/planner-pending-save-20261014/INDEPENDENT-REVIEW.md",
+    "rationale": "Existing canonical Planner draft, schedule and advanced presentation owners remain cohesive. Independent reviewer accepted explicit disabled propagation to all Radix Selects after mounted pointer repro, with no transport, schema or authorization responsibility added.",
     "functions": [
       {
         "name": "TaskDefinition",
-        "nonblankLines": 102
+        "nonblankLines": 105
       }
     ],
     "signals": [
@@ -1792,19 +1792,19 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
-    "sha256": "d17c8c4e548367517466f5d0fc2ce42f2ad4029e9659461f82390ca0c32c1e1a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TaskEditor.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "00f2b9694fb5caaa8654af98a1a803d27c98045edcaa9e6cb9bd82a9418176f4",
+    "reviewer": "Codex independent outreach_review",
+    "reviewedAt": "2026-10-14",
+    "evidence": "docs/planner-pending-save-20261014/INDEPENDENT-REVIEW.md",
+    "rationale": "Existing canonical Planner draft, schedule and advanced presentation owners remain cohesive. Independent reviewer accepted explicit disabled propagation to all Radix Selects after mounted pointer repro, with no transport, schema or authorization responsibility added.",
     "functions": [
       {
         "name": "TaskForm",
-        "nonblankLines": 95
+        "nonblankLines": 106
       },
       {
         "name": "TaskScheduleFields",
-        "nonblankLines": 106
+        "nonblankLines": 108
       }
     ],
     "signals": [
@@ -3733,14 +3733,14 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/planner.module.css",
-    "sha256": "9221305dabbe776b1cf6b484087f47e7be9197029186ff8e1f39fc41f09e8d05",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "Canonical Planner presentation stylesheet gains only client group card/header/table geometry. Public form card styling is in its own public-form.module.css owner because its public page differs from authenticated Planner. No global/common override. Final automatic table layout honors name/metadata cell widths with visually hidden semantic headers; fixed layout had incorrectly equalized columns.",
+    "sha256": "31d1a6775ce2df8569d8b239c9161c6078f49cb8dacafdec5b35ff210a1b4165",
+    "reviewer": "Codex independent outreach_review",
+    "reviewedAt": "2026-10-14",
+    "evidence": "docs/planner-pending-save-20261014/INDEPENDENT-REVIEW.md",
+    "rationale": "Existing canonical Planner editor lifecycle and presentation remain cohesive; independent review accepted pending dispatch/dismissal ownership, identity-token settlement guard, unchanged typed service boundary, and existing layout preservation.",
     "functions": [],
     "signals": [
-      "apps/web/src/features/modules/planner/planner.module.css: 441 nonblank lines require review"
+      "apps/web/src/features/modules/planner/planner.module.css: 450 nonblank lines require review"
     ]
   },
   {

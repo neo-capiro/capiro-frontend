@@ -17,6 +17,7 @@ import {
   TextArea,
 } from "../../../shared/module-ui";
 import styles from "./planner.module.css";
+import dialogStyles from "./task-dialog.module.css";
 import { assigneeName, dayLabel, minutesLabel } from "./task-presentation";
 import { TaskAttachments } from "./TaskAttachments";
 import { TaskEditor } from "./TaskEditor";
@@ -103,6 +104,7 @@ export function TaskDetail(props: Props) {
   return (
     <>
       <Modal
+        className={dialogStyles.taskDialog}
         open
         onOpenChange={(open) => {
           if (!open) props.onClose();
