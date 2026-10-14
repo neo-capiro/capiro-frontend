@@ -1,0 +1,400 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-meri-phone-parity-20261014/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "meri-phone-parity.spec.ts"
+    ],
+    "configFile": "/workspace/capiro-meri-phone-parity-20261014/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-meri-phone-parity-20261014/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-meri-phone-parity-20261014/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-meri-phone-parity-20261014/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-meri-phone-parity-20261014/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "meri-phone-parity.spec.ts",
+      "file": "meri-phone-parity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "explicit Meri fixture 1440 light exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2320,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:26.863Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJzY29wZSI6IHsKICAgICJ4IjogMjYwLAogICAgInkiOiA5MywKICAgICJ3aWR0aCI6IDEwMi41MTU2MjUsCiAgICAiaGVpZ2h0IjogMzYsCiAgICAidG9wIjogOTMsCiAgICAicmlnaHQiOiAzNjIuNTE1NjI1LAogICAgImJvdHRvbSI6IDEyOSwKICAgICJsZWZ0IjogMjYwCiAgfSwKICAiaGVhZGluZyI6IHsKICAgICJ4IjogNDc4LAogICAgInkiOiAyNzksCiAgICAid2lkdGgiOiA3MTYsCiAgICAiaGVpZ2h0IjogNDQsCiAgICAidG9wIjogMjc5LAogICAgInJpZ2h0IjogMTE5NCwKICAgICJib3R0b20iOiAzMjMsCiAgICAibGVmdCI6IDQ3OAogIH0sCiAgInRleHRhcmVhIjogewogICAgIngiOiA0OTUsCiAgICAieSI6IDQwMC4zOTA2MjUsCiAgICAid2lkdGgiOiA2ODIsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiA0MDAuMzkwNjI1LAogICAgInJpZ2h0IjogMTE3NywKICAgICJib3R0b20iOiA0MjIuODkwNjI1LAogICAgImxlZnQiOiA0OTUKICB9LAogICJjb21wb3NlciI6IHsKICAgICJ4IjogNDc4LAogICAgInkiOiAzODMuMzkwNjI1LAogICAgIndpZHRoIjogNzE2LAogICAgImhlaWdodCI6IDEzMC43OTY4NzUsCiAgICAidG9wIjogMzgzLjM5MDYyNSwKICAgICJyaWdodCI6IDExOTQsCiAgICAiYm90dG9tIjogNTE0LjE4NzUsCiAgICAibGVmdCI6IDQ3OAogIH0sCiAgInN1Z2dlc3Rpb25zIjogewogICAgIngiOiA0NzksCiAgICAieSI6IDUzOC4xODc1LAogICAgIndpZHRoIjogNzE0LAogICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICJ0b3AiOiA1MzguMTg3NSwKICAgICJyaWdodCI6IDExOTMsCiAgICAiYm90dG9tIjogNjUzLjI4MTI1LAogICAgImxlZnQiOiA0NzkKICB9LAogICJjYXJkcyI6IFsKICAgIHsKICAgICAgIngiOiA0NzksCiAgICAgICJ5IjogNTM4LjE4NzUsCiAgICAgICJ3aWR0aCI6IDIzMCwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDUzOC4xODc1LAogICAgICAicmlnaHQiOiA3MDksCiAgICAgICJib3R0b20iOiA2NTMuMjgxMjUsCiAgICAgICJsZWZ0IjogNDc5CiAgICB9LAogICAgewogICAgICAieCI6IDcyMSwKICAgICAgInkiOiA1MzguMTg3NSwKICAgICAgIndpZHRoIjogMjMwLAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNTM4LjE4NzUsCiAgICAgICJyaWdodCI6IDk1MSwKICAgICAgImJvdHRvbSI6IDY1My4yODEyNSwKICAgICAgImxlZnQiOiA3MjEKICAgIH0sCiAgICB7CiAgICAgICJ4IjogOTYzLAogICAgICAieSI6IDUzOC4xODc1LAogICAgICAid2lkdGgiOiAyMzAsCiAgICAgICJoZWlnaHQiOiAxMTUuMDkzNzUsCiAgICAgICJ0b3AiOiA1MzguMTg3NSwKICAgICAgInJpZ2h0IjogMTE5MywKICAgICAgImJvdHRvbSI6IDY1My4yODEyNSwKICAgICAgImxlZnQiOiA5NjMKICAgIH0KICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-ad8f35f102fc74f63ca3",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "explicit Meri fixture 1440 dark exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2370,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:29.428Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogMTA0MAogIH0sCiAgIm92ZXJmbG93IjogZmFsc2UsCiAgImhlYWRlciI6IHsKICAgICJ4IjogMCwKICAgICJ5IjogMCwKICAgICJ3aWR0aCI6IDE0NDAsCiAgICAiaGVpZ2h0IjogNjUsCiAgICAidG9wIjogMCwKICAgICJyaWdodCI6IDE0NDAsCiAgICAiYm90dG9tIjogNjUsCiAgICAibGVmdCI6IDAKICB9LAogICJzY29wZSI6IHsKICAgICJ4IjogMjYwLAogICAgInkiOiA5MywKICAgICJ3aWR0aCI6IDEwMi41MTU2MjUsCiAgICAiaGVpZ2h0IjogMzYsCiAgICAidG9wIjogOTMsCiAgICAicmlnaHQiOiAzNjIuNTE1NjI1LAogICAgImJvdHRvbSI6IDEyOSwKICAgICJsZWZ0IjogMjYwCiAgfSwKICAiaGVhZGluZyI6IHsKICAgICJ4IjogNDc4LAogICAgInkiOiAyNzksCiAgICAid2lkdGgiOiA3MTYsCiAgICAiaGVpZ2h0IjogNDQsCiAgICAidG9wIjogMjc5LAogICAgInJpZ2h0IjogMTE5NCwKICAgICJib3R0b20iOiAzMjMsCiAgICAibGVmdCI6IDQ3OAogIH0sCiAgInRleHRhcmVhIjogewogICAgIngiOiA0OTUsCiAgICAieSI6IDQwMC4zOTA2MjUsCiAgICAid2lkdGgiOiA2ODIsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiA0MDAuMzkwNjI1LAogICAgInJpZ2h0IjogMTE3NywKICAgICJib3R0b20iOiA0MjIuODkwNjI1LAogICAgImxlZnQiOiA0OTUKICB9LAogICJjb21wb3NlciI6IHsKICAgICJ4IjogNDc4LAogICAgInkiOiAzODMuMzkwNjI1LAogICAgIndpZHRoIjogNzE2LAogICAgImhlaWdodCI6IDEzMC43OTY4NzUsCiAgICAidG9wIjogMzgzLjM5MDYyNSwKICAgICJyaWdodCI6IDExOTQsCiAgICAiYm90dG9tIjogNTE0LjE4NzUsCiAgICAibGVmdCI6IDQ3OAogIH0sCiAgInN1Z2dlc3Rpb25zIjogewogICAgIngiOiA0NzksCiAgICAieSI6IDUzOC4xODc1LAogICAgIndpZHRoIjogNzE0LAogICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICJ0b3AiOiA1MzguMTg3NSwKICAgICJyaWdodCI6IDExOTMsCiAgICAiYm90dG9tIjogNjUzLjI4MTI1LAogICAgImxlZnQiOiA0NzkKICB9LAogICJjYXJkcyI6IFsKICAgIHsKICAgICAgIngiOiA0NzksCiAgICAgICJ5IjogNTM4LjE4NzUsCiAgICAgICJ3aWR0aCI6IDIzMCwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDUzOC4xODc1LAogICAgICAicmlnaHQiOiA3MDksCiAgICAgICJib3R0b20iOiA2NTMuMjgxMjUsCiAgICAgICJsZWZ0IjogNDc5CiAgICB9LAogICAgewogICAgICAieCI6IDcyMSwKICAgICAgInkiOiA1MzguMTg3NSwKICAgICAgIndpZHRoIjogMjMwLAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNTM4LjE4NzUsCiAgICAgICJyaWdodCI6IDk1MSwKICAgICAgImJvdHRvbSI6IDY1My4yODEyNSwKICAgICAgImxlZnQiOiA3MjEKICAgIH0sCiAgICB7CiAgICAgICJ4IjogOTYzLAogICAgICAieSI6IDUzOC4xODc1LAogICAgICAid2lkdGgiOiAyMzAsCiAgICAgICJoZWlnaHQiOiAxMTUuMDkzNzUsCiAgICAgICJ0b3AiOiA1MzguMTg3NSwKICAgICAgInJpZ2h0IjogMTE5MywKICAgICAgImJvdHRvbSI6IDY1My4yODEyNSwKICAgICAgImxlZnQiOiA5NjMKICAgIH0KICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-47c55a31b6306508eff6",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "explicit Meri fixture 390 light exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2200,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:31.810Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAic2NvcGUiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAxNzAsCiAgICAid2lkdGgiOiAxMDIuNTE1NjI1LAogICAgImhlaWdodCI6IDM2LAogICAgInRvcCI6IDE3MCwKICAgICJyaWdodCI6IDExOC41MTU2MjUsCiAgICAiYm90dG9tIjogMjA2LAogICAgImxlZnQiOiAxNgogIH0sCiAgImhlYWRpbmciOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAyODYsCiAgICAid2lkdGgiOiAzNTgsCiAgICAiaGVpZ2h0IjogMzMsCiAgICAidG9wIjogMjg2LAogICAgInJpZ2h0IjogMzc0LAogICAgImJvdHRvbSI6IDMxOSwKICAgICJsZWZ0IjogMTYKICB9LAogICJ0ZXh0YXJlYSI6IHsKICAgICJ4IjogMzMsCiAgICAieSI6IDM5Mi43OTY4NzUsCiAgICAid2lkdGgiOiAzMjQsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiAzOTIuNzk2ODc1LAogICAgInJpZ2h0IjogMzU3LAogICAgImJvdHRvbSI6IDQxNS4yOTY4NzUsCiAgICAibGVmdCI6IDMzCiAgfSwKICAiY29tcG9zZXIiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAzNzUuNzk2ODc1LAogICAgIndpZHRoIjogMzU4LAogICAgImhlaWdodCI6IDEzMC43OTY4NzUsCiAgICAidG9wIjogMzc1Ljc5Njg3NSwKICAgICJyaWdodCI6IDM3NCwKICAgICJib3R0b20iOiA1MDYuNTkzNzUsCiAgICAibGVmdCI6IDE2CiAgfSwKICAic3VnZ2VzdGlvbnMiOiB7CiAgICAieCI6IDE3LAogICAgInkiOiA1MzAuNTkzNzUsCiAgICAid2lkdGgiOiAzNTYsCiAgICAiaGVpZ2h0IjogMzY5LjI4MTI1LAogICAgInRvcCI6IDUzMC41OTM3NSwKICAgICJyaWdodCI6IDM3MywKICAgICJib3R0b20iOiA4OTkuODc1LAogICAgImxlZnQiOiAxNwogIH0sCiAgImNhcmRzIjogWwogICAgewogICAgICAieCI6IDE3LAogICAgICAieSI6IDUzMC41OTM3NSwKICAgICAgIndpZHRoIjogMzU2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNTMwLjU5Mzc1LAogICAgICAicmlnaHQiOiAzNzMsCiAgICAgICJib3R0b20iOiA2NDUuNjg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA2NTcuNjg3NSwKICAgICAgIndpZHRoIjogMzU2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNjU3LjY4NzUsCiAgICAgICJyaWdodCI6IDM3MywKICAgICAgImJvdHRvbSI6IDc3Mi43ODEyNSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA3ODQuNzgxMjUsCiAgICAgICJ3aWR0aCI6IDM1NiwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDc4NC43ODEyNSwKICAgICAgInJpZ2h0IjogMzczLAogICAgICAiYm90dG9tIjogODk5Ljg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-5f8b01d69bc2b3020fd7",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "explicit Meri fixture 390 dark exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2117,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:34.021Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDM5MCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzOTAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzOTAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAic2NvcGUiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAxNzAsCiAgICAid2lkdGgiOiAxMDIuNTE1NjI1LAogICAgImhlaWdodCI6IDM2LAogICAgInRvcCI6IDE3MCwKICAgICJyaWdodCI6IDExOC41MTU2MjUsCiAgICAiYm90dG9tIjogMjA2LAogICAgImxlZnQiOiAxNgogIH0sCiAgImhlYWRpbmciOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAyODYsCiAgICAid2lkdGgiOiAzNTgsCiAgICAiaGVpZ2h0IjogMzMsCiAgICAidG9wIjogMjg2LAogICAgInJpZ2h0IjogMzc0LAogICAgImJvdHRvbSI6IDMxOSwKICAgICJsZWZ0IjogMTYKICB9LAogICJ0ZXh0YXJlYSI6IHsKICAgICJ4IjogMzMsCiAgICAieSI6IDM5Mi43OTY4NzUsCiAgICAid2lkdGgiOiAzMjQsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiAzOTIuNzk2ODc1LAogICAgInJpZ2h0IjogMzU3LAogICAgImJvdHRvbSI6IDQxNS4yOTY4NzUsCiAgICAibGVmdCI6IDMzCiAgfSwKICAiY29tcG9zZXIiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAzNzUuNzk2ODc1LAogICAgIndpZHRoIjogMzU4LAogICAgImhlaWdodCI6IDEzMC43OTY4NzUsCiAgICAidG9wIjogMzc1Ljc5Njg3NSwKICAgICJyaWdodCI6IDM3NCwKICAgICJib3R0b20iOiA1MDYuNTkzNzUsCiAgICAibGVmdCI6IDE2CiAgfSwKICAic3VnZ2VzdGlvbnMiOiB7CiAgICAieCI6IDE3LAogICAgInkiOiA1MzAuNTkzNzUsCiAgICAid2lkdGgiOiAzNTYsCiAgICAiaGVpZ2h0IjogMzY5LjI4MTI1LAogICAgInRvcCI6IDUzMC41OTM3NSwKICAgICJyaWdodCI6IDM3MywKICAgICJib3R0b20iOiA4OTkuODc1LAogICAgImxlZnQiOiAxNwogIH0sCiAgImNhcmRzIjogWwogICAgewogICAgICAieCI6IDE3LAogICAgICAieSI6IDUzMC41OTM3NSwKICAgICAgIndpZHRoIjogMzU2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNTMwLjU5Mzc1LAogICAgICAicmlnaHQiOiAzNzMsCiAgICAgICJib3R0b20iOiA2NDUuNjg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA2NTcuNjg3NSwKICAgICAgIndpZHRoIjogMzU2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogNjU3LjY4NzUsCiAgICAgICJyaWdodCI6IDM3MywKICAgICAgImJvdHRvbSI6IDc3Mi43ODEyNSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA3ODQuNzgxMjUsCiAgICAgICJ3aWR0aCI6IDM1NiwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDc4NC43ODEyNSwKICAgICAgInJpZ2h0IjogMzczLAogICAgICAiYm90dG9tIjogODk5Ljg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-d01aac6fa8bbbc0a17ee",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "explicit Meri fixture 320 light exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2059,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:36.146Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDMyMCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzMjAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzMjAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAic2NvcGUiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAxOTksCiAgICAid2lkdGgiOiAxMDIuNTE1NjI1LAogICAgImhlaWdodCI6IDM2LAogICAgInRvcCI6IDE5OSwKICAgICJyaWdodCI6IDExOC41MTU2MjUsCiAgICAiYm90dG9tIjogMjM1LAogICAgImxlZnQiOiAxNgogIH0sCiAgImhlYWRpbmciOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAzNDcsCiAgICAid2lkdGgiOiAyODgsCiAgICAiaGVpZ2h0IjogNjYsCiAgICAidG9wIjogMzQ3LAogICAgInJpZ2h0IjogMzA0LAogICAgImJvdHRvbSI6IDQxMywKICAgICJsZWZ0IjogMTYKICB9LAogICJ0ZXh0YXJlYSI6IHsKICAgICJ4IjogMzMsCiAgICAieSI6IDQ4Ni43OTY4NzUsCiAgICAid2lkdGgiOiAyNTQsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiA0ODYuNzk2ODc1LAogICAgInJpZ2h0IjogMjg3LAogICAgImJvdHRvbSI6IDUwOS4yOTY4NzUsCiAgICAibGVmdCI6IDMzCiAgfSwKICAiY29tcG9zZXIiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiA0NjkuNzk2ODc1LAogICAgIndpZHRoIjogMjg4LAogICAgImhlaWdodCI6IDE4OS4wOTM3NSwKICAgICJ0b3AiOiA0NjkuNzk2ODc1LAogICAgInJpZ2h0IjogMzA0LAogICAgImJvdHRvbSI6IDY1OC44OTA2MjUsCiAgICAibGVmdCI6IDE2CiAgfSwKICAic3VnZ2VzdGlvbnMiOiB7CiAgICAieCI6IDE3LAogICAgInkiOiA2ODIuODkwNjI1LAogICAgIndpZHRoIjogMjg2LAogICAgImhlaWdodCI6IDM2OS4yODEyNSwKICAgICJ0b3AiOiA2ODIuODkwNjI1LAogICAgInJpZ2h0IjogMzAzLAogICAgImJvdHRvbSI6IDEwNTIuMTcxODc1LAogICAgImxlZnQiOiAxNwogIH0sCiAgImNhcmRzIjogWwogICAgewogICAgICAieCI6IDE3LAogICAgICAieSI6IDY4Mi44OTA2MjUsCiAgICAgICJ3aWR0aCI6IDI4NiwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDY4Mi44OTA2MjUsCiAgICAgICJyaWdodCI6IDMwMywKICAgICAgImJvdHRvbSI6IDc5Ny45ODQzNzUsCiAgICAgICJsZWZ0IjogMTcKICAgIH0sCiAgICB7CiAgICAgICJ4IjogMTcsCiAgICAgICJ5IjogODA5Ljk4NDM3NSwKICAgICAgIndpZHRoIjogMjg2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogODA5Ljk4NDM3NSwKICAgICAgInJpZ2h0IjogMzAzLAogICAgICAiYm90dG9tIjogOTI1LjA3ODEyNSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA5MzcuMDc4MTI1LAogICAgICAid2lkdGgiOiAyODYsCiAgICAgICJoZWlnaHQiOiAxMTUuMDkzNzUsCiAgICAgICJ0b3AiOiA5MzcuMDc4MTI1LAogICAgICAicmlnaHQiOiAzMDMsCiAgICAgICJib3R0b20iOiAxMDUyLjE3MTg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-d7e3d65900f82b669959",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "explicit Meri fixture 320 dark exact phone comparison",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2133,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:38.213Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "geometry.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJ2aWV3cG9ydCI6IHsKICAgICJ3aWR0aCI6IDMyMCwKICAgICJoZWlnaHQiOiA4NDQKICB9LAogICJvdmVyZmxvdyI6IGZhbHNlLAogICJoZWFkZXIiOiB7CiAgICAieCI6IDAsCiAgICAieSI6IDAsCiAgICAid2lkdGgiOiAzMjAsCiAgICAiaGVpZ2h0IjogMTA4LAogICAgInRvcCI6IDAsCiAgICAicmlnaHQiOiAzMjAsCiAgICAiYm90dG9tIjogMTA4LAogICAgImxlZnQiOiAwCiAgfSwKICAic2NvcGUiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAxOTksCiAgICAid2lkdGgiOiAxMDIuNTE1NjI1LAogICAgImhlaWdodCI6IDM2LAogICAgInRvcCI6IDE5OSwKICAgICJyaWdodCI6IDExOC41MTU2MjUsCiAgICAiYm90dG9tIjogMjM1LAogICAgImxlZnQiOiAxNgogIH0sCiAgImhlYWRpbmciOiB7CiAgICAieCI6IDE2LAogICAgInkiOiAzNDcsCiAgICAid2lkdGgiOiAyODgsCiAgICAiaGVpZ2h0IjogNjYsCiAgICAidG9wIjogMzQ3LAogICAgInJpZ2h0IjogMzA0LAogICAgImJvdHRvbSI6IDQxMywKICAgICJsZWZ0IjogMTYKICB9LAogICJ0ZXh0YXJlYSI6IHsKICAgICJ4IjogMzMsCiAgICAieSI6IDQ4Ni43OTY4NzUsCiAgICAid2lkdGgiOiAyNTQsCiAgICAiaGVpZ2h0IjogMjIuNSwKICAgICJ0b3AiOiA0ODYuNzk2ODc1LAogICAgInJpZ2h0IjogMjg3LAogICAgImJvdHRvbSI6IDUwOS4yOTY4NzUsCiAgICAibGVmdCI6IDMzCiAgfSwKICAiY29tcG9zZXIiOiB7CiAgICAieCI6IDE2LAogICAgInkiOiA0NjkuNzk2ODc1LAogICAgIndpZHRoIjogMjg4LAogICAgImhlaWdodCI6IDE4OS4wOTM3NSwKICAgICJ0b3AiOiA0NjkuNzk2ODc1LAogICAgInJpZ2h0IjogMzA0LAogICAgImJvdHRvbSI6IDY1OC44OTA2MjUsCiAgICAibGVmdCI6IDE2CiAgfSwKICAic3VnZ2VzdGlvbnMiOiB7CiAgICAieCI6IDE3LAogICAgInkiOiA2ODIuODkwNjI1LAogICAgIndpZHRoIjogMjg2LAogICAgImhlaWdodCI6IDM2OS4yODEyNSwKICAgICJ0b3AiOiA2ODIuODkwNjI1LAogICAgInJpZ2h0IjogMzAzLAogICAgImJvdHRvbSI6IDEwNTIuMTcxODc1LAogICAgImxlZnQiOiAxNwogIH0sCiAgImNhcmRzIjogWwogICAgewogICAgICAieCI6IDE3LAogICAgICAieSI6IDY4Mi44OTA2MjUsCiAgICAgICJ3aWR0aCI6IDI4NiwKICAgICAgImhlaWdodCI6IDExNS4wOTM3NSwKICAgICAgInRvcCI6IDY4Mi44OTA2MjUsCiAgICAgICJyaWdodCI6IDMwMywKICAgICAgImJvdHRvbSI6IDc5Ny45ODQzNzUsCiAgICAgICJsZWZ0IjogMTcKICAgIH0sCiAgICB7CiAgICAgICJ4IjogMTcsCiAgICAgICJ5IjogODA5Ljk4NDM3NSwKICAgICAgIndpZHRoIjogMjg2LAogICAgICAiaGVpZ2h0IjogMTE1LjA5Mzc1LAogICAgICAidG9wIjogODA5Ljk4NDM3NSwKICAgICAgInJpZ2h0IjogMzAzLAogICAgICAiYm90dG9tIjogOTI1LjA3ODEyNSwKICAgICAgImxlZnQiOiAxNwogICAgfSwKICAgIHsKICAgICAgIngiOiAxNywKICAgICAgInkiOiA5MzcuMDc4MTI1LAogICAgICAid2lkdGgiOiAyODYsCiAgICAgICJoZWlnaHQiOiAxMTUuMDkzNzUsCiAgICAgICJ0b3AiOiA5MzcuMDc4MTI1LAogICAgICAicmlnaHQiOiAzMDMsCiAgICAgICJib3R0b20iOiAxMDUyLjE3MTg3NSwKICAgICAgImxlZnQiOiAxNwogICAgfQogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-91907bc81b428c27b3ab",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "ordinary Meri 390 light retains real data boundaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2121,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:40.355Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-8aab82306e63f054a012",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 83,
+          "column": 3
+        },
+        {
+          "title": "ordinary Meri 390 dark retains real data boundaries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2098,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:04:42.486Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60497d1890cbe9916534-13900fa9064ddea386d1",
+          "file": "meri-phone-parity.spec.ts",
+          "line": 83,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T12:04:20.126Z",
+    "duration": 24597.544,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

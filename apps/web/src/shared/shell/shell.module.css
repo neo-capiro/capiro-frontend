@@ -190,6 +190,15 @@
   }
 }
 @media (max-width: 680px) {
+  .target {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+  .workspace {
+    flex: 1;
+    min-height: 0;
+  }
   .mobileNavigation {
     display: flex;
     flex-wrap: wrap;
