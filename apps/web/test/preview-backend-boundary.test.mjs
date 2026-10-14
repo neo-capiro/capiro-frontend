@@ -15,7 +15,7 @@ function parse(path) {
 }
 const apiRoutes = files(join(source, 'app/api')).filter(path => path.endsWith('/route.ts'));
 
-test('every API handler rejects preview dispatch before any route work', () => {
+test('every API handler applies preview admission before any route work', () => {
   assert.equal(apiRoutes.length, 4, 'Review newly introduced API surfaces explicitly');
   for (const path of apiRoutes) {
     const ast = parse(path);
@@ -45,11 +45,20 @@ test('every API handler rejects preview dispatch before any route work', () => {
       assert.equal(first.declarationList.declarations.length, 1);
       assert.ok(declaration?.initializer && ts.isCallExpression(declaration.initializer), path);
       assert.equal(declaration.initializer.expression.getText(ast), 'previewBackendRejection');
-      assert.deepEqual(declaration.initializer.arguments.map(arg => arg.getText(ast)), ['process.env']);
+      const receivesReads = /\/api\/(?:backend|capiro)\//.test(path);
+      assert.deepEqual(declaration.initializer.arguments.map(arg => arg.getText(ast)), receivesReads ? ['process.env', 'request'] : ['process.env']);
       assert.ok(second && ts.isIfStatement(second) && ts.isReturnStatement(second.thenStatement), path);
       assert.equal(second.expression.getText(ast), declaration.name.getText(ast));
       assert.equal(second.thenStatement.expression?.getText(ast), declaration.name.getText(ast));
       assert.equal(second.elseStatement, undefined);
+      if (receivesReads) {
+        const previewBranch = body.statements.find(node => ts.isIfStatement(node)
+          && node.expression.getText(ast) === 'process.env.CAPIRO_PREVIEW_READ_ONLY === "true"');
+        assert.ok(previewBranch && ts.isReturnStatement(previewBranch.thenStatement), 'Preview branch must return before ordinary service dispatch');
+        assert.equal(previewBranch.thenStatement.expression.expression.getText(ast), 'proxyPreviewRead');
+        const branchIndex = body.statements.indexOf(previewBranch);
+        assert.ok(body.statements.slice(0, branchIndex).every(node => !/readConfig\(|readCapiroConfig\(|proxyRequest\(|handleCapiroRequest\(/.test(node.getText(ast))));
+      }
     }
   }
 });

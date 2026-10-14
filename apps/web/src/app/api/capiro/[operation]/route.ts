@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { previewBackendRejection } from "../../../../shared/preview/backend-policy.server";
+import { proxyPreviewRead } from "../../../../shared/preview/read-proxy.server";
 import { readCapiroConfig } from "../../../../shared/capiro/config";
 import {
   handleCapiroRequest,
@@ -10,9 +11,19 @@ import { capiroOperations } from "../../../../shared/capiro/registry";
 
 type Context = { params: Promise<{ operation: string }> };
 async function handle(request: Request, context: Context) {
-  const held = previewBackendRejection(process.env);
+  const held = previewBackendRejection(process.env, request);
   if (held) return held;
   const { operation } = await context.params;
+  if (process.env.CAPIRO_PREVIEW_READ_ONLY === "true")
+    return proxyPreviewRead(
+      request,
+      process.env,
+      `/api/capiro/${operation}`,
+      async () => {
+        const session = await auth();
+        return session.userId ? session.getToken({ template: "capiro" }) : null;
+      },
+    );
   if (operation.startsWith("public-form."))
     return handlePublicPlannerFormRequest(
       request,

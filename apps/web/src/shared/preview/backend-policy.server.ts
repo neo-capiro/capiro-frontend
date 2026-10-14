@@ -1,15 +1,20 @@
-/**
- * Deployment containment, not authorization. No backend read route is admitted:
- * even GET can trigger tenant self-healing or internal admin mapping upstream.
- * Admission requires a reviewed source change with backend side-effect evidence.
- * Never derive this setting from a request, browser context or public variable.
- */
+import { previewReadTarget } from "./read-config.server";
+import { previewReadRoute } from "./read-route.server";
+
+/** Deployment containment, not authorization. Server configuration alone owns opt-in. */
 export function previewBackendRejection(
   env: Record<string, string | undefined>,
+  request?: Request,
 ): Response | null {
   const mode = env.CAPIRO_PREVIEW_READ_ONLY;
   // Preserve the ordinary app; malformed configured preview values fail closed.
   if (mode === undefined || mode === "false") return null;
+  if (request && previewReadTarget(env, request) && previewReadRoute(request))
+    return null;
+  return previewHeldResponse();
+}
+
+export function previewHeldResponse(): Response {
   return Response.json(
     {
       error: { code: "PREVIEW_BACKEND_HELD" },
