@@ -1,0 +1,72 @@
+{
+  "sourceCommit": "9d5fd42c6d8a7a131e1e3e0c0c4b02ce0afac09c",
+  "basePR30": "93ad8792a95bfc1a15a691c608b5fe98f0ca7956",
+  "applicationTree": "3ccbb35093add396f20feb03fe497f4dff18b586",
+  "baseline": {
+    "failed": 4,
+    "passed": 0
+  },
+  "expandedCandidate": {
+    "passed": 41,
+    "failed": 2,
+    "reason": "New error page lacked H1; fixed without weakening default axe"
+  },
+  "passed": {
+    "browser": 43,
+    "newBrowser": 7,
+    "existingBrowser": 36,
+    "retries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "focusedUnit": 30,
+    "rootControls": 111,
+    "types": true,
+    "changedLint": true,
+    "changedFormatting": true,
+    "publicPackages": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 468,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "errors": 0
+    },
+    "build": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true,
+    "defaultAxe": "Zero violations in changed desktop1440/mobile390 wrong-receipt states"
+  },
+  "coverage": {
+    "exactRows": 337,
+    "sourceRepairsInspected": 23,
+    "independentHistoricalRepairsPresent": 20,
+    "broaderPartialScopeContractQuestions": 3,
+    "otherCategoriesNotSemanticallyReaudited": 314,
+    "nativeAccepted": 0
+  },
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+      "byteIdenticalToPR30": true
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+      "byteIdenticalToPR30": true
+    }
+  ],
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "liveBlocker": "Coordinator reports root200/assets/no exceptions but Clerk403 subdomain_not_allowed and Loading sign-in; specific auth-setting approval pending. No live test or bypass by this owner.",
+  "limitations": [
+    "Local mocks/source pointers/test declarations are not native acceptance",
+    "No broad2697-unit rerun claimed; focused30-unit cases only",
+    "Ordinary snapshot rejection may follow committed PATCH; no new atomic/unknown/navigation/nested-parent guarantee",
+    "No live/AWS/security/credential/data-changing tests",
+    "Saved-layout receiving map pending backend owner; Meri0.1.3 unchanged",
+    "No fresh whole-frame/AT acceptance or container/image qualification"
+  ]
+}
