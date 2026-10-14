@@ -354,6 +354,21 @@
       "activeObjectiveFullpageParity": "OPEN_BINDING_MAP_PENDING",
       "mobileParity": "DEFERRED",
       "evidence": "../desktop-task-body-20261014/HANDOFF.md"
+    },
+    {
+      "batch": "desktop-detail-content-20261014",
+      "qualifiedSource": "35fe7c45a66de857d0e6b1d844605992513ad1f8",
+      "baseSource": "882c7b51d79c6d20ace685fb32b5c76a1ef312bf",
+      "scope": "Desktop readonly TaskDetail metadata/footer and Engagement navigation/query gates/card composition, separate visual successor",
+      "modulesDesktopSharedPassed": 94,
+      "additionalKeyboardPassed": 2,
+      "skipped": 0,
+      "flaky": 0,
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "activeObjectiveFullpageParity": "OPEN_CURRENT_SUCCESSOR_BINDING_MAP_UNRESOLVED",
+      "mobileParity": "DEFERRED",
+      "evidence": "../desktop-detail-content-20261014/HANDOFF.md"
     }
   ],
   "local_execution_batches": [

@@ -30,9 +30,9 @@ export function PlanView() {
           <div className={styles.empty}>
             <h2>Engagement plans are not connected</h2>
             <p className={styles.muted}>
-              The existing engagement service supplies meetings, outreach and
-              commitments. It does not expose the plan and wave contracts
-              required by this view.
+              The current frontend contract covers meetings, outreach and
+              commitments. A plan and wave binding has not been verified for
+              this view.
             </p>
             <UnavailableAction reason="A verified engagement-plan read/write contract is required.">
               + New engagement plan

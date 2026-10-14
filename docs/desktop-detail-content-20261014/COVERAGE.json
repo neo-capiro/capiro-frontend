@@ -1,0 +1,47 @@
+{
+  "baseSource": "882c7b51d79c6d20ace685fb32b5c76a1ef312bf",
+  "purpose": "Separate desktop visual/content successor; not prerequisite for Strategy functional preview release",
+  "figmaFileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "taskDetailReference": "411:100367 / high-fidelity drawer411:100627",
+  "engagementReference": "411:93988",
+  "taskDetail": "RETURNED_READONLY_METADATA_BODY_AND_PERSISTENT_EXISTING_ACTIONS",
+  "fullEditableTaskDetailParity": "OPEN_INLINE_EDIT_DUPLICATE_TASK_ACTION_RICH_DESCRIPTION",
+  "engagement": "CURRENT_CLIENT_OUTREACH_NAVIGATION_INDEPENDENT_READ_GATES_DESKTOP_CARD_COMPOSITION",
+  "fullEngagementParity": "OPEN_PLAN_WAVES_MULTICLIENT_OFFICE_ASSOCIATION_GLOBAL_HEADER_OFFSET",
+  "selectedMeetingReference": "NO_ADMITTED_FULL_MODULES_FRAME",
+  "activeObjective": "UNRESOLVED_OPERATIONAL_BINDING_MAP_BASIC_CORE_OWNER_ABSENCE_BOUNDED",
+  "backendCurrentSource": "91399fe1a205e37073cbeed2d7eb66a1fafd7fa2",
+  "backendPublishedCompared": [
+    "f4f9e1361d92ac0afadd67c1cae3f5faefa829ec",
+    "d15bba2cd75a8d36743e5d7a10eda346e4e48e2a",
+    "917fed9be648dc4abfd6770e0e391ce2e3fe3928",
+    "3b7affb158903069d220c89000d054c327d3c96d",
+    "45aa8059f1a0e6451e5d0b9518b7543ed3e9254e"
+  ],
+  "mobile": "DEFERRED_EXISTING_ASSEMBLY_RETAINED",
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337,
+  "strategyFiles": "UNCHANGED",
+  "sdk": "0.1.3_UNCHANGED_0.1.5_NOT_AUTOMATICALLY_ADOPTED",
+  "awsDeploymentDatabaseCredentialsLiveWrites": "NOT_RUN_NOT_AUTHORIZED",
+  "qualifiedSource": "35fe7c45a66de857d0e6b1d844605992513ad1f8",
+  "browser": {
+    "regressionPassed": 94,
+    "additionalKeyboardPassed": 2,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "strategyCoordination": {
+    "pr": 48,
+    "head": "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+    "base": "repair/capiro-desktop-details-20261014",
+    "changedPathIntersection": [
+      "scripts/architecture/reviewed-size-findings.json"
+    ],
+    "releaseDependency": false,
+    "runtimeTestIntersection": [],
+    "allPR48PathsInspected": 119,
+    "integrationRequirement": "Preserve both exact function review sets and qualify architecture on the combined tree"
+  }
+}
