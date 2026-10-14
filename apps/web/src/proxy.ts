@@ -11,7 +11,7 @@ import { previewBackendRejection } from "./shared/preview/backend-policy.server"
 const clerk = clerkMiddleware();
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
   if (request.nextUrl.pathname.startsWith("/api/")) {
-    const held = previewBackendRejection(process.env);
+    const held = previewBackendRejection(process.env, request);
     if (held) return held;
   }
   // This namespace has its own closed public capability allowlist in the route.

@@ -88,22 +88,25 @@ export function appendQuery(
   }
 }
 
+export function getRequestInput(request: Request): unknown {
+  const url = new URL(request.url);
+  if (
+    [...url.searchParams.keys()].some((key) => key !== "input") ||
+    url.searchParams.getAll("input").length > 1
+  )
+    throw new Error();
+  const input = url.searchParams.get("input") ?? "{}";
+  if (input.length > 16_000) throw new Error();
+  return JSON.parse(input);
+}
+
 export async function requestInput(
   request: Request,
   limit: number,
   signal: AbortSignal,
 ): Promise<unknown> {
+  if (request.method === "GET") return getRequestInput(request);
   const url = new URL(request.url);
-  if (request.method === "GET") {
-    if (
-      [...url.searchParams.keys()].some((key) => key !== "input") ||
-      url.searchParams.getAll("input").length > 1
-    )
-      throw new Error();
-    const input = url.searchParams.get("input") ?? "{}";
-    if (input.length > 16_000) throw new Error();
-    return JSON.parse(input);
-  }
   if (url.search) throw new Error();
   if (
     request.headers.get("content-type")?.split(";")[0]?.trim() !==

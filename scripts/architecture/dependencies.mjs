@@ -9,6 +9,8 @@ const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
 const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
 const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
+const previewOwner = `${appSource}shared/preview/`;
+const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
 
 function approvedPricingImport(file, module, entry) {
   return file === pricingOwner && entry.specifier === '@capiro/shared'
@@ -40,11 +42,11 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`, `${appSource}shared/meri-actions/connection-config.ts`,
   ])],
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
-    previewPolicy,
+    previewPolicy, previewReadProxy,
     '@clerk/nextjs/server', `${appSource}shared/capiro/config.ts`, `${appSource}shared/capiro/gateway.ts`, `${appSource}shared/capiro/registry.ts`,
   ])],
   [`${appSource}app/api/backend/[service]/[...path]/route.ts`, new Set([
-    previewPolicy,
+    previewPolicy, previewReadProxy,
     '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`, `${appSource}shared/portfolio/api/proxy.ts`,
   ])],
   [`${appSource}app/healthz/route.ts`, new Set()],
@@ -63,7 +65,9 @@ function resolveImport(from, specifier, files) {
 }
 
 function edgeViolation(from, to) {
-  if (to === previewPolicy && from !== `${appSource}proxy.ts` && !serverAdapters.get(from)?.has(previewPolicy)) return `${from}: preview policy is allocated only to backend server entries`;
+  if (to.startsWith(previewOwner) && !from.startsWith(previewOwner)
+      && !(to === previewPolicy && from === `${appSource}proxy.ts`)
+      && !serverAdapters.get(from)?.has(to)) return `${from}: preview policy and receiving code are allocated only to reviewed backend server entries`;
   if (to === pricingOwner && from !== pricingEntry) return `${from}: public pricing projection is allocated only to the Onboard server entry`;
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
