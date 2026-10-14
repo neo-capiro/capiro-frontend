@@ -9,6 +9,7 @@ import {
   StatusPanel,
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
+import overviewStyles from "./engagement-overview.module.css";
 type Query = {
   data?: EngagementMeeting[];
   loading: boolean;
@@ -19,10 +20,12 @@ export function EngagementOverview({
   clientId,
   meetings,
   onView,
+  onClientOutreach,
 }: {
   clientId: string;
   meetings: Query;
   onView: (view: string) => void;
+  onClientOutreach: (clientId: string) => void;
 }) {
   const [now] = useState(() => Date.now());
   const outreach = useCapiroQuery("engagement.outreach", {
@@ -37,7 +40,7 @@ export function EngagementOverview({
       name: string;
       meetings: number;
       open: number;
-      next: string | null;
+      next: EngagementMeeting | null;
     }
   >();
   for (const meeting of meetings.data ?? []) {
@@ -51,9 +54,9 @@ export function EngagementOverview({
     row.meetings++;
     if (
       Date.parse(meeting.startsAt) > now &&
-      (!row.next || meeting.startsAt < row.next)
+      (!row.next || meeting.startsAt < row.next.startsAt)
     )
-      row.next = meeting.startsAt;
+      row.next = meeting;
     clients.set(row.id, row);
   }
   for (const task of tasks.data ?? []) {
@@ -67,38 +70,44 @@ export function EngagementOverview({
     if (!["done", "canceled"].includes(task.status)) row.open++;
     clients.set(row.id, row);
   }
-  const summary = report.data?.summary;
   return (
-    <div className={styles.stack}>
+    <div className={`${styles.stack} ${overviewStyles.overview}`}>
       <OverviewStats
         meetings={meetings}
-        outreachCount={outreach.data?.length}
-        openCount={
-          tasks.data?.filter(
-            (task) => !["done", "canceled"].includes(task.status),
-          ).length
-        }
-        targetCount={summary?.targetOffices}
+        outreach={outreach}
+        tasks={tasks}
+        report={report}
       />
-      <StatusPanel
-        loading={meetings.loading || tasks.loading}
-        error={meetings.error ?? tasks.error}
-        onRetry={() => {
-          meetings.reload();
-          tasks.reload();
-        }}
-      >
-        <div className={styles.split}>
+      <div className={`${styles.split} ${overviewStyles.content}`}>
+        <StatusPanel
+          loading={meetings.loading || tasks.loading}
+          error={meetings.error ?? tasks.error}
+          onRetry={() => {
+            meetings.reload();
+            tasks.reload();
+          }}
+        >
           <Panel
             title="Across clients"
-            description="Meetings and open work returned for your current access."
+            description="Open a client’s Outreach view. Meetings and open work reflect your current access."
           >
             <DataTable
               rows={Array.from(clients.values())}
               rowKey={(row) => row.id}
               caption="Client engagement activity"
               columns={[
-                { key: "client", label: "Client", render: (row) => row.name },
+                {
+                  key: "client",
+                  label: "Client",
+                  render: (row) => (
+                    <ActionButton
+                      className={styles.clientLink}
+                      onClick={() => onClientOutreach(row.id)}
+                    >
+                      {row.name}
+                    </ActionButton>
+                  ),
+                },
                 {
                   key: "meetings",
                   label: "Meetings",
@@ -110,7 +119,7 @@ export function EngagementOverview({
                   label: "Next meeting",
                   render: (row) =>
                     row.next
-                      ? new Date(row.next).toLocaleDateString()
+                      ? `${new Date(row.next.startsAt).toLocaleDateString()} · ${row.next.subject}`
                       : "None scheduled",
                 },
               ]}
@@ -120,9 +129,9 @@ export function EngagementOverview({
               owner.
             </p>
           </Panel>
-          <OverviewSidebar report={report} tasks={tasks} onView={onView} />
-        </div>
-      </StatusPanel>
+        </StatusPanel>
+        <OverviewSidebar report={report} tasks={tasks} onView={onView} />
+      </div>
       <Panel
         title="Team workload"
         description="Review follow-up ownership across visible work."
@@ -145,27 +154,52 @@ export function EngagementOverview({
 
 function OverviewStats({
   meetings,
-  outreachCount,
-  openCount,
-  targetCount,
+  outreach,
+  tasks,
+  report,
 }: {
   meetings: Query;
-  outreachCount?: number;
-  openCount?: number;
-  targetCount?: number;
+  outreach: ReturnType<typeof useCapiroQuery<"engagement.outreach">>;
+  tasks: ReturnType<typeof useOverviewTasks>;
+  report: ReturnType<typeof useOverviewReport>;
 }) {
+  const cards = [
+    {
+      label: "Visible meetings",
+      query: meetings,
+      value: meetings.data?.length,
+    },
+    {
+      label: "Outreach records",
+      query: outreach,
+      value: outreach.data?.length,
+    },
+    {
+      label: "Open commitments",
+      query: tasks,
+      value: tasks.data?.filter(
+        (task) => !["done", "canceled"].includes(task.status),
+      ).length,
+    },
+    {
+      label: "Target offices",
+      query: report,
+      value: report.data?.summary.targetOffices,
+    },
+  ];
   return (
-    <div className={styles.stats}>
-      {[
-        ["Visible meetings", meetings.data?.length],
-        ["Outreach records", outreachCount],
-        ["Open commitments", openCount],
-        ["Target offices", targetCount],
-      ].map(([label, value]) => (
-        <div key={String(label)} className={styles.stat}>
+    <div className={`${styles.stats} ${overviewStyles.stats}`}>
+      {cards.map(({ label, query, value }) => (
+        <div key={label} className={styles.stat}>
           <p>{label}</p>
-          <strong>{value === undefined ? "—" : value}</strong>
-          <span>Current scope</span>
+          <StatusPanel
+            loading={query.loading}
+            error={query.error}
+            onRetry={query.reload}
+          >
+            <strong>{value === undefined ? "—" : value}</strong>
+            <span>Current scope</span>
+          </StatusPanel>
         </div>
       ))}
     </div>
@@ -209,25 +243,38 @@ function OverviewSidebar({
         </StatusPanel>
       </Panel>
       <Panel title="Follow-ups needing attention">
-        <div className={styles.body}>
-          {tasks.data
-            ?.filter((task) => !["done", "canceled"].includes(task.status))
-            .slice(0, 3)
-            .map((task) => (
-              <div key={task.id}>
-                <strong>{task.title}</strong>
-                <p className={styles.muted}>
-                  {task.client?.name ?? "Unassigned"} ·{" "}
-                  {task.dueDate
-                    ? new Date(task.dueDate).toLocaleDateString()
-                    : "No due date"}
-                </p>
-              </div>
-            ))}
-        </div>
-        <ActionButton onClick={() => onView("commitments")}>
-          Open commitments →
-        </ActionButton>
+        <StatusPanel
+          loading={tasks.loading}
+          error={tasks.error}
+          onRetry={tasks.reload}
+          empty={
+            tasks.data?.every((task) =>
+              ["done", "canceled"].includes(task.status),
+            )
+              ? "No open follow-ups"
+              : undefined
+          }
+        >
+          <div className={styles.body}>
+            {tasks.data
+              ?.filter((task) => !["done", "canceled"].includes(task.status))
+              .slice(0, 3)
+              .map((task) => (
+                <div key={task.id}>
+                  <strong>{task.title}</strong>
+                  <p className={styles.muted}>
+                    {task.client?.name ?? "Unassigned"} ·{" "}
+                    {task.dueDate
+                      ? new Date(task.dueDate).toLocaleDateString()
+                      : "No due date"}
+                  </p>
+                </div>
+              ))}
+          </div>
+          <ActionButton onClick={() => onView("commitments")}>
+            Open commitments →
+          </ActionButton>
+        </StatusPanel>
       </Panel>
     </div>
   );

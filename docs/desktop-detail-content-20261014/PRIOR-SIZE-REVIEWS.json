@@ -1,0 +1,11 @@
+[
+  {
+    "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "kind": "function",
+    "symbol": "OrdinaryEngagementScreen",
+    "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0",
+    "reason": "Owns the ordinary Engagement screen: tab/scope selection, existing client/meeting reads and composition of separately owned child workflows. The new outer EngagementScreen separates rich route discrimination before these queries mount; this function contains no rich document retrieval, persistence, renderer or dispatch implementation. The keyed Outreach child disposes selection on destination replacement. The 130-line body is predominantly existing tab composition; splitting it solely for size would obscure the single screen lifetime. See docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md#ordinaryengagementscreen.",
+    "reviewedBy": "Codex independent modules_settings_review",
+    "reviewedOn": "2026-10-13"
+  }
+]

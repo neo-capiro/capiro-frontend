@@ -158,9 +158,17 @@ for (const colorScheme of ["light", "dark"] as const) {
       exact: true,
     });
     await close.focus();
-    await page.keyboard.press("End");
+    await expect(
+      detail.getByRole("region", { name: "Description", exact: true }),
+    ).toHaveText(`Description${description}`);
+    const subtask = detail.getByRole("button", {
+      name: "+ Subtask",
+      exact: true,
+    });
+    await tabTo(page, subtask);
+    await expectFocusEvidence(subtask, info);
     await expect
-      .poll(() => header.evaluate((element) => element.scrollTop))
+      .poll(() => body.evaluate((element) => element.scrollTop))
       .toBeGreaterThan(0);
     const edit = detail.getByRole("button", { name: "Edit task", exact: true });
     await tabTo(page, edit);
