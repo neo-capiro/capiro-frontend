@@ -7,6 +7,7 @@ import { useFiles } from "./queries";
 import { filterFiles } from "./contracts";
 import { DeleteFile } from "./DeleteFile";
 import { FileToolbar } from "./FileToolbar";
+import { FileSelectionBar } from "./FileSelectionBar";
 import { FolderCards } from "./FolderCards";
 import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
@@ -149,7 +150,7 @@ export function FilesPage({
         <button
           className="button"
           aria-pressed={mode === "files"}
-          onClick={() => changeFilters({ mode: "files" })}
+          onClick={() => setFolder(undefined)}
         >
           All files
         </button>
@@ -263,26 +264,21 @@ export function FilesPage({
               <FolderCards files={rows} onOpen={setFolder} />
             ) : (
               <>
-                <div className={styles.selectionBar}>
-                  <span>
-                    {rows.length} files · {chosen.length} selected
-                  </span>
-                  <button
-                    className="button"
-                    disabled={chosen.length !== 1}
-                    onClick={() => {
-                      if (chosen[0]) requestAction("move", chosen[0].id);
-                    }}
-                  >
-                    Move to folder
-                  </button>
-                </div>
-                {chosen.length > 1 && (
-                  <p role="status">
-                    Batch moves require the atomic move contract. Move
-                    individual files until that contract is integrated.
-                  </p>
-                )}
+                <FileSelectionBar
+                  visibleCount={rows.length}
+                  selectedCount={chosen.length}
+                  hiddenSelectedCount={
+                    chosen.filter(
+                      (file) => !rows.some((row) => row.id === file.id),
+                    ).length
+                  }
+                  onClear={() =>
+                    setChecked({ view: query.readerScope, ids: [] })
+                  }
+                  onMove={() => {
+                    if (chosen[0]) requestAction("move", chosen[0].id);
+                  }}
+                />
                 <FileTable
                   files={rows}
                   selected={selected}

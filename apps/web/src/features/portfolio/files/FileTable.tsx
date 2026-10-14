@@ -14,8 +14,16 @@ export function FileTable({
   onSelect: (ids: string[]) => void;
   onAction: (action: FileAction, file: Attachment) => void;
 }) {
+  const visibleSelected = files.filter((file) =>
+    selected.includes(file.id),
+  ).length;
   return (
-    <div className="tableWrap">
+    <div
+      className="tableWrap"
+      role="region"
+      aria-label="File list"
+      tabIndex={0}
+    >
       <table className={styles.table}>
         <thead>
           <tr>
@@ -23,10 +31,13 @@ export function FileTable({
               <input
                 type="checkbox"
                 aria-label="Select visible files"
-                checked={
-                  files.length > 0 &&
-                  files.every((f) => selected.includes(f.id))
-                }
+                checked={files.length > 0 && visibleSelected === files.length}
+                disabled={files.length === 0}
+                ref={(input) => {
+                  if (input)
+                    input.indeterminate =
+                      visibleSelected > 0 && visibleSelected < files.length;
+                }}
                 onChange={(event) =>
                   onSelect(
                     event.target.checked
