@@ -50,7 +50,9 @@ export const serverAdapters = new Map([
     '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`, `${appSource}shared/portfolio/api/proxy.ts`,
   ])],
   [`${appSource}app/healthz/route.ts`, new Set()],
-  [`${appSource}app/favicon.ico/route.ts`, new Set()],
+  [`${appSource}app/favicon.ico/route.ts`, new Set([
+    `${appSource}shared/response-headers.ts`,
+  ])],
 ]);
 
 export const isPortfolioSource = name => /^apps\/web\/src\/(?:features\/portfolio\/|shared\/portfolio\/|app\/\(portfolio\)\/)/.test(name) || serverAdapters.has(name) || name === `${appSource}proxy.ts`;
