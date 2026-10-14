@@ -109,8 +109,18 @@ for (const width of [1440, 390]) {
     const home = `/meri?clientId=${actionClient.id}`;
     await page.goto(home);
     await expect(
-      page.getByLabel("Message draft", { exact: true }),
+      page.getByRole("heading", {
+        name: "Conversations unavailable",
+        exact: true,
+      }),
     ).toBeVisible();
+    await expect(page.getByLabel("Message draft", { exact: true })).toHaveCount(
+      0,
+    );
+    await expect(page.locator("body")).not.toContainText(
+      "Good morning, Jordan",
+    );
+    await expect(page.locator("body")).not.toContainText("Anduril");
     const files = page.getByRole(width === 390 ? "link" : "button", {
       name: "Files",
       exact: true,

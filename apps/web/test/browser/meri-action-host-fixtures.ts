@@ -95,6 +95,11 @@ export async function actionHostFixture(page: Page) {
     "me.read": testIdentity,
     "clients.list": [actionClient, otherActionClient],
   });
+  // Ordinary Meri reads canonical Core identity; never replace it with the former home fixture.
+  await page.route("**/api/backend/core/me", (route) => {
+    expect(route.request().method()).toBe("GET");
+    return route.fulfill({ json: testIdentity });
+  });
   const receive = async (route: Route, name: string, fallback: Reply) => {
     const request = route.request();
     requests.push({
