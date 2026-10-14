@@ -1,0 +1,85 @@
+{
+  "sourceCommit": "5952b9e305496100c86d4be0b44a52ab8d536b4d",
+  "base": "98c6eefea0953fbecccd88de43161c6bc809f300",
+  "acceptedConsolidatedCandidate": "72b6e1279506f0a38d7d34794c7cc9ba17744043",
+  "applicationTree": "e3fb7ca4c3ba29c0bbcbbe37bf1a8e76ee910fd1",
+  "runtimeTree": "d38e105031e013720afcec64cc9c8bd2291b6113",
+  "passed": {
+    "browser": 30,
+    "newBrowser": 4,
+    "existingBrowser": 26,
+    "browserStats": {
+      "startTime": "2026-10-14T04:43:00.959Z",
+      "duration": 91095.07699999999,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "layoutUnit": 29,
+    "rootControls": 111,
+    "workspaceTypes": true,
+    "publicPackages": true,
+    "webLint": {
+      "errors": 0,
+      "warnings": 81
+    },
+    "webFormatting": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 470,
+      "inheritedUnreviewed": 19,
+      "blocking": 0
+    },
+    "boundaryErrors": [],
+    "productionBuild": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true
+  },
+  "earlierOutcomes": {
+    "initialTwoCaseDiagnostic": "2failed; source changed during this diagnostic, so not claimed as an exact-base source qualification",
+    "initialBroaderBrowser": "23passed/5failed; old unavailable/denied default-reorder UI expectations updated to no admitted catalog rows/control; GET-only/no-write checks preserved",
+    "initialUnit": "27passed/2failed: table input unpacking corrected, assertions unchanged",
+    "initialLifetimeSetup": "2wrong-path setup failures; corrected to existing canonical /__test/portfolio-layout",
+    "intermediateLifetimeRed": "2failed on actual late-PUT overwrite and failed-read draft retention; source patch snapshot retained; both final cases pass",
+    "initialArchitecture": "4changed fingerprints require review; exact independent responsibility reviews added, guard policy unchanged"
+  },
+  "backend": {
+    "preparationSource": "da4d236a0938449d377aacffd97d048f5f341b8f",
+    "ownerReportedTests": 75,
+    "sourceVerifiedByFrontend": false,
+    "readResult": "GitHubHTTP422 No commit found",
+    "verifiedRosterSource": "a65ae3c8a9f1f0cf96d4f7d2ae30aad2fff172ff",
+    "mountConfigPersistenceNative": "Not qualified by this frontend slice"
+  },
+  "semantics": "Actor-bound GET supplies complete current authorized nonarchived layout catalog, bounded by known roster metadata. PUT must exactly reorder that admitted set. Cache lineage fences prevent late overwrite; unknown reconciliation requires original order andexpectedVersion+1. No frontend wall inference or autoPUT retry.",
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+      "unchanged": true
+    }
+  ],
+  "nativeAccepted": 0,
+  "nativeRowsStillOpen": 337,
+  "packageLockVendorChanges": false,
+  "freshInstallLifecycleScripts": false,
+  "frozenPR25Head": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "limitations": [
+    "No backend preparation75test replay or verified controller/config/migration binding",
+    "No full2697unit or historical browser rerun; focused29unit/30browser qualification",
+    "No fresh Figma whole-frame or manual assistive-technology acceptance; existing components/styles and defaultaxe assertions retained",
+    "No native account, wall/grant persistence, CAS/storage/restart/provider/image qualification",
+    "No live/AWS/security/credentials/data-changing test, merge, deployment or AWS build",
+    "Classic merge requirements remain unverified; no retry/bypass"
+  ]
+}
