@@ -17,6 +17,7 @@ assert.ok(
 const results = [];
 for (const [path, status, text] of [
   ["/healthz", 200, '"status":"ok"'],
+  ["/favicon.ico", 308, ""],
   ["/portfolio", 200, "Portfolio setup required"],
   ["/calendar", 200, "Portfolio setup required"],
   ["/meri/files", 200, "Connection setup required"],
@@ -34,6 +35,18 @@ for (const [path, status, text] of [
     signal: AbortSignal.timeout(10_000),
   });
   assert.equal(response.status, status, path);
+  if (path === "/favicon.ico") {
+    assert.equal(
+      response.headers.get("location"),
+      `${origin}/onboard/favicon.svg`,
+    );
+    const icon = await fetch(response.headers.get("location"), {
+      signal: AbortSignal.timeout(10_000),
+    });
+    assert.equal(icon.status, 200);
+    assert.match(icon.headers.get("content-type") ?? "", /^image\/svg\+xml/);
+    assert.ok((await icon.text()).includes('viewBox="0 0 32 32"'));
+  }
   if (new URL(origin + path).pathname === "/settings")
     assert.equal(
       new URL(response.headers.get("location"), origin).href,
