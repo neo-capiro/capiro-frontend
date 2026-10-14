@@ -4,6 +4,8 @@ import { queryString } from "@/shared/portfolio/api/http";
 import { strategiesPlanOperations } from "@/shared/capiro/operations/strategies-plan";
 import { plannerTaskOperations } from "@/shared/capiro/operations/planner-tasks";
 import { workspaceDraftSchema } from "../work/public";
+import { targetSchema } from "../relationships/public";
+import { objectiveDirectoryDestination } from "@/shared/capiro/operations/directory-objective-destination";
 import {
   objectiveStrategyDestination,
   objectivePlannerDestination,
@@ -18,10 +20,12 @@ import {
 export type ObjectiveWorkKind =
   | "strategy"
   | "planner_task"
+  | "directory_target"
   | "workspace_saved_revision";
 export const objectiveWorkLabels: Record<ObjectiveWorkKind, string> = {
   strategy: "Strategy",
   planner_task: "Planner task",
+  directory_target: "Saved Directory target",
   workspace_saved_revision: "Workspace saved revision",
 };
 export type ObjectiveWorkChoices = {
@@ -35,6 +39,29 @@ export async function loadObjectiveWorkChoices(
   cursor: string | undefined,
   signal: AbortSignal,
 ): Promise<ObjectiveWorkChoices> {
+  if (kind === "directory_target") {
+    const rows = await api.request(
+      "core",
+      `clients/${encodeURIComponent(clientId)}/targets`,
+      z
+        .array(targetSchema)
+        .refine(
+          (targets) =>
+            targets.every(
+              (row) => row.clientId.toLowerCase() === clientId.toLowerCase(),
+            ),
+          "Target client mismatch",
+        ),
+      { signal },
+    );
+    return {
+      items: rows.map((row) => ({
+        id: row.id,
+        label: `${row.sourceDirectory}: ${row.memberId} · ${row.id}`,
+      })),
+      nextCursor: null,
+    };
+  }
   if (kind === "strategy") {
     const rows = await api.request(
       "strategy",
@@ -92,6 +119,17 @@ export async function resolveObjectiveWork(
 ) {
   const suffix = queryString(query),
     id = encodeURIComponent(resourceId);
+  if (kind === "directory_target") {
+    const value = await api.request(
+      "core",
+      `clients/${encodeURIComponent(query.clientId)}/targets/${id}/objective-destination?${suffix}`,
+      objectiveDirectoryDestination,
+      { signal },
+    );
+    signal.throwIfAborted();
+    requireObjectiveBinding(value, resourceId, query);
+    return `/modules/directory?${queryString({ targetId: value.destination.resourceId, ...query })}`;
+  }
   if (kind === "strategy") {
     const value = await api.request(
       "strategy",

@@ -1,6 +1,7 @@
 import type { OperationRegistry } from "./contracts";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
+import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
 import { engagementOperations } from "./operations/engagement";
 import { intelligenceOperations } from "./operations/intelligence";
 import { legiwatchOperations } from "./operations/legiwatch";
@@ -22,6 +23,7 @@ export const capiroOperations = {
   ...workspaceOperations,
   ...strategiesOperations,
   ...directoryOperations,
+  ...directoryObjectiveOperations,
   ...calendarOperations,
   ...legiwatchOperations,
   ...settingsAdminOperations,
