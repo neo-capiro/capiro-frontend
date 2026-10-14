@@ -52,7 +52,7 @@ export async function serviceErrorResponse(
       : response.status === 403
         ? "You do not have access to this operation."
         : response.status === 404
-          ? "The requested record was not found."
+          ? "The requested action or record is unavailable from the current service."
           : response.status === 409
             ? "The record changed. Reload it before trying again."
             : response.status === 429

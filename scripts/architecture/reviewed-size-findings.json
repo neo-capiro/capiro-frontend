@@ -2525,5 +2525,14 @@
     "reason": "Existing newsletter edit/undo/save lifecycle keeps its responsibility. The narrow delta excludes bound Core copies consistently from initialization, target selection and returned document identity. It neither implements copied-tab mutation nor projects bound rich bodies into legacy updates. Exact independent review: docs/workspace-brief-copy-20261013/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex independent calendar_relationships_review; root integrated exact reviewed source",
     "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/portfolio/api/proxy.ts",
+    "kind": "function",
+    "symbol": "proxyRequest",
+    "fingerprint": "502e41acc3f6ebe860ada07b94471c25e2f636eeced82cc8986d7daca5bbd97f",
+    "reason": "This existing server adapter owns one bounded Portfolio forwarding transaction: validate the configured service/path/method and same-origin write, acquire the existing token, forward once with cancellation/deadline, and normalize the response. The only change is a truthful generic upstream 404 message that does not confuse an absent endpoint with a deleted record. Its current service roots, auth, body limit, headers and dispatch semantics are unchanged. Fixed-operation Modules forwarding remains separately owned by the existing gateway. No new feature, backend policy or lifecycle is added. Reviewed against the exact three-line error classification delta and end-to-end proxy/client regression cases.",
+    "reviewedBy": "Codex frontend integration owner",
+    "reviewedOn": "2026-10-14"
   }
 ]
