@@ -1,0 +1,128 @@
+{
+  "source": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "appTree": "dbd6aebbae52b5ded5611b21c3ff057b881cf92f",
+  "productionTree": "c48305d3d8fa8153fa1c1390950aa24e5281326b",
+  "backendSource": "111f269d749cae0249c2141779bd6d7deb93f45c",
+  "backendTree": "719c8292fc0c9cf4e8242b8d58efb2d004ad0a1f",
+  "checks": [
+    {
+      "name": "qualified-architecture",
+      "exitCode": 0,
+      "durationSeconds": 10.295621776982443,
+      "receipt": "qualified-architecture.json",
+      "log": "qualified-architecture.log"
+    },
+    {
+      "name": "qualified-browser",
+      "exitCode": 0,
+      "durationSeconds": 10.862925267982064,
+      "receipt": "qualified-browser.json",
+      "log": "qualified-browser.log"
+    },
+    {
+      "name": "qualified-build",
+      "exitCode": 0,
+      "durationSeconds": 68.02869766499498,
+      "receipt": "qualified-build.json",
+      "log": "qualified-build.log"
+    },
+    {
+      "name": "qualified-capiro-unit",
+      "exitCode": 0,
+      "durationSeconds": 20.58568269497482,
+      "receipt": "qualified-capiro-unit.json",
+      "log": "qualified-capiro-unit.log"
+    },
+    {
+      "name": "qualified-controls",
+      "exitCode": 0,
+      "durationSeconds": 11.223791751021054,
+      "receipt": "qualified-controls.json",
+      "log": "qualified-controls.log"
+    },
+    {
+      "name": "qualified-format",
+      "exitCode": 0,
+      "durationSeconds": 45.90361711999867,
+      "receipt": "qualified-format.json",
+      "log": "qualified-format.log"
+    },
+    {
+      "name": "qualified-lint",
+      "exitCode": 0,
+      "durationSeconds": 80.81539273599628,
+      "receipt": "qualified-lint.json",
+      "log": "qualified-lint.log"
+    },
+    {
+      "name": "qualified-packages",
+      "exitCode": 0,
+      "durationSeconds": 0.773583618021803,
+      "receipt": "qualified-packages.json",
+      "log": "qualified-packages.log"
+    },
+    {
+      "name": "qualified-runtime",
+      "exitCode": 0,
+      "durationSeconds": 5.87427035800647,
+      "receipt": "qualified-runtime.json",
+      "log": "qualified-runtime.log"
+    },
+    {
+      "name": "qualified-transport",
+      "exitCode": 0,
+      "durationSeconds": 20.767821447981987,
+      "receipt": "qualified-transport.json",
+      "log": "qualified-transport.log"
+    },
+    {
+      "name": "qualified-types",
+      "exitCode": 0,
+      "durationSeconds": 34.31225739401998,
+      "receipt": "qualified-types.json",
+      "log": "qualified-types.log"
+    },
+    {
+      "name": "qualified-web-unit",
+      "exitCode": 0,
+      "durationSeconds": 45.44223836099263,
+      "receipt": "qualified-web-unit.json",
+      "log": "qualified-web-unit.log"
+    }
+  ],
+  "unitTests": {
+    "web": 2243,
+    "capiro": 442,
+    "rootControls": 111,
+    "transport": 84,
+    "newReceiverCasesIncludedInWeb": 78,
+    "priorContainmentCasesIncludedInWeb": 36
+  },
+  "finalRegressionBaseline": {
+    "failed": 23,
+    "passed": 55,
+    "assertionsAndFixturesIdentical": true,
+    "sourceImportPathsOnlyRemapped": true
+  },
+  "architecture": {
+    "total": 488,
+    "reviewed": 466,
+    "inheritedUnreviewed": 22,
+    "blocking": 0
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 82
+  },
+  "httpObservations": 90,
+  "upstreamRequests": 0,
+  "externalNetworkAttempts": 0,
+  "browserObservations": 30,
+  "browserErrors": 0,
+  "cleanInstall": false,
+  "imageBuilt": false,
+  "nativeBackendQualified": false,
+  "nativeAcceptedRows": 0,
+  "nativeRowsStillOpen": 337,
+  "deployment": false
+}
