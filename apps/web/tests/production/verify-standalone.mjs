@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { chromium } from "@playwright/test";
+import { verifyConversationHttp } from "./verify-conversations.mjs";
 import { verifyMeriTheme } from "./verify-meri-theme.mjs";
 import {
   verifyDocumentHttp,
@@ -67,6 +68,7 @@ for (const [path, status, text] of [
 }
 
 results.push(...(await verifyDocumentHttp(origin)));
+results.push(...(await verifyConversationHttp(origin)));
 
 const browser = await chromium.launch({
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,

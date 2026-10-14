@@ -26,9 +26,15 @@ const apiRoutes = files(join(source, "app/api")).filter((path) =>
 );
 
 test("every API handler applies preview admission before any route work", () => {
-  assert.equal(
-    apiRoutes.length,
-    4,
+  assert.deepEqual(
+    apiRoutes.map((path) => relative(source, path)).sort(),
+    [
+      "app/api/action-followthrough/[operation]/route.ts",
+      "app/api/backend/[service]/[...path]/route.ts",
+      "app/api/capiro/[operation]/route.ts",
+      "app/api/conversations/[...path]/route.ts",
+      "app/api/documents/[operation]/route.ts",
+    ],
     "Review newly introduced API surfaces explicitly",
   );
   for (const path of apiRoutes) {

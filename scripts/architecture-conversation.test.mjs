@@ -23,7 +23,16 @@ test('conversation receiving does not admit private service, cursor or schema en
   }
 });
 
-test('conversation qualification does not allocate any new web server route', () => {
+test('conversation proxy does not allocate an additional per-operation server route', () => {
   const errors = inspectSources(new Map([['apps/web/src/app/api/conversations/submit/route.ts', 'export function POST() {}']])).errors;
   assert.ok(errors.some(error => error.includes('backend route handler is not allocated')));
+});
+
+const route = 'apps/web/src/app/api/conversations/[...path]/route.ts';
+test('conversation catch-all route remains allocated only to auth, preview, config and fixed proxy owners', () => {
+  const good = "import '@clerk/nextjs/server'; import '@/shared/preview/backend-policy.server'; import '@/shared/meri-conversations/config'; import '@/shared/meri-conversations/proxy';";
+  const sources = new Map([[route, good], ...['preview/backend-policy.server', 'meri-conversations/config', 'meri-conversations/proxy'].map(name => [`apps/web/src/shared/${name}.ts`, 'export {};'])]);
+  assert.deepEqual(inspectSources(sources).errors, []);
+  for (const denied of ['features/meri/private', 'shared/portfolio/api/http'])
+    assert.ok(inspectSources(new Map([[route, `import '@/${denied}';`]])).errors.length);
 });
