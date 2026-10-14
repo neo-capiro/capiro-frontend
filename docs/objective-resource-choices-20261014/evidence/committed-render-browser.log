@@ -1,0 +1,27 @@
+[WebServer] (node:203463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 13 tests using 1 worker
+
+(node:203594) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/objective-resource-version.spec.ts:54:1 › Calendar requires exact selected task version on open, retry and history return (2.7s)
+  ✓   2 test/browser/objective-resource-version.spec.ts:85:1 › changed preflight version requires refreshing choices and deliberate reselection (3.4s)
+  ✓   3 test/browser/objective-resource-version.spec.ts:135:1 › Workspace verifies full saved snapshot and refuses changed selected hash on fresh reads (3.0s)
+  ✓   4 test/browser/objective-resource-version.spec.ts:182:1 › version and hash claims without exact Objective binding never mount ordinary views (3.0s)
+  ✓   5 test/browser/objective-resource-version.spec.ts:197:3 › late occurrence observation is discarded after user replacement (2.1s)
+  ✓   6 test/browser/objective-resource-version.spec.ts:197:3 › late occurrence observation is discarded after organization replacement (1.6s)
+  ✓   7 test/browser/objective-resource-version.spec.ts:197:3 › late occurrence observation is discarded after client replacement (3.3s)
+  ✓   8 test/browser/objective-resource-version.spec.ts:252:1 › changed schedule version remains unavailable until its exact new timed selection (5.0s)
+  ✓   9 test/browser/objective-work-navigation.spec.ts:83:3 › strategies Portfolio handoff resolves exact saved Objective then resolves again at destination (7.6s)
+  ✓  10 test/browser/objective-work-navigation.spec.ts:83:3 › planner Portfolio handoff resolves exact saved Objective then resolves again at destination (6.8s)
+  ✓  11 test/browser/objective-work-navigation.spec.ts:83:3 › workspace Portfolio handoff resolves exact saved Objective then resolves again at destination (6.2s)
+  ✓  12 test/browser/objective-work-navigation.spec.ts:124:1 › saved Workspace selection is explicit and never opens the current working draft automatically (7.0s)
+  ✓  13 test/browser/objective-work-navigation.spec.ts:183:1 › unsaved edits and close interrupt Strategy resolution without late navigation (6.7s)
+
+  13 passed (1.1m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
