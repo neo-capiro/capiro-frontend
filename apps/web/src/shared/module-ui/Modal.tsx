@@ -18,6 +18,7 @@ export function Modal({
   children,
   footer,
   side = "center",
+  className = "",
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -26,12 +27,13 @@ export function Modal({
   children: ReactNode;
   footer?: ReactNode;
   side?: "center" | "right";
+  className?: string;
 }) {
   const opener = useRef<HTMLElement | null>(null);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className={`${styles.modal} ${side === "right" ? styles.drawer : ""}`}
+        className={`${styles.modal} ${side === "right" ? styles.drawer : ""} ${className}`}
         showCloseButton={false}
         onOpenAutoFocus={() => {
           opener.current =
@@ -61,7 +63,9 @@ export function Modal({
             ×
           </DialogClose>
         </header>
-        <div className={styles.modalBody}>{children}</div>
+        <div className={styles.modalBody} data-slot="modal-body">
+          {children}
+        </div>
         {footer && <footer className={styles.modalFooter}>{footer}</footer>}
       </DialogContent>
     </Dialog>

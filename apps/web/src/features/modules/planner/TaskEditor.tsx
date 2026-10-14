@@ -16,6 +16,7 @@ import {
 } from "../../../shared/module-ui";
 import { AdvancedTaskFields } from "./AdvancedTaskFields";
 import styles from "./planner.module.css";
+import dialogStyles from "./task-dialog.module.css";
 import type { Draft, TaskFormModel } from "./task-editor-data";
 import { statuses } from "./task-presentation";
 type Props = {
@@ -32,6 +33,7 @@ type Props = {
 export function TaskEditor(props: Props) {
   return (
     <Modal
+      className={`${dialogStyles.taskDialog} ${dialogStyles.editorDialog}`}
       open={props.open}
       onOpenChange={(open) => {
         if (!open) props.onClose();
@@ -107,29 +109,34 @@ function TaskForm(props: Props) {
     }
   };
   return (
-    <form className={styles.stack} onSubmit={(event) => void submit(event)}>
-      <TaskContentFields data={data} setData={setData} />
-      <TaskOwnerFields
-        data={data}
-        setData={setData}
-        people={props.people}
-        projects={props.projects}
-        projectIds={projectIds}
-        setProjects={setProjects}
-      />
-      <TaskScheduleFields data={data} setData={setData} />
-      <AdvancedTaskFields
-        data={data}
-        setData={setData}
-        people={props.people}
-        taskId={task?.id}
-      />
-      {error && (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
-      )}
-      <div className={styles.footer}>
+    <form
+      className={`${styles.stack} ${dialogStyles.editorForm}`}
+      onSubmit={(event) => void submit(event)}
+    >
+      <div className={dialogStyles.editorContent}>
+        <TaskContentFields data={data} setData={setData} />
+        <TaskOwnerFields
+          data={data}
+          setData={setData}
+          people={props.people}
+          projects={props.projects}
+          projectIds={projectIds}
+          setProjects={setProjects}
+        />
+        <TaskScheduleFields data={data} setData={setData} />
+        <AdvancedTaskFields
+          data={data}
+          setData={setData}
+          people={props.people}
+          taskId={task?.id}
+        />
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
+      </div>
+      <div className={`${styles.footer} ${dialogStyles.editorFooter}`}>
         <ActionButton type="button" onClick={props.onClose}>
           Cancel
         </ActionButton>
