@@ -90,6 +90,22 @@ try {
     page.setDefaultNavigationTimeout(20_000);
     page.on("pageerror", (error) => pageErrors.push(error.message));
     await page.goto(origin + "/meri");
+    await page
+      .getByRole("heading", { name: "Connection setup required", exact: true })
+      .waitFor();
+    const ordinaryMeri = await page.locator("body").innerText();
+    for (const sample of [
+      "Good morning, Jordan.",
+      "Anduril",
+      "Approvals · 2",
+      "FY27 funding landscape",
+      "Your authorized data",
+      "Disconnected synthetic fixture",
+    ])
+      assert.ok(
+        !ordinaryMeri.includes(sample),
+        `ordinary Meri must not substitute ${sample}`,
+      );
     await page.waitForFunction(
       () => typeof window.next?.router?.push === "function",
     );
@@ -164,7 +180,10 @@ try {
       });
       await page.evaluate(() => window.next.router.push("/meri"));
       await page
-        .getByRole("heading", { name: "Good morning, Jordan." })
+        .getByRole("heading", {
+          name: "Connection setup required",
+          exact: true,
+        })
         .waitFor();
       const returned = await page.evaluate(() => ({
         background: getComputedStyle(document.body).backgroundColor,

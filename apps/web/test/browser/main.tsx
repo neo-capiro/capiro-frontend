@@ -12,6 +12,7 @@ import { ObjectivesPage } from "../../src/features/portfolio/objectives/Objectiv
 import { ClientOverview } from "../../src/features/portfolio/client-profile/ClientOverview";
 import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
+import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
@@ -98,10 +99,18 @@ function RoutedApp() {
         </aside>
       </>
     );
+  if (path === "/meri/fixture/home")
+    return (
+      <ProductShell fixture>
+        <MeriHomeFixture />
+      </ProductShell>
+    );
   if (path === "/meri")
     return (
       <ProductShell>
-        <MeriHome />
+        <RequireSession>
+          <MeriHome />
+        </RequireSession>
       </ProductShell>
     );
   if (path === "/calendar")

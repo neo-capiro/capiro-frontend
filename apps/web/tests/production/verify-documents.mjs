@@ -34,7 +34,9 @@ export async function verifyDocumentNavigation(
   colorScheme,
 ) {
   await page.evaluate(() => window.next.router.push("/meri"));
-  await page.getByRole("heading", { name: "Good morning, Jordan." }).waitFor();
+  await page
+    .getByRole("heading", { name: "Connection setup required", exact: true })
+    .waitFor();
   await page
     .getByRole(viewport.width < 768 ? "link" : "button", {
       name: "Files",

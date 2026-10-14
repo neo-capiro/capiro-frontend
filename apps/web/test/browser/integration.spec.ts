@@ -77,7 +77,7 @@ test("shared product navigation and history preserve verified client hints and s
   await expect(page.locator("[data-portfolio-root]")).toHaveCount(1);
   await page.goBack();
   await expect(
-    page.getByRole("heading", { name: "Good morning, Jordan." }),
+    page.getByRole("heading", { name: "Meri", exact: true }),
   ).toBeVisible();
   await page.goForward();
   await expect(page.locator("[data-portfolio-root]")).toHaveCount(1);

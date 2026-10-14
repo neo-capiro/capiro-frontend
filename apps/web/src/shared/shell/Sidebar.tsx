@@ -12,7 +12,7 @@ const destinations = [
   { label: "Conversations", icon: "conversations", href: "/meri" },
   { label: "Files", icon: "files", href: "/meri/files" },
   { label: "Runs", icon: "runs" },
-  { label: "Approvals · 2", icon: "approvals" },
+  { label: "Approvals", icon: "approvals" },
   { label: "Memory", icon: "memory" },
   { label: "Routines", icon: "routines" },
   { label: "Data access", icon: "data-access" },
@@ -25,14 +25,20 @@ const recents = [
 
 export function Sidebar({
   assetSet = "home",
+  fixture = false,
 }: {
   assetSet?: "home" | "cited-answer";
+  fixture?: boolean;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
   const router = useRouter();
   const reset = () => {
     window.dispatchEvent(new Event("meri:reset-local-draft"));
+    if (fixture) {
+      if (pathname !== "/meri/fixture/home") router.push("/meri/fixture/home");
+      return;
+    }
     if (pathname !== "/meri")
       router.push(
         productHref(
@@ -49,7 +55,17 @@ export function Sidebar({
       : href === pathname;
   return (
     <aside className={styles.sidebar} aria-label="Meri navigation">
-      <Button type="button" className={styles.newConversation} onClick={reset}>
+      <Button
+        type="button"
+        className={styles.newConversation}
+        onClick={reset}
+        disabled={!fixture}
+        title={
+          fixture
+            ? "New local fixture draft"
+            : "Conversation service unavailable"
+        }
+      >
         <DesignIcon name="plus" assetSet={assetSet} />
         New conversation
       </Button>
@@ -90,14 +106,16 @@ export function Sidebar({
               item.href
                 ? item.label === "Files"
                   ? "Open document files"
-                  : assetSet === "home"
-                    ? "Open local Home"
-                    : "Open local conversation view"
-                : "Unavailable: disconnected synthetic fixture"
+                  : fixture
+                    ? "Open local fixture"
+                    : "Open Meri"
+                : "Unavailable: no connected service"
             }
           >
             {<DesignIcon name={item.icon} assetSet={assetSet} />}
-            {item.label}
+            {fixture && item.label === "Approvals"
+              ? "Approvals · 2"
+              : item.label}
           </Button>
         ))}
         <Button
@@ -120,18 +138,22 @@ export function Sidebar({
       </nav>
       <section className={styles.recents} aria-labelledby="recent-label">
         <h2 id="recent-label">Recent</h2>
-        {recents.map((title) => (
-          <Button
-            key={title}
-            type="button"
-            variant="ghost"
-            className={styles.navButton}
-            disabled
-            title="Synthetic title; no conversation exists"
-          >
-            {title}
-          </Button>
-        ))}
+        {fixture ? (
+          recents.map((title) => (
+            <Button
+              key={title}
+              type="button"
+              variant="ghost"
+              className={styles.navButton}
+              disabled
+              title="Synthetic title; no conversation exists"
+            >
+              {title}
+            </Button>
+          ))
+        ) : (
+          <p>Recent conversations unavailable</p>
+        )}
       </section>
       <div className={styles.preferences}>
         <div className={styles.divider} />

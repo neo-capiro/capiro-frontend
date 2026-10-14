@@ -2163,10 +2163,10 @@
     "file": "apps/web/src/shared/shell/Sidebar.tsx",
     "kind": "function",
     "symbol": "Sidebar",
-    "fingerprint": "af7dddbeafb9ac899294288a3b05085e95324278d92ad109ebb832d537d00df8",
-    "reason": "The existing Meri navigation owns destinations, active-state presentation and client-scoped links. This change enables the existing Files destination and corrects current-route selection; other unavailable destinations stay disabled. It introduces no document state, transport or authority logic. A separate Files-specific navigation owner would duplicate this shell responsibility.",
-    "reviewedBy": "Codex independent Meri Files integration review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "fd79fdbd2c5dfac1dcd09e05e44fea67b151b0da9e544d3e0e3f9dd914e1321a",
+    "reason": "Independent whole-function review: Sidebar remains the shared Meri navigation presentation owner. Explicit fixture composition gates local fixture reset, sample recents and approval count. Ordinary navigation reuses canonical route/scope helpers and disables unconnected conversation creation. Availability and fixture decisions stay beside their controls; no service query, authority, persistence, count fabrication or dispatch is added. Header/mobile navigation and feature workflows retain their own canonical owners. See docs/production-data-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent production data review outreach_review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
