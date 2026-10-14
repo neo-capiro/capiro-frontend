@@ -610,7 +610,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact’s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1415,7 +1415,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2380,7 +2380,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2424,10 +2424,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachView",
-    "fingerprint": "d4a51773336e6947c29eaca2905bb1ff228ed40296463614b52bbd40b9d42368",
-    "reason": "OutreachView composes the existing exact-record read, admission, selection and destination. The new client predicate extends its existing record-ID admission before every editor/rich destination; no DTO, transport, persistence or send responsibility is added. OutreachForm remains byte-unchanged.",
-    "reviewedBy": "Codex calendar_relationships_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "fa7f3eaf4558905785dc8a8590577d9676eb675e36c593c2053e6cad2937f4b3",
+    "reason": "Independent Codex outreach_review inspected the complete module and callers. OutreachView owns one ordinary Outreach read/selection/destination workflow; the shared predicate extends existing exact-record scope admission to the list before filtering and editor selection. The existing useOutreachRecords port is reused; no DTO, endpoint, auth, transport, persistence or send owner is added. The adjacent unchanged form and campaign/list renderers remain cohesive parts of this existing workflow. The module is 402 nonblank lines (a review signal, not a required split); no new lifecycle responsibility is accumulated. Full review rationale: docs/outreach-list-scope-20261014/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
@@ -2535,6 +2535,15 @@
     "fingerprint": "9bd04d2d1b16480be227e2e71802108b8549fbabc44b561c66bc71469ae5ba02",
     "reason": "Existing Portfolio index presentation stylesheet; the sole addition dims the temporarily inert local filter/navigation region during inline customization. No domain responsibility, global selector, geometry, asset, token or other feature styling is added. Exact scope reviewed in docs/customize-entry-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex frontend integration owner",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "56281213a60eeaaf2d46e865c63c57b037de62bd462dc5bf8e8782847be46481",
+    "reason": "Independent Codex outreach_review inspected the complete module and callers. OutreachView owns one ordinary Outreach read/selection/destination workflow; the shared predicate extends existing exact-record scope admission to the list before filtering and editor selection. The existing useOutreachRecords port is reused; no DTO, endpoint, auth, transport, persistence or send owner is added. The adjacent unchanged form and campaign/list renderers remain cohesive parts of this existing workflow. The module is 402 nonblank lines (a review signal, not a required split); no new lifecycle responsibility is accumulated. Full review rationale: docs/outreach-list-scope-20261014/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
     "reviewedOn": "2026-10-14"
   }
 ]

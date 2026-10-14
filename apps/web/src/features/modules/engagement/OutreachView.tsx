@@ -43,9 +43,7 @@ export function OutreachView({
     { params: { id: initialDraft ?? "" } },
     { enabled: !!initialDraft },
   );
-  const query = useCapiroQuery("engagement.outreach", {
-    query: { clientId: clientId || undefined, limit: 500 },
-  });
+  const query = useOutreachRecords(clientId);
   const [search, setSearch] = useState(""),
     [type, setType] = useState(""),
     [selected, setSelected] = useState<OutreachRecord | "new" | null>(
@@ -56,8 +54,13 @@ export function OutreachView({
     setLoadedDraft(draft.data);
     if (draft.data) setSelected(draft.data);
   }
+  const matchesScope = (record: OutreachRecord) =>
+    !clientId || record.client?.id === clientId;
+  const listError = query.data?.some((record) => !matchesScope(record))
+    ? new Error("The returned outreach does not match this client scope.")
+    : query.error;
   const rows =
-    query.data?.filter(
+    (!listError ? query.data : undefined)?.filter(
       (record) =>
         record.title.toLowerCase().includes(search.toLowerCase()) &&
         (!type || record.type === type),
@@ -73,8 +76,7 @@ export function OutreachView({
   if (
     initialDraft &&
     draft.data &&
-    (draft.data.id !== initialDraft ||
-      (clientId !== "" && draft.data.client?.id !== clientId))
+    (draft.data.id !== initialDraft || !matchesScope(draft.data))
   )
     return (
       <StatusPanel error="The returned outreach does not match this link." />
@@ -130,7 +132,11 @@ export function OutreachView({
         </ActionButton>
       </div>
       <CampaignList sessions={sessions} onSelect={setSession} />
-      <OutreachRecords query={query} rows={rows} onSelect={setSelected} />
+      <OutreachRecords
+        query={{ ...query, error: listError }}
+        rows={rows}
+        onSelect={setSelected}
+      />
       <p className={styles.note}>
         Editing a draft does not send mail. Delivery requires an audited
         immutable draft and a reviewed send intent.
