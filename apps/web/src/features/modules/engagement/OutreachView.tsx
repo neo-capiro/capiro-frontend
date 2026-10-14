@@ -50,6 +50,7 @@ export function OutreachView({
       initialCreate ? "new" : null,
     );
   const [loadedDraft, setLoadedDraft] = useState(() => draft.data);
+  const [draftSaving, setDraftSaving] = useState(false);
   if (loadedDraft !== draft.data) {
     setLoadedDraft(draft.data);
     if (draft.data) setSelected(draft.data);
@@ -144,7 +145,7 @@ export function OutreachView({
       <Modal
         open={selected !== null}
         onOpenChange={(open) => {
-          if (!open) setSelected(null);
+          if (!open && !draftSaving) setSelected(null);
         }}
         title={selected === "new" ? "New outreach" : "Outreach draft"}
         description={
@@ -160,6 +161,7 @@ export function OutreachView({
             clientId={clientId}
             onClose={() => setSelected(null)}
             onSaved={query.reload}
+            onBusyChange={setDraftSaving}
           />
         )}
       </Modal>
@@ -171,11 +173,13 @@ function OutreachForm({
   clientId,
   onClose,
   onSaved,
+  onBusyChange,
 }: {
   record?: OutreachRecord;
   clientId: string;
   onClose: () => void;
   onSaved: () => void;
+  onBusyChange: (busy: boolean) => void;
 }) {
   const api = useCapiro();
   const [title, setTitle] = useState(record?.title ?? ""),
@@ -188,7 +192,9 @@ function OutreachForm({
     [error, setError] = useState<string>();
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (busy) return;
     setBusy(true);
+    onBusyChange(true);
     setError(undefined);
     try {
       if (record)
@@ -214,23 +220,32 @@ function OutreachForm({
       );
     } finally {
       setBusy(false);
+      onBusyChange(false);
     }
   };
   return (
-    <form className={styles.stack} onSubmit={(event) => void submit(event)}>
+    <form
+      className={styles.stack}
+      aria-busy={busy}
+      onSubmit={(event) => void submit(event)}
+    >
       <Field label="Title" htmlFor="outreach-title">
         <TextInput
           id="outreach-title"
+          disabled={busy}
           required
           maxLength={240}
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
       </Field>
-      {!record && <OutreachType value={type} onChange={setType} />}
+      {!record && (
+        <OutreachType value={type} onChange={setType} disabled={busy} />
+      )}
       <Field label="Subject" htmlFor="outreach-subject">
         <TextInput
           id="outreach-subject"
+          disabled={busy}
           maxLength={300}
           value={subject}
           onChange={(event) => setSubject(event.target.value)}
@@ -239,6 +254,7 @@ function OutreachForm({
       <Field label="Body" htmlFor="outreach-body">
         <TextArea
           id="outreach-body"
+          disabled={busy}
           value={body}
           onChange={(event) => setBody(event.target.value)}
         />
@@ -254,11 +270,11 @@ function OutreachForm({
         </p>
       )}
       <div className={styles.footer}>
-        <ActionButton type="button" onClick={onClose}>
+        <ActionButton type="button" onClick={onClose} disabled={busy}>
           Cancel
         </ActionButton>
         <ActionButton primary type="submit" disabled={busy}>
-          Save draft
+          {busy ? "Saving draft…" : "Save draft"}
         </ActionButton>
       </div>
     </form>
@@ -322,16 +338,19 @@ function CampaignList({
 function OutreachType({
   value,
   onChange,
+  disabled,
 }: {
   value: "campaign" | "follow_up" | "prep" | "outbound_campaign";
   onChange: (
     value: "campaign" | "follow_up" | "prep" | "outbound_campaign",
   ) => void;
+  disabled: boolean;
 }) {
   return (
     <Field label="Type" htmlFor="outreach-type">
       <select
         id="outreach-type"
+        disabled={disabled}
         className={styles.select}
         value={value}
         onChange={(event) => onChange(event.target.value as typeof value)}
