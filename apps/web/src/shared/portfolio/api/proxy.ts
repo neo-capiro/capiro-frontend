@@ -1,4 +1,5 @@
 import type { RuntimeConfig, Service } from "../config/config";
+import { sameRequestOrigin } from "../../request-origin";
 const permittedRoots: Record<Service, readonly string[]> = {
   core: [
     "clients",
@@ -96,7 +97,7 @@ export async function proxyRequest(
     return jsonError(405, "Method not allowed.");
   if (
     request.method !== "GET" &&
-    request.headers.get("origin") !== new URL(request.url).origin
+    !sameRequestOrigin(request, config.requestOrigin)
   )
     return jsonError(403, "Request origin is not allowed.");
   let token: string | null;

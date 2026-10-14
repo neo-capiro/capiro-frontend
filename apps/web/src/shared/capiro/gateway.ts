@@ -22,6 +22,7 @@ import { publicOnboardOperations } from "./operations/onboard-public";
 
 import { jsonError, serviceErrorResponse } from "./gateway-errors";
 import { reportStrategyValidation } from "./strategy-validation-diagnostic";
+import { sameRequestOrigin } from "../request-origin";
 
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
@@ -212,7 +213,7 @@ async function handlePublicOperationRequest(
     return jsonError(405, "Method not allowed.");
   if (
     request.method !== "GET" &&
-    request.headers.get("origin") !== new URL(request.url).origin
+    !sameRequestOrigin(request, config.requestOrigin)
   )
     return jsonError(403, "Request origin is not allowed.");
   const base = config.services[operation.service];
@@ -295,7 +296,7 @@ export async function handleCapiroRequest(
     return jsonError(405, "Method not allowed for this operation.");
   if (
     request.method !== "GET" &&
-    request.headers.get("origin") !== new URL(request.url).origin
+    !sameRequestOrigin(request, config.requestOrigin)
   ) {
     return jsonError(403, "Request origin is not allowed.");
   }

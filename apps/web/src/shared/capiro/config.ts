@@ -1,10 +1,12 @@
 import { serviceNames, type CapiroService } from "./contracts";
+import { readRequestOrigin } from "../request-origin";
 
 export type CapiroConfig = {
   services: Partial<Record<CapiroService, string>>;
   authConfigured: boolean;
   publishableKey?: string;
   issues: string[];
+  requestOrigin?: string | null;
 };
 
 const serviceVariables: Record<CapiroService, string> = {
@@ -46,6 +48,7 @@ export function readCapiroConfig(
   env: Record<string, string | undefined>,
 ): CapiroConfig {
   const issues: string[] = [];
+  const requestOrigin = readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, issues);
   const services: CapiroConfig["services"] = {};
   for (const service of serviceNames) {
     const value = readServiceUrl(
@@ -72,6 +75,7 @@ export function readCapiroConfig(
     authConfigured,
     publishableKey: authConfigured ? publishableKey : undefined,
     issues,
+    requestOrigin,
   };
 }
 

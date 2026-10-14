@@ -1,3 +1,5 @@
+import { readRequestOrigin } from "../../request-origin";
+
 export const serviceKeys = [
   "core",
   "strategy",
@@ -20,6 +22,7 @@ export type RuntimeConfig = {
   publishableKey?: string;
   trackerBackend?: TrackerBackend;
   issues: string[];
+  requestOrigin?: string | null;
 };
 const variables: Record<Service, string> = {
   core: "CORE_API_BASE_URL",
@@ -59,6 +62,7 @@ export function readConfig(
   env: Record<string, string | undefined>,
 ): RuntimeConfig {
   const issues: string[] = [];
+  const requestOrigin = readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, issues);
   const trackerBackend = env.TRACKER_BACKEND?.trim() || undefined;
   if (
     trackerBackend &&
@@ -108,5 +112,6 @@ export function readConfig(
     authConfigured:
       authConfigured && !issues.some((i) => i.startsWith("Clerk public")),
     issues,
+    requestOrigin,
   };
 }
