@@ -2433,10 +2433,10 @@
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
-    "fingerprint": "a430dcf49a60b1889c2e4e56d8ec8340df338cb91e500c1711007490941f071d",
-    "reason": "Existing parent document editing and history presentation remain cohesive. Addition composes copied-tab links and excludes bound bodies from ordinary content projection; canonical copied-tab command lifecycle is separate. No new transport or authority owner. Exact independent review: docs/workspace-brief-copy-20261013/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent calendar_relationships_review; root integrated exact reviewed source",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "0333c6d6868b89f4a76f6d5d643fd41af559ddfe1f82dd4f010d5f263be64837",
+    "reason": "Independent Codex outreach_review inspected the complete existing 203-line Workspace editor. The ordinary section textarea now consumes its canonical PATCH/snapshot pending state, matching title and rich-section admission. No payload, writer, transport, persistence or unrelated responsibility is added. Current record admission remains in WorkspaceDraft; canonical mutation/prospect hooks retain lifecycle ownership. See docs/workspace-admission-20261014/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",

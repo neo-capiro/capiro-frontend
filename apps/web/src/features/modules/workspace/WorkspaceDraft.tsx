@@ -189,6 +189,7 @@ function DraftEditor({
               <TextArea
                 aria-label={`${name} content`}
                 value={sections[name] ?? ""}
+                disabled={pending}
                 onChange={(event) =>
                   setSections((previous) => ({
                     ...previous,
@@ -293,6 +294,18 @@ export function WorkspaceDraft({
     {},
     { enabled: Boolean(prospectId || query.data?.prospectId) },
   );
+  if (query.data && query.data.id !== id)
+    return (
+      <section className={styles.screen}>
+        <header className={styles.heading}>
+          <h1>Document unavailable</h1>
+        </header>
+        <StatusPanel
+          error="The returned document does not match this link."
+          onRetry={query.reload}
+        />
+      </section>
+    );
   let originError: Error | undefined;
   if (query.data && (prospectId || query.data.prospectId) && me.data) {
     try {

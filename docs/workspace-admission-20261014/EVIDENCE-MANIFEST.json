@@ -1,0 +1,383 @@
+{
+  "sourceCommit": "9d5fd42c6d8a7a131e1e3e0c0c4b02ce0afac09c",
+  "archive": "evidence.tar.gz",
+  "archiveBytes": 5981751,
+  "archiveSha256": "a1389b2a877b9b6fd05ee8d4c7d84be8abb5b2e0bb88ac227cb980beffce73c4",
+  "members": [
+    {
+      "path": "accessible-candidate-artifacts/.last-run.json",
+      "bytes": 145,
+      "sha256": "ec706f9555bf7f48af815719acc98f2acafea157f8bfbee27bfb497c1ee52850"
+    },
+    {
+      "path": "accessible-candidate-artifacts/newsletter-staging-explici-1d93f--opens-the-selected-session/newsletter-staging-desktop.png",
+      "bytes": 139197,
+      "sha256": "d97e6d48f9f32487fdd844435437c48492989c411c8cbd3018c6ebe45192beaf"
+    },
+    {
+      "path": "accessible-candidate-artifacts/newsletter-staging-mobile--63cdc-ts-keyboard-acknowledgement/newsletter-staging-mobile.png",
+      "bytes": 110647,
+      "sha256": "59133ad9d5ff6d330c80a7e72faa571945fe6d844eb2525949426f23388984fb"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--403d6-ble-keyboard-retry-at-390px/error-context.md",
+      "bytes": 3634,
+      "sha256": "911da3d2dd167a2f9294ccdadca3b0ca0bfbbcd2a2467e4de51ee1d4b2cd1553"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--403d6-ble-keyboard-retry-at-390px/test-failed-1.png",
+      "bytes": 25200,
+      "sha256": "16458dbc3a4a7788cfc91f57d98a05f1e5701572b47b149b3357e19b8a8426a5"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--403d6-ble-keyboard-retry-at-390px/trace.zip",
+      "bytes": 888110,
+      "sha256": "c4437bff9141f715ea6094f6a24619be79356ed3df8e74a71bbde8ab4874ace7"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--a94cf-le-keyboard-retry-at-1440px/error-context.md",
+      "bytes": 5380,
+      "sha256": "f3193a3ada933177437d0cfa3eddee498abe83bcc7e0bf59e5bdbf777a17e832"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--a94cf-le-keyboard-retry-at-1440px/test-failed-1.png",
+      "bytes": 47009,
+      "sha256": "ca60243bef92fe7c892ee161c5bc34f96f90c4a27152373d30c8031d0463fc90"
+    },
+    {
+      "path": "accessible-candidate-artifacts/workspace-admission-wrong--a94cf-le-keyboard-retry-at-1440px/trace.zip",
+      "bytes": 920999,
+      "sha256": "142a0a5c424057c5960829e818892c60f83f1d53499baa4075f3b926adc714f2"
+    },
+    {
+      "path": "accessible-candidate-results.json",
+      "bytes": 649413,
+      "sha256": "a8fe6f05d97b8ce6e161a74a10ade38dc2c6106da6e9b3fc62b5cfe7be09978b"
+    },
+    {
+      "path": "accessible-candidate.log",
+      "bytes": 12892,
+      "sha256": "797acbc34243f56aece79ed012048916f670457984c825be49e6e396a07bc00f"
+    },
+    {
+      "path": "baseline-artifacts/.last-run.json",
+      "bytes": 243,
+      "sha256": "c9979f3f5994ce862937c74baed8cb5f90ff9189d298ff54b6550b3a0d8fba69"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-3c6b6--before-mounting-its-editor/error-context.md",
+      "bytes": 7591,
+      "sha256": "f0825f30b73ae4d5f6bad0ee66a4080ec66a6e570b2fb5398ae3473355e0ee53"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-3c6b6--before-mounting-its-editor/test-failed-1.png",
+      "bytes": 62617,
+      "sha256": "a29d01a155176b699290740b1187ad8e44573ae82941e7861dfd768553974dde"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-3c6b6--before-mounting-its-editor/trace.zip",
+      "bytes": 303607,
+      "sha256": "95d0e0cff14ebe80f9cdc64cacab415caa324bdf17f4b5f30e72bbe6c2c88303"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-68ed8--before-mounting-its-editor/error-context.md",
+      "bytes": 9937,
+      "sha256": "bb4c74fdf00b785a693b3ad8065737911b1e3cce6d65fddb212808f8b6432921"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-68ed8--before-mounting-its-editor/test-failed-1.png",
+      "bytes": 130848,
+      "sha256": "b3318f64d347b4c10251ea7a64b75f24517e53d012bf92abfdba4a24a1472a90"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-Worksp-68ed8--before-mounting-its-editor/trace.zip",
+      "bytes": 701978,
+      "sha256": "4ab45b9bbbc6035406080ad1b97f6798986b8b6ccd9c47d6645d3a34f318d193"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-ab5c3-and-reopens-after-rejection/error-context.md",
+      "bytes": 6470,
+      "sha256": "a4c9f6575002fee4c92f40e7a16ce033948a4930ffb37bc443d7c61995054463"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-ab5c3-and-reopens-after-rejection/test-failed-1.png",
+      "bytes": 60326,
+      "sha256": "bff733a87c3dcb66fe8368fdfca2b4cf8a5333e927db47752ec7e7a0ce5fbdca"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-ab5c3-and-reopens-after-rejection/trace.zip",
+      "bytes": 358165,
+      "sha256": "b40d35802e033b1a863bf0d9e143deeccd97afd55a8f549f7e05257a9d32a586"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-e7ba2-and-reopens-after-rejection/error-context.md",
+      "bytes": 6468,
+      "sha256": "b96c027a288271767b028b10c215f27eed499598e1e0f0c7c887d34ead8a6836"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-e7ba2-and-reopens-after-rejection/test-failed-1.png",
+      "bytes": 60326,
+      "sha256": "bff733a87c3dcb66fe8368fdfca2b4cf8a5333e927db47752ec7e7a0ce5fbdca"
+    },
+    {
+      "path": "baseline-artifacts/workspace-admission-ordina-e7ba2-and-reopens-after-rejection/trace.zip",
+      "bytes": 360004,
+      "sha256": "99976168a1fb97007a3e13d73d3dd4aac2f863c4531201c38a66ac352cfa5b8d"
+    },
+    {
+      "path": "baseline-results.json",
+      "bytes": 29509,
+      "sha256": "7e2d6dfac79042cea3e0b35bdf53a4c9bb69476ad05f7d7a4080106eaf520e4c"
+    },
+    {
+      "path": "baseline-spec.ts.txt",
+      "bytes": 4415,
+      "sha256": "3af15eae4eb8110d4b15d63b7855b956e92f184a88d03f2a4941c36ee6d00882"
+    },
+    {
+      "path": "baseline.log",
+      "bytes": 14756,
+      "sha256": "501971d74d960faf8f6e3f36e6b07bcf7f4a0cab6974e13a924f3a27a784c82a"
+    },
+    {
+      "path": "browser-final-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "browser-final-artifacts/newsletter-staging-explici-1d93f--opens-the-selected-session/newsletter-staging-desktop.png",
+      "bytes": 139197,
+      "sha256": "d97e6d48f9f32487fdd844435437c48492989c411c8cbd3018c6ebe45192beaf"
+    },
+    {
+      "path": "browser-final-artifacts/newsletter-staging-mobile--63cdc-ts-keyboard-acknowledgement/newsletter-staging-mobile.png",
+      "bytes": 110647,
+      "sha256": "59133ad9d5ff6d330c80a7e72faa571945fe6d844eb2525949426f23388984fb"
+    },
+    {
+      "path": "browser-final-artifacts/workspace-admission-wrong--403d6-ble-keyboard-retry-at-390px/workspace-admission-390.png",
+      "bytes": 29483,
+      "sha256": "0ae8709b73a104c12760e557b884161839c29caf6b302cc3734297695f561cb5"
+    },
+    {
+      "path": "browser-final-artifacts/workspace-admission-wrong--a94cf-le-keyboard-retry-at-1440px/workspace-admission-1440.png",
+      "bytes": 53340,
+      "sha256": "36d2261794a2a93feb9a84e0ac9ee7d126669724f0bfe2fb9545606d48043652"
+    },
+    {
+      "path": "browser-final-results.json",
+      "bytes": 649807,
+      "sha256": "c9396549d46a9e66c1628d97decf579c444b280231dcdaf488d62b5e90ef3786"
+    },
+    {
+      "path": "capiro-workspace-architecture-red.json",
+      "bytes": 914340,
+      "sha256": "7e3815d51deab7c53975430b71c907de6eeef2c52c1d9152c8fc75d4387f85fb"
+    },
+    {
+      "path": "capiro-workspace-architecture-updated.json",
+      "bytes": 914985,
+      "sha256": "cbf74e8540700c07fd45f1a19680092c33a4d82244e529773ff6dd91b2a31763"
+    },
+    {
+      "path": "capiro-workspace-architecture.json",
+      "bytes": 914985,
+      "sha256": "cbf74e8540700c07fd45f1a19680092c33a4d82244e529773ff6dd91b2a31763"
+    },
+    {
+      "path": "capiro-workspace-build-final.log",
+      "bytes": 2683,
+      "sha256": "2a47e77903c7469e7c2cd23ca35498a18febb391aa85ba376527d9b8143f915f"
+    },
+    {
+      "path": "capiro-workspace-build.log",
+      "bytes": 2683,
+      "sha256": "d68146d5f148dee5199c099c590312bf50633d2db2ae0a65a5bcb4ff193f25d9"
+    },
+    {
+      "path": "capiro-workspace-final-browser.log",
+      "bytes": 7044,
+      "sha256": "46581000b311187b86e60bbf3e394e3fbc177f1090f5d2949712fd60c45fb910"
+    },
+    {
+      "path": "capiro-workspace-format-final.log",
+      "bytes": 274,
+      "sha256": "773cff305e1e384801ea09129135096bc71e0b5f6fa6c8fd66938c0de01cafbe"
+    },
+    {
+      "path": "capiro-workspace-format.log",
+      "bytes": 334,
+      "sha256": "504ef60bd8eebdac4934d7de17d03c73f5307ea47e309493b5a43548b3c40404"
+    },
+    {
+      "path": "capiro-workspace-green.log",
+      "bytes": 5015,
+      "sha256": "81f8d6d39a94aa762c830006e2c0dff05742e5c56692384f3fc918eccea11c66"
+    },
+    {
+      "path": "capiro-workspace-install.log",
+      "bytes": 164,
+      "sha256": "84310bca1de4b60674fd06b827e3e4822a6df141f550179e83ec58ca68262f10"
+    },
+    {
+      "path": "capiro-workspace-lint.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "capiro-workspace-packages.log",
+      "bytes": 2007,
+      "sha256": "6f3b01f08979a75f0ad0bab69de6cae8e573232ceedf91947f9f0fff22fd94d0"
+    },
+    {
+      "path": "capiro-workspace-production.log",
+      "bytes": 8294,
+      "sha256": "518f3b2a29f981158c5a436103d5ee8c7e977b289ebbb85ad6207516ff926f46"
+    },
+    {
+      "path": "capiro-workspace-red.log",
+      "bytes": 14756,
+      "sha256": "501971d74d960faf8f6e3f36e6b07bcf7f4a0cab6974e13a924f3a27a784c82a"
+    },
+    {
+      "path": "capiro-workspace-root.log",
+      "bytes": 11465,
+      "sha256": "7181d0dedd85b134dfa55e8d555ed0a8d278b9750b8c23870846023c8fa13578"
+    },
+    {
+      "path": "capiro-workspace-types-final.log",
+      "bytes": 821,
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "capiro-workspace-types.log",
+      "bytes": 821,
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "capiro-workspace-unit.log",
+      "bytes": 650,
+      "sha256": "cf79495ff6eec7f23954f86498558c903681b86d203663dc9c6f980133321e22"
+    },
+    {
+      "path": "first-candidate-results.json",
+      "bytes": 33864,
+      "sha256": "4c9251827320e04185fdeb26c75f3fd55888be894b50a1f71dc3014829b0cb24"
+    },
+    {
+      "path": "first-candidate.log",
+      "bytes": 5015,
+      "sha256": "81f8d6d39a94aa762c830006e2c0dff05742e5c56692384f3fc918eccea11c66"
+    },
+    {
+      "path": "ledger-preservation.json",
+      "bytes": 479,
+      "sha256": "1dc09a5ab34b6927431170eccf644702b815d9406a56f497d1a19a01ee5ada61"
+    },
+    {
+      "path": "previous-size-reviews.json",
+      "bytes": 723,
+      "sha256": "c5284564972dc64c611903854c60abbb1f35821befa6fc4caaecd658c44886a4"
+    },
+    {
+      "path": "production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "production/production-meri-1440-dark.png",
+      "bytes": 172515,
+      "sha256": "e206dbec06057dbd1dde0894ed8b986ee549e06784600f329a4803d323e070bf"
+    },
+    {
+      "path": "production/production-meri-1440-light.png",
+      "bytes": 86010,
+      "sha256": "6b8bbb83b23394c3f7c0084f641545c84919f11c32473fab36221f087ce6d2da"
+    },
+    {
+      "path": "production/production-meri-390-dark.png",
+      "bytes": 95164,
+      "sha256": "8f6f053b02111cea1449ebfa58f2f49c39d32369b711766b0ec5c4b658e3f14d"
+    },
+    {
+      "path": "production/production-meri-390-light.png",
+      "bytes": 56738,
+      "sha256": "82923566545170915a2b9e2183b57f2bfc89fd8fd2be0ac0cd516bd820450d32"
+    },
+    {
+      "path": "production/production-meri-error-1440-dark.png",
+      "bytes": 205851,
+      "sha256": "36127c24e41d3860254b95327cbfa45dddfd2aa962e2fc627330c6e727c65686"
+    },
+    {
+      "path": "production/production-meri-error-1440-light.png",
+      "bytes": 112386,
+      "sha256": "4ff4708f163070b406ec5068bf23041ca62a861a954d700a4de7a36a91dd4b97"
+    },
+    {
+      "path": "production/production-meri-error-390-dark.png",
+      "bytes": 131065,
+      "sha256": "2e586ebf8fb1048d297164c90babd1f0fd844ed9c5277a72c8751e7f469fa0f7"
+    },
+    {
+      "path": "production/production-meri-error-390-light.png",
+      "bytes": 83781,
+      "sha256": "fe2b521419885484bcdaaab3d3ea9c0ac5b02cdd2290b0c5563b7f49df411759"
+    },
+    {
+      "path": "production/production-meri-files-1440-dark.png",
+      "bytes": 120123,
+      "sha256": "7267c03461d67b46193ba1983ebc95efca60c3e38b39ae679a75da73fee9ac03"
+    },
+    {
+      "path": "production/production-meri-files-1440-light.png",
+      "bytes": 51117,
+      "sha256": "f843c80b08acd54d40151ea792879b669675ce305d29d7d1b13fa8db8b5b7ff3"
+    },
+    {
+      "path": "production/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "production/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "production/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "production/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "production/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "production/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "production/production-smoke.json",
+      "bytes": 7698,
+      "sha256": "30ccd231b9ede7e36af74854622fc0536c4f6e1326e44b87bbc224a70d6a8916"
+    },
+    {
+      "path": "production/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "production/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "3369c9ea9a42245d036e46f816e552863c8c52f214c0ad2be54b0b4d6155d95a"
+    }
+  ]
+}
