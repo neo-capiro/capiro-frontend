@@ -340,6 +340,20 @@
       "activeObjectiveFullpageParity": "OPEN_NOT_IMPLEMENTED",
       "mobileParity": "DEFERRED_PR43_EXCLUDED",
       "evidence": "../desktop-details-20261014/HANDOFF.md"
+    },
+    {
+      "batch": "desktop-task-body-20261014",
+      "qualifiedSource": "8660283cb246774921823d5a96df7a37129fef58",
+      "baseSource": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+      "scope": "Desktop task editor field grouping, canonical section membership, breakpoint and pending safety; not full content/native parity",
+      "modulesDesktopSharedPassed": 87,
+      "skipped": 0,
+      "flaky": 0,
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "activeObjectiveFullpageParity": "OPEN_BINDING_MAP_PENDING",
+      "mobileParity": "DEFERRED",
+      "evidence": "../desktop-task-body-20261014/HANDOFF.md"
     }
   ],
   "local_execution_batches": [

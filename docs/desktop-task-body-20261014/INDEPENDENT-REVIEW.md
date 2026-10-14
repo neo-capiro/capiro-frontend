@@ -14,3 +14,9 @@ Size responsibilities accepted:
 Other changed presentation modules have no size signal. TaskScheduleFields extraction follows civil schedule presentation ownership; original controller/form responsibility is retained, not duplicated.
 
 Exact raw sources: TaskEditor SHA256 c07e1e81bca08936650c7bd506622ff88a33c3816894087685d69f34f9f1e3a3; TaskProjectFields20af6008fe519f3af6100e406abed1af10425a576b8977d4cd32a28272101190. Eight new browser cases cover resizing, section preserve/clear, permission walls, canonical success readback and held resubmission. Runtime qualification separately recorded in HANDOFF; source review is not native acceptance.
+
+## Final artifact custody
+
+Independent outreach_review verified74Git-index manifest entries and10gzip/base64 wrappers, lengths/SHA256 with0errors and no staged unlisted paths. Changed code/test/current review records are byte-exact to qualified8660283cb246774921823d5a96df7a37129fef58. Decoded browser87expected/0unexpected/0skipped/0flaky. Check log confirms113root/84transport/2367web/451Capiro/385newsletter passed and declaration command completed; build compiled and24/24static pages generated. StandaloneJSON36results/pageErrors[] plus default-root smoke retained.
+
+RECONCILED native ledger and lock unchanged at the stated SHA256s. Strategy/shared Capiro delta empty. Handoff/COVERAGE/blockers explicitly keep full TaskDetail/ActiveObjective/Engagement parity open, mobile deferred,0native accepted/337open, PR43 excluded. No remaining must-fix for focused draft publication; no merge/deployment implied. Root reverified all entries/wrappers before adding this receipt and refreshing manifest.
