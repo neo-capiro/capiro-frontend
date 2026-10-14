@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import ts from "typescript";
@@ -21,13 +21,13 @@ function parse(path) {
     true,
   );
 }
-const apiRoutes = files(join(source, "app/api")).filter((path) =>
-  path.endsWith("/route.ts"),
+const apiRoutes = files(join(source, "app/api")).filter(
+  (path) => basename(path) === "route.ts",
 );
 
 test("every API handler applies preview admission before any route work", () => {
   assert.deepEqual(
-    apiRoutes.map((path) => relative(source, path)).sort(),
+    apiRoutes.map((path) => relative(source, path).split(sep).join("/")).sort(),
     [
       "app/api/action-followthrough/[operation]/route.ts",
       "app/api/backend/[service]/[...path]/route.ts",
@@ -97,7 +97,9 @@ test("every API handler applies preview admission before any route work", () => 
         declaration.initializer.expression.getText(ast),
         "previewBackendRejection",
       );
-      const receivesReads = /\/api\/(?:backend|capiro)\//.test(path);
+      const receivesReads = /\/api\/(?:backend|capiro)\//.test(
+        relative(source, path).split(sep).join("/"),
+      );
       assert.deepEqual(
         declaration.initializer.arguments.map((arg) => arg.getText(ast)),
         receivesReads ? ["process.env", "request"] : ["process.env"],
