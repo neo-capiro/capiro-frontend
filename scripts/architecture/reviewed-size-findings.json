@@ -2725,5 +2725,23 @@
     "reason": "This is the sole time-entry form assembly. It delegates draft, synchronous dispatch admission and generation retirement to canonical useAddTime and useCapiroMutation owners. The disabled native fieldset and guarded Cancel render the same pending transaction; project selection, duration, description and billable fields constrain that transaction. No parallel request or lifetime implementation is introduced.",
     "reviewedBy": "Codex outreach_review; Codex independent_fix_review",
     "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+    "kind": "function",
+    "symbol": "TimeExportDialog",
+    "fingerprint": "ce458bf74c3c263fbdfcdb4dec11320f87033171d46b2191a3a1258137311b05",
+    "reason": "One existing export form owns a bounded read-pagination-to-CSV workflow. Canonical API validates authority, request and receipts. Its synchronous attempt identity, cancellation, pending inputs and output admission constrain this same export; no second transport or unrelated domain is added.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+    "kind": "function",
+    "symbol": "TimeExportDialog > run",
+    "fingerprint": "060871eaf28a89f4d2cb9fe7e87cb1ff0f525771796c516ad85139c9b6d253fd",
+    "reason": "One bounded export-attempt lifecycle captures one input and revision, reads at most100pages, and emits one CSV only while its cancellation and active-attempt identity remain current. Every post-await and output boundary checks the same owner; final cleanup cannot release a newer reopened export. Canonical API owns validated receipts and authority.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-14"
   }
 ]
