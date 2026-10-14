@@ -318,6 +318,9 @@ test("navigation retains unknown original input and rebinds exact observed selec
   await expect(
     page.getByRole("button", { name: "Retry same request", exact: true }),
   ).toBeVisible();
+  await expect(page.getByLabel("Meri message", { exact: true })).toHaveValue(
+    "Retain across navigation",
+  );
   expect(f.hints[1]).toEqual({
     clientId,
     conversationId: binding.conversationId,

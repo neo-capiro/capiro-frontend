@@ -82,7 +82,7 @@ export function MeriConversationView({ port }: { port: MeriConversationPort }) {
       >
         <PromptInputBody>
           <PromptInputTextarea
-            value={draft}
+            value={intent.submit?.prompt ?? draft}
             onChange={(event) => setDraft(event.currentTarget.value)}
             aria-label="Meri message"
             placeholder="Ask Meri…"

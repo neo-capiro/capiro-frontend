@@ -6,7 +6,7 @@
     "apps/web/src/features/meri/MeriHome.tsx": "4f893f7697f2e710a8e88dd503a486a14f7ba25e4a68963ec7800c2cd00bf008",
     "apps/web/src/features/meri/conversation/MeriConversationHost.tsx": "8ba58da878038a86d9daa898557ff9e23808ce351350958333f24260e927c646",
     "apps/web/src/features/meri/conversation/MeriConversationTranscript.tsx": "1289a3d067d00e364bb0a9ea13dcd7bedb2e2c39582f3142370df20cee5f0b2b",
-    "apps/web/src/features/meri/conversation/MeriConversationView.tsx": "d848bd761aa7324af2b8b7287415aec36da08af6cf4ec59d8b4635a86f3980ee",
+    "apps/web/src/features/meri/conversation/MeriConversationView.tsx": "8ed11e9bf12174880282349a3a648d902d76f390cf19f74fa12e5425df6d4726",
     "apps/web/src/features/meri/conversation/useConversationActions.ts": "09bb5f9fde3579ae35a3b8722a9931c1e71cc4ae25ce951905f0008f9bb2295e",
     "apps/web/src/shared/meri-actions/connection-config.ts": "55b13454986c355e42d9e206b076a7890b3740e9b5e2c22a38f9ce6cc21db5b1",
     "apps/web/src/shared/meri-conversations/config.ts": "d7f2308b5f57e8688bfa9b5a6378b8d0c492d033fa9f305ce5698e92e9cb1e53",
@@ -18,7 +18,7 @@
     "apps/web/src/shared/shell/ProductShell.tsx": "23efd129e8fbfc6a8e0bd00ae418efc4cea270fba6154aff10c86d0e328136e0",
     "apps/web/test/browser/main.tsx": "4c79a2a33e38a6cfe226fb83a7bcf2fc77475eaaac025bfdf99ab4d9616dad1d",
     "apps/web/test/browser/meri-conversation-fixtures.ts": "bed31e9298bb06ecca6762a74615fba62a5ec3dd3cd5b17fe6bf6da17f835afc",
-    "apps/web/test/browser/meri-conversation-host.spec.ts": "6e118672fc7aed6f334c594c92cb57574d0d56acdb2509aa7b6174b8c431f1a5",
+    "apps/web/test/browser/meri-conversation-host.spec.ts": "b2ee56138a92531161bf2214cf47c990d60f01bff1552cab1886522a2971d559",
     "apps/web/test/preview-backend-boundary.test.mjs": "740a8a26cb50df6837b886829571a165b608dcf9c5226f46c65c22cddc8f7c96",
     "apps/web/tests/meri-conversation-host.test.ts": "3a0182b547582e954c8569f99468d1841c987cb89cd7b5ecf2b5815ca0e06b37",
     "apps/web/tests/meri-conversation-proxy.test.ts": "a163ac497647388b581e470fea59a45027689aa70fbc75167792d45694a62605",
@@ -29,7 +29,7 @@
     "scripts/architecture-conversation.test.mjs": "e1931505d52536c33e76a63eb7eddd604c6245aaa53eb18ac3aa90bc73c2534c",
     "scripts/architecture-preview.test.mjs": "2e844f3a3724aca2d1c715d319c773618449e58aeb010249bd2a2a420844c01c",
     "scripts/architecture/dependencies.mjs": "275945abd3de802e6fba8c63b9cfe739c1e61beac4a8642b0cd70dc26ec2786d",
-    "scripts/architecture/reviewed-size-findings.json": "32e0857ce25f541fabcb259b0b41007dc05ea1fc930785b967460caf785b181f",
+    "scripts/architecture/reviewed-size-findings.json": "cb9d80cd01857119d5832c8e930b54eb371e284cda6311fa1d0420604f213ae8",
     "docs/meri-conversation-host-20261014/evidence/capiro-meri-conversation-browser.raw.json": "9e0ae3e560d092c092b143cd47946f36252baaba480f648ce77d50781e076e8a",
     "docs/meri-conversation-host-20261014/evidence/capiro-meri-conversation-final-browser.raw.json": "d85eb1ff8f6504094987c15f638c7da54f4fbb61a016b2d04212f2f0235fb507",
     "docs/meri-conversation-host-20261014/evidence/capiro-meri-conversation-qualified-browser.raw.json": "9cee3a1d437c016c6afc0e1f09698f668f462e309e8090428c8c0575e72af02e",
@@ -52,6 +52,14 @@
     "docs/meri-conversation-host-20261014/evidence/preview-root-smoke.raw.json": "52e711064688bef637cf81a024da448cf2b46345157ddef1339a7e0966292437",
     "docs/meri-conversation-host-20261014/evidence/production-meri-390-dark.png": "823c348f63d71e520651d1f7cee42d0960cb1bdcdf2566fe544a8908ca898033",
     "docs/meri-conversation-host-20261014/evidence/production-meri-390-light.png": "c7f6062674cb5576dbd857dccd0b5735be4b4a849fdcce90c6a235007f0e783f",
-    "docs/meri-conversation-host-20261014/evidence/production-smoke.raw.json": "06e6287ef9e8d4768104f4b0b5eeb654863d76559d52648dae6ac8f6b266bc00"
+    "docs/meri-conversation-host-20261014/evidence/production-smoke.raw.json": "06e6287ef9e8d4768104f4b0b5eeb654863d76559d52648dae6ac8f6b266bc00",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-lint.raw.json": "12c9e769808fc014d29935a00cd393b9d5458828b0bf6cdc474b6458bb77efd6",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-format.raw.json": "05bb3c35971d1c495a838526e5d5df979990c54b6fc972edce5d802af548f727",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-architecture-green.raw.json": "a90ce0424d3a4b1006fea7dba2fe955e6982ff864b54aeb3de818493c5f24c52",
+    "docs/meri-conversation-host-20261014/evidence/retained-prompt-preview-root-smoke.raw.json": "52e711064688bef637cf81a024da448cf2b46345157ddef1339a7e0966292437",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-build.raw.json": "0f27610c87660b46554a76ee0fb6d0939f51cef389e5340df5f258dcd9fc157f",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-standalone.raw.json": "0ddeb75d0efff131f1e9e0763fad607146a5c9b1cbe0ac6d8071028d470ee654",
+    "docs/meri-conversation-host-20261014/evidence/retained-prompt-production-smoke.raw.json": "06e6287ef9e8d4768104f4b0b5eeb654863d76559d52648dae6ac8f6b266bc00",
+    "docs/meri-conversation-host-20261014/evidence/capiro-meri-retained-prompt-browser.raw.json": "f03900d7fb08762de3123c272d5ecadd7711bedb336568814fe4f0cf31fc80d4"
   }
 }
