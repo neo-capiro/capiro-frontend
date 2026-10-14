@@ -24,7 +24,7 @@ export function ObjectiveWorkDestinations({
   const id = useId();
   return (
     <section className="card stack" aria-label="Existing Objective work">
-      <h3>Existing Strategy, task or saved document</h3>
+      <h3>Existing Strategy, task, Context file or Calendar occurrence</h3>
       <button
         className="button"
         type="button"
@@ -119,8 +119,10 @@ function ObjectiveWorkPicker({
       </p>
       {kind === "workspace_saved_revision" && (
         <p>
-          Document names and client labels do not determine eligibility. Select
-          the document and a saved version for review.
+          Context Files opens an eligible saved Workspace revision. Document
+          names and client labels do not determine eligibility. Select the
+          document and exact saved version. General Portfolio attachments remain
+          in Files.
         </p>
       )}
       <QueryState
@@ -150,7 +152,7 @@ function ObjectiveWorkPicker({
               </option>
             ))}
           </select>
-          {kind === "planner_task" && (
+          {(kind === "planner_task" || kind === "planner_occurrence") && (
             <div className="row">
               <button
                 type="button"

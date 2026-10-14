@@ -1297,10 +1297,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
     "kind": "function",
     "symbol": "ObjectiveWorkPicker",
-    "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
-    "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3768c27757f8a11981f4fa9db2587c9ef6848b687e97a8ebdb54311a3c063ad5",
+    "reason": "Independent whole-function review: the existing resource picker owns selection, shared task/occurrence cursor navigation and pending/error presentation. Context Files copy describes the approved Workspace subset. List projection/owner resolution remains in objective-work/calendar sources, cancellation/navigation in the existing opener, Calendar observations and Workspace saved-version rendering in their canonical views. No persistence, authority, second calendar engine or new workflow owner accumulates. See docs/objective-resource-choices-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent Objective resource receiving review outreach_review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/calendar/calendar.module.css",

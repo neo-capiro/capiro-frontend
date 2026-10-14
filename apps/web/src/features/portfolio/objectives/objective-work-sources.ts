@@ -2,11 +2,15 @@ import { z } from "zod";
 import type { ApiClient } from "@/shared/portfolio/api/http";
 import { queryString } from "@/shared/portfolio/api/http";
 import { strategiesPlanOperations } from "@/shared/capiro/operations/strategies-plan";
-import { plannerTaskOperations } from "@/shared/capiro/operations/planner-tasks";
 import { workspaceDraftSchema } from "../work/public";
 import {
+  loadObjectiveCalendarChoices,
+  resolveObjectiveCalendar,
+  loadObjectivePlannerChoices,
+  readObjectivePlanner,
+} from "./objective-planner-sources";
+import {
   objectiveStrategyDestination,
-  objectivePlannerDestination,
   objectiveWorkspaceDestination,
   requireObjectiveWorkspace,
 } from "@/shared/capiro/operations/objective-work-destinations";
@@ -18,10 +22,12 @@ import {
 export type ObjectiveWorkKind =
   | "strategy"
   | "planner_task"
+  | "planner_occurrence"
   | "workspace_saved_revision";
 export const objectiveWorkLabels: Record<ObjectiveWorkKind, string> = {
   strategy: "Strategy",
   planner_task: "Planner task",
+  planner_occurrence: "Calendar Planner occurrence",
   workspace_saved_revision: "Workspace saved revision",
 };
 export type ObjectiveWorkChoices = {
@@ -35,6 +41,8 @@ export async function loadObjectiveWorkChoices(
   cursor: string | undefined,
   signal: AbortSignal,
 ): Promise<ObjectiveWorkChoices> {
+  if (kind === "planner_occurrence")
+    return loadObjectiveCalendarChoices(api, clientId, cursor, signal);
   if (kind === "strategy") {
     const rows = await api.request(
       "strategy",
@@ -49,26 +57,8 @@ export async function loadObjectiveWorkChoices(
       nextCursor: null,
     };
   }
-  if (kind === "planner_task") {
-    const page = await api.request(
-      "strategy",
-      `planner/tasks?${queryString({ archived: "false", cursor })}`,
-      plannerTaskOperations["planner.tasks"].response,
-      { signal },
-    );
-    if (page.nextCursor && page.nextCursor === cursor)
-      throw new Error("The task page did not advance. Refresh the list.");
-    return {
-      items: page.items
-        .filter(
-          (row) =>
-            !row.archived &&
-            row.clientId?.toLowerCase() === clientId.toLowerCase(),
-        )
-        .map((row) => ({ id: row.id, label: row.name })),
-      nextCursor: page.nextCursor,
-    };
-  }
+  if (kind === "planner_task")
+    return loadObjectivePlannerChoices(api, clientId, cursor, signal);
   const list = await api.request(
     "workspace",
     "drafts?scope=all",
@@ -90,6 +80,8 @@ export async function resolveObjectiveWork(
   query: ObjectiveDestinationQuery,
   signal: AbortSignal,
 ) {
+  if (kind === "planner_occurrence")
+    return resolveObjectiveCalendar(api, resourceId, query, signal);
   const suffix = queryString(query),
     id = encodeURIComponent(resourceId);
   if (kind === "strategy") {
@@ -104,14 +96,7 @@ export async function resolveObjectiveWork(
     return `/modules/strategies?${queryString({ strategyId: value.destination.resourceId, ...query })}`;
   }
   if (kind === "planner_task") {
-    const value = await api.request(
-      "strategy",
-      `planner/tasks/${id}/objective-destination?${suffix}`,
-      objectivePlannerDestination,
-      { signal },
-    );
-    signal.throwIfAborted();
-    requireObjectiveBinding(value, resourceId, query);
+    const value = await readObjectivePlanner(api, resourceId, query, signal);
     return `/modules/planner?${queryString({ taskId: value.destination.resourceId, ...query })}`;
   }
   const value = await api.request(
