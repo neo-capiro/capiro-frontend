@@ -25,7 +25,9 @@ export function PortfolioProfiles({
   onRefreshCatalog: () => void;
 }) {
   const layout = usePortfolioLayout(catalog.map(({ id }) => id));
-  const byId = new Map(rows.map((client) => [client.id, client]));
+  const byId = new Map(
+    (customizing ? catalog : rows).map((client) => [client.id, client]),
+  );
   const ordered =
     state.sort === "saved"
       ? layout.orderedIds.flatMap((id) => {
@@ -40,7 +42,8 @@ export function PortfolioProfiles({
           Refresh profiles
         </button>
       )}
-      {state.view === "cards" && state.sort === "saved" && !filtered ? (
+      {customizing ||
+      (state.view === "cards" && state.sort === "saved" && !filtered) ? (
         <PortfolioLayoutEditor
           cards={catalog.map(({ id, name }) => ({ id, name }))}
           layout={layout}

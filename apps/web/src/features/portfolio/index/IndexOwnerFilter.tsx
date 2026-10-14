@@ -6,6 +6,7 @@ export function IndexOwnerFilter({
   state,
   owners,
   ownerPending,
+  disabled = false,
   set,
 }: {
   state: PortfolioIndexState;
@@ -14,6 +15,7 @@ export function IndexOwnerFilter({
     { accountOwnerUserId: string | null; accountOwner: Member | null }
   >;
   ownerPending: boolean;
+  disabled?: boolean;
   set: (key: string, value: string) => void;
 }) {
   const choices = [
@@ -29,7 +31,7 @@ export function IndexOwnerFilter({
     <div className={styles.ownerFilter}>
       <select
         aria-label="Account owner"
-        disabled={!owners || ownerPending}
+        disabled={disabled || !owners || ownerPending}
         value={state.owner}
         onChange={(e) => set("owner", e.target.value)}
       >

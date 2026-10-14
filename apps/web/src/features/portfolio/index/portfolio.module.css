@@ -489,3 +489,6 @@
     flex-basis: 100%;
   }
 }
+.tabs[inert] {
+  opacity: 0.5;
+}

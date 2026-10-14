@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "recordedUTC": "2026-10-14T01:56:53.956878+00:00",
+  "sourceCommit": "74bc933c07df35e51b4f15c209ab9a2ddf90191c",
+  "basePR26": "348bf98481268a5f06e26a924f0985b242265cbb",
+  "applicationTree": "1f26d8e6de286321a9519ef001cde4eaefd33241",
+  "runtimeTree": "20ba251625c467aa14074bc76b64d2a9439a831b",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "frozenPR25": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "ledgerRows": ["CORE-098", "CORE-005"],
+  "completedBehavior": [
+    "Customize opens the full current catalog from list, recent/name sort, filtered and zero-match views.",
+    "URL, filters and view remain intact while local filter controls are inactive; Done restores them and trigger focus.",
+    "Keyboard and pointer ordering reuse the existing canonical editor; filtered mobile entry writes the complete catalog once with the expected version.",
+    "Cancel leaves saved ordering unchanged; pending/changed edits cannot use Done; reload displays the verified full order.",
+    "Unavailable layout explains the existing dependency and disables writes; empty/failed catalog can leave customization without a layout read."
+  ],
+  "baseline": {
+    "sourceCommit": "348bf98481268a5f06e26a924f0985b242265cbb",
+    "failedMountedCases": 4,
+    "record": "BASELINE.json",
+    "exactOriginalTest": "baseline-test-source.txt",
+    "report": "browser-red.json",
+    "log": "browser-red.log"
+  },
+  "passed": {
+    "focusedUnit": {
+      "cases": 35,
+      "files": 2,
+      "log": "unit.log",
+      "testFiles": [
+        "tests/portfolio-layout.test.ts",
+        "tests/portfolio-index.test.ts"
+      ]
+    },
+    "rootControls": {
+      "cases": 111,
+      "command": "npm test",
+      "log": "root-controls.log"
+    },
+    "mountedBrowser": {
+      "cases": 34,
+      "new": 7,
+      "unchanged": 27,
+      "retries": 0,
+      "log": "browser-final.log",
+      "report": "browser-final.json",
+      "config": "browser-final.config.mts"
+    },
+    "captureCorrection": {
+      "cases": 1,
+      "alreadyIncludedIn34": true,
+      "change": "Scroll to top before full-page mobile capture; no assertion changed",
+      "log": "browser-capture.log"
+    },
+    "webTypes": {
+      "command": "tsc --noEmit --incremental false",
+      "log": "types.log"
+    },
+    "changedFileLint": {
+      "log": "lint-source.log",
+      "warnings": 0
+    },
+    "changedFileFormat": {
+      "log": "format-source.log"
+    },
+    "publicPackages": {
+      "command": "npm run check:packages",
+      "log": "packages.log"
+    },
+    "architecture": {
+      "errors": [],
+      "total": 488,
+      "reviewed": 467,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "log": "architecture-final.log"
+    },
+    "productionBuild": {
+      "command": "npm run build",
+      "log": "build.log"
+    },
+    "actualStandalone": {
+      "command": "TMPDIR=<owned workspace temp> PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:production -- <evidence>/production",
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "observations": 30,
+      "http": 16,
+      "browser": 14,
+      "explicitPortfolioRootSmoke": true,
+      "pageErrors": [],
+      "browserVersion": "154.0.8037.57",
+      "log": "production.log",
+      "report": "production/production-smoke.json"
+    }
+  },
+  "visualInspection": {
+    "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+    "node": "411:41421",
+    "skill": "figma-design-to-code",
+    "reference": "figma-411-41421.png",
+    "context": "figma-411-41421-context.txt",
+    "viewports": [1440, 390],
+    "reviewedImages": [
+      "customize-desktop.png",
+      "customize-mobile-dark.png",
+      "customize-unavailable-mobile-dark.png"
+    ],
+    "newStaticAssets": false,
+    "scope": "Existing inline customization placement and controls, full catalog, readable scope/unavailable feedback, keyboard/return focus, no horizontal overflow. No full-frame or comprehensive AT acceptance."
+  },
+  "correctedFailures": [
+    {
+      "log": "browser-green.log",
+      "passed": 22,
+      "failed": 1,
+      "cause": "Existing screenshot write failed when workspace exhausted capacity. Four new and three prior integration cases had passed; original screenshot/assertions preserved and full rerun passed."
+    },
+    {
+      "log": "architecture.log",
+      "cause": "Two changed source fingerprints correctly required new responsibility reviews."
+    },
+    {
+      "log": "architecture-reviewed.log",
+      "cause": "Appending the two reviews duplicated existing canonical entries; guard correctly rejected them. Replaced the current entries, preserving prior records in previous-size-reviews.json and Git history."
+    }
+  ],
+  "dependencyReuse": {
+    "freshInstall": false,
+    "lockUnchanged": true,
+    "versionsChanged": false,
+    "newDependencies": false
+  },
+  "backendDependency": {
+    "receivingPR": "https://github.com/neo-capiro/capiro-backend/pull/4",
+    "receivingHead": "a65ae3c8a9f1f0cf96d4f7d2ae30aad2fff172ff",
+    "savedLayoutCandidate": "https://github.com/neo-capiro/capirov2/pull/2385",
+    "candidateHead": "46937ce53506657658fd85d9e6ef840abb842013",
+    "candidateModuleInReceiving": false,
+    "registrationAndMigration": "Unregistered candidate; proposed DDL unallocated/unapplied",
+    "evidence": "backend-dependency-readback.json",
+    "deployedStateVerified": false
+  },
+  "preservation": {
+    "nativeLedgers": [
+      {
+        "path": "docs/acceptance-20261013/RECONCILED-337.json",
+        "gitBlob": "a16e83506d60326e05ece7219a3a4105b5269e3a",
+        "sha256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4",
+        "rows": 337,
+        "unchanged": true
+      },
+      {
+        "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+        "gitBlob": "570e827c478f735855eec4ec4c2f5f8afc0970f0",
+        "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+        "rows": 345,
+        "unchanged": true
+      }
+    ],
+    "nativeRowsAccepted": 0,
+    "nativeRowsRemainOpen": 337,
+    "basicPreviewAccessGate": false,
+    "oldGeneratedBuildArchives": [
+      "pr26-next-archive.json",
+      "pr26-modules-harness-archive.json"
+    ],
+    "unchangedGeneratedContentDeduplication": [
+      "pr26-generated-output-preservation.json",
+      "new-build-deduplication.json"
+    ]
+  },
+  "unrun": [
+    "Fresh clean install",
+    "Full unrelated feature unit/browser/lint suites on this bounded repair",
+    "Native existing-account Clerk/API workflow",
+    "Deployed backend image/route check",
+    "Native saved-order persistence/version conflict/catalog revocation",
+    "New container/image scan",
+    "Full Figma/mobile/assistive-technology acceptance"
+  ],
+  "authOrPermissionChanges": false,
+  "newCommitmentsUI": false,
+  "liveBackendOrProviderCalls": false,
+  "paidCalls": false,
+  "deploymentOrResourcesChanged": false,
+  "imageDigest": null,
+  "evidenceArchive": {
+    "path": "evidence.tar.gz",
+    "sha256": "04a4d16c6b6bc66f16016acc1debefe3e92c47ca96737e2b95cddabfe7cb86fc",
+    "bytes": 6275905,
+    "memberCount": 93,
+    "manifest": "EVIDENCE-MANIFEST.json",
+    "scope": "All finite local observation logs, reports, fixture configs, Figma context/screenshot, screenshots and archive custody receipts; generated build archives remain at the exact local paths in their receipts."
+  }
+}
