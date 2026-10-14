@@ -1,0 +1,70 @@
+{
+  "recordedUTC": "2026-10-14T00:31:34.234871+00:00",
+  "qualifiedApplicationSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "preservedPr24Head": "23df0b04fe643ba7ab64395d7a471ddb20172db6",
+  "preservedPr23Head": "6780c114a1d216fa857182a62f9b3610b9d76121",
+  "changeScope": "Root documentation and explicit runtime configuration overlay only",
+  "profileSha256": "194aaebb709bdeb544f9603b53415db6c23d809d692d0522783ce8ea83e0ac0a",
+  "checksThisSession": {
+    "profileAcceptedByExistingPortfolioAndFixedGatewayConfiguration": true,
+    "literalFalseUsesOrdinaryModeForGetPostPutPatchDelete": true,
+    "retainedTrueAndMalformedValueContainment": true,
+    "existingModeTests": {
+      "passed": 114,
+      "failed": 0,
+      "files": [
+        "apps/web/tests/preview-backend-containment.test.ts",
+        "apps/web/tests/preview-read-receiving.test.ts"
+      ],
+      "log": "existing-mode-tests.log"
+    },
+    "existingDeploymentAndArchitectureControls": {
+      "passed": 11,
+      "failed": 0,
+      "files": [
+        "scripts/preview-config.test.mjs",
+        "scripts/architecture-preview.test.mjs",
+        "scripts/deployment-cli.test.mjs"
+      ],
+      "log": "existing-control-tests.log"
+    },
+    "archiveMembersComparedWithPinnedGitAndManifest": 2566,
+    "secretReferencesExactlyMatchOwnerReadback": true,
+    "allNonDocumentationSourceTreesUnchanged": true,
+    "newDocsFormatting": "passed",
+    "rawEvidenceWhitespace": "Original Vitest log retains its trailing blank line. Unfiltered git diff --check reports that line; documentation/configuration check excludes immutable raw logs."
+  },
+  "correctedValidationAttempt": {
+    "result": "ERR_MODULE_NOT_FOUND: esbuild",
+    "effect": "Ad hoc profile validation helper failed before execution; no application failure or dependency change. Reran successfully with the already installed TypeScript transpiler."
+  },
+  "reusedPriorQualification": {
+    "tests": 2880,
+    "productionBuild": true,
+    "actualHttpObservations": 90,
+    "actualBrowserObservations": 30,
+    "source": "5ca42049325881782bc9d2ac557450d642eccee8",
+    "report": "../preview-receiving-20261013/QUALIFICATION.md"
+  },
+  "notRunThisSession": [
+    "clean install",
+    "full suites and production rebuild (no source changes)",
+    "container build/scan/push",
+    "AWS current-state read or update",
+    "secret payload read",
+    "native Clerk login/expiry",
+    "native backend reads/writes",
+    "new Figma/full accessibility acceptance"
+  ],
+  "imageUri": null,
+  "imageDigest": null,
+  "deploymentPerformed": false,
+  "nativePortfolioRowsAccepted": 0,
+  "nativePortfolioRowsStillOpen": 337,
+  "publishedEvidenceSha256": {
+    "profile-validation.json": "95c3febd16289cd5b03c52faeb1aaafad6382d89152d57b3eba30ff37ff7123f",
+    "source-archive-verification.json": "352c858f6131a012c8de61a2df938723fb968f49e5114afb9210bfac2073dff2",
+    "existing-mode-tests.log": "3de71703cd581e72535f98c789d5f6987071c408bce3d6cbed96596157d63f9d",
+    "existing-control-tests.log": "78500a224ca577ea5fd6be39bc0224b2da9480b6894eff73b9548c5bfeb3ff94"
+  }
+}

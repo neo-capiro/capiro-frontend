@@ -1,0 +1,19 @@
+✔ preview policy is allocated only to the existing backend entries and Next proxy (11.145731ms)
+✔ preview policy cannot leak into client features, foundations, pages or unallocated routes (7.297346ms)
+✔ all preview internals are server allocated, including through client foundations (6.947777ms)
+✔ shipping SSR entry is import-safe and refuses invalid/reused output before download (276.695823ms)
+✔ container smoke documents exits and rejects invalid input before Docker allocation (11.708212ms)
+✔ Docker context regression is import-safe and refuses invalid or reused outputs before allocation (402.586899ms)
+✔ preview proposes only the three published owners; unavailable services stay disabled (5.46337ms)
+✔ preview rejects unknown, missing, credential-valued and production Clerk bindings (0.544595ms)
+✔ preview rejects retained or overridden production parameters and ambiguous sets (0.358853ms)
+✔ preview template constrains every explicit configuration value and keeps held services blank (1.34102ms)
+✔ preview CLI is import-safe, ignores hostile ambient values and never echoes rejected secrets (346.231766ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 747.394454
