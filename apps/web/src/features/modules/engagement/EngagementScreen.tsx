@@ -121,6 +121,7 @@ function OrdinaryEngagementScreen() {
               className={styles.select}
               value={clientId}
               aria-label="Engagement client scope"
+              disabled={clientQuery.loading || Boolean(clientQuery.error)}
               onChange={(event) => setClientId(event.target.value)}
             >
               <option value="">All permitted clients</option>
@@ -136,6 +137,17 @@ function OrdinaryEngagementScreen() {
           </>
         }
       />
+      {clientQuery.loading && <p role="status">Loading client scopes…</p>}
+      {clientQuery.error && (
+        <div>
+          <p role="alert">
+            Client scopes unavailable: {clientQuery.error.message}
+          </p>
+          <ActionButton onClick={clientQuery.reload}>
+            Retry client scopes
+          </ActionButton>
+        </div>
+      )}
       <Tabs
         items={tabs}
         value={view}

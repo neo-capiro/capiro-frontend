@@ -1,8 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { PlannerProject } from "../../../shared/capiro/operations/planner-schemas";
-import { useCapiroQuery } from "../../../shared/capiro/queries";
+import {
+  useCapiroMutation,
+  useCapiroQuery,
+} from "../../../shared/capiro/queries";
 import {
   ActionButton,
   Field,
@@ -20,16 +23,26 @@ export function AddTimeDialog(props: {
   projects: PlannerProject[];
   onSaved: () => void;
 }) {
+  const pending = useRef<object | null>(null);
   return (
     <Modal
       open={props.open}
       onOpenChange={(open) => {
-        if (!open) props.onClose();
+        if (!open && !pending.current) props.onClose();
       }}
       title="Add time"
       description="Time is recorded against permitted work in the service."
     >
-      {props.open && <AddTimeForm {...props} />}
+      {props.open && (
+        <AddTimeForm
+          {...props}
+          key={JSON.stringify([props.taskId, props.projectId])}
+          onPendingChange={(owner, value) => {
+            if (value) pending.current = owner;
+            else if (pending.current === owner) pending.current = null;
+          }}
+        />
+      )}
     </Modal>
   );
 }
@@ -39,12 +52,14 @@ function AddTimeForm({
   projects,
   onSaved,
   onClose,
+  onPendingChange,
 }: {
   taskId?: string;
   projectId: string | null;
   projects: PlannerProject[];
   onSaved: () => void;
   onClose: () => void;
+  onPendingChange: (owner: object, value: boolean) => void;
 }) {
   const {
     project,
@@ -60,70 +75,82 @@ function AddTimeForm({
     busy,
     error,
     submit,
-  } = useAddTime(taskId, projectId, onSaved, onClose);
+    isPending,
+  } = useAddTime(taskId, projectId, onSaved, onClose, onPendingChange);
   return (
-    <form className={styles.form} onSubmit={(event) => void submit(event)}>
-      <TimeDuration
-        workedOn={workedOn}
-        onWorkedOn={setWorkedOn}
-        minutes={minutes}
-        onMinutes={setMinutes}
-      />
-      <div className={styles.wide}>
-        <Field label="Project" htmlFor="time-project">
-          <select
-            id="time-project"
-            className={styles.select}
-            value={project}
-            required={!taskId}
-            onChange={(event) => setProject(event.target.value)}
-          >
-            <option value="">Personal work</option>
-            {projects
-              .filter(
-                (item) =>
-                  !item.archived && ["admin", "editor"].includes(item.access),
-              )
-              .map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
-        </Field>
-      </div>
-      <label className={styles.checkbox}>
-        <input
-          type="checkbox"
-          checked={billable}
-          onChange={(event) => setBillable(event.target.checked)}
+    <form aria-busy={busy} onSubmit={(event) => void submit(event)}>
+      <fieldset
+        disabled={busy}
+        className={styles.form}
+        style={{ margin: 0, padding: 0, border: 0, minWidth: 0 }}
+      >
+        <TimeDuration
+          workedOn={workedOn}
+          onWorkedOn={setWorkedOn}
+          minutes={minutes}
+          onMinutes={setMinutes}
         />
-        Billable
-      </label>
-      <div className={styles.wide}>
-        <Field label="Description" htmlFor="time-description">
-          <TextArea
-            id="time-description"
-            required
-            maxLength={20000}
-            value={text}
-            onChange={(event) => setText(event.target.value)}
+        <div className={styles.wide}>
+          <Field label="Project" htmlFor="time-project">
+            <select
+              id="time-project"
+              className={styles.select}
+              value={project}
+              required={!taskId}
+              onChange={(event) => setProject(event.target.value)}
+            >
+              <option value="">Personal work</option>
+              {projects
+                .filter(
+                  (item) =>
+                    !item.archived && ["admin", "editor"].includes(item.access),
+                )
+                .map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+            </select>
+          </Field>
+        </div>
+        <label className={styles.checkbox}>
+          <input
+            type="checkbox"
+            checked={billable}
+            onChange={(event) => setBillable(event.target.checked)}
           />
-        </Field>
-      </div>
-      {error && (
-        <p role="alert" className={`${styles.error} ${styles.wide}`}>
-          {error}
-        </p>
-      )}
-      <div className={`${styles.footer} ${styles.wide}`}>
-        <ActionButton type="button" onClick={onClose}>
-          Cancel
-        </ActionButton>
-        <ActionButton primary type="submit" disabled={busy}>
-          Add time
-        </ActionButton>
-      </div>
+          Billable
+        </label>
+        <div className={styles.wide}>
+          <Field label="Description" htmlFor="time-description">
+            <TextArea
+              id="time-description"
+              required
+              maxLength={20000}
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+            />
+          </Field>
+        </div>
+        {error && (
+          <p role="alert" className={`${styles.error} ${styles.wide}`}>
+            {error}
+          </p>
+        )}
+        <div className={`${styles.footer} ${styles.wide}`}>
+          <ActionButton
+            type="button"
+            onClick={() => {
+              if (!isPending()) onClose();
+            }}
+          >
+            Cancel
+          </ActionButton>
+          <ActionButton primary type="submit" disabled={busy}>
+            Add time
+          </ActionButton>
+        </div>
+      </fieldset>
     </form>
   );
 }
@@ -246,8 +273,12 @@ function useAddTime(
   projectId: string | null,
   onSaved: () => void,
   onClose: () => void,
+  onPendingChange: (owner: object, value: boolean) => void,
 ) {
-  const api = useCapiro();
+  const taskMutation = useCapiroMutation("planner.time.add");
+  const projectMutation = useCapiroMutation("planner.time.project.add");
+  const pending = useRef(false);
+  const owner = useRef({});
   const [project, setProject] = useState(projectId ?? ""),
     [workedOn, setWorkedOn] = useState(() =>
       new Date().toLocaleDateString("en-CA"),
@@ -255,12 +286,19 @@ function useAddTime(
     [minutes, setMinutes] = useState(60),
     [billable, setBillable] = useState(false),
     [text, setText] = useState(""),
-    [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
   const settings = useCapiroQuery("planner.time.settings", {});
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setBusy(true);
+    if (pending.current) return;
+    if (!taskId && !project) {
+      setError("Choose a project.");
+      return;
+    }
+    pending.current = true;
+    onPendingChange(owner.current, true);
+    taskMutation.reset();
+    projectMutation.reset();
     setError(undefined);
     try {
       const body = {
@@ -277,20 +315,19 @@ function useAddTime(
           category: "",
         },
       };
-      if (taskId)
-        await api.request("planner.time.add", { params: { id: taskId }, body });
+      if (taskId) await taskMutation.run({ params: { id: taskId }, body });
       else if (project)
-        await api.request("planner.time.project.add", {
+        await projectMutation.run({
           params: { id: project },
           body,
         });
-      else throw new Error("Choose a project.");
       onSaved();
       onClose();
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Unable to add time.");
+    } catch {
+      // Canonical mutation state owns errors and retires replaced-view callbacks; never replay writes.
     } finally {
-      setBusy(false);
+      pending.current = false;
+      onPendingChange(owner.current, false);
     }
   };
   return {
@@ -304,8 +341,10 @@ function useAddTime(
     setBillable,
     text,
     setText,
-    busy,
-    error,
+    busy: taskMutation.pending || projectMutation.pending,
+    error:
+      error ?? taskMutation.error?.message ?? projectMutation.error?.message,
     submit,
+    isPending: () => pending.current,
   };
 }
