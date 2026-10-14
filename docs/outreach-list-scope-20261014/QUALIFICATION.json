@@ -1,0 +1,72 @@
+{
+  "sourceCommit": "dcbdd8578e3c974791eb017aefdf9331da834fd0",
+  "basePR28": "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc",
+  "applicationTree": "fb16baa0dd9be532e8136aa55e7bbf232f415cfb",
+  "frozenPR25": "257cf5b5db673b31c98264f9da33759c68066ba4",
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "baseline": {
+    "failed": 3,
+    "passed": 1
+  },
+  "passed": {
+    "browser": 36,
+    "newBrowser": 6,
+    "existingBrowser": 30,
+    "retries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "webUnit": 2255,
+    "capiroUnit": 442,
+    "root": 111,
+    "types": true,
+    "packages": true,
+    "changedLint": true,
+    "changedFormat": true,
+    "build": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "axe": "Full default desktop 1440 and dark-OS-request mobile 390: zero violations",
+    "fullWebLint": {
+      "errors": 0,
+      "warnings": 81
+    },
+    "fullWebFormatting": true
+  },
+  "architecture": {
+    "total": 489,
+    "reviewed": 468,
+    "inheritedUnreviewed": 21,
+    "blocking": 0,
+    "boundaryErrors": 0
+  },
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+      "bytes": 1438305,
+      "byteIdenticalToPR28": true
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+      "bytes": 1332257,
+      "byteIdenticalToPR28": true
+    }
+  ],
+  "install": "npm ci --ignore-scripts --cache /tmp/capiro-next-npm-cache succeeded using unchanged root lock; no container/image qualification",
+  "limitations": [
+    "No native acceptance rows closed",
+    "No live authentication or API read/write",
+    "No deployment or AWS/security/credential/data-changing tests",
+    "Exact backend map 22d0d043 reconciled; four existing families need runtime/data qualification; saved-layout receiving contract genuinely missing per owner",
+    "Meri contracts remain pinned at 0.1.3; 0.1.5 not adopted",
+    "Visual review is bounded existing-state legibility, not whole-frame or assistive-technology acceptance"
+  ],
+  "consolidatedAncestorHeads": [
+    "257cf5b5db673b31c98264f9da33759c68066ba4",
+    "348bf98481268a5f06e26a924f0985b242265cbb",
+    "4465f5f1cfb1b807c97106433b70a0ccd480c4a2",
+    "38c53fb0c8f05f598d835122c0ce7fd0f30a04fc"
+  ],
+  "backendRoutingMap": "neo-capiro/capiro-backend@22d0d043a3efbf22e4b2d8d7f881af66f983873b:docs/backend-successor-plan-20261014/API-ROUTING-FINDINGS.md"
+}
