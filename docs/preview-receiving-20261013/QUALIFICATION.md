@@ -1,5 +1,7 @@
 # Receiving qualification and image-build inputs
 
+Follow-up: [backend PR3 receipt](BACKEND-PR3-RECEIPT.md) records corrected backend startup and physical permission names at evidence head `96a32150553c423ca182cc3fb345113f5993f016`. Backend product source, frontend source checks and immutable build inputs below remain unchanged.
+
 Qualified source: **`5ca42049325881782bc9d2ac557450d642eccee8`**. Application tree: `dbd6aebbae52b5ded5611b21c3ff057b881cf92f`. Runtime source tree: `c48305d3d8fa8153fa1c1390950aa24e5281326b`. Later publication commits contain documentation/evidence only. The branch is stacked on frontend PR23 at `6780c114a1d216fa857182a62f9b3610b9d76121`; that branch and its evidence packet remain unchanged.
 
 The exact backend source remains **`111f269d749cae0249c2141779bd6d7deb93f45c`**, tree `719c8292fc0c9cf4e8242b8d58efb2d004ad0a1f`, [backend draft PR2](https://github.com/neo-capiro/capiro-backend/pull/2). Its head and frontend PR23's head were refreshed during qualification. This receiver does not include backend PR1 or any copied backend implementation.

@@ -1,5 +1,7 @@
 # Preview API receiving source — native activation held
 
+Latest backend receipt: [PR3 runtime and permission corrections](BACKEND-PR3-RECEIPT.md). Backend evidence head is `96a32150553c423ca182cc3fb345113f5993f016`; product source and the three-route frontend binding remain `111f269d749cae0249c2141779bd6d7deb93f45c`.
+
 Frontend receiving branch: `integration/capiro-preview-receiving-20261013`, stacked on PR23 at `6780c114a1d216fa857182a62f9b3610b9d76121`. Original PR23 worktree and publication packet remain unchanged. Backend contract: [draft PR2](https://github.com/neo-capiro/capiro-backend/pull/2), source `111f269d749cae0249c2141779bd6d7deb93f45c`, tree `719c8292fc0c9cf4e8242b8d58efb2d004ad0a1f`.
 
 This is source preparation. There is no configured preview target, native service activation, application image, deployment, auth change, database change or resource creation in this work. Backend native Postgres/RLS/role permissions, actual Clerk session binding and isolated runtime remain unqualified. Do not send these requests to ordinary production Core, including its seemingly read-only routes. Existing preview deployment templates remain unchanged and do not set the new bindings.
