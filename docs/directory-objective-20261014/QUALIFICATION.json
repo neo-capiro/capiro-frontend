@@ -1,0 +1,153 @@
+{
+  "base": "a2d210a728a8ec6d2f1f2137b1c3b8ea8dbb2b82",
+  "backendHead": "917fed9be648dc4abfd6770e0e391ce2e3fe3928",
+  "sourceFiles": [
+    {
+      "path": "apps/web/src/features/modules/ModuleScreen.tsx",
+      "bytes": 1883,
+      "sha256": "5e09a1b5a2f238e131c3228bf7e2f33ee237cf2ef6ad995e2b443315141aa949"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/ObjectiveDirectoryDestination.tsx",
+      "bytes": 2188,
+      "sha256": "0cc12c2c6dc54696b0fb5be959d3533d15fef09cd4fa30b7e7ec1eb540a66d9d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+      "bytes": 6386,
+      "sha256": "7fcb802190bc386e013a53faef386c4e9d2a0b9cc659a2efba5cb85f88c121e4"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+      "bytes": 5432,
+      "sha256": "f0d7a95c384528e00bb2c0941cad290d08f3e9532bc230cd7c2ff1813bd080c4"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/public.ts",
+      "bytes": 296,
+      "sha256": "2c1550766d82879df30c2e7221e9009c945a7a471d2e8ba5dcb671bc7ea1f894"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/directory-objective-destination.ts",
+      "bytes": 1758,
+      "sha256": "edc85e68cc5aacf022e36b332c1214fc2a4791d116d6d7756f3f5f265dae42e1"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "bytes": 2506,
+      "sha256": "2a0dc8df423d972d4e5b432593f99276f43033ba24c231ef25235f2cb6fb0d42"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.ts",
+      "bytes": 1647,
+      "sha256": "5a51bfa32862daf214d557dd36baf0e8bf932675f60750a080c2ba61859333f1"
+    },
+    {
+      "path": "apps/web/test/browser/directory-objective.spec.ts",
+      "bytes": 13907,
+      "sha256": "9a239b29f348f6bac91a44ebddc851749b799455125c1c16b00493c3249f14b2"
+    },
+    {
+      "path": "apps/web/tests/directory-objective-destination.test.ts",
+      "bytes": 9325,
+      "sha256": "fe4e32652069452e8e0fb92a658defde361b8f58f0edaf9d610d414bbe4ebe49"
+    },
+    {
+      "path": "apps/web/tests/directory-objective-fixtures.ts",
+      "bytes": 912,
+      "sha256": "36da66235b8d430b8052a33c93d381aea3ba2837e3eb20cbcf19af317caa1edc"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/aggregate.raw.json",
+      "bytes": 5169,
+      "sha256": "883785ce0a79c6d567e6ec69ab1c3ddd26aa9fc8317777279678e1f521f2b9f6"
+    },
+    {
+      "path": "evidence/browser-results.json",
+      "bytes": 25204,
+      "sha256": "e1bfbe2e94b61f4f3f148d5b1843f17a0183e8dd77b937d4585db5e83d68b9c8"
+    },
+    {
+      "path": "evidence/browser.raw.json",
+      "bytes": 5129,
+      "sha256": "0e52a370532b3ecd4e957baf5fe4a1e0a6046acd0c8b28d9d516ddac44467050"
+    },
+    {
+      "path": "evidence/build-owned-deps.raw.json",
+      "bytes": 3697,
+      "sha256": "a0e1ac12c7f488d22775f82d2421190cc12b5de3a89bd5720285b26edc622794"
+    },
+    {
+      "path": "evidence/build.raw.json",
+      "bytes": 5761,
+      "sha256": "c7b5c54cb17ede8d3a4835524942d7d927e1c978a55499f5d19e089e63ef4a54"
+    },
+    {
+      "path": "evidence/directory-objective-mobile.png",
+      "bytes": 55132,
+      "sha256": "4c7ca9a6ecc233e1b31bd9ea2306a60602bfe35eaefa79289f9bc62f565905c2"
+    },
+    {
+      "path": "evidence/final-aggregate.raw.json",
+      "bytes": 1327423,
+      "sha256": "47cc05bf7b09ceea39b67190b5d61884d1cc13a92072c6c49aaa0f5f3a58839e"
+    },
+    {
+      "path": "evidence/final-browser.raw.json",
+      "bytes": 10609,
+      "sha256": "3f0473f04a0343c0b810d6e96b62b49d7b653ca05829c4989dfd9e48b2ed6903"
+    },
+    {
+      "path": "evidence/final-unit.raw.json",
+      "bytes": 432,
+      "sha256": "d81156e96002f6811861ebbdaa7de2eb6227c3500ef4f9b0210e22a03ecb7655"
+    },
+    {
+      "path": "evidence/focused-unit.raw.json",
+      "bytes": 432,
+      "sha256": "ff0e49179b353307b614e64533068469e94bfda95c9a73f0302f96172266d84c"
+    },
+    {
+      "path": "evidence/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "evidence/production-smoke.json",
+      "bytes": 7788,
+      "sha256": "5acb865ee9eee580a95fa71a18fe9ed4604bb5220ec32bd8bff588596907408c"
+    },
+    {
+      "path": "evidence/production.raw.json",
+      "bytes": 11257,
+      "sha256": "b6e57262c7cbc744f53055b72320a1883b40306b14248f8377569cbedd8a593a"
+    },
+    {
+      "path": "evidence/reviewed-browser.raw.json",
+      "bytes": 5881,
+      "sha256": "0fe492bb54582ec61d1146ed099abea7a02091ad37f92bbbbf8f94bc96e0d69e"
+    },
+    {
+      "path": "evidence/types.raw.json",
+      "bytes": 3393,
+      "sha256": "8094e1d46d8031a67e03a6abe1163e6cea5c874d240df3c0c45bf79dd9d38bd1"
+    }
+  ],
+  "finalResults": {
+    "build": "PASS",
+    "check": "PASS",
+    "focusedUnit": 24,
+    "browser": 21,
+    "allUnit": 2715,
+    "root": 111,
+    "transport": 84,
+    "newsletter": 385,
+    "newsletterDeclarations": 8,
+    "standaloneObservations": 31,
+    "nativeAccepted": 0
+  },
+  "nativeRowsOpen": 337,
+  "liveOrDeploymentChecks": false
+}
