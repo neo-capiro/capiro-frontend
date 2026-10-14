@@ -1,0 +1,76 @@
+[WebServer] (node:1287599) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] [PLUGIN_TIMINGS] JavaScript callbacks ran for 9.4s of this 11.9s build (79%).
+[WebServer] The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+[WebServer]   - plugin vite:build-import-analysis generateBundle (63%, 7.5s, 1 call)
+[WebServer] Additional callback time came from the callbacks below and from callbacks under 1s.
+[WebServer] 2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+[WebServer]   - plugin vite:css transform (81 calls)
+[WebServer]   - plugin vite:asset-import-meta-url transform (2 calls)
+[WebServer] See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+[WebServer] 
+
+Running 16 tests using 1 worker
+
+(node:1287643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop light: mixed queue preserves unsupported audit and compact approval/apply indexes (3.9s)
+  ✓   2 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop dark: mixed queue preserves unsupported audit and compact approval/apply indexes (3.6s)
+  ✓   3 test/browser/strategy-proposal-compatibility.spec.ts:226:1 › unsupported-only proposal remains readable and rejectable without executable selection (2.8s)
+  ✘   4 test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit (7.8s)
+(node:1287907) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 test/browser/strategy-proposal-compatibility.spec.ts:300:1 › stale409 stays visible with both dialogs and never retries the mutation (3.3s)
+  ✓   6 test/browser/strategy-proposal-compatibility.spec.ts:328:1 › synchronous duplicate confirmation sends one pending request (2.6s)
+  ✓   7 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID content refresh invalidates selection and confirmation (2.6s)
+  ✓   8 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID status refresh invalidates selection and confirmation (2.6s)
+  ✓   9 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID pin refresh invalidates selection and confirmation (2.8s)
+  ✓  10 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID approved-empty refresh invalidates selection and confirmation (2.8s)
+  ✓  11 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID unavailable refresh invalidates selection and confirmation (4.0s)
+  ✓  12 test/browser/strategy-proposal-compatibility.spec.ts:392:1 › refresh during a pending request retires old completion callbacks and selection (4.3s)
+  ✓  13 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › rejected review preserves audit but denies approve/apply/reject/undo (3.1s)
+  ✓  14 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › undone review preserves audit but denies approve/apply/reject/undo (2.7s)
+  ✓  15 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › stale review preserves audit but denies approve/apply/reject/undo (2.8s)
+  ✓  16 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › superseded review preserves audit but denies approve/apply/reject/undo (2.4s)
+
+
+  1) test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Review proposed changes', exact: true, includeHidden: true }).locator('section').filter({ has: getByRole('dialog', { name: 'Review proposed changes', exact: true, includeHidden: true }).getByRole('heading', { name: 'Stored application selection details', exact: true }) })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review proposed changes', exact: true, includeHidden: true }).locator('section').filter({ has: getByRole('dialog', { name: 'Review proposed changes', exact: true, includeHidden: true }).getByRole('heading', { name: 'Stored application selection details', exact: true }) })
+
+
+      275 |     }),
+      276 |   });
+    > 277 |   await expect(audit).toBeVisible();
+          |                       ^
+      278 |   await audit.locator("summary").filter({ hasText: "Operation 1" }).click();
+      279 |   await expect(audit.locator("pre").first()).toHaveText(
+      280 |     JSON.stringify(opaque, null, 2),
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:277:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit 
+  15 passed (1.2m)

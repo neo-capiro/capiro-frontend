@@ -1,0 +1,33 @@
+[WebServer] (node:1284230) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ✗ Build failed in 11.78s
+[WebServer] node:internal/modules/run_main:107
+[WebServer]     triggerUncaughtException(
+[WebServer]     ^
+[WebServer] 
+[WebServer] Build failed with 1 error:
+[WebServer] 
+[WebServer] Error: [vite]: Rolldown failed to resolve import "@tiptap/extension-image" from "/dev/shm/capiro-strategy-compatibility-20261014/apps/web/src/features/settings/signature/RichSignatureEditor.tsx".
+[WebServer] This is most likely unintended because it can break your application at runtime.
+[WebServer] If you do want to externalize this module explicitly add it to
+[WebServer] `build.rolldownOptions.external`
+[WebServer]     at viteLog (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34809:57)
+[WebServer]     at file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34846:71
+[WebServer]     at onwarn (file:///dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/server.mjs:48:56)
+[WebServer]     at file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34846:28
+[WebServer]     at onRollupLog (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34841:65)
+[WebServer]     at onLog (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34601:4)
+[WebServer]     at file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/create-bundler-option-2b9QJDoZ.mjs:48:26
+[WebServer]     at logger (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/create-bundler-option-2b9QJDoZ.mjs:39:3)
+[WebServer]     at aggregateBindingErrorsIntoJsError (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/error-Dsqzw0Oa.mjs:49:18)
+[WebServer]     at unwrapBindingResult (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/error-Dsqzw0Oa.mjs:19:128)
+[WebServer]     at #build (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/rolldown-D_vNlorD.mjs:133:34)
+[WebServer]     at async buildEnvironment (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34716:66)
+[WebServer]     at async Object.build (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:35137:19)
+[WebServer]     at async file:///dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/server.mjs:39:1 {
+[WebServer]   errors: [Getter/Setter]
+[WebServer] }
+[WebServer] 
+[WebServer] Node.js v24.19.0
+Error: Process from config.webServer was not able to start. Exit code: 1
+

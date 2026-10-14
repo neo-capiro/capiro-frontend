@@ -1,0 +1,30 @@
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+
+<--- Last few GCs --->
+
+[1284972:0x32c92000]    85393 ms: Scavenge (interleaved) 2040.3 (2048.5) -> 2038.3 (2052.5) MB, pooled: 0 MB, 5.14 / 0.00 ms  (average mu = 0.160, current mu = 0.011) allocation failure; 
+[1284972:0x32c92000]    86661 ms: Mark-Compact 2042.4 (2052.8) -> 2038.3 (2053.0) MB, pooled: 0 MB, 1257.24 / 0.00 ms  (average mu = 0.101, current mu = 0.037) allocation failure; scavenge might not succeed
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0x75356c node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0xc52cd0  [node]
+ 3: 0xc52dbf  [node]
+ 4: 0xef6695  [node]
+ 5: 0xef66c2  [node]
+ 6: 0xef69ba  [node]
+ 7: 0xf076ba  [node]
+ 8: 0xf0ba60  [node]
+ 9: 0x199e0d1  [node]
+Aborted
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 134
+npm error path /dev/shm/capiro-strategy-compatibility-20261014/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /dev/shm/capiro-strategy-compatibility-20261014/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit

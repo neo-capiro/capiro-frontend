@@ -9,45 +9,11 @@ import {
 
 const source =
   "capirov2@4be13b0 apps/api-strategy/src/agents/agents.controller.ts and {runs,change-sets,execution,watcher}.service.ts; DTOs and Prisma models; meri/meri.types.ts PlanEdit projection";
+import { strategyChangeSet } from "./strategy-change-set";
+export { strategyChangeSet } from "./strategy-change-set";
+export type { StrategyChangeSet } from "./strategy-change-set";
+
 const read = z.object({ params: strategyParams }).strict();
-const planEdit = z.object({
-  op: z.enum(["add", "update", "remove", "retime"]),
-  nodeId: z.string().optional(),
-  kind: z.string().optional(),
-  subject: z.string().optional(),
-  title: z.string().optional(),
-  note: z.string().nullable().optional(),
-  status: z.string().nullable().optional(),
-  ownerUserId: z.string().nullable().optional(),
-  startsOn: z.string().optional(),
-  endsOn: z.string().nullable().optional(),
-  openEnded: z.boolean().optional(),
-  dependsOn: z.array(z.string()).optional(),
-  sources: z
-    .array(z.object({ section: z.string(), ref: z.string().optional() }))
-    .optional(),
-});
-export const strategyChangeSet = z.object({
-  id: strategyId,
-  strategyId,
-  summary: z.string(),
-  ops: z.array(planEdit),
-  risk: z.enum(["low", "medium", "high", "critical"]),
-  status: z.enum([
-    "proposed",
-    "approved",
-    "rejected",
-    "applied",
-    "undone",
-    "stale",
-    "superseded",
-  ]),
-  strategyVersionId: strategyId,
-  appliedVersionId: strategyId.nullable(),
-  createdAt: z.string(),
-  appliedAt: z.string().nullable(),
-  approvedAt: z.string().nullable(),
-});
 const executionFindings = z.object({
   findings: z
     .array(
@@ -424,5 +390,4 @@ export const strategiesAgentOperations = {
     source,
   }),
 };
-export type StrategyChangeSet = z.infer<typeof strategyChangeSet>;
 export type StrategyRun = z.infer<typeof strategyRun>;

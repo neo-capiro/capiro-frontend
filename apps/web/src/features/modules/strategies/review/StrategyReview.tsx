@@ -1,5 +1,7 @@
 "use client";
 import { ReviewProposal } from "./ProposalReview";
+import { ProposalOperationSummary } from "./ProposalOperations";
+import { classifyProposalOperations } from "./proposal-operations";
 
 import { useState } from "react";
 import type { StrategyChangeSet } from "../../../../shared/capiro/operations/strategies-agents";
@@ -45,6 +47,9 @@ export function StrategyReview({ clientId }: { clientId?: string }) {
           ["medium", "high", "critical"].includes(proposal.risk)) ||
         (risk === "high" && ["high", "critical"].includes(proposal.risk))),
   );
+  const currentProposal = selected
+    ? proposals.data?.find((proposal) => proposal.id === selected.id)
+    : undefined;
   const pending = filtered.filter(
     (proposal) =>
       proposal.status === "proposed" || proposal.status === "approved",
@@ -109,12 +114,9 @@ export function StrategyReview({ clientId }: { clientId?: string }) {
           >
             <div className={styles.form}>
               <p>{proposal.summary}</p>
-              {proposal.ops.map((operation, index) => (
-                <p key={index}>
-                  <strong>{operation.title ?? `${operation.op} step`}</strong>
-                  <span className={styles.secondary}>
-                    {operation.op} · {operation.startsOn ?? "Date unchanged"}
-                  </span>
+              {classifyProposalOperations(proposal.ops).map((operation) => (
+                <p key={operation.index}>
+                  <ProposalOperationSummary operation={operation} />
                 </p>
               ))}
               <div>
@@ -152,7 +154,10 @@ export function StrategyReview({ clientId }: { clientId?: string }) {
       </StatusPanel>
       {selected && (
         <ReviewProposal
-          proposal={selected}
+          proposal={currentProposal ?? selected}
+          available={
+            Boolean(currentProposal) && !proposals.loading && !proposals.error
+          }
           onClose={() => setSelected(undefined)}
           onSaved={proposals.reload}
         />

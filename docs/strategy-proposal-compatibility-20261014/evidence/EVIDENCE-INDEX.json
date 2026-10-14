@@ -1,0 +1,85 @@
+{
+  "syntheticOnly": true,
+  "sourceBase": "462e7b554200f9b4a96c1589d55b6df7ce4a7df5",
+  "ownedFiles": [
+    {
+      "path": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+      "sha256": "b4b92b4f1c5b0520f9ab27440d5661d1c2474f9e339390e7270da4b4edf696fe",
+      "bytes": 4237,
+      "nonblankLines": 131
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+      "sha256": "a81e9a4a1dda3ba94666a7a067a8f9d59f16e559cc14b8054744d25e5b96d391",
+      "bytes": 5768,
+      "nonblankLines": 154
+    },
+    {
+      "path": "apps/web/test/browser/ProposalRefreshProbe.tsx",
+      "sha256": "729ba494c067fca6a3d8c01c831094b3782f9922f4f917888e1fc170b83dcb59",
+      "bytes": 3181,
+      "nonblankLines": 93
+    },
+    {
+      "path": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+      "sha256": "56dca23c5f364396fb6287d620624b4653734987b7497c05c6b90b7183e1eaee",
+      "bytes": 15918,
+      "nonblankLines": 439
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "0ac9475ac0be3fd53ecf52e27072b7b5604992c8ef85137770367624c3c79c41",
+      "bytes": 7397,
+      "nonblankLines": 207
+    }
+  ],
+  "unitTestsPassed": 32,
+  "unitLog": "UNIT-CONTRACT-PASS.log",
+  "desktopTestsPassed": 16,
+  "desktopLog": "PLAYWRIGHT-ATTEMPT-5.log",
+  "desktopReport": "PLAYWRIGHT-ATTEMPT-5-results.json",
+  "desktopSummary": "PLAYWRIGHT-ATTEMPT-5-summary.json",
+  "baseline": "BASELINE-PR46-CONTRACT.log",
+  "failedAttemptsPreserved": [
+    "PRELIMINARY-ATTEMPTS.json",
+    "PLAYWRIGHT-ATTEMPT-2.log",
+    "PLAYWRIGHT-ATTEMPT-3.log",
+    "PLAYWRIGHT-ATTEMPT-3-results.json",
+    "PLAYWRIGHT-ATTEMPT-3-summary.json",
+    "PLAYWRIGHT-ATTEMPT-3-artifacts/",
+    "PLAYWRIGHT-ATTEMPT-4.log",
+    "PLAYWRIGHT-ATTEMPT-4-results.json",
+    "PLAYWRIGHT-ATTEMPT-4-summary.json",
+    "PLAYWRIGHT-ATTEMPT-4-artifacts/",
+    "TYPECHECK-ATTEMPT-2.log",
+    "TYPECHECK-ATTEMPT-3.log",
+    "TYPECHECK-ATTEMPT-4.log"
+  ],
+  "noFurtherSourceChanges": true,
+  "limits": [
+    "Synthetic intercepted local responses; does not qualify live authorization or tenant bindings, real backend writes, deployment, native database or unknown live discriminator values.",
+    "Executable validation and allowed kinds unchanged; no operation aliases invented."
+  ],
+  "logs": [
+    "ARCHITECTURE-AFTER-HYDRATION.json",
+    "ARCHITECTURE-FINAL.json",
+    "BASELINE-PR46-CONTRACT.log",
+    "EVIDENCE-INDEX.json",
+    "FORMAT-ATTEMPT-1.log",
+    "LINT-ATTEMPT-1.log",
+    "OWNED-TEST-FORMAT.log",
+    "PLAYWRIGHT-ATTEMPT-2.log",
+    "PLAYWRIGHT-ATTEMPT-3-summary.json",
+    "PLAYWRIGHT-ATTEMPT-3.log",
+    "PLAYWRIGHT-ATTEMPT-4-summary.json",
+    "PLAYWRIGHT-ATTEMPT-4.log",
+    "PLAYWRIGHT-ATTEMPT-5-summary.json",
+    "PLAYWRIGHT-ATTEMPT-5.log",
+    "PRELIMINARY-ATTEMPTS.json",
+    "TYPECHECK-ATTEMPT-2.log",
+    "TYPECHECK-ATTEMPT-3.log",
+    "TYPECHECK-ATTEMPT-4.log",
+    "TYPECHECK-ATTEMPT-5.log",
+    "UNIT-CONTRACT-PASS.log"
+  ]
+}

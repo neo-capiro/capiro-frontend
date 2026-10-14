@@ -1,0 +1,18 @@
+{
+  "attempt": 3,
+  "exit": 1,
+  "passed": 2,
+  "failed": 14,
+  "classification": "resource crash, not assertion mismatch",
+  "firstFailures": [
+    "unsupported-only: page.goto Page crashed",
+    "approved-only opaque: page.goto Page crashed"
+  ],
+  "subsequentFailures": [
+    "stale409: page.route Target crashed / timeout",
+    "11 remaining cases: connection refused after WebServer Killed"
+  ],
+  "sourceOrAssertionEditsJustifiedByAttempt": false,
+  "artifacts": "/dev/shm/capiro-strategy-compatibility-20261014/apps/web/.qa/strategy-compatibility/PLAYWRIGHT-ATTEMPT-3-artifacts",
+  "rawLog": "PLAYWRIGHT-ATTEMPT-3.log"
+}
