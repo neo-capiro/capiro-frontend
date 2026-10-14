@@ -1378,10 +1378,10 @@
     "file": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
     "kind": "function",
     "symbol": "EditorSession",
-    "fingerprint": "deb989ba5ae827a2b85baed68dea4697f9059c9a3edd4460ecdbdd3abe0a83a4",
-    "reason": "Owns one organization layout draft and its explicit save/conflict/reconciliation UI. An editing flag hides controls outside Customize; it does not duplicate layout state or bypass any availability/current catalog/write fence. Guidance now reflects explicit Save and is hidden when blocked; Done stays disabled while a changed or unresolved write exists. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "ce014ecbb2e7682482c9fd4d9b25664dbb32ebe0ad080eb32398987e62a4561a",
+    "reason": "Existing one-order interaction owner projects a local draft only onto receipt-admitted membership, conceals rows during failed reads without dropping local input, and removes revoked IDs on successful catalog changes. Selection, drag, pending/conflict/unknown feedback remain one transaction presentation; no second store or access policy. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
+    "reviewedBy": "Codex frontend integration owner with independent outreach_review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
@@ -2523,9 +2523,9 @@
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
-    "fingerprint": "afbe35808f4633edecfa4f56827f1ada86b2740b3e0b89cef9accbb5c5582ccd",
-    "reason": "The existing Portfolio index remains the composition owner for current catalog, ordinary URL filters and opening/closing its canonical inline layout editor. This bounded change suspends filter controls, exposes the existing editor against the full catalog independently of filtered results, and restores the unchanged query presentation/focus. It adds no layout persistence, authority, data query or second editor state. Those responsibilities stay in the existing layout hook/editor and canonical identity/client providers. Exact responsibility and interaction review: docs/customize-entry-20261014/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex frontend integration owner",
+    "fingerprint": "01e4df693054c926f2c637dc628c8ef57a10e84870f4ea4a2c81c8315905e1f6",
+    "reason": "Existing index composition keeps roster presentation and URL filters; eligible count now belongs beside the single canonical layout hook in PortfolioProfiles. No transport, authority or new feature owner is added. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
+    "reviewedBy": "Codex frontend integration owner with independent outreach_review",
     "reviewedOn": "2026-10-14"
   },
   {
@@ -2544,6 +2544,24 @@
     "fingerprint": "cd0444d57a430d565ae1a800654cda81f589b967f675be5a9ab475ec11ef0d32",
     "reason": "Independent Codex outreach_review inspected the complete 421-line ordinary Outreach composition/editor module. Named children already partition campaign/record listing, type selection and editing. Parent pending state only vetoes dismissal; form retains its existing submit lifetime. No duplicate mutation, shared primitive change, auth, persistence or unrelated domain is added. Splitting by line count would obscure the bounded field/submit/close invariant. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+    "kind": "function",
+    "symbol": "usePortfolioLayout",
+    "fingerprint": "3c5897d5d616b8c0b8e03f3ab928415794fda812a486240b819bc8909d8633e0",
+    "reason": "The existing scoped read/save/reconcile owner now consumes the server-authorized catalog separately from tenant roster metadata. Captured receipt/cache freshness fences prevent a late PUT overwriting a newer GET; unchanged writer lifetime, exact version/order and GET-only unknown reconciliation remain cohesive. No endpoint, authority system or second state machine. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
+    "reviewedBy": "Codex frontend integration owner with independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+    "kind": "function",
+    "symbol": "usePortfolioLayout > save",
+    "fingerprint": "e314439748df16762631523e8e58eab72e03499a787af7d9b402fa980a2bbf86",
+    "reason": "One existing submitted order validates the complete captured authorized catalog, freezes it across dispatch, verifies receipt version/order and checks current cache lineage before installation. Unknown and conflict handling stay in the same existing transaction owner; no automatic retry or independent persistence. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
+    "reviewedBy": "Codex frontend integration owner with independent outreach_review",
     "reviewedOn": "2026-10-14"
   }
 ]

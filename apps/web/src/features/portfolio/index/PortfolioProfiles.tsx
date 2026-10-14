@@ -4,7 +4,7 @@ import type { PortfolioIndexState } from "./filter";
 import { ProfileCard, ProfileResults } from "./ProfileResults";
 import { PortfolioLayoutEditor, usePortfolioLayout } from "./layout/public";
 
-/** Mounted after the canonical client catalog loads; filters never become saved subsets. */
+/** Roster metadata supplies presentation; the layout receipt owns reorderable membership. */
 export function PortfolioProfiles({
   catalog,
   customizing,
@@ -24,9 +24,15 @@ export function PortfolioProfiles({
   owners?: Record<string, { accountOwner: Member | null }>;
   onRefreshCatalog: () => void;
 }) {
-  const layout = usePortfolioLayout(catalog.map(({ id }) => id));
+  const currentCatalog = catalog.filter(
+    (client) => client.status !== "archived",
+  );
+  const layout = usePortfolioLayout(currentCatalog.map(({ id }) => id));
+  const layoutCatalog = currentCatalog.filter(({ id }) =>
+    layout.catalogIds.includes(id),
+  );
   const byId = new Map(
-    (customizing ? catalog : rows).map((client) => [client.id, client]),
+    (customizing ? layoutCatalog : rows).map((client) => [client.id, client]),
   );
   const ordered =
     state.sort === "saved"
@@ -37,6 +43,13 @@ export function PortfolioProfiles({
       : rows;
   return (
     <>
+      {customizing && layout.receipt && (
+        <p className="status" role="status">
+          Customizing all {layoutCatalog.length}{" "}
+          {layoutCatalog.length === 1 ? "profile" : "profiles"} you can access.
+          Your filters and view will be restored when you finish.
+        </p>
+      )}
       {layout.error && (
         <button className="button" onClick={onRefreshCatalog}>
           Refresh profiles
@@ -45,7 +58,9 @@ export function PortfolioProfiles({
       {customizing ||
       (state.view === "cards" && state.sort === "saved" && !filtered) ? (
         <PortfolioLayoutEditor
-          cards={catalog.map(({ id, name }) => ({ id, name }))}
+          cards={(customizing ? layoutCatalog : currentCatalog).map(
+            ({ id, name }) => ({ id, name }),
+          )}
           layout={layout}
           editing={customizing}
           onFinish={onFinishCustomizing}

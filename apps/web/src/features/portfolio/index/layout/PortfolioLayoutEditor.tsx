@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, GripVertical } from "lucide-react";
 import type { PortfolioLayoutState } from "./usePortfolioLayout";
-import { moveClient, sameOrder } from "./ordering";
+import { moveClient, orderedClientIds, sameOrder } from "./ordering";
 import styles from "./layout.module.css";
 
 export type PortfolioLayoutCard = { id: string; name: string };
@@ -49,7 +49,34 @@ function EditorSession({
   );
   const [dragged, setDragged] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
-  const ids = draft?.scope === layout.scope ? draft.ids : layout.orderedIds;
+  const catalogKey = JSON.stringify([...layout.catalogIds].sort());
+  const [admittedCatalog, setAdmittedCatalog] = useState(catalogKey);
+  if (layout.receipt && admittedCatalog !== catalogKey) {
+    setAdmittedCatalog(catalogKey);
+    setDraft((value) =>
+      value
+        ? {
+            scope: layout.scope,
+            ids: orderedClientIds(
+              value.ids.map((id) => `client:${id}`),
+              layout.catalogIds,
+            ),
+          }
+        : null,
+    );
+    setDragged(null);
+    setAnnouncement(
+      "The accessible profile catalog changed. Review before saving.",
+    );
+  }
+  const currentIds =
+    draft?.scope === layout.scope ? draft.ids : layout.orderedIds;
+  const ids = editing
+    ? orderedClientIds(
+        currentIds.map((id) => `client:${id}`),
+        layout.catalogIds,
+      )
+    : currentIds;
   const changed =
     draft?.scope === layout.scope && !sameOrder(draft.ids, layout.orderedIds);
   const blocked =
@@ -70,8 +97,9 @@ function EditorSession({
       {layout.pending && <p role="status">Loading saved profile order…</p>}
       {layout.unavailable && (
         <p className="status" role="status">
-          Saved profile ordering is unavailable in this environment. Profiles
-          use their default order.
+          Saved profile ordering is unavailable in this environment. Reordering
+          requires a current accessible catalog. Your ordinary view remains
+          available.
           <button className="button" onClick={() => void layout.retry()}>
             Retry saved order
           </button>
@@ -196,8 +224,8 @@ function EditorSession({
       {layout.conflict && (
         <div className="status" role="alert">
           <p>
-            The saved order changed. Your unsaved order is retained. Review the
-            latest saved order before continuing.
+            The saved order changed. Your unsaved order is retained for the
+            current catalog. Review the latest saved order before continuing.
           </p>
           {layout.latestAvailable && (
             <ol aria-label="Latest saved profile order">

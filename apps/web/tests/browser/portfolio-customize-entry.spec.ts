@@ -132,13 +132,13 @@ test("unavailable saved ordering is explained after Customize from a filtered li
       { exact: false },
     ),
   ).toBeVisible();
-  await expect(page.getByRole("article")).toHaveCount(2);
+  await expect(page.getByRole("article")).toHaveCount(0);
   await expect(
     page.getByRole("button", {
       name: "Move Test Aerospace later",
       exact: true,
     }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Save order", exact: true }),
   ).toHaveCount(0);

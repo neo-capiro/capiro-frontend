@@ -1,0 +1,26 @@
+# Agreed authorized layout catalog semantics
+
+The coordinator explicitly resolves this as implementation consistency with existing authorization, not a new user scope decision. Frontend receiving source: `5952b9e305496100c86d4be0b44a52ab8d536b4d`. Backend preparation reported: `da4d236a0938449d377aacffd97d048f5f341b8f` with 75 tests. GitHub commit lookup returned 422 No commit found; exact preparation/controller/mount/test verification is still with its owner.
+
+## Roster versus reorderable catalog
+
+Inspected backend PR4 `a65ae3c8a9f1f0cf96d4f7d2ae30aad2fff172ff`: `apps/api/src/clients/clients.controller.ts` GET clients delegates to `ClientsService.list`; the list is tenant-scoped metadata, nonarchived by default. Client detail is also tenant metadata. Neither establishes the current user's memory-wall grant. GET memory-access is admin-only and is not an appropriate ordinary-user catalog reader. The canonical frontend `shared/session/client-contract.ts` strips extra backend fields and contains no per-user grant projection.
+
+**The actor-bound layout GET order is the complete current authorized visible catalog for ordering.** It may be a subset of the broader roster metadata. The frontend must not infer grants from memoryWall, role, name, owner, tenant membership or cached roster presence. A granted walled client may appear in the authoritative order; an ungranted walled client must not. Existing wall enforcement remains server-owned, including administrators' existing grant requirements; no new tenant/security policy or permission endpoint is introduced here.
+
+The frontend bounds every returned token against its fresh known nonarchived roster. Unknown or archived IDs fail receipt admission and require roster reload; they are not silently dropped. Completeness of the authorized catalog belongs to the authenticated backend. The frontend cannot independently reconstruct omitted grants from metadata. Ordinary roster metadata presentation keeps its existing contract; this patch changes layout membership, customization and persistence, not the policy of all client readers.
+
+## Exact receiving contract retained
+
+- Core GET/PUT `/api/me/portfolio-layout`, reached through existing canonical Core configuration and same-origin/session client.
+- Strict receipt `{contractVersion:1,tenantId:UUID,userId:UUID,version:int 0..2147483647,updatedAt:ISO|null,order:unique lowercase client:UUID[] max2000}`. Exactly version 0 implies timestamp null. Tenant/user echoes must match the current identity. Empty authorized catalog legitimately has order `[]` even if broader metadata exists.
+- GET exposes every currently authorized nonarchived layout client once. Server owns wall/grant/membership checks, durable storage and deterministic catalog reconciliation. Supply its exact reconciliation/version policy and native evidence; this frontend does not invent them.
+- PUT is exactly `{contractVersion:1,expectedVersion:int 0..2147483646,order}`. It must contain the complete admitted authorized set, once each, regardless of search/owner/status/type filters or cards/list/name/recent presentation. The frontend preflight refuses additions/omissions relative to its admitted GET. Backend atomically checks CAS and fresh current authorized membership; stale/denied/churn failures write nothing.
+- Success must return expectedVersion+1 and the exact submitted order. A late success cannot overwrite a newer GET or invalidated/failed/in-flight local read. It enters existing unknown-outcome recovery instead.
+- HTTP 409 requires explicit latest-order review. Unknown PUT outcomes never auto-retry: GET confirms only exact original order and expectedVersion+1. A changed catalog/order/version is not confirmation of the old intent; display its current allowed members and require review before another explicitly selected save.
+- GET failure conceals customization rows and blocks writes while preserving unsaved local input. Successful membership change removes revoked IDs from the draft and appends only newly GET-admitted members. Same-catalog retry restores the draft. Actor/roster lifetime replacement retains its existing abort/reset behavior.
+- Without a usable layout receipt, customization has no admitted rows or fallback reorder controls. Ordinary view remains available through its existing roster reader. No second store, endpoint, auth/client boundary, wall bypass or default full-roster PUT fallback.
+
+Current code: `PortfolioProfiles.tsx` bounds nonarchived metadata and uses receipt membership for customization; `layout/api.ts` admits GET subsets and validates complete captured-set writes; `usePortfolioLayout.ts` owns snapshot/cache freshness, save and GET reconciliation; `PortfolioLayoutEditor.tsx` projects and retains the one local draft. Existing shared session/client scope, URL filters, components and styles remain canonical.
+
+Backend owner next response: exact published source/controller/Core process mount/config/schema or allocated migration/test mapping, including current grants, initial/read/save/readback, catalog shrink/grow, stale/concurrent CAS and restart/lost-response durability. The old full-tenant-roster requirement in historical handoffs is superseded for layout ordering by this authorized catalog decision. Native qualification remains separate and all 337 rows stay open.

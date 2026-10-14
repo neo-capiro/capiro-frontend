@@ -37,10 +37,7 @@ export function assertLayoutCatalog(
   clientIds: readonly string[],
 ) {
   const expected = new Set(clientIds.map((id) => `client:${id}`));
-  if (
-    receipt.order.length !== expected.size ||
-    receipt.order.some((id) => !expected.has(id))
-  )
+  if (receipt.order.some((id) => !expected.has(id)))
     throw new ApiError(
       502,
       "The saved layout response does not match the current profile catalog. Reload profiles before continuing.",
@@ -69,7 +66,9 @@ export async function savePortfolioLayout(
     !Number.isInteger(input.expectedVersion) ||
     input.expectedVersion < 0 ||
     input.expectedVersion >= 2147483647 ||
-    !layoutOrderSchema.safeParse(input.order).success
+    !layoutOrderSchema.safeParse(input.order).success ||
+    input.order.length !== clientIds.length ||
+    input.order.some((token) => !clientIds.includes(token.slice(7)))
   )
     throw new ApiError(400, "The saved layout order or version is invalid.");
   const receipt = assertLayoutCatalog(

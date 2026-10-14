@@ -109,7 +109,6 @@ describe("saved Portfolio ordering", () => {
   it("resolves only matching version and exact requested order", () =>
     expect(resolvesLayoutSave(receipt, input, [a, b])).toBe(true));
   it.each([
-    { order: [`client:${a}`] },
     {
       order: [
         `client:${b}`,
@@ -119,7 +118,7 @@ describe("saved Portfolio ordering", () => {
     },
     { order: [`client:${a}`, "client:40000000-0000-4000-8000-000000000001"] },
   ])(
-    "rejects an incomplete or foreign catalog receipt %# before read publication",
+    "rejects a foreign roster ID receipt %# before read publication",
     async ({ order }) => {
       const { api } = apiFor({ ...receipt, order });
       await expect(readPortfolioLayout(api, actor, [a, b])).rejects.toThrow(
@@ -127,6 +126,27 @@ describe("saved Portfolio ordering", () => {
       );
     },
   );
+  it.each([{ ids: [a] }, { ids: [] }])(
+    "accepts the actor-bound authorized catalog %# as a roster subset",
+    async ({ ids }) => {
+      const value = { ...receipt, order: ids.map((id) => `client:${id}`) };
+      const { api } = apiFor(value);
+      expect(await readPortfolioLayout(api, actor, [a, b])).toEqual(value);
+    },
+  );
+  it("saves only the complete authorized catalog and refuses an extra roster ID before transport", async () => {
+    const value = { ...receipt, order: [`client:${a}`] };
+    const { api, calls } = apiFor(value);
+    const authorizedInput = { ...input, order: value.order };
+    expect(await savePortfolioLayout(api, actor, authorizedInput, [a])).toEqual(
+      value,
+    );
+    await expect(
+      savePortfolioLayout(api, actor, input, [a]),
+    ).rejects.toMatchObject({ status: 400 });
+    expect(calls).toHaveLength(1);
+    expect(calls[0]?.body).toEqual(authorizedInput);
+  });
   it("does not confirm a projected partial or extra success order", () => {
     expect(
       resolvesLayoutSave({ ...receipt, order: [`client:${b}`] }, input, [a, b]),
