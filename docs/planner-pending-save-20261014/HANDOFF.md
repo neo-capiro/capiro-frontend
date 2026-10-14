@@ -14,7 +14,7 @@ Final Modules6/6 and Portfolio15/15 Playwright cases pass. Tests cover required-
 
 Root npm check passes:2367 web units,451 Capiro registry tests,113 root tests,84 transport,385 newsletter plus8 declaration checks, types/lint/format/architecture/public packages. Production build passes. Independent Codex outreach_review accepted exact source/size fingerprints and final21-browser receipts. All36 standalone route/theme/viewport observations and preview-root checks pass. No Elements graph/package changes were made.
 
-The original red held-write and Select-pointer results are retained. Two test setup failures were corrected: save already closes the task detail after query refresh; Assignee also exists in the toolbar and must be scoped to the dialog. A first aggregate stopped on outdated size-review admission; exact independent reviews restored it. Raw aggregate/build logs use gzip/base64 byte/hash wrappers.
+The original red held-write and Select-pointer results are retained. Two test setup failures were corrected: save already closes the task detail after query refresh; Assignee also exists in the toolbar and must be scoped to the dialog. A first aggregate stopped on outdated size-review admission; exact independent reviews restored it. All raw logs use gzip/base64 byte/hash wrappers, preserving terminal whitespace and bytes without Git text normalization.
 
 ## Existing ledger and native gates
 

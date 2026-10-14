@@ -46,8 +46,8 @@
     },
     {
       "path": "docs/planner-pending-save-20261014/HANDOFF.md",
-      "bytes": 4312,
-      "sha256": "f245a847343b9b1ad9f874881320957d7994d549c8380cd13b305fa8bac5afac"
+      "bytes": 4373,
+      "sha256": "d856a84d7ae6cb0c54e85aa2d180f33b6347d593f0da2579a5b66f4f17ac8832"
     },
     {
       "path": "docs/planner-pending-save-20261014/INDEPENDENT-REVIEW.md",
@@ -60,9 +60,9 @@
       "sha256": "4ef6e12ccbda210235a306b1ff83f4ccc7cf81a70be2fb01cd191510f9d95bd8"
     },
     {
-      "path": "docs/planner-pending-save-20261014/before.log",
-      "bytes": 4531,
-      "sha256": "8b90b8ab831d38f2516fffa5a78507b73959a67bfc6a2d5ba31bf643309b2342"
+      "path": "docs/planner-pending-save-20261014/before.log.raw.json",
+      "bytes": 1949,
+      "sha256": "d93d9c980cf10717fd269bbda55e7c4400b1927f5a524bd53e2628d325e2911f"
     },
     {
       "path": "docs/planner-pending-save-20261014/before.png",
@@ -95,9 +95,9 @@
       "sha256": "bc20b002c5bea320b99c166f47606477cbe204e7dfc044a0c71b486f16d7d57b"
     },
     {
-      "path": "docs/planner-pending-save-20261014/modules-browser.log",
-      "bytes": 1655,
-      "sha256": "d765153d7e517b98fecb4e8706edddc95b458d65d5e3449a9903bf7821845ff6"
+      "path": "docs/planner-pending-save-20261014/modules-browser.log.raw.json",
+      "bytes": 1093,
+      "sha256": "a4b92655acd70c8cc79e2e2e940b24e0937ab2e8310e31f38b6f8664cd0c17f1"
     },
     {
       "path": "docs/planner-pending-save-20261014/pointer-first-attempt-results.json",
@@ -105,9 +105,9 @@
       "sha256": "ce7e81aec003382da39b18dcadb93106bf95b896e81b64c0b76b20f20f6e2c6f"
     },
     {
-      "path": "docs/planner-pending-save-20261014/pointer-first-attempt.log",
-      "bytes": 9830,
-      "sha256": "19af26f68becc84c15bc007f31f18ee53178b625fa993409a3c2353bcc959703"
+      "path": "docs/planner-pending-save-20261014/pointer-first-attempt.log.raw.json",
+      "bytes": 2469,
+      "sha256": "48d7f9a06c8d29af9ad1c24069941282ba84708f6b9e972138449bf7cdc8cd75"
     },
     {
       "path": "docs/planner-pending-save-20261014/portfolio-browser-results.json",
@@ -115,9 +115,9 @@
       "sha256": "93b48ecbfb0c15bda9c68a3a39ab8d3e9e1f21d2c40299c9642c9f047ca574f9"
     },
     {
-      "path": "docs/planner-pending-save-20261014/portfolio-browser.log",
-      "bytes": 3154,
-      "sha256": "834ee2e3f9567b40977b608f260d364b47ca97c46c74cfcfa0ce42ada4901798"
+      "path": "docs/planner-pending-save-20261014/portfolio-browser.log.raw.json",
+      "bytes": 1693,
+      "sha256": "d5e007f29bb362706d3a838b04cb74ba932df9d9f21426c68fd76a4ac393b4f6"
     },
     {
       "path": "docs/planner-pending-save-20261014/readback-first-attempt-results.json",
@@ -125,14 +125,14 @@
       "sha256": "688fdfab3e188293bba9db7ce568effa06729c73819524a2c7ec309de9a76a2c"
     },
     {
-      "path": "docs/planner-pending-save-20261014/readback-first-attempt.log",
-      "bytes": 4792,
-      "sha256": "c49989b05caeafe710446c1c16c6e35eabad68470f0ffddcbedc25c2915be23d"
+      "path": "docs/planner-pending-save-20261014/readback-first-attempt.log.raw.json",
+      "bytes": 1841,
+      "sha256": "9cf705609cc70801fbfa57bf33c4367743c3fa9c92e7b743d319278666c7af7e"
     },
     {
-      "path": "docs/planner-pending-save-20261014/select-pointer-after.log",
-      "bytes": 1655,
-      "sha256": "b707246865addba99f7089f8b8a73577884aa326a19a16fc81b9a095ce0852d8"
+      "path": "docs/planner-pending-save-20261014/select-pointer-after.log.raw.json",
+      "bytes": 1089,
+      "sha256": "c419df122efac67ed005d2594eb2f4fd84feb6bc6694557a55e25b69f823f00e"
     },
     {
       "path": "docs/planner-pending-save-20261014/select-pointer-before-results.json",
@@ -140,9 +140,9 @@
       "sha256": "d67e30d21c353c9923b75dc4082677a8e44410239958ec2f30f8d69929503373"
     },
     {
-      "path": "docs/planner-pending-save-20261014/select-pointer-before.log",
-      "bytes": 7602,
-      "sha256": "62604186df9094416457fd99373b0ab701f3cff0a67f89b4f55f93a1e9418a70"
+      "path": "docs/planner-pending-save-20261014/select-pointer-before.log.raw.json",
+      "bytes": 2013,
+      "sha256": "5e20fc35ace14d203e86131edd9d4f8840f4b158306b06efeeea91a042924be0"
     },
     {
       "path": "docs/planner-pending-save-20261014/standalone/preview-root-smoke.json",
@@ -235,19 +235,19 @@
       "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
     },
     {
-      "path": "docs/planner-pending-save-20261014/standalone/standalone-default.log",
-      "bytes": 147,
-      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+      "path": "docs/planner-pending-save-20261014/standalone/standalone-default.log.raw.json",
+      "bytes": 300,
+      "sha256": "bd92e4c1d672990415b6955a15eac3b74672baf51f34a20b4ae1001c9e490d78"
     },
     {
-      "path": "docs/planner-pending-save-20261014/standalone/standalone-portfolio.log",
-      "bytes": 147,
-      "sha256": "88b97c42ec7a31b4ac3d5acb8d365ca45669acef1a58e5dec51c0f6792d1709a"
+      "path": "docs/planner-pending-save-20261014/standalone/standalone-portfolio.log.raw.json",
+      "bytes": 300,
+      "sha256": "10d31acf97fa59718cc8eee461888c229608781cf1153b0275e2d2eddbe02a44"
     },
     {
-      "path": "docs/planner-pending-save-20261014/standalone-first-attempt.log",
-      "bytes": 1696,
-      "sha256": "469d35f6e050443044a04b2b80ef95317a97ed19e6288d8de029b4c3d888b520"
+      "path": "docs/planner-pending-save-20261014/standalone-first-attempt.log.raw.json",
+      "bytes": 985,
+      "sha256": "fb9807e89e52a21aeba9b8de48a69f341148ce2701c28633064e1fa4555461c6"
     },
     {
       "path": "docs/planner-pending-save-20261014/standalone.raw.json",
