@@ -71,6 +71,15 @@ for (const [width, colorScheme] of [
   }, info) => {
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
     await page.emulateMedia({ colorScheme, reducedMotion: "reduce" });
+    const heading = page.getByRole("heading", {
+      name:
+        width === 1440
+          ? "Everything in Capiro, across the whole firm"
+          : "Everything in Capiro",
+      exact: true,
+      level: 1,
+    });
+    await expect(heading).toBeVisible();
     const help = page.getByRole("button", {
       name: "About Modules",
       exact: true,
@@ -120,12 +129,6 @@ for (const [width, colorScheme] of [
     await page.keyboard.press("Escape");
     await expect(tooltip).toBeHidden();
     await expect(help).toBeFocused();
-    await expect(
-      page.getByRole("heading", {
-        name: "Everything in Capiro, across the whole firm",
-        exact: true,
-        level: 1,
-      }),
-    ).toBeVisible();
+    await expect(heading).toBeVisible();
   });
 }

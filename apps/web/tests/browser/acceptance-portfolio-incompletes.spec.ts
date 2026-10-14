@@ -28,11 +28,20 @@ for (const width of [1440, 390]) {
         page.getByRole("heading", { name: "Test Aerospace", level: 2 }),
       ).toBeVisible();
       const pulse = page.getByRole("region", { name: "Portfolio pulse" });
-      const labels = pulse.locator("p, small, span.eyebrow");
+      const eyebrow = pulse.getByText("Portfolio pulse", { exact: true });
+      if (width === 390) await expect(eyebrow).toBeHidden();
+      else await expect(eyebrow).toBeVisible();
+      const labels = pulse.locator(
+        "p:visible, small:visible, span.eyebrow:visible",
+      );
+      await expect(labels).toHaveCount(width === 390 ? 6 : 7);
       for (let i = 0; i < (await labels.count()); i++)
         await expectRenderedContrast(labels.nth(i), info, `pulse-label-${i}`);
       await expectRenderedContrast(
-        pulse.locator("strong").nth(1),
+        pulse
+          .getByText("Clients", { exact: true })
+          .locator("..")
+          .locator("strong"),
         info,
         "client-count",
       );

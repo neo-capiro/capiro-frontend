@@ -1,0 +1,23 @@
+# Desktop-first browser release repair on frozen PR42
+
+Base: PR42 `ee9d872743f44f927fa924eebd764da8e093888c`. This successor preserves PR42/source/output/config and contains no deployment action. PR43 phone production changes and PR44 Planner pending-save production changes remain separate candidates.
+
+## Repair
+
+The five reported AWS primary-browser failures were reproduced against the exact frozen source. Needs attention now uses a peer H2 with unchanged authored typography. Portfolio pulse metrics are a named keyboard-focusable scrolling region with visible focus; physical ArrowRight/ArrowLeft scrolling is tested. Contrast verification measures the explicit responsive visible-label counts, composes admitted translucent solid surfaces over the existing strict opaque background admission, and retains the4.5 minimum and conservative rejection. Actual renderer readable/low-contrast/unsupported-gradient controls prevent silent admission regressions. Unavailable Customize exposes no Drag/Move/Save controls; keyboard Done/filter behavior and admitted-catalog reorder/save/reload cases remain covered.
+
+The complete Modules gate exposed stale test expectations for ordinary unavailable Meri versus explicit synthetic fixture home, current enabled Files versus unavailable conversation actions, nested pulse region naming, and the responsive Modules heading. Tests now bind their intended fixture/current route and exact responsive heading while preserving isolation, default axe, contrast, keyboard and unavailable-state coverage. No Meri/shared shell production changes are included.
+
+## Qualification
+
+Neo explicitly deferred mobile; see DESKTOP-RELEASE-SCOPE.md for exact full desktop/shared selection, retained supersets and deferred phone evidence. Mobile-only failures do not block this desktop release. Further phone remediation/parity is stopped.
+
+Complete primary1300 passed with0failures,0skips,0flaky; all253attachments and full JSON retained. Complete Modules/Meri507 passed with0failures,0skips,0flaky; all81attachments and full JSON retained. Build and36credential-free standalone observations+root/default-product smoke passed with no page errors. Complete npmcheck passed; final types/lint/format passed. Security/API local regression suites are included; production dependency audit recorded0critical/high/moderate and7unchanged low findings (see SECURITY-SCOPE.md). Independent exact-byte review accepted the source, all seven Modules test corrections, alpha controls and required size reviews. No check skip, browser retry or threshold reduction is used.
+
+All intermediate failures are retained losslessly in this directory. Initial frozen control:2pass5fail. Intermediate repair:31pass3fail; focus attempt:36pass1fail; final targeted control:9pass. Initial Modules attempt recorded nine stale failures before filesystem exhaustion and produced no complete JSON report. Modules selected first controls:45pass6fail; fresh shared controls:20pass. Complete primary initial attempt:1295pass5fail, all artifact filesystem ENOSPC/ENOENT errors rather than assertion failures. These diagnostic attempts are not release qualification. Subsequent complete Modules heading diagnostic:504pass3fail,0skips0flaky; only the three phone desktop-suffix expectations failed, and all preceding tooltip/focus/axe/Escape assertions passed. Fresh complete507 after the exact responsive before/after correction passed; mobile release acceptance remains deferred. Raw logs/JSON use gzip+base64 wrappers with original byte lengths andSHA256, preserving terminal CR/trailing spaces exactly. Failure tar archives retain available attachments; filesystem failures cannot fabricate missing artifacts.
+
+## Release boundary
+
+No AWS, paid build, credentials/security or live data-changing checks were executed. Preview deployment to the new image is unverified. All337 native acceptance rows remain open; local browser/fixture/standalone results prove bounded frontend behavior only. Shared MeriSDK0.1.3 remains adopted; SDK0.1.5 requires separate compatibility review. Backend owner PR4 source includes API families; designated route/config/data binding and saved-layout mapping remain owner verification dependencies.
+
+For later release: qualify this focused successor against PR42 first; review/integrate PR43 and PR44 independently in an explicit consolidated candidate, then rerun its source-bound gates before any shipping-owner cloud attempt. No authorization to deploy is inferred. Full Portfolio/Modules desktop/mobile detail/modal Figma parity remains separate, with exact reference mapping retained in the unfinished local detail-parity checkpoint. This repair does not claim full-product parity or native acceptance.

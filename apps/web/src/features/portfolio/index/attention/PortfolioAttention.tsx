@@ -17,7 +17,7 @@ export function PortfolioAttention({
   return (
     <aside className={styles.card} aria-label="Needs attention">
       <header className={styles.header}>
-        <h3>Needs attention</h3>
+        <h2>Needs attention</h2>
         {data && (
           <span
             className={styles.count}

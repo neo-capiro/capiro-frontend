@@ -15,7 +15,9 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.header h3 {
+.header h2 {
+  font-size: 15px;
+  letter-spacing: -0.15px;
   line-height: 1.35;
 }
 .count {

@@ -25,13 +25,13 @@ async function style(locator: Locator) {
 }
 
 for (const width of [1440, 390]) {
-  test(`Meri authored dark workspace keeps the shared header light at ${width}px`, async ({
+  test(`Meri authored dark fixture keeps the shared header light at ${width}px`, async ({
     page,
   }, info) => {
     const fixture = await filesFixture(page);
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
     await page.emulateMedia({ colorScheme: "dark" });
-    await page.goto(`/meri?clientId=${actionClient.id}`);
+    await page.goto(`/meri/fixture/home?clientId=${actionClient.id}`);
     const main = page.getByRole("main");
     await expect(
       page.getByLabel("Message draft", { exact: true }),
@@ -83,7 +83,7 @@ for (const width of [1440, 390]) {
     const fixture = await filesFixture(page);
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
     await page.emulateMedia({ colorScheme: "dark" });
-    const home = `/meri?clientId=${actionClient.id}`;
+    const home = `/meri/fixture/home?clientId=${actionClient.id}`;
     await page.goto(home);
     await expect(
       page.getByLabel("Message draft", { exact: true }),
@@ -108,7 +108,7 @@ for (const width of [1440, 390]) {
       .click();
     await expect(
       page.getByRole("heading", {
-        name: "Everything in Capiro, across the whole firm",
+        name: /^Everything in Capiro/,
       }),
     ).toBeVisible();
     expect((await style(page.getByRole("banner"))).foreground).toBe("#0a0a0a");
