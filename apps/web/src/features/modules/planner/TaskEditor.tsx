@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type {
   PlannerPerson,
@@ -30,22 +30,33 @@ type Props = {
   initialTitle?: string;
 };
 export function TaskEditor(props: Props) {
+  const pending = useRef<object | null>(null);
   return (
     <Modal
       open={props.open}
       onOpenChange={(open) => {
-        if (!open) props.onClose();
+        if (!open && !pending.current) props.onClose();
       }}
       title={
         props.task ? "Edit task" : props.parentId ? "Add subtask" : "New task"
       }
       description="Task access and updates are checked by the Planner service."
     >
-      {props.open && <TaskForm {...props} />}
+      {props.open && (
+        <TaskForm
+          {...props}
+          onPendingChange={(owner, value) => {
+            if (value) pending.current = owner;
+            else if (pending.current === owner) pending.current = null;
+          }}
+        />
+      )}
     </Modal>
   );
 }
-function TaskForm(props: Props) {
+function TaskForm(
+  props: Props & { onPendingChange: (owner: object, pending: boolean) => void },
+) {
   const api = useCapiro();
   const task = props.task;
   const [data, setData] = useState<Draft>({
@@ -73,8 +84,13 @@ function TaskForm(props: Props) {
     ),
     [busy, setBusy] = useState(false),
     [error, setError] = useState<string>();
+  const pending = useRef(false);
+  const owner = useRef({});
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (pending.current) return;
+    pending.current = true;
+    props.onPendingChange(owner.current, true);
     setBusy(true);
     setError(undefined);
     try {
@@ -103,40 +119,46 @@ function TaskForm(props: Props) {
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Unable to save task.");
     } finally {
+      pending.current = false;
+      props.onPendingChange(owner.current, false);
       setBusy(false);
     }
   };
   return (
-    <form className={styles.stack} onSubmit={(event) => void submit(event)}>
-      <TaskContentFields data={data} setData={setData} />
-      <TaskOwnerFields
-        data={data}
-        setData={setData}
-        people={props.people}
-        projects={props.projects}
-        projectIds={projectIds}
-        setProjects={setProjects}
-      />
-      <TaskScheduleFields data={data} setData={setData} />
-      <AdvancedTaskFields
-        data={data}
-        setData={setData}
-        people={props.people}
-        taskId={task?.id}
-      />
-      {error && (
-        <p className={styles.error} role="alert">
-          {error}
-        </p>
-      )}
-      <div className={styles.footer}>
-        <ActionButton type="button" onClick={props.onClose}>
-          Cancel
-        </ActionButton>
-        <ActionButton primary type="submit" disabled={busy}>
-          {busy ? "Saving…" : "Save task"}
-        </ActionButton>
-      </div>
+    <form aria-busy={busy} onSubmit={(event) => void submit(event)}>
+      <fieldset disabled={busy} className={styles.editorFields}>
+        <TaskContentFields data={data} setData={setData} />
+        <TaskOwnerFields
+          disabled={busy}
+          data={data}
+          setData={setData}
+          people={props.people}
+          projects={props.projects}
+          projectIds={projectIds}
+          setProjects={setProjects}
+        />
+        <TaskScheduleFields data={data} setData={setData} disabled={busy} />
+        <AdvancedTaskFields
+          disabled={busy}
+          data={data}
+          setData={setData}
+          people={props.people}
+          taskId={task?.id}
+        />
+        {error && (
+          <p className={styles.error} role="alert">
+            {error}
+          </p>
+        )}
+        <div className={styles.footer}>
+          <ActionButton type="button" onClick={props.onClose}>
+            Cancel
+          </ActionButton>
+          <ActionButton primary type="submit" disabled={busy}>
+            {busy ? "Saving…" : "Save task"}
+          </ActionButton>
+        </div>
+      </fieldset>
     </form>
   );
 }
@@ -166,6 +188,7 @@ function TaskContentFields({ data, setData }: TaskFormModel) {
   );
 }
 function TaskOwnerFields({
+  disabled,
   data,
   setData,
   people,
@@ -182,6 +205,7 @@ function TaskOwnerFields({
     <>
       <Field label="Assignee" htmlFor="task-assignee">
         <SelectInput
+          disabled={disabled}
           id="task-assignee"
           value={data.assigneeId ?? "unassigned"}
           onValueChange={(id) =>
@@ -224,7 +248,7 @@ function TaskOwnerFields({
     </>
   );
 }
-function TaskScheduleFields({ data, setData }: TaskFormModel) {
+function TaskScheduleFields({ data, setData, disabled }: TaskFormModel) {
   return (
     <div className={styles.form}>
       <Field label="Start date" htmlFor="task-start">
@@ -291,6 +315,7 @@ function TaskScheduleFields({ data, setData }: TaskFormModel) {
       </Field>
       <Field label="Priority" htmlFor="task-priority">
         <SelectInput
+          disabled={disabled}
           id="task-priority"
           value={data.priority}
           onValueChange={(value) =>
@@ -304,6 +329,7 @@ function TaskScheduleFields({ data, setData }: TaskFormModel) {
       </Field>
       <Field label="Status" htmlFor="task-status">
         <SelectInput
+          disabled={disabled}
           id="task-status"
           value={data.status}
           onValueChange={(value) =>

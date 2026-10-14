@@ -21,11 +21,12 @@ export function AdvancedTaskFields(props: Props) {
     </details>
   );
 }
-function TaskDefinition({ data, setData }: TaskFormModel) {
+function TaskDefinition({ data, setData, disabled }: TaskFormModel) {
   return (
     <div className={styles.form}>
       <Field label="Task type" htmlFor="task-type">
         <SelectInput
+          disabled={disabled}
           id="task-type"
           value={data.subtype}
           onValueChange={(value) =>
@@ -40,6 +41,7 @@ function TaskDefinition({ data, setData }: TaskFormModel) {
       {data.subtype === "approval" && (
         <Field label="Approval" htmlFor="task-approval">
           <SelectInput
+            disabled={disabled}
             id="task-approval"
             value={data.approval}
             onValueChange={(value) =>
@@ -74,6 +76,7 @@ function TaskDefinition({ data, setData }: TaskFormModel) {
       </Field>
       <Field label="Repeat" htmlFor="task-repeat">
         <SelectInput
+          disabled={disabled}
           id="task-repeat"
           value={data.recurrence?.frequency ?? "none"}
           onValueChange={(value) =>

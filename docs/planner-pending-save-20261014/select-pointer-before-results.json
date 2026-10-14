@@ -1,0 +1,410 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-portfolio-modules-acceptance-20261014/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "planner-engagement.spec.ts"
+    ],
+    "configFile": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "planner-engagement.spec.ts",
+      "file": "planner-engagement.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Planner modes use the same permitted task data and exact board assets",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2594,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:06.620Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-5063bacb1c26b597722e",
+          "file": "planner-engagement.spec.ts",
+          "line": 114,
+          "column": 1
+        },
+        {
+          "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6464,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:09.529Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-0964d903fcfc8d41ed87",
+          "file": "planner-engagement.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "Planner pending writes freeze the submitted draft and dismissal until rejection at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7873,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:316:49",
+                    "location": {
+                      "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                      "column": 49,
+                      "line": 316
+                    },
+                    "snippet": "  314 |           box!.y + box!.height / 2,\n  315 |         );\n> 316 |         await expect(page.getByRole(\"listbox\")).toHaveCount(0);\n      |                                                 ^\n  317 |       }\n  318 |       await expect(\n  319 |         page.getByRole(\"button\", { name: \"Cancel\", exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                        "column": 49,
+                        "line": 316
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  314 |           box!.y + box!.height / 2,\n  315 |         );\n> 316 |         await expect(page.getByRole(\"listbox\")).toHaveCount(0);\n      |                                                 ^\n  317 |       }\n  318 |       await expect(\n  319 |         page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n    at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:316:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:16.026Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-281f9-sal-until-rejection-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                    "column": 49,
+                    "line": 316
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-5c08b4ac5a3350c6c292",
+          "file": "planner-engagement.spec.ts",
+          "line": 269,
+          "column": 3
+        },
+        {
+          "title": "Planner pending writes freeze the submitted draft and dismissal until rejection at 390",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8144,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:316:49",
+                    "location": {
+                      "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                      "column": 49,
+                      "line": 316
+                    },
+                    "snippet": "  314 |           box!.y + box!.height / 2,\n  315 |         );\n> 316 |         await expect(page.getByRole(\"listbox\")).toHaveCount(0);\n      |                                                 ^\n  317 |       }\n  318 |       await expect(\n  319 |         page.getByRole(\"button\", { name: \"Cancel\", exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                        "column": 49,
+                        "line": 316
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('listbox')\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listbox')\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  314 |           box!.y + box!.height / 2,\n  315 |         );\n> 316 |         await expect(page.getByRole(\"listbox\")).toHaveCount(0);\n      |                                                 ^\n  317 |       }\n  318 |       await expect(\n  319 |         page.getByRole(\"button\", { name: \"Cancel\", exact: true }),\n    at /workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts:316:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:24.716Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/test-failed-1.png"
+                    },
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbCiAgICB7CiAgICAgICJ0ZXh0IjogIkZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwOSAoQ29uZmxpY3QpIiwKICAgICAgImxvY2F0aW9uIjogewogICAgICAgICJ1cmwiOiAiaHR0cDovLzEyNy4wLjAuMTo1MTk3L2FwaS9jYXBpcm8vcGxhbm5lci50YXNrLmNyZWF0ZSIsCiAgICAgICAgImxpbmUiOiAwLAogICAgICAgICJjb2x1bW4iOiAwLAogICAgICAgICJsaW5lTnVtYmVyIjogMCwKICAgICAgICAiY29sdW1uTnVtYmVyIjogMAogICAgICB9CiAgICB9CiAgXQp9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test-results/modules-browser/planner-engagement-Planner-c3bdb-ssal-until-rejection-at-390/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-portfolio-modules-acceptance-20261014/apps/web/test/browser/planner-engagement.spec.ts",
+                    "column": 49,
+                    "line": 316
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-c07afeddd096c68ae649",
+          "file": "planner-engagement.spec.ts",
+          "line": 269,
+          "column": 3
+        },
+        {
+          "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2623,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:33.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-b5ce3052322269df05b2",
+          "file": "planner-engagement.spec.ts",
+          "line": 340,
+          "column": 1
+        },
+        {
+          "title": "A template session deep link keeps the server state version and sends no mail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-14T12:54:36.650Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJwYWdlRXJyb3JzIjogW10sCiAgImNvbnNvbGVFcnJvcnMiOiBbXQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "89777fd173b753a3989c-9600fbda34a87898cf29",
+          "file": "planner-engagement.spec.ts",
+          "line": 401,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-14T12:54:00.174Z",
+    "duration": 38757.043,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
