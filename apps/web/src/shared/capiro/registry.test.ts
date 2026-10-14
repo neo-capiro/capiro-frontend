@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { calendarOperations } from "./operations/calendar";
 import { directoryOperations } from "./operations/directory";
+import { directoryObjectiveOperations } from "./operations/directory-objective-destination";
 import { engagementOperations } from "./operations/engagement";
 import { intelligenceOperations } from "./operations/intelligence";
 import { legiwatchOperations } from "./operations/legiwatch";
@@ -23,6 +24,7 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     workspaceOperations,
     strategiesOperations,
     directoryOperations,
+    directoryObjectiveOperations,
     calendarOperations,
     legiwatchOperations,
     settingsAdminOperations,

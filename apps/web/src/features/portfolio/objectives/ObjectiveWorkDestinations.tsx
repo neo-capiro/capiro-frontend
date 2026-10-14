@@ -24,7 +24,7 @@ export function ObjectiveWorkDestinations({
   const id = useId();
   return (
     <section className="card stack" aria-label="Existing Objective work">
-      <h3>Existing Strategy, task or saved document</h3>
+      <h3>Existing Strategy, task, saved document or Directory target</h3>
       <button
         className="button"
         type="button"
