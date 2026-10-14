@@ -1,0 +1,221 @@
+{
+  "base": "7e170defb9442aa3ce0fd1d5b14060af831ce8d0",
+  "preservedWip": "f500620c",
+  "ownerContract": "d15bba2cd75a8d36743e5d7a10eda346e4e48e2a",
+  "authorityOwner": "65c4918042df0930d4ff46abd6994fbdd27538c5",
+  "ownerContractSha256": "6024357603e284abc43140fd12ec50a0bc4196989137ab1cffbf9e6ec2808f55",
+  "source": [
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/calendar/page.tsx",
+      "sha256": "270220732216a8136a20c3055cefd44f15a8b838480bf4a65cf947e5b8bde365"
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/calendar/page.tsx",
+      "sha256": "76a586368d76c0bcc3204ab214a0ee104d7c33f60afb781df4ae0dca50598aec"
+    },
+    {
+      "path": "apps/web/src/features/modules/objective-destinations/ObjectiveDestinationRoute.tsx",
+      "sha256": "cd675923bb24c2a8f2c2de4bf1960a36c05e0a06d60fa399258976f7146368f5"
+    },
+    {
+      "path": "apps/web/src/features/modules/objective-destinations/useWorkspaceObservation.ts",
+      "sha256": "a19061ce7175dfd158a4dcc070de5e8ecb09b3352df5f13183586ce173e9422b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/ObjectiveCalendarDestination.tsx",
+      "sha256": "1d2f1d375a7b160ad53e0e24103e1b59be49fce3977e12f1445ac7d3802de659"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/objective-occurrence.ts",
+      "sha256": "b58a8dd10e1c526e7151a9021b570fda686d9fad7db8d2839a14525694564fdd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/planner-feed.ts",
+      "sha256": "040798d8076bfd325c3c841a870cdfe07543d11feb6587dfb8888eec29964d1d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/public.ts",
+      "sha256": "dd018391e1dd0288b62b73dc0814272b20bcd0cdce67adb827b0a3549192e1ea"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveSavedVersion.tsx",
+      "sha256": "5ba40c04cc058c89a88bd28d3c2312b7144684cad06dde07b9053982ca0c7fa5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+      "sha256": "1172236d554eeb4c9e068a266e0c3df60fcf90dfc266da635ac17ea56b2afa70"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/objective-planner-sources.ts",
+      "sha256": "34fb73d17cf5635ea1ad9e34f538585564e71833f3d08678af183517c83355f2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+      "sha256": "f487b61e5080dd7346dec994badd42e40986cdf7945d634322934162ecf59c16"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/useObjectiveWorkDestination.ts",
+      "sha256": "df56b5b895554c9e30192aab85135e39304667cda038117b7a50af81a2a8336a"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/objective-read-admission.ts",
+      "sha256": "153b5c84ad6b51bbab4c1789fa78b2a4991f184fd3283ec3a260a5856b9bb8ae"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/objective-workspace-receiving.ts",
+      "sha256": "15b881175ad29e919f12ac92cc21de5f97159b410a6a471b7bd973aed97b5609"
+    },
+    {
+      "path": "scripts/architecture-objective-snapshot.test.mjs",
+      "sha256": "16f3cf074ea032649d0fa86250b77c2fd602cbc6a459e023de9d9ecd6320e7ab"
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "sha256": "717c5052752c167f633a837cce65810e85c1cbc137775f5f325f3d5b9bcc9df9"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "sha256": "bcaa8035c47528a863bdd4bf0417a8a35c8d8017a33e44f8fd7e39d10db680ee"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/aggregate-before-layout-correction.log",
+      "sha256": "1bbbfa0e5c564c1fbe197b14181c0cf5aae62e314391cb086b46b913aa1a5f65"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/architecture.json",
+      "sha256": "b2651728a84773b7734d9badd025cd53350b3d64e715c39ffbbf95db4fb81f51"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/browser.raw.json",
+      "sha256": "3dd800ff2aec12f0c409862988c114367cbe85cf323d8ea8666f6f29b520afac"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/build-final.log",
+      "sha256": "159039270cbb715b4d9067bdc12dbd6acb193ca81daed415527a54b45ac95367"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/build.log",
+      "sha256": "ad886aaf8efd778e482d714b860e204728c91a505660688e6835043f3515fba3"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/build.raw.json",
+      "sha256": "c373b190f6e3bd71fd1911ec8c7cdef4f7c0cb5826ae8a6b570ba0ff0f26c30a"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/capiro.log",
+      "sha256": "5b2e5fd1459db3d148fae79226f41db9cbef2fedff3eeb2554e50c01d929fa5f"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/committed-render-browser.log",
+      "sha256": "6a672a20fcf1bbd2d535f1aeddfe3cdcbe22c8f2e1e5c71b7729f5f5562768f1"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/corrected-build.raw.json",
+      "sha256": "bdda844342051a727ae8e1debb249545aacb5d7a50ed464fe33deb13164de9e4"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/corrected-unit.raw.json",
+      "sha256": "5478742c8908e45b94e1d34739eca7cdd9f158963af3e59d85e177b0cee0ade6"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/final-architecture.raw.json",
+      "sha256": "2ad2dca7a87b01a67aad1df265c97de5eb69ab8f6c08d3ac203287d9bdd90f95"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/final-browser.raw.json",
+      "sha256": "ee490f6c992d46290588d8ec2507d90a70c2a9b1252c486a7fbc6fc207d11844"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/final-build.raw.json",
+      "sha256": "f58c5d7b187e960cf4e7b2c4d472b80d3a11faec2cb5bce671c9044f0c31f3aa"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/final-unit.raw.json",
+      "sha256": "caadfc2d38c834f11732aec3477dd009d9247c8ef5f78e2acd8640784c301ffd"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/focused-browser.log",
+      "sha256": "f52358b135fbff68b180729e7479767f3be461fdf2ef4d3c00e4cae5635b3d28"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/focused-unit.log",
+      "sha256": "e566e7cf93efe700eed73942ea6874302a02ceb9e88a03ecdd814e5b2d384923"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/format.log",
+      "sha256": "f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/lint-final.log",
+      "sha256": "6f5e30d821ea3ef1a69b64eb5ef93efccab28d7cd1b1d89a8adf4302e83c046d"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/lint.log",
+      "sha256": "94ca321b19db38fb5fbd2cc73bbe2d22d6cbae965e5cb888f6319692f2400a52"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/newsletter.log",
+      "sha256": "0de1b12f78cd70816926ddb15fe0b0f42f7c657722c654153bfe64e06d1a1361"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/packages-final.log",
+      "sha256": "6f3b01f08979a75f0ad0bab69de6cae8e573232ceedf91947f9f0fff22fd94d0"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/public-snapshot-guard.log",
+      "sha256": "1082be5fefaf92196fefd65b71106fb7dc303aa8fac5e73b0b5533b815197d82"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/refactored-unit.raw.json",
+      "sha256": "34f009e156db555378c05733f3b78499f80e41332c65402a65548e3eb3b8e4f8"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/root-final.log",
+      "sha256": "c476bdf3268543c28d6a4e8f7d33e6f4611650546d6551d91f81d877f262d132"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/standalone-final.log",
+      "sha256": "5533fefb2ccb151fffd2bd66fd2aaff2977c8de3d8f5f83a2a3f8a08d825347c"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/transport-final.log",
+      "sha256": "18f0dc7d442e59f02af6011b2dc8939a22dc15fac2e5a991f068e9cc1828ba9b"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/typecheck-final.log",
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/typecheck.log",
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/unit.raw.json",
+      "sha256": "169edb062585e3e6a5173b7a7788bcd8884125ee723921589894bcd4081b245f"
+    },
+    {
+      "path": "docs/objective-resource-choices-20261014/evidence/web-final.log",
+      "sha256": "da88497616a6f7263a8cbacc6b86a95972a5546eef1765f9f1fa542eae72866a"
+    }
+  ],
+  "verification": {
+    "root": 112,
+    "transport": 84,
+    "web": 2284,
+    "capiro": 442,
+    "newsletter": 385,
+    "declarations": 8,
+    "focusedUnit": 35,
+    "focusedBrowserBeforeRefCorrection": 41,
+    "affectedBrowserFinal": 13,
+    "lintErrors": 0,
+    "lintWarnings": 81,
+    "build": "passed",
+    "standalone": "passed",
+    "native": "not run;337rowsremainopen"
+  },
+  "sourceCommit": "0655195aff80e935faa35e90258b1a086f33331f",
+  "hashEncoding": "Git committed bytes; build output CRLF normalized by repository attributes"
+}

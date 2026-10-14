@@ -1297,10 +1297,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
     "kind": "function",
     "symbol": "ObjectiveWorkPicker",
-    "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
-    "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "6c366c1c21e11f17df37eefdcf05aff43c73804bf7b9768586a0222be9cb9e54",
+    "reason": "One existing-resource selection and pagination interaction owns explicit pinned choice and current choice cache lineage. Owner resolution, task version/schema and snapshot integrity are delegated to canonical resource readers and receiving modules; navigation/lifetime belongs to useObjectiveWorkDestination; exact saved-version roster has its own component. No authority, persistence or editor is embedded.",
+    "reviewedBy": "Codex independent parent frontend review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/calendar/calendar.module.css",
@@ -2562,6 +2562,33 @@
     "fingerprint": "e314439748df16762631523e8e58eab72e03499a787af7d9b402fa980a2bbf86",
     "reason": "One existing submitted order validates the complete captured authorized catalog, freezes it across dispatch, verifies receipt version/order and checks current cache lineage before installation. Unknown and conflict handling stay in the same existing transaction owner; no automatic retry or independent persistence. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
     "reviewedBy": "Codex frontend integration owner with independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriConversationView.tsx",
+    "kind": "function",
+    "symbol": "MeriConversationView",
+    "fingerprint": "9fe5ae1a8db75bb685e00d00185fb7355bbdfa13299702c5a70ff5d7234d373e",
+    "reason": "Independent whole-function review accepted cohesive selected-conversation presentation and explicit command adapter, delegating admission/lifetime/transport to the adopted SDK/session owners and scoped journal; no authority or execution loop added. See docs/meri-conversation-host-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useConversationActions.ts",
+    "kind": "function",
+    "symbol": "useConversationActions",
+    "fingerprint": "18b811fb227a9ca2d5f147cfe7a68f2aaeaa8dccd1d7262e60a153cd9e96e124",
+    "reason": "Independent whole-function review accepted cohesive selected-conversation presentation and explicit command adapter, delegating admission/lifetime/transport to the adopted SDK/session owners and scoped journal; no authority or execution loop added. See docs/meri-conversation-host-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveSavedVersion.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveSavedVersion",
+    "fingerprint": "104621c36e9d04b45ada4a00d520b577cf7b490c6459622c124c308357e17118",
+    "reason": "One exact saved-version roster and explicit read-selection gate owns its current query/selection cache lineage. Canonical API handles transport; owner receipt binding and full snapshot hash verification live in the receiving module. No mutable working draft, command, persistence or authorization responsibility is added.",
+    "reviewedBy": "Codex independent parent frontend review",
     "reviewedOn": "2026-10-14"
   }
 ]
