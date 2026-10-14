@@ -1,0 +1,67 @@
+{
+  "sourceCommit": "c047f5c899700a2e4d3b4f185e3d70d06a13eb51",
+  "basePR31": "3059abec94e2d6b9790758bb9563afdb8091b143",
+  "applicationTree": "ca10782002daf4d9696c0332f4736cd32374ea1f",
+  "baseline": {
+    "failed": 3,
+    "passed": 1
+  },
+  "initialCandidate": {
+    "passed": 5,
+    "failed": 2,
+    "reason": "Invalid main status role and missing main landmark; corrected without axe suppression"
+  },
+  "passed": {
+    "distinctBrowserCases": 23,
+    "authCases": 5,
+    "existingRegressionCases": 18,
+    "finalAuthReplay": 5,
+    "countsNotSummed": true,
+    "retries": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "rootControls": 111,
+    "types": true,
+    "changedLint": true,
+    "changedFormat": true,
+    "publicPackages": true,
+    "architecture": {
+      "total": 489,
+      "reviewed": 468,
+      "inheritedUnreviewed": 21,
+      "blocking": 0,
+      "errors": 0
+    },
+    "build": true,
+    "standaloneObservations": 30,
+    "pageErrors": [],
+    "portfolioRootSmoke": true,
+    "defaultAxe": "Zero violations desktop1440/mobile390 prolonged-loading state"
+  },
+  "delayMilliseconds": 15000,
+  "authority": "Timer describes elapsed SDK loading only; ClerkLoaded remains sole unchanged child admission; ClerkFailed remains unchanged; no403 detection or auth grant",
+  "ledgers": [
+    {
+      "path": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+      "bytes": 1438305,
+      "sha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+      "byteIdenticalToPR31": true
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+      "bytes": 1332257,
+      "sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+      "byteIdenticalToPR31": true
+    }
+  ],
+  "frozenShippingSource": "5ca42049325881782bc9d2ac557450d642eccee8",
+  "nativeBlocker": "Coordinator reports actual deployed Clerk403 subdomain_not_allowed; specific setting approval pending; no live/settings action by this owner",
+  "limits": [
+    "No native auth or actual403 recovery qualified",
+    "No broad unit rerun",
+    "No auth/security/config/credentials/backend/API/package changes",
+    "No native acceptance rows closed",
+    "No container/image or fresh Figma/AT acceptance",
+    "Meri0.1.3 unchanged; saved-layout receiving remains backend-owner work"
+  ]
+}
