@@ -369,6 +369,24 @@
       "activeObjectiveFullpageParity": "OPEN_CURRENT_SUCCESSOR_BINDING_MAP_UNRESOLVED",
       "mobileParity": "DEFERRED",
       "evidence": "../desktop-detail-content-20261014/HANDOFF.md"
+    },
+    {
+      "batch": "unified-desktop-20261014",
+      "qualifiedSource": "68bc14f09a9f43c61b8854ca3e7f6b4264e47661",
+      "productionSource": "43f23842b589e64f7730e58d85d434f0a2021d80",
+      "baseSource": "038ee79e93e9b4d1a371a5d38e17dd339b1af859",
+      "integratedSource": "7d7bf4c550e8d906c6ef3498ff79327820519daa",
+      "scope": "History-preserving PR47/49 integration onto PR48 plus comment pending fences and existing-contract parent-scoped subtask navigation/paging/readback",
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "mobileParity": "DEFERRED",
+      "activeObjectiveFullpageParity": "OPEN_OPERATIONAL_BINDING_MAP_UNRESOLVED",
+      "evidence": "../unified-desktop-20261014/HANDOFF.md",
+      "combinedBrowserPassed": 131,
+      "objectiveDesktopPassed": 4,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0
     }
   ],
   "local_execution_batches": [
