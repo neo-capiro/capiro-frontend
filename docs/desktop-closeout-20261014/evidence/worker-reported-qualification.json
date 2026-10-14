@@ -1,0 +1,17 @@
+{
+  "sourceThreadId": "01a13c71-7ff1-7660-a7c8-de25cc94401c",
+  "source": "af68cd562227befba4f0dab67df4cd8ff56b218e",
+  "parent": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+  "custody": "Reported by source owner in delegated handoff. Windows local raw bundle/report not available in this Linux workspace; integrated Linux reports qualify the candidate separately.",
+  "reported": {
+    "desktopPassed": 14,
+    "newCases": 5,
+    "existingCases": 9,
+    "buildStaticPages": 24,
+    "typesAndFocusedLint": "PASS",
+    "rootPassed": 107,
+    "rootFailed": 6,
+    "rootBaselineComparison": "Same six Windows platform/path/bash/symlink failures reproduced at unchanged exact0a73 baseline."
+  },
+  "liveWrites": 0
+}

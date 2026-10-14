@@ -1,0 +1,1621 @@
+{
+  "qualifiedSource": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+  "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+  "semantics": "Every candidate-changed staged Git blob versus exact shipping base, excluding this manifest and final independent review to avoid self-reference. Source/runtime/test bytes qualified above; docs successor is checkpoint awaiting export integration.",
+  "excluded": [
+    "docs/desktop-closeout-20261014/MANIFEST.json",
+    "docs/desktop-closeout-20261014/FINAL-REVIEW.json"
+  ],
+  "entries": [
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+      "gitBlob": "ac091a4c2bec5320856b676bda1e5490c182cf57",
+      "bytes": 9032,
+      "sha256": "06df0ce5bcc23a120b93109e79cc4837ca53ffaa5381da6ddec61042d9211432"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "gitBlob": "5a89ee8e1c5ddcfb3e08b52b3a2933da68aa3f5c",
+      "bytes": 6804,
+      "sha256": "74ee5725f34c49dec7a46cf179aad28c12e4eaa84e58a057e17217ce9c18d88e"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+      "gitBlob": "ab98780493bfa11da1e8f85bef03bbb0a69ada48",
+      "bytes": 11202,
+      "sha256": "7c53ef9f62a94b43f6f41329e64a77dcfa10a75f797897ca40c00662413aeba6"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+      "gitBlob": "8c9e97e940cf0d017e6b8740710c00dd73d4dae4",
+      "bytes": 5166,
+      "sha256": "489029a128c3a96a7bddc75f16677b93fe4a76cffcb36065fd89a6be7c5b57e6"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+      "gitBlob": "90251203d9dc484b5b95538731f86d7ea8d29bbe",
+      "bytes": 1915,
+      "sha256": "6b26d0ef0641a181523a00948e16f9822c4b1ffbec8227015323f57947388b5b"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorBody.tsx",
+      "gitBlob": "771ee454869b64ceea2873f1a45bd149b31b2996",
+      "bytes": 3178,
+      "sha256": "71352a8da95ac1db689f03c0f5a90e4cbbfab3707385941a2a3d95b127805225"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorForm.tsx",
+      "gitBlob": "fce50369842677fcf3cc1e7e336385e196b84e08",
+      "bytes": 2251,
+      "sha256": "96d405e0270f5a864a77e00d3f34a8440b711b1227d26f580095b5ae90fb2a2e"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+      "gitBlob": "476d29849fd1f88077e04022fa76da7a666446a5",
+      "bytes": 9210,
+      "sha256": "a75d7c1dfc69a032b190c800a37308cc80e69bf95725e82b12d2b00ad277bfdc"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-detail.module.css",
+      "gitBlob": "b7dc4e078ebe2f413507b5791d830b5a3be25929",
+      "bytes": 1644,
+      "sha256": "2fb0d3ab914e3d0c28f001af0a6fb7b20e794e7115b0d3aef50f909fa7ee9a21"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-dialog.module.css",
+      "gitBlob": "7fed6c4ed772d76dfc1fab1700fe4a514a3cdc76",
+      "bytes": 2956,
+      "sha256": "672baafea75fbd93b505ff4e3d0e5cffa206a246a8583726a5be353643609a2a"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/useTaskEditor.ts",
+      "gitBlob": "d4a2d9222849ab2fd3aab6749cc26c032086e14a",
+      "bytes": 3963,
+      "sha256": "6ef3d6997cae0f08c5ffeea13e35ba8856240f28058b7f98faf4216c2ae0f5ae"
+    },
+    {
+      "path": "apps/web/test/browser/TaskDetailRefreshProbe.tsx",
+      "gitBlob": "608151edbc329661df961e50d56cd74e4a643e8c",
+      "bytes": 1208,
+      "sha256": "09f0383a4babb8f3499f4f6ff9ff8d8b9f0d7736e240ae6fec6b0eef81cac183"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-closeout.spec.ts",
+      "gitBlob": "d5eb68b25342337e88e42eca3fe96bcf9ac9ea3a",
+      "bytes": 14085,
+      "sha256": "b6fe0da2a78b3eeb343af2be41d305d4f62f0fd4cd32b044390ce18007cf7da0"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-detail-content.spec.ts",
+      "gitBlob": "71f8c6d8ec9f75f9c4b029b1f52329e5141bcdc0",
+      "bytes": 8638,
+      "sha256": "b0b69de1ac5192f0f8cc0512c635089edaff84d0b86b6afbeafe5677a5d88d6e"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-engagement-closeout.spec.ts",
+      "gitBlob": "032f11ba92699a0a150a0ff816846ffe94114c50",
+      "bytes": 2238,
+      "sha256": "d9ec1761e09ed26842d6b1d5915b75ed6902962a9dd58993856cb22fb3f5cdee"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-task-drawer.spec.ts",
+      "gitBlob": "9ea157c01ccce0e28f456b5fa4a9cfe76b6346ef",
+      "bytes": 8915,
+      "sha256": "f3c4e57e76cebe08d6587f701f918002d8aceb7540233fe52add7ad46679b3be"
+    },
+    {
+      "path": "apps/web/test/browser/engagement-client-catalog.spec.ts",
+      "gitBlob": "8c3af5d42c858301e325da9981c8d5c5ce58bbbe",
+      "bytes": 2510,
+      "sha256": "04501e027feefcb0a54f3182719178cc93790d4fbc833bbf1ffaa42c1dd2b9d9"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "gitBlob": "1ea4a240874743ba1e054f232fbb4adaf68f2482",
+      "bytes": 7564,
+      "sha256": "0413e51b0fc0ab5c1246bcc1690c465f3ebbb236613d6f47a0a30917da2b6ec8"
+    },
+    {
+      "path": "apps/web/test/browser/planner-time-pending.spec.ts",
+      "gitBlob": "a58cf3f314536448beff371c2c33af35b873692d",
+      "bytes": 5793,
+      "sha256": "86839275839afbc0f02758909e5a08fb8225b3f98553b9960baa647c851a430f"
+    },
+    {
+      "path": "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+      "gitBlob": "6602fcb9324a5acf1e5e3d988c654a41ee292bcd",
+      "bytes": 26939,
+      "sha256": "3e135e731aba83927f70a21c356719f1a6b0ac76de0c994d95b400335f2441d2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/COVERAGE.json",
+      "gitBlob": "51f7b6e0156c97696ddcec90f8c8ef521898c612",
+      "bytes": 2991,
+      "sha256": "637ea101f6ad71f89f967f40cc882fedfc0b92251f1c9f39b68b7385b6b8524b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/CURRENT-AUDIT.json",
+      "gitBlob": "adf2753134790472b5e830f8f2e3f972b74538c3",
+      "bytes": 24655,
+      "sha256": "849e450aff49512abf7619fad272b9a345c029e4e1b54d77dc255c9b10bbb74f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/HANDOFF.md",
+      "gitBlob": "bbeeb2714b2900f35ddb2d13cc6ae93132484c86",
+      "bytes": 5835,
+      "sha256": "9a6a6b9a4ea2292cf3c3e9b57996c5da2703111bf093509fc0547f135ef03ddb"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/INDEPENDENT-SOURCE-REVIEW.json",
+      "gitBlob": "2ab673cef3c4569a9fe327fd9423ae7e02fd9e55",
+      "bytes": 18657,
+      "sha256": "aa2e2b2045d8d0f8e6c55606bc405456fe3816a057da4ec1590f7c97a451e3a5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/PLAN.md",
+      "gitBlob": "f60e191fa4a9591cd974d9534691799a61a41f62",
+      "bytes": 4343,
+      "sha256": "ac85747c0ef74e393e94b1fc78cfbfca4e9ac3b4cafa1a0b8f9f97cacef446ed"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/.last-run.json",
+      "gitBlob": "cbcc1fbac11a74b608b2b3edc3a2ffd6ab639cb2",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-closeout-Desktop-d-508ca-bership-and-reads-back-dark/desktop-inline-task-detail.png",
+      "gitBlob": "b900b04ca3a98cd07d091acf5c98de5d7fb329c0",
+      "bytes": 118542,
+      "sha256": "ba461328d945824f959d97b06ae03c2297ea4be6f61577c6261736973ade5249"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-closeout-Desktop-d-8cdcb-ership-and-reads-back-light/desktop-inline-task-detail.png",
+      "gitBlob": "b900b04ca3a98cd07d091acf5c98de5d7fb329c0",
+      "bytes": 118542,
+      "sha256": "ba461328d945824f959d97b06ae03c2297ea4be6f61577c6261736973ade5249"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-detail-content-Des-194a6-ith-persistent-actions-dark/desktop-task-detail-content.png",
+      "gitBlob": "027679793109a55a910df96a4b4fb82a5e9c78a3",
+      "bytes": 116418,
+      "sha256": "116e46699705f694902bce0cbbc8a7566b8bc3373abd2f1372f41b77d5403d24"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-detail-content-Des-c47de--Outreach-destination-light/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-detail-content-Des-f5f50-t-Outreach-destination-dark/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-detail-content-Des-f9948-th-persistent-actions-light/desktop-task-detail-content.png",
+      "gitBlob": "027679793109a55a910df96a4b4fb82a5e9c78a3",
+      "bytes": 116418,
+      "sha256": "116e46699705f694902bce0cbbc8a7566b8bc3373abd2f1372f41b77d5403d24"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-closeou-602ef-ve-history-and-reload-light/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-closeou-a1ca6-ive-history-and-reload-dark/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-keyboar-6ff4d-rd-focus-and-contrast-light/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-engagement-keyboar-c29f5-ard-focus-and-contrast-dark/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "gitBlob": "b7c5ac8dc1040b0b7ed73894a031e8e3f89b5cd5",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/desktop-long-description.png",
+      "gitBlob": "e2d846e8873a80d8fe0f08edf80f2cb4300055c4",
+      "bytes": 95075,
+      "sha256": "396613942c862361563c1ddab9f04b5440611c064b7bc634a473b2e54e51f81b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/desktop-long-description.png",
+      "gitBlob": "e2d846e8873a80d8fe0f08edf80f2cb4300055c4",
+      "bytes": 95075,
+      "sha256": "396613942c862361563c1ddab9f04b5440611c064b7bc634a473b2e54e51f81b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "078fcf0aaea86abc62ca4eb05c3f12f5a9672551",
+      "bytes": 108122,
+      "sha256": "cdd6bb614dda0b41fc25574508de2e373e9aa2c83695b0e9f3e2a6d861b773ba"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "078fcf0aaea86abc62ca4eb05c3f12f5a9672551",
+      "bytes": 108122,
+      "sha256": "cdd6bb614dda0b41fc25574508de2e373e9aa2c83695b0e9f3e2a6d861b773ba"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "135d5197caae369a5df0fa19b43d1ca7b7d64b95",
+      "bytes": 63868,
+      "sha256": "a995a172237b51dd74b4514c95979b039e9030d80c8c3758344af3e5e70ec9be"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "4d701ed755af9cca6c036bfd6c4b3faab3bd8821",
+      "bytes": 57438,
+      "sha256": "650e990ba6649e9106c9e37cc5900f0bc4f21fe9582ad235d8ac5778c96085d4"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "a82f91a56da0dcff97690ad3505ccbfdefbfdfa5",
+      "bytes": 63871,
+      "sha256": "d9ab8544c460dd691673f7ba75975ab5382b3f2d860cbdcfe25c379f7ee28236"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "495fd7e78375e58feceb087238d27e9fe5de69d2",
+      "bytes": 151950,
+      "sha256": "933ad10de206155e955e106c5b7b9fb6cb0cb90c60906eda95cb552b69b43333"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "495fd7e78375e58feceb087238d27e9fe5de69d2",
+      "bytes": 151950,
+      "sha256": "933ad10de206155e955e106c5b7b9fb6cb0cb90c60906eda95cb552b69b43333"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/next-modules-scope-Calenda-696ed-orts-partial-empty-coverage/independent-feeds.png",
+      "gitBlob": "33a12ff8faf21403239d3884b90825c71230d44f",
+      "bytes": 128384,
+      "sha256": "e086e3d6b2ad601dc8597745877b8e74d021d9f284530e7e2bdedbd67c47664f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "gitBlob": "b4720aae04f31073385a518b417e3e4ee4359494",
+      "bytes": 115000,
+      "sha256": "5cdba96c16d6df998d1c7faa6f53f1e88d36389dba09644a6cd42d3276d9d558"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "gitBlob": "8a16e1a2eaa61baa4afdf47fb757f29b9246851d",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/combined-captures/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "gitBlob": "8a16e1a2eaa61baa4afdf47fb757f29b9246851d",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/build-sandbox-child-failure.json",
+      "gitBlob": "c4b545ba3833fd45163e62661e89cbd63a2cc613",
+      "bytes": 726,
+      "sha256": "f739c6901470127649cadbff7ec6f45d33488f8be54159a78693159008e2ee93"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/direct-showconfig.json",
+      "gitBlob": "2383f024be306b55c7f1d0080a71472669dcbdeb",
+      "bytes": 18353,
+      "sha256": "72c90c45d859d64b418453234adab71fe80a39b3da990f06ebb0e7e493c5de47"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/.last-run.json",
+      "gitBlob": "fb0be0470f1b8350a6d978868681b7e8f3e79bbc",
+      "bytes": 439,
+      "sha256": "3a9e3dd3662aaa44c6d1f6e5bc4ebce4e44c1762a5a0a0f3146948c5a06c78bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-532a6-ive-history-and-reload-dark/desktop-engagement-workload.png",
+      "gitBlob": "26c60c706f461c8abfbdfa1caf1860df2f18a411",
+      "bytes": 115844,
+      "sha256": "e67a2b496514457c60ac4c55241719e0244eef7681f10e41ecf622227851ee52"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-532a6-ive-history-and-reload-dark/error-context.json",
+      "gitBlob": "ba4255e4512ac2626252cc9826d84a919b07b9be",
+      "bytes": 4045,
+      "sha256": "b9fbe46fee28910d4a7d8b462312389b7c885f876564c44dacb81f026eff6206"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-532a6-ive-history-and-reload-dark/test-failed-1.png",
+      "gitBlob": "26c60c706f461c8abfbdfa1caf1860df2f18a411",
+      "bytes": 115844,
+      "sha256": "e67a2b496514457c60ac4c55241719e0244eef7681f10e41ecf622227851ee52"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-532a6-ive-history-and-reload-dark/trace.zip",
+      "gitBlob": "853626a3a7445614140a03525a82e69861a97ba7",
+      "bytes": 653648,
+      "sha256": "4d8c72897977b92cbe17d45f0cf2596330c70676a3579baf569b9caaaff37b26"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-556b6-ve-history-and-reload-light/desktop-engagement-workload.png",
+      "gitBlob": "26c60c706f461c8abfbdfa1caf1860df2f18a411",
+      "bytes": 115844,
+      "sha256": "e67a2b496514457c60ac4c55241719e0244eef7681f10e41ecf622227851ee52"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-556b6-ve-history-and-reload-light/error-context.json",
+      "gitBlob": "884a9ba6bcf3c4216b694ebb0e58f9722cec8cc7",
+      "bytes": 4045,
+      "sha256": "c5d333afdb8b50e3e39adcccaf83d49f3eff5991c43bf3de31160db1be3c4170"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-556b6-ve-history-and-reload-light/test-failed-1.png",
+      "gitBlob": "26c60c706f461c8abfbdfa1caf1860df2f18a411",
+      "bytes": 115844,
+      "sha256": "e67a2b496514457c60ac4c55241719e0244eef7681f10e41ecf622227851ee52"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-E-556b6-ve-history-and-reload-light/trace.zip",
+      "gitBlob": "3865f92d7060ee6b0816107e46a6caa78981562b",
+      "bytes": 712164,
+      "sha256": "4970e3ee1515508fb9802da0f09decc5b3a3d9a10f120336e397d3c7e4b6f9e9"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-d-508ca-bership-and-reads-back-dark/desktop-inline-task-detail.png",
+      "gitBlob": "1d6726d499b56753a3fa41d2407cee393ee3708a",
+      "bytes": 119443,
+      "sha256": "4ffa986cba1cdf5cb7a4034e9bcde1ddf0906fb8e4f92cdd016b62e4ce00ec1e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-closeout-Desktop-d-8cdcb-ership-and-reads-back-light/desktop-inline-task-detail.png",
+      "gitBlob": "1d6726d499b56753a3fa41d2407cee393ee3708a",
+      "bytes": 119443,
+      "sha256": "4ffa986cba1cdf5cb7a4034e9bcde1ddf0906fb8e4f92cdd016b62e4ce00ec1e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-194a6-ith-persistent-actions-dark/desktop-task-detail-content.png",
+      "gitBlob": "3250127c3725b5be54bc3588d7ad43f5b723e9f5",
+      "bytes": 117315,
+      "sha256": "89a39520c06d85f55bccfcb87669142448a3e161a43bd2cc95dca49f42be82f7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-3ff55-dent-office-report-readable/error-context.json",
+      "gitBlob": "659b7ac34a9209fb2ad94f78b654f6fe053b8b63",
+      "bytes": 5058,
+      "sha256": "1f916e4c7f81dc6ae9f92f6e2072a0c90195d9e0791271cbb03ead8a759110e2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-3ff55-dent-office-report-readable/test-failed-1.png",
+      "gitBlob": "2ae31c649a8a69213fd53b396162430c14735f44",
+      "bytes": 104828,
+      "sha256": "99717347ff65e3dc673c1ccd1941b6a940e0bf19bdbbee1a62639a6ec7314d32"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-3ff55-dent-office-report-readable/trace.zip",
+      "gitBlob": "2f64c38fbc44831438eae62f76bcbb0eaafd888a",
+      "bytes": 421789,
+      "sha256": "0daf2af7eae0ab07f5abaf5071dbc3d252688f421c44af1c162d89c4eb32de51"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-c47de--Outreach-destination-light/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-f5f50-t-Outreach-destination-dark/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-detail-content-Des-f9948-th-persistent-actions-light/desktop-task-detail-content.png",
+      "gitBlob": "3250127c3725b5be54bc3588d7ad43f5b723e9f5",
+      "bytes": 117315,
+      "sha256": "89a39520c06d85f55bccfcb87669142448a3e161a43bd2cc95dca49f42be82f7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-keyboar-6ff4d-rd-focus-and-contrast-light/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-engagement-keyboar-c29f5-ard-focus-and-contrast-dark/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "gitBlob": "22749be446361efb233935f1a84289a539c29784",
+      "bytes": 110628,
+      "sha256": "5cda5d01131d7cb8f4a98fdf12a233e4891b02957fecd024142afd44ca96c6cd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-body-Desktop--b874f-embership-and-reads-it-back/error-context.json",
+      "gitBlob": "9951970fc2c9a45efd85d9c61655ba053ba97b2c",
+      "bytes": 5354,
+      "sha256": "e049b9c39bd7f901a95c32c6f8830cfb0103f28a58082ec7d9bdc233ca244c85"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-body-Desktop--b874f-embership-and-reads-it-back/test-failed-1.png",
+      "gitBlob": "e776d3ef4e1e56fdbd3e7c3a5ee142502e4edd20",
+      "bytes": 85935,
+      "sha256": "e3c2b47f1b7b8b99bd157aad7ba6a79b820584e4c247b5fed2df89b20cc8ed6a"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-body-Desktop--b874f-embership-and-reads-it-back/trace.zip",
+      "gitBlob": "6bb7316d22c3535fa59774e7dd83a53def09dec3",
+      "bytes": 669752,
+      "sha256": "0bd71025e0dfaf2f2556276c1208baa6d101c12939d831747a926101cbcd7b65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "gitBlob": "b7c5ac8dc1040b0b7ed73894a031e8e3f89b5cd5",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/error-context.json",
+      "gitBlob": "69b74d85e2dd199743038af8689b595fc4f8f7d2",
+      "bytes": 5470,
+      "sha256": "5e455c8b3156210002d1c7fd067692fd8545720c48d5e97d19d509f8f5fc9cfd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/test-failed-1.png",
+      "gitBlob": "ab3e5b8823fbb51e0edbec7e3f7717b8ae876212",
+      "bytes": 132646,
+      "sha256": "3829d7bbed98bc09010f9443e5b2d89b14c8995a185d23b7275e0c204342203c"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/trace.zip",
+      "gitBlob": "849bf296853b5a8b402a861f4f7a04a4a5e84ee2",
+      "bytes": 472451,
+      "sha256": "7dcbbc2b40dec45351f22be66f571faec6975383c5a882837aa117b039c7f5bc"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/error-context.json",
+      "gitBlob": "f49c6df4c2006f2bb3748267128a4b91c56cd7c7",
+      "bytes": 5470,
+      "sha256": "a7492e31520579ed6b06996e6594b124b375f2a05d93715dac7803b4b5263274"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/test-failed-1.png",
+      "gitBlob": "ab3e5b8823fbb51e0edbec7e3f7717b8ae876212",
+      "bytes": 132646,
+      "sha256": "3829d7bbed98bc09010f9443e5b2d89b14c8995a185d23b7275e0c204342203c"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/trace.zip",
+      "gitBlob": "d8a057d8e15c4dcb4e0bf6bfa63525da211b5889",
+      "bytes": 499176,
+      "sha256": "e41a55422a4a2a49012ac87330b146dabd1ee0ce39b1f9b6c0937bdc1b969533"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "3d0199003b450d2c5c17f4d274db9fef53ac81be",
+      "bytes": 109031,
+      "sha256": "6e579090625ff12c9e84590e98b225bc526026585217a42cd48b6b89c8f70e10"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "3d0199003b450d2c5c17f4d274db9fef53ac81be",
+      "bytes": 109031,
+      "sha256": "6e579090625ff12c9e84590e98b225bc526026585217a42cd48b6b89c8f70e10"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-6417e--initially-empty-first-page/error-context.json",
+      "gitBlob": "c83d218323559a51f3e326cbf3d9a1ace5e79891",
+      "bytes": 5146,
+      "sha256": "9111a4474caeb2eaef8103f566e1aee4bae107e86feb75f67fe905217bbefd17"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-6417e--initially-empty-first-page/test-failed-1.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-6417e--initially-empty-first-page/trace.zip",
+      "gitBlob": "a8a14d43e9a51c24d4dabde16a61e44112e20dc4",
+      "bytes": 502175,
+      "sha256": "c33fe3ede019a52328ac26bafca7d295c0e797cc300eaf7c39ec43542d2908db"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-cb5d9-ed-list-from-its-first-page/error-context.json",
+      "gitBlob": "85365b30209d39432896296d6de23b55ab5ed0b9",
+      "bytes": 5118,
+      "sha256": "c3846f6bd1914549e3a25efe87917819474164af345f33ba0a1369abc588f8d4"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-cb5d9-ed-list-from-its-first-page/test-failed-1.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-captures/unified-task-detail-Deskto-cb5d9-ed-list-from-its-first-page/trace.zip",
+      "gitBlob": "1c233862b6d6297d80b64d2513c7ada490363575",
+      "bytes": 558665,
+      "sha256": "50bb9a9c9c62c97027ef9a03b2476ef384e1037618cd687f64a5ed8e575c2ffa"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused-report.json",
+      "gitBlob": "35052a7dffb203add55a42e22700281961f3ee67",
+      "bytes": 2103907,
+      "sha256": "48fc91b23cab3583054f9f64f9776ed37f16c5e1e9010e063a06d62f597e537e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/first-focused.json",
+      "gitBlob": "3aa2f189c505962ac573245fdd1f25febd4319a8",
+      "bytes": 7513,
+      "sha256": "1d9d2936fb7b28d0d2fbc36a6447dd6cfe0f11d1cd92e716b16b700708229fa1"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/integrated-sparse-evidence-check-failure.json",
+      "gitBlob": "01113d3a42a9bebdcf67cec1350293fb77a9b178",
+      "bytes": 146761,
+      "sha256": "6a512707ed1f2399b1ba763fc65d8653cafef300007e35c121738a4f373764cb"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/root-sandbox-child-failure.json",
+      "gitBlob": "2507e5ed052d76d13f4ffcb2360fc0cb8a4c5fc9",
+      "bytes": 967,
+      "sha256": "cdef29969a9adfa278dbb74d5b58149eaddba07980bfd9ee98671c9bb9325c18"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/diagnostics/sandbox-loopback-denied.json",
+      "gitBlob": "84c57423f42d475bf2ed45eaa9b8816541651ede",
+      "bytes": 979,
+      "sha256": "0fb3de7faec2ee39bbe24f6dec7fe6f475e614c6cfbba5a64aa462e1d464f1d2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/build-qualified-log.json",
+      "gitBlob": "44e8e60da997fca2c3ae1d7ca5248c7e7a49443c",
+      "bytes": 1499,
+      "sha256": "1de242fe9edd67ffc7b3d45bdc793c179b97f2dfef92e044eb78db5d87d4fccc"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/combined-log.json",
+      "gitBlob": "281221cb717245351dbe9464b810db767ab3a0ba",
+      "bytes": 6244,
+      "sha256": "0a6fb3374e1c36581f90f865552225566f1ef9874733e0a9851d036cd49b5525"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/combined-report.json",
+      "gitBlob": "ae60d53544a2db6a1c9900d547a90ddb8a996072",
+      "bytes": 4665991,
+      "sha256": "22b132ab4cdd941716fa4d7e6d977b415b4c6e08684fd0b118928080380fce2f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-architecture-log.json",
+      "gitBlob": "1ac3c0ccde4a147f2ba429ae06019a499c7ec302",
+      "bytes": 148829,
+      "sha256": "f04d23a80431f7308b85ffc238c7be39c324c152604159d272b98ed20a626e81"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-browser-log.json",
+      "gitBlob": "9a8de50cfa89455ab64d7de936788d7a46950e0e",
+      "bytes": 6498,
+      "sha256": "555de6dbbf73a7d361a808a476dc7b3bf9971486dc60cc629f0495be94f3ce5a"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-browser-report.json",
+      "gitBlob": "2cb1c57693462da37513618083dd0909bbf22b72",
+      "bytes": 4666646,
+      "sha256": "cfd54d05a1b4b51ad2c37bb7a201a82631027e78d167f9c2a73cb52bf12bf8dd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-build-log.json",
+      "gitBlob": "ca45b156e74921c8c6379e65aa93d0a524d084b6",
+      "bytes": 1227,
+      "sha256": "218e0a5e4fb99b59e15eb2e9df9a8976b152c71e1a80e62358766f190f520b12"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-check-log.json",
+      "gitBlob": "36122eb4baebe513319dfe6f340fa3405a686c88",
+      "bytes": 170147,
+      "sha256": "973e548a4e40897cb4f9f9b2508010bca4eed1a49ecd5a102cae8d496f35d125"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/integrated-standalone-log.json",
+      "gitBlob": "a90bd3ac3f995920081f163e8e9bb126cdf13eb7",
+      "bytes": 1904,
+      "sha256": "3dfe6c6e6bc08819e5735128361621b17be573fed70c3854e8bced9f84868a25"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/objective-log.json",
+      "gitBlob": "92b8b9a02cd578aa4b7c7a3fd693b75f0be4d54b",
+      "bytes": 833,
+      "sha256": "4ab4dbe64d0518c9e6f15db09e43f490993d45dd10fda2a16184a569eb9b784e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/objective-report.json",
+      "gitBlob": "a8996e1f718babff26a0b3c140c07f56ff9795f3",
+      "bytes": 2569,
+      "sha256": "cefc248dd0b01410194a238c643d280eb8ccff03bbff5c57e6d0fce7c7e9e1b0"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/pre-footer-focused-log.json",
+      "gitBlob": "914156edcb947e3885aaab9160faa848035bbb15",
+      "bytes": 2647,
+      "sha256": "5731e23e94e091e7795d2f1b196ba5cb1f4edefc81027e42ce134e99a82e1988"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/pre-footer-focused-report.json",
+      "gitBlob": "ac3cb830d5c736a1e9409dfbfa142a949d421482",
+      "bytes": 2914831,
+      "sha256": "8a27a00c5b0d14c778fea389aa456b79e4a05f43e824e208a73c5abfe4528ac4"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/root-after-shipping-merge-log.json",
+      "gitBlob": "c4a2ffbafb72f0ef50ddf6ae7b92a3c561aa07f8",
+      "bytes": 5964,
+      "sha256": "b1a1e98c7b261c90538fd91f687e59b466e42176a27238cd858dbd4e408d059a"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/root-check-log.json",
+      "gitBlob": "549c3bb06f60b9a9b007d2569780917359e1e07e",
+      "bytes": 169710,
+      "sha256": "a36a68835cdd91bc849b8f6797ece28240d4db5c8a1df0f40c60111d67479373"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/source-review.json",
+      "gitBlob": "1316ab6dca308b60f73e682e253b874a96d530e4",
+      "bytes": 6732,
+      "sha256": "e845fdd088f978b74c4eba9d31d0852bb9d12a0990b18d9a01d5b08b256158a4"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/standalone-log.json",
+      "gitBlob": "1bc8987eb02f5c4d4bdf2a5b40380c9efa6e2bb1",
+      "bytes": 1835,
+      "sha256": "e2df52c02cb4786e76b63d85aaa2698c23d904a527e093796ecbce46b3c57e60"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/evidence/worker-reported-qualification.json",
+      "gitBlob": "6c9ed708a51a8ff5e967d6455a3b6b7d50ebf233",
+      "bytes": 712,
+      "sha256": "6ef0eeb7c9f8a9afb288a0dcd63779168aa4a2d5902fbcdd6c86e30bbeb2da18"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/.last-run.json",
+      "gitBlob": "cbcc1fbac11a74b608b2b3edc3a2ffd6ab639cb2",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-closeout-Desktop-d-508ca-bership-and-reads-back-dark/desktop-inline-task-detail.png",
+      "gitBlob": "b900b04ca3a98cd07d091acf5c98de5d7fb329c0",
+      "bytes": 118542,
+      "sha256": "ba461328d945824f959d97b06ae03c2297ea4be6f61577c6261736973ade5249"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-closeout-Desktop-d-8cdcb-ership-and-reads-back-light/desktop-inline-task-detail.png",
+      "gitBlob": "b900b04ca3a98cd07d091acf5c98de5d7fb329c0",
+      "bytes": 118542,
+      "sha256": "ba461328d945824f959d97b06ae03c2297ea4be6f61577c6261736973ade5249"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-detail-content-Des-194a6-ith-persistent-actions-dark/desktop-task-detail-content.png",
+      "gitBlob": "027679793109a55a910df96a4b4fb82a5e9c78a3",
+      "bytes": 116418,
+      "sha256": "116e46699705f694902bce0cbbc8a7566b8bc3373abd2f1372f41b77d5403d24"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-detail-content-Des-c47de--Outreach-destination-light/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-detail-content-Des-f5f50-t-Outreach-destination-dark/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-detail-content-Des-f9948-th-persistent-actions-light/desktop-task-detail-content.png",
+      "gitBlob": "027679793109a55a910df96a4b4fb82a5e9c78a3",
+      "bytes": 116418,
+      "sha256": "116e46699705f694902bce0cbbc8a7566b8bc3373abd2f1372f41b77d5403d24"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-closeou-602ef-ve-history-and-reload-light/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-closeou-a1ca6-ive-history-and-reload-dark/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-keyboar-6ff4d-rd-focus-and-contrast-light/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-engagement-keyboar-c29f5-ard-focus-and-contrast-dark/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "gitBlob": "b7c5ac8dc1040b0b7ed73894a031e8e3f89b5cd5",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/desktop-long-description.png",
+      "gitBlob": "e2d846e8873a80d8fe0f08edf80f2cb4300055c4",
+      "bytes": 95075,
+      "sha256": "396613942c862361563c1ddab9f04b5440611c064b7bc634a473b2e54e51f81b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/desktop-long-description.png",
+      "gitBlob": "e2d846e8873a80d8fe0f08edf80f2cb4300055c4",
+      "bytes": 95075,
+      "sha256": "396613942c862361563c1ddab9f04b5440611c064b7bc634a473b2e54e51f81b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "078fcf0aaea86abc62ca4eb05c3f12f5a9672551",
+      "bytes": 108122,
+      "sha256": "cdd6bb614dda0b41fc25574508de2e373e9aa2c83695b0e9f3e2a6d861b773ba"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "078fcf0aaea86abc62ca4eb05c3f12f5a9672551",
+      "bytes": 108122,
+      "sha256": "cdd6bb614dda0b41fc25574508de2e373e9aa2c83695b0e9f3e2a6d861b773ba"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "a82f91a56da0dcff97690ad3505ccbfdefbfdfa5",
+      "bytes": 63871,
+      "sha256": "d9ab8544c460dd691673f7ba75975ab5382b3f2d860cbdcfe25c379f7ee28236"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "4d701ed755af9cca6c036bfd6c4b3faab3bd8821",
+      "bytes": 57438,
+      "sha256": "650e990ba6649e9106c9e37cc5900f0bc4f21fe9582ad235d8ac5778c96085d4"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "135d5197caae369a5df0fa19b43d1ca7b7d64b95",
+      "bytes": 63868,
+      "sha256": "a995a172237b51dd74b4514c95979b039e9030d80c8c3758344af3e5e70ec9be"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "495fd7e78375e58feceb087238d27e9fe5de69d2",
+      "bytes": 151950,
+      "sha256": "933ad10de206155e955e106c5b7b9fb6cb0cb90c60906eda95cb552b69b43333"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "gitBlob": "3f172e4f66918493df26bb840c4caba6455cc812",
+      "bytes": 151948,
+      "sha256": "2aba53932a87eae7db57f3272cb1484ac88fc48fddc665f19608b6f94ac7ad4b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/next-modules-scope-Calenda-696ed-orts-partial-empty-coverage/independent-feeds.png",
+      "gitBlob": "f6f9c67e46e625662b08b5a8424ca85b507b3878",
+      "bytes": 128386,
+      "sha256": "6bb87a15064b8775d93e013d08e95efcefb92b149526c12740b99ca0b8daff7c"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "gitBlob": "e2247d24979a58067a51ea215124212bfd72156b",
+      "bytes": 114989,
+      "sha256": "d02a70c510d39b3bd93c8d9241db99063aae971e862521eb7712ec306832dd54"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "gitBlob": "8a16e1a2eaa61baa4afdf47fb757f29b9246851d",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-captures/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "gitBlob": "8a16e1a2eaa61baa4afdf47fb757f29b9246851d",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/preview-root-smoke.json",
+      "gitBlob": "045230495b79fba96006b2dfae57c8b54cbecbbf",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-1440-dark.png",
+      "gitBlob": "ea977152d454df5376b185f224b2fd28f837974c",
+      "bytes": 123061,
+      "sha256": "a3e581c3a94babc97288886ed4cf175597ff7b93378e61e62657bce324975409"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-1440-light.png",
+      "gitBlob": "78178f9d2d187b1cdb0d87732e6976eeed80cf80",
+      "bytes": 59511,
+      "sha256": "d45f6759524acc07dff4ac6607eee51cb726a6cf5562b3182bc7d3fdbc84a399"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-390-dark.png",
+      "gitBlob": "b22b9df0a922f2d8a4fc59586d72363c09e63cef",
+      "bytes": 55067,
+      "sha256": "823c348f63d71e520651d1f7cee42d0960cb1bdcdf2566fe544a8908ca898033"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-390-light.png",
+      "gitBlob": "b5ff4c40a88aecd94eee78f95e148f77e651f83c",
+      "bytes": 30902,
+      "sha256": "c7f6062674cb5576dbd857dccd0b5735be4b4a849fdcce90c6a235007f0e783f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-error-1440-dark.png",
+      "gitBlob": "f3521c6125e2897a3baecf43809146bae11e79ab",
+      "bytes": 213041,
+      "sha256": "7f7e2f64a76499728f2c268125457e9b6996a2ce3a8f6625ef897979ad1fd4d7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-error-1440-light.png",
+      "gitBlob": "aa5a2fe5826e4faa89fe56b2fb0e9e9a631dbb8f",
+      "bytes": 126635,
+      "sha256": "9f0cb3e369faf664afc9683a0e9cffb32bbab0ecb1682da8547a631b7f1d326b"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-error-390-dark.png",
+      "gitBlob": "0cab35c11c52f09823ffa7505c4428bc758bd8af",
+      "bytes": 139577,
+      "sha256": "30f4a116ad160622d1cedcf2e729ad6d2660f6f83be7a14e452829ca9b021253"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-error-390-light.png",
+      "gitBlob": "0b2205db2f9f07c89dd440849b2fca220dedfd3b",
+      "bytes": 95601,
+      "sha256": "a8864ae18e47c6255e9f0566b0d1a8cde27074c9a0d43c69f067661aa89530d7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-files-1440-dark.png",
+      "gitBlob": "79359d71af71d111d8177bce2ea8af996b86c700",
+      "bytes": 115995,
+      "sha256": "6095857f9157b9d57cc1eb225017af2d152efa91e55cd7a03aa69b8cf5b7a212"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-files-1440-light.png",
+      "gitBlob": "0981f0728f661b5cf69317a21c08eb3a1e3e5783",
+      "bytes": 52760,
+      "sha256": "c118acdc6a097f5e89578e8f2a31026c3e553f44ef84c3601f0c8c9a55b637e5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-files-390-dark.png",
+      "gitBlob": "d86ddd46c9a456597e88f49e4cae8b57aa89f558",
+      "bytes": 43458,
+      "sha256": "c14f64a07cc5cf8d91de4da7fd4a8e89de5c14f15684bde114725bb18e5b209e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-meri-files-390-light.png",
+      "gitBlob": "9b85840e407e9c4839d0f5eaceb50d1d878e8983",
+      "bytes": 22875,
+      "sha256": "b4f20026935a2fe0abb8935fe4874b99b688bce9f172d77e20c625f35f10d50f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-portfolio-1440-dark.png",
+      "gitBlob": "47dbfeb7e6364dc5ce120fab9d04c83432ba45bd",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-portfolio-1440-light.png",
+      "gitBlob": "1babaa036168db62e914d7cef6597e42d88759b7",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-portfolio-390-dark.png",
+      "gitBlob": "d382c8167d15628678552349c66b08ce04fd00f8",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-portfolio-390-light.png",
+      "gitBlob": "6574dd93b222dd068247521ea9636a14165964cb",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/integrated-standalone/production-smoke.json",
+      "gitBlob": "d51e42ffa2703e59057ffa2cc0afd78f0e4ae680",
+      "bytes": 8348,
+      "sha256": "05d7998c5343bb4923d1b92cb56b5bcbb8562546faf1f0bd17e10ca340b1cbe0"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/objective-captures/.last-run.json",
+      "gitBlob": "cbcc1fbac11a74b608b2b3edc3a2ffd6ab639cb2",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/objective-captures/desktop-objective-detail-c-22460-olumn-geometry-at-1440-dark/desktop-objective-filled.png",
+      "gitBlob": "489f55d824435b48344a5864f95d732c31abee74",
+      "bytes": 113626,
+      "sha256": "55bc368de6cfd749d5642d46b42486f7ee34ffd656ec086b11062d32ceebb74f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/objective-captures/desktop-objective-detail-c-261b1-tail-reference-at-1440-dark/desktop-objective-ready-edit.png",
+      "gitBlob": "e3ccd281d2c13dc4f218a8c241179cab1197a6da",
+      "bytes": 120747,
+      "sha256": "4aacf9c57fd0c24d967d79ceb0d716aa0d9f89af16de66fe590260cc91918d34"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/objective-captures/desktop-objective-detail-c-824e0-lumn-geometry-at-1440-light/desktop-objective-filled.png",
+      "gitBlob": "0e93c75fdae456f553795f4de55377c02fa0aedb",
+      "bytes": 113595,
+      "sha256": "3564556d548a0db8782f9c2ba449dd6798a36d97995c2b2bd56937203fb74f90"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/objective-captures/desktop-objective-detail-c-defc2-ail-reference-at-1440-light/desktop-objective-ready-edit.png",
+      "gitBlob": "ab81c11db261c01827e8f0319aa8596490c8504a",
+      "bytes": 122149,
+      "sha256": "e7a1e48f9e7380da3d3bc4b13c74c42303cea83346598535fb98c4f90e5eb234"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/.last-run.json",
+      "gitBlob": "cbcc1fbac11a74b608b2b3edc3a2ffd6ab639cb2",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-closeout-Desktop-d-508ca-bership-and-reads-back-dark/desktop-inline-task-detail.png",
+      "gitBlob": "1d6726d499b56753a3fa41d2407cee393ee3708a",
+      "bytes": 119443,
+      "sha256": "4ffa986cba1cdf5cb7a4034e9bcde1ddf0906fb8e4f92cdd016b62e4ce00ec1e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-closeout-Desktop-d-8cdcb-ership-and-reads-back-light/desktop-inline-task-detail.png",
+      "gitBlob": "1d6726d499b56753a3fa41d2407cee393ee3708a",
+      "bytes": 119443,
+      "sha256": "4ffa986cba1cdf5cb7a4034e9bcde1ddf0906fb8e4f92cdd016b62e4ce00ec1e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-detail-content-Des-194a6-ith-persistent-actions-dark/desktop-task-detail-content.png",
+      "gitBlob": "3250127c3725b5be54bc3588d7ad43f5b723e9f5",
+      "bytes": 117315,
+      "sha256": "89a39520c06d85f55bccfcb87669142448a3e161a43bd2cc95dca49f42be82f7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-detail-content-Des-c47de--Outreach-destination-light/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-detail-content-Des-f5f50-t-Outreach-destination-dark/desktop-engagement-content.png",
+      "gitBlob": "12ea29be2de77c37f7c3831294075d1986d76a4d",
+      "bytes": 113952,
+      "sha256": "0539f6af300402cf816122a919ea259dc4df2bd9f6ada04495576d0c4732cef5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-detail-content-Des-f9948-th-persistent-actions-light/desktop-task-detail-content.png",
+      "gitBlob": "3250127c3725b5be54bc3588d7ad43f5b723e9f5",
+      "bytes": 117315,
+      "sha256": "89a39520c06d85f55bccfcb87669142448a3e161a43bd2cc95dca49f42be82f7"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-closeou-602ef-ve-history-and-reload-light/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-closeou-a1ca6-ive-history-and-reload-dark/desktop-engagement-workload.png",
+      "gitBlob": "cb141a53548abbdcafedb723a8fb1d2339f27bcf",
+      "bytes": 115919,
+      "sha256": "7b7684d52ce25a0e82c49b5d3410526bca81a1bf4e5e516fd5d5f3da3bf9da27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "gitBlob": "ea70167b11bce6d6902ac323bb7e99c73fffb1a1",
+      "bytes": 113227,
+      "sha256": "38560fc9a3192baa6d3cd013adf0a82fb3f174f036e2a726a838eaa6b384eb44"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "gitBlob": "b872f8c3996d4aeeb1368af40282545122cdde5f",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-keyboar-6ff4d-rd-focus-and-contrast-light/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-engagement-keyboar-c29f5-ard-focus-and-contrast-dark/desktop-engagement-keyboard.png",
+      "gitBlob": "cd98da4b99c3ce5de4b7f24c2e02b179cc1dc504",
+      "bytes": 114434,
+      "sha256": "66d7d92eaeccd4526406874651bcd8a414f3003e14cf4001aa82af7835116dd8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "gitBlob": "ee1d81daec1196fd04b8bb1ac961552489c5689c",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "gitBlob": "b7c5ac8dc1040b0b7ed73894a031e8e3f89b5cd5",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "e40706157a06e36368b01f7d76fbe0b66c42dfd6",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "3ac23fb026620b5e434acaf1de537fd7a9d167a4",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/desktop-long-description.png",
+      "gitBlob": "086ec4fb7771101f7b9affdc0c86062477926223",
+      "bytes": 96078,
+      "sha256": "f256e0fb8dca3a55ee284e2a73fbe0bf427b0f5f776794c474220bb497e8c472"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "63747445e6051b19a2d775dd6b04d921692c7a9c",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "67cb9c33eaaabb9966ebd77c9053eb519ae020d3",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "34054a22d6cd578df57c41785f6b1bd5955ed5a0",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "gitBlob": "73f96ac186088d865df55818eb35fa9b4fe95a0a",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/desktop-long-description.png",
+      "gitBlob": "086ec4fb7771101f7b9affdc0c86062477926223",
+      "bytes": 96078,
+      "sha256": "f256e0fb8dca3a55ee284e2a73fbe0bf427b0f5f776794c474220bb497e8c472"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "gitBlob": "3d0199003b450d2c5c17f4d274db9fef53ac81be",
+      "bytes": 109031,
+      "sha256": "6e579090625ff12c9e84590e98b225bc526026585217a42cd48b6b89c8f70e10"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/pre-footer-focused-captures/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "gitBlob": "3d0199003b450d2c5c17f4d274db9fef53ac81be",
+      "bytes": 109031,
+      "sha256": "6e579090625ff12c9e84590e98b225bc526026585217a42cd48b6b89c8f70e10"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/preview-root-smoke.json",
+      "gitBlob": "045230495b79fba96006b2dfae57c8b54cbecbbf",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-1440-dark.png",
+      "gitBlob": "74e559aea7571cd601ab6d68a7931d9b0a82fa32",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-1440-light.png",
+      "gitBlob": "32e02a619f834ed681f2a3456410e63a8eb09800",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-390-dark.png",
+      "gitBlob": "15dd04b5a37a9f55a93387c41f1d2f5147989229",
+      "bytes": 52513,
+      "sha256": "a57e0a4e9e1861b15dc243cc496558ebedee20b00d55ed3a996d42e2e9781e25"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-390-light.png",
+      "gitBlob": "5b4bc0e128f54f49df27fb81106bd5747ef21bb5",
+      "bytes": 26099,
+      "sha256": "e634b78347bffa29323c5871d502eebdd0894757f25225ae403f22093e63c520"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-error-1440-dark.png",
+      "gitBlob": "c837512954a3e0d1360e4dbb8dd27dc804595733",
+      "bytes": 204767,
+      "sha256": "d848d5e0714f7b3d1761efd60b8f4e5bf281d66a57cbad68e522ea0d57c3d310"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-error-1440-light.png",
+      "gitBlob": "dc741edef91b25f9deb3ebbc2a6efa53c0f55e07",
+      "bytes": 111180,
+      "sha256": "f60e96decea825b96a2de45765a0e28c3ad3a8d9c81b8d5494ff0be45ca7f6b5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-error-390-dark.png",
+      "gitBlob": "3e14c51f532317a21ba25bb79e24d13c3a7625c0",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-error-390-light.png",
+      "gitBlob": "3a078138d582fa43ab3f797635bfa907c440f127",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-files-1440-dark.png",
+      "gitBlob": "4de6f902083ab801f9831630a7e434b233b5e3ee",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-files-1440-light.png",
+      "gitBlob": "479990bbf76ec35481dac1ff0e28c0f9e3aba3c4",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-files-390-dark.png",
+      "gitBlob": "0f883f96bb98bd8b4a27a5dfac60277893e31e37",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-meri-files-390-light.png",
+      "gitBlob": "5aeb4e696571a162962a8773b7b8f27ee0d373e2",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-portfolio-1440-dark.png",
+      "gitBlob": "aa768df4de1951e0c28dc043986dfc591c942a5a",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-portfolio-1440-light.png",
+      "gitBlob": "000f1707b181c30822cdf89e3e36c297f5d16a93",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-portfolio-390-dark.png",
+      "gitBlob": "df0e55246413d2c8d83188dd198ba3e34f7bfbf4",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-portfolio-390-light.png",
+      "gitBlob": "99fa77aa15dd079c8fb45cee2ea153995c921472",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/desktop-closeout-20261014/standalone/production-smoke.json",
+      "gitBlob": "d26fcb50d25a54576aa5cd8f457d473e99c6d680",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "gitBlob": "11ff0bc4f0c3297e3a5b7952ebfc47844452c5b1",
+      "bytes": 217766,
+      "sha256": "79f6f0a07f878739ba9861aca9b3edf6adb39997ed0a5829163f37b16f686b8e"
+    }
+  ],
+  "nativeLedgerSHA256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4",
+  "lockSHA256": "6dc039be028c302b58965532b05d3dd5aa0ca1ed8bb6a90be716eb6325d24d13"
+}

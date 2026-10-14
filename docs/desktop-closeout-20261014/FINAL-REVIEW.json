@@ -1,0 +1,192 @@
+{
+  "reviewer": "Codex outreach_review",
+  "date": "2026-10-14",
+  "status": "LOCAL_DESKTOP_CHECKPOINT_QUALIFIED_EXPORT_REPAIR_PENDING",
+  "qualifiedSource": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+  "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+  "workerSource": "af68cd562227befba4f0dab67df4cd8ff56b218e",
+  "releaseReady": false,
+  "publicationBoundary": "Evidence checkpoint may be committed/pushed for parent and worker coordination. Final release remains held pending independent TimeExportDialog/spec candidate review and combined exact-source qualification. No merge/deployment/native acceptance authorized by this receipt.",
+  "manifestAudit": {
+    "path": "docs/desktop-closeout-20261014/MANIFEST.json",
+    "sha256": "d0a2777dfc84afac25dc73deb4c9d003f124314167913f9568f24de76797fa29",
+    "entries": 268,
+    "allIndexBytesShaAndGitBlobsVerified": true,
+    "changedPathCoverageExact": true,
+    "excludedSelfReferences": [
+      "docs/desktop-closeout-20261014/MANIFEST.json",
+      "docs/desktop-closeout-20261014/FINAL-REVIEW.json"
+    ],
+    "losslessGzipBase64WrappersVerified": 32,
+    "hashErrors": []
+  },
+  "sourceAudit": {
+    "runtimeTestReviewBytesEqualQualifiedSource": true,
+    "shippingDockerHistoryPreserved": "Qualified branch merges exact shipping0a73 without editing shipping paths; protected comparisons use0a73 rather than superseded3339.",
+    "protectedChangesAgainstShippingBase": [],
+    "registryRecords": 297,
+    "duplicateKeys": 0,
+    "acceptedSizeRecords": [
+      {
+        "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+        "kind": "function",
+        "symbol": "TaskDetailSession",
+        "fingerprint": "f992253ece47f1307078839b66efea37a82ac1bdb453cee36882027a1a7b3a05",
+        "reason": "One task-id/version/access-owned detail session composes the canonical shared editor model/form, nested task actions, comments and current subtask owner. Inline and nested forms are mutually exclusive; parent pending fence owns conflicting commands. Mutation transport/generation remains canonical, no API or second editing controller.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+        "kind": "function",
+        "symbol": "TaskDetailFields",
+        "fingerprint": "6a2f28722c6728f8cf7d179d255c3ec77d7b21cde4cfef08274d73e57978a754",
+        "reason": "Read-only canonical task metadata projection for nonwritable or noninline presentations. Optional repeat values reuse TaskRepeatValues rather than duplicate rendering/semantics. No write or authority responsibility.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+        "kind": "function",
+        "symbol": "EngagementOverview",
+        "fingerprint": "90822d6c136faf663a25ca31e673de83babdb5ef3da484a329aa302cdefa3433",
+        "reason": "Existing current-scope meetings/tasks/report/outreach projection and independent read/error/retry gates. Workload summary is derived solely from returned task states/ownership and delegates rendering; no new operational aggregate or service.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+        "kind": "function",
+        "symbol": "OrdinaryEngagementScreen",
+        "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
+        "reason": "This screen composes one Engagement route, current client catalog and selected view. Existing query owners handle scope/lifetime; view changes preserve URL/history/client intent and clear stale Outreach hints. Catalog loading/error disables the picker and exposes explicit retry while independently healthy queries remain usable. Presentation delegates to existing feature panels. These states govern the same route admission and do not create another workflow.",
+        "reviewedBy": "Codex outreach_review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/test/browser/main.tsx",
+        "kind": "function",
+        "symbol": "RoutedApp",
+        "fingerprint": "85402990235cf8aea284e72f03cf1214e350b8772e5832cdf797f12fcf39324b",
+        "reason": "Existing test-only application/router/boundary composition gains one canonical typed task-receipt replacement probe. Existing ProposalRefreshProbe and PR51 route branches are preserved; no production route, auth grant or transport implementation.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/test/browser/desktop-closeout.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "fc64a5509eb663338e3ad710e66e76ca43ad56ec09ec0dd8f62a7f16a987d0be",
+        "reason": "One task-detail closeout workflow suite with shared canonical local fixtures covers inline edit/readback/permissions, duplicate/pending/native submission, same-ID version admission, nested cancellation and breakpoint draft continuity. Tests assert observable payloads/control behavior; no arbitrary split or weakened baseline assertions.",
+        "reviewedBy": "Codex outreach_review independent exact-source review",
+        "reviewedOn": "2026-10-14"
+      },
+      {
+        "file": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+        "kind": "function",
+        "symbol": "AddTimeForm",
+        "fingerprint": "1d843d2916cdfc1fc03548fcc1de6f2081d818cf32c70bae42dee836a8f38f6f",
+        "reason": "This is the sole time-entry form assembly. It delegates draft, synchronous dispatch admission and generation retirement to canonical useAddTime and useCapiroMutation owners. The disabled native fieldset and guarded Cancel render the same pending transaction; project selection, duration, description and billable fields constrain that transaction. No parallel request or lifetime implementation is introduced.",
+        "reviewedBy": "Codex outreach_review; Codex independent_fix_review",
+        "reviewedOn": "2026-10-14"
+      }
+    ],
+    "priorSourceReview": "/tmp/capiro-desktop-closeout-source-review.json",
+    "sourceFindings": "Keyed task identity/version/access, canonical shared editor/mutation owner, sibling comments and mutually exclusive nested form assembly, cross-command pending admission, time mutation lifetime, current catalog retry and URL history are accepted. No new API/DTO/Commitment/Meri implementation."
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-10-14T22:33:50.540Z",
+      "duration": 266987.147,
+      "expected": 148,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "logAndReportAgree148Passed": true,
+    "capturesPNGs": 42,
+    "report": "docs/desktop-closeout-20261014/evidence/integrated-browser-report.json",
+    "log": "docs/desktop-closeout-20261014/evidence/integrated-browser-log.json",
+    "prior143And50NotAdded": true
+  },
+  "objectiveBrowser": {
+    "stats": {
+      "startTime": "2026-10-14T22:28:39.123Z",
+      "duration": 14379.555,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Existing basic intake/ready views; not operational Active Objective acceptance."
+  },
+  "aggregate": {
+    "root": 113,
+    "web": 2392,
+    "capiro": 483,
+    "transport": 84,
+    "newsletter": 385,
+    "declarations": 8,
+    "declarationsReceipt": {
+      "directory": "/tmp/capiro-newsletter-types-rkEdGB",
+      "passed": 8
+    },
+    "lintErrors": 0,
+    "inheritedLintWarnings": 81,
+    "types": "PASS",
+    "format": "PASS",
+    "architecture": {
+      "reviewed": 476,
+      "inheritedUnreviewed": 19,
+      "blocking": 0,
+      "registryKeys": 297,
+      "duplicates": 0
+    },
+    "receipt": "docs/desktop-closeout-20261014/evidence/integrated-check-log.json"
+  },
+  "build": {
+    "compiledSuccessfully": true,
+    "staticPages": 24,
+    "receipt": "docs/desktop-closeout-20261014/evidence/integrated-build-log.json",
+    "environmentDiagnostic": "Same-source permission-granted retry qualified after isolated sandbox child EPERM; failed attempt retained, no package/config/source relaxation."
+  },
+  "standalone": {
+    "observations": 36,
+    "pageErrors": [],
+    "defaultProduct": "portfolio",
+    "rootHTTP": 200,
+    "receipt": "docs/desktop-closeout-20261014/integrated-standalone/production-smoke.json"
+  },
+  "evidenceDiagnostics": "Initial nested-field collisions, authored fixture/assertion misses, sandbox capture and sparse8-document architecture failure retained losslessly. Sparse evidence restored byte-exact from Git before fullcheck. Diagnostics are not acceptance or added pass counts.",
+  "historicalAudit": {
+    "historicalRows": 337,
+    "historicalCategories": {
+      "existing_behavior_missing_evidence": 181,
+      "authentic_backend_provider_dependency": 133,
+      "actual_missing_implementation": 23
+    },
+    "currentScope": "22 narrow source defects repaired plus intentional structured Core brief/exact rich Workspace copy mapping. This does not assert whole-row functionality/native acceptance.",
+    "nativeRowsAccepted": 0,
+    "nativeRowsOpen": 337,
+    "nativeReconciliationSha256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4",
+    "nativeReconciliationByteUnchanged": true,
+    "localLedger": "POST-BATCH-DELTA appends one bounded current local batch; original native criteria and previous evidence retained."
+  },
+  "lockSha256": "6dc039be028c302b58965532b05d3dd5aa0ca1ed8bb6a90be716eb6325d24d13",
+  "lockByteUnchanged": true,
+  "SDK": "Existing adoption unchanged; no automatic0.1.5 or Fable runtime migration.",
+  "pendingExportWorker": {
+    "paths": [
+      "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+      "apps/web/test/browser/planner-time-export-lifetime.spec.ts"
+    ],
+    "status": "Await exact reviewed published candidate; final release publication held."
+  },
+  "remainingLimits": [
+    "Final release held for independently assigned TimeExportDialog and planner-time-export-lifetime.spec.ts worker; no candidate yet and no export qualification included.",
+    "All337 native rows OPEN_FINAL_ACCEPTANCE; no authenticated live service persistence, route/origin/deployment/credentials/security/provider/database action performed.",
+    "Active Objective operational association and Engagement plan/wave/multi-client office mapping remain owner dependencies; no invented endpoints or missing-family blanket claim.",
+    "Mobile parity deferred. Existing media probes and inherited fixed-light Modules styling do not prove full dark/mobile/Figma parity.",
+    "Unsupported duplicate task/comment-edit/rich-description serialization and remaining design differences remain explicitly open; shipping owner alone controls gateway/origin/Docker/config/cloud release."
+  ]
+}

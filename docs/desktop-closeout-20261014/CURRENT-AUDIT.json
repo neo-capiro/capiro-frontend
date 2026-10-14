@@ -1,0 +1,480 @@
+{
+  "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+  "historicalRows": 337,
+  "historicalCategories": {
+    "existing_behavior_missing_evidence": 181,
+    "authentic_backend_provider_dependency": 133,
+    "actual_missing_implementation": 23
+  },
+  "rule": "337 historical native-open rows are not337unimplemented features.22narrow historical source defects are repaired; PROS-024 maps to intentional structured Core editing plus an implemented explicit rich Workspace copy. This is scoped source assessment, not blanket feature/native/Figma acceptance. No historical row altered.",
+  "historicalMissingReviewed": [
+    {
+      "auditId": "CORE-059",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "The historical updated-only receipt/no-unknown-journal defect is repaired in the current folder-access owner. Exact intent schema, actor/execution guards and scoped unknown journal are present; native effect coverage remains open.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/files/folder-access.ts",
+          "gitBlob": "3ca582bae32b073ce63fb32d0156647b4508cffb",
+          "sha256": "f1a9dce22b4735ef1cd620aea79ecd92e3137fe900ab019f60ca10f0cd38e348"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/files/mutations.ts",
+          "gitBlob": "898d26b87e65fe1f74c862e92daa53fd32ba05b5",
+          "sha256": "d7fb71a9ba318e3aa713201b28bb6d46083c726c72e2987624aad215f95dfeae"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "CORE-109",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Canonical outreach draft navigation now validates UUID and preserves client. Existing meeting/file/mail source behavior remains. Native source association remains unqualified.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+          "gitBlob": "85e2709144acc5adf05d45a5bbf831b57c54ba23",
+          "sha256": "f7e1ce05b5eeaff9b97504889a1880bd6b41868fd513ed44421716c8c87d1c38"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-notes_list",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Current actor/client/meeting-keyed query uses bound artifact schema and admits only successful nonfetching/error-free readableRows; historical failed-current-read display defect is repaired.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+          "gitBlob": "4583e252a75624adad55bd6ed7a5ed5094e48745",
+          "sha256": "04a9b8a63ab60dc0f8706c5423c69076f4b890e819945369aa152f962815c9df"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/queries.ts",
+          "gitBlob": "c52e4a2a01d16d171fde3d230f25c4c0e8017511",
+          "sha256": "f9782e2e9fc0e29f7d4e5cc7a780aefed79d6c40946ab6c2601ce8d5c011f582"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-debrief_list",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Same canonical artifact owner repairs failed-current-read display and parent binding for debriefs; native sharing/authorization remains open.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+          "gitBlob": "4583e252a75624adad55bd6ed7a5ed5094e48745",
+          "sha256": "04a9b8a63ab60dc0f8706c5423c69076f4b890e819945369aa152f962815c9df"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/queries.ts",
+          "gitBlob": "c52e4a2a01d16d171fde3d230f25c4c0e8017511",
+          "sha256": "f9782e2e9fc0e29f7d4e5cc7a780aefed79d6c40946ab6c2601ce8d5c011f582"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-calendar_navigation",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Current Calendar parses and exposes Month/Week/Day/Agenda and renders the corresponding existing range/grid. Historical absent-Day claim is repaired; native navigation acceptance remains open.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+          "gitBlob": "c0836f681865ef9c6753bc0abe210a70ce8d3f05",
+          "sha256": "5286296655dfee0aa9f62e43e501f2ea16bcd7ad59d8a348563349914c89cc48"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "MCAL-010",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Funding deadline feed is already implemented and wired, reusing public funding schemas, bounded pages, detail precision/provenance and no raw-date guessing. Agency forecasts explicitly excluded. Historical absence is obsolete; receiving routes/provider freshness still need native evidence.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/calendar/funding-feed.ts",
+          "gitBlob": "20dfd1270c2af58d345c3301a0ffa053cb0c9d34",
+          "sha256": "685ded08c15841dfd81ace56d945e1b8c299f75a5ca15b1c366a8adf01d3f23e"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/funding-deadline.ts",
+          "gitBlob": "e4d8c714d6ca45612fe48b85315be94fbc024d3b",
+          "sha256": "bda950502665b1d47e582cef277fdcce3b59ca1e5f5276bd38e36461065876c9"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/calendar/queries.ts",
+          "gitBlob": "c52e4a2a01d16d171fde3d230f25c4c0e8017511",
+          "sha256": "f9782e2e9fc0e29f7d4e5cc7a780aefed79d6c40946ab6c2601ce8d5c011f582"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-org_read",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Failed current roster read no longer admits retained rows; current source gates records by success/error and disables actions during fetching.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+          "gitBlob": "9e1cdd94a08d89324bd41820f857dd3f0585719c",
+          "sha256": "3a55a0ce6878477438d19ecf57430074af4892c3ab78dfeee3da297a098c433c"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-org_drawer",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Selected person derives from admitted current roster; failed current read removes that selection/drawer and actions refuse unavailable records.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+          "gitBlob": "9e1cdd94a08d89324bd41820f857dd3f0585719c",
+          "sha256": "3a55a0ce6878477438d19ecf57430074af4892c3ab78dfeee3da297a098c433c"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-email_history",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Current contact/history scope and read failure clear selection/compose and hide retained history.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+          "gitBlob": "03d4379234631f7a7e9f6b2ec83b38a859d89149",
+          "sha256": "2f32f77436791a305f5f3a4752cb6617439ca7167fbc63644455e1ac8d3ef6a0"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-email_thread",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Requested-thread schema validates exact id; presentation requires admitted history, successful thread and matching selected id. Existing broader native history association is retained, not replaced by timeline semantics.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+          "gitBlob": "03d4379234631f7a7e9f6b2ec83b38a859d89149",
+          "sha256": "2f32f77436791a305f5f3a4752cb6617439ca7167fbc63644455e1ac8d3ef6a0"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/email.ts",
+          "gitBlob": "402883e72f84c1617d8a0fe62a4f1946767f8747",
+          "sha256": "a863bbaa5af7159b0d6f2be25fea096ce422e49367f9dfa01940c50d2a853a67"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-targets_read",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Failed target list no longer admits cached records/drawer. Mutations also check current successful idle query state.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+          "gitBlob": "43085acaa3184109f4b1e92e4075e1ffb0eefdba",
+          "sha256": "3a273378584ddcd839df9954da99d051716b9867c3765e1ee510013ee42c81a9"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/target-queries.ts",
+          "gitBlob": "8a4186817ac256eec3b60ee9d5d87fa2e3951f64",
+          "sha256": "efdc2e14d83a65b607fade9ebbc293fb6ce981785c094844df5cdab2f727cf20"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-target_recommendations",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Suggestions require success/nonfetching/no-error before actionable rows are rendered. This read-only audit does not modify or qualify Meri generation.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/TargetRecommendations.tsx",
+          "gitBlob": "17afc149445a116a82f90b2af38d1c81acc8fdd2",
+          "sha256": "8064700e7157879303ff3e158b70de973534a5c0b0a23d22454b74535c02f356"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-targets_member_search",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "DirectoryResults requires success/nonfetching/no-error for actionable results.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+          "gitBlob": "9195510a155dfc70d5405d990aec711adb850d3d",
+          "sha256": "793aad03bc6b39ad4605b8d413d75203cb6db23a344d6b405c7296e420a24414"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-targets_staff_search",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Same directory result admission repairs cached failed-page actionability.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+          "gitBlob": "9195510a155dfc70d5405d990aec711adb850d3d",
+          "sha256": "793aad03bc6b39ad4605b8d413d75203cb6db23a344d6b405c7296e420a24414"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-targets_state_search",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Same directory result admission repairs cached failed-page actionability.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+          "gitBlob": "9195510a155dfc70d5405d990aec711adb850d3d",
+          "sha256": "793aad03bc6b39ad4605b8d413d75203cb6db23a344d6b405c7296e420a24414"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "ENG-target_committee_staff",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Current directory result admission combines existing exact committee/staff binding with error/fetch refusal.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+          "gitBlob": "9195510a155dfc70d5405d990aec711adb850d3d",
+          "sha256": "793aad03bc6b39ad4605b8d413d75203cb6db23a344d6b405c7296e420a24414"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
+          "gitBlob": "6b61aca37a4d68615480a62b04b156d03bb1b419",
+          "sha256": "d3c24380be51be928531e2b4ed4543c88d428ec83b15f85230a8ceb65102c409"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "BILL-04",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Search now exposes currentBillSearch only after this mount, with query-state/reader-bound selection. Historical unfenced retained results are obsolete.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/queries.ts",
+          "gitBlob": "3a761f375871862319932c25f8e85b6e623edabb",
+          "sha256": "6b0958de9d177c1b077cfcff642d6f6de90d715e82caa1a544605b2a10583b7a"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+          "gitBlob": "7042b26df14b279c24e97d69e3c74cd28ac8252a",
+          "sha256": "f1b2aa218ea95ca1e6d3856ff4e2670352958fbd02f4215d8b031f99de4f2e69"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "BILL-06",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Track mutation calls assertBillSearchSelection immediately before existing setTracked dispatch; current selected source is rechecked rather than trusting radio id.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/queries.ts",
+          "gitBlob": "3a761f375871862319932c25f8e85b6e623edabb",
+          "sha256": "6b0958de9d177c1b077cfcff642d6f6de90d715e82caa1a544605b2a10583b7a"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+          "gitBlob": "7042b26df14b279c24e97d69e3c74cd28ac8252a",
+          "sha256": "f1b2aa218ea95ca1e6d3856ff4e2670352958fbd02f4215d8b031f99de4f2e69"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "OBJ-26",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Sibling keys now have outreach/work prefixes. Existing picker exposes reviewed Directory, Context file and Calendar occurrence bindings, in addition to other existing destinations; native receiving association remains separate from Active Objective operational mapping.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+          "gitBlob": "e1bd823f1297414a9e459794a1575d4a650952c4",
+          "sha256": "de6a8ca53ddf021dd27d55bbc6902895938e446a0e7066b78157d6363b505d17"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+          "gitBlob": "fa852ab7945ef2e11213accc7b850eb6457f2378",
+          "sha256": "932a08e0b40fc645b4ef6f775f3529552cd3a9cde557397c472682c2dd04e530"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+          "gitBlob": "7cb2a43dbd84fbecd1fcb4773a961d82a7aa3b96",
+          "sha256": "ab00fe6fc02978b39ffc87703d21227e380ac2058c90afaf021ac4b76eb50f8d"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "PROS-017",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Contacts now derive current records from success/no-error and gate editor/readOnly/role actions on availability.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+          "gitBlob": "684ec01782480657995514da170a82833bda0026",
+          "sha256": "99794e575c6e9700ed8e847ea63a93685898a9330dd9d816989379c46dc53180"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "PROS-023",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Historical version, history and refresh comparison now require successful error-free reads, so the old failed-current-read display defect is repaired. Refresh saving remains separately unavailable until reviewed text and citations can be preserved together; this source audit does not qualify that write contract.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+          "gitBlob": "5e79c20d6b5e2d520a96e8304700189911d7e015",
+          "sha256": "9fe621b2b85e21aeef7350f213b2d548dcd29b7240f37e0b8fe0c7063ca1d84f"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefHistory.tsx",
+          "gitBlob": "105feba2e802558e4b09de5eaf59ea633122bf7d",
+          "sha256": "e1c284013b9c4bba08dd1f5ae7637d58c78c4ec651f85ac8d1f5eceb7193da4b"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/prospects/brief/BriefRefresh.tsx",
+          "gitBlob": "57b0bbfccb6366e61b7d3d313d024011ea8dfb0a",
+          "sha256": "108e39e6b636eaf2749a78f8d63ea5036b3bd7c51e0d58b80f8a58fc9bbff2d4"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "PROS-024",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Core Brief intentionally preserves structured section editing under PROSPECT-BRIEF-CHECKPOINT. Canonical WorkspaceCopyLink carries complete saved source identity into an explicitly editable Workspace copy; its rich-document editor/toolbar already exist. Do not classify rich implementation as absent or introduce a second Core document format. Native cross-service copy/edit persistence and selected-frame acceptance remain open.",
+      "state": "IMPLEMENTED_OWNER_MAPPING_NATIVE_ACCEPTANCE_OPEN",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "docs/portfolio-31/PROSPECT-BRIEF-CHECKPOINT.md",
+          "gitBlob": "1f69f4484fdeff07a399beb8cc12ddd7ba2580ab",
+          "sha256": "9fbdda54a4cf4104e5a490cefadf7fdefe6d688f4e7f7145a3992e89bcd33e6d"
+        },
+        {
+          "path": "apps/web/src/features/portfolio/prospects/brief/WorkspaceCopyLink.tsx",
+          "gitBlob": "7ee2d496d7f7b6105d1f39b149d4ee6a3dd005fa",
+          "sha256": "fe823e6107d88774d9f182cb8a834c487d08559249f2558272a67fb3baa5f782"
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/brief-copy/CopyEditor.tsx",
+          "gitBlob": "0c1c0723b109ee60d8ad2b0a00bfc812f80d25cf",
+          "sha256": "e2493c598eb6290eafacccde7e3680df49ad4ef7da9460fabb04936a062e1285"
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+          "gitBlob": "4a8f2033c00835594d829151700f4caa7d33c0c3",
+          "sha256": "de70cb869c82eea3a4dc29e84e65f8d5333dc5a3c1325197ba7205e572d4e0dc"
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+          "gitBlob": "09b212ef6f4fd4f2498af5b3514a466910f8a568",
+          "sha256": "6e01d003aaf3d5cb4806d9824e09a038bfb4d56ca95920bb8442ec8ac0b82ef9"
+        }
+      ],
+      "nativeAccepted": false
+    },
+    {
+      "auditId": "PROS-032",
+      "historicalClassification": "actual_missing_implementation",
+      "currentScopedAssessment": "Confirmation derives exact selected id/name/entity from current successful search and clears when unavailable; old retained confirmation defect is repaired. Paid client creation remains explicitly unavailable.",
+      "state": "HISTORICAL_NARROW_SOURCE_DEFECT_REPAIRED_NOT_NATIVE_ACCEPTANCE",
+      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "evidence": [
+        {
+          "path": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+          "gitBlob": "f5e99e24257dead2e203d50054e11f5a0f107df3",
+          "sha256": "f73ae5ed33d66923580e6e5ba8ea3e819da340b5d7333ba6da9a85d83a3e9aed"
+        }
+      ],
+      "nativeAccepted": false
+    }
+  ],
+  "confirmedNewDesktopGaps": [
+    {
+      "gap": "Readonly writable TaskDetail requires second dialog instead of direct canonical editing",
+      "state": "IMPLEMENTED_148_COMBINED_LOCAL_PASS"
+    },
+    {
+      "gap": "Engagement workload shortcut empty despite current existing task values",
+      "state": "IMPLEMENTED_148_COMBINED_LOCAL_PASS"
+    },
+    {
+      "gap": "Engagement local-only view state loses history/reload/client-view intent",
+      "state": "IMPLEMENTED_148_COMBINED_LOCAL_PASS"
+    },
+    {
+      "gap": "Add time permits duplicate pending dispatch/edit/cancel",
+      "state": "IMPLEMENTED_148_COMBINED_LOCAL_PASS"
+    },
+    {
+      "gap": "Engagement catalog403 leaves enabled picker without error/retry",
+      "state": "IMPLEMENTED_148_COMBINED_LOCAL_PASS"
+    }
+  ],
+  "otherOpenMappings": [
+    "Active Objective411:61442 operational association",
+    "Engagement plan/waves/multi-client office association",
+    "Duplicate task and rich description/comment serialized control contracts",
+    "No admitted full Modules selected-meeting design frame",
+    "Prospect brief refresh saving must preserve reviewed text/citations together; current comparison is explicitly preview only"
+  ],
+  "mobile": "DEFERRED",
+  "meriImplementation": "UNCHANGED_FABLE_OWNER",
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337
+}
