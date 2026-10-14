@@ -304,9 +304,12 @@ for (const width of [1440, 390]) {
     ).toBe(true);
     await name.fill("Test submitted draft");
     await page
-      .getByText("Task type, repeat, collaborators and dependencies", {
-        exact: true,
-      })
+      .getByText(
+        width >= 1024
+          ? "More task options"
+          : "Task type, repeat, collaborators and dependencies",
+        { exact: true },
+      )
       .click();
     await page
       .getByRole("dialog")

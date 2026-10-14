@@ -75,13 +75,13 @@ function OrdinaryEngagementScreen() {
   const clientId = plannerId.safeParse(requestedClient).success
     ? requestedClient!
     : "";
-  const setClientId = (id: string) => {
+  const setClientId = (id: string, targetView = view) => {
     const next = new URLSearchParams(params);
     if (id) next.set("clientId", id);
     else next.delete("clientId");
     for (const key of ["draft", "session", "create", "directoryContactId"])
       next.delete(key);
-    next.set("view", view);
+    next.set("view", targetView);
     router.push(`/modules/engagement?${next}`);
   };
   const clientQuery = useCapiroQuery(
@@ -135,6 +135,7 @@ function OrdinaryEngagementScreen() {
           clientId={clientId}
           meetings={meetings}
           onView={setView}
+          onClientOutreach={(id) => setClientId(id, "outreach")}
         />
       )}{" "}
       {view === "plan" && <PlanView />}

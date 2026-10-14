@@ -1,0 +1,457 @@
+{
+  "baseSource": "882c7b51d79c6d20ace685fb32b5c76a1ef312bf",
+  "qualifiedSource": "35fe7c45a66de857d0e6b1d844605992513ad1f8",
+  "hashBasis": "Git index blobs; manifest itself excluded",
+  "entries": [
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+      "bytes": 8407,
+      "sha256": "dae8bc9ceabc22b5bd2d1bb81b11dfd5cf151e5a3a1f769dbd0cb4fd82434e65"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "bytes": 6015,
+      "sha256": "7797cf375f6bfb33f023f00dcbd712a1cecc6e5c56802bb2a2319a8f50509397"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/PlanView.tsx",
+      "bytes": 2133,
+      "sha256": "570fbd8b2541f870b7a05065b37a315cf18c52db8631f0ffa09e60cb8a96d401"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/engagement-overview.module.css",
+      "bytes": 1219,
+      "sha256": "94244cab600e11e04a1ba94fb928cc6e1332d997df90360109a9368377a7d758"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+      "bytes": 8913,
+      "sha256": "48bec95180710d289045980e325b5927e538821ae291ba6e362a1442311e9160"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+      "bytes": 5228,
+      "sha256": "13e29548fc133e3e44270a36a060765717ab70848a926c004e8d6cda1cde2584"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-detail.module.css",
+      "bytes": 1651,
+      "sha256": "113ed9bc4e49ad6b855b9fa69b9db32222294c8018cd9388ec231a796afb68f4"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-detail-content.spec.ts",
+      "bytes": 8360,
+      "sha256": "9905377fca78a4222707f16d7bc1c0d2f7a07ed657241de5a8c10d9e1e65279e"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-engagement-keyboard.spec.ts",
+      "bytes": 1786,
+      "sha256": "f272b6d50d82c720f98a842b9196b06e890ac0746c142a6c2b6da41cafbd2247"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-task-drawer.spec.ts",
+      "bytes": 8945,
+      "sha256": "288dc9eaf96051062291e64d086174fca30212af4cfa71b718304483c87f5f35"
+    },
+    {
+      "path": "docs/acceptance-20261013/POST-BATCH-DELTA.json",
+      "bytes": 25071,
+      "sha256": "bddbaed45a686696af27aec62134d100f4cbd2ef8cfbfd80c13dff0d784e1e73"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/BACKEND-BINDINGS.md",
+      "bytes": 11496,
+      "sha256": "b6b688db87d0fac01d723717bc7e5901b562a66af9375b2b29008bd0d409f987"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/COVERAGE.json",
+      "bytes": 2155,
+      "sha256": "b50173542e3dc04ff5a968072930ab44761f427e12586309cf873cbba8032e5f"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/HANDOFF.md",
+      "bytes": 7167,
+      "sha256": "732550ae3150dbec49696abefe9d7966dd5d98ac66770246ef6720413c1ea778"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md",
+      "bytes": 4149,
+      "sha256": "9a2be824d8067da77ee3457238fe6490d60f41aad6d5729be77ba5cfb5546330"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/PLAN.md",
+      "bytes": 1907,
+      "sha256": "90b578ba347f1fc2f895199386c4f586eb534b01a2799289c55bf3c2c925eac4"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/PRIOR-SIZE-REVIEWS.json",
+      "bytes": 1001,
+      "sha256": "46a38808f4e3f652ebfb847fba497dd5a69229468f81110aa76f5e547a375636"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/architecture-final.json.gz.json",
+      "bytes": 146831,
+      "sha256": "e7965b02c2af30b032453a6f23fd84f872a84bf17f701adfb53a47ca759c40c2"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser-results.json.gz.json",
+      "bytes": 3016153,
+      "sha256": "6b745803691b2465102fc7dfc10fd8687e3c70e441896e9edde1b370529eb0fc"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser.log.gz.json",
+      "bytes": 4578,
+      "sha256": "692cf8baf67e95424af34d0797de6774c22e3df0b6a7302c14a6798ea30df309"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-detail-content-Des-194a6-ith-persistent-actions-dark/desktop-task-detail-content.png",
+      "bytes": 118925,
+      "sha256": "95c9bd77536a79b877912915bf7c06a3f29bc47c2eb670aeda48171fc7243a5a"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-detail-content-Des-c47de--Outreach-destination-light/desktop-engagement-content.png",
+      "bytes": 109302,
+      "sha256": "543d8a6acb05317f41f482553b5470c99fcd2c5b76a5ad6d7b815a2da62aef48"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-detail-content-Des-f5f50-t-Outreach-destination-dark/desktop-engagement-content.png",
+      "bytes": 109302,
+      "sha256": "543d8a6acb05317f41f482553b5470c99fcd2c5b76a5ad6d7b815a2da62aef48"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-detail-content-Des-f9948-th-persistent-actions-light/desktop-task-detail-content.png",
+      "bytes": 118925,
+      "sha256": "95c9bd77536a79b877912915bf7c06a3f29bc47c2eb670aeda48171fc7243a5a"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-engagement-overview.png",
+      "bytes": 108581,
+      "sha256": "b6b7c2a2e48ffaf5f1b0713fec3e4d5fc69a98a0f6a35db806689056c883f30c"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-engagement-coverag-e1d6d-tinct-intents-at-1440-light/desktop-selected-meeting.png",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-engagement-overview.png",
+      "bytes": 108581,
+      "sha256": "b6b7c2a2e48ffaf5f1b0713fec3e4d5fc69a98a0f6a35db806689056c883f30c"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-engagement-coverag-eeaf1-stinct-intents-at-1440-dark/desktop-selected-meeting.png",
+      "bytes": 115686,
+      "sha256": "13de4a6970441b25c85d08a994e760e83840ac73643447fa8b41a53f58966e65"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-body-Desktop--2cdea-raft-across-breakpoint-dark/desktop-task-body.png",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-body-Desktop--b065c-aft-across-breakpoint-light/desktop-task-body.png",
+      "bytes": 110629,
+      "sha256": "a2187dc730465a7d68fbe2cf115dbe336bbf065735227802aefebd3f761e6cf5"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-21bec--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-35313-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-581c8-the-visible-footer-disabled/desktop-pending-footer.png",
+      "bytes": 100735,
+      "sha256": "342a6d0f2ec59b661aaaa24a7fd079042d521c11477c1969e7b987bcee9a1074"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 100170,
+      "sha256": "a06a141038969685ae292c70d4bef8ffffaaf149c32d12fe4279225b73c562bd"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-6893c-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 100391,
+      "sha256": "248095faeb921047da3180ee6e32deb80b20ed553016941f7d0c38c845145b27"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-786b5-e-Figma-drawer-at-1440-dark/desktop-editor-scrolled.png",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-88729-itor-reachable-at-1440-dark/desktop-long-description.png",
+      "bytes": 90261,
+      "sha256": "58b1087b405116a46e142ba6e18f690a3e22ab744fea5ae2fc04e61b24e89e45"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 98708,
+      "sha256": "8d010b1eb7479cd911c0f33e9e61d77330568a489d1fa06a8ef408b7c61f9d56"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-8d9b5--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 101688,
+      "sha256": "8ba365462a87caf6423268d38b5e88a61b375a8c64d38a77c7db4f234481966f"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 94925,
+      "sha256": "d174624a4ad8d0002862966f06cb508215917b2f3e75e4f0c358a58ed2fdab05"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-9f6ee--Figma-drawer-at-1440-light/desktop-editor-scrolled.png",
+      "bytes": 97921,
+      "sha256": "d2d86abe2822ee7dbf18efe552af0798ff4b59afb97ff1ba8262f9977a720eb8"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-abe44-tor-reachable-at-1440-light/desktop-long-description.png",
+      "bytes": 90261,
+      "sha256": "58b1087b405116a46e142ba6e18f690a3e22ab744fea5ae2fc04e61b24e89e45"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-ca253-e-Figma-drawer-at-1440-dark/desktop-drawer.png",
+      "bytes": 115850,
+      "sha256": "3add926dc19a7133b092fae19792ae98c2c298cf38a9cd73dc8a4d8c3ac92bce"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/desktop-task-drawer-Deskto-d18d8--Figma-drawer-at-1440-light/desktop-drawer.png",
+      "bytes": 115850,
+      "sha256": "3add926dc19a7133b092fae19792ae98c2c298cf38a9cd73dc8a4d8c3ac92bce"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151950,
+      "sha256": "933ad10de206155e955e106c5b7b9fb6cb0cb90c60906eda95cb552b69b43333"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151948,
+      "sha256": "2aba53932a87eae7db57f3272cb1484ac88fc48fddc665f19608b6f94ac7ad4b"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/next-modules-scope-Calenda-696ed-orts-partial-empty-coverage/independent-feeds.png",
+      "bytes": 128386,
+      "sha256": "6bb87a15064b8775d93e013d08e95efcefb92b149526c12740b99ca0b8daff7c"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/browser/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "bytes": 116022,
+      "sha256": "8e00e92aa5ded9b0fa9988963587613528da91bd192bec0be430f617bc23d8fc"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/build.log.gz.json",
+      "bytes": 1397,
+      "sha256": "ed79929604a3fe63a8fc7b2f25e3361d0ef33d135ad5e7426b74e70b53b2aaf9"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/check.log.gz.json",
+      "bytes": 168512,
+      "sha256": "b109ffd9a75789718631d43aafd1aed9b78ae98f81d020fd29c400856b1a5546"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/first-build.log.gz.json",
+      "bytes": 1021,
+      "sha256": "b538f0425daf1eb4962fb284585f0cd5193f246cb52df951d560d4821a045b65"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/first-check.log.gz.json",
+      "bytes": 1913,
+      "sha256": "5c6d4eb4db0ed79c3c8dfb416aa4a62297bae63d927bf55d2351199947a8150f"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/first-selected-results.json.gz.json",
+      "bytes": 2170864,
+      "sha256": "a0a327c4ab4a28f40750e3a8c9b70d8624ba39e8d0c960cada74c93170d26f33"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/first-selected.log.gz.json",
+      "bytes": 3754,
+      "sha256": "cbdab39cfa2f657d2a8acf3b62e18eab43d2ffa6935e5a73058bed6febafbddf"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/interrupted-filter-results.json.gz.json",
+      "bytes": 2429772,
+      "sha256": "12651a262d5f3c633aa2d7e611d9fa018430d4ea63c9b8893ed3a29237d179e7"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/interrupted-filter.log.gz.json",
+      "bytes": 3402,
+      "sha256": "5d462213f42c8732dd4c76bd8d7b538a3465c45f2e9ac4c841925f27eb37687b"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/pre-card-browser-results.json.gz.json",
+      "bytes": 3015889,
+      "sha256": "c01fcaa30bfeaa609609107b3bf23e5c88531a07818e0269b18df196af827834"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/diagnostics/pre-card-browser.log.gz.json",
+      "bytes": 4570,
+      "sha256": "a24d99b0b05999a63d26dc6ed32b278e80c6c37e0526d722c7158b2ffbb68a83"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/figma/engagement-desktop.context.txt",
+      "bytes": 70036,
+      "sha256": "a8bd11a1ced5aa79b0bdfa606c3dedf06b0b50f3f25627a4a69615f587d3fc0c"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/figma/engagement-desktop.png",
+      "bytes": 154075,
+      "sha256": "79e01b069d6d4e6923279e733126079f6b1b93a3fde08ec8b2418fa1bc7e7c85"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/figma/planner-detail-desktop.png",
+      "bytes": 175850,
+      "sha256": "954eaa7272d30205466c7323b39785c58f5fa34c954f3d3bbfb5ad43a9641738"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/figma/planner-detail-drawer.context.txt",
+      "bytes": 72770,
+      "sha256": "a4f7421b5d1dcd8693877696360dbe06f7ce20ffafa742946a1a74b1a4d629a0"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/keyboard-results.json.gz.json",
+      "bytes": 410356,
+      "sha256": "69515c836857e51a655ab07890eab3c5b70cbfa8d0323a49bd99671ad07b87be"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/keyboard.log.gz.json",
+      "bytes": 805,
+      "sha256": "bee0f00ce796939fd63165771eb8853d6c77c1e9a901c79cc3b2307dfe497c3f"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/keyboard/desktop-engagement-keyboar-6ff4d-rd-focus-and-contrast-light/desktop-engagement-keyboard.png",
+      "bytes": 109509,
+      "sha256": "51f36d99a0ce93e80cecf7c4005bc6195dc414ab72a9ead731f34bd43b4f3415"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/keyboard/desktop-engagement-keyboar-c29f5-ard-focus-and-contrast-dark/desktop-engagement-keyboard.png",
+      "bytes": 109509,
+      "sha256": "51f36d99a0ce93e80cecf7c4005bc6195dc414ab72a9ead731f34bd43b4f3415"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone.log.gz.json",
+      "bytes": 1973,
+      "sha256": "03c196c439e2651b7130606d4a936acda1cdce13d603ff68bd74d8b36d0a69d5"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-1440-dark.png",
+      "bytes": 119855,
+      "sha256": "f7a4c614d007c14def4d8f6ae4a83ed69ed4a60188df916c067744d67f898267"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-1440-light.png",
+      "bytes": 51903,
+      "sha256": "c315862d3db98195343e3273e3cab3dd39c01479edc4a22f3ce88e285f165e43"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-390-dark.png",
+      "bytes": 52486,
+      "sha256": "1eece3d52085b716f3e73ae3311e65b17d2d944e7ed1a9ea217e2889d55a3ba3"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-390-light.png",
+      "bytes": 26099,
+      "sha256": "e634b78347bffa29323c5871d502eebdd0894757f25225ae403f22093e63c520"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-error-1440-dark.png",
+      "bytes": 204767,
+      "sha256": "d848d5e0714f7b3d1761efd60b8f4e5bf281d66a57cbad68e522ea0d57c3d310"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-error-1440-light.png",
+      "bytes": 111180,
+      "sha256": "f60e96decea825b96a2de45765a0e28c3ad3a8d9c81b8d5494ff0be45ca7f6b5"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-error-390-dark.png",
+      "bytes": 129538,
+      "sha256": "c840b8ff7fe35b535922692082c6963fef3b30151d5fa2962c37a61c973f2a13"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-error-390-light.png",
+      "bytes": 82210,
+      "sha256": "e04b0fd3b2b3bbbc2a3c6002c71483c9029f78d9d904f9b5d0b7d0636a61a35d"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-files-1440-dark.png",
+      "bytes": 115536,
+      "sha256": "43719529c437ba5f14ff785b64ff761ebe1b7df88ae338edfb0ebd2181f5ecab"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-files-1440-light.png",
+      "bytes": 47660,
+      "sha256": "5748ba0ce40bf296dbcae86f1fea95c9c8344f54d8de3d9ef09fab8f18c4b8e5"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-files-390-dark.png",
+      "bytes": 43023,
+      "sha256": "843e7264d53c451ca8f9ad9feb0e42f1d1290b63f9e399680800be4d47098cbf"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-meri-files-390-light.png",
+      "bytes": 20352,
+      "sha256": "2839596709f215965adef331503c4d1c05139645fc0b14a07aa26eb71e785bbc"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-portfolio-1440-dark.png",
+      "bytes": 24509,
+      "sha256": "d374b8f6250f36220b2888a2de218b00fed031befb87fc25f93b2c5c29790241"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-portfolio-1440-light.png",
+      "bytes": 24688,
+      "sha256": "92bd3ef8d31706d7f03871435f8c652fe12974bb0cd4349b0cbb8ea20f87a390"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-portfolio-390-dark.png",
+      "bytes": 18526,
+      "sha256": "b7c71740ae6574704561e09273fd165757ec0f7a726cc866668c07e339cb5a65"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-portfolio-390-light.png",
+      "bytes": 18661,
+      "sha256": "8e74e1d6b1a3087dd05f4c947010bca242d0b9c334962f5b13d2c9866a349d13"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/standalone/production-smoke.json",
+      "bytes": 8348,
+      "sha256": "847fa81df88d21b5969f275c59f98def4a837007a5a07db5e0bb74fcb9460c92"
+    },
+    {
+      "path": "docs/desktop-detail-content-20261014/types-initial.log.gz.json",
+      "bytes": 384,
+      "sha256": "0a31f60cd1652bbbb7f789e2e6021a10bd8c190aaa561a782ec6807ef8ae5a19"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 212079,
+      "sha256": "5f8a66ebdd1d12016a8e5768b7acb2da4fdb33fbd140885d058c8d7f6c149811"
+    }
+  ]
+}
