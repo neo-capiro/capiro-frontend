@@ -93,11 +93,11 @@
     },
     {
       "path": "docs/objective-resource-choices-20261014/evidence/build-final.log",
-      "sha256": "68cf7fd2c6605b0c298566b14ce5b5969e36ddb21c0c5dc35ff411ed015159d1"
+      "sha256": "159039270cbb715b4d9067bdc12dbd6acb193ca81daed415527a54b45ac95367"
     },
     {
       "path": "docs/objective-resource-choices-20261014/evidence/build.log",
-      "sha256": "beea93a8745062bb982ee65aad19ac42ccca881863011505b61c52945fb4a339"
+      "sha256": "ad886aaf8efd778e482d714b860e204728c91a505660688e6835043f3515fba3"
     },
     {
       "path": "docs/objective-resource-choices-20261014/evidence/build.raw.json",
@@ -215,5 +215,7 @@
     "build": "passed",
     "standalone": "passed",
     "native": "not run;337rowsremainopen"
-  }
+  },
+  "sourceCommit": "0655195aff80e935faa35e90258b1a086f33331f",
+  "hashEncoding": "Git committed bytes; build output CRLF normalized by repository attributes"
 }
