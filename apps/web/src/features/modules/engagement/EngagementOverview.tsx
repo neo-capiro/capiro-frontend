@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
-import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
+import type {
+  EngagementMeeting,
+  EngagementTask,
+} from "../../../shared/capiro/operations/engagement";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -141,7 +144,13 @@ export function EngagementOverview({
           </ActionButton>
         }
       >
-        <div />
+        <StatusPanel
+          loading={tasks.loading}
+          error={tasks.error}
+          onRetry={tasks.reload}
+        >
+          <WorkloadSummary tasks={tasks.data ?? []} />
+        </StatusPanel>
       </Panel>
       {outreach.data?.length === 500 && (
         <p className={styles.note}>
@@ -288,4 +297,17 @@ function useOverviewTasks(clientId: string) {
   return useCapiroQuery("engagement.tasks", {
     query: { clientId: clientId || undefined },
   });
+}
+
+function WorkloadSummary({ tasks }: { tasks: EngagementTask[] }) {
+  const open = tasks.filter(
+    (task) => !["done", "canceled"].includes(task.status),
+  );
+  const assigned = open.filter((task) => task.ownerUserId !== null).length;
+  return (
+    <p className={styles.body}>
+      {open.length} returned open follow-ups · {assigned} assigned ·{" "}
+      {open.length - assigned} unassigned
+    </p>
+  );
 }

@@ -24,6 +24,9 @@ import { assigneeName, dayLabel, minutesLabel } from "./task-presentation";
 import { TaskAttachments } from "./TaskAttachments";
 import { TaskEditor } from "./TaskEditor";
 import { TaskDetailFields } from "./TaskDetailFields";
+import { TaskEditorForm } from "./TaskEditorForm";
+import { useTaskEditor } from "./useTaskEditor";
+import { useDesktopTaskLayout } from "./TaskEditorBody";
 import { TaskSubtasks } from "./TaskSubtasks";
 import detailStyles from "./task-detail.module.css";
 import { AddTimeDialog } from "./TimeDialogs";
@@ -40,7 +43,8 @@ function useDetail({ task, onSaved }: Props) {
     [subtask, setSubtask] = useState(false),
     [time, setTime] = useState(false),
     [comment, setComment] = useState(""),
-    [subtaskRevision, setSubtaskRevision] = useState(0);
+    [subtaskRevision, setSubtaskRevision] = useState(0),
+    [editorBusy, setEditorBusy] = useState(false);
   const active = useRef(false);
   const events = useCapiroQuery("planner.task.events", {
     params: { id: task.id },
@@ -93,7 +97,15 @@ function useDetail({ task, onSaved }: Props) {
     comment,
     setComment,
     error: commentMutation.error?.message ?? archiveMutation.error?.message,
-    busy: commentMutation.pending || archiveMutation.pending,
+    busy: editorBusy || commentMutation.pending || archiveMutation.pending,
+    setEditorPending: (_owner: object, value: boolean) => {
+      if (value) {
+        commentMutation.reset();
+        archiveMutation.reset();
+      }
+      active.current = value;
+      setEditorBusy(value);
+    },
     isPending: () => active.current,
     events,
     writable,
@@ -104,7 +116,27 @@ function useDetail({ task, onSaved }: Props) {
   };
 }
 export function TaskDetail(props: Props) {
+  return (
+    <TaskDetailSession
+      key={`${props.task.id}:${props.task.version}:${props.task.access}`}
+      {...props}
+    />
+  );
+}
+function TaskDetailSession(props: Props) {
   const m = useDetail(props);
+  const desktop = useDesktopTaskLayout();
+  const editor = useTaskEditor({
+    task: props.task,
+    onSaved: props.onSaved,
+    onClose: () => {
+      if (m.edit) m.setEdit(false);
+      else props.onClose();
+    },
+    canSubmit: () => m.writable && !m.isPending(),
+    onPendingChange: m.setEditorPending,
+  });
+  const inline = desktop && m.writable && !m.edit && !m.subtask && !m.time;
   return (
     <>
       <Modal
@@ -117,8 +149,9 @@ export function TaskDetail(props: Props) {
         description={props.task.description || "Task details"}
         footer={
           <div className={detailStyles.footerActions}>
-            <TaskDetailActions props={props} model={m} />
+            <TaskDetailActions props={props} model={m} showSummary={false} />
             <ActionButton
+              className={detailStyles.closeAction}
               disabled={m.busy}
               onClick={() => {
                 if (!m.isPending()) props.onClose();
@@ -126,6 +159,16 @@ export function TaskDetail(props: Props) {
             >
               Close
             </ActionButton>
+            {inline && (
+              <ActionButton
+                primary
+                type="submit"
+                form={editor.formId}
+                disabled={m.busy}
+              >
+                {editor.busy ? "Saving…" : "Save task"}
+              </ActionButton>
+            )}
           </div>
         }
       >
@@ -133,11 +176,22 @@ export function TaskDetail(props: Props) {
           <div className={detailStyles.legacySummary}>
             <TaskSummary props={props} model={m} />
           </div>
-          <TaskDetailFields
-            task={props.task}
-            people={props.people}
-            projects={props.projects}
-          />
+          {inline ? (
+            <TaskEditorForm
+              inline
+              model={editor}
+              task={props.task}
+              people={props.people}
+              projects={props.projects}
+              disabled={m.busy}
+            />
+          ) : (
+            <TaskDetailFields
+              task={props.task}
+              people={props.people}
+              projects={props.projects}
+            />
+          )}
           <TaskSubtasks
             key={`${props.task.id}:${m.subtaskRevision}`}
             taskId={props.task.id}
@@ -169,6 +223,7 @@ export function TaskDetail(props: Props) {
       </Modal>
       <TaskEditor
         open={m.edit}
+        model={editor}
         onClose={() => m.setEdit(false)}
         onSaved={props.onSaved}
         task={props.task}
@@ -291,17 +346,23 @@ function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
 function TaskDetailActions({
   props,
   model: m,
+  showSummary = true,
 }: {
   props: Props;
   model: Model;
+  showSummary?: boolean;
 }) {
   const task = props.task;
   return (
     <>
-      <Badge>{task.status.replaceAll("_", " ")}</Badge>
-      <Badge tone={task.priority === "high" ? "danger" : "neutral"}>
-        {task.priority}
-      </Badge>
+      {showSummary && (
+        <>
+          <Badge>{task.status.replaceAll("_", " ")}</Badge>
+          <Badge tone={task.priority === "high" ? "danger" : "neutral"}>
+            {task.priority}
+          </Badge>
+        </>
+      )}
       <ActionButton
         disabled={!m.writable || m.busy}
         onClick={() => {

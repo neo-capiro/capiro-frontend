@@ -1,3 +1,4 @@
+import { TaskDetailRefreshProbe } from "./TaskDetailRefreshProbe";
 import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
@@ -175,7 +176,9 @@ function RoutedApp() {
           <CapiroBoundary
             config={{ publishableKey: "pk_test_YQ==", configured }}
           >
-            {path === "/__test/strategy-proposal-refresh" ? (
+            {path === "/__test/task-detail-refresh" ? (
+              <TaskDetailRefreshProbe />
+            ) : path === "/__test/strategy-proposal-refresh" ? (
               <ProposalRefreshProbe />
             ) : isSettings ? (
               <SettingsScreen section={path.split("/")[2]} />

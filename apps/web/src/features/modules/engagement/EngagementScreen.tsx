@@ -68,8 +68,12 @@ function OrdinaryEngagementScreen() {
   ) {
     setRouteKey(JSON.stringify([requestedView, session, draft, initialCreate]));
     if (session || draft || initialCreate) setView("outreach");
-    else if (tabs.some((tab) => tab.id === requestedView))
-      setView(requestedView!);
+    else
+      setView(
+        tabs.some((tab) => tab.id === requestedView)
+          ? requestedView!
+          : "overview",
+      );
   }
   const router = useRouter();
   const clientId = plannerId.safeParse(requestedClient).success
@@ -82,6 +86,14 @@ function OrdinaryEngagementScreen() {
     for (const key of ["draft", "session", "create", "directoryContactId"])
       next.delete(key);
     next.set("view", targetView);
+    router.push(`/modules/engagement?${next}`);
+  };
+  const changeView = (id: string) => {
+    const next = new URLSearchParams(params);
+    next.set("view", id);
+    if (id !== "outreach")
+      for (const key of ["draft", "session", "create", "directoryContactId"])
+        next.delete(key);
     router.push(`/modules/engagement?${next}`);
   };
   const clientQuery = useCapiroQuery(
@@ -127,14 +139,14 @@ function OrdinaryEngagementScreen() {
       <Tabs
         items={tabs}
         value={view}
-        onChange={setView}
+        onChange={changeView}
         label="Engagement sections"
       />
       {view === "overview" && (
         <EngagementOverview
           clientId={clientId}
           meetings={meetings}
-          onView={setView}
+          onView={changeView}
           onClientOutreach={(id) => setClientId(id, "outreach")}
         />
       )}{" "}

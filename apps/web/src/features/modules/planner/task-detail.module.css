@@ -79,7 +79,7 @@
     gap: 10px;
     align-items: center;
   }
-  .footerActions > button:last-child {
+  .footerActions .closeAction {
     margin-left: auto;
   }
   .footerActions button {

@@ -79,7 +79,7 @@ for (const colorScheme of ["light", "dark"] as const) {
       name: nextTask.name,
       exact: true,
     });
-    const fields = dialog.locator('[data-slot="task-detail-fields"]');
+    const fields = dialog.locator('[data-slot="task-detail-editor"]');
     await expect(fields).toBeVisible();
     for (const [label, value] of [
       ["Start date", "2026-10-08"],
@@ -87,23 +87,32 @@ for (const colorScheme of ["light", "dark"] as const) {
       ["Start time", "09:00"],
       ["Due time", "17:00"],
       ["Time zone", "America/New_York"],
-      ["Repeat", "weekly · interval 2"],
+      ["Repeat interval", "2"],
+    ] as const)
+      await expect(fields.getByLabel(label, { exact: true })).toHaveValue(
+        value,
+      );
+    await expect(fields.getByLabel("Repeat", { exact: true })).toHaveText(
+      "weekly",
+    );
+    await expect(
+      fields.getByLabel("Synthetic current project section", { exact: true }),
+    ).toHaveText("Synthetic current section");
+    for (const [label, value] of [
       ["Repeat from", "Completion date"],
       ["Repeat on", "Monday, Wednesday"],
       ["Repeat ends", "2026-12-31"],
       ["Repeat anchor", "2026-10-01"],
-      ["Synthetic current project", "Synthetic current section"],
-    ] as const) {
+    ] as const)
       await expect(
         fields
           .locator("dl > div")
           .filter({ has: page.getByText(label, { exact: true }) })
           .locator("dd"),
       ).toHaveText(value);
-    }
-    await expect(
-      fields.getByRole("region", { name: "Description", exact: true }),
-    ).toHaveText(`Description${task.description}`);
+    await expect(fields.getByLabel("Description", { exact: true })).toHaveValue(
+      task.description,
+    );
     const footer = dialog.locator(":scope > footer");
     const before = await footer.boundingBox();
     await dialog
@@ -214,7 +223,7 @@ test("Desktop Engagement task denial leaves the independent office report readab
   ).toBeVisible();
   await expect(
     page.getByText("Synthetic task denial", { exact: true }),
-  ).toHaveCount(3);
+  ).toHaveCount(4);
   await expect(
     page.getByRole("button", { name: "Open reports →", exact: true }),
   ).toBeVisible();

@@ -148,3 +148,22 @@
     font-weight: 500;
   }
 }
+
+@media (min-width: 1024px) {
+  .inlineForm {
+    gap: 0;
+  }
+  .inlineContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .inlineContent textarea {
+    max-height: 240px;
+    overflow: auto;
+  }
+  .inlineContent label[for] {
+    color: var(--muted-foreground);
+    font-weight: 400;
+  }
+}
