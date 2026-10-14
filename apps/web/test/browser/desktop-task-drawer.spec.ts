@@ -52,7 +52,7 @@ async function expectScrollableEditor(
 }
 
 for (const colorScheme of ["light", "dark"] as const) {
-  for (const state of ["new", "detail", "edit"] as const) {
+  for (const state of ["new", "detail", "edit", "subtask"] as const) {
     test(`Desktop Planner ${state} uses the Figma drawer at 1440 ${colorScheme}`, async ({
       page,
     }, info) => {
@@ -72,12 +72,18 @@ for (const colorScheme of ["light", "dark"] as const) {
         await page
           .getByRole("button", { name: "Edit task", exact: true })
           .click();
+      if (state === "subtask")
+        await page
+          .getByRole("button", { name: "+ Subtask", exact: true })
+          .click();
       const title =
         state === "new"
           ? "New task"
           : state === "edit"
             ? "Edit task"
-            : nextTask.name;
+            : state === "subtask"
+              ? "Add subtask"
+              : nextTask.name;
       const dialog = page.getByRole("dialog", { name: title, exact: true });
       await expect(dialog).toBeVisible();
       const bounds = await dialog.boundingBox();
@@ -97,18 +103,22 @@ for (const colorScheme of ["light", "dark"] as const) {
       expect(bounds!.height).toBeCloseTo(1040, 0);
       if (state !== "detail") await expectScrollableEditor(page, dialog, info);
       await expectAccessibleHome(page, info);
-      if (state === "edit") await page.keyboard.press("Escape");
+      if (state === "edit" || state === "subtask")
+        await page.keyboard.press("Escape");
       else
         await dialog
           .getByRole("button", { name: "Close dialog", exact: true })
           .click();
       await expect(dialog).toBeHidden();
-      if (state === "edit") {
+      if (state === "edit" || state === "subtask") {
         await expect(
           page.getByRole("dialog", { name: nextTask.name, exact: true }),
         ).toBeVisible();
         await expect(
-          page.getByRole("button", { name: "Edit task", exact: true }),
+          page.getByRole("button", {
+            name: state === "edit" ? "Edit task" : "+ Subtask",
+            exact: true,
+          }),
         ).toBeFocused();
       }
       if (state === "new")
@@ -168,3 +178,59 @@ for (const colorScheme of ["light", "dark"] as const) {
     });
   });
 }
+
+test("Desktop Planner pending native resubmission keeps one request and the visible footer disabled", async ({
+  page,
+}, info) => {
+  await page.setViewportSize({ width: 1440, height: 1040 });
+  await setup(page);
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let writes = 0;
+  await page.route("**/api/capiro/planner.task.create", async (route) => {
+    writes++;
+    await held;
+    await route.fulfill({
+      status: 409,
+      json: { message: "Synthetic pending resubmission conflict" },
+    });
+  });
+  await page.goto("/modules/planner");
+  await page.getByRole("button", { name: "+ New task", exact: true }).click();
+  const dialog = page.getByRole("dialog", { name: "New task", exact: true });
+  const name = dialog.getByLabel("Task name", { exact: true });
+  await name.fill("Test submitted desktop draft");
+  await dialog.getByRole("button", { name: "Save task", exact: true }).click();
+  try {
+    await expect(name).toBeDisabled();
+    await dialog.locator("form").evaluate((form) => {
+      (form as HTMLFormElement).requestSubmit();
+      (form as HTMLFormElement).requestSubmit();
+    });
+    const footer = dialog.locator('[data-slot="task-editor-footer"]');
+    await expect(
+      footer.getByRole("button", { name: "Cancel", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      footer.getByRole("button", { name: "Saving…", exact: true }),
+    ).toBeDisabled();
+    const bounds = await footer.boundingBox();
+    expect(bounds!.y + bounds!.height).toBeCloseTo(1039, 0);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeVisible();
+    expect(writes).toBe(1);
+    await page.screenshot({
+      path: info.outputPath("desktop-pending-footer.png"),
+    });
+  } finally {
+    release();
+  }
+  await expect(dialog.getByRole("alert")).toContainText(
+    "Synthetic pending resubmission conflict",
+  );
+  await expect(name).toBeEnabled();
+  await expect(name).toHaveValue("Test submitted desktop draft");
+  expect(writes).toBe(1);
+});
