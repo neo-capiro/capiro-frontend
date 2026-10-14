@@ -324,6 +324,22 @@
       "modulesMeriPassed": 507,
       "skipped": 0,
       "flaky": 0
+    },
+    {
+      "batch": "desktop-details-20261014",
+      "qualifiedSource": "8de8d0ebefa61b4c97e442c87ce9b6f3ec42f772",
+      "baseSource": "20568813c9dc9ce161962e159e0a3751a196195c",
+      "integratedPR44Source": "bded987746d1f1a263bb4209c90b21ac5c978f40",
+      "scope": "Desktop Planner drawer/long-content/footer and pending-save controls; Objective/Engagement captures only",
+      "modulesDesktopSharedPassed": 79,
+      "portfolioCapturePassed": 4,
+      "skipped": 0,
+      "flaky": 0,
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "activeObjectiveFullpageParity": "OPEN_NOT_IMPLEMENTED",
+      "mobileParity": "DEFERRED_PR43_EXCLUDED",
+      "evidence": "../desktop-details-20261014/HANDOFF.md"
     }
   ],
   "local_execution_batches": [

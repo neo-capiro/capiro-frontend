@@ -1,0 +1,80 @@
+{
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "figmaBaseline": "3.1",
+  "referenceViewport": {
+    "width": 1440,
+    "height": 1040
+  },
+  "qualifiedSource": "8de8d0ebefa61b4c97e442c87ce9b6f3ec42f772",
+  "states": [
+    {
+      "nodeId": "819:146214",
+      "state": "Planner new task",
+      "status": "LOCAL_STRUCTURAL_DRAWER_HEADER_SCROLL_FOOTER_VERIFIED",
+      "scope": "New/edit/subtask shared drawer container; no fullbody/richtext parity claim"
+    },
+    {
+      "nodeId": "411:100367",
+      "visibleChildContext": "411:100627",
+      "state": "Planner task details",
+      "status": "LOCAL_DRAWER_AND_LONG_CONTENT_REACHABILITY_VERIFIED",
+      "scope": "Existing read/detail and nested edit interaction preserved; prototype unified editable body remains later parity"
+    },
+    {
+      "nodeId": "411:60728",
+      "state": "Filled Objective intake",
+      "status": "LOCAL_760_360_COLUMNS_VERIFIED_CONTENT_PARITY_OPEN"
+    },
+    {
+      "nodeId": "411:60726",
+      "state": "Blank Objective intake",
+      "status": "REFERENCE_CURRENTLY_SHELL_ONLY_NOT_AN_ACCEPTANCE_TARGET"
+    },
+    {
+      "nodeId": "411:61442",
+      "state": "Active Objective fullpage detail",
+      "status": "OPEN_ACTUAL_READY_EDIT_DRAWER_IS_DIFFERENT_STATE",
+      "implemented": false
+    },
+    {
+      "nodeId": "411:93988",
+      "state": "Engagement overview",
+      "status": "LOCAL_FIXTURE_CAPTURE_ONLY_FULL_PARITY_OPEN"
+    },
+    {
+      "nodeId": null,
+      "state": "Modules selected meeting desktop splitview",
+      "status": "LOCAL_BEHAVIOR_CAPTURE_NO_ADMITTED_FULL_FRAME",
+      "note": "Cropped Portfolio Calendar meeting dialogs are not a full Modules reference"
+    }
+  ],
+  "referenceFiles": [
+    {
+      "path": "docs/desktop-details-20261014/figma/engagement-desktop.png",
+      "sha256": "79e01b069d6d4e6923279e733126079f6b1b93a3fde08ec8b2418fa1bc7e7c85"
+    },
+    {
+      "path": "docs/desktop-details-20261014/figma/objective-detail-desktop.png",
+      "sha256": "db0d1cbea283f46d51c1d471676b404772e26969b71823ad415dfdffad183342"
+    },
+    {
+      "path": "docs/desktop-details-20261014/figma/objective-filled-desktop.png",
+      "sha256": "98ac5c3fad8f05bafd560907b46d46dcf4eeaa396d242172ace22157f82432f6"
+    },
+    {
+      "path": "docs/desktop-details-20261014/figma/objective-new-desktop.png",
+      "sha256": "6f1700ba2f7e303a05ac68694dfef58532669c59831ff2dd187813a4f92e1a50"
+    },
+    {
+      "path": "docs/desktop-details-20261014/figma/planner-detail-desktop.png",
+      "sha256": "954eaa7272d30205466c7323b39785c58f5fa34c954f3d3bbfb5ad43a9641738"
+    },
+    {
+      "path": "docs/desktop-details-20261014/figma/planner-new-desktop.png",
+      "sha256": "cd235b7b7ba833ce2832dd471ab6767deb3101e788c09ede16c2bba97f117e0e"
+    }
+  ],
+  "mobile": "DEFERRED_NO_PR43",
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337
+}
