@@ -128,11 +128,14 @@ export async function proxyRequest(
     if (!response.ok) {
       const payload: unknown = await response.json().catch(() => null);
       let message =
-        response.status >= 500
-          ? "The service is unavailable. Please retry."
-          : "The operation was rejected.";
+        response.status === 404
+          ? "The requested action or record is unavailable from the current service."
+          : response.status >= 500
+            ? "The service is unavailable. Please retry."
+            : "The operation was rejected.";
       if (
         response.status < 500 &&
+        response.status !== 404 &&
         payload &&
         typeof payload === "object" &&
         "message" in payload

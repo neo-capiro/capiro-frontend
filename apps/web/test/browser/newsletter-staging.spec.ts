@@ -1,6 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
+import { serviceErrorResponse } from "../../src/shared/capiro/gateway-errors";
+import { newsletterStagingOperations } from "../../src/shared/capiro/operations/workspace-newsletter-staging";
 import {
   draft,
   revision,
@@ -382,3 +384,62 @@ test("mobile saved text review fits the viewport and supports keyboard acknowled
   expect(writes).toEqual([]);
   expect(errors).toEqual([]);
 });
+
+for (const key of [
+  "workspace.newsletter.revision",
+  "workspace.newsletter.stage",
+] as const)
+  test(`missing ${key} never confirms staging or automatically replays it`, async ({
+    page,
+  }) => {
+    const { writes, errors } = await setup(page);
+    await page.route(`**/api/capiro/${key}**`, async (route) => {
+      const response = await serviceErrorResponse(
+        Response.json(
+          { message: "Cannot access candidate endpoint" },
+          { status: 404 },
+        ),
+        newsletterStagingOperations[key],
+        new AbortController().signal,
+        false,
+      );
+      await route.fulfill({
+        status: response.status,
+        json: await response.json(),
+      });
+    });
+    await open(page);
+    if (key === "workspace.newsletter.stage") {
+      await select(page);
+      await review(page);
+      await page
+        .getByRole("button", { name: "Stage saved revision", exact: true })
+        .click();
+    } else {
+      await page
+        .getByRole("combobox", { name: "Saved Newsletter revision" })
+        .click();
+      await page.getByRole("option", { name: /Saved policy revision/ }).click();
+      await expect(
+        page.getByRole("button", { name: "Stage saved revision", exact: true }),
+      ).toBeDisabled();
+    }
+    await expect(page.getByRole("alert")).toContainText(
+      "The requested action or record is unavailable from the current service.",
+    );
+    await expect(
+      page.getByRole("heading", { name: "Saved revision staged" }),
+    ).toHaveCount(0);
+    await expect(
+      page.getByRole("link", { name: "Open selected Outreach session" }),
+    ).toHaveCount(0);
+    expect(writes).toHaveLength(key === "workspace.newsletter.stage" ? 1 : 0);
+    if (key === "workspace.newsletter.stage") {
+      await open(page);
+      await expect(
+        page.getByText(/Original staging request retained/),
+      ).toBeVisible();
+      expect(writes).toHaveLength(1);
+    }
+    expect(errors).toEqual([]);
+  });

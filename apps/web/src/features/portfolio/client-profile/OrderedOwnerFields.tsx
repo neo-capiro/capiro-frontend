@@ -44,7 +44,9 @@ function OwnerEditor({
     <>
       <div className={styles.body}>
         <QueryState pending={editor.loading} error={editor.error} />
-        <OwnerCards editor={editor} blocked={blocked} roles={roles} />
+        {(editor.current || editor.draft) && (
+          <OwnerCards editor={editor} blocked={blocked} roles={roles} />
+        )}
         {editor.attempt && (
           <p role="status">
             Owner change result needs review. Read current owners and compare
