@@ -44,6 +44,10 @@ await build({
     minify: false,
     sourcemap: true,
     rolldownOptions: {
+      input: {
+        main: local("index.html"),
+        authLifecycle: local("auth-lifecycle.html"),
+      },
       onwarn(warning, handler) {
         if (warning.code !== "MODULE_LEVEL_DIRECTIVE") handler(warning);
       },
