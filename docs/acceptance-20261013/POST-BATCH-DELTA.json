@@ -307,5 +307,23 @@
     "evidence": "qualification-ae8da60e/README.md"
   },
   "verificationSource": "ae8da60e6d63d02b65a6ff9eb71c90554f213a10",
-  "remaining_native_criteria_note": "The remaining_native_criteria arrays retain verbatim baseline whole-row criteria, including any historical reproduce-first or repair wording. boundedChange and offlineBoundedChangeVerified record the current completed offline subcriteria; the qualification receipt binds their successor evidence. Native/design/dependency portions remain open, and no whole row is accepted."
+  "remaining_native_criteria_note": "The remaining_native_criteria arrays retain verbatim baseline whole-row criteria, including any historical reproduce-first or repair wording. boundedChange and offlineBoundedChangeVerified record the current completed offline subcriteria; the qualification receipt binds their successor evidence. Native/design/dependency portions remain open, and no whole row is accepted.",
+  "localExecutionBatches": [
+    {
+      "batch": "browser-release-repair-20261014",
+      "baseSource": "ee9d872743f44f927fa924eebd764da8e093888c",
+      "reviewedCodeSource": "50bb55586a77816c1b60b3b5edee4b9a41f5a8dd",
+      "status": "completed-offline-desktop-first",
+      "scope": "Existing Portfolio home heading/focus/contrast and unavailable Customize semantics; truthful current/fixture Modules test bindings; no new API or feature scope",
+      "nativeRowsAccepted": 0,
+      "nativeRowsOpen": 337,
+      "evidence": "../browser-release-repair-20261014/HANDOFF.md",
+      "note": "Full superset executions passed; release acceptance scope is desktop/shared local behavior only. All prior failing mobile/filesystem evidence retained; full mobile/native/Figma acceptance deferred.",
+      "releaseAcceptanceScope": "desktop-first; all mobile/native/full responsive parity deferred; unfiltered suites supporting desktop/shared regression",
+      "portfolioPassed": 1300,
+      "modulesMeriPassed": 507,
+      "skipped": 0,
+      "flaky": 0
+    }
+  ]
 }

@@ -1,0 +1,20 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+    "kind": "function",
+    "symbol": "PortfolioAttention",
+    "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c",
+    "reason": "Existing attention list/status/retry presentation owner. A note role makes the already-labelled count semantically valid; it adds no query, aggregation, mutation or state responsibility. Independent exact-source review: docs/unified-20261013/corrections/A11Y-STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "6f4403012a92478d6f59fc3d444d96341ad668b69f5721d155dcf5adf1ebc420",
+    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
+    "reviewedOn": "2026-10-14",
+    "reason": "Canonical Portfolio index/header/pulse/cards/profile chooser responsive presentation. Selectors preserve shared global styles and truthful availability, without adding authority, state or a second workflow. Extraction solely for this size threshold would scatter coupled responsive geometry. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+  }
+]

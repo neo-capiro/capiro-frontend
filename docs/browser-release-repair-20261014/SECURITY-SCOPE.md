@@ -1,0 +1,5 @@
+# Local security/API qualification scope
+
+Complete npmcheck includes public package/boundary checks,113root,2367web,451Capiro,84transport and385newsletter+8declaration cases. Shared auth/session/tenant/client lifetime, current-read failures, stale callbacks, denied mutations and API payload/version boundaries are additionally exercised by the complete browser suites. No live credential, authorization or data-changing service test is implied.
+
+Public npm production dependency audit (`npm audit --omit=dev --json --registry=https://registry.npmjs.org`) completed with exit1:0critical,0high,0moderate and7low package findings, including the transitive KaTeX advisory GHSA-238p-pmpm-9mq7 and its parent packages. The exact report is retained. This is not a clean-audit claim. Package-lock bytes are identical to frozen PR42 (SHA256: 6dc039be028c302b58965532b05d3dd5aa0ca1ed8bb6a90be716eb6325d24d13); no dependency/override/package update is included in the release repair. The existing low findings remain visible for the dependency owner; this slice does not infer provider/native/security acceptance from local tests.

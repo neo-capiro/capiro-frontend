@@ -1,0 +1,4576 @@
+{
+  "scope": "All tests selected; titleDimensions is lexical evidence only, not native or full responsive acceptance. Default configuration1440x1040; tests may explicitly change viewport internally.",
+  "stats": {
+    "startTime": "2026-10-14T14:56:56.030Z",
+    "duration": 1456315.7019999998,
+    "expected": 507,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "file": "acceptance-meri-icons.spec.ts",
+      "line": 10,
+      "title": "acceptance-meri-icons.spec.ts > Meri explicit fixture navigation assets retain visible icon treatment in light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "acceptance-meri-icons.spec.ts",
+      "line": 10,
+      "title": "acceptance-meri-icons.spec.ts > Meri explicit fixture navigation assets retain visible icon treatment in dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "acceptance-meri-theme.spec.ts > Meri authored dark fixture keeps the shared header light at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "acceptance-meri-theme.spec.ts > Meri Files theme follows preference through scoped navigation and history at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "acceptance-meri-theme.spec.ts > Meri authored dark fixture keeps the shared header light at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "acceptance-meri-theme.spec.ts > Meri Files theme follows preference through scoped navigation and history at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast home 1440px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast docx 1440px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast xlsx 1440px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast unavailable 1440px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast modules 1440px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast home 1440px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast docx 1440px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast xlsx 1440px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast unavailable 1440px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast modules 1440px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast home 390px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast docx 390px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast xlsx 390px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast unavailable 390px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast modules 390px light",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast home 390px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast docx 390px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast xlsx 390px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast unavailable 390px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "acceptance-shared-incompletes.spec.ts > Shared incomplete contrast modules 390px dark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "auth-initialization.spec.ts",
+      "line": 13,
+      "title": "auth-initialization.spec.ts > prolonged sign-in loading offers keyboard reload without admitting private content at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "auth-initialization.spec.ts",
+      "line": 13,
+      "title": "auth-initialization.spec.ts > prolonged sign-in loading offers keyboard reload without admitting private content at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "auth-initialization.spec.ts",
+      "line": 62,
+      "title": "auth-initialization.spec.ts > SDK ready disposes delayed loading state and permits only the existing protected path",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "auth-initialization.spec.ts",
+      "line": 87,
+      "title": "auth-initialization.spec.ts > SDK failed replaces delayed loading with the existing failure state and no private reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "auth-initialization.spec.ts",
+      "line": 126,
+      "title": "auth-initialization.spec.ts > returning to SDK loading starts a fresh feedback window and conceals the previous private view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > active subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > past_due subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > trialing subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > canceled subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > none subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 54,
+      "title": "billing-flow.spec.ts > comped subscriber adds profiles through the portal, never checkout",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 73,
+      "title": "billing-flow.spec.ts > none non-subscriber can review a new subscription",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 73,
+      "title": "billing-flow.spec.ts > trialing non-subscriber can review a new subscription",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "billing-flow.spec.ts > active without a subscription does not infer checkout eligibility",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "billing-flow.spec.ts > past_due without a subscription does not infer checkout eligibility",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "billing-flow.spec.ts > canceled without a subscription does not infer checkout eligibility",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 100,
+      "title": "billing-flow.spec.ts > comped without a subscription does not infer checkout eligibility",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 120,
+      "title": "billing-flow.spec.ts > disabled billing cannot open either hosted flow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 131,
+      "title": "billing-flow.spec.ts > checkout closes when a fresh summary reports an existing subscription",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 157,
+      "title": "billing-flow.spec.ts > failed current summary prevents checkout from a previously opened form",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 157,
+      "title": "billing-flow.spec.ts > failed current state prevents checkout from a previously opened form",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 182,
+      "title": "billing-flow.spec.ts > an existing-subscriber action rechecks that a subscription still exists",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 199,
+      "title": "billing-flow.spec.ts > portal rejects a receipt for the other hosted flow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 199,
+      "title": "billing-flow.spec.ts > checkout rejects a receipt for the other hosted flow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 228,
+      "title": "billing-flow.spec.ts > repeated clicks while summary revalidation is pending dispatch one portal request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 228,
+      "title": "billing-flow.spec.ts > repeated clicks while summary revalidation is pending dispatch one checkout request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 274,
+      "title": "billing-flow.spec.ts > session replacement discards a pending hosted receipt",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 315,
+      "title": "billing-flow.spec.ts > contradictory current reads and failed initial summary expose no billing action",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "billing-flow.spec.ts",
+      "line": 347,
+      "title": "billing-flow.spec.ts > session replacement during revalidation prevents dispatch from the old form",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "calendar-visual-closeout.spec.ts",
+      "line": 6,
+      "title": "calendar-visual-closeout.spec.ts > compact Calendar retains scoped module navigation, history, source disclosures and mobile controls",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "calendar.spec.ts",
+      "line": 43,
+      "title": "calendar.spec.ts > month and week retain client scope and query end-exclusive Eastern ranges",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "calendar.spec.ts",
+      "line": 98,
+      "title": "calendar.spec.ts > client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "calendar.spec.ts",
+      "line": 139,
+      "title": "calendar.spec.ts > fixed Date retains native formatting and advancing browser timers",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "combined-successor.spec.ts",
+      "line": 205,
+      "title": "combined-successor.spec.ts > one Objective opens Directory, pinned Calendar and immutable Context Files without losing any resource kind",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "combined-successor.spec.ts",
+      "line": 226,
+      "title": "combined-successor.spec.ts > unknown Meri input remains visible and scoped across all three bound destinations before explicit exact retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "combined-successor.spec.ts",
+      "line": 305,
+      "title": "combined-successor.spec.ts > settled Directory preflight cannot navigate after switching to Calendar and Context Files",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "comment-calendar.spec.ts",
+      "line": 11,
+      "title": "comment-calendar.spec.ts > Modules comment calendar advances empty candidate pages and retains civil dates at 360px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "comment-calendar.spec.ts",
+      "line": 11,
+      "title": "comment-calendar.spec.ts > Modules comment calendar advances empty candidate pages and retains civil dates at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 16,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 Activity opens the exact current Outreach record at 1440px without writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 16,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 Activity opens the exact current Outreach record at 390px without writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 53,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 refuses record mismatch before exposing a source editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 53,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 refuses client mismatch before exposing a source editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 53,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 refuses null-client mismatch before exposing a source editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 53,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 refuses missing-client mismatch before exposing a source editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 83,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 current source 403 refuses blank-draft fallback and recovers by exact reread",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 83,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 current source 404 refuses blank-draft fallback and recovers by exact reread",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 83,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 current source 503 refuses blank-draft fallback and recovers by exact reread",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 118,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 record replacement rejects the held previous source read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 118,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 client replacement rejects the held previous source read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 177,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 authority replacement userId retires the held private record",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 177,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 authority replacement orgId retires the held private record",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "core109-activity-outreach.spec.ts",
+      "line": 177,
+      "title": "core109-activity-outreach.spec.ts > CORE-109 authority replacement sessionId retires the held private record",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 41,
+      "title": "directory-objective.spec.ts > congress saved target opens exact Objective-bound identity and rereads on history/retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 41,
+      "title": "directory-objective.spec.ts > state saved target opens exact Objective-bound identity and rereads on history/retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 41,
+      "title": "directory-objective.spec.ts > staff saved target opens exact Objective-bound identity and rereads on history/retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 134,
+      "title": "directory-objective.spec.ts > owner 403 conceals target; explicit retry resolves again without generic fallback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 134,
+      "title": "directory-objective.spec.ts > owner 404 conceals target; explicit retry resolves again without generic fallback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 134,
+      "title": "directory-objective.spec.ts > owner 409 conceals target; explicit retry resolves again without generic fallback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 134,
+      "title": "directory-objective.spec.ts > owner 503 conceals target; explicit retry resolves again without generic fallback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 167,
+      "title": "directory-objective.spec.ts > mismatched response and malformed locations never display target or ordinary Directory",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 200,
+      "title": "directory-objective.spec.ts > reload failure removes earlier observation and exposes no generic Directory reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 228,
+      "title": "directory-objective.spec.ts > held old target is rejected after selection replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 271,
+      "title": "directory-objective.spec.ts > sessionId replacement starts a fresh resolution and rejects held earlier scope",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 271,
+      "title": "directory-objective.spec.ts > userId replacement starts a fresh resolution and rejects held earlier scope",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 271,
+      "title": "directory-objective.spec.ts > orgId replacement starts a fresh resolution and rejects held earlier scope",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 314,
+      "title": "directory-objective.spec.ts > long stored Unicode identity remains readable on mobile with keyboard recheck",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 347,
+      "title": "directory-objective.spec.ts > client replacement rejects a held previous-client observation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "directory-objective.spec.ts",
+      "line": 391,
+      "title": "directory-objective.spec.ts > Directory preflight refusal stays in Objective; closing aborts held navigation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "effective-dates.spec.ts",
+      "line": 9,
+      "title": "effective-dates.spec.ts > Modules master Government feed preserves date-only provenance and partial coverage",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "effective-dates.spec.ts",
+      "line": 51,
+      "title": "effective-dates.spec.ts > an empty Government page remains explicitly incomplete and forecasts unavailable",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > portfolio 1440 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > modules 1440 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > meri 1440 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > meri-fixture 1440 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > portfolio 390 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > modules 390 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > meri 390 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "figma-parity.spec.ts",
+      "line": 33,
+      "title": "figma-parity.spec.ts > meri-fixture 390 approved comparison and existing interaction",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 200 cannot outlive user replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 401 cannot outlive user replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 200 cannot outlive session replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 401 cannot outlive session replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 200 cannot outlive organization replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 401 cannot outlive organization replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 200 cannot outlive sign-out replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 401 cannot outlive sign-out replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 200 cannot outlive client replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 160,
+      "title": "funding-calendar-session.spec.ts > funding detail late 401 cannot outlive client replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "funding-calendar-session.spec.ts",
+      "line": 267,
+      "title": "funding-calendar-session.spec.ts > displayed funding clears across every boundary and returns only after the current detail read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 37,
+      "title": "integration.spec.ts > shared product navigation and history preserve verified client hints and scoped styles",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 120,
+      "title": "integration.spec.ts > client replacement interrupts a write and organization replacement clears drafts and revalidates",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 169,
+      "title": "integration.spec.ts > Core expiry clears the application, does not replay and cannot be escaped by changing client",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch News evidence renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Florida Budget renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Research evidence renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Monitoring renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Client briefings renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Reports renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Trends renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Legacy digest renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Import review renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch Research import review renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 21,
+      "title": "legiwatch.spec.ts > LegiWatch LegiWatch settings renders a real connected view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 48,
+      "title": "legiwatch.spec.ts > research continues past an empty matched page using the retained-source cursor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 96,
+      "title": "legiwatch.spec.ts > workflow changes invalidate a reviewed preview and enqueue only its exact current hash",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "legiwatch.spec.ts",
+      "line": 169,
+      "title": "legiwatch.spec.ts > monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 44,
+      "title": "meeting-detail-current.spec.ts > MS06 baseline: current supplied link appears with safe external-link attributes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 56,
+      "title": "meeting-detail-current.spec.ts > MS06 baseline: meetings retain selectable list beside current detail with Prep entry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 83,
+      "title": "meeting-detail-current.spec.ts > MS06 absent preparation metadata is unavailable rather than a claimed empty collection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: null",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: ",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: javascript:alert(1)",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: data:text/html,hello",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: https://name:secret@meet.example.test/",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 106,
+      "title": "meeting-detail-current.spec.ts > MS06 missing or unsafe supplied link is inactive: //meet.example.test/alpha",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 123,
+      "title": "meeting-detail-current.spec.ts > MS06 loading and denied detail never activate summary link or read its materials",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "meeting-detail-current.spec.ts > MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000002:30000000-0000-4000-8000-000000000001",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 164,
+      "title": "meeting-detail-current.spec.ts > MS06 foreign receipt stays unavailable: 40000000-0000-4000-8000-000000000001:30000000-0000-4000-8000-000000000002",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 183,
+      "title": "meeting-detail-current.spec.ts > MS06 replaced detail cannot publish its late link",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 209,
+      "title": "meeting-detail-current.spec.ts > MS06 phone detail stays in bounds and Escape restores its list opener",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meeting-detail-current.spec.ts",
+      "line": 239,
+      "title": "meeting-detail-current.spec.ts > MS06 client replacement clears selection before a new list can expose the prior link",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 200 cannot publish after user replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 401 cannot publish after user replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 200 cannot publish after session replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 401 cannot publish after session replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 200 cannot publish after organization replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 23,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held query 401 cannot publish after organization replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 72,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held execution 200 cannot restore the former client's proposal or expire its replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 72,
+      "title": "meri-action-host-lifetime.spec.ts > Meri held execution 401 cannot restore the former client's proposal or expire its replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-lifetime.spec.ts",
+      "line": 126,
+      "title": "meri-action-host-lifetime.spec.ts > a current action401 removes private workflow state without an automatic reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "line": 80,
+      "title": "meri-action-host-mobile-navigation.spec.ts > 375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "line": 109,
+      "title": "meri-action-host-mobile-navigation.spec.ts > 1440px Meri retains one visible sidebar destination per route without duplicate mobile links",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "mixed"
+    },
+    {
+      "file": "meri-action-host-navigation.spec.ts",
+      "line": 16,
+      "title": "meri-action-host-navigation.spec.ts > Meri unknown preparation stays fenced across cross-mode Back/Forward and reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-navigation.spec.ts",
+      "line": 16,
+      "title": "meri-action-host-navigation.spec.ts > Meri in-flight preparation stays fenced across cross-mode Back/Forward and reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-navigation.spec.ts",
+      "line": 106,
+      "title": "meri-action-host-navigation.spec.ts > same-client verification refetch hides actions while retaining the private draft for a current success",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 16,
+      "title": "meri-action-host-workflow.spec.ts > Meri actual host bootstraps only explicitly and keeps action requests behind the received context",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 51,
+      "title": "meri-action-host-workflow.spec.ts > Meri unavailable connection exposes no automatic action dispatch",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 66,
+      "title": "meri-action-host-workflow.spec.ts > Meri exact proposal requires separate approval and rechecks the identical observed command",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 142,
+      "title": "meri-action-host-workflow.spec.ts > Meri dated draft controls are keyboard operable and fit 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 142,
+      "title": "meri-action-host-workflow.spec.ts > Meri dated draft controls are keyboard operable and fit 375px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-action-host-workflow.spec.ts",
+      "line": 220,
+      "title": "meri-action-host-workflow.spec.ts > Meri admitted context expiry clears an idle private draft without another request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 15,
+      "title": "meri-conversation-host.spec.ts > connects exact native account/client, renders only admitted history, reconnects from its cursor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 86,
+      "title": "meri-conversation-host.spec.ts > owner 401 never supplies fixture transcript",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 86,
+      "title": "meri-conversation-host.spec.ts > owner 403 never supplies fixture transcript",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 86,
+      "title": "meri-conversation-host.spec.ts > owner 502 never supplies fixture transcript",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 122,
+      "title": "meri-conversation-host.spec.ts > foreign native actor receipt cannot create a ready host or dispatch conversation reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 147,
+      "title": "meri-conversation-host.spec.ts > unknown submit retries exact original request input, then observes current run without duplicate submit",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 212,
+      "title": "meri-conversation-host.spec.ts > cancel response completed stays completed and never pretends cancellation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 241,
+      "title": "meri-conversation-host.spec.ts > sessionId replacement drops transcript and rejects settled late history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 241,
+      "title": "meri-conversation-host.spec.ts > orgId replacement drops transcript and rejects settled late history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 241,
+      "title": "meri-conversation-host.spec.ts > userId replacement drops transcript and rejects settled late history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 284,
+      "title": "meri-conversation-host.spec.ts > navigation retains unknown original input and rebinds exact observed selectors before explicit retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-conversation-host.spec.ts",
+      "line": 341,
+      "title": "meri-conversation-host.spec.ts > client replacement rejects settled late transcript and requires a new verified connection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 200 cannot publish or revoke the replacement user",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 401 cannot publish or revoke the replacement user",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 200 cannot publish or revoke the replacement session",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 401 cannot publish or revoke the replacement session",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 200 cannot publish or revoke the replacement organization",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 29,
+      "title": "meri-files-lifetime.spec.ts > Files late create 401 cannot publish or revoke the replacement organization",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 73,
+      "title": "meri-files-lifetime.spec.ts > Files held create cannot restore details after selected-client replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 104,
+      "title": "meri-files-lifetime.spec.ts > Files expiry removes an idle draft, known version and owned download URL without reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 138,
+      "title": "meri-files-lifetime.spec.ts > Files current 401 refusal clears known versions and download resources",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 138,
+      "title": "meri-files-lifetime.spec.ts > Files current 403 refusal clears known versions and download resources",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 179,
+      "title": "meri-files-lifetime.spec.ts > Files same-client held verification retains typed draft and known version after current success",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 217,
+      "title": "meri-files-lifetime.spec.ts > Files authorized same-client verification does not abort an already held create",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 255,
+      "title": "meri-files-lifetime.spec.ts > Files a denied same-client refresh destroys retained private state without new document requests",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-lifetime.spec.ts",
+      "line": 290,
+      "title": "meri-files-lifetime.spec.ts > Files sign-out removes draft and verified download without a background operation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 14,
+      "title": "meri-files-navigation.spec.ts > Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 14,
+      "title": "meri-files-navigation.spec.ts > Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 104,
+      "title": "meri-files-navigation.spec.ts > Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 104,
+      "title": "meri-files-navigation.spec.ts > Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "meri-files-workflow.spec.ts > Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "meri-files-workflow.spec.ts > Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "meri-files-workflow.spec.ts > Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "meri-files-workflow.spec.ts > Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "meri-files-workflow.spec.ts > Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "meri-files-workflow.spec.ts > Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 159,
+      "title": "meri-files-workflow.spec.ts > Files repeated create intent is refused locally without a second delivery",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 175,
+      "title": "meri-files-workflow.spec.ts > Files incorrect download hash hides known version actions and releases no object URL",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 208,
+      "title": "meri-files-workflow.spec.ts > Files requires a selected client without bootstrapping from browser hints",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 39,
+      "title": "meri-production-data.spec.ts > normal signed-in Meri displays API identity and verified client with no sample records",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 97,
+      "title": "meri-production-data.spec.ts > null account names and no client selection use neutral state, never sample identity",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 113,
+      "title": "meri-production-data.spec.ts > identity 401 exposes failure without substituting sample data",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 113,
+      "title": "meri-production-data.spec.ts > identity 403 exposes failure without substituting sample data",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 113,
+      "title": "meri-production-data.spec.ts > identity 503 exposes failure without substituting sample data",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 133,
+      "title": "meri-production-data.spec.ts > malformed identity response has no greeting and explicit retry reads current owner data",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 166,
+      "title": "meri-production-data.spec.ts > unavailable selected client hides Meri content instead of inventing a client",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 186,
+      "title": "meri-production-data.spec.ts > session replacement rejects held earlier identity data",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 233,
+      "title": "meri-production-data.spec.ts > sign-out removes identity and prevents reads after client navigation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 267,
+      "title": "meri-production-data.spec.ts > /meri/files ordinary shell never supplies sample recent titles or approval counts",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "meri-production-data.spec.ts",
+      "line": 267,
+      "title": "meri-production-data.spec.ts > /meri/actions ordinary shell never supplies sample recent titles or approval counts",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 24,
+      "title": "modules-home-design.spec.ts > Figma Modules landscape keeps the authored wide card",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 38,
+      "title": "modules-home-design.spec.ts > Figma Modules card SVGs preserve native rendered geometry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "modules-home-design.spec.ts > Figma Modules information is available by keyboard at 1440px light without changing the heading",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "modules-home-design.spec.ts > Figma Modules information is available by keyboard at 390px light without changing the heading",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "modules-home-design.spec.ts > Figma Modules information is available by keyboard at 1440px dark without changing the heading",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "modules-home-design.spec.ts > Figma Modules information is available by keyboard at 390px dark without changing the heading",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "modules-home-design.spec.ts",
+      "line": 69,
+      "title": "modules-home-design.spec.ts > Figma Modules information is available by keyboard at 320px light without changing the heading",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "modules-information-activation.spec.ts",
+      "line": 65,
+      "title": "modules-information-activation.spec.ts > touch 390px > real tap and repeat reveal the explanation; outside tap dismisses",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "modules-information-activation.spec.ts",
+      "line": 65,
+      "title": "modules-information-activation.spec.ts > touch 320px > real tap and repeat reveal the explanation; outside tap dismisses",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "modules-information-activation.spec.ts",
+      "line": 105,
+      "title": "modules-information-activation.spec.ts > desktop activation > mouse click reveals the explanation; repeat click and outside dismissal work",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules-information-activation.spec.ts",
+      "line": 123,
+      "title": "modules-information-activation.spec.ts > desktop activation > Enter and Space retain the full explanation with Escape and blur dismissal",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules-information-activation.spec.ts",
+      "line": 143,
+      "title": "modules-information-activation.spec.ts > desktop activation > native hover remains available and scroll dismisses after activation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Engagement Manager primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Planner primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Master calendar primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Workspace primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Strategies primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Directory primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Intelligence Center primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "modules.spec.ts",
+      "line": 16,
+      "title": "modules.spec.ts > Research Portfolios primary route renders through the canonical session/API boundary",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 13,
+      "title": "newsletter-document-lifecycle.spec.ts > rich document create is explicit, preserves local content and stages only a confirmed full save",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 84,
+      "title": "newsletter-document-lifecycle.spec.ts > rich library detail requires explicit adoption and sends the complete reviewed CAS document",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 130,
+      "title": "newsletter-document-lifecycle.spec.ts > rich save 409 retains edits until deliberate owner review and full rebase",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 130,
+      "title": "newsletter-document-lifecycle.spec.ts > rich save 503 retains edits until deliberate owner review and full rebase",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 200,
+      "title": "newsletter-document-lifecycle.spec.ts > rich explicit adoption replaces uncertain local edits without attributing the owner state",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "line": 238,
+      "title": "newsletter-document-lifecycle.spec.ts > rich saved preview excludes local edits and sanitizes active HTML without remote requests",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 18,
+      "title": "newsletter-document-navigation.spec.ts > rich pending create remains fenced after history close/reopen and an empty library",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 69,
+      "title": "newsletter-document-navigation.spec.ts > rich pending stage stays fenced across history navigation and late 200",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 69,
+      "title": "newsletter-document-navigation.spec.ts > rich pending stage stays fenced across history navigation and late 503",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 127,
+      "title": "newsletter-document-navigation.spec.ts > rich unknown save after reopen needs a successful owner read and separate adoption",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 176,
+      "title": "newsletter-document-navigation.spec.ts > rich held save cannot restore prior private material after client replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-document-navigation.spec.ts",
+      "line": 176,
+      "title": "newsletter-document-navigation.spec.ts > rich held save cannot restore prior private material after session replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich-history.spec.ts",
+      "line": 5,
+      "title": "newsletter-rich-history.spec.ts > text-only logo controls match the public renderer",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich-history.spec.ts",
+      "line": 21,
+      "title": "newsletter-rich-history.spec.ts > typing after Undo retains editor focus and the complete new branch",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 45,
+      "title": "newsletter-rich.spec.ts > rich list selection cannot mount the generic writer and Back restores the list",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 65,
+      "title": "newsletter-rich.spec.ts > ordinary records retain the existing editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 77,
+      "title": "newsletter-rich.spec.ts > legacy draft deep link containing rich metadata never mounts the plain writer",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 92,
+      "title": "newsletter-rich.spec.ts > wrong-type marker refuses editing and malformed marker fails decoding",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 122,
+      "title": "newsletter-rich.spec.ts > rich route does not call legacy, V3 or effectful owners: newsletter=10000000-0000-4000-8000-000000000007",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 122,
+      "title": "newsletter-rich.spec.ts > rich route does not call legacy, V3 or effectful owners: newsletterStage=20000000-0000-4000-8000-000000000007",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 122,
+      "title": "newsletter-rich.spec.ts > rich route does not call legacy, V3 or effectful owners: newsletter=10000000-0000-4000-8000-000000000007&session=20000000-0000-4000-8000-000000000007",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 122,
+      "title": "newsletter-rich.spec.ts > rich route does not call legacy, V3 or effectful owners: newsletterStage=20000000-0000-4000-8000-000000000007&newsletter=10000000-0000-4000-8000-000000000007",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 122,
+      "title": "newsletter-rich.spec.ts > rich route does not call legacy, V3 or effectful owners: newsletter=bad",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 136,
+      "title": "newsletter-rich.spec.ts > local rich editor formats content, undoes, previews mobile and plain text without writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 209,
+      "title": "newsletter-rich.spec.ts > preview isolates untrusted HTML, external images and links",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-rich.spec.ts",
+      "line": 233,
+      "title": "newsletter-rich.spec.ts > scope replacement and sign-out clear the local editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 76,
+      "title": "newsletter-staging.spec.ts > explicit saved revision review stages only its exact references and opens the selected session",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 131,
+      "title": "newsletter-staging.spec.ts > lost response then reload recovers original key/version without restaging later session edits",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 174,
+      "title": "newsletter-staging.spec.ts > incompatible destination and unavailable source make zero staging calls",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 220,
+      "title": "newsletter-staging.spec.ts > storage refusal blocks selection and replacement writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 239,
+      "title": "newsletter-staging.spec.ts > replacement Core actor cannot recover the former actor's pending staging",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 277,
+      "title": "newsletter-staging.spec.ts > conflict and malformed receipt retain the same original staging request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 307,
+      "title": "newsletter-staging.spec.ts > fresh source refusal before dispatch clears review and sends no staging request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 331,
+      "title": "newsletter-staging.spec.ts > a refreshed destination version requires fresh explicit review",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 358,
+      "title": "newsletter-staging.spec.ts > mobile saved text review fits the viewport and supports keyboard acknowledgement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 392,
+      "title": "newsletter-staging.spec.ts > missing workspace.newsletter.revision never confirms staging or automatically replays it",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "newsletter-staging.spec.ts",
+      "line": 392,
+      "title": "newsletter-staging.spec.ts > missing workspace.newsletter.stage never confirms staging or automatically replays it",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 5,
+      "title": "next-modules-baseline.spec.ts > MS02 verified Calendar entry dispatches only the selected client scope",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 28,
+      "title": "next-modules-baseline.spec.ts > MS03 agenda preserves both Planner start and due occurrences",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 54,
+      "title": "next-modules-baseline.spec.ts > MS04 meeting failure leaves successful agenda feeds visible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-baseline.spec.ts",
+      "line": 75,
+      "title": "next-modules-baseline.spec.ts > MS05 linked task resolves beyond the current list and opens its detail",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 13,
+      "title": "next-modules-scope.spec.ts > Calendar picker and history share verified scope and discard a held former-client read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "next-modules-scope.spec.ts > Calendar denied client verification never falls back to master reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 67,
+      "title": "next-modules-scope.spec.ts > Calendar wrong-client client verification never falls back to master reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 91,
+      "title": "next-modules-scope.spec.ts > Calendar current scope label survives optional picker-list failure",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 106,
+      "title": "next-modules-scope.spec.ts > Calendar meeting retry preserves other feeds and reports partial empty coverage",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-scope.spec.ts",
+      "line": 144,
+      "title": "next-modules-scope.spec.ts > Calendar tenant replacement and failed current read hide prior agenda rows",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 15,
+      "title": "next-modules-task-links.spec.ts > linked task rejects wrong-task receipt without detail actions",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 15,
+      "title": "next-modules-task-links.spec.ts > linked task rejects wrong-client receipt without detail actions",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 41,
+      "title": "next-modules-task-links.spec.ts > invalid task link makes no detail request and can be dismissed without losing scope",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 63,
+      "title": "next-modules-task-links.spec.ts > task link hides prior editor after current 403, then recovers only after successful retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 63,
+      "title": "next-modules-task-links.spec.ts > task link hides prior editor after current 503, then recovers only after successful retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 107,
+      "title": "next-modules-task-links.spec.ts > linked task follows back-forward and discards a held replaced task",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 151,
+      "title": "next-modules-task-links.spec.ts > linked task client replacement rejects the former read and editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 151,
+      "title": "next-modules-task-links.spec.ts > linked task tenant replacement rejects the former read and editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 196,
+      "title": "next-modules-task-links.spec.ts > agenda link opens a done task despite default open list filter, and respects viewer access",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 217,
+      "title": "next-modules-task-links.spec.ts > linked task uses current project membership when direct client is absent",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-task-links.spec.ts",
+      "line": 217,
+      "title": "next-modules-task-links.spec.ts > linked task uses current project membership when direct client is different",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "next-modules-view-persistence.spec.ts > Calendar keeps Month and chosen date across client, Master and history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "next-modules-view-persistence.spec.ts > Calendar keeps Week and chosen date across client, Master and history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "title": "next-modules-view-persistence.spec.ts > Calendar keeps Agenda and chosen date across client, Master and history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "next-modules-view-persistence.spec.ts",
+      "line": 54,
+      "title": "next-modules-view-persistence.spec.ts > invalid Calendar URL selection falls back to valid defaults before any date request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 32,
+      "title": "objective-calendar-occurrence.spec.ts > civil occurrence preflight and Calendar resolve independently on open/history/recheck",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 32,
+      "title": "objective-calendar-occurrence.spec.ts > timed occurrence preflight and Calendar resolve independently on open/history/recheck",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 139,
+      "title": "objective-calendar-occurrence.spec.ts > owner403 conceals Calendar occurrence until explicit retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 139,
+      "title": "objective-calendar-occurrence.spec.ts > owner404 conceals Calendar occurrence until explicit retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 139,
+      "title": "objective-calendar-occurrence.spec.ts > owner409 conceals Calendar occurrence until explicit retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 139,
+      "title": "objective-calendar-occurrence.spec.ts > owner503 conceals Calendar occurrence until explicit retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 170,
+      "title": "objective-calendar-occurrence.spec.ts > fresh receipt with removed or collapsed selection refuses instead of retargeting",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 190,
+      "title": "objective-calendar-occurrence.spec.ts > malformed bound selectors and mismatched Objective never fall back to ordinary agenda",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 218,
+      "title": "objective-calendar-occurrence.spec.ts > session replacement rejects a settled late receipt",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-calendar-occurrence.spec.ts",
+      "line": 218,
+      "title": "objective-calendar-occurrence.spec.ts > selection replacement rejects a settled late receipt",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 43,
+      "title": "objective-destination.spec.ts > each Objective-bound open/reload calls the canonical owner without an unbound session fallback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 96,
+      "title": "objective-destination.spec.ts > owner refusal404 clears bound content and never falls back",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 96,
+      "title": "objective-destination.spec.ts > owner refusal409 clears bound content and never falls back",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 122,
+      "title": "objective-destination.spec.ts > mismatched binding and malformed Objective query never expose session content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-destination.spec.ts",
+      "line": 141,
+      "title": "objective-destination.spec.ts > a replaced Objective query hides the old observation and ignores its late response",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-navigation.spec.ts",
+      "line": 28,
+      "title": "objective-navigation.spec.ts > Objective navigation resolves the exact saved version through Core before opening its local destination",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-navigation.spec.ts",
+      "line": 93,
+      "title": "objective-navigation.spec.ts > unsaved edits and stale Objective resolver never navigate using old campaign text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 54,
+      "title": "objective-resource-version.spec.ts > Calendar requires exact selected task version on open, retry and history return",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 85,
+      "title": "objective-resource-version.spec.ts > changed preflight version requires refreshing choices and deliberate reselection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 135,
+      "title": "objective-resource-version.spec.ts > Workspace verifies full saved snapshot and refuses changed selected hash on fresh reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 182,
+      "title": "objective-resource-version.spec.ts > version and hash claims without exact Objective binding never mount ordinary views",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 197,
+      "title": "objective-resource-version.spec.ts > late occurrence observation is discarded after user replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 197,
+      "title": "objective-resource-version.spec.ts > late occurrence observation is discarded after organization replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 197,
+      "title": "objective-resource-version.spec.ts > late occurrence observation is discarded after client replacement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-resource-version.spec.ts",
+      "line": 252,
+      "title": "objective-resource-version.spec.ts > changed schedule version remains unavailable until its exact new timed selection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "objective-work-destinations.spec.ts > strategies rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > strategies owner404 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > strategies owner409 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > strategies owner503 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "objective-work-destinations.spec.ts > strategies refuses changed and malformed bindings before exposing resource content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "objective-work-destinations.spec.ts > planner rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > planner owner404 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > planner owner409 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > planner owner503 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "objective-work-destinations.spec.ts > planner refuses changed and malformed bindings before exposing resource content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 61,
+      "title": "objective-work-destinations.spec.ts > workspace rechecks the owner on open, reload, history and explicit review without ordinary reads or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > workspace owner404 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > workspace owner409 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 161,
+      "title": "objective-work-destinations.spec.ts > workspace owner503 removes the prior observation with no fallback or automatic retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 194,
+      "title": "objective-work-destinations.spec.ts > workspace refuses changed and malformed bindings before exposing resource content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 220,
+      "title": "objective-work-destinations.spec.ts > replacement query and session scope hide old or late Strategy observations",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 294,
+      "title": "objective-work-destinations.spec.ts > Planner401 expires the shared session without replay or retained task content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-destinations.spec.ts",
+      "line": 323,
+      "title": "objective-work-destinations.spec.ts > a changed Workspace client hint clears the saved snapshot and rechecks its owner",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "objective-work-navigation.spec.ts > strategies Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "objective-work-navigation.spec.ts > planner Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 83,
+      "title": "objective-work-navigation.spec.ts > workspace Portfolio handoff resolves exact saved Objective then resolves again at destination",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 124,
+      "title": "objective-work-navigation.spec.ts > saved Workspace selection is explicit and never opens the current working draft automatically",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "objective-work-navigation.spec.ts",
+      "line": 183,
+      "title": "objective-work-navigation.spec.ts > unsaved edits and close interrupt Strategy resolution without late navigation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 18,
+      "title": "onboard-boundary.spec.ts > Onboard IT token replacement discards local draft and late 200 without automatic requests",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 18,
+      "title": "onboard-boundary.spec.ts > Onboard IT token replacement discards local draft and late 401 without automatic requests",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard user replacement ignores late plan 200 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard user replacement ignores late plan 401 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard session replacement ignores late plan 200 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard session replacement ignores late plan 401 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard org replacement ignores late plan 200 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 79,
+      "title": "onboard-boundary.spec.ts > Onboard org replacement ignores late plan 401 and does not repeat the write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 140,
+      "title": "onboard-boundary.spec.ts > Onboard sign-in disposes signed-out draft and late public 200",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 140,
+      "title": "onboard-boundary.spec.ts > Onboard sign-in disposes signed-out draft and late public 401",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 195,
+      "title": "onboard-boundary.spec.ts > current public401 on register preserves signed-in scope and permits authenticated legal read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 233,
+      "title": "onboard-boundary.spec.ts > Onboard public requests omit the synthetic cookie while authenticated requests retain same-origin credentials",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-boundary.spec.ts",
+      "line": 283,
+      "title": "onboard-boundary.spec.ts > current authenticated401 expires the Onboard application without replaying a request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 12,
+      "title": "onboard-host-config.spec.ts > actual OnboardHost hides feature controls until current config is received",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 34,
+      "title": "onboard-host-config.spec.ts > actual OnboardHost config 401 is retryable and does not expire the signed-in application",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 34,
+      "title": "onboard-host-config.spec.ts > actual OnboardHost config 503 is retryable and does not expire the signed-in application",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 71,
+      "title": "onboard-host-config.spec.ts > actual OnboardHost refuses a different Clerk application before authenticated funnel reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 93,
+      "title": "onboard-host-config.spec.ts > disabled self-service config exposes no registration form or funnel effects",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 112,
+      "title": "onboard-host-config.spec.ts > missing service configuration stays unavailable without any onboarding reads or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 128,
+      "title": "onboard-host-config.spec.ts > registration discards an unsigned draft on sign-in and refuses a different account's saved artifact",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-config.spec.ts",
+      "line": 182,
+      "title": "onboard-host-config.spec.ts > matching registration draft requires explicit restore and one explicit firm registration",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-funnel.spec.ts",
+      "line": 12,
+      "title": "onboard-host-funnel.spec.ts > native funnel session B revokes a held A write without replacing Clerk or advancing B",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-funnel.spec.ts",
+      "line": 83,
+      "title": "onboard-host-funnel.spec.ts > current status reads serialize without clearing an unknown write before explicit native B adoption",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-funnel.spec.ts",
+      "line": 159,
+      "title": "onboard-host-funnel.spec.ts > actual plan controls support keyboard selection without overflow at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "onboard-host-funnel.spec.ts",
+      "line": 159,
+      "title": "onboard-host-funnel.spec.ts > actual plan controls support keyboard selection without overflow at 375px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 12,
+      "title": "onboard-host-public.spec.ts > actual IT page ignores held token A invite 200 after token B becomes current",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 12,
+      "title": "onboard-host-public.spec.ts > actual IT page ignores held token A invite 401 after token B becomes current",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 59,
+      "title": "onboard-host-public.spec.ts > IT token replacement fences held consent 200, clears local provider step and omits ambient credentials",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 59,
+      "title": "onboard-host-public.spec.ts > IT token replacement fences held consent 401, clears local provider step and omits ambient credentials",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 147,
+      "title": "onboard-host-public.spec.ts > current IT invite 403 conceals provider actions until a deliberate successful retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 147,
+      "title": "onboard-host-public.spec.ts > current IT invite 404 conceals provider actions until a deliberate successful retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "onboard-host-public.spec.ts",
+      "line": 147,
+      "title": "onboard-host-public.spec.ts > current IT invite 503 conceals provider actions until a deliberate successful retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 14,
+      "title": "outreach-list-scope.spec.ts > Outreach scope-error keyboard retry conceals rows during the held read at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 14,
+      "title": "outreach-list-scope.spec.ts > Outreach scope-error keyboard retry conceals rows during the held read at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 62,
+      "title": "outreach-list-scope.spec.ts > scoped Outreach refuses other-client list receipts and recovers with a current matching read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 62,
+      "title": "outreach-list-scope.spec.ts > scoped Outreach refuses null-client list receipts and recovers with a current matching read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 62,
+      "title": "outreach-list-scope.spec.ts > scoped Outreach refuses missing-client list receipts and recovers with a current matching read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-list-scope.spec.ts",
+      "line": 117,
+      "title": "outreach-list-scope.spec.ts > all permitted clients Outreach retains matching, other-client and unassigned records",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-pending.spec.ts",
+      "line": 6,
+      "title": "outreach-pending.spec.ts > ordinary Outreach successful save preserves the exact submitted text at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "outreach-pending.spec.ts",
+      "line": 6,
+      "title": "outreach-pending.spec.ts > ordinary Outreach successful save preserves the exact submitted text at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "outreach-pending.spec.ts",
+      "line": 61,
+      "title": "outreach-pending.spec.ts > ordinary Outreach create holds the submitted draft until a rejected save settles",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "outreach-pending.spec.ts",
+      "line": 61,
+      "title": "outreach-pending.spec.ts > ordinary Outreach update holds the submitted draft until a rejected save settles",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 114,
+      "title": "planner-engagement.spec.ts > Planner modes use the same permitted task data and exact board assets",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 165,
+      "title": "planner-engagement.spec.ts > Planner failed writes retain drafts and a successful save uses only reviewed fields",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 220,
+      "title": "planner-engagement.spec.ts > Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "planner-engagement.spec.ts",
+      "line": 281,
+      "title": "planner-engagement.spec.ts > A template session deep link keeps the server state version and sends no mail",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held update; success preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held update; failure preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held update; lost receipt preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 166,
+      "title": "prospect-draft-pending-edit.spec.ts > leaving during held update retains the original intent without continuing the old save",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held snapshot; success preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held snapshot; failure preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 111,
+      "title": "prospect-draft-pending-edit.spec.ts > prospect fields freeze during held snapshot; lost receipt preserves submitted text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 166,
+      "title": "prospect-draft-pending-edit.spec.ts > leaving during held snapshot retains the original intent without continuing the old save",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "prospect-draft-pending-edit.spec.ts > a user replacement during PATCH cannot restore or finish the former editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "prospect-draft-pending-edit.spec.ts > a tenant replacement during PATCH cannot restore or finish the former editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "prospect-draft-pending-edit.spec.ts > a prospect replacement during PATCH cannot restore or finish the former editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-pending-edit.spec.ts",
+      "line": 196,
+      "title": "prospect-draft-pending-edit.spec.ts > a client replacement during PATCH cannot restore or finish the former editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-draft-restart-acceptance.spec.ts",
+      "line": 6,
+      "title": "prospect-draft-restart-acceptance.spec.ts > lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 10,
+      "title": "prospect-rich-workspace.spec.ts > plain text explicitly gains rich formatting, link, lists, table, insert, undo/redo and local preview",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 72,
+      "title": "prospect-rich-workspace.spec.ts > opening and saving existing supported HTML preserves its exact native string",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 90,
+      "title": "prospect-rich-workspace.spec.ts > unsupported stored markup needs review and no executable content reaches editor or preview",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 120,
+      "title": "prospect-rich-workspace.spec.ts > rich fields freeze through update; success preserves formatting",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 120,
+      "title": "prospect-rich-workspace.spec.ts > rich fields freeze through update; lost receipt retains exact HTML",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 120,
+      "title": "prospect-rich-workspace.spec.ts > rich fields freeze through snapshot; success preserves formatting",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 120,
+      "title": "prospect-rich-workspace.spec.ts > rich fields freeze through snapshot; lost receipt retains exact HTML",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 176,
+      "title": "prospect-rich-workspace.spec.ts > client replacement while a rich PATCH is held removes former content and prevents snapshot",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-rich-workspace.spec.ts",
+      "line": 210,
+      "title": "prospect-rich-workspace.spec.ts > rich editing is keyboard reachable and contained at phone width",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 41,
+      "title": "prospect-workspace.spec.ts > prospect creation recovers its original seed and key after a lost receipt",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 76,
+      "title": "prospect-workspace.spec.ts > manual content, version history and exports use only reviewed draft operations",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 124,
+      "title": "prospect-workspace.spec.ts > an uncertain save retains edits across navigation and requires read-back before explicit save",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 152,
+      "title": "prospect-workspace.spec.ts > a wrong prospectId never exposes the document or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 152,
+      "title": "prospect-workspace.spec.ts > a wrong tenantId never exposes the document or writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 168,
+      "title": "prospect-workspace.spec.ts > prospect Newsletter origin cannot open its sending workflow",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 182,
+      "title": "prospect-workspace.spec.ts > a changed document blocks PATCH and shows the saved content for deliberate review",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 214,
+      "title": "prospect-workspace.spec.ts > mobile prospect manual editor preserves keyboard fields and stays in the viewport",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 237,
+      "title": "prospect-workspace.spec.ts > leaving during save preflight aborts the write and retains the uncertain editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 274,
+      "title": "prospect-workspace.spec.ts > expired creation sends one original request and clears the authenticated editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 296,
+      "title": "prospect-workspace.spec.ts > reload preserves the original prospect creation seed and request key",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 331,
+      "title": "prospect-workspace.spec.ts > reload preserves uncertain manual edits and the read-back requirement",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 359,
+      "title": "prospect-workspace.spec.ts > replacement Core actor cannot restore the former creation input after reload",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 359,
+      "title": "prospect-workspace.spec.ts > replacement Core actor cannot restore the former manual-save input after reload",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 427,
+      "title": "prospect-workspace.spec.ts > unavailable browser journal blocks creation without a backend write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "prospect-workspace.spec.ts",
+      "line": 427,
+      "title": "prospect-workspace.spec.ts > unavailable browser journal blocks manual-save without a backend write",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "public-forms.spec.ts",
+      "line": 5,
+      "title": "public-forms.spec.ts > public form submits only displayed answers and shows the returned receipt without sign-in",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "public-forms.spec.ts",
+      "line": 52,
+      "title": "public-forms.spec.ts > revoked public capability renders an unavailable state without a submission action",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 64,
+      "title": "remaining-modules.spec.ts > MS08 regression: All tasks defaults to named client groups and current-page counts",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 106,
+      "title": "remaining-modules.spec.ts > MS08 scope picker preserves All tasks, disposes drafts and restores scope through history",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 149,
+      "title": "remaining-modules.spec.ts > MS08 failed current clients list removes former labels and disables picker until retry",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 181,
+      "title": "remaining-modules.spec.ts > MS08 failed current task page hides groups and recovers without inventing filters",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 215,
+      "title": "remaining-modules.spec.ts > MS08 independently verified client remains named when picker is empty",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 215,
+      "title": "remaining-modules.spec.ts > MS08 independently verified client remains named when picker is unavailable",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 237,
+      "title": "remaining-modules.spec.ts > MS08 replacement rejects held former task read and unverified selected client",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 278,
+      "title": "remaining-modules.spec.ts > MS08 scope and grouping controls remain keyboard operable at phone width",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 339,
+      "title": "remaining-modules.spec.ts > MS07 regression: Workspace filters share a compact desktop row and wrap on phones",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "mixed"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 409,
+      "title": "remaining-modules.spec.ts > MS09 regression: public form uses bounded card hierarchy and keeps input on styled error",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "remaining-modules.spec.ts",
+      "line": 468,
+      "title": "remaining-modules.spec.ts > MS09 preserves malformed-receipt and replaced-token controls",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "service-error-feedback.spec.ts",
+      "line": 29,
+      "title": "service-error-feedback.spec.ts > saved layout404 reports unavailable while retaining actual ordinary profiles and refusing reorder writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "service-error-feedback.spec.ts",
+      "line": 60,
+      "title": "service-error-feedback.spec.ts > Objectives404 shows the explicit error and never opens stale records or a new-objective editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "service-error-feedback.spec.ts",
+      "line": 92,
+      "title": "service-error-feedback.spec.ts > strategies.proposals failure does not invent counts; proposals failure retries only the existing read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "service-error-feedback.spec.ts",
+      "line": 92,
+      "title": "service-error-feedback.spec.ts > strategies.list failure does not invent counts; proposals failure retries only the existing read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 7,
+      "title": "session.spec.ts > missing configuration renders setup without issuing service requests",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 20,
+      "title": "session.spec.ts > org/session change clears prior records and sign-out removes all protected content",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 53,
+      "title": "session.spec.ts > 401 removes protected content and asks for sign-in without replaying a request",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 69,
+      "title": "session.spec.ts > development StrictMode remount establishes a valid request scope before child reads",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings personal renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings contact-info renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings branding renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings team renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings integrations renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings memory renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings meri-preferences renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings billing renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings ai-usage renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings profiles renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings intelligence-mappings renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-tenants renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-customers renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-ai-keys renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-broadcasts renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-personnel renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-reconciliation renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-matches renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "settings-scenes.spec.ts > Settings hq-analyst renders compatible responses without runtime failures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 59,
+      "title": "settings-scenes.spec.ts > All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 95,
+      "title": "settings-scenes.spec.ts > Settings dialogs trap focus and Escape closes an unsent invitation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 8,
+      "title": "settings.spec.ts > Personal saves the title only after a validated response and keeps signature uploads separate",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 46,
+      "title": "settings.spec.ts > Team does not fetch private records for a standard user",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 64,
+      "title": "settings.spec.ts > Team prevents self-removal and failed invitations remain editable without success feedback",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "settings.spec.ts",
+      "line": 118,
+      "title": "settings.spec.ts > Mobile Personal fits the viewport and Settings sections remain keyboard accessible",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri semantic correction: 1440px conversations footer exposes its scoped notice within contentinfo",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri semantic correction: 1440px actions footer exposes its scoped notice within contentinfo",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri semantic correction: 390px conversations footer exposes its scoped notice within contentinfo",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri semantic correction: 390px actions footer exposes its scoped notice within contentinfo",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 68,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri positive control: phone suggestion remains reachable by keyboard and creates only a local draft",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 90,
+      "title": "shared-home-accessibility-interaction.spec.ts > Meri semantic correction: named suggestions group preserves three Start controls without becoming a focus stop",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 112,
+      "title": "shared-home-accessibility-interaction.spec.ts > Modules semantic correction: fixture warning remains visible in a named complementary landmark",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "shared-home-accessibility.spec.ts > meri home retains full default axe checks at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "shared-home-accessibility.spec.ts > modules home retains full default axe checks at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "shared-home-accessibility.spec.ts > meri home retains full default axe checks at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "shared-home-accessibility.spec.ts > modules home retains full default axe checks at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 18,
+      "title": "workspace-admission.spec.ts > an exact Newsletter receipt still opens its existing builder without writes",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 44,
+      "title": "workspace-admission.spec.ts > wrong Workspace receipt has accessible keyboard retry at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 44,
+      "title": "workspace-admission.spec.ts > wrong Workspace receipt has accessible keyboard retry at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 76,
+      "title": "workspace-admission.spec.ts > Workspace refuses a different returned ordinary draft ID before mounting its editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 76,
+      "title": "workspace-admission.spec.ts > Workspace refuses a different returned Newsletter draft ID before mounting its editor",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 142,
+      "title": "workspace-admission.spec.ts > ordinary Workspace section input stays stable through held update and reopens after rejection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-admission.spec.ts",
+      "line": 142,
+      "title": "workspace-admission.spec.ts > ordinary Workspace section input stays stable through held snapshot and reopens after rejection",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy-presentation.spec.ts",
+      "line": 14,
+      "title": "workspace-brief-copy-presentation.spec.ts > copied rich section keeps keyboard controls, layout and accessibility at 1440px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-desktop"
+    },
+    {
+      "file": "workspace-brief-copy-presentation.spec.ts",
+      "line": 14,
+      "title": "workspace-brief-copy-presentation.spec.ts > copied rich section keeps keyboard controls, layout and accessibility at 390px",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "explicit-mobile"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 13,
+      "title": "workspace-brief-copy.spec.ts > explicit copy binds the exact Core version and reads the created tab without Core mutation",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 41,
+      "title": "workspace-brief-copy.spec.ts > atomic rich copy edit preserves complete extra fields and reopens the exact saved tab",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 70,
+      "title": "workspace-brief-copy.spec.ts > full JSON editing requires explicit application and retains table and photo structures",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 104,
+      "title": "workspace-brief-copy.spec.ts > lost atomic receipt retains exact input across reload and replay shows newer current body",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 138,
+      "title": "workspace-brief-copy.spec.ts > receipt success followed by unavailable fresh reads retains the receipt and recovers without resending",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 170,
+      "title": "workspace-brief-copy.spec.ts > state conflict requires explicit fresh review before a new request while retaining proposed text",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 210,
+      "title": "workspace-brief-copy.spec.ts > a failed current 403 read hides the copied editor and requires a successful current read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 210,
+      "title": "workspace-brief-copy.spec.ts > a failed current 503 read hides the copied editor and requires a successful current read",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 235,
+      "title": "workspace-brief-copy.spec.ts > navigation during a held atomic save cannot install its late receipt in another view",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    },
+    {
+      "file": "workspace-brief-copy.spec.ts",
+      "line": 264,
+      "title": "workspace-brief-copy.spec.ts > two pages share the real journal execution lock and never replay a command acknowledged by the first page",
+      "statuses": [
+        "expected"
+      ],
+      "titleDimensions": "default-or-internal-viewport"
+    }
+  ]
+}
