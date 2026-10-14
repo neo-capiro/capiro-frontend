@@ -19,7 +19,7 @@ async function expectScrollableEditor(
   expect((await header.boundingBox())!.height).toBeCloseTo(58, 0);
   await expect(header.getByRole("heading")).toHaveCSS("font-size", "14px");
   await dialog
-    .getByText("Task type, repeat, collaborators and dependencies", {
+    .getByText("More task options", {
       exact: true,
     })
     .click();

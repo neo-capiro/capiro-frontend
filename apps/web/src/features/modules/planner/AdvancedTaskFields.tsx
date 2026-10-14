@@ -1,128 +1,39 @@
 "use client";
 import type { PlannerPerson } from "../../../shared/capiro/operations/planner-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
-import {
-  Field,
-  SelectInput,
-  StatusPanel,
-  TextInput,
-} from "../../../shared/module-ui";
+import { StatusPanel } from "../../../shared/module-ui";
 import styles from "./planner.module.css";
+import {
+  TaskTypeFields,
+  TaskTagField,
+  TaskRepeatFields,
+} from "./TaskDefinitionFields";
 import type { TaskFormModel } from "./task-editor-data";
 type Props = TaskFormModel & { people: PlannerPerson[]; taskId?: string };
-export function AdvancedTaskFields(props: Props) {
+export function AdvancedTaskFields({
+  compact = false,
+  ...props
+}: Props & { compact?: boolean }) {
   return (
     <details>
-      <summary>Task type, repeat, collaborators and dependencies</summary>
+      <summary>
+        {compact
+          ? "More task options"
+          : "Task type, repeat, collaborators and dependencies"}
+      </summary>
       <div className={styles.stack}>
-        <TaskDefinition {...props} />
+        {compact ? <TaskTagField {...props} /> : <TaskDefinition {...props} />}
         <TaskRelationships {...props} />
       </div>
     </details>
   );
 }
-function TaskDefinition({ data, setData, disabled }: TaskFormModel) {
+function TaskDefinition(props: TaskFormModel) {
   return (
     <div className={styles.form}>
-      <Field label="Task type" htmlFor="task-type">
-        <SelectInput
-          disabled={disabled}
-          id="task-type"
-          value={data.subtype}
-          onValueChange={(value) =>
-            setData({ ...data, subtype: value as typeof data.subtype })
-          }
-          options={["task", "milestone", "approval"].map((value) => ({
-            value,
-            label: value,
-          }))}
-        />
-      </Field>
-      {data.subtype === "approval" && (
-        <Field label="Approval" htmlFor="task-approval">
-          <SelectInput
-            disabled={disabled}
-            id="task-approval"
-            value={data.approval}
-            onValueChange={(value) =>
-              setData({ ...data, approval: value as typeof data.approval })
-            }
-            options={[
-              "pending",
-              "approved",
-              "rejected",
-              "changes_requested",
-            ].map((value) => ({
-              value,
-              label: value.replaceAll("_", " "),
-            }))}
-          />
-        </Field>
-      )}
-      <Field label="Tags (comma separated)" htmlFor="task-tags">
-        <TextInput
-          id="task-tags"
-          value={data.tags.join(", ")}
-          onChange={(event) =>
-            setData({
-              ...data,
-              tags: event.target.value
-                .split(",")
-                .map((value) => value.trim())
-                .filter(Boolean),
-            })
-          }
-        />
-      </Field>
-      <Field label="Repeat" htmlFor="task-repeat">
-        <SelectInput
-          disabled={disabled}
-          id="task-repeat"
-          value={data.recurrence?.frequency ?? "none"}
-          onValueChange={(value) =>
-            setData({
-              ...data,
-              recurrence:
-                value === "none"
-                  ? null
-                  : {
-                      frequency: value as NonNullable<
-                        typeof data.recurrence
-                      >["frequency"],
-                      interval: 1,
-                    },
-            })
-          }
-          options={[
-            "none",
-            "daily",
-            "weekly",
-            "monthly",
-            "yearly",
-            "periodically",
-          ].map((value) => ({ value, label: value }))}
-        />
-      </Field>
-      {data.recurrence && (
-        <Field label="Repeat interval" htmlFor="task-interval">
-          <TextInput
-            type="number"
-            id="task-interval"
-            min={1}
-            max={365}
-            value={data.recurrence.interval}
-            onChange={(event) =>
-              setData({
-                ...data,
-                recurrence: {
-                  ...data.recurrence!,
-                  interval: Number(event.target.value),
-                },
-              })
-            }
-          />
-        </Field>
-      )}
+      <TaskTypeFields {...props} />
+      <TaskTagField {...props} />
+      <TaskRepeatFields {...props} />
     </div>
   );
 }
