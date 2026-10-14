@@ -38,6 +38,8 @@ export function PortfolioLayoutHarness() {
       });
     const catalog = () => setCards((values) => values.slice(1));
     const unmount = () => setShown(false);
+    const refresh = () =>
+      void cache.invalidateQueries({ queryKey: ["portfolio-layout"] });
     const invalidate = () =>
       void cache.invalidateQueries({
         queryKey: ["identity"],
@@ -46,11 +48,13 @@ export function PortfolioLayoutHarness() {
     window.addEventListener("layout-actor-change", actor);
     window.addEventListener("layout-catalog-change", catalog);
     window.addEventListener("layout-unmount", unmount);
+    window.addEventListener("layout-refresh", refresh);
     window.addEventListener("layout-authority-invalidate", invalidate);
     return () => {
       window.removeEventListener("layout-actor-change", actor);
       window.removeEventListener("layout-catalog-change", catalog);
       window.removeEventListener("layout-unmount", unmount);
+      window.removeEventListener("layout-refresh", refresh);
       window.removeEventListener("layout-authority-invalidate", invalidate);
     };
   }, [cache]);

@@ -187,9 +187,8 @@ export function PortfolioIndex({
                     >
                       {customizing ? (
                         <>
-                          Customizing all {records.length}{" "}
-                          {records.length === 1 ? "profile" : "profiles"}. Your
-                          filters and view will be restored when you finish.
+                          Customize the current accessible catalog. Your filters
+                          and view will be restored when you finish.
                         </>
                       ) : (
                         <>

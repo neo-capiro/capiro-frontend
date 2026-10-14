@@ -9,13 +9,12 @@ import {
   assertClientWriter,
   ambiguousClientWrite,
 } from "@/shared/portfolio/auth/client-writer";
-import type { LayoutSave } from "./contracts";
+import type { LayoutSave, LayoutReceipt } from "./contracts";
 import {
   readPortfolioLayout,
   resolvesLayoutSave,
   savePortfolioLayout,
 } from "./api";
-import { orderedClientIds } from "./ordering";
 
 export function usePortfolioLayout(clientIds: readonly string[]) {
   const api = useApi();
@@ -91,6 +90,25 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
       return receipt;
     },
   });
+  // Roster metadata is not a wall grant. The actor-bound GET owns the complete
+  // current reorderable catalog; never append roster IDs omitted by its order.
+  const catalogIds = !query.error
+    ? (query.data?.order ?? []).map((token) => token.slice(7))
+    : [];
+  const guardReceipt = (receipt: LayoutReceipt) => {
+    guard();
+    const current = cache.getQueryState<LayoutReceipt>(key);
+    if (
+      current?.data !== receipt ||
+      current.isInvalidated ||
+      current.fetchStatus !== "idle" ||
+      current.error
+    )
+      throw new ApiError(
+        502,
+        "The layout changed while saving. Check the saved order before continuing.",
+      );
+  };
   const refresh = async () => {
     guard();
     const receipt = await readPortfolioLayout(
@@ -124,9 +142,9 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
       return false;
     }
     if (
-      ids.length !== clientIds.length ||
+      ids.length !== catalogIds.length ||
       new Set(ids).size !== ids.length ||
-      ids.some((id) => !clientIds.includes(id))
+      ids.some((id) => !catalogIds.includes(id))
     ) {
       setIssue(
         new ApiError(400, "Review the current profile catalog before saving."),
@@ -138,6 +156,7 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
       expectedVersion: query.data.version,
       order: ids.map((id) => `client:${id}`),
     };
+    const sourceReceipt = query.data;
     const controller = lifetime.current!;
     busy.current = true;
     setSaving(true);
@@ -145,17 +164,17 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
     let sent = false;
     let received = false;
     try {
-      guard();
+      guardReceipt(sourceReceipt);
       sent = true;
       const receipt = await savePortfolioLayout(
         api,
         actor!,
         input,
-        clientIds,
+        catalogIds,
         controller.signal,
       );
       received = true;
-      guard();
+      guardReceipt(sourceReceipt);
       cache.setQueryData(key, receipt);
       return true;
     } catch (error) {
@@ -197,7 +216,14 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
     setSaving(true);
     try {
       const latest = await refresh();
-      if (uncertain && resolvesLayoutSave(latest, uncertain, clientIds)) {
+      if (
+        uncertain &&
+        resolvesLayoutSave(
+          latest,
+          uncertain,
+          latest.order.map((token) => token.slice(7)),
+        )
+      ) {
         setUncertain(null);
         setIssue(null);
         return true;
@@ -223,10 +249,8 @@ export function usePortfolioLayout(clientIds: readonly string[]) {
     }
   };
   return {
-    orderedIds: orderedClientIds(
-      actor && !query.error ? (query.data?.order ?? []) : [],
-      clientIds,
-    ),
+    catalogIds,
+    orderedIds: query.data && !query.error ? catalogIds : [...clientIds],
     receipt: actor && !query.error ? query.data : undefined,
     pending: identity.isPending || (Boolean(actor) && query.isPending),
     error: issue ?? identity.error ?? query.error,

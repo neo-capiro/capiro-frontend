@@ -78,7 +78,7 @@ test("pointer rearrangement and cancel are local until Save", async ({
   expect(writes).toBe(0);
 });
 for (const status of [404, 503])
-  test(`unavailable ${status} keeps default cards and refuses writes`, async ({
+  test(`unavailable ${status} conceals the unadmitted layout catalog and refuses writes`, async ({
     page,
   }) => {
     await layoutFixtures(page);
@@ -93,7 +93,7 @@ for (const status of [404, 503])
     ).toBeVisible();
     await expect(
       page.getByRole("button", { name: "Move Aerospace One later" }),
-    ).toBeDisabled();
+    ).toHaveCount(0);
     expect(writes).toBe(0);
   });
 test("conflict retains draft and requires explicit latest order review", async ({
@@ -171,7 +171,7 @@ test("wrong actor successful receipt is not published", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Move Aerospace One later" }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
 });
 test("portal role never reads or writes the layout catalog", async ({
   page,
@@ -185,7 +185,7 @@ test("portal role never reads or writes the layout catalog", async ({
   await page.goto(path);
   await expect(
     page.getByRole("button", { name: "Move Aerospace One later" }),
-  ).toBeDisabled();
+  ).toHaveCount(0);
   expect(calls).toBe(0);
 });
 test("failed latest read cannot reuse the stale conflict receipt", async ({
