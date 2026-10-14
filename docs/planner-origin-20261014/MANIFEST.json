@@ -1,0 +1,72 @@
+{
+  "base": "cc73ead8f591b31b2f2cfc8bb008913408d7a5e0",
+  "basis": "Git index blobs; manifest excludes itself",
+  "files": [
+    {
+      "path": "apps/web/src/shared/capiro/config.ts",
+      "bytes": 2763,
+      "sha256": "55ca0bb7eb873f57a1424957119beeca0b00c3c9c39852c0838d30a5bdaadefa",
+      "gitBlob": "ee9d69ae7bb494725d097e2cb001292cfb9c4275"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "bytes": 10811,
+      "sha256": "7170447942bc048456f2b2c0d97e0e6e0583c3c3f988265a435c12c88275c983",
+      "gitBlob": "05f340e93568893809ad168d34101910accbd895"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/api/proxy.ts",
+      "bytes": 5995,
+      "sha256": "71c4288ac1c72030503af3be7f8b2fe65fe908956329eb038c1605040fe2665d",
+      "gitBlob": "b9e27574b07e7ad55c0fd53b09601abcf7f15287"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/config/config.ts",
+      "bytes": 3610,
+      "sha256": "401ca92eb162d2e0b1ebc7733746265c20fc330a2416e39902337cfb8a4fc49a",
+      "gitBlob": "042c4752505ca81045a3759097d6a06b12e15ad6"
+    },
+    {
+      "path": "apps/web/src/shared/request-origin.ts",
+      "bytes": 1258,
+      "sha256": "d666342e5d16e5aff95cde0ea2c9d451853aee3ae18f7566011db7cb42096606",
+      "gitBlob": "020511698839e3f4805692231ae0c4fae9d20c99"
+    },
+    {
+      "path": "apps/web/tests/request-origin-adapter.test.ts",
+      "bytes": 11687,
+      "sha256": "611ce8144dea183825af7d0a32c25bfb3e262863bddac9bc1431c67cff492eb5",
+      "gitBlob": "894a278d6de90e363c2299bf7378d592ba5813f1"
+    },
+    {
+      "path": "docs/planner-origin-20261014/ARCHITECTURE.json",
+      "bytes": 1018,
+      "sha256": "3a02c36441730aa7f69c3905120b0ddb1b619df258ccbd9ef448c938a42e93b7",
+      "gitBlob": "904a79ba2f3f538695e9615b1ffaabaf0760dc79"
+    },
+    {
+      "path": "docs/planner-origin-20261014/HANDOFF.md",
+      "bytes": 4247,
+      "sha256": "a7cff27b084f6dab3adff627790f4dec4ea2f8acc6fd22e49baa89588491df2e",
+      "gitBlob": "9ac75d4953053af578a321d271d8b70235b579a1"
+    },
+    {
+      "path": "docs/planner-origin-20261014/TEST-LOG.txt",
+      "bytes": 265,
+      "sha256": "054608ada579f4ca7773d9b6d4dd860ef73ee07ecac0fa94238a4520c85dbfc7",
+      "gitBlob": "b25f9809ab2ddee87f0840fdf3fd95276764ea13"
+    },
+    {
+      "path": "docs/planner-origin-20261014/VERIFICATION.json",
+      "bytes": 2633,
+      "sha256": "0850d0aec39296948d5490a61894a02333ee7ec90ed240de8ab2d3eb13aa6412",
+      "gitBlob": "3b8d03acac7d3289cb275598cec46055088fa511"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 216584,
+      "sha256": "0c088bd57ae9887500a1e6b74b30e3e7b52856a53585ba2491580f7fdc8bd89d",
+      "gitBlob": "a216988ecd52a89e75b7e88a6bd7b07bf7f69255"
+    }
+  ]
+}

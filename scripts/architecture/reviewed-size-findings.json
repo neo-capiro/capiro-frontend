@@ -2496,9 +2496,9 @@
     "file": "apps/web/src/shared/portfolio/api/proxy.ts",
     "kind": "function",
     "symbol": "proxyRequest",
-    "fingerprint": "502e41acc3f6ebe860ada07b94471c25e2f636eeced82cc8986d7daca5bbd97f",
-    "reason": "This existing server adapter owns one bounded Portfolio forwarding transaction: validate the configured service/path/method and same-origin write, acquire the existing token, forward once with cancellation/deadline, and normalize the response. The only change is a truthful generic upstream 404 message that does not confuse an absent endpoint with a deleted record. Its current service roots, auth, body limit, headers and dispatch semantics are unchanged. Fixed-operation Modules forwarding remains separately owned by the existing gateway. No new feature, backend policy or lifecycle is added. Reviewed against the exact three-line error classification delta and end-to-end proxy/client regression cases.",
-    "reviewedBy": "Codex frontend integration owner",
+    "fingerprint": "e2978996c95f2ccc411e88e154035f882899f04e2a51ebf7f59f42520327e9ca",
+    "reason": "Independent review: fixed-service request validation, authentication, bounded forwarding and response normalization remain cohesive. Delta only delegates origin equality to the shared comparator; no new auth, route-policy or dispatch responsibility. Approval applies only to this fingerprint; inherited signals remain visible.",
+    "reviewedBy": "Codex independent /root/runtime_review",
     "reviewedOn": "2026-10-14"
   },
   {
