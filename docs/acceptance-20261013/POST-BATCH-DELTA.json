@@ -413,14 +413,15 @@
     {
       "batch": "desktop-task-engagement-closeout-20261014",
       "baseSource": "0a73dd87d0430f07ac67d66e96457a4df304720c",
-      "source": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+      "source": "fcdc4d744b5a6637c873412ad57cefa705a327dc",
       "workerSource": "af68cd562227befba4f0dab67df4cd8ff56b218e",
       "evidence": "docs/desktop-closeout-20261014/HANDOFF.md",
       "status": "LOCAL_FIXTURE_SUBCRITERIA_EXECUTED_NATIVE_OPEN",
       "nativeRowsAccepted": 0,
       "nativeRowsOpen": 337,
-      "localEvidence": "Canonical inline task edit/version/membership/receipt admission; current returned Engagement workload and URL intent; one pending time-entry dispatch and client catalog403503 retry; combined local qualification in COVERAGE.json. No historic native criteria changed.",
-      "remaining_native_criteria": "All337 rows remain native-open. No signed-in live service persistence, deployment/origin validation, backend route/config/data binding, full selected Figma/theme parity, mobile parity or Meri runtime qualification performed."
+      "localEvidence": "154 combined local browser cases: canonical inline task version/membership/receipt admission, returned Engagement workload and URL intent, pending time-entry dispatch, catalog403503 retry, canceled/replaced real CSV export output. Full exact-source gates in COVERAGE.json. No historical native criteria changed.",
+      "remaining_native_criteria": "All337 rows remain native-open. No signed-in live service persistence, deployment/origin validation, backend route/config/data binding, full selected Figma/theme parity, mobile parity or Meri runtime qualification performed.",
+      "exportWorkerSource": "f5a0c7639b99b25cdca5c49b6977c5592313ab3e"
     }
   ]
 }

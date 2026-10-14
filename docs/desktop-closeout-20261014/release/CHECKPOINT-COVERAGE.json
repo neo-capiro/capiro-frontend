@@ -1,0 +1,75 @@
+{
+  "qualifiedSource": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+  "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+  "workerSource": "af68cd562227befba4f0dab67df4cd8ff56b218e",
+  "qualification": "LOCAL_DESKTOP_CHECKPOINT_PASS_EXPORT_REPAIR_PENDING",
+  "browser": {
+    "command": "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:browser:modules --workspace @capiro/web -- [19 specs named in integrated-browser-log] --workers=2",
+    "expected": 148,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "captures": 42,
+    "report": "evidence/integrated-browser-report.json",
+    "log": "evidence/integrated-browser-log.json"
+  },
+  "fullCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "rootPassed": 113,
+    "webPassed": 2392,
+    "capiroPassed": 483,
+    "transportPassed": 84,
+    "newsletterPassed": 385,
+    "declarationsPassed": 8,
+    "lintErrors": 0,
+    "inheritedLintWarnings": 81,
+    "types": "PASS",
+    "format": "PASS",
+    "architecture": {
+      "reviewed": 476,
+      "inheritedUnreviewed": 19,
+      "blocking": 0,
+      "registryKeys": 297,
+      "duplicates": 0
+    },
+    "log": "evidence/integrated-check-log.json"
+  },
+  "build": {
+    "command": "npm run build --workspace @capiro/web",
+    "exitCode": 0,
+    "staticPages": 24,
+    "log": "evidence/integrated-build-log.json"
+  },
+  "standalone": {
+    "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:production -- docs/desktop-closeout-20261014/integrated-standalone",
+    "exitCode": 0,
+    "observations": 36,
+    "pageErrors": [],
+    "defaultRootStatus": 200,
+    "report": "integrated-standalone/production-smoke.json"
+  },
+  "portfolioObjective": {
+    "passed": 4,
+    "report": "evidence/objective-report.json",
+    "sourceEquivalence": "Portfolio source and Objective test bytes unchanged through integratedee7d."
+  },
+  "diagnostics": {
+    "workerWindows": "107pass/6 platform failures reported at worker and unchangedshippingbase; Linux root113passed. Raw Windows artifacts not locally available.",
+    "initialIntegratedCheck": "Sparse checkout omitted8 exact committed review evidence files after merge; restored from Git without edits. Initial failure retained in diagnostics.",
+    "predecessorRuns": "143 and50 predecessor browser reports retained, not substituted for final148."
+  },
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337,
+  "mobileParity": "DEFERRED_NOT_QUALIFIED",
+  "meriImplementation": "OUT_OF_SCOPE",
+  "darkTheme": "Inherited fixed-light Modules styling; light/dark media regression execution is not full dark parity.",
+  "shipping": "No deployment/AWS/live writes; protected shipping paths equal exactPR51base.",
+  "pendingExportWorker": {
+    "paths": [
+      "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+      "apps/web/test/browser/planner-time-export-lifetime.spec.ts"
+    ],
+    "status": "Await exact reviewed published candidate; final release publication held."
+  }
+}

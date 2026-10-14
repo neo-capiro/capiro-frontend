@@ -1,17 +1,25 @@
 {
-  "qualifiedSource": "ee7d0f154ca15e172e77112b1fbf623f5a136aab",
+  "qualifiedSource": "fcdc4d744b5a6637c873412ad57cefa705a327dc",
   "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
   "workerSource": "af68cd562227befba4f0dab67df4cd8ff56b218e",
-  "qualification": "LOCAL_DESKTOP_CHECKPOINT_PASS_EXPORT_REPAIR_PENDING",
+  "qualification": "LOCAL_DESKTOP_RELEASE_CANDIDATE_QUALIFIED",
   "browser": {
-    "command": "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:browser:modules --workspace @capiro/web -- [19 specs named in integrated-browser-log] --workers=2",
-    "expected": 148,
+    "command": "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:browser:modules --workspace @capiro/web -- [20 specs named in release/browser-log.json] --workers=2",
+    "expected": 154,
     "unexpected": 0,
     "skipped": 0,
     "flaky": 0,
     "captures": 42,
-    "report": "evidence/integrated-browser-report.json",
-    "log": "evidence/integrated-browser-log.json"
+    "report": "release/browser-report.json",
+    "log": "release/browser-log.json",
+    "stats": {
+      "startTime": "2026-10-14T22:47:24.726Z",
+      "duration": 300922.917,
+      "expected": 154,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
   },
   "fullCheck": {
     "command": "npm run check",
@@ -27,27 +35,28 @@
     "types": "PASS",
     "format": "PASS",
     "architecture": {
-      "reviewed": 476,
+      "reviewed": 477,
       "inheritedUnreviewed": 19,
       "blocking": 0,
-      "registryKeys": 297,
-      "duplicates": 0
+      "registryKeys": 300,
+      "duplicates": 0,
+      "finalRegistryLog": "release/architecture-log.json"
     },
-    "log": "evidence/integrated-check-log.json"
+    "log": "release/check-log.json"
   },
   "build": {
     "command": "npm run build --workspace @capiro/web",
     "exitCode": 0,
     "staticPages": 24,
-    "log": "evidence/integrated-build-log.json"
+    "log": "release/build-log.json"
   },
   "standalone": {
-    "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:production -- docs/desktop-closeout-20261014/integrated-standalone",
+    "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:production -- docs/desktop-closeout-20261014/release/standalone",
     "exitCode": 0,
     "observations": 36,
     "pageErrors": [],
     "defaultRootStatus": 200,
-    "report": "integrated-standalone/production-smoke.json"
+    "report": "release/standalone/production-smoke.json"
   },
   "portfolioObjective": {
     "passed": 4,
@@ -57,7 +66,7 @@
   "diagnostics": {
     "workerWindows": "107pass/6 platform failures reported at worker and unchangedshippingbase; Linux root113passed. Raw Windows artifacts not locally available.",
     "initialIntegratedCheck": "Sparse checkout omitted8 exact committed review evidence files after merge; restored from Git without edits. Initial failure retained in diagnostics.",
-    "predecessorRuns": "143 and50 predecessor browser reports retained, not substituted for final148."
+    "predecessorRuns": "143/50/148 checkpoint evidence retained separately, not substituted for final154."
   },
   "nativeRowsAccepted": 0,
   "nativeRowsOpen": 337,
@@ -65,11 +74,8 @@
   "meriImplementation": "OUT_OF_SCOPE",
   "darkTheme": "Inherited fixed-light Modules styling; light/dark media regression execution is not full dark parity.",
   "shipping": "No deployment/AWS/live writes; protected shipping paths equal exactPR51base.",
-  "pendingExportWorker": {
-    "paths": [
-      "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
-      "apps/web/test/browser/planner-time-export-lifetime.spec.ts"
-    ],
-    "status": "Await exact reviewed published candidate; final release publication held."
-  }
+  "executedRuntimeSource": "77a5ca8033bbaf60c528b785e70436ebdc1706dc",
+  "exportWorkerSource": "f5a0c7639b99b25cdca5c49b6977c5592313ab3e",
+  "sourceEquivalence": "Runtime/tests/packages are byte-identical between executed77a5 and review-only successor fcdc; only one exact independently accepted CSV test callback review was added. Fresh architecture covers final300record registry. Evidence successor edits only docs.",
+  "optionalPortability": "74a2008a86ad54ce303f5f58e5529803fa096aa5 separate harness candidate excluded; Linux root113passed without it."
 }
