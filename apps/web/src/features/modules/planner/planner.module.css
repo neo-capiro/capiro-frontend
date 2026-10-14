@@ -439,3 +439,13 @@
     padding: 8px 10px;
   }
 }
+
+.editorFields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}

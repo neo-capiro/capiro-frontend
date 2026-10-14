@@ -23,8 +23,8 @@ async function expectScrollableEditor(
       exact: true,
     })
     .click();
-  const content = dialog.locator("form > div").first();
-  const footer = dialog.locator("form > div").last();
+  const content = dialog.locator('[data-slot="task-editor-content"]');
+  const footer = dialog.locator('[data-slot="task-editor-footer"]');
   const before = await footer.boundingBox();
   await content.evaluate((element) => {
     element.scrollTop = element.scrollHeight;
