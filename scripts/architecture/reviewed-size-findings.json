@@ -610,7 +610,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reason": "One selected contact’s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1406,7 +1406,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2371,7 +2371,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2622,17 +2622,17 @@
     "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
     "kind": "function",
     "symbol": "TaskForm",
-    "fingerprint": "5640d80741e257a4ed259e435e9408bc2e1aa0a17be1888b531f666500945666",
-    "reason": "Independent merged-source review accepted the same task draft/versioned mutation/pending/error/form presentation owner. Exact PR44 synchronous pending ref and owner-token cleanup, native fieldset and all six explicit Select disabled controls remain. Feature-local content/footer layout adds no API, serialization or authority responsibility; canonical transport/lifetime remains unchanged. See docs/desktop-details-20261014/INDEPENDENT-REVIEW.md.",
+    "fingerprint": "e1f6859972da30b1c2157a7c22dd38a001947b634d84e1412aebbcb603ad4422",
+    "reason": "One canonical task draft/versioned mutation/pending/error controller remains mounted above viewport presentation; delegates field implementation and preserves membership IDs/positions. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+    "file": "apps/web/src/features/modules/planner/TaskProjectFields.tsx",
     "kind": "function",
-    "symbol": "TaskScheduleFields",
-    "fingerprint": "a5b4fb710f1c8a35bcf53061230b202d7c3790b25a3581605ce77867fcc6bea4",
-    "reason": "Independent merged-source review accepted the same approved PR44 civil start/due/time-zone/status/priority/estimate controls and explicit disabled prop. No new state, transport or domain responsibility. See docs/desktop-details-20261014/INDEPENDENT-REVIEW.md.",
+    "symbol": "TaskProjectFields",
+    "fingerprint": "d51836f3ec58dff66f02f5e8a33f4cf515b48880e06f67da3644fd5911c8d679",
+    "reason": "Canonical project membership/section presentation with explicit current project edit walls, saved unavailable preservation and desktop-only admission; no service or authority responsibility. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
   }
