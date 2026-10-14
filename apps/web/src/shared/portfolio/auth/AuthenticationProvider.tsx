@@ -6,6 +6,7 @@ import {
   ClerkFailed,
 } from "@clerk/nextjs";
 import type { ReactNode } from "react";
+import { AuthenticationLoading } from "./AuthenticationLoading";
 
 export function AuthenticationProvider({
   publishableKey,
@@ -17,9 +18,7 @@ export function AuthenticationProvider({
   return (
     <ClerkProvider publishableKey={publishableKey}>
       <ClerkLoading>
-        <main className="centered" role="status">
-          Loading sign-in…
-        </main>
+        <AuthenticationLoading />
       </ClerkLoading>
       <ClerkFailed>
         <main className="centered stack">
