@@ -1375,15 +1375,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
-    "kind": "function",
-    "symbol": "PortfolioIndex",
-    "fingerprint": "cc00a22d3c966f6f415d0817bcd3e3fcfda650c7b0eb283acf0b98f7440c7f28",
-    "reason": "Composes the canonical index queries, URL filters, profile catalog, attention and dialogs. Secondary tabs/filter disclosure are extracted to IndexNavigation, owner choices to IndexOwnerFilter. Customize only controls visibility of existing local layout editing; full catalog, current-read concealment, actor/session and objective focus ownership remain unchanged. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md. Done customizing explicitly returns focus to its trigger.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
     "kind": "function",
     "symbol": "EditorSession",
@@ -2158,15 +2149,6 @@
     "reason": "One86-line real-browser scenario callback verifies the same uncertain preparation invariant across ordered Modules navigation, Back, deliberate reconnect, late completion, Forward/Back and a second reconnect. Parameterizing acknowledged-unknown and still-in-flight states preserves that single invariant without reconstructing durable state. URL/private-view assertions and exact query/draft/prepare/execute counts are adjacent to their transitions; fixture helpers own setup and real request completion barriers. Keeping this causal sequence together preserves test meaning better than splitting it into independently reset tests."
   },
   {
-    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "f15942ff74b4dea83bf1157fca7bacacd8cd414f1592485f2ae6c95a4fa16a3b",
-    "reason": "Same Portfolio index/card/filter presentation owner. Prior seven-line card target/ellipsis correction plus three lines make only pressed All/Clients count text inherit the existing selected-button foreground. No inactive-count, global-token, dark-token, data, navigation or shared-foundation responsibility is added. Independently reviewed by objectives_work_intel_review; see docs/unified-20261013/corrections/REVIEW.md.",
-    "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
     "kind": "function",
     "symbol": "PortfolioAttention",
@@ -2532,6 +2514,24 @@
     "symbol": "proxyRequest",
     "fingerprint": "502e41acc3f6ebe860ada07b94471c25e2f636eeced82cc8986d7daca5bbd97f",
     "reason": "This existing server adapter owns one bounded Portfolio forwarding transaction: validate the configured service/path/method and same-origin write, acquire the existing token, forward once with cancellation/deadline, and normalize the response. The only change is a truthful generic upstream 404 message that does not confuse an absent endpoint with a deleted record. Its current service roots, auth, body limit, headers and dispatch semantics are unchanged. Fixed-operation Modules forwarding remains separately owned by the existing gateway. No new feature, backend policy or lifecycle is added. Reviewed against the exact three-line error classification delta and end-to-end proxy/client regression cases.",
+    "reviewedBy": "Codex frontend integration owner",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "function",
+    "symbol": "PortfolioIndex",
+    "fingerprint": "afbe35808f4633edecfa4f56827f1ada86b2740b3e0b89cef9accbb5c5582ccd",
+    "reason": "The existing Portfolio index remains the composition owner for current catalog, ordinary URL filters and opening/closing its canonical inline layout editor. This bounded change suspends filter controls, exposes the existing editor against the full catalog independently of filtered results, and restores the unchanged query presentation/focus. It adds no layout persistence, authority, data query or second editor state. Those responsibilities stay in the existing layout hook/editor and canonical identity/client providers. Exact responsibility and interaction review: docs/customize-entry-20261014/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex frontend integration owner",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9bd04d2d1b16480be227e2e71802108b8549fbabc44b561c66bc71469ae5ba02",
+    "reason": "Existing Portfolio index presentation stylesheet; the sole addition dims the temporarily inert local filter/navigation region during inline customization. No domain responsibility, global selector, geometry, asset, token or other feature styling is added. Exact scope reviewed in docs/customize-entry-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex frontend integration owner",
     "reviewedOn": "2026-10-14"
   }

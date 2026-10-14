@@ -8,6 +8,7 @@ import styles from "./portfolio.module.css";
 
 export function IndexNavigation({
   records,
+  customizing = false,
   state,
   permitted,
   objectiveTrigger,
@@ -16,6 +17,7 @@ export function IndexNavigation({
   clear,
 }: {
   records?: Client[];
+  customizing?: boolean;
   state: PortfolioIndexState;
   permitted: boolean;
   objectiveTrigger: RefObject<HTMLButtonElement | null>;
@@ -24,7 +26,7 @@ export function IndexNavigation({
   clear: () => void;
 }) {
   return (
-    <nav className={styles.tabs} aria-label="Profile type">
+    <nav className={styles.tabs} aria-label="Profile type" inert={customizing}>
       {[
         ["All", ""],
         ["Clients", "CLIENT"],

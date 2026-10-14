@@ -42,6 +42,10 @@ export function PortfolioIndex({
   const [customizing, setCustomizing] = useState(false);
   const objectiveTrigger = useRef<HTMLButtonElement>(null);
   const customizeTrigger = useRef<HTMLButtonElement>(null);
+  const finishCustomizing = () => {
+    setCustomizing(false);
+    customizeTrigger.current?.focus();
+  };
   const state = readPortfolioState(params);
   const permitted =
     !identity.error &&
@@ -86,6 +90,7 @@ export function PortfolioIndex({
               state={state}
               owners={owners.error ? undefined : owners.data}
               ownerPending={owners.isPending}
+              disabled={customizing}
               set={set}
             />
             <label className={styles.search}>
@@ -95,6 +100,7 @@ export function PortfolioIndex({
                 autoFocus={params.has("search")}
                 placeholder="Search profiles…"
                 value={state.search}
+                disabled={customizing}
                 onChange={(e) => set("q", e.target.value)}
               />
             </label>
@@ -153,6 +159,7 @@ export function PortfolioIndex({
           <section className="stack" aria-label="Portfolio profiles">
             <IndexNavigation
               records={records}
+              customizing={customizing}
               state={state}
               permitted={permitted}
               objectiveTrigger={objectiveTrigger}
@@ -162,7 +169,7 @@ export function PortfolioIndex({
             />
             {records && (
               <>
-                {ownerFilterWaiting ? (
+                {ownerFilterWaiting && !customizing ? (
                   <div className="status" role="status">
                     {owners.isPending
                       ? "Loading account owners…"
@@ -171,20 +178,32 @@ export function PortfolioIndex({
                 ) : (
                   <>
                     <p
-                      className={activeFilters ? styles.resultCount : "srOnly"}
+                      className={
+                        customizing || activeFilters
+                          ? styles.resultCount
+                          : "srOnly"
+                      }
                       role="status"
                     >
-                      {rows.length} {rows.length === 1 ? "profile" : "profiles"}
-                      {activeFilters ? ` of ${records.length}` : ""}
+                      {customizing ? (
+                        <>
+                          Customizing all {records.length}{" "}
+                          {records.length === 1 ? "profile" : "profiles"}. Your
+                          filters and view will be restored when you finish.
+                        </>
+                      ) : (
+                        <>
+                          {rows.length}{" "}
+                          {rows.length === 1 ? "profile" : "profiles"}
+                          {activeFilters ? ` of ${records.length}` : ""}
+                        </>
+                      )}
                     </p>
-                    {rows.length ? (
+                    {(customizing ? records.length > 0 : rows.length > 0) ? (
                       <PortfolioProfiles
                         catalog={records}
                         customizing={customizing}
-                        onFinishCustomizing={() => {
-                          setCustomizing(false);
-                          customizeTrigger.current?.focus();
-                        }}
+                        onFinishCustomizing={finishCustomizing}
                         rows={rows}
                         state={state}
                         filtered={activeFilters}
@@ -203,7 +222,7 @@ export function PortfolioIndex({
                             ? "Try a different search or clear your filters."
                             : "Add your first client or track a prospect in Business Development."}
                         </p>
-                        {activeFilters && (
+                        {activeFilters && !customizing && (
                           <button className="button" onClick={clear}>
                             Clear filters
                           </button>
@@ -218,13 +237,14 @@ export function PortfolioIndex({
                         )}
                       </div>
                     )}
-                    {rows.length > 0 &&
+                    {!customizing &&
+                      rows.length > 0 &&
                       (state.view !== "cards" ||
                         state.sort !== "saved" ||
                         activeFilters) && (
                         <p className="muted">
-                          To rearrange profiles, choose Card view and Saved
-                          order, then clear profile filters.
+                          Select Customize to rearrange all profiles in their
+                          saved order.
                         </p>
                       )}
                   </>
@@ -238,6 +258,11 @@ export function PortfolioIndex({
                   </button>
                 )}
               </>
+            )}
+            {customizing && !records?.length && (
+              <button className="button" onClick={finishCustomizing}>
+                Done customizing
+              </button>
             )}
           </section>
           {records && <PortfolioAttention clients={records} />}
