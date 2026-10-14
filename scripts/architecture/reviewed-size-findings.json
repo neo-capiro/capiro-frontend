@@ -1893,10 +1893,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachForm",
-    "fingerprint": "d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa",
-    "reason": "Owns the existing single ordinary outreach create/update form: local title/subject/body inputs, pending/error presentation and one explicit submit callback. This function is byte-identical to HEAD; only its containing file acquired rich route classification. The response projection remains in the operation registry and rich candidates cannot reach this form. Its 88-line body is cohesive form rendering plus its existing submit handler. This structural review does not retrospectively qualify legacy mutation cancellation, read authority or provider delivery. See docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md#outreachform.",
-    "reviewedBy": "Codex independent modules_settings_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "bc83c6b583d5a0c35dfc44fb1e5fd241222276ded7eac0a0d26afc054c8787fa",
+    "reason": "Independent Codex outreach_review inspected the 100-line ordinary create/update form. One submit lifetime owns its existing payload, local fields and pending/error display. Disabling fields/Cancel and notifying parent pending state keeps submitted input and close intent stable until settlement. Native uncertainty and unmount/replay semantics are unchanged, not newly qualified. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
@@ -2424,8 +2424,8 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachView",
-    "fingerprint": "fa7f3eaf4558905785dc8a8590577d9676eb675e36c593c2053e6cad2937f4b3",
-    "reason": "Independent Codex outreach_review inspected the complete module and callers. OutreachView owns one ordinary Outreach read/selection/destination workflow; the shared predicate extends existing exact-record scope admission to the list before filtering and editor selection. The existing useOutreachRecords port is reused; no DTO, endpoint, auth, transport, persistence or send owner is added. The adjacent unchanged form and campaign/list renderers remain cohesive parts of this existing workflow. The module is 402 nonblank lines (a review signal, not a required split); no new lifecycle responsibility is accumulated. Full review rationale: docs/outreach-list-scope-20261014/STRUCTURE-REVIEW.md.",
+    "fingerprint": "8bfbb75ea53281e837cee4bf7275581ad760d37a94f5ee10e443851cb376878d",
+    "reason": "Independent Codex outreach_review inspected the existing 138-line read/admission/selection/destination composition. Added parent flag reflects the child ordinary submit pending state solely to veto controlled modal dismissal; shared query/session boundaries and rich destinations retain ownership. No writer or transport responsibility is added. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
     "reviewedOn": "2026-10-14"
   },
@@ -2541,8 +2541,8 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "56281213a60eeaaf2d46e865c63c57b037de62bd462dc5bf8e8782847be46481",
-    "reason": "Independent Codex outreach_review inspected the complete module and callers. OutreachView owns one ordinary Outreach read/selection/destination workflow; the shared predicate extends existing exact-record scope admission to the list before filtering and editor selection. The existing useOutreachRecords port is reused; no DTO, endpoint, auth, transport, persistence or send owner is added. The adjacent unchanged form and campaign/list renderers remain cohesive parts of this existing workflow. The module is 402 nonblank lines (a review signal, not a required split); no new lifecycle responsibility is accumulated. Full review rationale: docs/outreach-list-scope-20261014/STRUCTURE-REVIEW.md.",
+    "fingerprint": "cd0444d57a430d565ae1a800654cda81f589b967f675be5a9ab475ec11ef0d32",
+    "reason": "Independent Codex outreach_review inspected the complete 421-line ordinary Outreach composition/editor module. Named children already partition campaign/record listing, type selection and editing. Parent pending state only vetoes dismissal; form retains its existing submit lifetime. No duplicate mutation, shared primitive change, auth, persistence or unrelated domain is added. Splitting by line count would obscure the bounded field/submit/close invariant. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
     "reviewedOn": "2026-10-14"
   }
