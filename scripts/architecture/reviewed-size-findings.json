@@ -416,11 +416,11 @@
     "kind": "function",
     "symbol": "FileTable",
     "line": 6,
-    "nonblank": 109,
-    "fingerprint": "2a4413a0ddb6887003a9d7b9c54963e4474075926f3a87b9ead2cee0ee8634f0",
-    "reason": "A presentational table with visible-row selection and typed action intent. It has no data fetch, mutation, folder persistence or authorization rule. Retain the select-visible behavior beside the displayed rows; extracting a universal table/action framework would obscure the file-specific readiness and source columns.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "nonblank": 120,
+    "fingerprint": "e2040cc41ecd8da30ae7205decd1c9003c9be03fb94cc3778ee9d38bf35e49e7",
+    "reason": "Retains native visible-row selection and typed file action intent beside one table. Derives only selected-visible cardinality to set checked, mixed and empty-disabled presentation; existing union/subtraction behavior preserves off-view selections. Fetching, persistence, reader authority and mutation admission remain outside this component. No generic table framework or second selection state is introduced. The named focusable scroll region retains keyboard access when the empty table has no enabled row control; full-default axe and keyboard scrolling are exercised without suppressing rules.",
+    "reviewedBy": "Codex shared frontend integration owner",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
@@ -610,7 +610,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reason": "One selected contact’s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1415,7 +1415,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1549,10 +1549,12 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "71b102bced5c6eb98f9187aa4979c27119ab3a26a1078ba7e98a910aa7f382ce",
-    "reason": "The 320-line function still composes one current collection/action lifetime. New FileToolbar and FolderCards isolate provenance/folder presentation, while existing upload/access/move/delete/preview owners retain requests, receipt admission, unknown recovery and current reader/actor/client guards. Reader-scoped filters do not become native ACLs; no new transport/provider orchestration was added. A further arbitrary JSX split is not required for this bounded change.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "9c083f6549341eed0ff1c975057ab28c4a34780ee497bb10ddacbad7aa1770b9",
+    "reason": "Composes one reader-scoped collection, filters and action lifetime. FileSelectionBar now owns count/hidden-selection disclosure, clear intent and the existing single-file move/batch-unavailable presentation. FilesPage retains the sole reader-scoped selected IDs and current-file guard; All files clears only folder through the existing filter owner. Query, upload, access, move, delete and preview owners retain transport, cancellation and receipt semantics. The 315-line function adds no backend or authorization responsibility.",
+    "reviewedBy": "Codex shared frontend integration owner",
+    "reviewedOn": "2026-10-14",
+    "line": 20,
+    "nonblank": 315
   },
   {
     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
@@ -2378,7 +2380,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
