@@ -1,0 +1,9 @@
+# Consolidated later source candidate
+
+Runtime/test source: **`8f07bead475a186e470eb0b50f2e4fb03d4c40f5`**, exact PR33 head. Branch `integration/capiro-layout-received-candidate-20261014` adds only this exact receiving/aggregate qualification result. It ordinarily contains every PR26–33 source and the accepted SDK compatibility-review commits; no cherry-pick, squash, rebase or donor replay was used. Runtime, package, lock, vendor and native ledger bytes remain unchanged from PR33.
+
+For later release, verify/integrate the existing foundation through frozen PR25 and then use history-preserving merge commits PR26→27→28→29→30→31→32. Preserve SDK review source `98c6eefea0953fbecccd88de43161c6bc809f300`, a documentation-only descendant of accepted candidate `72b6e1279506f0a38d7d34794c7cc9ba17744043`, before PR33. PR33 currently bases on `review/capiro-sdk-015-20261014`; it is not a direct main-only delta. After predecessors enter the actual receiving branch, retarget/review reduced successor diffs and required checks. Do not additionally replay this consolidated branch after the same history has entered the receiver.
+
+Backend PR10 separately stacks on PR9. Source compatibility does not authorize its authored migration or deployment; preserve that owner's source/history and separately qualify its Meetings regression fix. Exact migration/schema/process/image/config receiving and native save/recovery are required before a later layout release.
+
+Classic required checks/reviews remain unverified from the earlier permission-limited inspection; no retry, bypass, draft promotion, merge or deployment was attempted. No hosted checks are claimed from these local results. Frozen PR25 head `257cf5b5db673b31c98264f9da33759c68066ba4` and shipping source `5ca42049325881782bc9d2ac557450d642eccee8` remain unchanged.
