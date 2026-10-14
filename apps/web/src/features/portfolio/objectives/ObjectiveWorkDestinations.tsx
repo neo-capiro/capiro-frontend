@@ -1,6 +1,6 @@
 "use client";
-import { useId, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useId, useLayoutEffect, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { Objective } from "./contracts";
@@ -84,8 +84,17 @@ function ObjectiveWorkPicker({
 }) {
   const api = useApi(),
     selectId = useId();
-  const [resourceId, setResourceId] = useState(""),
+  const [selection, setSelection] = useState<{
+      id: string;
+      taskVersion?: number;
+    }>(),
     [cursors, setCursors] = useState<(string | undefined)[]>([undefined]);
+  const resourceId = selection?.id ?? "";
+  const cache = useQueryClient();
+  const live = useRef({ selection, disabled });
+  useLayoutEffect(() => {
+    live.current = { selection, disabled };
+  }, [selection, disabled]);
   const destination = useObjectiveWorkDestination(objective, disabled);
   const cursor = cursors.at(-1),
     locked = disabled || destination.busy;
@@ -103,13 +112,43 @@ function ObjectiveWorkPicker({
       loadObjectiveWorkChoices(api, kind, objective.clientId, cursor, signal),
   });
   const selected =
-    choices.data?.items.some((item) => item.id === resourceId) &&
+    choices.data?.items.some(
+      (item) =>
+        item.id === resourceId && item.taskVersion === selection?.taskVersion,
+    ) &&
     choices.isSuccess &&
     !choices.isFetching;
   const next = choices.data?.nextCursor;
   function changePage(forward: boolean) {
     setCursors(forward && next ? [...cursors, next] : cursors.slice(0, -1));
-    setResourceId("");
+    setSelection(undefined);
+  }
+  function open(versionId = "", versionCurrent: () => boolean = () => true) {
+    const capturedSelection = selection,
+      source = choices.data;
+    void destination.open(kind, resourceId, versionId, {
+      taskVersion: capturedSelection?.taskVersion,
+      isCurrent: () => {
+        const current = cache.getQueryState([
+          "objective-work-choices",
+          kind,
+          objective.clientId,
+          objective.id,
+          cursor,
+        ]);
+        return Boolean(
+          current &&
+          live.current.selection === capturedSelection &&
+          !live.current.disabled &&
+          versionCurrent() &&
+          current.data === source &&
+          current.status === "success" &&
+          current.fetchStatus === "idle" &&
+          !current.isInvalidated &&
+          !current.error,
+        );
+      },
+    });
   }
   return (
     <div className="stack">
@@ -128,7 +167,10 @@ function ObjectiveWorkPicker({
       <QueryState
         pending={choices.isFetching}
         error={choices.error}
-        retry={() => void choices.refetch()}
+        retry={() => {
+          setSelection(undefined);
+          void choices.refetch();
+        }}
       />
       {choices.isSuccess && !choices.isFetching && (
         <>
@@ -142,7 +184,14 @@ function ObjectiveWorkPicker({
             value={resourceId}
             disabled={locked}
             onChange={(event) => {
-              setResourceId(event.target.value);
+              const item = choices.data.items.find(
+                (row) => row.id === event.target.value,
+              );
+              setSelection(
+                item
+                  ? { id: item.id, taskVersion: item.taskVersion }
+                  : undefined,
+              );
             }}
           >
             <option value="">Choose an existing resource</option>
@@ -152,6 +201,17 @@ function ObjectiveWorkPicker({
               </option>
             ))}
           </select>
+          <button
+            type="button"
+            className="button"
+            disabled={locked}
+            onClick={() => {
+              setSelection(undefined);
+              void choices.refetch();
+            }}
+          >
+            Refresh resource choices
+          </button>
           {(kind === "planner_task" || kind === "planner_occurrence") && (
             <div className="row">
               <button
@@ -185,9 +245,7 @@ function ObjectiveWorkPicker({
           key={resourceId}
           draftId={resourceId}
           disabled={locked}
-          onOpen={(versionId) =>
-            void destination.open(kind, resourceId, versionId)
-          }
+          onOpen={open}
         />
       )}
       <QueryState error={destination.error} />
@@ -196,7 +254,7 @@ function ObjectiveWorkPicker({
           type="button"
           className="button primary"
           disabled={locked || !selected}
-          onClick={() => void destination.open(kind, resourceId, "")}
+          onClick={() => open()}
         >
           {destination.busy
             ? "Checking current destination…"

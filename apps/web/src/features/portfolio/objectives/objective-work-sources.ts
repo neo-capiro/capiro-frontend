@@ -12,12 +12,13 @@ import {
 import {
   objectiveStrategyDestination,
   objectiveWorkspaceDestination,
-  requireObjectiveWorkspace,
 } from "@/shared/capiro/operations/objective-work-destinations";
 import {
   requireObjectiveBinding,
   type ObjectiveDestinationQuery,
 } from "@/shared/capiro/operations/objective-destination-binding";
+import { receiveObjectiveWorkspace } from "@/shared/capiro/operations/objective-workspace-receiving";
+import { captureObjectiveRead } from "@/shared/capiro/operations/objective-read-admission";
 
 export type ObjectiveWorkKind =
   | "strategy"
@@ -31,7 +32,7 @@ export const objectiveWorkLabels: Record<ObjectiveWorkKind, string> = {
   workspace_saved_revision: "Workspace saved revision",
 };
 export type ObjectiveWorkChoices = {
-  items: { id: string; label: string }[];
+  items: { id: string; label: string; taskVersion?: number }[];
   nextCursor: string | null;
 };
 export async function loadObjectiveWorkChoices(
@@ -79,33 +80,70 @@ export async function resolveObjectiveWork(
   versionId: string,
   query: ObjectiveDestinationQuery,
   signal: AbortSignal,
+  selected: {
+    taskVersion?: number;
+    snapshotHash?: string;
+    isCurrent?: () => boolean;
+  } = {},
 ) {
-  if (kind === "planner_occurrence")
-    return resolveObjectiveCalendar(api, resourceId, query, signal);
-  const suffix = queryString(query),
-    id = encodeURIComponent(resourceId);
-  if (kind === "strategy") {
+  const captured = captureObjectiveRead(query, signal, selected.isCurrent),
+    taskVersion = selected.taskVersion,
+    snapshotHash = selected.snapshotHash,
+    isCurrent = selected.isCurrent;
+  try {
+    if (kind === "planner_occurrence")
+      return resolveObjectiveCalendar(
+        api,
+        resourceId,
+        captured.query,
+        signal,
+        taskVersion!,
+        isCurrent,
+      );
+    const suffix = queryString(captured.query),
+      id = encodeURIComponent(resourceId);
+    if (kind === "strategy") {
+      const value = await api.request(
+        "strategy",
+        `strategies/${id}/objective-destination?${suffix}`,
+        objectiveStrategyDestination,
+        { signal },
+      );
+      signal.throwIfAborted();
+      captured.admitted();
+      requireObjectiveBinding(value, resourceId, captured.query);
+      return `/modules/strategies?${queryString({ strategyId: value.destination.resourceId, ...captured.query })}`;
+    }
+    if (kind === "planner_task") {
+      const value = await readObjectivePlanner(
+        api,
+        resourceId,
+        captured.query,
+        signal,
+      );
+      captured.admitted();
+      return `/modules/planner?${queryString({ taskId: value.destination.resourceId, ...captured.query })}`;
+    }
     const value = await api.request(
-      "strategy",
-      `strategies/${id}/objective-destination?${suffix}`,
-      objectiveStrategyDestination,
+      "workspace",
+      `drafts/${id}/versions/${encodeURIComponent(versionId)}/objective-destination?${suffix}`,
+      objectiveWorkspaceDestination,
       { signal },
     );
-    signal.throwIfAborted();
-    requireObjectiveBinding(value, resourceId, query);
-    return `/modules/strategies?${queryString({ strategyId: value.destination.resourceId, ...query })}`;
+    captured.admitted();
+    const current = await receiveObjectiveWorkspace(
+      value,
+      resourceId,
+      versionId,
+      captured.query,
+      signal,
+      snapshotHash,
+      isCurrent,
+    );
+    captured.admitted();
+    return `/modules/workspace?${queryString({ draftId: current.destination.draftId, versionId: current.destination.resourceId, snapshotHash: current.snapshotHash, ...captured.query })}`;
+  } catch (error) {
+    captured.admitted();
+    throw error;
   }
-  if (kind === "planner_task") {
-    const value = await readObjectivePlanner(api, resourceId, query, signal);
-    return `/modules/planner?${queryString({ taskId: value.destination.resourceId, ...query })}`;
-  }
-  const value = await api.request(
-    "workspace",
-    `drafts/${id}/versions/${encodeURIComponent(versionId)}/objective-destination?${suffix}`,
-    objectiveWorkspaceDestination,
-    { signal },
-  );
-  signal.throwIfAborted();
-  requireObjectiveWorkspace(value, resourceId, versionId, query);
-  return `/modules/workspace?${queryString({ draftId: value.destination.draftId, versionId: value.destination.resourceId, ...query })}`;
 }

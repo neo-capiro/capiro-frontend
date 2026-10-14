@@ -10,7 +10,12 @@ import {
 } from "./objective-occurrence";
 
 type Selection = NonNullable<ReturnType<typeof readObjectiveCalendarLocation>>;
-function BoundOccurrence({ query, occurrenceKey, taskId }: Selection) {
+function BoundOccurrence({
+  query,
+  occurrenceKey,
+  taskId,
+  taskVersion,
+}: Selection) {
   const result = useCapiroQuery("planner.objectiveDestination", {
     params: { id: taskId },
     query,
@@ -25,6 +30,7 @@ function BoundOccurrence({ query, occurrenceKey, taskId }: Selection) {
         result.data,
         occurrenceKey,
         query,
+        taskVersion,
       );
   } catch (cause) {
     error =
@@ -98,8 +104,8 @@ export function ObjectiveCalendarDestination({
 }) {
   const params = useSearchParams();
   if (
-    !["objectiveId", "objectiveVersion", "occurrence"].some((key) =>
-      params.has(key),
+    !["objectiveId", "objectiveVersion", "occurrence", "taskVersion"].some(
+      (key) => params.has(key),
     )
   )
     return children;
@@ -117,5 +123,5 @@ export function ObjectiveCalendarDestination({
         </p>
       </section>
     );
-  return <BoundOccurrence key={selected.occurrenceKey} {...selected} />;
+  return <BoundOccurrence key={JSON.stringify(selected)} {...selected} />;
 }

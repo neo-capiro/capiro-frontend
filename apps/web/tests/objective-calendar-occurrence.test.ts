@@ -46,6 +46,7 @@ it("uses exact existing Planner occurrence keys and refuses malformed bound hint
     ...query,
     objectiveVersion: "1",
     occurrence: key,
+    taskVersion: "4",
   });
   expect(readObjectiveCalendarLocation(params)?.occurrenceKey).toBe(key);
   for (const suffix of [
@@ -75,6 +76,7 @@ it("preserves civil dates and collapses coincident start/due to due", () => {
       objectivePlannerDestination.parse({ ...boundTask, task }),
       `planner:${taskId}:start`,
       query,
+      4,
     ),
   ).toThrow("no longer");
 });
@@ -106,22 +108,28 @@ for (const changes of [
   });
 it("requires requested resource/client/Objective and a still-current occurrence", () => {
   const value = objectivePlannerDestination.parse(boundTask);
-  expect(requireObjectiveCalendarOccurrence(value, key, query).sourceId).toBe(
-    taskId,
-  );
+  expect(
+    requireObjectiveCalendarOccurrence(value, key, query, 4).sourceId,
+  ).toBe(taskId);
   for (const changed of [
     { clientId: strategyId },
     { objectiveId: strategyId },
     { objectiveVersion: 2 },
   ])
     expect(() =>
-      requireObjectiveCalendarOccurrence(value, key, { ...query, ...changed }),
+      requireObjectiveCalendarOccurrence(
+        value,
+        key,
+        { ...query, ...changed },
+        4,
+      ),
     ).toThrow("does not match");
   expect(() =>
     requireObjectiveCalendarOccurrence(
       value,
       `planner:${strategyId}:due`,
       query,
+      4,
     ),
   ).toThrow();
   expect(() =>
@@ -129,6 +137,7 @@ it("requires requested resource/client/Objective and a still-current occurrence"
       { ...value, task: { ...value.task, dueOn: null } },
       key,
       query,
+      4,
     ),
   ).toThrow("no longer");
 });
@@ -176,6 +185,7 @@ it("preflight uses the existing Planner bound GET, not a new occurrence endpoint
     "",
     query,
     new AbortController().signal,
+    { taskVersion: 4 },
   );
   expect(observed).toContain(`/planner/tasks/${taskId}/objective-destination?`);
   expect(new URL(href, "http://local.test").pathname).toBe("/calendar");
@@ -198,6 +208,7 @@ for (const status of [403, 404, 409, 503])
         "",
         query,
         new AbortController().signal,
+        { taskVersion: 4 },
       ),
     ).rejects.toThrow();
     expect(calls).toBe(1);

@@ -10,7 +10,9 @@ import {
   plannerCalendarOccurrences,
   readPlannerOccurrenceKey,
   requireObjectiveCalendarOccurrence,
+  selectedPlannerVersion,
 } from "../calendar/public";
+import { captureObjectiveRead } from "@/shared/capiro/operations/objective-read-admission";
 
 async function loadPlannerPage(
   api: ApiClient,
@@ -60,6 +62,7 @@ export async function loadObjectiveCalendarChoices(
     items: page.items.flatMap((task) =>
       plannerCalendarOccurrences(task).map((item) => ({
         id: item.key,
+        taskVersion: task.version,
         label: `${item.title} · ${item.key.endsWith(":start") ? "start" : "due"} · ${item.day}${item.startAt ? ` · ${item.timeZone}` : " · civil date"}`,
       })),
     ),
@@ -72,23 +75,44 @@ export async function readObjectivePlanner(
   query: ObjectiveDestinationQuery,
   signal: AbortSignal,
 ) {
+  const captured = captureObjectiveRead(query, signal);
   const value = await api.request(
     "strategy",
-    `planner/tasks/${encodeURIComponent(taskId)}/objective-destination?${queryString(query)}`,
+    `planner/tasks/${encodeURIComponent(taskId)}/objective-destination?${queryString(captured.query)}`,
     objectivePlannerDestination,
     { signal },
   );
-  signal.throwIfAborted();
-  return requireObjectiveBinding(value, taskId, query);
+  captured.admitted();
+  return requireObjectiveBinding(value, taskId, captured.query);
 }
 export async function resolveObjectiveCalendar(
   api: ApiClient,
   key: string,
   query: ObjectiveDestinationQuery,
   signal: AbortSignal,
+  taskVersion: number,
+  isCurrent?: () => boolean,
 ) {
   const selected = readPlannerOccurrenceKey(key);
-  const value = await readObjectivePlanner(api, selected.taskId, query, signal);
-  const current = requireObjectiveCalendarOccurrence(value, key, query);
-  return `/calendar?${queryString({ occurrence: current.key, ...query })}`;
+  const expectedVersion = selectedPlannerVersion.parse(taskVersion),
+    captured = captureObjectiveRead(query, signal, isCurrent);
+  try {
+    const value = await readObjectivePlanner(
+      api,
+      selected.taskId,
+      captured.query,
+      signal,
+    );
+    captured.admitted();
+    const current = requireObjectiveCalendarOccurrence(
+      value,
+      selected.key,
+      captured.query,
+      expectedVersion,
+    );
+    return `/calendar?${queryString({ occurrence: current.key, taskVersion: expectedVersion, ...captured.query })}`;
+  } catch (error) {
+    captured.admitted();
+    throw error;
+  }
 }

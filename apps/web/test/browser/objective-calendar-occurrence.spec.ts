@@ -13,7 +13,7 @@ const query = {
   objectiveVersion: 1,
 };
 const key = `planner:${taskId}:due`;
-const href = `/calendar?${new URLSearchParams({ ...query, objectiveVersion: "1", occurrence: key })}`;
+const href = `/calendar?${new URLSearchParams({ ...query, objectiveVersion: "1", occurrence: key, taskVersion: "4" })}`;
 const endpoint = "**/api/capiro/planner.objectiveDestination?*";
 async function fixture(page: Page) {
   const unexpected = await installFixtures(page);
