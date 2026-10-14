@@ -49,7 +49,7 @@ export function ProductShell({
                 ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
                 : actionWorkflow
                   ? "Recommendation actions require a verified action connection."
-                  : "Conversation service is unavailable. Client and account details come from the connected Capiro services."}
+                  : "Conversation operations require a verified runtime connection. Client and account details come from the connected Capiro services."}
             </>
           )}
         </div>

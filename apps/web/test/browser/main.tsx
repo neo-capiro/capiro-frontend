@@ -109,7 +109,11 @@ function RoutedApp() {
     return (
       <ProductShell>
         <RequireSession>
-          <MeriHome />
+          <MeriHome
+            conversationEnabled={
+              sessionStorage.getItem("meri-conversation-enabled") === "true"
+            }
+          />
         </RequireSession>
       </ProductShell>
     );

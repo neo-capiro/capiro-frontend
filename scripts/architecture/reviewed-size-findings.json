@@ -2563,5 +2563,23 @@
     "reason": "One existing submitted order validates the complete captured authorized catalog, freezes it across dispatch, verifies receipt version/order and checks current cache lineage before installation. Unknown and conflict handling stay in the same existing transaction owner; no automatic retry or independent persistence. Independent Codex outreach_review accepted the exact responsibility/fingerprint and race fixes; see docs/authorized-layout-20261014/HANDOFF.md.",
     "reviewedBy": "Codex frontend integration owner with independent outreach_review",
     "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriConversationView.tsx",
+    "kind": "function",
+    "symbol": "MeriConversationView",
+    "fingerprint": "4f7d23371aa45f6028be93332cfa4f40fb48bae60f263ddc973fadd33e0dc59c",
+    "reason": "Independent whole-function review accepted cohesive selected-conversation presentation and explicit command adapter, delegating admission/lifetime/transport to the adopted SDK/session owners and scoped journal; no authority or execution loop added. See docs/meri-conversation-host-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useConversationActions.ts",
+    "kind": "function",
+    "symbol": "useConversationActions",
+    "fingerprint": "18b811fb227a9ca2d5f147cfe7a68f2aaeaa8dccd1d7262e60a153cd9e96e124",
+    "reason": "Independent whole-function review accepted cohesive selected-conversation presentation and explicit command adapter, delegating admission/lifetime/transport to the adopted SDK/session owners and scoped journal; no authority or execution loop added. See docs/meri-conversation-host-20261014/INDEPENDENT-REVIEW.md.",
+    "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
   }
 ]

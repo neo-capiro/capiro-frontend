@@ -8,9 +8,14 @@ import { QueryState } from "../../shared/portfolio/ui/QueryState";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { scopedHref } from "../../shared/session/client-route";
 import styles from "./home.module.css";
+import { MeriConversationHost } from "./conversation/MeriConversationHost";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
-export function MeriHome() {
+export function MeriHome({
+  conversationEnabled = false,
+}: {
+  conversationEnabled?: boolean;
+}) {
   const identity = useIdentity();
   const selected = useSelectedClient();
   const current =
@@ -64,13 +69,14 @@ export function MeriHome() {
           )}
           <Link href="/">Open Portfolio</Link>
         </section>
-        <section aria-labelledby="conversation-availability">
-          <h2 id="conversation-availability">Conversations unavailable</h2>
-          <p>
-            This workspace has no connected conversation service. Recent
-            conversations and approval counts cannot be loaded.
-          </p>
-        </section>
+        <MeriConversationHost
+          enabled={conversationEnabled}
+          account={
+            current?.tenant?.id
+              ? { tenantId: current.tenant.id, actorId: current.user.id }
+              : undefined
+          }
+        />
         <section aria-label="Available Meri workspaces">
           <Link href={scopedHref("/meri/files", clientId)}>
             Open document files
