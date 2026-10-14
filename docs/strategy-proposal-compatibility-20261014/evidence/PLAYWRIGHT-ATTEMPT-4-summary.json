@@ -1,0 +1,11 @@
+{
+  "attempt": 4,
+  "passed": 15,
+  "failed": 1,
+  "classification": "owned test filter context error",
+  "failure": "Section has locator re-entered ancestor dialog; retained DOM contains both audit tables/headings.",
+  "correction": "Only the two has heading locators changed from modal.getByRole to page.getByRole; all raw/index/visibility assertions preserved.",
+  "productFilesChanged": false,
+  "preCorrectionSpecSha256": "0aa5a2686e445dd5c888382e7544a7200d974def2fecf7ead9fd09ff9bb8a538",
+  "postCorrectionSpecSha256": "56dca23c5f364396fb6287d620624b4653734987b7497c05c6b90b7183e1eaee"
+}

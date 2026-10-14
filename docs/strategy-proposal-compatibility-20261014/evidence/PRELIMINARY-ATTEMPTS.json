@@ -1,0 +1,34 @@
+[
+  {
+    "kind": "sandbox-init",
+    "exit": 101,
+    "tests": 0,
+    "output": "thread 'main' (1283846) panicked at linux-sandbox/src/linux_run_main.rs:994:25:\nfailed to register synthetic bubblewrap mount target /tmp/.aws: No space left on device (os error 28)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  {
+    "kind": "targeted-vitest-initial",
+    "time": "2026-10-14T17:29:09Z",
+    "exit": 1,
+    "tests": 0,
+    "output": "Failed Suites 2\nError: ENOSPC: no space left on device, write\nTest Files 2 failed (2)\nTests no tests\nDuration 339ms (transform 0ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)"
+  },
+  {
+    "kind": "targeted-vitest-owned-tmp-rerun",
+    "time": "2026-10-14T17:29:37Z",
+    "exit": 0,
+    "tests": 32,
+    "output": "Test Files 2 passed (2)\nTests 32 passed (32)\nDuration 449ms (transform 127ms, setup 0ms, import 375ms, tests 59ms, environment 0ms)"
+  },
+  {
+    "kind": "desktop-playwright-initial",
+    "exit": 1,
+    "tests": 0,
+    "output": "Build failed with 1 error:\n[rolldown:vite-resolve] plugin `rolldown:vite-resolve` threw an error\nCaused by:\n\"./conversation-application\" is not exported under the conditions [\"module\", \"browser\", \"production\", \"import\"] from package /dev/shm/capiro-strategy-compatibility-20261014/node_modules/@capiro/meri-contracts (see exports field in /dev/shm/capiro-strategy-compatibility-20261014/node_modules/@capiro/meri-contracts/package.json)\nat aggregateBindingErrorsIntoJsError (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/error-Dsqzw0Oa.mjs:49:18)\nat unwrapBindingResult (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/error-Dsqzw0Oa.mjs:19:128)\nat #build (file:///workspace/capiro-frontend/node_modules/rolldown/dist/shared/rolldown-D_vNlorD.mjs:133:34)\nat async buildEnvironment (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:34716:66)\nat async Object.build (file:///workspace/capiro-frontend/node_modules/vite/dist/node/chunks/node.js:35137:19)\nat async file:///dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/server.mjs:39:1\nNode.js v24.19.0\nProcess from config.webServer was not able to start. Exit code: 1"
+  },
+  {
+    "kind": "owned-test-edit-guard",
+    "filesChanged": false,
+    "output": "RuntimeError: Approved reopen anchor mismatch",
+    "correction": "Read exact formatted four-space anchor; repeated test-only patch applied after guard."
+  }
+]

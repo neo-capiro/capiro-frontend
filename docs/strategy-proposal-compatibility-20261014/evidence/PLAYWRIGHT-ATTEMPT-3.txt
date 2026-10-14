@@ -1,0 +1,481 @@
+[WebServer] (node:1285309) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+(node:1285351) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop light: mixed queue preserves unsupported audit and compact approval/apply indexes (5.7s)
+  ✓   2 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop dark: mixed queue preserves unsupported audit and compact approval/apply indexes (5.2s)
+  ✘   3 test/browser/strategy-proposal-compatibility.spec.ts:226:1 › unsupported-only proposal remains readable and rejectable without executable selection (1.4s)
+(node:1285629) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit (1.1s)
+(node:1285758) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] Killed
+  ✘   5 test/browser/strategy-proposal-compatibility.spec.ts:300:1 › stale409 stays visible with both dialogs and never retries the mutation (30.1s)
+(node:1285982) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 test/browser/strategy-proposal-compatibility.spec.ts:328:1 › synchronous duplicate confirmation sends one pending request (1.3s)
+(node:1286120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID content refresh invalidates selection and confirmation (984ms)
+(node:1286255) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID status refresh invalidates selection and confirmation (763ms)
+(node:1286393) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID pin refresh invalidates selection and confirmation (832ms)
+(node:1286527) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID approved-empty refresh invalidates selection and confirmation (684ms)
+(node:1286663) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID unavailable refresh invalidates selection and confirmation (715ms)
+(node:1286808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 test/browser/strategy-proposal-compatibility.spec.ts:392:1 › refresh during a pending request retires old completion callbacks and selection (695ms)
+(node:1286947) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › rejected review preserves audit but denies approve/apply/reject/undo (685ms)
+(node:1287083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › undone review preserves audit but denies approve/apply/reject/undo (764ms)
+(node:1287225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › stale review preserves audit but denies approve/apply/reject/undo (1.1s)
+(node:1287364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  16 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › superseded review preserves audit but denies approve/apply/reject/undo (708ms)
+
+
+  1) test/browser/strategy-proposal-compatibility.spec.ts:226:1 › unsupported-only proposal remains readable and rejectable without executable selection 
+
+    Error: page.goto: Page crashed
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/strategies?view=review", waiting until "load"
+
+
+      128 | }
+      129 | async function openFirstReview(page: Page) {
+    > 130 |   await page.goto("/modules/strategies?view=review");
+          |              ^
+      131 |   await button(page, "Review change details").first().click();
+      132 |   await expect(review(page)).toBeVisible();
+      133 | }
+        at openFirstReview (/dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:130:14)
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:232:9
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-7c45e-ithout-executable-selection/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-7c45e-ithout-executable-selection/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-7c45e-ithout-executable-selection/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit 
+
+    Error: page.goto: Page crashed
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/strategies?view=review", waiting until "load"
+
+
+      128 | }
+      129 | async function openFirstReview(page: Page) {
+    > 130 |   await page.goto("/modules/strategies?view=review");
+          |              ^
+      131 |   await button(page, "Review change details").first().click();
+      132 |   await expect(review(page)).toBeVisible();
+      133 | }
+        at openFirstReview (/dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:130:14)
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:263:9
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-37be2-ication-index-and-raw-audit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) test/browser/strategy-proposal-compatibility.spec.ts:300:1 › stale409 stays visible with both dialogs and never retries the mutation 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.route: Target crashed 
+
+       at fixtures.ts:34
+
+      32 | };
+      33 | export async function onlyLocalRequests(page: Page) {
+    > 34 |   await page.route("**/*", (route) => {
+         |              ^
+      35 |     const url = new URL(route.request().url());
+      36 |     return url.hostname === "127.0.0.1"
+      37 |       ? route.continue()
+        at onlyLocalRequests (/dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/fixtures.ts:34:14)
+        at fixture (/dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:70:9)
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:303:23
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-4f705--never-retries-the-mutation/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-4f705--never-retries-the-mutation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-4f705--never-retries-the-mutation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) test/browser/strategy-proposal-compatibility.spec.ts:328:1 › synchronous duplicate confirmation sends one pending request 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      335 |     held = route;
+      336 |   });
+    > 337 |   await page.goto("/__test/strategy-proposal-refresh");
+          |              ^
+      338 |   await button(review(page), "Apply 2 changes").click();
+      339 |   await button(page, "Confirm decision").evaluate(
+      340 |     (button: HTMLButtonElement) => {
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:337:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-2f926-n-sends-one-pending-request/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-2f926-n-sends-one-pending-request/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-2f926-n-sends-one-pending-request/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-2f926-n-sends-one-pending-request/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID content refresh invalidates selection and confirmation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      368 |   }) => {
+      369 |     const state = await fixture(page);
+    > 370 |     await page.goto("/__test/strategy-proposal-refresh");
+          |                ^
+      371 |     await review(page).getByRole("checkbox").nth(1).uncheck();
+      372 |     await button(review(page), "Approve selected").click();
+      373 |     await expect(button(page, "Confirm decision")).toBeVisible();
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-7b9a7--selection-and-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-7b9a7--selection-and-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-7b9a7--selection-and-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-7b9a7--selection-and-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID status refresh invalidates selection and confirmation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      368 |   }) => {
+      369 |     const state = await fixture(page);
+    > 370 |     await page.goto("/__test/strategy-proposal-refresh");
+          |                ^
+      371 |     await review(page).getByRole("checkbox").nth(1).uncheck();
+      372 |     await button(review(page), "Approve selected").click();
+      373 |     await expect(button(page, "Confirm decision")).toBeVisible();
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-d5ee6--selection-and-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-d5ee6--selection-and-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-d5ee6--selection-and-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-d5ee6--selection-and-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID pin refresh invalidates selection and confirmation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      368 |   }) => {
+      369 |     const state = await fixture(page);
+    > 370 |     await page.goto("/__test/strategy-proposal-refresh");
+          |                ^
+      371 |     await review(page).getByRole("checkbox").nth(1).uncheck();
+      372 |     await button(review(page), "Approve selected").click();
+      373 |     await expect(button(page, "Confirm decision")).toBeVisible();
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-ac81c--selection-and-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-ac81c--selection-and-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-ac81c--selection-and-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-ac81c--selection-and-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID approved-empty refresh invalidates selection and confirmation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      368 |   }) => {
+      369 |     const state = await fixture(page);
+    > 370 |     await page.goto("/__test/strategy-proposal-refresh");
+          |                ^
+      371 |     await review(page).getByRole("checkbox").nth(1).uncheck();
+      372 |     await button(review(page), "Approve selected").click();
+      373 |     await expect(button(page, "Confirm decision")).toBeVisible();
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-99672--selection-and-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-99672--selection-and-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-99672--selection-and-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-99672--selection-and-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID unavailable refresh invalidates selection and confirmation 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      368 |   }) => {
+      369 |     const state = await fixture(page);
+    > 370 |     await page.goto("/__test/strategy-proposal-refresh");
+          |                ^
+      371 |     await review(page).getByRole("checkbox").nth(1).uncheck();
+      372 |     await button(review(page), "Approve selected").click();
+      373 |     await expect(button(page, "Confirm decision")).toBeVisible();
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:370:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-b8661--selection-and-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-b8661--selection-and-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-b8661--selection-and-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-b8661--selection-and-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) test/browser/strategy-proposal-compatibility.spec.ts:392:1 › refresh during a pending request retires old completion callbacks and selection 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh", waiting until "load"
+
+
+      406 |     held = route;
+      407 |   });
+    > 408 |   await page.goto("/__test/strategy-proposal-refresh");
+          |              ^
+      409 |   await button(review(page), "Apply 2 changes").click();
+      410 |   await button(page, "Confirm decision").click();
+      411 |   await expect.poll(() => Boolean(held)).toBe(true);
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:408:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-8c5fa-ion-callbacks-and-selection/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) test/browser/strategy-proposal-compatibility.spec.ts:431:3 › rejected review preserves audit but denies approve/apply/reject/undo 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=rejected
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=rejected", waiting until "load"
+
+
+      433 |   }) => {
+      434 |     const state = await fixture(page);
+    > 435 |     await page.goto(`/__test/strategy-proposal-refresh?status=${status}`);
+          |                ^
+      436 |     await expect(review(page)).toContainText("Original stored details");
+      437 |     for (const name of ["Approve selected", "Reject change set"])
+      438 |       await expect(
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:435:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-bfb26-s-approve-apply-reject-undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) test/browser/strategy-proposal-compatibility.spec.ts:431:3 › undone review preserves audit but denies approve/apply/reject/undo 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=undone
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=undone", waiting until "load"
+
+
+      433 |   }) => {
+      434 |     const state = await fixture(page);
+    > 435 |     await page.goto(`/__test/strategy-proposal-refresh?status=${status}`);
+          |                ^
+      436 |     await expect(review(page)).toContainText("Original stored details");
+      437 |     for (const name of ["Approve selected", "Reject change set"])
+      438 |       await expect(
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:435:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-9ae96-s-approve-apply-reject-undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) test/browser/strategy-proposal-compatibility.spec.ts:431:3 › stale review preserves audit but denies approve/apply/reject/undo 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=stale
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=stale", waiting until "load"
+
+
+      433 |   }) => {
+      434 |     const state = await fixture(page);
+    > 435 |     await page.goto(`/__test/strategy-proposal-refresh?status=${status}`);
+          |                ^
+      436 |     await expect(review(page)).toContainText("Original stored details");
+      437 |     for (const name of ["Approve selected", "Reject change set"])
+      438 |       await expect(
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:435:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-0bc82-s-approve-apply-reject-undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) test/browser/strategy-proposal-compatibility.spec.ts:431:3 › superseded review preserves audit but denies approve/apply/reject/undo 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=superseded
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strategy-proposal-refresh?status=superseded", waiting until "load"
+
+
+      433 |   }) => {
+      434 |     const state = await fixture(page);
+    > 435 |     await page.goto(`/__test/strategy-proposal-refresh?status=${status}`);
+          |                ^
+      436 |     await expect(review(page)).toContainText("Original stored details");
+      437 |     for (const name of ["Approve selected", "Reject change set"])
+      438 |       await expect(
+        at /dev/shm/capiro-strategy-compatibility-20261014/apps/web/test/browser/strategy-proposal-compatibility.spec.ts:435:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/strategy-proposal-compatib-c047f-s-approve-apply-reject-undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14 failed
+    test/browser/strategy-proposal-compatibility.spec.ts:226:1 › unsupported-only proposal remains readable and rejectable without executable selection 
+    test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit 
+    test/browser/strategy-proposal-compatibility.spec.ts:300:1 › stale409 stays visible with both dialogs and never retries the mutation 
+    test/browser/strategy-proposal-compatibility.spec.ts:328:1 › synchronous duplicate confirmation sends one pending request 
+    test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID content refresh invalidates selection and confirmation 
+    test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID status refresh invalidates selection and confirmation 
+    test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID pin refresh invalidates selection and confirmation 
+    test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID approved-empty refresh invalidates selection and confirmation 
+    test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID unavailable refresh invalidates selection and confirmation 
+    test/browser/strategy-proposal-compatibility.spec.ts:392:1 › refresh during a pending request retires old completion callbacks and selection 
+    test/browser/strategy-proposal-compatibility.spec.ts:431:3 › rejected review preserves audit but denies approve/apply/reject/undo 
+    test/browser/strategy-proposal-compatibility.spec.ts:431:3 › undone review preserves audit but denies approve/apply/reject/undo 
+    test/browser/strategy-proposal-compatibility.spec.ts:431:3 › stale review preserves audit but denies approve/apply/reject/undo 
+    test/browser/strategy-proposal-compatibility.spec.ts:431:3 › superseded review preserves audit but denies approve/apply/reject/undo 
+  2 passed (1.4m)

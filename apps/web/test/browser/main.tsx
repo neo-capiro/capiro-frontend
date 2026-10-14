@@ -1,3 +1,4 @@
+import { ProposalRefreshProbe } from "./ProposalRefreshProbe";
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
 import { MeriFilesHost } from "../../src/app/meri/files/MeriFilesHost";
@@ -174,7 +175,9 @@ function RoutedApp() {
           <CapiroBoundary
             config={{ publishableKey: "pk_test_YQ==", configured }}
           >
-            {isSettings ? (
+            {path === "/__test/strategy-proposal-refresh" ? (
+              <ProposalRefreshProbe />
+            ) : isSettings ? (
               <SettingsScreen section={path.split("/")[2]} />
             ) : path.startsWith("/modules") ? (
               module

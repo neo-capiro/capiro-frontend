@@ -1,0 +1,37 @@
+{
+  "attempt": 5,
+  "exit": 0,
+  "passed": 16,
+  "failed": 0,
+  "duration": "57.7s",
+  "nodeVersion": "24.19.0",
+  "nodeOptions": "--max-old-space-size=1024",
+  "chromiumExecutable": "/usr/bin/chromium",
+  "workers": 1,
+  "viewport": {
+    "width": 1440,
+    "height": 1040
+  },
+  "syntheticOnly": true,
+  "externalRequestsBlocked": true,
+  "rawLog": "PLAYWRIGHT-ATTEMPT-5.log",
+  "report": "PLAYWRIGHT-ATTEMPT-5-results.json",
+  "artifacts": [
+    {
+      "path": "PLAYWRIGHT-ATTEMPT-5-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-1f85b-pact-approval-apply-indexes/strategy-compatibility-dark.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    },
+    {
+      "path": "PLAYWRIGHT-ATTEMPT-5-artifacts/strategy-proposal-compatib-82460-pact-approval-apply-indexes/strategy-compatibility-light.png",
+      "bytes": 191255,
+      "sha256": "4c328aba8e47d97e46b3e6e2f366d379257f79ed1771f6340153f2049de721b2"
+    }
+  ],
+  "sourceOrTestChangesAfterPass": false
+}

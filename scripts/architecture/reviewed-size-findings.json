@@ -2199,10 +2199,10 @@
     "file": "apps/web/test/browser/main.tsx",
     "kind": "function",
     "symbol": "RoutedApp",
-    "fingerprint": "1a1f4c8c9f3cde9da5da22c5bb1b5d52326eba7ab0963bf52f8412d4a8a8684a",
-    "reason": "Existing canonical fixture route dispatcher. The additive Files branch composes actual ProductShell/RequireSession/MeriFilesHost and explicit fixture-only operation/disable controls. All older branches remain byte-preserved; no production family or authority comes from these fixture query parameters.",
-    "reviewedBy": "Codex independent Meri Files integration review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "62045414de6a3237a4b9469f0e597f6a6b7817341dabe8a2d046e159d75d810d",
+    "reason": "Accepted the existing synthetic browser route composition; the change adds one explicit test-only mount of the canonical review component for same-ID refresh/pending tests. Existing routes, production routing and application authority remain unchanged. This is test harness composition, not a production entry or new service.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
+    "reviewedOn": "2026-10-14"
   },
   {
     "file": "apps/web/tests/meri-document-adapter.test.ts",
@@ -2634,6 +2634,51 @@
     "fingerprint": "a5b4fb710f1c8a35bcf53061230b202d7c3790b25a3581605ce77867fcc6bea4",
     "reason": "Independent merged-source review accepted the same approved PR44 civil start/due/time-zone/status/priority/estimate controls and explicit disabled prop. No new state, transport or domain responsibility. See docs/desktop-details-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+    "kind": "function",
+    "symbol": "ProposalReviewSession",
+    "fingerprint": "1010534a879f871fa09a3950c3e2f4ea4c5635d7d2e0ab43ab501d80f68ea96f",
+    "reason": "Accepted one cohesive proposal-review lifecycle: local selection/confirmation, four canonical mutation calls, pending/error view and completion disposal. Stored operation classification/action rules and raw audit presentation have separate canonical owners. It introduces no authorization, persistence or runtime business rules; backend refuses unsupported/stale work. Keeping this session together makes selection, pending state and confirmation ownership explicit instead of scattering it.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+    "kind": "function",
+    "symbol": "StrategyReview",
+    "fingerprint": "c1b1e6bf7c55c95f7d42ddfc59e26527b11abfd3c83a7ceee73b7f302f5b079a",
+    "reason": "Accepted the existing strategy review tab composition: proposals/firm-findings reads, risk/client presentation and current selected-proposal lifetime. This change only uses the canonical operation presenter and current list record/availability; existing firm-review interaction remains unchanged. It adds no backend policy, cross-domain service or parallel state owner.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/strategy-proposal-compatibility-contracts.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "f043b1416328a4f7ebb1e7bdac42bbf121cb46915b4d2e89018cf56fdf18f131",
+    "reason": "Accepted one cohesive synthetic wire compatibility describe callback: lossless JSON/envelope preservation, list/approve/reject response agreement, unchanged executable vocabulary and strict index request envelopes. Assertions cover outcomes independently, without copying the production classifier or unrelated mocked services.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/review/strategy-proposal-compatibility.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "e7ffd7a2ad4a5a0f709c11b74b386c31438fac3c0250d2369ef630ad45beca58",
+    "reason": "Accepted one cohesive local review boundary describe callback: raw/index preservation, original versus approved selection bases, invalid/duplicate indexes, empty approval, status gates and same-ID snapshot invalidation. These related admission/lifetime assertions share one fixture; no backend implementation or authority logic is duplicated.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/test/browser/strategy-proposal-compatibility.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0191f6489715c14112a4501442cdc9d746ef1d72e1d1731fefeeca11fb04ad31",
+    "reason": "Accepted the larger test-only file as one Strategy compatibility workflow suite with one local fixture owner and 16 desktop cases: mixed queues, light/dark audit, selective original/approved indexes, unsupported-only Reject, opaque approved audit, stale refusal, synchronous duplicate exclusion, replacement/disposal and terminal statuses. Fixture responses are synthetic and every case rejects external requests/page errors. No unrelated feature behavior, production hooks or weakened existing assertion is introduced.",
+    "reviewedBy": "/root/strategy_compatibility_independent_review",
     "reviewedOn": "2026-10-14"
   }
 ]

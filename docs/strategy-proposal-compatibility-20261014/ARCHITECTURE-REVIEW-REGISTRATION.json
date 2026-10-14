@@ -1,0 +1,26 @@
+{
+  "initialAppendAttempt": "Refused duplicate existing RoutedApp review key before any write. Corrected registration updates only independently reviewed exact matching keys; preserves all other records and rules.",
+  "replaced": [
+    {
+      "previous": {
+        "file": "apps/web/test/browser/main.tsx",
+        "kind": "function",
+        "symbol": "RoutedApp",
+        "fingerprint": "1a1f4c8c9f3cde9da5da22c5bb1b5d52326eba7ab0963bf52f8412d4a8a8684a",
+        "reason": "Existing canonical fixture route dispatcher. The additive Files branch composes actual ProductShell/RequireSession/MeriFilesHost and explicit fixture-only operation/disable controls. All older branches remain byte-preserved; no production family or authority comes from these fixture query parameters.",
+        "reviewedBy": "Codex independent Meri Files integration review",
+        "reviewedOn": "2026-10-13"
+      },
+      "accepted": {
+        "file": "apps/web/test/browser/main.tsx",
+        "kind": "function",
+        "symbol": "RoutedApp",
+        "fingerprint": "62045414de6a3237a4b9469f0e597f6a6b7817341dabe8a2d046e159d75d810d",
+        "reason": "Accepted the existing synthetic browser route composition; the change adds one explicit test-only mount of the canonical review component for same-ID refresh/pending tests. Existing routes, production routing and application authority remain unchanged. This is test harness composition, not a production entry or new service.",
+        "reviewedBy": "/root/strategy_compatibility_independent_review",
+        "reviewedOn": "2026-10-14"
+      }
+    }
+  ],
+  "acceptedReceipt": "INDEPENDENT-SOURCE-DESIGN-REVIEW.json"
+}

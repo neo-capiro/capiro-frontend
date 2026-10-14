@@ -1,0 +1,20 @@
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+test/browser/strategy-proposal-compatibility.spec.ts(89,21): error TS2322: Type '{ status: string; id?: string | undefined; strategyId?: string | undefined; summary?: string | undefined; ops?: ({ op: string; nodeId: string; title: string; sources: { section: string; ref: string; }[]; } | { ...; } | { ...; })[] | undefined; ... 5 more ...; approvedAt?: null | undefined; }' is not assignable to type '{ id: string; strategyId: string; summary: string; ops: ({ op: string; nodeId: string; title: string; sources: { section: string; ref: string; }[]; } | { op: string; title: string; nested: { preserved: (number | null)[]; }; nodeId?: undefined; } | { ...; })[]; ... 6 more ...; approvedAt: null; }'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+test/browser/strategy-proposal-compatibility.spec.ts(98,11): error TS2322: Type 'string' is not assignable to type 'null'.
+test/browser/strategy-proposal-compatibility.spec.ts(107,9): error TS2322: Type '{ status: string; id?: string | undefined; strategyId?: string | undefined; summary?: string | undefined; ops?: ({ op: string; nodeId: string; title: string; sources: { section: string; ref: string; }[]; } | { ...; } | { ...; })[] | undefined; ... 5 more ...; approvedAt?: null | undefined; }' is not assignable to type '{ id: string; strategyId: string; summary: string; ops: ({ op: string; nodeId: string; title: string; sources: { section: string; ref: string; }[]; } | { op: string; title: string; nested: { preserved: (number | null)[]; }; nodeId?: undefined; } | { ...; })[]; ... 6 more ...; approvedAt: null; }'.
+  Types of property 'id' are incompatible.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /dev/shm/capiro-strategy-compatibility-20261014/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /dev/shm/capiro-strategy-compatibility-20261014/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit

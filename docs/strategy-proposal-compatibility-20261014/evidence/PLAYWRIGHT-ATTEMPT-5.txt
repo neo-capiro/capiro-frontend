@@ -1,0 +1,33 @@
+[WebServer] (node:1288571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] [PLUGIN_TIMINGS] JavaScript callbacks ran for 7.6s of this 9.9s build (77%).
+[WebServer] The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+[WebServer]   - plugin vite:build-import-analysis generateBundle (58%, 5.7s, 1 call)
+[WebServer] Additional callback time came from the callbacks below and from callbacks under 1s.
+[WebServer] 1 callback is listed without a time. Its calls overlapped, so the time inside one call includes work from other calls. To find its cost, profile the build with `node --cpu-prof`:
+[WebServer]   - plugin vite:css transform (81 calls)
+[WebServer] See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+[WebServer] 
+
+Running 16 tests using 1 worker
+
+(node:1288599) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop light: mixed queue preserves unsupported audit and compact approval/apply indexes (4.6s)
+  ✓   2 test/browser/strategy-proposal-compatibility.spec.ts:147:3 › desktop dark: mixed queue preserves unsupported audit and compact approval/apply indexes (3.5s)
+  ✓   3 test/browser/strategy-proposal-compatibility.spec.ts:226:1 › unsupported-only proposal remains readable and rejectable without executable selection (2.5s)
+  ✓   4 test/browser/strategy-proposal-compatibility.spec.ts:252:1 › approved-only opaque entry retains its exact application index and raw audit (2.7s)
+  ✓   5 test/browser/strategy-proposal-compatibility.spec.ts:300:1 › stale409 stays visible with both dialogs and never retries the mutation (2.6s)
+  ✓   6 test/browser/strategy-proposal-compatibility.spec.ts:328:1 › synchronous duplicate confirmation sends one pending request (2.5s)
+  ✓   7 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID content refresh invalidates selection and confirmation (2.6s)
+  ✓   8 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID status refresh invalidates selection and confirmation (2.5s)
+  ✓   9 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID pin refresh invalidates selection and confirmation (2.7s)
+  ✓  10 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID approved-empty refresh invalidates selection and confirmation (3.2s)
+  ✓  11 test/browser/strategy-proposal-compatibility.spec.ts:366:3 › same-ID unavailable refresh invalidates selection and confirmation (3.1s)
+  ✓  12 test/browser/strategy-proposal-compatibility.spec.ts:392:1 › refresh during a pending request retires old completion callbacks and selection (2.7s)
+  ✓  13 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › rejected review preserves audit but denies approve/apply/reject/undo (2.5s)
+  ✓  14 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › undone review preserves audit but denies approve/apply/reject/undo (2.3s)
+  ✓  15 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › stale review preserves audit but denies approve/apply/reject/undo (2.4s)
+  ✓  16 test/browser/strategy-proposal-compatibility.spec.ts:431:3 › superseded review preserves audit but denies approve/apply/reject/undo (2.4s)
+
+  16 passed (57.7s)
