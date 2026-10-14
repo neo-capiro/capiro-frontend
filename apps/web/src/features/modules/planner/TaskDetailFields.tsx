@@ -51,45 +51,7 @@ export function TaskDetailFields({ task, people, projects }: Props) {
                 : "Does not repeat"
             }
           />
-          {task.recurrence?.basedOn && (
-            <DetailValue
-              label="Repeat from"
-              value={
-                task.recurrence.basedOn === "due_date"
-                  ? "Due date"
-                  : "Completion date"
-              }
-            />
-          )}
-          {task.recurrence?.weekdays && (
-            <DetailValue
-              label="Repeat on"
-              value={
-                task.recurrence.weekdays.length
-                  ? task.recurrence.weekdays
-                      .map((day) =>
-                        new Intl.DateTimeFormat("en-US", {
-                          weekday: "long",
-                          timeZone: "UTC",
-                        }).format(new Date(Date.UTC(2000, 0, 2 + day))),
-                      )
-                      .join(", ")
-                  : "Not specified"
-              }
-            />
-          )}
-          {task.recurrence?.endsOn !== undefined && (
-            <DetailValue
-              label="Repeat ends"
-              value={task.recurrence.endsOn ?? "No end date"}
-            />
-          )}
-          {task.recurrence?.anchorOn && (
-            <DetailValue
-              label="Repeat anchor"
-              value={task.recurrence.anchorOn}
-            />
-          )}
+          <TaskRepeatValues recurrence={task.recurrence} />
         </dl>
       </section>
       <section aria-label="Description">
@@ -145,6 +107,52 @@ export function TaskDetailFields({ task, people, projects }: Props) {
     </div>
   );
 }
+
+export function TaskRepeatValues({
+  recurrence,
+}: {
+  recurrence: PlannerTask["recurrence"];
+}) {
+  return (
+    <>
+      {recurrence?.basedOn && (
+        <DetailValue
+          label="Repeat from"
+          value={
+            recurrence.basedOn === "due_date" ? "Due date" : "Completion date"
+          }
+        />
+      )}
+      {recurrence?.weekdays && (
+        <DetailValue
+          label="Repeat on"
+          value={
+            recurrence.weekdays.length
+              ? recurrence.weekdays
+                  .map((day) =>
+                    new Intl.DateTimeFormat("en-US", {
+                      weekday: "long",
+                      timeZone: "UTC",
+                    }).format(new Date(Date.UTC(2000, 0, 2 + day))),
+                  )
+                  .join(", ")
+              : "Not specified"
+          }
+        />
+      )}
+      {recurrence?.endsOn !== undefined && (
+        <DetailValue
+          label="Repeat ends"
+          value={recurrence.endsOn ?? "No end date"}
+        />
+      )}
+      {recurrence?.anchorOn && (
+        <DetailValue label="Repeat anchor" value={recurrence.anchorOn} />
+      )}
+    </>
+  );
+}
+
 function DetailValue({ label, value }: { label: string; value: string }) {
   return (
     <div>

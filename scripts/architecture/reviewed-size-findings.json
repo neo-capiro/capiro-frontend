@@ -2187,15 +2187,6 @@
     "reviewedOn": "2026-10-13"
   },
   {
-    "file": "apps/web/test/browser/main.tsx",
-    "kind": "function",
-    "symbol": "RoutedApp",
-    "fingerprint": "62045414de6a3237a4b9469f0e597f6a6b7817341dabe8a2d046e159d75d810d",
-    "reason": "Accepted the existing synthetic browser route composition; the change adds one explicit test-only mount of the canonical review component for same-ID refresh/pending tests. Existing routes, production routing and application authority remain unchanged. This is test harness composition, not a production entry or new service.",
-    "reviewedBy": "/root/strategy_compatibility_independent_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
     "file": "apps/web/tests/meri-document-adapter.test.ts",
     "kind": "file",
     "symbol": "<module>",
@@ -2610,47 +2601,11 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/planner/TaskEditor.tsx",
-    "kind": "function",
-    "symbol": "TaskForm",
-    "fingerprint": "e1f6859972da30b1c2157a7c22dd38a001947b634d84e1412aebbcb603ad4422",
-    "reason": "One canonical task draft/versioned mutation/pending/error controller remains mounted above viewport presentation; delegates field implementation and preserves membership IDs/positions. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
     "file": "apps/web/src/features/modules/planner/TaskProjectFields.tsx",
     "kind": "function",
     "symbol": "TaskProjectFields",
     "fingerprint": "d51836f3ec58dff66f02f5e8a33f4cf515b48880e06f67da3644fd5911c8d679",
     "reason": "Canonical project membership/section presentation with explicit current project edit walls, saved unavailable preservation and desktop-only admission; no service or authority responsibility. See docs/desktop-task-body-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
-    "kind": "function",
-    "symbol": "TaskDetailFields",
-    "fingerprint": "27695f2eb100f5e4adc0433ad401b9269a35203c89f03e2b46f4632f9e766cab",
-    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
-    "kind": "function",
-    "symbol": "EngagementOverview",
-    "fingerprint": "b59c0963a35421238b31cff2646a324b1ba4f3fac4fa8117461c1117414c6ef9",
-    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
-    "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
-    "kind": "function",
-    "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "849de8e656b06ae97fbe90b3d9504cd046666071787ca843995f66c26d20f9b3",
-    "reason": "Independent exact-source responsibility review accepted existing canonical read-only task projection or Engagement projection/router composition, no new transport/auth/lifetime/domain. See docs/desktop-detail-content-20261014/INDEPENDENT-REVIEW.md.",
     "reviewedBy": "Codex independent outreach_review",
     "reviewedOn": "2026-10-14"
   },
@@ -2700,21 +2655,102 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
-    "kind": "function",
-    "symbol": "TaskDetail",
-    "fingerprint": "420e51976d843b703adb1ba284aa694db956bed0580ec5cbb282c6ee6e769f93",
-    "reason": "One task detail composition owns comment/archive pending fencing and existing nested actions; canonical mutations own transport and lifetime.",
-    "reviewedBy": "Codex outreach_review independent exact-source review",
-    "reviewedOn": "2026-10-14"
-  },
-  {
     "file": "apps/web/src/features/modules/planner/TaskSubtasks.tsx",
     "kind": "function",
     "symbol": "TaskSubtasks",
     "fingerprint": "b453b02718b5f8d863eeab492f1a3bd5ef9291ebd16b0e62b1227705799319e7",
     "reason": "One parent-scoped subtask page admits current parent/cursor receipts, controls explicit paging and preserves scoped navigation. Canonical query owns transport/lifetime; linked detail rechecks child receipt.",
     "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailSession",
+    "fingerprint": "f992253ece47f1307078839b66efea37a82ac1bdb453cee36882027a1a7b3a05",
+    "reason": "One task-id/version/access-owned detail session composes the canonical shared editor model/form, nested task actions, comments and current subtask owner. Inline and nested forms are mutually exclusive; parent pending fence owns conflicting commands. Mutation transport/generation remains canonical, no API or second editing controller.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailFields",
+    "fingerprint": "6a2f28722c6728f8cf7d179d255c3ec77d7b21cde4cfef08274d73e57978a754",
+    "reason": "Read-only canonical task metadata projection for nonwritable or noninline presentations. Optional repeat values reuse TaskRepeatValues rather than duplicate rendering/semantics. No write or authority responsibility.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+    "kind": "function",
+    "symbol": "EngagementOverview",
+    "fingerprint": "90822d6c136faf663a25ca31e673de83babdb5ef3da484a329aa302cdefa3433",
+    "reason": "Existing current-scope meetings/tasks/report/outreach projection and independent read/error/retry gates. Workload summary is derived solely from returned task states/ownership and delegates rendering; no new operational aggregate or service.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "kind": "function",
+    "symbol": "OrdinaryEngagementScreen",
+    "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
+    "reason": "This screen composes one Engagement route, current client catalog and selected view. Existing query owners handle scope/lifetime; view changes preserve URL/history/client intent and clear stale Outreach hints. Catalog loading/error disables the picker and exposes explicit retry while independently healthy queries remain usable. Presentation delegates to existing feature panels. These states govern the same route admission and do not create another workflow.",
+    "reviewedBy": "Codex outreach_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/test/browser/main.tsx",
+    "kind": "function",
+    "symbol": "RoutedApp",
+    "fingerprint": "85402990235cf8aea284e72f03cf1214e350b8772e5832cdf797f12fcf39324b",
+    "reason": "Existing test-only application/router/boundary composition gains one canonical typed task-receipt replacement probe. Existing ProposalRefreshProbe and PR51 route branches are preserved; no production route, auth grant or transport implementation.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/test/browser/desktop-closeout.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "fc64a5509eb663338e3ad710e66e76ca43ad56ec09ec0dd8f62a7f16a987d0be",
+    "reason": "One task-detail closeout workflow suite with shared canonical local fixtures covers inline edit/readback/permissions, duplicate/pending/native submission, same-ID version admission, nested cancellation and breakpoint draft continuity. Tests assert observable payloads/control behavior; no arbitrary split or weakened baseline assertions.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+    "kind": "function",
+    "symbol": "AddTimeForm",
+    "fingerprint": "1d843d2916cdfc1fc03548fcc1de6f2081d818cf32c70bae42dee836a8f38f6f",
+    "reason": "This is the sole time-entry form assembly. It delegates draft, synchronous dispatch admission and generation retirement to canonical useAddTime and useCapiroMutation owners. The disabled native fieldset and guarded Cancel render the same pending transaction; project selection, duration, description and billable fields constrain that transaction. No parallel request or lifetime implementation is introduced.",
+    "reviewedBy": "Codex outreach_review; Codex independent_fix_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+    "kind": "function",
+    "symbol": "TimeExportDialog",
+    "fingerprint": "ce458bf74c3c263fbdfcdb4dec11320f87033171d46b2191a3a1258137311b05",
+    "reason": "One existing export form owns a bounded read-pagination-to-CSV workflow. Canonical API validates authority, request and receipts. Its synchronous attempt identity, cancellation, pending inputs and output admission constrain this same export; no second transport or unrelated domain is added.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+    "kind": "function",
+    "symbol": "TimeExportDialog > run",
+    "fingerprint": "060871eaf28a89f4d2cb9fe7e87cb1ff0f525771796c516ad85139c9b6d253fd",
+    "reason": "One bounded export-attempt lifecycle captures one input and revision, reads at most100pages, and emits one CSV only while its cancellation and active-attempt identity remain current. Every post-await and output boundary checks the same owner; final cleanup cannot release a newer reopened export. Canonical API owns validated receipts and authority.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-14"
+  },
+  {
+    "file": "apps/web/test/browser/planner-time-export-lifetime.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b",
+    "reason": "One real CSV pagination/download control shares setup, exact request assertions, duplicate native submission admission and escaping/readback. These assertions observe the same export transaction and receipt; no unrelated behavior is mixed in, and splitting solely by line count would fragment its ordered evidence.",
+    "reviewedBy": "Codex outreach_review",
     "reviewedOn": "2026-10-14"
   }
 ]

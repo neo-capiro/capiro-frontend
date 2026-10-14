@@ -1,0 +1,97 @@
+{
+  "status": "LOCAL_DESKTOP_RELEASE_CANDIDATE_QUALIFIED",
+  "qualifiedSource": "fcdc4d744b5a6637c873412ad57cefa705a327dc",
+  "executedRuntimeSource": "77a5ca8033bbaf60c528b785e70436ebdc1706dc",
+  "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+  "independentReviewer": "Codex outreach_review",
+  "scope": "Independent local exact source, test, registry and staged evidence custody review. Browser/build/check runs inspected through sealed receipts; no independent reruns or live service actions.",
+  "sourceReviewReceipt": {
+    "path": "/tmp/capiro-desktop-export-source-review.json",
+    "sha256": "3723f25c59e06b356d08b027996ba2b0e5fd0aff6b5eb39fb9d789104a8cab16"
+  },
+  "custody": {
+    "manifestEntries": 341,
+    "manifestSha256": "d7f04210ed048c3330bb34cf1e5b2fb2cf4da29a123e27777e042286062e2d95",
+    "allIndexBlobHashesBytesAndPathCoverageMatch": true,
+    "losslessWrappers": 39,
+    "allWrapperDecodedBytesAndSha256Match": true,
+    "browserPngCaptures": 42,
+    "realCsv": "Complete synthetic CSV retained in lossless wrapper before Git line-ending normalization.",
+    "exclusions": [
+      "MANIFEST.json",
+      "FINAL-REVIEW.json"
+    ],
+    "checkpointReviewPreserved": "release/CHECKPOINT-INDEPENDENT-REVIEW.json"
+  },
+  "qualification": {
+    "browser": {
+      "expected": 154,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "logReportAgree": true
+    },
+    "objective": {
+      "expected": 4,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "source": "Unchanged Portfolio source/test; preserved separate receipt."
+    },
+    "check": {
+      "root": 113,
+      "web": 2392,
+      "capiro": 483,
+      "transport": 84,
+      "newsletter": 385,
+      "declarations": 8,
+      "lintWarnings": 81,
+      "lintErrors": 0,
+      "types": "PASS",
+      "format": "PASS"
+    },
+    "architecture": {
+      "reviewed": 477,
+      "inheritedUnreviewed": 19,
+      "blocking": 0,
+      "errors": [],
+      "registryRecords": 300,
+      "registryUniqueKeys": 300
+    },
+    "build": {
+      "staticPages": 24,
+      "completed": true
+    },
+    "standalone": {
+      "results": 36,
+      "pageErrors": [],
+      "defaultRootStatus": 200
+    }
+  },
+  "equivalence": {
+    "qualifiedSourceToStagedRuntimeTestsRegistryDiffEmpty": true,
+    "77a5ToFcdc": "Only accepted CSV test callback registry record; runtime/tests unchanged.",
+    "protectedShippingAndMeriRuntimeChanges": [],
+    "lockfileUnchanged": true,
+    "nativeLedgerUnchanged": true,
+    "postBatchLedgerAppendOnly": true,
+    "portability74a2008Excluded": true
+  },
+  "acceptedExportFingerprints": [
+    "ce458bf74c3c263fbdfcdb4dec11320f87033171d46b2191a3a1258137311b05",
+    "060871eaf28a89f4d2cb9fe7e87cb1ff0f525771796c516ad85139c9b6d253fd",
+    "fedd38c18dd9596c4846223172004951f782683368955d33605afd66d5c28f4b"
+  ],
+  "findings": [],
+  "remainingLimits": {
+    "nativeRowsAccepted": 0,
+    "nativeRowsOpen": 337,
+    "shipping": "Image pipeline, deployment, live origin/API and native verification unperformed; shipping-owned.",
+    "mobileParity": "Deferred, not qualified; incidental regression runs do not accept mobile parity.",
+    "themeParity": "Inherited fixed-light Modules presentation; full dark/pixel parity not accepted.",
+    "ownerMappings": "Active Objective operations, Engagement plan/waves/multi-client office and unsupported rich serialization/duplicate controls remain explicit owner dependencies.",
+    "meri": "Fable-owned; no new Meri implementation or SDK adoption.",
+    "historicalAudit": "181 existing/133 dependency/23 old missing classification remains historical, not a current blanket missing claim; current audit is narrow source mapping."
+  },
+  "releaseReceiving": "Source candidate qualified for parent PR publication and shipping handoff; no merge/deployment/native acceptance performed by reviewer."
+}

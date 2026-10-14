@@ -13,6 +13,8 @@ import {
 } from "./TaskEditorFields";
 import { TaskTypeFields, TaskRepeatFields } from "./TaskDefinitionFields";
 import { TaskProjectFields, type TaskProjectModel } from "./TaskProjectFields";
+import { TaskRepeatValues } from "./TaskDetailFields";
+import detailStyles from "./task-detail.module.css";
 import { TaskScheduleFields } from "./TaskScheduleFields";
 import styles from "./planner.module.css";
 import dialogStyles from "./task-dialog.module.css";
@@ -30,12 +32,11 @@ function serverSnapshot() {
 }
 type Props = TaskFormModel &
   TaskProjectModel & { people: PlannerPerson[]; taskId?: string };
+export function useDesktopTaskLayout() {
+  return useSyncExternalStore(subscribe, desktopSnapshot, serverSnapshot);
+}
 export function TaskEditorBody(props: Props) {
-  const desktop = useSyncExternalStore(
-    subscribe,
-    desktopSnapshot,
-    serverSnapshot,
-  );
+  const desktop = useDesktopTaskLayout();
   if (!desktop)
     return (
       <>
@@ -67,6 +68,18 @@ export function TaskEditorBody(props: Props) {
           <TaskScheduleFields {...props} />
           <TaskRepeatFields {...props} />
         </div>
+        {props.data.recurrence &&
+          (props.data.recurrence.basedOn ||
+            props.data.recurrence.weekdays ||
+            props.data.recurrence.endsOn !== undefined ||
+            props.data.recurrence.anchorOn) && (
+            <dl
+              className={detailStyles.grid}
+              aria-label="Saved repeat settings"
+            >
+              <TaskRepeatValues recurrence={props.data.recurrence} />
+            </dl>
+          )}
       </fieldset>
       <TaskDescriptionField {...props} />
       <TaskProjectFields {...props} showSections />

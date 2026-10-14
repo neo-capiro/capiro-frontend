@@ -158,9 +158,9 @@ for (const colorScheme of ["light", "dark"] as const) {
       exact: true,
     });
     await close.focus();
-    await expect(
-      detail.getByRole("region", { name: "Description", exact: true }),
-    ).toHaveText(`Description${description}`);
+    await expect(detail.getByLabel("Description", { exact: true })).toHaveValue(
+      description,
+    );
     const subtask = detail.getByRole("button", {
       name: "+ Subtask",
       exact: true,

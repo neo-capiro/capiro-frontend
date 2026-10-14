@@ -68,8 +68,12 @@ function OrdinaryEngagementScreen() {
   ) {
     setRouteKey(JSON.stringify([requestedView, session, draft, initialCreate]));
     if (session || draft || initialCreate) setView("outreach");
-    else if (tabs.some((tab) => tab.id === requestedView))
-      setView(requestedView!);
+    else
+      setView(
+        tabs.some((tab) => tab.id === requestedView)
+          ? requestedView!
+          : "overview",
+      );
   }
   const router = useRouter();
   const clientId = plannerId.safeParse(requestedClient).success
@@ -82,6 +86,14 @@ function OrdinaryEngagementScreen() {
     for (const key of ["draft", "session", "create", "directoryContactId"])
       next.delete(key);
     next.set("view", targetView);
+    router.push(`/modules/engagement?${next}`);
+  };
+  const changeView = (id: string) => {
+    const next = new URLSearchParams(params);
+    next.set("view", id);
+    if (id !== "outreach")
+      for (const key of ["draft", "session", "create", "directoryContactId"])
+        next.delete(key);
     router.push(`/modules/engagement?${next}`);
   };
   const clientQuery = useCapiroQuery(
@@ -109,6 +121,7 @@ function OrdinaryEngagementScreen() {
               className={styles.select}
               value={clientId}
               aria-label="Engagement client scope"
+              disabled={clientQuery.loading || Boolean(clientQuery.error)}
               onChange={(event) => setClientId(event.target.value)}
             >
               <option value="">All permitted clients</option>
@@ -124,17 +137,28 @@ function OrdinaryEngagementScreen() {
           </>
         }
       />
+      {clientQuery.loading && <p role="status">Loading client scopes…</p>}
+      {clientQuery.error && (
+        <div>
+          <p role="alert">
+            Client scopes unavailable: {clientQuery.error.message}
+          </p>
+          <ActionButton onClick={clientQuery.reload}>
+            Retry client scopes
+          </ActionButton>
+        </div>
+      )}
       <Tabs
         items={tabs}
         value={view}
-        onChange={setView}
+        onChange={changeView}
         label="Engagement sections"
       />
       {view === "overview" && (
         <EngagementOverview
           clientId={clientId}
           meetings={meetings}
-          onView={setView}
+          onView={changeView}
           onClientOutreach={(id) => setClientId(id, "outreach")}
         />
       )}{" "}

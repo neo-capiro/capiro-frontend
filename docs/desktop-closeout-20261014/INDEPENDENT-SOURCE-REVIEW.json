@@ -1,0 +1,332 @@
+{
+  "reviewer": "Codex outreach_review",
+  "baseSource": "3339da55be64d3f0036c081224ed658cfabf6c0a",
+  "status": "EXACT_QUALIFIED_SOURCE_AND_SHIPPING_MERGE_ACCEPTED_EVIDENCE_AUDIT_PENDING",
+  "acceptedSizeFindings": [
+    {
+      "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+      "kind": "function",
+      "symbol": "TaskDetailSession",
+      "line": 126,
+      "nonblank": 130,
+      "fingerprint": "f992253ece47f1307078839b66efea37a82ac1bdb453cee36882027a1a7b3a05",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "One task-id/version/access-owned detail session composes the canonical shared editor model/form, nested task actions, comments and current subtask owner. Inline and nested forms are mutually exclusive; parent pending fence owns conflicting commands. Mutation transport/generation remains canonical, no API or second editing controller."
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+      "kind": "function",
+      "symbol": "TaskDetailFields",
+      "line": 14,
+      "nonblank": 96,
+      "fingerprint": "6a2f28722c6728f8cf7d179d255c3ec77d7b21cde4cfef08274d73e57978a754",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "Read-only canonical task metadata projection for nonwritable or noninline presentations. Optional repeat values reuse TaskRepeatValues rather than duplicate rendering/semantics. No write or authority responsibility."
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+      "kind": "function",
+      "symbol": "EngagementOverview",
+      "line": 22,
+      "nonblank": 131,
+      "fingerprint": "90822d6c136faf663a25ca31e673de83babdb5ef3da484a329aa302cdefa3433",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "Existing current-scope meetings/tasks/report/outreach projection and independent read/error/retry gates. Workload summary is derived solely from returned task states/ownership and delegates rendering; no new operational aggregate or service."
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "kind": "function",
+      "symbol": "OrdinaryEngagementScreen",
+      "line": 45,
+      "nonblank": 143,
+      "fingerprint": "2f3cb81a0c8e9cc2b97d9f3779cd9d945369a1d291db7d7c60f5f9cbed97a5b2",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "Existing ordinary route/client/view composition now records explicit view intent in the URL, preserves client selectors, and restores default overview when absent/invalid. Objective/Newsletter destination branches and current auth/client query ownership remain unchanged."
+    },
+    {
+      "file": "apps/web/test/browser/main.tsx",
+      "kind": "function",
+      "symbol": "RoutedApp",
+      "line": 51,
+      "nonblank": 148,
+      "fingerprint": "85402990235cf8aea284e72f03cf1214e350b8772e5832cdf797f12fcf39324b",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "Existing test-only application/router/boundary composition gains one canonical typed task-receipt replacement probe. Existing ProposalRefreshProbe and PR51 route branches are preserved; no production route, auth grant or transport implementation."
+    },
+    {
+      "file": "apps/web/test/browser/desktop-closeout.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 407,
+      "fingerprint": "fc64a5509eb663338e3ad710e66e76ca43ad56ec09ec0dd8f62a7f16a987d0be",
+      "reviewer": "Codex outreach_review",
+      "acceptance": "ACCEPTED_EXACT_RESPONSIBILITY",
+      "reason": "One task-detail closeout workflow suite with shared canonical local fixtures covers inline edit/readback/permissions, duplicate/pending/native submission, same-ID version admission, nested cancellation and breakpoint draft continuity. Tests assert observable payloads/control behavior; no arbitrary split or weakened baseline assertions."
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+      "bytes": 9032,
+      "sha256": "06df0ce5bcc23a120b93109e79cc4837ca53ffaa5381da6ddec61042d9211432"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "bytes": 6363,
+      "sha256": "b6a56fe5ea82ab525db8b588032e16485745bf71b25abce3ac9bb60e8da3ca9c"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+      "bytes": 11202,
+      "sha256": "7c53ef9f62a94b43f6f41329e64a77dcfa10a75f797897ca40c00662413aeba6"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+      "bytes": 5166,
+      "sha256": "489029a128c3a96a7bddc75f16677b93fe4a76cffcb36065fd89a6be7c5b57e6"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+      "bytes": 1915,
+      "sha256": "6b26d0ef0641a181523a00948e16f9822c4b1ffbec8227015323f57947388b5b"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorBody.tsx",
+      "bytes": 3178,
+      "sha256": "71352a8da95ac1db689f03c0f5a90e4cbbfab3707385941a2a3d95b127805225"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditorForm.tsx",
+      "bytes": 2251,
+      "sha256": "96d405e0270f5a864a77e00d3f34a8440b711b1227d26f580095b5ae90fb2a2e"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-detail.module.css",
+      "bytes": 1644,
+      "sha256": "2fb0d3ab914e3d0c28f001af0a6fb7b20e794e7115b0d3aef50f909fa7ee9a21"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-dialog.module.css",
+      "bytes": 2956,
+      "sha256": "672baafea75fbd93b505ff4e3d0e5cffa206a246a8583726a5be353643609a2a"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/useTaskEditor.ts",
+      "bytes": 3963,
+      "sha256": "6ef3d6997cae0f08c5ffeea13e35ba8856240f28058b7f98faf4216c2ae0f5ae"
+    },
+    {
+      "path": "apps/web/test/browser/TaskDetailRefreshProbe.tsx",
+      "bytes": 1208,
+      "sha256": "09f0383a4babb8f3499f4f6ff9ff8d8b9f0d7736e240ae6fec6b0eef81cac183"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-closeout.spec.ts",
+      "bytes": 14085,
+      "sha256": "b6fe0da2a78b3eeb343af2be41d305d4f62f0fd4cd32b044390ce18007cf7da0"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-detail-content.spec.ts",
+      "bytes": 8638,
+      "sha256": "b0b69de1ac5192f0f8cc0512c635089edaff84d0b86b6afbeafe5677a5d88d6e"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-engagement-closeout.spec.ts",
+      "bytes": 2238,
+      "sha256": "d9ec1761e09ed26842d6b1d5915b75ed6902962a9dd58993856cb22fb3f5cdee"
+    },
+    {
+      "path": "apps/web/test/browser/desktop-task-drawer.spec.ts",
+      "bytes": 8915,
+      "sha256": "f3c4e57e76cebe08d6587f701f918002d8aceb7540233fe52add7ad46679b3be"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "bytes": 7564,
+      "sha256": "0413e51b0fc0ab5c1246bcc1690c465f3ebbb236613d6f47a0a30917da2b6ec8"
+    }
+  ],
+  "protectedChangesAgainstPR51": [],
+  "protectedScope": "Meri/Fable/runtime, shipping gateway/origin/config/Docker, shared API/schema/contracts, Strategy, SDK/packages/vendor/lock untouched. Current tracked/untracked source change list independently checked.",
+  "admissionReview": [
+    "TaskDetail thin wrapper remounts TaskDetailSession by task id/version/access; standalone owned editor similarly keyed. This closes initialized-old-draft/new-prop-version mixing and retires old mutation callbacks.",
+    "One useTaskEditor controller remains above inline/nested/breakpoint presentation; native versioned creates/updates use canonical useCapiroMutation. One form field assembly mounted while edit/subtask/time dialog active.",
+    "Parent synchronous cross-command pending fence prevents comment/archive/inline save conflict; textarea/fieldset/all Select controls disabled. Mutually exclusive forms keep IDs/validation unambiguous.",
+    "Nested Cancel explicitly resets model; nested Save conditionally closes nested editor without clearing root task URL. Sibling activity/comment form does not nest under editor.",
+    "Final footer showSummary=false avoids stale saved priority/status badges during mutable inline draft; legacy summary retains default true outside desktop footer.",
+    "QA replacement probe is test-only, canonical plannerTask.parse, cleanup-owned listener, existing CapiroBoundary; PR51 ProposalRefreshProbe retained."
+  ],
+  "historicalLedger": {
+    "rows": 337,
+    "existing_behavior_missing_evidence": 181,
+    "authentic_backend_provider_dependency": 133,
+    "historical_actual_missing_implementation": 23,
+    "acceptanceState": "337 OPEN_FINAL_ACCEPTANCE",
+    "classificationLimit": "Historical23 not current missing inventory; later focused handoffs/source control current bounded claims."
+  },
+  "qualificationBoundary": {
+    "focusedPreBadge": "Parent reported50/0unexpected/0skip/0flaky; actual source changed footer badge presentation afterward, so this is pre-badge evidence only.",
+    "diagnostics": "Initial42/8 included real duplicate nested-form collisions and corrected fixture/assertion mismatches; retained as diagnostic, not acceptance.",
+    "finalRequired": "Fresh post-badge combined143 unique browser selection and required exact-source types/lint/architecture/aggregate/build/standalone before publication. Reviewer ran no browsers."
+  },
+  "remainingLimits": [
+    "All337 native acceptance rows remain open.",
+    "Active Objective operational association and Engagement plan/wave/multi-client office mapping require exact owner bindings; no invented contracts or new Commitment/Meri controls.",
+    "Mobile parity deferred; existing smaller-screen assembly retained without mobile qualification claim.",
+    "Shipping exclusively owns gateway/origin/Docker/config/deployment; no AWS/live credentials/data/provider calls by reviewer."
+  ],
+  "metadataInstructions": "Retire superseded TaskForm/TaskDetail current records; replace targeted changed records with these exact fingerprints, retain prior evidence and preserve all unaffected PR51 records.",
+  "qualifiedSuccessors": [
+    {
+      "qualifiedProductionTestReviewSource": "0f7df478a7f7f6451fb00b8eae95afd69b3f780b",
+      "currentHistoryMergedSource": "d4e3bf34b85498445f10c7e3ea70955d1f10c6a5",
+      "shippingBase": "0a73dd87d0430f07ac67d66e96457a4df304720c",
+      "mergeParents": [
+        "0f7df478a7f7f6451fb00b8eae95afd69b3f780b",
+        "0a73dd87d0430f07ac67d66e96457a4df304720c"
+      ],
+      "previousBaseSnapshotRetained": "3339da55be64d3f0036c081224ed658cfabf6c0a",
+      "priorSourceHashMismatches": [],
+      "productionTestReviewDeltaQualifiedToMerge": [],
+      "protectedChangesComparedWithShippingBase": [],
+      "dockerSource": "apps/web/Dockerfile",
+      "dockerBlobAtShipping": "9f46582e28280feef55928f3f1d8a53c3627dbc7",
+      "dockerBlobAtMerge": "9f46582e28280feef55928f3f1d8a53c3627dbc7",
+      "acceptedMetadataChecks": [
+        {
+          "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+          "symbol": "TaskDetailSession",
+          "currentRecordMatches": true,
+          "fingerprint": "f992253ece47f1307078839b66efea37a82ac1bdb453cee36882027a1a7b3a05"
+        },
+        {
+          "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+          "symbol": "TaskDetailFields",
+          "currentRecordMatches": true,
+          "fingerprint": "6a2f28722c6728f8cf7d179d255c3ec77d7b21cde4cfef08274d73e57978a754"
+        },
+        {
+          "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+          "symbol": "EngagementOverview",
+          "currentRecordMatches": true,
+          "fingerprint": "90822d6c136faf663a25ca31e673de83babdb5ef3da484a329aa302cdefa3433"
+        },
+        {
+          "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "symbol": "OrdinaryEngagementScreen",
+          "currentRecordMatches": true,
+          "fingerprint": "2f3cb81a0c8e9cc2b97d9f3779cd9d945369a1d291db7d7c60f5f9cbed97a5b2"
+        },
+        {
+          "file": "apps/web/test/browser/main.tsx",
+          "symbol": "RoutedApp",
+          "currentRecordMatches": true,
+          "fingerprint": "85402990235cf8aea284e72f03cf1214e350b8772e5832cdf797f12fcf39324b"
+        },
+        {
+          "file": "apps/web/test/browser/desktop-closeout.spec.ts",
+          "symbol": "<module>",
+          "currentRecordMatches": true,
+          "fingerprint": "fc64a5509eb663338e3ad710e66e76ca43ad56ec09ec0dd8f62a7f16a987d0be"
+        }
+      ],
+      "retiredSupersededSymbols": [],
+      "qualificationReportedByRoot": {
+        "combinedBrowser": 143,
+        "unexpected": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "root": 113,
+        "web": 2392,
+        "capiro": 483,
+        "transport": 84,
+        "newsletter": 385,
+        "declarations": 8,
+        "buildStaticPages": 24,
+        "standaloneObservations": 36,
+        "pageErrors": 0,
+        "rootHTTP": 200,
+        "status": "Allpassed; final evidence custody audit will independently validate reports."
+      },
+      "environmentDiagnostic": "First sandbox build compiled but spawned child capture failed; marker EPERM reproduced, permission-granted same-source retry passed. Failed log retained; no config/package/source relaxation.",
+      "mergedRootReported": "Fresh113 root passed after shipping-only history merge; runtime/tests/reviews unchanged.",
+      "workerScope": "TimeDialogs and EngagementScreen catalog403 worker SHA pending, not qualified by this receipt. Preserve current view/history behavior; review and rerun combined gates after receiving worker result.",
+      "unaffectedShippingReviewRecordsPreserved": true,
+      "unexpectedReviewRecordChanges": []
+    }
+  ],
+  "integratedWorkerReviews": [
+    {
+      "combinedSource": "ab8e47f7663c9480d3f8fccd3b44b924b5e65f82",
+      "workerSource": "af68cd562227befba4f0dab67df4cd8ff56b218e",
+      "sourceHashes": [
+        {
+          "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "bytes": 6804,
+          "sha256": "74ee5725f34c49dec7a46cf179aad28c12e4eaa84e58a057e17217ce9c18d88e"
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+          "bytes": 9210,
+          "sha256": "a75d7c1dfc69a032b190c800a37308cc80e69bf95725e82b12d2b00ad277bfdc"
+        },
+        {
+          "path": "apps/web/test/browser/engagement-client-catalog.spec.ts",
+          "bytes": 2510,
+          "sha256": "04501e027feefcb0a54f3182719178cc93790d4fbc833bbf1ffaa42c1dd2b9d9"
+        },
+        {
+          "path": "apps/web/test/browser/planner-time-pending.spec.ts",
+          "bytes": 5793,
+          "sha256": "86839275839afbc0f02758909e5a08fb8225b3f98553b9960baa647c851a430f"
+        }
+      ],
+      "acceptedSizeFindings": [
+        {
+          "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "kind": "function",
+          "symbol": "OrdinaryEngagementScreen",
+          "nonblank": 155,
+          "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
+          "reviewer": "Codex outreach_review",
+          "reason": "Existing ordinary client/view URL state and feature dispatch remain one owner. Catalog loading/error/retry presentation is the same scope-picker admission responsibility; independent healthy Engagement queries remain usable. Root view history/default reset logic is preserved. No new route, authority, backend operation or shared shell ownership."
+        },
+        {
+          "file": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+          "kind": "function",
+          "symbol": "AddTimeForm",
+          "nonblank": 94,
+          "fingerprint": "1d843d2916cdfc1fc03548fcc1de6f2081d818cf32c70bae42dee836a8f38f6f",
+          "reviewer": "Codex outreach_review",
+          "reason": "One existing time-entry form composes canonical duration/project/billable/description controls and mutation state. Native disabled fieldset, pending-dismissal callbacks and visible errors remain this form lifecycle. useAddTime owns task/project mutation selection and canonical request admission; no copied validators, second API or unrelated domain."
+        }
+      ],
+      "status": "COMBINED_SOURCE_ACCEPTED_FRESH_QUALIFICATION_PENDING",
+      "behavior": [
+        "Time form captures payload before await; synchronous pending guard excludes native repeat submits, actor/project/task remount identity retires old callbacks through canonical mutation generation, parent owner token prevents old-finally clearing newer owner.",
+        "All ordinary time fields/buttons native-disabled while pending; Escape/Close/scrim blocked, rejected draft retained, success closes deliberately. Existing time-zone settings/fallback and backend policy remain unchanged/unqualified.",
+        "Catalog403/503 removes picker actionability, presents loading/error/keyboard retry, retains independent report/meeting reads, restores only fresh successful catalog; root URL view/client/history logic preserved."
+      ],
+      "testFiles": 2,
+      "testCases": 5,
+      "testMeaning": "Held success/rejection with native repeated submission/input/dismissal guards, replacement request failure/settled stale reply, and catalog403/503 held retry/recovery/navigation. These definitions are meaningful; final combined report custody pending.",
+      "auditReview": {
+        "evidenceHashesAllMatchPinnedD4": true,
+        "nativeAcceptanceNotClaimed": true,
+        "requiredCorrections": [
+          "Day already implemented in CalendarPage with calendar-day browser source; no new Day decision required.",
+          "PROS024 must distinguish deliberate structured Core brief from implemented exact saved Core-to-rich-Workspace copy; no new Core rich editor decision or blanket absence claim.",
+          "Worker-pending labels in current audit must acknowledge clean integration; snapshot source labels must remain precise."
+        ],
+        "correctionStatus": "Updated CURRENT-AUDIT independently re-read: Day already implemented; deliberate structured Core brief and exact rich Workspace copy distinguished; worker states integrated awaiting final qualification. No native rows accepted.",
+        "currentAuditSha256": "67817cccf1d675e96954e81412bf6746cab6ad6858511da0f732e459b5200881"
+      }
+    }
+  ]
+}
