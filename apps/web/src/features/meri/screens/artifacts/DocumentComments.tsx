@@ -14,14 +14,29 @@ const titles: Readonly<Record<CommentThreadState, string | null>> = {
   reply: "Reply to comment",
   replied: "Reply added",
   resolved: "Comment resolved",
+  reopened: "Comment reopened",
+  open: "Comments · 1 open thread",
 };
 
-const outcomes: Readonly<Record<CommentThreadState, string>> = {
-  thread: "",
-  reply: "",
+/** Local-only outcome of the state just reached; states without one show no status line. */
+const outcomes: Readonly<Partial<Record<CommentThreadState, string>>> = {
   replied: "Added to this local preview only. Nothing was sent.",
   resolved: "Resolved in this local preview only. Nothing was saved.",
+  reopened: "Reopened in this local preview only. Nothing was saved.",
 };
+
+const labelSuffix: Readonly<Partial<Record<CommentThreadState, string>>> = {
+  resolved: " · Resolved",
+  reopened: " · Reopened",
+};
+
+/** States whose overlay ends with Done: the outcomes and the open thread. */
+const withDone: ReadonlySet<CommentThreadState> = new Set([
+  "replied",
+  "resolved",
+  "reopened",
+  "open",
+]);
 
 /** One comment or reply: label, author, text, time and its actions (an empty row keeps the card height). */
 function CommentCard({
@@ -71,7 +86,7 @@ function ThreadActions({ thread }: { thread: CommentThreadControls }) {
         type="button"
         className={ui.outline}
         aria-haspopup="dialog"
-        data-focus-on-state={thread.state === "thread" || undefined}
+        data-focus-on-state={thread.state !== "replied" || undefined}
         onClick={thread.startReply}
       >
         Reply
@@ -121,8 +136,8 @@ function ReplyForm({ thread }: { thread: CommentThreadControls }) {
 }
 
 /**
- * Document overlay · comments with its local reply, reply-added and resolved states
- * (Figma 13.24 to 13.26). Focus moves to the main control of each new state.
+ * Document overlay · comments with its local reply, reply-added, resolved, reopened and
+ * open-thread states (Figma 13.24 to 13.28). Focus moves to the main control of each new state.
  */
 export function CommentThread({
   thread,
@@ -146,6 +161,9 @@ export function CommentThread({
     onClose();
   };
   const resolved = thread.state === "resolved";
+  const outcome = outcomes[thread.state];
+  /** Done after a reply shows the open thread (13.28); everywhere else it closes the overlay. */
+  const done = thread.state === "replied" ? thread.showOpenThread : close;
   return (
     <Popover
       label={title ?? "Comments"}
@@ -155,7 +173,7 @@ export function CommentThread({
       <div ref={content} className={c.content}>
         {title ? <h2 className={c.title}>{title}</h2> : null}
         <CommentCard
-          label={`Comment · 1${resolved ? " · Resolved" : ""}`}
+          label={`Comment · 1${labelSuffix[thread.state] ?? ""}`}
           comment={thread.comment}
           framed={Boolean(title)}
         >
@@ -172,20 +190,20 @@ export function CommentThread({
               />
             ))}
         {thread.state === "reply" ? <ReplyForm thread={thread} /> : null}
-        {thread.state === "replied" || resolved ? (
-          <>
-            <p className={shared.caption} role="status">
-              {outcomes[thread.state]}
-            </p>
-            <button
-              type="button"
-              className={`${ui.outline} ${c.done}`}
-              data-focus-on-state={thread.state === "replied" || undefined}
-              onClick={close}
-            >
-              Done
-            </button>
-          </>
+        {outcome ? (
+          <p className={shared.caption} role="status">
+            {outcome}
+          </p>
+        ) : null}
+        {withDone.has(thread.state) ? (
+          <button
+            type="button"
+            className={`${ui.outline} ${c.done}`}
+            data-focus-on-state={thread.state === "replied" || undefined}
+            onClick={done}
+          >
+            Done
+          </button>
         ) : null}
       </div>
     </Popover>

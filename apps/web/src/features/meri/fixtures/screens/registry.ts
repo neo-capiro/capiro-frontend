@@ -4,6 +4,7 @@ import { artifactScreens } from "./artifacts";
 import { artifactPageScreens } from "./artifacts-pages";
 import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
+import { conversationFilterScreens } from "./conversation-filters";
 import { darkScreens } from "./dark";
 import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
@@ -29,6 +30,7 @@ const inSection = (
 /** Every rendered Figma 3.4 fixture screen; each area owns its entries, the registry owns their section. */
 export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("conversations", conversationScreens),
+  ...inSection("conversations", conversationFilterScreens),
   ...inSection("conversations", browserScreens),
   ...inSection("runs", runScreens),
   ...inSection("files", artifactScreens),

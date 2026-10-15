@@ -70,7 +70,7 @@ const pages: readonly BriefPage[] = [
     noteHeading: "Evidence & limitations",
     note: "3 defined authorized sources · Public records through 8 Oct · Client records through 9 Oct. This brief reflects retrieved evidence only; coverage may be partial.",
     sources:
-      "Sources: [1] Public funding update · [2] Client task · [3] Meeting note",
+      "Sources: [1] Public funding update · [2] Client task · [3] Strategy review",
   },
   {
     id: "page-2",

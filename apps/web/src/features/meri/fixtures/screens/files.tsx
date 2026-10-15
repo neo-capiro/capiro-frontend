@@ -325,4 +325,18 @@ export const fileScreens: readonly FixtureScreen[] = [
       />
     ),
   },
+  {
+    slug: "download-source-bundle",
+    figmaId: "Overlay · Download source bundle",
+    figmaNode: "3064:40160",
+    title: "Download source bundle",
+    Screen: () => (
+      <SourceScopeScreen
+        unavailable={fixtureUnavailable}
+        closeHref={fixtureHref("word-document")}
+        view={artifactSharing}
+        bundleOnLoad
+      />
+    ),
+  },
 ];

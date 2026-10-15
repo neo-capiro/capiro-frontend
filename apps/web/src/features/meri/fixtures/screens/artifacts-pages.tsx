@@ -137,7 +137,45 @@ export const artifactPageScreens: readonly FixtureScreen[] = [
     figmaNode: "3045:34333",
     title: "Document comment resolved",
     Screen: () => (
-      <WordDocumentFixture opening={{ comments: { state: "resolved" } }} />
+      <WordDocumentFixture
+        opening={{ comments: { state: "resolved", replies: [addedReply] } }}
+      />
     ),
+  },
+  {
+    slug: "document-comment-reopened",
+    figmaId: "13.27",
+    figmaNode: "3064:35947",
+    title: "Comment reopened",
+    Screen: () => (
+      <WordDocumentFixture
+        opening={{ comments: { state: "reopened", replies: [addedReply] } }}
+      />
+    ),
+  },
+  {
+    slug: "document-comment-open-thread",
+    figmaId: "13.28",
+    figmaNode: "3064:35975",
+    title: "Comment thread with reply",
+    Screen: () => (
+      <WordDocumentFixture
+        opening={{ comments: { state: "open", replies: [addedReply] } }}
+      />
+    ),
+  },
+  {
+    slug: "artifact-sharing-from-document",
+    figmaId: "04.08B",
+    figmaNode: "3064:40201",
+    title: "Artifact sharing opened from document workspace",
+    Screen: () => <WordDocumentFixture opening={{ share: true }} />,
+  },
+  {
+    slug: "download-pdf",
+    figmaId: "Overlay · Download PDF",
+    figmaNode: "3064:40166",
+    title: "Download PDF",
+    Screen: () => <PdfPreviewFixture downloadOnLoad />,
   },
 ];

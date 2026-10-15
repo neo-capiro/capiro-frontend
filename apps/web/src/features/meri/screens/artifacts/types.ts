@@ -69,8 +69,17 @@ export type CommentThreadView = {
   replyDraft: string;
 };
 
-/** Local comment overlay states: the thread, writing a reply, a reply added, and resolved (Figma 13.24 to 13.26). */
-export type CommentThreadState = "thread" | "reply" | "replied" | "resolved";
+/**
+ * Local comment overlay states: the thread, writing a reply, a reply added, resolved,
+ * reopened and the open thread with its replies (Figma 13.24 to 13.28).
+ */
+export type CommentThreadState =
+  | "thread"
+  | "reply"
+  | "replied"
+  | "resolved"
+  | "reopened"
+  | "open";
 
 /** A comment overlay opened at a given state, with replies already added in this local preview. */
 export type CommentThreadOpening = {
@@ -108,8 +117,12 @@ export type DocumentWorkspaceView = {
   blockTypes: readonly DetailItem[];
 };
 
-/** Where a document workspace opens: a page (0-based) and, optionally, the comment overlay at a state. */
+/**
+ * Where a document workspace opens: a page (0-based) and, optionally, the comment
+ * overlay at a state or the sharing dialog (04.08B).
+ */
 export type DocumentOpening = {
   pageIndex?: number;
   comments?: CommentThreadOpening;
+  share?: boolean;
 };
