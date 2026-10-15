@@ -2,6 +2,7 @@ import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
 import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
+import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
@@ -13,6 +14,7 @@ export const fixtureScreens: readonly FixtureScreen[] = [
   ...conversationScreens,
   ...runScreens,
   ...artifactScreens,
+  ...fileScreens,
   ...approvalScreens,
   ...browserScreens,
   ...routineScreens,
