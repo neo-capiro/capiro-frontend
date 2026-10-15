@@ -2806,5 +2806,14 @@
     "reason": "One explicit Markdown source-edit lifecycle owns selection, native Undo-preserving insertion, link validation and deferred insertion retirement. Canonical task hooks retain save, pending, abort, receipt and version authority.",
     "reviewedBy": "Codex independent_fix_review",
     "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveGeneration.tsx",
+    "kind": "function",
+    "symbol": "ReadyGeneration",
+    "fingerprint": "793fb6da2b6ea2cd2aad36208de0c78453619220dd00467ce1b7b69276634308",
+    "reason": "Independent source review accepted this cohesive saved-Objective generation form: lifecycle/polling, encrypted persistence and receipt rendering have separate owners; the form composes explicit selection, recover and refresh controls without adding authority or transport ownership.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
   }
 ]

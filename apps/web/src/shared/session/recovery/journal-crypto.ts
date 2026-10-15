@@ -23,7 +23,12 @@ const envelope = z.discriminatedUnion("state", [
       scope: z.string(),
       requestId: z.uuid(),
       state: z.literal("refused"),
-      code: z.literal("WORKSPACE_BRIEF_STATE_CONFLICT"),
+      code: z.enum([
+        "WORKSPACE_BRIEF_STATE_CONFLICT",
+        "OBJECTIVE_GENERATION_FAILED",
+        "OBJECTIVE_CONTEXT_INCOMPLETE",
+        "OBJECTIVE_VERSION_CONFLICT",
+      ]),
     })
     .strict(),
 ]);

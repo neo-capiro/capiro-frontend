@@ -7,6 +7,7 @@ import {
   type ObjectiveDestinationQuery,
 } from "../../../shared/capiro/operations/objective-destination-binding";
 import { useWorkspaceObservation } from "./useWorkspaceObservation";
+import { ObjectiveGeneratedStrategy } from "./ObjectiveGeneratedStrategy";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ObjectiveDestinationFrame,
@@ -122,6 +123,22 @@ export function ObjectiveDestinationRoute({
   children: ReactNode;
 }) {
   const params = useSearchParams();
+  if (params.has("generatedJobId") || params.has("strategyVersionId")) {
+    if (kind !== "strategy") return <ObjectiveDestinationUnavailable />;
+    const selected = readObjectiveLocation(params, [
+      "strategyId",
+      "strategyVersionId",
+      "generatedJobId",
+    ] as const);
+    return selected ? (
+      <ObjectiveGeneratedStrategy
+        key={JSON.stringify(selected)}
+        {...selected}
+      />
+    ) : (
+      <ObjectiveDestinationUnavailable />
+    );
+  }
   if (
     !params.has("objectiveId") &&
     !params.has("objectiveVersion") &&

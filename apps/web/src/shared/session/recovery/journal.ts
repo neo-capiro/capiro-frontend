@@ -144,7 +144,14 @@ function retireRecovery(
   requestId: string,
   disposition:
     | { state: "acknowledged" }
-    | { state: "refused"; code: "WORKSPACE_BRIEF_STATE_CONFLICT" },
+    | {
+        state: "refused";
+        code:
+          | "WORKSPACE_BRIEF_STATE_CONFLICT"
+          | "OBJECTIVE_GENERATION_FAILED"
+          | "OBJECTIVE_CONTEXT_INCOMPLETE"
+          | "OBJECTIVE_VERSION_CONFLICT";
+      },
   assert: () => void,
 ) {
   return locked(scope, assert, async () => {
@@ -188,6 +195,28 @@ export function retireRefusedRecovery(
   assert: () => void,
 ) {
   if (code !== "WORKSPACE_BRIEF_STATE_CONFLICT")
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(scope, requestId, { state: "refused", code }, assert);
+}
+
+/** Only after re-reading an exact terminal failed Objective receipt with no result.
+ * An unconfirmed outcome can never release its durable request fence. */
+export function retireObjectiveFailureRecovery(
+  scope: string,
+  requestId: string,
+  code:
+    | "OBJECTIVE_GENERATION_FAILED"
+    | "OBJECTIVE_CONTEXT_INCOMPLETE"
+    | "OBJECTIVE_VERSION_CONFLICT",
+  assert: () => void,
+) {
+  if (
+    ![
+      "OBJECTIVE_GENERATION_FAILED",
+      "OBJECTIVE_CONTEXT_INCOMPLETE",
+      "OBJECTIVE_VERSION_CONFLICT",
+    ].includes(code)
+  )
     return Promise.reject(new RecoveryStorageError());
   return retireRecovery(scope, requestId, { state: "refused", code }, assert);
 }

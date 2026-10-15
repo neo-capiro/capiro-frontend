@@ -11,6 +11,7 @@ import {
 import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
 import { ObjectiveOutreach } from "./ObjectiveOutreach";
 import { ObjectiveWorkDestinations } from "./ObjectiveWorkDestinations";
+import { ObjectiveGeneration } from "./ObjectiveGeneration";
 
 export function ObjectiveEditor({
   clientId,
@@ -67,6 +68,17 @@ export function ObjectiveEditor({
           key={`outreach:${session.record.id}:${session.record.version}`}
           objective={session.record}
           disabled={
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
+      {open && session.record && (
+        <ObjectiveGeneration
+          key={`generation:${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
+            !session.mutation.canWrite ||
             session.mutation.isPending ||
             session.draftStatus === "Unsaved changes"
           }
