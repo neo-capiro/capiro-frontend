@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
@@ -179,7 +179,7 @@ function MobileMenu({
   );
 }
 
-/** Phone disclosure for the Meri workspace menu; the sidebar is hidden at this width. */
+/** Figma 10.19 phone "Workspace menu" disclosure; the sidebar is hidden at this width. */
 export function MeriMobileNavigation({
   assetSet = "home",
   fixture = false,
@@ -218,8 +218,8 @@ export function MeriMobileNavigation({
         aria-controls={menuId}
         onClick={() => setOpenOn(open ? null : pathname)}
       >
-        Meri workspace
-        {open ? <X aria-hidden /> : <Menu aria-hidden />}
+        <ChevronDown aria-hidden />
+        Workspace menu
       </button>
       {open ? (
         <MobileMenu

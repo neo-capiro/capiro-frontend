@@ -47,9 +47,9 @@ async function expectRoute(
   expectActionIsolation(fixture);
 }
 
-/** The Figma 10.08 phone menu holds the Meri sections behind one disclosure. */
+/** The Figma 10.08 phone menu holds the Meri sections behind the 10.19 "Workspace menu" disclosure. */
 const menuToggle = (page: Page) =>
-  page.getByRole("button", { name: "Meri workspace", exact: true });
+  page.getByRole("button", { name: "Workspace menu", exact: true });
 
 /** Open the phone menu from the keyboard, then follow one section link. */
 async function navigateByKeyboard(page: Page, name: string) {

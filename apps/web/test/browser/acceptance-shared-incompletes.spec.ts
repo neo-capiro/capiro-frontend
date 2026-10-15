@@ -73,10 +73,10 @@ for (const width of [1440, 390]) {
               includeHidden: true,
             }),
           ).toBeDisabled();
-        // The phone sections live behind the Figma 10.08 workspace menu.
+        // The phone sections live behind the Figma 10.19 "Workspace menu" disclosure.
         if (width === 390 && view !== "modules")
           await page
-            .getByRole("button", { name: "Meri workspace", exact: true })
+            .getByRole("button", { name: "Workspace menu", exact: true })
             .click();
         await page.mouse.move(0, 0);
         await expectRenderedContrast(control, info, "rest");
