@@ -16,7 +16,6 @@ import {
   Modal,
   Panel,
   StatusPanel,
-  TextArea,
 } from "../../../shared/module-ui";
 import styles from "./planner.module.css";
 import dialogStyles from "./task-dialog.module.css";
@@ -31,6 +30,8 @@ import { TaskSubtasks } from "./TaskSubtasks";
 import detailStyles from "./task-detail.module.css";
 import { AddTimeDialog } from "./TimeDialogs";
 import { duplicateTaskSeed } from "./task-editor-data";
+import { MarkdownTextarea } from "../../../shared/markdown/MarkdownTextarea";
+import { TaskEventText } from "./TaskEventText";
 type Props = {
   task: PlannerTask;
   people: PlannerPerson[];
@@ -57,7 +58,12 @@ function useDetail({ task, onSaved }: Props) {
   const writable = ["admin", "editor"].includes(task.access);
   const addComment = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (active.current || duplicateOpen.current || task.access === "viewer")
+    if (
+      active.current ||
+      duplicateOpen.current ||
+      task.access === "viewer" ||
+      !comment.trim()
+    )
       return;
     active.current = true;
     const submitted = comment;
@@ -349,7 +355,7 @@ function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
             {m.events.data?.map((item) => (
               <article key={item.id}>
                 <Badge>{item.kind}</Badge>
-                <p>{item.text}</p>
+                <TaskEventText kind={item.kind} text={item.text} />
                 <time className={styles.note}>
                   {new Date(item.createdAt).toLocaleString()}
                 </time>
@@ -364,18 +370,20 @@ function TaskActivity({ task, model: m }: { task: PlannerTask; model: Model }) {
           className={styles.editorFields}
         >
           <Field label="Comment" htmlFor="task-comment">
-            <TextArea
+            <MarkdownTextarea
               id="task-comment"
+              label="Comment"
               disabled={m.busy || task.access === "viewer"}
+              canEdit={() => !m.isPending() && task.access !== "viewer"}
               value={m.comment}
-              onChange={(event) => m.setComment(event.target.value)}
+              onChange={m.setComment}
               required
               maxLength={20000}
             />
           </Field>
           <ActionButton
             type="submit"
-            disabled={m.busy || task.access === "viewer"}
+            disabled={m.busy || task.access === "viewer" || !m.comment.trim()}
           >
             Post comment
           </ActionButton>

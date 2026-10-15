@@ -1,0 +1,161 @@
+{
+  "schema": "focused-non-meri-settings-comment-qualification/1",
+  "status": "SOURCE_AND_LOCAL_FOCUSED_UI_PASS_PRODUCTION_BUILD_BLOCKED",
+  "base": "4e1421054df0d32c564f7c9bc75cbd5e5366b428",
+  "branch": "fix/non-meri-settings-comment-closure",
+  "browser": {
+    "node": "24.19.0",
+    "playwright": "1.61.1",
+    "headlessChromeForTesting": "153.0.8010.12",
+    "platform": "Windows",
+    "workers": 1,
+    "retries": 0,
+    "perCaseTimeoutMs": 15000,
+    "globalTimeoutMs": 240000,
+    "installedBinaryOnly": true,
+    "targetLinuxChromium149Qualified": false
+  },
+  "checks": {
+    "browser": {
+      "passed": 29,
+      "newCases": 19,
+      "affectedExistingCases": 10,
+      "failures": 0,
+      "skips": 0,
+      "retries": 0,
+      "flaky": 0,
+      "files": {
+        "planner-comments-formatting.spec.ts": 8,
+        "planner-markdown.spec.ts": 6,
+        "settings-mutations.spec.ts": 11,
+        "unified-task-detail.spec.ts": 4
+      },
+      "inventoryAndRunIDsMatch": true,
+      "idSetSHA256": "3f2966a43489d81e68ee34df9c1dbb16425738466388621bc05a8f2c6f48b08b"
+    },
+    "canonicalWebTSC": {
+      "exitCode": 0,
+      "incremental": false,
+      "heapMiB": 4096
+    },
+    "changedFileESLint": {
+      "exitCode": 0
+    },
+    "architecture": {
+      "exitCode": 0,
+      "errors": [],
+      "sizeSummary": {
+        "total": 506,
+        "reviewed": 487,
+        "inheritedUnreviewed": 19,
+        "blocking": 0
+      }
+    },
+    "productionBuild": {
+      "exitCode": 1,
+      "status": "BLOCKED_BEFORE_COMPILATION_BY_BORROWED_DEPENDENCY_JUNCTION",
+      "error": "Turbopack: Symlink apps/web/node_modules could not be resolved: the symlink target leaves the filesystem root or its parent directory could not be resolved",
+      "buildConfigOrFilesystemRootChanged": false
+    }
+  },
+  "evidence": {
+    "focused-inventory.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/focused-inventory.json",
+      "bytes": 21449,
+      "sha256": "da73d75623189a75a48cc3f16eb9671ce9125f16cdba546c61cc884517ff9003"
+    },
+    "focused-headless-final.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/focused-headless-final.json",
+      "bytes": 742158,
+      "sha256": "0f354d0d310d6d07c4ecac8c31c86143c3c391e615f79fda1a3597531ae2fec7"
+    },
+    "FOCUSED-RESULT.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/FOCUSED-RESULT.json",
+      "bytes": 11954,
+      "sha256": "9e43136dabf48919bcff6cbfdf3950867c4b66f7b075047e6e8e57daac457427"
+    },
+    "web-typecheck-final.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/web-typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "web-typecheck-final.stderr.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/web-typecheck-final.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lint-final.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/lint-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lint-final.stderr.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/lint-final.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "architecture-final.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/architecture-final.json",
+      "bytes": 952626,
+      "sha256": "6e34855a4a8fb7a762379b04c688ed2c32c3c5e01b24236aa93bb1264e44c939"
+    },
+    "next-build.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/next-build.log",
+      "bytes": 188,
+      "sha256": "dd8d7c80f60076a3201b16bddfc5f702ab95decd7e7d37907c1ada1aa494168b"
+    },
+    "next-build.stderr.log": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/next-build.stderr.log",
+      "bytes": 2938,
+      "sha256": "f9061d62fe0d1f8ea36c2c05c7e001e8fa14912e59dd289ae0cad947cfba247e"
+    },
+    "settings-baseline.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/settings-baseline.json",
+      "bytes": 12777,
+      "sha256": "18d3fd3829f11d1a299616c5c1f64329eebe75ecff4cd90270bc3507583820c2"
+    },
+    "settings-baseline-existing-browser.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/settings-baseline-existing-browser.json",
+      "bytes": 14594,
+      "sha256": "0b443c9a840e6f6976991c2cb4af8639aa67474da749d6a3d8e147e39b7b8f80"
+    },
+    "settings-focused-v1.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/settings-focused-v1.json",
+      "bytes": 18951,
+      "sha256": "be5c7203c19bfc8f6bd0836856aca53fdf36d0193f2b460f5505a0ff32a0dc6f"
+    },
+    "comments-focused-v1.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/comments-focused-v1.json",
+      "bytes": 18141,
+      "sha256": "7f3a5c71226e1363d2cbfcaa86e31a8a7ac6e188930385246d871904f1abaf85"
+    },
+    "comment-reload-recheck.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/comment-reload-recheck.json",
+      "bytes": 2819,
+      "sha256": "3df5e04f8552d0b587f31437f600aa3bcc10017fb57766a9d976f10a66a24e1a"
+    },
+    "comment-reload-recheck-v2.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/comment-reload-recheck-v2.json",
+      "bytes": 4036,
+      "sha256": "fc9c083d3a695844b630de9e8a5bf53e16550468be13ac5412be88967feb282d"
+    },
+    "focused-final.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/focused-final.json",
+      "bytes": 74635,
+      "sha256": "318d7de5994d5f08ca1c089930ce7060bae4149305bc3dd77f11bbb913bc3fef"
+    },
+    "focused-final-v2.json": {
+      "path": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/non-meri-settings-comment-closure/focused-final-v2.json",
+      "bytes": 747410,
+      "sha256": "84b92b56a6d8188559c9cd8c1c0c939fa8acd55dc368d377f8c92a514981b167"
+    }
+  },
+  "retainedFailureBoundary": "Earlier environment, regression, selector and browser resource failures remain failures in their original reports. Final local headless result is separate; no flake/root-cause or old-result overwrite is claimed.",
+  "limits": [
+    "No full480 rerun or blanket carry to this source.",
+    "No native/backend/provider/PG/image/standalone/deployment qualification.",
+    "No new installation, role/credential/security/proxy change, AWS/paid operation, Meri or mobile work.",
+    "No push or merge.",
+    "Default saved comment formatting remains literal; default formatted legacy interpretation, mentions and edit/remove need a separately approved contract."
+  ]
+}

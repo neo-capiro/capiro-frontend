@@ -16,7 +16,11 @@ const commands: { text: string; name: string; action: MarkdownAction }[] = [
   { text: "Checklist", name: "Checklist", action: "checklist" },
 ];
 export function MarkdownTextarea(
-  props: MarkdownTextareaModel & { id: string; label: string },
+  props: MarkdownTextareaModel & {
+    id: string;
+    label: string;
+    required?: boolean;
+  },
 ) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const m = useMarkdownTextarea(props, inputRef);
@@ -94,6 +98,7 @@ export function MarkdownTextarea(
         id={props.id}
         value={props.value}
         maxLength={props.maxLength}
+        required={props.required && !m.preview}
         disabled={props.disabled}
         hidden={m.preview}
         style={m.preview ? { display: "none" } : undefined}
@@ -115,7 +120,9 @@ export function MarkdownTextarea(
           role="region"
           aria-label={`${props.label} preview`}
         >
-          <MarkdownContent source={props.value || "No description"} />
+          <MarkdownContent
+            source={props.value || `No ${props.label.toLowerCase()}`}
+          />
         </div>
       )}
       {!m.linkOpen && m.error && (
@@ -126,7 +133,7 @@ export function MarkdownTextarea(
       <Modal
         open={m.linkOpen}
         onOpenChange={m.setLinkOpen}
-        title="Insert description link"
+        title={`Insert ${props.label.toLowerCase()} link`}
       >
         <form
           onSubmit={(event) => {

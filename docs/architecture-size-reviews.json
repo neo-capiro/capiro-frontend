@@ -2868,33 +2868,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/settings/IntegrationSettings.tsx",
-    "sha256": "1655315b613841fd8e207e8f7973d5afc54fd6d3035159fdbab9682a5ddff9bd",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "IntegrationSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
-    "functions": [
-      {
-        "name": "IntegrationSettings",
-        "nonblankLines": 311
-      },
-      {
-        "name": "callback at line 98",
-        "nonblankLines": 166
-      },
-      {
-        "name": "callback at line 115",
-        "nonblankLines": 91
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/settings/InviteMember.tsx",
     "sha256": "809cf371285c7a0d7db785d2c474188048f9a9a549d815acc48518c6c70bc9cf",
     "reviewer": "Codex implementation review",
@@ -2943,28 +2916,6 @@
     ],
     "signals": [
       "apps/web/src/features/settings/MeriPreferences.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/settings/ProfileSettings.tsx",
-    "sha256": "75fbb59b820464ee583cf3a1469607f08e53cd2c39e5be41a97de32f3c313b5a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "ProfileSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
-    "functions": [
-      {
-        "name": "ProfileSettings",
-        "nonblankLines": 186
-      },
-      {
-        "name": "CreateProfile",
-        "nonblankLines": 84
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/settings/ProfileSettings.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/settings/ProfileSettings.tsx: function over80 nonblank lines requires review"
     ]
   },
   {

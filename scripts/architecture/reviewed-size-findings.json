@@ -610,7 +610,7 @@
     "kind": "function",
     "symbol": "ContactMail",
     "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact’s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
+    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1406,7 +1406,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2353,7 +2353,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2754,24 +2754,6 @@
     "reviewedOn": "2026-10-14"
   },
   {
-    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "49963949c23003eef578d8030f59abde5d3f4c2832bf223209e0d0ce3ea4f9e2",
-    "reason": "One cohesive task-detail presentation and mutation arbitration module, composing canonical task, activity, attachment and time owners.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
-  },
-  {
-    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
-    "kind": "function",
-    "symbol": "useDetail",
-    "fingerprint": "6b6afb37bd92856514a519daa84fd924d012c2d70c4163caaf9fb0c06a47587c",
-    "reason": "Unchanged previously independently reviewed task-detail mutation admission and busy arbitration.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
-  },
-  {
     "file": "apps/web/src/features/modules/planner/useTaskEditor.ts",
     "kind": "function",
     "symbol": "useTaskEditor",
@@ -2786,24 +2768,6 @@
     "symbol": "<anonymous>",
     "fingerprint": "8fb8908a82af47ba59225526f1ce22a61d5562798e41cf5660f0b9ee41e6c1b2",
     "reason": "One coherent cancel, reopen, explicitly review and create scenario asserts exact allowlisted payload and source preservation. The callback retains observable end-to-end scenario custody without weakening assertions.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
-  },
-  {
-    "file": "apps/web/src/shared/markdown/MarkdownTextarea.tsx",
-    "kind": "function",
-    "symbol": "MarkdownTextarea",
-    "fingerprint": "d597b565245e0c10a0105a0f40b51666cdab3f4b15c559353298cc7189e42d30",
-    "reason": "One Markdown textarea presentation owns its toolbar, source, preview and explicit link dialog. Native events stay scoped to the same draft; it contains no API, persistence or authority owner.",
-    "reviewedBy": "Codex independent_fix_review",
-    "reviewedOn": "2026-10-15"
-  },
-  {
-    "file": "apps/web/src/shared/markdown/useMarkdownTextarea.ts",
-    "kind": "function",
-    "symbol": "useMarkdownTextarea",
-    "fingerprint": "4efef7832f86216df00f73d432a7ab076d13a1ea283e30a5f56468a1417ef00f",
-    "reason": "One explicit Markdown source-edit lifecycle owns selection, native Undo-preserving insertion, link validation and deferred insertion retirement. Canonical task hooks retain save, pending, abort, receipt and version authority.",
     "reviewedBy": "Codex independent_fix_review",
     "reviewedOn": "2026-10-15"
   },
@@ -2841,6 +2805,87 @@
     "fingerprint": "fbcecad096295582d9a3a5d3e0573c9bbc52d981e09f27d67fdf94ee3190f5bc",
     "reason": "One canonical encrypted recovery adapter binds source, actor, frozen intent and immutable known outputs under the existing journal and cross-tab command lock; no second storage owner.",
     "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0038731542228a4dc2b5983a5bae7c54d42950646e215a79c00cddbe4e4a8dac",
+    "reason": "One canonical task-detail composition owns existing task actions and the captured comment/pending lifecycle. The new source adds only invalid-empty refusal and canonical comment presentation; TaskEventText owns explicit preview, while mutation and authorization remain in existing owners.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "useDetail",
+    "fingerprint": "d6a6567499eb3e2d5b0773ebf1664d9f13e56256d18ccb4a71e9c3864d5b1c2e",
+    "reason": "One canonical task-detail composition owns existing task actions and the captured comment/pending lifecycle. The new source adds only invalid-empty refusal and canonical comment presentation; TaskEventText owns explicit preview, while mutation and authorization remain in existing owners.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "kind": "function",
+    "symbol": "IntegrationSettings",
+    "fingerprint": "8a4ce01d6f7221a6622140e77ada69558255eb2ffec171f705af13141ac4ebe2",
+    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "kind": "function",
+    "symbol": "IntegrationSettings > <anonymous>",
+    "fingerprint": "b86ee62d387eb3c36f00c5403b417b268b5c85f952799e50cba9c78493356689",
+    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "kind": "function",
+    "symbol": "IntegrationSettings > <anonymous> > <anonymous> #2",
+    "fingerprint": "368369f085d7558837a0bd5a22683e048406317b1ebb60971eb6101e86ae3a9f",
+    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/settings/ProfileSettings.tsx",
+    "kind": "function",
+    "symbol": "ProfileSettings",
+    "fingerprint": "00b634ed5416e8b97f5d24b0f3be114a4fde8791f57cfb2474b0b8e3eb2d79a0",
+    "reason": "One existing profile Settings screen owns list and reviewed archive/restore dialogs; the local status helper checks the exact requested profile and achieved state before existing completion. CreateProfile remains its existing local draft and typed create request owner.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/settings/ProfileSettings.tsx",
+    "kind": "function",
+    "symbol": "CreateProfile",
+    "fingerprint": "f75e1ff9c3fa39df51341dfeced90202a8d20ff8c4af27ad7ce0a5060eb78253",
+    "reason": "One existing profile Settings screen owns list and reviewed archive/restore dialogs; the local status helper checks the exact requested profile and achieved state before existing completion. CreateProfile remains its existing local draft and typed create request owner.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/shared/markdown/MarkdownTextarea.tsx",
+    "kind": "function",
+    "symbol": "MarkdownTextarea",
+    "fingerprint": "37ce79091f621d2398cccaa41e0bd1003b6bf830204652b0a5accaeb79898b27",
+    "reason": "One shared Markdown editor composes formatting, link and preview controls. Added field-specific copy and required handling preserve the canonical edit owner without duplicating editors or changing description serialization.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/shared/markdown/useMarkdownTextarea.ts",
+    "kind": "function",
+    "symbol": "useMarkdownTextarea",
+    "fingerprint": "b6d011a2bf6cfcbbdcf24af4ed880dbddca9d614fc62a97f29124d737a2370b1",
+    "reason": "One canonical Markdown editing hook owns selection, native Undo and queued-link lifetime. The new field label changes only stale-selection wording; formatting and validation algorithms, length bounds and disposal remain unchanged.",
+    "reviewedBy": "Codex non_meri_closure_review",
     "reviewedOn": "2026-10-15"
   }
 ]

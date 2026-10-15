@@ -54,6 +54,10 @@ export function IntegrationSettings() {
       { signal },
     );
     signal.throwIfAborted();
+    if (connectionId && result.connectionId !== connectionId)
+      throw new Error(
+        "The sign-in response did not match this account. Reload integrations to confirm the result.",
+      );
     window.location.assign(
       settingsDestination(
         result.authUrl,
@@ -70,12 +74,31 @@ export function IntegrationSettings() {
         : "settings.integrations.syncGoogle",
       { params: { connectionId: connection.id } },
     );
+    if (result.connectionId !== connection.id)
+      throw new Error(
+        "The sync response did not match this account. Reload integrations to confirm the result.",
+      );
     const stats = [result.calendar, ...Object.values(result.mail ?? {})].filter(
       (value) => !!value,
     );
     if (stats.some((value) => value.failed > 0))
       throw new Error(
         "The sync completed with failed records. Check the connection details and retry.",
+      );
+    return result;
+  }
+  async function disconnectAccount(connection: Connection) {
+    if (connection.provider === "imap_caldav")
+      throw new Error("IMAP / CalDAV disconnection is unavailable here.");
+    const result = await api.request(
+      connection.provider === "microsoft_365"
+        ? "settings.integrations.disconnectMicrosoft"
+        : "settings.integrations.disconnectGoogle",
+      { params: { connectionId: connection.id } },
+    );
+    if (result.connectionId !== connection.id || !result.disconnected)
+      throw new Error(
+        "The disconnect response did not confirm this account. Reload integrations to confirm the result.",
       );
     return result;
   }
@@ -176,7 +199,9 @@ export function IntegrationSettings() {
                           <SettingsButton
                             danger
                             small
-                            disabled={action.busy}
+                            disabled={
+                              action.busy || provider.id === "imap_caldav"
+                            }
                             onClick={() => setDisconnect(connection)}
                           >
                             Disconnect
@@ -255,7 +280,8 @@ export function IntegrationSettings() {
                 {provider.id === "imap_caldav" && (
                   <p className={styles.description}>
                     Server configuration is required for IMAP / CalDAV
-                    ingestion.
+                    ingestion. OAuth, manual sync and disconnection are
+                    unavailable here.
                   </p>
                 )}
               </SettingsCard>
@@ -293,13 +319,7 @@ export function IntegrationSettings() {
               onClick={() => {
                 if (disconnect && disconnect.provider !== "imap_caldav")
                   void action.run(
-                    () =>
-                      api.request(
-                        disconnect.provider === "microsoft_365"
-                          ? "settings.integrations.disconnectMicrosoft"
-                          : "settings.integrations.disconnectGoogle",
-                        { params: { connectionId: disconnect.id } },
-                      ),
+                    () => disconnectAccount(disconnect),
                     "Account was disconnected.",
                     () => {
                       setDisconnect(undefined);
