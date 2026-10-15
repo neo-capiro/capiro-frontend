@@ -1,10 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { MeriDialog } from "../../ui/MeriDialog";
 import { Notice } from "../../ui/Notice";
 import { FormField } from "../../ui/FormField";
+import { DeleteConversationDialog } from "./DeleteConversationDialog";
 import ui from "../../ui/meri-ui.module.css";
 import rows from "../../ui/detail-row.module.css";
 import styles from "./conversation.module.css";
@@ -17,7 +18,7 @@ export type ManagementView = {
   archived?: { title: string; detail: string };
 };
 
-/** 09.08 Conversation management and branches: rename and branch navigation stay local. */
+/** 09.08 Conversation management and branches: rename, branch navigation and deletion confirmation stay local. */
 export function ConversationManagementScreen({
   view,
   unavailable,
@@ -63,6 +64,31 @@ export function ConversationManagementScreen({
         />
       </MeriDialog>
       <BranchPanel view={view} unavailable={unavailable} />
+      <DeleteConversation unavailable={unavailable} />
+    </div>
+  );
+}
+
+/** Opens Overlay · Delete this conversation?; the deletion request itself needs the trusted service. */
+function DeleteConversation({ unavailable }: { unavailable: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={ui.row}>
+      <button
+        type="button"
+        className={ui.ghost}
+        aria-haspopup="dialog"
+        onClick={() => setOpen(true)}
+      >
+        <Trash2 aria-hidden /> Delete conversation
+      </button>
+      <DeleteConversationDialog
+        open={open}
+        onOpenChange={setOpen}
+        explanation="Only delete if permitted by your workspace policy. Some records may be retained: filed client records, action receipts and legally retained records follow their own rules."
+        confirmLabel="Request deletion"
+        unavailable={unavailable}
+      />
     </div>
   );
 }

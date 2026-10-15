@@ -25,6 +25,8 @@ export type ToolActivityView = {
     coverage: string;
   };
   receipt?: { title: string; detail: string };
+  /** 02.07A expanded receipt of the same tool activity. */
+  expandedHref?: string;
 };
 
 const columns: readonly DataColumn<ToolRecord>[] = [
@@ -84,8 +86,12 @@ export function ToolActivityScreen({
         </section>
       ) : null}
       <div className={ui.row}>
-        <LinkAction variant="ghost" unavailable={unavailable}>
-          View expanded code activity
+        <LinkAction
+          variant="ghost"
+          href={view.expandedHref}
+          unavailable={unavailable}
+        >
+          View expanded tool activity
         </LinkAction>
       </div>
     </div>

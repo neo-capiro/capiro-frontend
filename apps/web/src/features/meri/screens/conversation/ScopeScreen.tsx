@@ -20,9 +20,11 @@ export type ScopeView = {
   options: readonly ScopeOption[];
   /** Scope currently applied to the conversation; choosing another stays local. */
   appliedId: string;
+  /** Search text the picker opens with (01.03A shows a search with no permitted match). */
+  initialQuery?: string;
 };
 
-/** 01.03 Choose client and data scope: permitted scopes only; applying needs the trusted service. */
+/** 01.03 Choose client and data scope (and 01.03A no matches): permitted scopes only; applying needs the trusted service. */
 export function ScopeScreen({
   view,
   unavailable,
@@ -80,11 +82,17 @@ function ScopeChoice({
   unavailable: string;
   onCancel: () => void;
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(view.initialQuery ?? "");
   const [choiceId, setChoiceId] = useState(view.appliedId);
+  const search = useRef<HTMLInputElement>(null);
   const choice = view.options.find((option) => option.id === choiceId);
   const matches = view.options.filter((option) =>
     option.name.toLowerCase().includes(query.trim().toLowerCase()),
+  );
+  const cancel = (
+    <button type="button" className={ui.outline} onClick={onCancel}>
+      Cancel
+    </button>
   );
   return (
     <>
@@ -92,40 +100,102 @@ function ScopeChoice({
         label="Search clients"
         placeholder="Search by name…"
         autoFocus
+        ref={search}
         value={query}
         onChange={setQuery}
       />
-      <ul className={styles.rowList} aria-label="Permitted scopes">
-        {matches.map((option) => {
-          const chosen = option.id === choiceId;
-          return (
-            <DetailRow
-              key={option.id}
-              as="li"
-              icon={<Users />}
-              title={option.name}
-              detail={chosen ? `Selected · ${option.detail}` : option.detail}
+      {matches.length ? (
+        <>
+          <ScopeOptions
+            options={matches}
+            choiceId={choiceId}
+            onChoose={setChoiceId}
+          />
+          <DataScope items={choice?.dataScope ?? []} />
+          <div className={ui.row}>
+            {cancel}
+            <button
+              type="button"
+              className={ui.primary}
+              disabled
+              title={unavailable}
             >
-              <button
-                type="button"
-                className={chosen ? ui.primary : ui.outline}
-                aria-pressed={chosen}
-                aria-label={`${chosen ? "Selected" : "Choose"} ${option.name}`}
-                onClick={() => setChoiceId(option.id)}
-              >
-                {chosen ? "Selected" : "Choose"}
-              </button>
-            </DetailRow>
-          );
-        })}
-        {matches.length ? null : (
-          <li className={ui.muted}>No permitted client matches “{query}”.</li>
-        )}
-      </ul>
+              Use {choice?.name ?? "scope"}
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div role="status">
+            <Notice tone="success" title="No matching authorized clients">
+              Try a different search. No match does not prove a client is
+              absent. Your unsent draft is kept; General workspace remains
+              available after you clear the search.
+            </Notice>
+          </div>
+          <div className={ui.row}>
+            {cancel}
+            <button
+              type="button"
+              className={ui.primary}
+              onClick={() => {
+                setQuery("");
+                search.current?.focus();
+              }}
+            >
+              Clear search
+            </button>
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+function ScopeOptions({
+  options,
+  choiceId,
+  onChoose,
+}: {
+  options: readonly ScopeOption[];
+  choiceId: string;
+  onChoose: (id: string) => void;
+}) {
+  return (
+    <ul className={styles.rowList} aria-label="Permitted scopes">
+      {options.map((option) => {
+        const chosen = option.id === choiceId;
+        return (
+          <DetailRow
+            key={option.id}
+            as="li"
+            icon={<Users />}
+            title={option.name}
+            detail={chosen ? `Selected · ${option.detail}` : option.detail}
+          >
+            <button
+              type="button"
+              className={chosen ? ui.primary : ui.outline}
+              aria-pressed={chosen}
+              aria-label={`${chosen ? "Selected" : "Choose"} ${option.name}`}
+              onClick={() => onChoose(option.id)}
+            >
+              {chosen ? "Selected" : "Choose"}
+            </button>
+          </DetailRow>
+        );
+      })}
+    </ul>
+  );
+}
+
+function DataScope({ items }: { items: readonly string[] }) {
+  return (
+    <>
       <hr className={styles.divider} />
       <h3 className={styles.sectionTitle}>Data scope</h3>
       <ul className={styles.rowList} aria-label="Included data">
-        {choice?.dataScope.map((item) => (
+        {items.map((item) => (
           <DetailRow key={item} as="li" icon={<Check />} title={item} />
         ))}
       </ul>
@@ -133,19 +203,6 @@ function ScopeChoice({
         Changing clients starts a clean context. The unsent prompt stays
         available.
       </Notice>
-      <div className={ui.row}>
-        <button type="button" className={ui.outline} onClick={onCancel}>
-          Cancel
-        </button>
-        <button
-          type="button"
-          className={ui.primary}
-          disabled
-          title={unavailable}
-        >
-          Use {choice?.name ?? "scope"}
-        </button>
-      </div>
     </>
   );
 }
