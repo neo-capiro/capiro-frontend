@@ -17,9 +17,13 @@ linked in [the integration plan](docs/integration-20261012/PLAN.md).
 The application owns one Clerk identity/session/client lifetime. Core/Intel
 Portfolio transports, the Modules fixed-operation gateway and Meri public
 packages remain distinct governed interfaces. Browser selection is a hint;
-backend authorization remains authoritative. Meri screens are disclosed,
-disconnected synthetic fixtures until their public runtime integration is
-qualified. Unsupported operations stay unavailable.
+backend authorization remains authoritative. The normal `/meri` route composes
+the governed conversation host and public SDK; connection stays disabled without
+validated configuration and explicit opt-in. The separate polished run workspace
+remains a disclosed disconnected sample. Implemented receiving and local fixture
+checks do not establish live runtime acceptance. See the pinned
+[Meri host status and remaining controls](docs/meri-conversation-status-20261015/STATUS.md).
+Unsupported operations stay unavailable.
 
 Use Node 24 and npm 11.9.0 from the repository root. `package-lock.json` is the sole
 active install lock; historical locks remain immutable qualification evidence.
