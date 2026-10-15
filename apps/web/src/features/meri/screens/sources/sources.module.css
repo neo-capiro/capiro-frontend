@@ -61,3 +61,13 @@ section.capabilities {
 .sourceList[data-state="closed"] [data-when="open"] {
   display: none;
 }
+/* 05.21–05.22 loading and unavailable source states. */
+section.state {
+  gap: 10px;
+  padding: 16px;
+  width: 100%;
+}
+.compactStatus > span {
+  height: auto;
+  min-width: 0;
+}
