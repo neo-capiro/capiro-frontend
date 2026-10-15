@@ -36,6 +36,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 01.04F | Running conversation filter | 3048:34348 | Built: synthetic fixture `/meri/fixture/conversation-history-running` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04G | Archived conversation filter | 3048:34602 | Built: synthetic fixture `/meri/fixture/conversation-history-archived` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04H | History after selected conversation deletion | 3043:38316 | Built: synthetic fixture `/meri/fixture/conversation-history-after-deletion` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04I | Client filter menu open | 3067:40614 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04J | Status filter menu open | 3067:40882 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05 | Search and command palette | 1064:144529 | Built: synthetic fixture `/meri/fixture/command-palette` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05A | Command palette no matches | 3034:37943 | Built: synthetic fixture `/meri/fixture/command-palette-no-matches` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 02.02 | Parallel specialist activity | 1064:144601 | Built: synthetic fixture `/meri/fixture/specialist-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
@@ -79,11 +81,13 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 04.07 | Filing and download receipts | 1064:146629 | Built: synthetic fixture `/meri/fixture/filing-receipt` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.08 | Artifact sharing and source scopes | 3019:28559 | Built: synthetic fixture `/meri/fixture/artifact-sharing` | Follows parent flow |
 | 04.08A | Source access review requested | 3024:26544 | Built: synthetic fixture `/meri/fixture/source-access-review-requested` | Follows parent flow |
+| 04.08B | Artifact sharing opened from document workspace | 3064:40201 | Not built (added 15 Oct) | Follows parent flow |
 | 05.01 | Evidence and citations | 1064:146715 | Built: synthetic fixture `/meri/fixture/evidence-sources` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.04 | Institutional Memory recall | 1064:147042 | Built: synthetic fixture `/meri/fixture/memory-recall` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.04B | Institutional Memory history | 3019:23371 | Built: synthetic fixture `/meri/fixture/memory-history` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.04C | Institutional Memory history — no matching history | 3062:39816 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.05 | Memory detail and provenance | 1064:147112 | Built: synthetic fixture `/meri/fixture/memory-detail` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.06 | Memory update proposal | 1064:147204 | Built: synthetic fixture `/meri/fixture/memory-proposal` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.07 | Access changed and clean recovery | 1064:147272 | Built: synthetic fixture `/meri/fixture/access-changed` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
@@ -147,17 +151,22 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 05.14 | Memory proposal — revised draft | 3019:29568 | Built: synthetic fixture `/meri/fixture/memory-proposal-revised` | Follows parent flow |
 | 05.15 | Memory proposals — loading | 3019:29765 | Built: synthetic fixture `/meri/fixture/memory-proposals-loading` | Follows parent flow |
 | 05.16 | Memory proposals — load error | 3019:29962 | Built: synthetic fixture `/meri/fixture/memory-proposals-load-error` | Follows parent flow |
+| 05.16B | Memory proposals — retry loading in progress | 3062:34870 | Not built (added 15 Oct) | Follows parent flow |
 | 05.17 | Memory proposal — submission error | 3019:30159 | Built: synthetic fixture `/meri/fixture/memory-proposal-submission-error` | Follows parent flow |
 | 05.18 | Memory review — decision status uncertain | 3019:30356 | Built: synthetic fixture `/meri/fixture/memory-review-status-uncertain` | Follows parent flow |
+| 05.18A | Memory review — status confirmed | 3062:35082 | Not built (added 15 Oct) | Follows parent flow |
 | 05.19 | Memory review — access restricted | 3019:30553 | Built: synthetic fixture `/meri/fixture/memory-review-restricted` | Follows parent flow |
 | 05.20 | Memory proposal — changed while open | 3019:30750 | Built: synthetic fixture `/meri/fixture/memory-proposal-changed` | Follows parent flow |
+| 05.20A | Memory proposal — refreshed to latest revision | 3062:35293 | Not built (added 15 Oct) | Follows parent flow |
 | 05.21 | Sources loading | 3026:27513 | Built: synthetic fixture `/meri/fixture/sources-loading` | Follows parent flow |
 | 05.22 | Sources unavailable | 3026:27760 | Built: synthetic fixture `/meri/fixture/sources-unavailable` | Follows parent flow |
+| 05.22A | Sources — retry in progress | 3062:39648 | Not built (added 15 Oct) | Follows parent flow |
 | 06.01A | Approvals after task decision | 3036:33107 | Built: synthetic fixture `/meri/fixture/approvals-after-task-decision` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.01B | Approvals after filing decision | 3036:38096 | Built: synthetic fixture `/meri/fixture/approvals-after-filing-decision` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.01C | Approvals after memory decision | 3048:39000 | Built: synthetic fixture `/meri/fixture/approvals-after-memory-decision` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02A | Authorized memory reviewer perspective | 3027:28352 | Built: synthetic fixture `/meri/fixture/memory-review-authorized-reviewer` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02B | Request memory proposal changes | 3036:38962 | Built: synthetic fixture `/meri/fixture/request-memory-changes` | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.02C | Memory proposal approved by another reviewer | 3063:35688 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.04A | Executed task proposal | 3036:33726 | Built: synthetic fixture `/meri/fixture/executed-task-proposal` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.05A | Artifact filing rejected | 3036:38733 | Built: synthetic fixture `/meri/fixture/artifact-filing-rejected` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.07A | Request artifact filing changes | 3036:38540 | Built: synthetic fixture `/meri/fixture/request-filing-changes` | Approval metadata and commands exist. No list endpoint for an approval center found. |
@@ -165,6 +174,9 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 06.07C | Task proposal rejected | 3036:33325 | Built: synthetic fixture `/meri/fixture/task-proposal-rejected` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.07D | Task changes requested | 3036:33519 | Built: synthetic fixture `/meri/fixture/task-changes-requested` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.08 | Source access approval review | 3024:26758 | Built: synthetic fixture `/meri/fixture/source-access-review` | Follows parent flow |
+| 06.08A | Source access approved | 3063:36079 | Not built (added 15 Oct) | Follows parent flow |
+| 06.08B | Source access denied | 3063:36239 | Not built (added 15 Oct) | Follows parent flow |
+| 06.08C | Source access review — source owner perspective | 3063:35905 | Not built (added 15 Oct) | Follows parent flow |
 | 07.02A | Research account connected | 3024:32269 | Built: synthetic fixture `/meri/fixture/research-account-connected` | No browser product integration. No qualified browser host. |
 | 07.03A | Public browser download receipt | 3024:32057 | Built: synthetic fixture `/meri/fixture/public-download-receipt` | No browser product integration. No qualified browser host. |
 | 08.02A | Edit routine | 3024:31132 | Built: synthetic fixture `/meri/fixture/edit-routine` | Schedule owner, create/update/cancel and history exist as source. |
@@ -204,6 +216,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 13.24 | Reply to document comment | 3045:34297 | Built: synthetic fixture `/meri/fixture/document-comment-reply` | Follows parent flow |
 | 13.25 | Document comment reply added | 3045:34315 | Built: synthetic fixture `/meri/fixture/document-comment-reply-added` | Follows parent flow |
 | 13.26 | Document comment resolved | 3045:34333 | Built: synthetic fixture `/meri/fixture/document-comment-resolved` | Follows parent flow |
+| 13.27 | Comment reopened | 3064:35947 | Not built (added 15 Oct) | Follows parent flow |
+| 13.28 | Comment thread with reply | 3064:35975 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Run cancelled |  | 1064:150073 | Absent | Follows parent flow |
 | Overlay · Revise funding analysis |  | 1064:150079 | Absent | Follows parent flow |
 | Overlay · File funding analysis |  | 1064:150093 | Absent | Follows parent flow |
@@ -235,6 +249,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Problem report sent |  | 3022:32427 | Built: synthetic fixture `/meri/fixture/problem-report-sent` | Follows parent flow |
 | Overlay · Signed out |  | 3022:32475 | Built: synthetic fixture `/meri/fixture/signed-out` | Follows parent flow |
 | Overlay · Updates panel |  | 3022:32579 | Built: synthetic fixture `/meri/fixture/updates-panel` | Follows parent flow |
+| Overlay · Download PDF |  | 3064:40166 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Download source bundle |  | 3064:40160 | Not built (added 15 Oct) | Follows parent flow |
 | Document overlay · blocks |  | 1064:150601 | Absent | Follows parent flow |
 | Document overlay · revision |  | 1064:150603 | Absent | Follows parent flow |
 | Document overlay · mobileRevision |  | 1064:150605 | Built: synthetic fixture `/meri/fixture/document-mobile-revision` | Follows parent flow |

@@ -4,7 +4,6 @@ import { expectGradientIncompletes } from "../rendered-contrast";
 import { tabTo, expectFocusEvidence } from "../accessibility-interaction";
 import {
   filesFixture,
-  filesUrl,
   actionClient,
   expectFilesIsolation,
 } from "./meri-files-fixtures";
@@ -84,22 +83,26 @@ for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
     await page.emulateMedia({ colorScheme: "dark" });
     const home = `/meri/fixture/home?clientId=${actionClient.id}`;
+    const fixtureFilesUrl = `/meri/fixture/workspace-files?clientId=${actionClient.id}`;
     await page.goto(home);
     await expect(
       page.getByLabel("Message draft", { exact: true }),
     ).toBeVisible();
+    // Fixture navigation stays on fixture screens; at 390px the sections sit
+    // behind the workspace menu (Figma 10.08).
+    if (width === 390)
+      await page
+        .getByRole("button", { name: "Meri workspace", exact: true })
+        .click();
     await page
       .getByRole(width === 390 ? "link" : "button", {
         name: "Files",
         exact: true,
       })
       .click();
-    await expect(page).toHaveURL(filesUrl());
+    await expect(page).toHaveURL(fixtureFilesUrl);
     await expect(
-      page.getByRole("button", {
-        name: "Connect document service",
-        exact: true,
-      }),
+      page.getByRole("heading", { level: 1, name: "Files", exact: true }),
     ).toBeVisible();
     expect((await style(page.getByRole("main"))).foreground).toBe("#f5f5f4");
     await page
@@ -113,12 +116,12 @@ for (const width of [1440, 390]) {
     ).toBeVisible();
     expect((await style(page.getByRole("banner"))).foreground).toBe("#0a0a0a");
     await page.goBack();
-    await expect(page).toHaveURL(filesUrl());
+    await expect(page).toHaveURL(fixtureFilesUrl);
     expect((await style(page.getByRole("main"))).foreground).toBe("#f5f5f4");
     await page.goBack();
     await expect(page).toHaveURL(home);
     await page.goForward();
-    await expect(page).toHaveURL(filesUrl());
+    await expect(page).toHaveURL(fixtureFilesUrl);
     await page.emulateMedia({ colorScheme: "light" });
     expect((await style(page.getByRole("main"))).foreground).toBe("#0a0a0a");
     await page.emulateMedia({ colorScheme: "dark" });
