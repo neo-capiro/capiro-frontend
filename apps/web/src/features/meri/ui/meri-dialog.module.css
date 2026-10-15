@@ -1,0 +1,108 @@
+/* Figma 3.4 Meri dialogs (01.03, 01.05, 09.08) and other portal surfaces. */
+.portalSurface {
+  color: var(--foreground);
+}
+.dialog {
+  position: fixed;
+  z-index: 101;
+  left: 260px;
+  top: 177px;
+  width: min(720px, calc(100vw - 292px));
+  max-height: calc(100dvh - 200px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow:
+    0 2px 6px #0c0a090d,
+    0 16px 40px -12px #0c0a092e;
+}
+.dialog[data-width="wide"] {
+  width: min(800px, calc(100vw - 292px));
+}
+.dialog[data-placement="top"] {
+  top: 93px;
+  max-height: calc(100dvh - 116px);
+}
+.heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.44px;
+  font-weight: 600;
+}
+.close {
+  width: 40px;
+  height: 36px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--foreground);
+}
+.close svg {
+  width: 16px;
+  height: 16px;
+}
+.description {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  color: var(--muted-foreground);
+}
+.hint {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--muted-foreground);
+}
+@media (max-width: 900px) {
+  .dialog,
+  .dialog[data-width="wide"] {
+    left: 226px;
+    width: min(720px, calc(100vw - 242px));
+  }
+}
+@media (max-width: 680px) {
+  .dialog,
+  .dialog[data-width="wide"],
+  .dialog[data-placement="top"] {
+    left: 16px;
+    right: 16px;
+    top: 72px;
+    width: auto;
+    max-height: calc(100dvh - 96px);
+    padding: 20px 16px;
+  }
+}
+/* Portals render outside the shell workspace, so they restate its Figma 10.01 dark tokens. */
+@media (prefers-color-scheme: dark) {
+  .portalSurface {
+    --background: #0a0a0a;
+    --card: #0a0a0a;
+    --foreground: #f5f5f4;
+    --muted: #242424;
+    --muted-foreground: #afa6a0;
+    --border: #242424;
+    --input: #242424;
+    --meri-icon-filter: brightness(0) invert(1);
+    color-scheme: dark;
+  }
+  .dialog {
+    background: linear-gradient(168deg, #242424, #0a0a0a);
+  }
+}
