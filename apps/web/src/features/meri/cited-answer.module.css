@@ -211,16 +211,22 @@
 .selectedSource {
   background: var(--muted);
 }
+/* Figma 10.05 mobile conversation: 16px gutters, 22px title, no Meri wordmark. */
 @media (max-width: 680px) {
   .view {
-    padding: 24px 16px;
+    padding: 16px;
+    gap: 16px;
+  }
+  .heading {
+    min-height: 0;
   }
   .heading h1 {
-    font-size: 23px;
+    font-size: 22px;
     line-height: 1.2;
+    letter-spacing: -0.44px;
   }
   .meriMark {
-    margin-top: 3px;
+    display: none;
   }
   .answer h2 {
     font-size: 18px;

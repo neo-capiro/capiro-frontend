@@ -251,24 +251,34 @@
     flex-wrap: wrap;
   }
 }
+/* Figma 10.04 mobile home: scope chip only, the question as the visible heading, two start tiles. */
 @media (max-width: 680px) {
   .home {
-    padding: 24px 16px;
+    padding: 16px;
   }
-  .scopeRow {
-    flex-wrap: wrap;
-  }
-  .meriWordmark {
-    margin-left: auto;
+  .status,
+  .meriWordmark,
+  .suggestions > :nth-child(n + 3) {
+    display: none;
   }
   .welcomeGroup {
-    margin-top: 80px;
+    margin-top: 32px;
+    gap: 16px;
   }
+  /* The greeting stays the page heading for assistive technology. */
   .welcome h1 {
-    font-size: 30px;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
   .welcome p {
-    font-size: 19px;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.9px;
+    color: var(--foreground);
   }
   .composerFooter {
     width: 100%;
@@ -278,7 +288,22 @@
     margin-left: auto;
   }
   .suggestions {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+  .card {
+    gap: 10px;
+  }
+  .cardTopRow {
+    display: contents;
+  }
+  .cardTopRow .start {
+    order: 1;
+    margin-top: auto;
+  }
+  .moreSuggestions {
+    flex-wrap: wrap;
+    align-self: flex-start;
   }
 }
 .stopIcon {
