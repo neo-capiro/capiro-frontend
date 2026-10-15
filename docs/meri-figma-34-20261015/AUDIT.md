@@ -164,3 +164,73 @@ Live browser takeover, in-browser Office editing, a device bridge and authentica
 | 11 States | Five state boards as real component states | Per-flow wiring |
 | 12 Tooling | Workflow library, 14 setups, commitments, coverage, matrix views | Runtime-qualified workflows |
 | AI Elements | Tool, Artifact, Attachment, Confirmation, Plan, Sources, Queue, Checkpoint, Context, File Tree, Inline Citation, Code Block, Terminal, Web Preview | Upstream adoption with provenance |
+
+## Tooling coverage, workflow setups and document drafting frames
+
+These frames sit beside the standalone mock-up in sections `1064:150752` (tooling coverage), `1064:150329` (document drafting) and `1064:150613` (client context). The tooling numbering conflicts listed above are kept as authored; the node ID is the unique key.
+
+| Figma ID | Screen | Node | Frontend status | Group |
+| --- | --- | --- | --- | --- |
+| 12.01 | Workflow library | 1064:151092 | Absent | desktop |
+| 12.02 | Commitments & Deliverables | 1064:151177 | Absent | desktop |
+| 12.03 | Sources & coverage | 1064:151246 | Absent | desktop |
+| 12.04 | Source access & operations | 1064:151332 | Absent | desktop |
+| 12.05 | Artifact formats | 1064:151397 | Absent | desktop |
+| 12.06 | Code & reproducible analysis | 1064:151469 | Absent | desktop |
+| 12.07 | Workflow request & context | 1064:151540 | Absent | desktop |
+| 12.08 | Workflow run & recovery | 1064:151605 | Absent | desktop |
+| 12.07 | Funding & federal market | 1064:151682 | Absent | desktop |
+| 12.08 | Budget lines & exact comparison | 1064:151762 | Absent | desktop |
+| 12.10 | Relationship & mail history | 1064:151858 | Absent | desktop |
+| 12.11 | Client & portfolio changes | 1064:151930 | Absent | desktop |
+| 12.13 | Government watch | 1064:152002 | Absent | desktop |
+| 12.14 | Memory conflict & lifecycle | 1064:152069 | Absent | desktop |
+| 12.15 | Clarify subject & context | 1064:152144 | Absent | desktop |
+| 12.16 | Exact file extraction coverage | 1064:152220 | Absent | desktop |
+| 12.17 | Browser permissions & qualification | 1064:152281 | Absent | desktop |
+| 12.20 | Company research & capture roadmap | 1064:152370 | Absent | desktop |
+| 12.21 | Portfolio overlap matrix | 1064:152468 | Absent | desktop |
+| 12.15 | Artifact verification | 1064:152575 | Absent | desktop |
+| 12.22 | Exact source record | 1064:152635 | Absent | desktop |
+| Setup · Research a Company |  | 1064:152953 | Absent | setup |
+| Setup · Relationship Brief |  | 1064:152955 | Absent | setup |
+| Setup · Client Changes |  | 1064:152957 | Absent | setup |
+| Setup · Portfolio Changes |  | 1064:152959 | Absent | setup |
+| Setup · Portfolio Overlap |  | 1064:152961 | Absent | setup |
+| Setup · Mail History |  | 1064:152963 | Absent | setup |
+| Setup · Meeting Prep Brief |  | 1064:152965 | Absent | setup |
+| Setup · Commitments & Deliverables |  | 1064:152967 | Absent | setup |
+| Setup · Funding Opportunity Match |  | 1064:152969 | Absent | setup |
+| Setup · PE Deep Dive |  | 1064:152971 | Absent | setup |
+| Setup · Bill Watch |  | 1064:152973 | Absent | setup |
+| Setup · Hearing Watch |  | 1064:152975 | Absent | setup |
+| Setup · Representation Lookup |  | 1064:152977 | Absent | setup |
+| Setup · Regulatory Docket Brief |  | 1064:152979 | Absent | setup |
+| Task · Draft from commitment |  | 1064:152981 | Absent | setup |
+| Task · Review exact source action |  | 1064:153002 | Absent | setup |
+| Task · Source creation receipt |  | 1064:153038 | Absent | setup |
+| Task · Canonical source record |  | 1064:153081 | Absent | setup |
+| Meri · Workflow library · Phone |  | 1064:152692 | Absent | responsive |
+| Meri · Commitments & Deliverables · Phone |  | 1064:152717 | Absent | responsive |
+| Meri · Sources & coverage · Phone |  | 1064:152737 | Absent | responsive |
+| Meri · Review workflow request · Phone |  | 1064:152758 | Absent | responsive |
+| Meri · Workflow library · Tablet |  | 1064:152783 | Absent | responsive |
+| Meri · Workflow library · Dark |  | 1064:152868 | Absent | responsive |
+| Phone setup · Research a Company |  | 1064:153319 | Absent | phone setup |
+| Phone setup · Relationship Brief |  | 1064:153321 | Absent | phone setup |
+| Phone setup · Client Changes |  | 1064:153323 | Absent | phone setup |
+| Phone setup · Portfolio Changes |  | 1064:153325 | Absent | phone setup |
+| Phone setup · Portfolio Overlap |  | 1064:153327 | Absent | phone setup |
+| Phone setup · Mail History |  | 1064:153329 | Absent | phone setup |
+| Phone setup · Meeting Prep Brief |  | 1064:153331 | Absent | phone setup |
+| Phone setup · Commitments & Deliverables |  | 1064:153333 | Absent | phone setup |
+| Phone setup · Funding Opportunity Match |  | 1064:153335 | Absent | phone setup |
+| Phone setup · PE Deep Dive |  | 1064:153337 | Absent | phone setup |
+| Phone setup · Bill Watch |  | 1064:153339 | Absent | phone setup |
+| Phone setup · Hearing Watch |  | 1064:153341 | Absent | phone setup |
+| Phone setup · Representation Lookup |  | 1064:153343 | Absent | phone setup |
+| Phone setup · Regulatory Docket Brief |  | 1064:153345 | Absent | phone setup |
+| Meri · Document working draft · Desktop |  | 1064:150330 | Absent | drafting |
+| Meri · Document working draft · Tablet |  | 1064:150459 | Absent | drafting |
+| Meri · Document working draft · Phone |  | 1064:150539 | Absent | drafting |
+| Meri · Anduril meeting workspace entry |  | 1064:150614 | Absent | client context |
