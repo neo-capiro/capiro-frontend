@@ -16,7 +16,7 @@ test("delayed SDK readiness survives navigation and reload without admitting bac
   });
   await page.goto(path);
   await expect(
-    page.getByText("Loading sign-in.", { exact: true }),
+    page.getByText("Loading sign-in…", { exact: true }),
   ).toBeVisible();
   await page.evaluate(() => {
     const url = new URL(location.href);
@@ -41,7 +41,7 @@ test("delayed SDK readiness survives navigation and reload without admitting bac
   expect(reads).toBe(1);
   await page.reload();
   await expect(
-    page.getByText("Loading sign-in.", { exact: true }),
+    page.getByText("Loading sign-in…", { exact: true }),
   ).toBeVisible();
   await expect(page.getByTestId("identity")).toHaveCount(0);
   expect(reads).toBe(1);
@@ -85,7 +85,7 @@ test("provider loaded and auth loaded remain separate; backend refusal still exp
     ),
   );
   await expect(
-    page.getByText("Loading your session.", { exact: true }),
+    page.getByText("Loading your session…", { exact: true }),
   ).toBeVisible();
   await expect(page.getByTestId("identity")).toHaveCount(0);
   expect(reads).toBe(0);
