@@ -35,6 +35,7 @@ export type ResearchProgressView = {
   sources: { title: string; breakdown: string; note: string };
   steer: string;
   backgroundHref?: string;
+  runHref?: string;
 };
 
 /** 02.01 Research in progress: plan, run overview and a steering draft while work continues. */
@@ -73,7 +74,11 @@ export function ResearchProgressScreen({
             </ul>
           </PlanContent>
           <PlanFooter className={styles.planFooter}>
-            <LinkAction variant="ghost" unavailable={unavailable}>
+            <LinkAction
+              variant="ghost"
+              href={view.runHref}
+              unavailable={unavailable}
+            >
               <ArrowUpRight aria-hidden /> View run
             </LinkAction>
           </PlanFooter>

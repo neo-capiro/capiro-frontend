@@ -193,6 +193,7 @@ function researchView(): ResearchProgressView {
     },
     steer: "Please prioritize the open restoration request.",
     backgroundHref: fixtureHref("background-runs"),
+    runHref: fixtureHref("run-detail"),
   };
 }
 
