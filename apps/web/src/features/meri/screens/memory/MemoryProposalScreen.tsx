@@ -1,29 +1,26 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
-import { FormField } from "../../ui/FormField";
+import { Notice } from "../../ui/Notice";
+import { StatusPill } from "../../ui/StatusPill";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
 import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
+import {
+  phaseRules,
+  type MemoryProposalView,
+  type ProposalAction,
+} from "./proposal-phases";
+import { ProposalContentFields } from "./ProposalContentFields";
 import styles from "./memory.module.css";
 
-export type MemoryProposalView = {
-  title: string;
-  reference: string;
-  currentFact: string;
-  proposedFact: string;
-  owner: string;
-  visibility: string;
-  reason: string;
-};
-
 /**
- * 05.06 Memory update proposal. A proposal never changes canonical memory by
- * itself: it is submitted for an authorized reviewer, so submission stays with
- * the trusted backend and is unavailable in the browser fixture.
+ * Memory proposal lifecycle (05.06, 05.10–05.20): one proposal dialog whose
+ * explicit phase decides what is editable and which actions are possible. A
+ * proposal never changes canonical memory by itself; submission, review and
+ * status reads stay with the trusted backend and are unavailable here.
  */
 export function MemoryProposalScreen({
   view,
@@ -34,84 +31,107 @@ export function MemoryProposalScreen({
   closeHref?: string | undefined;
   unavailable: string;
 }) {
-  const [owner, setOwner] = useState(view.owner);
-  const [visibility, setVisibility] = useState(view.visibility);
-  const [reason, setReason] = useState(view.reason);
+  const rules = phaseRules[view.phase];
   return (
     <div className={ui.page}>
-      <MeriPageHeading
-        title="Propose a memory update"
-        description="Changes are sourced and reviewed before becoming canonical."
-      />
+      <MeriPageHeading title={view.heading} description={view.description} />
       <section
         className={`${surfaces.card} ${styles.proposal}`}
         aria-labelledby="proposal-title"
+        aria-busy={rules.busy || undefined}
+        data-phase={view.phase}
       >
         <div className={styles.proposalHeading}>
           <h2 id="proposal-title" className={panel.title}>
             {view.title}
           </h2>
+          {view.status ? (
+            <span className={styles.lifecycleStatus}>
+              <StatusPill tone={view.status.tone}>
+                {view.status.label}
+              </StatusPill>
+            </span>
+          ) : null}
           {closeHref ? (
             <Link
               className={ui.ghost}
               href={closeHref}
-              aria-label="Close proposal"
+              aria-label={`Close ${view.title}`}
             >
               <X aria-hidden />
             </Link>
           ) : null}
         </div>
-        <p className={`${panel.body} ${ui.muted}`}>{view.reference}</p>
-        <div className={styles.pair}>
-          <FactCard label="Current approved fact" fact={view.currentFact} />
-          <FactCard label="Proposed replacement" fact={view.proposedFact} />
-        </div>
-        <div className={styles.pair}>
-          <FormField label="Owner" value={owner} onChange={setOwner} />
-          <FormField
-            label="Visibility"
-            value={visibility}
-            onChange={setVisibility}
+        <p className={`${panel.body} ${ui.muted}`}>{view.context}</p>
+        {view.feedback ? <Feedback feedback={view.feedback} /> : null}
+        {"content" in view ? (
+          <ProposalContentFields
+            content={view.content}
+            editable={rules.editable}
           />
-        </div>
-        <div className={surfaces.stretch}>
-          <FormField
-            label="Reason and evidence"
-            value={reason}
-            onChange={setReason}
-          />
-        </div>
-        <p className={`${surfaces.small} ${ui.muted}`}>
-          This proposal replaces the current fact only after an authorized
-          reviewer approves it.
-        </p>
+        ) : null}
+        <p className={`${surfaces.small} ${ui.muted}`}>{view.footnote}</p>
         <div className={ui.row}>
-          <LinkAction
+          <Action
+            action={view.secondary}
             variant="outline"
-            href={closeHref}
+            busy={rules.busy}
             unavailable={unavailable}
-          >
-            Cancel
-          </LinkAction>
-          <button
-            type="button"
-            className={ui.primary}
-            disabled
-            title={unavailable}
-          >
-            Submit for review
-          </button>
+          />
+          <Action
+            action={view.primary}
+            variant="primary"
+            busy={rules.busy}
+            unavailable={unavailable}
+          />
         </div>
       </section>
     </div>
   );
 }
 
-function FactCard({ label, fact }: { label: string; fact: string }) {
+/** Danger feedback is an alert (from Notice); every other outcome is announced politely. */
+function Feedback({
+  feedback,
+}: {
+  feedback: NonNullable<MemoryProposalView["feedback"]>;
+}) {
   return (
-    <div className={`${surfaces.panel} ${styles.fact}`}>
-      <h3>{label}</h3>
-      <p>{fact}</p>
+    <div
+      className={surfaces.stretch}
+      role={feedback.tone === "danger" ? undefined : "status"}
+    >
+      <Notice tone={feedback.tone} title={feedback.title}>
+        {feedback.lines.map((line, index) => (
+          <span key={line}>
+            {index ? <br /> : null}
+            {line}
+          </span>
+        ))}
+      </Notice>
     </div>
+  );
+}
+
+/** While a read or write is in flight both actions wait; otherwise navigation or an explained disabled control. */
+function Action({
+  action,
+  variant,
+  busy,
+  unavailable,
+}: {
+  action: ProposalAction;
+  variant: "outline" | "primary";
+  busy: boolean;
+  unavailable: string;
+}) {
+  return busy ? (
+    <button type="button" className={ui[variant]} disabled>
+      {action.label}
+    </button>
+  ) : (
+    <LinkAction variant={variant} href={action.href} unavailable={unavailable}>
+      {action.label}
+    </LinkAction>
   );
 }

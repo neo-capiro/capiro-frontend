@@ -5,10 +5,11 @@ import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
 import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
+import { memoryProposalScreens } from "./memory-proposals";
 import { responsiveScreens } from "./responsive";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
-import { sourceScreens } from "./sources";
+import { evidenceScreens, sourceScreens } from "./sources";
 import { stateScreens } from "./states";
 import { workflowScreens } from "./workflows";
 import { workflowSetupScreens } from "./workflow-setups";
@@ -30,8 +31,10 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("files", fileScreens),
   ...inSection("approvals", approvalScreens),
   ...inSection("routines", routineScreens),
+  ...inSection("conversations", evidenceScreens),
   ...inSection("data-access", sourceScreens),
   ...inSection("memory", memoryScreens),
+  ...inSection("memory", memoryProposalScreens),
   ...inSection("conversations", workflowScreens),
   ...inSection("conversations", workflowSetupScreens),
   ...inSection("conversations", workflowResponsiveScreens),

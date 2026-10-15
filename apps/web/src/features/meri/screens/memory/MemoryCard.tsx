@@ -11,13 +11,14 @@ export type MemoryItem = {
   title: string;
   meta: string;
   fact: string;
-  status: { label: string; tone: StatusTone };
-  /** Superseded memory kept as labeled history. */
-  historical: boolean;
+  /** compact: the narrower Figma status slot used by superseded history. */
+  status: { label: string; tone: StatusTone; compact?: boolean };
   /** Synthetic index terms standing in for server-side recall. */
   terms: readonly string[];
-  evidenceHref?: string;
-  correctionHref?: string;
+  /** Evidence or receipt for the record; disabled when it has no destination. */
+  evidence: { label: string; href?: string | undefined };
+  /** Present when the record can receive a correction proposal. */
+  correction?: { href?: string | undefined };
 };
 
 /** One recalled memory: approval, ownership, the fact itself and its review actions. */
@@ -38,22 +39,28 @@ export function MemoryCard({
       </h2>
       <p className={surfaces.caption}>{item.meta}</p>
       <p className={panel.body}>{item.fact}</p>
-      <div className={`${ui.row} ${surfaces.pillSlot}`}>
+      <div
+        className={`${ui.row} ${surfaces.pillSlot} ${
+          item.status.compact ? styles.compactSlot : ""
+        }`}
+      >
         <StatusPill tone={item.status.tone}>{item.status.label}</StatusPill>
         <LinkAction
           variant="outline"
-          href={item.evidenceHref}
+          href={item.evidence.href}
           unavailable={unavailable}
         >
-          View evidence
+          {item.evidence.label}
         </LinkAction>
-        <LinkAction
-          variant="ghost"
-          href={item.correctionHref}
-          unavailable={unavailable}
-        >
-          <Sparkle aria-hidden fill="currentColor" /> Propose a correction
-        </LinkAction>
+        {item.correction ? (
+          <LinkAction
+            variant="ghost"
+            href={item.correction.href}
+            unavailable={unavailable}
+          >
+            <Sparkle aria-hidden fill="currentColor" /> Propose a correction
+          </LinkAction>
+        ) : null}
       </div>
     </article>
   );

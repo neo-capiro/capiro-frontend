@@ -5,8 +5,13 @@
   align-items: flex-start;
   width: 100%;
 }
-.search > :first-child {
-  flex: 0 1 782px;
+.searchField {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.viewSwitch {
+  display: flex;
+  gap: 12px;
 }
 .memoryList {
   display: flex;
@@ -18,6 +23,10 @@ article.memoryCard {
   gap: 12px;
   padding: 20px;
   width: 100%;
+}
+/* Superseded history uses the narrower Figma status slot. */
+.compactSlot {
+  --pill-width: 88px;
 }
 .detailLayout {
   display: grid;
@@ -40,16 +49,34 @@ article.memoryCard {
   justify-content: space-between;
   align-self: stretch;
 }
+.proposalHeading h2 {
+  flex: 1;
+  min-width: 0;
+}
 .proposalHeading a {
   width: 40px;
   padding: 0;
   justify-content: center;
 }
+/* Memory lifecycle status: a hugging pill beside the dialog title. */
+.lifecycleStatus > span {
+  height: auto;
+  min-width: 0;
+}
+/* An in-flight submission or read shows both actions as waiting. */
+.proposal[aria-busy="true"] button:disabled {
+  opacity: 0.5;
+}
 .pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
+  align-items: start;
   align-self: stretch;
+}
+/* Figma keeps recorded proposal values on the card surface in every phase. */
+.proposal input:read-only {
+  background: var(--card);
 }
 div.fact {
   gap: 12px;
@@ -75,48 +102,6 @@ div.fact {
   line-height: 39px;
   font-weight: 600;
 }
-.stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-}
-.filterMenu {
-  min-width: 200px;
-  padding: 4px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--card);
-  color: var(--foreground);
-  box-shadow:
-    0 2px 6px #0c0a090d,
-    0 16px 40px -12px #0c0a092e;
-  z-index: 50;
-}
-.filterMenu [role="menuitemradio"] {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 10px 0 32px;
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  cursor: default;
-}
-.filterMenu [role="menuitemradio"][data-highlighted] {
-  background: var(--muted);
-}
-.filterMenu [role="menuitemradio"] > span {
-  position: absolute;
-  left: 10px;
-  display: flex;
-}
-.filterMenu svg {
-  width: 8px;
-  height: 8px;
-  fill: currentColor;
-}
 @keyframes proposal-enter {
   from {
     opacity: 0;
@@ -140,5 +125,8 @@ div.fact {
   }
   .search {
     flex-wrap: wrap;
+  }
+  .searchField {
+    flex-basis: 100%;
   }
 }

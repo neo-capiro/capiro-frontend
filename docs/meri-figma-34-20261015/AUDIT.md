@@ -83,13 +83,13 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.04 | Institutional Memory recall | 1064:147042 | Built: synthetic fixture `/meri/fixture/memory-recall` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
-| 05.04B | Institutional Memory history | 3019:23371 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.04B | Institutional Memory history | 3019:23371 | Built: synthetic fixture `/meri/fixture/memory-history` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.05 | Memory detail and provenance | 1064:147112 | Built: synthetic fixture `/meri/fixture/memory-detail` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.06 | Memory update proposal | 1064:147204 | Built: synthetic fixture `/meri/fixture/memory-proposal` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.07 | Access changed and clean recovery | 1064:147272 | Built: synthetic fixture `/meri/fixture/access-changed` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.08 | Approved memory outcome | 1064:147320 | Built: synthetic fixture `/meri/fixture/memory-approved` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
-| 05.08A | Current memory after approval | 3019:23613 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
-| 05.08B | Superseded briefing preference | 3050:34741 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.08A | Current memory after approval | 3019:23613 | Built: synthetic fixture `/meri/fixture/memory-current-approved` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.08B | Superseded briefing preference | 3050:34741 | Built: synthetic fixture `/meri/fixture/memory-superseded` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 06.01 | Approval center | 1064:147397 | Built: synthetic fixture `/meri/fixture/approval-center` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02 | Memory approval review | 1064:147483 | Built: synthetic fixture `/meri/fixture/memory-approval-review` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.03 | Draft a client task | 1064:147566 | Built: synthetic fixture `/meri/fixture/draft-client-task` | Approval metadata and commands exist. No list endpoint for an approval center found. |
@@ -140,19 +140,19 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Task created |  | 1064:149977 | Absent | Follows parent flow |
 | Overlay · Artifact filed |  | 1064:149982 | Absent | Follows parent flow |
 | 05.09 | Funding evidence detail | 1064:149987 | Built: synthetic fixture `/meri/fixture/funding-evidence` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
-| 05.10 | Memory proposal — submitting | 3019:28780 | Not built (added 15 Oct) | Follows parent flow |
-| 05.11 | Memory proposal — submitted and pending | 3019:28977 | Not built (added 15 Oct) | Follows parent flow |
-| 05.12 | Memory proposal — rejected | 3019:29174 | Not built (added 15 Oct) | Follows parent flow |
-| 05.13 | Memory proposal — changes requested | 3019:29371 | Not built (added 15 Oct) | Follows parent flow |
-| 05.14 | Memory proposal — revised draft | 3019:29568 | Not built (added 15 Oct) | Follows parent flow |
-| 05.15 | Memory proposals — loading | 3019:29765 | Not built (added 15 Oct) | Follows parent flow |
-| 05.16 | Memory proposals — load error | 3019:29962 | Not built (added 15 Oct) | Follows parent flow |
-| 05.17 | Memory proposal — submission error | 3019:30159 | Not built (added 15 Oct) | Follows parent flow |
-| 05.18 | Memory review — decision status uncertain | 3019:30356 | Not built (added 15 Oct) | Follows parent flow |
-| 05.19 | Memory review — access restricted | 3019:30553 | Not built (added 15 Oct) | Follows parent flow |
-| 05.20 | Memory proposal — changed while open | 3019:30750 | Not built (added 15 Oct) | Follows parent flow |
-| 05.21 | Sources loading | 3026:27513 | Not built (added 15 Oct) | Follows parent flow |
-| 05.22 | Sources unavailable | 3026:27760 | Not built (added 15 Oct) | Follows parent flow |
+| 05.10 | Memory proposal — submitting | 3019:28780 | Built: synthetic fixture `/meri/fixture/memory-proposal-submitting` | Follows parent flow |
+| 05.11 | Memory proposal — submitted and pending | 3019:28977 | Built: synthetic fixture `/meri/fixture/memory-proposal-pending` | Follows parent flow |
+| 05.12 | Memory proposal — rejected | 3019:29174 | Built: synthetic fixture `/meri/fixture/memory-proposal-rejected` | Follows parent flow |
+| 05.13 | Memory proposal — changes requested | 3019:29371 | Built: synthetic fixture `/meri/fixture/memory-proposal-changes-requested` | Follows parent flow |
+| 05.14 | Memory proposal — revised draft | 3019:29568 | Built: synthetic fixture `/meri/fixture/memory-proposal-revised` | Follows parent flow |
+| 05.15 | Memory proposals — loading | 3019:29765 | Built: synthetic fixture `/meri/fixture/memory-proposals-loading` | Follows parent flow |
+| 05.16 | Memory proposals — load error | 3019:29962 | Built: synthetic fixture `/meri/fixture/memory-proposals-load-error` | Follows parent flow |
+| 05.17 | Memory proposal — submission error | 3019:30159 | Built: synthetic fixture `/meri/fixture/memory-proposal-submission-error` | Follows parent flow |
+| 05.18 | Memory review — decision status uncertain | 3019:30356 | Built: synthetic fixture `/meri/fixture/memory-review-status-uncertain` | Follows parent flow |
+| 05.19 | Memory review — access restricted | 3019:30553 | Built: synthetic fixture `/meri/fixture/memory-review-restricted` | Follows parent flow |
+| 05.20 | Memory proposal — changed while open | 3019:30750 | Built: synthetic fixture `/meri/fixture/memory-proposal-changed` | Follows parent flow |
+| 05.21 | Sources loading | 3026:27513 | Built: synthetic fixture `/meri/fixture/sources-loading` | Follows parent flow |
+| 05.22 | Sources unavailable | 3026:27760 | Built: synthetic fixture `/meri/fixture/sources-unavailable` | Follows parent flow |
 | 06.01A | Approvals after task decision | 3036:33107 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.01B | Approvals after filing decision | 3036:38096 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.01C | Approvals after memory decision | 3048:39000 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |

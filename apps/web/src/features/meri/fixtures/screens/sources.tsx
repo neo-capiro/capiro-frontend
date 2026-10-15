@@ -14,7 +14,9 @@ import {
   type FundingEvidenceView,
 } from "../../screens/sources/FundingEvidenceScreen";
 import { AccessChangedScreen } from "../../screens/sources/AccessChangedScreen";
+import { SourcesStateScreen } from "../../screens/sources/SourcesStateScreen";
 import { fixtureHref, fixtureUnavailable } from "./href";
+import { sourcesLoading, sourcesUnavailable } from "./sources-states";
 import type { FixtureScreen } from "./types";
 
 const retrieved = "9 Oct 2026, 10:44 AM";
@@ -82,63 +84,6 @@ const evidenceSources: readonly EvidenceSource[] = [
       "The client asked for a concise brief with direct source references.",
     limit:
       "This source records the discussion. It does not confirm follow-up owners.",
-  },
-  {
-    id: "mailbox",
-    title: "[4] Mailbox thread",
-    meta: "Connected mailbox · Current through 10:32 AM · Delayed",
-    summary: "Scheduling messages for the meeting.",
-    status: { label: "Refresh delayed", tone: "warning" },
-    fields: [
-      { label: "Scope", value: "Jordan’s permitted mailbox" },
-      { label: "Source type", value: "Email thread" },
-      { label: "Record reference", value: "MAIL-3307" },
-      { label: "Last changed", value: "9 Oct 2026, 10:20 AM" },
-      { label: "Retrieved", value: "9 Oct 2026, 10:32 AM" },
-      { label: "Coverage", value: "2 of 2 pages · Refresh delayed 12 minutes" },
-    ],
-    recordReference: "MAIL-3307",
-    excerpt: "Tuesday at 2 PM works for the program review.",
-    limit:
-      "Mail is current through 10:32 AM. Later messages may not be reflected.",
-  },
-  {
-    id: "calendar",
-    title: "[5] Meeting invitation",
-    meta: "Calendar record · Updated 6 Oct · Current",
-    summary: "Meeting time, attendees and agenda.",
-    status: { label: "Current record", tone: "success" },
-    fields: [
-      { label: "Scope", value: "Authorized calendars" },
-      { label: "Source type", value: "Calendar event" },
-      { label: "Record reference", value: "CAL-0912" },
-      { label: "Last changed", value: "6 Oct 2026, 9:05 AM" },
-      { label: "Retrieved", value: "9 Oct 2026, 10:35 AM" },
-      { label: "Coverage", value: "Selected event only" },
-    ],
-    recordReference: "CAL-0912",
-    excerpt: "Program review with the Anduril client team.",
-    limit:
-      "This source confirms the meeting. It does not record what was decided.",
-  },
-  {
-    id: "previous-funding",
-    title: "[6] Previous funding position",
-    meta: "Public source · Valid 1 Sep–7 Oct · Superseded",
-    summary: "Earlier position kept as labeled history.",
-    status: { label: "Historical", tone: "warning" },
-    fields: [
-      { label: "Scope", value: "Public · Qualified retained history" },
-      { label: "Source type", value: "Official publication" },
-      { label: "Record reference", value: "PUB-1977" },
-      { label: "Last changed", value: "1 Sep 2026" },
-      { label: "Retrieved", value: retrieved },
-      { label: "Coverage", value: "Qualified retained period" },
-    ],
-    recordReference: "PUB-1977",
-    excerpt: "The FY27 position will be confirmed in a later publication.",
-    limit:
-      "Replaced by the 8 Oct publication. It is not presented as a current fact.",
   },
 ];
 
@@ -279,7 +224,8 @@ const fundingEvidence: FundingEvidenceView = {
     "It provides public funding context. Client priorities and recommended next actions remain separate, sourced conclusions.",
 };
 
-export const sourceScreens: readonly FixtureScreen[] = [
+/** Figma 3.4 05 · Evidence views opened from a conversation (sidebar: Conversations). */
+export const evidenceScreens: readonly FixtureScreen[] = [
   {
     slug: "evidence-sources",
     figmaId: "05.01",
@@ -289,7 +235,7 @@ export const sourceScreens: readonly FixtureScreen[] = [
       <EvidenceSourcesScreen
         view={{
           title: "Sources for the meeting brief",
-          description: "6 sources · Retrieved 9 Oct, 10:44 AM · Anduril scope",
+          description: "3 sources · Retrieved 9 Oct, 10:44 AM · Anduril scope",
           sources: evidenceSources,
           visibleCount: 3,
           initialSourceId: "task",
@@ -299,6 +245,47 @@ export const sourceScreens: readonly FixtureScreen[] = [
       />
     ),
   },
+  {
+    slug: "funding-evidence",
+    figmaId: "05.09",
+    figmaNode: "1064:149987",
+    title: "Funding evidence detail",
+    Screen: () => (
+      <FundingEvidenceScreen
+        view={fundingEvidence}
+        sourcesHref={fixtureHref("evidence-sources")}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "sources-loading",
+    figmaId: "05.21",
+    figmaNode: "3026:27513",
+    title: "Sources loading",
+    Screen: () => (
+      <SourcesStateScreen
+        view={sourcesLoading}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "sources-unavailable",
+    figmaId: "05.22",
+    figmaNode: "3026:27760",
+    title: "Sources unavailable",
+    Screen: () => (
+      <SourcesStateScreen
+        view={sourcesUnavailable}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+];
+
+/** Figma 3.4 05 · Data coverage and access (sidebar: Data access). */
+export const sourceScreens: readonly FixtureScreen[] = [
   {
     slug: "data-coverage",
     figmaId: "05.02",
@@ -335,19 +322,6 @@ export const sourceScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <AccessChangedScreen
         currentAccessHref={fixtureHref("data-coverage")}
-        unavailable={fixtureUnavailable}
-      />
-    ),
-  },
-  {
-    slug: "funding-evidence",
-    figmaId: "05.09",
-    figmaNode: "1064:149987",
-    title: "Funding evidence detail",
-    Screen: () => (
-      <FundingEvidenceScreen
-        view={fundingEvidence}
-        sourcesHref={fixtureHref("evidence-sources")}
         unavailable={fixtureUnavailable}
       />
     ),

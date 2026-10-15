@@ -4,7 +4,7 @@ import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
 import { conversationScreens } from "./conversation";
 import { fileScreens } from "./files";
-import { sourceScreens } from "./sources";
+import { evidenceScreens } from "./sources";
 import { sameScreen } from "./same-screen";
 import type { RegisteredFixtureScreen } from "./types";
 
@@ -163,7 +163,7 @@ export const responsiveScreens: readonly RegisteredFixtureScreen[] = [
     figmaNode: "1064:149158",
     title: "Mobile sources",
     section: "data-access",
-    Screen: sameScreen(sourceScreens, "evidence-sources"),
+    Screen: sameScreen(evidenceScreens, "evidence-sources"),
   },
   {
     slug: "mobile-filing-review",
