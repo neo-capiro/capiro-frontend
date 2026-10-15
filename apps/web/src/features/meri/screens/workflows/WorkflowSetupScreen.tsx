@@ -1,5 +1,6 @@
 import ui from "../../ui/meri-ui.module.css";
 import { WorkflowSetup, type WorkflowSetupView } from "./WorkflowSetup";
+import styles from "./screens.module.css";
 
 /** Setup · <workflow>: the shared setup form for one named workflow. */
 export function WorkflowSetupScreen({
@@ -14,7 +15,7 @@ export function WorkflowSetupScreen({
   unavailable: string;
 }) {
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${styles.setupPage}`}>
       <WorkflowSetup
         setup={setup}
         closeHref={closeHref}

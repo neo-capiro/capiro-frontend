@@ -1,5 +1,5 @@
 import { LinkAction } from "../../ui/LinkAction";
-import styles from "./tooling.module.css";
+import styles from "./records.module.css";
 
 export type CommitmentView = {
   promise: string;
@@ -29,7 +29,10 @@ export function CommitmentRecord({
         <span>{record.source}</span>
       </div>
       <div className={styles.commitmentOwner}>
-        <p>{record.owner}</p>
+        <p>
+          <span className={styles.phoneLabel}>Owner: </span>
+          {record.owner}
+        </p>
         <span>{record.due}</span>
       </div>
       <div className={styles.commitmentStatus}>

@@ -1,0 +1,220 @@
+/* Figma 3.4 Meri/Commitment record and Meri/Source coverage rows, with their phone variants. */
+.coverage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.coverageRow,
+.commitment {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.coverageDomain,
+.coverageResult,
+.coverageDetail,
+.commitmentPromise,
+.commitmentOwner,
+.commitmentStatus {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.coverageDomain {
+  width: 220px;
+  flex-shrink: 0;
+}
+.coverageDomain strong,
+.commitmentPromise strong {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.coverageResult,
+.commitmentOwner {
+  width: 150px;
+  flex-shrink: 0;
+}
+.coverageResult strong,
+.commitmentStatus strong {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.coverageDetail,
+.commitmentPromise {
+  flex: 1;
+}
+.coverageDetail p,
+.commitmentOwner p {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.coverageRow span,
+.commitment span {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.commitment {
+  gap: 12px;
+  padding: 16px;
+}
+.commitmentStatus {
+  width: 250px;
+  flex-shrink: 0;
+}
+.commitmentActions {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+@media (max-width: 860px) {
+  .coverageRow,
+  .commitment {
+    flex-wrap: wrap;
+  }
+  .coverageDomain,
+  .coverageResult,
+  .commitmentOwner,
+  .commitmentStatus {
+    width: auto;
+    flex: 1 1 200px;
+  }
+  .coverageDetail {
+    flex-basis: 100%;
+  }
+}
+/* Field label read by assistive technology everywhere, shown only on phones. */
+.phoneLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/*
+ * Figma 02 · Responsive phone components: "Meri/Mobile commitment record" and
+ * "Meri/Mobile source coverage" restack the same records into single-column
+ * cards with a uniform 8px rhythm.
+ */
+@media (max-width: 680px) {
+  .commitment,
+  .coverageRow {
+    gap: 8px;
+    padding: 16px;
+  }
+  .commitment {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .commitmentPromise,
+  .commitmentOwner,
+  .commitmentStatus {
+    display: contents;
+  }
+  .commitment .commitmentOwner span,
+  .commitmentOwner p {
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: -0.039px;
+    color: var(--foreground);
+  }
+  .commitment .phoneLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+  .commitmentActions {
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+  .coverageRow {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0;
+    align-items: baseline;
+  }
+  .coverageDomain,
+  .coverageResult,
+  .coverageDetail {
+    display: contents;
+  }
+  .coverageDomain strong {
+    grid-area: 1 / 1 / 2 / -1;
+  }
+  .coverageResult strong {
+    grid-area: 2 / 1;
+  }
+  .coverageRow .coverageDomain span {
+    grid-area: 2 / 2;
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+  .coverageDomain span::before {
+    content: "\00a0·\00a0" / "";
+  }
+  .coverageResult span {
+    grid-area: 3 / 1 / 4 / -1;
+  }
+  .coverageDetail p {
+    grid-area: 4 / 1 / 5 / -1;
+  }
+  .coverageDetail span {
+    grid-area: 5 / 1 / 6 / -1;
+  }
+  /* Count tiles collapse into one muted status line (Figma "Status · 4 promises · …"). */
+  .countSummary ul[data-variant="count"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    width: fit-content;
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--muted);
+  }
+  .countSummary ul[data-variant="count"] li:nth-child(n) {
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--muted-foreground);
+  }
+  .countSummary ul[data-variant="count"] li:nth-child(n) > * {
+    font: inherit;
+    letter-spacing: 0;
+    text-transform: lowercase;
+  }
+  .countSummary ul[data-variant="count"] li:nth-child(n) > small {
+    display: none;
+  }
+  .countSummary li + li::before {
+    content: "·" / "";
+    order: -2;
+    margin-left: 4px;
+  }
+}

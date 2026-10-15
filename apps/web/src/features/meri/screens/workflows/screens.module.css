@@ -234,3 +234,52 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* Phone back target (Figma "Meri/Mobile icon action · Back"); hidden above phone width. */
+.mobileBack {
+  display: none;
+}
+/* Figma "Workflow library · Tablet": two tile columns beside the tablet sidebar. */
+@media (max-width: 1100px) {
+  .tileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+}
+/* Figma 02 · Responsive phone frames: 16px rhythm, Title L heading, icon Back. */
+@media (max-width: 680px) {
+  .toolingPage {
+    gap: 16px;
+  }
+  .mobileBack {
+    display: flex;
+  }
+  .mobileBack > * {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .mobileBack svg {
+    width: 20px;
+    height: 20px;
+  }
+  .toolingPage > header > :last-child {
+    display: none;
+  }
+  .toolingPage > header h1 {
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+  }
+  .composer,
+  .requestAside {
+    padding: 16px;
+  }
+  /* Phone setup frames show the setup sheet edge to edge. */
+  div.setupPage {
+    padding: 0;
+  }
+  .promptBox {
+    padding: 12px;
+  }
+}

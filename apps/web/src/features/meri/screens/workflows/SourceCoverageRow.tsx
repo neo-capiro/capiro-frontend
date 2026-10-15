@@ -1,4 +1,4 @@
-import styles from "./tooling.module.css";
+import styles from "./records.module.css";
 
 /** Success, qualified empty, partial and unavailable are distinct outcomes. */
 export type CoverageOutcome = "success" | "empty" | "partial" | "unavailable";

@@ -24,3 +24,9 @@
   letter-spacing: -0.039px;
   color: var(--muted-foreground);
 }
+/* Phone: one full-width card per row. */
+@media (max-width: 680px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
