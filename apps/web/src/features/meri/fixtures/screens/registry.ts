@@ -1,4 +1,5 @@
 import { approvalScreens } from "./approvals";
+import { conversationScreens } from "./conversation";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
 import type { FixtureScreen } from "./types";
@@ -8,6 +9,7 @@ export const fixtureScreens: readonly FixtureScreen[] = [
   ...runScreens,
   ...approvalScreens,
   ...routineScreens,
+  ...conversationScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>
