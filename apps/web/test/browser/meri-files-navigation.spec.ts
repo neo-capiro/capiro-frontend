@@ -121,6 +121,16 @@ for (const width of [1440, 390]) {
       "Good morning, Jordan",
     );
     await expect(page.locator("body")).not.toContainText("Anduril");
+    // At 390px the sections sit behind the Figma "Workspace menu" disclosure.
+    const menu = page.getByRole("button", {
+      name: "Workspace menu",
+      exact: true,
+    });
+    if (width === 390) {
+      await tabTo(page, menu);
+      await page.keyboard.press("Enter");
+      await expect(menu).toHaveAttribute("aria-expanded", "true");
+    }
     const files = page.getByRole(width === 390 ? "link" : "button", {
       name: "Files",
       exact: true,
@@ -131,7 +141,13 @@ for (const width of [1440, 390]) {
     await expectFocusEvidence(files, testInfo);
     await page.keyboard.press("Enter");
     await expect(page).toHaveURL(filesUrl());
+    if (width === 390) {
+      // Navigating closes the menu; reopen it to read the current section.
+      await expect(menu).toHaveAttribute("aria-expanded", "false");
+      await menu.click();
+    }
     await expect(files).toHaveAttribute("aria-current", "page");
+    if (width === 390) await page.keyboard.press("Escape");
     const connect = page.getByRole("button", {
       name: "Connect document service",
       exact: true,

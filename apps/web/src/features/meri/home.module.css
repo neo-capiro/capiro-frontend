@@ -252,14 +252,14 @@
     flex-wrap: wrap;
   }
 }
-/* Figma 10.04 mobile home: scope chip only, the question as the visible heading, two start tiles. */
+/* Figma 10.04 mobile home: scope chip only, the question as the visible heading, start tiles
+   two per row (the third wraps so no start action is lost on a phone). */
 @media (max-width: 680px) {
   .home {
     padding: 16px;
   }
   .status,
-  .meriWordmark,
-  .suggestions > :nth-child(n + 3) {
+  .meriWordmark {
     display: none;
   }
   .welcomeGroup {
