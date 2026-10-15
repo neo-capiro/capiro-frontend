@@ -2,19 +2,21 @@ import {
   RoutinesScreen,
   type RoutineRow,
 } from "../../screens/routines/RoutinesScreen";
-import {
-  RoutineEditorScreen,
-  type RoutineEditorView,
-} from "../../screens/routines/RoutineEditorScreen";
+import { RoutineEditorScreen } from "../../screens/routines/RoutineEditorScreen";
 import {
   RoutineDetailScreen,
   type RoutineDetailView,
 } from "../../screens/routines/RoutineDetailScreen";
-import {
-  RoutineHistoryScreen,
-  type RoutineRun,
-} from "../../screens/routines/RoutineHistoryScreen";
+import { RoutineHistoryScreen } from "../../screens/routines/RoutineHistoryScreen";
 import { fixtureHref, fixtureUnavailable } from "./href";
+import {
+  cancelledHistory,
+  disabledHistory,
+  editor,
+  editRoutine,
+  history,
+  pausedHistory,
+} from "./routines-history";
 import type { FixtureScreen } from "./types";
 
 const routines: readonly RoutineRow[] = [
@@ -52,25 +54,6 @@ const routines: readonly RoutineRow[] = [
   },
 ];
 
-const editor: RoutineEditorView = {
-  draft: {
-    name: "Monday meeting preparation",
-    instructions:
-      "Create a sourced meeting brief with recent developments and open commitments.",
-    scope: "Anduril · Authorized sources",
-    initiator: "Jordan Clayton",
-    destination: "Meri workspace · New conversation and verified files",
-    frequency: "Every Monday",
-    startTime: "9:00 AM",
-    timezone: "America/New_York",
-    budget: "Workspace policy · Per-run limits enforced",
-    retry: "Retry transient errors within the same run limit",
-    notifications: "In-app completion and approval notifications",
-  },
-  nextRuns: "Next runs: 12 Oct · 19 Oct · 26 Oct, 9:00 AM America/New_York",
-  cancelHref: fixtureHref("routines"),
-};
-
 const detail: RoutineDetailView = {
   name: "Monday meeting preparation",
   owner: "Owned by Jordan Clayton · Created 9 Oct",
@@ -100,33 +83,9 @@ const detail: RoutineDetailView = {
       value: "Drafting only; review required for governed actions",
     },
   ],
-  editHref: fixtureHref("routine-editor"),
+  editHref: fixtureHref("edit-routine"),
   historyHref: fixtureHref("routine-history"),
 };
-
-const runs: readonly RoutineRun[] = [
-  {
-    id: "SR-1040",
-    status: "Complete",
-    output: "Meeting brief v1",
-    usage: "$0.64",
-    started: "5 Oct, 9:00 AM",
-  },
-  {
-    id: "SR-1023",
-    status: "Complete",
-    output: "Meeting brief v1",
-    usage: "$0.58",
-    started: "28 Sep, 9:00 AM",
-  },
-  {
-    id: "SR-1001",
-    status: "Failed",
-    output: "Partial output",
-    usage: "$0.22",
-    started: "21 Sep, 9:00 AM",
-  },
-];
 
 export const routineScreens: readonly FixtureScreen[] = [
   {
@@ -153,6 +112,18 @@ export const routineScreens: readonly FixtureScreen[] = [
     ),
   },
   {
+    slug: "edit-routine",
+    figmaId: "08.02A",
+    figmaNode: "3024:31132",
+    title: "Edit routine",
+    Screen: () => (
+      <RoutineEditorScreen
+        view={editRoutine}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
     slug: "routine-detail",
     figmaId: "08.03",
     figmaNode: "1064:148440",
@@ -167,9 +138,41 @@ export const routineScreens: readonly FixtureScreen[] = [
     figmaNode: "1064:148534",
     title: "Routine history and authority changes",
     Screen: () => (
+      <RoutineHistoryScreen view={history} unavailable={fixtureUnavailable} />
+    ),
+  },
+  {
+    slug: "routine-paused",
+    figmaId: "08.04A",
+    figmaNode: "3024:31351",
+    title: "Routine paused",
+    Screen: () => (
       <RoutineHistoryScreen
-        runs={runs}
-        routine="Monday meeting preparation"
+        view={pausedHistory}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "routine-disabled",
+    figmaId: "08.04B",
+    figmaNode: "3024:31580",
+    title: "Routine automatically disabled",
+    Screen: () => (
+      <RoutineHistoryScreen
+        view={disabledHistory}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "routine-cancelled",
+    figmaId: "08.04C",
+    figmaNode: "3024:31809",
+    title: "Routine cancelled",
+    Screen: () => (
+      <RoutineHistoryScreen
+        view={cancelledHistory}
         unavailable={fixtureUnavailable}
       />
     ),

@@ -46,12 +46,15 @@ const limitFields: readonly FieldSpec[] = [
 ];
 
 export type RoutineEditorView = {
+  /** New routine (08.02) or an existing routine being edited (08.02A). */
+  mode: "create" | "edit";
+  description: string;
   draft: RoutineDraft;
   nextRuns: string;
   cancelHref?: string;
 };
 
-/** 08.02 Create or edit routine: a local draft; saving is a trusted schedule-owner action. */
+/** 08.02 Create and 08.02A Edit routine: a local draft; saving is a trusted schedule-owner action. */
 export function RoutineEditorScreen({
   view,
   unavailable,
@@ -77,8 +80,8 @@ export function RoutineEditorScreen({
   return (
     <div className={ui.page}>
       <MeriPageHeading
-        title="New routine"
-        description="Choose when Meri works and where the output should appear."
+        title={view.mode === "edit" ? "Edit routine" : "New routine"}
+        description={view.description}
       />
       <Panel label="Routine form">
         <form
@@ -112,7 +115,7 @@ export function RoutineEditorScreen({
               disabled
               title={unavailable}
             >
-              Create routine
+              {view.mode === "edit" ? "Save changes" : "Create routine"}
             </button>
           </div>
         </form>

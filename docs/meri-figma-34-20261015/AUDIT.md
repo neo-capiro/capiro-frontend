@@ -167,10 +167,10 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 06.08 | Source access approval review | 3024:26758 | Built: synthetic fixture `/meri/fixture/source-access-review` | Follows parent flow |
 | 07.02A | Research account connected | 3024:32269 | Built: synthetic fixture `/meri/fixture/research-account-connected` | No browser product integration. No qualified browser host. |
 | 07.03A | Public browser download receipt | 3024:32057 | Built: synthetic fixture `/meri/fixture/public-download-receipt` | No browser product integration. No qualified browser host. |
-| 08.02A | Edit routine | 3024:31132 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
-| 08.04A | Routine paused | 3024:31351 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
-| 08.04B | Routine automatically disabled | 3024:31580 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
-| 08.04C | Routine cancelled | 3024:31809 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
+| 08.02A | Edit routine | 3024:31132 | Built: synthetic fixture `/meri/fixture/edit-routine` | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04A | Routine paused | 3024:31351 | Built: synthetic fixture `/meri/fixture/routine-paused` | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04B | Routine automatically disabled | 3024:31580 | Built: synthetic fixture `/meri/fixture/routine-disabled` | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04C | Routine cancelled | 3024:31809 | Built: synthetic fixture `/meri/fixture/routine-cancelled` | Schedule owner, create/update/cancel and history exist as source. |
 | 09.01 | Personal preferences | 3022:29587 | Not built (added 15 Oct) | Follows parent flow |
 | 09.02 | Connector accounts and permissions | 3022:30009 | Not built (added 15 Oct) | Follows parent flow |
 | 09.03 | Usage and workspace limits | 3022:30398 | Not built (added 15 Oct) | Follows parent flow |
