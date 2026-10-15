@@ -36,8 +36,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 01.04F | Running conversation filter | 3048:34348 | Built: synthetic fixture `/meri/fixture/conversation-history-running` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04G | Archived conversation filter | 3048:34602 | Built: synthetic fixture `/meri/fixture/conversation-history-archived` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04H | History after selected conversation deletion | 3043:38316 | Built: synthetic fixture `/meri/fixture/conversation-history-after-deletion` | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04I | Client filter menu open | 3067:40614 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04J | Status filter menu open | 3067:40882 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04I | Client filter menu open | 3067:40614 | Built: synthetic fixture `/meri/fixture/conversation-history-client-menu` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04J | Status filter menu open | 3067:40882 | Built: synthetic fixture `/meri/fixture/conversation-history-status-menu` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05 | Search and command palette | 1064:144529 | Built: synthetic fixture `/meri/fixture/command-palette` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05A | Command palette no matches | 3034:37943 | Built: synthetic fixture `/meri/fixture/command-palette-no-matches` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 02.02 | Parallel specialist activity | 1064:144601 | Built: synthetic fixture `/meri/fixture/specialist-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
