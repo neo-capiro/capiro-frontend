@@ -13,9 +13,9 @@ const destinations = [
   { label: "Files", icon: "files", href: "/meri/files" },
   { label: "Runs", icon: "runs", fixture: "background-runs" },
   { label: "Approvals", icon: "approvals", fixture: "approval-center" },
-  { label: "Memory", icon: "memory" },
+  { label: "Memory", icon: "memory", fixture: "memory-recall" },
   { label: "Routines", icon: "routines", fixture: "routines" },
-  { label: "Data access", icon: "data-access" },
+  { label: "Data access", icon: "data-access", fixture: "data-coverage" },
 ] as const satisfies readonly {
   label: string;
   icon: string;

@@ -31,8 +31,11 @@
 }
 .headingAside {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 24px;
+}
+.headingAside > :not(.wordmark) {
+  align-self: center;
 }
 .wordmark {
   width: 62px;
@@ -42,11 +45,10 @@
   background: var(--foreground);
   mask: url("/design/home/meri-wordmark.png") center / 62px 20px no-repeat;
 }
-.headingAside .wordmark {
-  margin-top: 0;
-  padding-left: 24px;
-  border-left: 1px solid var(--border);
-  box-sizing: content-box;
+.actionDivider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
 }
 .row {
   display: flex;
@@ -67,6 +69,7 @@
   font-weight: 500;
   letter-spacing: -0.07px;
   white-space: nowrap;
+  text-decoration: none;
 }
 .primary {
   border: 0;

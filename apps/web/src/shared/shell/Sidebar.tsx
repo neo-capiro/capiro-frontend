@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSelectedClient } from "../session/SelectedClient";
-import { productHref, scopedHref } from "../session/client-route";
+import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { DesignIcon } from "./DesignIcon";

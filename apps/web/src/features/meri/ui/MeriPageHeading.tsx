@@ -18,7 +18,12 @@ export function MeriPageHeading({
         <p>{description}</p>
       </div>
       <div className={styles.headingAside}>
-        {action}
+        {action ? (
+          <>
+            {action}
+            <span className={styles.actionDivider} aria-hidden="true" />
+          </>
+        ) : null}
         <span className={styles.wordmark} role="img" aria-label="Meri" />
       </div>
     </header>
