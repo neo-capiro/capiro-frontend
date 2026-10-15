@@ -4,6 +4,7 @@ import { expectGradientIncompletes } from "../rendered-contrast";
 import { tabTo, expectFocusEvidence } from "../accessibility-interaction";
 import {
   filesFixture,
+  filesUrl,
   actionClient,
   expectFilesIsolation,
 } from "./meri-files-fixtures";
@@ -82,6 +83,85 @@ for (const width of [1440, 390]) {
     const fixture = await filesFixture(page);
     await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
     await page.emulateMedia({ colorScheme: "dark" });
+    // Ordinary Meri home and the document-receiving /meri/files route.
+    const home = `/meri?clientId=${actionClient.id}`;
+    await page.goto(home);
+    // The ordinary home is the disconnected conversation state, not the fixture.
+    await expect(
+      page.getByRole("heading", {
+        name: "Conversations unavailable",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await expect(page.getByLabel("Message draft", { exact: true })).toHaveCount(
+      0,
+    );
+    // At 390px the sections sit behind the Figma "Workspace menu" disclosure.
+    if (width === 390) {
+      const menu = page.getByRole("button", {
+        name: "Workspace menu",
+        exact: true,
+      });
+      await menu.click();
+      await expect(menu).toHaveAttribute("aria-expanded", "true");
+    }
+    await page
+      .getByRole(width === 390 ? "link" : "button", {
+        name: "Files",
+        exact: true,
+      })
+      .click();
+    await expect(page).toHaveURL(filesUrl());
+    await expect(
+      page.getByRole("button", {
+        name: "Connect document service",
+        exact: true,
+      }),
+    ).toBeVisible();
+    expect((await style(page.getByRole("main"))).foreground).toBe("#f5f5f4");
+    await page
+      .getByRole("navigation", { name: "Product modes" })
+      .getByRole("link", { name: "Modules", exact: true })
+      .click();
+    await expect(
+      page.getByRole("heading", {
+        name: /^Everything in Capiro/,
+      }),
+    ).toBeVisible();
+    expect((await style(page.getByRole("banner"))).foreground).toBe("#0a0a0a");
+    await page.goBack();
+    await expect(page).toHaveURL(filesUrl());
+    expect((await style(page.getByRole("main"))).foreground).toBe("#f5f5f4");
+    await page.goBack();
+    await expect(page).toHaveURL(home);
+    await page.goForward();
+    await expect(page).toHaveURL(filesUrl());
+    await page.emulateMedia({ colorScheme: "light" });
+    expect((await style(page.getByRole("main"))).foreground).toBe("#0a0a0a");
+    await page.emulateMedia({ colorScheme: "dark" });
+    expect((await style(page.getByRole("main"))).foreground).toBe("#f5f5f4");
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth > innerWidth,
+      ),
+    ).toBe(false);
+    await page.screenshot({
+      path: info.outputPath(`files-dark-${width}.png`),
+      fullPage: true,
+    });
+    const audit = await expectAccessibleHome(page, info);
+    await expectGradientIncompletes(page, info, audit.incomplete);
+    expect(fixture.requests).toEqual([]);
+    expect(fixture.host.calls("session")).toHaveLength(0);
+    expectFilesIsolation(fixture);
+  });
+
+  test(`Meri fixture Files theme follows preference through scoped navigation and history at ${width}px`, async ({
+    page,
+  }, info) => {
+    const fixture = await filesFixture(page);
+    await page.setViewportSize({ width, height: width === 1440 ? 1040 : 844 });
+    await page.emulateMedia({ colorScheme: "dark" });
     const home = `/meri/fixture/home?clientId=${actionClient.id}`;
     const fixtureFilesUrl = `/meri/fixture/workspace-files?clientId=${actionClient.id}`;
     await page.goto(home);
@@ -132,7 +212,7 @@ for (const width of [1440, 390]) {
       ),
     ).toBe(false);
     await page.screenshot({
-      path: info.outputPath(`files-dark-${width}.png`),
+      path: info.outputPath(`fixture-files-dark-${width}.png`),
       fullPage: true,
     });
     const audit = await expectAccessibleHome(page, info);
