@@ -3722,5 +3722,22 @@
     "signals": [
       "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
     ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/TeamView.tsx",
+    "sha256": "6ed74f71b6495e95f762965ee58b0d749e08dcc3a203ed8b83f13375ff278390",
+    "reviewer": "Codex independent patch_review and source owner",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/engagement-contract-mapping-20261015/HANDOFF.md#structure-review",
+    "rationale": "One follow-up workload table with task and member-name read-status presentation. Canonical query/UI modules retain transport, authorization and persistence. The bounded delta filters existing open tasks before owner grouping and independently reports name lookup failures; it introduces no assignment or plan policy.",
+    "functions": [
+      {
+        "name": "TeamView",
+        "nonblankLines": 83
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/TeamView.tsx: function over80 nonblank lines requires review"
+    ]
   }
 ]

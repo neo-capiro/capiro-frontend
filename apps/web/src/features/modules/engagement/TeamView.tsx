@@ -1,22 +1,25 @@
 "use client";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
-import { DataTable, Panel, StatusPanel } from "../../../shared/module-ui";
+import {
+  ActionButton,
+  DataTable,
+  Panel,
+  StatusPanel,
+} from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
 export function TeamView({ clientId }: { clientId: string }) {
   const people = useCapiroQuery("settings.tenantMembers", {});
   const tasks = useCapiroQuery("engagement.tasks", {
     query: { clientId: clientId || undefined },
   });
+  const openTasks =
+    tasks.data?.filter((task) => !["done", "canceled"].includes(task.status)) ??
+    [];
   const rows = Array.from(
-    new Set(tasks.data?.map((task) => task.ownerUserId ?? "unassigned") ?? []),
+    new Set(openTasks.map((task) => task.ownerUserId ?? "unassigned")),
   ).map((id) => ({
     id,
-    work:
-      tasks.data?.filter(
-        (task) =>
-          (task.ownerUserId ?? "unassigned") === id &&
-          !["done", "canceled"].includes(task.status),
-      ) ?? [],
+    work: openTasks.filter((task) => (task.ownerUserId ?? "unassigned") === id),
   }));
   return (
     <Panel
@@ -28,6 +31,19 @@ export function TeamView({ clientId }: { clientId: string }) {
         error={tasks.error}
         onRetry={tasks.reload}
       >
+        {people.loading && (
+          <p className={styles.body} role="status">
+            Loading team member names…
+          </p>
+        )}
+        {people.error && (
+          <div className={styles.body} role="alert">
+            <p>Team member names unavailable: {people.error.message}</p>
+            <ActionButton onClick={people.reload}>
+              Retry team member names
+            </ActionButton>
+          </div>
+        )}
         <DataTable
           rows={rows}
           rowKey={(row) => row.id}
