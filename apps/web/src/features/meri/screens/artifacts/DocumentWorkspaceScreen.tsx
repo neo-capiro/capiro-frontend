@@ -12,6 +12,7 @@ import { DocumentSurface } from "./DocumentSurface";
 import type { DocumentWorkspaceView } from "./types";
 import { versionColumns } from "./VersionsScreen";
 import { useDocumentDraft } from "./useDocumentDraft";
+import { WorkspacePanes } from "./WorkspacePanes";
 import shared from "./artifacts.module.css";
 import styles from "./document.module.css";
 
@@ -48,6 +49,34 @@ function DraftActions({
   );
 }
 
+/** Versions tab: the artifact's versions and the route to compare them. */
+function VersionsTab({
+  view,
+  compareHref,
+  unavailable,
+}: {
+  view: DocumentWorkspaceView;
+  compareHref?: string | undefined;
+  unavailable: string;
+}) {
+  return (
+    <>
+      <DataTable
+        caption="Versions"
+        columns={versionColumns}
+        rows={view.versions}
+      />
+      <LinkAction
+        variant="outline"
+        href={compareHref}
+        unavailable={unavailable}
+      >
+        Compare versions
+      </LinkAction>
+    </>
+  );
+}
+
 /**
  * 03.02 Word document workspace (read-only Viewing) and the document working draft
  * (Editing): conversation beside the artifact, with in-screen document overlays.
@@ -81,58 +110,57 @@ export function DocumentWorkspaceScreen({
           {view.caption}
         </p>
       ) : null}
-      <div className={shared.columns}>
-        <ConversationPane view={view.conversation} unavailable={unavailable} />
-        <section className={styles.panel} aria-label={view.panelTitle}>
-          <h2 className={styles.panelTitle}>{view.panelTitle}</h2>
-          {editable ? (
-            <DraftActions backHref={links.back} unavailable={unavailable} />
-          ) : (
-            <ArtifactActionBar
-              downloadHref={links.download}
-              reviseHref={links.revise}
-              fileHref={links.file}
-              unavailable={unavailable}
-            />
-          )}
-          <SegmentedTabs
-            label="Artifact view"
-            options={tabs}
-            value={tab}
-            onChange={setTab}
+      <WorkspacePanes
+        artifactLabel={editable ? "Draft" : "Document"}
+        conversation={
+          <ConversationPane
+            view={view.conversation}
+            unavailable={unavailable}
           />
-          {tab === "preview" ? (
-            <DocumentSurface
-              view={view}
-              draft={draft}
-              editable={editable}
-              editHref={links.edit}
-              unavailable={unavailable}
-            />
-          ) : tab === "versions" ? (
-            <>
-              <DataTable
-                caption="Versions"
-                columns={versionColumns}
-                rows={view.versions}
-              />
-              <LinkAction
-                variant="outline"
-                href={links.versions}
+        }
+        artifact={
+          <section className={styles.panel} aria-label={view.panelTitle}>
+            <h2 className={styles.panelTitle}>{view.panelTitle}</h2>
+            {editable ? (
+              <DraftActions backHref={links.back} unavailable={unavailable} />
+            ) : (
+              <ArtifactActionBar
+                downloadHref={links.download}
+                reviseHref={links.revise}
+                fileHref={links.file}
                 unavailable={unavailable}
-              >
-                Compare versions
-              </LinkAction>
-            </>
-          ) : (
-            <DetailList
-              label="Sources"
-              items={view.sources}
-              variant="references"
+              />
+            )}
+            <SegmentedTabs
+              label="Artifact view"
+              options={tabs}
+              value={tab}
+              onChange={setTab}
             />
-          )}
-        </section>
-      </div>
+            {tab === "preview" ? (
+              <DocumentSurface
+                view={view}
+                draft={draft}
+                editable={editable}
+                editHref={links.edit}
+                unavailable={unavailable}
+              />
+            ) : tab === "versions" ? (
+              <VersionsTab
+                view={view}
+                compareHref={links.versions}
+                unavailable={unavailable}
+              />
+            ) : (
+              <DetailList
+                label="Sources"
+                items={view.sources}
+                variant="references"
+              />
+            )}
+          </section>
+        }
+      />
     </div>
   );
 }
