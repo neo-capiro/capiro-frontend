@@ -5,6 +5,7 @@ import { FieldTable, type FieldRow } from "../../ui/FieldTable";
 import type { SourceSummary } from "../../ui/SourceCard";
 import ui from "../../ui/meri-ui.module.css";
 import panel from "../../ui/panel.module.css";
+import phone from "../../ui/phone-fields.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./sources.module.css";
 
@@ -36,12 +37,14 @@ export function EvidenceDetail({
       <span className={`${surfaces.pillSlot} ${styles.statusWide}`}>
         <StatusPill tone={source.status.tone}>{source.status.label}</StatusPill>
       </span>
-      <FieldTable
-        caption={`Evidence fields for ${source.title}`}
-        fieldLabel="Evidence field"
-        rows={source.fields}
-        shares={[220, 414]}
-      />
+      <div className={`${styles.fields} ${phone.stackOnPhone}`}>
+        <FieldTable
+          caption={`Evidence fields for ${source.title}`}
+          fieldLabel="Evidence field"
+          rows={source.fields}
+          shares={[220, 414]}
+        />
+      </div>
       <h3 className={surfaces.sectionTitle}>Authorized excerpt</h3>
       <blockquote className={styles.quote}>“{source.excerpt}”</blockquote>
       <button

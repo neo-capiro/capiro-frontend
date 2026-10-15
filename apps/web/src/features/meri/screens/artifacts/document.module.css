@@ -333,12 +333,29 @@
   font-size: 15px;
   font-weight: 500;
 }
+/* The Chat/Document switch exists only where the panes stack (tablet and phone). */
+.paneSwitch {
+  display: none;
+}
 @media (max-width: 1100px) {
   .conversation {
     width: 100%;
   }
   .blocks {
     left: 0;
+  }
+  .paneSwitch {
+    display: block;
+  }
+  .panes[data-pane="artifact"] > :first-child,
+  .panes[data-pane="conversation"] > :last-child {
+    display: none;
+  }
+  /* Figma 10.03/10.06: the single artifact pane sits directly on the page. */
+  .panes > .panel {
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 }
 .inline {
@@ -353,4 +370,15 @@
 }
 .headingCaption {
   margin-top: -14px;
+}
+/* Figma working draft · Phone: the toolbar wraps to two rows instead of scrolling. */
+@media (max-width: 680px) {
+  .toolbar {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    overflow-x: visible;
+  }
+  .page {
+    padding: 20px;
+  }
 }

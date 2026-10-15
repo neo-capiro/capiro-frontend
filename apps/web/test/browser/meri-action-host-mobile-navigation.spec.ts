@@ -47,12 +47,29 @@ async function expectRoute(
   expectActionIsolation(fixture);
 }
 
+/** The Figma 10.08 phone menu holds the Meri sections behind one disclosure. */
+const menuToggle = (page: Page) =>
+  page.getByRole("button", { name: "Meri workspace", exact: true });
+
+/** Open the phone menu from the keyboard, then follow one section link. */
+async function navigateByKeyboard(page: Page, name: string) {
+  const toggle = menuToggle(page);
+  if (!(await toggle.evaluate((element) => element === document.activeElement)))
+    await tabTo(page, toggle);
+  await page.keyboard.press("Enter");
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await tabTo(page, page.getByRole("link", { name, exact: true }));
+  await page.keyboard.press("Enter");
+}
+
 async function expectMobileRoute(
   page: Page,
   fixture: ActionFixture,
   destination: Destination,
 ) {
   await expectRoute(page, fixture, destination);
+  await expect(menuToggle(page)).toHaveAttribute("aria-expanded", "false");
+  await menuToggle(page).click();
   const home = page.getByRole("link", { name: "Conversations", exact: true });
   const actions = page.getByRole("link", {
     name: "Recommendation actions",
@@ -75,6 +92,9 @@ async function expectMobileRoute(
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(375);
+  await page.keyboard.press("Escape");
+  await expect(menuToggle(page)).toBeFocused();
+  await expect(home).toHaveCount(0);
 }
 
 test("375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch", async ({
@@ -84,17 +104,9 @@ test("375px Meri navigation preserves the verified client through keyboard and B
   const fixture = await actionHostFixture(page);
   await page.goto(homeUrl);
   await expectMobileRoute(page, fixture, "home");
-  await tabTo(
-    page,
-    page.getByRole("link", { name: "Recommendation actions", exact: true }),
-  );
-  await page.keyboard.press("Enter");
+  await navigateByKeyboard(page, "Recommendation actions");
   await expectMobileRoute(page, fixture, "actions");
-  await tabTo(
-    page,
-    page.getByRole("link", { name: "Conversations", exact: true }),
-  );
-  await page.keyboard.press("Enter");
+  await navigateByKeyboard(page, "Conversations");
   await expectMobileRoute(page, fixture, "home");
   await page.goBack();
   await expectMobileRoute(page, fixture, "actions");

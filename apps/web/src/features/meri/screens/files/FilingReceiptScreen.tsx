@@ -7,6 +7,7 @@ import { LinkAction } from "../../ui/LinkAction";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { Notice } from "../../ui/Notice";
 import ui from "../../ui/meri-ui.module.css";
+import phone from "../../ui/phone-fields.module.css";
 import { DownloadDialog } from "./DownloadDialog";
 import { ReceiptToasts, type ReceiptToast } from "./ReceiptToasts";
 import type { DownloadView, Heading } from "./types";
@@ -52,7 +53,7 @@ export function FilingReceiptScreen({
         {view.saved.detail}
       </Notice>
       <section className={styles.panel} aria-label="Filing receipt">
-        <div className={styles.full}>
+        <div className={`${styles.full} ${phone.stackOnPhone}`}>
           <DataTable
             caption="Filing receipt"
             columns={columns}

@@ -1,0 +1,52 @@
+/*
+ * Figma 10.07, 10.09, 10.13 and 10.17: on a phone a field/value table reads as stacked
+ * label and value pairs. Apply to an element containing a FieldTable or DataTable; desktop
+ * and tablet rendering is unchanged.
+ */
+@media (max-width: 680px) {
+  .stackOnPhone div:has(> table) {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+  .stackOnPhone table,
+  .stackOnPhone tbody,
+  .stackOnPhone tr,
+  .stackOnPhone td {
+    display: block;
+    width: auto;
+    min-width: 0;
+  }
+  .stackOnPhone colgroup {
+    display: none;
+  }
+  .stackOnPhone thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .stackOnPhone table tbody tr:nth-child(n) {
+    background: transparent;
+  }
+  .stackOnPhone table td {
+    height: auto;
+    padding: 0;
+  }
+  .stackOnPhone table td:first-child {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--muted-foreground);
+  }
+  .stackOnPhone table td:last-child {
+    font-size: 14px;
+    line-height: 1.45;
+    letter-spacing: -0.07px;
+  }
+  .stackOnPhone table tr:first-child td:first-child {
+    padding-top: 0;
+  }
+}

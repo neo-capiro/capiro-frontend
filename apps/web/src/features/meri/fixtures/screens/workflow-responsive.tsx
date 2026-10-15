@@ -1,19 +1,11 @@
-import type { ComponentType } from "react";
+import { sameScreen } from "./same-screen";
 import { workflowSetupScreens } from "./workflow-setups";
 import { workflowScreens } from "./workflows";
 import type { FixtureScreen } from "./types";
 
 const desktopScreens = [...workflowScreens, ...workflowSetupScreens];
 
-/**
- * The responsive frames are the same registered screens at another viewport
- * or colour scheme: each entry renders the desktop entry's Screen unchanged.
- */
-const same = (slug: string): ComponentType => {
-  const screen = desktopScreens.find((entry) => entry.slug === slug);
-  if (!screen) throw new Error(`No workflow fixture screen ${slug}`);
-  return screen.Screen;
-};
+const same = (slug: string) => sameScreen(desktopScreens, slug);
 
 /** Figma 3.4 02 · Responsive & theme references and 05 · Phone workflow setups. */
 export const workflowResponsiveScreens: readonly FixtureScreen[] = [

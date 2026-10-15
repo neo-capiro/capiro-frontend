@@ -98,6 +98,9 @@
   flex-shrink: 0;
 }
 .tableFrame {
+  /* Shrinks inside flex columns so the phone rule below can scroll it. */
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
@@ -224,11 +227,11 @@
   .actionDivider {
     display: none;
   }
+  /* Figma 10.xx phone page title (v2/Stat). */
   .headingCopy h1 {
-    font-size: 20px;
-    line-height: 1.3;
-    font-weight: 500;
-    letter-spacing: -0.3px;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.44px;
   }
   .tableFrame {
     overflow-x: auto;
