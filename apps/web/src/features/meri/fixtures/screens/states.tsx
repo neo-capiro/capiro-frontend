@@ -27,8 +27,11 @@ const runLinks: StateLinks = {
   "Workspace not persisted": fixtureHref("analysis-outputs"),
 };
 const fileLinks: StateLinks = {
+  "Partial extraction": fixtureHref("file-extraction-coverage"),
+  "Page limit reached": fixtureHref("file-extraction-coverage"),
   "Duplicate attachment": fixtureHref("workspace-files"),
   "Stale version": fixtureHref("artifact-versions"),
+  "Verification failed": fixtureHref("artifact-verification"),
 };
 const approvalLinks: StateLinks = {
   "Pending review": fixtureHref("review-task-action"),
@@ -47,6 +50,7 @@ const lifecycleLinks: StateLinks = {
   Reconnecting: fixtureHref("research-progress"),
   "Personal memory": fixtureHref("memory-recall"),
   "Superseded memory": fixtureHref("memory-detail"),
+  "Conflicting evidence": fixtureHref("memory-conflict"),
   "Memory proposal expired": fixtureHref("memory-proposal"),
   "Grant expired": fixtureHref("access-changed"),
   "Conversation export": fixtureHref("conversation-management"),
