@@ -33,12 +33,13 @@ const columns: readonly DataColumn<RoutineRow>[] = [
 export function RoutinesScreen({
   routines,
   createHref,
-  routineHref,
+  routineHrefs,
   unavailable,
 }: {
   routines: readonly RoutineRow[];
   createHref?: string | undefined;
-  routineHref?: ((id: string) => string) | undefined;
+  /** Serializable per-routine destinations; routines without one stay unavailable. */
+  routineHrefs?: Readonly<Record<string, string>> | undefined;
   unavailable: string;
 }) {
   const [selected, setSelected] = useState(routines[0]?.id);
@@ -68,7 +69,7 @@ export function RoutinesScreen({
       <div className={styles.row} aria-label="Selected routine actions">
         <LinkAction
           variant="primary"
-          href={current && routineHref?.(current.id)}
+          href={current && routineHrefs?.[current.id]}
           unavailable={unavailable}
         >
           Open routine
