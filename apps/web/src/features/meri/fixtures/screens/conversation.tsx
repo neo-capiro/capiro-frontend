@@ -1,11 +1,3 @@
-import type { StatusTone } from "../../ui/StatusPill";
-import {
-  buildWorkspaceView,
-  listRunAttempts,
-  runStateLabels,
-  type WorkspaceView,
-} from "../../workspace/workspace-view";
-import { projectSampleEvents, runActivityEvents } from "../run-activity-events";
 import {
   ScopeScreen,
   type ScopeView,
@@ -18,43 +10,23 @@ import {
   CommandPaletteScreen,
   type PaletteView,
 } from "../../screens/conversation/CommandPaletteScreen";
-import {
-  ResearchProgressScreen,
-  type ResearchProgressView,
-} from "../../screens/conversation/ResearchProgressScreen";
-import {
-  SpecialistActivityScreen,
-  type SpecialistView,
-} from "../../screens/conversation/SpecialistActivityScreen";
-import {
-  ToolActivityScreen,
-  type ToolActivityView,
-} from "../../screens/conversation/ToolActivityScreen";
+import { ResearchProgressScreen } from "../../screens/conversation/ResearchProgressScreen";
+import { SpecialistActivityScreen } from "../../screens/conversation/SpecialistActivityScreen";
+import { ToolActivityScreen } from "../../screens/conversation/ToolActivityScreen";
+import { ExpandedToolActivityScreen } from "../../screens/conversation/ExpandedToolActivityScreen";
 import {
   ConversationManagementScreen,
   type ManagementView,
 } from "../../screens/conversation/ConversationManagementScreen";
+import { historyViews } from "./conversation-history";
+import {
+  expandedToolActivityView,
+  researchView,
+  specialists,
+  toolActivityView,
+} from "./conversation-progress";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
-
-/** Sample run state comes from the canonical public projection of the shared sample events. */
-function sampleRun(eventCount: number): WorkspaceView {
-  const events = runActivityEvents("activity").slice(0, eventCount);
-  const accepted = projectSampleEvents(events).accepted;
-  const [selection] = listRunAttempts(accepted);
-  if (!selection) throw new Error("Sample run events have no run attempt");
-  return buildWorkspaceView(accepted, selection);
-}
-const runTone = (state: WorkspaceView["state"]): StatusTone =>
-  state === "running" || state === "completed"
-    ? "success"
-    : state === "failed"
-      ? "danger"
-      : state === "waiting-for-approval" ||
-          state === "paused" ||
-          state === "cancelled"
-        ? "warning"
-        : "neutral";
 
 const scope: ScopeView = {
   appliedId: "anduril",
@@ -83,33 +55,6 @@ const scope: ScopeView = {
       dataScope: ["Client records and timelines", "Public sources"],
     },
   ],
-};
-
-const history: HistoryView = {
-  rows: [
-    ["brief", "Anduril meeting brief", "Anduril", "Complete", "Just now"],
-    ["funding", "FY27 funding landscape", "General", "Running", "2 min ago"],
-    ["updates", "Weekly client updates", "Anduril", "Complete", "Yesterday"],
-    ["sources", "Source comparison", "Anduril", "Archived", "7 Oct"],
-  ].map(([id = "", title = "", client = "", status = "", updated = ""]) => ({
-    id,
-    title,
-    client,
-    status,
-    updated,
-  })),
-  background: {
-    title: "1 run is continuing in the background",
-    detail:
-      "Open Runs to check progress. Conversation navigation preserves your draft.",
-    runsHref: fixtureHref("background-runs"),
-  },
-  outcome: {
-    title: "Conversation deleted",
-    detail:
-      "The item is removed from your view. Retained receipts follow policy.",
-  },
-  manageHref: fixtureHref("conversation-management"),
 };
 
 const palette: PaletteView = {
@@ -143,166 +88,6 @@ const palette: PaletteView = {
   ],
 };
 
-function researchView(): ResearchProgressView {
-  const run = sampleRun(6);
-  return {
-    title: "Anduril meeting brief",
-    context: "Anduril · Started 2 minutes ago",
-    request:
-      "Research recent developments, analyze open commitments, and create a sourced meeting brief.",
-    plan: {
-      title: "Meeting brief · 4 steps",
-      steps: [
-        ["scope", "Confirm scope", "Anduril · 6 authorized sources", true],
-        [
-          "research",
-          "Research developments",
-          "Research specialist · Working",
-          true,
-        ],
-        [
-          "signals",
-          "Analyze client signals",
-          "Data specialist · Complete",
-          false,
-        ],
-        [
-          "brief",
-          "Create and verify brief",
-          "Document specialist · Queued",
-          false,
-        ],
-      ].map(([id, title, detail, done]) => ({
-        id: String(id),
-        title: String(title),
-        detail: String(detail),
-        done: done === true,
-      })),
-    },
-    status: {
-      label: run.state ? runStateLabels[run.state] : "No status reported",
-      tone: runTone(run.state),
-    },
-    specialists: {
-      title: "3 specialists working",
-      detail: "Research · Data · Document",
-      href: fixtureHref("specialist-activity"),
-    },
-    sources: {
-      title: "6 sources found",
-      breakdown: "4 client records · 2 public sources",
-      note: "Evidence is checked before it appears in the brief.",
-    },
-    steer: "Please prioritize the open restoration request.",
-    backgroundHref: fixtureHref("background-runs"),
-    runHref: fixtureHref("run-detail"),
-  };
-}
-
-const specialist = (
-  id: string,
-  status: string,
-  tone: StatusTone,
-  task: string,
-  progress: string,
-  details: readonly string[],
-) => ({
-  id,
-  name: id,
-  status: { label: status, tone },
-  task,
-  progress,
-  details,
-});
-const specialists: SpecialistView = {
-  context: "Meeting brief · Work delegated within this run",
-  specialists: [
-    specialist(
-      "Research",
-      "Working",
-      "neutral",
-      "Find current funding and client developments.",
-      "6 sources · checking one date",
-      ["Reading 4 client records", "Checking the date on 1 public source"],
-    ),
-    specialist(
-      "Data",
-      "Complete",
-      "success",
-      "Analyze authorized commitments and meeting notes.",
-      "2 open commitments · 1 timing risk",
-      ["Wrote commitments.csv", "Flagged 1 timing risk for review"],
-    ),
-    specialist(
-      "Document",
-      "Queued",
-      "neutral",
-      "Create a concise meeting brief with citations.",
-      "Waiting for research",
-      ["Starts when research finishes"],
-    ),
-    specialist(
-      "Verification",
-      "Queued",
-      "neutral",
-      "Validate output, links and rendering.",
-      "Waiting for document",
-      ["Starts when the document is drafted"],
-    ),
-  ],
-  limit: {
-    title: "Run limits are active",
-    detail:
-      "Up to 3 specialists may work at once. Queued work starts as capacity becomes available.",
-  },
-  outputs: [
-    ["source-index.json", "Research", "Working"],
-    ["commitments.csv", "Data", "Verified"],
-    ["meeting-brief.docx", "Document", "Queued"],
-  ].map(([name = "", owner = "", status = ""]) => ({
-    id: name,
-    name,
-    owner,
-    status,
-  })),
-};
-
-function toolActivityView(): ToolActivityView {
-  const run = sampleRun(Infinity);
-  const read = run.tools.find((tool) => tool.name === "sample.source_read");
-  const complete = read?.resultReference != null;
-  return {
-    tool: {
-      title: "Search authorized client records",
-      status: complete
-        ? { label: "Complete", tone: "success" }
-        : { label: "Running", tone: "neutral" },
-      request:
-        "Client: Anduril · Sources: tasks, meetings, files · Time range: last 30 days",
-      records: [
-        ["Restoration request", "Task", "Open"],
-        ["Strategy review", "Meeting", "7 Oct"],
-        ["White paper v2", "Document", "6 Oct"],
-      ].map(([record = "", type = "", result = ""]) => ({
-        id: record,
-        record,
-        type,
-        result,
-      })),
-      coverage:
-        "Coverage: 23 records returned · All 2 pages read · 1 encrypted attachment excluded",
-    },
-    ...(run.artifacts.length
-      ? {
-          receipt: {
-            title: "Workspace file created",
-            detail: "commitments.csv · Verified · 2 rows · Saved at 10:44 AM",
-          },
-        }
-      : {}),
-  };
-}
-
 const management: ManagementView = {
   title: "Anduril meeting brief",
   suggestedTitle: "Anduril meeting brief — October",
@@ -320,6 +105,13 @@ const management: ManagementView = {
   },
 };
 
+/** 01.04 and its states share one screen; each frame opens it with its own local state. */
+function History({ view }: { view: HistoryView }) {
+  return (
+    <ConversationHistoryScreen view={view} unavailable={fixtureUnavailable} />
+  );
+}
+
 export const conversationScreens: readonly FixtureScreen[] = [
   {
     slug: "choose-scope",
@@ -329,16 +121,93 @@ export const conversationScreens: readonly FixtureScreen[] = [
     Screen: () => <ScopeScreen view={scope} unavailable={fixtureUnavailable} />,
   },
   {
+    slug: "choose-scope-no-matches",
+    figmaId: "01.03A",
+    figmaNode: "3034:37692",
+    title: "Scope picker no matches",
+    Screen: () => (
+      <ScopeScreen
+        view={{ ...scope, initialQuery: "Unlisted client" }}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
     slug: "conversation-history",
     figmaId: "01.04",
     figmaNode: "1064:144425",
     title: "Conversation history",
-    Screen: () => (
-      <ConversationHistoryScreen
-        view={history}
-        unavailable={fixtureUnavailable}
-      />
-    ),
+    Screen: () => <History view={historyViews.all} />,
+  },
+  {
+    slug: "conversation-history-empty",
+    figmaId: "01.04A",
+    figmaNode: "3034:32186",
+    title: "Empty conversation history",
+    Screen: () => <History view={historyViews.empty} />,
+  },
+  {
+    slug: "conversation-history-no-matches",
+    figmaId: "01.04B",
+    figmaNode: "3034:32443",
+    title: "No matching conversations",
+    Screen: () => <History view={historyViews.noMatches} />,
+  },
+  {
+    slug: "conversation-history-complete",
+    figmaId: "01.04C",
+    figmaNode: "3034:36844",
+    title: "Completed conversation filter",
+    Screen: () => <History view={historyViews.complete} />,
+  },
+  {
+    slug: "conversation-history-anduril",
+    figmaId: "01.04D",
+    figmaNode: "3034:37090",
+    title: "Anduril conversation filter",
+    Screen: () => <History view={historyViews.anduril} />,
+  },
+  {
+    slug: "conversation-history-general",
+    figmaId: "01.04E",
+    figmaNode: "3034:37336",
+    title: "General conversation filter",
+    Screen: () => <History view={historyViews.general} />,
+  },
+  {
+    slug: "conversation-history-running",
+    figmaId: "01.04F",
+    figmaNode: "3048:34348",
+    title: "Running conversation filter",
+    Screen: () => <History view={historyViews.running} />,
+  },
+  {
+    slug: "conversation-history-archived",
+    figmaId: "01.04G",
+    figmaNode: "3048:34602",
+    title: "Archived conversation filter",
+    Screen: () => <History view={historyViews.archived} />,
+  },
+  {
+    slug: "conversation-history-after-deletion",
+    figmaId: "01.04H",
+    figmaNode: "3043:38316",
+    title: "History after selected conversation deletion",
+    Screen: () => <History view={historyViews.afterDeletion} />,
+  },
+  {
+    slug: "conversation-client-filter",
+    figmaId: "13.21",
+    figmaNode: "3034:37582",
+    title: "Conversation client filter menu",
+    Screen: () => <History view={historyViews.clientMenu} />,
+  },
+  {
+    slug: "conversation-status-filter",
+    figmaId: "13.22",
+    figmaNode: "3034:37596",
+    title: "Conversation status filter menu",
+    Screen: () => <History view={historyViews.statusMenu} />,
   },
   {
     slug: "command-palette",
@@ -346,6 +215,17 @@ export const conversationScreens: readonly FixtureScreen[] = [
     figmaNode: "1064:144529",
     title: "Search and command palette",
     Screen: () => <CommandPaletteScreen view={palette} />,
+  },
+  {
+    slug: "command-palette-no-matches",
+    figmaId: "01.05A",
+    figmaNode: "3034:37943",
+    title: "Command palette no matches",
+    Screen: () => (
+      <CommandPaletteScreen
+        view={{ ...palette, initialQuery: "Unlisted source" }}
+      />
+    ),
   },
   {
     slug: "research-progress",
@@ -379,6 +259,18 @@ export const conversationScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <ToolActivityScreen
         view={toolActivityView()}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "tool-activity-expanded",
+    figmaId: "02.07A",
+    figmaNode: "3027:28579",
+    title: "Expanded tool activity",
+    Screen: () => (
+      <ExpandedToolActivityScreen
+        view={expandedToolActivityView()}
         unavailable={fixtureUnavailable}
       />
     ),

@@ -22,6 +22,7 @@ import {
   InterruptedRunScreen,
   type InterruptedRunView,
 } from "../../screens/runs/InterruptedRunScreen";
+import { meetingBriefPlan } from "./runs-plan";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
 
@@ -128,38 +129,10 @@ function runDetailView(): RunDetailView {
           : "No verified checkpoint",
       },
     ],
-    plan: {
-      title: "Meeting brief · 4 steps",
-      steps: [
-        ["scope", "Confirm scope", "Anduril · 6 authorized sources", true],
-        [
-          "research",
-          "Research developments",
-          "Research specialist · Working",
-          true,
-        ],
-        [
-          "signals",
-          "Analyze client signals",
-          "Data specialist · Complete",
-          false,
-        ],
-        [
-          "brief",
-          "Create and verify brief",
-          "Document specialist · Queued",
-          false,
-        ],
-      ].map(([id, title, detail, done]) => ({
-        id: String(id),
-        title: String(title),
-        detail: String(detail),
-        done: done === true,
-      })),
-    },
+    plan: meetingBriefPlan("Anduril · 3 authorized sources"),
     activity: [
       ["10:42 · Starting", "Scope and access checked"],
-      ["10:43 · Reading sources", "6 authorized sources returned"],
+      ["10:43 · Reading sources", "3 authorized sources returned"],
       ["10:44 · Analyzing", "Commitments table verified"],
       ["10:44 · Researching", "Checking public funding update"],
     ].map(([title = "", detail = ""]) => ({ id: title, title, detail })),

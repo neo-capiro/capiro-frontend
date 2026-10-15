@@ -4,17 +4,26 @@ import { Plus } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { LinkAction } from "../../ui/LinkAction";
-import { Notice } from "../../ui/Notice";
-import { ToastCard, ToastRegion } from "../../ui/ToastCard";
-import { HistoryFilters, useHistoryFilters } from "./HistoryFilters";
-import type { HistoryRow } from "./HistoryFilters";
+import { StateMessage } from "../../ui/StateMessage";
+import {
+  HistoryFilters,
+  useHistoryFilters,
+  type HistoryQuery,
+  type HistoryRow,
+} from "./HistoryFilters";
+import { HistoryActions } from "./HistoryActions";
+import { HistoryFollowUps, type HistoryFollowUpView } from "./HistoryFollowUps";
 import ui from "../../ui/meri-ui.module.css";
 
-export type HistoryView = {
+export type HistoryView = HistoryFollowUpView & {
+  /** Heading guidance; after a deletion it reports what was removed (01.04H). */
+  description: string;
   rows: readonly HistoryRow[];
-  background?: { title: string; detail: string; runsHref?: string };
-  /** A recorded outcome shown as the Figma "Conversation deleted" toast. */
-  outcome?: { title: string; detail: string };
+  initial?: HistoryQuery & {
+    /** Conversation selected on load; null when the selection was just deleted. */
+    selectedId?: string | null;
+    openMenu?: "client" | "status";
+  };
   manageHref?: string;
 };
 
@@ -25,7 +34,7 @@ const columns: readonly DataColumn<HistoryRow>[] = [
   { key: "updated", label: "Updated", width: 19, render: (r) => r.updated },
 ];
 
-/** 01.04 Conversation history: local search, filters and selection over listed conversations. */
+/** 01.04 Conversation history (01.04A–H states): local search, filters, selection and deletion confirmation. */
 export function ConversationHistoryScreen({
   view,
   unavailable,
@@ -33,23 +42,63 @@ export function ConversationHistoryScreen({
   view: HistoryView;
   unavailable: string;
 }) {
-  const filters = useHistoryFilters(view.rows);
-  const [selected, setSelected] = useState(view.rows[0]?.id);
-  const history = useRef<HTMLElement>(null);
-  const current =
-    filters.rows.find((row) => row.id === selected) ?? filters.rows[0];
   return (
     <div className={ui.page}>
       <MeriPageHeading
         title="Conversations"
-        description="Find previous work, including runs that are still active."
+        description={view.description}
         action={
           <LinkAction variant="primary" unavailable={unavailable}>
             <Plus aria-hidden /> New conversation
           </LinkAction>
         }
       />
-      <HistoryFilters filters={filters} rows={view.rows} />
+      {view.rows.length ? (
+        <HistoryList view={view} unavailable={unavailable} />
+      ) : (
+        <StateMessage
+          title="No conversations yet"
+          status="Information"
+          action={
+            <LinkAction variant="outline" unavailable={unavailable}>
+              New conversation
+            </LinkAction>
+          }
+        >
+          Start a conversation to research, analyze or draft. Only conversations
+          permitted by your current account will appear here.
+        </StateMessage>
+      )}
+    </div>
+  );
+}
+
+function HistoryList({
+  view,
+  unavailable,
+}: {
+  view: HistoryView;
+  unavailable: string;
+}) {
+  const filters = useHistoryFilters(view.rows, view.initial);
+  const [selected, setSelected] = useState(
+    view.initial?.selectedId === undefined
+      ? view.rows[0]?.id
+      : view.initial.selectedId,
+  );
+  const history = useRef<HTMLElement>(null);
+  const search = useRef<HTMLInputElement>(null);
+  const current = selected
+    ? (filters.rows.find((row) => row.id === selected) ?? filters.rows[0])
+    : undefined;
+  return (
+    <>
+      <HistoryFilters
+        filters={filters}
+        rows={view.rows}
+        openMenu={view.initial?.openMenu}
+        searchRef={search}
+      />
       <section ref={history} tabIndex={-1} aria-label="Conversation history">
         {filters.rows.length ? (
           <DataTable
@@ -60,93 +109,42 @@ export function ConversationHistoryScreen({
             onSelect={setSelected}
           />
         ) : (
-          <p className={ui.muted} role="status">
-            No conversations match these filters.
-          </p>
+          <StateMessage
+            title="No matching conversations"
+            status="No matches"
+            announce
+            action={
+              <button
+                type="button"
+                className={ui.outline}
+                onClick={() => {
+                  filters.clear();
+                  search.current?.focus();
+                }}
+              >
+                Clear search and filters
+              </button>
+            }
+          >
+            No permitted conversations match the current search and filters.
+            This does not prove that the work never existed; access and
+            retention rules still apply.
+          </StateMessage>
         )}
       </section>
-      <div className={ui.row} aria-label="Selected conversation actions">
-        <LinkAction variant="primary" unavailable={unavailable}>
-          Open conversation
-        </LinkAction>
-        <LinkAction
-          variant="outline"
-          href={current && view.manageHref}
+      {filters.rows.length ? (
+        <HistoryActions
+          selected={current !== undefined}
+          manageHref={view.manageHref}
           unavailable={unavailable}
-        >
-          Rename
-        </LinkAction>
-        <button
-          type="button"
-          className={ui.outline}
-          disabled
-          title={unavailable}
-        >
-          Archive
-        </button>
-        <button type="button" className={ui.ghost} disabled title={unavailable}>
-          Delete
-        </button>
-      </div>
+        />
+      ) : null}
       <HistoryFollowUps
         view={view}
+        visibleIds={filters.rows.map((row) => row.id)}
         unavailable={unavailable}
         onOpenHistory={() => history.current?.focus()}
       />
-    </div>
-  );
-}
-
-function HistoryFollowUps({
-  view,
-  unavailable,
-  onOpenHistory,
-}: {
-  view: HistoryView;
-  unavailable: string;
-  onOpenHistory: () => void;
-}) {
-  const [outcome, setOutcome] = useState(view.outcome);
-  return (
-    <>
-      {view.background ? (
-        <Notice
-          tone="success"
-          title={view.background.title}
-          action={
-            <LinkAction
-              variant="outline"
-              href={view.background.runsHref}
-              unavailable={unavailable}
-            >
-              View runs
-            </LinkAction>
-          }
-        >
-          {view.background.detail}
-        </Notice>
-      ) : null}
-      <ToastRegion>
-        {outcome ? (
-          <ToastCard
-            title={outcome.title}
-            detail={outcome.detail}
-            icon="success"
-            onDismiss={() => setOutcome(undefined)}
-          >
-            <button
-              type="button"
-              className={ui.outline}
-              onClick={() => {
-                setOutcome(undefined);
-                onOpenHistory();
-              }}
-            >
-              Open history
-            </button>
-          </ToastCard>
-        ) : null}
-      </ToastRegion>
     </>
   );
 }

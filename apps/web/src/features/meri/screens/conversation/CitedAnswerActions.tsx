@@ -1,10 +1,15 @@
+"use client";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@capiro/ui/button";
+import { ToastCard, ToastRegion } from "../../ui/ToastCard";
+import portal from "../../ui/meri-dialog.module.css";
 import styles from "../../cited-answer.module.css";
 
 export type CopyStatus = "idle" | "copied" | "unavailable";
 type SampleSource = { id: string; label: string; detail: string };
 
-/** Answer actions (Copy, Sources; unavailable Retry/Fork/Helpful) and the sample sources disclosure. */
+/** Answer actions (Copy, Sources; unavailable Retry/Fork/Helpful), the sample sources disclosure and the 13.23 Copy unavailable toast. */
 export function CitedAnswerActions({
   copyStatus,
   onCopy,
@@ -20,10 +25,18 @@ export function CitedAnswerActions({
   selectedSource: string | null;
   onToggleSources: () => void;
 }) {
+  const [copyDismissed, setCopyDismissed] = useState(false);
   return (
     <>
       <div className={styles.messageActions} aria-label="Answer actions">
-        <Button type="button" variant="ghost" onClick={onCopy}>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() => {
+            setCopyDismissed(false);
+            onCopy();
+          }}
+        >
           {copyStatus === "copied" ? "Copied" : "Copy"}
         </Button>
         <Button
@@ -47,12 +60,10 @@ export function CitedAnswerActions({
             {label}
           </Button>
         ))}
-        <span className="sr-only" role="status">
-          {copyStatus === "unavailable"
-            ? "Copy unavailable in this browser"
-            : ""}
-        </span>
       </div>
+      {copyStatus === "unavailable" && !copyDismissed ? (
+        <CopyUnavailableToast onDismiss={() => setCopyDismissed(true)} />
+      ) : null}
       {sourcesOpen && (
         <section
           id="sample-sources"
@@ -82,5 +93,21 @@ export function CitedAnswerActions({
         </section>
       )}
     </>
+  );
+}
+
+/** 13.23 Copy unavailable: a recoverable clipboard outcome, portalled out of the answer article's typography. */
+function CopyUnavailableToast({ onDismiss }: { onDismiss: () => void }) {
+  return createPortal(
+    <div className={portal.portalSurface}>
+      <ToastRegion>
+        <ToastCard
+          title="Copy unavailable"
+          detail="Clipboard access was not available. Select the permitted text and copy it manually."
+          onDismiss={onDismiss}
+        />
+      </ToastRegion>
+    </div>,
+    document.body,
   );
 }

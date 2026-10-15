@@ -1,8 +1,9 @@
 "use client";
-import { useId, useState, type KeyboardEvent } from "react";
+import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Clock, FileText, MessageSquare, Sparkle } from "lucide-react";
 import { FormField } from "../../ui/FormField";
+import { StateMessage } from "../../ui/StateMessage";
 import ui from "../../ui/meri-ui.module.css";
 import rows from "../../ui/detail-row.module.css";
 import styles from "./conversation.module.css";
@@ -33,14 +34,21 @@ const shortcuts = [
   ["Esc", "Close search"],
 ] as const;
 
-/** Commands always list; other results match any query word in their title or detail. */
-const matches = (item: PaletteItem, query: string) => {
-  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+const words = (query: string) =>
+  query.toLowerCase().split(/\s+/).filter(Boolean);
+/** A result matches when any query word appears in its title or detail. */
+const matches = (item: PaletteItem, terms: readonly string[]) => {
   const text = `${item.title} ${item.detail}`.toLowerCase();
-  return (
-    item.kind === "command" ||
-    !words.length ||
-    words.some((word) => text.includes(word))
+  return !terms.length || terms.some((term) => text.includes(term));
+};
+/** Commands are suggested alongside matching work; otherwise they must match too (01.05A). */
+const search = (items: readonly PaletteItem[], query: string) => {
+  const terms = words(query);
+  const work = items.some(
+    (item) => item.kind !== "command" && matches(item, terms),
+  );
+  return items.filter(
+    (item) => matches(item, terms) || (work && item.kind === "command"),
   );
 };
 
@@ -51,7 +59,8 @@ export function CommandPalette({ view }: { view: PaletteView }) {
   const [query, setQuery] = useState(view.initialQuery);
   const [active, setActive] = useState(0);
   const [message, setMessage] = useState("");
-  const results = view.items.filter((item) => matches(item, query));
+  const input = useRef<HTMLInputElement>(null);
+  const results = search(view.items, query);
   const current = results[Math.min(active, results.length - 1)];
   const open = (item: PaletteItem | undefined) => {
     if (!item) return;
@@ -75,10 +84,11 @@ export function CommandPalette({ view }: { view: PaletteView }) {
       <FormField
         label="Search"
         role="combobox"
-        aria-expanded
-        aria-controls={listId}
+        aria-expanded={results.length > 0}
+        aria-controls={results.length ? listId : undefined}
         aria-autocomplete="list"
         autoFocus
+        ref={input}
         aria-activedescendant={current ? `${listId}-${current.id}` : undefined}
         value={query}
         onChange={(value) => {
@@ -88,17 +98,28 @@ export function CommandPalette({ view }: { view: PaletteView }) {
         }}
         onKeyDown={move}
       />
-      <PaletteResults
-        listId={listId}
-        results={results}
-        current={current}
-        onHover={(item) => setActive(results.indexOf(item))}
-        onOpen={open}
-      />
+      {results.length ? (
+        <PaletteResults
+          listId={listId}
+          results={results}
+          current={current}
+          onHover={(item) => setActive(results.indexOf(item))}
+          onOpen={open}
+        />
+      ) : null}
       <p className="sr-only" role="status">
         {message || `${results.length} results`}
       </p>
       <ShortcutHelp />
+      {results.length ? null : (
+        <NoMatches
+          onClear={() => {
+            setQuery("");
+            setActive(0);
+            input.current?.focus();
+          }}
+        />
+      )}
     </>
   );
 }
@@ -150,6 +171,24 @@ function PaletteResults({
         </li>
       ))}
     </ul>
+  );
+}
+
+function NoMatches({ onClear }: { onClear: () => void }) {
+  return (
+    <StateMessage
+      title="No matching commands or work"
+      status="No matches"
+      action={
+        <button type="button" className={ui.outline} onClick={onClear}>
+          Clear search
+        </button>
+      }
+    >
+      No permitted result matches this search. Try a different query or open
+      Conversations. An empty search result does not establish that work is
+      absent.
+    </StateMessage>
   );
 }
 

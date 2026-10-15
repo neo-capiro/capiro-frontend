@@ -35,7 +35,7 @@
   line-height: 1.5;
   letter-spacing: -0.075px;
 }
-/* 01.04 history filters and their menus */
+/* 01.04 history search and filters */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -46,42 +46,9 @@
   flex: 0 1 752px;
   min-width: 240px;
 }
-.menu {
-  z-index: 102;
-  min-width: 180px;
-  padding: 4px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--card);
-  box-shadow:
-    0 2px 6px #0c0a090d,
-    0 16px 40px -12px #0c0a092e;
-}
-.menuItem {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 8px 10px 8px 30px;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-  cursor: default;
-}
-.menuItem > span:first-child {
-  position: absolute;
-  left: 10px;
-  display: flex;
-  width: 14px;
-  justify-content: center;
-}
-.menuItem svg {
-  width: 8px;
-  height: 8px;
-  fill: currentColor;
-}
-.menuItem[data-highlighted] {
-  background: var(--muted);
+/* 01.04H: with no selected conversation every action is visibly unavailable. */
+.historyActions[data-selection="none"] > button {
+  opacity: 0.5;
 }
 /* 01.05 command palette */
 .paletteHeading {
@@ -180,4 +147,11 @@
   .dialogSpace {
     display: none;
   }
+}
+/* Delete confirmations stack their actions (Figma overlays 3035:33134, 3022:32527). */
+.stackedActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }

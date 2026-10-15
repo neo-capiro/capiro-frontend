@@ -1,0 +1,49 @@
+/* Figma 3.4 13.21 / 13.22 conversation filter menus (480px panel). */
+.menu {
+  z-index: 102;
+  width: min(480px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow:
+    0 2px 6px #0c0a090d,
+    0 16px 40px -12px #0c0a092e;
+}
+.title {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 500;
+}
+.description {
+  margin-top: -4px;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.option {
+  cursor: default;
+  outline: none;
+}
+/* The chosen value is shown by the trigger and this border; the radio dot is not part of the design. */
+.option > span:first-child {
+  display: none;
+}
+.option[data-state="checked"] {
+  border-color: var(--foreground);
+}
+.option[data-highlighted] {
+  outline: 2px solid var(--ring, #2563eb);
+  outline-offset: 2px;
+}
