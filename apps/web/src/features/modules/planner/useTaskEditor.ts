@@ -2,12 +2,13 @@
 import { useId, useRef, useState } from "react";
 import type { PlannerTask } from "../../../shared/capiro/operations/planner-schemas";
 import { useCapiroMutation } from "../../../shared/capiro/queries";
-import type { Draft } from "./task-editor-data";
+import type { Draft, TaskCreateSeed } from "./task-editor-data";
 export type TaskEditorInput = {
   task?: PlannerTask;
   projectId?: string | null;
   parentId?: string;
   initialTitle?: string;
+  initialCreate?: TaskCreateSeed;
   onSaved: () => void;
   onClose: () => void;
   canSubmit?: () => boolean;
@@ -15,14 +16,15 @@ export type TaskEditorInput = {
 };
 function taskDraft(props: TaskEditorInput): Draft {
   const task = props.task;
+  const seed = task ? undefined : props.initialCreate;
   return {
-    name: task?.name ?? props.initialTitle ?? "",
-    description: task?.description ?? "",
+    name: task?.name ?? seed?.name ?? props.initialTitle ?? "",
+    description: task?.description ?? seed?.description ?? "",
     assigneeId: task?.assigneeId ?? null,
     dueOn: task?.dueOn ?? null,
     startOn: task?.startOn ?? null,
     status: task?.status ?? "todo",
-    priority: task?.priority ?? "none",
+    priority: task?.priority ?? seed?.priority ?? "none",
     estimateMinutes: task?.estimateMinutes ?? 0,
     startTime: task?.startTime ?? null,
     dueTime: task?.dueTime ?? null,
@@ -35,18 +37,26 @@ function taskDraft(props: TaskEditorInput): Draft {
     recurrence: task?.recurrence ?? null,
   };
 }
+function editorMemberships(props: TaskEditorInput) {
+  return (
+    props.task?.memberships ??
+    props.initialCreate?.memberships ??
+    (props.projectId
+      ? [{ projectId: props.projectId, sectionId: null, position: 0 }]
+      : [])
+  );
+}
 /** The single draft/membership/versioned-save owner for every task editor presentation. */
 export function useTaskEditor(props: TaskEditorInput) {
   const task = props.task;
   const formId = useId();
   const [data, setData] = useState(() => taskDraft(props));
   const [projectIds, setProjects] = useState(
-    task?.memberships.map((item) => item.projectId) ??
-      (props.projectId ? [props.projectId] : []),
+    editorMemberships(props).map((item) => item.projectId),
   );
   const [sectionIds, setSections] = useState<Record<string, string | null>>(
     Object.fromEntries(
-      task?.memberships.map((item) => [item.projectId, item.sectionId]) ?? [],
+      editorMemberships(props).map((item) => [item.projectId, item.sectionId]),
     ),
   );
   const create = useCapiroMutation("planner.task.create");
@@ -56,13 +66,13 @@ export function useTaskEditor(props: TaskEditorInput) {
   const reset = () => {
     if (pending.current) return;
     setData(taskDraft(props));
-    setProjects(
-      task?.memberships.map((item) => item.projectId) ??
-        (props.projectId ? [props.projectId] : []),
-    );
+    setProjects(editorMemberships(props).map((item) => item.projectId));
     setSections(
       Object.fromEntries(
-        task?.memberships.map((item) => [item.projectId, item.sectionId]) ?? [],
+        editorMemberships(props).map((item) => [
+          item.projectId,
+          item.sectionId,
+        ]),
       ),
     );
     create.reset();
@@ -76,6 +86,9 @@ export function useTaskEditor(props: TaskEditorInput) {
     try {
       const mutation = {
         ...data,
+        ...(!task && props.initialCreate
+          ? { clientId: props.initialCreate.clientId }
+          : {}),
         parentId: props.parentId ?? task?.parentId ?? null,
         memberships: projectIds.map((projectId) => ({
           projectId,

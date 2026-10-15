@@ -30,6 +30,7 @@ import { useDesktopTaskLayout } from "./TaskEditorBody";
 import { TaskSubtasks } from "./TaskSubtasks";
 import detailStyles from "./task-detail.module.css";
 import { AddTimeDialog } from "./TimeDialogs";
+import { duplicateTaskSeed } from "./task-editor-data";
 type Props = {
   task: PlannerTask;
   people: PlannerPerson[];
@@ -40,12 +41,14 @@ type Props = {
 type Model = ReturnType<typeof useDetail>;
 function useDetail({ task, onSaved }: Props) {
   const [edit, setEdit] = useState(false),
+    [duplicate, setDuplicateState] = useState(false),
     [subtask, setSubtask] = useState(false),
     [time, setTime] = useState(false),
     [comment, setComment] = useState(""),
     [subtaskRevision, setSubtaskRevision] = useState(0),
     [editorBusy, setEditorBusy] = useState(false);
   const active = useRef(false);
+  const duplicateOpen = useRef(false);
   const events = useCapiroQuery("planner.task.events", {
     params: { id: task.id },
   });
@@ -54,7 +57,8 @@ function useDetail({ task, onSaved }: Props) {
   const writable = ["admin", "editor"].includes(task.access);
   const addComment = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (active.current || task.access === "viewer") return;
+    if (active.current || duplicateOpen.current || task.access === "viewer")
+      return;
     active.current = true;
     const submitted = comment;
     archiveMutation.reset();
@@ -72,7 +76,7 @@ function useDetail({ task, onSaved }: Props) {
     }
   };
   const archive = async () => {
-    if (active.current || !writable) return;
+    if (active.current || duplicateOpen.current || !writable) return;
     active.current = true;
     commentMutation.reset();
     try {
@@ -90,6 +94,14 @@ function useDetail({ task, onSaved }: Props) {
   return {
     edit,
     setEdit,
+    duplicate,
+    setDuplicate: (value: boolean) => {
+      if (value && (active.current || !writable)) return;
+      duplicateOpen.current = value;
+      setDuplicateState(value);
+    },
+    canSubmitDuplicate: () =>
+      duplicateOpen.current && writable && !active.current,
     subtask,
     setSubtask,
     time,
@@ -97,7 +109,11 @@ function useDetail({ task, onSaved }: Props) {
     comment,
     setComment,
     error: commentMutation.error?.message ?? archiveMutation.error?.message,
-    busy: editorBusy || commentMutation.pending || archiveMutation.pending,
+    busy:
+      duplicate ||
+      editorBusy ||
+      commentMutation.pending ||
+      archiveMutation.pending,
     setEditorPending: (_owner: object, value: boolean) => {
       if (value) {
         commentMutation.reset();
@@ -106,7 +122,7 @@ function useDetail({ task, onSaved }: Props) {
       active.current = value;
       setEditorBusy(value);
     },
-    isPending: () => active.current,
+    isPending: () => active.current || duplicateOpen.current,
     events,
     writable,
     addComment,
@@ -136,7 +152,15 @@ function TaskDetailSession(props: Props) {
     canSubmit: () => m.writable && !m.isPending(),
     onPendingChange: m.setEditorPending,
   });
-  const inline = desktop && m.writable && !m.edit && !m.subtask && !m.time;
+  const duplicateEditor = useTaskEditor({
+    initialCreate: duplicateTaskSeed(props.task, props.projects),
+    onSaved: props.onSaved,
+    onClose: () => m.setDuplicate(false),
+    canSubmit: m.canSubmitDuplicate,
+    onPendingChange: m.setEditorPending,
+  });
+  const inline =
+    desktop && m.writable && !m.edit && !m.subtask && !m.time && !m.duplicate;
   return (
     <>
       <Modal
@@ -149,7 +173,17 @@ function TaskDetailSession(props: Props) {
         description={props.task.description || "Task details"}
         footer={
           <div className={detailStyles.footerActions}>
-            <TaskDetailActions props={props} model={m} showSummary={false} />
+            <TaskDetailActions
+              props={props}
+              model={m}
+              showSummary={false}
+              onDuplicate={() => {
+                if (!m.isPending()) {
+                  duplicateEditor.reset();
+                  m.setDuplicate(true);
+                }
+              }}
+            />
             <ActionButton
               className={detailStyles.closeAction}
               disabled={m.busy}
@@ -221,6 +255,14 @@ function TaskDetailSession(props: Props) {
           )}
         </div>
       </Modal>
+      <TaskEditor
+        open={m.duplicate}
+        model={duplicateEditor}
+        onClose={() => m.setDuplicate(false)}
+        onSaved={props.onSaved}
+        people={props.people}
+        projects={props.projects}
+      />
       <TaskEditor
         open={m.edit}
         model={editor}
@@ -347,14 +389,21 @@ function TaskDetailActions({
   props,
   model: m,
   showSummary = true,
+  onDuplicate,
 }: {
   props: Props;
   model: Model;
   showSummary?: boolean;
+  onDuplicate?: () => void;
 }) {
   const task = props.task;
   return (
     <>
+      {onDuplicate && (
+        <ActionButton disabled={!m.writable || m.busy} onClick={onDuplicate}>
+          Duplicate task
+        </ActionButton>
+      )}
       {showSummary && (
         <>
           <Badge>{task.status.replaceAll("_", " ")}</Badge>
