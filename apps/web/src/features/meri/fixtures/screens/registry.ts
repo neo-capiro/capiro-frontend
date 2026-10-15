@@ -1,4 +1,5 @@
 import { approvalScreens } from "./approvals";
+import { memoryScreens } from "./memory";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
 import { sourceScreens } from "./sources";
@@ -10,6 +11,7 @@ export const fixtureScreens: readonly FixtureScreen[] = [
   ...approvalScreens,
   ...routineScreens,
   ...sourceScreens,
+  ...memoryScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>
