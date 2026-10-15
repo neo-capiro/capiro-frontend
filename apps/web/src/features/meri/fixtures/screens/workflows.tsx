@@ -160,7 +160,7 @@ export const workflowScreens: readonly FixtureScreen[] = [
   },
   {
     slug: "funding-market",
-    figmaId: "12.07",
+    figmaId: "12.09",
     figmaNode: "1064:151682",
     title: "Funding & federal market",
     Screen: () => (
@@ -173,7 +173,7 @@ export const workflowScreens: readonly FixtureScreen[] = [
   },
   {
     slug: "budget-comparison",
-    figmaId: "12.08",
+    figmaId: "12.12",
     figmaNode: "1064:151762",
     title: "Budget lines & exact comparison",
     Screen: () => (
@@ -303,7 +303,7 @@ export const workflowScreens: readonly FixtureScreen[] = [
   },
   {
     slug: "artifact-verification",
-    figmaId: "12.15",
+    figmaId: "12.18",
     figmaNode: "1064:152575",
     title: "Artifact verification",
     Screen: () => (

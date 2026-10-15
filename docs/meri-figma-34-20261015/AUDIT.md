@@ -181,8 +181,8 @@ These frames sit beside the standalone mock-up in sections `1064:150752` (toolin
 | 12.06 | Code & reproducible analysis | 1064:151469 | Built: synthetic fixture `/meri/fixture/code-analysis` | desktop |
 | 12.07 | Workflow request & context | 1064:151540 | Built: synthetic fixture `/meri/fixture/workflow-request` | desktop |
 | 12.08 | Workflow run & recovery | 1064:151605 | Built: synthetic fixture `/meri/fixture/workflow-run` | desktop |
-| 12.07 | Funding & federal market | 1064:151682 | Built: synthetic fixture `/meri/fixture/funding-market` | desktop |
-| 12.08 | Budget lines & exact comparison | 1064:151762 | Built: synthetic fixture `/meri/fixture/budget-comparison` | desktop |
+| 12.09 | Funding & federal market | 1064:151682 | Built: synthetic fixture `/meri/fixture/funding-market` | desktop |
+| 12.12 | Budget lines & exact comparison | 1064:151762 | Built: synthetic fixture `/meri/fixture/budget-comparison` | desktop |
 | 12.10 | Relationship & mail history | 1064:151858 | Built: synthetic fixture `/meri/fixture/relationship-history` | desktop |
 | 12.11 | Client & portfolio changes | 1064:151930 | Built: synthetic fixture `/meri/fixture/portfolio-changes` | desktop |
 | 12.13 | Government watch | 1064:152002 | Built: synthetic fixture `/meri/fixture/government-watch` | desktop |
@@ -192,7 +192,7 @@ These frames sit beside the standalone mock-up in sections `1064:150752` (toolin
 | 12.17 | Browser permissions & qualification | 1064:152281 | Built: synthetic fixture `/meri/fixture/browser-permissions` | desktop |
 | 12.20 | Company research & capture roadmap | 1064:152370 | Built: synthetic fixture `/meri/fixture/company-research` | desktop |
 | 12.21 | Portfolio overlap matrix | 1064:152468 | Built: synthetic fixture `/meri/fixture/portfolio-overlap` | desktop |
-| 12.15 | Artifact verification | 1064:152575 | Built: synthetic fixture `/meri/fixture/artifact-verification` | desktop |
+| 12.18 | Artifact verification | 1064:152575 | Built: synthetic fixture `/meri/fixture/artifact-verification` | desktop |
 | 12.22 | Exact source record | 1064:152635 | Built: synthetic fixture `/meri/fixture/exact-source-record` | desktop |
 | Setup · Research a Company |  | 1064:152953 | Built: synthetic fixture `/meri/fixture/setup-research-company` | setup |
 | Setup · Relationship Brief |  | 1064:152955 | Built: synthetic fixture `/meri/fixture/setup-relationship-brief` | setup |
