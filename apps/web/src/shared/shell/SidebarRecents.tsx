@@ -1,7 +1,8 @@
 import { Button } from "@capiro/ui/button";
 import styles from "./shell.module.css";
 
-const recents = [
+/** Synthetic recent conversation titles, shared by the sidebar and the phone menu. */
+export const recents = [
   "Anduril meeting brief",
   "FY27 funding landscape",
   "Weekly client updates",

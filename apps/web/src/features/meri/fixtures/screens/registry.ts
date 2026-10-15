@@ -5,6 +5,7 @@ import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
 import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
+import { responsiveScreens } from "./responsive";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
 import { sourceScreens } from "./sources";
@@ -27,6 +28,7 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("routines", routineScreens),
   ...inSection("data-access", sourceScreens),
   ...inSection("memory", memoryScreens),
+  ...responsiveScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>

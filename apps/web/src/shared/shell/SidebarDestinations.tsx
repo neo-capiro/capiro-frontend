@@ -18,7 +18,8 @@ export type MeriSection =
   | "routines"
   | "data-access";
 
-const destinations = [
+/** Canonical Meri workspace destinations, shared by the sidebar and the phone menu. */
+export const destinations = [
   {
     label: "Conversations",
     icon: "conversations",
@@ -66,7 +67,7 @@ const destinations = [
   fixture?: string;
 }[];
 /** Fixture mode links a destination to its synthetic Figma screen when one exists. */
-const destinationHref = (
+export const destinationHref = (
   item: (typeof destinations)[number],
   fixture: boolean,
 ): string | undefined =>
