@@ -17,6 +17,7 @@ import { ObjectiveCalendarDestination } from "../../src/features/portfolio/calen
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
 import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
+import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
@@ -106,7 +107,7 @@ function RoutedApp() {
     );
   if (path === "/meri/fixture/home")
     return (
-      <ProductShell fixture>
+      <ProductShell fixture pendingApprovals={pendingApprovals()}>
         <MeriHomeFixture />
       </ProductShell>
     );
@@ -120,6 +121,7 @@ function RoutedApp() {
         fixture
         designTarget={fixtureScreen.figmaNode}
         section={fixtureScreen.section}
+        pendingApprovals={pendingApprovals(fixtureScreen.slug)}
       >
         <fixtureScreen.Screen />
       </ProductShell>

@@ -82,15 +82,23 @@ export const destinationHref = (
 export const preferencesHref = (fixture: boolean) =>
   fixture ? "/meri/fixture/personal-preferences" : "/settings/preferences";
 
+/** A destination label; Approvals carries the pending count when one is supplied. */
+export const destinationLabel = (label: string, pendingApprovals?: number) =>
+  label === "Approvals" && pendingApprovals !== undefined
+    ? `Approvals · ${pendingApprovals}`
+    : label;
+
 /** Meri workspace destinations; unavailable services stay explained and disabled. */
 export function SidebarDestinations({
   assetSet,
   fixture,
   section,
+  pendingApprovals,
 }: {
   assetSet: "home" | "cited-answer";
   fixture: boolean;
   section?: MeriSection | undefined;
+  pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
@@ -137,9 +145,7 @@ export function SidebarDestinations({
             }
           >
             {<DesignIcon name={item.icon} assetSet={assetSet} />}
-            {fixture && item.label === "Approvals"
-              ? "Approvals · 2"
-              : item.label}
+            {destinationLabel(item.label, pendingApprovals)}
           </Button>
         );
       })}

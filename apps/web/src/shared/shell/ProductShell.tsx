@@ -13,6 +13,7 @@ export function ProductShell({
   documentWorkflow = false,
   fixture = false,
   section,
+  pendingApprovals,
 }: {
   children: React.ReactNode;
   designTarget?: string;
@@ -22,6 +23,8 @@ export function ProductShell({
   fixture?: boolean;
   /** Marks the matching sidebar destination as current. */
   section?: MeriSection | undefined;
+  /** Fixture sample count shown on the Approvals destination. */
+  pendingApprovals?: number | undefined;
 }) {
   return (
     <>
@@ -31,9 +34,15 @@ export function ProductShell({
           assetSet={assetSet}
           fixture={fixture}
           section={section}
+          pendingApprovals={pendingApprovals}
         />
         <div className={styles.workspace}>
-          <Sidebar assetSet={assetSet} fixture={fixture} section={section} />
+          <Sidebar
+            assetSet={assetSet}
+            fixture={fixture}
+            section={section}
+            pendingApprovals={pendingApprovals}
+          />
           <main id="main-content" className={styles.main}>
             {actionWorkflow || documentWorkflow ? (
               children

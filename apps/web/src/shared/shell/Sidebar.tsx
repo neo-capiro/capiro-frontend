@@ -18,10 +18,12 @@ export function Sidebar({
   assetSet = "home",
   fixture = false,
   section,
+  pendingApprovals,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
   section?: MeriSection | undefined;
+  pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
@@ -82,6 +84,7 @@ export function Sidebar({
         assetSet={assetSet}
         fixture={fixture}
         section={section}
+        pendingApprovals={pendingApprovals}
       />
       <SidebarRecents fixture={fixture} />
       <SidebarPreferences fixture={fixture} section={section} />

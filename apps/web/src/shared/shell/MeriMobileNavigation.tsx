@@ -9,6 +9,7 @@ import { scopedHref } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
 import {
   destinationHref,
+  destinationLabel,
   destinations,
   type MeriSection,
 } from "./SidebarDestinations";
@@ -21,6 +22,7 @@ type MenuProps = {
   assetSet: AssetSet;
   fixture: boolean;
   section?: MeriSection | undefined;
+  pendingApprovals?: number | undefined;
   clientId?: string | undefined;
   onNavigate: () => void;
 };
@@ -111,6 +113,7 @@ function MobileMenu({
   assetSet,
   fixture,
   section,
+  pendingApprovals,
   clientId,
   onNavigate,
 }: MenuProps) {
@@ -131,8 +134,7 @@ function MobileMenu({
       />
       {destinations.map((item) => {
         const href = destinationHref(item, fixture);
-        const label =
-          fixture && item.label === "Approvals" ? "Approvals · 2" : item.label;
+        const label = destinationLabel(item.label, pendingApprovals);
         const icon = <DesignIcon name={item.icon} assetSet={assetSet} />;
         return href ? (
           <Link
@@ -184,10 +186,12 @@ export function MeriMobileNavigation({
   assetSet = "home",
   fixture = false,
   section,
+  pendingApprovals,
 }: {
   assetSet?: AssetSet;
   fixture?: boolean;
   section?: MeriSection | undefined;
+  pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
@@ -227,6 +231,7 @@ export function MeriMobileNavigation({
           assetSet={assetSet}
           fixture={fixture}
           section={section}
+          pendingApprovals={pendingApprovals}
           clientId={clientId}
           onNavigate={() => setOpenOn(null)}
         />

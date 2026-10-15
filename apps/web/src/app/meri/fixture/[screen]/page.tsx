@@ -4,6 +4,7 @@ import {
   findFixtureScreen,
   fixtureScreens,
 } from "../../../../features/meri/fixtures/screens/registry";
+import { pendingApprovals } from "../../../../features/meri/fixtures/screens/approval-counts";
 
 export const generateStaticParams = () =>
   fixtureScreens.map((screen) => ({ screen: screen.slug }));
@@ -20,6 +21,7 @@ export default async function FixtureScreenPage({
       fixture
       designTarget={entry.figmaNode}
       section={entry.section}
+      pendingApprovals={pendingApprovals(entry.slug)}
     >
       <entry.Screen />
     </ProductShell>
