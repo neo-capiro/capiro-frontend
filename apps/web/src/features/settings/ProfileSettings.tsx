@@ -36,6 +36,28 @@ export function ProfileSettings() {
   const [archive, setArchive] = useState<Client>();
   const [create, setCreate] = useState(false);
   const action = useSettingsAction();
+  async function changeStatus(
+    client: Client,
+    operation: "archive" | "restore",
+  ) {
+    const result =
+      operation === "archive"
+        ? await api.request("settings.profiles.archive", {
+            params: { clientId: client.id },
+          })
+        : await api.request("settings.profiles.restore", {
+            params: { clientId: client.id },
+            body: { status: "active" },
+          });
+    if (
+      result.id !== client.id ||
+      result.status !== (operation === "archive" ? "archived" : "active")
+    )
+      throw new Error(
+        "The response did not confirm this profile update. Reload profiles to confirm the result.",
+      );
+    return result;
+  }
   const clients: Client[] = query.data ?? [];
   const active = clients.filter((client) => client.status !== "archived");
   const archived = clients.filter((client) => client.status === "archived");
@@ -129,11 +151,7 @@ export function ProfileSettings() {
                       disabled={action.busy}
                       onClick={() =>
                         void action.run(
-                          () =>
-                            api.request("settings.profiles.restore", {
-                              params: { clientId: row.id },
-                              body: { status: "active" },
-                            }),
+                          () => changeStatus(row, "restore"),
                           "Profile was restored.",
                           query.reload,
                         )
@@ -178,10 +196,7 @@ export function ProfileSettings() {
               onClick={() => {
                 if (archive)
                   void action.run(
-                    () =>
-                      api.request("settings.profiles.archive", {
-                        params: { clientId: archive.id },
-                      }),
+                    () => changeStatus(archive, "archive"),
                     "Profile was archived.",
                     () => {
                       setArchive(undefined);

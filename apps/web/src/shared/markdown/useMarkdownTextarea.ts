@@ -15,6 +15,7 @@ import {
   type SourceEdit,
 } from "./source-edit";
 export type MarkdownTextareaModel = {
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   disabled?: boolean | undefined;
@@ -22,7 +23,14 @@ export type MarkdownTextareaModel = {
   maxLength: number;
 };
 export function useMarkdownTextarea(
-  { value, onChange, disabled, canEdit, maxLength }: MarkdownTextareaModel,
+  {
+    value,
+    onChange,
+    disabled,
+    canEdit,
+    maxLength,
+    label = "Description",
+  }: MarkdownTextareaModel,
   input: RefObject<HTMLTextAreaElement | null>,
 ) {
   const selection = useRef<{
@@ -83,14 +91,14 @@ export function useMarkdownTextarea(
       queued.current = null;
       if (pending.source !== value) {
         setError(
-          "The description changed. Select its current text before adding a link.",
+          `The ${label.toLowerCase()} changed. Select its current text before adding a link.`,
         );
         return;
       }
       apply(pending.edit);
     });
     return () => cancelAnimationFrame(frame);
-  }, [linkOpen, value, apply]);
+  }, [linkOpen, value, apply, label]);
   const format = (action: MarkdownAction) => {
     const node = input.current;
     if (!node || preview || !editable()) return;
@@ -128,7 +136,7 @@ export function useMarkdownTextarea(
     }
     if (!saved || saved.source !== value) {
       setError(
-        "The description changed. Close this dialog and select its current text.",
+        `The ${label.toLowerCase()} changed. Close this dialog and select its current text.`,
       );
       return;
     }

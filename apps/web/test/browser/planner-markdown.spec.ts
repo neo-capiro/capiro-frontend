@@ -25,7 +25,11 @@ test("preview renders Markdown/GFM safely and an unchanged save preserves every 
   await expect(dialog).toHaveAccessibleDescription(
     "Review task details, description and activity.",
   );
-  await dialog.getByRole("button", { name: "Preview", exact: true }).click();
+  const toolbar = dialog.getByRole("toolbar", {
+    name: "Description formatting",
+    exact: true,
+  });
+  await toolbar.getByRole("button", { name: "Preview", exact: true }).click();
   const preview = dialog.getByRole("region", { name: "Description preview" });
   await expect(
     preview.getByRole("heading", { name: "Saved heading", exact: true }),
@@ -52,7 +56,7 @@ test("preview renders Markdown/GFM safely and an unchanged save preserves every 
   await page.screenshot({
     path: info.outputPath("markdown-preview-desktop.png"),
   });
-  await dialog.getByRole("button", { name: "Preview", exact: true }).click();
+  await toolbar.getByRole("button", { name: "Preview", exact: true }).click();
   await dialog.getByRole("button", { name: "Save task", exact: true }).click();
   await expect(dialog).toBeHidden();
   expect(writes).toHaveLength(1);
@@ -136,12 +140,16 @@ test("link insertion rejects unsafe URLs, restores selection for native undo, an
   });
   await page.goto(`/modules/planner?task=${taskId}`);
   const dialog = page.getByRole("dialog", { name: nextTask.name, exact: true });
+  const toolbar = dialog.getByRole("toolbar", {
+    name: "Description formatting",
+    exact: true,
+  });
   const input = dialog.getByLabel("Description", { exact: true });
   await input.focus();
   await input.evaluate((node) =>
     (node as HTMLTextAreaElement).setSelectionRange(0, 5),
   );
-  await dialog.getByRole("button", { name: "Link", exact: true }).click();
+  await toolbar.getByRole("button", { name: "Link", exact: true }).click();
   const link = page.getByRole("dialog", {
     name: "Insert description link",
     exact: true,
@@ -164,7 +172,7 @@ test("link insertion rejects unsafe URLs, restores selection for native undo, an
   await input.evaluate((node) =>
     (node as HTMLTextAreaElement).setSelectionRange(0, 1),
   );
-  await dialog.getByRole("button", { name: "Bold", exact: true }).click();
+  await toolbar.getByRole("button", { name: "Bold", exact: true }).click();
   await expect(dialog.getByRole("alert")).toContainText("character limit");
   expect((await input.inputValue()).length).toBe(50000);
   expect(writes).toBe(0);
@@ -213,7 +221,10 @@ test("readonly description rendering and receipt replacement never retain a form
 }) => {
   await setup(page);
   await page.goto("/__test/task-detail-refresh");
-  await page.getByRole("button", { name: "Link", exact: true }).click();
+  await page
+    .getByRole("toolbar", { name: "Description formatting", exact: true })
+    .getByRole("button", { name: "Link", exact: true })
+    .click();
   await page
     .getByRole("dialog", { name: "Insert description link", exact: true })
     .getByLabel("Link URL")
@@ -260,6 +271,10 @@ test("pending save synchronously fences formatting and link changes", async ({
   });
   await page.goto(`/modules/planner?task=${taskId}`);
   const dialog = page.getByRole("dialog", { name: nextTask.name, exact: true });
+  const toolbar = dialog.getByRole("toolbar", {
+    name: "Description formatting",
+    exact: true,
+  });
   await dialog.locator('[data-slot="task-detail-editor"]').evaluate((form) => {
     (form as HTMLFormElement).requestSubmit();
     form.querySelector<HTMLButtonElement>('button[aria-label="Bold"]')?.click();
@@ -267,10 +282,10 @@ test("pending save synchronously fences formatting and link changes", async ({
   try {
     await expect.poll(() => submitted).toBe(nextTask.description);
     await expect(
-      dialog.getByRole("button", { name: "Bold", exact: true }),
+      toolbar.getByRole("button", { name: "Bold", exact: true }),
     ).toBeDisabled();
     await expect(
-      dialog.getByRole("button", { name: "Link", exact: true }),
+      toolbar.getByRole("button", { name: "Link", exact: true }),
     ).toBeDisabled();
     await expect(dialog.getByLabel("Description", { exact: true })).toHaveValue(
       nextTask.description,
