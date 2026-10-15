@@ -45,7 +45,6 @@ export function WorkspaceFileTree({
                 path={id}
                 name={file.name}
                 className={styles.file}
-                aria-selected={id === selectedId}
               >
                 <FileTreeName>{file.name}</FileTreeName>
               </FileTreeFile>
