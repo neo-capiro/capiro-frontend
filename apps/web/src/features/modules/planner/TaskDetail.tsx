@@ -170,7 +170,7 @@ function TaskDetailSession(props: Props) {
           if (!open && !m.isPending()) props.onClose();
         }}
         title={props.task.name}
-        description={props.task.description || "Task details"}
+        description="Review task details, description and activity."
         footer={
           <div className={detailStyles.footerActions}>
             <TaskDetailActions

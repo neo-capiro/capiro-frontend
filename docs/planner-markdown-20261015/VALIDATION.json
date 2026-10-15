@@ -1,0 +1,13 @@
+{
+  "scope": "local synthetic desktop Markdown implementation",
+  "unit": { "file": "apps/web/tests/planner-markdown.test.ts", "passed": 22, "failed": 0 },
+  "browser": { "file": "apps/web/test/browser/planner-markdown.spec.ts", "passed": 6, "failed": 0, "workers": 1, "retries": 0 },
+  "regressions": { "desktop-closeout.spec.ts": 10, "planner-duplicate.spec.ts": 5, "note": "All 15 passed in the final combined run before its added Objective test assertion failed; all six Markdown cases subsequently reran successfully after test-only correction." },
+  "types": { "packages/ui": "passed", "narrow Markdown source and tests": "passed", "full frontend": "not qualified: earlier 768/1536 MiB heap exhaustion" },
+  "webOwnedSourceLint": "passed, zero errors/warnings",
+  "architecture": { "errors": 0, "blocking": 0, "reviewed": 482, "inheritedUnreviewed": 19 },
+  "sourceReview": "independent_fix_review accepted exact final fingerprints",
+  "liveWrites": 0,
+  "publication": "not performed",
+  "limits": ["focused Planner harness, not default full entry", "stale installed Meri public exports block full local entry", "cloud full typecheck/build/integration still required", "Objective government-field-to-Strategy and Planner project-plan integration remain open", "mobile deferred"]
+}

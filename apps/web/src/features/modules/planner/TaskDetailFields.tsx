@@ -6,6 +6,7 @@ import type {
 } from "../../../shared/capiro/operations/planner-schemas";
 import { assigneeName, minutesLabel, statuses } from "./task-presentation";
 import styles from "./task-detail.module.css";
+import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 type Props = {
   task: PlannerTask;
   people: PlannerPerson[];
@@ -56,9 +57,7 @@ export function TaskDetailFields({ task, people, projects }: Props) {
       </section>
       <section aria-label="Description">
         <h3>Description</h3>
-        <p className={styles.description}>
-          {task.description || "No description"}
-        </p>
+        <MarkdownContent source={task.description || "No description"} />
       </section>
       <section aria-label="Projects and sections">
         <h3>Projects &amp; sections</h3>

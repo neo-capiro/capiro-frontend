@@ -1,0 +1,74 @@
+.editor {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.toolbar button {
+  padding: 5px 10px;
+  min-height: 32px;
+}
+.content {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+  min-width: 0;
+}
+.content p {
+  white-space: pre-wrap;
+  margin: 0 0 8px;
+}
+.content h1,
+.content h2,
+.content h3,
+.content h4 {
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+.content ul,
+.content ol {
+  padding-left: 24px;
+  margin: 8px 0;
+}
+.content ul {
+  list-style: disc;
+}
+.content ol {
+  list-style: decimal;
+}
+.content a {
+  text-decoration: underline;
+}
+.content blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 12px;
+}
+.content pre {
+  white-space: pre-wrap;
+}
+.content table {
+  border-collapse: collapse;
+}
+.content th,
+.content td {
+  border: 1px solid var(--border);
+  padding: 6px;
+}
+.preview {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 100px;
+}
+.error {
+  color: var(--destructive);
+  font-size: 13px;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

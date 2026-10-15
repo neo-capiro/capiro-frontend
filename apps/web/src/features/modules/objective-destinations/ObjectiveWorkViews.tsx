@@ -8,6 +8,7 @@ import type {
 import { Panel, Badge } from "../../../shared/module-ui";
 import { ObjectiveObservation } from "./ObjectiveDestinationFrame";
 import styles from "./objective-destinations.module.css";
+import { MarkdownContent } from "../../../shared/markdown/MarkdownContent";
 
 export function ObjectiveStrategyView({
   value,
@@ -72,9 +73,9 @@ export function ObjectivePlannerView({
   return (
     <>
       <Panel title={task.name}>
-        <p className={styles.plaintext}>
-          {task.description || "No description supplied"}
-        </p>
+        <MarkdownContent
+          source={task.description || "No description supplied"}
+        />
         <dl className={styles.facts}>
           <dt>Status</dt>
           <dd>{task.status}</dd>

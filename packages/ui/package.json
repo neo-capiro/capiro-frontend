@@ -9,6 +9,7 @@
     "node": ">=24 <25"
   },
   "exports": {
+    "./markdown": "./src/markdown.tsx",
     "./button": "./src/shadcn/button.tsx",
     "./dialog": "./src/shadcn/dialog.tsx",
     "./tooltip": "./src/shadcn/tooltip.tsx",

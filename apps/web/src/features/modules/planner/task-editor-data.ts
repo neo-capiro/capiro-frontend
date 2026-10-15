@@ -62,4 +62,5 @@ export type TaskFormModel = {
   data: Draft;
   setData: (data: Draft) => void;
   disabled?: boolean;
+  isPending?: () => boolean;
 };
