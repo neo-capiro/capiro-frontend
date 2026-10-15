@@ -4,9 +4,9 @@ Source: Figma file `IXJzJUkXcUTkySHir5JNea` ("Capiro 3.4 Meri"), page "Prototype
 
 Method: the full page metadata was read once (1.0 MB XML) and every Meri frame was matched to the existing code by name, component use and visible labels. Screenshots were reviewed inline. This is a structural audit. It is not a pixel comparison, and no frame has been accepted against the new file.
 
-## Environment blocker
+## Figma assets
 
-Figma asset downloads use `www.figma.com/api/mcp/asset/…`. The cloud environment's network policy denies that host with a 403, so exact SVG and image assets cannot be downloaded in this session. Inline screenshots work. The design-to-code rule says never to redraw assets, so any screen needing a new asset waits until `www.figma.com` is under Allowed domains. Icons already in the repository are reused.
+`www.figma.com` is allowed in this environment's network policy since 15 October, so Figma asset downloads work. The file's icons are Lucide-style and are implemented with `lucide-react` or the existing local design assets; no screen needed a downloaded raster asset.
 
 ## What exists
 
@@ -257,16 +257,28 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Document overlay · comments |  | 1064:150607 | Absent | Follows parent flow |
 | Document overlay · Editing mode |  | 1064:150609 | Absent | Follows parent flow |
 
-## Missing from the design (needs your mock-ups)
+## Design gaps: status after the 15 October design passes
 
-1. **09.01 to 09.07 have no screens.** Layout anchors exist in the review map, but there is no frame behind them: personal preferences, connector accounts and permissions, usage and workspace limits, skills and artifact templates, notifications and account menu, privacy and deletion, help shortcuts and feedback. The frontend already implements these seven pages from the earlier design in `apps/web/src/features/settings/MeriPreferences.tsx` and `preferences/PreferencePages.tsx`, so the new frames should match that content. The design handoff is [FIGMA-MOCKUP-HANDOFF.md](FIGMA-MOCKUP-HANDOFF.md).
-2. **Numbering conflicts in the tooling-coverage section.** 12.07, 12.08 and 12.15 are each used twice. 12.09, 12.12 and 12.18 are not used. 12.19 is a table frame, not a screen. Confirm whether these are renumbering slips or missing screens.
-3. **Retention and deletion states.** Only "Conversation deleted" and "Object deleted" exist. There is no design for a conversation or artifact that is unavailable because of retention suppression, no export screen, and no deletion-in-progress or legal-hold state.
-4. **Session and availability states.** No signed-out, session-expired, feature-disabled or service-unavailable screen. The frontend needs these because the conversation service is off by default.
-5. **Artifact sharing scope.** The plan requires an artifact's sharing to respect its contributing source scopes. No screen shows the combined scope or explains a restricted share.
-6. **Tenant budget exhaustion.** "Budget reached" appears as a run state only. There is no screen showing a tenant or user budget, and 09.03 is missing.
-7. **Tablet and dark coverage.** Tablet exists for the conversation, the artifact drawer and the workflow library. Dark exists for the workspace and the workflow library. Every other screen has neither.
-8. **Phone coverage.** Phone frames exist for 15 flows. Routines, approvals center, memory, browser, history and run detail have no phone frame.
+The eight gaps first reported here were designed on 15 October (completion record `FIGMA-MOCKUP-COMPLETION.md`, design notes `3043:34159` and `3069:36679`):
+
+1. **09.01–09.07 Settings:** designed and built, sharing one set of page components with the ordinary `/settings/meri-preferences` tab.
+2. **Tooling numbering:** renamed to 12.09, 12.12 and 12.18 with node IDs preserved.
+3. **Retention and deletion:** 11.06 designed and built.
+4. **Session and availability:** 11.07 designed and built.
+5. **Artifact sharing scope:** 04.08, 04.08A and 04.08B designed; the access review outcomes 06.08A–C were added.
+6. **Tenant budget:** 09.03 Usage and workspace limits designed and built.
+7. **Tablet and dark:** 10.25–10.27, 10.34 and 10.36 (tablet) and 10.28–10.32 (dark) designed and built; 10.01 was aligned to the newer dark frames.
+8. **Phone:** 10.19–10.24, 10.33 and 10.35 designed and built; the phone workflow frames now use the shared phone header and Workspace menu.
+
+The follow-up pass also added destination frames for actions that had none (memory retry, status and refresh results, empty memory history, independent memory approval, comment reopen and reply, download sheets, the history filter menus) and corrected the sidebar Approvals count, routine dates, citation numbering and copy.
+
+### Still open in the design (recorded in design note `3069:36679`)
+
+- Whether source-access reviews (AR-1042) count toward the sidebar Approvals total; 06.08A/B currently keep "· 3".
+- Which artifact filing outcome is canonical for FL-1042 after a decision: 06.05A (rejected) or 06.07B (changes requested); 06.01B links to 06.05A.
+- The History tab in 06.01 and 06.01A–C opens 08.04 Routine history, which looks like the wrong target.
+- No frame shows the open "Workspace menu" on a phone (10.08 shows the earlier bar); the build extrapolates it.
+- Prototype actions with no result frame: "Use skill", "Attach a permitted template", "Sign in", "Contact workspace admin", "Check service status" (Settings and 11.07).
 
 ## Not designed because the plan defers it
 
