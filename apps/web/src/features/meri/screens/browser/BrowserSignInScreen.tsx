@@ -15,6 +15,7 @@ export type BrowserSignInView = {
   access: string;
   cancelHref?: string;
   statesHref?: string;
+  permissionsHref?: string;
 };
 
 /**
@@ -35,7 +36,11 @@ export function BrowserSignInScreen({
         description="Site access is specific to your authorized account and this workspace."
       />
       <div className={ui.row}>
-        <LinkAction variant="outline" unavailable={unavailable}>
+        <LinkAction
+          variant="outline"
+          href={view.permissionsHref}
+          unavailable={unavailable}
+        >
           Permissions &amp; qualification
         </LinkAction>
       </div>
