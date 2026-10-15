@@ -1,17 +1,21 @@
 import { useRef } from "react";
 import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
 import { MeetingDetail } from "../../../shared/meetings/MeetingDetail";
-import { Badge } from "../../../shared/module-ui";
+import { Badge, TextInput } from "../../../shared/module-ui";
 import styles from "./meeting-split.module.css";
 
 export function MeetingSplitView({
   rows,
   selected,
+  search,
+  onSearch,
   onSelect,
   onReload,
 }: {
   rows: EngagementMeeting[];
   selected: EngagementMeeting | null;
+  search: string;
+  onSearch: (value: string) => void;
   onSelect: (meeting: EngagementMeeting | null) => void;
   onReload: () => void;
 }) {
@@ -19,6 +23,18 @@ export function MeetingSplitView({
   return (
     <div className={styles.split}>
       <section className={styles.list} aria-label="Meeting list">
+        <header className={styles.listHeader}>
+          <h2>Meetings across clients</h2>
+          <p className={styles.muted}>Search, prepare and follow through.</p>
+        </header>
+        <TextInput
+          className={styles.search}
+          aria-label="Search meetings"
+          type="search"
+          placeholder="Search by meeting or client."
+          value={search}
+          onChange={(event) => onSearch(event.target.value)}
+        />
         {rows.length === 0 && (
           <p className={styles.muted}>No meetings match these filters.</p>
         )}
