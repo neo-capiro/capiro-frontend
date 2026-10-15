@@ -15,13 +15,15 @@ The five promoted shadcn components were taken from the `vercel/ai-elements` mon
 
 ## Promoted sources (`provenance.json` `additions`, 16 records)
 
+Current as of `78b1c126`: the FileTree row gives the current promoted bytes/SHA-256 after the second recorded owner edit (keyboard/ARIA tree pattern). The earlier lane value was 7,937 bytes, SHA-256 `c762916cd5f0640ad23e1d27745c5a40c0080e49086fb57592d755d71ab0d857`. `packages/ui/provenance.json` remains the canonical record; every other row is unchanged from the original lane.
+
 | Promoted path | Upstream path (vercel/ai-elements @ bc871264) | Upstream bytes | Upstream SHA-256 | Upstream git blob SHA-1 | Promoted bytes | Promoted SHA-256 | Adapted |
 |---|---|---|---|---|---|---|---|
 | `src/ai-elements/artifact.tsx` | `packages/elements/src/artifact.tsx` | 3404 | `6e5017f85105164b95861b1d10a78c956c312682c5ecd17e2619870ba5993aba` | `4d5fef418484fc71952fc5df4ce8332dd219121e` | 3351 | `248edad66d9ddfc1eb77110a63ed76a32d3694b9f83015f2f973c9b0088be4b1` | no |
 | `src/ai-elements/attachments.tsx` | `packages/elements/src/attachments.tsx` | 11417 | `91c42be9a592fe8ff2468352b8636f6bc364567779618ac3a075f1080b378fad` | `cc7b24958a815341dad0d5497fb338ae56a5c83f` | 11600 | `afef2be1e393351e1f81b6f5c3ab2a5d4d9325aec11ce8795ba0c241404322c6` | yes |
 | `src/ai-elements/checkpoint.tsx` | `packages/elements/src/checkpoint.tsx` | 1683 | `8649b28c7969c6c58bd9a8643279810c13da332198a4fcbc5b8a75000673eb5b` | `ab7900ce8a3311ce4afb886fc57f044deae371f5` | 1610 | `b381d7331086c257518b3d356ed9c1a1ea0c844d8fe241c56f9fe1175ccf2904` | no |
 | `src/ai-elements/confirmation.tsx` | `packages/elements/src/confirmation.tsx` | 3919 | `62aafcb7db41853faaf91b0247b6fce044b7a985e336e21b802e8778e7d1af7a` | `505139f02800e8d3cdaf52d3afdea80b5ca21b14` | 3866 | `5324e7bc00e3ee376c4981a8f3818d6f151ef40bf119e785b435a05191953e31` | no |
-| `src/ai-elements/file-tree.tsx` | `packages/elements/src/file-tree.tsx` | 7680 | `9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb` | `6c1f8441ffebf750061e4911dcdd8762577d92fd` | 7937 | `c762916cd5f0640ad23e1d27745c5a40c0080e49086fb57592d755d71ab0d857` | yes |
+| `src/ai-elements/file-tree.tsx` | `packages/elements/src/file-tree.tsx` | 7680 | `9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb` | `6c1f8441ffebf750061e4911dcdd8762577d92fd` | 12557 | `4c1601e0558e9ab3b64262b5f58e3a28eceff06aef726fed977ebd488b20f45e` | yes |
 | `src/ai-elements/plan.tsx` | `packages/elements/src/plan.tsx` | 3600 | `bfa20e90199fa40e5f714be131798406dc07b23051f8c48c590e91c65ade99d8` | `cce50c74a0222e9fa633bff69e41fdb0baad7f41` | 3790 | `061fbcccbcde4cdff5a57b41315abb1e129602dcf1099c71e03bddc1618d7918` | yes |
 | `src/ai-elements/queue.tsx` | `packages/elements/src/queue.tsx` | 6294 | `c823f565e0430749ba0b09db33e76eeb675eea4838bed10245bca392bffd6cfa` | `efe793cb581e92d65c68362909efadd6aada802b` | 6221 | `cd35e4a35ebaf4e0d6d3e5c6abe7236bde4cdc353640553f52f888472f8394ac` | no |
 | `src/ai-elements/sources.tsx` | `packages/elements/src/sources.tsx` | 1886 | `1454af3ac2c58766a155a881d119d1f9321632a4922d3f74581ba37f52b4707a` | `8c5d559a3926d40eb0254582a0bee5151e8ba801` | 1853 | `81db9ff918731bff2b6ddc5a90a158edde7d73c4c09d6224fbeb8627551f5c9e` | no |
@@ -66,16 +68,32 @@ Recorded edits (inverse-checked by `sources.mjs`):
 
 ### `src/ai-elements/file-tree.tsx`
 
-Reason: Strict exactOptionalPropertyTypes: omit onSelect and selectedPath from the FileTree context value when undefined instead of explicitly passing undefined.
+Current record (`packages/ui/provenance.json`, the `additions` entry for `src/ai-elements/file-tree.tsx`, lines 562-676 at `78b1c126`): promoted 12,557 bytes, SHA-256 `4c1601e0558e9ab3b64262b5f58e3a28eceff06aef726fed977ebd488b20f45e`; owner `Fable implementation owner (Meri Figma 3.4 lane)`; imports/exports `Preserved`; 16 exact recorded edits plus the prominent notice, inverse-checked by `sources.mjs` back to upstream SHA-256 `9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb` (7,680 bytes, git blob `6c1f8441ffebf750061e4911dcdd8762577d92fd`). The provenance record holds the exact notice and `from -> to` text; this section summarises it and is not a second copy.
 
-Recorded edits (inverse-checked by `sources.mjs`):
+Recorded reason, in three parts:
 
-- `() => ({ expandedPaths, onSelect, selectedPath, togglePath }),` -> `() => ({
-      expandedPaths,
-      ...(onSelect === undefined ? {} : { onSelect }),
-      ...(selectedPath === undefined ? {} : { selectedPath }),
-      togglePath,
-    }),`
+1. Strict `exactOptionalPropertyTypes`: omit `onSelect` and `selectedPath` from the FileTree context value when undefined instead of explicitly passing undefined (the original lane edit).
+2. Accessibility fixes from axe: nest a folder's children in `role="group"` so treeitems have the required parent (`aria-required-parent`), and give the folder expand control an accessible name (`button-name`).
+3. WAI-ARIA tree keyboard pattern (second owner edit, answering the review HOLD that parent treeitems lacked expansion state and keyboard navigation): folder treeitems expose `aria-expanded`, items expose `aria-selected`, one roving tab stop with the inner buttons removed from the tab order, and the tree handles Up/Down, Right (expand or first child), Left (collapse or parent), Home/End and Enter/Space (select, and toggle a folder).
+
+The 16 recorded edits, in record order:
+
+1. Context value omits absent `onSelect`/`selectedPath` (the original edit).
+2. Folder children container gains `role="group"`.
+3. Folder expand button gains `aria-label` "Expand/Collapse <name>".
+4. React import list gains `useEffect` and `useRef`.
+5. Context type gains optional `tabStopPath`.
+6. New `visibleItems` helper: treeitems in document order, skipping descendants of collapsed folders.
+7. `FileTree` takes `onBlur`/`onFocus`/`onKeyDown`, holds a tree ref and `tabStopPath` state, resets the tab stop to the selection when focus is outside, and moves it to the first visible item when the current stop is hidden.
+8. Collapsing a folder that contains the tab stop moves the tab stop (and focus, if inside) to the folder.
+9. Context value carries `tabStopPath`; new focus, blur and keydown handlers implement the roving tab stop and the key map above, respecting caller-prevented events and Alt/Ctrl/Meta.
+10. Tree root wires `onBlur`/`onFocus`/`onKeyDown`/`ref`.
+11. Folder reads `tabStopPath` from context.
+12. Folder treeitem gains `aria-expanded`, `aria-selected`, `data-path` and roving `tabIndex`.
+13. Folder expand button gets `tabIndex={-1}`.
+14. Folder name button gets `tabIndex={-1}`.
+15. File reads `tabStopPath` and drops its own Enter/Space handler (the tree owns the keys).
+16. File treeitem gains `aria-selected`, `data-path` and roving `tabIndex`, without its own `onKeyDown`.
 
 ### `src/ai-elements/plan.tsx`
 
@@ -125,6 +143,8 @@ Coordination note for the `apps/web` lane: `scripts/architecture/dependencies.mj
 - `promotion-pins.json` regenerated with `node generate-pins.mjs`; `node generate-pins.mjs --check` passes.
 
 ## Checks run
+
+Historical: this table records the original adoption lane at base `5880f5f0`, before the FileTree keyboard/ARIA edit and the adopted-element browser specs. It is not current qualification evidence. Current exact-pin evidence is published separately under `docs/meri-figma-34-20261015/evidence/` on its own evidence branch.
 
 | Check | Result |
 |---|---|
