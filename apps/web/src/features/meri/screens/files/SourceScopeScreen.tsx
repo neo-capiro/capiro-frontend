@@ -6,6 +6,7 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { Notice } from "../../ui/Notice";
 import { StatusPill } from "../../ui/StatusPill";
 import ui from "../../ui/meri-ui.module.css";
+import phone from "../../ui/phone-page.module.css";
 import type { Heading } from "./types";
 import styles from "./files.module.css";
 
@@ -48,7 +49,9 @@ export function SourceScopeScreen({
 }) {
   const scopesLabel = useId();
   return (
-    <div className={`${ui.page} ${styles.screen}`}>
+    <div
+      className={`${ui.page} ${phone.page} ${styles.screen} ${styles.sharing}`}
+    >
       <MeriPageHeading
         title={view.heading.title}
         description={view.heading.description}
@@ -71,13 +74,19 @@ export function SourceScopeScreen({
             ))}
           </ul>
         </div>
-        <FormField label="Destination client" value={view.client} />
-        <FormField label="Requested destination" value={view.destination} />
+        {/* Multiline so a long read-only value wraps on a phone (Figma 10.35). */}
+        <FormField label="Destination client" value={view.client} multiline />
+        <FormField
+          label="Requested destination"
+          value={view.destination}
+          multiline
+        />
         <FormField
           label="Who can open this version now"
           value={view.audience}
+          multiline
         />
-        <FormField label="Filing result" value={view.result} />
+        <FormField label="Filing result" value={view.result} multiline />
         <div className={styles.full}>
           <Notice tone="warning" title={view.notice.title}>
             {view.notice.detail}

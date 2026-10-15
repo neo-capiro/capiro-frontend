@@ -92,7 +92,7 @@ for (const width of [1440, 390]) {
     // behind the workspace menu (Figma 10.08).
     if (width === 390)
       await page
-        .getByRole("button", { name: "Meri workspace", exact: true })
+        .getByRole("button", { name: "Workspace menu", exact: true })
         .click();
     await page
       .getByRole(width === 390 ? "link" : "button", {

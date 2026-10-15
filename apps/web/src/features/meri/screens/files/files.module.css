@@ -275,3 +275,21 @@
   line-height: 1.2;
   font-weight: 500;
 }
+/* 04.08 read-only values are textareas so they wrap on a phone; they never resize. */
+.sharing textarea {
+  resize: none;
+}
+/* Figma 10.35 phone and 10.36 tablet artifact sharing: a full-width dialog with card fields. */
+@media (max-width: 1100px) {
+  .sharing > section[data-raised] {
+    max-width: none;
+  }
+  .sharing section textarea:read-only {
+    background: var(--card);
+  }
+}
+@media (max-width: 680px) {
+  .sharing > section[data-raised] {
+    padding: 24px;
+  }
+}

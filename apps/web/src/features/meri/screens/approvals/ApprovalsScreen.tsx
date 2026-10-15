@@ -5,7 +5,10 @@ import { SegmentedTabs } from "../../ui/SegmentedTabs";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { Notice } from "../../ui/Notice";
 import { LinkAction } from "../../ui/LinkAction";
+import { phoneCardColumns } from "../../ui/phone-card-columns";
 import styles from "../../ui/meri-ui.module.css";
+import cards from "../../ui/phone-cards.module.css";
+import phone from "../../ui/phone-page.module.css";
 
 export type ApprovalRow = {
   id: string;
@@ -40,6 +43,7 @@ const columns: readonly DataColumn<ApprovalRow>[] = [
   },
   { key: "expires", label: "Expires", width: 28, render: (row) => row.expires },
 ];
+const cardColumns = phoneCardColumns(columns);
 const views = [
   { id: "pending", label: "Pending" },
   { id: "history", label: "History" },
@@ -55,7 +59,7 @@ export function ApprovalsScreen({
 }) {
   const [tab, setTab] = useState<"pending" | "history">("pending");
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${phone.page} ${cards.cards}`}>
       <MeriPageHeading title="Approvals" description={view.description} />
       <div className={styles.row}>
         <LinkAction
@@ -74,7 +78,7 @@ export function ApprovalsScreen({
       />
       <DataTable
         caption={tab === "pending" ? "Pending approvals" : "Approval history"}
-        columns={columns}
+        columns={cardColumns}
         rows={view[tab]}
       />
       <div className={styles.row} aria-label="Review proposals">

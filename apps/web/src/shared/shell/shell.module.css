@@ -174,9 +174,6 @@
   .main {
     background: linear-gradient(153.8deg, #242424, #0a0a0a);
   }
-  .currentDestination {
-    background: linear-gradient(173.738deg, #242424, #0a0a0a);
-  }
 }
 @media (max-width: 900px) {
   .brand {
@@ -187,27 +184,24 @@
     gap: 2px;
   }
 }
-/* Figma 10.02/10.03 tablet: the sidebar collapses to an icon rail; labels remain accessible names. */
+/*
+ * Figma 10.02/10.03 tablet: the sidebar collapses to an icon rail; labels remain accessible names.
+ * The final tablet frames (10.25–10.27, 10.36) keep New conversation as the filled 40px tile.
+ */
 @media (min-width: 681px) and (max-width: 1100px) {
   .sidebar {
     flex-basis: 72px;
     width: 72px;
-    padding: 16px 12px;
+    padding: 16px;
     align-items: center;
   }
   .navButton,
   .newConversation {
-    width: 48px;
+    width: 40px;
     padding: 0;
     gap: 0;
     justify-content: center;
     font-size: 0;
-  }
-  .newConversation {
-    --meri-icon-filter: inherit;
-    color: inherit;
-    background: transparent;
-    box-shadow: none;
   }
   .divider,
   .recents,
@@ -224,34 +218,48 @@
   }
 }
 @media (max-width: 680px) {
+  /* Figma 10.19–10.24: an outlined "Workspace menu" button opens the menu in the content inset. */
   .mobileNavigation {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 16px 0;
     background: var(--card);
   }
   .menuToggle {
-    height: 48px;
-    padding: 0 16px;
-    display: flex;
+    height: 36px;
+    padding: 0 14px;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    border: 0;
-    background: transparent;
+    gap: 8px;
+    border: 1px solid var(--input);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 1px 2px #0c0a090d;
     color: var(--foreground);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.15px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.07px;
+    white-space: nowrap;
   }
   .menuToggle svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 120ms;
+  }
+  .menuToggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
   }
   .mobileMenu {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 4px 16px 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
   }
   .mobileItem,
   .mobileNewConversation {
@@ -308,7 +316,16 @@
     display: none;
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .menuToggle svg {
+    transition: none;
+  }
+}
 @media (max-width: 680px) and (prefers-color-scheme: dark) {
+  /* The menu row sits in the content inset, so it continues the top of the main surface. */
+  .mobileNavigation {
+    background: linear-gradient(90deg, #242424, #212121);
+  }
   .mobileNewConversation {
     --meri-icon-filter: brightness(0);
     color: #0a0a0a;

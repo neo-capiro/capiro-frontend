@@ -6,6 +6,7 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { FormField } from "../../ui/FormField";
 import { Notice } from "../../ui/Notice";
 import ui from "../../ui/meri-ui.module.css";
+import phone from "../../ui/phone-page.module.css";
 import { MemoryCard, type MemoryItem } from "./MemoryCard";
 import styles from "./memory.module.css";
 
@@ -53,7 +54,7 @@ export function MemoryRecallScreen({
   );
   const scope = view.view === "current" ? "current memory" : "memory history";
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${phone.page}`}>
       <MeriPageHeading title={view.title} description={view.description} />
       <div className={styles.search}>
         <div role="search" aria-label="Memory" className={styles.searchField}>
