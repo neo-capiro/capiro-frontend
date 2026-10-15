@@ -1,6 +1,10 @@
 "use client";
 import { useCallback, useState } from "react";
-import type { DocumentPageView, RevisionSuggestion } from "./types";
+import type {
+  DocumentOpening,
+  DocumentPageView,
+  RevisionSuggestion,
+} from "./types";
 
 export type DocumentOverlay = "blocks" | "comments" | "mode" | "revision";
 export type DocumentMode = "Editing" | "Suggesting";
@@ -9,11 +13,14 @@ export type DocumentMode = "Editing" | "Suggesting";
 export function useDocumentDraft(
   initial: readonly DocumentPageView[],
   suggestion: RevisionSuggestion,
+  opening: DocumentOpening = {},
 ) {
   const [pages, setPages] = useState(initial);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(opening.pageIndex ?? 0);
   const [zoom, setZoom] = useState(100);
-  const [overlay, setOverlay] = useState<DocumentOverlay | null>(null);
+  const [overlay, setOverlay] = useState<DocumentOverlay | null>(
+    opening.comments ? "comments" : null,
+  );
   const [mode, setMode] = useState<DocumentMode>("Editing");
   const [applied, setApplied] = useState<string | null>(null);
   const close = useCallback(() => setOverlay(null), []);

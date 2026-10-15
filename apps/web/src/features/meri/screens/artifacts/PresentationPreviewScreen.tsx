@@ -31,19 +31,23 @@ export type PresentationView = {
   checks: readonly DetailItem[];
 };
 
-/** 03.05 Presentation preview: slide filmstrip, slide canvas, speaker notes and checks. */
+/** 03.05 Presentation preview (and 03.05A to E opened at a later slide): filmstrip, slide canvas, speaker notes and checks. */
 export function PresentationPreviewScreen({
   view,
   flow,
   unavailable,
+  initialSlideIndex = 0,
 }: {
   view: PresentationView;
   /** Revise, file and download sheets for this deck. */
   flow: ArtifactFlowView;
   unavailable: string;
+  initialSlideIndex?: number;
 }) {
   const sheets = useArtifactSheet();
-  const [slideId, setSlideId] = useState(view.slides[0]?.id ?? "");
+  const [slideId, setSlideId] = useState(
+    view.slides[initialSlideIndex]?.id ?? view.slides[0]?.id ?? "",
+  );
   const index = Math.max(
     0,
     view.slides.findIndex((slide) => slide.id === slideId),
@@ -85,7 +89,7 @@ export function PresentationPreviewScreen({
               <p className={styles.notes}>{slide.notes}</p>
               <button
                 type="button"
-                className={ui.ghost}
+                className={ui.outline}
                 disabled
                 title={unavailable}
               >

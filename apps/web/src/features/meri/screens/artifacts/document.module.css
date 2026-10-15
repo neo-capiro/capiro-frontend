@@ -214,6 +214,9 @@
   gap: 8px;
   align-items: center;
 }
+.pager button:disabled {
+  color: var(--muted-foreground);
+}
 .zoom {
   appearance: none;
   height: 36px;

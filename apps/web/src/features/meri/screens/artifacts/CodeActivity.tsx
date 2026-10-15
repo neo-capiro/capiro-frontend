@@ -5,7 +5,7 @@ import ui from "../../ui/meri-ui.module.css";
 import shared from "./artifacts.module.css";
 import styles from "./web.module.css";
 
-/** Code block without highlighting: numbered lines in a plain pre/code element. */
+/** Code block without highlighting: the generated source in a plain pre/code element. */
 export function CodeView({
   label,
   lines,
@@ -29,17 +29,7 @@ export function CodeView({
         </button>
       </div>
       <pre className={styles.code}>
-        <code>
-          {lines.map((line, index) => (
-            <span key={index}>
-              <span className={styles.lineNumber} aria-hidden>
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              {line}
-              {"\n"}
-            </span>
-          ))}
-        </code>
+        <code>{lines.join("\n")}</code>
       </pre>
       <p className={shared.liveStatus} role="status">
         {copied}
@@ -48,24 +38,35 @@ export function CodeView({
   );
 }
 
+/** A recorded verification log: checked steps (03.07) or a version receipt with its statement (03.07A). */
+export type VerificationLog = {
+  title: string;
+  lines: readonly string[];
+  checked: boolean;
+  statement?: string;
+};
+
 /** Terminal-style verification activity recorded for the generated output. */
 export function VerificationActivity({
-  steps,
+  log,
   note,
   unavailable,
 }: {
-  steps: readonly string[];
+  log: VerificationLog;
   note: string;
   unavailable: string;
 }) {
   return (
-    <section className={shared.panel} aria-label="Verification activity">
-      <h2 className={shared.panelTitle}>Verification activity</h2>
-      <ul className={styles.activity}>
-        {steps.map((step) => (
-          <li key={step}>✓ {step}</li>
-        ))}
-      </ul>
+    <section className={shared.panel} aria-label={log.title}>
+      <h2 className={shared.panelTitle}>{log.title}</h2>
+      <div className={styles.activity}>
+        <ul>
+          {log.lines.map((line) => (
+            <li key={line}>{log.checked ? `✓ ${line}` : line}</li>
+          ))}
+        </ul>
+        {log.statement ? <p>{log.statement}</p> : null}
+      </div>
       <p className={shared.caption}>{note}</p>
       <button type="button" className={ui.outline} disabled title={unavailable}>
         <ChevronDown aria-hidden /> Download source bundle

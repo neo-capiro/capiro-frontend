@@ -48,25 +48,25 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 02.08 | Interrupted run and fork | 1064:145144 | Built: synthetic fixture `/meri/fixture/interrupted-run` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 03.01 | Workspace files | 1064:145204 | Built: synthetic fixture `/meri/fixture/workspace-files` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.02 | Word document workspace | 1064:145316 | Built: synthetic fixture `/meri/fixture/word-document` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.02A | DOCX brief page 2 | 3031:28357 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.02B | DOCX brief page 3 | 3031:28703 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.02C | DOCX brief page 4 | 3031:29048 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02A | DOCX brief page 2 | 3031:28357 | Built: synthetic fixture `/meri/fixture/word-document-page-2` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02B | DOCX brief page 3 | 3031:28703 | Built: synthetic fixture `/meri/fixture/word-document-page-3` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02C | DOCX brief page 4 | 3031:29048 | Built: synthetic fixture `/meri/fixture/word-document-page-4` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.03 | PDF and multi-page preview | 1064:145426 | Built: synthetic fixture `/meri/fixture/pdf-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.03A | PDF brief page 2 | 3031:33544 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.03B | PDF brief page 3 | 3031:33809 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.03C | PDF brief page 4 | 3031:34074 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03A | PDF brief page 2 | 3031:33544 | Built: synthetic fixture `/meri/fixture/pdf-preview-page-2` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03B | PDF brief page 3 | 3031:33809 | Built: synthetic fixture `/meri/fixture/pdf-preview-page-3` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03C | PDF brief page 4 | 3031:34074 | Built: synthetic fixture `/meri/fixture/pdf-preview-page-4` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.04 | Spreadsheet preview | 1064:145539 | Built: synthetic fixture `/meri/fixture/spreadsheet-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.04A | Spreadsheet source data | 3026:32155 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.04B | Spreadsheet references | 3026:32465 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.04A | Spreadsheet source data | 3026:32155 | Built: synthetic fixture `/meri/fixture/spreadsheet-source-data` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.04B | Spreadsheet references | 3026:32465 | Built: synthetic fixture `/meri/fixture/spreadsheet-references` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.05 | Presentation preview | 1064:145690 | Built: synthetic fixture `/meri/fixture/presentation-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.05A | Presentation slide 2 | 3031:34357 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.05B | Presentation slide 3 | 3031:34599 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.05C | Presentation slide 4 | 3031:34846 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.05D | Presentation slide 5 | 3031:35087 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.05E | Presentation slide 6 | 3031:35328 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05A | Presentation slide 2 | 3031:34357 | Built: synthetic fixture `/meri/fixture/presentation-slide-2` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05B | Presentation slide 3 | 3031:34599 | Built: synthetic fixture `/meri/fixture/presentation-slide-3` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05C | Presentation slide 4 | 3031:34846 | Built: synthetic fixture `/meri/fixture/presentation-slide-4` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05D | Presentation slide 5 | 3031:35087 | Built: synthetic fixture `/meri/fixture/presentation-slide-5` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05E | Presentation slide 6 | 3031:35328 | Built: synthetic fixture `/meri/fixture/presentation-slide-6` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.06 | Generated web preview | 1064:145787 | Built: synthetic fixture `/meri/fixture/generated-web-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.07 | Code and execution activity | 1064:145886 | Built: synthetic fixture `/meri/fixture/code-activity` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
-| 03.07A | Generated web verification activity | 3026:32814 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.07A | Generated web verification activity | 3026:32814 | Built: synthetic fixture `/meri/fixture/web-verification-activity` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.08 | Analysis outputs | 1064:145939 | Built: synthetic fixture `/meri/fixture/analysis-outputs` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.09 | Versions and comparison | 1064:146038 | Built: synthetic fixture `/meri/fixture/artifact-versions` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.10 | Revise an artifact | 1064:146126 | Built: synthetic fixture `/meri/fixture/revise-artifact` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
@@ -77,8 +77,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 04.05 | Download exact artifact version | 1064:146498 | Built: synthetic fixture `/meri/fixture/download-artifact` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.06 | Revision progress and verification | 1064:146561 | Built: synthetic fixture `/meri/fixture/revision-progress` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.07 | Filing and download receipts | 1064:146629 | Built: synthetic fixture `/meri/fixture/filing-receipt` | Artifact filing command and download exist. No upload or extraction API found. |
-| 04.08 | Artifact sharing and source scopes | 3019:28559 | Not built (added 15 Oct) | Follows parent flow |
-| 04.08A | Source access review requested | 3024:26544 | Not built (added 15 Oct) | Follows parent flow |
+| 04.08 | Artifact sharing and source scopes | 3019:28559 | Built: synthetic fixture `/meri/fixture/artifact-sharing` | Follows parent flow |
+| 04.08A | Source access review requested | 3024:26544 | Built: synthetic fixture `/meri/fixture/source-access-review-requested` | Follows parent flow |
 | 05.01 | Evidence and citations | 1064:146715 | Built: synthetic fixture `/meri/fixture/evidence-sources` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
@@ -201,9 +201,9 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 13.21 | Conversation client filter menu | 3034:37582 | Not built (added 15 Oct) | Follows parent flow |
 | 13.22 | Conversation status filter menu | 3034:37596 | Not built (added 15 Oct) | Follows parent flow |
 | 13.23 | Copy unavailable | 3034:38179 | Not built (added 15 Oct) | Follows parent flow |
-| 13.24 | Reply to document comment | 3045:34297 | Not built (added 15 Oct) | Follows parent flow |
-| 13.25 | Document comment reply added | 3045:34315 | Not built (added 15 Oct) | Follows parent flow |
-| 13.26 | Document comment resolved | 3045:34333 | Not built (added 15 Oct) | Follows parent flow |
+| 13.24 | Reply to document comment | 3045:34297 | Built: synthetic fixture `/meri/fixture/document-comment-reply` | Follows parent flow |
+| 13.25 | Document comment reply added | 3045:34315 | Built: synthetic fixture `/meri/fixture/document-comment-reply-added` | Follows parent flow |
+| 13.26 | Document comment resolved | 3045:34333 | Built: synthetic fixture `/meri/fixture/document-comment-resolved` | Follows parent flow |
 | Overlay · Run cancelled |  | 1064:150073 | Absent | Follows parent flow |
 | Overlay · Revise funding analysis |  | 1064:150079 | Absent | Follows parent flow |
 | Overlay · File funding analysis |  | 1064:150093 | Absent | Follows parent flow |

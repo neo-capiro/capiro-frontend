@@ -136,6 +136,9 @@ export const sourceAccessReview: DecisionOutcomeView = {
     status: "Needs attention",
     detail:
       "Requested access: permit the Anduril team to open the mailbox contribution in meeting-brief-v2.docx v2. Existing source lineage stays attached. Approval cannot grant unrelated mailbox access or change the artifact content. Current status: Pending. If the provider cannot apply a narrower grant, the request remains blocked.",
-    action: { label: "Return to artifact access" },
+    action: {
+      label: "Return to artifact access",
+      href: fixtureHref("artifact-sharing"),
+    },
   },
 };

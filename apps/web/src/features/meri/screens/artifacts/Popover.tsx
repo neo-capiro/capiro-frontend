@@ -32,7 +32,7 @@ export function Popover({
         : null;
     const trigger = opener.current;
     const first = node?.querySelector<HTMLElement>(
-      "input, button:not(:disabled)",
+      "input, textarea, button:not(:disabled)",
     );
     (first ?? node)?.focus();
     const press = (event: MouseEvent) => {

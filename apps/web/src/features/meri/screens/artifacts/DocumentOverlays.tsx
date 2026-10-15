@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Sparkle } from "lucide-react";
 import ui from "../../ui/meri-ui.module.css";
 import { Popover } from "./Popover";
-import type { CommentView, DetailItem, RevisionSuggestion } from "./types";
+import type { DetailItem, RevisionSuggestion } from "./types";
 import type { DocumentMode } from "./useDocumentDraft";
 import shared from "./artifacts.module.css";
 import styles from "./document.module.css";
@@ -108,45 +108,6 @@ export function RevisionCard({
         </button>
         <button type="button" className={ui.ghost} onClick={onClose}>
           Discard
-        </button>
-      </div>
-    </Popover>
-  );
-}
-
-/** Document overlay · comments: a synthetic thread; replying and resolving are not executed. */
-export function CommentThread({
-  comments,
-  onClose,
-  unavailable,
-}: {
-  comments: readonly CommentView[];
-  onClose: () => void;
-  unavailable: string;
-}) {
-  return (
-    <Popover label="Comments" onClose={onClose} className={styles.alignEnd}>
-      <p className={shared.eyebrow}>Comment · {comments.length}</p>
-      {comments.map((comment) => (
-        <article key={comment.id} className={styles.comment}>
-          <p className={styles.author}>
-            <span aria-hidden>{comment.initials}</span> {comment.author}
-          </p>
-          <p className={styles.blockParagraph}>{comment.text}</p>
-          <p className={shared.body}>{comment.time}</p>
-        </article>
-      ))}
-      <div className={ui.row}>
-        <button
-          type="button"
-          className={ui.outline}
-          disabled
-          title={unavailable}
-        >
-          Reply
-        </button>
-        <button type="button" className={ui.ghost} disabled title={unavailable}>
-          Resolve
         </button>
       </div>
     </Popover>

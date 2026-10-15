@@ -259,3 +259,19 @@
     background: #f5f5f4;
   }
 }
+/* 04.08: contributing source scopes retained by the artifact version. */
+.scopes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scopes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scopeLabel {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
