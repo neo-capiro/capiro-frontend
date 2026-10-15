@@ -43,15 +43,6 @@
   gap: 20px;
   min-width: 0;
 }
-.question {
-  min-height: 56px;
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--muted);
-  font-size: 15px;
-  line-height: 1.5;
-  letter-spacing: -0.075px;
-}
 .answer {
   display: flex;
   flex-direction: column;
@@ -233,8 +224,5 @@
   }
   .answer h2 {
     font-size: 18px;
-  }
-  .question {
-    min-height: 0;
   }
 }

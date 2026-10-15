@@ -7,6 +7,7 @@ import {
   PromptInputButton,
 } from "@capiro/ui/prompt-input";
 import { Button } from "@capiro/ui/button";
+import { X } from "lucide-react";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
 import styles from "./home.module.css";
 
@@ -15,11 +16,14 @@ export function MeriComposer({
   onDraft,
   textareaRef,
   assetSet = "home",
+  running = false,
 }: {
   draft: string;
   onDraft: (value: string) => void;
   textareaRef: React.RefObject<HTMLTextAreaElement | null>;
   assetSet?: "home" | "cited-answer";
+  /** A run is in progress: the submit slot shows Stop instead of Send. */
+  running?: boolean;
 }) {
   return (
     <section className={styles.composerFrame} aria-label="Local draft composer">
@@ -62,16 +66,29 @@ export function MeriComposer({
               Anduril
             </PromptInputButton>
           </PromptInputTools>
-          <Button
-            type="submit"
-            className={styles.send}
-            disabled
-            aria-label="Send unavailable: disconnected fixture"
-            title="Sending is unavailable until trusted backend contracts are integrated"
-          >
-            <DesignIcon name="send" assetSet={assetSet} />
-            Send
-          </Button>
+          {running ? (
+            <Button
+              type="button"
+              className={styles.send}
+              disabled
+              aria-label="Stop unavailable: disconnected fixture"
+              title="Stopping a run requires a connected, authorized run"
+            >
+              <X aria-hidden className={styles.stopIcon} />
+              Stop
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              className={styles.send}
+              disabled
+              aria-label="Send unavailable: disconnected fixture"
+              title="Sending is unavailable until trusted backend contracts are integrated"
+            >
+              <DesignIcon name="send" assetSet={assetSet} />
+              Send
+            </Button>
+          )}
         </PromptInputFooter>
         <p className={styles.keyboardHint} id="send-help">
           Enter to send · Shift + Enter for a new line

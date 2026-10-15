@@ -1,6 +1,7 @@
 import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
 import { browserScreens } from "./browser";
+import { conversationScreens } from "./conversation";
 import { memoryScreens } from "./memory";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
@@ -9,6 +10,7 @@ import type { FixtureScreen } from "./types";
 
 /** Every rendered Figma 3.4 fixture screen; each area owns its own entries. */
 export const fixtureScreens: readonly FixtureScreen[] = [
+  ...conversationScreens,
   ...runScreens,
   ...artifactScreens,
   ...approvalScreens,

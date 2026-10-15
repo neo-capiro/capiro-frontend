@@ -78,6 +78,15 @@
   line-height: 1.45;
   letter-spacing: -0.07px;
 }
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--muted-foreground);
+  opacity: 1;
+}
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--foreground);
+}
 .field textarea {
   resize: vertical;
   field-sizing: content;
