@@ -11,6 +11,7 @@ import { fixtureHref, fixtureUnavailable } from "./href";
 import {
   currentFact,
   history,
+  historyNoMatches,
   proposedFact,
   recallAfterApproval,
   recallBefore,
@@ -62,7 +63,7 @@ const approved: MemoryApprovedView = {
   ],
 };
 
-/** Before approval, History opens 05.04B; after it, the views pair 05.08A with 05.08B. */
+/** Before approval, History opens 05.04B (05.04C when its search matches nothing); after it, the views pair 05.08A with 05.08B. */
 const beforeApproval = {
   current: fixtureHref("memory-recall"),
   history: fixtureHref("memory-history"),
@@ -94,6 +95,19 @@ export const memoryScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <MemoryRecallScreen
         view={history}
+        viewHrefs={beforeApproval}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "memory-history-no-matches",
+    figmaId: "05.04C",
+    figmaNode: "3062:39816",
+    title: "Institutional Memory history — no matching history",
+    Screen: () => (
+      <MemoryRecallScreen
+        view={historyNoMatches}
         viewHrefs={beforeApproval}
         unavailable={fixtureUnavailable}
       />

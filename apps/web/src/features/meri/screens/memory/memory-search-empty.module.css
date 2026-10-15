@@ -1,0 +1,22 @@
+/* Figma 3.4 05.04C "State · No matching history" card. */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.body {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  color: var(--foreground);
+}
+/* The Figma "No matches" pill keeps its 88px slot. */
+.status > span {
+  min-width: 88px;
+}

@@ -16,7 +16,11 @@ import {
 import { AccessChangedScreen } from "../../screens/sources/AccessChangedScreen";
 import { SourcesStateScreen } from "../../screens/sources/SourcesStateScreen";
 import { fixtureHref, fixtureUnavailable } from "./href";
-import { sourcesLoading, sourcesUnavailable } from "./sources-states";
+import {
+  sourcesLoading,
+  sourcesRetrying,
+  sourcesUnavailable,
+} from "./sources-states";
 import type { FixtureScreen } from "./types";
 
 const retrieved = "9 Oct 2026, 10:44 AM";
@@ -278,6 +282,18 @@ export const evidenceScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <SourcesStateScreen
         view={sourcesUnavailable}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "sources-retrying",
+    figmaId: "05.22A",
+    figmaNode: "3062:39648",
+    title: "Sources — retry in progress",
+    Screen: () => (
+      <SourcesStateScreen
+        view={sourcesRetrying}
         unavailable={fixtureUnavailable}
       />
     ),

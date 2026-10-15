@@ -7,7 +7,7 @@ import {
 } from "./memory-proposal-states";
 import { proposalContent } from "./memory-records";
 
-/** Synthetic copy for the recovery frames of the memory proposal lifecycle (05.17–05.20). */
+/** Synthetic copy for the recovery frames of the memory proposal lifecycle (05.17–05.20A). */
 export const submissionError: MemoryProposalView = {
   phase: "submission-error",
   heading: "Your proposal was not submitted",
@@ -48,7 +48,38 @@ export const statusUncertain: MemoryProposalView = {
   footnote:
     "Checking status is read-only. The interface does not automatically retry an approval or rejection.",
   secondary: backToMemory,
-  primary: { label: "Check status" },
+  primary: {
+    label: "Check status",
+    href: fixtureHref("memory-review-status-confirmed"),
+  },
+};
+
+const reviewRevision = (label: string) => ({
+  label,
+  href: fixtureHref("memory-review-authorized-reviewer"),
+});
+const stillPending = { label: "Pending review", tone: "warning" } as const;
+
+/** 05.18A: the read-only status read found no decision; a new decision is made explicitly in 06.02A. */
+export const statusConfirmed: MemoryProposalView = {
+  phase: "pending",
+  heading: "Decision status confirmed",
+  description: sharedMemory("Latest recorded status"),
+  title: proposalTitle,
+  context: "Proposal MP-1042 · Anduril · Status read at 10:52 AM",
+  status: stillPending,
+  feedback: {
+    tone: "warning",
+    title: "No decision recorded · Pending review",
+    lines: [
+      "The status read found no recorded reviewer decision. MP-1042 is still pending and unchanged, and the approved fact remains current.",
+    ],
+  },
+  content: proposalContent,
+  footnote:
+    "This was a read-only status check. No approval, rejection or replacement was written or repeated. Any new decision must be made explicitly on the displayed proposal.",
+  secondary: backToMemory,
+  primary: reviewRevision("Return to review"),
 };
 
 export const restricted: MemoryProposalView = {
@@ -89,5 +120,30 @@ export const changed: MemoryProposalView = {
   footnote:
     "No stale decision or replacement is applied. Refreshing reads the latest proposal without resubmitting it.",
   secondary: backToMemory,
-  primary: { label: "Refresh proposal" },
+  primary: {
+    label: "Refresh proposal",
+    href: fixtureHref("memory-proposal-refreshed"),
+  },
+};
+
+/** 05.20A: the latest recorded revision replaced the stale copy; nothing from it was applied. */
+export const refreshed: MemoryProposalView = {
+  phase: "pending",
+  heading: "Proposal refreshed",
+  description: sharedMemory("Showing the latest recorded revision"),
+  title: proposalTitle,
+  context: "Proposal MP-1042 · Anduril · Latest revision · Refreshed just now",
+  status: stillPending,
+  feedback: {
+    tone: "neutral",
+    title: "Showing the latest revision",
+    lines: [
+      "This view was reloaded from the proposal’s current recorded state. Nothing from the stale copy was applied or resubmitted.",
+    ],
+  },
+  content: proposalContent,
+  footnote:
+    "Review the displayed revision, scope and evidence before making a decision. A decision covers only this revision.",
+  secondary: backToMemory,
+  primary: reviewRevision("Review this revision"),
 };
