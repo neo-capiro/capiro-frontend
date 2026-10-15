@@ -26,25 +26,25 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 02.01 | Research in progress | 1064:144151 | Built: synthetic fixture `/meri/fixture/research-progress` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 01.02 | Cited answer | 1064:144239 | Built: synthetic fixture `/meri/fixture/cited-answer` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.03 | Choose client and data scope | 1064:144332 | Built: synthetic fixture `/meri/fixture/choose-scope` | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.03A | Scope picker no matches | 3034:37692 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.03A | Scope picker no matches | 3034:37692 | Built: synthetic fixture `/meri/fixture/choose-scope-no-matches` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04 | Conversation history | 1064:144425 | Built: synthetic fixture `/meri/fixture/conversation-history` | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04A | Empty conversation history | 3034:32186 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04B | No matching conversations | 3034:32443 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04C | Completed conversation filter | 3034:36844 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04D | Anduril conversation filter | 3034:37090 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04E | General conversation filter | 3034:37336 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04F | Running conversation filter | 3048:34348 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04G | Archived conversation filter | 3048:34602 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.04H | History after selected conversation deletion | 3043:38316 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04A | Empty conversation history | 3034:32186 | Built: synthetic fixture `/meri/fixture/conversation-history-empty` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04B | No matching conversations | 3034:32443 | Built: synthetic fixture `/meri/fixture/conversation-history-no-matches` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04C | Completed conversation filter | 3034:36844 | Built: synthetic fixture `/meri/fixture/conversation-history-complete` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04D | Anduril conversation filter | 3034:37090 | Built: synthetic fixture `/meri/fixture/conversation-history-anduril` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04E | General conversation filter | 3034:37336 | Built: synthetic fixture `/meri/fixture/conversation-history-general` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04F | Running conversation filter | 3048:34348 | Built: synthetic fixture `/meri/fixture/conversation-history-running` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04G | Archived conversation filter | 3048:34602 | Built: synthetic fixture `/meri/fixture/conversation-history-archived` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04H | History after selected conversation deletion | 3043:38316 | Built: synthetic fixture `/meri/fixture/conversation-history-after-deletion` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05 | Search and command palette | 1064:144529 | Built: synthetic fixture `/meri/fixture/command-palette` | Conversations HTTP exists. No search endpoint. Client list is external. |
-| 01.05A | Command palette no matches | 3034:37943 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.05A | Command palette no matches | 3034:37943 | Built: synthetic fixture `/meri/fixture/command-palette-no-matches` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 02.02 | Parallel specialist activity | 1064:144601 | Built: synthetic fixture `/meri/fixture/specialist-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.03 | Run detail | 1064:144708 | Built: synthetic fixture `/meri/fixture/run-detail` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.04 | Background runs | 1064:144817 | Built: synthetic fixture `/meri/fixture/background-runs` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.05 | Steer and stop a run | 1064:144923 | Built: synthetic fixture `/meri/fixture/steer-run` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.06 | Checkpoint and verified restore | 1064:144982 | Built: synthetic fixture `/meri/fixture/checkpoint-restore` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.07 | Tool activity and receipts | 1064:145061 | Built: synthetic fixture `/meri/fixture/tool-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
-| 02.07A | Expanded tool activity | 3027:28579 | Not built (added 15 Oct) | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
+| 02.07A | Expanded tool activity | 3027:28579 | Built: synthetic fixture `/meri/fixture/tool-activity-expanded` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.08 | Interrupted run and fork | 1064:145144 | Built: synthetic fixture `/meri/fixture/interrupted-run` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 03.01 | Workspace files | 1064:145204 | Built: synthetic fixture `/meri/fixture/workspace-files` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.02 | Word document workspace | 1064:145316 | Built: synthetic fixture `/meri/fixture/word-document` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
@@ -198,9 +198,9 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 10.36 | Tablet artifact sharing | 3033:33089 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 11.06 | Retention and deletion states | 3019:27976 | Not built (added 15 Oct) | Follows parent flow |
 | 11.07 | Session and availability states | 3019:28267 | Not built (added 15 Oct) | Follows parent flow |
-| 13.21 | Conversation client filter menu | 3034:37582 | Not built (added 15 Oct) | Follows parent flow |
-| 13.22 | Conversation status filter menu | 3034:37596 | Not built (added 15 Oct) | Follows parent flow |
-| 13.23 | Copy unavailable | 3034:38179 | Not built (added 15 Oct) | Follows parent flow |
+| 13.21 | Conversation client filter menu | 3034:37582 | Built: synthetic fixture `/meri/fixture/conversation-client-filter` | Follows parent flow |
+| 13.22 | Conversation status filter menu | 3034:37596 | Built: synthetic fixture `/meri/fixture/conversation-status-filter` | Follows parent flow |
+| 13.23 | Copy unavailable | 3034:38179 | Built inside `/meri/fixture/cited-answer` (Copy); no route of its own | Follows parent flow |
 | 13.24 | Reply to document comment | 3045:34297 | Not built (added 15 Oct) | Follows parent flow |
 | 13.25 | Document comment reply added | 3045:34315 | Not built (added 15 Oct) | Follows parent flow |
 | 13.26 | Document comment resolved | 3045:34333 | Not built (added 15 Oct) | Follows parent flow |
@@ -226,8 +226,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Account menu |  | 3022:32545 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Clear personal defaults? |  | 3022:32491 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Connection disconnected |  | 3022:32411 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Delete conversation from history? |  | 3035:33134 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Delete this conversation? |  | 3022:32527 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Delete conversation from history? |  | 3035:33134 | Built inside `/meri/fixture/conversation-history` (Delete); no route of its own | Follows parent flow |
+| Overlay · Delete this conversation? |  | 3022:32527 | Built inside `/meri/fixture/conversation-management` (Delete conversation); no route of its own | Follows parent flow |
 | Overlay · Deletion requested |  | 3022:32459 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Disconnect the research portal? |  | 3022:32509 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Export ready |  | 3022:32443 | Not built (added 15 Oct) | Follows parent flow |
