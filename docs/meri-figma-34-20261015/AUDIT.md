@@ -135,7 +135,7 @@ Figma asset downloads use `www.figma.com/api/mcp/asset/…`. The cloud environme
 
 ## Missing from the design (needs your mock-ups)
 
-1. **09.01 to 09.07 have no screens.** Layout anchors exist in the review map, but there is no frame behind them: personal preferences, connector accounts and permissions, usage and workspace limits, skills and artifact templates, notifications and account menu, privacy and deletion, help shortcuts and feedback.
+1. **09.01 to 09.07 have no screens.** Layout anchors exist in the review map, but there is no frame behind them: personal preferences, connector accounts and permissions, usage and workspace limits, skills and artifact templates, notifications and account menu, privacy and deletion, help shortcuts and feedback. The frontend already implements these seven pages from the earlier design in `apps/web/src/features/settings/MeriPreferences.tsx` and `preferences/PreferencePages.tsx`, so the new frames should match that content. The design handoff is [FIGMA-MOCKUP-HANDOFF.md](FIGMA-MOCKUP-HANDOFF.md).
 2. **Numbering conflicts in the tooling-coverage section.** 12.07, 12.08 and 12.15 are each used twice. 12.09, 12.12 and 12.18 are not used. 12.19 is a table frame, not a screen. Confirm whether these are renumbering slips or missing screens.
 3. **Retention and deletion states.** Only "Conversation deleted" and "Object deleted" exist. There is no design for a conversation or artifact that is unavailable because of retention suppression, no export screen, and no deletion-in-progress or legal-hold state.
 4. **Session and availability states.** No signed-out, session-expired, feature-disabled or service-unavailable screen. The frontend needs these because the conversation service is off by default.
