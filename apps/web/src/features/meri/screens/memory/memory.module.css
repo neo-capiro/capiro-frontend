@@ -130,3 +130,21 @@ div.fact {
     flex-basis: 100%;
   }
 }
+/* Figma 10.21 phone memory recall: scope and view filters wrap as one row of buttons. */
+@media (max-width: 680px) {
+  .search {
+    gap: 8px;
+  }
+  .searchField {
+    margin-bottom: 4px;
+  }
+  .viewSwitch {
+    display: contents;
+  }
+  .memoryList {
+    gap: 16px;
+  }
+  article.memoryCard {
+    --pill-width: 63px;
+  }
+}

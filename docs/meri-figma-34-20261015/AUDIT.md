@@ -178,15 +178,15 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 09.05 | Notifications and account menu | 3022:31261 | Not built (added 15 Oct) | Follows parent flow |
 | 09.06 | Privacy and deletion | 3022:31622 | Not built (added 15 Oct) | Follows parent flow |
 | 09.07 | Help, shortcuts and feedback | 3022:31991 | Not built (added 15 Oct) | Follows parent flow |
-| 10.19 | Phone routines | 3032:30166 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.20 | Phone approval center | 3032:30415 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.21 | Phone memory recall | 3032:30630 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.22 | Phone run detail | 3032:30828 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.23 | Phone conversation history | 3032:31071 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.24 | Phone browser activity | 3032:31325 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.25 | Tablet approval center | 3032:31529 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.26 | Tablet routines | 3032:31859 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.27 | Tablet workspace files | 3032:32204 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.19 | Phone routines | 3032:30166 | Built: synthetic fixture `/meri/fixture/phone-routines` | Follows parent flow |
+| 10.20 | Phone approval center | 3032:30415 | Built: synthetic fixture `/meri/fixture/phone-approval-center` | Follows parent flow |
+| 10.21 | Phone memory recall | 3032:30630 | Built: synthetic fixture `/meri/fixture/phone-memory-recall` | Follows parent flow |
+| 10.22 | Phone run detail | 3032:30828 | Built: synthetic fixture `/meri/fixture/phone-run-detail` | Follows parent flow |
+| 10.23 | Phone conversation history | 3032:31071 | Built: synthetic fixture `/meri/fixture/phone-conversation-history` | Follows parent flow |
+| 10.24 | Phone browser activity | 3032:31325 | Built: synthetic fixture `/meri/fixture/phone-browser-activity` | Follows parent flow |
+| 10.25 | Tablet approval center | 3032:31529 | Built: synthetic fixture `/meri/fixture/tablet-approval-center` | Follows parent flow |
+| 10.26 | Tablet routines | 3032:31859 | Built: synthetic fixture `/meri/fixture/tablet-routines` | Follows parent flow |
+| 10.27 | Tablet workspace files | 3032:32204 | Built: synthetic fixture `/meri/fixture/tablet-workspace-files` | Follows parent flow |
 | 10.28 | Dark run detail | 3032:32570 | Not built (added 15 Oct) | Follows parent flow |
 | 10.29 | Dark approval center | 3032:33006 | Not built (added 15 Oct) | Follows parent flow |
 | 10.30 | Dark workspace files | 3032:33402 | Not built (added 15 Oct) | Follows parent flow |
@@ -194,8 +194,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 10.32 | Dark routines | 3033:31843 | Not built (added 15 Oct) | Follows parent flow |
 | 10.33 | Phone personal preferences | 3033:32256 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.34 | Tablet personal preferences | 3033:32515 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.35 | Phone artifact sharing | 3033:32900 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.36 | Tablet artifact sharing | 3033:33089 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.35 | Phone artifact sharing | 3033:32900 | Built: synthetic fixture `/meri/fixture/phone-artifact-sharing` | Follows parent flow |
+| 10.36 | Tablet artifact sharing | 3033:33089 | Built: synthetic fixture `/meri/fixture/tablet-artifact-sharing` | Follows parent flow |
 | 11.06 | Retention and deletion states | 3019:27976 | Not built (added 15 Oct) | Follows parent flow |
 | 11.07 | Session and availability states | 3019:28267 | Not built (added 15 Oct) | Follows parent flow |
 | 13.21 | Conversation client filter menu | 3034:37582 | Built: synthetic fixture `/meri/fixture/conversation-client-filter` | Follows parent flow |

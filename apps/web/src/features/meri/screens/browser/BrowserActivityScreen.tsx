@@ -2,6 +2,7 @@ import { ArrowUpRight, Clock, FileText, X } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import phone from "../../ui/phone-page.module.css";
 import styles from "./browser.module.css";
 
 export type BrowserSnapshot = {
@@ -56,7 +57,7 @@ export function BrowserActivityScreen({
   unavailable: string;
 }) {
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${phone.page}`}>
       <MeriPageHeading
         title="Browse official sources"
         description={`Current task: ${view.task}`}

@@ -5,7 +5,10 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { Notice } from "../../ui/Notice";
 import { LinkAction } from "../../ui/LinkAction";
+import { phoneCardColumns } from "../../ui/phone-card-columns";
 import styles from "../../ui/meri-ui.module.css";
+import cards from "../../ui/phone-cards.module.css";
+import phone from "../../ui/phone-page.module.css";
 
 export type RoutineRow = {
   id: string;
@@ -28,6 +31,10 @@ const columns: readonly DataColumn<RoutineRow>[] = [
     render: (row) => row.lastOutcome,
   },
 ];
+const cardColumns = phoneCardColumns(columns, {
+  key: "status",
+  tone: (row) => (row.status === "Active" ? "success" : "neutral"),
+});
 
 /** 08.01 Routines: recurring research and drafting within current permissions. */
 export function RoutinesScreen({
@@ -45,7 +52,7 @@ export function RoutinesScreen({
   const [selected, setSelected] = useState(routines[0]?.id);
   const current = routines.find((row) => row.id === selected);
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${phone.page} ${cards.cards}`}>
       <MeriPageHeading
         title="Routines"
         description="Recurring research and drafting within your permissions"
@@ -61,7 +68,7 @@ export function RoutinesScreen({
       />
       <DataTable
         caption="Routines"
-        columns={columns}
+        columns={cardColumns}
         rows={routines}
         selectedId={selected}
         onSelect={setSelected}

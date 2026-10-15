@@ -8,6 +8,7 @@ import { RunPlanCard, type PlanStep } from "../../ui/RunPlanCard";
 import { StatTiles, type StatTile } from "../../ui/StatTiles";
 import { StopRunControl } from "./StopRunControl";
 import ui from "../../ui/meri-ui.module.css";
+import phone from "../../ui/phone-page.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./runs.module.css";
 
@@ -34,7 +35,7 @@ export function RunDetailScreen({
   unavailable: string;
 }) {
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${phone.page} ${styles.detail}`}>
       <MeriPageHeading title={view.title} description={view.context} />
       <StatTiles label="Run summary" tiles={view.metrics} variant="metric" />
       <div className={styles.body}>

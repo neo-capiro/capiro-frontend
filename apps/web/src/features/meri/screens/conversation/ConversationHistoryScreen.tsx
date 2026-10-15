@@ -13,7 +13,10 @@ import {
 } from "./HistoryFilters";
 import { HistoryActions } from "./HistoryActions";
 import { HistoryFollowUps, type HistoryFollowUpView } from "./HistoryFollowUps";
+import { phoneCardColumns } from "../../ui/phone-card-columns";
 import ui from "../../ui/meri-ui.module.css";
+import cards from "../../ui/phone-cards.module.css";
+import phone from "../../ui/phone-page.module.css";
 
 export type HistoryView = HistoryFollowUpView & {
   /** Heading guidance; after a deletion it reports what was removed (01.04H). */
@@ -33,6 +36,10 @@ const columns: readonly DataColumn<HistoryRow>[] = [
   { key: "status", label: "Status", width: 18, render: (r) => r.status },
   { key: "updated", label: "Updated", width: 19, render: (r) => r.updated },
 ];
+const cardColumns = phoneCardColumns(columns, {
+  key: "status",
+  tone: (row) => (row.status === "Complete" ? "success" : "neutral"),
+});
 
 /** 01.04 Conversation history (01.04A–H states): local search, filters, selection and deletion confirmation. */
 export function ConversationHistoryScreen({
@@ -43,7 +50,7 @@ export function ConversationHistoryScreen({
   unavailable: string;
 }) {
   return (
-    <div className={ui.page}>
+    <div className={`${ui.page} ${phone.page} ${cards.cards}`}>
       <MeriPageHeading
         title="Conversations"
         description={view.description}
@@ -103,7 +110,7 @@ function HistoryList({
         {filters.rows.length ? (
           <DataTable
             caption="Conversations"
-            columns={columns}
+            columns={cardColumns}
             rows={filters.rows}
             selectedId={current?.id}
             onSelect={setSelected}

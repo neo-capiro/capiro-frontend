@@ -83,8 +83,24 @@
   font-size: 13px;
   color: var(--muted-foreground);
 }
-@media (max-width: 1100px) {
+@media (max-width: 680px) {
   .treePanel {
     width: 100%;
+  }
+}
+/* Figma 10.27 tablet workspace files: the 232px tree stays beside the file list. */
+@media (min-width: 681px) and (max-width: 1100px) {
+  div.layout {
+    flex-direction: row;
+  }
+  .layout > .treePanel {
+    width: 232px !important;
+  }
+  .layout > :not(.treePanel) {
+    width: auto !important;
+  }
+  /* The 70px version column keeps "Working" on one line, as the frame draws it. */
+  .layout td > span {
+    white-space: nowrap;
   }
 }

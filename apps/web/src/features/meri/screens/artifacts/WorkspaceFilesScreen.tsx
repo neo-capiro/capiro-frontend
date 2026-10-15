@@ -130,7 +130,7 @@ export function WorkspaceFilesScreen({
           Artifact formats
         </LinkAction>
       </div>
-      <div className={`${shared.columns} ${shared.wideGap}`}>
+      <div className={`${shared.columns} ${shared.wideGap} ${styles.layout}`}>
         <WorkspaceTreePanel
           view={view}
           selectedId={selectedId}
