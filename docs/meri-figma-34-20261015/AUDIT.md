@@ -26,22 +26,47 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 02.01 | Research in progress | 1064:144151 | Built: synthetic fixture `/meri/fixture/research-progress` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 01.02 | Cited answer | 1064:144239 | Built: synthetic fixture `/meri/fixture/cited-answer` | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.03 | Choose client and data scope | 1064:144332 | Built: synthetic fixture `/meri/fixture/choose-scope` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.03A | Scope picker no matches | 3034:37692 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.04 | Conversation history | 1064:144425 | Built: synthetic fixture `/meri/fixture/conversation-history` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04A | Empty conversation history | 3034:32186 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04B | No matching conversations | 3034:32443 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04C | Completed conversation filter | 3034:36844 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04D | Anduril conversation filter | 3034:37090 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04E | General conversation filter | 3034:37336 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04F | Running conversation filter | 3048:34348 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04G | Archived conversation filter | 3048:34602 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.04H | History after selected conversation deletion | 3043:38316 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 01.05 | Search and command palette | 1064:144529 | Built: synthetic fixture `/meri/fixture/command-palette` | Conversations HTTP exists. No search endpoint. Client list is external. |
+| 01.05A | Command palette no matches | 3034:37943 | Not built (added 15 Oct) | Conversations HTTP exists. No search endpoint. Client list is external. |
 | 02.02 | Parallel specialist activity | 1064:144601 | Built: synthetic fixture `/meri/fixture/specialist-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.03 | Run detail | 1064:144708 | Built: synthetic fixture `/meri/fixture/run-detail` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.04 | Background runs | 1064:144817 | Built: synthetic fixture `/meri/fixture/background-runs` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.05 | Steer and stop a run | 1064:144923 | Built: synthetic fixture `/meri/fixture/steer-run` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.06 | Checkpoint and verified restore | 1064:144982 | Built: synthetic fixture `/meri/fixture/checkpoint-restore` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.07 | Tool activity and receipts | 1064:145061 | Built: synthetic fixture `/meri/fixture/tool-activity` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
+| 02.07A | Expanded tool activity | 3027:28579 | Not built (added 15 Oct) | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 02.08 | Interrupted run and fork | 1064:145144 | Built: synthetic fixture `/meri/fixture/interrupted-run` | Lifecycle and run events exist. SDK subagents are not configured, so specialist activity has no data. |
 | 03.01 | Workspace files | 1064:145204 | Built: synthetic fixture `/meri/fixture/workspace-files` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.02 | Word document workspace | 1064:145316 | Built: synthetic fixture `/meri/fixture/word-document` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02A | DOCX brief page 2 | 3031:28357 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02B | DOCX brief page 3 | 3031:28703 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.02C | DOCX brief page 4 | 3031:29048 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.03 | PDF and multi-page preview | 1064:145426 | Built: synthetic fixture `/meri/fixture/pdf-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03A | PDF brief page 2 | 3031:33544 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03B | PDF brief page 3 | 3031:33809 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.03C | PDF brief page 4 | 3031:34074 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.04 | Spreadsheet preview | 1064:145539 | Built: synthetic fixture `/meri/fixture/spreadsheet-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.04A | Spreadsheet source data | 3026:32155 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.04B | Spreadsheet references | 3026:32465 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.05 | Presentation preview | 1064:145690 | Built: synthetic fixture `/meri/fixture/presentation-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05A | Presentation slide 2 | 3031:34357 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05B | Presentation slide 3 | 3031:34599 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05C | Presentation slide 4 | 3031:34846 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05D | Presentation slide 5 | 3031:35087 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.05E | Presentation slide 6 | 3031:35328 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.06 | Generated web preview | 1064:145787 | Built: synthetic fixture `/meri/fixture/generated-web-preview` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.07 | Code and execution activity | 1064:145886 | Built: synthetic fixture `/meri/fixture/code-activity` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
+| 03.07A | Generated web verification activity | 3026:32814 | Not built (added 15 Oct) | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.08 | Analysis outputs | 1064:145939 | Built: synthetic fixture `/meri/fixture/analysis-outputs` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.09 | Versions and comparison | 1064:146038 | Built: synthetic fixture `/meri/fixture/artifact-versions` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
 | 03.10 | Revise an artifact | 1064:146126 | Built: synthetic fixture `/meri/fixture/revise-artifact` | DOCX and XLSX create/revise/inspect/download exist. PPTX, PDF, HTML and code previews, PDF.js and signed links do not. |
@@ -52,14 +77,19 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 04.05 | Download exact artifact version | 1064:146498 | Built: synthetic fixture `/meri/fixture/download-artifact` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.06 | Revision progress and verification | 1064:146561 | Built: synthetic fixture `/meri/fixture/revision-progress` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.07 | Filing and download receipts | 1064:146629 | Built: synthetic fixture `/meri/fixture/filing-receipt` | Artifact filing command and download exist. No upload or extraction API found. |
+| 04.08 | Artifact sharing and source scopes | 3019:28559 | Not built (added 15 Oct) | Follows parent flow |
+| 04.08A | Source access review requested | 3024:26544 | Not built (added 15 Oct) | Follows parent flow |
 | 05.01 | Evidence and citations | 1064:146715 | Built: synthetic fixture `/meri/fixture/evidence-sources` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.04 | Institutional Memory recall | 1064:147042 | Built: synthetic fixture `/meri/fixture/memory-recall` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.04B | Institutional Memory history | 3019:23371 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.05 | Memory detail and provenance | 1064:147112 | Built: synthetic fixture `/meri/fixture/memory-detail` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.06 | Memory update proposal | 1064:147204 | Built: synthetic fixture `/meri/fixture/memory-proposal` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.07 | Access changed and clean recovery | 1064:147272 | Built: synthetic fixture `/meri/fixture/access-changed` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.08 | Approved memory outcome | 1064:147320 | Built: synthetic fixture `/meri/fixture/memory-approved` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.08A | Current memory after approval | 3019:23613 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.08B | Superseded briefing preference | 3050:34741 | Not built (added 15 Oct) | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 06.01 | Approval center | 1064:147397 | Built: synthetic fixture `/meri/fixture/approval-center` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02 | Memory approval review | 1064:147483 | Built: synthetic fixture `/meri/fixture/memory-approval-review` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.03 | Draft a client task | 1064:147566 | Built: synthetic fixture `/meri/fixture/draft-client-task` | Approval metadata and commands exist. No list endpoint for an approval center found. |
@@ -76,24 +106,24 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 08.03 | Routine detail | 1064:148440 | Built: synthetic fixture `/meri/fixture/routine-detail` | Schedule owner, create/update/cancel and history exist as source. |
 | 08.04 | Routine history and authority changes | 1064:148534 | Built: synthetic fixture `/meri/fixture/routine-history` | Schedule owner, create/update/cancel and history exist as source. |
 | 09.08 | Conversation management and branches | 1064:148633 | Built: synthetic fixture `/meri/fixture/conversation-management` | Only 09.08 has a design. Preferences, connectors, usage, notifications, retention UI and help have no backend contract. |
-| 10.01 | Dark workspace | 1064:148697 | Absent | Composite of the above. |
-| 10.02 | Tablet conversation | 1064:148772 | Absent | Composite of the above. |
-| 10.03 | Tablet artifact drawer | 1064:148841 | Absent | Composite of the above. |
-| 10.04 | Mobile home | 1064:148902 | Absent | Composite of the above. |
-| 10.05 | Mobile conversation | 1064:148941 | Absent | Composite of the above. |
-| 10.06 | Mobile artifact | 1064:148985 | Absent | Composite of the above. |
-| 10.07 | Mobile task approval | 1064:149028 | Absent | Composite of the above. |
-| 10.08 | Mobile navigation | 1064:149061 | Partial: Mobile navigation disclosure exists for the shared shell | Composite of the above. |
-| 10.17 | Mobile filing receipt | 1064:149090 | Absent | Composite of the above. |
-| 10.18 | Mobile revision progress | 1064:149120 | Absent | Composite of the above. |
-| 10.09 | Mobile sources | 1064:149158 | Absent | Composite of the above. |
-| 10.10 | Mobile artifact actions | 1064:149191 | Absent | Composite of the above. |
-| 10.11 | Mobile artifact revision | 1064:149225 | Absent | Composite of the above. |
-| 10.12 | Mobile versions | 1064:149254 | Absent | Composite of the above. |
-| 10.13 | Mobile filing review | 1064:149286 | Absent | Composite of the above. |
-| 10.14 | Mobile scope picker | 1064:149316 | Absent | Composite of the above. |
-| 10.15 | Mobile upload | 1064:149346 | Absent | Composite of the above. |
-| 10.16 | Mobile research progress | 1064:149375 | Absent | Composite of the above. |
+| 10.01 | Dark workspace | 1064:148697 | Built: synthetic fixture `/meri/fixture/dark-workspace` | Composite of the above. |
+| 10.02 | Tablet conversation | 1064:148772 | Built: synthetic fixture `/meri/fixture/tablet-conversation` | Composite of the above. |
+| 10.03 | Tablet artifact drawer | 1064:148841 | Built: synthetic fixture `/meri/fixture/tablet-artifact-drawer` | Composite of the above. |
+| 10.04 | Mobile home | 1064:148902 | Built: synthetic fixture `/meri/fixture/mobile-home` | Composite of the above. |
+| 10.05 | Mobile conversation | 1064:148941 | Built: synthetic fixture `/meri/fixture/mobile-conversation` | Composite of the above. |
+| 10.06 | Mobile artifact | 1064:148985 | Built: synthetic fixture `/meri/fixture/mobile-artifact` | Composite of the above. |
+| 10.07 | Mobile task approval | 1064:149028 | Built: synthetic fixture `/meri/fixture/mobile-task-approval` | Composite of the above. |
+| 10.08 | Mobile navigation | 1064:149061 | Built: synthetic fixture `/meri/fixture/mobile-navigation` | Composite of the above. |
+| 10.17 | Mobile filing receipt | 1064:149090 | Built: synthetic fixture `/meri/fixture/mobile-filing-receipt` | Composite of the above. |
+| 10.18 | Mobile revision progress | 1064:149120 | Built: synthetic fixture `/meri/fixture/mobile-revision-progress` | Composite of the above. |
+| 10.09 | Mobile sources | 1064:149158 | Built: synthetic fixture `/meri/fixture/mobile-sources` | Composite of the above. |
+| 10.10 | Mobile artifact actions | 1064:149191 | Built: synthetic fixture `/meri/fixture/mobile-artifact-actions` | Composite of the above. |
+| 10.11 | Mobile artifact revision | 1064:149225 | Built: synthetic fixture `/meri/fixture/mobile-artifact-revision` | Composite of the above. |
+| 10.12 | Mobile versions | 1064:149254 | Built: synthetic fixture `/meri/fixture/mobile-versions` | Composite of the above. |
+| 10.13 | Mobile filing review | 1064:149286 | Built: synthetic fixture `/meri/fixture/mobile-filing-review` | Composite of the above. |
+| 10.14 | Mobile scope picker | 1064:149316 | Built: synthetic fixture `/meri/fixture/mobile-scope-picker` | Composite of the above. |
+| 10.15 | Mobile upload | 1064:149346 | Built: synthetic fixture `/meri/fixture/mobile-upload` | Composite of the above. |
+| 10.16 | Mobile research progress | 1064:149375 | Built: synthetic fixture `/meri/fixture/mobile-research-progress` | Composite of the above. |
 | 11.01 | Run and recovery state board | 1064:149425 | Built: synthetic fixture `/meri/fixture/states-run-recovery` | Composite of the above. |
 | 11.02 | File and artifact error state board | 1064:149528 | Built: synthetic fixture `/meri/fixture/states-file-artifact` | Composite of the above. |
 | 11.03 | Approval and permission state board | 1064:149631 | Built: synthetic fixture `/meri/fixture/states-approval-permission` | Composite of the above. |
@@ -110,6 +140,70 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Task created |  | 1064:149977 | Absent | Follows parent flow |
 | Overlay · Artifact filed |  | 1064:149982 | Absent | Follows parent flow |
 | 05.09 | Funding evidence detail | 1064:149987 | Built: synthetic fixture `/meri/fixture/funding-evidence` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
+| 05.10 | Memory proposal — submitting | 3019:28780 | Not built (added 15 Oct) | Follows parent flow |
+| 05.11 | Memory proposal — submitted and pending | 3019:28977 | Not built (added 15 Oct) | Follows parent flow |
+| 05.12 | Memory proposal — rejected | 3019:29174 | Not built (added 15 Oct) | Follows parent flow |
+| 05.13 | Memory proposal — changes requested | 3019:29371 | Not built (added 15 Oct) | Follows parent flow |
+| 05.14 | Memory proposal — revised draft | 3019:29568 | Not built (added 15 Oct) | Follows parent flow |
+| 05.15 | Memory proposals — loading | 3019:29765 | Not built (added 15 Oct) | Follows parent flow |
+| 05.16 | Memory proposals — load error | 3019:29962 | Not built (added 15 Oct) | Follows parent flow |
+| 05.17 | Memory proposal — submission error | 3019:30159 | Not built (added 15 Oct) | Follows parent flow |
+| 05.18 | Memory review — decision status uncertain | 3019:30356 | Not built (added 15 Oct) | Follows parent flow |
+| 05.19 | Memory review — access restricted | 3019:30553 | Not built (added 15 Oct) | Follows parent flow |
+| 05.20 | Memory proposal — changed while open | 3019:30750 | Not built (added 15 Oct) | Follows parent flow |
+| 05.21 | Sources loading | 3026:27513 | Not built (added 15 Oct) | Follows parent flow |
+| 05.22 | Sources unavailable | 3026:27760 | Not built (added 15 Oct) | Follows parent flow |
+| 06.01A | Approvals after task decision | 3036:33107 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.01B | Approvals after filing decision | 3036:38096 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.01C | Approvals after memory decision | 3048:39000 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.02A | Authorized memory reviewer perspective | 3027:28352 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.02B | Request memory proposal changes | 3036:38962 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.04A | Executed task proposal | 3036:33726 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.05A | Artifact filing rejected | 3036:38733 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.07A | Request artifact filing changes | 3036:38540 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.07B | Artifact filing changes requested | 3036:38314 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.07C | Task proposal rejected | 3036:33325 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.07D | Task changes requested | 3036:33519 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.08 | Source access approval review | 3024:26758 | Not built (added 15 Oct) | Follows parent flow |
+| 07.02A | Research account connected | 3024:32269 | Not built (added 15 Oct) | No browser product integration. No qualified browser host. |
+| 07.03A | Public browser download receipt | 3024:32057 | Not built (added 15 Oct) | No browser product integration. No qualified browser host. |
+| 08.02A | Edit routine | 3024:31132 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04A | Routine paused | 3024:31351 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04B | Routine automatically disabled | 3024:31580 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
+| 08.04C | Routine cancelled | 3024:31809 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
+| 09.01 | Personal preferences | 3022:29587 | Not built (added 15 Oct) | Follows parent flow |
+| 09.02 | Connector accounts and permissions | 3022:30009 | Not built (added 15 Oct) | Follows parent flow |
+| 09.03 | Usage and workspace limits | 3022:30398 | Not built (added 15 Oct) | Follows parent flow |
+| 09.04 | Skills and artifact templates | 3022:30883 | Not built (added 15 Oct) | Follows parent flow |
+| 09.05 | Notifications and account menu | 3022:31261 | Not built (added 15 Oct) | Follows parent flow |
+| 09.06 | Privacy and deletion | 3022:31622 | Not built (added 15 Oct) | Follows parent flow |
+| 09.07 | Help, shortcuts and feedback | 3022:31991 | Not built (added 15 Oct) | Follows parent flow |
+| 10.19 | Phone routines | 3032:30166 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.20 | Phone approval center | 3032:30415 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.21 | Phone memory recall | 3032:30630 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.22 | Phone run detail | 3032:30828 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.23 | Phone conversation history | 3032:31071 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.24 | Phone browser activity | 3032:31325 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.25 | Tablet approval center | 3032:31529 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.26 | Tablet routines | 3032:31859 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.27 | Tablet workspace files | 3032:32204 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.28 | Dark run detail | 3032:32570 | Not built (added 15 Oct) | Follows parent flow |
+| 10.29 | Dark approval center | 3032:33006 | Not built (added 15 Oct) | Follows parent flow |
+| 10.30 | Dark workspace files | 3032:33402 | Not built (added 15 Oct) | Follows parent flow |
+| 10.31 | Dark memory recall | 3033:31453 | Not built (added 15 Oct) | Follows parent flow |
+| 10.32 | Dark routines | 3033:31843 | Not built (added 15 Oct) | Follows parent flow |
+| 10.33 | Phone personal preferences | 3033:32256 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.34 | Tablet personal preferences | 3033:32515 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.35 | Phone artifact sharing | 3033:32900 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.36 | Tablet artifact sharing | 3033:33089 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 11.06 | Retention and deletion states | 3019:27976 | Not built (added 15 Oct) | Follows parent flow |
+| 11.07 | Session and availability states | 3019:28267 | Not built (added 15 Oct) | Follows parent flow |
+| 13.21 | Conversation client filter menu | 3034:37582 | Not built (added 15 Oct) | Follows parent flow |
+| 13.22 | Conversation status filter menu | 3034:37596 | Not built (added 15 Oct) | Follows parent flow |
+| 13.23 | Copy unavailable | 3034:38179 | Not built (added 15 Oct) | Follows parent flow |
+| 13.24 | Reply to document comment | 3045:34297 | Not built (added 15 Oct) | Follows parent flow |
+| 13.25 | Document comment reply added | 3045:34315 | Not built (added 15 Oct) | Follows parent flow |
+| 13.26 | Document comment resolved | 3045:34333 | Not built (added 15 Oct) | Follows parent flow |
 | Overlay · Run cancelled |  | 1064:150073 | Absent | Follows parent flow |
 | Overlay · Revise funding analysis |  | 1064:150079 | Absent | Follows parent flow |
 | Overlay · File funding analysis |  | 1064:150093 | Absent | Follows parent flow |
@@ -129,9 +223,21 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Download ready slides |  | 1064:150315 | Absent | Follows parent flow |
 | Overlay · Download Signal summary |  | 1064:150319 | Absent | Follows parent flow |
 | Overlay · Download ready html |  | 1064:150325 | Absent | Follows parent flow |
+| Overlay · Account menu |  | 3022:32545 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Clear personal defaults? |  | 3022:32491 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Connection disconnected |  | 3022:32411 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Delete conversation from history? |  | 3035:33134 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Delete this conversation? |  | 3022:32527 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Deletion requested |  | 3022:32459 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Disconnect the research portal? |  | 3022:32509 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Export ready |  | 3022:32443 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Preferences saved |  | 3022:32395 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Problem report sent |  | 3022:32427 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Signed out |  | 3022:32475 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Updates panel |  | 3022:32579 | Not built (added 15 Oct) | Follows parent flow |
 | Document overlay · blocks |  | 1064:150601 | Absent | Follows parent flow |
 | Document overlay · revision |  | 1064:150603 | Absent | Follows parent flow |
-| Document overlay · mobileRevision |  | 1064:150605 | Absent | Follows parent flow |
+| Document overlay · mobileRevision |  | 1064:150605 | Built: synthetic fixture `/meri/fixture/document-mobile-revision` | Follows parent flow |
 | Document overlay · comments |  | 1064:150607 | Absent | Follows parent flow |
 | Document overlay · Editing mode |  | 1064:150609 | Absent | Follows parent flow |
 
@@ -212,27 +318,27 @@ These frames sit beside the standalone mock-up in sections `1064:150752` (toolin
 | Task · Review exact source action |  | 1064:153002 | Built: synthetic fixture `/meri/fixture/task-review-source-action` | setup |
 | Task · Source creation receipt |  | 1064:153038 | Built: synthetic fixture `/meri/fixture/task-creation-receipt` | setup |
 | Task · Canonical source record |  | 1064:153081 | Built: synthetic fixture `/meri/fixture/task-canonical-record` | setup |
-| Meri · Workflow library · Phone |  | 1064:152692 | Absent | responsive |
-| Meri · Commitments & Deliverables · Phone |  | 1064:152717 | Absent | responsive |
-| Meri · Sources & coverage · Phone |  | 1064:152737 | Absent | responsive |
-| Meri · Review workflow request · Phone |  | 1064:152758 | Absent | responsive |
-| Meri · Workflow library · Tablet |  | 1064:152783 | Absent | responsive |
-| Meri · Workflow library · Dark |  | 1064:152868 | Absent | responsive |
-| Phone setup · Research a Company |  | 1064:153319 | Absent | phone setup |
-| Phone setup · Relationship Brief |  | 1064:153321 | Absent | phone setup |
-| Phone setup · Client Changes |  | 1064:153323 | Absent | phone setup |
-| Phone setup · Portfolio Changes |  | 1064:153325 | Absent | phone setup |
-| Phone setup · Portfolio Overlap |  | 1064:153327 | Absent | phone setup |
-| Phone setup · Mail History |  | 1064:153329 | Absent | phone setup |
-| Phone setup · Meeting Prep Brief |  | 1064:153331 | Absent | phone setup |
-| Phone setup · Commitments & Deliverables |  | 1064:153333 | Absent | phone setup |
-| Phone setup · Funding Opportunity Match |  | 1064:153335 | Absent | phone setup |
-| Phone setup · PE Deep Dive |  | 1064:153337 | Absent | phone setup |
-| Phone setup · Bill Watch |  | 1064:153339 | Absent | phone setup |
-| Phone setup · Hearing Watch |  | 1064:153341 | Absent | phone setup |
-| Phone setup · Representation Lookup |  | 1064:153343 | Absent | phone setup |
-| Phone setup · Regulatory Docket Brief |  | 1064:153345 | Absent | phone setup |
+| Meri · Workflow library · Phone |  | 1064:152692 | Built: synthetic fixture `/meri/fixture/workflow-library-phone` | responsive |
+| Meri · Commitments & Deliverables · Phone |  | 1064:152717 | Built: synthetic fixture `/meri/fixture/commitments-deliverables-phone` | responsive |
+| Meri · Sources & coverage · Phone |  | 1064:152737 | Built: synthetic fixture `/meri/fixture/sources-coverage-phone` | responsive |
+| Meri · Review workflow request · Phone |  | 1064:152758 | Built: synthetic fixture `/meri/fixture/workflow-request-phone` | responsive |
+| Meri · Workflow library · Tablet |  | 1064:152783 | Built: synthetic fixture `/meri/fixture/workflow-library-tablet` | responsive |
+| Meri · Workflow library · Dark |  | 1064:152868 | Built: synthetic fixture `/meri/fixture/workflow-library-dark` | responsive |
+| Phone setup · Research a Company |  | 1064:153319 | Built: synthetic fixture `/meri/fixture/phone-setup-research-company` | phone setup |
+| Phone setup · Relationship Brief |  | 1064:153321 | Built: synthetic fixture `/meri/fixture/phone-setup-relationship-brief` | phone setup |
+| Phone setup · Client Changes |  | 1064:153323 | Built: synthetic fixture `/meri/fixture/phone-setup-client-changes` | phone setup |
+| Phone setup · Portfolio Changes |  | 1064:153325 | Built: synthetic fixture `/meri/fixture/phone-setup-portfolio-changes` | phone setup |
+| Phone setup · Portfolio Overlap |  | 1064:153327 | Built: synthetic fixture `/meri/fixture/phone-setup-portfolio-overlap` | phone setup |
+| Phone setup · Mail History |  | 1064:153329 | Built: synthetic fixture `/meri/fixture/phone-setup-mail-history` | phone setup |
+| Phone setup · Meeting Prep Brief |  | 1064:153331 | Built: synthetic fixture `/meri/fixture/phone-setup-meeting-prep` | phone setup |
+| Phone setup · Commitments & Deliverables |  | 1064:153333 | Built: synthetic fixture `/meri/fixture/phone-setup-commitments-audit` | phone setup |
+| Phone setup · Funding Opportunity Match |  | 1064:153335 | Built: synthetic fixture `/meri/fixture/phone-setup-funding-opportunity-match` | phone setup |
+| Phone setup · PE Deep Dive |  | 1064:153337 | Built: synthetic fixture `/meri/fixture/phone-setup-pe-deep-dive` | phone setup |
+| Phone setup · Bill Watch |  | 1064:153339 | Built: synthetic fixture `/meri/fixture/phone-setup-bill-watch` | phone setup |
+| Phone setup · Hearing Watch |  | 1064:153341 | Built: synthetic fixture `/meri/fixture/phone-setup-hearing-watch` | phone setup |
+| Phone setup · Representation Lookup |  | 1064:153343 | Built: synthetic fixture `/meri/fixture/phone-setup-representation-lookup` | phone setup |
+| Phone setup · Regulatory Docket Brief |  | 1064:153345 | Built: synthetic fixture `/meri/fixture/phone-setup-regulatory-docket-brief` | phone setup |
 | Meri · Document working draft · Desktop |  | 1064:150330 | Built: synthetic fixture `/meri/fixture/document-working-draft` | drafting |
-| Meri · Document working draft · Tablet |  | 1064:150459 | Absent | drafting |
-| Meri · Document working draft · Phone |  | 1064:150539 | Absent | drafting |
+| Meri · Document working draft · Tablet |  | 1064:150459 | Built: synthetic fixture `/meri/fixture/document-working-draft-tablet` | drafting |
+| Meri · Document working draft · Phone |  | 1064:150539 | Built: synthetic fixture `/meri/fixture/document-working-draft-phone` | drafting |
 | Meri · Anduril meeting workspace entry |  | 1064:150614 | Absent | client context |
