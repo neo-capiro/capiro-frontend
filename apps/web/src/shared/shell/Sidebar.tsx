@@ -6,7 +6,11 @@ import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { DesignIcon } from "./DesignIcon";
-import { SidebarDestinations, type MeriSection } from "./SidebarDestinations";
+import {
+  preferencesHref,
+  SidebarDestinations,
+  type MeriSection,
+} from "./SidebarDestinations";
 import { SidebarRecents } from "./SidebarRecents";
 import styles from "./shell.module.css";
 
@@ -80,13 +84,36 @@ export function Sidebar({
         section={section}
       />
       <SidebarRecents fixture={fixture} />
-      <div className={styles.preferences}>
-        <div className={styles.divider} />
-        <Button asChild variant="ghost" className={styles.navButton}>
-          <Link href="/settings/preferences">Preferences</Link>
-        </Button>
-        <p>Capiro · Your authorized workspace</p>
-      </div>
+      <SidebarPreferences fixture={fixture} section={section} />
     </aside>
+  );
+}
+
+/** Preferences link: the 09.01 fixture in fixture mode, current on the Settings fixture pages. */
+function SidebarPreferences({
+  fixture,
+  section,
+}: {
+  fixture: boolean;
+  section?: MeriSection | undefined;
+}) {
+  const current = section === "preferences";
+  return (
+    <div className={styles.preferences}>
+      <div className={styles.divider} />
+      <Button
+        asChild
+        variant="ghost"
+        className={`${styles.navButton} ${current ? styles.currentDestination : ""}`}
+      >
+        <Link
+          href={preferencesHref(fixture)}
+          aria-current={current ? "page" : undefined}
+        >
+          Preferences
+        </Link>
+      </Button>
+      <p>Capiro · Your authorized workspace</p>
+    </div>
   );
 }
