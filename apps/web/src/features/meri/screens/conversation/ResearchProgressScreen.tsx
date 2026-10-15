@@ -1,29 +1,16 @@
 "use client";
 import { useRef, useState } from "react";
-import { ArrowUpRight, Check, Clock, Users } from "lucide-react";
-import {
-  Plan,
-  PlanContent,
-  PlanFooter,
-  PlanHeader,
-  PlanTitle,
-} from "@capiro/ui/plan";
-import { QueueItem } from "@capiro/ui/queue";
+import { ArrowUpRight, Clock, Users } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { LinkAction } from "../../ui/LinkAction";
 import { StatusPill, type StatusTone } from "../../ui/StatusPill";
 import { MeriComposer } from "../../MeriComposer";
-import { DetailRow } from "./DetailRow";
+import { DetailRow } from "../../ui/DetailRow";
+import { RunPlanCard, type PlanStep } from "../../ui/RunPlanCard";
 import { UserMessage } from "./UserMessage";
 import ui from "../../ui/meri-ui.module.css";
 import styles from "./run-progress.module.css";
 
-type PlanStep = {
-  id: string;
-  title: string;
-  detail: string;
-  done: boolean;
-};
 export type ResearchProgressView = {
   title: string;
   context: string;
@@ -35,6 +22,7 @@ export type ResearchProgressView = {
   sources: { title: string; breakdown: string; note: string };
   steer: string;
   backgroundHref?: string;
+  runHref?: string;
 };
 
 /** 02.01 Research in progress: plan, run overview and a steering draft while work continues. */
@@ -52,32 +40,13 @@ export function ResearchProgressScreen({
       <MeriPageHeading title={view.title} description={view.context} />
       <UserMessage>{view.request}</UserMessage>
       <div className={styles.workspace}>
-        <Plan defaultOpen className={styles.plan}>
-          <PlanHeader className={styles.planHeader}>
-            <PlanTitle role="heading" aria-level={2}>
-              {view.plan.title}
-            </PlanTitle>
-          </PlanHeader>
-          <PlanContent className={styles.planContent}>
-            <ul className={styles.steps} aria-label="Plan steps">
-              {view.plan.steps.map((step) => (
-                <QueueItem key={step.id} className={styles.step}>
-                  <DetailRow
-                    icon={step.done ? <Check /> : <Clock />}
-                    state={step.done ? "Done" : "Not done"}
-                    title={step.title}
-                    detail={step.detail}
-                  />
-                </QueueItem>
-              ))}
-            </ul>
-          </PlanContent>
-          <PlanFooter className={styles.planFooter}>
-            <LinkAction variant="ghost" unavailable={unavailable}>
-              <ArrowUpRight aria-hidden /> View run
-            </LinkAction>
-          </PlanFooter>
-        </Plan>
+        <RunPlanCard
+          title={view.plan.title}
+          steps={view.plan.steps}
+          runHref={view.runHref}
+          unavailable={unavailable}
+          className={styles.plan}
+        />
         <RunOverview view={view} unavailable={unavailable} />
       </div>
       <MeriComposer

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Clock, FileText, MessageSquare, Sparkle } from "lucide-react";
 import { FormField } from "../../ui/FormField";
 import ui from "../../ui/meri-ui.module.css";
+import rows from "../../ui/detail-row.module.css";
 import styles from "./conversation.module.css";
 
 export type PaletteItem = {
@@ -136,12 +137,12 @@ function PaletteResults({
           onMouseMove={() => onHover(item)}
           onClick={() => onOpen(item)}
         >
-          <span className={styles.rowIcon} aria-hidden>
+          <span className={rows.rowIcon} aria-hidden>
             {icons[item.kind]}
           </span>
-          <span className={styles.rowCopy}>
-            <span className={styles.rowTitle}>{item.title}</span>
-            <span className={styles.rowDetail}>{item.detail}</span>
+          <span className={rows.rowCopy}>
+            <span className={rows.rowTitle}>{item.title}</span>
+            <span className={rows.rowDetail}>{item.detail}</span>
           </span>
           <span className={styles.resultAction} aria-hidden>
             Open

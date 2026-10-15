@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "./conversation.module.css";
+import styles from "./detail-row.module.css";
 
 /** Icon, title and supporting line with an optional trailing control (Figma 3.4 list row). */
 export function DetailRow({
@@ -23,7 +23,7 @@ export function DetailRow({
       <span className={styles.rowIcon} aria-hidden>
         {icon}
       </span>
-      <span className={styles.rowCopy}>
+      <span className={styles.rowCopy} data-slot="detail-row-copy">
         <span className={styles.rowTitle}>
           {state ? <span className="sr-only">{state}: </span> : null}
           {title}

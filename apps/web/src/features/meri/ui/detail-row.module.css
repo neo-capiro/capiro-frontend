@@ -1,0 +1,34 @@
+/* Figma 3.4 list row: icon, title and supporting line with an optional trailing control. */
+.detailRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.rowIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: inline-flex;
+}
+.rowIcon svg {
+  width: 18px;
+  height: 18px;
+}
+.rowCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1.45;
+}
+.rowTitle {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.rowDetail {
+  font-size: 13px;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}

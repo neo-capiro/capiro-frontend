@@ -5,7 +5,7 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { MeriDialog } from "../../ui/MeriDialog";
 import { Notice } from "../../ui/Notice";
 import { StatusPill } from "../../ui/StatusPill";
-import { DetailRow } from "./DetailRow";
+import { DetailRow } from "../../ui/DetailRow";
 import { FormField } from "../../ui/FormField";
 import ui from "../../ui/meri-ui.module.css";
 import styles from "./conversation.module.css";

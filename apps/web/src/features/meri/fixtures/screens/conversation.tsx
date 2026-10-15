@@ -48,9 +48,11 @@ function sampleRun(eventCount: number): WorkspaceView {
 const runTone = (state: WorkspaceView["state"]): StatusTone =>
   state === "running" || state === "completed"
     ? "success"
-    : state === "failed" || state === "cancelled"
+    : state === "failed"
       ? "danger"
-      : state === "waiting-for-approval" || state === "paused"
+      : state === "waiting-for-approval" ||
+          state === "paused" ||
+          state === "cancelled"
         ? "warning"
         : "neutral";
 
@@ -193,6 +195,7 @@ function researchView(): ResearchProgressView {
     },
     steer: "Please prioritize the open restoration request.",
     backgroundHref: fixtureHref("background-runs"),
+    runHref: fixtureHref("run-detail"),
   };
 }
 

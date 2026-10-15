@@ -6,6 +6,7 @@ import { MeriDialog } from "../../ui/MeriDialog";
 import { Notice } from "../../ui/Notice";
 import { FormField } from "../../ui/FormField";
 import ui from "../../ui/meri-ui.module.css";
+import rows from "../../ui/detail-row.module.css";
 import styles from "./conversation.module.css";
 
 export type ManagementView = {
@@ -36,7 +37,7 @@ export function ConversationManagementScreen({
         <div className={styles.dialogSpace} aria-hidden />
       ) : (
         <div className={ui.row}>
-          <span className={styles.rowTitle}>{view.title}</span>
+          <span className={rows.rowTitle}>{view.title}</span>
           <button
             type="button"
             className={ui.outline}

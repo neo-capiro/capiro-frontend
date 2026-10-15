@@ -1,0 +1,41 @@
+/* Figma 3.4 run plan card shared by research progress (02.01) and run detail (02.03). */
+.plan {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.header {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+}
+.content {
+  align-self: stretch;
+}
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.step {
+  list-style: none;
+}
+.footer {
+  display: flex;
+}
+@media (prefers-color-scheme: dark) {
+  .plan {
+    background: linear-gradient(163deg, #242424, #0a0a0a);
+  }
+}
