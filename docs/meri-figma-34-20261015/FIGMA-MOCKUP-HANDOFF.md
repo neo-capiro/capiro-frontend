@@ -171,6 +171,23 @@ In **Meri · Tooling coverage** (`1064:150752`), three IDs are each used twice a
 
 Record the mapping in a note frame next to the section. If you think a different numbering is intended, write it in the note instead of guessing.
 
+### 8. Fix inconsistencies found while building the screens
+
+The frontend build of the existing frames found these problems. Fix them in place; they change copy or add states, not structure.
+
+- **Text overflow.** 05.06 fact cards are fixed at 27px text height, so the proposed text spills over the "Visibility" label. 05.08's heading is fixed at 39px and clips "appendix". 06.03 and 08.02 text areas overflow their 44px inputs.
+- **05.01 sources.** The frame shows 3 of "6 sources"; define the other three.
+- **05.04 filter.** The query "Anduril priorities" with the "Current" filter shows a personal memory and a historical one. Decide what the filter options mean and make the drawn results match.
+- **02.01 step icons.** "Research developments" has a check but says "Working"; "Analyze client signals" has a clock but says "Complete".
+- **References.** The task proposal is TP-2048 in 06.01 and 06.04, the receipt says TASK-2048 and the evidence cites TASK-2047. The sidebar says "Approvals · 2" while 06.01 lists three pending proposals. In 08.04, runs SR-1023 and SR-1040 both output "Meeting brief v1".
+- **Routine state.** 08.03 shows the routine as Active, while 08.04 shows it as both "Paused" and "Automatically disabled". 08.04's inline "Cancel future runs?" card duplicates the overlay with different copy. 08.02 is titled "New routine" with "Create routine" although 08.03 "Edit routine" opens it: add an edit-mode variant. Its "Next runs" copy should follow the chosen frequency.
+- **Browser receipts.** "Research account connected" belongs to the authenticated flow, but 07.03's receipt reads "Public source · Allowed". 07.02 has no connected-account state.
+- **Targets with no frame.** Add destinations, or remove the controls, for: 06.03 entry point; "Request changes" on 06.02 and 06.05 (06.07 is drawn only for TP-2048); "Change scope" on sources screens; "View connector health"; "Start a clean conversation"; "View expanded code activity"; "Use Anduril" in the scope picker; the Versions and Sources tabs on document screens; Source data and References tabs on the spreadsheet; the Activity tab on the web preview; comment Reply and Resolve; "Try again" on a suggestion.
+- **Missing states.** Delete confirmation for a conversation; scope picker and command palette closed and empty states; empty and filtered-out history; failed copy ("Copy unavailable"); keyboard shortcuts content; filter menu contents; submitted and rejected memory-proposal states; loading and error states for memory and sources; pages 2 to 4 of the brief and slides 2 to 6 of the deck.
+- **Mismatched content.** 03.07's source code does not match the 03.06 preview it claims to generate. 03.10 draws its dialog inline; confirm whether it should be a modal.
+- **Dark status colours.** No dark values exist for the success, warning and destructive variables. The frontend uses provisional values (success #93c4a5 on #1d2a22, warning #e2c48e on #2c2618, destructive #eba3a3 on #2e1d1d); define the real ones in the dark mode.
+- **Overlay triggers.** "Task created", "Routine paused", "Research account connected" and "Conversation deleted" are results of actions that stay disabled until the services connect; each needs a defined trigger path in the prototype.
+
 ## What not to do
 
 - Do not redesign existing approved frames.
@@ -185,4 +202,5 @@ Record the mapping in a note frame next to the section. If you think a different
 - Prototype links work from the sidebar and the triggering buttons.
 - Dark and phone variants use the dark variable mode and phone shell from the templates.
 - Item 7 renames are done, and the note frame records them.
+- Every item in 8 is fixed or answered in a note frame.
 - Return a list of every new or renamed frame with its node ID, a screenshot of each, and any open questions. The frontend audit table will be updated from that list.
