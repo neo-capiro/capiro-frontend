@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { LinkedTaskDetail } from "./LinkedTaskDetail";
+import { ObjectivePreparedPlan } from "./ObjectivePreparedPlan";
 import { PlannerClientScope } from "./PlannerClientScope";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -70,11 +71,38 @@ export function PlannerScreen() {
       ? [...knownClients, scope.client]
       : knownClients;
   const [routeView, setRouteView] = useState(() => requestedView);
+  const [planDismissed, setPlanDismissed] = useState(false);
+  const planSelector = params.has("materializationRequestId")
+    ? params.toString()
+    : null;
+  const [previousPlan, setPreviousPlan] = useState(planSelector);
+  if (previousPlan !== planSelector) {
+    setPreviousPlan(planSelector);
+    setPlanDismissed(false);
+    setProjectId(null);
+  }
   if (routeView !== requestedView) {
     setRouteView(requestedView);
     if (sections.some((section) => section.id === requestedView))
       setSection(requestedView!);
   }
+  if (planSelector !== null && !planDismissed)
+    return (
+      <div className={styles.screen}>
+        <PageHeader
+          title="Planner"
+          description="Review the plan generated from your saved Strategy."
+        />
+        <ObjectivePreparedPlan
+          onOpenProject={(id) => {
+            bootstrap.reload();
+            setProjectId(id);
+            setSection("projects");
+            setPlanDismissed(true);
+          }}
+        />
+      </div>
+    );
   return (
     <div className={styles.screen}>
       <PageHeader

@@ -4,6 +4,7 @@ export class ApiError extends Error {
   constructor(
     public readonly status: number,
     message: string,
+    public readonly details?: unknown,
   ) {
     super(message);
     this.name = "ApiError";
@@ -60,6 +61,7 @@ export function createApiClient(
           response.status === 401
             ? "Your session expired. Sign in again."
             : message,
+          data,
         );
       }
       const parsed = schema.safeParse(data);

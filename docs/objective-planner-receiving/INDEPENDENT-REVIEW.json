@@ -1,0 +1,29 @@
+{
+  "verdict": "ACCEPT_SOURCE_ONLY",
+  "reviewer": "Codex independent_fix_review",
+  "base": "9cef177eb294167ea3fbc46289cabbd8c6b8f7c9",
+  "contract": "42d8142092aa49740526667fd1a58c86ec6c1e61",
+  "blockers": [],
+  "resolvedFindings": [
+    "Preserve known immutable output IDs through redaction and reload",
+    "Require exact context outgoing-edge equality",
+    "Match explicit frozen request groups and reject duplicate keys",
+    "Use own-property checks for legal group keys",
+    "Keep stable scalar session dependencies"
+  ],
+  "reviewedFilesSHA256": {
+    "apps/web/src/features/portfolio/objectives/ObjectiveGeneration.tsx": "683a933e776f82a5e7e30711d0bceab2e51e109bed4d46fceae9637c17ac59d9",
+    "apps/web/src/features/modules/planner/ObjectivePreparedPlan.tsx": "cae52ee85a368f2748216d39a547f0866c1325abd49ad7bc9cb6fd8e0449e5a3",
+    "apps/web/src/features/modules/planner/PlannerScreen.tsx": "c83cc3644670993374fd155915032760cc2f994fe5e5e56110a49400367886a5",
+    "apps/web/src/features/portfolio/objectives/ObjectivePlanOutcome.tsx": "c38383e75c9e4fe4af1aaa1b125c1a9d71b6ac96dbea0ead11ef2824bd63a6ff",
+    "apps/web/src/features/portfolio/objectives/objective-plan-flow.ts": "ef0d87647be09db4fe72bcea4b8a5234ed687d2b9c2df5e35bb5dabc637ec87e",
+    "apps/web/src/features/portfolio/objectives/objective-plan-recovery.ts": "5b27974f778c49ec20f582c8f7f6d18dee52a1c6027f841ea33c21e7e673f5bf",
+    "apps/web/src/features/portfolio/objectives/objective-plan-session.ts": "f920957d5928b7f5a37e142823aac673c91da98e310ca4cdbc3af78421ff3bc1",
+    "apps/web/src/shared/capiro/operations/strategy-materialization.ts": "6bce50aec7c5d8dc142c88434d0bf0edf20930b999e22b69d40c6365dc205d0f",
+    "apps/web/src/shared/capiro/operations/strategy-materialization-semantics.ts": "c25bb9d9750605e94ed9d5861c0e7af25514b7172cf1824bbe3eea2a4003a227",
+    "apps/web/src/shared/capiro/operations/strategy-materialization-types.ts": "8f9436e3917520b668bcdca222506543a5fa38e5c65984aebacbf9c6ae7e9b65",
+    "apps/web/src/shared/capiro/operations/strategy-materialization.contract.json": "8e38c42ac1b111be5d0a0fe7f1b156b3d1691974f49b8c683b3df895c895dcfa",
+    "apps/web/tests/objective-plan-wire-fixtures.json": "7a82981fe245a2e0d71b412af1a8a5588051f8e961efe814ce2b78225dcc7799"
+  },
+  "reviewLimits": "Independent source/structure inspection only; author tests not rerun by reviewer; full application/Linux/native qualifications remain separate"
+}

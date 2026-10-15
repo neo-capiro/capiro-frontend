@@ -2810,9 +2810,36 @@
   {
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveGeneration.tsx",
     "kind": "function",
+    "symbol": "useGenerationSession",
+    "fingerprint": "02f4e60e23168fd7091dcd4416dbd2dbec85ccf42133934fa6d86e9582639cae",
+    "reason": "One stable saved-source session composes canonical generation/plan lifecycles and bounded observation; scalar actor/source keys preserve intent across renders.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveGeneration.tsx",
+    "kind": "function",
     "symbol": "ReadyGeneration",
-    "fingerprint": "793fb6da2b6ea2cd2aad36208de0c78453619220dd00467ce1b7b69276634308",
-    "reason": "Independent source review accepted this cohesive saved-Objective generation form: lifecycle/polling, encrypted persistence and receipt rendering have separate owners; the form composes explicit selection, recover and refresh controls without adding authority or transport ownership.",
+    "fingerprint": "83584801acbc240c30f25eb4950aed83c9a7750de41a282a9d2106fc24ca1186",
+    "reason": "One saved-Objective form composes explicit generation then plan progress, recovery and outcomes. Separate session/journal owners retain command and authority semantics.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivePlanOutcome.tsx",
+    "kind": "function",
+    "symbol": "ObjectivePlanOutcome",
+    "fingerprint": "cb02bd363ba56728f80f4ea2ba666584c64a9da4c6c80fe03b5da11061949cc5",
+    "reason": "One plan-outcome presentation shows truthful prepared, issues, partial and uncertain states with explicit recovery controls; it owns no transport or persistence.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/objective-plan-recovery.ts",
+    "kind": "function",
+    "symbol": "createPlanRecovery",
+    "fingerprint": "fbcecad096295582d9a3a5d3e0573c9bbc52d981e09f27d67fdf94ee3190f5bc",
+    "reason": "One canonical encrypted recovery adapter binds source, actor, frozen intent and immutable known outputs under the existing journal and cross-tab command lock; no second storage owner.",
     "reviewedBy": "Codex independent_fix_review",
     "reviewedOn": "2026-10-15"
   }

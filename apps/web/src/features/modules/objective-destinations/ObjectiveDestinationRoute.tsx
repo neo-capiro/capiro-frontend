@@ -123,6 +123,12 @@ export function ObjectiveDestinationRoute({
   children: ReactNode;
 }) {
   const params = useSearchParams();
+  if (params.has("materializationRequestId"))
+    return kind === "planner_task" ? (
+      children
+    ) : (
+      <ObjectiveDestinationUnavailable />
+    );
   if (params.has("generatedJobId") || params.has("strategyVersionId")) {
     if (kind !== "strategy") return <ObjectiveDestinationUnavailable />;
     const selected = readObjectiveLocation(params, [

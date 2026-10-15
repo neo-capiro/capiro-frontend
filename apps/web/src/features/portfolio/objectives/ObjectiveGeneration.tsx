@@ -23,6 +23,10 @@ import {
   type GenerationState,
 } from "./objective-generation-session";
 import { createGenerationRecovery } from "./objective-generation-recovery";
+import { ObjectivePlanFlow } from "./objective-plan-flow";
+import { ObjectivePlanSession } from "./objective-plan-session";
+import { createPlanRecovery } from "./objective-plan-recovery";
+import { ObjectivePlanOutcome } from "./ObjectivePlanOutcome";
 import type { Objective } from "./contracts";
 
 export function ObjectiveGeneration({
@@ -69,30 +73,32 @@ function useGenerationSession({
 }) {
   const api = useApi(),
     cache = useQueryClient();
-  const session = useMemo(
-    () =>
+  const { userId, tenantId } = actor;
+  const { clientId, id, version } = objective;
+  const session = useMemo(() => {
+    const owner = { userId, tenantId };
+    const selected = { clientId, id, version };
+    return new ObjectivePlanFlow(
       new ObjectiveGenerationSession(
         api,
-        objective,
-        createGenerationRecovery(api, cache, actor, objective),
+        selected,
+        createGenerationRecovery(api, cache, owner, selected),
       ),
-    [
-      api,
-      cache,
-      actor.userId,
-      actor.tenantId,
-      objective.clientId,
-      objective.id,
-      objective.version,
-    ],
-  );
+      (job) =>
+        new ObjectivePlanSession(
+          api,
+          job,
+          createPlanRecovery(api, cache, owner, job),
+        ),
+    );
+  }, [api, cache, userId, tenantId, clientId, id, version]);
   const state = useSyncExternalStore(
     session.subscribe,
     session.snapshot,
     session.snapshot,
   );
   const polls = useRef({ jobId: "", count: 0 });
-  const accepted = state.accepted;
+  const accepted = state.generation.accepted;
   const locked = disabled || objective.status !== "ready";
   const pending =
     accepted?.status === "queued" || accepted?.status === "running";
@@ -111,7 +117,15 @@ function useGenerationSession({
     };
   }, [locked, session]);
   useEffect(() => {
-    if (!accepted || !pending || state.busy || state.error || locked) return;
+    if (
+      !accepted ||
+      !pending ||
+      state.generation.busy ||
+      state.generation.error ||
+      locked ||
+      !state.observing
+    )
+      return;
     if (polls.current.jobId !== accepted.jobId)
       polls.current = { jobId: accepted.jobId, count: 0 };
     if (polls.current.count >= 120) return;
@@ -120,15 +134,30 @@ function useGenerationSession({
       void session.refresh();
     }, 2500);
     return () => clearTimeout(timer);
-  }, [accepted, pending, state.busy, state.error, locked, session]);
-  return { session, state, locked };
+  }, [
+    accepted,
+    pending,
+    state.generation.busy,
+    state.generation.error,
+    state.observing,
+    locked,
+    session,
+  ]);
+  return {
+    session,
+    state: state.generation,
+    plan: state.plan,
+    observing: state.observing,
+    locked,
+  };
 }
 function ReadyGeneration(props: {
   objective: Objective;
   disabled: boolean;
   actor: ClientWriter;
 }) {
-  const { session, state, locked } = useGenerationSession(props);
+  const { session, state, plan, observing, locked } =
+    useGenerationSession(props);
   const { objective } = props;
   const selectId = useId();
   const [selectedType, setSelectedType] = useState("");
@@ -162,14 +191,14 @@ function ReadyGeneration(props: {
           type="button"
           disabled={locked || !state.ready || state.busy || !type}
           onClick={() =>
-            void session.submit(type as (typeof strategyTypes)[number])
+            void session.finish(type as (typeof strategyTypes)[number])
           }
         >
           {state.busy
             ? "Submitting request…"
             : request
               ? "Recover same request"
-              : "Generate Strategy"}
+              : "Generate Strategy and prepare plan"}
         </button>
       )}
       {state.error && <p role="alert">{state.error}</p>}
@@ -194,10 +223,13 @@ function ReadyGeneration(props: {
       )}
       <GenerationOutcome
         state={state}
-        session={session}
+        flow={session}
         locked={locked}
         clearType={() => setSelectedType("")}
       />
+      {state.verified && !locked && state.job?.status === "completed" && (
+        <ObjectivePlanOutcome state={plan} flow={session} locked={locked} />
+      )}
       {accepted && (
         <button
           className="button"
@@ -208,18 +240,30 @@ function ReadyGeneration(props: {
           Refresh generation status
         </button>
       )}
+      {accepted && (
+        <button
+          className="button"
+          type="button"
+          disabled={locked}
+          onClick={() =>
+            observing ? session.suspend() : void session.resume()
+          }
+        >
+          {observing ? "Stop watching" : "Resume watching and plan preparation"}
+        </button>
+      )}
     </section>
   );
 }
 
 function GenerationOutcome({
   state,
-  session,
+  flow,
   locked,
   clearType,
 }: {
   state: GenerationState;
-  session: ObjectiveGenerationSession;
+  flow: ObjectivePlanFlow;
   locked: boolean;
   clearType: () => void;
 }) {
@@ -269,17 +313,18 @@ function GenerationOutcome({
               Open generated Strategy receipt
             </Link>
           )}
-          {session.canReset() && (
+          {flow.canReset() && (
             <button
               className="button"
               type="button"
               disabled={locked}
               onClick={() => {
-                void session.reset();
-                clearType();
+                void flow.reset().then(() => {
+                  if (!flow.snapshot().generation.request) clearType();
+                });
               }}
             >
-              Start another Strategy request
+              Start another Strategy and plan request
             </button>
           )}
         </>

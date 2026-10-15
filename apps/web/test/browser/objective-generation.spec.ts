@@ -1,79 +1,13 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import wire from "../../tests/objective-generation-wire-fixtures.json" with { type: "json" };
+import { json, objective, clientId } from "../../tests/browser/fixtures";
+import { boundStrategy, strategyId } from "../../tests/objective-work-fixtures";
+import { testIdentity } from "./fixtures";
 import {
-  objectiveGenerationRequest,
-  type ObjectiveGenerationRequest,
-} from "../../src/shared/capiro/operations/objective-generation";
-import {
-  installFixtures,
-  json,
-  objective,
-  clientId,
-} from "../../tests/browser/fixtures";
-import {
-  binding,
-  boundStrategy,
-  strategyId,
-} from "../../tests/objective-work-fixtures";
-import { operationFixtures, testIdentity } from "./fixtures";
-
-const origin = `/portfolio/${clientId}/objectives?objective=${objective.id}`;
-const ready = { ...objective, status: "ready", readyAt: objective.updatedAt };
-async function fixture(
-  page: Page,
-  options: { lost?: boolean; failed?: boolean } = {},
-) {
-  const unexpected = await installFixtures(page);
-  await page.route(`**/api/backend/core/clients/${clientId}/objectives`, (r) =>
-    json(r, [ready]),
-  );
-  const writes: ObjectiveGenerationRequest[] = [];
-  const job = () => {
-    const value = structuredClone(
-      options.failed
-        ? wire.incompleteContextPoll.body
-        : wire.completedPoll.body,
-    );
-    value.objectiveGeneration.requestId =
-      writes[0]?.requestId ?? wire.request.body.requestId;
-    value.objectiveGeneration.source = { ...binding };
-    if (value.objectiveGeneration.result)
-      value.objectiveGeneration.result.strategyId = strategyId;
-    value.strategyId = value.objectiveGeneration.result ? strategyId : null;
-    return value;
-  };
-  await page.route(
-    "**/api/backend/strategy/strategies/objective-drafts",
-    async (route) => {
-      const body = objectiveGenerationRequest.parse(
-        route.request().postDataJSON(),
-      );
-      writes.push(body);
-      if (options.lost && writes.length === 1) return route.abort("failed");
-      const value = structuredClone(wire.accepted.body);
-      value.objectiveGeneration.requestId = body.requestId;
-      value.objectiveGeneration.source = { ...binding };
-      return json(route, value);
-    },
-  );
-  await page.route("**/api/backend/strategy/strategies/draft-jobs/*", (r) =>
-    json(r, job()),
-  );
-  await operationFixtures(page, {
-    "me.read": testIdentity,
-    "strategies.objectiveDraftJob": () => job(),
-    "strategies.objectiveDestination": boundStrategy,
-  });
-  return { writes, job, unexpected };
-}
-async function generate(page: Page) {
-  await page
-    .getByLabel("Strategy type", { exact: true })
-    .selectOption("appropriations");
-  await page
-    .getByRole("button", { name: "Generate Strategy", exact: true })
-    .click();
-}
+  fixture,
+  generate,
+  origin,
+} from "./objective-generation-browser-fixtures";
 
 test("desktop generation validates the saved receipt and opens exact Strategy/version navigation", async ({
   page,
@@ -81,7 +15,7 @@ test("desktop generation validates the saved receipt and opens exact Strategy/ve
   const f = await fixture(page);
   await page.goto(origin);
   const action = page.getByRole("button", {
-    name: "Generate Strategy",
+    name: "Generate Strategy and prepare plan",
     exact: true,
   });
   await expect(action).toBeDisabled();
@@ -184,7 +118,7 @@ test("incomplete coverage shows its issue and never exposes a saved Strategy lin
     page.getByRole("link", { name: "Open generated Strategy receipt" }),
   ).toHaveCount(0);
   await page
-    .getByRole("button", { name: "Start another Strategy request" })
+    .getByRole("button", { name: "Start another Strategy and plan request" })
     .click();
   await expect(page.getByLabel("Strategy type")).toBeEnabled();
   expect(f.writes).toHaveLength(1);
@@ -226,7 +160,10 @@ test("read-only and unsaved Objective views cannot dispatch generation", async (
     .getByRole("textbox", { name: "Outcome", exact: true })
     .fill("Unsaved synthetic change");
   await expect(
-    page.getByRole("button", { name: "Generate Strategy", exact: true }),
+    page.getByRole("button", {
+      name: "Generate Strategy and prepare plan",
+      exact: true,
+    }),
   ).toBeDisabled();
   expect(f.writes).toEqual([]);
   await page.route("**/api/backend/core/me", (r) =>
@@ -239,7 +176,10 @@ test("read-only and unsaved Objective views cannot dispatch generation", async (
     ),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Generate Strategy", exact: true }),
+    page.getByRole("button", {
+      name: "Generate Strategy and prepare plan",
+      exact: true,
+    }),
   ).toHaveCount(0);
   expect(f.writes).toEqual([]);
 });
