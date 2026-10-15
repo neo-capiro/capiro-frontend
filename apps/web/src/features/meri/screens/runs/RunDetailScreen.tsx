@@ -5,24 +5,19 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { LinkAction } from "../../ui/LinkAction";
 import { DetailRow } from "../../ui/DetailRow";
 import { RunPlanCard, type PlanStep } from "../../ui/RunPlanCard";
+import { StatTiles, type StatTile } from "../../ui/StatTiles";
 import { StopRunControl } from "./StopRunControl";
 import ui from "../../ui/meri-ui.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./runs.module.css";
 
-export type RunMetric = {
-  id: string;
-  label: string;
-  value: string;
-  caption: string;
-};
 /** One timestamped entry of the run's activity timeline. */
 export type RunEvent = { id: string; title: string; detail: string };
 export type RunDetailView = {
   title: string;
   context: string;
   /** Status, checkpoint and usage values come from the projected public run events. */
-  metrics: readonly RunMetric[];
+  metrics: readonly StatTile[];
   plan: { title: string; steps: readonly PlanStep[] };
   activity: readonly RunEvent[];
   toolActivityHref?: string;
@@ -41,15 +36,7 @@ export function RunDetailScreen({
   return (
     <div className={ui.page}>
       <MeriPageHeading title={view.title} description={view.context} />
-      <ul className={styles.metrics} aria-label="Run summary">
-        {view.metrics.map((metric) => (
-          <li key={metric.id} className={styles.metric}>
-            <span className={styles.metricLabel}>{metric.label}</span>
-            <span className={styles.metricValue}>{metric.value}</span>
-            <span className={surfaces.caption}>{metric.caption}</span>
-          </li>
-        ))}
-      </ul>
+      <StatTiles label="Run summary" tiles={view.metrics} variant="metric" />
       <div className={styles.body}>
         <RunPlanCard
           title={view.plan.title}

@@ -294,6 +294,7 @@ export const sourceScreens: readonly FixtureScreen[] = [
           visibleCount: 3,
           initialSourceId: "task",
         }}
+        coverageHref={fixtureHref("sources-coverage")}
         unavailable={fixtureUnavailable}
       />
     ),
@@ -306,6 +307,7 @@ export const sourceScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <DataCoverageScreen
         view={dataCoverage}
+        operationsHref={fixtureHref("source-operations")}
         limitationsHref={fixtureHref("coverage-details")}
         unavailable={fixtureUnavailable}
       />

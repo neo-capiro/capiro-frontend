@@ -8,6 +8,9 @@ import { memoryScreens } from "./memory";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
 import { sourceScreens } from "./sources";
+import { stateScreens } from "./states";
+import { workflowScreens } from "./workflows";
+import { workflowSetupScreens } from "./workflow-setups";
 import type { FixtureScreen, RegisteredFixtureScreen } from "./types";
 
 const inSection = (
@@ -27,6 +30,9 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("routines", routineScreens),
   ...inSection("data-access", sourceScreens),
   ...inSection("memory", memoryScreens),
+  ...inSection("conversations", workflowScreens),
+  ...inSection("conversations", workflowSetupScreens),
+  ...inSection(undefined, stateScreens),
 ];
 
 export const findFixtureScreen = (slug: string) =>

@@ -1,0 +1,70 @@
+/* Figma 3.4 summary tiles: run detail metrics (02.03) and tooling counts (12.02). */
+.tiles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 16px;
+}
+.tile {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.value {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.caption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.tiles[data-variant="metric"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.tiles[data-variant="metric"] .tile {
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.tiles[data-variant="metric"] .label {
+  color: var(--muted-foreground);
+}
+.tiles[data-variant="metric"] .value {
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -1.02px;
+}
+.tiles[data-variant="count"] {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.tiles[data-variant="count"] .tile {
+  gap: 4px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+}
+.tiles[data-variant="count"] .value {
+  order: -1;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.44px;
+}
+@media (max-width: 1100px) {
+  .tiles[data-variant="metric"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .tiles[data-variant="metric"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

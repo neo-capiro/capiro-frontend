@@ -106,25 +106,21 @@ function runDetailView(): RunDetailView {
     context: "Run MR-1042 · Anduril · Owned by Jordan Clayton",
     metrics: [
       {
-        id: "status",
         label: "Status",
         value: stateLabel(run),
         caption: "Step 2 of 4",
       },
       {
-        id: "elapsed",
         label: "Elapsed",
         value: "2m 18s",
         caption: "Started 10:42 AM",
       },
       {
-        id: "usage",
         label: "Usage",
         value: run.usageIds.length ? "$0.42" : "Not recorded",
         caption: "All attempts included",
       },
       {
-        id: "checkpoint",
         label: "Checkpoint",
         value: saved ? "Saved" : "None yet",
         caption: saved

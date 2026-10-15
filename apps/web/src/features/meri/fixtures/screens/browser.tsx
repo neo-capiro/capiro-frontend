@@ -48,6 +48,7 @@ const signIn: BrowserSignInView = {
   access: "Read source pages and download permitted documents",
   cancelHref: fixtureHref("browser-activity"),
   statesHref: fixtureHref("browser-connection-states"),
+  permissionsHref: fixtureHref("browser-permissions"),
 };
 
 const files: BrowserFilesView = {
@@ -80,6 +81,7 @@ const states: readonly BrowserConnectionState[] = [
     detail: "This domain is outside the allowed sites for your workspace.",
     tone: "danger",
     action: "View allowed connections",
+    href: fixtureHref("browser-permissions"),
   },
   {
     title: "Sign-in expired",

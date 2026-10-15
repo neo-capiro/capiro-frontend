@@ -131,6 +131,7 @@ export const memoryScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <MemoryDetailScreen
         view={detail}
+        compareHref={fixtureHref("memory-conflict")}
         correctionHref={fixtureHref("memory-proposal")}
         evidenceHref={fixtureHref("evidence-sources")}
         unavailable={fixtureUnavailable}
