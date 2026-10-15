@@ -140,6 +140,7 @@ export const workflowScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <WorkflowRequestScreen
         view={workflowRequest}
+        backHref={fixtureHref("setup-commitments-audit")}
         unavailable={fixtureUnavailable}
       />
     ),

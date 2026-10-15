@@ -79,6 +79,7 @@ export const relationshipHistory: RelationshipHistoryView = {
     {
       label: "Draft a meeting brief",
       variant: "outline",
+      href: fixtureHref("setup-meeting-prep"),
     },
   ],
 };

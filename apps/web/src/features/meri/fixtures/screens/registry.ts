@@ -8,6 +8,7 @@ import { runScreens } from "./runs";
 import { sourceScreens } from "./sources";
 import { stateScreens } from "./states";
 import type { FixtureScreen } from "./types";
+import { workflowSetupScreens } from "./workflow-setups";
 import { workflowScreens } from "./workflows";
 
 /** Every rendered Figma 3.4 fixture screen; each area owns its own entries. */
@@ -22,6 +23,7 @@ export const fixtureScreens: readonly FixtureScreen[] = [
   ...memoryScreens,
   ...stateScreens,
   ...workflowScreens,
+  ...workflowSetupScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>

@@ -28,6 +28,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Capabilities, federal markets, capture gaps and a sourced roadmap.",
       state: "default",
+      setupHref: fixtureHref("setup-research-company"),
     },
     {
       id: "relationship_brief",
@@ -35,6 +36,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "People, history, decisions and open questions across permitted sources.",
       state: "default",
+      setupHref: fixtureHref("setup-relationship-brief"),
     },
     {
       id: "client_changes",
@@ -42,12 +44,14 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Dated changes this week, with carryover and source gaps separated.",
       state: "default",
+      setupHref: fixtureHref("setup-client-changes"),
     },
     {
       id: "portfolio_changes",
       title: "Portfolio Changes",
       description: "Changes across the full permitted active-client roster.",
       state: "default",
+      setupHref: fixtureHref("setup-portfolio-changes"),
     },
     {
       id: "portfolio_overlap",
@@ -55,6 +59,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Evidence-backed overlap with an external company or domain.",
       state: "default",
+      setupHref: fixtureHref("setup-portfolio-overlap"),
     },
     {
       id: "mail_history",
@@ -62,6 +67,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Correspondence, promises and unresolved threads with cited dates.",
       state: "default",
+      setupHref: fixtureHref("setup-mail-history"),
     },
     {
       id: "meeting_prep",
@@ -69,12 +75,14 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Prior exchanges, decisions, deadlines and a one-page checklist.",
       state: "default",
+      setupHref: fixtureHref("setup-meeting-prep"),
     },
     {
       id: "commitments_audit",
       title: "Commitments & Deliverables",
       description: "Promises, delivery evidence and missing tracked work.",
       state: "default",
+      setupHref: fixtureHref("setup-commitments-audit"),
     },
     {
       id: "funding_opportunity_match",
@@ -82,6 +90,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Active grant and contract candidates with fit evidence and deadlines.",
       state: "default",
+      setupHref: fixtureHref("setup-funding-opportunity-match"),
     },
     {
       id: "pe_deep_dive",
@@ -89,6 +98,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Exact Program Element, fiscal year, budget stage and source exhibits.",
       state: "default",
+      setupHref: fixtureHref("setup-pe-deep-dive"),
     },
     {
       id: "bill_watch",
@@ -96,6 +106,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Tracked legislation with jurisdiction, session and dated status evidence.",
       state: "default",
+      setupHref: fixtureHref("setup-bill-watch"),
     },
     {
       id: "hearing_watch",
@@ -103,6 +114,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Upcoming hearings with committee, jurisdiction and precise time.",
       state: "default",
+      setupHref: fixtureHref("setup-hearing-watch"),
     },
     {
       id: "representation_lookup",
@@ -110,6 +122,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Deterministic representation for a state, district or facility.",
       state: "default",
+      setupHref: fixtureHref("setup-representation-lookup"),
     },
     {
       id: "regulatory_docket_brief",
@@ -117,6 +130,7 @@ export const workflowLibrary: WorkflowLibraryView = {
       description:
         "Exact docket, rule stage and verified comment or action window.",
       state: "default",
+      setupHref: fixtureHref("setup-regulatory-docket-brief"),
     },
   ],
   noResults: {

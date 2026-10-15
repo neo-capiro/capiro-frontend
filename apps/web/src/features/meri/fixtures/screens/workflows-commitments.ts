@@ -51,6 +51,7 @@ export const commitments: CommitmentsView = {
       status: "No record of action",
       tracking: "No tracked task in checked sources",
       evidenceHref: fixtureHref("relationship-history"),
+      draftTaskHref: fixtureHref("task-draft-commitment"),
       needsTask: true,
     },
     {
@@ -71,6 +72,7 @@ export const commitments: CommitmentsView = {
       status: "No record of action",
       tracking: "No tracked task in checked sources",
       evidenceHref: fixtureHref("exact-source-record"),
+      draftTaskHref: fixtureHref("task-draft-commitment"),
       needsTask: true,
     },
   ],
@@ -259,6 +261,7 @@ export const workflowRequest: WorkflowRequestView = {
     "Exact workflow revision",
     "Required evidence and output checks",
   ],
+  editInputsHref: fixtureHref("setup-commitments-audit"),
   cancelHref: fixtureHref("workflow-library"),
   sourceAccessHref: fixtureHref("source-operations"),
 };
