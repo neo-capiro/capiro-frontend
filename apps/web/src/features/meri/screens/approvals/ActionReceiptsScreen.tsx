@@ -2,10 +2,10 @@
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { FieldTable, type FieldRow } from "../../ui/FieldTable";
 import { LinkAction } from "../../ui/LinkAction";
-import { OutcomeToast } from "../../ui/OutcomeToast";
 import { StatusPill } from "../../ui/StatusPill";
 import ui from "../../ui/meri-ui.module.css";
 import panel from "../../ui/panel.module.css";
+import surfaces from "../../ui/surfaces.module.css";
 import { ProposalConfirmation } from "./ProposalConfirmation";
 
 export type ActionReceipt = {
@@ -18,11 +18,7 @@ export type ActionReceipt = {
   actionLabel: string;
   actionHref?: string;
 };
-export type ActionReceiptsView = {
-  receipts: readonly ActionReceipt[];
-  /** Overlay · Task created: the recorded outcome that led to this page. */
-  created: { title: string; detail: string; status: string };
-};
+export type ActionReceiptsView = { receipts: readonly ActionReceipt[] };
 
 function ReceiptCard({
   receipt,
@@ -41,7 +37,7 @@ function ReceiptCard({
       tone={primary ? "card" : "muted"}
     >
       <StatusPill tone="success">{receipt.status}</StatusPill>
-      <h2 className={primary ? panel.title : panel.subtitle}>
+      <h2 className={primary ? panel.title : surfaces.largeTitle}>
         {receipt.title}
       </h2>
       {receipt.fields && (
@@ -85,18 +81,6 @@ export function ActionReceiptsScreen({
           unavailable={unavailable}
         />
       ))}
-      <OutcomeToast
-        title={view.created.title}
-        detail={view.created.detail}
-        status={view.created.status}
-        tone="success"
-        success
-        action={
-          <LinkAction variant="primary" unavailable={unavailable}>
-            Back to conversation
-          </LinkAction>
-        }
-      />
     </div>
   );
 }

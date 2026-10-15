@@ -16,6 +16,9 @@ export type ApprovalRow = {
 };
 export type ApprovalReview = { label: string; href?: string };
 export type ApprovalsView = {
+  /** Pending count and any just-recorded decision, as the service reports them. */
+  description: string;
+  draftHref?: string;
   pending: readonly ApprovalRow[];
   history: readonly ApprovalRow[];
   reviews: readonly ApprovalReview[];
@@ -42,7 +45,7 @@ const views = [
   { id: "history", label: "History" },
 ] as const;
 
-/** 06.01 Approval center: decisions assigned to the current user. */
+/** 06.01 Approval center and 06.01A–C after a recorded decision: proposals assigned to the current user. */
 export function ApprovalsScreen({
   view,
   unavailable,
@@ -53,10 +56,16 @@ export function ApprovalsScreen({
   const [tab, setTab] = useState<"pending" | "history">("pending");
   return (
     <div className={styles.page}>
-      <MeriPageHeading
-        title="Approvals"
-        description="Decisions assigned to you · Actions are rechecked before execution"
-      />
+      <MeriPageHeading title="Approvals" description={view.description} />
+      <div className={styles.row}>
+        <LinkAction
+          variant="outline"
+          href={view.draftHref}
+          unavailable={unavailable}
+        >
+          Draft a client task
+        </LinkAction>
+      </div>
       <SegmentedTabs
         label="Approval list"
         options={views}
