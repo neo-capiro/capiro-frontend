@@ -171,90 +171,6 @@
 .workflowField[data-state="unresolved"] input {
   border-color: var(--warning-text);
 }
-.coverage {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.coverageRow,
-.commitment {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-}
-.coverageDomain,
-.coverageResult,
-.coverageDetail,
-.commitmentPromise,
-.commitmentOwner,
-.commitmentStatus {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.coverageDomain {
-  width: 220px;
-  flex-shrink: 0;
-}
-.coverageDomain strong,
-.commitmentPromise strong {
-  font-size: 14px;
-  line-height: 1.45;
-  font-weight: 500;
-  letter-spacing: -0.07px;
-}
-.coverageResult,
-.commitmentOwner {
-  width: 150px;
-  flex-shrink: 0;
-}
-.coverageResult strong,
-.commitmentStatus strong {
-  font-size: 12px;
-  line-height: 1.2;
-  font-weight: 500;
-}
-.coverageDetail,
-.commitmentPromise {
-  flex: 1;
-}
-.coverageDetail p,
-.commitmentOwner p {
-  font-size: 13px;
-  line-height: 1.45;
-  letter-spacing: -0.039px;
-}
-.coverageRow span,
-.commitment span {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--muted-foreground);
-}
-.commitment {
-  gap: 12px;
-  padding: 16px;
-}
-.commitmentStatus {
-  width: 250px;
-  flex-shrink: 0;
-}
-.commitmentActions {
-  width: 160px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
 .requiredSources,
 .receive {
   width: 100%;
@@ -285,19 +201,18 @@
   letter-spacing: -0.039px;
   color: var(--muted-foreground);
 }
-@media (max-width: 860px) {
-  .coverageRow,
-  .commitment {
-    flex-wrap: wrap;
+/* Figma "Meri/Mobile workflow tile": the starter action drops below the copy. */
+@media (max-width: 680px) {
+  .tile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
-  .coverageDomain,
-  .coverageResult,
-  .commitmentOwner,
-  .commitmentStatus {
-    width: auto;
-    flex: 1 1 200px;
-  }
-  .coverageDetail {
-    flex-basis: 100%;
+}
+/* Figma "Workflow library · Dark": tiles and the search field use the dark surface gradient. */
+@media (prefers-color-scheme: dark) {
+  .tile,
+  .workflowField input {
+    background: linear-gradient(175deg, #242424, #0a0a0a);
   }
 }

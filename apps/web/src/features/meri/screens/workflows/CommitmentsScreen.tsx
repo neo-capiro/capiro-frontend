@@ -4,6 +4,7 @@ import { CommitmentRecord, type CommitmentView } from "./CommitmentRecord";
 import { StatTiles, type StatTile } from "../../ui/StatTiles";
 import { ToolingPage } from "./ToolingPage";
 import type { ActionSpec } from "./types";
+import records from "./records.module.css";
 import tooling from "./tooling.module.css";
 
 export type CommitmentsView = {
@@ -38,7 +39,7 @@ export function CommitmentsScreen({
         variant="count"
       />
       <Notice title={view.coverage.title}>{view.coverage.detail}</Notice>
-      <ul className={tooling.coverage} aria-label="Evidence-backed promises">
+      <ul className={records.coverage} aria-label="Evidence-backed promises">
         {view.commitments.map((record) => (
           <CommitmentRecord
             key={record.promise}

@@ -67,4 +67,36 @@
   .tiles[data-variant="metric"] {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* Phone count tiles read as one muted status line (Figma 12.02 phone "4 promises · …"). */
+  .tiles[data-variant="count"] {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 100%;
+    gap: 0;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--muted-foreground);
+  }
+  .tiles[data-variant="count"] .tile {
+    flex-direction: row;
+    gap: 4px;
+    padding: 0;
+    background: none;
+  }
+  .tiles[data-variant="count"] .tile + .tile::before {
+    content: "\00a0·" / "";
+    order: -2;
+  }
+  .tiles[data-variant="count"] :is(.label, .value) {
+    font: inherit;
+    letter-spacing: 0;
+    text-transform: lowercase;
+  }
+  .tiles[data-variant="count"] .caption {
+    display: none;
+  }
 }

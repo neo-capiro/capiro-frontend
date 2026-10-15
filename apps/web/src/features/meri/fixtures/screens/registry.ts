@@ -11,6 +11,7 @@ import { sourceScreens } from "./sources";
 import { stateScreens } from "./states";
 import { workflowScreens } from "./workflows";
 import { workflowSetupScreens } from "./workflow-setups";
+import { workflowResponsiveScreens } from "./workflow-responsive";
 import type { FixtureScreen, RegisteredFixtureScreen } from "./types";
 
 const inSection = (
@@ -32,6 +33,7 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("memory", memoryScreens),
   ...inSection("conversations", workflowScreens),
   ...inSection("conversations", workflowSetupScreens),
+  ...inSection("conversations", workflowResponsiveScreens),
   ...inSection(undefined, stateScreens),
 ];
 
