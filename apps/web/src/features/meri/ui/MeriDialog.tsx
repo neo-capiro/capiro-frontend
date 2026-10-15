@@ -28,7 +28,8 @@ export function MeriDialog({
   description: string;
   /** Figma anchors dialogs either at the content top or below the page heading. */
   placement?: "top" | "below-heading";
-  width?: "default" | "wide";
+  /** compact 560px, default 720px, wide 800px, extra-wide 960px (Figma frame widths). */
+  width?: "compact" | "default" | "wide" | "extra-wide";
   /** Renders the description as the smaller keyboard-hint line. */
   hint?: boolean;
   /** Receives focus on close when the dialog was not opened from a control (open on load). */

@@ -5,7 +5,12 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { SegmentedTabs } from "../../ui/SegmentedTabs";
 import { StatusPill } from "../../ui/StatusPill";
 import ui from "../../ui/meri-ui.module.css";
-import { ArtifactActionBar } from "./ArtifactActionBar";
+import {
+  ArtifactFlowActions,
+  ArtifactFlowSheets,
+  useArtifactSheet,
+} from "../files/ArtifactFlows";
+import type { ArtifactFlowView } from "../files/types";
 import { DetailList } from "./DetailList";
 import {
   cellReference,
@@ -60,11 +65,15 @@ function ComparisonChart({ chart }: { chart: SpreadsheetView["chart"] }) {
 /** 03.04 Spreadsheet preview: formula bar, read-only grid, chart and workbook checks. */
 export function SpreadsheetPreviewScreen({
   view,
+  flow,
   unavailable,
 }: {
   view: SpreadsheetView;
+  /** Revise, file and download sheets for this workbook. */
+  flow: ArtifactFlowView;
   unavailable: string;
 }) {
+  const sheets = useArtifactSheet();
   const [cell, setCell] = useState(view.initialCell);
   const [tab, setTab] = useState<Tab>("summary");
   const current = view.rows[cell.row]?.[cell.col];
@@ -74,7 +83,7 @@ export function SpreadsheetPreviewScreen({
         title={view.heading.title}
         description={view.heading.description}
       />
-      <ArtifactActionBar unavailable={unavailable} />
+      <ArtifactFlowActions flow={flow} onOpen={sheets.open} />
       <div
         className={styles.formulaBar}
         role="status"
@@ -114,8 +123,8 @@ export function SpreadsheetPreviewScreen({
             <button
               type="button"
               className={ui.primary}
-              disabled
-              title={unavailable}
+              aria-haspopup="dialog"
+              onClick={() => sheets.open("revise")}
             >
               <Sparkle aria-hidden /> Revise workbook
             </button>
@@ -128,6 +137,12 @@ export function SpreadsheetPreviewScreen({
           variant="references"
         />
       )}
+      <ArtifactFlowSheets
+        flow={flow}
+        sheet={sheets.sheet}
+        onClose={sheets.close}
+        unavailable={unavailable}
+      />
     </div>
   );
 }

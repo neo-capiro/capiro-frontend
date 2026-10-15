@@ -32,7 +32,7 @@ export function StopRunControl({
         onOpenChange={setOpen}
         title="Stop remaining work?"
         description="Verified files and completed receipts are preserved."
-        width="default"
+        width="compact"
       >
         <div className={styles.dialogActions}>
           <button

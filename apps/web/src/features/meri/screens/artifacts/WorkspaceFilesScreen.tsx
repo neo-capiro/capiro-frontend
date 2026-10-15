@@ -17,6 +17,8 @@ export type WorkspaceFilesView = {
   groups: readonly WorkspaceFileGroup[];
   initialFileId: string;
   versionsHref?: string;
+  uploadHref?: string;
+  attachHref?: string;
 };
 
 const columns: readonly DataColumn<WorkspaceFileRow>[] = [
@@ -50,18 +52,24 @@ function WorkspaceTreePanel({
         selectedId={selectedId}
         onSelect={onSelect}
       />
-      <button type="button" className={ui.outline} disabled title={unavailable}>
+      <LinkAction
+        variant="outline"
+        href={view.attachHref}
+        unavailable={unavailable}
+      >
         <Plus aria-hidden /> Attach an existing file
-      </button>
+      </LinkAction>
     </section>
   );
 }
 
 function SelectedFileActions({
   versionsHref,
+  fileHref,
   unavailable,
 }: {
   versionsHref?: string | undefined;
+  fileHref?: string | undefined;
   unavailable: string;
 }) {
   return (
@@ -73,9 +81,9 @@ function SelectedFileActions({
       >
         Versions
       </LinkAction>
-      <button type="button" className={ui.primary} disabled title={unavailable}>
+      <LinkAction variant="primary" href={fileHref} unavailable={unavailable}>
         File to client
-      </button>
+      </LinkAction>
       <button type="button" className={ui.ghost} disabled title={unavailable}>
         Rename
       </button>
@@ -108,14 +116,13 @@ export function WorkspaceFilesScreen({
         title={view.heading.title}
         description={view.heading.description}
         action={
-          <button
-            type="button"
-            className={ui.primary}
-            disabled
-            title={unavailable}
+          <LinkAction
+            variant="primary"
+            href={view.uploadHref}
+            unavailable={unavailable}
           >
             <Plus aria-hidden /> Upload
-          </button>
+          </LinkAction>
         }
       />
       <div className={ui.row}>
@@ -159,6 +166,7 @@ export function WorkspaceFilesScreen({
           ) : null}
           <SelectedFileActions
             versionsHref={view.versionsHref}
+            fileHref={selected?.fileHref}
             unavailable={unavailable}
           />
         </div>

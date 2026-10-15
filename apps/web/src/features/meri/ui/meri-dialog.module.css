@@ -25,6 +25,14 @@
 .dialog[data-width="wide"] {
   width: min(800px, calc(100vw - 292px));
 }
+/* Figma 3.4 compact overlays (Stop remaining work?, revise and file sheets: 350-560px). */
+.dialog[data-width="compact"] {
+  width: min(560px, calc(100vw - 292px));
+}
+/* Figma 3.4 04.02 file picker (960px). */
+.dialog[data-width="extra-wide"] {
+  width: min(960px, calc(100vw - 292px));
+}
 .dialog[data-placement="top"] {
   top: 93px;
   max-height: calc(100dvh - 116px);
@@ -79,7 +87,7 @@
 }
 @media (max-width: 680px) {
   .dialog,
-  .dialog[data-width="wide"],
+  .dialog[data-width],
   .dialog[data-placement="top"] {
     left: 16px;
     right: 16px;

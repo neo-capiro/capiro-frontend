@@ -6,7 +6,10 @@ import { PresentationPreviewScreen } from "../../screens/artifacts/PresentationP
 import { ReviseArtifactScreen } from "../../screens/artifacts/ReviseArtifactScreen";
 import { SpreadsheetPreviewScreen } from "../../screens/artifacts/SpreadsheetPreviewScreen";
 import { VersionsScreen } from "../../screens/artifacts/VersionsScreen";
-import { WorkspaceFilesScreen } from "../../screens/artifacts/WorkspaceFilesScreen";
+import {
+  WorkspaceFilesScreen,
+  type WorkspaceFilesView,
+} from "../../screens/artifacts/WorkspaceFilesScreen";
 import {
   pdfPreview,
   versionRows,
@@ -14,8 +17,92 @@ import {
   workingDraft,
 } from "./artifacts-documents";
 import { generatedWeb, presentation, spreadsheet } from "./artifacts-previews";
+import {
+  clientUpdateFlow,
+  fundingAnalysisFlow,
+  signalSummaryFlow,
+} from "./files-flows";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
+
+/** 03.01 workspace contents, with entry points to the 04 · Files flows. */
+const workspaceFiles: WorkspaceFilesView = {
+  heading: {
+    title: "Files",
+    description: "Anduril meeting brief · 7 files in this workspace",
+  },
+  files: [
+    {
+      id: "brief",
+      name: "meeting-brief-v2.docx",
+      detail: "DOCX · 4 pages · 184 KB · v2",
+      version: "v2",
+      status: "Verified",
+      openHref: fixtureHref("word-document"),
+      fileHref: fixtureHref("file-to-client"),
+    },
+    {
+      id: "funding",
+      name: "funding-analysis.xlsx",
+      detail: "XLSX · 1 sheet · 38 KB · v1",
+      version: "v1",
+      status: "Verified",
+      openHref: fixtureHref("spreadsheet-preview"),
+    },
+    {
+      id: "update",
+      name: "client-update.pptx",
+      detail: "PPTX · 6 slides · 2.1 MB · v1",
+      version: "v1",
+      status: "Verified",
+      openHref: fixtureHref("presentation-preview"),
+    },
+    {
+      id: "commitments",
+      name: "commitments.csv",
+      detail: "CSV · 2 rows · Verified · 4 KB",
+      version: "Working",
+      status: "Verified",
+      openHref: fixtureHref("analysis-outputs"),
+    },
+    {
+      id: "notes",
+      name: "meeting-notes.pdf",
+      detail: "PDF · Input · 2 pages · 96 KB",
+    },
+    {
+      id: "funding-update",
+      name: "funding-update.pdf",
+      detail: "PDF · Input · 6 pages · 410 KB",
+    },
+    {
+      id: "index",
+      name: "source-index.json",
+      detail: "JSON · Working · 12 KB",
+    },
+  ],
+  groups: [
+    {
+      id: "inputs",
+      label: "Inputs",
+      fileIds: ["notes", "funding-update"],
+    },
+    {
+      id: "working",
+      label: "Working",
+      fileIds: ["index", "commitments"],
+    },
+    {
+      id: "published",
+      label: "Published",
+      fileIds: ["brief", "funding", "update"],
+    },
+  ],
+  initialFileId: "brief",
+  versionsHref: fixtureHref("artifact-versions"),
+  uploadHref: fixtureHref("attach-files"),
+  attachHref: fixtureHref("attach-capiro-file"),
+};
 
 /** Figma 3.4 03 · Artifacts frames and the document working draft, with synthetic data. */
 export const artifactScreens: readonly FixtureScreen[] = [
@@ -27,80 +114,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <WorkspaceFilesScreen
         unavailable={fixtureUnavailable}
-        view={{
-          heading: {
-            title: "Files",
-            description: "Anduril meeting brief · 7 files in this workspace",
-          },
-          files: [
-            {
-              id: "brief",
-              name: "meeting-brief-v2.docx",
-              detail: "DOCX · 4 pages · 184 KB · v2",
-              version: "v2",
-              status: "Verified",
-              openHref: fixtureHref("word-document"),
-            },
-            {
-              id: "funding",
-              name: "funding-analysis.xlsx",
-              detail: "XLSX · 1 sheet · 38 KB · v1",
-              version: "v1",
-              status: "Verified",
-              openHref: fixtureHref("spreadsheet-preview"),
-            },
-            {
-              id: "update",
-              name: "client-update.pptx",
-              detail: "PPTX · 6 slides · 2.1 MB · v1",
-              version: "v1",
-              status: "Verified",
-              openHref: fixtureHref("presentation-preview"),
-            },
-            {
-              id: "commitments",
-              name: "commitments.csv",
-              detail: "CSV · 2 rows · Verified · 4 KB",
-              version: "Working",
-              status: "Verified",
-              openHref: fixtureHref("analysis-outputs"),
-            },
-            {
-              id: "notes",
-              name: "meeting-notes.pdf",
-              detail: "PDF · Input · 2 pages · 96 KB",
-            },
-            {
-              id: "funding-update",
-              name: "funding-update.pdf",
-              detail: "PDF · Input · 6 pages · 410 KB",
-            },
-            {
-              id: "index",
-              name: "source-index.json",
-              detail: "JSON · Working · 12 KB",
-            },
-          ],
-          groups: [
-            {
-              id: "inputs",
-              label: "Inputs",
-              fileIds: ["notes", "funding-update"],
-            },
-            {
-              id: "working",
-              label: "Working",
-              fileIds: ["index", "commitments"],
-            },
-            {
-              id: "published",
-              label: "Published",
-              fileIds: ["brief", "funding", "update"],
-            },
-          ],
-          initialFileId: "brief",
-          versionsHref: fixtureHref("artifact-versions"),
-        }}
+        view={workspaceFiles}
       />
     ),
   },
@@ -115,7 +129,9 @@ export const artifactScreens: readonly FixtureScreen[] = [
         editable={false}
         unavailable={fixtureUnavailable}
         links={{
+          download: fixtureHref("download-artifact"),
           revise: fixtureHref("revise-artifact"),
+          file: fixtureHref("file-to-client"),
           edit: fixtureHref("document-working-draft"),
           versions: fixtureHref("artifact-versions"),
         }}
@@ -161,6 +177,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
       <SpreadsheetPreviewScreen
         unavailable={fixtureUnavailable}
         view={spreadsheet}
+        flow={fundingAnalysisFlow}
       />
     ),
   },
@@ -173,6 +190,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
       <PresentationPreviewScreen
         unavailable={fixtureUnavailable}
         view={presentation}
+        flow={clientUpdateFlow}
       />
     ),
   },
@@ -184,6 +202,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <GeneratedWebScreen
         view={generatedWeb}
+        flow={signalSummaryFlow}
         initialTab="preview"
         unavailable={fixtureUnavailable}
       />
@@ -197,6 +216,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
     Screen: () => (
       <GeneratedWebScreen
         view={generatedWeb}
+        flow={signalSummaryFlow}
         initialTab="code"
         unavailable={fixtureUnavailable}
       />
