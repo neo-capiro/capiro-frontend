@@ -26,6 +26,7 @@ import { CapiroBoundary } from "../../src/shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../src/shared/capiro/queries";
 import { ModuleShell } from "../../src/shared/shell/ModuleShell";
 import { SettingsScreen } from "../../src/features/settings";
+import { MeriPreferencesPanel } from "../../src/features/meri/screens/settings/MeriPreferencesPanel";
 import { ModuleScreen } from "../../src/features/modules/ModuleScreen";
 import { ModuleHub } from "../../src/features/modules/hub/ModuleHub";
 import type { ModuleSlug } from "../../src/shared/shell/module-catalog";
@@ -181,7 +182,10 @@ function RoutedApp() {
             ) : path === "/__test/strategy-proposal-refresh" ? (
               <ProposalRefreshProbe />
             ) : isSettings ? (
-              <SettingsScreen section={path.split("/")[2]} />
+              <SettingsScreen
+                section={path.split("/")[2]}
+                meriPreferences={<MeriPreferencesPanel />}
+              />
             ) : path.startsWith("/modules") ? (
               module
             ) : (

@@ -4,12 +4,14 @@ import { artifactScreens } from "./artifacts";
 import { artifactPageScreens } from "./artifacts-pages";
 import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
+import { darkScreens } from "./dark";
 import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
 import { memoryProposalScreens } from "./memory-proposals";
 import { responsiveScreens } from "./responsive";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
+import { settingsScreens } from "./settings";
 import { evidenceScreens, sourceScreens } from "./sources";
 import { stateScreens } from "./states";
 import { workflowScreens } from "./workflows";
@@ -41,7 +43,9 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("conversations", workflowSetupScreens),
   ...inSection("conversations", workflowResponsiveScreens),
   ...inSection(undefined, stateScreens),
+  ...inSection("preferences", settingsScreens),
   ...responsiveScreens,
+  ...darkScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>

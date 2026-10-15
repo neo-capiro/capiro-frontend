@@ -24,6 +24,11 @@
   letter-spacing: -0.039px;
   color: var(--muted-foreground);
 }
+/* Specific status labels size to their text (Figma 11.06 and 11.07 Meri/Status). */
+.statusSlot > span {
+  height: auto;
+  min-width: 0;
+}
 /* Phone: one full-width card per row. */
 @media (max-width: 680px) {
   .grid {

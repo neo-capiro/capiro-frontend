@@ -171,13 +171,13 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 08.04A | Routine paused | 3024:31351 | Built: synthetic fixture `/meri/fixture/routine-paused` | Schedule owner, create/update/cancel and history exist as source. |
 | 08.04B | Routine automatically disabled | 3024:31580 | Built: synthetic fixture `/meri/fixture/routine-disabled` | Schedule owner, create/update/cancel and history exist as source. |
 | 08.04C | Routine cancelled | 3024:31809 | Built: synthetic fixture `/meri/fixture/routine-cancelled` | Schedule owner, create/update/cancel and history exist as source. |
-| 09.01 | Personal preferences | 3022:29587 | Not built (added 15 Oct) | Follows parent flow |
-| 09.02 | Connector accounts and permissions | 3022:30009 | Not built (added 15 Oct) | Follows parent flow |
-| 09.03 | Usage and workspace limits | 3022:30398 | Not built (added 15 Oct) | Follows parent flow |
-| 09.04 | Skills and artifact templates | 3022:30883 | Not built (added 15 Oct) | Follows parent flow |
-| 09.05 | Notifications and account menu | 3022:31261 | Not built (added 15 Oct) | Follows parent flow |
-| 09.06 | Privacy and deletion | 3022:31622 | Not built (added 15 Oct) | Follows parent flow |
-| 09.07 | Help, shortcuts and feedback | 3022:31991 | Not built (added 15 Oct) | Follows parent flow |
+| 09.01 | Personal preferences | 3022:29587 | Built: synthetic fixture `/meri/fixture/personal-preferences` | Follows parent flow |
+| 09.02 | Connector accounts and permissions | 3022:30009 | Built: synthetic fixture `/meri/fixture/connector-accounts` | Follows parent flow |
+| 09.03 | Usage and workspace limits | 3022:30398 | Built: synthetic fixture `/meri/fixture/usage-limits` | Follows parent flow |
+| 09.04 | Skills and artifact templates | 3022:30883 | Built: synthetic fixture `/meri/fixture/skills-templates` | Follows parent flow |
+| 09.05 | Notifications and account menu | 3022:31261 | Built: synthetic fixture `/meri/fixture/notifications-account` | Follows parent flow |
+| 09.06 | Privacy and deletion | 3022:31622 | Built: synthetic fixture `/meri/fixture/privacy-deletion` | Follows parent flow |
+| 09.07 | Help, shortcuts and feedback | 3022:31991 | Built: synthetic fixture `/meri/fixture/help-shortcuts` | Follows parent flow |
 | 10.19 | Phone routines | 3032:30166 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.20 | Phone approval center | 3032:30415 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.21 | Phone memory recall | 3032:30630 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
@@ -187,17 +187,17 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 10.25 | Tablet approval center | 3032:31529 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.26 | Tablet routines | 3032:31859 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.27 | Tablet workspace files | 3032:32204 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.28 | Dark run detail | 3032:32570 | Not built (added 15 Oct) | Follows parent flow |
-| 10.29 | Dark approval center | 3032:33006 | Not built (added 15 Oct) | Follows parent flow |
-| 10.30 | Dark workspace files | 3032:33402 | Not built (added 15 Oct) | Follows parent flow |
-| 10.31 | Dark memory recall | 3033:31453 | Not built (added 15 Oct) | Follows parent flow |
-| 10.32 | Dark routines | 3033:31843 | Not built (added 15 Oct) | Follows parent flow |
-| 10.33 | Phone personal preferences | 3033:32256 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.34 | Tablet personal preferences | 3033:32515 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
+| 10.28 | Dark run detail | 3032:32570 | Built: synthetic fixture `/meri/fixture/dark-run-detail` | Follows parent flow |
+| 10.29 | Dark approval center | 3032:33006 | Built: synthetic fixture `/meri/fixture/dark-approval-center` | Follows parent flow |
+| 10.30 | Dark workspace files | 3032:33402 | Built: synthetic fixture `/meri/fixture/dark-workspace-files` | Follows parent flow |
+| 10.31 | Dark memory recall | 3033:31453 | Built: synthetic fixture `/meri/fixture/dark-memory-recall` | Follows parent flow |
+| 10.32 | Dark routines | 3033:31843 | Built: synthetic fixture `/meri/fixture/dark-routines` | Follows parent flow |
+| 10.33 | Phone personal preferences | 3033:32256 | Built: synthetic fixture `/meri/fixture/phone-personal-preferences` | Follows parent flow |
+| 10.34 | Tablet personal preferences | 3033:32515 | Built: synthetic fixture `/meri/fixture/tablet-personal-preferences` | Follows parent flow |
 | 10.35 | Phone artifact sharing | 3033:32900 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.36 | Tablet artifact sharing | 3033:33089 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 11.06 | Retention and deletion states | 3019:27976 | Not built (added 15 Oct) | Follows parent flow |
-| 11.07 | Session and availability states | 3019:28267 | Not built (added 15 Oct) | Follows parent flow |
+| 11.06 | Retention and deletion states | 3019:27976 | Built: synthetic fixture `/meri/fixture/retention-states` | Follows parent flow |
+| 11.07 | Session and availability states | 3019:28267 | Built: synthetic fixture `/meri/fixture/session-states` | Follows parent flow |
 | 13.21 | Conversation client filter menu | 3034:37582 | Built: synthetic fixture `/meri/fixture/conversation-client-filter` | Follows parent flow |
 | 13.22 | Conversation status filter menu | 3034:37596 | Built: synthetic fixture `/meri/fixture/conversation-status-filter` | Follows parent flow |
 | 13.23 | Copy unavailable | 3034:38179 | Not built (added 15 Oct) | Follows parent flow |
@@ -223,18 +223,18 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Download ready slides |  | 1064:150315 | Absent | Follows parent flow |
 | Overlay · Download Signal summary |  | 1064:150319 | Absent | Follows parent flow |
 | Overlay · Download ready html |  | 1064:150325 | Absent | Follows parent flow |
-| Overlay · Account menu |  | 3022:32545 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Clear personal defaults? |  | 3022:32491 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Connection disconnected |  | 3022:32411 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Account menu |  | 3022:32545 | Built: synthetic fixture `/meri/fixture/account-menu` | Follows parent flow |
+| Overlay · Clear personal defaults? |  | 3022:32491 | Built: synthetic fixture `/meri/fixture/clear-personal-defaults` | Follows parent flow |
+| Overlay · Connection disconnected |  | 3022:32411 | Built: synthetic fixture `/meri/fixture/connection-disconnected` | Follows parent flow |
 | Overlay · Delete conversation from history? |  | 3035:33134 | Built inside `/meri/fixture/conversation-history` (Delete); no route of its own | Follows parent flow |
 | Overlay · Delete this conversation? |  | 3022:32527 | Built inside `/meri/fixture/conversation-management` (Delete conversation); no route of its own | Follows parent flow |
-| Overlay · Deletion requested |  | 3022:32459 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Disconnect the research portal? |  | 3022:32509 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Export ready |  | 3022:32443 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Preferences saved |  | 3022:32395 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Problem report sent |  | 3022:32427 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Signed out |  | 3022:32475 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Updates panel |  | 3022:32579 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Deletion requested |  | 3022:32459 | Built: synthetic fixture `/meri/fixture/deletion-requested` | Follows parent flow |
+| Overlay · Disconnect the research portal? |  | 3022:32509 | Built: synthetic fixture `/meri/fixture/disconnect-research-portal` | Follows parent flow |
+| Overlay · Export ready |  | 3022:32443 | Built: synthetic fixture `/meri/fixture/export-ready` | Follows parent flow |
+| Overlay · Preferences saved |  | 3022:32395 | Built: synthetic fixture `/meri/fixture/preferences-saved` | Follows parent flow |
+| Overlay · Problem report sent |  | 3022:32427 | Built: synthetic fixture `/meri/fixture/problem-report-sent` | Follows parent flow |
+| Overlay · Signed out |  | 3022:32475 | Built: synthetic fixture `/meri/fixture/signed-out` | Follows parent flow |
+| Overlay · Updates panel |  | 3022:32579 | Built: synthetic fixture `/meri/fixture/updates-panel` | Follows parent flow |
 | Document overlay · blocks |  | 1064:150601 | Absent | Follows parent flow |
 | Document overlay · revision |  | 1064:150603 | Absent | Follows parent flow |
 | Document overlay · mobileRevision |  | 1064:150605 | Built: synthetic fixture `/meri/fixture/document-mobile-revision` | Follows parent flow |

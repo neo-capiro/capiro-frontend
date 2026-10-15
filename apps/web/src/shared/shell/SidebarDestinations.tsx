@@ -16,7 +16,8 @@ export type MeriSection =
   | "approvals"
   | "memory"
   | "routines"
-  | "data-access";
+  | "data-access"
+  | "preferences";
 
 /** Canonical Meri workspace destinations, shared by the sidebar and the phone menu. */
 export const destinations = [
@@ -76,6 +77,10 @@ export const destinationHref = (
     : "href" in item
       ? item.href
       : undefined;
+
+/** Preferences opens the Figma 09.01 synthetic Settings page in fixture mode. */
+export const preferencesHref = (fixture: boolean) =>
+  fixture ? "/meri/fixture/personal-preferences" : "/settings/preferences";
 
 /** Meri workspace destinations; unavailable services stay explained and disabled. */
 export function SidebarDestinations({

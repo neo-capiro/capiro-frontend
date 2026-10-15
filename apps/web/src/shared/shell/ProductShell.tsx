@@ -26,7 +26,7 @@ export function ProductShell({
   return (
     <>
       <div className={styles.target} data-design-target={designTarget}>
-        <Header assetSet={assetSet} />
+        <Header assetSet={assetSet} fixture={fixture} />
         <MeriMobileNavigation
           assetSet={assetSet}
           fixture={fixture}
