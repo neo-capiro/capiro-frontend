@@ -1,0 +1,16 @@
+date_utc: 2026-10-15T20:07:07Z
+git rev-parse HEAD HEAD^{tree}:
+c7e060007f5cd5a9b786442d0cc168a73c5565a8
+e9905e0acf209cbd319166437c06ca1e112fa3de
+git status --porcelain --ignored=no (nothing between the markers means clean):
+--- begin status
+--- end status
+node -v: v24.21.0
+npm -v: 11.19.0  (package.json packageManager: npm@11.9.0)
+uname -m: x86_64
+uname -sr: Linux 6.18.44-fc-v114
+ldd --version | head -1: ldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39
+nproc: 4
+sha256sum package-lock.json: 6dc039be028c302b58965532b05d3dd5aa0ca1ed8bb6a90be716eb6325d24d13  package-lock.json
+node_modules/.package-lock.json sha256: 227db11e9d739863a18bda4246cb4d756179f2c0ecb5acde928946d04d07922c
+node_modules: real directories (cp -a) copied from an existing install of the same package-lock.json; workspace links are relative (node_modules/@capiro/ui -> ../../packages/ui)

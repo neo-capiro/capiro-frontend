@@ -1,0 +1,8 @@
+$ npm run pins:check --workspace @capiro/qualification-elements
+# start_utc 2026-10-15T20:09:47Z
+
+> @capiro/qualification-elements@0.0.0 pins:check
+> node generate-pins.mjs --check
+
+{"check":true,"bytes":15370}
+# end_utc 2026-10-15T20:09:48Z exit=0

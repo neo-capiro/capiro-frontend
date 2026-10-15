@@ -1,0 +1,27 @@
+$ npm run typecheck
+# start_utc 2026-10-15T20:07:08Z
+
+> capiro-frontend@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @capiro/meri-client@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/qualification-newsletter@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/ui@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+# end_utc 2026-10-15T20:09:30Z exit=0

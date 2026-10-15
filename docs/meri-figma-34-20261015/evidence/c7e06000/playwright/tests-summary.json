@@ -1,0 +1,1532 @@
+{
+  "stats": {
+    "startTime": "2026-10-15T20:12:56.104Z",
+    "duration": 462128.00200000004,
+    "expected": 95,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "acceptance-meri-icons.spec.ts",
+      "line": 10,
+      "title": "Meri explicit fixture navigation assets retain visible icon treatment in light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3166,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-icons.spec.ts",
+      "line": 10,
+      "title": "Meri explicit fixture navigation assets retain visible icon treatment in dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2865,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "Meri authored dark fixture keeps the shared header light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6997,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "Meri Files theme follows preference through scoped navigation and history at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5440,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 159,
+      "title": "Meri fixture Files theme follows preference through scoped navigation and history at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7121,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "Meri authored dark fixture keeps the shared header light at 390px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7663,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "Meri Files theme follows preference through scoped navigation and history at 390px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5413,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-meri-theme.spec.ts",
+      "line": 159,
+      "title": "Meri fixture Files theme follows preference through scoped navigation and history at 390px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6328,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast home 1440px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4065,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast docx 1440px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4045,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast xlsx 1440px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4005,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast unavailable 1440px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3894,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast modules 1440px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4634,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast home 1440px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3884,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast docx 1440px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4144,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast xlsx 1440px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4140,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast unavailable 1440px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3691,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast modules 1440px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5290,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast home 390px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3835,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast docx 390px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3600,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast xlsx 390px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2981,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast unavailable 390px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3193,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast modules 390px light",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3785,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast home 390px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3323,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast docx 390px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3046,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast xlsx 390px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3225,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast unavailable 390px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3098,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "acceptance-shared-incompletes.spec.ts",
+      "line": 21,
+      "title": "Shared incomplete contrast modules 390px dark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3970,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "line": 100,
+      "title": "375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5279,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-action-host-mobile-navigation.spec.ts",
+      "line": 121,
+      "title": "1440px Meri retains one visible sidebar destination per route without duplicate mobile links",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3656,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 14,
+      "title": "Meri Tool activity disclosure is keyboard operable in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5976,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 59,
+      "title": "Meri specialist Task details expand and collapse by keyboard in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5678,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 97,
+      "title": "Meri run Plan card renders its Queue steps and keyboard link in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5649,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 14,
+      "title": "Meri Tool activity disclosure is keyboard operable in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6050,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 59,
+      "title": "Meri specialist Task details expand and collapse by keyboard in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5541,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-disclosures.spec.ts",
+      "line": 97,
+      "title": "Meri run Plan card renders its Queue steps and keyboard link in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5666,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 14,
+      "title": "Meri proposal Confirmation and receipts expose named regions and keyboard links in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 9816,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 70,
+      "title": "Meri Checkpoint restore renders the checkpoint and its keyboard fork in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5481,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 110,
+      "title": "Meri cited Sources select evidence by keyboard in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5758,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 157,
+      "title": "Meri Artifact cards name their file and actions in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8929,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 197,
+      "title": "Meri draft Attachments are removable by keyboard in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5559,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 225,
+      "title": "Meri WebPreview controls are named and keyboard operable in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7078,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 14,
+      "title": "Meri proposal Confirmation and receipts expose named regions and keyboard links in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 8893,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 70,
+      "title": "Meri Checkpoint restore renders the checkpoint and its keyboard fork in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5032,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 110,
+      "title": "Meri cited Sources select evidence by keyboard in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5303,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 157,
+      "title": "Meri Artifact cards name their file and actions in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7533,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 197,
+      "title": "Meri draft Attachments are removable by keyboard in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6048,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-adopted-elements.spec.ts",
+      "line": 225,
+      "title": "Meri WebPreview controls are named and keyboard operable in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7133,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-file-tree-keyboard.spec.ts",
+      "line": 31,
+      "title": "Meri workspace FileTree implements the keyboard tree pattern in light at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 10599,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-file-tree-keyboard.spec.ts",
+      "line": 31,
+      "title": "Meri workspace FileTree implements the keyboard tree pattern in dark at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 10950,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 14,
+      "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4390,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 14,
+      "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4234,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 104,
+      "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4244,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-navigation.spec.ts",
+      "line": 104,
+      "title": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4246,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5274,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5159,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 6070,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 5127,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3698,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3716,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 159,
+      "title": "Files repeated create intent is refused locally without a second delivery",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3266,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 175,
+      "title": "Files incorrect download hash hides known version actions and releases no object URL",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3660,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "line": 208,
+      "title": "Files requires a selected client without bootstrapping from browser hints",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2507,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings personal renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3205,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings contact-info renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2898,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings branding renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2746,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings team renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2635,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings integrations renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2788,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings memory renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3016,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings meri-preferences renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2713,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings billing renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2752,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings ai-usage renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3375,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings profiles renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4247,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 4159,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-tenants renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3416,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-customers renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3651,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3131,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2804,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-personnel renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2960,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3188,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-matches renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3659,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 33,
+      "title": "Settings hq-analyst renders compatible responses without runtime failures",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3372,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 59,
+      "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 7461,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "settings-scenes.spec.ts",
+      "line": 95,
+      "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3872,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 1440px conversations footer exposes its scoped notice within contentinfo",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3231,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 1440px actions footer exposes its scoped notice within contentinfo",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3182,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 390px conversations footer exposes its scoped notice within contentinfo",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2736,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 23,
+      "title": "Meri semantic correction: 390px actions footer exposes its scoped notice within contentinfo",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2989,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 68,
+      "title": "Meri positive control: phone suggestion remains reachable by keyboard and creates only a local draft",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3624,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 90,
+      "title": "Meri semantic correction: named suggestions group preserves three Start controls without becoming a focus stop",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2496,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility-interaction.spec.ts",
+      "line": 112,
+      "title": "Modules semantic correction: fixture warning remains visible in a named complementary landmark",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 2549,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "meri home retains full default axe checks at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3139,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "modules home retains full default axe checks at 1440px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3787,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "meri home retains full default axe checks at 390px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3411,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "modules home retains full default axe checks at 390px",
+      "project": "",
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMs": 3998,
+          "errors": []
+        }
+      ]
+    }
+  ]
+}

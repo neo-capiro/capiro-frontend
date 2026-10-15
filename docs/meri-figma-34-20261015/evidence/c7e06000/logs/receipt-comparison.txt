@@ -1,0 +1,33 @@
+metafile inputs identical (2807 entries): True
+metafile outputs identical after reducing keys to basename: True
+historical output keys: ['../../../../..<scratch>/esbuild-tool/ssr-final-78b1c126/fixture.cjs.LEGAL.txt', '../../../../..<scratch>/esbuild-tool/ssr-final-78b1c126/fixture.cjs']
+new output keys: ['../../../../..<evidence-scratch>/ssr-c7e06000/fixture.cjs.LEGAL.txt', '../../../../..<evidence-scratch>/ssr-c7e06000/fixture.cjs']
+receipt.schema: identical
+receipt.scope: identical
+receipt.node: identical
+receipt.tool: identical
+receipt.entry: identical
+receipt.sources: DIFFERS
+receipt.inputs: identical
+receipt.dependencies: identical
+receipt.outputs: DIFFERS
+receipt.externalImports: identical
+receipt.discovery: DIFFERS
+receipt.build: DIFFERS
+receipt.resolverMetadataRecords: identical
+source records: 67 67 paths identical: True
+  source differs: packages/qualification-elements/README.md 2620 6924b865eb2fdbfd3535f8460fa251fc2a388437d7ddbf9574bfa663250d8215 -> 2722 9be79d39c593fe343ee4c47e1b2001c5ad12e47fab9f737d1dc9d4a96e7229c3
+  source differs: packages/qualification-elements/promotion-pins.json 15370 a8974bafee3b66a8e89967d05b0e7666f88664d73c2513cb4f4e57991bffbbb0 -> 15370 b4755848e29666b79dc1eacf0590815c151d6c7a44a05e33f3a7aa7b2b87c806
+  discovery.argv: ["<scratch>/esbuild-tool/root/linux-x64/esbuild", "--bundle", "--platform=node", "--target=node24", "--format=cjs", "--js -> ["<scratch>/esbuild-tool/root/linux-x64/esbuild", "--bundle", "--platform=node", "--target=node24", "--format=cjs", "--js
+  discovery.cwd: "<original-checkout>/packages/qualification-elements" -> "<worktree>/packages/qualification-elements"
+  discovery.startUtc: "2026-10-15T19:31:43.673Z" -> "2026-10-15T20:09:58.300Z"
+  discovery.endUtc: "2026-10-15T19:31:44.787Z" -> "2026-10-15T20:10:00.679Z"
+  discovery.durationMs: 1112.784745 -> 2376.605936
+  build.argv: ["<scratch>/esbuild-tool/root/linux-x64/esbuild", "--bundle", "--platform=node", "--target=node24", "--format=cjs", "--js -> ["<scratch>/esbuild-tool/root/linux-x64/esbuild", "--bundle", "--platform=node", "--target=node24", "--format=cjs", "--js
+  build.cwd: "<original-checkout>/packages/qualification-elements" -> "<worktree>/packages/qualification-elements"
+  build.startUtc: "2026-10-15T19:31:45.267Z" -> "2026-10-15T20:10:01.352Z"
+  build.endUtc: "2026-10-15T19:31:46.404Z" -> "2026-10-15T20:10:03.369Z"
+  build.durationMs: 1137.503726 -> 2017.166162
+  output fixture.cjs identical
+  output fixture.cjs.LEGAL.txt identical
+  output metafile.json DIFFERS 884d352fe926fcab -> 5c3a4a608f4b2412

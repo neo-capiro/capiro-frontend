@@ -1,0 +1,15 @@
+# Offline verifySSRReceipt from bundle copies only: fresh workspace = git archive <commit> packages/ui packages/qualification-elements; node_modules = extract of dependencies/bound-dependency-files.tar.gz only (no npm install).
+# script: offline-verify.sh (reproduced in README)
+# start_utc 2026-10-15T20:21:47Z
+## 1. new receipt at PIN c7e06000
+commit=c7e060007f5cd5a9b786442d0cc168a73c5565a8 receipt_sha256=4ad91e1597290a64daeb03e560dfcc0a52534cef3dfda3938cfd52ae1caacf5e workspace_files=67 dependency_files=3155
+{"verifySSRReceipt":"passed","node":{"version":"v24.21.0","platform":"linux","arch":"x64"},"sources":67,"inputs":2806,"dependencies":3155,"outputs":["fixture.cjs:45f3177103cd430d39098b444edf50f1d0fc489eaa7f0ed1277d02f627350c48","fixture.cjs.LEGAL.txt:3b408a8916297642fec7bfc9f090491d53ebbc7accdbd28a10e89db897bc49b0","metafile.json:5c3a4a608f4b24127a8aea6ad68927afa46309109603c4906cbfc89ae08bc770"]}
+exit=0
+## 2. historical receipt at 78b1c126
+commit=78b1c12691541a32aa82039d2518b91a5e780ce5 receipt_sha256=1d7b867567ce988514762f39dec396432f101e5bbcf562fa3aa8be28138b31e6 workspace_files=67 dependency_files=3155
+{"verifySSRReceipt":"passed","node":{"version":"v24.21.0","platform":"linux","arch":"x64"},"sources":67,"inputs":2806,"dependencies":3155,"outputs":["fixture.cjs:45f3177103cd430d39098b444edf50f1d0fc489eaa7f0ed1277d02f627350c48","fixture.cjs.LEGAL.txt:3b408a8916297642fec7bfc9f090491d53ebbc7accdbd28a10e89db897bc49b0","metafile.json:884d352fe926fcabb383fcdeded612022a7214fae1494c3e1c0d6d493d29eabd"]}
+exit=0
+## 3. cross-pin negatives
+historical receipt against PIN workspace: refused as expected: ERR_ASSERTION "package source pins"
+new receipt against 78b1c126 workspace: refused as expected: ERR_ASSERTION "package source pins"
+# end_utc 2026-10-15T20:21:51Z

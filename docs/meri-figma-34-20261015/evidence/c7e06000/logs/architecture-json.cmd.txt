@@ -1,0 +1,2 @@
+$ node scripts/architecture.mjs > architecture.json 2> architecture.stderr.txt
+exit=0

@@ -1,0 +1,63 @@
+$ node --test apps/web/test/action-workflow.test.mjs apps/web/test/assets.test.mjs apps/web/test/cited-answer-assets.test.mjs apps/web/test/meri-fixture-screens.test.mjs apps/web/test/module-assets.test.mjs apps/web/test/preview-backend-boundary.test.mjs apps/web/test/run-workspace.test.mjs apps/web/test/settings-access.test.mjs apps/web/test/suggestions.test.mjs
+# start_utc 2026-10-15T20:05:41Z
+✔ query, selection and edited review prepare an immutable pending proposal without execution (4.496181ms)
+✔ an edit invalidates a reviewed draft and preparation cannot use its former handle (4.436661ms)
+✔ held draft locks the exact submitted edits and synchronous duplicate requests (0.785979ms)
+✔ execution refusal stays pending; later deliberate execution and replay use the identical handle (2.52444ms)
+✔ held execution admits only one click until its response settles (0.799138ms)
+✔ a newer unknown execution retires the former approval refusal and fences repetition (2.180056ms)
+✔ a newer result-withheld execution retires the former approval refusal and fences repetition (1.065224ms)
+✔ a newer stored-withheld execution retires the former approval refusal and fences repetition (0.644625ms)
+✔ a newer indeterminate execution retires the former approval refusal and fences repetition (1.020985ms)
+✔ a newer thrown execution retires the former approval refusal and fences repetition (0.740146ms)
+✔ unknown does not schedule or admit a repeat and never claims successful execution (1.742944ms)
+✔ result-withheld does not schedule or admit a repeat and never claims successful execution (0.384272ms)
+✔ stored-withheld does not schedule or admit a repeat and never claims successful execution (1.036244ms)
+✔ not-stored does not schedule or admit a repeat and never claims successful execution (0.292249ms)
+✔ read-unavailable does not schedule or admit a repeat and never claims successful execution (0.372826ms)
+✔ invalid-response does not schedule or admit a repeat and never claims successful execution (0.216363ms)
+✔ not-dispatched does not schedule or admit a repeat and never claims successful execution (1.353256ms)
+✔ acknowledged indeterminate result and thrown transport error both withhold success and further requests (0.690152ms)
+✔ lost current authority removes all former recommendations, editable inputs and proposal details (0.426891ms)
+✔ a denied current reread removes prior recommendation cards instead of treating their cache as current (1.179183ms)
+✔ actor lifetime disposal aborts local observation and rejects a late former proposal (0.4511ms)
+✔ tenant lifetime disposal aborts local observation and rejects a late former proposal (0.415166ms)
+✔ session lifetime disposal aborts local observation and rejects a late former proposal (0.209898ms)
+✔ client lifetime disposal aborts local observation and rejects a late former proposal (0.264634ms)
+✔ reattachment never resurrects a request from before disposal (0.378245ms)
+✔ failed observed receipt is displayed as failure, never converted into task creation success (0.325296ms)
+✔ all nineteen exact design assets are local, nonempty, hash-bound and retain intrinsic SVG dimensions (10.979404ms)
+✔ the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes (4.527338ms)
+✔ Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions (1.191149ms)
+✔ no application source retains temporary Figma asset URLs or screenshot implementation imagery (0.640141ms)
+✔ all22 cited-answer Figma assets retain their exact local bytes and intrinsic geometry (13.499793ms)
+✔ cited-answer source and styling use local assets without screenshot implementation imagery (0.620164ms)
+✔ every registered fixture screen is a distinct audited Figma 3.4 frame (13.980687ms)
+✔ each area file is registered and fixture links only target registered screens (33.927108ms)
+✔ every decision-outcome approval count names a registered fixture screen (0.980472ms)
+✔ Modules shared assets retain exact native export bytes and intrinsic SVG roots (9.610584ms)
+✔ every API handler applies preview admission before any route work (43.077068ms)
+✔ preview policy stays in server entry points with no request-derived configuration (1749.558067ms)
+✔ all eight canonical run states display explicit labels without inferred completion (53.27606ms)
+✔ fixture events all validate with the public browser contract; unknown scenarios fail (19.108276ms)
+✔ selected run and attempt isolate colliding message and tool request IDs (8.478211ms)
+✔ message fragments concatenate in accepted order; sparse references stay exact (9.894462ms)
+✔ unmatched completion never invents a tool name, arguments or business success (15.204718ms)
+✔ canonical safe error rendering never exposes raw text or prototype-looking codes (2.059751ms)
+✔ canonical projection owns replay and sequence repair before presentation (5.56221ms)
+✔ fixture canonical admission rejects cross-view and immutable-event conflicts (1.519131ms)
+✔ presentation does not mutate accepted events or include unsupported metadata (10.062421ms)
+✔ Settings presentation never exposes HQ or workspace management to customer standard roles (1.235742ms)
+✔ Billing mirrors both the user admin role and independent billing-admin grant (0.315051ms)
+✔ Hosted account navigation rejects unsafe schemes, misleading hosts and credentials (0.641387ms)
+✔ Bulk intelligence review excludes award-bearing, PAC, unknown, resolved and weak mappings (0.260716ms)
+✔ six local suggestions produce distinct editable draft text without executable authority (2.481414ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2817.347969
+# end_utc 2026-10-15T20:05:44Z exit=0

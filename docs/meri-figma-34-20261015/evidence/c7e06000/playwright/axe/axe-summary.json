@@ -1,0 +1,941 @@
+{
+  "source": "playwright report.json attachments named axe-full-default-results (base64 body decoded, bytes unchanged)",
+  "audits": 36,
+  "totalViolations": 0,
+  "audits_with_incomplete": 28,
+  "rows": [
+    {
+      "file": "01-acceptance-meri-theme-meri-authored-dark-fixture-keeps-the-shared-header-light-at-1440px.json",
+      "sha256": "4e2e7c95915a72c1aa9842256418398c868698597d399ffd86c1c924d91128c9",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "Meri authored dark fixture keeps the shared header light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/home?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 30,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "02-acceptance-meri-theme-meri-files-theme-follows-preference-through-scoped-navigation-and-hi.json",
+      "sha256": "34426ce9669c3960dad1c5358c895935ce60e25d2443436323ebaca583b00c22",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "Meri Files theme follows preference through scoped navigation and history at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 9,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 36,
+      "inapplicable": 54
+    },
+    {
+      "file": "03-acceptance-meri-theme-meri-fixture-files-theme-follows-preference-through-scoped-navigatio.json",
+      "sha256": "ed685d3af7d0c3fc814f71c9890dc68d84b7823eae5f5f0ed020c7a6787ade51",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 159,
+      "title": "Meri fixture Files theme follows preference through scoped navigation and history at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/workspace-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 17,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 50,
+      "inapplicable": 40
+    },
+    {
+      "file": "04-acceptance-meri-theme-meri-authored-dark-fixture-keeps-the-shared-header-light-at-390px.json",
+      "sha256": "6922f3e0709bde1efe339c77f4ea0003998f399b25180a15567f1651d784a9fa",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 28,
+      "title": "Meri authored dark fixture keeps the shared header light at 390px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/home?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 41,
+      "inapplicable": 49
+    },
+    {
+      "file": "05-acceptance-meri-theme-meri-files-theme-follows-preference-through-scoped-navigation-and-hi.json",
+      "sha256": "bdd6f5c02018853910025a80515dd6944b5aecb1b3641fd221549d24d67f1c9a",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 80,
+      "title": "Meri Files theme follows preference through scoped navigation and history at 390px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 3,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 36,
+      "inapplicable": 54
+    },
+    {
+      "file": "06-acceptance-meri-theme-meri-fixture-files-theme-follows-preference-through-scoped-navigatio.json",
+      "sha256": "b0462b7dc2ebfc46eb3d36ef0519f563b24eae290cf37d7af860fa24534b7e0c",
+      "spec": "acceptance-meri-theme.spec.ts",
+      "line": 159,
+      "title": "Meri fixture Files theme follows preference through scoped navigation and history at 390px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/workspace-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 50,
+      "inapplicable": 40
+    },
+    {
+      "file": "07-meri-adopted-disclosures-meri-tool-activity-disclosure-is-keyboard-operable-in-light-at-14.json",
+      "sha256": "14d97840ddb3d52f79fa17e38b823f5a1e9c9c10f70ede22b13c1276fe6c9d19",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 14,
+      "title": "Meri Tool activity disclosure is keyboard operable in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/tool-activity?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 43,
+      "inapplicable": 47
+    },
+    {
+      "file": "08-meri-adopted-disclosures-meri-specialist-task-details-expand-and-collapse-by-keyboard-in-l.json",
+      "sha256": "26799e1ef9a997bb863e5456976de149911af4b67180595748fa2fa3408c2f48",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 59,
+      "title": "Meri specialist Task details expand and collapse by keyboard in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/specialist-activity?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "09-meri-adopted-disclosures-meri-run-plan-card-renders-its-queue-steps-and-keyboard-link-in-l.json",
+      "sha256": "92b428092406e8ce59cbfd9d12c92d8edb7e3a92312d145233e22e6ee0259031",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 97,
+      "title": "Meri run Plan card renders its Queue steps and keyboard link in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/research-progress?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "10-meri-adopted-disclosures-meri-tool-activity-disclosure-is-keyboard-operable-in-dark-at-144.json",
+      "sha256": "37331bacbea3a63aa20d2e019f0980bd3aecfd6803d6c9cecef3c5ca8f7b9381",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 14,
+      "title": "Meri Tool activity disclosure is keyboard operable in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/tool-activity?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 20,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 43,
+      "inapplicable": 47
+    },
+    {
+      "file": "11-meri-adopted-disclosures-meri-specialist-task-details-expand-and-collapse-by-keyboard-in-d.json",
+      "sha256": "b19b2e436a40b1d0dc82a75727c01372b85232b426bec14a99114dacb342cc83",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 59,
+      "title": "Meri specialist Task details expand and collapse by keyboard in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/specialist-activity?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 32,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "12-meri-adopted-disclosures-meri-run-plan-card-renders-its-queue-steps-and-keyboard-link-in-d.json",
+      "sha256": "d708b8eacf51da8d6fb3dfb5e08d778592ed6f881035047eec9ac35936531904",
+      "spec": "meri-adopted-disclosures.spec.ts",
+      "line": 97,
+      "title": "Meri run Plan card renders its Queue steps and keyboard link in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/research-progress?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 31,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "13-meri-adopted-elements-meri-proposal-confirmation-and-receipts-expose-named-regions-and-key.json",
+      "sha256": "8b393b5b0d24bf4fe440589c769a4de233e716f97be7496454739a774e7f7cc6",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 14,
+      "title": "Meri proposal Confirmation and receipts expose named regions and keyboard links in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/review-task-action?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "14-meri-adopted-elements-meri-checkpoint-restore-renders-the-checkpoint-and-its-keyboard-fork.json",
+      "sha256": "36c5ce54107acb429651a60c73bd66dfc559fe9759bacbd97fa301dfd0f8b805",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 70,
+      "title": "Meri Checkpoint restore renders the checkpoint and its keyboard fork in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/checkpoint-restore?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "15-meri-adopted-elements-meri-cited-sources-select-evidence-by-keyboard-in-light-at-1440px.json",
+      "sha256": "5c5804c8b58eb737b5e4e0eaec0c2e2210cb5053a62fb8f6ade8d7a72ae95021",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 110,
+      "title": "Meri cited Sources select evidence by keyboard in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/evidence-sources?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "16-meri-adopted-elements-meri-artifact-cards-name-their-file-and-actions-in-light-at-1440px.json",
+      "sha256": "8816f789716b615c2547a8fe3d4c6e7921aaa8dcb7fe05747bc4eb4e684f65af",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 157,
+      "title": "Meri Artifact cards name their file and actions in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/analysis-outputs?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "17-meri-adopted-elements-meri-draft-attachments-are-removable-by-keyboard-in-light-at-1440px.json",
+      "sha256": "580c58e3c12d7c440c0b924f63573a11ca217ba4f1bd4a98c6d203c6d951af3f",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 197,
+      "title": "Meri draft Attachments are removable by keyboard in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/attach-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "18-meri-adopted-elements-meri-webpreview-controls-are-named-and-keyboard-operable-in-light-at.json",
+      "sha256": "c4e20d189a37dccc0009323287082ba1671fad872b04c305f92c9f4170e3e843",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 225,
+      "title": "Meri WebPreview controls are named and keyboard operable in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/generated-web-preview?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 3,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        },
+        {
+          "id": "frame-tested",
+          "impact": "critical",
+          "nodes": 1,
+          "messages": [
+            "The iframe still has to be tested with axe-core"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 47
+    },
+    {
+      "file": "19-meri-adopted-elements-meri-proposal-confirmation-and-receipts-expose-named-regions-and-key.json",
+      "sha256": "5419575a98591a1783762d4e2f2e64632e1d821ad82b12536061b0666cc012d2",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 14,
+      "title": "Meri proposal Confirmation and receipts expose named regions and keyboard links in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/review-task-action?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "20-meri-adopted-elements-meri-checkpoint-restore-renders-the-checkpoint-and-its-keyboard-fork.json",
+      "sha256": "da6c65054299ae939477dc1e8475c180ccacb78e6aa7b10b0d2618f66e4f2561",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 70,
+      "title": "Meri Checkpoint restore renders the checkpoint and its keyboard fork in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/checkpoint-restore?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "21-meri-adopted-elements-meri-cited-sources-select-evidence-by-keyboard-in-dark-at-1440px.json",
+      "sha256": "67cae954a9a1789812c209e9dba17244c75c07669cb9d1d332e85c3d7ff42957",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 110,
+      "title": "Meri cited Sources select evidence by keyboard in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/evidence-sources?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "22-meri-adopted-elements-meri-artifact-cards-name-their-file-and-actions-in-dark-at-1440px.json",
+      "sha256": "64f3e98643797e3bfff9634dd4e4e8009c09aa962179703bbed39c7323ca2d0b",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 157,
+      "title": "Meri Artifact cards name their file and actions in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/analysis-outputs?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 14,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 48
+    },
+    {
+      "file": "23-meri-adopted-elements-meri-draft-attachments-are-removable-by-keyboard-in-dark-at-1440px.json",
+      "sha256": "31a99a555e4db99842914fa692d9672d5e0e7e72c1a9226d322f3ac20557e99e",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 197,
+      "title": "Meri draft Attachments are removable by keyboard in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/attach-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "24-meri-adopted-elements-meri-webpreview-controls-are-named-and-keyboard-operable-in-dark-at-.json",
+      "sha256": "1cbce14ac74843b11f025da5c353f3c1eca1f5947f32650ce197a4eb5e31e1be",
+      "spec": "meri-adopted-elements.spec.ts",
+      "line": 225,
+      "title": "Meri WebPreview controls are named and keyboard operable in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/generated-web-preview?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 22,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        },
+        {
+          "id": "frame-tested",
+          "impact": "critical",
+          "nodes": 1,
+          "messages": [
+            "The iframe still has to be tested with axe-core"
+          ]
+        }
+      ],
+      "passes": 42,
+      "inapplicable": 47
+    },
+    {
+      "file": "25-meri-file-tree-keyboard-meri-workspace-filetree-implements-the-keyboard-tree-pattern-in-li.json",
+      "sha256": "b774af977efeefb5cead09187b051c2fee5e3a8d6b88b1a589911f2dca49702f",
+      "spec": "meri-file-tree-keyboard.spec.ts",
+      "line": 31,
+      "title": "Meri workspace FileTree implements the keyboard tree pattern in light at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/workspace-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 50,
+      "inapplicable": 40
+    },
+    {
+      "file": "26-meri-file-tree-keyboard-meri-workspace-filetree-implements-the-keyboard-tree-pattern-in-da.json",
+      "sha256": "e5fd70abbdb2af68bde047622632798c6d87b9e8daa21312054db879c4f7afbc",
+      "spec": "meri-file-tree-keyboard.spec.ts",
+      "line": 31,
+      "title": "Meri workspace FileTree implements the keyboard tree pattern in dark at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/fixture/dark-workspace-files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        }
+      ],
+      "passes": 50,
+      "inapplicable": 40
+    },
+    {
+      "file": "27-meri-files-workflow-files-docx-1440px-creates-revises-inspects-and-verifies-synthetic-byte.json",
+      "sha256": "8d40086f75ae3ab9fad87db33287936c1172f6137550e8765808d411ec9c8ccb",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 43,
+      "inapplicable": 47
+    },
+    {
+      "file": "28-meri-files-workflow-files-docx-390px-creates-revises-inspects-and-verifies-synthetic-bytes.json",
+      "sha256": "2575090073aca44a7a64d666739f7b71bf79f2b39723bd37c6a9fe2c6afa4e6e",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 43,
+      "inapplicable": 47
+    },
+    {
+      "file": "29-meri-files-workflow-files-xlsx-1440px-creates-revises-inspects-and-verifies-synthetic-byte.json",
+      "sha256": "7af304e61808cb56e0cf7406f9b629d28e8604ded106b12185cb2f4a4029b38b",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "30-meri-files-workflow-files-xlsx-390px-creates-revises-inspects-and-verifies-synthetic-bytes.json",
+      "sha256": "8d88770cf3662d696a0b3e7635667d8514cd3a6acc1a79a8f713c93efa0e0bed",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 19,
+      "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&document-operation=create_excel",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 44,
+      "inapplicable": 46
+    },
+    {
+      "file": "31-meri-files-workflow-files-disabled-1440px-makes-no-session-document-calls-and-retains-trut.json",
+      "sha256": "7788cc0ece58bee99238262162817e874072cd2c617ed0f2140b5f400da08f0c",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 36,
+      "inapplicable": 54
+    },
+    {
+      "file": "32-meri-files-workflow-files-disabled-390px-makes-no-session-document-calls-and-retains-truth.json",
+      "sha256": "7dc3baec28d3e321dbbc8d6b0c813a1d16273a82382de9899076d494955baebd",
+      "spec": "meri-files-workflow.spec.ts",
+      "line": 133,
+      "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri/files?clientId=abcdef00-0000-4000-8000-000000000009&documents-disabled=1",
+      "timestamp": "2026-10-12T20:00:00.150Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 36,
+      "inapplicable": 54
+    },
+    {
+      "file": "33-shared-home-accessibility-meri-home-retains-full-default-axe-checks-at-1440px.json",
+      "sha256": "f1a579f91002d4bcf952f28f9121f2bc467b9ceee6690abfde815c1dfba9ba9b",
+      "spec": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "meri home retains full default axe checks at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri",
+      "timestamp": "2026-10-15T20:20:25.415Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 37,
+      "inapplicable": 53
+    },
+    {
+      "file": "34-shared-home-accessibility-modules-home-retains-full-default-axe-checks-at-1440px.json",
+      "sha256": "da377829fbbe792872ffd6872da1719405ff2242bc11dc26791acbdd0f00e45e",
+      "spec": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "modules home retains full default axe checks at 1440px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/modules",
+      "timestamp": "2026-10-15T20:20:29.050Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "1440x1040",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2,
+          "messages": [
+            "Element content contains only non-text characters",
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Unable to determine if the visible text is part of the accessible name"
+          ]
+        }
+      ],
+      "passes": 34,
+      "inapplicable": 55
+    },
+    {
+      "file": "35-shared-home-accessibility-meri-home-retains-full-default-axe-checks-at-390px.json",
+      "sha256": "6dc76f34840764ea041efda8c2cc7062f82bc5319a3090c135df738884e711e8",
+      "spec": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "meri home retains full default axe checks at 390px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/meri",
+      "timestamp": "2026-10-15T20:20:32.746Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [],
+      "passes": 36,
+      "inapplicable": 54
+    },
+    {
+      "file": "36-shared-home-accessibility-modules-home-retains-full-default-axe-checks-at-390px.json",
+      "sha256": "a6303ff7c9bfe18b57ae1e25d67af382e5256865f514166fe4d5fba1b5011f87",
+      "spec": "shared-home-accessibility.spec.ts",
+      "line": 7,
+      "title": "modules home retains full default axe checks at 390px",
+      "testStatus": "expected",
+      "url": "http://127.0.0.1:5197/modules",
+      "timestamp": "2026-10-15T20:20:36.613Z",
+      "axeVersion": "4.14.0",
+      "runnerViewport": "390x844",
+      "orientation": "landscape-primary",
+      "violations": 0,
+      "violationNodes": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Element's background color could not be determined due to a background gradient"
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1,
+          "messages": [
+            "Unable to determine if the visible text is part of the accessible name"
+          ]
+        }
+      ],
+      "passes": 34,
+      "inapplicable": 55
+    }
+  ]
+}

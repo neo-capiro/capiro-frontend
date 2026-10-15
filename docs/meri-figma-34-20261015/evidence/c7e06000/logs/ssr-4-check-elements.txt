@@ -1,0 +1,51 @@
+$ npm run check:elements
+# start_utc 2026-10-15T20:10:04Z
+
+> capiro-frontend@0.1.0 check:elements
+> npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements
+
+
+> @capiro/qualification-elements@0.0.0 pins:check
+> node generate-pins.mjs --check
+
+{"check":true,"bytes":15370}
+
+> @capiro/qualification-elements@0.0.0 check
+> npm run typecheck && npm test
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/qualification-elements@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ SSR harness caches its first success or failure without launching again (2.897418ms)
+✔ SSR harness diagnostics retain only bounded phase counts and no raw payloads (0.877574ms)
+✔ all adopted value exports remain present in the frozen static inventory (257.750889ms)
+✔ elapsed deadline refuses a starved timer and real guards refuse restricted operations (343.629438ms)
+✔ real receipt rejects wrong identity, missing or changed source and changed output before execution (2133.335693ms)
+✔ immutable vendor blob identities and one exact owner adaptation (31.301946ms)
+✔ actual import graph is a closed seventeen-file display source; no runtime AI orchestration (162.43172ms)
+✔ additional upstream sources inverse-verify to the pinned upstream blobs with four exact owner adaptations (143.314901ms)
+✔ every adopted root, including additions, closes over adopted and project-authored UI sources only (189.285883ms)
+✔ allocated package closure and every non-self artifact hash match actual files (30.719793ms)
+✔ project-authored UI inventory rejects extra sources and binds source and manifest hashes (94.825578ms)
+✔ strict compiler checks remain enabled for every actual adopted source (1.205069ms)
+✔ exact dependency lock uses registry integrities and actual installed package versions (62.23263ms)
+✔ license/notice inventory checks actual package files and retains complete Apache terms (147.983781ms)
+✔ real Conversation, Message and PromptInput server-render deterministically without network/DOM/provider/native calls (2681.432355ms)
+ℹ {"elapsedMs":1864.388746,"loadedModules":8,"buildInputs":2807,"deniedAttempts":0}
+✔ hostile HTML, URLs, Markdown and diagram syntax remain escaped plain text in all display slots (0.525746ms)
+✔ fixture enables no Markdown, attachment, screenshot, speech, model or durable command control (176.263956ms)
+✔ CSS records real Tailwind4/Streamdown sources while leaving browser styling unqualified (0.704777ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7289.953473
+# end_utc 2026-10-15T20:10:22Z exit=0

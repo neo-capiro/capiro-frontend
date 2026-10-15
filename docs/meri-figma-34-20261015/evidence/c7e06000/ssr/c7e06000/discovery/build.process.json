@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/tmp/claude-0/-home-user-meri-greenfield/bee73297-c6ec-58ce-ba3c-205a70d00699/scratchpad/esbuild-tool/root/linux-x64/esbuild",
+    "--bundle",
+    "--platform=node",
+    "--target=node24",
+    "--format=cjs",
+    "--jsx=automatic",
+    "--tree-shaking=true",
+    "--define:process.env.NODE_ENV=\"production\"",
+    "--sourcefile=ssr-entry.mjs",
+    "--legal-comments=external",
+    "--log-level=warning",
+    "--outfile=/tmp/claude-0/-home-user-meri-greenfield/bee73297-c6ec-58ce-ba3c-205a70d00699/scratchpad/evidence-c7e06000/ssr-c7e06000/discovery/fixture.cjs",
+    "--metafile=/tmp/claude-0/-home-user-meri-greenfield/bee73297-c6ec-58ce-ba3c-205a70d00699/scratchpad/evidence-c7e06000/ssr-c7e06000/discovery/metafile.json"
+  ],
+  "cwd": "/home/user/fe-evidence/packages/qualification-elements",
+  "environmentKeys": [
+    "NODE_ENV",
+    "PATH",
+    "SystemRoot",
+    "TZ"
+  ],
+  "startUtc": "2026-10-15T20:09:58.300Z",
+  "endUtc": "2026-10-15T20:10:00.679Z",
+  "durationMs": 2376.605936,
+  "timeoutMs": 120000,
+  "status": 0,
+  "signal": null,
+  "error": null,
+  "shell": false,
+  "inputSha256": "b3e3442c7cdce293b0aafc81399282c0e5848dafbc42f68d8e09cbd477f6636d"
+}
