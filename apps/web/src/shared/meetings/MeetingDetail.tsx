@@ -63,7 +63,7 @@ export function MeetingDetail({
               label="Meeting materials"
             />
             {tab === "prep" ? (
-              <MeetingPreparation meeting={current} />
+              <MeetingPreparation meeting={current} inline={inline} />
             ) : (
               <MeetingArtifacts
                 key={`${current.id}:${tab}`}

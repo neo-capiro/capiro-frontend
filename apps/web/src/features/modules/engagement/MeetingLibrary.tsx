@@ -49,6 +49,7 @@ export function MeetingLibrary({
     <div className={styles.stack}>
       <MeetingFilters
         mode={mode}
+        showSearch={mode === "library" || display === "queue"}
         search={search}
         onSearch={setSearch}
         type={type}
@@ -101,6 +102,11 @@ export function MeetingLibrary({
           <MeetingSplitView
             rows={rows}
             selected={selected}
+            search={search}
+            onSearch={(value) => {
+              setSearch(value);
+              setPage(1);
+            }}
             onSelect={setSelected}
             onReload={query.reload}
           />
@@ -149,6 +155,7 @@ export function MeetingLibrary({
 
 function MeetingFilters({
   mode,
+  showSearch,
   search,
   onSearch: setSearch,
   type,
@@ -162,6 +169,7 @@ function MeetingFilters({
   onPage: setPage,
 }: {
   mode: "library" | "meetings";
+  showSearch: boolean;
   search: string;
   onSearch: (value: string) => void;
   type: string;
@@ -176,16 +184,18 @@ function MeetingFilters({
 }) {
   return (
     <div className={styles.tools}>
-      <TextInput
-        aria-label="Search meetings"
-        type="search"
-        placeholder="Search by meeting or client…"
-        value={search}
-        onChange={(event) => {
-          setSearch(event.target.value);
-          setPage(1);
-        }}
-      />
+      {showSearch && (
+        <TextInput
+          aria-label="Search meetings"
+          type="search"
+          placeholder="Search by meeting or client…"
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setPage(1);
+          }}
+        />
+      )}
       {mode === "library" && (
         <>
           <select

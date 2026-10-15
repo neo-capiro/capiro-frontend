@@ -3575,11 +3575,11 @@
   },
   {
     "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
-    "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8",
-    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
-    "rationale": "One selected meeting read and material-tab composition. Current receipt lineage gates both inline and modal presentations; header/link and preparation rendering are separate cohesive children, and artifact editing retains its canonical owner. No new transport, authority, provider or persistence responsibility. Missing versus empty preparation remains explicit. Independent source review accepted exact correction; browser and combined qualification are reported separately.",
+    "sha256": "36f7ee543afad64f7e0d2e1def47ffc3b94d49911262d568ffb5305dc184db8c",
+    "reviewer": "Codex /root/non_meri_closure_review",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/selected-meeting-desktop-20261015/STRUCTURE-REVIEW.md#meeting-detail",
+    "rationale": "One selected-meeting composition owns the requested meeting/client read fence and modal/inline material tabs. The added inline presentation flag selects the existing MeetingPreparation child; it does not change query admission, current-receipt gating, tab state, safe Join ownership or modal Notes default. Header/link, preparation rendering and artifact editing remain separate cohesive children. No extraction is required for this one-flag change.",
     "functions": [
       {
         "name": "MeetingDetail",
@@ -3592,15 +3592,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
-    "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e",
-    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
-    "rationale": "Existing meeting list/filter/selection composition with a deliberate inline list-detail view. MeetingSplitView owns geometry and focus; existing query hooks retain fixed-operation reads. Client/mode scope replacement clears selected meeting before another list can expose it, while filter state remains local. Default library and queue modal behavior is preserved. Independent source review accepted exact correction; browser and combined qualification remain separate.",
+    "sha256": "79e724a1f5d789cb3be0a3b6913d84b64b34d7c53091b5829db1f573bb529865",
+    "reviewer": "Codex /root/non_meri_closure_review",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/selected-meeting-desktop-20261015/STRUCTURE-REVIEW.md#meeting-library",
+    "rationale": "One existing meeting library/list/queue composition owns canonical search, paging and selected-meeting state. Relocating the same search input to the list card passes that state to MeetingSplitView without a duplicate filter/query owner. Fixed-operation queries, scope replacement and default library/queue modal behavior remain with their current owners; no transport, provider, authority or persistence responsibility was added.",
     "functions": [
       {
         "name": "MeetingLibrary",
-        "nonblankLines": 124
+        "nonblankLines": 130
       }
     ],
     "signals": [
