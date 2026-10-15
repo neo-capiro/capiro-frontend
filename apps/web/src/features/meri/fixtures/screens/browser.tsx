@@ -2,18 +2,13 @@ import {
   BrowserActivityScreen,
   type BrowserActivityView,
 } from "../../screens/browser/BrowserActivityScreen";
-import {
-  BrowserSignInScreen,
-  type BrowserSignInView,
-} from "../../screens/browser/BrowserSignInScreen";
-import {
-  BrowserFilesScreen,
-  type BrowserFilesView,
-} from "../../screens/browser/BrowserFilesScreen";
+import { BrowserSignInScreen } from "../../screens/browser/BrowserSignInScreen";
+import { BrowserFilesScreen } from "../../screens/browser/BrowserFilesScreen";
 import {
   BrowserConnectionStatesScreen,
   type BrowserConnectionState,
 } from "../../screens/browser/BrowserConnectionStatesScreen";
+import { connected, files, publicFiles, signIn } from "./browser-connections";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
 
@@ -39,33 +34,7 @@ const activity: BrowserActivityView = {
       detail: "Saved only after source and access checks",
     },
   ],
-  filesHref: fixtureHref("browser-files"),
-};
-
-const signIn: BrowserSignInView = {
-  site: "Authorized research portal",
-  account: "Jordan Clayton · Permitted research account",
-  access: "Read source pages and download permitted documents",
-  cancelHref: fixtureHref("browser-activity"),
-  statesHref: fixtureHref("browser-connection-states"),
-  permissionsHref: fixtureHref("browser-permissions"),
-};
-
-const files: BrowserFilesView = {
-  fileName: "funding-update.pdf",
-  receipt: [
-    { label: "Original URL", value: "Official source document link" },
-    { label: "Domain", value: "Public source · Allowed" },
-    { label: "Downloaded", value: "9 Oct 2026, 10:44 AM" },
-    { label: "Workspace location", value: "Inputs / funding-update.pdf" },
-    { label: "Processing", value: "12 pages extracted · Source link retained" },
-  ],
-  connected: {
-    title: "Research account connected",
-    detail: "Read pages and download permitted files. Uploads are not enabled.",
-    status: "Connected",
-  },
-  browseHref: fixtureHref("browser-activity"),
+  filesHref: fixtureHref("public-download-receipt"),
 };
 
 const states: readonly BrowserConnectionState[] = [
@@ -119,12 +88,30 @@ export const browserScreens: readonly FixtureScreen[] = [
     ),
   },
   {
+    slug: "research-account-connected",
+    figmaId: "07.02A",
+    figmaNode: "3024:32269",
+    title: "Research account connected",
+    Screen: () => (
+      <BrowserSignInScreen view={connected} unavailable={fixtureUnavailable} />
+    ),
+  },
+  {
     slug: "browser-files",
     figmaId: "07.03",
     figmaNode: "1064:148104",
     title: "Browser files and receipts",
     Screen: () => (
       <BrowserFilesScreen view={files} unavailable={fixtureUnavailable} />
+    ),
+  },
+  {
+    slug: "public-download-receipt",
+    figmaId: "07.03A",
+    figmaNode: "3024:32057",
+    title: "Public browser download receipt",
+    Screen: () => (
+      <BrowserFilesScreen view={publicFiles} unavailable={fixtureUnavailable} />
     ),
   },
   {

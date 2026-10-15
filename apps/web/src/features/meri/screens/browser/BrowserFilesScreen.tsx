@@ -9,14 +9,17 @@ import ui from "../../ui/meri-ui.module.css";
 import panel from "../../ui/panel.module.css";
 
 export type BrowserFilesView = {
+  /** Public (07.03A) and authenticated (07.03) downloads keep separate receipts. */
+  description: string;
   fileName: string;
   receipt: readonly FieldRow[];
-  /** Overlay · Research account connected: the recorded connection grant. */
-  connected: { title: string; detail: string; status: string };
+  /** Overlay · Research account connected: the recorded grant behind an authenticated download. */
+  connected?: { title: string; detail: string; status: string };
   browseHref?: string;
+  permissionsHref?: string;
 };
 
-/** 07.03 Browser files and receipts: downloads become source-linked workspace inputs. */
+/** 07.03 and 07.03A Browser files and receipts: downloads become source-linked workspace inputs. */
 export function BrowserFilesScreen({
   view,
   unavailable,
@@ -27,10 +30,7 @@ export function BrowserFilesScreen({
   const disabled = { disabled: true, title: unavailable } as const;
   return (
     <div className={ui.page}>
-      <MeriPageHeading
-        title="Browser files"
-        description="Downloads become source-linked workspace inputs."
-      />
+      <MeriPageHeading title="Browser files" description={view.description} />
       <Panel label="Download receipt">
         <StatusPill tone="success">Download complete</StatusPill>
         <h2 className={panel.title}>{view.fileName}</h2>
@@ -60,26 +60,32 @@ export function BrowserFilesScreen({
           only for supported sites with an explicit upload grant and required
           review.
         </p>
-        <button type="button" className={ui.outline} {...disabled}>
+        <LinkAction
+          variant="outline"
+          href={view.permissionsHref}
+          unavailable={unavailable}
+        >
           View site permissions
-        </button>
+        </LinkAction>
       </Panel>
-      <OutcomeToast
-        title={view.connected.title}
-        detail={view.connected.detail}
-        status={view.connected.status}
-        tone="success"
-        success
-        action={
-          <LinkAction
-            variant="primary"
-            href={view.browseHref}
-            unavailable={unavailable}
-          >
-            Continue browsing
-          </LinkAction>
-        }
-      />
+      {view.connected ? (
+        <OutcomeToast
+          title={view.connected.title}
+          detail={view.connected.detail}
+          status={view.connected.status}
+          tone="success"
+          success
+          action={
+            <LinkAction
+              variant="primary"
+              href={view.browseHref}
+              unavailable={unavailable}
+            >
+              Continue browsing
+            </LinkAction>
+          }
+        />
+      ) : null}
     </div>
   );
 }

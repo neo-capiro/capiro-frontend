@@ -165,8 +165,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 06.07C | Task proposal rejected | 3036:33325 | Built: synthetic fixture `/meri/fixture/task-proposal-rejected` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.07D | Task changes requested | 3036:33519 | Built: synthetic fixture `/meri/fixture/task-changes-requested` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.08 | Source access approval review | 3024:26758 | Built: synthetic fixture `/meri/fixture/source-access-review` | Follows parent flow |
-| 07.02A | Research account connected | 3024:32269 | Not built (added 15 Oct) | No browser product integration. No qualified browser host. |
-| 07.03A | Public browser download receipt | 3024:32057 | Not built (added 15 Oct) | No browser product integration. No qualified browser host. |
+| 07.02A | Research account connected | 3024:32269 | Built: synthetic fixture `/meri/fixture/research-account-connected` | No browser product integration. No qualified browser host. |
+| 07.03A | Public browser download receipt | 3024:32057 | Built: synthetic fixture `/meri/fixture/public-download-receipt` | No browser product integration. No qualified browser host. |
 | 08.02A | Edit routine | 3024:31132 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
 | 08.04A | Routine paused | 3024:31351 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
 | 08.04B | Routine automatically disabled | 3024:31580 | Not built (added 15 Oct) | Schedule owner, create/update/cancel and history exist as source. |
