@@ -4,7 +4,12 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { SegmentedTabs } from "../../ui/SegmentedTabs";
 import ui from "../../ui/meri-ui.module.css";
 import shared from "./artifacts.module.css";
-import { ArtifactActionBar } from "./ArtifactActionBar";
+import {
+  ArtifactFlowActions,
+  ArtifactFlowSheets,
+  useArtifactSheet,
+} from "../files/ArtifactFlows";
+import type { ArtifactFlowView } from "../files/types";
 import { CodeView, VerificationActivity } from "./CodeActivity";
 import type { Heading } from "./types";
 import { WebPreviewPanel } from "./WebPreviewPanel";
@@ -30,13 +35,17 @@ const tabs = [
 /** 03.06 Generated web preview and 03.07 Code and execution activity, as tabs of one artifact. */
 export function GeneratedWebScreen({
   view,
+  flow,
   initialTab,
   unavailable,
 }: {
   view: GeneratedWebView;
+  /** Revise, file and download sheets for this generated page. */
+  flow: ArtifactFlowView;
   initialTab: GeneratedWebTab;
   unavailable: string;
 }) {
+  const sheets = useArtifactSheet();
   const [tab, setTab] = useState(initialTab);
   const heading = view.headings[tab];
   const activity = (
@@ -53,7 +62,7 @@ export function GeneratedWebScreen({
         description={heading.description}
       />
       {tab === "preview" ? (
-        <ArtifactActionBar unavailable={unavailable} />
+        <ArtifactFlowActions flow={flow} onOpen={sheets.open} />
       ) : null}
       <SegmentedTabs
         label="Generated artifact view"
@@ -75,6 +84,12 @@ export function GeneratedWebScreen({
       ) : (
         activity
       )}
+      <ArtifactFlowSheets
+        flow={flow}
+        sheet={sheets.sheet}
+        onClose={sheets.close}
+        unavailable={unavailable}
+      />
     </div>
   );
 }

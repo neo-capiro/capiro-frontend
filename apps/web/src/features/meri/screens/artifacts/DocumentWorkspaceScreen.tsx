@@ -16,7 +16,9 @@ import shared from "./artifacts.module.css";
 import styles from "./document.module.css";
 
 export type DocumentWorkspaceLinks = {
+  download?: string;
   revise?: string;
+  file?: string;
   edit?: string;
   back?: string;
   versions?: string;
@@ -87,7 +89,9 @@ export function DocumentWorkspaceScreen({
             <DraftActions backHref={links.back} unavailable={unavailable} />
           ) : (
             <ArtifactActionBar
+              downloadHref={links.download}
               reviseHref={links.revise}
+              fileHref={links.file}
               unavailable={unavailable}
             />
           )}

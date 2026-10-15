@@ -3,7 +3,12 @@ import { useState } from "react";
 import { ArrowUpRight, Sparkle } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import ui from "../../ui/meri-ui.module.css";
-import { ArtifactActionBar } from "./ArtifactActionBar";
+import {
+  ArtifactFlowActions,
+  ArtifactFlowSheets,
+  useArtifactSheet,
+} from "../files/ArtifactFlows";
+import type { ArtifactFlowView } from "../files/types";
 import { DetailList } from "./DetailList";
 import { ThumbnailRail } from "./ThumbnailRail";
 import type { DetailItem, Heading } from "./types";
@@ -29,11 +34,15 @@ export type PresentationView = {
 /** 03.05 Presentation preview: slide filmstrip, slide canvas, speaker notes and checks. */
 export function PresentationPreviewScreen({
   view,
+  flow,
   unavailable,
 }: {
   view: PresentationView;
+  /** Revise, file and download sheets for this deck. */
+  flow: ArtifactFlowView;
   unavailable: string;
 }) {
+  const sheets = useArtifactSheet();
   const [slideId, setSlideId] = useState(view.slides[0]?.id ?? "");
   const index = Math.max(
     0,
@@ -46,7 +55,7 @@ export function PresentationPreviewScreen({
         title={view.heading.title}
         description={view.heading.description}
       />
-      <ArtifactActionBar unavailable={unavailable} />
+      <ArtifactFlowActions flow={flow} onOpen={sheets.open} />
       <div className={shared.columns}>
         <ThumbnailRail
           label="Slides"
@@ -94,13 +103,19 @@ export function PresentationPreviewScreen({
           <button
             type="button"
             className={ui.outline}
-            disabled
-            title={unavailable}
+            aria-haspopup="dialog"
+            onClick={() => sheets.open("revise")}
           >
             <Sparkle aria-hidden /> Revise deck
           </button>
         </section>
       </div>
+      <ArtifactFlowSheets
+        flow={flow}
+        sheet={sheets.sheet}
+        onClose={sheets.close}
+        unavailable={unavailable}
+      />
     </div>
   );
 }

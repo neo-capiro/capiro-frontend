@@ -19,6 +19,8 @@ export type WorkspaceFileRow = ArtifactFile & {
   /** Present for versioned outputs, which the file table lists. */
   version?: string;
   status?: string;
+  /** Registered fixture screen that files this exact version to the client, when one exists. */
+  fileHref?: string;
 };
 
 export type WorkspaceFileGroup = {
