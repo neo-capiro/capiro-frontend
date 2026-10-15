@@ -1,6 +1,6 @@
 # Canonical UI export qualification
 
-This offline fixture consumes only `@capiro/ui` public component exports. The UI package owns all seventeen adopted sources; there is no qualification vendor copy. It is not a product screen, server, model loop or backend endpoint.
+This offline fixture consumes only `@capiro/ui` public component exports. The UI package owns all seventeen adopted sources and the sixteen recorded Meri Figma 3.4 additions (verified by inverse rewrite against their recorded pinned upstream hashes, with four exact recorded owner adaptations); there is no qualification vendor copy. It is not a product screen, server, model loop or backend endpoint.
 
 `baseline/component-pins.json` and `baseline/package-lock.json` preserve the original NEW Meri367-package inventory/lock as immutable historical data. The workspace owner's root lock is the only active install lock. Exact source/provenance ownership for both real packages is generated into `promotion-pins.json` by `node generate-pins.mjs`; `node generate-pins.mjs --check` refuses drift. Source generators do not execute components. Metadata is a trusted owner anchor, not authorization or hostile-filesystem proof.
 
