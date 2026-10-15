@@ -3,7 +3,7 @@ import { RunActivityFixture } from "../../../../features/meri/fixtures/RunActivi
 
 export default function RunActivityFixturePage() {
   return (
-    <ProductShell fixture designTarget="443:82027">
+    <ProductShell fixture section="conversations" designTarget="443:82027">
       <RunActivityFixture />
     </ProductShell>
   );

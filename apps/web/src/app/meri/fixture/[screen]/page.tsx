@@ -16,7 +16,11 @@ export default async function FixtureScreenPage({
   const entry = findFixtureScreen((await params).screen);
   if (!entry) notFound();
   return (
-    <ProductShell fixture designTarget={entry.figmaNode}>
+    <ProductShell
+      fixture
+      designTarget={entry.figmaNode}
+      section={entry.section}
+    >
       <entry.Screen />
     </ProductShell>
   );

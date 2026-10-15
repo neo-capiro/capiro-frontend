@@ -8,17 +8,60 @@ import { scopedHref } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
 import styles from "./shell.module.css";
 
+/** Workspace section a page belongs to; marks its sidebar destination as current. */
+export type MeriSection =
+  | "conversations"
+  | "files"
+  | "runs"
+  | "approvals"
+  | "memory"
+  | "routines"
+  | "data-access";
+
 const destinations = [
-  { label: "Conversations", icon: "conversations", href: "/meri" },
-  { label: "Files", icon: "files", href: "/meri/files" },
-  { label: "Runs", icon: "runs", fixture: "background-runs" },
-  { label: "Approvals", icon: "approvals", fixture: "approval-center" },
-  { label: "Memory", icon: "memory", fixture: "memory-recall" },
-  { label: "Routines", icon: "routines", fixture: "routines" },
-  { label: "Data access", icon: "data-access", fixture: "data-coverage" },
+  {
+    label: "Conversations",
+    icon: "conversations",
+    section: "conversations",
+    href: "/meri",
+    fixture: "home",
+  },
+  {
+    label: "Files",
+    icon: "files",
+    section: "files",
+    href: "/meri/files",
+    fixture: "workspace-files",
+  },
+  { label: "Runs", icon: "runs", section: "runs", fixture: "background-runs" },
+  {
+    label: "Approvals",
+    icon: "approvals",
+    section: "approvals",
+    fixture: "approval-center",
+  },
+  {
+    label: "Memory",
+    icon: "memory",
+    section: "memory",
+    fixture: "memory-recall",
+  },
+  {
+    label: "Routines",
+    icon: "routines",
+    section: "routines",
+    fixture: "routines",
+  },
+  {
+    label: "Data access",
+    icon: "data-access",
+    section: "data-access",
+    fixture: "data-coverage",
+  },
 ] as const satisfies readonly {
   label: string;
   icon: string;
+  section: MeriSection;
   href?: string;
   fixture?: string;
 }[];
@@ -37,20 +80,21 @@ const destinationHref = (
 export function SidebarDestinations({
   assetSet,
   fixture,
+  section,
 }: {
   assetSet: "home" | "cited-answer";
   fixture: boolean;
+  section?: MeriSection | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
   const router = useRouter();
-  const isCurrent = (href?: string) =>
-    href === "/meri"
-      ? pathname === "/meri" ||
-        pathname === "/meri/fixture/home" ||
-        pathname === "/meri/fixture/cited-answer" ||
-        pathname === "/meri/fixture/run-activity"
-      : href === pathname;
+  const isCurrent = (item: (typeof destinations)[number], href?: string) =>
+    section
+      ? item.section === section
+      : href === "/meri"
+        ? pathname === "/meri"
+        : href === pathname;
   return (
     <nav className={styles.destinations} aria-label="Meri workspace">
       {destinations.map((item) => {
@@ -60,8 +104,8 @@ export function SidebarDestinations({
             key={item.label}
             type="button"
             variant="ghost"
-            className={`${styles.navButton} ${isCurrent(href) ? styles.currentDestination : ""}`}
-            aria-current={isCurrent(href) ? "page" : undefined}
+            className={`${styles.navButton} ${isCurrent(item, href) ? styles.currentDestination : ""}`}
+            aria-current={isCurrent(item, href) ? "page" : undefined}
             disabled={!href}
             onClick={
               href

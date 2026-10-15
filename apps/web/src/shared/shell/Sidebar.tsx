@@ -6,16 +6,18 @@ import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { DesignIcon } from "./DesignIcon";
-import { SidebarDestinations } from "./SidebarDestinations";
+import { SidebarDestinations, type MeriSection } from "./SidebarDestinations";
 import { SidebarRecents } from "./SidebarRecents";
 import styles from "./shell.module.css";
 
 export function Sidebar({
   assetSet = "home",
   fixture = false,
+  section,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
+  section?: MeriSection | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
@@ -52,18 +54,31 @@ export function Sidebar({
         <DesignIcon name="plus" assetSet={assetSet} />
         New conversation
       </Button>
-      <Button
-        type="button"
-        variant="ghost"
-        className={styles.navButton}
-        disabled
-        title="No connected conversation store"
-      >
-        <DesignIcon name="search" assetSet={assetSet} />
-        Search conversations
-      </Button>
+      {fixture ? (
+        <Button asChild variant="ghost" className={styles.navButton}>
+          <Link href="/meri/fixture/command-palette">
+            <DesignIcon name="search" assetSet={assetSet} />
+            Search conversations
+          </Link>
+        </Button>
+      ) : (
+        <Button
+          type="button"
+          variant="ghost"
+          className={styles.navButton}
+          disabled
+          title="No connected conversation store"
+        >
+          <DesignIcon name="search" assetSet={assetSet} />
+          Search conversations
+        </Button>
+      )}
       <div className={styles.divider} />
-      <SidebarDestinations assetSet={assetSet} fixture={fixture} />
+      <SidebarDestinations
+        assetSet={assetSet}
+        fixture={fixture}
+        section={section}
+      />
       <SidebarRecents fixture={fixture} />
       <div className={styles.preferences}>
         <div className={styles.divider} />

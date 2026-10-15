@@ -100,6 +100,13 @@
     --border: #242424;
     --input: #242424;
     --meri-icon-filter: brightness(0) invert(1);
+    /* Status tones for dark surfaces (provisional: Figma 3.4 defines no dark status variables). */
+    --success: #93c4a5;
+    --success-subtle: #1d2a22;
+    --warning-text: #e2c48e;
+    --warning-subtle: #2c2618;
+    --destructive-text: #eba3a3;
+    --destructive-subtle: #2e1d1d;
     color-scheme: dark;
   }
   .dialog {

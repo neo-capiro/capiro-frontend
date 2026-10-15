@@ -3,7 +3,7 @@ import { MeriHomeFixture } from "../../../../features/meri/fixtures/MeriHomeFixt
 
 export default function HomeFixturePage() {
   return (
-    <ProductShell fixture>
+    <ProductShell fixture section="conversations">
       <MeriHomeFixture />
     </ProductShell>
   );

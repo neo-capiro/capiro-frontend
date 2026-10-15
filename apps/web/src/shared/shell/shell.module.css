@@ -80,6 +80,7 @@
   font-weight: 500;
   letter-spacing: -0.07px;
   white-space: nowrap;
+  text-decoration: none;
 }
 .newConversation {
   --meri-icon-filter: brightness(0) invert(1);
@@ -154,6 +155,13 @@
     --border: #242424;
     --input: #242424;
     --border-strong: #5b514b;
+    /* Status tones for dark surfaces (provisional: Figma 3.4 defines no dark status variables). */
+    --success: #93c4a5;
+    --success-subtle: #1d2a22;
+    --warning-text: #e2c48e;
+    --warning-subtle: #2c2618;
+    --destructive-text: #eba3a3;
+    --destructive-subtle: #2e1d1d;
     --meri-icon-filter: brightness(0) invert(1);
     color: var(--foreground);
     color-scheme: dark;
