@@ -77,8 +77,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 04.05 | Download exact artifact version | 1064:146498 | Built: synthetic fixture `/meri/fixture/download-artifact` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.06 | Revision progress and verification | 1064:146561 | Built: synthetic fixture `/meri/fixture/revision-progress` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.07 | Filing and download receipts | 1064:146629 | Built: synthetic fixture `/meri/fixture/filing-receipt` | Artifact filing command and download exist. No upload or extraction API found. |
-| 04.08 | Artifact sharing and source scopes | 3019:28559 | Not built (added 15 Oct) | Follows parent flow |
-| 04.08A | Source access review requested | 3024:26544 | Not built (added 15 Oct) | Follows parent flow |
+| 04.08 | Artifact sharing and source scopes | 3019:28559 | Built: synthetic fixture `/meri/fixture/artifact-sharing` | Follows parent flow |
+| 04.08A | Source access review requested | 3024:26544 | Built: synthetic fixture `/meri/fixture/source-access-review-requested` | Follows parent flow |
 | 05.01 | Evidence and citations | 1064:146715 | Built: synthetic fixture `/meri/fixture/evidence-sources` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |

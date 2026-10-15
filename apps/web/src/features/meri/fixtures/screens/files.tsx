@@ -5,7 +5,9 @@ import { ExtractionScreen } from "../../screens/files/ExtractionScreen";
 import { FileToClientScreen } from "../../screens/files/FileToClientScreen";
 import { FilingReceiptScreen } from "../../screens/files/FilingReceiptScreen";
 import { RevisionProgressScreen } from "../../screens/files/RevisionProgressScreen";
+import { SourceScopeScreen } from "../../screens/files/SourceScopeScreen";
 import { meetingBriefDownload } from "./files-flows";
+import { accessReviewRequested, artifactSharing } from "./files-sharing";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
 
@@ -294,6 +296,32 @@ export const fileScreens: readonly FixtureScreen[] = [
             },
           ],
         }}
+      />
+    ),
+  },
+  {
+    slug: "artifact-sharing",
+    figmaId: "04.08",
+    figmaNode: "3019:28559",
+    title: "Artifact sharing and source scopes",
+    Screen: () => (
+      <SourceScopeScreen
+        unavailable={fixtureUnavailable}
+        closeHref={fixtureHref("word-document")}
+        view={artifactSharing}
+      />
+    ),
+  },
+  {
+    slug: "source-access-review-requested",
+    figmaId: "04.08A",
+    figmaNode: "3024:26544",
+    title: "Source access review requested",
+    Screen: () => (
+      <SourceScopeScreen
+        unavailable={fixtureUnavailable}
+        closeHref={fixtureHref("word-document")}
+        view={accessReviewRequested}
       />
     ),
   },
