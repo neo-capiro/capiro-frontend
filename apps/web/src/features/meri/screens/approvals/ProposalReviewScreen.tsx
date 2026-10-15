@@ -8,6 +8,7 @@ import { FieldTable, type FieldRow } from "../../ui/FieldTable";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
 import panel from "../../ui/panel.module.css";
+import phone from "../../ui/phone-fields.module.css";
 import { ProposalConfirmation } from "./ProposalConfirmation";
 import styles from "./approvals.module.css";
 
@@ -52,11 +53,13 @@ export function ProposalReviewScreen({
             </section>
           </div>
         )}
-        <FieldTable
-          caption={`${view.proposalId} exact action`}
-          fieldLabel="Exact action field"
-          rows={view.fields}
-        />
+        <div className={`${styles.fields} ${phone.stackOnPhone}`}>
+          <FieldTable
+            caption={`${view.proposalId} exact action`}
+            fieldLabel="Exact action field"
+            rows={view.fields}
+          />
+        </div>
         <ConfirmationActions className={ui.row}>
           <ConfirmationAction
             className={ui.primary}

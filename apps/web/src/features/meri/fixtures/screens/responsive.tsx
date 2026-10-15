@@ -1,8 +1,10 @@
 import { MeriCitedAnswer } from "../../MeriCitedAnswer";
 import { MeriHomeFixture } from "../MeriHomeFixture";
+import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
 import { conversationScreens } from "./conversation";
 import { fileScreens } from "./files";
+import { sourceScreens } from "./sources";
 import type { FixtureScreen, RegisteredFixtureScreen } from "./types";
 
 /** The registered desktop screen a responsive frame renders unchanged. */
@@ -152,5 +154,37 @@ export const responsiveScreens: readonly RegisteredFixtureScreen[] = [
     title: "Document overlay · mobile revision",
     section: "files",
     Screen: sameScreen(artifactScreens, "document-working-draft"),
+  },
+  {
+    slug: "mobile-task-approval",
+    figmaId: "10.07",
+    figmaNode: "1064:149028",
+    title: "Mobile task approval",
+    section: "approvals",
+    Screen: sameScreen(approvalScreens, "review-task-action"),
+  },
+  {
+    slug: "mobile-sources",
+    figmaId: "10.09",
+    figmaNode: "1064:149158",
+    title: "Mobile sources",
+    section: "data-access",
+    Screen: sameScreen(sourceScreens, "evidence-sources"),
+  },
+  {
+    slug: "mobile-filing-review",
+    figmaId: "10.13",
+    figmaNode: "1064:149286",
+    title: "Mobile filing review",
+    section: "approvals",
+    Screen: sameScreen(approvalScreens, "review-artifact-filing"),
+  },
+  {
+    slug: "mobile-research-progress",
+    figmaId: "10.16",
+    figmaNode: "1064:149375",
+    title: "Mobile research progress",
+    section: "conversations",
+    Screen: sameScreen(conversationScreens, "research-progress"),
   },
 ];

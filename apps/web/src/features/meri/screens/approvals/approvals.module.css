@@ -25,6 +25,10 @@
   font-size: 18px;
   line-height: 27px;
 }
+/* Layout-neutral wrapper that lets the field table stack on a phone. */
+.fields {
+  display: contents;
+}
 .form {
   width: 100%;
   display: flex;
