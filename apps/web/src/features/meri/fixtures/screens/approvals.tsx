@@ -23,6 +23,9 @@ import {
   filingRejected,
   requestFilingChanges,
   requestMemoryChanges,
+  sourceAccessApproved,
+  sourceAccessDenied,
+  sourceAccessOwnerReview,
   sourceAccessReview,
   taskChangesRequested,
   taskRejected,
@@ -30,6 +33,7 @@ import {
 import {
   executedTask,
   filingReview,
+  memoryApprovedByReviewer,
   memoryReview,
   memoryReviewer,
   taskReview,
@@ -146,6 +150,15 @@ export const approvalScreens: readonly FixtureScreen[] = [
     ),
   },
   {
+    slug: "memory-approved-by-reviewer",
+    figmaId: "06.02C",
+    figmaNode: "3063:35688",
+    title: "Memory proposal approved by another reviewer",
+    Screen: () => (
+      <ProposalReviewScreen view={memoryApprovedByReviewer} unavailable={u} />
+    ),
+  },
+  {
     slug: "draft-client-task",
     figmaId: "06.03",
     figmaNode: "1064:147566",
@@ -237,6 +250,33 @@ export const approvalScreens: readonly FixtureScreen[] = [
     title: "Source access approval review",
     Screen: () => (
       <DecisionOutcomeScreen view={sourceAccessReview} unavailable={u} />
+    ),
+  },
+  {
+    slug: "source-access-approved",
+    figmaId: "06.08A",
+    figmaNode: "3063:36079",
+    title: "Source access approved",
+    Screen: () => (
+      <DecisionOutcomeScreen view={sourceAccessApproved} unavailable={u} />
+    ),
+  },
+  {
+    slug: "source-access-denied",
+    figmaId: "06.08B",
+    figmaNode: "3063:36239",
+    title: "Source access denied",
+    Screen: () => (
+      <DecisionOutcomeScreen view={sourceAccessDenied} unavailable={u} />
+    ),
+  },
+  {
+    slug: "source-access-owner-review",
+    figmaId: "06.08C",
+    figmaNode: "3063:35905",
+    title: "Source access review — source owner perspective",
+    Screen: () => (
+      <DecisionOutcomeScreen view={sourceAccessOwnerReview} unavailable={u} />
     ),
   },
 ];

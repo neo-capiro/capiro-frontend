@@ -20,17 +20,38 @@ export type ExecutedOutcome = {
   created: { title: string; detail: string; status: string };
 };
 
+/**
+ * A decision another authorized reviewer already recorded (06.02C): what it
+ * covered, and where its result can be read. Nothing here decides again.
+ */
+export type RecordedDecision = {
+  notice: { title: string; body: string };
+  /** Navigation only; the first is the primary next step. */
+  links: readonly { label: string; href?: string | undefined }[];
+};
+
 export type ProposalReviewView = {
   title: string;
   description: string;
   proposalId: string;
   summary: string;
   /** Memory proposals show the current and proposed fact side by side. */
-  comparison?: { current: string; proposed: string };
+  comparison?: {
+    current: string;
+    proposed: string;
+    /** Headings once a decision is recorded, e.g. "Previous · Now superseded". */
+    labels?: { current: string; proposed: string };
+  };
   fields: readonly FieldRow[];
   decision:
     | ({ state: "pending" } & PendingDecision)
-    | ({ state: "executed" } & ExecutedOutcome);
+    | ({ state: "executed" } & ExecutedOutcome)
+    | ({ state: "recorded" } & RecordedDecision);
+};
+
+const notice = (decision: ProposalReviewView["decision"]) => {
+  if (decision.state === "pending") return decision.reviewer;
+  return decision.state === "recorded" ? decision.notice : undefined;
 };
 
 function ExecutedFollowUp({
@@ -71,7 +92,30 @@ function ExecutedFollowUp({
   );
 }
 
-/** 06.02, 06.02A, 06.04, 06.04A and 06.05: one immutable proposal whose exact arguments are fixed. */
+function RecordedLinks({
+  decision,
+  unavailable,
+}: {
+  decision: RecordedDecision;
+  unavailable: string;
+}) {
+  return (
+    <div className={ui.row}>
+      {decision.links.map((link, index) => (
+        <LinkAction
+          key={link.label}
+          variant={index ? "outline" : "primary"}
+          href={link.href}
+          unavailable={unavailable}
+        >
+          {link.label}
+        </LinkAction>
+      ))}
+    </div>
+  );
+}
+
+/** 06.02, 06.02A, 06.02C, 06.04, 06.04A and 06.05: one immutable proposal whose exact arguments are fixed. */
 export function ProposalReviewScreen({
   view,
   unavailable,
@@ -79,8 +123,8 @@ export function ProposalReviewScreen({
   view: ProposalReviewView;
   unavailable: string;
 }) {
-  const { decision } = view;
-  const reviewer = decision.state === "pending" ? decision.reviewer : undefined;
+  const { decision, comparison } = view;
+  const callout = notice(decision);
   return (
     <div className={ui.page}>
       <MeriPageHeading title={view.title} description={view.description} />
@@ -89,23 +133,23 @@ export function ProposalReviewScreen({
         outcome={decision.state === "pending" ? "pending" : "approved"}
         label={`${view.proposalId} proposal`}
       >
-        {reviewer && (
+        {callout && (
           <div className={panel.full}>
-            <Notice tone="success" title={reviewer.title}>
-              {reviewer.body}
+            <Notice tone="success" title={callout.title}>
+              {callout.body}
             </Notice>
           </div>
         )}
         <h2 className={panel.title}>{view.summary}</h2>
-        {view.comparison && (
+        {comparison && (
           <div className={styles.comparison}>
             <section aria-label="Current fact">
-              <h3>Current</h3>
-              <p>{view.comparison.current}</p>
+              <h3>{comparison.labels?.current ?? "Current"}</h3>
+              <p>{comparison.current}</p>
             </section>
             <section aria-label="Proposed fact">
-              <h3>Proposed</h3>
-              <p>{view.comparison.proposed}</p>
+              <h3>{comparison.labels?.proposed ?? "Proposed"}</h3>
+              <p>{comparison.proposed}</p>
             </section>
           </div>
         )}
@@ -121,6 +165,9 @@ export function ProposalReviewScreen({
             decision={decision}
             unavailable={unavailable}
           />
+        )}
+        {decision.state === "recorded" && (
+          <RecordedLinks decision={decision} unavailable={unavailable} />
         )}
       </ProposalConfirmation>
       {decision.state === "executed" && (

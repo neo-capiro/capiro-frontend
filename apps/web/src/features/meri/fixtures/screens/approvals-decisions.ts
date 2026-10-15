@@ -15,22 +15,19 @@ const taskRejection: Rejection = {
   approvalsHref: fixtureHref("approvals-after-task-decision"),
 };
 
-/** 06.07 Reject or request changes. */
+/** 06.07 Reject or request changes: the rejection is the recorded 06.07C outcome. */
 export const decision: ProposalDecisionView = {
+  description:
+    "Feedback applies only to TP-2048 · The reviewed payload stays immutable",
   requestChanges: {
     context: "TP-2048 · Pending task proposal",
     requestedChange:
       "Move the due date to 12 Oct and add the missing meeting-note reference.",
     guidance: closesProposal,
-    submitLabel: "Request a new proposal",
+    submitLabel: "Send feedback",
     closeHref: fixtureHref("review-task-action"),
   },
-  rejection: {
-    ...taskRejection,
-    detail:
-      "Decision by Jordan Clayton · 10:49 AM · Reason recorded with the proposal.",
-    approvalsHref: fixtureHref("approval-center"),
-  },
+  rejection: taskRejection,
 };
 
 /** 06.02B: feedback returns MP-1042 to its proposer and activates nothing. */
@@ -124,21 +121,73 @@ export const taskChangesRequested: DecisionOutcomeView = {
   },
 };
 
-/** 06.08: reviewing AR-1042; the request itself grants no access and files no copy. */
+const accessRequest = {
+  kind: "state",
+  title: "Mailbox J. Clayton → Authorized Anduril team",
+} as const;
+const toArtifactAccess = {
+  label: "Return to artifact access",
+  href: fixtureHref("artifact-sharing"),
+};
+const decidedBySourceOwner =
+  "AR-1042 · Exact version v2 · Decision recorded by an authorized source owner";
+
+/** 06.08: the requester's read-only view of AR-1042; the request itself grants no access and files no copy. */
 export const sourceAccessReview: DecisionOutcomeView = {
   title: "Review contributing source access",
   description:
     "AR-1042 · Exact version v2 · Assigned to an authorized source owner",
   outcome: {
-    kind: "state",
-    title: "Mailbox J. Clayton → Authorized Anduril team",
+    ...accessRequest,
     tone: "warning",
     status: "Needs attention",
     detail:
       "Requested access: permit the Anduril team to open the mailbox contribution in meeting-brief-v2.docx v2. Existing source lineage stays attached. Approval cannot grant unrelated mailbox access or change the artifact content. Current status: Pending. If the provider cannot apply a narrower grant, the request remains blocked.",
-    action: {
-      label: "Return to artifact access",
-      href: fixtureHref("artifact-sharing"),
-    },
+    note: "Read-only for the requester. An authorized source owner records the decision in their own review view; this request grants no access and files no copy until that decision is recorded.",
+    action: toArtifactAccess,
+  },
+};
+
+/** 06.08C: the source owner decides AR-1042; approving applies only the narrower grant. */
+export const sourceAccessOwnerReview: DecisionOutcomeView = {
+  title: "Review contributing source access",
+  description:
+    "AR-1042 · Exact version v2 · Source owner perspective · Requested by Jordan Clayton",
+  outcome: {
+    ...accessRequest,
+    tone: "warning",
+    status: "Needs decision",
+    detail:
+      "Requested access: permit the Anduril team to open the mailbox contribution in meeting-brief-v2.docx v2. Approving applies only this narrower grant to this exact version. It cannot grant unrelated mailbox access, change the artifact content or remove provenance. Denying keeps filing blocked.",
+    note: "You are reviewing as an authorized source owner, not as the requester. The grant is rechecked with the provider before it is applied.",
+    decisions: ["Approve narrower grant", "Deny request"],
+  },
+};
+
+/** 06.08A */
+export const sourceAccessApproved: DecisionOutcomeView = {
+  title: "Source access approved",
+  description: decidedBySourceOwner,
+  outcome: {
+    ...accessRequest,
+    tone: "success",
+    status: "Approved",
+    detail:
+      "Recorded outcome: the narrower grant was applied. The Anduril team can open the mailbox contribution in meeting-brief-v2.docx v2 only. Provenance and source lineage are unchanged, and access is rechecked before reuse or filing.",
+    action: toArtifactAccess,
+  },
+};
+
+/** 06.08B */
+export const sourceAccessDenied: DecisionOutcomeView = {
+  title: "Source access denied",
+  description: decidedBySourceOwner,
+  outcome: {
+    ...accessRequest,
+    tone: "danger",
+    status: "Denied",
+    detail:
+      "Recorded outcome: AR-1042 was denied. No access was granted and filing to the authorized Anduril team stays blocked for meeting-brief-v2.docx v2. Provenance is unchanged. You can file a version without the mailbox contribution or request a new review.",
+    action: toArtifactAccess,
   },
 };

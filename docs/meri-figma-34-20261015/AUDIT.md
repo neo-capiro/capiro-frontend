@@ -166,7 +166,7 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 06.01C | Approvals after memory decision | 3048:39000 | Built: synthetic fixture `/meri/fixture/approvals-after-memory-decision` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02A | Authorized memory reviewer perspective | 3027:28352 | Built: synthetic fixture `/meri/fixture/memory-review-authorized-reviewer` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.02B | Request memory proposal changes | 3036:38962 | Built: synthetic fixture `/meri/fixture/request-memory-changes` | Approval metadata and commands exist. No list endpoint for an approval center found. |
-| 06.02C | Memory proposal approved by another reviewer | 3063:35688 | Not built (added 15 Oct) | Approval metadata and commands exist. No list endpoint for an approval center found. |
+| 06.02C | Memory proposal approved by another reviewer | 3063:35688 | Built: synthetic fixture `/meri/fixture/memory-approved-by-reviewer` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.04A | Executed task proposal | 3036:33726 | Built: synthetic fixture `/meri/fixture/executed-task-proposal` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.05A | Artifact filing rejected | 3036:38733 | Built: synthetic fixture `/meri/fixture/artifact-filing-rejected` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.07A | Request artifact filing changes | 3036:38540 | Built: synthetic fixture `/meri/fixture/request-filing-changes` | Approval metadata and commands exist. No list endpoint for an approval center found. |
@@ -174,9 +174,9 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 06.07C | Task proposal rejected | 3036:33325 | Built: synthetic fixture `/meri/fixture/task-proposal-rejected` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.07D | Task changes requested | 3036:33519 | Built: synthetic fixture `/meri/fixture/task-changes-requested` | Approval metadata and commands exist. No list endpoint for an approval center found. |
 | 06.08 | Source access approval review | 3024:26758 | Built: synthetic fixture `/meri/fixture/source-access-review` | Follows parent flow |
-| 06.08A | Source access approved | 3063:36079 | Not built (added 15 Oct) | Follows parent flow |
-| 06.08B | Source access denied | 3063:36239 | Not built (added 15 Oct) | Follows parent flow |
-| 06.08C | Source access review — source owner perspective | 3063:35905 | Not built (added 15 Oct) | Follows parent flow |
+| 06.08A | Source access approved | 3063:36079 | Built: synthetic fixture `/meri/fixture/source-access-approved` | Follows parent flow |
+| 06.08B | Source access denied | 3063:36239 | Built: synthetic fixture `/meri/fixture/source-access-denied` | Follows parent flow |
+| 06.08C | Source access review — source owner perspective | 3063:35905 | Built: synthetic fixture `/meri/fixture/source-access-owner-review` | Follows parent flow |
 | 07.02A | Research account connected | 3024:32269 | Built: synthetic fixture `/meri/fixture/research-account-connected` | No browser product integration. No qualified browser host. |
 | 07.03A | Public browser download receipt | 3024:32057 | Built: synthetic fixture `/meri/fixture/public-download-receipt` | No browser product integration. No qualified browser host. |
 | 08.02A | Edit routine | 3024:31132 | Built: synthetic fixture `/meri/fixture/edit-routine` | Schedule owner, create/update/cancel and history exist as source. |
