@@ -9,6 +9,7 @@ import { memoryScreens } from "./memory";
 import { responsiveScreens } from "./responsive";
 import { routineScreens } from "./routines";
 import { runScreens } from "./runs";
+import { settingsScreens } from "./settings";
 import { sourceScreens } from "./sources";
 import { stateScreens } from "./states";
 import { workflowScreens } from "./workflows";
@@ -37,6 +38,7 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("conversations", workflowSetupScreens),
   ...inSection("conversations", workflowResponsiveScreens),
   ...inSection(undefined, stateScreens),
+  ...inSection("preferences", settingsScreens),
   ...responsiveScreens,
   ...darkScreens,
 ];

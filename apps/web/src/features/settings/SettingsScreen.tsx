@@ -21,7 +21,6 @@ import { TenantTabs } from "./hq/TenantTabs";
 import { IntegrationSettings } from "./IntegrationSettings";
 import { MappingSettings } from "./mappings/MappingSettings";
 import { MemorySettings } from "./MemorySettings";
-import { MeriPreferences } from "./MeriPreferences";
 import { PersonalSettings } from "./PersonalSettings";
 import { ProfileSettings } from "./ProfileSettings";
 import { SettingsNavigation } from "./SettingsNavigation";
@@ -29,7 +28,11 @@ import styles from "./styles";
 import { TeamSettings } from "./TeamSettings";
 import { UsageSettings } from "./UsageSettings";
 
-type ScreenContext = { identity: CapiroMe; refresh: () => void };
+type ScreenContext = {
+  identity: CapiroMe;
+  refresh: () => void;
+  meriPreferences: ReactNode;
+};
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
   "contact-info": (context) => <ContactSettings identity={context.identity} />,
@@ -37,7 +40,7 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   team: (context) => <TeamSettings identity={context.identity} />,
   integrations: () => <IntegrationSettings />,
   memory: () => <MemorySettings />,
-  "meri-preferences": () => <MeriPreferences />,
+  "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
   profiles: () => <ProfileSettings />,
@@ -70,7 +73,17 @@ const descriptions: Record<string, string> = {
   "meri-preferences": "Personal defaults for your Meri workspace.",
 };
 
-export function SettingsScreen({ section = "personal" }: { section?: string }) {
+/**
+ * Capiro Settings. Meri preferences are composed by the app route from the Meri feature,
+ * which owns the 09.01–09.07 pages; features never import each other.
+ */
+export function SettingsScreen({
+  section = "personal",
+  meriPreferences,
+}: {
+  section?: string;
+  meriPreferences: ReactNode;
+}) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
   const render = screens[section];
@@ -113,7 +126,7 @@ export function SettingsScreen({ section = "personal" }: { section?: string }) {
                 {["hq-tenants", "hq-ai-keys", "hq-personnel"].includes(
                   section,
                 ) && <TenantTabs section={section} />}
-                {render({ identity, refresh: query.reload })}
+                {render({ identity, refresh: query.reload, meriPreferences })}
               </>
             ) : (
               <SettingsNotice title="Settings section unavailable">

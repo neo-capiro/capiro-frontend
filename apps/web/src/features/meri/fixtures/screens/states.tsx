@@ -8,7 +8,9 @@ import { approvalPermissionStates } from "./states-approvals";
 import { emptySuccessStates } from "./states-empty";
 import { fileArtifactStates } from "./states-files";
 import { conversationMemoryStates } from "./states-lifecycle";
+import { retentionStates } from "./states-retention";
 import { runRecoveryStates } from "./states-run";
+import { sessionStates } from "./states-session";
 import type { FixtureScreen } from "./types";
 
 /**
@@ -63,6 +65,22 @@ const emptyLinks: StateLinks = {
   "Object deleted": fixtureHref("conversation-history"),
   "Duplicate prevented": fixtureHref("action-receipts"),
 };
+const retentionLinks: StateLinks = {
+  "Removed by retention": fixtureHref("action-receipts"),
+  "Artifact version deleted": fixtureHref("artifact-versions"),
+  "Deletion in progress": fixtureHref("privacy-deletion"),
+  "Deletion blocked by legal hold": fixtureHref("privacy-deletion"),
+  "Export ready": fixtureHref("export-ready"),
+  "Retention policy changed": fixtureHref("privacy-deletion"),
+  "Upload expired": fixtureHref("attach-files"),
+  "Browser session data cleared": fixtureHref("connector-accounts"),
+};
+const sessionLinks: StateLinks = {
+  "Document or action service unavailable": fixtureHref("workspace-files"),
+  "Partial service": fixtureHref("run-detail"),
+  "No authorized client selected": fixtureHref("choose-scope"),
+  "Maintenance or read-only mode": fixtureHref("conversation-history"),
+};
 
 const board = (view: StateBoardView, links: StateLinks) =>
   function StateBoard() {
@@ -110,5 +128,19 @@ export const stateScreens: readonly FixtureScreen[] = [
     figmaNode: "1064:149837",
     title: "Empty, search and success states",
     Screen: board(emptySuccessStates, emptyLinks),
+  },
+  {
+    slug: "retention-states",
+    figmaId: "11.06",
+    figmaNode: "3019:27976",
+    title: "Retention and deletion states",
+    Screen: board(retentionStates, retentionLinks),
+  },
+  {
+    slug: "session-states",
+    figmaId: "11.07",
+    figmaNode: "3019:28267",
+    title: "Session and availability states",
+    Screen: board(sessionStates, sessionLinks),
   },
 ];

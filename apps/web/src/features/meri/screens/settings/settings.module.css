@@ -1,0 +1,241 @@
+/* Figma 3.4 09 · Settings pages (09.01–09.07): navigation, two content columns and preference cards. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 28px;
+}
+/* Inside the Capiro Settings frame the host supplies the page padding. */
+.page[data-embedded] {
+  padding: 0;
+}
+/* Preferences navigation: two rows (718px and 588px) of fixed Figma tab widths. */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 718px;
+}
+/* Local tabs (Capiro Settings host) wrap the same way as the route links. */
+.nav > [role="tablist"] {
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.nav > a,
+.nav [role="tab"] {
+  flex: 0 0 auto;
+}
+.nav > a:nth-child(1),
+.nav [role="tab"]:nth-child(1) {
+  width: 182px;
+}
+.nav > a:nth-child(2),
+.nav [role="tab"]:nth-child(2) {
+  width: 148px;
+}
+.nav > a:nth-child(3),
+.nav [role="tab"]:nth-child(3) {
+  width: 170px;
+}
+.nav > a:nth-child(4),
+.nav [role="tab"]:nth-child(4) {
+  width: 200px;
+}
+.nav > a:nth-child(5),
+.nav [role="tab"]:nth-child(5) {
+  width: 180px;
+}
+.nav > a:nth-child(6),
+.nav [role="tab"]:nth-child(6) {
+  width: 206px;
+}
+.nav > a:nth-child(7),
+.nav [role="tab"]:nth-child(7) {
+  width: 190px;
+}
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 650fr) minmax(0, 482fr);
+  gap: 20px;
+  align-items: start;
+}
+.column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* Preferences card: the shared Panel at the Figma card geometry (20px padding, 14px rhythm, shadow-xs). */
+.card > section {
+  gap: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+/* Figma 09.xx "Notice · …": muted callout; warning and danger tint the surface and title. */
+.callout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.callout[data-tone="warning"] {
+  background: var(--warning-subtle);
+}
+.callout[data-tone="danger"] {
+  background: var(--destructive-subtle);
+}
+.calloutTitle {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+  color: var(--foreground);
+}
+.callout[data-tone="warning"] .calloutTitle {
+  color: var(--warning-text);
+}
+.callout[data-tone="danger"] .calloutTitle {
+  color: var(--destructive-text);
+}
+.calloutDetail {
+  color: var(--muted-foreground);
+}
+.field,
+.inactiveField {
+  padding: 8px;
+}
+.inactiveField {
+  opacity: 0.45;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.choices > button {
+  width: 105px;
+}
+/* Meri / Preferences / Include run reference: off is a card pill, on is the black gradient. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+  white-space: nowrap;
+}
+.chip[aria-pressed="true"] {
+  color: #f5f5f4;
+  background: linear-gradient(174deg, #242424, #0a0a0a);
+}
+.metrics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.metricValue {
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -1.02px;
+}
+/* Run policy limits: label and enforced value rows on the muted surface. */
+.policy {
+  width: 100%;
+  margin: 0;
+  background: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.policy > div {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  padding: 8px 0;
+}
+.policy dt,
+.policy dd {
+  margin: 0;
+  padding: 0 12px;
+}
+.skills {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+.skill h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.07px;
+}
+.skillAction {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+/* Figma 10.34 tablet keeps both columns; 10.33 phone stacks them under one scrolling tab row. */
+@media (max-width: 680px) {
+  .page {
+    padding: 16px;
+  }
+  .nav,
+  .nav > [role="tablist"] {
+    max-width: none;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  .nav > a:nth-child(n),
+  .nav [role="tab"]:nth-child(n) {
+    width: auto;
+    height: 44px;
+  }
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .policy > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .chip[aria-pressed="true"] {
+    color: #0a0a0a;
+    background: #f5f5f4;
+  }
+}
