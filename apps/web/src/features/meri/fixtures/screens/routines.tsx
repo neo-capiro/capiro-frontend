@@ -24,7 +24,7 @@ const routines: readonly RoutineRow[] = [
     id: "rt-monday",
     name: "Monday meeting preparation",
     client: "Anduril",
-    nextRun: "12 Oct, 9:00 AM ET",
+    nextRun: "19 Oct, 9:00 AM ET",
     status: "Active",
     lastOutcome: "Brief ready",
   },
@@ -59,7 +59,7 @@ const detail: RoutineDetailView = {
   owner: "Owned by Jordan Clayton · Created 9 Oct",
   summary: [
     { label: "Status", value: "Active", detail: "Current permissions apply" },
-    { label: "Next run", value: "12 Oct", detail: "9:00 AM America/New_York" },
+    { label: "Next run", value: "19 Oct", detail: "9:00 AM America/New_York" },
     {
       label: "Last output",
       value: "Brief ready",

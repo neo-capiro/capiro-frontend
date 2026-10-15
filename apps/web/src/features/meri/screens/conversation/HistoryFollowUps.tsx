@@ -13,7 +13,7 @@ export type HistoryFollowUpView = {
     detail: string;
     runsHref?: string;
   };
-  /** A recorded outcome shown as the Figma "Conversation deleted" toast. */
+  /** A recorded outcome shown as Overlay · Conversation deleted; Dismiss closes it. */
   outcome?: { title: string; detail: string };
 };
 
@@ -22,14 +22,19 @@ export function HistoryFollowUps({
   view,
   visibleIds,
   unavailable,
-  onOpenHistory,
+  onOutcomeClosed,
 }: {
   view: HistoryFollowUpView;
   visibleIds: readonly string[];
   unavailable: string;
-  onOpenHistory: () => void;
+  /** Returns focus to the history list once the toast holding it closes. */
+  onOutcomeClosed: () => void;
 }) {
   const [outcome, setOutcome] = useState(view.outcome);
+  const close = () => {
+    setOutcome(undefined);
+    onOutcomeClosed();
+  };
   const background =
     view.background && visibleIds.includes(view.background.conversationId)
       ? view.background
@@ -59,17 +64,10 @@ export function HistoryFollowUps({
             title={outcome.title}
             detail={outcome.detail}
             icon="success"
-            onDismiss={() => setOutcome(undefined)}
+            onDismiss={close}
           >
-            <button
-              type="button"
-              className={ui.outline}
-              onClick={() => {
-                setOutcome(undefined);
-                onOpenHistory();
-              }}
-            >
-              Open history
+            <button type="button" className={ui.outline} onClick={close}>
+              Dismiss
             </button>
           </ToastCard>
         ) : null}
