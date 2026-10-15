@@ -3,6 +3,7 @@ import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
 import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
+import { darkScreens } from "./dark";
 import { fileScreens } from "./files";
 import { memoryScreens } from "./memory";
 import { responsiveScreens } from "./responsive";
@@ -37,6 +38,7 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("conversations", workflowResponsiveScreens),
   ...inSection(undefined, stateScreens),
   ...responsiveScreens,
+  ...darkScreens,
 ];
 
 export const findFixtureScreen = (slug: string) =>

@@ -187,11 +187,11 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 10.25 | Tablet approval center | 3032:31529 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.26 | Tablet routines | 3032:31859 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.27 | Tablet workspace files | 3032:32204 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
-| 10.28 | Dark run detail | 3032:32570 | Not built (added 15 Oct) | Follows parent flow |
-| 10.29 | Dark approval center | 3032:33006 | Not built (added 15 Oct) | Follows parent flow |
-| 10.30 | Dark workspace files | 3032:33402 | Not built (added 15 Oct) | Follows parent flow |
-| 10.31 | Dark memory recall | 3033:31453 | Not built (added 15 Oct) | Follows parent flow |
-| 10.32 | Dark routines | 3033:31843 | Not built (added 15 Oct) | Follows parent flow |
+| 10.28 | Dark run detail | 3032:32570 | Built: synthetic fixture `/meri/fixture/dark-run-detail` | Follows parent flow |
+| 10.29 | Dark approval center | 3032:33006 | Built: synthetic fixture `/meri/fixture/dark-approval-center` | Follows parent flow |
+| 10.30 | Dark workspace files | 3032:33402 | Built: synthetic fixture `/meri/fixture/dark-workspace-files` | Follows parent flow |
+| 10.31 | Dark memory recall | 3033:31453 | Built: synthetic fixture `/meri/fixture/dark-memory-recall` | Follows parent flow |
+| 10.32 | Dark routines | 3033:31843 | Built: synthetic fixture `/meri/fixture/dark-routines` | Follows parent flow |
 | 10.33 | Phone personal preferences | 3033:32256 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.34 | Tablet personal preferences | 3033:32515 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
 | 10.35 | Phone artifact sharing | 3033:32900 | Awaiting final mobile design (added 15 Oct) | Follows parent flow |
