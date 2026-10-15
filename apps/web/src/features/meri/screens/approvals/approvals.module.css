@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
+  align-items: start;
 }
 .comparison section {
   display: flex;
@@ -39,4 +40,22 @@
   .comparison {
     grid-template-columns: 1fr;
   }
+}
+/* Recorded decision state (06.05A, 06.07B, 06.07D, 06.08): compact full-width card. */
+.stateCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+/* 06.02 proposer view: approve, reject (adopted buttons) and request changes (third control)
+   belong to another reviewer, so they read as unavailable; "View submitted proposal" does not. */
+.notYours > [data-slot="button"]:disabled,
+.notYours > :nth-child(3):disabled {
+  opacity: 0.45;
 }
