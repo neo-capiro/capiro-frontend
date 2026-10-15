@@ -3,7 +3,10 @@
 // Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by
 // omitting absent onSelect/selectedPath context values, and give a folder's children
 // the ARIA group role that treeitem nesting requires and the expand control an accessible
-// name; all upstream imports/exports are retained.
+// name. Second owner edit: implement the WAI-ARIA tree keyboard pattern (one roving
+// tab stop, aria-expanded/aria-selected treeitems, Up/Down/Left/Right/Home/End and
+// Enter/Space handled by the tree, inner buttons out of the tab order); all upstream
+// imports/exports are retained.
 
 import {
   Collapsible,
@@ -22,7 +25,9 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -31,6 +36,7 @@ interface FileTreeContextType {
   togglePath: (path: string) => void;
   selectedPath?: string;
   onSelect?: (path: string) => void;
+  tabStopPath?: string;
 }
 
 // Default noop for context default value
@@ -42,6 +48,15 @@ const FileTreeContext = createContext<FileTreeContextType>({
   expandedPaths: new Set(),
   togglePath: noop,
 });
+
+// Visible treeitems in document order: descendants of collapsed folders are skipped.
+const visibleItems = (tree: HTMLElement | null) =>
+  Array.from(
+    tree?.querySelectorAll<HTMLElement>('[role="treeitem"]') ?? []
+  ).filter(
+    (item) =>
+      !item.parentElement?.closest('[role="treeitem"][aria-expanded="false"]')
+  );
 
 export type FileTreeProps = Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> & {
   expanded?: Set<string>;
@@ -59,16 +74,54 @@ export const FileTree = ({
   onExpandedChange,
   className,
   children,
+  onBlur,
+  onFocus,
+  onKeyDown,
   ...props
 }: FileTreeProps) => {
   const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);
   const expandedPaths = controlledExpanded ?? internalExpanded;
+  const treeRef = useRef<HTMLDivElement>(null);
+  const [tabStopPath, setTabStopPath] = useState(selectedPath);
+
+  // Entering the tree lands on the selected item; keep exactly one visible tab stop.
+  useEffect(() => {
+    if (
+      selectedPath !== undefined &&
+      !treeRef.current?.contains(document.activeElement)
+    ) {
+      setTabStopPath(selectedPath);
+    }
+  }, [selectedPath]);
+  useEffect(() => {
+    const items = visibleItems(treeRef.current);
+    if (!items.some((item) => item.dataset.path === tabStopPath)) {
+      setTabStopPath(items[0]?.dataset.path);
+    }
+  });
 
   const togglePath = useCallback(
     (path: string) => {
       const newExpanded = new Set(expandedPaths);
       if (newExpanded.has(path)) {
         newExpanded.delete(path);
+        // Collapsing hides descendants: the folder takes over their tab stop and focus.
+        const folder = visibleItems(treeRef.current).find(
+          (item) => item.dataset.path === path
+        );
+        const stop = treeRef.current?.querySelector(
+          '[role="treeitem"][tabindex="0"]'
+        );
+        if (folder && stop && stop !== folder && folder.contains(stop)) {
+          setTabStopPath(path);
+          const active = document.activeElement;
+          if (
+            active?.closest('[role="treeitem"]') !== folder &&
+            folder.contains(active)
+          ) {
+            folder.focus();
+          }
+        }
       } else {
         newExpanded.add(path);
       }
@@ -83,10 +136,87 @@ export const FileTree = ({
       expandedPaths,
       ...(onSelect === undefined ? {} : { onSelect }),
       ...(selectedPath === undefined ? {} : { selectedPath }),
+      ...(tabStopPath === undefined ? {} : { tabStopPath }),
       togglePath,
     }),
-    [expandedPaths, onSelect, selectedPath, togglePath]
+    [expandedPaths, onSelect, selectedPath, tabStopPath, togglePath]
   );
+
+  const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
+    onFocus?.(event);
+    const item = (event.target as Element).closest<HTMLElement>(
+      '[role="treeitem"]'
+    );
+    if (item?.dataset.path !== undefined) {
+      setTabStopPath(item.dataset.path);
+    }
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    onBlur?.(event);
+    if (
+      selectedPath !== undefined &&
+      !event.currentTarget.contains(event.relatedTarget)
+    ) {
+      setTabStopPath(selectedPath);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    onKeyDown?.(event);
+    const item = (event.target as Element).closest<HTMLElement>(
+      '[role="treeitem"]'
+    );
+    const path = item?.dataset.path;
+    if (
+      event.defaultPrevented ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      !item ||
+      path === undefined
+    ) {
+      return;
+    }
+    const items = visibleItems(treeRef.current);
+    const index = items.indexOf(item);
+    const expanded = item.getAttribute("aria-expanded");
+    let next: HTMLElement | null | undefined;
+    if (event.key === "ArrowDown") {
+      next = items[index + 1];
+    } else if (event.key === "ArrowUp") {
+      next = items[index - 1];
+    } else if (event.key === "Home") {
+      next = items[0];
+    } else if (event.key === "End") {
+      next = items.at(-1);
+    } else if (event.key === "ArrowRight" && expanded === "false") {
+      togglePath(path);
+    } else if (event.key === "ArrowRight" && expanded === "true") {
+      next = item.querySelector<HTMLElement>(
+        '[role="group"] [role="treeitem"]'
+      );
+    } else if (event.key === "ArrowLeft" && expanded === "true") {
+      togglePath(path);
+    } else if (event.key === "ArrowLeft") {
+      next = item.parentElement?.closest<HTMLElement>('[role="treeitem"]');
+    } else if (
+      (event.key === "Enter" || event.key === " ") &&
+      event.target === item
+    ) {
+      onSelect?.(path);
+      if (expanded !== null) {
+        togglePath(path);
+      }
+    } else {
+      return;
+    }
+    event.preventDefault();
+    if (next && treeRef.current?.contains(next)) {
+      setTabStopPath(next.dataset.path);
+      next.focus();
+    }
+  };
 
   return (
     <FileTreeContext.Provider value={contextValue}>
@@ -95,6 +225,10 @@ export const FileTree = ({
           "rounded-lg border bg-background font-mono text-sm",
           className
         )}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
+        ref={treeRef}
         role="tree"
         {...props}
       >
@@ -152,7 +286,7 @@ export const FileTreeFolder = ({
   children,
   ...props
 }: FileTreeFolderProps) => {
-  const { expandedPaths, togglePath, selectedPath, onSelect } =
+  const { expandedPaths, togglePath, selectedPath, onSelect, tabStopPath } =
     useContext(FileTreeContext);
   const isExpanded = expandedPaths.has(path);
   const isSelected = selectedPath === path;
@@ -174,9 +308,12 @@ export const FileTreeFolder = ({
     <FileTreeFolderContext.Provider value={folderContextValue}>
       <Collapsible onOpenChange={handleOpenChange} open={isExpanded}>
         <div
+          aria-expanded={isExpanded}
+          aria-selected={isSelected}
           className={cn("", className)}
+          data-path={path}
           role="treeitem"
-          tabIndex={0}
+          tabIndex={tabStopPath === path ? 0 : -1}
           {...props}
         >
           <div
@@ -189,6 +326,7 @@ export const FileTreeFolder = ({
               <button
                 aria-label={`${isExpanded ? "Collapse" : "Expand"} ${name}`}
                 className="flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0"
+                tabIndex={-1}
                 type="button"
               >
                 <ChevronRightIcon
@@ -202,6 +340,7 @@ export const FileTreeFolder = ({
             <button
               className="flex min-w-0 flex-1 cursor-pointer items-center gap-1 border-none bg-transparent p-0 text-left"
               onClick={handleSelect}
+              tabIndex={-1}
               type="button"
             >
               <FileTreeIcon>
@@ -247,21 +386,12 @@ export const FileTreeFile = ({
   children,
   ...props
 }: FileTreeFileProps) => {
-  const { selectedPath, onSelect } = useContext(FileTreeContext);
+  const { selectedPath, onSelect, tabStopPath } = useContext(FileTreeContext);
   const isSelected = selectedPath === path;
 
   const handleClick = useCallback(() => {
     onSelect?.(path);
   }, [onSelect, path]);
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        onSelect?.(path);
-      }
-    },
-    [onSelect, path]
-  );
 
   const fileContextValue = useMemo(() => ({ name, path }), [name, path]);
 
@@ -273,10 +403,11 @@ export const FileTreeFile = ({
           isSelected && "bg-muted",
           className
         )}
+        aria-selected={isSelected}
+        data-path={path}
         onClick={handleClick}
-        onKeyDown={handleKeyDown}
         role="treeitem"
-        tabIndex={0}
+        tabIndex={tabStopPath === path ? 0 : -1}
         {...props}
       >
         {children ?? (
