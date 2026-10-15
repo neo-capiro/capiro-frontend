@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Sparkle } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { SegmentedTabs } from "../../ui/SegmentedTabs";
@@ -18,125 +18,149 @@ import {
   type CellPosition,
   type SheetCell,
 } from "./SheetGrid";
+import {
+  ComparisonChart,
+  WorkbookReferences,
+  type ComparisonChartView,
+  type WorkbookNote,
+} from "./SpreadsheetSections";
 import type { DetailItem, Heading } from "./types";
 import shared from "./artifacts.module.css";
 import styles from "./previews.module.css";
 
+export type SpreadsheetTab = "summary" | "source" | "references";
 export type SpreadsheetView = {
-  heading: Heading;
+  /** Page heading for each workbook tab (03.04, 03.04A and 03.04B). */
+  headings: Readonly<Record<SpreadsheetTab, Heading>>;
   sheetLabel: string;
   columns: readonly string[];
   rows: readonly (readonly SheetCell[])[];
   initialCell: CellPosition;
-  chart: { title: string; bars: readonly { label: string; value: number }[] };
+  chart: ComparisonChartView;
   checks: readonly DetailItem[];
-  sourceData: readonly DetailItem[];
-  references: readonly DetailItem[];
+  /** Formula bar caption on the Source data tab. */
+  sourceCaption: string;
+  references: WorkbookNote;
 };
-type Tab = "summary" | "source" | "references";
 const tabs = [
   { id: "summary", label: "Summary" },
   { id: "source", label: "Source data" },
   { id: "references", label: "References" },
 ] as const;
 
-function ComparisonChart({ chart }: { chart: SpreadsheetView["chart"] }) {
-  const max = Math.max(...chart.bars.map((bar) => bar.value), 1);
+/** Summary tab: comparison chart beside the workbook checks and revision entry point. */
+function SummaryDetails({
+  view,
+  onReferences,
+  onRevise,
+}: {
+  view: SpreadsheetView;
+  onReferences: () => void;
+  onRevise: () => void;
+}) {
   return (
-    <figure className={styles.chart}>
-      <figcaption className={shared.panelTitle}>{chart.title}</figcaption>
-      <div className={styles.bars} aria-hidden>
-        {chart.bars.map((bar) => (
-          <div key={bar.label} className={styles.bar}>
-            <span style={{ height: `${(bar.value / max) * 138}px` }} />
-            <span>{`${bar.label} · ${bar.value}`}</span>
-          </div>
-        ))}
-      </div>
-      <ul className="sr-only">
-        {chart.bars.map((bar) => (
-          <li key={bar.label}>{`Program ${bar.label}: ${bar.value}`}</li>
-        ))}
-      </ul>
-    </figure>
+    <div className={`${shared.columns} ${shared.wideGap}`}>
+      <ComparisonChart chart={view.chart} />
+      <section
+        className={`${shared.panel} ${shared.grow}`}
+        aria-label="Workbook validation"
+      >
+        <DetailList label="Workbook checks" items={view.checks} tight />
+        <button type="button" className={ui.outline} onClick={onReferences}>
+          View source references
+        </button>
+        <button
+          type="button"
+          className={ui.primary}
+          aria-haspopup="dialog"
+          onClick={onRevise}
+        >
+          <Sparkle aria-hidden /> Revise workbook
+        </button>
+      </section>
+    </div>
   );
 }
 
-/** 03.04 Spreadsheet preview: formula bar, read-only grid, chart and workbook checks. */
+/**
+ * 03.04 Spreadsheet preview with its Source data (03.04A) and References (03.04B) tabs:
+ * formula bar, read-only grid, chart, workbook checks and the inputs note.
+ */
 export function SpreadsheetPreviewScreen({
   view,
   flow,
   unavailable,
+  initialTab = "summary",
 }: {
   view: SpreadsheetView;
   /** Revise, file and download sheets for this workbook. */
   flow: ArtifactFlowView;
   unavailable: string;
+  initialTab?: SpreadsheetTab;
 }) {
   const sheets = useArtifactSheet();
   const [cell, setCell] = useState(view.initialCell);
-  const [tab, setTab] = useState<Tab>("summary");
+  const [tab, setTab] = useState(initialTab);
+  const tabsArea = useRef<HTMLDivElement>(null);
   const current = view.rows[cell.row]?.[cell.col];
+  const heading = view.headings[tab];
+  const grid = tab !== "references";
+  const backToSummary = () => {
+    setTab("summary");
+    requestAnimationFrame(() =>
+      tabsArea.current
+        ?.querySelector<HTMLElement>('[aria-selected="true"]')
+        ?.focus(),
+    );
+  };
   return (
     <div className={`${ui.page} ${shared.screen}`}>
       <MeriPageHeading
-        title={view.heading.title}
-        description={view.heading.description}
+        title={heading.title}
+        description={heading.description}
       />
-      <ArtifactFlowActions flow={flow} onOpen={sheets.open} />
-      <div
-        className={styles.formulaBar}
-        role="status"
-        aria-label="Selected cell"
-      >
-        <StatusPill>{cellReference(cell)}</StatusPill>
-        <span>{`ƒx   ${current?.formula ?? current?.value ?? ""}`}</span>
-      </div>
-      <SheetGrid
-        label={view.sheetLabel}
-        columns={view.columns}
-        rows={view.rows}
-        selected={cell}
-        onSelect={setCell}
-      />
-      <SegmentedTabs
-        label="Workbook details"
-        options={tabs}
-        value={tab}
-        onChange={setTab}
-      />
-      {tab === "summary" ? (
-        <div className={`${shared.columns} ${shared.wideGap}`}>
-          <ComparisonChart chart={view.chart} />
-          <section
-            className={`${shared.panel} ${shared.grow}`}
-            aria-label="Workbook validation"
-          >
-            <DetailList label="Workbook checks" items={view.checks} tight />
-            <button
-              type="button"
-              className={ui.outline}
-              onClick={() => setTab("references")}
-            >
-              View source references
-            </button>
-            <button
-              type="button"
-              className={ui.primary}
-              aria-haspopup="dialog"
-              onClick={() => sheets.open("revise")}
-            >
-              <Sparkle aria-hidden /> Revise workbook
-            </button>
-          </section>
+      {grid ? <ArtifactFlowActions flow={flow} onOpen={sheets.open} /> : null}
+      {grid ? (
+        <div
+          className={styles.formulaBar}
+          role="status"
+          aria-label="Selected cell"
+        >
+          <StatusPill>{cellReference(cell)}</StatusPill>
+          <span>
+            {tab === "source"
+              ? view.sourceCaption
+              : `ƒx   ${current?.formula ?? current?.value ?? ""}`}
+          </span>
         </div>
-      ) : (
-        <DetailList
-          label={tab === "source" ? "Source data" : "References"}
-          items={tab === "source" ? view.sourceData : view.references}
-          variant="references"
+      ) : null}
+      {grid ? (
+        <SheetGrid
+          label={view.sheetLabel}
+          columns={view.columns}
+          rows={view.rows}
+          selected={cell}
+          onSelect={setCell}
         />
-      )}
+      ) : null}
+      <div ref={tabsArea}>
+        <SegmentedTabs
+          label="Workbook details"
+          options={tabs}
+          value={tab}
+          onChange={setTab}
+        />
+      </div>
+      {tab === "summary" ? (
+        <SummaryDetails
+          view={view}
+          onReferences={() => setTab("references")}
+          onRevise={() => sheets.open("revise")}
+        />
+      ) : null}
+      {tab === "references" ? (
+        <WorkbookReferences note={view.references} onBack={backToSummary} />
+      ) : null}
       <ArtifactFlowSheets
         flow={flow}
         sheet={sheets.sheet}

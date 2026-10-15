@@ -141,6 +141,7 @@
   font-size: 18px;
   line-height: 27px;
   color: var(--muted-foreground);
+  white-space: pre-line;
 }
 .slideFooter {
   padding-top: 20px;
@@ -173,4 +174,12 @@
 }
 .summary > button {
   width: auto;
+}
+/* 03.04B: the References tab's workbook note. */
+.workbookNote {
+  gap: 10px;
+  align-items: flex-start;
+}
+.muted {
+  color: var(--muted-foreground);
 }

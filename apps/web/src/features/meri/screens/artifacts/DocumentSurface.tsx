@@ -2,13 +2,10 @@
 import { DocumentPage } from "./DocumentPage";
 import { DocumentPager } from "./DocumentPager";
 import { DocumentToolbar } from "./DocumentToolbar";
-import {
-  BlockMenu,
-  CommentThread,
-  ModeMenu,
-  RevisionCard,
-} from "./DocumentOverlays";
+import { CommentThread } from "./DocumentComments";
+import { BlockMenu, ModeMenu, RevisionCard } from "./DocumentOverlays";
 import type { DocumentWorkspaceView } from "./types";
+import type { CommentThreadControls } from "./useCommentThread";
 import type { useDocumentDraft } from "./useDocumentDraft";
 import shared from "./artifacts.module.css";
 import styles from "./document.module.css";
@@ -17,12 +14,14 @@ import styles from "./document.module.css";
 export function DocumentSurface({
   view,
   draft,
+  thread,
   editable,
   editHref,
   unavailable,
 }: {
   view: DocumentWorkspaceView;
   draft: ReturnType<typeof useDocumentDraft>;
+  thread: CommentThreadControls;
   editable: boolean;
   editHref?: string | undefined;
   unavailable: string;
@@ -69,11 +68,7 @@ export function DocumentSurface({
           />
         ) : null}
         {draft.overlay === "comments" ? (
-          <CommentThread
-            comments={view.comments}
-            onClose={draft.close}
-            unavailable={unavailable}
-          />
+          <CommentThread thread={thread} onClose={draft.close} />
         ) : null}
         {draft.overlay === "mode" ? (
           <ModeMenu

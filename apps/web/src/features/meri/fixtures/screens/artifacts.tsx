@@ -1,22 +1,28 @@
 import { AnalysisOutputsScreen } from "../../screens/artifacts/AnalysisOutputsScreen";
 import { DocumentWorkspaceScreen } from "../../screens/artifacts/DocumentWorkspaceScreen";
-import { GeneratedWebScreen } from "../../screens/artifacts/GeneratedWebScreen";
+import {
+  GeneratedWebScreen,
+  type GeneratedWebTab,
+} from "../../screens/artifacts/GeneratedWebScreen";
 import { PdfPreviewScreen } from "../../screens/artifacts/PdfPreviewScreen";
 import { PresentationPreviewScreen } from "../../screens/artifacts/PresentationPreviewScreen";
 import { ReviseArtifactScreen } from "../../screens/artifacts/ReviseArtifactScreen";
-import { SpreadsheetPreviewScreen } from "../../screens/artifacts/SpreadsheetPreviewScreen";
-import { VersionsScreen } from "../../screens/artifacts/VersionsScreen";
 import {
-  WorkspaceFilesScreen,
-  type WorkspaceFilesView,
-} from "../../screens/artifacts/WorkspaceFilesScreen";
+  SpreadsheetPreviewScreen,
+  type SpreadsheetTab,
+} from "../../screens/artifacts/SpreadsheetPreviewScreen";
+import type { DocumentOpening } from "../../screens/artifacts/types";
+import { VersionsScreen } from "../../screens/artifacts/VersionsScreen";
+import { WorkspaceFilesScreen } from "../../screens/artifacts/WorkspaceFilesScreen";
 import {
   pdfPreview,
   versionRows,
   wordDocument,
   workingDraft,
 } from "./artifacts-documents";
-import { generatedWeb, presentation, spreadsheet } from "./artifacts-previews";
+import { presentation, spreadsheet } from "./artifacts-previews";
+import { generatedWeb } from "./artifacts-web";
+import { workspaceFiles } from "./artifacts-workspace";
 import {
   clientUpdateFlow,
   fundingAnalysisFlow,
@@ -25,84 +31,76 @@ import {
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
 
-/** 03.01 workspace contents, with entry points to the 04 · Files flows. */
-const workspaceFiles: WorkspaceFilesView = {
-  heading: {
-    title: "Files",
-    description: "Anduril meeting brief · 7 files in this workspace",
-  },
-  files: [
-    {
-      id: "brief",
-      name: "meeting-brief-v2.docx",
-      detail: "DOCX · 4 pages · 184 KB · v2",
-      version: "v2",
-      status: "Verified",
-      openHref: fixtureHref("word-document"),
-      fileHref: fixtureHref("file-to-client"),
-    },
-    {
-      id: "funding",
-      name: "funding-analysis.xlsx",
-      detail: "XLSX · 1 sheet · 38 KB · v1",
-      version: "v1",
-      status: "Verified",
-      openHref: fixtureHref("spreadsheet-preview"),
-    },
-    {
-      id: "update",
-      name: "client-update.pptx",
-      detail: "PPTX · 6 slides · 2.1 MB · v1",
-      version: "v1",
-      status: "Verified",
-      openHref: fixtureHref("presentation-preview"),
-    },
-    {
-      id: "commitments",
-      name: "commitments.csv",
-      detail: "CSV · 2 rows · Verified · 4 KB",
-      version: "Working",
-      status: "Verified",
-      openHref: fixtureHref("analysis-outputs"),
-    },
-    {
-      id: "notes",
-      name: "meeting-notes.pdf",
-      detail: "PDF · Input · 2 pages · 96 KB",
-    },
-    {
-      id: "funding-update",
-      name: "funding-update.pdf",
-      detail: "PDF · Input · 6 pages · 410 KB",
-    },
-    {
-      id: "index",
-      name: "source-index.json",
-      detail: "JSON · Working · 12 KB",
-    },
-  ],
-  groups: [
-    {
-      id: "inputs",
-      label: "Inputs",
-      fileIds: ["notes", "funding-update"],
-    },
-    {
-      id: "working",
-      label: "Working",
-      fileIds: ["index", "commitments"],
-    },
-    {
-      id: "published",
-      label: "Published",
-      fileIds: ["brief", "funding", "update"],
-    },
-  ],
-  initialFileId: "brief",
-  versionsHref: fixtureHref("artifact-versions"),
-  uploadHref: fixtureHref("attach-files"),
-  attachHref: fixtureHref("attach-capiro-file"),
-};
+/** 03.02 Word document workspace; its page (03.02A to C) and comment (13.24 to 13.26) frames open it elsewhere. */
+export function WordDocumentFixture({
+  opening,
+}: {
+  opening?: DocumentOpening;
+}) {
+  return (
+    <DocumentWorkspaceScreen
+      view={wordDocument}
+      editable={false}
+      unavailable={fixtureUnavailable}
+      opening={opening}
+      links={{
+        download: fixtureHref("download-artifact"),
+        revise: fixtureHref("revise-artifact"),
+        file: fixtureHref("file-to-client"),
+        edit: fixtureHref("document-working-draft"),
+        versions: fixtureHref("artifact-versions"),
+      }}
+    />
+  );
+}
+
+/** 03.03 PDF preview, opened at a later page by 03.03A to C. */
+export function PdfPreviewFixture({ pageIndex }: { pageIndex?: number }) {
+  return (
+    <PdfPreviewScreen
+      reviseHref={fixtureHref("revise-artifact")}
+      unavailable={fixtureUnavailable}
+      view={pdfPreview}
+      initialPageIndex={pageIndex}
+    />
+  );
+}
+
+/** 03.04 Spreadsheet preview, opened on another tab by 03.04A and 03.04B. */
+export function SpreadsheetFixture({ tab }: { tab?: SpreadsheetTab }) {
+  return (
+    <SpreadsheetPreviewScreen
+      unavailable={fixtureUnavailable}
+      view={spreadsheet}
+      flow={fundingAnalysisFlow}
+      initialTab={tab}
+    />
+  );
+}
+
+/** 03.05 Presentation preview, opened at a later slide by 03.05A to E. */
+export function PresentationFixture({ slideIndex }: { slideIndex?: number }) {
+  return (
+    <PresentationPreviewScreen
+      unavailable={fixtureUnavailable}
+      view={presentation}
+      flow={clientUpdateFlow}
+      initialSlideIndex={slideIndex}
+    />
+  );
+}
+
+/** 03.06 generated web artifact on one of its tabs (03.06, 03.07, 03.07A). */
+export function GeneratedWebFixture({ tab }: { tab: GeneratedWebTab }) {
+  return (
+    <GeneratedWebScreen
+      view={generatedWeb}
+      flow={signalSummaryFlow}
+      initialTab={tab}
+      unavailable={fixtureUnavailable}
+    />
+  );
+}
 
 /** Figma 3.4 03 · Artifacts frames and the document working draft, with synthetic data. */
 export const artifactScreens: readonly FixtureScreen[] = [
@@ -123,20 +121,7 @@ export const artifactScreens: readonly FixtureScreen[] = [
     figmaId: "03.02",
     figmaNode: "1064:145316",
     title: "Word document workspace",
-    Screen: () => (
-      <DocumentWorkspaceScreen
-        view={wordDocument}
-        editable={false}
-        unavailable={fixtureUnavailable}
-        links={{
-          download: fixtureHref("download-artifact"),
-          revise: fixtureHref("revise-artifact"),
-          file: fixtureHref("file-to-client"),
-          edit: fixtureHref("document-working-draft"),
-          versions: fixtureHref("artifact-versions"),
-        }}
-      />
-    ),
+    Screen: () => <WordDocumentFixture />,
   },
   {
     slug: "document-working-draft",
@@ -160,67 +145,35 @@ export const artifactScreens: readonly FixtureScreen[] = [
     figmaId: "03.03",
     figmaNode: "1064:145426",
     title: "PDF and multi-page preview",
-    Screen: () => (
-      <PdfPreviewScreen
-        reviseHref={fixtureHref("revise-artifact")}
-        unavailable={fixtureUnavailable}
-        view={pdfPreview}
-      />
-    ),
+    Screen: () => <PdfPreviewFixture />,
   },
   {
     slug: "spreadsheet-preview",
     figmaId: "03.04",
     figmaNode: "1064:145539",
     title: "Spreadsheet preview",
-    Screen: () => (
-      <SpreadsheetPreviewScreen
-        unavailable={fixtureUnavailable}
-        view={spreadsheet}
-        flow={fundingAnalysisFlow}
-      />
-    ),
+    Screen: () => <SpreadsheetFixture />,
   },
   {
     slug: "presentation-preview",
     figmaId: "03.05",
     figmaNode: "1064:145690",
     title: "Presentation preview",
-    Screen: () => (
-      <PresentationPreviewScreen
-        unavailable={fixtureUnavailable}
-        view={presentation}
-        flow={clientUpdateFlow}
-      />
-    ),
+    Screen: () => <PresentationFixture />,
   },
   {
     slug: "generated-web-preview",
     figmaId: "03.06",
     figmaNode: "1064:145787",
     title: "Generated web preview",
-    Screen: () => (
-      <GeneratedWebScreen
-        view={generatedWeb}
-        flow={signalSummaryFlow}
-        initialTab="preview"
-        unavailable={fixtureUnavailable}
-      />
-    ),
+    Screen: () => <GeneratedWebFixture tab="preview" />,
   },
   {
     slug: "code-activity",
     figmaId: "03.07",
     figmaNode: "1064:145886",
     title: "Code and execution activity",
-    Screen: () => (
-      <GeneratedWebScreen
-        view={generatedWeb}
-        flow={signalSummaryFlow}
-        initialTab="code"
-        unavailable={fixtureUnavailable}
-      />
-    ),
+    Screen: () => <GeneratedWebFixture tab="code" />,
   },
   {
     slug: "analysis-outputs",

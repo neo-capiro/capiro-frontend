@@ -9,8 +9,9 @@ import { ArtifactActionBar } from "./ArtifactActionBar";
 import { ConversationPane } from "./ConversationPane";
 import { DetailList } from "./DetailList";
 import { DocumentSurface } from "./DocumentSurface";
-import type { DocumentWorkspaceView } from "./types";
+import type { DocumentOpening, DocumentWorkspaceView } from "./types";
 import { versionColumns } from "./VersionsScreen";
+import { useCommentThread } from "./useCommentThread";
 import { useDocumentDraft } from "./useDocumentDraft";
 import { WorkspacePanes } from "./WorkspacePanes";
 import shared from "./artifacts.module.css";
@@ -80,19 +81,23 @@ function VersionsTab({
 /**
  * 03.02 Word document workspace (read-only Viewing) and the document working draft
  * (Editing): conversation beside the artifact, with in-screen document overlays.
+ * `opening` starts at another page (03.02A to C) or with the comment overlay open (13.24 to 13.26).
  */
 export function DocumentWorkspaceScreen({
   view,
   editable,
   links,
   unavailable,
+  opening,
 }: {
   view: DocumentWorkspaceView;
   editable: boolean;
   links: DocumentWorkspaceLinks;
   unavailable: string;
+  opening?: DocumentOpening | undefined;
 }) {
-  const draft = useDocumentDraft(view.pages, view.suggestion);
+  const draft = useDocumentDraft(view.pages, view.suggestion, opening);
+  const thread = useCommentThread(view.commentThread, opening?.comments);
   const [tab, setTab] = useState<Tab>("preview");
   const tabs = [
     { id: "preview", label: editable ? "Editor" : "Preview" },
@@ -141,6 +146,7 @@ export function DocumentWorkspaceScreen({
               <DocumentSurface
                 view={view}
                 draft={draft}
+                thread={thread}
                 editable={editable}
                 editHref={links.edit}
                 unavailable={unavailable}

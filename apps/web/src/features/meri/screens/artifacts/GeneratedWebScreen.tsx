@@ -10,7 +10,11 @@ import {
   useArtifactSheet,
 } from "../files/ArtifactFlows";
 import type { ArtifactFlowView } from "../files/types";
-import { CodeView, VerificationActivity } from "./CodeActivity";
+import {
+  CodeView,
+  VerificationActivity,
+  type VerificationLog,
+} from "./CodeActivity";
 import type { Heading } from "./types";
 import { WebPreviewPanel } from "./WebPreviewPanel";
 
@@ -23,7 +27,10 @@ export type GeneratedWebView = {
   previewNote: string;
   codeLabel: string;
   code: readonly string[];
-  activity: readonly string[];
+  /** Checked steps shown under the source on the Code tab (03.07). */
+  codeActivity: VerificationLog;
+  /** The version's verification receipt on the Activity tab (03.07A). */
+  receipt: VerificationLog;
   activityNote: string;
 };
 const tabs = [
@@ -32,7 +39,7 @@ const tabs = [
   { id: "activity", label: "Activity" },
 ] as const;
 
-/** 03.06 Generated web preview and 03.07 Code and execution activity, as tabs of one artifact. */
+/** 03.06 Generated web preview, 03.07 Code and execution activity and 03.07A verification activity, as tabs of one artifact. */
 export function GeneratedWebScreen({
   view,
   flow,
@@ -48,13 +55,6 @@ export function GeneratedWebScreen({
   const sheets = useArtifactSheet();
   const [tab, setTab] = useState(initialTab);
   const heading = view.headings[tab];
-  const activity = (
-    <VerificationActivity
-      steps={view.activity}
-      note={view.activityNote}
-      unavailable={unavailable}
-    />
-  );
   return (
     <div className={`${ui.page} ${shared.screen}`}>
       <MeriPageHeading
@@ -76,13 +76,17 @@ export function GeneratedWebScreen({
           html={view.html}
           note={view.previewNote}
         />
-      ) : tab === "code" ? (
-        <>
-          <CodeView label={view.codeLabel} lines={view.code} />
-          {activity}
-        </>
       ) : (
-        activity
+        <>
+          {tab === "code" ? (
+            <CodeView label={view.codeLabel} lines={view.code} />
+          ) : null}
+          <VerificationActivity
+            log={tab === "code" ? view.codeActivity : view.receipt}
+            note={view.activityNote}
+            unavailable={unavailable}
+          />
+        </>
       )}
       <ArtifactFlowSheets
         flow={flow}

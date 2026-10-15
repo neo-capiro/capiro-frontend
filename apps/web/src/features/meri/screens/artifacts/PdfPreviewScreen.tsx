@@ -20,17 +20,21 @@ export type PdfPreviewView = {
   details: readonly DetailItem[];
 };
 
-/** 03.03 PDF and multi-page preview: page rail, read-only page and preview checks. */
+/** 03.03 PDF and multi-page preview (and 03.03A to C opened at a later page): page rail, read-only page and preview checks. */
 export function PdfPreviewScreen({
   view,
   reviseHref,
   unavailable,
+  initialPageIndex = 0,
 }: {
   view: PdfPreviewView;
   reviseHref?: string | undefined;
   unavailable: string;
+  initialPageIndex?: number;
 }) {
-  const [pageId, setPageId] = useState(view.pages[0]?.id ?? "");
+  const [pageId, setPageId] = useState(
+    view.pages[initialPageIndex]?.id ?? view.pages[0]?.id ?? "",
+  );
   const index = Math.max(
     0,
     view.pages.findIndex((page) => page.id === pageId),

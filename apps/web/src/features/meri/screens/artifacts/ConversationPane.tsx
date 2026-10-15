@@ -27,7 +27,7 @@ export function ConversationPane({
         <p className={styles.reply}>{view.reply}</p>
       </div>
       <ArtifactCard file={view.artifact} unavailable={unavailable} />
-      <button type="button" className={ui.ghost} disabled title={unavailable}>
+      <button type="button" className={ui.outline} disabled title={unavailable}>
         <ArrowUpRight aria-hidden /> {view.sourcesLabel}
       </button>
       <MeriComposer

@@ -1,97 +1,13 @@
 import type {
-  DocumentPageView,
+  CommentView,
   DocumentWorkspaceView,
   VersionRow,
 } from "../../screens/artifacts/types";
 import type { PdfPreviewView } from "../../screens/artifacts/PdfPreviewScreen";
+import { briefPages } from "./artifacts-brief";
 import { fixtureHref } from "./href";
 
-/** Synthetic Anduril meeting brief data for 03.02, 03.03, 03.09 and the working draft. */
-const eyebrow = "ANDURIL  /  CLIENT INTELLIGENCE";
-const footer = (page: number) => `Capiro   •   Anduril   •   Page ${page} of 4`;
-const laterPage = (
-  id: string,
-  label: string,
-  page: number,
-  text: string,
-): DocumentPageView => ({
-  id,
-  label,
-  blocks: [
-    { kind: "eyebrow", text: eyebrow },
-    { kind: "heading", text: label },
-    { kind: "paragraph", text },
-    { kind: "divider" },
-    { kind: "footer", text: footer(page) },
-  ],
-});
-
-/** Synthetic Anduril meeting brief shared by the Word, PDF and working-draft frames. */
-const briefPages: readonly DocumentPageView[] = [
-  {
-    id: "page-1",
-    label: "Meeting brief",
-    blocks: [
-      { kind: "eyebrow", text: eyebrow },
-      { kind: "title", text: "Meeting brief" },
-      { kind: "byline", text: "9 October 2026 · Prepared for Jordan Clayton" },
-      { kind: "divider" },
-      { kind: "heading", text: "The decisions to make" },
-      {
-        kind: "paragraph",
-        text: "Align next week’s outreach around FY27 funding, clarify the outstanding restoration request, and confirm the timing of the revised client brief. [1] [2]",
-      },
-      { kind: "heading", text: "Three developments to discuss" },
-      {
-        kind: "check",
-        title: "Funding context",
-        detail:
-          "Review the published defense funding update before the meeting. [1]",
-      },
-      {
-        kind: "check",
-        title: "Open commitment",
-        detail:
-          "The restoration request remains open in the authorized task record. [2]",
-      },
-      {
-        kind: "check",
-        title: "Client communication",
-        detail:
-          "The latest meeting note asks for a concise update with sources. [3]",
-      },
-      { kind: "subheading", text: "Evidence & limitations" },
-      {
-        kind: "note",
-        text: "6 authorized sources · Public records through 8 Oct · Mailbox results through 9 Oct. One older attachment could not be extracted; it is excluded from the summary.",
-      },
-      { kind: "divider" },
-      {
-        kind: "sources",
-        text: "Sources: [1] Public funding update · [2] Client task · [3] Meeting note",
-      },
-      { kind: "footer", text: footer(1) },
-    ],
-  },
-  laterPage(
-    "page-2",
-    "Open commitments",
-    2,
-    "Restoration request: no owner assigned, due 8 Oct and now overdue. Client brief: due 10 Oct. Both come from the authorized task record. [2]",
-  ),
-  laterPage(
-    "page-3",
-    "Recommendations",
-    3,
-    "Confirm the funding priorities. Assign an owner to the restoration request. Agree on the brief’s delivery date. [1] [2]",
-  ),
-  laterPage(
-    "page-4",
-    "Sources",
-    4,
-    "[1] Public funding update, published 8 Oct. [2] Client task, authorized task record retrieved 9 Oct. [3] Meeting note, mailbox result from 9 Oct.",
-  ),
-];
+/** Synthetic Anduril meeting brief data for 03.02, 03.03, 03.09, the working draft and the comment states. */
 
 export const versionRows: readonly VersionRow[] = [
   {
@@ -110,6 +26,18 @@ export const versionRows: readonly VersionRow[] = [
   },
 ];
 
+const sourceLinksReply =
+  "Source links remain with this recommendation, including the strategy review. [3]";
+
+/** The reply already added in this local preview when 13.25 opens. */
+export const addedReply: CommentView = {
+  id: "reply-1",
+  initials: "JC",
+  author: "Jordan Clayton",
+  text: sourceLinksReply,
+  time: "Just now",
+};
+
 const documentBase: Omit<
   DocumentWorkspaceView,
   "heading" | "panelTitle" | "conversation"
@@ -120,14 +48,18 @@ const documentBase: Omit<
     {
       id: "s1",
       label: "[1] Public funding update",
-      detail: "Public record · through 8 Oct",
+      detail: "Public source · Published 8 Oct",
     },
     {
       id: "s2",
-      label: "[2] Client task",
-      detail: "Authorized task record · retrieved 9 Oct",
+      label: "[2] Restoration request",
+      detail: "Client task TASK-2047 · Updated 8 Oct",
     },
-    { id: "s3", label: "[3] Meeting note", detail: "Mailbox result · 9 Oct" },
+    {
+      id: "s3",
+      label: "[3] Strategy review",
+      detail: "Meeting note · 7 Oct",
+    },
   ],
   suggestion: {
     request: "Make the recommendation more concise",
@@ -135,15 +67,17 @@ const documentBase: Omit<
     text: "Confirm FY27 funding priorities, assign an owner to the restoration request, and agree on the next client brief. [1] [2]",
     note: "Source links retained · Review before applying",
   },
-  comments: [
-    {
+  commentThread: {
+    comment: {
       id: "c1",
       initials: "JC",
       author: "Jordan Clayton",
       text: "Keep the source links with this recommendation.",
       time: "Just now",
     },
-  ],
+    replyAuthor: { initials: "JC", author: "Jordan Clayton" },
+    replyDraft: sourceLinksReply,
+  },
   blockTypes: [
     { id: "h1", label: "Heading 1", detail: "Large section heading" },
     { id: "h2", label: "Heading 2", detail: "Subsection heading" },
@@ -166,7 +100,7 @@ const conversation = (openHref?: string) => ({
     detail: "DOCX · v2 · 4 pages · Verified",
     ...(openHref ? { openHref } : {}),
   },
-  sourcesLabel: "View 6 sources",
+  sourcesLabel: "View 3 sources",
   draft: "Make the recommendations more concise.",
 });
 
@@ -205,7 +139,7 @@ export const pdfPreview: PdfPreviewView = {
       detail: "v2 · Created 10:47 AM",
     },
     { id: "pages", label: "Pages", detail: "4 · No overflow found" },
-    { id: "sources", label: "Sources", detail: "6 linked references" },
+    { id: "sources", label: "Sources", detail: "3 linked references" },
     {
       id: "quality",
       label: "Quality check",

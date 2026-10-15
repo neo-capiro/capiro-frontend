@@ -1,105 +1,44 @@
-import type { GeneratedWebView } from "../../screens/artifacts/GeneratedWebScreen";
 import type { PresentationView } from "../../screens/artifacts/PresentationPreviewScreen";
 import type { SpreadsheetView } from "../../screens/artifacts/SpreadsheetPreviewScreen";
 
-/** Synthetic workbook, deck and generated HTML for 03.04 to 03.07. */
+/** Synthetic workbook and deck for 03.04, 03.05 and their tabs and slides (03.04A to B, 03.05A to E). */
 const slide = (
-  id: string,
+  page: number,
   label: string,
   title: string,
-  subtitle: string,
+  subtitle: readonly string[],
   notes: string,
-  page: number,
+  notesSources: string,
 ) => ({
-  id,
+  id: `s${page}`,
   label,
-  eyebrow: "ANDURIL  /  OCTOBER 2026",
+  eyebrow: `ANDURIL / OCTOBER 2026 · SLIDE ${page}`,
   title,
-  subtitle,
-  footer: `Client update  /  0${page}`,
+  subtitle: subtitle.join("\n"),
+  footer: `Client update / 0${page} · Version 1`,
   notes,
-  notesSources: "Sources [2] [3]",
+  notesSources,
 });
-
-const signalSummaryHtml = `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Anduril · Signal summary</title>
-<style>
-:root{color-scheme:light dark;--fg:#0a0a0a;--muted:#756e69;--bg:#f5f5f4;--card:#fff;--line:#e7e5e4}
-@media (prefers-color-scheme:dark){:root{--fg:#f5f5f4;--muted:#afa6a0;--bg:#242424;--card:#0a0a0a;--line:#242424}}
-body{margin:0;padding:32px;font:14px/1.45 system-ui,sans-serif;color:var(--fg);background:var(--card)}
-h1{margin:0 0 20px;font-size:34px;line-height:1.1;letter-spacing:-1px}p{margin:0 0 20px;color:var(--muted);font-size:15px}
-.m{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
-.m div{padding:20px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
-.m span{display:block;font-size:12px;color:var(--muted)}.m b{display:block;margin:8px 0;font-size:34px}
-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
-th{padding:10px;text-align:left;font-size:12px;font-weight:500;color:var(--muted);background:var(--bg)}
-td{padding:10px}tr:nth-child(even) td{background:var(--bg)}
-</style></head>
-<body><main aria-label="Client signal summary"><h1>Anduril · Signal summary</h1>
-<p>A concise view of the evidence in this workspace.</p>
-<section class="m" aria-label="Verified evidence">
-<div><span>Authorized sources</span><b>6</b><span>As of 9 Oct</span></div>
-<div><span>Open commitments</span><b>2</b><span>From task records</span></div>
-<div><span>Verified outputs</span><b>3</b><span>Brief · Workbook · Deck</span></div></section>
-<table><thead><tr><th>Signal</th><th>Evidence</th><th>Next step</th></tr></thead><tbody>
-<tr><td>Funding context</td><td>Public record [1]</td><td>Confirm priorities</td></tr>
-<tr><td>Restoration request</td><td>Client task [2]</td><td>Assign follow-up</td></tr>
-<tr><td>Meeting timing</td><td>Meeting note [3]</td><td>Confirm agenda</td></tr>
-</tbody></table></main></body></html>`;
-
-export const generatedWeb: GeneratedWebView = {
-  headings: {
-    preview: {
-      title: "Client signal summary",
-      description: "signal-summary.html · Version 1 · Isolated preview",
-    },
-    code: {
-      title: "Signal summary source",
-      description: "signal-summary.html · Generated artifact source",
-    },
-    activity: {
-      title: "Signal summary activity",
-      description: "signal-summary.html · Verification run for version 1",
-    },
-  },
-  fileName: "signal-summary.html",
-  html: signalSummaryHtml,
-  previewNote:
-    "Preview links and controls stay within this generated artifact. Open original sources from the evidence drawer.",
-  codeLabel: "HTML · signal-summary.html",
-  code: [
-    "<!doctype html>",
-    '<html lang="en">',
-    "  <head><title>Anduril · Signal summary</title></head>",
-    "  <body>",
-    '    <main aria-label="Client signal summary">',
-    "      <h1>Anduril · Signal summary</h1>",
-    '      <section aria-label="Verified evidence">',
-    "        <h2>Open commitments</h2>",
-    "        <p>2 commitments from authorized task records.</p>",
-    "      </section>",
-    "    </main>",
-    "  </body>",
-    "</html>",
-  ],
-  activity: [
-    "HTML generated",
-    "Preview rendered",
-    "External source links checked",
-    "Accessibility labels present",
-    "Output saved as version 1",
-  ],
-  activityNote:
-    "This view shows run activity. Ask Meri for a change in the conversation.",
-};
 
 const cell = (value: string, formula?: string) =>
   formula ? { value, formula } : { value };
 
 export const spreadsheet: SpreadsheetView = {
-  heading: {
-    title: "Funding analysis",
-    description: "funding-analysis.xlsx · Version 1 · Read-only preview",
+  headings: {
+    summary: {
+      title: "Funding analysis",
+      description: "funding-analysis.xlsx · Version 1 · Read-only preview",
+    },
+    source: {
+      title: "Funding analysis · Source data",
+      description:
+        "funding-analysis.xlsx · v1 · Source sheet · Illustrative fixture, not live award data",
+    },
+    references: {
+      title: "Funding analysis · References",
+      description:
+        "funding-analysis.xlsx · v1 · Referenced inputs and calculation notes",
+    },
   },
   sheetLabel: "funding-analysis.xlsx, sheet 1",
   columns: ["A · Category", "B · FY26", "C · FY27", "D · Change"],
@@ -141,35 +80,13 @@ export const spreadsheet: SpreadsheetView = {
       detail: "Unsupported workbook features are reported before download",
     },
   ],
-  sourceData: [
-    {
-      id: "a",
-      label: "Program A",
-      detail: "FY26 120 · FY27 138 · Illustrative planning data",
-    },
-    {
-      id: "b",
-      label: "Program B",
-      detail: "FY26 40 · FY27 44 · Illustrative planning data",
-    },
-    {
-      id: "c",
-      label: "Program C",
-      detail: "FY26 20 · FY27 24 · Illustrative planning data",
-    },
-  ],
-  references: [
-    {
-      id: "r1",
-      label: "[1] Public funding update",
-      detail: "Public record · through 8 Oct",
-    },
-    {
-      id: "r2",
-      label: "Planning values",
-      detail: "Illustrative synthetic values; no budget source is connected",
-    },
-  ],
+  sourceCaption: "Source data · Values used in the Summary sheet · $M",
+  references: {
+    title: "Illustrative workbook inputs",
+    status: "Information",
+    detail:
+      "This workbook uses the displayed planning fixture: Program A 120 → 138, B 40 → 44 and C 20 → 24 ($M). Summary totals are 180 → 206, a 14.4% increase. These synthetic inputs do not establish federal award facts. The original inputs, formulas and immutable version stay with the workbook.",
+  },
 };
 
 export const presentation: PresentationView = {
@@ -178,53 +95,77 @@ export const presentation: PresentationView = {
     description: "client-update.pptx · 6 slides · Version 1 · Verified",
   },
   slides: [
+    {
+      id: "s1",
+      label: "Overview",
+      eyebrow: "ANDURIL  /  OCTOBER 2026",
+      title: "A focused plan for\nthe next conversation",
+      subtitle: "Funding context · Open commitments · Clear next steps",
+      footer: "Client update  /  01",
+      notes:
+        "Open with the client’s near-term priorities. Ask for confirmation of the restoration request before moving into funding context. Cite the latest task record and meeting note.",
+      notesSources: "Sources [2] [3]",
+    },
     slide(
-      "s1",
-      "Overview",
-      "A focused plan for\nthe next conversation",
-      "Funding context · Open commitments · Clear next steps",
-      "Open with the client’s near-term priorities. Ask for confirmation of the restoration request before moving into funding context. Cite the latest task record and meeting note.",
-      1,
-    ),
-    slide(
-      "s2",
-      "Funding context",
-      "FY27 funding moves\nin the client’s favour",
-      "Published defense funding update · 8 Oct",
-      "Summarize the public funding update and keep the citation visible.",
       2,
+      "Funding context",
+      "Funding context",
+      [
+        "Review the public funding update [1].",
+        "Confirm how the published context relates to client priorities.",
+        "Treat the update as evidence, not a forecast or award decision.",
+      ],
+      "Use public funding update [1] for the published context. Ask the client to confirm its implications. Do not present a funding assumption as an approved award or a complete market search.",
+      "Sources [1]",
     ),
     slide(
-      "s3",
-      "Commitments",
-      "Two commitments\nneed an owner",
-      "Restoration request overdue · Client brief due 10 Oct",
-      "Confirm who owns the restoration request.",
       3,
+      "Commitments",
+      "Open commitments",
+      [
+        "Restoration request · Source task TASK-2047 [2].",
+        "Confirm the accountable owner and intended timing.",
+        "Keep follow-up recommendations separate from recorded facts.",
+      ],
+      "The displayed restoration request is sourced to TASK-2047 [2]. Confirm ownership and timing before drafting a new task. This slide does not execute outreach or create a commitment.",
+      "Sources [2]",
     ),
     slide(
-      "s4",
-      "Recommendations",
-      "Three concise\nrecommendations",
-      "Priorities · Ownership · Delivery date",
-      "Keep each recommendation to one sentence.",
       4,
+      "Recommendations",
+      "Recommendations",
+      [
+        "Lead with a concise executive summary.",
+        "Keep direct source links with each recommendation.",
+        "Request review before changing shared memory or client records.",
+      ],
+      "The strategy review [3] provides briefing context. Recommendations are proposals for discussion. Any governed action requires review of its exact payload and current authority.",
+      "Sources [2] [3]",
     ),
     slide(
-      "s5",
-      "Next steps",
-      "Agree the next\nclient touchpoint",
-      "Brief delivery · Follow-up meeting",
-      "Close with the agreed dates.",
       5,
+      "Next steps",
+      "Next steps",
+      [
+        "Confirm priorities at the client meeting.",
+        "Resolve owner and timing for the restoration follow-up.",
+        "Prepare a sourced draft for review; preserve version history.",
+      ],
+      "Use the client task [2] and strategy review [3] to confirm the next steps. A task proposal is separate from a created task. Do not file or send this deck without required review.",
+      "Sources [2] [3]",
     ),
     slide(
-      "s6",
-      "Sources",
-      "Sources",
-      "[1] Public funding update · [2] Client task · [3] Meeting note",
-      "All references link to authorized records.",
       6,
+      "Sources",
+      "Sources and limitations",
+      [
+        "[1] Public funding update · Published 8 Oct.",
+        "[2] Restoration request · Source task TASK-2047.",
+        "[3] Strategy review · Meeting note 7 Oct.",
+        "Retrieved evidence may be partial; access is checked again.",
+      ],
+      "This synthetic example defines exactly 3 contributing sources. Each reference opens the matching evidence view. A zero-result search or missing source is not proof of absence. Permissions and freshness are evaluated at use time.",
+      "View all 3 sources",
     ),
   ],
   checks: [

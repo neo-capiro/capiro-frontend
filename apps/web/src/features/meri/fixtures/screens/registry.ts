@@ -1,6 +1,7 @@
 import type { MeriSection } from "../../../../shared/shell/SidebarDestinations";
 import { approvalScreens } from "./approvals";
 import { artifactScreens } from "./artifacts";
+import { artifactPageScreens } from "./artifacts-pages";
 import { browserScreens } from "./browser";
 import { conversationScreens } from "./conversation";
 import { fileScreens } from "./files";
@@ -27,6 +28,7 @@ export const fixtureScreens: readonly RegisteredFixtureScreen[] = [
   ...inSection("conversations", browserScreens),
   ...inSection("runs", runScreens),
   ...inSection("files", artifactScreens),
+  ...inSection("files", artifactPageScreens),
   ...inSection("files", fileScreens),
   ...inSection("approvals", approvalScreens),
   ...inSection("routines", routineScreens),
