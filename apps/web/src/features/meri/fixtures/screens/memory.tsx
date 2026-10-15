@@ -1,63 +1,22 @@
-import {
-  MemoryRecallScreen,
-  type MemoryRecallView,
-} from "../../screens/memory/MemoryRecallScreen";
+import { MemoryRecallScreen } from "../../screens/memory/MemoryRecallScreen";
 import {
   MemoryDetailScreen,
   type MemoryDetailView,
 } from "../../screens/memory/MemoryDetailScreen";
 import {
-  MemoryProposalScreen,
-  type MemoryProposalView,
-} from "../../screens/memory/MemoryProposalScreen";
-import {
   MemoryApprovedScreen,
   type MemoryApprovedView,
 } from "../../screens/memory/MemoryApprovedScreen";
 import { fixtureHref, fixtureUnavailable } from "./href";
+import {
+  currentFact,
+  history,
+  proposedFact,
+  recallAfterApproval,
+  recallBefore,
+  supersededHistory,
+} from "./memory-records";
 import type { FixtureScreen } from "./types";
-
-const currentFact =
-  "Keep client briefs concise and include direct source links.";
-const proposedFact =
-  "Use a one-page executive summary, with source links and detailed evidence in an appendix.";
-
-const recall: MemoryRecallView = {
-  client: "Anduril",
-  initialQuery: "Anduril priorities",
-  items: [
-    {
-      id: "client-priority",
-      title: "Client priority · Current",
-      meta: "Approved · Anduril · Owned by client team",
-      fact: currentFact,
-      status: { label: "Current", tone: "success" },
-      historical: false,
-      terms: ["priorities", "briefing"],
-      evidenceHref: fixtureHref("memory-detail"),
-      correctionHref: fixtureHref("memory-proposal"),
-    },
-    {
-      id: "briefing-format",
-      title: "Preferred briefing format",
-      meta: "Personal · Jordan Clayton",
-      fact: "Use a one-page executive summary before the detailed appendix.",
-      status: { label: "Current", tone: "neutral" },
-      historical: false,
-      terms: ["priorities", "briefing", "format"],
-    },
-    {
-      id: "funding-assumption",
-      title: "Funding assumption · Superseded",
-      meta: "Historical · Valid through 7 Oct",
-      fact: "Replaced after the latest public funding update.",
-      status: { label: "Historical", tone: "warning" },
-      historical: true,
-      terms: ["priorities", "funding"],
-      evidenceHref: fixtureHref("coverage-details"),
-    },
-  ],
-};
 
 const detail: MemoryDetailView = {
   title: "Client briefing preference",
@@ -86,20 +45,10 @@ const detail: MemoryDetailView = {
   },
 };
 
-const proposal: MemoryProposalView = {
-  title: "Update briefing preference",
-  reference: "Proposal MP-1042 · Anduril",
-  currentFact,
-  proposedFact,
-  owner: "Anduril client team",
-  visibility: "Authorized client team",
-  reason: "Strategy review note · 7 Oct · Explicit client preference",
-};
-
 const approved: MemoryApprovedView = {
   description: "Approved fact · Anduril · MP-1042",
   review:
-    "Approved by Jordan Clayton at 10:49 AM. The previous fact is retained as superseded history.",
+    "Approved by an authorized client reviewer at 10:49 AM. The previous fact is retained as superseded history.",
   fact: proposedFact,
   fields: [
     {
@@ -113,6 +62,16 @@ const approved: MemoryApprovedView = {
   ],
 };
 
+/** Before approval, History opens 05.04B; after it, the views pair 05.08A with 05.08B. */
+const beforeApproval = {
+  current: fixtureHref("memory-recall"),
+  history: fixtureHref("memory-history"),
+};
+const afterApproval = {
+  current: fixtureHref("memory-current-approved"),
+  history: fixtureHref("memory-superseded"),
+};
+
 export const memoryScreens: readonly FixtureScreen[] = [
   {
     slug: "memory-recall",
@@ -120,7 +79,24 @@ export const memoryScreens: readonly FixtureScreen[] = [
     figmaNode: "1064:147042",
     title: "Institutional Memory recall",
     Screen: () => (
-      <MemoryRecallScreen view={recall} unavailable={fixtureUnavailable} />
+      <MemoryRecallScreen
+        view={recallBefore}
+        viewHrefs={beforeApproval}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "memory-history",
+    figmaId: "05.04B",
+    figmaNode: "3019:23371",
+    title: "Institutional Memory history",
+    Screen: () => (
+      <MemoryRecallScreen
+        view={history}
+        viewHrefs={beforeApproval}
+        unavailable={fixtureUnavailable}
+      />
     ),
   },
   {
@@ -139,19 +115,6 @@ export const memoryScreens: readonly FixtureScreen[] = [
     ),
   },
   {
-    slug: "memory-proposal",
-    figmaId: "05.06",
-    figmaNode: "1064:147204",
-    title: "Memory update proposal",
-    Screen: () => (
-      <MemoryProposalScreen
-        view={proposal}
-        closeHref={fixtureHref("memory-detail")}
-        unavailable={fixtureUnavailable}
-      />
-    ),
-  },
-  {
     slug: "memory-approved",
     figmaId: "05.08",
     figmaNode: "1064:147320",
@@ -160,7 +123,33 @@ export const memoryScreens: readonly FixtureScreen[] = [
       <MemoryApprovedScreen
         view={approved}
         evidenceHref={fixtureHref("evidence-sources")}
-        memoryHref={fixtureHref("memory-recall")}
+        memoryHref={fixtureHref("memory-current-approved")}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "memory-current-approved",
+    figmaId: "05.08A",
+    figmaNode: "3019:23613",
+    title: "Current memory after approval",
+    Screen: () => (
+      <MemoryRecallScreen
+        view={recallAfterApproval}
+        viewHrefs={afterApproval}
+        unavailable={fixtureUnavailable}
+      />
+    ),
+  },
+  {
+    slug: "memory-superseded",
+    figmaId: "05.08B",
+    figmaNode: "3050:34741",
+    title: "Superseded briefing preference",
+    Screen: () => (
+      <MemoryRecallScreen
+        view={supersededHistory}
+        viewHrefs={afterApproval}
         unavailable={fixtureUnavailable}
       />
     ),
