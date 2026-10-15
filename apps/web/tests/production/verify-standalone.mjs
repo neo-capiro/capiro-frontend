@@ -220,6 +220,7 @@ try {
     }
     await page.setViewportSize({ width: 1440, height: 1040 });
     await page.getByRole("link", { name: "Modules", exact: true }).click();
+    await page.waitForURL("**/modules");
     await page
       .getByRole("heading", { name: "Connection setup required" })
       .waitFor();
