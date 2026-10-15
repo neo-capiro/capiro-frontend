@@ -81,7 +81,7 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 04.07 | Filing and download receipts | 1064:146629 | Built: synthetic fixture `/meri/fixture/filing-receipt` | Artifact filing command and download exist. No upload or extraction API found. |
 | 04.08 | Artifact sharing and source scopes | 3019:28559 | Built: synthetic fixture `/meri/fixture/artifact-sharing` | Follows parent flow |
 | 04.08A | Source access review requested | 3024:26544 | Built: synthetic fixture `/meri/fixture/source-access-review-requested` | Follows parent flow |
-| 04.08B | Artifact sharing opened from document workspace | 3064:40201 | Not built (added 15 Oct) | Follows parent flow |
+| 04.08B | Artifact sharing opened from document workspace | 3064:40201 | Built: synthetic fixture `/meri/fixture/artifact-sharing-from-document` | Follows parent flow |
 | 05.01 | Evidence and citations | 1064:146715 | Built: synthetic fixture `/meri/fixture/evidence-sources` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.02 | Data coverage and capabilities | 1064:146817 | Built: synthetic fixture `/meri/fixture/data-coverage` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
 | 05.03 | Freshness, partial and historical results | 1064:146948 | Built: synthetic fixture `/meri/fixture/coverage-details` | Retrieval contracts exist with zero bound handlers. Memory read is partial. Memory update is absent. |
@@ -216,8 +216,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | 13.24 | Reply to document comment | 3045:34297 | Built: synthetic fixture `/meri/fixture/document-comment-reply` | Follows parent flow |
 | 13.25 | Document comment reply added | 3045:34315 | Built: synthetic fixture `/meri/fixture/document-comment-reply-added` | Follows parent flow |
 | 13.26 | Document comment resolved | 3045:34333 | Built: synthetic fixture `/meri/fixture/document-comment-resolved` | Follows parent flow |
-| 13.27 | Comment reopened | 3064:35947 | Not built (added 15 Oct) | Follows parent flow |
-| 13.28 | Comment thread with reply | 3064:35975 | Not built (added 15 Oct) | Follows parent flow |
+| 13.27 | Comment reopened | 3064:35947 | Built: synthetic fixture `/meri/fixture/document-comment-reopened` | Follows parent flow |
+| 13.28 | Comment thread with reply | 3064:35975 | Built: synthetic fixture `/meri/fixture/document-comment-open-thread` | Follows parent flow |
 | Overlay · Run cancelled |  | 1064:150073 | Absent | Follows parent flow |
 | Overlay · Revise funding analysis |  | 1064:150079 | Absent | Follows parent flow |
 | Overlay · File funding analysis |  | 1064:150093 | Absent | Follows parent flow |
@@ -249,8 +249,8 @@ Status as of the merged lanes on branch `meri/figma-34-ui`. "Built" means the fr
 | Overlay · Problem report sent |  | 3022:32427 | Built: synthetic fixture `/meri/fixture/problem-report-sent` | Follows parent flow |
 | Overlay · Signed out |  | 3022:32475 | Built: synthetic fixture `/meri/fixture/signed-out` | Follows parent flow |
 | Overlay · Updates panel |  | 3022:32579 | Built: synthetic fixture `/meri/fixture/updates-panel` | Follows parent flow |
-| Overlay · Download PDF |  | 3064:40166 | Not built (added 15 Oct) | Follows parent flow |
-| Overlay · Download source bundle |  | 3064:40160 | Not built (added 15 Oct) | Follows parent flow |
+| Overlay · Download PDF |  | 3064:40166 | Built: synthetic fixture `/meri/fixture/download-pdf` | Follows parent flow |
+| Overlay · Download source bundle |  | 3064:40160 | Built: synthetic fixture `/meri/fixture/download-source-bundle` | Follows parent flow |
 | Document overlay · blocks |  | 1064:150601 | Absent | Follows parent flow |
 | Document overlay · revision |  | 1064:150603 | Absent | Follows parent flow |
 | Document overlay · mobileRevision |  | 1064:150605 | Built: synthetic fixture `/meri/fixture/document-mobile-revision` | Follows parent flow |

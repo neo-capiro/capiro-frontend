@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState, type Ref } from "react";
 import { Sparkle } from "lucide-react";
 import { LinkAction } from "../../ui/LinkAction";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import ui from "../../ui/meri-ui.module.css";
+import { DownloadDialog } from "../files/DownloadDialog";
+import type { DownloadView } from "../files/types";
 import { ArtifactActionBar } from "./ArtifactActionBar";
 import { DetailList } from "./DetailList";
 import { DocumentPage } from "./DocumentPage";
@@ -18,20 +20,67 @@ export type PdfPreviewView = {
   title: string;
   pages: readonly DocumentPageView[];
   details: readonly DetailItem[];
+  /** Exact-version formats behind Download PDF (Overlay · Download PDF). */
+  download: DownloadView;
 };
 
-/** 03.03 PDF and multi-page preview (and 03.03A to C opened at a later page): page rail, read-only page and preview checks. */
+/** Preview details beside the page: its checks, Download PDF and the revision route. */
+function PreviewDetails({
+  details,
+  downloadRef,
+  onDownload,
+  reviseHref,
+  unavailable,
+}: {
+  details: readonly DetailItem[];
+  downloadRef: Ref<HTMLButtonElement>;
+  onDownload: () => void;
+  reviseHref: string | undefined;
+  unavailable: string;
+}) {
+  return (
+    <section
+      className={`${shared.panel} ${styles.side}`}
+      aria-label="Preview details"
+    >
+      <h2 className={shared.panelTitle}>Preview details</h2>
+      <DetailList label="Preview checks" items={details} />
+      <button
+        ref={downloadRef}
+        type="button"
+        className={ui.primary}
+        aria-haspopup="dialog"
+        onClick={onDownload}
+      >
+        Download PDF
+      </button>
+      <LinkAction variant="outline" href={reviseHref} unavailable={unavailable}>
+        <Sparkle aria-hidden /> Ask Meri to revise
+      </LinkAction>
+    </section>
+  );
+}
+
+/**
+ * 03.03 PDF and multi-page preview (and 03.03A to C opened at a later page): page rail,
+ * read-only page and preview checks. Download PDF opens the exact-version download
+ * dialog (Overlay · Download PDF), open on arrival with `downloadOnLoad`.
+ */
 export function PdfPreviewScreen({
   view,
   reviseHref,
   unavailable,
   initialPageIndex = 0,
+  downloadOnLoad = false,
 }: {
   view: PdfPreviewView;
   reviseHref?: string | undefined;
   unavailable: string;
   initialPageIndex?: number;
+  downloadOnLoad?: boolean | undefined;
 }) {
+  const [downloadOpen, setDownloadOpen] = useState(downloadOnLoad);
+  const downloadButton = useRef<HTMLButtonElement>(null);
   const [pageId, setPageId] = useState(
     view.pages[initialPageIndex]?.id ?? view.pages[0]?.id ?? "",
   );
@@ -68,29 +117,30 @@ export function PdfPreviewScreen({
             className={documentStyles.pdfPage}
           />
         ) : null}
-        <section
-          className={`${shared.panel} ${styles.side}`}
-          aria-label="Preview details"
-        >
-          <h2 className={shared.panelTitle}>Preview details</h2>
-          <DetailList label="Preview checks" items={view.details} />
+        <PreviewDetails
+          details={view.details}
+          downloadRef={downloadButton}
+          onDownload={() => setDownloadOpen(true)}
+          reviseHref={reviseHref}
+          unavailable={unavailable}
+        />
+      </div>
+      <DownloadDialog
+        open={downloadOpen}
+        onOpenChange={setDownloadOpen}
+        view={view.download}
+        unavailable={unavailable}
+        returnFocus={downloadButton}
+        footer={
           <button
             type="button"
-            className={ui.primary}
-            disabled
-            title={unavailable}
+            className={ui.ghost}
+            onClick={() => setDownloadOpen(false)}
           >
-            Download PDF
+            Cancel
           </button>
-          <LinkAction
-            variant="outline"
-            href={reviseHref}
-            unavailable={unavailable}
-          >
-            <Sparkle aria-hidden /> Ask Meri to revise
-          </LinkAction>
-        </section>
-      </div>
+        }
+      />
     </div>
   );
 }

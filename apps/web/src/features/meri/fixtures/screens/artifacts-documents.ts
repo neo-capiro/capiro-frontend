@@ -5,6 +5,7 @@ import type {
 } from "../../screens/artifacts/types";
 import type { PdfPreviewView } from "../../screens/artifacts/PdfPreviewScreen";
 import { briefPages } from "./artifacts-brief";
+import { briefBundleOption } from "./files-sharing";
 import { fixtureHref } from "./href";
 
 /** Synthetic Anduril meeting brief data for 03.02, 03.03, 03.09, the working draft and the comment states. */
@@ -29,7 +30,7 @@ export const versionRows: readonly VersionRow[] = [
 const sourceLinksReply =
   "Source links remain with this recommendation, including the strategy review. [3]";
 
-/** The reply already added in this local preview when 13.25 opens. */
+/** The reply already added in this local preview when 13.25 to 13.28 open. */
 export const addedReply: CommentView = {
   id: "reply-1",
   initials: "JC",
@@ -146,4 +147,13 @@ export const pdfPreview: PdfPreviewView = {
       detail: "Layout and links verified",
     },
   ],
+  download: {
+    title: "meeting-brief-v2.pdf",
+    description:
+      "Exact immutable version 2 · Verified · Same source version as DOCX",
+    options: [
+      { id: "pdf", label: "PDF", detail: "4 pages · Read-only · Verified" },
+      briefBundleOption,
+    ],
+  },
 };

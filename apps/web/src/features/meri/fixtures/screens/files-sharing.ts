@@ -1,7 +1,20 @@
+import type { SourceScopeDetailsView } from "../../screens/files/SourceScopeDetails";
 import type { SourceScopeView } from "../../screens/files/SourceScopeScreen";
+import type { DownloadOption } from "../../screens/files/types";
 import { fixtureHref } from "./href";
 
-/** Synthetic 04.08 / 04.08A data: artifact v2 keeps all contributing source scopes; AR-1042 grants no access. */
+/**
+ * Synthetic 04.08 / 04.08A / 04.08B data: artifact v2 keeps all contributing source
+ * scopes; AR-1042 grants no access; the source bundle holds only sources you can open.
+ */
+
+/** The meeting brief's permitted source bundle, offered by the sharing view and the PDF download. */
+export const briefBundleOption: DownloadOption = {
+  id: "bundle",
+  label: "Permitted source bundle",
+  detail: "ZIP · Only sources you can open",
+};
+
 const scopeBase = {
   context:
     "meeting-brief-v2.docx · v2 · Verified. Filing keeps its original source permissions and provenance.",
@@ -11,13 +24,8 @@ const scopeBase = {
   audience: "Jordan Clayton · Intersection of all contributing permissions",
 };
 
-export const artifactSharing: SourceScopeView = {
+const sharing: Omit<SourceScopeDetailsView, "actions"> = {
   ...scopeBase,
-  heading: {
-    title: "Share a verified artifact",
-    description:
-      "The most restricted contributing source controls who can open this exact version.",
-  },
   title: "Artifact access and source scopes",
   result:
     "Blocked · Destination access is broader than the contributing mailbox scope",
@@ -26,20 +34,57 @@ export const artifactSharing: SourceScopeView = {
     detail:
       "Filing cannot expand access or remove provenance. Request approval to make the contributing mailbox source available to the intended audience, or choose a narrower destination. Access is rechecked before filing.",
   },
-  actions: [
-    {
-      id: "cancel",
-      label: "Cancel",
-      variant: "outline",
-      href: fixtureHref("word-document"),
-    },
-    {
-      id: "request",
-      label: "Request access review",
-      variant: "primary",
-      href: fixtureHref("source-access-review-requested"),
-    },
-  ],
+  bundle: {
+    title: "meeting-brief-v2-sources.zip",
+    description:
+      "Permitted source bundle · Exact version v2 · Only sources you can open",
+    options: [briefBundleOption],
+  },
+};
+
+const sharingActions = (
+  leave: SourceScopeDetailsView["actions"][number],
+): SourceScopeDetailsView["actions"] => [
+  leave,
+  {
+    id: "bundle",
+    label: "Download source bundle",
+    variant: "outline",
+    local: "bundle",
+  },
+  {
+    id: "request",
+    label: "Request access review",
+    variant: "primary",
+    href: fixtureHref("source-access-review-requested"),
+  },
+];
+
+/** 04.08 as its own page; Cancel returns to the document. */
+export const artifactSharing: SourceScopeView = {
+  ...sharing,
+  heading: {
+    title: "Share a verified artifact",
+    description:
+      "The most restricted contributing source controls who can open this exact version.",
+  },
+  actions: sharingActions({
+    id: "cancel",
+    label: "Cancel",
+    variant: "outline",
+    href: fixtureHref("word-document"),
+  }),
+};
+
+/** 04.08B: the same view as a dialog over the document; Back to document closes it. */
+export const documentSharing: SourceScopeDetailsView = {
+  ...sharing,
+  actions: sharingActions({
+    id: "back",
+    label: "Back to document",
+    variant: "outline",
+    local: "close",
+  }),
 };
 
 export const accessReviewRequested: SourceScopeView = {

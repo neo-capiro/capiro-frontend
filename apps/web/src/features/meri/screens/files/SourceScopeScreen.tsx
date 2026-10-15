@@ -1,52 +1,36 @@
-import { useId } from "react";
-import { FormField } from "../../ui/FormField";
+"use client";
+import { useRef, useState } from "react";
 import { InlineDialog } from "../../ui/InlineDialog";
-import { LinkAction } from "../../ui/LinkAction";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
-import { Notice } from "../../ui/Notice";
-import { StatusPill } from "../../ui/StatusPill";
 import ui from "../../ui/meri-ui.module.css";
+import { DownloadDialog } from "./DownloadDialog";
+import {
+  SourceScopeDetails,
+  type SourceScopeDetailsView,
+} from "./SourceScopeDetails";
 import type { Heading } from "./types";
 import styles from "./files.module.css";
 
-/** A navigation from the scope dialog; without a registered destination it renders disabled. */
-export type ScopeAction = {
-  id: string;
-  label: string;
-  variant: "primary" | "outline";
-  href?: string;
-};
-
-/** An artifact version's combined source scope and the filing outcome it allows. */
-export type SourceScopeView = {
-  heading: Heading;
-  title: string;
-  context: string;
-  /** Every contributing source scope the version retains. */
-  scopes: readonly string[];
-  client: string;
-  destination: string;
-  audience: string;
-  result: string;
-  notice: { title: string; detail: string };
-  actions: readonly ScopeAction[];
-};
+export type SourceScopeView = SourceScopeDetailsView & { heading: Heading };
 
 /**
- * 04.08 Artifact sharing and source scopes and 04.08A Source access review requested:
- * the exact version keeps all contributing source scopes, so a broader destination is
- * blocked until a review is decided; requesting review grants no access and files nothing.
+ * 04.08 Artifact sharing and source scopes and 04.08A Source access review requested,
+ * with the permitted source bundle download (Overlay · Download source bundle) when
+ * the view offers one; `bundleOnLoad` opens that overlay on arrival.
  */
 export function SourceScopeScreen({
   view,
   closeHref,
   unavailable,
+  bundleOnLoad = false,
 }: {
   view: SourceScopeView;
   closeHref?: string | undefined;
   unavailable: string;
+  bundleOnLoad?: boolean;
 }) {
-  const scopesLabel = useId();
+  const [bundleOpen, setBundleOpen] = useState(bundleOnLoad);
+  const bundleButton = useRef<HTMLButtonElement>(null);
   return (
     <div className={`${ui.page} ${styles.screen}`}>
       <MeriPageHeading
@@ -59,43 +43,31 @@ export function SourceScopeScreen({
         closeHref={closeHref}
         unavailable={unavailable}
       >
-        <div className={styles.scopes}>
-          <p id={scopesLabel} className={styles.scopeLabel}>
-            Contributing source scopes
-          </p>
-          <ul aria-labelledby={scopesLabel}>
-            {view.scopes.map((scope) => (
-              <li key={scope}>
-                <StatusPill>{scope}</StatusPill>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <FormField label="Destination client" value={view.client} />
-        <FormField label="Requested destination" value={view.destination} />
-        <FormField
-          label="Who can open this version now"
-          value={view.audience}
+        <SourceScopeDetails
+          view={view}
+          handlers={view.bundle ? { bundle: () => setBundleOpen(true) } : {}}
+          bundleRef={bundleButton}
+          unavailable={unavailable}
         />
-        <FormField label="Filing result" value={view.result} />
-        <div className={styles.full}>
-          <Notice tone="warning" title={view.notice.title}>
-            {view.notice.detail}
-          </Notice>
-        </div>
-        <div className={ui.row}>
-          {view.actions.map((action) => (
-            <LinkAction
-              key={action.id}
-              variant={action.variant}
-              href={action.href}
-              unavailable={unavailable}
-            >
-              {action.label}
-            </LinkAction>
-          ))}
-        </div>
       </InlineDialog>
+      {view.bundle ? (
+        <DownloadDialog
+          open={bundleOpen}
+          onOpenChange={setBundleOpen}
+          view={view.bundle}
+          unavailable={unavailable}
+          returnFocus={bundleButton}
+          footer={
+            <button
+              type="button"
+              className={ui.ghost}
+              onClick={() => setBundleOpen(false)}
+            >
+              Cancel
+            </button>
+          }
+        />
+      ) : null}
     </div>
   );
 }

@@ -28,10 +28,14 @@ import {
   fundingAnalysisFlow,
   signalSummaryFlow,
 } from "./files-flows";
+import { documentSharing } from "./files-sharing";
 import { fixtureHref, fixtureUnavailable } from "./href";
 import type { FixtureScreen } from "./types";
 
-/** 03.02 Word document workspace; its page (03.02A to C) and comment (13.24 to 13.26) frames open it elsewhere. */
+/**
+ * 03.02 Word document workspace; its page (03.02A to C), comment (13.24 to 13.28) and
+ * sharing (04.08B) frames open it elsewhere.
+ */
 export function WordDocumentFixture({
   opening,
 }: {
@@ -43,6 +47,7 @@ export function WordDocumentFixture({
       editable={false}
       unavailable={fixtureUnavailable}
       opening={opening}
+      sharing={documentSharing}
       links={{
         download: fixtureHref("download-artifact"),
         revise: fixtureHref("revise-artifact"),
@@ -54,14 +59,21 @@ export function WordDocumentFixture({
   );
 }
 
-/** 03.03 PDF preview, opened at a later page by 03.03A to C. */
-export function PdfPreviewFixture({ pageIndex }: { pageIndex?: number }) {
+/** 03.03 PDF preview, opened at a later page by 03.03A to C or with Overlay · Download PDF open. */
+export function PdfPreviewFixture({
+  pageIndex,
+  downloadOnLoad,
+}: {
+  pageIndex?: number;
+  downloadOnLoad?: boolean;
+}) {
   return (
     <PdfPreviewScreen
       reviseHref={fixtureHref("revise-artifact")}
       unavailable={fixtureUnavailable}
       view={pdfPreview}
       initialPageIndex={pageIndex}
+      downloadOnLoad={downloadOnLoad}
     />
   );
 }
