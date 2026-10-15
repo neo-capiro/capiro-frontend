@@ -50,21 +50,10 @@
   line-height: 1.45;
   letter-spacing: -0.039px;
 }
-.body {
-  font-size: 14px;
-  line-height: 1.45;
-  letter-spacing: -0.07px;
-}
 .lede {
   font-size: 15px;
   line-height: 1.5;
   letter-spacing: -0.075px;
-}
-.statTitle {
-  font-size: 22px;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.44px;
 }
 .largeTitle {
   font-size: 20px;
@@ -78,34 +67,6 @@
   font-weight: 600;
   letter-spacing: -0.15px;
 }
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-.field label {
-  font-size: 12px;
-  line-height: 1.2;
-  font-weight: 500;
-}
-.field [data-slot="input"] {
-  height: 44px;
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-  color: var(--foreground);
-  font: inherit;
-  font-size: 14px;
-  line-height: 1.45;
-  letter-spacing: -0.07px;
-}
-.field [data-slot="input"]:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 1px;
-}
 /* Meri/Status pills keep the fixed Figma widths of their slot. */
 .pillSlot > span {
   min-width: var(--pill-width, 130px);
@@ -113,7 +74,6 @@
 /* The global reset covers p, h1 and h2 only. */
 .sourceCard h3,
 .sectionTitle,
-.statTitle,
 .largeTitle {
   margin: 0;
 }

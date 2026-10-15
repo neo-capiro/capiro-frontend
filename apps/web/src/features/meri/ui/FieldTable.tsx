@@ -1,24 +1,24 @@
 "use client";
 import { DataTable, type DataColumn } from "./DataTable";
-import surfaces from "./surfaces.module.css";
+import styles from "./panel.module.css";
 
 export type FieldRow = { label: string; value: string };
-type Row = FieldRow & { id: string };
+type KeyedRow = FieldRow & { id: string };
 
-/** Two-column field/value record table (evidence, memory and governance fields). */
+/** Two-column field/value record table for evidence, memory, action, receipt and configuration details. */
 export function FieldTable({
   caption,
   fieldLabel,
   rows,
-  shares,
+  shares = [280, 824],
 }: {
   caption: string;
   fieldLabel: string;
   rows: readonly FieldRow[];
   /** Field and value column shares, matching the Figma column geometry. */
-  shares: readonly [number, number];
+  shares?: readonly [number, number];
 }) {
-  const columns: readonly DataColumn<Row>[] = [
+  const columns: readonly DataColumn<KeyedRow>[] = [
     {
       key: "field",
       label: fieldLabel,
@@ -33,7 +33,7 @@ export function FieldTable({
     },
   ];
   return (
-    <div className={surfaces.stretch}>
+    <div className={styles.full}>
       <DataTable
         caption={caption}
         columns={columns}

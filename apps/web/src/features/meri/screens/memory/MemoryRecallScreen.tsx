@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
-import { TextField } from "../../ui/TextField";
+import { FormField } from "../../ui/FormField";
 import { Notice } from "../../ui/Notice";
 import ui from "../../ui/meri-ui.module.css";
 import { MemoryCard, type MemoryItem } from "./MemoryCard";
@@ -49,7 +49,7 @@ export function MemoryRecallScreen({
         description="Approved knowledge, personal memory and sourced history"
       />
       <div className={styles.search} role="search" aria-label="Memory">
-        <TextField
+        <FormField
           label="Search memory"
           type="search"
           value={query}

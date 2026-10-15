@@ -2,6 +2,7 @@ import { Sparkle } from "lucide-react";
 import { StatusPill, type StatusTone } from "../../ui/StatusPill";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./memory.module.css";
 
@@ -36,7 +37,7 @@ export function MemoryCard({
         {item.title}
       </h2>
       <p className={surfaces.caption}>{item.meta}</p>
-      <p className={surfaces.body}>{item.fact}</p>
+      <p className={panel.body}>{item.fact}</p>
       <div className={`${ui.row} ${surfaces.pillSlot}`}>
         <StatusPill tone={item.status.tone}>{item.status.label}</StatusPill>
         <LinkAction

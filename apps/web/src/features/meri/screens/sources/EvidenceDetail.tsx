@@ -4,6 +4,7 @@ import { StatusPill, type StatusTone } from "../../ui/StatusPill";
 import { FieldTable, type FieldRow } from "../../ui/FieldTable";
 import type { SourceSummary } from "../../ui/SourceCard";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./sources.module.css";
 
@@ -29,12 +30,7 @@ export function EvidenceDetail({
   const headingId = `evidence-${source.id}`;
   return (
     <section className={surfaces.panel} aria-labelledby={headingId}>
-      <h2
-        id={headingId}
-        ref={headingRef}
-        tabIndex={-1}
-        className={surfaces.statTitle}
-      >
+      <h2 id={headingId} ref={headingRef} tabIndex={-1} className={panel.title}>
         {source.title}
       </h2>
       <span className={`${surfaces.pillSlot} ${styles.statusWide}`}>

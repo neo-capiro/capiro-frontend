@@ -4,6 +4,7 @@ import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { Notice } from "../../ui/Notice";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./sources.module.css";
 
@@ -92,7 +93,7 @@ export function CoverageDetailsScreen({
         <h2 id="historical-source" className={surfaces.largeTitle}>
           {view.historical.title}
         </h2>
-        <p className={surfaces.body}>{view.historical.detail}</p>
+        <p className={panel.body}>{view.historical.detail}</p>
         <LinkAction
           variant="primary"
           href={currentEvidenceHref}

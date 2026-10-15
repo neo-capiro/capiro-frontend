@@ -4,6 +4,7 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { DataTable, type DataColumn } from "../../ui/DataTable";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./sources.module.css";
 
@@ -104,7 +105,7 @@ export function DataCoverageScreen({
         <h2 id="enabled-actions" className={surfaces.sectionTitle}>
           Enabled actions
         </h2>
-        <p className={surfaces.body}>{view.enabledActions.join(" · ")}</p>
+        <p className={panel.body}>{view.enabledActions.join(" · ")}</p>
         <p className={surfaces.caption}>
           Reading a source does not grant permission to change it. Action access
           is checked separately.

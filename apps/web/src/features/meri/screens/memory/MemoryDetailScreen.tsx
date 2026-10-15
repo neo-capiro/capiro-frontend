@@ -5,6 +5,7 @@ import { SourceCard, type SourceSummary } from "../../ui/SourceCard";
 import { Notice } from "../../ui/Notice";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./memory.module.css";
 
@@ -45,7 +46,7 @@ export function MemoryDetailScreen({
       </div>
       <div className={styles.detailLayout}>
         <section className={surfaces.card} aria-labelledby="memory-fact">
-          <h2 id="memory-fact" className={surfaces.statTitle}>
+          <h2 id="memory-fact" className={panel.title}>
             {view.fact}
           </h2>
           <FieldTable

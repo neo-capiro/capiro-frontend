@@ -3,6 +3,7 @@ import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { Notice } from "../../ui/Notice";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./sources.module.css";
 
@@ -34,10 +35,10 @@ export function AccessChangedScreen({
         aria-labelledby="clean-recovery"
       >
         <Users aria-hidden strokeWidth={1.5} />
-        <h2 id="clean-recovery" className={surfaces.statTitle}>
+        <h2 id="clean-recovery" className={panel.title}>
           Start with your current permissions
         </h2>
-        <p className={surfaces.body}>
+        <p className={panel.body}>
           A clean conversation will use only sources you can access now.
           Previous restricted messages, files and memory will not be copied into
           it.

@@ -1,8 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { Check, X } from "lucide-react";
-import ui from "../../ui/meri-ui.module.css";
-import styles from "./sources.module.css";
+import { ToastCard, ToastRegion } from "../../ui/ToastCard";
 
 type CopyStatus = "idle" | "copied" | "unavailable";
 const DISMISS_AFTER_MS = 6000;
@@ -37,28 +35,19 @@ export function CopyToast({
   onDismiss: () => void;
 }) {
   return (
-    <div role="status" aria-live="polite">
+    <ToastRegion>
       {status === "idle" ? null : (
-        <div
-          className={styles.toast}
-          data-tone={status === "copied" ? "success" : "danger"}
-        >
-          <span className={styles.toastIcon} aria-hidden>
-            {status === "copied" ? <Check /> : <X />}
-          </span>
-          <div className={styles.toastBody}>
-            <h2>{status === "copied" ? "Copied" : "Copy unavailable"}</h2>
-            <p>
-              {status === "copied"
-                ? `${subject} copied to your clipboard.`
-                : "This browser did not allow clipboard access."}
-            </p>
-            <button type="button" className={ui.ghost} onClick={onDismiss}>
-              <X aria-hidden /> Dismiss
-            </button>
-          </div>
-        </div>
+        <ToastCard
+          title={status === "copied" ? "Copied" : "Copy unavailable"}
+          detail={
+            status === "copied"
+              ? `${subject} copied to your clipboard.`
+              : "This browser did not allow clipboard access."
+          }
+          icon={status === "copied" ? "success" : "danger"}
+          onDismiss={onDismiss}
+        />
       )}
-    </div>
+    </ToastRegion>
   );
 }

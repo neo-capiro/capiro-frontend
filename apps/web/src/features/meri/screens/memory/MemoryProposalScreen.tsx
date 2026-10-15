@@ -3,9 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
-import { TextField } from "../../ui/TextField";
+import { FormField } from "../../ui/FormField";
 import { LinkAction } from "../../ui/LinkAction";
 import ui from "../../ui/meri-ui.module.css";
+import panel from "../../ui/panel.module.css";
 import surfaces from "../../ui/surfaces.module.css";
 import styles from "./memory.module.css";
 
@@ -47,7 +48,7 @@ export function MemoryProposalScreen({
         aria-labelledby="proposal-title"
       >
         <div className={styles.proposalHeading}>
-          <h2 id="proposal-title" className={surfaces.statTitle}>
+          <h2 id="proposal-title" className={panel.title}>
             {view.title}
           </h2>
           {closeHref ? (
@@ -60,21 +61,21 @@ export function MemoryProposalScreen({
             </Link>
           ) : null}
         </div>
-        <p className={`${surfaces.body} ${ui.muted}`}>{view.reference}</p>
+        <p className={`${panel.body} ${ui.muted}`}>{view.reference}</p>
         <div className={styles.pair}>
           <FactCard label="Current approved fact" fact={view.currentFact} />
           <FactCard label="Proposed replacement" fact={view.proposedFact} />
         </div>
         <div className={styles.pair}>
-          <TextField label="Owner" value={owner} onChange={setOwner} />
-          <TextField
+          <FormField label="Owner" value={owner} onChange={setOwner} />
+          <FormField
             label="Visibility"
             value={visibility}
             onChange={setVisibility}
           />
         </div>
         <div className={surfaces.stretch}>
-          <TextField
+          <FormField
             label="Reason and evidence"
             value={reason}
             onChange={setReason}
