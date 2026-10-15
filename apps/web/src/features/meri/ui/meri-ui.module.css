@@ -168,6 +168,12 @@
 .notice[data-tone="success"] h2 {
   color: var(--success);
 }
+/* Toned backgrounds need body text nearer the foreground for 4.5:1 contrast. */
+.notice[data-tone="success"] .muted,
+.notice[data-tone="warning"] .muted,
+.notice[data-tone="danger"] .muted {
+  color: color-mix(in srgb, var(--muted-foreground) 80%, var(--foreground));
+}
 .notice[data-tone="warning"] {
   background: var(--warning-subtle);
 }

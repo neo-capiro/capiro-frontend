@@ -105,9 +105,13 @@ function SourceList({
   return (
     <Sources
       className={styles.sourceList}
-      aria-label="Cited sources"
+      aria-labelledby="cited-sources"
       role="region"
     >
+      {/* Names the region and keeps the cards' level-3 headings in order. */}
+      <h2 id="cited-sources" className="sr-only">
+        Cited sources
+      </h2>
       {sources.slice(0, visibleCount).map(renderCard)}
       {hidden.length ? (
         <>
