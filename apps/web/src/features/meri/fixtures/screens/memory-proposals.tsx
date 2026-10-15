@@ -8,12 +8,15 @@ import {
   loading,
   pending,
   rejected,
+  retrying,
   revised,
   submitting,
 } from "./memory-proposal-states";
 import {
   changed,
+  refreshed,
   restricted,
+  statusConfirmed,
   statusUncertain,
   submissionError,
 } from "./memory-review-states";
@@ -33,7 +36,7 @@ const proposalScreen = (
     );
   };
 
-/** Memory proposal lifecycle: one shared proposal dialog in each explicit Figma state. */
+/** Memory proposal lifecycle: one shared proposal dialog in each explicit Figma state (05.06, 05.10–05.20A). */
 export const memoryProposalScreens: readonly FixtureScreen[] = [
   {
     slug: "memory-proposal",
@@ -92,6 +95,13 @@ export const memoryProposalScreens: readonly FixtureScreen[] = [
     Screen: proposalScreen(loadError),
   },
   {
+    slug: "memory-proposals-retrying",
+    figmaId: "05.16B",
+    figmaNode: "3062:34870",
+    title: "Memory proposals — retry loading in progress",
+    Screen: proposalScreen(retrying),
+  },
+  {
     slug: "memory-proposal-submission-error",
     figmaId: "05.17",
     figmaNode: "3019:30159",
@@ -106,6 +116,13 @@ export const memoryProposalScreens: readonly FixtureScreen[] = [
     Screen: proposalScreen(statusUncertain),
   },
   {
+    slug: "memory-review-status-confirmed",
+    figmaId: "05.18A",
+    figmaNode: "3062:35082",
+    title: "Memory review — status confirmed",
+    Screen: proposalScreen(statusConfirmed),
+  },
+  {
     slug: "memory-review-restricted",
     figmaId: "05.19",
     figmaNode: "3019:30553",
@@ -118,5 +135,12 @@ export const memoryProposalScreens: readonly FixtureScreen[] = [
     figmaNode: "3019:30750",
     title: "Memory proposal — changed while open",
     Screen: proposalScreen(changed),
+  },
+  {
+    slug: "memory-proposal-refreshed",
+    figmaId: "05.20A",
+    figmaNode: "3062:35293",
+    title: "Memory proposal — refreshed to latest revision",
+    Screen: proposalScreen(refreshed),
   },
 ];

@@ -150,7 +150,7 @@ function HistoryList({
         view={view}
         visibleIds={filters.rows.map((row) => row.id)}
         unavailable={unavailable}
-        onOpenHistory={() => history.current?.focus()}
+        onOutcomeClosed={() => history.current?.focus()}
       />
     </>
   );

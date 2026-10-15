@@ -63,3 +63,13 @@ test("each area file is registered and fixture links only target registered scre
     for (const [, slug] of source.matchAll(/fixtureHref\("([^"]+)"\)/g))
       assert.ok(slugs.has(slug), `fixture link target ${slug} is registered`);
 });
+
+test("every decision-outcome approval count names a registered fixture screen", () => {
+  const source = readFileSync(new URL("approval-counts.ts", directory), "utf8");
+  const slugs = [...source.matchAll(/^ {2}"([^"]+)",$/gm)].map(
+    ([, slug]) => slug,
+  );
+  assert.ok(slugs.length > 0);
+  const registered = new Set(entries.map((entry) => entry.slug));
+  for (const slug of slugs) assert.ok(registered.has(slug), slug);
+});

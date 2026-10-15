@@ -19,7 +19,7 @@ export type SourcesStateView = {
 };
 
 /**
- * 05.21 Sources loading and 05.22 Sources unavailable: states of the 05.01
+ * 05.21 Sources loading, 05.22 Sources unavailable and 05.22A retry: states of the 05.01
  * evidence screen. Neither shows source records, so neither can imply that no
  * evidence exists.
  */

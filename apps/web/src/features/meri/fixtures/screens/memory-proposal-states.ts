@@ -184,5 +184,27 @@ export const loadError: MemoryProposalView = {
   },
   footnote:
     "Retry only refreshes the proposal list. It does not submit or approve a memory change.",
-  primary: { label: "Retry loading" },
+  primary: {
+    label: "Retry loading",
+    href: fixtureHref("memory-proposals-retrying"),
+  },
+};
+
+/** 05.16B: the retried queue read is in flight; both actions wait for it. */
+export const retrying: MemoryProposalView = {
+  ...queue,
+  phase: "loading",
+  heading: "Memory proposals",
+  description: sharedMemory("Retrying the review queue read"),
+  status: { label: "Retrying", tone: "neutral" },
+  feedback: {
+    tone: "neutral",
+    title: "Retrying proposal list",
+    lines: [
+      "Reading the review queue again. Current approved memory is unchanged while this read runs.",
+    ],
+  },
+  footnote:
+    "Retry only refreshes the proposal list. It does not submit or approve a memory change. Proposal content will appear after this read completes.",
+  primary: { label: "Retrying…" },
 };

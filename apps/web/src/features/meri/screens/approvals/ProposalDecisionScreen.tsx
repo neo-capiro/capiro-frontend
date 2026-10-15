@@ -8,6 +8,8 @@ import {
 } from "./RequestChangesDialog";
 
 export type ProposalDecisionView = {
+  /** Which proposal the feedback applies to. */
+  description: string;
   requestChanges: RequestChangesView;
   rejection: Rejection;
 };
@@ -24,7 +26,7 @@ export function ProposalDecisionScreen({
     <div className={ui.page}>
       <MeriPageHeading
         title="Proposal decisions"
-        description="Changes never alter an already reviewed payload."
+        description={view.description}
       />
       <RequestChangesDialog
         view={view.requestChanges}

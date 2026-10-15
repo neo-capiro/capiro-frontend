@@ -17,6 +17,7 @@ const afterDecision: ReadonlySet<string> = new Set([
   "memory-superseded",
   "memory-proposal-rejected",
   "memory-proposal-changes-requested",
+  "memory-approved-by-reviewer",
 ]);
 
 export const pendingApprovals = (slug?: string) =>

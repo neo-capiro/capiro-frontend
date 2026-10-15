@@ -17,7 +17,7 @@ import { ProposalContentFields } from "./ProposalContentFields";
 import styles from "./memory.module.css";
 
 /**
- * Memory proposal lifecycle (05.06, 05.10–05.20): one proposal dialog whose
+ * Memory proposal lifecycle (05.06, 05.10–05.20A): one proposal dialog whose
  * explicit phase decides what is editable and which actions are possible. A
  * proposal never changes canonical memory by itself; submission, review and
  * status reads stay with the trusted backend and are unavailable here.

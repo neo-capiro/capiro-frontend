@@ -17,14 +17,17 @@ export type ApprovalRow = {
   action: string;
   expires: string;
 };
-export type ApprovalReview = { label: string; href?: string };
+export type ApprovalReview = { label: string; href?: string | undefined };
 export type ApprovalsView = {
   /** Pending count and any just-recorded decision, as the service reports them. */
   description: string;
   draftHref?: string;
   pending: readonly ApprovalRow[];
   history: readonly ApprovalRow[];
+  /** Reviews of the proposals still pending. */
   reviews: readonly ApprovalReview[];
+  /** The just-decided proposal's recorded outcome ("ID · Decision recorded"), after the pending reviews. */
+  recorded?: ApprovalReview;
 };
 
 const columns: readonly DataColumn<ApprovalRow>[] = [
@@ -92,6 +95,15 @@ export function ApprovalsScreen({
             {review.label}
           </LinkAction>
         ))}
+        {view.recorded ? (
+          <LinkAction
+            variant="ghost"
+            href={view.recorded.href}
+            unavailable={unavailable}
+          >
+            {view.recorded.label}
+          </LinkAction>
+        ) : null}
       </div>
       <Notice tone="warning" title="Review the exact proposal">
         Approving permits only the displayed action and arguments. Changed

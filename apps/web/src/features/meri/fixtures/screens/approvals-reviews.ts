@@ -49,6 +49,53 @@ export const memoryReviewer: ProposalReviewView = {
   },
 };
 
+/** 06.02C: another authorized reviewer approved revision 1 of MP-1042; the proposer reads the recorded outcome. */
+export const memoryApprovedByReviewer: ProposalReviewView = {
+  ...memoryProposal,
+  title: "Memory update approved",
+  description:
+    "Recorded outcome · MP-1042 · Requested by Jordan Clayton · Approved by another authorized client reviewer",
+  comparison: {
+    ...memoryProposal.comparison,
+    labels: {
+      current: "Previous · Now superseded",
+      proposed: "Approved replacement",
+    },
+  },
+  fields: [
+    {
+      label: "Action",
+      value: "Replaced the current approved fact · Revision 1",
+    },
+    ...memoryProposal.fields.slice(1, -1),
+    {
+      label: "Proposal state",
+      value: "Approved · Recorded 9 Oct 2026, 10:49 AM",
+    },
+  ],
+  decision: {
+    state: "recorded",
+    notice: {
+      title: "Decision recorded · Revision 1 approved",
+      body: "An authorized client reviewer other than the proposer approved revision 1 of MP-1042 on 9 Oct 2026 at 10:49 AM. The approval covered only the exact replacement, scope and evidence shown here; later revisions need their own review.",
+    },
+    links: [
+      {
+        label: "Open current memory",
+        href: fixtureHref("memory-current-approved"),
+      },
+      {
+        label: "View superseded record",
+        href: fixtureHref("memory-superseded"),
+      },
+      {
+        label: "Return to approvals",
+        href: fixtureHref("approvals-after-memory-decision"),
+      },
+    ],
+  },
+};
+
 /** TP-2048's immutable payload; TASK-2047 is its distinct source task. */
 const taskFields: readonly FieldRow[] = [
   { label: "Action", value: "Create client task" },

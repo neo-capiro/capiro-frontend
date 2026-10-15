@@ -1,13 +1,13 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ListFilter } from "lucide-react";
 import { MeriPageHeading } from "../../ui/MeriPageHeading";
 import { FormField } from "../../ui/FormField";
-import { Notice } from "../../ui/Notice";
 import ui from "../../ui/meri-ui.module.css";
 import phone from "../../ui/phone-page.module.css";
 import { MemoryCard, type MemoryItem } from "./MemoryCard";
+import { MemorySearchEmpty } from "./MemorySearchEmpty";
 import styles from "./memory.module.css";
 
 /** Current memory is eligible governed recall; history holds superseded records for provenance. */
@@ -27,6 +27,23 @@ const views: readonly { id: MemoryView; label: string }[] = [
   { id: "history", label: "History" },
 ];
 
+/** Zero-result copy per view; neither claims that no such record exists. */
+const noMatches: Readonly<
+  Record<MemoryView, { title: string; label: string; records: string }>
+> = {
+  current: {
+    title: "No matching memory",
+    label: "Current memory",
+    records: "No current records in your authorized memory match this search.",
+  },
+  history: {
+    title: "No matching history",
+    label: "History",
+    records:
+      "No superseded records in your authorized history match this search.",
+  },
+};
+
 const matches = (item: MemoryItem, query: string) => {
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
   if (!terms.length) return true;
@@ -36,7 +53,7 @@ const matches = (item: MemoryItem, query: string) => {
   return terms.some((term) => text.includes(term));
 };
 
-/** 05.04 Institutional Memory recall and its separate 05.04B history view. */
+/** 05.04 Institutional Memory recall, its separate 05.04B history view and 05.04C zero-result search. */
 export function MemoryRecallScreen({
   view,
   viewHrefs,
@@ -48,11 +65,13 @@ export function MemoryRecallScreen({
   unavailable: string;
 }) {
   const [query, setQuery] = useState(view.initialQuery);
+  const search = useRef<HTMLInputElement>(null);
   const results = useMemo(
     () => view.items.filter((item) => matches(item, query)),
     [view.items, query],
   );
   const scope = view.view === "current" ? "current memory" : "memory history";
+  const empty = noMatches[view.view];
   return (
     <div className={`${ui.page} ${phone.page}`}>
       <MeriPageHeading title={view.title} description={view.description} />
@@ -63,6 +82,7 @@ export function MemoryRecallScreen({
             type="search"
             value={query}
             onChange={setQuery}
+            ref={search}
           />
         </div>
         <button
@@ -98,10 +118,17 @@ export function MemoryRecallScreen({
           ))}
         </div>
       ) : (
-        <Notice title="No memory matched in this search">
-          Nothing was returned for this query within {view.client} {scope}. This
-          does not show that no such memory exists.
-        </Notice>
+        <MemorySearchEmpty
+          title={empty.title}
+          records={empty.records}
+          scope={`${empty.label} · ${view.client}`}
+          query={query}
+          currentHref={view.view === "current" ? undefined : viewHrefs.current}
+          onClear={() => {
+            setQuery("");
+            search.current?.focus();
+          }}
+        />
       )}
     </div>
   );

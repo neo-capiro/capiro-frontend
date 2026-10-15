@@ -13,6 +13,8 @@ export type BrowserFilesView = {
   description: string;
   fileName: string;
   receipt: readonly FieldRow[];
+  /** Why uploading is unavailable: the connection's grant, or a public source read without one. */
+  uploadNote: string;
   /** Overlay · Research account connected: the recorded grant behind an authenticated download. */
   connected?: { title: string; detail: string; status: string };
   browseHref?: string;
@@ -55,11 +57,7 @@ export function BrowserFilesScreen({
         <h2 className={panel.subtitle}>
           Uploading to this site is unavailable
         </h2>
-        <p className={panel.body}>
-          This connection permits reading and downloads. File uploads appear
-          only for supported sites with an explicit upload grant and required
-          review.
-        </p>
+        <p className={panel.body}>{view.uploadNote}</p>
         <LinkAction
           variant="outline"
           href={view.permissionsHref}

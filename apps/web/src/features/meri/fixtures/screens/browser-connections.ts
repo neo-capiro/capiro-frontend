@@ -45,6 +45,7 @@ export const connected: BrowserSignInView = {
   status: "Provider sign-in completed. No credentials were entered into Meri.",
   filesHref: fixtureHref("browser-files"),
   receiptHref: fixtureHref("browser-files"),
+  conversationHref: fixtureHref("research-progress"),
 };
 
 const downloaded = (origin: FieldRow, access: FieldRow): FieldRow[] => [
@@ -70,6 +71,8 @@ export const files: BrowserFilesView = {
       value: "Research portal · Jordan Clayton · Read and download only",
     },
   ),
+  uploadNote:
+    "This connection permits reading and downloads. File uploads appear only for supported sites with an explicit upload grant and required review.",
   connected: {
     title: "Research account connected",
     detail: "Read pages and download permitted files. Uploads are not enabled.",
@@ -87,5 +90,7 @@ export const publicFiles: BrowserFilesView = {
     { label: "Original URL", value: "Official source document link" },
     { label: "Domain", value: "Public source · Allowed" },
   ),
+  uploadNote:
+    "This public source is read without a site connection. Downloads are limited to publicly available files, and uploads are not available for public sources.",
   permissionsHref: fixtureHref("browser-permissions"),
 };

@@ -7,13 +7,17 @@ import surfaces from "../../ui/surfaces.module.css";
 import { RejectedOutcome, type Rejection } from "./RejectedOutcome";
 import styles from "./approvals.module.css";
 
-/** A recorded decision state that needs follow-up, with the one place to go next. */
+/** A decision state with the one place to go next, or the decision still to be made. */
 export type OutcomeState = {
   title: string;
   tone: StatusTone;
   status: string;
   detail: string;
-  action: { label: string; href?: string };
+  /** Who may act on this view, e.g. the requester's read-only note (06.08). */
+  note?: string;
+  /** Decision controls for the deciding reviewer (06.08C); a fixture never records a decision. */
+  decisions?: readonly string[];
+  action?: { label: string; href?: string };
 };
 
 export type DecisionOutcomeView = {
@@ -36,20 +40,39 @@ function OutcomeStateCard({
       <h2 className={surfaces.sectionTitle}>{state.title}</h2>
       <StatusPill tone={state.tone}>{state.status}</StatusPill>
       <p className={ui.muted}>{state.detail}</p>
-      <LinkAction
-        variant="outline"
-        href={state.action.href}
-        unavailable={unavailable}
-      >
-        {state.action.label}
-      </LinkAction>
+      {state.note ? <p className={ui.muted}>{state.note}</p> : null}
+      {state.decisions ? (
+        <div className={ui.row} role="group" aria-label="Decision">
+          {state.decisions.map((label, index) => (
+            <button
+              key={label}
+              type="button"
+              className={index ? ui.outline : ui.primary}
+              disabled
+              title={unavailable}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      ) : null}
+      {state.action ? (
+        <LinkAction
+          variant="outline"
+          href={state.action.href}
+          unavailable={unavailable}
+        >
+          {state.action.label}
+        </LinkAction>
+      ) : null}
     </section>
   );
 }
 
 /**
- * 06.05A, 06.07B, 06.07C, 06.07D and 06.08: the recorded outcome of a decision or
- * request. The original payload is unchanged; nothing here executes or grants access.
+ * 06.05A, 06.07B, 06.07C, 06.07D and 06.08–06.08C: the recorded outcome of a
+ * decision or request, or (06.08C) the decision awaiting its reviewer. The
+ * original payload is unchanged; nothing here executes or grants access.
  */
 export function DecisionOutcomeScreen({
   view,

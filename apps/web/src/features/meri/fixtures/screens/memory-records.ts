@@ -79,7 +79,13 @@ export const history: MemoryRecallView = {
   ],
 };
 
-/** 05.08B: the replaced briefing preference, kept with its approval receipt. */
+/** 05.04C: the 05.04B history searched for a term no authorized record matches. */
+export const historyNoMatches: MemoryRecallView = {
+  ...history,
+  initialQuery: "Hearing schedule",
+};
+
+/** 05.08B: the replaced briefing preference, kept with its approval receipt (06.06). */
 export const supersededHistory: MemoryRecallView = {
   view: "history",
   title: "Memory history after approval",
@@ -97,7 +103,7 @@ export const supersededHistory: MemoryRecallView = {
       terms: ["briefing", "preference"],
       evidence: {
         label: "View approval receipt",
-        href: fixtureHref("memory-approved"),
+        href: fixtureHref("action-receipts"),
       },
     },
   ],

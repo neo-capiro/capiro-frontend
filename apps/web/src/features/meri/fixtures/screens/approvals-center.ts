@@ -34,73 +34,85 @@ const closedRow: ApprovalRow = {
   expires: "Closed 9 Oct",
 };
 
-type ReviewLinks = {
-  memory?: string | undefined;
-  task?: string | undefined;
-  filing?: string | undefined;
-};
-const reviews = (links: ReviewLinks): readonly ApprovalReview[] => [
-  { label: "Review memory update", href: links.memory },
-  { label: "Review task", href: links.task },
-  { label: "Review artifact filing", href: links.filing },
+const reviews: readonly (ApprovalReview & { id: string })[] = [
+  {
+    id: memoryRow.id,
+    label: "Review memory update",
+    href: fixtureHref("memory-approval-review"),
+  },
+  {
+    id: taskRow.id,
+    label: "Review task",
+    href: fixtureHref("review-task-action"),
+  },
+  {
+    id: filingRow.id,
+    label: "Review artifact filing",
+    href: fixtureHref("review-artifact-filing"),
+  },
 ];
-const pendingReviews: ReviewLinks = {
-  memory: fixtureHref("memory-approval-review"),
-  task: fixtureHref("review-task-action"),
-  filing: fixtureHref("review-artifact-filing"),
-};
+const reviewsOf = (pending: readonly ApprovalRow[]): ApprovalReview[] =>
+  reviews
+    .filter((review) => pending.some((row) => row.id === review.id))
+    .map(({ label, href }) => ({ label, href }));
 
-/** The decided proposal leaves Pending and is listed first in History with its recorded time. */
-const decided = (row: ApprovalRow, time: string): ApprovalRow => ({
-  ...row,
-  action: `${row.action} · Decision recorded`,
-  expires: time,
-});
+const history = [closedRow];
+const pending = [memoryRow, taskRow, filingRow];
 
-const center = (
-  description: string,
-  pending: readonly ApprovalRow[],
-  history: readonly ApprovalRow[],
-  links: ReviewLinks,
-): ApprovalsView => ({
-  description,
+/** 06.01 Approval center. */
+export const approvals: ApprovalsView = {
+  description:
+    "Decisions assigned to you · Actions are rechecked before execution",
   draftHref: fixtureHref("draft-client-task"),
   pending,
   history,
-  reviews: reviews(links),
-});
+  reviews: reviewsOf(pending),
+};
 
-const afterDecision = (id: string) =>
-  `2 pending proposals · ${id} decision recorded · Actions rechecked before execution`;
+/**
+ * 06.01A–C: the decided proposal leaves Pending and its review link; it is
+ * listed first in History with its recorded time and links to its recorded outcome.
+ */
+const afterDecision = (
+  decided: ApprovalRow,
+  time: string,
+  outcomeHref: string,
+): ApprovalsView => {
+  const remaining = pending.filter((row) => row.id !== decided.id);
+  return {
+    ...approvals,
+    description: `${remaining.length} pending proposals · ${decided.id} decision recorded · Actions rechecked before execution`,
+    pending: remaining,
+    history: [
+      {
+        ...decided,
+        action: `${decided.action} · Decision recorded`,
+        expires: time,
+      },
+      ...history,
+    ],
+    reviews: reviewsOf(remaining),
+    recorded: { label: `${decided.id} · Decision recorded`, href: outcomeHref },
+  };
+};
 
-/** 06.01 Approval center. */
-export const approvals = center(
-  "Decisions assigned to you · Actions are rechecked before execution",
-  [memoryRow, taskRow, filingRow],
-  [closedRow],
-  pendingReviews,
+/** 06.01A: TP-2048's recorded outcome is its action receipt (06.06). */
+export const approvalsAfterTask = afterDecision(
+  taskRow,
+  "Today, 10:49 AM",
+  fixtureHref("action-receipts"),
 );
 
-/** 06.01A: TP-2048 decided; its review opens the recorded task outcome. */
-export const approvalsAfterTask = center(
-  afterDecision("TP-2048"),
-  [memoryRow, filingRow],
-  [decided(taskRow, "Today, 10:49 AM"), closedRow],
-  { ...pendingReviews, task: fixtureHref("executed-task-proposal") },
+/** 06.01B: FL-1042's recorded outcome is the rejected filing (06.05A). */
+export const approvalsAfterFiling = afterDecision(
+  filingRow,
+  "Today, 10:52 AM",
+  fixtureHref("artifact-filing-rejected"),
 );
 
-/** 06.01B: FL-1042 decided; its review opens the recorded filing outcome. */
-export const approvalsAfterFiling = center(
-  afterDecision("FL-1042"),
-  [memoryRow, taskRow],
-  [decided(filingRow, "Today, 10:52 AM"), closedRow],
-  { ...pendingReviews, filing: fixtureHref("artifact-filing-rejected") },
-);
-
-/** 06.01C: MP-1042 decided; no recorded memory-decision frame exists, so its review is unavailable. */
-export const approvalsAfterMemory = center(
-  afterDecision("MP-1042"),
-  [taskRow, filingRow],
-  [decided(memoryRow, "Today, 10:47 AM"), closedRow],
-  { ...pendingReviews, memory: undefined },
+/** 06.01C: MP-1042's recorded outcome is the approval by another reviewer (06.02C). */
+export const approvalsAfterMemory = afterDecision(
+  memoryRow,
+  "Today, 10:47 AM",
+  fixtureHref("memory-approved-by-reviewer"),
 );
