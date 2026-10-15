@@ -16,6 +16,7 @@ import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage
 import { ObjectiveCalendarDestination } from "../../src/features/portfolio/calendar/ObjectiveCalendarDestination";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
+import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
@@ -109,6 +110,20 @@ function RoutedApp() {
         <MeriHomeFixture />
       </ProductShell>
     );
+  // Mirrors src/app/meri/fixture/[screen]/page.tsx for registered fixture screens.
+  const fixtureScreen = path.startsWith("/meri/fixture/")
+    ? findFixtureScreen(path.slice("/meri/fixture/".length))
+    : undefined;
+  if (fixtureScreen)
+    return (
+      <ProductShell
+        fixture
+        designTarget={fixtureScreen.figmaNode}
+        section={fixtureScreen.section}
+      >
+        <fixtureScreen.Screen />
+      </ProductShell>
+    );
   if (path === "/meri")
     return (
       <ProductShell>
@@ -154,7 +169,7 @@ function RoutedApp() {
   const configured = path !== "/__test/unconfigured";
   const isSettings = path.startsWith("/settings");
   const slug = path.split("/")[2] as ModuleSlug;
-  const module = path.startsWith("/modules/") ? (
+  const moduleView = path.startsWith("/modules/") ? (
     <ModuleScreen module={slug} />
   ) : (
     <ModuleHub />
@@ -187,7 +202,7 @@ function RoutedApp() {
                 meriPreferences={<MeriPreferencesPanel />}
               />
             ) : path.startsWith("/modules") ? (
-              module
+              moduleView
             ) : (
               <SessionProbe />
             )}

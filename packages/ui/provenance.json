@@ -572,23 +572,33 @@
       "upstreamSha256": "9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb",
       "adaptation": {
         "owner": "Fable implementation owner (Meri Figma 3.4 lane)",
-        "reason": "Strict exactOptionalPropertyTypes: omit onSelect and selectedPath from the FileTree context value when undefined instead of explicitly passing undefined",
+        "reason": "Strict exactOptionalPropertyTypes: omit onSelect and selectedPath from the FileTree context value when undefined instead of explicitly passing undefined; nest folder children in role=\"group\" so treeitems have the required parent (axe aria-required-parent); name the folder expand control (axe button-name)",
         "changes": [
           "Prominent owner change notice",
-          "() => ({ expandedPaths, onSelect, selectedPath, togglePath }), -> () => ({\n      expandedPaths,\n      ...(onSelect === undefined ? {} : { onSelect }),\n      ...(selectedPath === undefined ? {} : { selectedPath }),\n      togglePath,\n    }),"
+          "() => ({ expandedPaths, onSelect, selectedPath, togglePath }), -> () => ({\n      expandedPaths,\n      ...(onSelect === undefined ? {} : { onSelect }),\n      ...(selectedPath === undefined ? {} : { selectedPath }),\n      togglePath,\n    }),",
+          "<div className=\"ml-4 border-l pl-2\">{children}</div> -> <div className=\"ml-4 border-l pl-2\" role=\"group\">{children}</div>",
+          "              <button\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              > ->               <button\n                aria-label={`${isExpanded ? \"Collapse\" : \"Expand\"} ${name}`}\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >"
         ],
         "importsExports": "Preserved",
-        "notice": "// Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by\n// omitting absent onSelect/selectedPath context values; all upstream imports/exports are retained.\n\n",
+        "notice": "// Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by\n// omitting absent onSelect/selectedPath context values, and give a folder's children\n// the ARIA group role that treeitem nesting requires and the expand control an accessible\n// name; all upstream imports/exports are retained.\n\n",
         "edits": [
           {
             "from": "() => ({ expandedPaths, onSelect, selectedPath, togglePath }),",
             "to": "() => ({\n      expandedPaths,\n      ...(onSelect === undefined ? {} : { onSelect }),\n      ...(selectedPath === undefined ? {} : { selectedPath }),\n      togglePath,\n    }),"
+          },
+          {
+            "from": "<div className=\"ml-4 border-l pl-2\">{children}</div>",
+            "to": "<div className=\"ml-4 border-l pl-2\" role=\"group\">{children}</div>"
+          },
+          {
+            "from": "              <button\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >",
+            "to": "              <button\n                aria-label={`${isExpanded ? \"Collapse\" : \"Expand\"} ${name}`}\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >"
           }
         ]
       },
       "promotedPath": "src/ai-elements/file-tree.tsx",
-      "promotedSha256": "c762916cd5f0640ad23e1d27745c5a40c0080e49086fb57592d755d71ab0d857",
-      "promotedBytes": 7937,
+      "promotedSha256": "bdae1b53adad89002cf7e9581090644dda87013a072123ac703d6ace1139b29b",
+      "promotedBytes": 8156,
       "importSpecifierChanges": [
         {
           "from": "@repo/shadcn-ui/components/ui/collapsible",

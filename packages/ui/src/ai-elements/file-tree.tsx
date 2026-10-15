@@ -1,7 +1,9 @@
 "use client";
 
 // Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by
-// omitting absent onSelect/selectedPath context values; all upstream imports/exports are retained.
+// omitting absent onSelect/selectedPath context values, and give a folder's children
+// the ARIA group role that treeitem nesting requires and the expand control an accessible
+// name; all upstream imports/exports are retained.
 
 import {
   Collapsible,
@@ -185,6 +187,7 @@ export const FileTreeFolder = ({
           >
             <CollapsibleTrigger asChild>
               <button
+                aria-label={`${isExpanded ? "Collapse" : "Expand"} ${name}`}
                 className="flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0"
                 type="button"
               >
@@ -212,7 +215,7 @@ export const FileTreeFolder = ({
             </button>
           </div>
           <CollapsibleContent>
-            <div className="ml-4 border-l pl-2">{children}</div>
+            <div className="ml-4 border-l pl-2" role="group">{children}</div>
           </CollapsibleContent>
         </div>
       </Collapsible>
