@@ -1,13 +1,60 @@
 import type { QueryClient } from "@tanstack/react-query";
+import {
+  receiveConversationRequest,
+  type ConversationStoredRequest,
+  type ConversationSubmitRequest,
+} from "@capiro/meri-contracts/conversation-application";
 import type { ActionContext } from "../meri-actions/session-receipt";
 export type ConversationIntent = Readonly<{
-  submit?: {
-    requestId: string;
-    prompt: string;
-    state: "pending" | "unknown" | "observed";
-  };
+  submit?: Readonly<
+    ConversationSubmitRequest & {
+      state: "pending" | "unknown" | "observed";
+    }
+  >;
   cancel?: "pending" | "unknown" | "observed";
 }>;
+
+/** Recover the original requested window and skill selection, never the normalized execution window. */
+export function storedSubmission(
+  stored: ConversationStoredRequest,
+): ConversationSubmitRequest {
+  return receiveConversationRequest(
+    "submit",
+    new TextEncoder().encode(
+      JSON.stringify({
+        requestId: stored.requestId,
+        prompt: stored.prompt,
+        ...(stored.windowRequest
+          ? { windowRequest: stored.windowRequest }
+          : {}),
+        ...(stored.skill
+          ? {
+              skill: {
+                skillId: stored.skill.skillId,
+                skillVersion: stored.skill.skillVersion,
+              },
+            }
+          : {}),
+      }),
+    ),
+  );
+}
+
+export const submissionIdentity = (input: ConversationSubmitRequest) =>
+  JSON.stringify(input, (_, value) =>
+    value && typeof value === "object" && !Array.isArray(value)
+      ? Object.fromEntries(
+          Object.entries(value).sort(([a], [b]) => a.localeCompare(b)),
+        )
+      : value,
+  );
+
+function snapshotSubmit(submit: NonNullable<ConversationIntent["submit"]>) {
+  const copy = structuredClone(submit);
+  if (copy.windowRequest) Object.freeze(copy.windowRequest);
+  if (copy.skill) Object.freeze(copy.skill);
+  return Object.freeze(copy);
+}
 /** Nonsecret command uncertainty follows this exact observed context in canonical scope memory. */
 export function conversationIntentJournal(
   client: QueryClient,
@@ -28,6 +75,7 @@ export function conversationIntentJournal(
   const current = () =>
     owned !== undefined && cache.find({ queryKey: key, exact: true }) === owned;
   return {
+    current,
     read(): ConversationIntent {
       if (!current()) return {};
       const value = client.getQueryData<ConversationIntent>(key) ?? {};
@@ -40,16 +88,17 @@ export function conversationIntentJournal(
       };
     },
     write(value: ConversationIntent) {
-      if (current())
+      if (current()) {
         client.setQueryData(
           key,
           Object.freeze({
             ...value,
-            ...(value.submit
-              ? { submit: Object.freeze({ ...value.submit }) }
-              : {}),
+            ...(value.submit ? { submit: snapshotSubmit(value.submit) } : {}),
           }),
         );
+        return true;
+      }
+      return false;
     },
   };
 }

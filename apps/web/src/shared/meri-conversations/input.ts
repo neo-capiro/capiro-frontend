@@ -3,6 +3,10 @@ import {
   receiveConversationRequest,
   type ConversationRoute,
 } from "@capiro/meri-contracts/conversation-application";
+import {
+  conversationInputMetadata,
+  receiveConversationInputRequest,
+} from "@capiro/meri-contracts/conversation-input";
 import { boundedJsonBytes } from "../meri-actions/bounded-json";
 
 const reconnectPath =
@@ -10,6 +14,10 @@ const reconnectPath =
 
 /** Only public protocol routes; no user-selected upstream destination. */
 export function conversationRoute(path: string) {
+  if (
+    `/api/conversations/${path}` === conversationInputMetadata.routes.admit.path
+  )
+    return "inputAdmit" as const;
   if (reconnectPath.test(path)) return "reconnect" as const;
   if (
     path === "submit" ||
@@ -63,7 +71,7 @@ export function validConversationRequest(
 
 export async function conversationBody(
   request: Request,
-  route: ConversationRoute,
+  route: ConversationRoute | "inputAdmit",
   signal: AbortSignal,
 ) {
   const bytes = await boundedJsonBytes(
@@ -71,6 +79,7 @@ export async function conversationBody(
     signal,
     protocol.limits.requestBytes,
   );
-  receiveConversationRequest(route, bytes);
+  if (route === "inputAdmit") receiveConversationInputRequest(bytes);
+  else receiveConversationRequest(route, bytes);
   return bytes;
 }

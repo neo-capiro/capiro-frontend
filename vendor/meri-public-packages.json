@@ -72,6 +72,22 @@
       "purpose": "Additive native conversation discovery/transcript/next-turn public receiver; preserves historical artifacts and frozen wire bytes.",
       "independentReviewManifestSha256": "8e40d9a06b0856cb9ad778a4dcc5edc2ac0d8742c36bbed592222dfd3eb42b94",
       "ownerAcceptance": "Parent explicit artifact acceptance of exact 5aa13719 / 050ce4a5 on 2026-10-16; consumer/runtime validation pending."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.7.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "618db545b15b5c4bab58f0cd5d12cfb022232402",
+      "artifactPublicationCommit": "a54239c5f252667b3aaaaa588ef1776219816075",
+      "artifactPublicationTree": "1e1b27c4829baed7556a59aa1c631b40735caae4",
+      "bytes": 510639,
+      "sha256": "8f0c2e1435122c22f2a1ed7427dd744f361bc598e178f2ef842acd6f91b78daa",
+      "integrity": "sha512-GAbmH0ZshRDUAiyhuEImdlIyFAhUqwWUudHRYNPLL9WitFjc5cERyidP9Yhe9jOPHKC5lJGF3pF9yVgZeWfKlw==",
+      "regularEntryCount": 35,
+      "status": "accepted-artifact-pending-consumer-qualification",
+      "purpose": "Additive durable input admission receipt using canonical submit request and run-bound action session; preserves all26 prior distribution files.",
+      "independentReviewManifestSha256": "bbdb4ac91e222955159be04a988f604961bf53aa651a672f4fdbf04255b836ef",
+      "ownerAcceptance": "Parent explicit corrected artifact acceptance of a54239c5 / 8f0c2e14 on 2026-10-16; source/artifact only, consumer/runtime validation pending.",
+      "supersededArtifact": "Rejected53497d94 tar preserved outside repository; never adopted. New canonical error alias and metadata corrected; prior no-skip TS2552 failure retained by producer."
     }
   ]
 }

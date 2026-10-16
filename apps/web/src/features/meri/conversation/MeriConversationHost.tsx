@@ -94,6 +94,7 @@ function ConnectedConversation({
       nextTurnBlocked={session.nextBlocked}
       promptKey={session.logicalKey}
       savedCurrent={session.savedCurrent}
+      acceptedRequest={session.acceptedRequest}
       onSettled={session.refresh}
       historyStatus={<ConversationHistoryStatus session={session} />}
     />

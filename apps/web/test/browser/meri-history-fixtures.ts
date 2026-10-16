@@ -83,6 +83,31 @@ export async function installHistory(
     denied: false,
   };
   const calls = { list: [] as unknown[], transcript: [] as unknown[] };
+  // Receipt-only synthetic owner for retained/recovered requests, never fresh-target proof.
+  const inputReceipts = new Map<string, { bytes: string; receipt: object }>();
+  await page.route("**/api/conversations/input/admit", (route) => {
+    const input = route.request().postDataJSON(),
+      bytes = route.request().postData()!;
+    const previous = inputReceipts.get(input.requestId);
+    if (previous)
+      return previous.bytes === bytes
+        ? reply(route, { ...previous.receipt, replayed: true })
+        : reply(route, { error: { code: "REQUEST_CONFLICT" } }, 409);
+    const accepted = native.turns.find(
+      (row) => row.request.requestId === input.requestId,
+    );
+    const target = native.pendingTurn?.targetBinding ?? accepted?.run.binding;
+    if (!target)
+      return reply(route, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 503);
+    const receipt = {
+      run: accepted?.run ?? runFor("queued", target),
+      request: accepted?.request ?? stored(input.requestId, input.prompt),
+      lastSequence: accepted?.lastSequence ?? 1,
+      replayed: false,
+    };
+    inputReceipts.set(input.requestId, { bytes, receipt });
+    return reply(route, receipt);
+  });
   await page.route("**/api/conversations/list", (route) => {
     const input = route.request().postDataJSON();
     calls.list.push(input);

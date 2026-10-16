@@ -72,7 +72,8 @@ test('lost real submit acknowledgement retries exact intent with one persisted r
   await assert.rejects(f.client.submit(f.input));
   assert.equal(f.client.getSnapshot().submit, 'unknown');
   await f.client.retrySubmit();
-  assert.equal(f.calls[0].body, f.calls[1].body);
+  const submits = f.calls.filter(call => call.path.endsWith('/submit'));
+  assert.equal(submits.length, 2); assert.equal(submits[0].body, submits[1].body);
   assert.equal(f.state.runs.size, 1);
   // Exact backend intentionally re-dispatches the same queued workflow on a retry.
   assert.equal(f.state.starts, 2);

@@ -2,6 +2,7 @@
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
+import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { UserMessage } from "../screens/conversation/UserMessage";
 import { ConversationArtifacts } from "./ConversationArtifacts";
 import { ConversationFrame } from "./ConversationFrame";
@@ -67,6 +68,7 @@ export function MeriLiveConversation({
   promptKey,
   onSettled,
   savedCurrent,
+  acceptedRequest,
 }: {
   port: MeriConversationPort;
   initialPrompt: string | undefined;
@@ -82,6 +84,7 @@ export function MeriLiveConversation({
   promptKey?: string | undefined;
   onSettled: () => void;
   savedCurrent?: TurnView | undefined;
+  acceptedRequest?: ConversationStoredRequest | undefined;
 }) {
   const run = useLiveRun(port, initialPrompt);
   const { snapshot, intent, busy } = run;
@@ -116,7 +119,13 @@ export function MeriLiveConversation({
       earlier={earlier}
       historyStatus={historyStatus}
       current={<LiveTurn turn={turn} intent={intent} earlier={earlier} />}
-      status={<RunStatus run={run} active={active} />}
+      status={
+        <RunStatus
+          run={run}
+          active={active}
+          acceptedRequest={acceptedRequest}
+        />
+      }
       files={
         <ConversationArtifacts
           artifacts={conversationArtifacts(turn ? [...earlier, turn] : earlier)}

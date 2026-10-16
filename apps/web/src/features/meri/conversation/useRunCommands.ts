@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
-import { requestStop, sendRequest } from "./run-commands";
+import { recoverRequest, requestStop, sendRequest } from "./run-commands";
+import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useCommandGate } from "./useCommandGate";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
@@ -39,7 +40,8 @@ export function useRunCommands(
   const record = {
     read: journal.read,
     write: (value: ReturnType<typeof journal.read>) => {
-      if (alive.current) journal.write(value);
+      if (!alive.current || !journal.write(value))
+        throw new Error("Conversation scope changed");
     },
   };
   const thenObserve = (done: boolean) => {
@@ -57,15 +59,19 @@ export function useRunCommands(
     }
   };
   const history = () => perform(loadHistory).then(thenObserve);
-  const submit = (prompt: string, retry = false) =>
+  const send = (operation: () => Promise<unknown>) =>
     perform(async () => {
-      await sendRequest(port, record, prompt, retry);
+      await operation();
       setTranscript("loaded");
       // A replayed ACK may already be terminal and contain no output events. Read its exact
       // run-local transcript before the observation loop sees that there is nothing left to watch.
       if (isSettled(port.getSnapshot().observation?.runState))
         await loadHistory();
     }).then(thenObserve);
+  const submit = (prompt: string, retry = false) =>
+    send(() => sendRequest(port, record, prompt, retry));
+  const recover = (stored: ConversationStoredRequest) =>
+    send(() => recoverRequest(port, record, stored));
   // The receipt is not the run's status; keep observing for run.status either way.
   const cancel = () =>
     perform(() => requestStop(port, record)).then(() => {
@@ -81,6 +87,7 @@ export function useRunCommands(
     transcript,
     history,
     submit,
+    recover,
     cancel,
   };
 }

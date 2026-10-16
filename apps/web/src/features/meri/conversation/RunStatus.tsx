@@ -1,5 +1,6 @@
 import { Button } from "@capiro/ui/button";
 import type { useLiveRun } from "./useLiveRun";
+import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import ui from "../ui/meri-ui.module.css";
 import styles from "./live.module.css";
 
@@ -7,10 +8,12 @@ import styles from "./live.module.css";
 export function RunStatus({
   run,
   active,
+  acceptedRequest,
 }: {
   run: ReturnType<typeof useLiveRun>;
   /** The run has not reached a terminal status. */
   active: boolean;
+  acceptedRequest?: ConversationStoredRequest | undefined;
 }) {
   const { snapshot, intent, busy } = run;
   const uncertain = intent.submit?.state === "unknown";
@@ -56,6 +59,19 @@ export function RunStatus({
           </Button>
         </div>
       )}
+      {!intent.submit &&
+        acceptedRequest &&
+        snapshot.observation?.runState === "queued" && (
+          <Button
+            type="button"
+            variant="outline"
+            className={ui.outline}
+            disabled={busy}
+            onClick={() => void run.recover(acceptedRequest)}
+          >
+            Continue accepted request
+          </Button>
+        )}
       {active && <ObservationStatus run={run} />}
       {snapshot.cancelReceipt && (
         <p role="status" className={styles.muted}>

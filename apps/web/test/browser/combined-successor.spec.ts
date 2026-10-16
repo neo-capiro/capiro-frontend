@@ -82,6 +82,7 @@ async function fixture(page: Page, contexts?: object[]) {
           "/api/action-followthrough/session",
           "/api/conversations/history",
           "/api/conversations/submit",
+          "/api/conversations/input/admit",
           "/api/conversations/events",
           "/api/conversations/list",
           "/api/conversations/transcript",
@@ -342,8 +343,10 @@ test("unknown Meri input remains visible and scoped across all three bound desti
     "/api/conversations/history",
     "/api/conversations/next-turn",
     "/api/action-followthrough/session",
+    "/api/conversations/input/admit",
     "/api/conversations/submit",
     "/api/action-followthrough/session",
+    "/api/conversations/input/admit",
     "/api/conversations/submit",
     "/api/conversations/events",
   ]);
