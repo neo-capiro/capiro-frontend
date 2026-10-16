@@ -169,7 +169,7 @@ it("preserves the read failure and offers retry without a destination", () => {
   harness.query.error = new Error("Synthetic read refusal");
   const html = renderToStaticMarkup(createElement(RunPlanStepLink, { run }));
   expect(html).toContain("Synthetic read refusal");
-  expect(html).toContain("Retry");
+  expect(html).toContain("Try again");
   expect(html).not.toContain("href=");
 });
 it("disables detail reading and navigation for an unavailable selected client", () => {

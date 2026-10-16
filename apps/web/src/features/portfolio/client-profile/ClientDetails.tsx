@@ -54,7 +54,9 @@ export function ClientDetails({ client }: { client: Client }) {
         </span>
         <span className={governmentStyles.entryMetrics}>
           <span>
-            <strong>{values.samStatus || "Not provided"}</strong>
+            <strong>
+              {values.samStatus.trim() ? values.samStatus : "Not provided"}
+            </strong>
             <small>SAM.gov registration</small>
           </span>
           <span>

@@ -96,7 +96,7 @@ describe("program associations presentation", () => {
     state.isFetching = true;
     const html = render();
     expect(html).toContain('role="status"');
-    expect(html).toContain("Loading.");
+    expect(html).toContain("Loading…");
     expect(html).not.toContain("PE-SYNTHETIC");
   });
   it.each([403, 404, 500])(
