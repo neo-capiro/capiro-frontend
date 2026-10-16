@@ -8,7 +8,7 @@ export async function POST(
   request: Request,
   context: { params: Promise<{ operation: string }> },
 ) {
-  const held = previewBackendRejection(process.env);
+  const held = previewBackendRejection(process.env, request);
   if (held) return held;
   const { operation } = await context.params;
   return proxyActionRequest(

@@ -1,6 +1,7 @@
 import { previewReadTarget } from "./read-config.server";
 import { previewReadRoute } from "./read-route.server";
 import { previewFirstChatWriteTarget } from "./first-chat-write.server";
+import { previewMeriConversationRoute } from "./meri-conversation-route.server";
 
 /** Deployment containment, not authorization. Server configuration alone owns opt-in. */
 export function previewBackendRejection(
@@ -13,6 +14,7 @@ export function previewBackendRejection(
   if (request && previewReadTarget(env, request) && previewReadRoute(request))
     return null;
   if (request && previewFirstChatWriteTarget(env, request)) return null;
+  if (request && previewMeriConversationRoute(env, request)) return null;
   return previewHeldResponse();
 }
 

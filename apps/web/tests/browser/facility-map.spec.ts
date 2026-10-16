@@ -97,6 +97,10 @@ test("real coordinate pins, keyboard district selection, pan/zoom and source-bac
     name: "Synthetic lab · CA-01",
     exact: true,
   });
+  await expect(page.locator('[data-slot="dialog-overlay"]')).toHaveCSS(
+    "background-color",
+    "rgb(10, 10, 10)",
+  );
   await expect(detail).toContainText("Test Representative");
   await expect(detail).toContainText("12");
   await expect(

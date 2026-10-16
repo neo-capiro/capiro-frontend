@@ -99,7 +99,6 @@ export function FacilityDetailDialog({
       <Dialog
         open={open}
         className={profile.dialog}
-        overlayClassName={profile.overlay}
         onOpenChange={onOpenChange}
         eyebrow={current ? `${clientName} / District nexus` : "District nexus"}
         textClose

@@ -11,7 +11,7 @@ async function receive(
   request: Request,
   context: { params: Promise<{ path: string[] }> },
 ) {
-  const held = previewBackendRejection(process.env);
+  const held = previewBackendRejection(process.env, request);
   if (held) return held;
   const { path } = await context.params;
   const nativeRoute = conversationHistoryRoute(path.join("/"));

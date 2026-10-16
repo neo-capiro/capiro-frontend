@@ -103,6 +103,7 @@ async function expectOverlayAndFocus(page: Page, dialog: Locator) {
   const overlay = page.locator('[data-slot="dialog-overlay"]');
   await expect(overlay).toHaveCount(1);
   await expect(overlay).toBeVisible();
+  await expect(overlay).not.toHaveCSS("background-color", "rgb(10, 10, 10)");
   await expect(overlay).toHaveCSS("position", "fixed");
   const coverage = await overlay.evaluate((element) => {
     const rect = element.getBoundingClientRect();

@@ -320,10 +320,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
     "kind": "function",
     "symbol": "FacilityDetailDialog",
-    "fingerprint": "30dc1dad839f9bf16b45aa83e4a2a86eb1f6729de06073e0b711179d0627c6b0",
-    "reason": "Owns current-facility scope, section navigation and edit/remove modal lifetime. Header/footer presentation retains the wrong-client guard while pure location/representation children and evidence queries keep their separate owners. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "fingerprint": "af3334369aceac754655ce5ee72ae49f3e243cb715af15975e2be6ace315707d",
+    "reason": "Owns selected-facility scope, guarded section navigation and edit/remove modal lifetime. The open/current guard gates evidence reads; wrong-client content and action guards remain intact. Facts, queries and write editors have separate owners. The sole change removes the unpinned overlay prop; Facility styling is scoped in CSS. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
     "reviewedOn": "2026-10-16",
-    "reviewedBy": "Codex PR60 root and independent source reviewers"
+    "reviewedBy": "Codex PR60 root and independent elements_pin_fix_review"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",

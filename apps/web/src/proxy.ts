@@ -53,5 +53,6 @@ export const config = {
     "/setup",
     "/api/capiro/:path*",
     "/api/action-followthrough/:path*",
+    "/api/conversations/:path*",
   ],
 };

@@ -1,5 +1,5 @@
 :global(body:has([data-portfolio-root]))
-  .overlay:global([data-slot="dialog-overlay"]) {
+  :global([data-slot="dialog-overlay"]):has(+ .dialog) {
   background: #0a0a0a;
 }
 .dialog {

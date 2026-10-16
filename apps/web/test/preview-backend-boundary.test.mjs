@@ -102,9 +102,13 @@ test("every API handler applies preview admission before any route work", () => 
       );
       const route = relative(source, path).replaceAll("\\", "/");
       const receivesReads = /\/api\/(?:backend|capiro)\//.test(route);
+      const receivesMeriConversation =
+        /\/api\/(?:action-followthrough|conversations)\//.test(route);
       assert.deepEqual(
         declaration.initializer.arguments.map((arg) => arg.getText(ast)),
-        receivesReads ? ["process.env", "request"] : ["process.env"],
+        receivesReads || receivesMeriConversation
+          ? ["process.env", "request"]
+          : ["process.env"],
       );
       assert.ok(
         second &&
