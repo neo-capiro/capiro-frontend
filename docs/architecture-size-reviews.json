@@ -2091,15 +2091,15 @@
   },
   {
     "path": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
-    "sha256": "d5197828c65410e4f710b6129614b3ed78dd33f6bfed43b292108a415907e973",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "StrategiesScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "484ab1c5727914d5540271f4cc0ecb7e7fb9af080850bd62876e91ef5d071d6b",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Existing Strategy route composition delegates current-link verification to CurrentStrategyLink; ordinary section/library behavior remains intact.",
     "functions": [
       {
         "name": "StrategiesScreen",
-        "nonblankLines": 93
+        "nonblankLines": 101
       }
     ],
     "signals": [
@@ -2193,11 +2193,11 @@
   },
   {
     "path": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
-    "sha256": "5ba8e950b8c17062b521ab41ff9512f66407d6d94b3e72d708d5bafae0e65213",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "StrategyTimeline.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "86cb483dc9feba582bd37b3bf01e96aa33c3b74fec463ff91978fb8d62fa7e44",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Inherited unchanged Strategy detail/timeline responsibility; current client correlation is added in the outer receiver, not mixed into this body.",
     "functions": [
       {
         "name": "TimelineView",
@@ -3507,15 +3507,15 @@
   },
   {
     "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
-    "sha256": "12adf15153a9e3e45c8d53690132eda492b20030fd1dad6435e6da4682e84ef8",
-    "reviewer": "Codex independent objectives_work_intel_review and root integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
-    "rationale": "Owns the client Objective list, local status filter, URL selection and failure cleanup. A single current-success projection conceals records and editors after failed reads. Existing ObjectiveEditor, NewObjectivePage and mutation hooks retain edits, validation and dispatch. No shared cache abstraction, transport or backend authority is added.",
+    "sha256": "50e810d7a9be76b7e392aee7f2da0349a87662c91121d6efd683720d5341fad4",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Existing Objective list/editor routing now adds operational selection in the same client-scoped page. New branch delegates operational data/rendering and preserves existing edit/create lifecycle.",
     "functions": [
       {
         "name": "ObjectivesPage",
-        "nonblankLines": 208
+        "nonblankLines": 254
       }
     ],
     "signals": [
@@ -3575,11 +3575,11 @@
   },
   {
     "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
-    "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8",
-    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
-    "rationale": "One selected meeting read and material-tab composition. Current receipt lineage gates both inline and modal presentations; header/link and preparation rendering are separate cohesive children, and artifact editing retains its canonical owner. No new transport, authority, provider or persistence responsibility. Missing versus empty preparation remains explicit. Independent source review accepted exact correction; browser and combined qualification are reported separately.",
+    "sha256": "36f7ee543afad64f7e0d2e1def47ffc3b94d49911262d568ffb5305dc184db8c",
+    "reviewer": "Codex /root/non_meri_closure_review",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/selected-meeting-desktop-20261015/STRUCTURE-REVIEW.md#meeting-detail",
+    "rationale": "One selected-meeting composition owns the requested meeting/client read fence and modal/inline material tabs. The added inline presentation flag selects the existing MeetingPreparation child; it does not change query admission, current-receipt gating, tab state, safe Join ownership or modal Notes default. Header/link, preparation rendering and artifact editing remain separate cohesive children. No extraction is required for this one-flag change.",
     "functions": [
       {
         "name": "MeetingDetail",
@@ -3592,18 +3592,19 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
-    "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e",
-    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
-    "rationale": "Existing meeting list/filter/selection composition with a deliberate inline list-detail view. MeetingSplitView owns geometry and focus; existing query hooks retain fixed-operation reads. Client/mode scope replacement clears selected meeting before another list can expose it, while filter state remains local. Default library and queue modal behavior is preserved. Independent source review accepted exact correction; browser and combined qualification remain separate.",
+    "sha256": "a21cc0db90659ff3567f1420fa4a05758e9daacc613a3e764fdb2a51a62280cf",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Meeting library module cohesively contains its current-meeting URL receiver and existing catalog/split-view presentation. Independent current-link state is factored into a component; file length alone does not require another module. Inherited meeting catalog filtering/grouping/detail selection remains cohesive and separate from the new current-link receiver.",
     "functions": [
       {
-        "name": "MeetingLibrary",
-        "nonblankLines": 124
+        "name": "MeetingLibraryContents",
+        "nonblankLines": 130
       }
     ],
     "signals": [
+      "apps/web/src/features/modules/engagement/MeetingLibrary.tsx: 480 nonblank lines require review",
       "apps/web/src/features/modules/engagement/MeetingLibrary.tsx: function over80 nonblank lines requires review"
     ]
   },
@@ -3708,15 +3709,15 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
-    "sha256": "c83cc3644670993374fd155915032760cc2f994fe5e5e56110a49400367886a5",
+    "sha256": "01ec98a0e8ed01718b2bc15b95737a9d9ee7e8677d828ed6f67e515e378a4454",
     "reviewer": "Codex independent_fix_review",
-    "reviewedAt": "2026-10-15",
-    "evidence": "docs/objective-planner-receiving/STRUCTURE-REVIEW.md#receiving",
-    "rationale": "The canonical Planner screen keeps project selection and bootstrap ownership; one bounded generated-receipt entry delegates validation/presentation and returns to the existing project workspace without a second navigation owner.",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Existing Planner section/task/generated-receipt selection now dispatches explicit current project URLs to a separate scoped receiver. Its selection state remains the page responsibility.",
     "functions": [
       {
         "name": "PlannerScreen",
-        "nonblankLines": 133
+        "nonblankLines": 148
       }
     ],
     "signals": [
@@ -3738,6 +3739,179 @@
     ],
     "signals": [
       "apps/web/src/features/modules/engagement/TeamView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/EngagementPlanWorkspace.tsx",
+    "sha256": "3ec489cbd59ae06c1d983bb2f58c3b79f1d2d2af8c4603877ecf49270fbc6244",
+    "reviewer": "Codex non_meri_closure_review lint successor",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Owns the selected Plan workspace read/selection lifecycle, opaque cursor stack, truthful selected-versus-returned-client summaries, and composition of detail and creation. Shared queries and the command owner retain transport and acknowledgement behavior; no authorization, persistence, recommendation or separate catalog policy is implemented here. The lint successor destructures the existing stable useCallback acknowledgement and lists that function directly in the effect dependencies; it adds no new effect trigger, read request, command replay or ownership rule.",
+    "functions": [
+      {
+        "name": "EngagementPlanWorkspace",
+        "nonblankLines": 282
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/EngagementPlanWorkspace.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/PlanDetail.tsx",
+    "sha256": "df05d2ac5d279ddf33001939d6b7468b98ec82b92ba4ed71f1c35b3381b4f121",
+    "reviewer": "Codex non_meri_closure_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Presents one current aggregate and its permitted lifecycle action affordances, then delegates title, wave and review/history editing. The action expectations bind this client, plan and exact next version. This is one aggregate presentation boundary, not an independent workflow engine.",
+    "functions": [
+      {
+        "name": "PlanDetail",
+        "nonblankLines": 107
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/PlanDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+    "sha256": "ee6bccb44c3dc01f5b38209e0dd5e2bd1bed8254b57eb6357d5701de7048e1a1",
+    "reviewer": "Codex non_meri_closure_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Keeps one creation draft, stable request UUID, normalized original payload, controlled modal and explicit same-command reconciliation together. Pending/uncertain creation does not silently dismiss or invent a different request; retained state is explicitly limited to the mounted owner.",
+    "functions": [
+      {
+        "name": "NewPlan",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/PlanReviewHistory.tsx",
+    "sha256": "bcdb3867432230a0f1d6c9f5de157c9864a9505f8a4bd4107c2768c0115f6b9d",
+    "reviewer": "Codex non_meri_closure_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Owns manual review input and its revision evidence under one current aggregate. Review acknowledgement binds V+1 and the normalized explicit deadline. Raw historical snapshots stay separate from derived current review/child fields; history paging and current office-reference availability are described without historical availability or external-verification claims.",
+    "functions": [
+      {
+        "name": "PlanReviewHistory",
+        "nonblankLines": 160
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/PlanReviewHistory.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/PlanWaves.tsx",
+    "sha256": "3a4edb4d2cd05e0f2eaa36054a95244b587c4e199de27f1b3dd52c5f84ab0310",
+    "reviewer": "Codex non_meri_closure_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Owns the visible children of one Plan, archive/restore controls, active-child ordering and complete-set reorder. It passes child authoring to its collocated editor and delegates requests/acknowledgement to the existing boundaries. No scheduling, sending, recommendation or office-selection subsystem is added. Keeps creation/editing of the same child field set together: normalized title/format/date-only window, stable creation request UUID, exact CAS expectation, field acknowledgement, and controlled modal uncertainty. Ordinary uncertain edits can close for read-back without clearing or replaying the command; uncertain creation retains explicit same-payload reconciliation.",
+    "functions": [
+      {
+        "name": "PlanWaves",
+        "nonblankLines": 126
+      },
+      {
+        "name": "WaveEditor",
+        "nonblankLines": 177
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/PlanWaves.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/plan/usePlanCommands.ts",
+    "sha256": "8ae583636e42f5c7297add792202e4723c10dc1db46d5869896965316ddf1eb0",
+    "reviewer": "Codex non_meri_closure_review lint successor",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "A pure, single acknowledgement boundary checks current identity, exact non-reconciled versions, immutable creation receipt identity versus newer reconciled aggregates, requested child fields/archive/order, and review deadline/version. It neither sends requests nor establishes authority. Centralizing these related witnesses avoids divergent UI success rules. This function body is byte-unchanged; its containing file hash is rebound because the adjacent hook received the bounded lint fix. Owns a single mounted command lifecycle: one pending request, explicit unknown delivery, retained original creation closure, and ordinary read-back acknowledgement bound to the owning client/plan. It reuses canonical disposable HTTP scopes and does not claim a durable browser journal or automatic retry. The lint successor adds only a render-facing boolean projection synchronized at the existing creation retain, successful clear and definitive-failure clear transitions. The immutable command payload remains event-owned in its ref; pending and owning-plan read-back guards are unchanged.",
+    "functions": [
+      {
+        "name": "acceptPlanCommand",
+        "nonblankLines": 83
+      },
+      {
+        "name": "usePlanCommands",
+        "nonblankLines": 97
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/plan/usePlanCommands.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx",
+    "sha256": "ef53b951310d11d7b838df51560cf2ec08d38798120bda3da0f9ef30734f5731",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One operational read-page composition owns saved Objective header, observed coverage and unavailable composite disclosure. Query lifecycle and repeatable panels are already delegated; no association write workflow.",
+    "functions": [
+      {
+        "name": "ObjectiveOperationalPage",
+        "nonblankLines": 110
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/operational/ObjectiveOperationalPage.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/operational/OperationalSections.tsx",
+    "sha256": "f72729247c16266560b8c78a35b8ec9c32132993ab8136f95f8d522fdbe94ced",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Two adjacent linked-work panels share explicit read projection, provenance and current-action link generation. No independent effects or command ownership; keeping this static presentation cohesive is reasonable.",
+    "functions": [
+      {
+        "name": "OperationalWorkSections",
+        "nonblankLines": 100
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/operational/OperationalSections.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/engagement-plans-schemas.ts",
+    "sha256": "e6ac256dfa5de19ea486692a0f31117a2d0ae4b1f9b2b903ecb9d27c557da100",
+    "reviewer": "Codex non_meri_closure_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One closed manual Plan wire family owns request/current/history/receipt/list validation. Raw shared shapes avoid duplicate DTOs while current aggregates and historical snapshots remain intentionally distinct. Refinements check returned cross-field witnesses, including review at server-returned checkedAt, rather than introducing authorization, a browser clock freshness policy, provider calls or orchestration. The operation descriptor table is already separate; further splitting solely for 400 lines would not improve this ownership.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/engagement-plans-schemas.ts: 489 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts",
+    "sha256": "a5e5685c29f580bb81beabd8c59f85a8a42d7b38da68ed7891e296ee818f81c7",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One cross-section identity/provenance consistency pass builds resource witnesses for subsequent action validation. Resource, receipt and manual revision checks share a single consistency boundary; no transport or side effects.",
+    "functions": [
+      {
+        "name": "rowWitnesses",
+        "nonblankLines": 89
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts: function over80 nonblank lines requires review"
     ]
   }
 ]

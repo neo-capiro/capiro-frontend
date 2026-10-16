@@ -4,8 +4,10 @@ import styles from "./meetings.module.css";
 
 export function MeetingPreparation({
   meeting,
+  inline = false,
 }: {
   meeting: EngagementMeeting;
+  inline?: boolean;
 }) {
   if (!meeting.preps?.length)
     return (
@@ -23,25 +25,38 @@ export function MeetingPreparation({
       </Panel>
     );
   return (
-    <div className={styles.stack}>
+    <div
+      className={`${styles.stack} ${inline ? styles.inlinePreparations : ""}`}
+    >
       {meeting.preps.map((prep) => (
-        <Panel title="Meeting preparation" key={prep.id}>
+        <Panel title={inline ? undefined : "Meeting preparation"} key={prep.id}>
           <div className={styles.artifact}>
             <Badge>{prep.status}</Badge>
-            <p className={styles.body}>{prep.summary}</p>
-            {(["agenda", "talkingPoints", "risks", "followUps"] as const).map(
-              (key) =>
-                Array.isArray(prep[key]) ? (
-                  <div key={key}>
-                    <h3>{key.replace(/([A-Z])/g, " $1")}</h3>
-                    <ul className={styles.prepList}>
-                      {prep[key].map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null,
-            )}
+            <div className={styles.prepSection}>
+              {inline && <h3>Summary</h3>}
+              <p className={styles.body}>{prep.summary}</p>
+            </div>
+            {(
+              [
+                ["agenda", "Agenda"],
+                ["talkingPoints", "Talking points"],
+                ["risks", "Watch-outs"],
+                ["followUps", "Follow-ups"],
+              ] as const
+            ).map(([key, label]) => {
+              if (!Array.isArray(prep[key])) return null;
+              const List = inline && key === "agenda" ? "ol" : "ul";
+              return (
+                <div className={styles.prepSection} key={key}>
+                  <h3>{inline ? label : key.replace(/([A-Z])/g, " $1")}</h3>
+                  <List className={styles.prepList}>
+                    {prep[key].map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </List>
+                </div>
+              );
+            })}
           </div>
         </Panel>
       ))}

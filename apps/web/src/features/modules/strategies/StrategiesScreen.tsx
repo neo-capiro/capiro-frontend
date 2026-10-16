@@ -1,10 +1,16 @@
 "use client";
 import { StrategiesLibrary } from "./StrategiesLibrary";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { useSelectedClient } from "../../../shared/session/SelectedClient";
+import { strategyId } from "../../../shared/capiro/operations/strategies-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
-import { ActionButton, SelectInput } from "../../../shared/module-ui";
+import {
+  ActionButton,
+  SelectInput,
+  StatusPanel,
+} from "../../../shared/module-ui";
 import { StrategyContext } from "./context/StrategyContext";
 import { StrategyReview } from "./review/StrategyReview";
 import { StrategyRuns } from "./runs/StrategyRuns";
@@ -49,7 +55,15 @@ export function StrategiesScreen() {
   const [clientId, setClientId] = useState(searchParams.get("clientId") ?? "");
   const [selected, setSelected] = useState<string>();
   const [creating, setCreating] = useState(false);
-  const clients = useCapiroQuery("clients.list", {});
+  const linked = searchParams.has("strategy");
+  const clients = useCapiroQuery("clients.list", {}, { enabled: !linked });
+  if (linked)
+    return (
+      <CurrentStrategyLink
+        key={searchParams.toString()}
+        onDismiss={() => setSelected(undefined)}
+      />
+    );
   if (selected)
     return (
       <StrategyTimeline id={selected} onClose={() => setSelected(undefined)} />
@@ -129,5 +143,45 @@ export function StrategiesScreen() {
         />
       )}
     </section>
+  );
+}
+
+function CurrentStrategyLink({ onDismiss }: { onDismiss: () => void }) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const scope = useSelectedClient();
+  const id = params.get("strategy") ?? "";
+  const clientId = params.get("clientId") ?? "";
+  const valid =
+    params.getAll("strategy").length === 1 &&
+    params.getAll("clientId").length === 1 &&
+    strategyId.safeParse(id).success &&
+    strategyId.safeParse(clientId).success;
+  const authorized =
+    scope.state === "authorized-client" && scope.client.id === clientId;
+  const close = () => {
+    onDismiss();
+    const next = new URLSearchParams(params.toString());
+    next.delete("strategy");
+    router.replace(`/modules/strategies${next.size ? `?${next}` : ""}`);
+  };
+  if (!valid || !authorized)
+    return (
+      <>
+        <StatusPanel
+          loading={valid && scope.state === "loading"}
+          error={
+            !valid
+              ? "This Strategy link is invalid."
+              : scope.state === "loading"
+                ? undefined
+                : "This Strategy is unavailable in the selected client scope."
+          }
+        />
+        <ActionButton onClick={close}>Dismiss Strategy link</ActionButton>
+      </>
+    );
+  return (
+    <StrategyTimeline id={id} expectedClientId={clientId} onClose={close} />
   );
 }

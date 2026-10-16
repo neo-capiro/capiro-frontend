@@ -2694,10 +2694,10 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
-    "reason": "This screen composes one Engagement route, current client catalog and selected view. Existing query owners handle scope/lifetime; view changes preserve URL/history/client intent and clear stale Outreach hints. Catalog loading/error disables the picker and exposes explicit retry while independently healthy queries remain usable. Presentation delegates to existing feature panels. These states govern the same route admission and do not create another workflow.",
-    "reviewedBy": "Codex outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "d53c017af63e34946a634d22420e9b10f7646b23b3b1548f78e43c1a94acefda",
+    "reason": "The existing Engagement tab/client-scope composition owner adds only a presentation fallback for its controlled scope select when the valid URL identity is absent from the returned catalog. The same value and query scope remain unchanged; the static missing-name label carries no authority. This remains one local navigation/scope presentation responsibility, while Plan operations, authorization and receipt/uncertainty lifetimes stay delegated. Six extra option-rendering lines do not introduce a new reason to split the component.",
+    "reviewedBy": "Codex non_meri_closure_review scope-label successor",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/test/browser/main.tsx",

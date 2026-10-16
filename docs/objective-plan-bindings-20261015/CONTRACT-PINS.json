@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "base": "9da3616a4c700b658770897c827f517997b69a5e",
+  "objective": {
+    "contractCommit": "6ce5cacd261e4e4541fea482beea160a3f6c3702",
+    "schemaSHA256": "6314da43305d37140c8dfeedb9b042c7e41f1354fd60f06da371e918d209ab93",
+    "implementationCommit": "622905839c7a510ab01a512ef8012926b2e1b4ce",
+    "implementationTree": "90503a35520425ccd20fdccd44380940fd826d0f",
+    "ownerHandoffSHA256": "10a0d32eaf7c4868df2358ee257e4ced4968747a85d761fc8c374e1b316f4dbf",
+    "status": "SOURCE_ONLY_NOT_NATIVE_OR_LIVE_API",
+    "limitations": [
+      "Automation and questions remain unavailable",
+      "No generated-current or frozen-snapshot adoption",
+      "Association write descriptors/receipt binding are preparation, not a human write workflow",
+      "Process-local cursors require section restart after409/server-instance replacement"
+    ]
+  },
+  "engagement": {
+    "reviewedProposal": "f41be1774131d5a51ed5eaaafdcdade4f50781e3",
+    "wireSHA256": "64181558d22ccd71bf1b09f5644a2431e591567cd2b77913f9a6471b7004e8e2",
+    "implementationCommit": "016e79b585c14f20d13669e13c987c01e3dd29dd",
+    "priorReceivingSourceCommit": "9a151f4dbf9e910ce9a78c3cb40a5dc53390508e",
+    "status": "REVIEWED_ACL_SUCCESSOR_SOURCE_PIN_NOT_FULL_APPLICATION_OR_LIVE_QUALIFICATION",
+    "limitations": [
+      "No wall-scoped office picker",
+      "No recommendation/ranking/availability or wave execution route",
+      "Review means explicitly reviewed aggregate version plus explicit deadline",
+      "Migration-only016e successor repairs explicit TRUNCATE revocations on four new tables; receiving WIRE and application source remain unchanged per owner handoff",
+      "CAPIRO_PREVIEW_READ_ONLY continues to hold all nine plan operations503; no preview allowlist expansion in this candidate",
+      "Unknown creation recovery is retained only while the scoped UI owner stays mounted; route/browser closure is not durable reconciliation"
+    ],
+    "priorPreparationWireSHA256": "04fb15c5ca266c6e703a156df3cee33cfd6fb6b2b741570c3eb402c7011eef31",
+    "implementationTree": "aae45db5f9464559739fd8eb0ad6374852b1351b",
+    "implementationPR": "https://github.com/neo-capiro/capiro-backend/pull/27"
+  },
+  "figma": {
+    "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+    "objectiveNode": "411:61442",
+    "planNode": "411:95121",
+    "target": "Desktop1440x1040",
+    "asset": {
+      "path": "apps/web/public/figma/objective-operational/arrow-left.svg",
+      "bytes": 357,
+      "sha256": "cd433885afb47a496d7054c9e0fe738f7519ec1224de27edf50f8dbf1e111131",
+      "rootWidth": 15,
+      "rootHeight": 15,
+      "slot": "Objective operations back link",
+      "source": "Exact Figma get_design_context asset dbd217a0-5381-4465-a1eb-f8fa48e5e861.svg"
+    }
+  }
+}

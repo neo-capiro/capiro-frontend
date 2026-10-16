@@ -26,6 +26,19 @@
   overflow-wrap: anywhere;
   cursor: pointer;
 }
+.listHeader h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.listHeader p {
+  margin: 8px 0 0;
+}
+.search {
+  width: 100%;
+  min-width: 0;
+}
 .meeting strong {
   font-size: 14px;
   line-height: 1.35;
@@ -55,6 +68,15 @@
   border-radius: 12px;
   background: var(--card);
   color: var(--muted-foreground);
+}
+@media (min-width: 1024px) {
+  .list {
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+  }
 }
 @media (max-width: 900px) {
   .split {

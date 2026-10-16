@@ -266,19 +266,26 @@ function TimelineView({
 
 export function StrategyTimeline({
   id,
+  expectedClientId,
   onClose,
 }: {
   id: string;
+  expectedClientId?: string;
   onClose: () => void;
 }) {
   const query = useCapiroQuery("strategies.detail", { params: { id } });
+  const mismatch =
+    query.data &&
+    expectedClientId !== undefined &&
+    (query.data.id !== id || query.data.clientId !== expectedClientId);
+  const error =
+    query.error ??
+    (mismatch
+      ? "This Strategy is unavailable in the selected client scope."
+      : undefined);
   return (
-    <StatusPanel
-      loading={query.loading}
-      error={query.error}
-      onRetry={query.reload}
-    >
-      {query.data && (
+    <StatusPanel loading={query.loading} error={error} onRetry={query.reload}>
+      {!error && !query.loading && query.data && (
         <TimelineView
           key={query.data.id}
           strategy={query.data}

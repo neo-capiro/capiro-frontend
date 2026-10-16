@@ -1,6 +1,7 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { plannerId } from "../../../shared/capiro/operations/planner-schemas";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { LinkedTaskDetail } from "./LinkedTaskDetail";
 import { ObjectivePreparedPlan } from "./ObjectivePreparedPlan";
@@ -58,7 +59,12 @@ export function PlannerScreen() {
         : "my-tasks",
     ),
     [projectId, setProjectId] = useState<string | null>(null);
-  const bootstrap = useCapiroQuery("planner.bootstrap", {});
+  const linkedProject = params.has("project");
+  const bootstrap = useCapiroQuery(
+    "planner.bootstrap",
+    {},
+    { enabled: !linkedProject },
+  );
   const clients = useCapiroQuery(
     "clients.list",
     {},
@@ -86,6 +92,16 @@ export function PlannerScreen() {
     if (sections.some((section) => section.id === requestedView))
       setSection(requestedView!);
   }
+  if (linkedProject)
+    return (
+      <CurrentProjectLink
+        key={params.toString()}
+        onDismiss={() => {
+          setProjectId(null);
+          setSection("projects");
+        }}
+      />
+    );
   if (planSelector !== null && !planDismissed)
     return (
       <div className={styles.screen}>
@@ -164,6 +180,73 @@ export function PlannerScreen() {
               initialTaskTitle={initialTaskTitle}
             />
           </>
+        )}
+      </StatusPanel>
+    </div>
+  );
+}
+
+function CurrentProjectLink({ onDismiss }: { onDismiss: () => void }) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const scope = useSelectedClient();
+  const id = params.get("project") ?? "";
+  const clientId = params.get("clientId") ?? "";
+  const valid =
+    params.getAll("project").length === 1 &&
+    params.getAll("clientId").length === 1 &&
+    params.getAll("view").length === 1 &&
+    params.get("view") === "projects" &&
+    !params.has("materializationRequestId") &&
+    plannerId.safeParse(id).success &&
+    plannerId.safeParse(clientId).success;
+  const authorized =
+    scope.state === "authorized-client" && scope.client.id === clientId;
+  const query = useCapiroQuery(
+    "planner.bootstrap",
+    {},
+    { enabled: valid && authorized },
+  );
+  const matches = query.data?.projects.filter((project) => project.id === id);
+  const project =
+    matches?.length === 1 &&
+    !matches[0]!.archived &&
+    matches[0]!.clientId === clientId
+      ? matches[0]
+      : undefined;
+  const error = !valid
+    ? "This project link is invalid."
+    : !authorized && scope.state !== "loading"
+      ? "This project is unavailable in the selected client scope."
+      : (query.error ??
+        (query.data && !project
+          ? "This project is unavailable in the selected client scope."
+          : undefined));
+  const close = () => {
+    onDismiss();
+    const next = new URLSearchParams(params.toString());
+    next.delete("project");
+    router.replace(`/modules/planner${next.size ? `?${next}` : ""}`);
+  };
+  return (
+    <div className={styles.screen}>
+      <PageHeader title="Planner" description="Current project work." />
+      <ActionButton onClick={close}>Back to Projects</ActionButton>
+      <StatusPanel
+        loading={(valid && scope.state === "loading") || query.loading}
+        error={error}
+        onRetry={valid && authorized ? query.reload : undefined}
+      >
+        {!error && !query.loading && project && query.data && (
+          <TaskWorkspace
+            key={project.id}
+            initialView="list"
+            clientId={clientId}
+            mine={false}
+            projectId={project.id}
+            people={query.data.people}
+            projects={query.data.projects}
+          />
         )}
       </StatusPanel>
     </div>

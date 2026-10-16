@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  engagementMeeting,
+  type EngagementMeeting,
+} from "../../../shared/capiro/operations/engagement";
+import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { MeetingDetail } from "../../../shared/meetings/MeetingDetail";
 import { meetingMaterials } from "../../../shared/meetings/library-materials";
@@ -16,7 +21,84 @@ import {
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
 import { MeetingSplitView } from "./MeetingSplitView";
-export function MeetingLibrary({
+export function MeetingLibrary(props: {
+  clientId: string;
+  mode: "library" | "meetings";
+}) {
+  const params = useSearchParams();
+  if (params.has("meeting"))
+    return <CurrentMeetingLink key={params.toString()} {...props} />;
+  return <MeetingLibraryContents {...props} />;
+}
+
+function CurrentMeetingLink({
+  clientId,
+  mode,
+}: {
+  clientId: string;
+  mode: "library" | "meetings";
+}) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const scope = useSelectedClient();
+  const id = params.get("meeting") ?? "";
+  const requestedClient = params.get("clientId") ?? "";
+  const valid =
+    mode === "meetings" &&
+    params.getAll("meeting").length === 1 &&
+    params.getAll("clientId").length === 1 &&
+    params.getAll("view").length === 1 &&
+    params.get("view") === "meetings" &&
+    engagementMeeting.shape.id.safeParse(id).success &&
+    engagementMeeting.shape.id.safeParse(requestedClient).success;
+  const authorized =
+    scope.state === "authorized-client" &&
+    scope.client.id === requestedClient &&
+    clientId === requestedClient;
+  const query = useCapiroQuery(
+    "engagement.meeting",
+    { params: { id } },
+    { enabled: valid && authorized },
+  );
+  const mismatch =
+    query.data &&
+    (query.data.id !== id || query.data.client?.id !== requestedClient);
+  const error = !valid
+    ? "This meeting link is invalid."
+    : !authorized && scope.state !== "loading"
+      ? "This meeting is unavailable in the selected client scope."
+      : (query.error ??
+        (mismatch
+          ? "This meeting is unavailable in the selected client scope."
+          : undefined));
+  const close = () => {
+    const next = new URLSearchParams(params.toString());
+    next.delete("meeting");
+    router.replace(`/modules/engagement${next.size ? `?${next}` : ""}`);
+  };
+  return (
+    <div className={styles.stack}>
+      <ActionButton onClick={close}>Back to Meetings</ActionButton>
+      <StatusPanel
+        loading={(valid && scope.state === "loading") || query.loading}
+        error={error}
+        onRetry={valid && authorized ? query.reload : undefined}
+      >
+        {!error && !query.loading && query.data && (
+          <MeetingDetail
+            key={id}
+            meeting={query.data}
+            presentation="inline"
+            onClose={close}
+            onSaved={query.reload}
+          />
+        )}
+      </StatusPanel>
+    </div>
+  );
+}
+
+function MeetingLibraryContents({
   clientId,
   mode,
 }: {
@@ -49,6 +131,7 @@ export function MeetingLibrary({
     <div className={styles.stack}>
       <MeetingFilters
         mode={mode}
+        showSearch={mode === "library" || display === "queue"}
         search={search}
         onSearch={setSearch}
         type={type}
@@ -101,6 +184,11 @@ export function MeetingLibrary({
           <MeetingSplitView
             rows={rows}
             selected={selected}
+            search={search}
+            onSearch={(value) => {
+              setSearch(value);
+              setPage(1);
+            }}
             onSelect={setSelected}
             onReload={query.reload}
           />
@@ -149,6 +237,7 @@ export function MeetingLibrary({
 
 function MeetingFilters({
   mode,
+  showSearch,
   search,
   onSearch: setSearch,
   type,
@@ -162,6 +251,7 @@ function MeetingFilters({
   onPage: setPage,
 }: {
   mode: "library" | "meetings";
+  showSearch: boolean;
   search: string;
   onSearch: (value: string) => void;
   type: string;
@@ -176,16 +266,18 @@ function MeetingFilters({
 }) {
   return (
     <div className={styles.tools}>
-      <TextInput
-        aria-label="Search meetings"
-        type="search"
-        placeholder="Search by meeting or client…"
-        value={search}
-        onChange={(event) => {
-          setSearch(event.target.value);
-          setPage(1);
-        }}
-      />
+      {showSearch && (
+        <TextInput
+          aria-label="Search meetings"
+          type="search"
+          placeholder="Search by meeting or client…"
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setPage(1);
+          }}
+        />
+      )}
       {mode === "library" && (
         <>
           <select
