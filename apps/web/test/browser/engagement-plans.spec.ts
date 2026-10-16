@@ -84,6 +84,14 @@ test("Engagement plans preserve original create payload on explicit reconciliati
     },
   );
   await page.goto(`/modules/engagement?view=plan&clientId=${clientId}`);
+  const clientScope = page.getByRole("combobox", {
+    name: "Engagement client scope",
+    exact: true,
+  });
+  await expect(clientScope).toHaveValue(clientId);
+  await expect(clientScope.locator("option:checked")).toHaveText(
+    "Selected client (name unavailable)",
+  );
   await page
     .getByRole("button", { name: "+ New engagement plan", exact: true })
     .click();

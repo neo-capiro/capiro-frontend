@@ -125,6 +125,12 @@ function OrdinaryEngagementScreen() {
               onChange={(event) => setClientId(event.target.value)}
             >
               <option value="">All permitted clients</option>
+              {clientId &&
+                !clients.some((client) => client.id === clientId) && (
+                  <option value={clientId}>
+                    Selected client (name unavailable)
+                  </option>
+                )}
               {clients.map((client) => (
                 <option key={client.id} value={client.id}>
                   {client.name}

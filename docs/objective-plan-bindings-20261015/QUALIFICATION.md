@@ -23,6 +23,12 @@ Shipping then released a browser-only sequential slot. Fresh available commitmen
 
 The canonical default `npm run build` remains held by shared-host capacity and the separate Shipping slot. After browser cleanup, available virtual commitment was5,602,320,384bytes, less than the proposed6144MiB heap maximum before native/parent margin. No build was launched and no unrelated process or OS setting was changed. Heavy processes are serialized with Shipping. The build includes fresh Meri-client declarations and full Next/web typing as canonical prerequisites; this does not allocate Meri implementation work. Earlier initial typecheck diagnostics are retained and their source fixes are independently reviewed, but are not a full final typing pass.
 
+## Scope-label source successor
+
+Visual inspection of the passing Plan capture exposed an empty-catalog fixture gap and a real existing selector presentation edge. A valid selected URL ID absent from the options could visually show the first all-client label while queries retained the selected ID. The successor adds only a matching **Selected client (name unavailable)** option; IDs, queries, disabled/error conditions and permission boundaries remain unchanged. Independent exact source review is `01f4d07798f93f34c9b44903b8f6f6f10f2179bab319aa85d855e1f3d6909dd8`.
+
+Three rendered regressions passed for matching catalog, missing/foreign-only catalog and empty URL scope. All three changed source/test paths passed lint and formatting. The existing first Plan browser case now checks native select value and checked-option label; six affected Plan browser cases await rerun. Their immediate capacity check at01:08:41UTC found3,445,075,968bytes available commit, below the unchanged4096MiB heap plus1GiB parent/native margin; no browser started. The earlier18-case evidence stays frozen atbd13. Shipping subsequently assigned the next bounded slot to Objective typing, so neither this browser nor the6144MiB default build may overlap it.
+
 ## Invocation
 
 From `apps/web`, the targeted unit command is:
