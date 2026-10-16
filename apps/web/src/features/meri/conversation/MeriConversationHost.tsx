@@ -1,9 +1,11 @@
 "use client";
 import { useRef, useState, type RefObject } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@capiro/ui/button";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
 import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
+import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { UserMessage } from "../screens/conversation/UserMessage";
 import { ConversationFrame } from "./ConversationFrame";
 import { MeriLiveConversation } from "./MeriLiveConversation";
@@ -20,6 +22,7 @@ export function MeriConversationHost({
   account?: ConversationAccount;
 }) {
   const selected = useSelectedClient();
+  const selector = conversationSelection(useSearchParams());
   if (!enabled)
     return (
       <section aria-labelledby="conversation-availability">
@@ -27,6 +30,15 @@ export function MeriConversationHost({
         <p>
           The governed conversation connection is not enabled. Conversations and
           their files cannot be loaded.
+        </p>
+      </section>
+    );
+  if (selector.state === "invalid")
+    return (
+      <section role="alert">
+        <h2>Conversation selection unavailable</h2>
+        <p>
+          The conversation link is invalid. No other conversation was opened.
         </p>
       </section>
     );
@@ -42,10 +54,18 @@ export function MeriConversationHost({
     );
   return (
     <ConnectedConversation
-      key={`${account.tenantId}:${account.actorId}:${selected.client.id}`}
+      key={JSON.stringify([
+        account.tenantId,
+        account.actorId,
+        selected.client.id,
+        selector,
+      ])}
       account={account}
       clientId={selected.client.id}
       scope={selected.client.name}
+      conversationId={
+        selector.state === "selected" ? selector.conversationId : undefined
+      }
     />
   );
 }
@@ -55,12 +75,19 @@ function ConnectedConversation({
   account,
   clientId,
   scope,
+  conversationId,
 }: {
   account: ConversationAccount;
   clientId: string;
   scope: string;
+  conversationId?: string | undefined;
 }) {
-  const connection = useConversationConnection(account, clientId);
+  const connection = useConversationConnection(
+    account,
+    clientId,
+    undefined,
+    conversationId,
+  );
   const { state, pending } = connection;
   const [draft, setDraft] = useState("");
   const [earlier, setEarlier] = useState<readonly TurnView[]>([]);

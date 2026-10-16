@@ -8,6 +8,7 @@ import { unavailableResources } from "../../../shared/meri-resources/unavailable
 import { MeriComposer, type LiveComposer } from "../MeriComposer";
 import { ConversationTurn } from "./ConversationTurn";
 import type { TurnView } from "./conversation-view";
+import { shouldShowPrompt } from "./prompt-identity";
 import styles from "./live.module.css";
 
 /**
@@ -60,6 +61,7 @@ export function ConversationFrame({
               key={turn.runId}
               turn={turn}
               label={`Earlier turn ${index + 1}`}
+              showPrompt={shouldShowPrompt(turn, earlier.slice(0, index))}
             />
           ))}
           {current}

@@ -28,21 +28,25 @@ const time = (value: string) => {
 export function ConversationTurn({
   turn,
   label,
+  showPrompt = true,
 }: {
   turn: TurnView;
   /** Accessible name of the turn, e.g. "Current turn". */
   label: string;
+  /** Resumed segments retain their output/status while their logical prompt is shown once. */
+  showPrompt?: boolean;
 }) {
   const working = turn.messages.length === 0 && turn.errors.length === 0;
   return (
     <article className={styles.turn} aria-label={label}>
-      {turn.prompt !== null ? (
-        <UserMessage>{turn.prompt}</UserMessage>
-      ) : (
-        <p className={styles.muted}>
-          The request text for this run was not returned by the service.
-        </p>
-      )}
+      {showPrompt &&
+        (turn.prompt !== null ? (
+          <UserMessage>{turn.prompt}</UserMessage>
+        ) : (
+          <p className={styles.muted}>
+            The request text for this run was not returned by the service.
+          </p>
+        ))}
       <Message from="assistant" className={styles.message}>
         <MessageContent className={answer.answer}>
           <div className={styles.answerHeading}>

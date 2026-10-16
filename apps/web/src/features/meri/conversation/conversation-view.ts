@@ -13,6 +13,8 @@ export type TurnView = Readonly<
     prompt: string | null;
     runState: RunState;
     omittedPrefix: boolean;
+    /** UI key derived from admitted conversation + logical request identity; never prompt text. */
+    promptKey?: string;
   } & Pick<
     WorkspaceView,
     | "reasonCode"

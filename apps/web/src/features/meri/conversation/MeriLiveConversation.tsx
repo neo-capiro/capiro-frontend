@@ -14,6 +14,7 @@ import {
   type TurnView,
 } from "./conversation-view";
 import { useLiveRun } from "./useLiveRun";
+import { shouldShowPrompt } from "./prompt-identity";
 import styles from "./live.module.css";
 
 /** The session-bound run, with every turn already shown in this page above it. */
@@ -58,7 +59,11 @@ export function MeriLiveConversation({
       earlier={earlier}
       current={
         turn ? (
-          <ConversationTurn turn={turn} label="Current turn" />
+          <ConversationTurn
+            turn={turn}
+            label="Current turn"
+            showPrompt={shouldShowPrompt(turn, earlier)}
+          />
         ) : intent.submit ? (
           <article
             className={`${styles.turn} ${styles.pending}`}

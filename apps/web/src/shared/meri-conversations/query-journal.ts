@@ -59,17 +59,19 @@ export function conversationSelectionOwner(
   client: QueryClient,
   account: { tenantId: string; actorId: string },
   clientId: string,
+  conversationId?: string,
 ) {
   const key = [
     "meri-conversation-selection",
     account.tenantId,
     account.actorId,
     clientId,
+    ...(conversationId ? [conversationId] : []),
   ];
   client.setQueryDefaults(key, { gcTime: Infinity });
   client.setQueryData<{ conversationId?: string; runId?: string }>(
     key,
-    (previous) => previous ?? {},
+    (previous) => previous ?? (conversationId ? { conversationId } : {}),
   );
   const cache = client.getQueryCache(),
     owned = cache.find({ queryKey: key, exact: true });

@@ -47,10 +47,11 @@ export function useConversationConnection(
   account: ConversationAccount,
   clientId: string,
   now: () => number = Date.now,
+  conversationId?: string,
 ) {
   const cache = useQueryClient();
   const [selection] = useState(() =>
-    conversationSelectionOwner(cache, account, clientId),
+    conversationSelectionOwner(cache, account, clientId, conversationId),
   );
   const [bound] = useState(boundContext);
   const create = useCallback(
