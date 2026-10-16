@@ -5,3 +5,7 @@ tests/fixtures/meri-actions/*.json
 # Exact centrally allocated backend42d81420 contract and wire evidence.
 src/shared/capiro/operations/strategy-materialization.contract.json
 tests/objective-plan-wire-fixtures.json
+
+# Exact reviewed backend6ce operational contract and wire examples; hash-tested.
+src/shared/capiro/operations/objective-operational.contract.json
+tests/objective-operational-contract-fixtures.json

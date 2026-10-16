@@ -2694,10 +2694,10 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "312849ecfcd936f8c957ac071f0d39fd04b4155e0adf8627432818a4b2a23d5c",
-    "reason": "This screen composes one Engagement route, current client catalog and selected view. Existing query owners handle scope/lifetime; view changes preserve URL/history/client intent and clear stale Outreach hints. Catalog loading/error disables the picker and exposes explicit retry while independently healthy queries remain usable. Presentation delegates to existing feature panels. These states govern the same route admission and do not create another workflow.",
-    "reviewedBy": "Codex outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "8234c04c2e60ea6d1701fdcc41be20ed97272958ea5227ff5e4377c2dfe858f0",
+    "reason": "Remains the existing Engagement tab/client-scope composition owner. The bounded Plan change supplies client context to the delegated PlanView; domain CRUD/review/history stays outside this container. Existing destination, meetings and outreach owners are preserved; URL/client hints do not create backend authority.",
+    "reviewedBy": "Codex non_meri_closure_review",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/test/browser/main.tsx",

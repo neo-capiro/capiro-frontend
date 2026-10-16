@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  engagementMeeting,
+  type EngagementMeeting,
+} from "../../../shared/capiro/operations/engagement";
+import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { MeetingDetail } from "../../../shared/meetings/MeetingDetail";
 import { meetingMaterials } from "../../../shared/meetings/library-materials";
@@ -16,7 +21,84 @@ import {
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
 import { MeetingSplitView } from "./MeetingSplitView";
-export function MeetingLibrary({
+export function MeetingLibrary(props: {
+  clientId: string;
+  mode: "library" | "meetings";
+}) {
+  const params = useSearchParams();
+  if (params.has("meeting"))
+    return <CurrentMeetingLink key={params.toString()} {...props} />;
+  return <MeetingLibraryContents {...props} />;
+}
+
+function CurrentMeetingLink({
+  clientId,
+  mode,
+}: {
+  clientId: string;
+  mode: "library" | "meetings";
+}) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const scope = useSelectedClient();
+  const id = params.get("meeting") ?? "";
+  const requestedClient = params.get("clientId") ?? "";
+  const valid =
+    mode === "meetings" &&
+    params.getAll("meeting").length === 1 &&
+    params.getAll("clientId").length === 1 &&
+    params.getAll("view").length === 1 &&
+    params.get("view") === "meetings" &&
+    engagementMeeting.shape.id.safeParse(id).success &&
+    engagementMeeting.shape.id.safeParse(requestedClient).success;
+  const authorized =
+    scope.state === "authorized-client" &&
+    scope.client.id === requestedClient &&
+    clientId === requestedClient;
+  const query = useCapiroQuery(
+    "engagement.meeting",
+    { params: { id } },
+    { enabled: valid && authorized },
+  );
+  const mismatch =
+    query.data &&
+    (query.data.id !== id || query.data.client?.id !== requestedClient);
+  const error = !valid
+    ? "This meeting link is invalid."
+    : !authorized && scope.state !== "loading"
+      ? "This meeting is unavailable in the selected client scope."
+      : (query.error ??
+        (mismatch
+          ? "This meeting is unavailable in the selected client scope."
+          : undefined));
+  const close = () => {
+    const next = new URLSearchParams(params.toString());
+    next.delete("meeting");
+    router.replace(`/modules/engagement${next.size ? `?${next}` : ""}`);
+  };
+  return (
+    <div className={styles.stack}>
+      <ActionButton onClick={close}>Back to Meetings</ActionButton>
+      <StatusPanel
+        loading={(valid && scope.state === "loading") || query.loading}
+        error={error}
+        onRetry={valid && authorized ? query.reload : undefined}
+      >
+        {!error && !query.loading && query.data && (
+          <MeetingDetail
+            key={id}
+            meeting={query.data}
+            presentation="inline"
+            onClose={close}
+            onSaved={query.reload}
+          />
+        )}
+      </StatusPanel>
+    </div>
+  );
+}
+
+function MeetingLibraryContents({
   clientId,
   mode,
 }: {

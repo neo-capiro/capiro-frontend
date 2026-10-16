@@ -162,7 +162,12 @@ function OrdinaryEngagementScreen() {
           onClientOutreach={(id) => setClientId(id, "outreach")}
         />
       )}{" "}
-      {view === "plan" && <PlanView />}
+      {view === "plan" && (
+        <PlanView
+          clientId={clientId}
+          clientName={clients.find((client) => client.id === clientId)?.name}
+        />
+      )}
       {view === "meetings" && (
         <MeetingLibrary clientId={clientId} mode="meetings" />
       )}
