@@ -1,0 +1,86 @@
+{
+  "source": "845cebade818b8ceef1568574662196d813d14d0",
+  "stage": "ui-runtime",
+  "profileSha256": "8a4ff50a976f843f68a44cd246e29224b3142eef7685f2771b5bb0b4fba44131",
+  "workingDirectory": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input\\apps\\web",
+  "argv": [
+    "node",
+    "--max-old-space-size=384",
+    "../../node_modules/vitest/vitest.mjs",
+    "run",
+    "--config",
+    "vitest.config.ts",
+    "tests/meri-input-recovery.test.ts",
+    "tests/meri-conversation-proxy.test.ts",
+    "--pool=forks",
+    "--execArgv=--max-old-space-size=768",
+    "--maxWorkers=1",
+    "--no-file-parallelism",
+    "--reporter=json",
+    "--outputFile",
+    "C:/Users/neoma/Documents/Codex/2026-10-15/task-7/evidence/meri-input-ui-845.json"
+  ],
+  "startedAt": "2026-10-16T05:20:46.9536020+00:00",
+  "endedAt": "2026-10-16T05:20:48.3598631+00:00",
+  "rootPid": 33392,
+  "exitCode": 0,
+  "rootExited": true,
+  "nodeVersion": "24.19.0",
+  "capacity": {
+    "at": "2026-10-16T05:20:46.9212331+00:00",
+    "availableMiB": 11514,
+    "commitHeadroomMiB": 2806,
+    "requiredStartCommitMiB": 2560,
+    "requiredStartPhysicalMiB": 2560,
+    "remainingFloorMiB": 1024
+  },
+  "ownedProcesses": [
+    {
+      "pid": 32164,
+      "name": "conhost",
+      "startedUtcTicks": 639277248469641264,
+      "commandLine": "\\??\\C:\\Windows\\system32\\conhost.exe 0x4"
+    },
+    {
+      "pid": 28660,
+      "name": "node",
+      "startedUtcTicks": 639277248476245879,
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" --experimental-import-meta-resolve --require C:/Users/neoma/Documents/Codex/2026-10-15/task-7/meri-ui-input/node_modules/vitest/suppress-warnings.cjs --conditions node --conditions development --max-old-space-size=768 C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input\\node_modules\\vitest\\dist\\workers\\forks.js"
+    },
+    {
+      "pid": 33392,
+      "name": "node",
+      "startedUtcTicks": 639277248469561720,
+      "commandLine": "\"C:\\Program Files\\nodejs\\node.exe\" --max-old-space-size=384 ../../node_modules/vitest/vitest.mjs run --config vitest.config.ts tests/meri-input-recovery.test.ts tests/meri-conversation-proxy.test.ts --pool=forks --execArgv=--max-old-space-size=768 --maxWorkers=1 --no-file-parallelism --reporter=json --outputFile C:/Users/neoma/Documents/Codex/2026-10-15/task-7/evidence/meri-input-ui-845.json"
+    }
+  ],
+  "sampledAggregatePeakWorkingSetBytes": 117694464,
+  "memorySamples": [
+    {
+      "at": "2026-10-16T05:20:48.0159951+00:00",
+      "availableMiB": 11479,
+      "commitHeadroomMiB": 2585,
+      "ownedPids": [
+        33392,
+        32164,
+        28660
+      ],
+      "aggregateWorkingSetBytes": 117694464
+    }
+  ],
+  "timedOut": false,
+  "pressureStop": false,
+  "monitorFailure": null,
+  "forcedCleanupPids": [],
+  "remainingDirectChildren": [],
+  "generatedBeforeSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "generatedAfterSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "afterSourceStatus": [
+    " M packages/meri-client/dist/conversation-client.js"
+  ],
+  "lockUnchanged": true,
+  "scopeValid": true,
+  "synthetic": true,
+  "browserNextProviderDatabase": false,
+  "automaticNextStage": false
+}

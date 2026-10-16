@@ -1,4 +1,5 @@
 import { conversationApplicationMetadata as protocol, receiveConversationRequest, receiveConversationResponse, } from '@capiro/meri-contracts/conversation-application';
+import { conversationInputMetadata, conversationInputView, receiveConversationInputRequest, receiveConversationInputResponse, } from '@capiro/meri-contracts/conversation-input';
 import { ConversationNetwork, ConversationUnavailable } from './conversation-network.js';
 import { ConversationObservation } from './conversation-observation.js';
 import { conversationChat } from './conversation-chat.js';
@@ -19,6 +20,8 @@ class ConversationConnection {
     observation;
     handle;
     intent;
+    // Correlation only: this synthetic tail must never replace an observed transcript/cursor.
+    inputReceipt;
     busy = false;
     disposed = false;
     listeners = new Set();
@@ -63,6 +66,7 @@ class ConversationConnection {
         this.view = undefined;
         this.observation = undefined;
         this.intent = undefined;
+        this.inputReceipt = undefined;
         this.state = DISPOSED;
         for (const listener of this.listeners)
             listener();
@@ -106,7 +110,8 @@ class ConversationConnection {
     async receive(route, request, onDispatch) {
         const current = this.view;
         const response = await this.network.json(protocol.routes[route].path, bytes(request), onDispatch);
-        const value = await receiveConversationResponse(route, response.status, response.bytes, request, current);
+        const correlation = current ?? (this.inputReceipt && conversationInputView(this.inputReceipt));
+        const value = await receiveConversationResponse(route, response.status, response.bytes, request, correlation);
         this.network.check();
         if (this.disposed || this.view !== current)
             throw new ConversationUnavailable('superseded-response');
@@ -118,7 +123,7 @@ class ConversationConnection {
         this.network.check();
         if (this.intent)
             throw new ConversationUnavailable('retained-submit-intent');
-        const request = receiveConversationRequest('submit', bytes(input));
+        const request = receiveConversationInputRequest(bytes(input));
         this.start();
         this.intent = request;
         return this.sendRetained();
@@ -129,13 +134,33 @@ class ConversationConnection {
         this.start();
         return this.sendRetained(true);
     };
+    async admitRetained(onDispatch) {
+        const current = this.view, previous = this.inputReceipt, intent = this.intent;
+        const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch);
+        const value = await receiveConversationInputResponse(response.status, response.bytes, intent, {
+            tenantId: this.context.tenantId, actorId: this.context.actorId,
+            conversationId: this.context.conversationId, runId: this.context.runId,
+            clientId: this.context.selectedClientId,
+        }, current ?? previous);
+        this.network.check();
+        if (this.disposed || this.view !== current || this.inputReceipt !== previous)
+            throw new ConversationUnavailable('superseded-input-receipt');
+        if ('error' in value)
+            throw new ConversationUnavailable(value.error.code);
+        this.inputReceipt = value;
+    }
     async sendRetained(previouslyUnknown = false) {
         const intent = this.intent;
         let dispatched = false;
         this.publish({ submit: 'pending' });
         try {
+            await this.admitRetained(() => { dispatched = true; });
             const view = await this.receive('submit', intent, () => { dispatched = true; });
-            this.bind(view);
+            // An ACK carries no historical events. Preserve any already observed prefix and cursor.
+            if (this.observation && this.state.status === 'ready' && this.state.observation === this.observation.snapshot)
+                this.view = view;
+            else
+                this.bind(view);
             this.publish({ submit: 'observed' });
             return this.getSnapshot();
         }
