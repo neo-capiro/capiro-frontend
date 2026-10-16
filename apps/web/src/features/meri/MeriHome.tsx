@@ -13,8 +13,12 @@ import { MeriConversationHost } from "./conversation/MeriConversationHost";
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
   conversationEnabled = false,
+  firstChatBootstrapEnabled = false,
+  firstChatBootstrapClientId,
 }: {
   conversationEnabled?: boolean;
+  firstChatBootstrapEnabled?: boolean;
+  firstChatBootstrapClientId?: string;
 }) {
   const identity = useIdentity();
   const selected = useSelectedClient();
@@ -73,6 +77,8 @@ export function MeriHome({
         </section>
         <MeriConversationHost
           enabled={conversationEnabled}
+          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          firstChatBootstrapClientId={firstChatBootstrapClientId}
           account={
             current?.tenant?.id
               ? { tenantId: current.tenant.id, actorId: current.user.id }

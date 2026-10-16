@@ -4,11 +4,15 @@ import { RequireSession } from "../../shared/session/SessionContext";
 import { readConversationConfig } from "../../shared/meri-conversations/config";
 
 export default function MeriPage() {
-  const enabled = readConversationConfig(process.env).enabled;
+  const config = readConversationConfig(process.env);
   return (
-    <ProductShell conversationEnabled={enabled}>
+    <ProductShell conversationEnabled={config.enabled}>
       <RequireSession>
-        <MeriHome conversationEnabled={enabled} />
+        <MeriHome
+          conversationEnabled={config.enabled}
+          firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
+          firstChatBootstrapClientId={config.firstChatBootstrapClientId}
+        />
       </RequireSession>
     </ProductShell>
   );

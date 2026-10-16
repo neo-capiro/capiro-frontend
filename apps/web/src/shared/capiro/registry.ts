@@ -16,6 +16,10 @@ import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
 import { engagementPlanOperations } from "./operations/engagement-plans";
+import {
+  firstChatCoreOperation,
+  firstChatCoreOperationKey,
+} from "./operations/meri-first-chat";
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
@@ -36,4 +40,5 @@ export const capiroOperations = {
   ...onboardCoreOperations,
   ...objectiveOperationalOperations,
   ...engagementPlanOperations,
+  [firstChatCoreOperationKey]: firstChatCoreOperation,
 } as const satisfies OperationRegistry;

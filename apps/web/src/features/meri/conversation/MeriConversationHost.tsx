@@ -1,7 +1,16 @@
 "use client";
+import { Button } from "@capiro/ui/button";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
+import {
+  canBeginNewChatAfterConflict,
+  resolveFirstChatConversation,
+} from "../../../shared/meri-conversations/first-chat-bootstrap";
+import { beginNewChatIntent } from "../../../shared/meri-conversations/first-chat-intent";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { MeriLiveConversation } from "./MeriLiveConversation";
 import { useConversationSession } from "./useConversationSession";
@@ -11,9 +20,13 @@ import { ConnectionPending } from "./ConnectionPending";
 export function MeriConversationHost({
   enabled,
   account,
+  firstChatBootstrapEnabled = false,
+  firstChatBootstrapClientId,
 }: {
   enabled: boolean;
   account?: ConversationAccount;
+  firstChatBootstrapEnabled?: boolean;
+  firstChatBootstrapClientId?: string;
 }) {
   const selected = useSelectedClient();
   const selector = conversationSelection(useSearchParams());
@@ -46,6 +59,29 @@ export function MeriConversationHost({
         </p>
       </section>
     );
+  if (
+    firstChatBootstrapEnabled &&
+    selected.client.id !== firstChatBootstrapClientId
+  )
+    return (
+      <section role="alert">
+        <h2>Conversation connection unavailable</h2>
+        <p>This client is not configured for the current conversation.</p>
+      </section>
+    );
+  if (firstChatBootstrapEnabled && selector.state === "current")
+    return (
+      <CoreResolvedConversation
+        key={JSON.stringify([
+          account.tenantId,
+          account.actorId,
+          selected.client.id,
+        ])}
+        account={account}
+        clientId={selected.client.id}
+        scope={selected.client.name}
+      />
+    );
   return (
     <ConnectedConversation
       key={JSON.stringify([
@@ -60,6 +96,111 @@ export function MeriConversationHost({
       conversationId={
         selector.state === "selected" ? selector.conversationId : undefined
       }
+    />
+  );
+}
+
+type CoreResolution =
+  | { state: "pending" }
+  | { state: "ready"; conversationId: string }
+  | { state: "error"; canBeginNew: boolean };
+
+/** The Core receipt is verified before mounting a component that can issue a Meri session. */
+function CoreResolvedConversation({
+  account,
+  clientId,
+  scope,
+}: {
+  account: ConversationAccount;
+  clientId: string;
+  scope: string;
+}) {
+  const api = useCapiro();
+  const [attempt, setAttempt] = useState(0);
+  const [resolution, setResolution] = useState<CoreResolution>({
+    state: "pending",
+  });
+  const { tenantId, actorId } = account;
+  useEffect(() => {
+    const controller = new AbortController();
+    void Promise.resolve()
+      .then(() =>
+        resolveFirstChatConversation({
+          scope: { tenantId, actorId, clientId },
+          storage: window.sessionStorage,
+          signal: controller.signal,
+          createOrReuse: (body, signal) =>
+            api.request(firstChatCoreOperationKey, { body }, { signal }),
+        }),
+      )
+      .then(({ conversationId }) => {
+        if (!controller.signal.aborted)
+          setResolution({ state: "ready", conversationId });
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted)
+          setResolution({
+            state: "error",
+            canBeginNew: canBeginNewChatAfterConflict(
+              error,
+              { tenantId, actorId, clientId },
+              () => window.sessionStorage,
+            ),
+          });
+      });
+    return () => controller.abort();
+  }, [api, tenantId, actorId, clientId, attempt]);
+
+  if (resolution.state === "pending")
+    return (
+      <section role="status">
+        <h2>Preparing conversation</h2>
+        <p>Confirming the current client conversation.</p>
+      </section>
+    );
+  if (resolution.state === "error")
+    return (
+      <section role="alert">
+        <h2>Conversation connection unavailable</h2>
+        <p>The current conversation could not be confirmed.</p>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            setResolution({ state: "pending" });
+            setAttempt((value) => value + 1);
+          }}
+        >
+          Retry conversation
+        </Button>
+        {resolution.canBeginNew && (
+          <Button
+            type="button"
+            onClick={() => {
+              try {
+                beginNewChatIntent(
+                  { tenantId, actorId, clientId },
+                  window.sessionStorage,
+                );
+                setResolution({ state: "pending" });
+                setAttempt((value) => value + 1);
+              } catch {
+                setResolution({ state: "error", canBeginNew: false });
+              }
+            }}
+          >
+            New Chat
+          </Button>
+        )}
+      </section>
+    );
+  return (
+    <ConnectedConversation
+      key={resolution.conversationId}
+      account={account}
+      clientId={clientId}
+      scope={scope}
+      conversationId={resolution.conversationId}
     />
   );
 }
