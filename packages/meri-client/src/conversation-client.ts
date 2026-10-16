@@ -170,6 +170,9 @@ class ConversationConnection {
       throw new ConversationUnavailable('superseded-allocation-receipt');
     }
     if ('error' in value) throw new ConversationUnavailable(value.error.code);
+    if (previous && stableStringify(previous.allocation) !== stableStringify(value.allocation)) {
+      throw new ConversationUnavailable('INITIAL_INPUT_RECEIPT_DRIFT');
+    }
     this.allocation = value;
   }
   private async admitRetained(onDispatch: () => void) {
