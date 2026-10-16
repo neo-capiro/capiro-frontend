@@ -19,6 +19,7 @@ phases:
       - test "$CODEBUILD_SOURCE_VERSION" = "$EXPECTED_S3_VERSION"
       - npm run check
       - node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"
+      - npm run test:browser -- --workers=3 tests/browser/facility-action-lifetime.spec.ts tests/browser/facility-map.spec.ts tests/browser/mail-rich-compose.spec.ts tests/browser/profile-current-state.spec.ts tests/browser/work-boundary.spec.ts tests/browser/work-documents.spec.ts
       - npm run test:browser -- --workers=3
       - npm run test:browser:modules
       - npm run build
