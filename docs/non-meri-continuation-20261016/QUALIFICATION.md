@@ -2,6 +2,20 @@
 
 This is source preparation, not release or live API qualification. PR56 and deployed `9da3616a` evidence retain their own source/platform scope and are not promoted to this successor.
 
+## Jump-box continuation on 2026-10-16
+
+The recovered source was applied to a separate checkout from published base `3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd`; the resulting tree exactly matched the handed-off unpublished tree `eb7163dc5fb7340f106927c635ef4731ba6eeb7f`. The source-handoff status below remains historical. This task used bundled Node 24.19.0 and a fresh locked dependency install in its own checkout.
+
+| Focused check | Actual result |
+| --- | --- |
+| Eleven Vitest files listed below | 88 passed, exit 0. [Receipt](../../../validation-evidence/focused-vitest-88.txt). |
+| Government/location Portfolio browser | 8 passed, exit 0. [Playwright JSON](../../../validation-evidence/portfolio-browser-8.json). |
+| Commitment, Work/Strategy and District Nexus browser | 13 passed, exit 0. [Playwright JSON](../../../validation-evidence/modules-browser-13.json). |
+
+For the browser runs, the canonical Playwright configs and tests were used with only their `webServer` launch disabled in temporary task-local config overlays. Each existing Vite harness was started separately with Node 24 and stopped afterward. On this Windows host, Playwright's built-in web-server termination stalled after the test cases, before its reporters finalized; the separate-server runs produced complete JSON reports. The temporary overlays were removed. Initial failure traces from test/harness assertions were preserved under [browser-failure-evidence](../../../browser-failure-evidence); the final focused reports above have no unexpected results.
+
+The scoped corrections after recovery were a whitespace-only SAM status fallback, distinct React keys for the two location sections, two browser assertion updates to match existing behavior, two Vitest assertion text updates, and the existing `next/image` browser stub wired into the Portfolio harness. Full semantic typing, default production build, broader parity and visual comparison remain separate qualification stages. No live API, authentication, backend, mobile or deployment claim follows from these synthetic focused runs.
+
 ## Actually completed
 
 | Check | Actual result and limit |

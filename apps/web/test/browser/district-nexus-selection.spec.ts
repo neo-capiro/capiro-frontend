@@ -182,7 +182,7 @@ test("District Nexus scopes a repeated district key to the current client and se
   await expect(
     page.getByText("Replacement client warning", { exact: true }),
   ).toBeVisible();
-  await expect(page.getByText("777", { exact: true })).toBeVisible();
+  await expect(page.getByText("777+", { exact: true })).toBeVisible();
   expect(writes).toEqual([]);
 });
 

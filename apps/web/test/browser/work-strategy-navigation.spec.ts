@@ -169,7 +169,12 @@ test("view/client navigation is reflected by URL, history and reload; library op
   await expect(
     page.getByRole("combobox", { name: "Strategy client scope", exact: true }),
   ).toContainText("All clients");
-  await page.getByRole("button", { name: strategy.title, exact: true }).click();
+  await page
+    .getByRole("table", { name: "Strategies library" })
+    .getByRole("row")
+    .filter({ hasText: strategy.title })
+    .getByRole("button", { name: "Open", exact: true })
+    .click();
   await expect(page).toHaveURL(
     `/modules/strategies?clientId=${clientId}&strategy=${strategyId}`,
   );

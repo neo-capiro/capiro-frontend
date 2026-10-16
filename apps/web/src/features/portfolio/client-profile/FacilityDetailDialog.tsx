@@ -139,7 +139,7 @@ export function FacilityDetailDialog({
                 available={available}
               />
               <FacilityEconomicSections
-                key={`${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
+                key={`economic:${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
                 scope={scope}
                 open={enabled}
                 ids={ids}
@@ -161,7 +161,7 @@ export function FacilityDetailDialog({
                 id={ids.awards}
               />
               <FacilityStrategySections
-                key={`${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
+                key={`strategy:${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
                 scope={scope}
                 open={enabled}
                 ids={ids}
