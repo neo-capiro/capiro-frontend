@@ -16,6 +16,7 @@ import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage
 import { ObjectiveCalendarDestination } from "../../src/features/portfolio/calendar/ObjectiveCalendarDestination";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
+import { MeriCitedAnswer } from "../../src/features/meri/MeriCitedAnswer";
 import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
 import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
@@ -109,6 +110,18 @@ function RoutedApp() {
     return (
       <ProductShell fixture pendingApprovals={pendingApprovals()}>
         <MeriHomeFixture />
+      </ProductShell>
+    );
+  if (path === "/meri/fixture/cited-answer")
+    return (
+      <ProductShell
+        pendingApprovals={pendingApprovals()}
+        fixture
+        section="conversations"
+        designTarget="1064:144239"
+        assetSet="cited-answer"
+      >
+        <MeriCitedAnswer />
       </ProductShell>
     );
   // Mirrors src/app/meri/fixture/[screen]/page.tsx for registered fixture screens.

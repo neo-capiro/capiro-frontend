@@ -19,14 +19,14 @@ test("synthetic: selected conversation reload keeps the exact selector and admit
     `/meri?clientId=${clientId}&conversationId=${binding.conversationId}`,
   );
   await expect(
-    page.getByText("Previously stored request", { exact: true }),
+    page.getByText("You: Previously stored request", { exact: true }),
   ).toBeVisible();
   expect(fixture.hints).toEqual([
     { clientId, conversationId: binding.conversationId },
   ]);
   await page.reload();
   await expect(
-    page.getByText("Previously stored request", { exact: true }),
+    page.getByText("You: Previously stored request", { exact: true }),
   ).toBeVisible();
   expect(fixture.hints).toEqual([
     { clientId, conversationId: binding.conversationId },

@@ -193,12 +193,12 @@ test("synthetic partial history keeps an admitted current prompt visible while n
   await expect(
     page
       .getByRole("article", { name: "Earlier turn 1", exact: true })
-      .getByText("Earlier submitted question", { exact: true }),
+      .getByText("You: Earlier submitted question", { exact: true }),
   ).toBeVisible();
   await expect(
     page
       .getByRole("article", { name: "Current turn", exact: true })
-      .getByText("Distinct current question", { exact: true }),
+      .getByText("You: Distinct current question", { exact: true }),
   ).toBeVisible();
   await expect(
     page.getByText("Current admitted answer", { exact: true }),
@@ -371,9 +371,9 @@ test("synthetic lost reservation and submit ACKs preserve source, exact target a
   });
   expect(submits).toHaveLength(2);
   expect(submits[1]).toEqual(submits[0]);
-  await expect(page.getByText("Second question", { exact: true })).toHaveCount(
-    1,
-  );
+  await expect(
+    page.getByText("You: Second question", { exact: true }),
+  ).toHaveCount(1);
   expect(f.unexpected).toEqual([]);
 });
 

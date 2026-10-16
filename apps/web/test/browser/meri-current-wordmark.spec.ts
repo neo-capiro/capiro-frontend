@@ -1,10 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { filesFixture, actionClient } from "./meri-files-fixtures";
+import { filesFixture } from "./meri-files-fixtures";
 
 for (const [name, path] of [
   ["Home", "/meri/fixture/home"],
   ["inner page", "/meri/fixture/evidence-sources"],
-  ["document workspace", `/meri/files?clientId=${actionClient.id}`],
+  ["document workspace", "/meri/fixture/word-document"],
 ] as const) {
   test(`synthetic desktop ${name} reuses the exact current Meri mask in its62x20 slot`, async ({
     page,
