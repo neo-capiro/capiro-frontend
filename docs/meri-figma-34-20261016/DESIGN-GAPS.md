@@ -1,0 +1,25 @@
+# Design gaps for Neo — current Meri reference, 16 October 2026
+
+These requests concern missing desktop presentations of already required
+history/input safety behavior. They are separate from code omissions and from
+missing backend contracts. They do not propose a new API or change authority.
+Current Figma metadata, prototype patterns, full-text search and six actual
+design-context screenshots were read; matching historical IDs is not proof of
+an unchanged design. Mobile remains deferred.
+
+| ID | Nearest current frame | Missing screen / interaction / state | Why needed | Precise mockup request |
+| --- | --- | --- | --- | --- |
+| D01 | [01.01 Home —1064:144075](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-144075), [11.01 Run states —1064:149425](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-149425) | First-message allocation/admission/submit in progress, followed by an unknown acknowledgement outcome. Existing uncertainty frames concern memory review. | A browser timeout can occur after the server accepted the immutable input. The original request must stay visible and retry must preserve its identity; an edited draft is separate. | Add1440×1040 Home-to-first-turn frames for pending allocation, pending admission and unknown delivery. Show the original pending prompt separately from the editable next draft; indicate Send is blocked and provide **Retry same request** only for retained exact input. Include success transitioning to the admitted real transcript. Do not show a successful run before positive admission/submission evidence. |
+| D02 | [11.07 Session/service states —3019:28267](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=3019-28267), [01.01 Home —1064:144075](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-144075) | Hard reload with a bound session/target but no retained immutable input; history404/503 or a RESERVED next-turn mapping cannot prove an input was never sent. | A generic empty Home or “Start clean” action can suggest authority to mint a replacement identity. Existing session-expiry cards do not express this distinction. | Add a desktop recovery frame with a truthful uncertainty explanation, blocked Send, currently permitted history if available, and read/reconnect controls. Show the separate positive stored-input recovery state, which can recover the original request. Do not offer a new request identity merely because history is absent, unavailable or RESERVED. |
+| D03 | [01.02 Cited answer —1064:144239](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-144239), [01.04 Conversations —1064:144425](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-144425) | Partial saved transcript while the current SDK turn is admitted but its native prompt lineage is loading/unavailable. | Accepted source keeps the distinct current prompt visible, does not deduplicate by text, and does not treat unloaded history as empty. The full static history table does not define this asynchronous state. | Add a desktop conversation frame with older loaded turns, an explicit partial-history/load-more status and a distinct current admitted prompt. Add native-history read failure/retry beside it without turning it into a successful empty result or suppressing the current prompt. |
+| D04 | [Client context / Anduril meeting workspace entry —1064:150614](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-150614), [01.01 Home —1064:144075](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri?node-id=1064-144075) | The meeting-entry reference uses the older Workspaces/Recent sidebar, while the standalone product uses Conversations/Files/Runs navigation. It has no registered current Meri renderer. | Silently selecting a different shell or inventing a second meeting workspace would alter the product flow. The native meeting link explicitly promises the same workspace as Calendar/Outreach/Engagement. | Confirm whether this older reference is superseded. If it remains required, mock the desktop meeting-context entry in the current Meri shell, including pending/no permitted meeting/access removed states and the **Open meeting** destination into the single canonical meeting workspace. Keep example MTG-1042/OUT-0184 as fixture data, not live identities. |
+
+Status: all four mockup requests are **pending Neo**. Existing conservative
+recovery behavior is preserved while their presentation is undecided. Other
+defined desktop work may proceed.
+
+Evidence: `evidence/initial-input-design-state-search.json` contains the current
+full-text query and its nine matches, including the existing memory uncertainty
+and source-of-truth note. `CURRENT-INVENTORY.json` records the current frame
+catalog; `evidence/current-prototype-patterns.json` retains every observed
+prototype reaction pattern, including conditional/variable actions.

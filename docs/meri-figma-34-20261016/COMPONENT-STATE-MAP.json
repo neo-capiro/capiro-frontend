@@ -1,0 +1,819 @@
+{
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "scope": "Current Meri subtree,19component sets/94variants; shared-header/field masters remain linked by high-fidelity contexts. Components-page read returned no separately Meri-named families.",
+  "families": [
+    {
+      "nodeId": "1064:143260",
+      "name": "Meri/Mode switch",
+      "width": 856,
+      "height": 128,
+      "states": [
+        {
+          "nodeId": "1064:143261",
+          "name": "Size=Desktop",
+          "width": 372,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143265",
+          "name": "Size=Compact",
+          "width": 372,
+          "height": 48
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/shared/shell/ModeLink.tsx",
+        "apps/web/src/shared/shell/Header.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143269",
+      "name": "Meri/Status",
+      "width": 768,
+      "height": 112,
+      "states": [
+        {
+          "nodeId": "1064:143270",
+          "name": "Tone=Neutral",
+          "width": 64,
+          "height": 32
+        },
+        {
+          "nodeId": "1064:143272",
+          "name": "Tone=Success",
+          "width": 75,
+          "height": 32
+        },
+        {
+          "nodeId": "1064:143274",
+          "name": "Tone=Warning",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "nodeId": "1064:143276",
+          "name": "Tone=Danger",
+          "width": 109,
+          "height": 32
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/ui/StatusPill.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143278",
+      "name": "Meri/Field",
+      "width": 1328,
+      "height": 174,
+      "states": [
+        {
+          "nodeId": "1064:143279",
+          "name": "State=Default",
+          "width": 300,
+          "height": 80
+        },
+        {
+          "nodeId": "1064:143284",
+          "name": "State=Focus",
+          "width": 300,
+          "height": 80
+        },
+        {
+          "nodeId": "1064:143289",
+          "name": "State=Invalid",
+          "width": 300,
+          "height": 103
+        },
+        {
+          "nodeId": "1064:143295",
+          "name": "State=Disabled",
+          "width": 300,
+          "height": 80
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/ui/FormField.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143602",
+      "name": "Meri/Action interaction",
+      "width": 904,
+      "height": 256,
+      "states": [
+        {
+          "nodeId": "1064:143603",
+          "name": "Variant=Primary, State=Default",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143605",
+          "name": "Variant=Primary, State=Hover",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143607",
+          "name": "Variant=Primary, State=Focus",
+          "width": 152,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143609",
+          "name": "Variant=Primary, State=Disabled",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143611",
+          "name": "Variant=Primary, State=Loading",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143613",
+          "name": "Variant=Outline, State=Default",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143615",
+          "name": "Variant=Outline, State=Hover",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143617",
+          "name": "Variant=Outline, State=Focus",
+          "width": 152,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143619",
+          "name": "Variant=Outline, State=Disabled",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143621",
+          "name": "Variant=Outline, State=Loading",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143623",
+          "name": "Variant=Ghost, State=Default",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143625",
+          "name": "Variant=Ghost, State=Hover",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143627",
+          "name": "Variant=Ghost, State=Focus",
+          "width": 152,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143629",
+          "name": "Variant=Ghost, State=Disabled",
+          "width": 148,
+          "height": 48
+        },
+        {
+          "nodeId": "1064:143631",
+          "name": "Variant=Ghost, State=Loading",
+          "width": 148,
+          "height": 48
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/shadcn/button.tsx",
+        "apps/web/src/features/meri/ui/LinkAction.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143634",
+      "name": "Meri/AI Elements/PromptInput",
+      "width": 3040,
+      "height": 300,
+      "states": [
+        {
+          "nodeId": "1064:143635",
+          "name": "State=Empty",
+          "width": 356,
+          "height": 170
+        },
+        {
+          "nodeId": "1064:143644",
+          "name": "State=Ready",
+          "width": 356,
+          "height": 170
+        },
+        {
+          "nodeId": "1064:143653",
+          "name": "State=Attached",
+          "width": 356,
+          "height": 195
+        },
+        {
+          "nodeId": "1064:143665",
+          "name": "State=Streaming",
+          "width": 356,
+          "height": 147
+        },
+        {
+          "nodeId": "1064:143674",
+          "name": "State=Disabled",
+          "width": 356,
+          "height": 170
+        },
+        {
+          "nodeId": "1064:143683",
+          "name": "State=Offline",
+          "width": 356,
+          "height": 147
+        },
+        {
+          "nodeId": "1064:143692",
+          "name": "State=Error",
+          "width": 356,
+          "height": 147
+        },
+        {
+          "nodeId": "1064:143701",
+          "name": "State=Steer",
+          "width": 356,
+          "height": 147
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/prompt-input.tsx",
+        "apps/web/src/features/meri/MeriComposer.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143710",
+      "name": "Meri/AI Elements/Tool",
+      "width": 2200,
+      "height": 260,
+      "states": [
+        {
+          "nodeId": "1064:143711",
+          "name": "State=Queued",
+          "width": 340,
+          "height": 124
+        },
+        {
+          "nodeId": "1064:143715",
+          "name": "State=Running",
+          "width": 340,
+          "height": 124
+        },
+        {
+          "nodeId": "1064:143719",
+          "name": "State=Approval",
+          "width": 340,
+          "height": 124
+        },
+        {
+          "nodeId": "1064:143723",
+          "name": "State=Complete",
+          "width": 340,
+          "height": 124
+        },
+        {
+          "nodeId": "1064:143727",
+          "name": "State=Error",
+          "width": 340,
+          "height": 124
+        },
+        {
+          "nodeId": "1064:143731",
+          "name": "State=Denied",
+          "width": 340,
+          "height": 124
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/tool.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143736",
+      "name": "Meri/AI Elements/Artifact",
+      "width": 1552,
+      "height": 270,
+      "states": [
+        {
+          "nodeId": "1064:143737",
+          "name": "State=Working",
+          "width": 356,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143745",
+          "name": "State=Verified",
+          "width": 356,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143753",
+          "name": "State=Failed",
+          "width": 356,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143761",
+          "name": "State=Filed",
+          "width": 356,
+          "height": 196
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/artifact.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143769",
+      "name": "Meri/AI Elements/Attachment",
+      "width": 1488,
+      "height": 200,
+      "states": [
+        {
+          "nodeId": "1064:143770",
+          "name": "State=Uploading",
+          "width": 340,
+          "height": 123
+        },
+        {
+          "nodeId": "1064:143777",
+          "name": "State=Processing",
+          "width": 340,
+          "height": 123
+        },
+        {
+          "nodeId": "1064:143784",
+          "name": "State=Ready",
+          "width": 340,
+          "height": 123
+        },
+        {
+          "nodeId": "1064:143792",
+          "name": "State=Error",
+          "width": 340,
+          "height": 123
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/attachments.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143799",
+      "name": "Meri/AI Elements/Confirmation",
+      "width": 1844,
+      "height": 280,
+      "states": [
+        {
+          "nodeId": "1064:143800",
+          "name": "State=Pending",
+          "width": 340,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143808",
+          "name": "State=Accepted",
+          "width": 340,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143816",
+          "name": "State=Rejected",
+          "width": 340,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143824",
+          "name": "State=Expired",
+          "width": 340,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143832",
+          "name": "State=Revoked",
+          "width": 340,
+          "height": 196
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/confirmation.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143841",
+      "name": "Meri/AI Elements/Plan",
+      "width": 1132,
+      "height": 370,
+      "states": [
+        {
+          "nodeId": "1064:143842",
+          "name": "State=Expanded",
+          "width": 340,
+          "height": 216
+        },
+        {
+          "nodeId": "1064:143861",
+          "name": "State=Collapsed",
+          "width": 340,
+          "height": 125
+        },
+        {
+          "nodeId": "1064:143865",
+          "name": "State=Complete",
+          "width": 340,
+          "height": 216
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/plan.tsx",
+        "packages/ui/src/ai-elements/task.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143884",
+      "name": "Meri/AI Elements/Sources",
+      "width": 1132,
+      "height": 300,
+      "states": [
+        {
+          "nodeId": "1064:143885",
+          "name": "State=Collapsed",
+          "width": 340,
+          "height": 125
+        },
+        {
+          "nodeId": "1064:143889",
+          "name": "State=Expanded",
+          "width": 340,
+          "height": 196
+        },
+        {
+          "nodeId": "1064:143894",
+          "name": "State=Restricted",
+          "width": 340,
+          "height": 125
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/sources.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143898",
+      "name": "Meri/AI Elements/Queue",
+      "width": 1132,
+      "height": 300,
+      "states": [
+        {
+          "nodeId": "1064:143899",
+          "name": "State=Pending",
+          "width": 340,
+          "height": 201
+        },
+        {
+          "nodeId": "1064:143905",
+          "name": "State=Active",
+          "width": 340,
+          "height": 201
+        },
+        {
+          "nodeId": "1064:143911",
+          "name": "State=Complete",
+          "width": 340,
+          "height": 201
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/queue.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143917",
+      "name": "Meri/AI Elements/Checkpoint",
+      "width": 1132,
+      "height": 270,
+      "states": [
+        {
+          "nodeId": "1064:143918",
+          "name": "State=Saving",
+          "width": 340,
+          "height": 171
+        },
+        {
+          "nodeId": "1064:143923",
+          "name": "State=Verified",
+          "width": 340,
+          "height": 171
+        },
+        {
+          "nodeId": "1064:143928",
+          "name": "State=Failed",
+          "width": 340,
+          "height": 171
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/checkpoint.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:143933",
+      "name": "Meri/AI Elements/Context",
+      "width": 1132,
+      "height": 270,
+      "states": [
+        {
+          "nodeId": "1064:143934",
+          "name": "State=Normal",
+          "width": 340,
+          "height": 133
+        },
+        {
+          "nodeId": "1064:143940",
+          "name": "State=Near limit",
+          "width": 340,
+          "height": 162
+        },
+        {
+          "nodeId": "1064:143947",
+          "name": "State=Exceeded",
+          "width": 340,
+          "height": 162
+        }
+      ],
+      "codePaths": [],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "No adopted Context module; investigate requirement instead of fabricating context metrics"
+    },
+    {
+      "nodeId": "1064:143954",
+      "name": "Meri/AI Elements/FileTree",
+      "width": 1132,
+      "height": 320,
+      "states": [
+        {
+          "nodeId": "1064:143955",
+          "name": "State=Collapsed",
+          "width": 340,
+          "height": 84
+        },
+        {
+          "nodeId": "1064:143960",
+          "name": "State=Expanded",
+          "width": 340,
+          "height": 200
+        },
+        {
+          "nodeId": "1064:143971",
+          "name": "State=Selected",
+          "width": 340,
+          "height": 200
+        }
+      ],
+      "codePaths": [
+        "packages/ui/src/ai-elements/file-tree.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:150754",
+      "name": "Meri/Workflow tile",
+      "width": 600,
+      "height": 350,
+      "states": [
+        {
+          "nodeId": "1064:150755",
+          "name": "State=Default",
+          "width": 560,
+          "height": 75
+        },
+        {
+          "nodeId": "1064:150760",
+          "name": "State=NeedsSource",
+          "width": 560,
+          "height": 75
+        },
+        {
+          "nodeId": "1064:150765",
+          "name": "State=Disabled",
+          "width": 560,
+          "height": 75
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/screens/workflows/WorkflowTile.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:150770",
+      "name": "Meri/Workflow field",
+      "width": 560,
+      "height": 420,
+      "states": [
+        {
+          "nodeId": "1064:150771",
+          "name": "State=Default",
+          "width": 520,
+          "height": 92
+        },
+        {
+          "nodeId": "1064:150776",
+          "name": "State=Unresolved",
+          "width": 520,
+          "height": 92
+        },
+        {
+          "nodeId": "1064:150781",
+          "name": "State=Unavailable",
+          "width": 520,
+          "height": 92
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/screens/workflows/WorkflowField.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:150786",
+      "name": "Meri/Source coverage row",
+      "width": 1136,
+      "height": 470,
+      "states": [
+        {
+          "nodeId": "1064:150787",
+          "name": "Outcome=Success",
+          "width": 1096,
+          "height": 67
+        },
+        {
+          "nodeId": "1064:150797",
+          "name": "Outcome=Empty",
+          "width": 1096,
+          "height": 67
+        },
+        {
+          "nodeId": "1064:150807",
+          "name": "Outcome=Partial",
+          "width": 1096,
+          "height": 67
+        },
+        {
+          "nodeId": "1064:150817",
+          "name": "Outcome=Unavailable",
+          "width": 1096,
+          "height": 67
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/screens/workflows/SourceCoverageRow.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    },
+    {
+      "nodeId": "1064:150832",
+      "name": "Meri/Workflow setup",
+      "width": 3240,
+      "height": 2680,
+      "states": [
+        {
+          "nodeId": "1064:150833",
+          "name": "Workflow=research_company",
+          "width": 760,
+          "height": 620
+        },
+        {
+          "nodeId": "1064:150851",
+          "name": "Workflow=relationship_brief",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150869",
+          "name": "Workflow=client_changes",
+          "width": 760,
+          "height": 620
+        },
+        {
+          "nodeId": "1064:150887",
+          "name": "Workflow=portfolio_changes",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150905",
+          "name": "Workflow=portfolio_overlap",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150923",
+          "name": "Workflow=mail_history",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150941",
+          "name": "Workflow=meeting_prep",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150959",
+          "name": "Workflow=commitments_audit",
+          "width": 760,
+          "height": 620
+        },
+        {
+          "nodeId": "1064:150977",
+          "name": "Workflow=funding_opportunity_match",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:150995",
+          "name": "Workflow=pe_deep_dive",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:151013",
+          "name": "Workflow=bill_watch",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:151031",
+          "name": "Workflow=hearing_watch",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:151049",
+          "name": "Workflow=representation_lookup",
+          "width": 760,
+          "height": 601
+        },
+        {
+          "nodeId": "1064:151067",
+          "name": "Workflow=regulatory_docket_brief",
+          "width": 760,
+          "height": 601
+        }
+      ],
+      "codePaths": [
+        "apps/web/src/features/meri/screens/workflows/WorkflowSetup.tsx"
+      ],
+      "stateAcceptance": "UNRUN; check configured states/keyboard/disabled/loading/errors against current high-fidelity context",
+      "implementationGap": "I06"
+    }
+  ]
+}
