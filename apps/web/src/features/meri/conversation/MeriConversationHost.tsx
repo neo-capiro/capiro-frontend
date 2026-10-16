@@ -92,6 +92,7 @@ function ConnectedConversation({
       textareaRef={session.textarea}
       onNextTurn={session.startNext}
       nextTurnBlocked={session.nextBlocked}
+      initialBlocked={session.initialBlocked}
       promptKey={session.logicalKey}
       savedCurrent={session.savedCurrent}
       acceptedRequest={session.acceptedRequest}

@@ -1,3 +1,5 @@
+"use client";
+import { useId } from "react";
 import {
   PromptInput,
   PromptInputBody,
@@ -44,7 +46,8 @@ export function MeriComposer({
   running?: boolean;
   live?: LiveComposer;
 }) {
-  const canSend = !!live && !live.sendBlocked && !!draft.trim();
+  const helpId = useId();
+  const canSend = !!live && !running && !live.sendBlocked && !!draft.trim();
   return (
     <section
       className={styles.composerFrame}
@@ -67,11 +70,18 @@ export function MeriComposer({
             onChange={(event) => onDraft(event.currentTarget.value)}
             onKeyDown={(event) => {
               // A blocked send must not reach the form: its reset would clear the kept draft.
-              if (live && !canSend && event.key === "Enter" && !event.shiftKey)
+              if (
+                live &&
+                !canSend &&
+                event.key === "Enter" &&
+                !event.shiftKey &&
+                !event.nativeEvent.isComposing &&
+                event.nativeEvent.keyCode !== 229
+              )
                 event.preventDefault();
             }}
             aria-label={live ? "Meri message" : "Message draft"}
-            aria-describedby="send-help"
+            aria-describedby={helpId}
             placeholder="Ask Meri to research, analyze, or create something…"
             {...(live ? { maxLength: 8000 } : {})}
           />
@@ -83,16 +93,19 @@ export function MeriComposer({
             live={live}
             canSend={canSend}
             assetSet={assetSet}
+            helpId={helpId}
           />
         </PromptInputFooter>
-        <p className={styles.keyboardHint} id="send-help">
+        <p className={styles.keyboardHint} id={helpId}>
           Enter to send · Shift + Enter for a new line
           <span className="sr-only">
             {!live
               ? ". Sending is currently unavailable in this disconnected synthetic fixture."
-              : live.sendBlocked
-                ? `. ${live.sendBlocked}`
-                : ""}
+              : running
+                ? `. A run is in progress. ${live.stopBlocked ?? "Use Stop to request cancellation; your draft stays editable."}`
+                : live.sendBlocked
+                  ? `. ${live.sendBlocked}`
+                  : ""}
           </span>
         </p>
       </PromptInput>
@@ -147,11 +160,13 @@ function ComposerAction({
   live,
   canSend,
   assetSet,
+  helpId,
 }: {
   running: boolean;
   live: LiveComposer | undefined;
   canSend: boolean;
   assetSet: AssetSet;
+  helpId: string;
 }) {
   if (running)
     return (
@@ -159,6 +174,7 @@ function ComposerAction({
         type="button"
         className={styles.send}
         disabled={!live?.onStop || !!live.stopBlocked}
+        aria-describedby={helpId}
         onClick={live?.onStop}
         aria-label={
           live ? "Stop run" : "Stop unavailable: disconnected fixture"
@@ -178,6 +194,7 @@ function ComposerAction({
       type="submit"
       className={styles.send}
       disabled={!canSend}
+      aria-describedby={helpId}
       aria-label={
         live ? "Send message" : "Send unavailable: disconnected fixture"
       }

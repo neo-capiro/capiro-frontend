@@ -1,4 +1,5 @@
 import type { Page, Route } from "@playwright/test";
+import type { ConversationSubmittedResponse } from "@capiro/meri-contracts/conversation-application";
 import {
   installFixtures,
   json,
@@ -44,13 +45,7 @@ export const scopes = [
     policyRevision: "policy1",
   },
 ];
-type RunState =
-  | "queued"
-  | "running"
-  | "waiting-for-approval"
-  | "completed"
-  | "failed"
-  | "cancelled";
+type RunState = ConversationSubmittedResponse["run"]["state"];
 export const runFor = (state: RunState = "running", value = binding) => ({
   binding: value,
   state,
@@ -171,6 +166,13 @@ export async function setupConversation(
     await page.route(`**/api/conversations/${path}`, (r) =>
       json(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 503),
     );
+  await page.route("**/api/conversations/input/allocate", (r) =>
+    json(
+      r,
+      { error: { code: "INITIAL_INPUT_UNAVAILABLE", outcome: "UNKNOWN" } },
+      503,
+    ),
+  );
   await page.route("**/api/action-followthrough/session", (r) => {
     hints.push(r.request().postDataJSON());
     const value = {

@@ -4,7 +4,10 @@ import {
   conversationIntentJournal,
   storedSubmission,
 } from "../src/shared/meri-conversations/query-journal";
-import { recoverRequest } from "../src/features/meri/conversation/run-commands";
+import {
+  recoverRequest,
+  sendRequest,
+} from "../src/features/meri/conversation/run-commands";
 import type { MeriConversationPort } from "../src/shared/meri-conversations/host-controller";
 import type { ConversationSubmitRequest } from "@capiro/meri-contracts/conversation-application";
 
@@ -110,5 +113,96 @@ it("synthetic recovery refuses changed accepted identity without dispatch or rep
   ).rejects.toMatchObject({ code: "retained-submit-mismatch" });
   expect(submit).not.toHaveBeenCalled();
   expect(journal.read().submit!.windowRequest).toEqual(stored.windowRequest);
+  cache.clear();
+});
+
+it("synthetic initial intent is retained before allocation and its workflow selector never reaches wire input", async () => {
+  const cache = new QueryClient(),
+    journal = conversationIntentJournal(cache, context);
+  const submit = vi.fn();
+  const submitInitial = vi.fn(async (input: ConversationSubmitRequest) => {
+    expect(journal.read().submit).toEqual({
+      ...input,
+      state: "unknown",
+      workflow: "initial",
+    });
+    expect(input).not.toHaveProperty("workflow");
+    expect(input).not.toHaveProperty("state");
+    expect(input.prompt).toBe("Initial proposal");
+  });
+  const port = {
+    submit,
+    submitInitial,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await sendRequest(port, journal, "Initial proposal", false, true);
+  expect(submitInitial).toHaveBeenCalledOnce();
+  expect(submit).not.toHaveBeenCalled();
+  expect(journal.read().submit).toMatchObject({
+    workflow: "initial",
+    state: "observed",
+  });
+  cache.clear();
+});
+
+it("synthetic unknown initial flow survives port replacement and ignores a changed draft on retry", async () => {
+  const cache = new QueryClient(),
+    journal = conversationIntentJournal(cache, context);
+  const first = vi.fn(async () => {
+    throw new Error("Lost allocation ACK");
+  });
+  const original = {
+    submitInitial: first,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await expect(
+    sendRequest(original, journal, "Keep original", false, true),
+  ).rejects.toThrow();
+  const retained = structuredClone(journal.read().submit);
+  const ordinary = vi.fn(),
+    retry = vi.fn();
+  const second = vi.fn(async (input: ConversationSubmitRequest) => {
+    expect(input).toEqual({
+      requestId: retained!.requestId,
+      prompt: "Keep original",
+    });
+  });
+  const recreated = {
+    submit: ordinary,
+    submitInitial: second,
+    retrySubmit: retry,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await sendRequest(recreated, journal, "A changed draft", true);
+  expect(second).toHaveBeenCalledOnce();
+  expect(ordinary).not.toHaveBeenCalled();
+  expect(retry).not.toHaveBeenCalled();
+  expect(journal.read().submit!.requestId).toBe(retained!.requestId);
+  cache.clear();
+});
+
+it("synthetic positive stored recovery uses ordinary admission after an initial workflow port was replaced", async () => {
+  const cache = new QueryClient(),
+    journal = conversationIntentJournal(cache, context);
+  journal.write({
+    submit: {
+      ...storedSubmission(stored),
+      state: "unknown",
+      workflow: "initial",
+    },
+  });
+  const submit = vi.fn(async (input: ConversationSubmitRequest) => {
+    expect(input).toEqual(storedSubmission(stored));
+    expect(journal.read().submit).not.toHaveProperty("workflow");
+  });
+  const submitInitial = vi.fn();
+  const port = {
+    submit,
+    submitInitial,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await recoverRequest(port, journal, stored);
+  expect(submit).toHaveBeenCalledOnce();
+  expect(submitInitial).not.toHaveBeenCalled();
   cache.clear();
 });

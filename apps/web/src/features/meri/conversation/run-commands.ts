@@ -22,20 +22,27 @@ export async function sendRequest(
   intent: IntentRecord,
   prompt: string,
   retry: boolean,
+  initial = false,
 ) {
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
     throw new ConversationUnavailable("retained-submit-intent");
   const input = retry
     ? retained!
-    : { requestId: crypto.randomUUID(), prompt, state: "pending" as const };
+    : {
+        requestId: crypto.randomUUID(),
+        prompt,
+        state: "pending" as const,
+        ...(initial ? { workflow: "initial" as const } : {}),
+      };
   intent.write({ ...intent.read(), submit: { ...input, state: "pending" } });
   try {
     if (retry && port.getSnapshot().submit === "unknown")
       await port.retrySubmit();
     else {
-      const { state: _state, ...request } = input;
-      await port.submit(request);
+      const { state: _state, workflow, ...request } = input;
+      if (workflow === "initial") await port.submitInitial(request);
+      else await port.submit(request);
     }
     intent.write({ ...intent.read(), submit: { ...input, state: "observed" } });
   } catch (cause) {
@@ -53,14 +60,13 @@ export async function recoverRequest(
   const request = storedSubmission(stored),
     retained = intent.read().submit;
   if (retained) {
-    const { state: _state, ...previous } = retained;
+    const { state: _state, workflow: _workflow, ...previous } = retained;
     if (submissionIdentity(previous) !== submissionIdentity(request))
       throw new ConversationUnavailable("retained-submit-mismatch");
-  } else
-    intent.write({
-      ...intent.read(),
-      submit: { ...request, state: "unknown" },
-    });
+  }
+  // Canonical stored input already exists. A recreated port can use ordinary admission;
+  // a still-live unknown SDK operation retains and retries its own exact original workflow.
+  intent.write({ ...intent.read(), submit: { ...request, state: "unknown" } });
   return sendRequest(port, intent, request.prompt, true);
 }
 

@@ -42,6 +42,7 @@ export function useRunCommands(
     write: (value: ReturnType<typeof journal.read>) => {
       if (!alive.current || !journal.write(value))
         throw new Error("Conversation scope changed");
+      setIntent(value);
     },
   };
   const thenObserve = (done: boolean) => {
@@ -70,6 +71,8 @@ export function useRunCommands(
     }).then(thenObserve);
   const submit = (prompt: string, retry = false) =>
     send(() => sendRequest(port, record, prompt, retry));
+  const submitInitial = (prompt: string) =>
+    send(() => sendRequest(port, record, prompt, false, true));
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
   // The receipt is not the run's status; keep observing for run.status either way.
@@ -87,6 +90,7 @@ export function useRunCommands(
     transcript,
     history,
     submit,
+    submitInitial,
     recover,
     cancel,
   };

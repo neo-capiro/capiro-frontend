@@ -100,6 +100,15 @@ export function sessionHistoryState(
       : !source
         ? "Verify the current conversation history before starting another turn."
         : undefined;
+  const initialBlocked =
+    busy ||
+    retained ||
+    reservation ||
+    metadata ||
+    history.saved?.latest ||
+    localTurns.length
+      ? "This conversation has an existing or reserved turn. Recover its original message before sending."
+      : undefined;
   return {
     logicalKey,
     acceptedRequest: admitted?.request,
@@ -111,5 +120,6 @@ export function sessionHistoryState(
     recoveryNeeded,
     unknownReservation,
     nextBlocked,
+    initialBlocked,
   };
 }

@@ -36,6 +36,7 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
   '@capiro/meri-contracts/conversation-history',
   '@capiro/meri-contracts/conversation-input',
+  '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-client/conversation',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',

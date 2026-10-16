@@ -252,7 +252,7 @@ test("synthetic hard reload with RESERVED and no immutable submit identity can o
   expect(f.unexpected).toEqual([]);
 });
 
-test("synthetic absent history never treats 404 as proof that a new first-submit ID is safe", async ({
+test("synthetic absent history never bypasses positive original allocation before admission or submit", async ({
   page,
 }) => {
   const f = await setupConversation(page);
@@ -262,20 +262,38 @@ test("synthetic absent history never treats 404 as proof that a new first-submit
   await page.route("**/api/conversations/history", (r) =>
     reply(r, { error: { code: "NOT_FOUND" } }, 404),
   );
-  const submits: unknown[] = [];
+  const allocations: unknown[] = [],
+    admissions: unknown[] = [],
+    submits: unknown[] = [];
+  await page.route("**/api/conversations/input/allocate", (r) => {
+    allocations.push(r.request().postDataJSON());
+    return reply(
+      r,
+      { error: { code: "INITIAL_INPUT_UNAVAILABLE", outcome: "UNKNOWN" } },
+      503,
+    );
+  });
+  await page.route("**/api/conversations/input/admit", (r) => {
+    admissions.push(r.request().postDataJSON());
+    return reply(r, {}, 500);
+  });
   await page.route("**/api/conversations/submit", (r) => {
     submits.push(r.request().postDataJSON());
     return reply(r, {}, 500);
   });
   await page.goto(selectedUrl);
   await composer(page).fill("First message after reload");
+  await expect(sendButton(page)).toBeEnabled();
+  await sendButton(page).click();
+  await expect(
+    page.getByRole("button", { name: "Retry same request", exact: true }),
+  ).toBeVisible();
   await expect(sendButton(page)).toBeDisabled();
-  await expect(sendButton(page)).toHaveAttribute(
-    "title",
-    /cannot verify whether a message is already in flight/,
-  );
+  expect(allocations).toHaveLength(1);
+  expect(admissions).toEqual([]);
   await page.reload();
   await expect(sendButton(page)).toBeDisabled();
+  expect(allocations).toHaveLength(1);
   expect(submits).toEqual([]);
   expect(f.unexpected).toEqual([]);
 });

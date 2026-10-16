@@ -1,0 +1,377 @@
+{
+  "schema": "meri-initial-input-interface-preparation-evidence/1",
+  "base": "b2c7dab2bfd159b2d54e2b0149226811c593fb4e",
+  "branch": "dot/meri-ui-initial-input-20261016",
+  "at": "2026-10-16T05:56:19.420680+00:00",
+  "state": "INTERFACE PREPARATION ONLY; not materialized/executed against0.1.8",
+  "wireSourceAccepted": "41c54452f6cfd6e26aa55f9f23370fbbcade49c3",
+  "heldBackendSource": "1a1230401bd5d9cc15450ae5bab9c66a4ff7c7d2",
+  "publicationAndGenerationHold": "No corrected published source/artifact; no held repair/module copying, indirect publication, generation or adoption",
+  "retainedArtifact": {
+    "version": "0.1.7",
+    "sha256": "8f0c2e1435122c22f2a1ed7427dd744f361bc598e178f2ef842acd6f91b78daa"
+  },
+  "unchangedSdkDistSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "lockByteDomains": {
+    "gitAndNewWorktreeLfSha256": "99ed591fa24f46600495eeddc2cd785ed9aa0bd6d9bf8aab7c3a22e9724f86df",
+    "priorB2WorktreeCrLfSha256": "836ff4f6acde1857c6b66ccafe72d69250f7793a3efa090978f5563bc7dd3149",
+    "normalizationEqual": true,
+    "gitBlobUnchanged": true
+  },
+  "stages": [
+    {
+      "name": "initial-ui-format",
+      "receipt": "initial-ui-format.result.json",
+      "exit": 0,
+      "rootPid": 37756,
+      "expected": 0,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-structure",
+      "receipt": "initial-ui-structure.result.json",
+      "exit": 1,
+      "rootPid": 15752,
+      "expected": 1,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-after-availability-format",
+      "receipt": "initial-ui-after-availability-format.result.json",
+      "exit": 0,
+      "rootPid": 18884,
+      "expected": 0,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-after-availability-structure",
+      "receipt": "initial-ui-after-availability-structure.result.json",
+      "exit": 0,
+      "rootPid": 8112,
+      "expected": 0,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-pending-feedback-format",
+      "receipt": "initial-ui-pending-feedback-format.result.json",
+      "exit": 0,
+      "rootPid": 31320,
+      "expected": 0,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-pending-feedback-structure",
+      "receipt": "initial-ui-pending-feedback-structure.result.json",
+      "exit": 0,
+      "rootPid": 32584,
+      "expected": 0,
+      "runtimeTests": false
+    },
+    {
+      "name": "initial-ui-preparation-syntax",
+      "receipt": "initial-ui-preparation-syntax.result.json",
+      "exit": 0,
+      "rootPid": 19464,
+      "expected": 0,
+      "runtimeTests": false
+    }
+  ],
+  "finalAst": {
+    "inputs": 1787,
+    "errors": [],
+    "summary": {
+      "total": 501,
+      "reviewed": 482,
+      "inheritedUnreviewed": 19,
+      "blocking": 0
+    },
+    "fullExternalRawSha256": "685fbd262428c5598081eb96bc17b6068f4eb88227b50a158d2c42c078737ebb"
+  },
+  "sourceRows": [
+    {
+      "path": "apps/web/src/features/meri/MeriComposer.tsx",
+      "bytes": 6285,
+      "sha256": "d5d69dd70e443b68c3f2262881e84ca5a216f850f7bc9172db18cbc98425f309",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "18475b59741a4a88bea4c87e289159226a86ba83d8cbf46ebd1d008a561846d2"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+      "bytes": 3281,
+      "sha256": "dcaebfd0236db699b8031af639c2b9d74e6c4fb6804347c5675b9f72ae02cb4c",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "2ca82e7ce854aacc7e035764651ef96fede153d3fd834efabe4958f35a9454d6"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+      "bytes": 5822,
+      "sha256": "4bc7fd4133ed044ead17fd04fa50b14f5a3340ca3e49463b1f7f0276c9802126",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "ba69a170e2a5709d51ca6bde1ce82e84f937963d4442dbe0b33e41c1e9160294"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/run-commands.ts",
+      "bytes": 3237,
+      "sha256": "9832778d29099d14670c37fd7e887b8d23d3e686557ffad9bcc8db829e8aab01",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "2b6d90562952dcbc4cd4a2e5861bd5b58fc646066ccd7659d3ccebc46e42344f"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/saved-turns.ts",
+      "bytes": 4243,
+      "sha256": "c2811036a89272dbcfb0059f5b90a02e18c6124b8d4b1cd2a656dab4029e2b5e",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "0f810d56af2e39d073fe8a575704858f6116640cad3b6fd9cb7b5d8f90f8bf87"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+      "bytes": 3443,
+      "sha256": "8b6e932b0a6f070365166fbf2b189f4506ff644667e4cf27cc29341ceabe0744",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "eb5933c716329a9e34e511e5b7c0acd8a69428cd1b51a7d6c019f5230cd317e3"
+    },
+    {
+      "path": "apps/web/src/shared/meri-conversations/input.ts",
+      "bytes": 3316,
+      "sha256": "f90d47b6fe4765c70b5b7f9269327a064a2a1ef71ba85f1a69e9abeac55d4f18",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "c071b26c787b38749f05603699b9c6d3a92e37e0af82878eadf265a262eca8ef"
+    },
+    {
+      "path": "apps/web/src/shared/meri-conversations/proxy.ts",
+      "bytes": 6401,
+      "sha256": "9d5f9d4f37b6cf9c01c7974a1448d7cb0fd24ff674cd6780dba2996898355e3e",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "b8eee9c0f26eeee3c716e4bf087456d92e67831bd64558c1244ff42f9c67b28d"
+    },
+    {
+      "path": "apps/web/src/shared/meri-conversations/query-journal.ts",
+      "bytes": 4587,
+      "sha256": "db405e4116a04623dd324fd470dde1bd8b75da792b4d783e6dc3e19824f4a779",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "eca98729277f1e68c8382890c10aa2502b1658de66b2b81b7364790479fe315c"
+    },
+    {
+      "path": "apps/web/test/browser/meri-conversation-fixtures.ts",
+      "bytes": 6440,
+      "sha256": "dac903dddcac5b10860e7f49f16901a93ffe1043888bdc0be2b8858030e2aad9",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "2f312f4ecf5aa1e6ac22b679ec1183a8e9ae76860849fce7738f474685f1faf7"
+    },
+    {
+      "path": "apps/web/test/browser/meri-history.spec.ts",
+      "bytes": 13140,
+      "sha256": "dbbceae66495e0dab137b5b83e75632a01481a442c89a790e51b8fb1c41967d4",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "798fcbb27bb62eeed1ea173b30c1bfb8be76f4156eb3359d7e5b2f5a4d759aaf"
+    },
+    {
+      "path": "apps/web/test/browser/meri-initial-input-fixtures.ts",
+      "bytes": 6207,
+      "sha256": "94607d866a8b3b1b02653a4a9469711cbf245cda7638e1a7d94f2e28f75df719",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": null
+    },
+    {
+      "path": "apps/web/test/browser/meri-initial-input.spec.ts",
+      "bytes": 9058,
+      "sha256": "ce75eea5b9dbf927f1fe80c42cb9c0cfd7ae85db500470bcac90a812a7bcfba0",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": null
+    },
+    {
+      "path": "apps/web/tests/meri-conversation-proxy.test.ts",
+      "bytes": 15624,
+      "sha256": "e31b44ebc24a9d682c70c6b8a405da7c3d350a920b04080b00a175d27626375d",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "efc6fa6528a2c4552fcb3235d13be19a63ffaace6de0d44ff185d863a495eb72"
+    },
+    {
+      "path": "apps/web/tests/meri-initial-input-proxy.test.ts",
+      "bytes": 2844,
+      "sha256": "3561739d94abfb1038f91070074c7058c0d78dd1448779a1ca701f303d035cad",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": null
+    },
+    {
+      "path": "apps/web/tests/meri-input-recovery.test.ts",
+      "bytes": 7384,
+      "sha256": "255dcc63f67945e0ae185e548aa1599bd3933eab0ff5f7c9effb159d9984b137",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "30fd81f80c2b68ac0e7c91267bc66c919e36931af204228f25f1c999afa3e0cf"
+    },
+    {
+      "path": "packages/meri-client/src/conversation-client.ts",
+      "bytes": 13616,
+      "sha256": "57825e5c5bf3daed7116ba134a6b78a2a4bab5cb5556c6ba162a6277cca2ef3f",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "5bb212fad990d2c207e438c803beb9a0660297003c3953a84fa2f5b086c440af"
+    },
+    {
+      "path": "packages/meri-client/src/conversation-network.ts",
+      "bytes": 9238,
+      "sha256": "8eb0004432d5575d2bbcdd152c27ba19d9c3fd3d2b70f3ad7d2a2f46fd5e3555",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "0b280b7e795bdc44c5ee94be28c958a628bad6603b045e4cb158968c8c44ed73"
+    },
+    {
+      "path": "packages/qualification-transport/conversation-initial-input.test.mjs",
+      "bytes": 7929,
+      "sha256": "8a8857609b9750a467b8b6f79b86768d5a234173d28df9fc2159b09b5c17d742",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": null
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "bytes": 8647,
+      "sha256": "4cd6b78021427962941c4cb60601f97a3bd9fd21b0ab0d8961c2a581b04b1c9d",
+      "byteDomain": "working LF bytes; verify committed Git bytes at source seal",
+      "beforeGitBlobSha256": "7124edf7dbd8ff0c9967063cf8a3263c42e60098f1cfd3a86b5ee53b35a52bbd"
+    }
+  ],
+  "rawFiles": [
+    {
+      "path": "initial-ui-format.result.json",
+      "bytes": 1542,
+      "sha256": "13b365856494fd4c4871b93ebde56a23aee4826e3b9e581f6623b09206f4930c"
+    },
+    {
+      "path": "initial-ui-format.stdout.log",
+      "bytes": 963,
+      "sha256": "4df7c0f7bec1d7d360285c2d9f5c366f654c316be77bbc4789f46cf4a0794f7f"
+    },
+    {
+      "path": "initial-ui-format.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-structure.result.json",
+      "bytes": 563,
+      "sha256": "81e86ccddaa138596d4283b0229ef5f3b38a5d4ac4c03bedc56fb2f64e57283a"
+    },
+    {
+      "path": "initial-ui-structure.stdout.log",
+      "bytes": 153,
+      "sha256": "a809268ad4acb9a74a565ce42d3b2c14a305e7677268eaee083325d3dbb2ce0f"
+    },
+    {
+      "path": "initial-ui-structure.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-after-availability-format.result.json",
+      "bytes": 1542,
+      "sha256": "89fc9bcf2aee47cf576040cb63ea0f2e47b7c8b2956b92830f4bb80435e0feab"
+    },
+    {
+      "path": "initial-ui-after-availability-format.stdout.log",
+      "bytes": 1085,
+      "sha256": "21ee3a0d9784b7d4dc2feb22d371bb73157b5a425e9eb834aa3c404c8629c2d3"
+    },
+    {
+      "path": "initial-ui-after-availability-format.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-after-availability-structure.result.json",
+      "bytes": 562,
+      "sha256": "44d1e9289c5a39db5cf87eaf92d76a9b80c4b00f7bff4902c604236c5dea5429"
+    },
+    {
+      "path": "initial-ui-after-availability-structure.stdout.log",
+      "bytes": 144,
+      "sha256": "5fb2755d6d30df7bbcea7ba14b1b9b0efc3a14a9874d35e7db33a7812c782c9b"
+    },
+    {
+      "path": "initial-ui-after-availability-structure.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-pending-feedback-format.result.json",
+      "bytes": 1542,
+      "sha256": "34c7b894563ab1c72ce545837bff8f40da79cf0814fe8d7d366a92593bdc49c7"
+    },
+    {
+      "path": "initial-ui-pending-feedback-format.stdout.log",
+      "bytes": 1085,
+      "sha256": "b96dcc3aa8127537ef9aebe6246bc6a10501a9f7958ccd10456fca1c9235e02a"
+    },
+    {
+      "path": "initial-ui-pending-feedback-format.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-pending-feedback-structure.result.json",
+      "bytes": 563,
+      "sha256": "e575bbe8cf7a5dc24170193faca1e687316589f0ace7d607d2b8d9036b33d261"
+    },
+    {
+      "path": "initial-ui-pending-feedback-structure.stdout.log",
+      "bytes": 144,
+      "sha256": "a6fa10c068e7152e09c32e5606007b8cee270ad0a402bfd224b4f177dda7d53f"
+    },
+    {
+      "path": "initial-ui-pending-feedback-structure.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-preparation-syntax.result.json",
+      "bytes": 589,
+      "sha256": "8d1ebafba03b482c47e3db0489ef99df2add476068ccca4506e86757a6c387eb"
+    },
+    {
+      "path": "initial-ui-preparation-syntax.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-preparation-syntax.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "check-meri-initial-ui-structure.first-finding.mjs",
+      "bytes": 1881,
+      "sha256": "a7e9ffdcd00f05e3f8b026a55478db3778df02b0940a0cc10e03704aef904239"
+    },
+    {
+      "path": "check-meri-initial-ui-structure.mjs",
+      "bytes": 1911,
+      "sha256": "5758e997a0ba7d00eb452128f3366bd13aa3212ed319830b16e339f2f0a079c6"
+    },
+    {
+      "path": "run-meri-initial-ui-analysis.first.ps1",
+      "bytes": 3264,
+      "sha256": "f079640058ecb98394c8e143d724cc3af07487a64e083c82c5f1ec393522c2fa"
+    },
+    {
+      "path": "run-meri-initial-ui-analysis.ps1",
+      "bytes": 3562,
+      "sha256": "48a6c5773d4d98327276c2b046aff40602eb0d68db21cef9c237d77fa2a73787"
+    }
+  ],
+  "authoredUnrun": {
+    "sdkSyntheticCases": 16,
+    "newJournalCases": 3,
+    "retainedJournalCases": 4,
+    "newProxySpecificCases": 3,
+    "proxyMatrixRowsAdded": 2,
+    "desktopBrowserCases": 6
+  },
+  "unrun": [
+    "0.1.8 materialization/install",
+    "SDK or web semantic types",
+    "all new behavior/SDK/proxy tests",
+    "all browser cases",
+    "production build",
+    "real authentication/provider/database/native acceptance"
+  ],
+  "accessibility": "Source changes and inspection only; manual/rendered checks incomplete",
+  "resources": "All small source-analysis primaries terminal; no test/compiler/browser/install or persistent port/process launched"
+}

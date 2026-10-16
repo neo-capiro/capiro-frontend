@@ -53,6 +53,46 @@ function LiveTurn({
   );
 }
 
+/** Local composer availability; only the SDK/server may admit an original input or next turn. */
+function composerAvailability(
+  run: ReturnType<typeof useLiveRun>,
+  turn: TurnView | null,
+  earlier: readonly TurnView[],
+  initialPrompt: string | undefined,
+  initialBlocked: string | undefined,
+  nextTurnBlocked: string | undefined,
+) {
+  const { intent, busy } = run;
+  const initial =
+    !turn &&
+    !intent.submit &&
+    !initialPrompt &&
+    !earlier.length &&
+    !initialBlocked;
+  const firstBlocked =
+    !turn && !intent.submit && !initial
+      ? (initialBlocked ??
+        "Recover the original message identity before sending.")
+      : undefined;
+  return {
+    initial,
+    sendBlocked:
+      firstBlocked ??
+      (isTerminal(turn?.runState) ? nextTurnBlocked : undefined) ??
+      (busy
+        ? "Meri is still handling your last command."
+        : intent.submit?.state === "unknown"
+          ? "Delivery of your last request is uncertain. Retry it before sending another."
+          : intent.submit && !turn
+            ? "Your request is being sent."
+            : undefined),
+    stopBlocked:
+      busy || intent.cancel === "pending"
+        ? "Meri is handling your last command."
+        : undefined,
+  };
+}
+
 /** The session-bound run, with every turn already shown in this page above it. */
 export function MeriLiveConversation({
   port,
@@ -64,6 +104,7 @@ export function MeriLiveConversation({
   textareaRef,
   onNextTurn,
   nextTurnBlocked,
+  initialBlocked,
   historyStatus,
   promptKey,
   onSettled,
@@ -80,6 +121,7 @@ export function MeriLiveConversation({
   /** The run finished: send `prompt` as the conversation's next run. */
   onNextTurn: (prompt: string, finished: TurnView) => void;
   nextTurnBlocked?: string | undefined;
+  initialBlocked?: string | undefined;
   historyStatus?: ReactNode;
   promptKey?: string | undefined;
   onSettled: () => void;
@@ -87,7 +129,7 @@ export function MeriLiveConversation({
   acceptedRequest?: ConversationStoredRequest | undefined;
 }) {
   const run = useLiveRun(port, initialPrompt);
-  const { snapshot, intent, busy } = run;
+  const { snapshot, intent } = run;
   const observed = snapshot.observation
     ? {
         ...turnFromObservation(snapshot.observation, port.context.runId),
@@ -97,7 +139,6 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
-  const uncertain = intent.submit?.state === "unknown";
   const announced = useRef(false);
   useEffect(() => {
     if (finished && !announced.current) {
@@ -105,13 +146,18 @@ export function MeriLiveConversation({
       onSettled();
     }
   }, [finished, onSettled]);
-  const firstBlocked =
-    !turn && !intent.submit
-      ? "Meri cannot verify whether a message is already in flight. Sending is blocked until its original identity can be recovered."
-      : undefined;
+  const availability = composerAvailability(
+    run,
+    turn,
+    earlier,
+    initialPrompt,
+    initialBlocked,
+    nextTurnBlocked,
+  );
   const send = () => {
     const prompt = draft.trim();
-    if (turn && finished && !nextTurnBlocked) onNextTurn(prompt, turn);
+    if (availability.initial) void run.submitInitial(prompt);
+    else if (turn && finished && !nextTurnBlocked) onNextTurn(prompt, turn);
   };
   return (
     <ConversationFrame
@@ -139,20 +185,8 @@ export function MeriLiveConversation({
       composer={{
         onSend: send,
         onStop: () => void run.cancel(),
-        sendBlocked:
-          firstBlocked ??
-          (finished ? nextTurnBlocked : undefined) ??
-          (busy
-            ? "Meri is still handling your last command."
-            : uncertain
-              ? "Delivery of your last request is uncertain. Retry it before sending another."
-              : intent.submit && !turn
-                ? "Your request is being sent."
-                : undefined),
-        stopBlocked:
-          busy || intent.cancel === "pending"
-            ? "Meri is handling your last command."
-            : undefined,
+        sendBlocked: availability.sendBlocked,
+        stopBlocked: availability.stopBlocked,
         scope,
         attachUnavailable: unavailableTitle("attachments"),
       }}

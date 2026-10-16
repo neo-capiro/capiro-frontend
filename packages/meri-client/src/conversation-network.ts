@@ -120,12 +120,12 @@ export class ConversationNetwork {
     this.owner.abort(); this.stopObservation(); this.onDispose();
   };
   stopObservation() { this.stream?.abort(); this.stream = undefined; }
-  private lease(observation: boolean, caller?: AbortSignal | null) {
+  private lease(observation: boolean, caller?: AbortSignal | null, milliseconds = REQUEST_MS) {
     this.check();
     const local = new AbortController();
     if (observation) { this.stopObservation(); this.stream = local; }
     const signal = AbortSignal.any([local.signal, this.owner.signal, this.options.signal, ...(caller ? [caller] : [])]);
-    const timer = setTimeout(() => local.abort(), REQUEST_MS);
+    const timer = setTimeout(() => local.abort(), Math.min(REQUEST_MS, milliseconds));
     const done = () => { clearTimeout(timer); if (this.stream === local) this.stream = undefined; };
     return { signal, done };
   }
@@ -145,8 +145,13 @@ export class ConversationNetwork {
       return response;
     } catch (error) { discard(response); throw error; }
   }
-  async json(path: string, body: Uint8Array, onDispatch?: () => void): Promise<{ status: number; bytes: Uint8Array }> {
-    const lease = this.lease(false);
+  async json(path: string, body: Uint8Array, onDispatch?: () => void, budget?: Readonly<{
+    requestBytes: number; responseBytes: number; maxRequestMs: number;
+  }>): Promise<{ status: number; bytes: Uint8Array }> {
+    if (body.byteLength > Math.min(protocol.limits.requestBytes, budget?.requestBytes ?? protocol.limits.requestBytes)) {
+      throw new ConversationUnavailable('request-byte-limit');
+    }
+    const lease = this.lease(false, undefined, budget?.maxRequestMs);
     try {
       const response = await this.dispatch(path, {
         method: 'POST', body: new TextDecoder('utf-8', { fatal: true }).decode(body),
@@ -155,7 +160,8 @@ export class ConversationNetwork {
       if (!/^application\/json(?:;\s*charset=utf-8)?$/i.test(response.headers.get('content-type') ?? '')) {
         discard(response); throw new ConversationUnavailable('invalid-json-media');
       }
-      const bounded = boundedBody(response, lease.signal, this.check, protocol.limits.responseBytes, () => {});
+      const limit = Math.min(protocol.limits.responseBytes, budget?.responseBytes ?? protocol.limits.responseBytes);
+      const bounded = boundedBody(response, lease.signal, this.check, limit, () => {});
       const bytes = new Uint8Array(await new Response(bounded).arrayBuffer());
       this.check(); lease.signal.throwIfAborted();
       return { status: response.status, bytes };

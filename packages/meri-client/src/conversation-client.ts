@@ -10,6 +10,10 @@ import {
   receiveConversationInputRequest, receiveConversationInputResponse,
 } from '@capiro/meri-contracts/conversation-input';
 import type { AdmittedConversationInputReceipt } from '@capiro/meri-contracts/conversation-input';
+import {
+  conversationInitialInputMetadata, receiveConversationInitialInputRequest,
+  receiveConversationInitialInputResponse, receiveAllocatedConversationInputResponse,
+} from '@capiro/meri-contracts/conversation-initial-input';
 import { ConversationNetwork, ConversationUnavailable } from './conversation-network.js';
 import type { ConversationLifetime } from './conversation-network.js';
 import { ConversationObservation } from './conversation-observation.js';
@@ -33,6 +37,8 @@ const EMPTY: MeriConversationSnapshot = Object.freeze({
 const DISPOSED: MeriConversationSnapshot = Object.freeze({ ...EMPTY, status: 'disposed' });
 const HIDDEN: MeriConversationSnapshot = Object.freeze({ ...EMPTY, status: 'unavailable' });
 const bytes = (value: unknown) => new TextEncoder().encode(JSON.stringify(value));
+type InitialRequest = ReturnType<typeof receiveConversationInitialInputRequest>;
+type InitialReceipt = Exclude<Awaited<ReturnType<typeof receiveConversationInitialInputResponse>>, { error: unknown }>;
 
 /** One server-selected run/context. No new turn or durable cancel is implied by observation. */
 class ConversationConnection {
@@ -45,6 +51,8 @@ class ConversationConnection {
   private intent: AdmittedConversationRequest<'submit'> | undefined;
   // Correlation only: this synthetic tail must never replace an observed transcript/cursor.
   private inputReceipt: AdmittedConversationInputReceipt | undefined;
+  private initialIntent: InitialRequest | undefined;
+  private allocation: InitialReceipt | undefined;
   private busy = false;
   private disposed = false;
   private readonly listeners = new Set<() => void>();
@@ -75,6 +83,7 @@ class ConversationConnection {
     this.disposed = true; this.detach();
     this.view = undefined; this.observation = undefined; this.intent = undefined;
     this.inputReceipt = undefined;
+    this.initialIntent = undefined; this.allocation = undefined;
     this.state = DISPOSED;
     for (const listener of this.listeners) listener();
   }
@@ -121,27 +130,58 @@ class ConversationConnection {
     if ('error' in value) throw new ConversationUnavailable(value.error.code);
     return value;
   }
-  submit = async (input: ConversationSubmitRequest) => {
+  private retain<T extends AdmittedConversationRequest<'submit'>>(
+    input: ConversationSubmitRequest, receive: (input: Uint8Array) => T,
+  ) {
     this.network.check();
     if (this.intent) throw new ConversationUnavailable('retained-submit-intent');
-    const request = receiveConversationInputRequest(bytes(input));
+    const request = receive(bytes(input));
     this.start(); this.intent = request;
+    return request;
+  }
+  submit = async (input: ConversationSubmitRequest) => {
+    this.retain(input, receiveConversationInputRequest);
+    return this.sendRetained();
+  };
+  /** Original input only. A local identity is a proposal until the server's durable allocation. */
+  submitInitial = async (input: ConversationSubmitRequest) => {
+    if (this.view || this.inputReceipt) throw new ConversationUnavailable('initial-input-already-observed');
+    this.initialIntent = this.retain(input, receiveConversationInitialInputRequest);
     return this.sendRetained();
   };
   retrySubmit = async () => {
     if (!this.intent || this.state.submit !== 'unknown') throw new ConversationUnavailable('no-unknown-submit');
     this.start(); return this.sendRetained(true);
   };
-  private async admitRetained(onDispatch: () => void) {
-    const current = this.view, previous = this.inputReceipt, intent = this.intent!;
-    const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch);
-    const value = await receiveConversationInputResponse(response.status, response.bytes, intent, {
+  private inputContext() {
+    return {
       tenantId: this.context.tenantId, actorId: this.context.actorId,
       conversationId: this.context.conversationId, runId: this.context.runId,
       clientId: this.context.selectedClientId,
-    }, current ?? previous);
+    };
+  }
+  private async allocateRetained(onDispatch: () => void) {
+    const intent = this.initialIntent!, previous = this.allocation, current = this.view;
+    const response = await this.network.json(conversationInitialInputMetadata.routes.allocate.path,
+      bytes(intent), onDispatch, conversationInitialInputMetadata.limits);
+    const value = await receiveConversationInitialInputResponse(response.status, response.bytes, intent, this.inputContext());
     this.network.check();
-    if (this.disposed || this.view !== current || this.inputReceipt !== previous) throw new ConversationUnavailable('superseded-input-receipt');
+    if (this.disposed || this.initialIntent !== intent || this.allocation !== previous || this.view !== current) {
+      throw new ConversationUnavailable('superseded-allocation-receipt');
+    }
+    if ('error' in value) throw new ConversationUnavailable(value.error.code);
+    this.allocation = value;
+  }
+  private async admitRetained(onDispatch: () => void) {
+    const current = this.view, previous = this.inputReceipt, intent = this.intent!;
+    const initial = this.initialIntent, allocation = this.allocation;
+    if (initial && !allocation) throw new ConversationUnavailable('no-initial-input-allocation');
+    const response = await this.network.json(conversationInputMetadata.routes.admit.path, bytes(intent), onDispatch);
+    const value = initial
+      ? await receiveAllocatedConversationInputResponse(response.status, response.bytes, initial, this.inputContext(), allocation!)
+      : await receiveConversationInputResponse(response.status, response.bytes, intent, this.inputContext(), current ?? previous);
+    this.network.check();
+    if (this.disposed || this.view !== current || this.inputReceipt !== previous || this.allocation !== allocation) throw new ConversationUnavailable('superseded-input-receipt');
     if ('error' in value) throw new ConversationUnavailable(value.error.code);
     this.inputReceipt = value;
   }
@@ -150,6 +190,7 @@ class ConversationConnection {
     let dispatched = false;
     this.publish({ submit: 'pending' });
     try {
+      if (this.initialIntent) await this.allocateRetained(() => { dispatched = true; });
       await this.admitRetained(() => { dispatched = true; });
       const view = await this.receive('submit', intent, () => { dispatched = true; });
       // An ACK carries no historical events. Preserve any already observed prefix and cursor.
@@ -158,7 +199,9 @@ class ConversationConnection {
       this.publish({ submit: 'observed' });
       return this.getSnapshot();
     } catch (error) {
-      if (!dispatched && !previouslyUnknown) this.intent = undefined;
+      if (!dispatched && !previouslyUnknown) {
+        this.intent = undefined; this.initialIntent = undefined; this.allocation = undefined;
+      }
       this.publish({ submit: dispatched || previouslyUnknown ? 'unknown' : 'idle' });
       throw error;
     } finally { this.busy = false; }
@@ -201,7 +244,7 @@ export function createMeriConversation(options: ConversationLifetime) {
   const connection = new ConversationConnection(options);
   return Object.freeze({
     getSnapshot: connection.getSnapshot, subscribe: connection.subscribe,
-    submit: connection.submit, retrySubmit: connection.retrySubmit,
+    submit: connection.submit, submitInitial: connection.submitInitial, retrySubmit: connection.retrySubmit,
     history: connection.history, cancel: connection.cancel,
     openChat: connection.openChat, dispose: connection.dispose,
   });

@@ -9,6 +9,8 @@ export type ConversationIntent = Readonly<{
   submit?: Readonly<
     ConversationSubmitRequest & {
       state: "pending" | "unknown" | "observed";
+      /** Local recovery route only; omitted from canonical request bytes. */
+      workflow?: "initial";
     }
   >;
   cancel?: "pending" | "unknown" | "observed";

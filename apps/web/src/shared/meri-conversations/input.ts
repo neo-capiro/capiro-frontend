@@ -7,6 +7,10 @@ import {
   conversationInputMetadata,
   receiveConversationInputRequest,
 } from "@capiro/meri-contracts/conversation-input";
+import {
+  conversationInitialInputMetadata,
+  receiveConversationInitialInputRequest,
+} from "@capiro/meri-contracts/conversation-initial-input";
 import { boundedJsonBytes } from "../meri-actions/bounded-json";
 
 const reconnectPath =
@@ -14,6 +18,11 @@ const reconnectPath =
 
 /** Only public protocol routes; no user-selected upstream destination. */
 export function conversationRoute(path: string) {
+  if (
+    `/api/conversations/${path}` ===
+    conversationInitialInputMetadata.routes.allocate.path
+  )
+    return "inputAllocate" as const;
   if (
     `/api/conversations/${path}` === conversationInputMetadata.routes.admit.path
   )
@@ -37,6 +46,10 @@ export function validConversationRequest(
   const url = new URL(request.url);
   const origin = request.headers.get("origin");
   const length = request.headers.get("content-length");
+  const limit =
+    route === "inputAllocate"
+      ? conversationInitialInputMetadata.limits.requestBytes
+      : protocol.limits.requestBytes;
   if (
     url.pathname !== `/api/conversations/${path}` ||
     url.search ||
@@ -62,7 +75,7 @@ export function validConversationRequest(
   return (
     origin === url.origin &&
     !request.headers.has(protocol.routes.reconnect.cursorHeader) &&
-    (length === null || Number(length) <= protocol.limits.requestBytes) &&
+    (length === null || Number(length) <= limit) &&
     /^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(
       request.headers.get("content-type") ?? "",
     )
@@ -71,15 +84,18 @@ export function validConversationRequest(
 
 export async function conversationBody(
   request: Request,
-  route: ConversationRoute | "inputAdmit",
+  route: ConversationRoute | "inputAdmit" | "inputAllocate",
   signal: AbortSignal,
 ) {
   const bytes = await boundedJsonBytes(
     new Response(request.body, { headers: request.headers }),
     signal,
-    protocol.limits.requestBytes,
+    route === "inputAllocate"
+      ? conversationInitialInputMetadata.limits.requestBytes
+      : protocol.limits.requestBytes,
   );
-  if (route === "inputAdmit") receiveConversationInputRequest(bytes);
+  if (route === "inputAllocate") receiveConversationInitialInputRequest(bytes);
+  else if (route === "inputAdmit") receiveConversationInputRequest(bytes);
   else receiveConversationRequest(route, bytes);
   return bytes;
 }
