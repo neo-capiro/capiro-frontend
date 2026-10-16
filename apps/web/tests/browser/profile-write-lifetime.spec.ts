@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { json } from "./fixtures";
+import { installUnavailableLocationReads, json } from "./fixtures";
 import {
   installProfileCurrentState,
   profileEvent,
@@ -287,10 +287,14 @@ test("a changed saved facility cannot be overwritten by an older open draft", as
   page,
 }) => {
   const { state, unexpected } = await installProfileCurrentState(page);
+  const locationWrites = await installUnavailableLocationReads(
+    page,
+    profileFacility.clientId,
+  );
   await page.goto("/profile-current-state.html?mode=facilities");
   await page.getByRole("button", { name: /Synthetic profile lab/ }).click();
   await page
-    .getByRole("button", { name: "Edit facility", exact: true })
+    .getByRole("button", { name: "Edit location", exact: true })
     .click();
   const dialog = page.getByRole("dialog", { name: "Edit facility" });
   await dialog.getByLabel("Notes", { exact: true }).fill("Local unsaved note");
@@ -315,6 +319,7 @@ test("a changed saved facility cannot be overwritten by an older open draft", as
     "Another saved note",
   );
   expect(state.writes).toEqual([]);
+  expect(locationWrites).toEqual([]);
   expect(unexpected).toEqual([]);
 });
 

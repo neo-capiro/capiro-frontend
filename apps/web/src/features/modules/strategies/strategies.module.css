@@ -53,6 +53,20 @@
   display: flex;
   gap: 12px;
 }
+.scope > div > [role="combobox"] {
+  min-height: 36px;
+  width: auto;
+  white-space: nowrap;
+}
+.referenceVisibility .referencePills {
+  align-items: center;
+}
+.referenceVisibility .referencePills .active {
+  background: var(--card);
+  color: var(--foreground);
+  border-color: var(--input);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
 .pills {
   display: flex;
   gap: 10px;
@@ -207,6 +221,42 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.contextScope > section {
+  padding: 20px;
+}
+.contextScope > section > header {
+  margin-bottom: 12px;
+}
+.contextScope .form {
+  gap: 12px;
+}
+.contextScope .pills button {
+  padding: 8px 12px;
+}
+.contextSearch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.contextSearch label {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.contextSearchControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.contextSearchControls > input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+}
+.contextSearchControls > [role="combobox"] {
+  flex: 0 0 auto;
+  width: auto;
+  min-height: 36px;
 }
 .facts {
   display: grid;

@@ -43,6 +43,10 @@ export function Dialog({
   onOpenChange,
   title,
   description,
+  eyebrow,
+  headerActions,
+  textClose = false,
+  overlayClassName,
   children,
   drawer = false,
   wide = false,
@@ -54,6 +58,10 @@ export function Dialog({
   onOpenChange: (open: boolean) => void;
   title: string;
   description?: string;
+  eyebrow?: string;
+  headerActions?: ReactNode;
+  textClose?: boolean;
+  overlayClassName?: string;
   children: ReactNode;
   drawer?: boolean;
   wide?: boolean;
@@ -72,6 +80,7 @@ export function Dialog({
         onFocusCapture={rememberFocus}
         aria-modal="true"
         showCloseButton={false}
+        overlayClassName={overlayClassName}
         onCloseAutoFocus={(event) => {
           onCloseAutoFocus?.(event);
           returnFocus(event);
@@ -92,11 +101,24 @@ export function Dialog({
         className={`${styles.content} ${drawer ? styles.drawer : ""} ${wide ? styles.wide : ""} ${className}`}
       >
         <header className="row between">
-          <DialogTitle asChild>
-            <h2>{title}</h2>
-          </DialogTitle>
-          <DialogClose className="button ghost iconButton" aria-label="Close">
-            <X size={16} />
+          {eyebrow ? (
+            <div className={styles.headerTitle}>
+              <span>{eyebrow}</span>
+              <DialogTitle asChild>
+                <h2>{title}</h2>
+              </DialogTitle>
+            </div>
+          ) : (
+            <DialogTitle asChild>
+              <h2>{title}</h2>
+            </DialogTitle>
+          )}
+          {headerActions}
+          <DialogClose
+            className={textClose ? "button" : "button ghost iconButton"}
+            aria-label="Close"
+          >
+            {textClose ? "Close" : <X size={16} />}
           </DialogClose>
         </header>
         {description ? (

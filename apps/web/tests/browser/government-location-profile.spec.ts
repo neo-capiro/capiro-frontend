@@ -568,7 +568,7 @@ test("a saved map location exposes ten areas, retains the existing editor and re
   await expect(awards).toContainText("$120");
   await expect(awards).not.toContainText("987,654,321");
   await detail
-    .getByRole("button", { name: "Edit facility", exact: true })
+    .getByRole("button", { name: "Edit location", exact: true })
     .click();
   const editor = page.getByRole("dialog", {
     name: "Edit facility",

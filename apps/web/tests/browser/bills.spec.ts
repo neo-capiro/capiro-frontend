@@ -1,5 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { installFixtures, json, clientId } from "./fixtures";
+import {
+  installFixtures,
+  installUnavailableLocationReads,
+  json,
+  clientId,
+} from "./fixtures";
 test("intel search, tracking and paging retain client scope; failed untrack stays reviewable", async ({
   page,
 }) => {
@@ -124,6 +129,10 @@ test("facility edit clears optional values instead of omitting them", async ({
   page,
 }) => {
   const unexpected = await installFixtures(page);
+  const locationWrites = await installUnavailableLocationReads(page, clientId, {
+    state: "TX",
+    code: "10",
+  });
   const facility = {
     id: "facility-test",
     clientId,
@@ -168,7 +177,7 @@ test("facility edit clears optional values instead of omitting them", async ({
   await page.goto(`/portfolio/${clientId}`);
   await page.getByRole("button", { name: /Test site/ }).click();
   await page
-    .getByRole("button", { name: "Edit facility", exact: true })
+    .getByRole("button", { name: "Edit location", exact: true })
     .click();
   const edit = page.getByRole("dialog", { name: "Edit facility" });
   await edit.getByLabel("Notes", { exact: true }).fill("");
@@ -177,10 +186,11 @@ test("facility edit clears optional values instead of omitting them", async ({
   await edit.getByRole("button", { name: "Save changes" }).click();
   await expect(edit).not.toBeVisible();
   await page
-    .getByRole("button", { name: "Edit facility", exact: true })
+    .getByRole("button", { name: "Edit location", exact: true })
     .click();
   await expect(
     page.getByRole("dialog").getByLabel("Notes", { exact: true }),
   ).toHaveValue("");
+  expect(locationWrites).toEqual([]);
   expect(unexpected).toEqual([]);
 });

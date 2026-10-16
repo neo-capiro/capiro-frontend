@@ -1,6 +1,7 @@
 "use client";
 import { StrategiesLibrary } from "./StrategiesLibrary";
 
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { strategyId } from "../../../shared/capiro/operations/strategies-schemas";
@@ -137,53 +138,17 @@ export function StrategiesScreen() {
         />
         <ActionButton onClick={clients.reload}>Refresh</ActionButton>
       </div>
-      <header className={styles.heading}>
-        <div>
-          <h1>{pageText[view].title}</h1>
-          <p>{pageText[view].description}</p>
-        </div>
-        {view === "library" && (
-          <div className={styles.actions}>
-            <ActionButton onClick={() => setView("review")}>
-              Agent review
-            </ActionButton>
-            <ActionButton onClick={() => setView("context")}>
-              Context library
-            </ActionButton>
-            <ActionButton primary onClick={create}>
-              New strategy
-            </ActionButton>
-          </div>
-        )}
-      </header>
-      {view !== "library" && (
-        <div className={styles.pills} role="group" aria-label="Strategy views">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              className={view === tab.id ? styles.active : ""}
-              aria-pressed={view === tab.id}
-              onClick={() => setView(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      )}
-      {view === "library" && (
-        <StrategiesLibrary
-          key={clientId}
-          clientId={clientId}
-          onOpen={open}
-          onCreate={create}
-          onReview={() => setView("review")}
-        />
-      )}
-      {view === "context" && (
-        <StrategyContext clientId={clientId || undefined} />
-      )}
-      {view === "review" && <StrategyReview clientId={clientId || undefined} />}
-      {view === "runs" && <StrategyRuns />}
+      <StrategyViewSurface
+        key={`${view}:${clientId}`}
+        view={view}
+        clientId={clientId}
+        clientName={
+          clients.data?.find((client) => client.id === clientId)?.name
+        }
+        onView={setView}
+        onCreate={create}
+        onOpen={open}
+      />
       {clients.error && (
         <p role="alert" className={styles.notice}>
           Client scope unavailable · {clients.error.message}
@@ -205,6 +170,92 @@ export function StrategiesScreen() {
         />
       )}
     </section>
+  );
+}
+
+function StrategyViewSurface({
+  view,
+  clientId,
+  clientName,
+  onView,
+  onCreate,
+  onOpen,
+}: {
+  view: View;
+  clientId: string;
+  clientName?: string;
+  onView: (view: View) => void;
+  onCreate: () => void;
+  onOpen: (id: string, clientId: string) => void;
+}) {
+  const [contextEvidence, setContextEvidence] = useState(false);
+  const [contextUpload, setContextUpload] = useState(false);
+  return (
+    <>
+      <header className={styles.heading}>
+        <div>
+          <h1>{pageText[view].title}</h1>
+          <p>{pageText[view].description}</p>
+        </div>
+        {view === "library" && (
+          <div className={styles.actions}>
+            <ActionButton onClick={() => onView("review")}>
+              Agent review
+            </ActionButton>
+            <ActionButton onClick={() => onView("context")}>
+              Context library
+            </ActionButton>
+            <ActionButton primary onClick={onCreate}>
+              New strategy
+            </ActionButton>
+          </div>
+        )}
+        {view === "context" && !contextEvidence && (
+          <div className={styles.actions}>
+            <ActionButton onClick={() => setContextEvidence(true)}>
+              Review facts and conflicts
+            </ActionButton>
+            <ActionButton onClick={() => setContextUpload(true)}>
+              Upload files
+            </ActionButton>
+          </div>
+        )}
+      </header>
+      {view !== "library" && (
+        <div className={styles.pills} role="group" aria-label="Strategy views">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={view === tab.id ? styles.active : ""}
+              aria-pressed={view === tab.id}
+              onClick={() => onView(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      )}
+      {view === "library" && (
+        <StrategiesLibrary
+          clientId={clientId}
+          onOpen={onOpen}
+          onCreate={onCreate}
+          onReview={() => onView("review")}
+        />
+      )}
+      {view === "context" && (
+        <StrategyContext
+          clientId={clientId || undefined}
+          clientName={clientName}
+          evidence={contextEvidence}
+          onEvidenceClose={() => setContextEvidence(false)}
+          upload={contextUpload}
+          onUploadClose={() => setContextUpload(false)}
+        />
+      )}
+      {view === "review" && <StrategyReview clientId={clientId || undefined} />}
+      {view === "runs" && <StrategyRuns />}
+    </>
   );
 }
 

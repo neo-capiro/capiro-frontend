@@ -180,6 +180,38 @@ export async function json(route: Route, body: unknown, status = 200) {
     body: JSON.stringify(body),
   });
 }
+/** Editor-only tests have no source-backed district evidence to display. */
+export async function installUnavailableLocationReads(
+  page: Page,
+  locationClientId: string,
+  district?: { state: string; code: string },
+) {
+  const base = `intelligence/clients/${locationClientId}/district-nexus-v2`;
+  const paths = [base, `${base}/economic-footprint`];
+  if (district) {
+    const key = `intelligence/district-nexus/districts/${district.state}/${district.code}`;
+    paths.push(
+      `${key}/economic-context`,
+      `${key}/strategic?clientId=${locationClientId}`,
+      `${base}/priority-intelligence?state=${district.state}&district=${district.code}`,
+    );
+  }
+  const expected = new Set(paths.map((path) => `/api/backend/core/${path}`));
+  const unexpectedWrites: string[] = [];
+  await page.route(
+    (url) => expected.has(url.pathname + url.search),
+    (route) => {
+      if (route.request().method() !== "GET") {
+        unexpectedWrites.push(
+          `${route.request().method()} ${new URL(route.request().url()).pathname}`,
+        );
+        return json(route, { message: "Unexpected location mutation" }, 500);
+      }
+      return json(route, { message: "Location evidence unavailable" }, 404);
+    },
+  );
+  return unexpectedWrites;
+}
 export const sendingMailbox = {
   id: "70000000-0000-4000-8000-000000000001",
   provider: "google_workspace",

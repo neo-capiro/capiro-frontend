@@ -155,11 +155,26 @@ test("view/client navigation is reflected by URL, history and reload; library op
   await page.screenshot({
     path: info.outputPath("context-library-desktop.png"),
   });
+  await page
+    .getByRole("button", { name: "Review facts and conflicts", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Facts and conflicts", exact: true }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Strategies", exact: true }).click();
   await expect(page).toHaveURL(`/modules/strategies?clientId=${clientId}`);
   await page.goBack();
   await expect(
     page.getByRole("heading", { name: "Context library", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Facts and conflicts", exact: true }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", {
+      name: "Review facts and conflicts",
+      exact: true,
+    }),
   ).toBeVisible();
   await page.reload();
   await expect(

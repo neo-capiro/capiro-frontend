@@ -16,6 +16,12 @@
   gap: 20px;
   box-shadow: 0 16px 48px #0003;
 }
+.headerTitle {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
 .drawer {
   left: auto;
   right: 0;

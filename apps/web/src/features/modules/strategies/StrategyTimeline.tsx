@@ -83,7 +83,7 @@ function TimelineView({
             onValueChange={(value) => setYears(Number(value))}
             options={[1, 2, 3].map((value) => ({
               value: String(value),
-              label: `FY${startFy}${value > 1 ? `–FY${startFy + value - 1}` : ""}`,
+              label: `FY${String(startFy).slice(-2)}${value > 1 ? `–FY${String(startFy + value - 1).slice(-2)}` : ""}`,
             }))}
           />
           <SelectInput
@@ -92,13 +92,10 @@ function TimelineView({
             onValueChange={(value) => setStartFy(Number(value))}
             options={Array.from({ length: 11 }, (_, index) => ({
               value: String(fiscalYear(new Date()) - 3 + index),
-              label: `Start FY${fiscalYear(new Date()) - 3 + index}`,
+              label: `Start FY${String(fiscalYear(new Date()) - 3 + index).slice(-2)}`,
             }))}
           />
         </div>
-        <span className={styles.muted}>
-          Saved {new Date(strategy.lastEditedAt).toLocaleString()}
-        </span>
       </div>
       <header className={styles.heading}>
         <div>
@@ -113,9 +110,9 @@ function TimelineView({
           </ActionButton>
         </div>
       </header>
-      <div className={styles.scope}>
+      <div className={`${styles.scope} ${styles.referenceVisibility}`}>
         <Badge>{objectiveLabels[strategy.type]}</Badge>
-        <div className={styles.pills}>
+        <div className={`${styles.pills} ${styles.referencePills}`}>
           <button
             aria-pressed={flags.ppbe}
             className={flags.ppbe ? styles.active : ""}
@@ -137,6 +134,9 @@ function TimelineView({
           >
             Congress
           </button>
+          <span className={styles.muted}>
+            Saved {new Date(strategy.lastEditedAt).toLocaleString()}
+          </span>
         </div>
       </div>
       <div className={styles.timelineTools}>
@@ -156,7 +156,9 @@ function TimelineView({
           <ActionButton onClick={() => setPhasesOpen(true)}>
             Firm phases
           </ActionButton>
-          <ActionButton onClick={() => setStep(true)}>Add step</ActionButton>
+          <ActionButton primary onClick={() => setStep(true)}>
+            Add step
+          </ActionButton>
         </div>
       </div>
       {(phases.error || references.error) && (

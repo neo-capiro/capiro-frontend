@@ -1,46 +1,73 @@
 .dialog {
   width: min(1020px, calc(100vw - 32px));
   height: min(820px, 90dvh);
-  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-  gap: 16px;
+  grid-template-rows: 30px 20px 52px minmax(0, 1fr) 36px;
+  gap: 0;
+  box-shadow: var(--shadow);
+}
+.dialog > header {
+  align-items: flex-start;
 }
 .dialog > header h2 {
   font-size: 24px;
   font-weight: 500;
-  letter-spacing: -0.4px;
+  line-height: 30px;
+  letter-spacing: -0.12px;
+}
+.dialog > header > button {
+  height: 36px;
+  box-shadow: 0 1px 2px #0c0a090d;
 }
 .dialog > p {
-  font-size: 13px;
+  align-self: start;
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 12px;
+  align-self: end;
+  gap: 12px;
 }
-.tabs button {
-  font-size: 13px;
+.tabs :global(.button) {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: 0 1px 2px #0c0a090d;
+  font-size: 14px;
+  line-height: 1.2;
 }
 .tabs button[aria-pressed="true"] {
-  background: var(--muted);
-  color: var(--foreground);
+  border-color: #242424;
+  background: var(--dark-gradient);
+  color: #fff;
+  box-shadow:
+    inset 0 1px #ffffff24,
+    0 1px 2px #0c0a0924;
 }
 .body {
   min-height: 0;
   overflow: auto;
+  padding-top: 16px;
 }
 .card {
-  padding: 16px;
+  padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   display: grid;
   gap: 12px;
   min-width: 0;
 }
 .card h3 {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 20px;
 }
 .card p {
   font-size: 12px;
@@ -54,17 +81,20 @@
 }
 .metrics > div {
   display: grid;
-  gap: 6px;
+  gap: 12px;
   min-width: 0;
 }
 .metrics dt {
+  order: 2;
   font-size: 12px;
   color: var(--muted-foreground);
 }
 .metrics dd {
+  order: 1;
   margin: 0;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 500;
+  line-height: 30px;
   overflow-wrap: anywhere;
 }
 .entry {

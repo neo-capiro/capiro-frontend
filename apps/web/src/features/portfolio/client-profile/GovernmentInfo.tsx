@@ -32,6 +32,7 @@ function GovernmentProfile({
       title="Government & federal profile"
       description={`Saved identity and separately sourced federal context for ${client.name}.`}
       className={styles.dialog}
+      textClose
     >
       <nav className={styles.tabs} aria-label="Government profile sections">
         <button

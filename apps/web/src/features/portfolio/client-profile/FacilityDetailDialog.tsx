@@ -99,7 +99,19 @@ export function FacilityDetailDialog({
       <Dialog
         open={open}
         className={profile.dialog}
+        overlayClassName={profile.overlay}
         onOpenChange={onOpenChange}
+        eyebrow={current ? `${clientName} / District nexus` : "District nexus"}
+        textClose
+        headerActions={
+          <button
+            className="button"
+            disabled={!available || !current}
+            onClick={() => setEditing(true)}
+          >
+            Edit location
+          </button>
+        }
         title={
           current
             ? `${facility.name}${facilityDistrict(facility) ? ` · ${facilityDistrict(facility)}` : ""}`
@@ -107,7 +119,7 @@ export function FacilityDetailDialog({
         }
         description={
           current
-            ? `Location for ${clientName}. ${facilityAddress(facility)}`
+            ? facilityAddress(facility)
             : "The saved location does not match the current client."
         }
       >
@@ -121,6 +133,7 @@ export function FacilityDetailDialog({
               className={profile.navigation}
               aria-label="Location profile sections"
             >
+              <span className={profile.navigationLabel}>On this page</span>
               {(
                 [
                   ["Location", ids.location],
@@ -139,6 +152,10 @@ export function FacilityDetailDialog({
                   {label}
                 </button>
               ))}
+              <div className={profile.navigationNote}>
+                <span>10 areas of context</span>
+                <span>Client evidence and public data remain distinct.</span>
+              </div>
             </nav>
             <div ref={bodyRef} className={profile.body}>
               <FacilityLocationFacts
@@ -179,18 +196,12 @@ export function FacilityDetailDialog({
             </div>
           </div>
         )}
-        <div className="row between">
-          <button className="button" onClick={() => onOpenChange(false)}>
-            Done
-          </button>
-          <div className="row">
-            <button
-              className="button"
-              disabled={!available || !current}
-              onClick={() => setEditing(true)}
-            >
-              Edit facility
-            </button>
+        <footer className={profile.footer}>
+          <div className={profile.footerContext}>
+            <small>
+              Location evidence retains its source and period. Economic impact
+              and award attribution require supporting records.
+            </small>
             <button
               className="button ghost danger"
               disabled={!available || !current}
@@ -199,7 +210,10 @@ export function FacilityDetailDialog({
               Remove
             </button>
           </div>
-        </div>
+          <button className="button" onClick={() => onOpenChange(false)}>
+            Done
+          </button>
+        </footer>
       </Dialog>
       {current && (
         <FacilityDialog
