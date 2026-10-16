@@ -2,7 +2,10 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../src/shared/portfolio/api/http";
-import type { ClientProgramPage } from "../src/features/portfolio/client-profile/client-program-context";
+import type {
+  ClientProgramPage,
+  ProgramAssociation,
+} from "../src/features/portfolio/client-profile/client-program-context";
 import { ClientProgramContext } from "../src/features/portfolio/client-profile/ClientProgramContext";
 
 const state = vi.hoisted(() => ({
@@ -36,29 +39,28 @@ const render = () =>
       enabled: true,
     }),
   );
+const association = (): ProgramAssociation => ({
+  peCode: "PE-SYNTHETIC",
+  title: null,
+  score: 0.8,
+  paths: [
+    {
+      path: "prior_award",
+      score: 0.8,
+      evidence: ["3 prior awards (~$987.6M)"],
+    },
+    {
+      path: "facility_district",
+      score: 0.6,
+      evidence: ["Facility in district(s): VA-08"],
+    },
+  ],
+});
 const page = (): ClientProgramPage => ({
   page: 1,
   limit: 20,
   total: 1,
-  data: [
-    {
-      peCode: "PE-SYNTHETIC",
-      title: null,
-      score: 0.8,
-      paths: [
-        {
-          path: "prior_award",
-          score: 0.8,
-          evidence: ["3 prior awards (~$987.6M)"],
-        },
-        {
-          path: "facility_district",
-          score: 0.6,
-          evidence: ["Facility in district(s): VA-08"],
-        },
-      ],
-    },
-  ],
+  data: [association()],
 });
 beforeEach(() =>
   Object.assign(state, {
@@ -126,7 +128,7 @@ describe("program associations presentation", () => {
       ...page(),
       total: 21,
       data: Array.from({ length: 20 }, (_, index) => ({
-        ...page().data[0],
+        ...association(),
         peCode: `PE-SYNTHETIC-${index}`,
       })),
     };
@@ -139,13 +141,21 @@ describe("program associations presentation", () => {
     expect(html).not.toContain("Load all");
   });
   it("bounds and escapes nonmonetary reason text", () => {
-    state.data!.data[0].paths = [
-      {
-        path: "capability_keyword",
-        score: 0.5,
-        evidence: ["<script>synthetic</script>" + "x".repeat(400)],
-      },
-    ];
+    state.data = {
+      ...page(),
+      data: [
+        {
+          ...association(),
+          paths: [
+            {
+              path: "capability_keyword",
+              score: 0.5,
+              evidence: ["<script>synthetic</script>" + "x".repeat(400)],
+            },
+          ],
+        },
+      ],
+    };
     const html = render();
     expect(html).toContain("&lt;script&gt;");
     expect(html).not.toContain("<script>");

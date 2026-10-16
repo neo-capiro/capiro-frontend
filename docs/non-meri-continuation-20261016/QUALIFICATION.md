@@ -8,13 +8,35 @@ The recovered source was applied to a separate checkout from published base `3ef
 
 | Focused check | Actual result |
 | --- | --- |
-| Eleven Vitest files listed below | 88 passed, exit 0. [Receipt](../../../validation-evidence/focused-vitest-88.txt). |
-| Government/location Portfolio browser | 8 passed, exit 0. [Playwright JSON](../../../validation-evidence/portfolio-browser-8.json). |
-| Commitment, Work/Strategy and District Nexus browser | 13 passed, exit 0. [Playwright JSON](../../../validation-evidence/modules-browser-13.json). |
+| Eleven Vitest files listed below | 88 passed, exit 0. Task-local receipt: `validation-evidence/focused-vitest-88.txt`. |
+| Government/location Portfolio browser | 8 passed, exit 0. Task-local JSON: `validation-evidence/portfolio-browser-8.json`. |
+| Commitment, Work/Strategy and District Nexus browser | 13 passed, exit 0. Task-local JSON: `validation-evidence/modules-browser-13.json`. |
+| Follow-up program-context Vitest | 29 passed, exit 0, after typed fixture corrections. These revisit the program-context coverage in the 88-case selection. |
+| Follow-up objective/profile Vitest | 15 passed, exit 0, after a nullable-total typing correction and freshness assertion correction. |
+| Full root semantic typing | `npm run typecheck` passed with bundled Node 24. Task-local receipt: `validation-evidence/full-typecheck-final-20261016.txt`. |
+| Root production build | `npm run build` passed with bundled Node 24; Next 16.4.0 built 24 of 24 static pages. Task-local receipt: `validation-evidence/production-build-20261016.txt`. |
 
-For the browser runs, the canonical Playwright configs and tests were used with only their `webServer` launch disabled in temporary task-local config overlays. Each existing Vite harness was started separately with Node 24 and stopped afterward. On this Windows host, Playwright's built-in web-server termination stalled after the test cases, before its reporters finalized; the separate-server runs produced complete JSON reports. The temporary overlays were removed. Initial failure traces from test/harness assertions were preserved under [browser-failure-evidence](../../../browser-failure-evidence); the final focused reports above have no unexpected results.
+The task-local receipts above are in the enclosing `task-2` workspace, outside this Git branch. For the browser runs, the canonical Playwright configs and tests were used with only their `webServer` launch disabled in temporary task-local config overlays. Each existing Vite harness was started separately with Node 24 and stopped afterward. On this Windows host, Playwright's built-in web-server termination stalled after the test cases, before its reporters finalized; the separate-server runs produced complete JSON reports. The temporary overlays were removed. Initial failure traces from test/harness assertions were preserved under task-local `browser-failure-evidence`; the final focused reports above have no unexpected results.
 
-The scoped corrections after recovery were a whitespace-only SAM status fallback, distinct React keys for the two location sections, two browser assertion updates to match existing behavior, two Vitest assertion text updates, and the existing `next/image` browser stub wired into the Portfolio harness. Full semantic typing, default production build, broader parity and visual comparison remain separate qualification stages. No live API, authentication, backend, mobile or deployment claim follows from these synthetic focused runs.
+The first scoped corrections after recovery were a whitespace-only SAM status fallback, distinct React keys for the two location sections, two browser assertion updates to match existing behavior, two Vitest assertion text updates, and the existing `next/image` browser stub wired into the Portfolio harness. Subsequent semantic typing exposed a nullable section total and unsafe program-context test fixtures; both were corrected. Desktop browser comparison exposed a nested-scroll defect in the location dialog; its header and footer now remain in view during section navigation, with a focused browser assertion. The full root typing and production build above passed after the production-source correction.
+
+Desktop captures at 1440×1040 were compared with the updated Portfolio `mpXWnySldUFzdVna8i69Ki` and Modules `zGvvF6V6hh7yweoplCdpdE` Figma files. They use synthetic fixture data.
+
+| Reference frame | Browser captures | Observed difference |
+| --- | --- | --- |
+| Government entry `1064:158951`, Identity `1064:159414`, Federal `1064:159495` | [Identity](./desktop-visual/government-identity-desktop.png), [Federal Footprint](./desktop-visual/government-federal-desktop.png) | Dialog shell matches 1020×820; active tabs, card density and content position differ. Saved fields and bounded award/program evidence remain visible. |
+| Location `1064:159626` | [Opening](./desktop-visual/location-opening-desktop.png), [ten-area view](./desktop-visual/location-ten-area-desktop.png) | Dialog shell matches 1040×900; rail colors and footer actions differ. The nested-scroll fix keeps header/footer visible during section navigation. |
+| Commitments `1064:192312` | [List](./desktop-visual/commitments-list-desktop.png), [edit](./desktop-visual/commitment-edit-desktop.png) | Title/table start lower; filter and column layouts differ. No exact edit frame was present in the audited desktop index. |
+| Context Library `1064:228790` | [Library](./desktop-visual/context-library-desktop.png) | KPI/filter structure broadly matches, with search/status stacking and content roughly 75–80 px lower. |
+| Strategies Library `1064:227836`, detail `1064:227937` | [Library](./desktop-visual/strategies-library-desktop.png), [detail](./desktop-visual/strategy-detail-desktop.png) | Table and timeline structure broadly matches; content starts roughly 75–100 px lower and the synthetic fixture has fewer lanes/steps. |
+
+This comparison establishes observed deltas, not full visual parity. The already requested missing Figma states remain in [Government and Location](../figma-34-audit-20261016/portfolio/GOVERNMENT-AND-LOCATION.md) and [Modules design gaps](../figma-34-audit-20261016/modules/DESIGN-GAPS.md); no duplicate design audit was created.
+
+The focused browser fixtures are synthetic. These results do not establish live API, authentication, backend, mobile, AWS or deployment behavior. Broader parity and regression work remains at a coherent source pin.
+
+## Historical source-handoff record
+
+The sections below preserve the pre-recovery handoff as it was recorded before the jump-box checks above.
 
 ## Actually completed
 

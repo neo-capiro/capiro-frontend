@@ -6,6 +6,7 @@ import {
   clientProgramPageSchema,
   readClientProgramPage,
   type ClientProgramPage,
+  type ProgramAssociation,
 } from "../src/features/portfolio/client-profile/client-program-context";
 import { currentProfileActor } from "../src/features/portfolio/client-profile/profile-access";
 import { profileReadKey } from "../src/features/portfolio/client-profile/profile-keys";
@@ -19,24 +20,29 @@ function currentProfile() {
   cache.setQueryData(["identity"], profileIdentity);
   return { cache, actor: currentProfileActor(cache)! };
 }
+function nativeAssociation(page = 1, index = 0): ProgramAssociation {
+  return {
+    peCode: `PE-SYNTHETIC-${page}-${index}`,
+    title: null,
+    score: 0.8,
+    paths: [
+      {
+        path: "prior_award",
+        score: 0.8,
+        evidence: ["1 prior award on this PE (~$900K)"],
+      },
+    ],
+  };
+}
 function nativePage(total = 1, page = 1): ClientProgramPage {
   const count = Math.min(20, Math.max(0, total - (page - 1) * 20));
   return {
     total,
     page,
     limit: 20,
-    data: Array.from({ length: count }, (_, index) => ({
-      peCode: `PE-SYNTHETIC-${page}-${index}`,
-      title: null,
-      score: 0.8,
-      paths: [
-        {
-          path: "prior_award",
-          score: 0.8,
-          evidence: ["1 prior award on this PE (~$900K)"],
-        },
-      ],
-    })),
+    data: Array.from({ length: count }, (_, index) =>
+      nativeAssociation(page, index),
+    ),
   };
 }
 function service(value: unknown, status = 200) {
@@ -52,17 +58,17 @@ function service(value: unknown, status = 200) {
 describe("bounded native client program context", () => {
   it("receives native fields and raw reason strings without inventing client/FY fields", () => {
     const value = clientProgramPageSchema.parse(nativePage());
-    expect(value.data[0].title).toBeNull();
-    expect(value.data[0].paths[0].evidence[0]).toContain("$900K");
+    expect(value.data[0]?.title).toBeNull();
+    expect(value.data[0]?.paths[0]?.evidence[0]).toContain("$900K");
     expect(value).not.toHaveProperty("clientId");
     expect(value).not.toHaveProperty("fiscalYear");
   });
   it.each([
     { ...nativePage(), total: 401 },
     { ...nativePage(), page: 0 },
-    { ...nativePage(), data: [{ ...nativePage().data[0], score: Infinity }] },
-    { ...nativePage(), data: [{ ...nativePage().data[0], score: NaN }] },
-    { ...nativePage(), data: [{ ...nativePage().data[0], paths: [] }] },
+    { ...nativePage(), data: [{ ...nativeAssociation(), score: Infinity }] },
+    { ...nativePage(), data: [{ ...nativeAssociation(), score: NaN }] },
+    { ...nativePage(), data: [{ ...nativeAssociation(), paths: [] }] },
   ])("refuses malformed native pages", (value) => {
     expect(clientProgramPageSchema.safeParse(value).success).toBe(false);
   });
@@ -70,8 +76,8 @@ describe("bounded native client program context", () => {
     { ...nativePage(), page: 2 },
     { ...nativePage(), limit: 100 },
     { ...nativePage(), total: 2 },
-    { ...nativePage(), data: [{ ...nativePage().data[0], score: 0.49 }] },
-    { ...nativePage(2), data: [nativePage().data[0], nativePage().data[0]] },
+    { ...nativePage(), data: [{ ...nativeAssociation(), score: 0.49 }] },
+    { ...nativePage(2), data: [nativeAssociation(), nativeAssociation()] },
   ])("refuses wrong request/page population metadata", (value) => {
     expect(() => assertClientProgramPage(value, 1)).toThrow(ApiError);
   });
@@ -94,10 +100,12 @@ describe("bounded native client program context", () => {
       signal,
     );
     expect(calls).toHaveLength(1);
-    expect(calls[0].url).toBe(
-      "/api/backend/core/intelligence/clients/client-a/pe-relevance?minScore=0.5&page=2&limit=20",
-    );
-    expect(calls[0].signal).toBe(signal);
+    expect(calls).toEqual([
+      {
+        url: "/api/backend/core/intelligence/clients/client-a/pe-relevance?minScore=0.5&page=2&limit=20",
+        signal,
+      },
+    ]);
     expect(value.page).toBe(2);
     expect(value.total).toBe(41);
     expect(value.data).toHaveLength(20);

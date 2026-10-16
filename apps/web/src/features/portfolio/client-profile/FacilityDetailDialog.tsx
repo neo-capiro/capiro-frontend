@@ -1,5 +1,5 @@
 "use client";
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import type { Facility } from "./contracts";
 import { FacilityDialog } from "./FacilityDialog";
@@ -35,6 +35,7 @@ export function FacilityDetailDialog({
 }) {
   const [editing, setEditing] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const id = useId();
   const actor = useProfileActor();
   const current = facility.clientId === clientId;
@@ -81,8 +82,17 @@ export function FacilityDetailDialog({
   >;
   const navigate = (target: string) => {
     const section = document.getElementById(target);
-    section?.scrollIntoView({ block: "start" });
-    section?.focus({ preventScroll: true });
+    const body = bodyRef.current;
+    if (!section || !body?.contains(section)) return;
+    body.scrollTo({
+      top:
+        body.scrollTop +
+        section.getBoundingClientRect().top -
+        body.getBoundingClientRect().top -
+        4,
+      behavior: "auto",
+    });
+    section.focus({ preventScroll: true });
   };
   return (
     <>
@@ -130,7 +140,7 @@ export function FacilityDetailDialog({
                 </button>
               ))}
             </nav>
-            <div className={profile.body}>
+            <div ref={bodyRef} className={profile.body}>
               <FacilityLocationFacts
                 id={ids.location}
                 clientId={clientId}

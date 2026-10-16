@@ -257,7 +257,9 @@ describe("Profile evidence receiving subsets", () => {
     const value = schema.parse(strategic);
     expect(value.strategic.score).toBeNull();
     expect(value.nexusStrength).toBeNull();
-    expect(value.strategic.freshness[0].freshnessUnavailable).toBe(true);
+    expect(value.strategic.freshness[0]).toMatchObject({
+      freshnessUnavailable: true,
+    });
     expect(
       schema.safeParse({ ...strategic, clientId: "different" }).success,
     ).toBe(false);

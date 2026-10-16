@@ -4,7 +4,7 @@ import { client, clientId, setup } from "./next-modules-fixtures";
 
 test("Commitment title edit preserves its due instant and fences pending dismissal and duplicate save", async ({
   page,
-}) => {
+}, info) => {
   const task = {
     id: "51000000-0000-4000-8000-000000000001",
     title: "Synthetic commitment",
@@ -27,12 +27,21 @@ test("Commitment title edit preserves its due instant and fences pending dismiss
     await route.fulfill({ json: { ...task, title: input.body.title } });
   });
   await page.goto(`/modules/engagement?clientId=${clientId}&view=commitments`);
+  await expect(
+    page.getByRole("button", { name: task.title, exact: true }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath("commitments-list-desktop.png"),
+  });
   await page.getByRole("button", { name: task.title, exact: true }).click();
   const dialog = page.getByRole("dialog", {
     name: "Edit commitment",
     exact: true,
   });
   await dialog.getByLabel("Title", { exact: true }).fill("Reviewed commitment");
+  await page.screenshot({
+    path: info.outputPath("commitment-edit-desktop.png"),
+  });
   await dialog
     .getByRole("button", { name: "Save commitment", exact: true })
     .click();

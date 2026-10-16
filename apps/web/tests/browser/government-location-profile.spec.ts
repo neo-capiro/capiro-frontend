@@ -517,6 +517,9 @@ test("one Government profile entry preserves thirteen saved fields and keeps FY 
   await expect(awards).toContainText("Unavailable");
   await expect(awards).toContainText("900,000");
   await expect(dialog).not.toContainText("60,000");
+  await page.screenshot({
+    path: info.outputPath("government-federal-desktop.png"),
+  });
   await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(entry).toBeVisible();
   assertReadOnly(control);
@@ -528,6 +531,9 @@ test("a saved map location exposes ten areas, retains the existing editor and re
   const control = await installProfile(page);
   await page.goto(`/portfolio/${clientId}`);
   const detail = await openLocation(page);
+  await page.screenshot({
+    path: info.outputPath("location-opening-desktop.png"),
+  });
   for (const heading of [
     "Location & geography",
     "Client economic footprint",
@@ -552,6 +558,10 @@ test("a saved map location exposes ten areas, retains the existing editor and re
     .click();
   await expect(
     detail.getByRole("heading", { name: "Unemployment", exact: true }),
+  ).toBeInViewport();
+  await expect(detail.locator("header").first()).toBeInViewport();
+  await expect(
+    detail.getByRole("button", { name: "Done", exact: true }),
   ).toBeInViewport();
   const awards = detail.getByRole("region", { name: "Contracts and grants" });
   await expect(awards).toContainText("$0");

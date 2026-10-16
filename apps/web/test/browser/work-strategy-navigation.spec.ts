@@ -136,7 +136,7 @@ test("malformed and duplicate step selectors do not issue a Strategy detail read
 
 test("view/client navigation is reflected by URL, history and reload; library opens an exact-client detail", async ({
   page,
-}) => {
+}, info) => {
   await setup(page, {
     ...moduleRouteFixtures,
     "clients.list": [client],
@@ -149,6 +149,12 @@ test("view/client navigation is reflected by URL, history and reload; library op
   await expect(
     page.getByRole("heading", { name: "Context library", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByText("No context documents match this view", { exact: true }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath("context-library-desktop.png"),
+  });
   await page.getByRole("button", { name: "Strategies", exact: true }).click();
   await expect(page).toHaveURL(`/modules/strategies?clientId=${clientId}`);
   await page.goBack();
@@ -169,18 +175,24 @@ test("view/client navigation is reflected by URL, history and reload; library op
   await expect(
     page.getByRole("combobox", { name: "Strategy client scope", exact: true }),
   ).toContainText("All clients");
-  await page
+  const strategyRow = page
     .getByRole("table", { name: "Strategies library" })
     .getByRole("row")
-    .filter({ hasText: strategy.title })
-    .getByRole("button", { name: "Open", exact: true })
-    .click();
+    .filter({ hasText: strategy.title });
+  await expect(strategyRow).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath("strategies-library-desktop.png"),
+  });
+  await strategyRow.getByRole("button", { name: "Open", exact: true }).click();
   await expect(page).toHaveURL(
     `/modules/strategies?clientId=${clientId}&strategy=${strategyId}`,
   );
   await expect(
     page.getByRole("heading", { name: strategy.title, exact: true }),
   ).toBeVisible();
+  await page.screenshot({
+    path: info.outputPath("strategy-detail-desktop.png"),
+  });
 });
 
 test("New strategy consumes the current catalog-backed client hint and routes only after acknowledgement", async ({
