@@ -147,6 +147,63 @@ test("synthetic saved transcript preserves resumed output, shows each logical pr
   expect(f.unexpected).toEqual([]);
 });
 
+test("synthetic partial history keeps an admitted current prompt visible while native lineage is unavailable", async ({
+  page,
+}) => {
+  const f = await setupConversation(page, undefined, [contextFor(nextBinding)]);
+  const source = {
+    ...turn(binding, requestId, "Earlier submitted question", 0, 100),
+    sequenceEnd: 100,
+  };
+  const current = turn(
+    nextBinding,
+    nextRequestId,
+    "Distinct current question",
+    100,
+    2,
+  );
+  const sourceEvents = Array.from({ length: 100 }, (_, index) => {
+    const item =
+      index === 99 ? status(index + 1, "completed") : event(index + 1, ".");
+    return { sequence: item.sequence, event: item as UIEvent };
+  });
+  const currentEvents = [
+    event(1, "Current admitted answer", nextBinding),
+    status(2, "completed", nextBinding),
+  ].map((item) => ({ sequence: item.sequence + 100, event: item as UIEvent }));
+  const { native } = await installHistory(page, {
+    turns: [source, current],
+    events: [...sourceEvents, ...currentEvents],
+  });
+  await installCurrentRun(page, native);
+  await page.route("**/api/conversations/transcript", (route) =>
+    route.request().postDataJSON().after === 100
+      ? reply(route, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 503)
+      : route.fallback(),
+  );
+  await page.goto(selectedUrl);
+  await expect(
+    page.getByText(
+      "The latest turn could not be verified. Reload saved history before starting another turn.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("article", { name: "Earlier turn 1", exact: true })
+      .getByText("Earlier submitted question", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("article", { name: "Current turn", exact: true })
+      .getByText("Distinct current question", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Current admitted answer", { exact: true }),
+  ).toBeVisible();
+  await expect(sendButton(page)).toBeDisabled();
+  expect(f.unexpected).toEqual([]);
+});
+
 test("synthetic hard reload with RESERVED and no immutable submit identity can only replay that source mapping", async ({
   page,
 }) => {

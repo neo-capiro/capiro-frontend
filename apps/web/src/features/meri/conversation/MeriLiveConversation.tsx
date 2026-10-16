@@ -33,10 +33,7 @@ function LiveTurn({
       <ConversationTurn
         turn={turn}
         label="Current turn"
-        showPrompt={
-          (!!turn.promptKey || !earlier.length) &&
-          shouldShowPrompt(turn, earlier)
-        }
+        showPrompt={shouldShowPrompt(turn, earlier)}
       />
     );
   if (!intent.submit) return null;

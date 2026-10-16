@@ -86,7 +86,7 @@ owner; this source intentionally remains fail-closed until that owner supplies i
   `b4fd9802aa4acefc0f596becc500fa133d4ee4ddd2b49e679abae95286408751`.
 - **16 new proxy/client byte-boundary cases UNRUN** pending admitted checkpoint.
   Five new saved-current/order display cases in the existing live unit file are
-  also **UNRUN**. Six new native-history browser cases and the three
+  also **UNRUN**. Seven new native-history browser cases and the three
   existing selector/reload cases are **UNRUN**. Existing unknown-submit/retry and
   mixed Meri cases now begin from an admitted terminal source and fixed native
   reservation; original exact-retry/scoping assertions remain.
@@ -124,7 +124,7 @@ Then submit the final source/artifact pins to Shipping and qualification. Extend
 the existing [bounded qualification request](UI-QUALIFICATION-REQUEST-20261016.md)
 with `tests/meri-history-proxy.test.ts` (16 authored cases), the five new live-view
 unit cases, and the new selector/
-native-history browser files (3 + 6 authored cases). Registration counts must come
+native-history browser files (3 + 7 authored cases). Registration counts must come
 from the actual admitted inventory, not this manual count. Use the canonical
 Vitest/browser configs and server, one worker, zero browser retries, fresh reports,
 owned PID/port cleanup and the previously requested memory/deadline bounds.
@@ -151,3 +151,28 @@ not be redirected backwards when history still names its accepted source. Only a
 known accepted segment with a strictly later sequence base offers an exact
 "Open latest accepted turn" action. That action reuses canonical session issuance
 and never creates or submits a new command identity.
+
+## Independent source review and focused correction
+
+Exact first native checkpoint `108e5abdae8b3c59407ddfa5c3821be366a1f085` is
+preserved. Its 44-row changed-committed-byte proof has SHA-256
+`e9977cbc1b388d2c321bd7e8bfa33b62d85d9e4a3510178e761f2744cdb3934a`.
+Independent source review returned **HOLD / one P2**, not acceptance. Receipt
+`SOURCE-REVIEW.json` at the existing frontend reviewer's
+`audit-evidence/meri-history-source-review-108e5abd/` has SHA-256
+`edf2d31943027a3fe3da0a6a545fa3ad13a33798a3aaeb1d2ab5494afd6a010c`.
+No additional source blocker was found in its reviewed ownership, scope, paging,
+cache, reservation or recovery fences. The reviewer also independently bound the
+actual artifact and both lock integrities without install or execution.
+
+P2 was a rendering guard that hid the current admitted SDK prompt when earlier
+history existed but current prompt lineage was unavailable. The focused successor
+uses canonical `shouldShowPrompt` alone, preserving the rule that absent lineage
+never permits prompt suppression. Three focused synthetic prompt-identity controls
+PASS (43.448 ms, one 128 MiB Node process, no children). They include an earlier
+keyed prompt plus a current missing key, and matching-key suppression. A seventh
+native-history browser case reproduces the full earlier-A/current-B/tail-unavailable
+state; it remains **UNRUN** with the other browser cases. These controls do not
+claim that the browser P2 reproduction was executed. Artifact/manifest/lock bytes
+are unchanged by the correction; successor review and runtime qualification are
+still required.
