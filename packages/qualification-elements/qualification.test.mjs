@@ -6,6 +6,7 @@ import { readFileSync, readdirSync, existsSync, mkdtempSync, copyFileSync, mkdir
 import { dirname, join, relative, resolve, sep, posix } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import { verifySSRReceipt } from './ssr-build.mjs';
 import { checkSSRDeadline } from './ssr-runtime.mjs';
 import ts from 'typescript';
@@ -80,7 +81,7 @@ function sourceExportInventory(source) {
 }
 
 function vendorFiles() {
-  return ownedFiles(HERE).filter(x => x.startsWith('packages/ui/src/')).map(x => x.slice('packages/ui/'.length));
+  return verifyPromotedSources(HERE).sources.map(x => x.promotedPath).sort();
 }
 
 function inspectClosure(sourceMap) {
@@ -242,7 +243,7 @@ function inspectClosure(sourceMap) {
     const closure = inspectClosure(sources); assert.deepEqual(closure.files, vendorFiles());
     const p = json('../ui/package.json');
     const declared = { ...p.dependencies, ...p.peerDependencies };
-    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx' });
+    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx' });
     assert.equal(json('package.json').dependencies['@capiro/ui'], '0.0.0');
     for (const name of closure.external) assert.ok(Object.hasOwn(declared, name), `undeclared dependency ${name}`);
     const bad = new Map(sources); bad.set('src/ai-elements/conversation.tsx', sources.get('src/ai-elements/conversation.tsx') + '\nimport {generateText} from "ai";');
@@ -259,6 +260,25 @@ function inspectClosure(sourceMap) {
     assert.equal(pins.artifacts.length + 1, pins.ownedFiles.length);
     assert.deepEqual(sourceRecords(HERE).map(x => x.path), pins.ownedFiles);
     for (const artifact of pins.artifacts) { const raw = readSource(HERE, artifact.path); assert.equal(raw.length, artifact.bytes); assert.equal(sha(raw), artifact.sha256, artifact.path); }
+  });
+
+  test('project-authored UI inventory rejects extra sources and binds source and manifest hashes', () => {
+    const pins = json('promotion-pins.json');
+    const projectPath = 'packages/ui/src/markdown.tsx';
+    assert.deepEqual(pins.projectAuthoredUi, pins.artifacts.filter(x => x.path === projectPath));
+    assert.equal(pins.projectAuthoredUi.length, 1);
+    const cloneWorkspace = mkdtempSync(join(tmpdir(), 'capiro-ui-inventory-'));
+    const clone = join(cloneWorkspace, 'packages/qualification-elements');
+    for (const name of ownedFiles(HERE)) { const path = join(cloneWorkspace, name); mkdirSync(dirname(path), { recursive: true }); copyFileSync(join(workspaceRoot(HERE), name), path); }
+    for (const name of ['src/unlisted.tsx', 'src/shadcn/unlisted.tsx']) {
+      const path = join(cloneWorkspace, 'packages/ui', name); writeFileSync(path, 'export const unlisted = true;');
+      assert.throws(() => verifyPromotedSources(clone), /explicitly inventoried project UI sources/); unlinkSync(path);
+    }
+    for (const name of [projectPath, 'packages/ui/package.json']) {
+      const path = join(cloneWorkspace, name), raw = readSource(HERE, name);
+      writeFileSync(path, Buffer.concat([raw, Buffer.from(' ')]));
+      assert.throws(() => sourceRecords(clone), /complete actual split-package source pins/); writeFileSync(path, raw);
+    }
   });
 
   test('strict compiler checks remain enabled for every actual adopted source', () => {

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 export const HERE = dirname(fileURLToPath(import.meta.url));
 export const BASELINE_SHA256 = 'd7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1';
+const PROJECT_UI_SOURCES = ['src/markdown.tsx'];
 export const hash = raw => createHash('sha256').update(raw).digest('hex');
 export const slash = path => path.split(sep).join('/');
 export const workspaceRoot = root => resolve(root, '../..');
@@ -74,7 +75,7 @@ export function verifyPromotedSources(root = HERE) {
     assert.equal(Buffer.byteLength(text), old.localBytes);
   }
   const actual = ownedFiles(root).filter(x => x.startsWith('packages/ui/src/')).map(x => x.slice('packages/ui/'.length));
-  assert.deepEqual(actual, [...promoted].sort(), 'single exact seventeen-file UI owner');
+  assert.deepEqual(actual, [...promoted, ...PROJECT_UI_SOURCES].sort(), 'exact seventeen adopted and explicitly inventoried project UI sources');
   return provenance;
 }
 
@@ -85,6 +86,7 @@ export function computePins(root = HERE) {
     schema: 'capiro-elements-promotion/1',
     scope: 'Source/provenance inventory only; not browser/runtime/release qualification',
     baselineSha256: BASELINE_SHA256,
+    projectAuthoredUi: PROJECT_UI_SOURCES.map(path => record(`packages/ui/${path}`, readBounded(join(uiRoot(root), path)))),
     ownedFiles: [...names, 'packages/qualification-elements/promotion-pins.json'].sort(),
     artifacts: names.map(path => record(path, readSource(root, path))),
     selfHashExcluded: 'packages/qualification-elements/promotion-pins.json',

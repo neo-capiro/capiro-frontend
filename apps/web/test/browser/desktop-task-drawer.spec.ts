@@ -147,7 +147,10 @@ for (const colorScheme of ["light", "dark"] as const) {
     });
     await expect(detail).toBeVisible();
     await expect(detail.locator('[data-slot="dialog-description"]')).toHaveText(
-      description,
+      "Review task details, description and activity.",
+    );
+    await expect(detail).toHaveAccessibleDescription(
+      "Review task details, description and activity.",
     );
     const header = detail.locator(":scope > header");
     expect((await header.boundingBox())!.height).toBeLessThanOrEqual(180);

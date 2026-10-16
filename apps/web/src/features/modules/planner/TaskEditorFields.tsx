@@ -1,13 +1,9 @@
 "use client";
 import type { PlannerPerson } from "../../../shared/capiro/operations/planner-schemas";
-import {
-  Field,
-  SelectInput,
-  TextArea,
-  TextInput,
-} from "../../../shared/module-ui";
+import { Field, SelectInput, TextInput } from "../../../shared/module-ui";
 import type { Draft, TaskFormModel } from "./task-editor-data";
 import { statuses } from "./task-presentation";
+import { MarkdownTextarea } from "../../../shared/markdown/MarkdownTextarea";
 export function TaskNameField({ data, setData }: TaskFormModel) {
   return (
     <>
@@ -23,17 +19,23 @@ export function TaskNameField({ data, setData }: TaskFormModel) {
     </>
   );
 }
-export function TaskDescriptionField({ data, setData }: TaskFormModel) {
+export function TaskDescriptionField({
+  data,
+  setData,
+  disabled,
+  isPending,
+}: TaskFormModel) {
   return (
     <>
       <Field label="Description" htmlFor="task-description">
-        <TextArea
+        <MarkdownTextarea
           id="task-description"
+          label="Description"
           maxLength={50000}
+          disabled={disabled}
+          canEdit={() => !isPending?.()}
           value={data.description}
-          onChange={(event) =>
-            setData({ ...data, description: event.target.value })
-          }
+          onChange={(description) => setData({ ...data, description })}
         />
       </Field>
     </>

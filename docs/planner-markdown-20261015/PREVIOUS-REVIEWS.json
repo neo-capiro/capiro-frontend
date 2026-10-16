@@ -1,0 +1,38 @@
+[
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "b38db409de78eba89bdb91268b8ac062a944ea51f8130198a168dc64c92a2dc6",
+    "reason": "One cohesive task-detail presentation and interaction arbitration module. Named detail, activity and action functions compose canonical editors, subtasks, attachments and time views rather than duplicate their domain behavior.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "useDetail",
+    "fingerprint": "6b6afb37bd92856514a519daa84fd924d012c2d70c4163caaf9fb0c06a47587c",
+    "reason": "One task-detail admission and mutation arbitration owner fences source actions while its independent create draft is open or pending; canonical mutation hooks own transport, abort and generation retirement.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailSession",
+    "fingerprint": "3e88291f95d6688abc6e2b284a6d5d9373744c4d600930ae0e57799153aa7579",
+    "reason": "One task-detail presentation composes the existing canonical source editor and separate create draft, retaining current receipt remount and fixed footer. No duplicate transport, persistence or authority owner.",
+    "reviewedBy": "Codex independent_fix_review",
+    "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/modules/planner/TaskDetailFields.tsx",
+    "kind": "function",
+    "symbol": "TaskDetailFields",
+    "fingerprint": "6a2f28722c6728f8cf7d179d255c3ec77d7b21cde4cfef08274d73e57978a754",
+    "reason": "Read-only canonical task metadata projection for nonwritable or noninline presentations. Optional repeat values reuse TaskRepeatValues rather than duplicate rendering/semantics. No write or authority responsibility.",
+    "reviewedBy": "Codex outreach_review independent exact-source review",
+    "reviewedOn": "2026-10-14"
+  }
+]

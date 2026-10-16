@@ -2,6 +2,13 @@
   "schema": "capiro-elements-promotion/1",
   "scope": "Source/provenance inventory only; not browser/runtime/release qualification",
   "baselineSha256": "d7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1",
+  "projectAuthoredUi": [
+    {
+      "path": "packages/ui/src/markdown.tsx",
+      "bytes": 2409,
+      "sha256": "f198a320d4cf969eaf039cf9188a14e712f04898fd433c45d22127f123f75204"
+    }
+  ],
   "ownedFiles": [
     "packages/qualification-elements/.gitignore",
     "packages/qualification-elements/README.md",
@@ -37,6 +44,7 @@
     "packages/ui/src/ai-elements/message.tsx",
     "packages/ui/src/ai-elements/prompt-input.tsx",
     "packages/ui/src/lib/utils.ts",
+    "packages/ui/src/markdown.tsx",
     "packages/ui/src/shadcn/button-group.tsx",
     "packages/ui/src/shadcn/button.tsx",
     "packages/ui/src/shadcn/command.tsx",
@@ -95,13 +103,13 @@
     },
     {
       "path": "packages/qualification-elements/qualification.test.mjs",
-      "bytes": 26896,
-      "sha256": "7f76cf3b365fcc4b237fc65d4ee9cebc4e7c44f9dd71dd5cb51b50b7dc6bfb4a"
+      "bytes": 28291,
+      "sha256": "5323bbda828cf70d18eabf8e06d1e19ff6473b13f5d7a7383adb988a49b3a2a8"
     },
     {
       "path": "packages/qualification-elements/sources.mjs",
-      "bytes": 5195,
-      "sha256": "75c5f947086a882c6f40c5093fcdfaeff607a6548184ea5d4b93926ac6a02322"
+      "bytes": 5425,
+      "sha256": "90615c6879a5babb7d3478cf573f209d0677d608373b11bfbb3acad96f2289aa"
     },
     {
       "path": "packages/qualification-elements/ssr-build.mjs",
@@ -190,8 +198,8 @@
     },
     {
       "path": "packages/ui/package.json",
-      "bytes": 1515,
-      "sha256": "12251cd1f30a0beacfd0f9763113dfd829825543ab3e0c9202b520f8745ed73b"
+      "bytes": 1555,
+      "sha256": "5f6c3e9b4dbf30f7e74e5221825a51ed13a1e401923016e9cfc397f6f963b851"
     },
     {
       "path": "packages/ui/provenance.json",
@@ -217,6 +225,11 @@
       "path": "packages/ui/src/lib/utils.ts",
       "bytes": 166,
       "sha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d"
+    },
+    {
+      "path": "packages/ui/src/markdown.tsx",
+      "bytes": 2409,
+      "sha256": "f198a320d4cf969eaf039cf9188a14e712f04898fd433c45d22127f123f75204"
     },
     {
       "path": "packages/ui/src/shadcn/button-group.tsx",

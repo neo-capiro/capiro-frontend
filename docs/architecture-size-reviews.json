@@ -3657,23 +3657,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
-    "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "Planner route composition owns section/project selection, current bootstrap and optional All tasks client catalog. The new picker isolates URL scope interaction in PlannerClientScope; grouping and table presentation remain outside this controller. No authorization/transport orchestration added.",
-    "functions": [
-      {
-        "name": "PlannerScreen",
-        "nonblankLines": 106
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
     "sha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e",
     "reviewer": "Codex shared frontend integration review",
@@ -3753,6 +3736,40 @@
     "functions": [],
     "signals": [
       "apps/web/src/features/modules/workspace/workspace.module.css: 791 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/ObjectivePreparedPlan.tsx",
+    "sha256": "cae52ee85a368f2748216d39a547f0866c1325abd49ad7bc9cb6fd8e0449e5a3",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/objective-planner-receiving/STRUCTURE-REVIEW.md#receiving",
+    "rationale": "One saved plan receiving lifecycle owns fresh job/receipt reads, immutable mapping fence, current-access recheck and existing project-navigation callback. Transport, backend authority, and project editing retain their canonical owners.",
+    "functions": [
+      {
+        "name": "PreparedPlan",
+        "nonblankLines": 152
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/ObjectivePreparedPlan.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+    "sha256": "c83cc3644670993374fd155915032760cc2f994fe5e5e56110a49400367886a5",
+    "reviewer": "Codex independent_fix_review",
+    "reviewedAt": "2026-10-15",
+    "evidence": "docs/objective-planner-receiving/STRUCTURE-REVIEW.md#receiving",
+    "rationale": "The canonical Planner screen keeps project selection and bootstrap ownership; one bounded generated-receipt entry delegates validation/presentation and returns to the existing project workspace without a second navigation owner.",
+    "functions": [
+      {
+        "name": "PlannerScreen",
+        "nonblankLines": 133
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
     ]
   }
 ]

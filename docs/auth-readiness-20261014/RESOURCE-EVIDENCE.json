@@ -1,0 +1,64 @@
+{
+  "source": "0b6c7ecf2c3f0f66dee5a0e88cb67528a6cc5fc2",
+  "status": "TRACE_FAILED",
+  "applicationWrites": 0,
+  "credentialsExtracted": false,
+  "contextClosed": true,
+  "readinessSamplesCollected": 0,
+  "resourceFailureCount": 43,
+  "resourceFailureKinds": [
+    {
+      "Name": "fetch",
+      "Count": 1
+    },
+    {
+      "Name": "font",
+      "Count": 2
+    },
+    {
+      "Name": "image",
+      "Count": 9
+    },
+    {
+      "Name": "script",
+      "Count": 27
+    },
+    {
+      "Name": "stylesheet",
+      "Count": 4
+    }
+  ],
+  "failedAppChunks": [
+    "/_next/static/chunks/39yhjd683xvzt.js",
+    "/_next/static/chunks/1-3nq2q9y6rd2.js",
+    "/_next/static/chunks/0du6qnm4ee-qx.js",
+    "/_next/static/chunks/0i8eef_83jjb7.js",
+    "/_next/static/chunks/242x7dx0zu3hf.js",
+    "/_next/static/chunks/2h661s-6l3a1q.js",
+    "/_next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+    "/_next/static/chunks/0l5k-ow8w23o2.js",
+    "/_next/static/chunks/2ld6qbexyi5ro.js",
+    "/_next/static/chunks/0vmsqyt13ttbb.js",
+    "/_next/static/chunks/294fesf5tjlwi.js",
+    "/_next/static/chunks/0vmgm28qm3362.js",
+    "/_next/static/chunks/2gboall2346fl.js",
+    "/_next/static/chunks/18_ncfsx8db19.js",
+    "/_next/static/chunks/3frovdatokbx6.js",
+    "/_next/static/chunks/422xqg89wog9-.js",
+    "/_next/static/chunks/3h3iv6tcinsql.js",
+    "/_next/static/chunks/20b-zcn884l86.js",
+    "/_next/static/chunks/37p5j5m-ge7oa.js",
+    "/_next/static/chunks/43gcecopj3g6t.js",
+    "/_next/static/chunks/3rzm-vt0nzaxx.js",
+    "/_next/static/chunks/0bq9zovqf1xla.js",
+    "/_next/static/chunks/3ht8-7iodiju7.js",
+    "/_next/static/chunks/0cnpj7vyg50-n.js",
+    "/_next/static/chunks/2ojh4b5k8dxo3.js"
+  ],
+  "failedClerkUiScript": true,
+  "availableCommitBytes": 632909824,
+  "availablePhysicalMB": 10146,
+  "ownAbandonedAuditNodeProcesses": 0,
+  "browserValidation": "NOT_RUN_MEMORY_GATE",
+  "classification": "ENVIRONMENT_RESOURCE_BLOCKER_NO_PRODUCT_FIX_JUSTIFIED"
+}

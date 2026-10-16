@@ -2,6 +2,7 @@ import { useSyncExternalStore, type ReactNode } from "react";
 
 type TestSession = {
   providerStatus: "loading" | "error" | "ready" | "degraded";
+  providerLoaded: boolean;
   isLoaded: boolean;
   userId: string | null;
   sessionId: string | null;
@@ -11,6 +12,9 @@ type TestSession = {
   lastName?: string;
 };
 const initial: TestSession = {
+  providerLoaded:
+    new URLSearchParams(window.location.search).get("providerStatus") !==
+    "loading",
   providerStatus:
     new URLSearchParams(window.location.search).get("providerStatus") ===
     "loading"
@@ -24,10 +28,18 @@ const initial: TestSession = {
 let session = initial;
 const listeners = new Set<() => void>();
 window.addEventListener("test:session", (event: Event) => {
+  const detail = (event as CustomEvent<Partial<TestSession>>).detail;
   session = {
     ...initial,
-    ...(event as CustomEvent<Partial<TestSession>>).detail,
+    ...detail,
   };
+  if (
+    detail.providerStatus !== undefined &&
+    detail.providerLoaded === undefined
+  )
+    session.providerLoaded = ["ready", "degraded"].includes(
+      detail.providerStatus,
+    );
   for (const notify of listeners) notify();
 });
 const subscribe = (notify: () => void) => {
@@ -46,9 +58,7 @@ export function ClerkProvider({ children }: { children: ReactNode }) {
 }
 export function ClerkLoaded({ children }: { children: ReactNode }) {
   const current = useSyncExternalStore(subscribe, () => session);
-  return ["ready", "degraded"].includes(current.providerStatus) ? (
-    <>{children}</>
-  ) : null;
+  return current.providerLoaded ? <>{children}</> : null;
 }
 export function ClerkLoading({ children }: { children: ReactNode }) {
   const current = useSyncExternalStore(subscribe, () => session);
