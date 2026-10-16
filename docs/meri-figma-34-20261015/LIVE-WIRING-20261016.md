@@ -71,15 +71,22 @@ Unchanged: the Clerk session and its `capiro` native token are used only server-
 
 ## Checks
 
+These are historical lane claims for `2acbd89c`, not fresh qualification of a
+successor. Package-four handoff review found the architecture row inaccurate and
+the browser run unfinished. The corrections below retain those open outcomes;
+follow-up source and exact-pin checks are recorded in
+[UI-FOLLOWUP-20261016.md](UI-FOLLOWUP-20261016.md).
+
 | Check | Result |
 | --- | --- |
 | `npm run typecheck` | pass |
 | `npm test` (root node tests) | 117 / 117 pass |
-| `npm run architecture` | pass (0 errors, no unreviewed blocking size findings) |
+| `npm run architecture` | **FAIL (corrected): exit 1**, unreviewed `useLiveRun` size finding (84 nonblank lines); original pass claim was inaccurate. |
 | `npm run test:transport` | 86 / 86 pass (2 new `prompt` cases) |
 | `apps/web` vitest | 172 files, 2509 tests pass (new: `meri-conversation-live`, `meri-document-links`, `meri-unavailable-resources`) |
 | `apps/web` lint | 0 errors (81 existing warnings, none in changed files) |
 | `apps/web` format check | pass |
-| Meri Playwright specs (`test/browser`, Chromium 1194) | see below |
+| Meri Playwright specs (`test/browser`, Chromium 1194) | **INCOMPLETE** at the lane stop; the case inventory below is not a completed-run result. |
+| Production build (`apps/web`) | **UNRUN** at the lane stop. |
 
 New and rewritten browser specs: `meri-conversation-host.spec.ts` (22 cases: transcript and cursor resume, multi-turn, early stream end, stalled reconnect, Stop and receipt semantics, 401/403/502, foreign receipt, uncertain submit and retry, navigation retention, session and client replacement, expiry and reconnect, approvals, unavailable titles), `meri-conversation-artifacts.spec.ts` (3: preview and signed-link download with byte check, link refusal, inspect refusal) and the updated conversation case in `combined-successor.spec.ts`.
