@@ -18,10 +18,22 @@ import {
 import {
   setupConversation,
   connect,
-  run,
+  runFor,
+  context,
+  contextFor,
+  nextBinding,
+  event,
   binding as conversationBinding,
   reply,
+  sse,
+  status,
 } from "./meri-conversation-fixtures";
+import {
+  acceptNext,
+  installCurrentRun,
+  installHistory,
+  installReservation,
+} from "./meri-history-fixtures";
 const origin = `/portfolio/${clientId}/objectives?objective=${objective.id}`;
 const occurrence = `planner:${taskId}:due`;
 const objectiveQuery = {
@@ -58,8 +70,8 @@ const resources = [
     receipt: boundWorkspace,
   },
 ] as const;
-async function fixture(page: Page) {
-  const state = await setupConversation(page);
+async function fixture(page: Page, contexts?: object[]) {
+  const state = await setupConversation(page, undefined, contexts);
   const queries: { path: string; query: Record<string, string> }[] = [];
   const commands: string[] = [];
   page.on("request", (request) => {
@@ -68,7 +80,13 @@ async function fixture(page: Page) {
       if (
         ![
           "/api/action-followthrough/session",
+          "/api/conversations/history",
           "/api/conversations/submit",
+          "/api/conversations/input/admit",
+          "/api/conversations/events",
+          "/api/conversations/list",
+          "/api/conversations/transcript",
+          "/api/conversations/next-turn",
         ].includes(path)
       )
         state.unexpected.push(`Unexpected write: ${path}`);
@@ -226,20 +244,31 @@ test("one Objective opens Directory, pinned Calendar and immutable Context Files
 test("unknown Meri input remains visible and scoped across all three bound destinations before explicit exact retry", async ({
   page,
 }) => {
-  const f = await fixture(page);
+  const f = await fixture(page, [context, contextFor(nextBinding)]);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await installReservation(page, native);
   const requests: { requestId: string; prompt: string }[] = [];
   await page.route("**/api/conversations/submit", (r) => {
     const input = r.request().postDataJSON();
     requests.push(input);
+    if (requests.length === 1)
+      acceptNext(native, input.requestId, input.prompt);
     return requests.length === 1
       ? reply(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 502)
       : reply(r, {
-          run,
+          run: runFor("running", nextBinding),
           requestId: input.requestId,
           lastSequence: 1,
           replayed: true,
         });
   });
+  await page.route("**/api/conversations/events", (r) =>
+    sse(r, [
+      event(1, "Second answer", nextBinding),
+      status(2, "completed", nextBinding),
+    ]),
+  );
   await connect(page);
   await page
     .getByLabel("Meri message", { exact: true })
@@ -269,18 +298,25 @@ test("unknown Meri input remains visible and scoped across all three bound desti
     .getByRole("navigation", { name: "Workspace", exact: true })
     .getByRole("link", { name: "Meri", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: "Connect conversation service", exact: true })
-    .click();
-  const input = page.getByLabel("Meri message", { exact: true });
-  await expect(input).toHaveValue("Original integration request");
-  await expect(input).toBeDisabled();
+  await expect(
+    page
+      .getByRole("article", { name: "Current turn" })
+      .getByText("Original integration request"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Send message", exact: true }),
+  ).toBeDisabled();
   expect(f.hints).toEqual([
     { clientId },
     {
       clientId,
       conversationId: conversationBinding.conversationId,
-      runId: conversationBinding.runId,
+      runId: nextBinding.runId,
+    },
+    {
+      clientId,
+      conversationId: conversationBinding.conversationId,
+      runId: nextBinding.runId,
     },
   ]);
   expect(requests).toHaveLength(1);
@@ -288,17 +324,31 @@ test("unknown Meri input remains visible and scoped across all three bound desti
     .getByRole("button", { name: "Retry same request", exact: true })
     .click();
   await expect(
-    page.getByText("The submitted request was observed by the service.", {
-      exact: true,
-    }),
+    page
+      .getByRole("article", { name: "Current turn" })
+      .getByText("Completed", { exact: true }),
   ).toBeVisible();
   expect(requests).toEqual([requests[0], requests[0]]);
   exactQueries(f.queries);
-  expect(f.commands).toEqual([
+  // Native list/transcript POSTs are reads and may run concurrently. Keep the strict command order.
+  expect(
+    f.commands.filter(
+      (path) =>
+        !["/api/conversations/list", "/api/conversations/transcript"].includes(
+          path,
+        ),
+    ),
+  ).toEqual([
     "/api/action-followthrough/session",
+    "/api/conversations/history",
+    "/api/conversations/next-turn",
+    "/api/action-followthrough/session",
+    "/api/conversations/input/admit",
     "/api/conversations/submit",
     "/api/action-followthrough/session",
+    "/api/conversations/input/admit",
     "/api/conversations/submit",
+    "/api/conversations/events",
   ]);
   expect(f.unexpected).toEqual([]);
 });

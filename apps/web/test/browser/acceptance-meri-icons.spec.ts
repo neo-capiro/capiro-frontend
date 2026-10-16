@@ -19,9 +19,14 @@ for (const colorScheme of ["light", "dark"] as const) {
     const sidebar = page.getByRole("complementary", {
       name: "Meri navigation",
     });
-    for (const name of ["Files", "Conversations", "Search conversations"]) {
+    // Search conversations opens the fixture command palette, so it is a link.
+    for (const [role, name] of [
+      ["button", "Files"],
+      ["button", "Conversations"],
+      ["link", "Search conversations"],
+    ] as const) {
       const icon = sidebar
-        .getByRole("button", { name, exact: true })
+        .getByRole(role, { name, exact: true })
         .locator("img");
       expect(await filter(icon)).toBe(
         colorScheme === "light" ? "none" : "brightness(0) invert(1)",
@@ -34,9 +39,7 @@ for (const colorScheme of ["light", "dark"] as const) {
           .getByRole("button", { name: "New conversation" })
           .locator("img"),
       ),
-    ).toBe(
-      colorScheme === "light" ? "brightness(0) invert(1)" : "brightness(0)",
-    );
+    ).toBe("brightness(0) invert(1)"); // Figma 10.28-10.32: the dark gradient button keeps a light icon.
     expect(
       await filter(
         page

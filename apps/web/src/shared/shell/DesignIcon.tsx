@@ -6,7 +6,7 @@ export function DesignIcon({
   assetSet = "home",
 }: {
   name: string;
-  assetSet?: "home" | "cited-answer";
+  assetSet?: "home" | "cited-answer" | "header-34-20261016";
 }) {
   return (
     <img

@@ -28,8 +28,15 @@ export const publicExports = new Set([
   '@capiro/ui/button', '@capiro/ui/markdown', '@capiro/ui/dialog', '@capiro/ui/tooltip', '@capiro/ui/prompt-input',
   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
+  '@capiro/ui/tool', '@capiro/ui/artifact', '@capiro/ui/attachments', '@capiro/ui/confirmation',
+  '@capiro/ui/plan', '@capiro/ui/sources', '@capiro/ui/queue', '@capiro/ui/checkpoint', '@capiro/ui/file-tree',
+  '@capiro/ui/task', '@capiro/ui/web-preview', '@capiro/ui/badge', '@capiro/ui/collapsible', '@capiro/ui/alert',
+  '@capiro/ui/card', '@capiro/ui/scroll-area',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/action-application', '@capiro/meri-contracts/conversation-application',
+  '@capiro/meri-contracts/conversation-history',
+  '@capiro/meri-contracts/conversation-input',
+  '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-client/conversation',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
@@ -40,10 +47,15 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/conversations/[...path]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/proxy.ts`,
+    `${appSource}shared/meri-conversations/history-proxy.ts`,
   ])],
   [`${appSource}app/api/documents/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/proxy.ts`,
+  ])],
+  [`${appSource}app/api/documents/links/[action]/route.ts`, new Set([
+    previewPolicy,
+    '@clerk/nextjs/server', `${appSource}shared/meri-documents/config.ts`, `${appSource}shared/meri-documents/link-proxy.ts`,
   ])],
   [`${appSource}app/api/action-followthrough/[operation]/route.ts`, new Set([
     previewPolicy,

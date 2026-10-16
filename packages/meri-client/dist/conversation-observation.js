@@ -5,7 +5,7 @@ export class ConversationObservation {
     changed;
     cursor;
     state;
-    constructor(view, changed) {
+    constructor(view, changed, prompt = null) {
         this.view = view;
         this.changed = changed;
         this.cursor = createConversationCursor(view);
@@ -17,6 +17,7 @@ export class ConversationObservation {
             hasMore: this.cursor.after < view.lastSequence,
             events: Object.freeze([...events]),
             runState: view.run.state,
+            prompt: history ? view.request.prompt : prompt,
         });
     }
     get snapshot() { return this.state; }
@@ -32,6 +33,7 @@ export class ConversationObservation {
             hasMore: this.cursor.after < this.view.lastSequence,
             events: Object.freeze(truncated ? events.slice(-1000) : events),
             runState: admitted.event.type === 'run.status' ? admitted.event.data.state : this.state.runState,
+            prompt: this.state.prompt,
         });
         this.changed();
     }

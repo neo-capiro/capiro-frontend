@@ -1,12 +1,20 @@
+import Link from "next/link";
 import { Button } from "@capiro/ui/button";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
 import { suggestions } from "./suggestions.mjs";
 import styles from "./home.module.css";
 
+/**
+ * Local draft suggestions. "Browse workflows" opens the workflow library only
+ * when a caller supplies its destination; otherwise it stays an explained
+ * disabled control.
+ */
 export function MeriSuggestions({
   onSelect,
+  browseHref,
 }: {
   onSelect: (id: string) => void;
+  browseHref?: string | undefined;
 }) {
   return (
     <>
@@ -48,19 +56,27 @@ export function MeriSuggestions({
             {item.title}
           </Button>
         ))}
-        <Button
-          type="button"
-          variant="ghost"
-          className={styles.start}
-          disabled
-          aria-describedby="workflow-library-unavailable"
-          title="Workflow library is not implemented in this disconnected fixture"
-        >
-          Browse workflows
-        </Button>
-        <span id="workflow-library-unavailable" className="sr-only">
-          Workflow library is not implemented in this disconnected fixture.
-        </span>
+        {browseHref ? (
+          <Button asChild variant="ghost" className={styles.start}>
+            <Link href={browseHref}>Browse workflows</Link>
+          </Button>
+        ) : (
+          <>
+            <Button
+              type="button"
+              variant="ghost"
+              className={styles.start}
+              disabled
+              aria-describedby="workflow-library-unavailable"
+              title="Workflow library is not implemented in this disconnected fixture"
+            >
+              Browse workflows
+            </Button>
+            <span id="workflow-library-unavailable" className="sr-only">
+              Workflow library is not implemented in this disconnected fixture.
+            </span>
+          </>
+        )}
       </div>
     </>
   );

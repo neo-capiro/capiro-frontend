@@ -1,18 +1,12 @@
 "use client";
-import {
-  useEffect,
-  useLayoutEffect,
-  useState,
-  useSyncExternalStore,
-} from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { conversationSelectionOwner } from "../../../shared/meri-conversations/query-journal";
+import { useSearchParams } from "next/navigation";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
-import {
-  ConversationHostController,
-  type ConversationAccount,
-} from "../../../shared/meri-conversations/host-controller";
-import { MeriConversationView } from "./MeriConversationView";
+import type { ConversationAccount } from "../../../shared/meri-conversations/host-controller";
+import { conversationSelection } from "../../../shared/meri-conversations/selection";
+import { MeriLiveConversation } from "./MeriLiveConversation";
+import { useConversationSession } from "./useConversationSession";
+import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
+import { ConnectionPending } from "./ConnectionPending";
 
 export function MeriConversationHost({
   enabled,
@@ -22,13 +16,23 @@ export function MeriConversationHost({
   account?: ConversationAccount;
 }) {
   const selected = useSelectedClient();
+  const selector = conversationSelection(useSearchParams());
   if (!enabled)
     return (
       <section aria-labelledby="conversation-availability">
         <h2 id="conversation-availability">Conversations unavailable</h2>
         <p>
-          The governed conversation connection is not enabled. Recent
-          conversations and approval counts cannot be loaded.
+          The governed conversation connection is not enabled. Conversations and
+          their files cannot be loaded.
+        </p>
+      </section>
+    );
+  if (selector.state === "invalid")
+    return (
+      <section role="alert">
+        <h2>Conversation selection unavailable</h2>
+        <p>
+          The conversation link is invalid. No other conversation was opened.
         </p>
       </section>
     );
@@ -44,61 +48,56 @@ export function MeriConversationHost({
     );
   return (
     <ConnectedConversation
-      key={`${account.tenantId}:${account.actorId}:${selected.client.id}`}
+      key={JSON.stringify([
+        account.tenantId,
+        account.actorId,
+        selected.client.id,
+        selector,
+      ])}
       account={account}
       clientId={selected.client.id}
+      scope={selected.client.name}
+      conversationId={
+        selector.state === "selected" ? selector.conversationId : undefined
+      }
     />
   );
 }
+
+/** One selected conversation; session changes preserve its draft and immutable recovery journal. */
 function ConnectedConversation({
   account,
   clientId,
+  scope,
+  conversationId,
 }: {
   account: ConversationAccount;
   clientId: string;
+  scope: string;
+  conversationId?: string | undefined;
 }) {
-  const cache = useQueryClient();
-  const [host] = useState(() => {
-    const selection = conversationSelectionOwner(cache, account, clientId);
-    return new ConversationHostController({
-      account,
-      hints: selection.hints,
-      onBound: selection.record,
-    });
-  });
-  useEffect(() => host.attach(), [host]);
-  useLayoutEffect(() => {
-    host.setClientAvailable(true);
-    return () => host.setClientAvailable(false);
-  }, [host]);
-  const state = useSyncExternalStore(
-    host.subscribe,
-    host.getSnapshot,
-    host.getSnapshot,
-  );
-  if (state.status === "ready")
-    return <MeriConversationView port={state.port} />;
+  const session = useConversationSession(account, clientId, conversationId);
+  const { ready, connection } = session;
+  if (!ready || session.latestTarget)
+    return <ConnectionPending session={session} scope={scope} />;
   return (
-    <section className="stack" role="status">
-      <h2>
-        {state.status === "expired"
-          ? "Conversation session expired"
-          : "Connect current conversation"}
-      </h2>
-      <p>
-        {state.status === "unavailable"
-          ? "The service could not verify this conversation. No sample transcript was substituted."
-          : "The service rechecks your account, client and current conversation before issuing a short-lived connection."}
-      </p>
-      <button
-        className="button"
-        disabled={state.status === "connecting"}
-        onClick={() => void host.connect()}
-      >
-        {state.status === "connecting"
-          ? "Connecting…"
-          : "Connect conversation service"}
-      </button>
-    </section>
+    <MeriLiveConversation
+      key={ready.lifetimeKey}
+      port={ready.port}
+      initialPrompt={connection.pending}
+      earlier={session.earlier}
+      scope={scope}
+      draft={session.draft}
+      onDraft={session.setDraft}
+      textareaRef={session.textarea}
+      onNextTurn={session.startNext}
+      nextTurnBlocked={session.nextBlocked}
+      initialBlocked={session.initialBlocked}
+      promptKey={session.logicalKey}
+      savedCurrent={session.savedCurrent}
+      acceptedRequest={session.acceptedRequest}
+      onSettled={session.refresh}
+      historyStatus={<ConversationHistoryStatus session={session} />}
+    />
   );
 }

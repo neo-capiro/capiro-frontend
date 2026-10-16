@@ -1,0 +1,151 @@
+/* Live conversation pieces layered on the Figma 01.02 cited-answer layout. */
+.frame {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.heading h2 {
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  font-weight: 600;
+}
+.log {
+  position: relative;
+  max-height: min(62vh, 720px);
+  min-height: 120px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.log > div {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.turns {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 4px 2px 40px;
+}
+.turn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
+}
+.turn > p:first-child {
+  align-self: flex-end;
+  max-width: min(560px, 100%);
+}
+.message {
+  max-width: 100%;
+}
+.answerHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+.text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.muted {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  font-size: 12px;
+}
+.tools li {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+}
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.statusRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.files {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.files h2 {
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.fileList {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+.file {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  min-width: 0;
+}
+.fileHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.fileActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pending {
+  opacity: 0.8;
+}
+@media (max-width: 680px) {
+  .log {
+    max-height: none;
+  }
+}

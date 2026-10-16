@@ -1,0 +1,82 @@
+/* Figma 3.4 document comment overlay and its 13.24 to 13.26 reply and resolve states. */
+.content {
+  display: contents;
+}
+.wide {
+  right: 0;
+  width: 416px;
+}
+.content .title {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 500;
+}
+.card,
+.bare {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+}
+.card > *,
+.bare > * {
+  margin: 0;
+}
+.label {
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.author {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+}
+.text {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.time {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-height: 28px;
+}
+.actions button {
+  height: 28px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.form textarea {
+  border-width: 2px;
+  border-color: var(--foreground);
+}
+.formActions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.done {
+  align-self: flex-start;
+}

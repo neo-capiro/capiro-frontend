@@ -43,7 +43,9 @@ export function MeriHome({
         </div>
         <span className={styles.meriWordmark} role="img" aria-label="Meri" />
       </div>
-      <div className={styles.welcomeGroup}>
+      <div
+        className={`${styles.welcomeGroup} ${conversationEnabled ? styles.connectedGroup : ""}`}
+      >
         <div className={styles.welcome}>
           <h1>Meri</h1>
         </div>

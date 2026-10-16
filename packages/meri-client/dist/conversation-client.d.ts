@@ -17,6 +17,7 @@ export declare function createMeriConversation(options: ConversationLifetime): R
     getSnapshot: () => MeriConversationSnapshot;
     subscribe: (listener: () => void) => () => void;
     submit: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
+    submitInitial: (input: ConversationSubmitRequest) => Promise<MeriConversationSnapshot>;
     retrySubmit: () => Promise<MeriConversationSnapshot>;
     history: (input?: ConversationHistoryRequest) => Promise<MeriConversationSnapshot>;
     cancel: () => Promise<Readonly<ConversationCancelledResponse>>;

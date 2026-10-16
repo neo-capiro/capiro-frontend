@@ -37,7 +37,11 @@ export declare class ConversationNetwork {
     stopObservation(): void;
     private lease;
     private dispatch;
-    json(path: string, body: Uint8Array, onDispatch?: () => void): Promise<{
+    json(path: string, body: Uint8Array, onDispatch?: () => void, budget?: Readonly<{
+        requestBytes: number;
+        responseBytes: number;
+        maxRequestMs: number;
+    }>): Promise<{
         status: number;
         bytes: Uint8Array;
     }>;

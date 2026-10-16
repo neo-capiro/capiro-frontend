@@ -1,0 +1,36 @@
+/* Figma 3.4 "State · …" cards (01.04A, 01.04B, 01.05A, 02.07A). */
+.state {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--foreground);
+}
+.title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.15px;
+}
+.body {
+  max-width: 100%;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.body p + p,
+.body ul + p {
+  margin-top: 19px;
+}

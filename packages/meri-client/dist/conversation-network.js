@@ -140,7 +140,7 @@ export class ConversationNetwork {
         this.onDispose();
     };
     stopObservation() { this.stream?.abort(); this.stream = undefined; }
-    lease(observation, caller) {
+    lease(observation, caller, milliseconds = REQUEST_MS) {
         this.check();
         const local = new AbortController();
         if (observation) {
@@ -148,7 +148,7 @@ export class ConversationNetwork {
             this.stream = local;
         }
         const signal = AbortSignal.any([local.signal, this.owner.signal, this.options.signal, ...(caller ? [caller] : [])]);
-        const timer = setTimeout(() => local.abort(), REQUEST_MS);
+        const timer = setTimeout(() => local.abort(), Math.min(REQUEST_MS, milliseconds));
         const done = () => { clearTimeout(timer); if (this.stream === local)
             this.stream = undefined; };
         return { signal, done };
@@ -178,8 +178,11 @@ export class ConversationNetwork {
             throw error;
         }
     }
-    async json(path, body, onDispatch) {
-        const lease = this.lease(false);
+    async json(path, body, onDispatch, budget) {
+        if (body.byteLength > Math.min(protocol.limits.requestBytes, budget?.requestBytes ?? protocol.limits.requestBytes)) {
+            throw new ConversationUnavailable('request-byte-limit');
+        }
+        const lease = this.lease(false, undefined, budget?.maxRequestMs);
         try {
             const response = await this.dispatch(path, {
                 method: 'POST', body: new TextDecoder('utf-8', { fatal: true }).decode(body),
@@ -189,7 +192,8 @@ export class ConversationNetwork {
                 discard(response);
                 throw new ConversationUnavailable('invalid-json-media');
             }
-            const bounded = boundedBody(response, lease.signal, this.check, protocol.limits.responseBytes, () => { });
+            const limit = Math.min(protocol.limits.responseBytes, budget?.responseBytes ?? protocol.limits.responseBytes);
+            const bounded = boundedBody(response, lease.signal, this.check, limit, () => { });
             const bytes = new Uint8Array(await new Response(bounded).arrayBuffer());
             this.check();
             lease.signal.throwIfAborted();

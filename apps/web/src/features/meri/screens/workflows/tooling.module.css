@@ -1,0 +1,218 @@
+/* Figma 3.4 06 · Reusable Meri tooling components (8px radius, Geist interface, Geist Mono records). */
+.caption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.small {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.muted {
+  color: var(--muted-foreground);
+}
+.mono {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.boxTitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+/* Controls the design shows as blocked (opacity 45%). */
+.blocked {
+  opacity: 0.45;
+}
+.end {
+  justify-content: flex-end;
+  width: 100%;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tag {
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+.metadata > div {
+  display: grid;
+  grid-template-columns: var(--label-width) minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+}
+.metadata dt {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.metadata[data-strong] dt {
+  font-weight: 500;
+  line-height: 1.2;
+}
+.metadata dd {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  overflow-wrap: anywhere;
+}
+.box,
+.formatCard,
+.verification {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.box[data-tone="muted"] {
+  background: var(--muted);
+}
+.box[data-body="large"] {
+  gap: 12px;
+}
+.lines p {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.box[data-body="large"] .lines p {
+  font-size: 14px;
+  letter-spacing: -0.07px;
+}
+.box > *,
+.formatCard > *,
+.verification > * {
+  max-width: 100%;
+}
+.formatCard {
+  gap: 12px;
+}
+.formatCard .small {
+  color: var(--muted-foreground);
+}
+.pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+  align-items: start;
+  width: 100%;
+}
+.tile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.tileCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tileCopy h2 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.tileCopy p {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.workflowField {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.workflowField input {
+  min-height: 0;
+  padding: 12px;
+  font-size: 13px;
+  letter-spacing: -0.039px;
+}
+.workflowField input:disabled {
+  opacity: 0.45;
+}
+.workflowField[data-state="unresolved"] input {
+  border-color: var(--warning-text);
+}
+.requiredSources,
+.receive {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.requiredSources {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+}
+.requiredSources h3,
+.receive h3 {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.requiredSources p {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+.receive p {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+/* Figma "Meri/Mobile workflow tile": the starter action drops below the copy. */
+@media (max-width: 680px) {
+  .tile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+/* Figma "Workflow library · Dark": tiles and the search field use the dark surface gradient. */
+@media (prefers-color-scheme: dark) {
+  .tile,
+  .workflowField input {
+    background: linear-gradient(175deg, #242424, #0a0a0a);
+  }
+}

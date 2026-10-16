@@ -2,33 +2,31 @@
 
 import Link from "next/link";
 import { useSelectedClient } from "../session/SelectedClient";
-import { productHref, scopedHref } from "../session/client-route";
+import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
+import {
+  preferencesHref,
+  SidebarDestinations,
+  type MeriSection,
+} from "./SidebarDestinations";
+import { SidebarRecents } from "./SidebarRecents";
 import styles from "./shell.module.css";
-
-const destinations = [
-  { label: "Conversations", icon: "conversations", href: "/meri" },
-  { label: "Files", icon: "files", href: "/meri/files" },
-  { label: "Runs", icon: "runs" },
-  { label: "Approvals", icon: "approvals" },
-  { label: "Memory", icon: "memory" },
-  { label: "Routines", icon: "routines" },
-  { label: "Data access", icon: "data-access" },
-];
-const recents = [
-  "Anduril meeting brief",
-  "FY27 funding landscape",
-  "Weekly client updates",
-];
 
 export function Sidebar({
   assetSet = "home",
   fixture = false,
+  conversationEnabled = false,
+  section,
+  pendingApprovals,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
+  conversationEnabled?: boolean;
+  section?: MeriSection | undefined;
+  pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
   const selected = useSelectedClient();
@@ -49,10 +47,6 @@ export function Sidebar({
         ),
       );
   };
-  const isCurrent = (href?: string) =>
-    href === "/meri"
-      ? pathname === "/meri" || pathname.startsWith("/meri/fixture/")
-      : href === pathname;
   return (
     <aside className={styles.sidebar} aria-label="Meri navigation">
       <Button
@@ -63,105 +57,69 @@ export function Sidebar({
         title={
           fixture
             ? "New local fixture draft"
-            : "Conversation service unavailable"
+            : unavailableTitle("newConversation")
         }
       >
         <DesignIcon name="plus" assetSet={assetSet} />
         New conversation
       </Button>
-      <Button
-        type="button"
-        variant="ghost"
-        className={styles.navButton}
-        disabled
-        title="No connected conversation store"
-      >
-        <DesignIcon name="search" assetSet={assetSet} />
-        Search conversations
-      </Button>
-      <div className={styles.divider} />
-      <nav className={styles.destinations} aria-label="Meri workspace">
-        {destinations.map((item) => (
-          <Button
-            key={item.label}
-            type="button"
-            variant="ghost"
-            className={`${styles.navButton} ${isCurrent(item.href) ? styles.currentDestination : ""}`}
-            aria-current={isCurrent(item.href) ? "page" : undefined}
-            disabled={!item.href}
-            onClick={
-              item.href
-                ? () =>
-                    router.push(
-                      scopedHref(
-                        item.href,
-                        selected.state === "authorized-client"
-                          ? selected.client.id
-                          : undefined,
-                      ),
-                    )
-                : undefined
-            }
-            title={
-              item.href
-                ? item.label === "Files"
-                  ? "Open document files"
-                  : fixture
-                    ? "Open local fixture"
-                    : "Open Meri"
-                : "Unavailable: no connected service"
-            }
-          >
-            {<DesignIcon name={item.icon} assetSet={assetSet} />}
-            {fixture && item.label === "Approvals"
-              ? "Approvals · 2"
-              : item.label}
-          </Button>
-        ))}
-        <Button
-          asChild
-          variant="ghost"
-          className={`${styles.navButton} ${pathname === "/meri/actions" ? styles.currentDestination : ""}`}
-        >
-          <Link
-            href={scopedHref(
-              "/meri/actions",
-              selected.state === "authorized-client"
-                ? selected.client.id
-                : undefined,
-            )}
-            aria-current={pathname === "/meri/actions" ? "page" : undefined}
-          >
-            Recommendation actions
+      {fixture ? (
+        <Button asChild variant="ghost" className={styles.navButton}>
+          <Link href="/meri/fixture/command-palette">
+            <DesignIcon name="search" assetSet={assetSet} />
+            Search conversations
           </Link>
         </Button>
-      </nav>
-      <section className={styles.recents} aria-labelledby="recent-label">
-        <h2 id="recent-label">Recent</h2>
-        {fixture ? (
-          recents.map((title) => (
-            <Button
-              key={title}
-              type="button"
-              variant="ghost"
-              className={styles.navButton}
-              disabled
-              title="Synthetic title; no conversation exists"
-            >
-              {title}
-            </Button>
-          ))
-        ) : (
-          <p>Recent conversations unavailable</p>
-        )}
-      </section>
-      <div className={styles.preferences}>
-        <div className={styles.divider} />
-        <Button asChild variant="ghost" className={styles.navButton}>
-          <Link href="/settings/preferences">Preferences</Link>
+      ) : (
+        <Button
+          type="button"
+          variant="ghost"
+          className={styles.navButton}
+          disabled
+          title={unavailableTitle("conversationList")}
+        >
+          <DesignIcon name="search" assetSet={assetSet} />
+          Search conversations
         </Button>
-        <p>Capiro · Your authorized workspace</p>
-      </div>
+      )}
+      <div className={styles.divider} />
+      <SidebarDestinations
+        assetSet={assetSet}
+        fixture={fixture}
+        section={section}
+        pendingApprovals={pendingApprovals}
+      />
+      <SidebarRecents fixture={fixture} enabled={conversationEnabled} />
+      <SidebarPreferences fixture={fixture} section={section} />
     </aside>
+  );
+}
+
+/** Preferences link: the 09.01 fixture in fixture mode, current on the Settings fixture pages. */
+function SidebarPreferences({
+  fixture,
+  section,
+}: {
+  fixture: boolean;
+  section?: MeriSection | undefined;
+}) {
+  const current = section === "preferences";
+  return (
+    <div className={styles.preferences}>
+      <div className={styles.divider} />
+      <Button
+        asChild
+        variant="ghost"
+        className={`${styles.navButton} ${current ? styles.currentDestination : ""}`}
+      >
+        <Link
+          href={preferencesHref(fixture)}
+          aria-current={current ? "page" : undefined}
+        >
+          Preferences
+        </Link>
+      </Button>
+      <p>Capiro · Your authorized workspace</p>
+    </div>
   );
 }

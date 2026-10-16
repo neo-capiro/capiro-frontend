@@ -1,0 +1,188 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+import {
+  Artifact,
+  ArtifactActions,
+  ArtifactDescription,
+  ArtifactHeader,
+  ArtifactTitle,
+} from "@capiro/ui/artifact";
+import { Button } from "@capiro/ui/button";
+import { FileText } from "lucide-react";
+import type {
+  ArtifactAccess,
+  ArtifactPreview,
+} from "../../../shared/meri-documents/artifact-access";
+import { unavailableResources } from "../../../shared/meri-resources/unavailable";
+import { DocumentInspectionSummary } from "../files/DocumentInspectionSummary";
+import { DocumentDownloadUrl } from "../files/download-url";
+import { StatusPill } from "../ui/StatusPill";
+import type { TurnView } from "./conversation-view";
+import ui from "../ui/meri-ui.module.css";
+import styles from "./live.module.css";
+
+type Listed = TurnView["artifacts"][number];
+type Status =
+  | { kind: "idle" }
+  | { kind: "working"; action: "preview" | "download" }
+  | { kind: "failed"; action: "preview" | "download"; code: string }
+  | { kind: "downloaded"; filename: string };
+const sizes = (bytes: number) =>
+  bytes < 1024
+    ? `${bytes} B`
+    : bytes < 1024 * 1024
+      ? `${(bytes / 1024).toFixed(1)} KB`
+      : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+
+/** Files Meri published in this conversation; every read goes through the current session. */
+export function ConversationArtifacts({
+  artifacts,
+  access,
+}: {
+  artifacts: readonly Listed[];
+  access: ArtifactAccess;
+}) {
+  return (
+    <section className={styles.files} aria-labelledby="conversation-files">
+      <h2 id="conversation-files">Files in this conversation</h2>
+      {artifacts.length === 0 ? (
+        <p className={styles.muted}>
+          No files have been published in the turns shown here.
+        </p>
+      ) : (
+        <ul className={styles.fileList}>
+          {artifacts.map((artifact) => (
+            <li key={artifact.versionId}>
+              <ConversationArtifact artifact={artifact} access={access} />
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className={styles.muted}>
+        {unavailableResources.workspaceFiles.summary}
+      </p>
+    </section>
+  );
+}
+
+/** Preview and download for one listed version; the newest command supersedes an older one. */
+function useArtifactActions(access: ArtifactAccess, versionId: string) {
+  const [preview, setPreview] = useState<ArtifactPreview | null>(null);
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const work = useRef<AbortController | null>(null);
+  const [url] = useState(() => new DocumentDownloadUrl());
+  useEffect(
+    () => () => {
+      work.current?.abort();
+      url.clear();
+    },
+    [url],
+  );
+  const begin = (action: "preview" | "download") => {
+    work.current?.abort();
+    const controller = new AbortController();
+    work.current = controller;
+    setStatus({ kind: "working", action });
+    return controller;
+  };
+  const inspect = async () => {
+    const controller = begin("preview");
+    const reply = await access.inspect(versionId, controller.signal);
+    if (work.current !== controller) return;
+    if (!reply.ok)
+      return setStatus({ kind: "failed", action: "preview", code: reply.code });
+    setPreview(reply.value);
+    setStatus({ kind: "idle" });
+  };
+  const download = async () => {
+    const controller = begin("download");
+    const reply = await access.download(versionId, controller.signal);
+    if (work.current !== controller) return;
+    if (!reply.ok)
+      return setStatus({
+        kind: "failed",
+        action: "download",
+        code: reply.code,
+      });
+    const link = document.createElement("a");
+    link.href = url.replace(
+      new Blob([reply.value.bytes], { type: reply.value.mimeType }),
+    );
+    link.download = reply.value.filename;
+    link.rel = "noopener";
+    link.click();
+    setStatus({ kind: "downloaded", filename: reply.value.filename });
+  };
+  return { preview, status, inspect, download };
+}
+
+const outcome = (status: Status) =>
+  status.kind === "failed"
+    ? `${status.action === "preview" ? "Preview" : "Download"} unavailable (${status.code}). Nothing was substituted.`
+    : status.kind === "downloaded"
+      ? `Downloaded ${status.filename}; its bytes matched the inspected version.`
+      : "";
+
+function ConversationArtifact({
+  artifact,
+  access,
+}: {
+  artifact: Listed;
+  access: ArtifactAccess;
+}) {
+  const { preview, status, inspect, download } = useArtifactActions(
+    access,
+    artifact.versionId,
+  );
+  const name =
+    preview?.filename ?? `File version ${artifact.versionId.slice(0, 8)}`;
+  const working = (action: "preview" | "download") =>
+    status.kind === "working" && status.action === action;
+  return (
+    <Artifact className={styles.file} role="group" aria-label={name}>
+      <ArtifactHeader className={styles.fileHeader}>
+        <FileText aria-hidden />
+        <div>
+          <ArtifactTitle>{name}</ArtifactTitle>
+          <ArtifactDescription className={styles.muted}>
+            {preview
+              ? `${preview.mimeType} · ${sizes(preview.bytes)}`
+              : "Preview to load its details from the service."}
+          </ArtifactDescription>
+        </div>
+      </ArtifactHeader>
+      <ArtifactActions className={styles.fileActions}>
+        <Button
+          type="button"
+          variant="outline"
+          className={ui.outline}
+          disabled={status.kind === "working"}
+          onClick={() => void inspect()}
+        >
+          {working("preview") ? "Loading preview…" : "Preview"}
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className={ui.outline}
+          disabled={status.kind === "working"}
+          onClick={() => void download()}
+        >
+          {working("download") ? "Preparing download…" : "Download"}
+        </Button>
+      </ArtifactActions>
+      <div role="status" className={styles.muted}>
+        {outcome(status)}
+      </div>
+      {preview && (
+        <div className={styles.preview}>
+          <div className={styles.pills}>
+            <StatusPill>{`Generation: ${preview.generationStatus}`}</StatusPill>
+            <StatusPill>{`Preview: ${preview.previewStatus}`}</StatusPill>
+          </div>
+          <DocumentInspectionSummary inspection={preview.inspection} />
+        </div>
+      )}
+    </Artifact>
+  );
+}

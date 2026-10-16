@@ -6,6 +6,7 @@ import { DesignIcon } from "../../../shared/shell/DesignIcon";
 import { MeriComposer } from "../MeriComposer";
 import { MeriSuggestions } from "../MeriSuggestions";
 import { selectSuggestion } from "../suggestions.mjs";
+import { fixtureHref } from "./screens/href";
 import styles from "../home.module.css";
 
 export function MeriHomeFixture() {
@@ -52,7 +53,10 @@ export function MeriHomeFixture() {
           <p>What would you like to work on?</p>
         </div>
         <MeriComposer draft={draft} onDraft={setDraft} textareaRef={textarea} />
-        <MeriSuggestions onSelect={select} />
+        <MeriSuggestions
+          onSelect={select}
+          browseHref={fixtureHref("workflow-library")}
+        />
       </div>
     </div>
   );
