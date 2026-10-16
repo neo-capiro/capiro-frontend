@@ -28,7 +28,7 @@ export function FixtureHeaderActions({
         aria-expanded={open === "updates"}
         onClick={() => setOpen("updates")}
       >
-        <DesignIcon name="updates" assetSet={assetSet} />
+        <DesignIcon name="updates" assetSet="header-34-20261016" />
       </Button>
       <FixtureAccountMenu
         assetSet={assetSet}
