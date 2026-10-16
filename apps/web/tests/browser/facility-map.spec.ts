@@ -287,6 +287,10 @@ test("candidate index, district resolution, queued retry and failure messages st
     name: "Synthetic lab · CA-01",
     exact: true,
   });
+  const addressResolution = detail.getByRole("region", {
+    name: "Address resolution",
+  });
+  const addressAlert = addressResolution.getByRole("alert");
   await detail
     .getByRole("button", { name: "Use this address", exact: true })
     .click();
@@ -296,9 +300,7 @@ test("candidate index, district resolution, queued retry and failure messages st
   await detail
     .getByRole("button", { name: "Resolve district", exact: true })
     .click();
-  await expect(detail.getByRole("alert")).toContainText(
-    "Synthetic geocoder failure",
-  );
+  await expect(addressAlert).toContainText("Synthetic geocoder failure");
   expect(attempts).toBe(1);
   await detail
     .getByRole("button", { name: "Review current address resolution" })
@@ -306,11 +308,9 @@ test("candidate index, district resolution, queued retry and failure messages st
   await detail
     .getByRole("button", { name: "Retry geocoding", exact: true })
     .click();
-  await expect(
-    detail
-      .getByRole("region", { name: "Address resolution" })
-      .getByRole("status"),
-  ).toContainText("Retry requested");
+  await expect(addressResolution.getByRole("status")).toContainText(
+    "Retry requested",
+  );
   expect(queued).toBe(true);
   await page.screenshot({ path: "test-results/facility-geocoding-detail.png" });
   expect(unexpected).toEqual([]);
@@ -408,19 +408,21 @@ test("a candidate conflict reloads the displayed snapshot and never falls back t
     name: "Synthetic lab · CA-01",
     exact: true,
   });
+  const addressResolution = detail.getByRole("region", {
+    name: "Address resolution",
+  });
+  const addressAlert = addressResolution.getByRole("alert");
   await detail
     .getByRole("button", { name: "Use this address", exact: true })
     .click();
-  await expect(detail.getByRole("alert")).toContainText("Candidates changed");
+  await expect(addressAlert).toContainText("Candidates changed");
   await expect(detail).toContainText("REVIEW NEW CANDIDATE");
   await expect(detail).not.toContainText("FIRST CANDIDATE");
   expect(writes).toBe(1);
   await detail
     .getByRole("button", { name: "Use this address", exact: true })
     .click();
-  await expect(detail.getByRole("alert")).toContainText(
-    "Reviewed route unavailable",
-  );
+  await expect(addressAlert).toContainText("Reviewed route unavailable");
   expect(writes).toBe(2);
   await expect(detail).toBeVisible();
   expect(unexpected).toEqual([]);
@@ -545,18 +547,25 @@ test("resolved representative target reports failed saves, validates receipt and
     name: "Synthetic lab · CA-01",
     exact: true,
   });
+  const representation = detail.getByRole("region", {
+    name: "Elected representation",
+  });
   const add = detail.getByRole("button", {
     name: "Add representative to targets : Test Representative",
     exact: true,
   });
   await expect(add).toBeEnabled();
   await add.click();
-  await expect(detail.getByRole("alert")).toContainText(
-    "Synthetic target save failure",
-  );
+  await expect(
+    representation.getByRole("alert").filter({
+      hasText: "Synthetic target save failure",
+    }),
+  ).toContainText("Synthetic target save failure");
   expect(writes).toBe(1);
   await add.click();
-  await expect(detail.getByRole("alert")).toContainText("unexpected response");
+  await expect(
+    representation.getByRole("alert").filter({ hasText: "unexpected response" }),
+  ).toContainText("unexpected response");
   await expect(
     detail.getByText("Added to targets", { exact: true }),
   ).not.toBeVisible();
