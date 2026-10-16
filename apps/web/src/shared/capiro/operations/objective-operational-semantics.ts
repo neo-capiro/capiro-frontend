@@ -54,20 +54,17 @@ function validateSections(value: OperationalRead) {
   for (const section of Object.values(value.sections)) {
     if (Date.parse(section.observedAt) > Date.parse(value.observedAt)) fail();
     if (section.coverage === "complete") {
+      const total = section.total;
+      if (total === null) return fail();
       if (
         value.associationSetVersion === null ||
         section.snapshotId === null ||
-        section.total === null ||
         section.reasons.length ||
-        section.total < section.items.length
+        total < section.items.length
       )
         fail();
-      if (section.nextCursor !== null && section.total <= section.items.length)
-        fail();
-      if (
-        section.total === 0 &&
-        (section.items.length || section.nextCursor !== null)
-      )
+      if (section.nextCursor !== null && total <= section.items.length) fail();
+      if (total === 0 && (section.items.length || section.nextCursor !== null))
         fail();
     } else {
       if (section.total !== null || !section.reasons.length) fail();

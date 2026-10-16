@@ -16,15 +16,27 @@ import { ContextDocument } from "./ContextDocument";
 import { ContextEvidence } from "./ContextEvidence";
 import { ContextUpload } from "./ContextUpload";
 
-export function StrategyContext({ clientId }: { clientId?: string }) {
+export function StrategyContext({
+  clientId,
+  clientName,
+  evidence,
+  onEvidenceClose,
+  upload,
+  onUploadClose,
+}: {
+  clientId?: string;
+  clientName?: string;
+  evidence: boolean;
+  onEvidenceClose: () => void;
+  upload: boolean;
+  onUploadClose: () => void;
+}) {
   const [search, setSearch] = useState("");
-  const [scope, setScope] = useState("client");
+  const [scope, setScope] = useState(clientId ? "client" : "all");
   const [state, setState] = useState<
     "draft" | "active" | "superseded" | "archived" | "all"
   >("active");
   const [document, setDocument] = useState<StrategyContextDocument>();
-  const [evidence, setEvidence] = useState(false);
-  const [upload, setUpload] = useState(false);
   const query = useCapiroQuery("strategies.context.documents", {
     query: {
       clientId: scope === "client" ? clientId : undefined,
@@ -41,19 +53,9 @@ export function StrategyContext({ clientId }: { clientId?: string }) {
     `${row.title} ${row.content}`.toLowerCase().includes(search.toLowerCase()),
   );
   if (evidence)
-    return (
-      <ContextEvidence clientId={clientId} onClose={() => setEvidence(false)} />
-    );
+    return <ContextEvidence clientId={clientId} onClose={onEvidenceClose} />;
   return (
     <div className={styles.panels} data-design-node="411:120223">
-      <div className={styles.actions}>
-        <ActionButton onClick={() => setEvidence(true)}>
-          Review facts and conflicts
-        </ActionButton>
-        <ActionButton onClick={() => setUpload(true)}>
-          Upload files
-        </ActionButton>
-      </div>
       <div className={styles.stats}>
         <article className={styles.stat}>
           <h2>Active documents</h2>
@@ -73,67 +75,73 @@ export function StrategyContext({ clientId }: { clientId?: string }) {
           <strong>{health.data?.openConflicts ?? "—"}</strong>
         </article>
       </div>
-      <Panel
-        title="Context scope and document status"
-        description="Filter without mixing another client’s context."
-      >
-        <div className={styles.form}>
-          <div className={styles.pills}>
-            {[
-              ["all", "All clients"],
-              ["firm", "Firm"],
-              ["client", "Selected client"],
-            ].map(([value, label]) => (
-              <button
-                key={value}
-                className={scope === value ? styles.active : ""}
-                aria-pressed={scope === value}
-                onClick={() => setScope(value!)}
-                disabled={value === "client" && !clientId}
-              >
-                {label}
-              </button>
-            ))}
+      <div className={styles.contextScope}>
+        <Panel
+          title="Context scope and document status"
+          description="Filter without mixing another client's context."
+        >
+          <div className={styles.form}>
+            <div className={styles.pills}>
+              {[
+                ["all", "All clients"],
+                ["firm", "Firm"],
+                ["client", clientName ?? "Selected client"],
+              ].map(([value, label]) => (
+                <button
+                  key={value}
+                  className={scope === value ? styles.active : ""}
+                  aria-pressed={scope === value}
+                  onClick={() => setScope(value!)}
+                  disabled={value === "client" && !clientId}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className={styles.pills}>
+              {[
+                ["active", "Active"],
+                ["all", "All statuses"],
+                ["draft", "Draft"],
+                ["superseded", "Previous versions"],
+                ["archived", "Archived"],
+              ].map(([value, label]) => (
+                <button
+                  key={value}
+                  className={state === value ? styles.active : ""}
+                  aria-pressed={state === value}
+                  onClick={() => setState(value as typeof state)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className={styles.pills}>
-            {[
-              ["active", "Active"],
-              ["all", "All statuses"],
-              ["draft", "Draft"],
-              ["superseded", "Previous versions"],
-              ["archived", "Archived"],
-            ].map(([value, label]) => (
-              <button
-                key={value}
-                className={state === value ? styles.active : ""}
-                aria-pressed={state === value}
-                onClick={() => setState(value as typeof state)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+        </Panel>
+      </div>
+      <div className={styles.contextSearch}>
+        <label htmlFor="context-document-search">Search documents</label>
+        <div className={styles.contextSearchControls}>
+          <TextInput
+            id="context-document-search"
+            aria-label="Search context documents"
+            placeholder="Search by title or content"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <SelectInput
+            aria-label="Document state"
+            value={state}
+            onValueChange={(value) => setState(value as typeof state)}
+            options={[
+              { value: "all", label: "All statuses" },
+              { value: "active", label: "Active" },
+              { value: "draft", label: "Draft" },
+              { value: "superseded", label: "Previous versions" },
+              { value: "archived", label: "Archived" },
+            ]}
+          />
         </div>
-      </Panel>
-      <div className={styles.filters}>
-        <TextInput
-          aria-label="Search context documents"
-          placeholder="Search by title or content"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-        <SelectInput
-          aria-label="Document state"
-          value={state}
-          onValueChange={(value) => setState(value as typeof state)}
-          options={[
-            { value: "all", label: "All statuses" },
-            { value: "active", label: "Active" },
-            { value: "draft", label: "Draft" },
-            { value: "superseded", label: "Previous versions" },
-            { value: "archived", label: "Archived" },
-          ]}
-        />
       </div>
       <StatusPanel
         loading={query.loading}
@@ -187,7 +195,7 @@ export function StrategyContext({ clientId }: { clientId?: string }) {
       {upload && (
         <ContextUpload
           clientId={clientId}
-          onClose={() => setUpload(false)}
+          onClose={onUploadClose}
           onSaved={() => {
             query.reload();
             health.reload();

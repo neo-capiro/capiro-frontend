@@ -10,6 +10,7 @@ import {
   TextArea,
 } from "../../../../shared/module-ui";
 import { policyAllows } from "./run-model";
+import { RunPlanStepLink } from "./RunPlanStepLink";
 import styles from "./runs.module.css";
 
 type Action = "execute" | "resume" | "cancel" | "retry" | "mark_failed";
@@ -121,14 +122,7 @@ export function RunActions({
               {descriptions[value].confirm}
             </ActionButton>
           ))}
-        {node && allowed("return_to_node") && (
-          <a
-            className={styles.anchor}
-            href={`/modules/strategies?strategyId=${encodeURIComponent(node.strategyId)}&nodeId=${encodeURIComponent(node.nodeId)}`}
-          >
-            Return to plan step
-          </a>
-        )}
+        {node && allowed("return_to_node") && <RunPlanStepLink run={run} />}
       </div>
       {policy.state !== run.state && (
         <p role="alert">

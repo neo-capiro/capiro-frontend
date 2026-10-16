@@ -66,6 +66,7 @@ export function useFacilityNexus(clientId: string, enabled: boolean) {
   });
   return {
     ...query,
+    enabled: enabled && Boolean(actor),
     data:
       enabled && actor && query.isSuccess && !query.error
         ? query.data

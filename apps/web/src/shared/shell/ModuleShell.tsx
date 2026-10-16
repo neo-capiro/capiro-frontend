@@ -28,13 +28,14 @@ export function ModuleShell({
           className={
             settings
               ? styles.settingsMain
-              : `${styles.main} ${active === "calendar" ? styles.calendarMain : ""} ${["hub", "intelligence", "directory", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
+              : `${styles.main} ${active === "calendar" ? styles.calendarMain : ""} ${active === "engagement" ? styles.engagementMain : ""} ${active === "strategies" ? styles.strategiesMain : ""} ${["hub", "intelligence", "directory", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
           }
           id="main-content"
         >
-          {!settings && active !== "hub" && active !== "calendar" && (
-            <ModuleBreadcrumb active={active} />
-          )}
+          {!settings &&
+            active !== "hub" &&
+            active !== "calendar" &&
+            active !== "strategies" && <ModuleBreadcrumb active={active} />}
           {children}
         </main>
       </div>

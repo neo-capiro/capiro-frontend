@@ -1,0 +1,92 @@
+.body {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.body .card {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl, 16px);
+  background: var(--card);
+}
+.body .card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.08px;
+}
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+  min-width: 0;
+}
+.body .card dl {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+}
+.body .card dl > div {
+  display: grid;
+  grid-template-columns: 142px minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.body .card dt {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.body .card dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.body .card dd > span {
+  gap: 4px 8px;
+}
+.body .card dd > span > span {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: inherit;
+}
+.body .card dd > span > span + span::before {
+  content: "· ";
+}
+/* These positions bind the explicit saved-identifier rows in the component. */
+.body .columns > dl:first-child > div:nth-child(n + 3) dd,
+.body .columns > dl:nth-child(2) > div:nth-child(n + 2) dd,
+.body .lobbying > dl > div:last-child dd {
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: 400;
+}
+.body .sourceNote {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.065px;
+}
+@media (max-width: 900px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}

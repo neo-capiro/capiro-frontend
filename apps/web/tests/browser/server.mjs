@@ -43,6 +43,10 @@ const server = await createServer({
       { find: "next/link", replacement: navigation },
       { find: "next/navigation", replacement: navigation },
       {
+        find: "next/image",
+        replacement: path.join(app, "test/browser/image.tsx"),
+      },
+      {
         find: "@clerk/nextjs",
         replacement: path.join(app, "tests/browser/clerk.tsx"),
       },

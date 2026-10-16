@@ -98,6 +98,11 @@ const breakdown = z.object({
   rationale: z.string(),
   evidenceCount: z.number().int(),
 });
+const awarded = z.object({
+  contractObligations: z.number().finite().nullable(),
+  grantObligations: z.number().finite().nullable(),
+  grantOutlays: z.number().finite().nullable(),
+});
 export const facilityNexusSchema = z.object({
   clientId: z.string(),
   score: z.number().nullable(),
@@ -105,8 +110,32 @@ export const facilityNexusSchema = z.object({
   breakdown: z.array(breakdown),
   generatedAt: z.string(),
   districts: z.array(
-    z.object({ districtKey: z.string(), score: z.number().nullable() }),
+    z.object({
+      districtKey: z.string(),
+      score: z.number().nullable(),
+      awarded: awarded.optional(),
+      coveragePercent: z.number().finite().optional(),
+    }),
   ),
+  // Older map projections omit enrichment. Missing facts remain unavailable.
+  awarded: awarded.optional(),
+  linkage: z
+    .object({
+      contractingLinked: z.boolean(),
+      contractorNames: z.array(z.string()),
+      assistanceLinked: z.boolean(),
+      recipientNames: z.array(z.string()),
+      ueiConfirmedCount: z.number().int().nonnegative(),
+    })
+    .optional(),
+  facilityFootprint: z
+    .object({
+      facilityCount: z.number().int().nonnegative(),
+      facilitiesWithoutDistrict: z.number().int().nonnegative(),
+      employeeCount: z.number().finite().nullable(),
+      facilitiesMissingEmployeeCount: z.number().int().nonnegative(),
+    })
+    .optional(),
   warnings: z.array(z.object({ code: z.string(), message: z.string() })),
   freshness: z.array(
     z.object({
@@ -118,3 +147,4 @@ export const facilityNexusSchema = z.object({
     }),
   ),
 });
+export type FacilityNexus = z.infer<typeof facilityNexusSchema>;

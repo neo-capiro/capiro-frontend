@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { type MailContact } from "./email";
+import { type MailContact, type MailThread } from "./email";
 import { useContactThreads, useMailThread } from "./email";
 import { MailCompose } from "./MailCompose";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -77,6 +77,11 @@ export function ContactMail({
               <span>
                 <strong>{item.subject}</strong>
                 <p className="muted">{item.snippet}</p>
+                <p className="muted">
+                  <small>
+                    <ContactMessageDate messages={item.messages} />
+                  </small>
+                </p>
               </span>
             </button>
           ))}
@@ -147,5 +152,35 @@ export function ContactMail({
         />
       )}
     </section>
+  );
+}
+
+function ContactMessageDate({
+  messages,
+}: {
+  messages: MailThread["messages"];
+}) {
+  let latest: { value: string; instant: number } | undefined;
+  for (const message of messages) {
+    const value = message.sentAt ?? message.receivedAt ?? message.createdAt;
+    const instant = Date.parse(value);
+    if (Number.isFinite(instant) && (!latest || instant > latest.instant))
+      latest = { value, instant };
+  }
+  if (!latest) return "Date unavailable";
+  const date = new Date(latest.instant);
+  return (
+    <time dateTime={latest.value} title="Latest available message date">
+      {date.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })}
+      {" · "}
+      {date.toLocaleTimeString(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+      })}
+    </time>
   );
 }

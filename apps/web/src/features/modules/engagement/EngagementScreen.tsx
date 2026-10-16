@@ -114,7 +114,11 @@ function OrdinaryEngagementScreen() {
     <div className={styles.screen}>
       <PageHeader
         title="Engagement Manager"
-        description="Meetings, outreach and commitments across your permitted clients."
+        description={
+          view === "commitments"
+            ? undefined
+            : "Meetings, outreach and commitments across your permitted clients."
+        }
         actions={
           <>
             <select

@@ -1,0 +1,240 @@
+{
+  "schema": "figma34-modules-family-checklist/1",
+  "status": "READ_ONLY_FAMILY_AUDIT_AND_ACTIONABLE_ALLOCATION_NOT_PARITY",
+  "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "sourcePins": "audit-evidence/figma34/modules/SOURCE-READ-PINS.json",
+  "families": [
+    {
+      "key": "hub",
+      "nodeId": "1064:191436",
+      "title": "Module hub",
+      "sourcePaths": [
+        "apps/web/src/features/modules/hub/ModuleHub.tsx"
+      ],
+      "observed": "Actual1440 frame has run-the-work and landscape card groups, client scope, card shortcuts, firm-vs-client explanation and current shared chrome.",
+      "gap": "Source owner exists. Exact3.4 visual/token/asset comparison has not run; sample counts and 'anyone at the firm' prose must not become permission or completeness claims.",
+      "classification": "EXISTING_OWNER_VISUAL_MAPPING_PENDING",
+      "tests": [
+        "1440/1024 card geometry and canonical asset slots.",
+        "Keyboard navigation and About dismissal through existing owner.",
+        "Verified client scope; no sample counts or broader access inferred."
+      ]
+    },
+    {
+      "key": "engagement",
+      "nodeId": "1064:191641",
+      "title": "Engagement overview, plan, meetings and workload",
+      "sourcePaths": [
+        "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+        "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+        "apps/web/src/features/modules/engagement/MeetingSplitView.tsx",
+        "apps/web/src/features/modules/engagement/plan/EngagementPlanWorkspace.tsx"
+      ],
+      "observed": "Actualoverview shows 30d activity/open work, nextmeeting, plan statuses, sharedoffices and dueweek workload; actualPlan192802 shows crossclientwaves and recommendedDCwindows. Meeting192500 now supplies the full selectedModules splitframe.",
+      "gap": "PR56 implements bounded manual Plan CRUD/version review, not ranking/windows/recommendations. Core qualification/live adoption remains separate. Retain truthful returned-work counts and current permissions; do not restore illustrative exact business metrics. Root owns current bounded Commitment/date fixes; no overlapping edit.",
+      "classification": "PARTIAL_SOURCE_WITH_BACKEND_SEMANTIC_GAPS",
+      "tests": [
+        "PR56 manualplan fields/lifecycle/review deadline exactcurrent receipts; allnine read-only-preview503 remain.",
+        "Meetings list/detail/loading/denial with exact currentclient identity; verify full3.4 splitframe at1440/1024.",
+        "Overview returned-open counts and parsed nextmeeting timing; no invented dueweek/office union."
+      ]
+    },
+    {
+      "key": "planner",
+      "nodeId": "1064:193172",
+      "title": "Planner full work surfaces and production states",
+      "sourcePaths": [
+        "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+        "apps/web/src/features/modules/planner/TaskDetail.tsx",
+        "apps/web/src/features/modules/planner/TaskEditorForm.tsx",
+        "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+        "apps/web/src/features/modules/planner/TimesheetsView.tsx",
+        "apps/web/src/features/modules/planner/CapacityView.tsx",
+        "apps/web/src/features/modules/planner/ReportingDashboard.tsx"
+      ],
+      "observed": "138 topframe candidates cover taskviews, project/budget/time, capacity/reporting/forms and explicit viewer/commenter/conflict/import/attachment/empty/unavailable states. Taskdrawer680px child198349 is highfidelity;1024child225117 captured.",
+      "gap": "Existing inline edit/duplicate/Markdown/comments/time/subtask implementation supersedes old missing-control claims. Exact Editcomment224375 mapping needs nativeownercontract review; no edit/remove semantics inferred from a design label. Rendered wholeframe/dark/reducedmotion parity remains open.",
+      "classification": "EXISTING_BROAD_SOURCE_NEW_STATE_MAPPING_REQUIRED",
+      "tests": [
+        "Exact pictured viewer/commenter/archive/conflict states via real owner permissions and stableversion receipts.",
+        "680px drawer at1440 and1024; body scroll/footer/focus; native Undo/Markdown preserved.",
+        "Import partialresume, timeexportcomplete, scoped approval and unavailable-work controls; do not rerun unrelated accepted suites."
+      ]
+    },
+    {
+      "key": "strategies",
+      "nodeId": "1064:227836",
+      "title": "Strategies library and production workflow",
+      "sourcePaths": [
+        "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
+        "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx",
+        "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
+        "apps/web/src/features/modules/strategies/context/StrategyContext.tsx",
+        "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+        "apps/web/src/features/modules/strategies/runs/StrategyRuns.tsx"
+      ],
+      "observed": "90candidateframes; explicit workflowgroups forcreate/manage, firmphases, steps/Meri, monitoring, context/evidence, reviews/runs, exports/versionhistory and sevenempty/access/recovery states.",
+      "gap": "Current source initializes view/clientId from URL once then changes local state atlines50-55,77,95-114. Ordinary clicks do not update route and back/forward values are not synchronized; confirmed navigation integration candidate. Exact generated/frozen-version actions remain blocked until approved mapping. Actualaccessdeniedframe still shows Live/refreshedjustnow; see designgap.",
+      "classification": "SOURCE_NAVIGATION_GAP_AND_BACKEND_BOUNDARIES",
+      "tests": [
+        "Library/context/review/runs and client scope survive reload/back/forward using canonical query keys; malformed/duplicate selectors failclosed.",
+        "Preserve current exact Strategy/client receiving paths and no generatedlineage inference.",
+        "Empty/loading/denied/expired/archive states reflect current trusted facts."
+      ]
+    },
+    {
+      "key": "directory",
+      "nodeId": "1064:240729",
+      "title": "Directory and newD34 profiles",
+      "sourcePaths": [
+        "apps/web/src/features/modules/directory/DirectoryScreen.tsx",
+        "apps/web/src/features/modules/directory/MemberProfile.tsx",
+        "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
+        "apps/web/src/features/modules/directory/ContactPreview.tsx",
+        "apps/web/src/features/modules/directory/StateDirectory.tsx",
+        "apps/web/src/features/modules/directory/CommitteeDirectory.tsx"
+      ],
+      "observed": "34candidateframes including27D34 variants: membertabs, office/committeestaff, committee/subcommittee/hierarchy, Florida identities, DoWprofile, loading/empty/profileerror, notes/copy and1024staffsheet.",
+      "gap": "PersonnelDirectory renders name as plainstrong and publicprofile link, with no internal DoW detailselection. NewD34rolehistory/associatedoffices/committeehierarchy mappings require exact existing Directory fields and independentcurrentidentity verification; do not synthesize missing data. Directoryview source is localstate-only; browser route-state recovery needs focused correction analogousStrategies.",
+      "classification": "CONCRETE_PROFILE_NAVIGATION_GAP_WITH_DATA_MAPPING_DEPENDENCY",
+      "tests": [
+        "Directoryfilter/selection survives profileerror retry/back; knownpersonnelidentity opens only matchingcurrentresource.",
+        "No filename/name-based ID inference; display absent history/contact fields as unavailable.",
+        "Copyemail feedback, keyboard close/focus,1024staffsheet; phone390 deferred."
+      ]
+    },
+    {
+      "key": "intelligence",
+      "nodeId": "1064:241092",
+      "title": "Intelligence explorer, budget and funding",
+      "sourcePaths": [
+        "apps/web/src/features/modules/intelligence/IntelligenceScreen.tsx",
+        "apps/web/src/features/modules/intelligence/ProgramElementProfile.tsx"
+      ],
+      "observed": "7candidateframes supplyDataExplorer/table+selecteddetail, budget/funding/districtnexus and moduleoverlay.",
+      "gap": "Canonical source exists. Do not infer dataadaptercompleteness or exact sourcecounts from illustrative table; map each designed filter/selecteddetail to its fixedoperation owner before furtherUI.",
+      "classification": "EXISTING_OWNER_SOURCE_MAPPING_AND_RENDERING_PENDING",
+      "tests": [
+        "Page/filter counts only validated returnedcoverage.",
+        "Selected record exactidentity; retryonefailedsource independently.",
+        "Safeofficialsource links, Sourceattribution and unavailablefield labels."
+      ]
+    },
+    {
+      "key": "research",
+      "nodeId": "1064:242312",
+      "title": "Research portfolios",
+      "sourcePaths": [
+        "apps/web/src/features/modules/research-portfolios/ResearchPortfoliosScreen.tsx",
+        "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx"
+      ],
+      "observed": "3candidateframes: list, detailoverview and switcheroverlay. Listvisually distinguishesrole/mode/status with client/membercounts.",
+      "gap": "Creationcontrol visible but no dedicatedcreationframe in this3framebranch; currentownerexists. Need exact creationfield/state composition fromexistingDTO, notprefilledsuccessdetail. List/detailempty/loading/denied design composition not separatelyprovided inbranch.",
+      "classification": "EXISTING_OWNER_WITH_DESIGN_STATE_GAPS",
+      "tests": [
+        "Currentrole/access/archivedfilters; zeroresults distinct unreadable.",
+        "Createopens reviewableemptyform, explicitsubmit and currentreceipt; no writeonopen.",
+        "Keep researchportfolios distinctfrom clientPortfolio."
+      ]
+    },
+    {
+      "key": "settings",
+      "nodeId": "1064:243193",
+      "title": "Settings standard/admin/HQ and billing lifecycle",
+      "sourcePaths": [
+        "apps/web/src/features/settings/SettingsScreen.tsx",
+        "apps/web/src/features/settings/ContactSettings.tsx",
+        "apps/web/src/features/settings/IntegrationSettings.tsx",
+        "apps/web/src/features/settings/BillingSettings.tsx",
+        "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+        "apps/web/src/features/settings/hq/TenantSettings.tsx",
+        "apps/web/src/features/settings/analyst/AnalystSettings.tsx"
+      ],
+      "observed": "78candidateframes spanstandard/admin/HQ, pendinginvites, profilearchive, billingnoaccess/pastdue/ACH/cancel/terms andmapping/analyst states. Contact, Integrations, HQTenants, mappingsnormal/empty andbillingnoaccess captured.",
+      "gap": "PR53/9da Contact/Branding/Profile/Integration checks supersede historical missingaction assertions. Billinglifecycle/terms semantics remain server-owned; actualglobalblockedterms frame does not authorize adding an acceptance route. AnalystProvision/SAM remain unavailable until approvednativeactions.12Memory/preferences candidates excluded toMeriowner.",
+      "classification": "EXISTING_OWNER_ROLE_AND_ACTION_MAPPING_PENDING",
+      "tests": [
+        "me.read gates beforeprivateHQ/Teamreads; forbiddenstates do notleakprivatecounts.",
+        "Contact exactrequest/readback andpending/error; OAuth redirectidentity andIMAPunavailable controls preserved.",
+        "Profilemutation identity/status, billingflow/eligibility, mappingsindividualreview restrictions; no realprovider/chargeclaim."
+      ]
+    },
+    {
+      "key": "workspace",
+      "nodeId": "1064:253915",
+      "title": "Workspace documents, templates and HillDay",
+      "sourcePaths": [
+        "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+        "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx"
+      ],
+      "observed": "217candidateframes underWorkspace; document/workflow/clientshare, TemplateStudio5stepwizard, HillDayresolution/context/generation/manualeditor andnewNewsletterworkflow.",
+      "gap": "Existingowners implement broadworkflows; currentAPI/savedreceipt mapping must be checked byworkflow, not equatedwithprototype success. TemplateStudio loadingframe is blank; preserve safeexplicitloading inproduction pendingmockup.",
+      "classification": "EXISTING_WORKFLOW_OWNERS_EXACT_STATE_MAPPING_PENDING",
+      "tests": [
+        "Draft/pending/uncertain saves preserveimmutablecommand and exactorigin/version.",
+        "Templatecapability/scopes/variables andcurrentreceipt checks.",
+        "Manualeditor+history/export; noMeri/providerexecution claims."
+      ]
+    },
+    {
+      "key": "newsletter",
+      "nodeId": "1174:277401",
+      "title": "Newsletter3.4 complete production design",
+      "sourcePaths": [
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+        "apps/web/src/features/modules/workspace/newsletter/newsletter-model.ts"
+      ],
+      "observed": "Actual3.4branch includes block/section/style controls, ContentStudio, imageediting/AI, BrandKit, templates, plainHTML/linkchecks, viewer/comments/invites, Outreachdestinations/review/send/delivery and explicitunknown/error/unavailable variants.",
+      "gap": "CurrentBuilderTools has9flatblockkinds; bodymodel is subject/preview/firm/address/blocks and3localpresets. Newvideo/apps/footer/columns/sections/BrandKit/asset transforms/HTMLchecker/invites/delivery features cannot be represented bycopyingFigma labels into thatmodel. Requires sourceowner+versioned document/Outreach contract inventory first. Preserveexisting savedrevisionstage andprospectorigin restrictions; do not inventserveractions.",
+      "classification": "SUBSTANTIAL_NEW_DESIGN_SCOPE_REQUIRES_VERSIONED_CONTRACT_ALLOCATION",
+      "tests": [
+        "Map each actualnewfamily toownedpersistedfield/action/receipt orhonestunavailability beforeUI.",
+        "Blankcanvas decision; noillustrativesamplecontentsaved.",
+        "Viewerread-only, commentscapability andstage/saveunknown recovery exactlypictured; no realmaildelivery."
+      ]
+    },
+    {
+      "key": "legiwatch",
+      "nodeId": "1064:262084",
+      "title": "LegiWatch Federal/Florida production design",
+      "sourcePaths": [
+        "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx",
+        "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingsScreen.tsx",
+        "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingDetailScreen.tsx",
+        "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationWorkspace.tsx"
+      ],
+      "observed": "119candidateframes: hearings/discovery, committee rooms, notifications, consent/attendance, live/retainedaudio, preparation/Meribrief, reviewedpublication/evidence, updates/reports/operations/news/budget andsharedstates.",
+      "gap": "Currentbroadowners exist. Capture/consent/retainedmedia/AI/governedpublication semantics remain canonicalbackend/runtimeowned; pagebuttons nevergrantcapture authority. Actualviewstates266949 explicitly distinguishread-only/unavailablecapability andretainquery.",
+      "classification": "EXISTING_BROAD_OWNER_NATIVE_CAPABILITY_QUALIFICATION_REQUIRED",
+      "tests": [
+        "Unknown/offcapability hides/disables protectedworkflowwithreason; source readremainsindependent.",
+        "Loading/empty/readfailure/permission notconflated; queryretained.",
+        "Safeofficialplayerfallback/captions/audio coverage gaps andsourceprovenance; no inventedautocapture."
+      ]
+    },
+    {
+      "key": "calendar",
+      "nodeId": "1064:267760",
+      "title": "Master calendar",
+      "sourcePaths": [
+        "apps/web/src/features/modules/calendar/CalendarScreen.tsx",
+        "apps/web/src/features/modules/calendar/CalendarControls.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "observed": "15candidateframes covermonth/week/agenda acrossprofile/masterdesktop,1024 and390plus dropdownstates.1024frame shows meetings/hearings/planner/government/deadlines sourcechips.",
+      "gap": "Forecast/effective-datecoverage truth remains explicit, notillustrativepolicyforecastclaim. Newevent1024 label has no dedicatedeventcreationform incalendarbranch; clarifyreuseofmeetingcreation vsdistincteventsemantics.",
+      "classification": "EXISTING_SCOPE_AND_FEED_OWNERS_DESIGN_FORM_GAP",
+      "tests": [
+        "URLscope/date/view andhealthyfeed retention ononefailedfeed.",
+        "1440/1024 sourcechips/overflow/agenda, currentresource recheckonopen.",
+        "Dateonlypublisherprovenance andunavailableforecast; mobiledeferred."
+      ]
+    }
+  ]
+}

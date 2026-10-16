@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "status": "FOUR_WHOLE_TRAVERSAL_MATCHES",
+  "scope": "Figma read-only semantic custody; not filesystem/Git hash audit or visual/runtime qualification",
+  "hash": "SHA256 over exact JSON.stringify assembled data encoded UTF8; same helper executed in Figma and functions isolate",
+  "knownVectors": [
+    "empty SHA256 e3b0c442...b855",
+    "abc SHA256 ba7816bf...15ad"
+  ],
+  "sections": [
+    {
+      "section": "typed",
+      "assembled": {
+        "sha256": "3b9ca6e71b5fff5071332116551cda5e400088ea2e20155cd5fc404afe575fb9",
+        "utf8Bytes": 757679,
+        "jsCharacters": 755727
+      },
+      "currentTraversal": {
+        "readOnly": true,
+        "controlCount": 3912,
+        "actionCount": 584,
+        "fingerprint": {
+          "sha256": "3b9ca6e71b5fff5071332116551cda5e400088ea2e20155cd5fc404afe575fb9",
+          "utf8Bytes": 757679,
+          "jsCharacters": 755727
+        }
+      },
+      "pass": true
+    },
+    {
+      "section": "shapes",
+      "assembled": {
+        "sha256": "ddcd890f671e6416043749f5c6e382e92cc939acd6883095ab5f7d1830cfeb37",
+        "utf8Bytes": 17032,
+        "jsCharacters": 17024
+      },
+      "currentTraversal": {
+        "readOnly": true,
+        "controlCount": 125,
+        "actionCount": 26,
+        "fingerprint": {
+          "sha256": "ddcd890f671e6416043749f5c6e382e92cc939acd6883095ab5f7d1830cfeb37",
+          "utf8Bytes": 17032,
+          "jsCharacters": 17024
+        }
+      },
+      "pass": true
+    },
+    {
+      "section": "shared",
+      "assembled": {
+        "sha256": "d3858ae52dd9504dc8153153e38d4b1c13338e9e4c54d0daa0cfa5df5af8d087",
+        "utf8Bytes": 155683,
+        "jsCharacters": 155202
+      },
+      "currentTraversal": {
+        "readOnly": true,
+        "groupCount": 17,
+        "instanceCount": 306,
+        "fingerprint": {
+          "sha256": "d3858ae52dd9504dc8153153e38d4b1c13338e9e4c54d0daa0cfa5df5af8d087",
+          "utf8Bytes": 155683,
+          "jsCharacters": 155202
+        }
+      },
+      "pass": true
+    },
+    {
+      "section": "local-variants",
+      "assembled": {
+        "sha256": "7ca84ed43d15684ccc37c88bb3717329f6e7a3cd7fb4f5c461c9fb08c68494c3",
+        "utf8Bytes": 93600,
+        "jsCharacters": 93302
+      },
+      "currentTraversal": {
+        "readOnly": true,
+        "variantCount": 12,
+        "fingerprint": {
+          "sha256": "7ca84ed43d15684ccc37c88bb3717329f6e7a3cd7fb4f5c461c9fb08c68494c3",
+          "utf8Bytes": 93600,
+          "jsCharacters": 93302
+        }
+      },
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "Final traversals match all assembled typed controls/actions, shape reactions, shared semantic groups/memberships and local variants at the final read.",
+    "No immutable Figma version was supplied and these four traversals are not an atomic whole-file snapshot.",
+    "Screenshots/styles/motion and source files are outside these semantic fingerprints.",
+    "The helper and failed projection history are retained; no shell, compiler, app test or browser was started for this check."
+  ]
+}

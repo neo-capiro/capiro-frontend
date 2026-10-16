@@ -7,6 +7,7 @@ import type {
   StrategyNode,
 } from "../../../shared/capiro/operations/strategies-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
+import { currentStrategyStep } from "../../../shared/capiro/strategy-navigation";
 import {
   ActionButton,
   Badge,
@@ -29,10 +30,14 @@ function TimelineView({
   strategy,
   onClose,
   reload,
+  initialStep,
+  onStepClose,
 }: {
   strategy: StrategyDetail;
   onClose: () => void;
   reload: () => void;
+  initialStep?: StrategyNode;
+  onStepClose?: () => void;
 }) {
   const [years, setYears] = useState(3);
   const [startFy, setStartFy] = useState(() =>
@@ -41,7 +46,9 @@ function TimelineView({
       : fiscalYear(new Date()),
   );
   const [flags, setFlags] = useState({ ppbe: true, congress: true });
-  const [step, setStep] = useState<true | StrategyNode>();
+  const [step, setStep] = useState<true | StrategyNode | undefined>(
+    initialStep,
+  );
   const [phasesOpen, setPhasesOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [history, setHistory] = useState(false);
@@ -76,7 +83,7 @@ function TimelineView({
             onValueChange={(value) => setYears(Number(value))}
             options={[1, 2, 3].map((value) => ({
               value: String(value),
-              label: `FY${startFy}${value > 1 ? `–FY${startFy + value - 1}` : ""}`,
+              label: `FY${String(startFy).slice(-2)}${value > 1 ? `–FY${String(startFy + value - 1).slice(-2)}` : ""}`,
             }))}
           />
           <SelectInput
@@ -85,13 +92,10 @@ function TimelineView({
             onValueChange={(value) => setStartFy(Number(value))}
             options={Array.from({ length: 11 }, (_, index) => ({
               value: String(fiscalYear(new Date()) - 3 + index),
-              label: `Start FY${fiscalYear(new Date()) - 3 + index}`,
+              label: `Start FY${String(fiscalYear(new Date()) - 3 + index).slice(-2)}`,
             }))}
           />
         </div>
-        <span className={styles.muted}>
-          Saved {new Date(strategy.lastEditedAt).toLocaleString()}
-        </span>
       </div>
       <header className={styles.heading}>
         <div>
@@ -106,9 +110,9 @@ function TimelineView({
           </ActionButton>
         </div>
       </header>
-      <div className={styles.scope}>
+      <div className={`${styles.scope} ${styles.referenceVisibility}`}>
         <Badge>{objectiveLabels[strategy.type]}</Badge>
-        <div className={styles.pills}>
+        <div className={`${styles.pills} ${styles.referencePills}`}>
           <button
             aria-pressed={flags.ppbe}
             className={flags.ppbe ? styles.active : ""}
@@ -130,6 +134,9 @@ function TimelineView({
           >
             Congress
           </button>
+          <span className={styles.muted}>
+            Saved {new Date(strategy.lastEditedAt).toLocaleString()}
+          </span>
         </div>
       </div>
       <div className={styles.timelineTools}>
@@ -149,7 +156,9 @@ function TimelineView({
           <ActionButton onClick={() => setPhasesOpen(true)}>
             Firm phases
           </ActionButton>
-          <ActionButton onClick={() => setStep(true)}>Add step</ActionButton>
+          <ActionButton primary onClick={() => setStep(true)}>
+            Add step
+          </ActionButton>
         </div>
       </div>
       {(phases.error || references.error) && (
@@ -179,7 +188,10 @@ function TimelineView({
         <StrategyStep
           strategy={strategy}
           node={step === true ? undefined : step}
-          onClose={() => setStep(undefined)}
+          onClose={() => {
+            setStep(undefined);
+            onStepClose?.();
+          }}
           onSaved={reload}
         />
       )}
@@ -267,32 +279,50 @@ function TimelineView({
 export function StrategyTimeline({
   id,
   expectedClientId,
+  requestedStepId,
   onClose,
+  onStepClose,
 }: {
   id: string;
   expectedClientId?: string;
+  requestedStepId?: string;
   onClose: () => void;
+  onStepClose?: () => void;
 }) {
   const query = useCapiroQuery("strategies.detail", { params: { id } });
   const mismatch =
     query.data &&
-    expectedClientId !== undefined &&
-    (query.data.id !== id || query.data.clientId !== expectedClientId);
+    (query.data.id !== id ||
+      (expectedClientId !== undefined &&
+        query.data.clientId !== expectedClientId));
+  const initialStep =
+    query.data && requestedStepId
+      ? currentStrategyStep(query.data.nodes, id, requestedStepId)
+      : undefined;
   const error =
     query.error ??
     (mismatch
       ? "This Strategy is unavailable in the selected client scope."
-      : undefined);
+      : requestedStepId !== undefined && query.data && !initialStep
+        ? "This Strategy step is unavailable in the current Strategy."
+        : undefined);
   return (
-    <StatusPanel loading={query.loading} error={error} onRetry={query.reload}>
-      {!error && !query.loading && query.data && (
-        <TimelineView
-          key={query.data.id}
-          strategy={query.data}
-          onClose={onClose}
-          reload={query.reload}
-        />
+    <>
+      {error && (
+        <ActionButton onClick={onClose}>Back to Strategies</ActionButton>
       )}
-    </StatusPanel>
+      <StatusPanel loading={query.loading} error={error} onRetry={query.reload}>
+        {!error && !query.loading && query.data && (
+          <TimelineView
+            key={`${query.data.id}:${requestedStepId ?? ""}`}
+            strategy={query.data}
+            onClose={onClose}
+            reload={query.reload}
+            initialStep={initialStep}
+            onStepClose={requestedStepId ? onStepClose : undefined}
+          />
+        )}
+      </StatusPanel>
+    </>
   );
 }

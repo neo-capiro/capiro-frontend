@@ -1,8 +1,10 @@
 "use client";
-import { useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { useEffect, useRef, useState } from "react";
 import type { EngagementTask } from "../../../shared/capiro/operations/engagement";
-import { useCapiroQuery } from "../../../shared/capiro/queries";
+import {
+  useCapiroMutation,
+  useCapiroQuery,
+} from "../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
@@ -14,15 +16,24 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
+import { commitmentFields } from "./commitment-fields";
 export function CommitmentView({ clientId }: { clientId: string }) {
-  const api = useCapiro();
+  return <ScopedCommitments key={clientId} clientId={clientId} />;
+}
+function ScopedCommitments({ clientId }: { clientId: string }) {
+  const completion = useCapiroMutation("engagement.task.update");
   const query = useCapiroQuery("engagement.tasks", {
     query: { clientId: clientId || undefined },
   });
   const [status, setStatus] = useState("open"),
     [selected, setSelected] = useState<EngagementTask | "new" | null>(null),
-    [error, setError] = useState<string>(),
-    [busy, setBusy] = useState(false);
+    [formBusy, setFormBusy] = useState(false);
+  const formPending = useRef(false);
+  const busy = completion.pending || formBusy;
+  const changeFormBusy = (pending: boolean) => {
+    formPending.current = pending;
+    setFormBusy(pending);
+  };
   const rows =
     query.data?.filter(
       (task) =>
@@ -32,20 +43,15 @@ export function CommitmentView({ clientId }: { clientId: string }) {
           : task.status === status),
     ) ?? [];
   const complete = async (task: EngagementTask) => {
-    setBusy(true);
-    setError(undefined);
+    if (busy || formPending.current) return;
     try {
-      await api.request("engagement.task.update", {
+      await completion.run({
         params: { id: task.id },
         body: { status: task.status === "done" ? "todo" : "done" },
       });
       query.reload();
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "Unable to update commitment.",
-      );
-    } finally {
-      setBusy(false);
+    } catch {
+      /* The canonical mutation owner displays the current-scope error. */
     }
   };
   return (
@@ -55,6 +61,7 @@ export function CommitmentView({ clientId }: { clientId: string }) {
           className={styles.select}
           aria-label="Commitment status"
           value={status}
+          disabled={busy}
           onChange={(event) => setStatus(event.target.value)}
         >
           <option value="open">Open commitments</option>
@@ -64,14 +71,17 @@ export function CommitmentView({ clientId }: { clientId: string }) {
         <ActionButton
           primary
           className={styles.end}
-          onClick={() => setSelected("new")}
+          disabled={busy}
+          onClick={() => {
+            if (!formPending.current && !busy) setSelected("new");
+          }}
         >
           + New commitment
         </ActionButton>
       </div>
-      {error && (
+      {completion.error && (
         <p role="alert" className={styles.error}>
-          {error}
+          {completion.error.message}
         </p>
       )}
       <StatusPanel
@@ -82,14 +92,16 @@ export function CommitmentView({ clientId }: { clientId: string }) {
         <CommitmentTable
           rows={rows}
           busy={busy}
-          onEdit={setSelected}
+          onEdit={(task) => {
+            if (!formPending.current && !busy) setSelected(task);
+          }}
           onComplete={complete}
         />
       </StatusPanel>
       <Modal
         open={selected !== null}
         onOpenChange={(open) => {
-          if (!open) setSelected(null);
+          if (!open && !formPending.current) setSelected(null);
         }}
         title={selected === "new" ? "New commitment" : "Edit commitment"}
         description="The service preserves the task's client and meeting associations."
@@ -99,8 +111,14 @@ export function CommitmentView({ clientId }: { clientId: string }) {
             key={typeof selected === "object" ? selected.id : "new"}
             task={typeof selected === "object" ? selected : undefined}
             clientId={clientId}
-            onClose={() => setSelected(null)}
-            onSaved={query.reload}
+            onClose={() => {
+              if (!formPending.current) setSelected(null);
+            }}
+            onSaved={() => {
+              query.reload();
+              setSelected(null);
+            }}
+            onBusyChange={changeFormBusy}
           />
         )}
       </Modal>
@@ -112,45 +130,53 @@ function CommitmentForm({
   clientId,
   onClose,
   onSaved,
+  onBusyChange,
 }: {
   task?: EngagementTask;
   clientId: string;
   onClose: () => void;
   onSaved: () => void;
+  onBusyChange: (busy: boolean) => void;
 }) {
-  const api = useCapiro();
+  const mutation = useCapiroMutation(
+    task ? "engagement.task.update" : "engagement.task.create",
+  );
+  const active = useRef(true),
+    pending = useRef(false);
+  useEffect(() => {
+    active.current = true;
+    return () => {
+      active.current = false;
+    };
+  }, []);
   const [title, setTitle] = useState(task?.title ?? ""),
     [description, setDescription] = useState(task?.description ?? ""),
-    [due, setDue] = useState(task?.dueDate?.slice(0, 10) ?? ""),
-    [busy, setBusy] = useState(false),
-    [error, setError] = useState<string>();
+    [due, setDue] = useState(task?.dueDate?.slice(0, 10) ?? "");
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setBusy(true);
-    setError(undefined);
+    if (pending.current) return;
+    pending.current = true;
+    onBusyChange(true);
     try {
-      const body = {
-        title,
-        description,
-        ...(due ? { dueDate: new Date(`${due}T12:00:00`).toISOString() } : {}),
-      };
+      const draft = { title, description, due };
       if (task)
-        await api.request("engagement.task.update", {
+        await mutation.run({
           params: { id: task.id },
-          body: { ...body, dueDate: due ? body.dueDate : null },
+          body: commitmentFields(draft, task),
         });
       else
-        await api.request("engagement.task.create", {
-          body: { ...body, ...(clientId ? { clientId } : {}) },
+        await mutation.run({
+          body: {
+            ...commitmentFields(draft),
+            ...(clientId ? { clientId } : {}),
+          },
         });
-      onSaved();
-      onClose();
-    } catch (cause) {
-      setError(
-        cause instanceof Error ? cause.message : "Unable to save commitment.",
-      );
+      if (active.current) onSaved();
+    } catch {
+      // The canonical mutation owner retains the current-scope error.
     } finally {
-      setBusy(false);
+      pending.current = false;
+      if (active.current) onBusyChange(false);
     }
   };
   return (
@@ -161,6 +187,7 @@ function CommitmentForm({
           required
           maxLength={240}
           value={title}
+          disabled={mutation.pending}
           onChange={(event) => setTitle(event.target.value)}
         />
       </Field>
@@ -168,6 +195,7 @@ function CommitmentForm({
         <TextArea
           id="commitment-description"
           value={description}
+          disabled={mutation.pending}
           onChange={(event) => setDescription(event.target.value)}
         />
       </Field>
@@ -176,19 +204,24 @@ function CommitmentForm({
           type="date"
           id="commitment-due"
           value={due}
+          disabled={mutation.pending}
           onChange={(event) => setDue(event.target.value)}
         />
       </Field>
-      {error && (
+      {mutation.error && (
         <p role="alert" className={styles.error}>
-          {error}
+          {mutation.error.message}
         </p>
       )}
       <div className={styles.footer}>
-        <ActionButton type="button" onClick={onClose}>
+        <ActionButton
+          type="button"
+          disabled={mutation.pending}
+          onClick={onClose}
+        >
           Cancel
         </ActionButton>
-        <ActionButton primary type="submit" disabled={busy}>
+        <ActionButton primary type="submit" disabled={mutation.pending}>
           Save commitment
         </ActionButton>
       </div>
@@ -217,7 +250,11 @@ function CommitmentTable({
           key: "task",
           label: "Commitment",
           render: (row) => (
-            <button className={styles.name} onClick={() => setSelected(row)}>
+            <button
+              className={styles.name}
+              disabled={busy}
+              onClick={() => setSelected(row)}
+            >
               {row.title}
             </button>
           ),
