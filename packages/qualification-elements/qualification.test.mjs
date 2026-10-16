@@ -10,7 +10,7 @@ import { tmpdir } from 'node:os';
 import { verifySSRReceipt } from './ssr-build.mjs';
 import { checkSSRDeadline } from './ssr-runtime.mjs';
 import ts from 'typescript';
-import { sourceRecords, ownedFiles, readSource, uiRoot, workspaceRoot, dependencyRoot, verifyPromotedSources } from './sources.mjs';
+import { sourceRecords, ownedFiles, readSource, uiRoot, workspaceRoot, dependencyRoot, verifyPromotedSources, adoptedFiles, projectUiSources } from './sources.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -108,6 +108,33 @@ function inspectClosure(sourceMap) {
   for (const name of ['conversation', 'message', 'prompt-input']) visit(`src/ai-elements/${name}.tsx`);
   return { files: [...visited].sort(), external: [...external].sort() };
 }
+
+function inspectAdoptedClosure(sourceMap, roots) {
+  const visited = new Set(), external = new Set();
+  const visit = name => {
+    if (visited.has(name)) return;
+    const text = sourceMap.get(name); assert.equal(typeof text, 'string', `missing reachable source ${name}`); visited.add(name);
+    const file = ts.createSourceFile(name, text, ts.ScriptTarget.ES2022, true, name.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
+    for (const statement of file.statements) {
+      if (!ts.isImportDeclaration(statement)) continue;
+      const specifier = statement.moduleSpecifier.text;
+      if (specifier.startsWith('.')) {
+        const stem = posix.normalize(posix.join(posix.dirname(name), specifier));
+        const target = [stem + '.ts', stem + '.tsx'].filter(x => sourceMap.has(x));
+        assert.equal(target.length, 1, `missing reachable source ${stem}`); visit(target[0]);
+      } else {
+        assert.ok(!specifier.startsWith('http') && !specifier.includes(':'), `unexpected runtime source ${specifier}`);
+        if (specifier === 'ai') assert.equal(statement.importClause?.isTypeOnly, true, 'AI SDK must be type-only in adopted files');
+        else assert.ok(!forbidden.test(specifier), `forbidden orchestration/provider import ${specifier}`);
+        external.add(specifier);
+      }
+    }
+  };
+  for (const name of roots) visit(name);
+  return { files: [...visited].sort(), external: [...external].sort() };
+}
+
+const ADDITION_EXPORTS = { './tool': './src/ai-elements/tool.tsx', './artifact': './src/ai-elements/artifact.tsx', './attachments': './src/ai-elements/attachments.tsx', './confirmation': './src/ai-elements/confirmation.tsx', './plan': './src/ai-elements/plan.tsx', './sources': './src/ai-elements/sources.tsx', './queue': './src/ai-elements/queue.tsx', './checkpoint': './src/ai-elements/checkpoint.tsx', './file-tree': './src/ai-elements/file-tree.tsx', './task': './src/ai-elements/task.tsx', './web-preview': './src/ai-elements/web-preview.tsx', './badge': './src/shadcn/badge.tsx', './collapsible': './src/shadcn/collapsible.tsx', './alert': './src/shadcn/alert.tsx', './card': './src/shadcn/card.tsx', './scroll-area': './src/shadcn/scroll-area.tsx', './output-block': './src/output-block.tsx', './streaming-text': './src/streaming-text.tsx' };
 
 {
   const ssr = onceSSROutcome(() => {
@@ -243,13 +270,63 @@ function inspectClosure(sourceMap) {
     const closure = inspectClosure(sources); assert.deepEqual(closure.files, vendorFiles());
     const p = json('../ui/package.json');
     const declared = { ...p.dependencies, ...p.peerDependencies };
-    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx' });
+    assert.deepEqual(p.exports, { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './markdown': './src/markdown.tsx', './tooltip': './src/shadcn/tooltip.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx', ...ADDITION_EXPORTS });
     assert.equal(json('package.json').dependencies['@capiro/ui'], '0.0.0');
     for (const name of closure.external) assert.ok(Object.hasOwn(declared, name), `undeclared dependency ${name}`);
     const bad = new Map(sources); bad.set('src/ai-elements/conversation.tsx', sources.get('src/ai-elements/conversation.tsx') + '\nimport {generateText} from "ai";');
     assert.throws(() => inspectClosure(bad), /type-only/);
     const missing = new Map(sources); missing.delete('src/shadcn/input.tsx');
     assert.throws(() => inspectClosure(missing), /missing reachable source/);
+  });
+
+  test('additional upstream sources inverse-verify to the pinned upstream blobs with four exact owner adaptations', () => {
+    const provenance = verifyPromotedSources(HERE);
+    assert.equal(provenance.sources.length, 17, 'original seventeen retained');
+    assert.equal(provenance.additions.length, 16);
+    assert.equal(provenance.aiElementsCommit, json('component-pins.json').upstream.commit);
+    assert.deepEqual(provenance.additions.map(x => x.promotedPath).sort(), Object.values(ADDITION_EXPORTS).filter(x => !x.startsWith('./src/output-block') && !x.startsWith('./src/streaming-text')).map(x => x.slice(2)).sort(), 'every addition is a public export');
+    const adapted = provenance.additions.filter(x => x.adaptation).map(x => x.promotedPath).sort();
+    assert.deepEqual(adapted, ['src/ai-elements/attachments.tsx', 'src/ai-elements/file-tree.tsx', 'src/ai-elements/plan.tsx', 'src/ai-elements/tool.tsx']);
+    for (const row of provenance.additions) {
+      const text = readFileSync(join(UI, row.promotedPath), 'utf8');
+      assert.doesNotMatch(text, /from "\.\/(?:code-block|shimmer)"/, 'deferred upstream modules are not referenced');
+      if (row.adaptation) { assert.match(text, /^"use client";\n\n\/\/ Meri Fable owner adaptation/); assert.equal(row.adaptation.importsExports, 'Preserved'); }
+      else assert.doesNotMatch(text, /owner adaptation/);
+    }
+    assert.match(readFileSync(join(UI, 'src/ai-elements/tool.tsx'), 'utf8'), /<OutputBlock text=\{output\} \/>/);
+    assert.match(readFileSync(join(UI, 'src/output-block.tsx'), 'utf8'), /data-slot="tool-output-block"/);
+    const cloneWorkspace = mkdtempSync(join(tmpdir(), 'capiro-ui-additions-'));
+    const clone = join(cloneWorkspace, 'packages/qualification-elements');
+    for (const name of ownedFiles(HERE)) { const path = join(cloneWorkspace, name); mkdirSync(dirname(path), { recursive: true }); copyFileSync(join(workspaceRoot(HERE), name), path); }
+    const provenancePath = join(cloneWorkspace, 'packages/ui/provenance.json');
+    const mutate = (change, pattern) => {
+      const copy = structuredClone(provenance); change(copy);
+      writeFileSync(provenancePath, JSON.stringify(copy, null, 2) + '\n');
+      assert.throws(() => verifyPromotedSources(clone), pattern);
+    };
+    mutate(p => { p.additions[0].upstreamSha256 = '0'.repeat(64); p.additions[0].localSha256 = '0'.repeat(64); }, /only recorded specifiers and adaptation edits changed/);
+    mutate(p => { p.additions.find(x => x.adaptation).adaptation.edits.pop(); }, /AssertionError/);
+    mutate(p => { p.additions.pop(); }, /recorded additions and explicitly inventoried project UI sources/);
+    mutate(p => { p.additions[0].importSpecifierChanges = []; }, /only recorded specifiers and adaptation edits changed/);
+    writeFileSync(provenancePath, readSource(HERE, 'packages/ui/provenance.json'));
+    const toolPath = join(cloneWorkspace, 'packages/ui/src/ai-elements/tool.tsx'), toolRaw = readSource(HERE, 'packages/ui/src/ai-elements/tool.tsx');
+    writeFileSync(toolPath, toolRaw.toString('utf8').replace('// Meri Fable owner adaptation', '// Removed owner adaptation'));
+    assert.throws(() => verifyPromotedSources(clone));
+    writeFileSync(toolPath, toolRaw);
+    verifyPromotedSources(clone);
+  });
+
+  test('every adopted root, including additions, closes over adopted and project-authored UI sources only', () => {
+    const files = adoptedFiles(HERE);
+    assert.equal(files.length, 33);
+    const sources = new Map([...files, ...projectUiSources()].map(name => [name, readFileSync(join(UI, name), 'utf8')]));
+    const closure = inspectAdoptedClosure(sources, files);
+    assert.deepEqual(closure.files, [...files, 'src/output-block.tsx', 'src/streaming-text.tsx'].sort(), 'markdown.tsx is not reachable from adopted sources');
+    const p = json('../ui/package.json'), declared = { ...p.dependencies, ...p.peerDependencies };
+    for (const name of closure.external) assert.ok(Object.hasOwn(declared, name), `undeclared dependency ${name}`);
+    for (const name of ['motion/react', 'shiki', 'tokenlens', 'ansi-to-react']) assert.ok(!closure.external.includes(name), `deferred dependency ${name}`);
+    const bad = new Map(sources); bad.set('src/ai-elements/tool.tsx', sources.get('src/ai-elements/tool.tsx') + '\nimport { CodeBlock } from "./code-block";');
+    assert.throws(() => inspectAdoptedClosure(bad, files), /missing reachable source/);
   });
 
   test('allocated package closure and every non-self artifact hash match actual files', () => {
@@ -265,8 +342,10 @@ function inspectClosure(sourceMap) {
   test('project-authored UI inventory rejects extra sources and binds source and manifest hashes', () => {
     const pins = json('promotion-pins.json');
     const projectPath = 'packages/ui/src/markdown.tsx';
-    assert.deepEqual(pins.projectAuthoredUi, pins.artifacts.filter(x => x.path === projectPath));
-    assert.equal(pins.projectAuthoredUi.length, 1);
+    const projectPaths = projectUiSources().map(path => `packages/ui/${path}`);
+    assert.deepEqual(projectPaths, [projectPath, 'packages/ui/src/output-block.tsx', 'packages/ui/src/streaming-text.tsx']);
+    assert.deepEqual(pins.projectAuthoredUi, pins.artifacts.filter(x => projectPaths.includes(x.path)));
+    assert.equal(pins.projectAuthoredUi.length, 3);
     const cloneWorkspace = mkdtempSync(join(tmpdir(), 'capiro-ui-inventory-'));
     const clone = join(cloneWorkspace, 'packages/qualification-elements');
     for (const name of ownedFiles(HERE)) { const path = join(cloneWorkspace, name); mkdirSync(dirname(path), { recursive: true }); copyFileSync(join(workspaceRoot(HERE), name), path); }

@@ -1,5 +1,6 @@
 import { Button } from "@capiro/ui/button";
 import styles from "./fixture.module.css";
+import Link from "next/link";
 
 export function MeriFixtureEntry() {
   return (
@@ -19,10 +20,10 @@ export function MeriFixtureEntry() {
       </p>
       <div className={styles.links}>
         <Button asChild className={styles.open}>
-          <a href="/meri/fixture/home">Open Meri Home fixture</a>
+          <Link href="/meri/fixture/home">Open Meri Home fixture</Link>
         </Button>
         <Button asChild variant="outline" className={styles.openSecondary}>
-          <a href="/meri/fixture/cited-answer">Open cited answer</a>
+          <Link href="/meri/fixture/cited-answer">Open cited answer</Link>
         </Button>
       </div>
       <p className={styles.note}>

@@ -8,6 +8,14 @@
   --input: #e7e5e4;
   --radius: 10px;
   --border-strong: #d6d3d1;
+  --subtle-foreground: #a8a29e;
+  /* Meri/Status semantic tones (Figma 3.4 441:81475); independent of evidence quality. */
+  --success: #3d6b4f;
+  --success-subtle: #e7efe9;
+  --warning-text: #6c5226;
+  --warning-subtle: #f3eee2;
+  --destructive-text: #652424;
+  --destructive-subtle: #f3e7e5;
   --font-newsreader: "Newsreader", serif;
   font-family: var(--font-geist-sans), Arial, sans-serif;
   color: var(--foreground);

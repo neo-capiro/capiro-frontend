@@ -9,6 +9,8 @@ const fixedParameters = Object.freeze({
   ExistingAppUrl: origin,
   TrackerBackend: 'intelligence',
 });
+const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
+const optionalBindings = ['meriApiBaseUrl', 'meriConversationWorkflowEnabled'];
 const patterns = Object.freeze({
   clerkIssuer: /^https:\/\/[a-z0-9-]+\.clerk\.accounts\.dev$/,
   clerkApplicationId: /^app_[A-Za-z0-9]{8,80}$/,
@@ -17,18 +19,36 @@ const patterns = Object.freeze({
   clerkKeyArn: /^arn:aws:kms:us-east-1:967807252336:key\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
 });
 
-function closedRecord(input, keys, code) {
+function closedRecord(input, keys, code, optionalKeys = []) {
+  const ownKeys = input && typeof input === 'object' ? Reflect.ownKeys(input) : [];
   if (!input || typeof input !== 'object' || Array.isArray(input)
       || Object.getPrototypeOf(input) !== Object.prototype
-      || Object.keys(input).sort().join('|') !== [...keys].sort().join('|')
-      || keys.some(key => !Object.hasOwn(Object.getOwnPropertyDescriptor(input, key), 'value'))) {
+      || keys.some(key => !Object.hasOwn(input, key))
+      || ownKeys.some(key => typeof key !== 'string' || (!keys.includes(key) && !optionalKeys.includes(key)))
+      || ownKeys.some(key => !Object.hasOwn(Object.getOwnPropertyDescriptor(input, key), 'value'))) {
     throw Error(code);
   }
 }
 
+function readMeriConfiguration(bindings) {
+  const baseUrl = Object.hasOwn(bindings, 'meriApiBaseUrl') ? bindings.meriApiBaseUrl : '';
+  const enabled = Object.hasOwn(bindings, 'meriConversationWorkflowEnabled')
+    ? bindings.meriConversationWorkflowEnabled : false;
+  if (typeof baseUrl !== 'string' || baseUrl.length > 512
+      || (baseUrl !== '' && !meriOriginPattern.test(baseUrl))) throw Error('PREVIEW_MERI_ORIGIN_INVALID');
+  if (baseUrl) {
+    try {
+      if (new URL(baseUrl).origin !== baseUrl) throw Error();
+    } catch { throw Error('PREVIEW_MERI_ORIGIN_INVALID'); }
+  }
+  if (typeof enabled !== 'boolean') throw Error('PREVIEW_MERI_FLAG_INVALID');
+  if (enabled && !baseUrl) throw Error('PREVIEW_MERI_ORIGIN_REQUIRED');
+  return { baseUrl, enabled };
+}
+
 /** Public metadata only. This does not read credentials or establish application authority. */
 export function renderPreviewConfiguration(bindings) {
-  closedRecord(bindings, Object.keys(patterns), 'PREVIEW_BINDINGS_SHAPE');
+  closedRecord(bindings, Object.keys(patterns), 'PREVIEW_BINDINGS_SHAPE', optionalBindings);
   for (const [name, pattern] of Object.entries(patterns)) {
     const value = bindings[name];
     if (typeof value !== 'string' || value.length > 1024
@@ -36,8 +56,11 @@ export function renderPreviewConfiguration(bindings) {
       throw Error(`PREVIEW_BINDING_INVALID:${name}`);
     }
   }
+  const meri = readMeriConfiguration(bindings);
   const values = {
     ...fixedParameters,
+    MeriApiBaseUrl: meri.baseUrl,
+    MeriConversationWorkflowEnabled: String(meri.enabled),
     ClerkPublishableKeySecretArn: bindings.clerkPublishableKeyArn,
     ClerkSecretKeySecretArn: bindings.clerkSecretArn,
     ClerkKmsKeyArn: bindings.clerkKeyArn,
@@ -56,7 +79,8 @@ export function renderPreviewConfiguration(bindings) {
       CAPIRO_EXISTING_APP_URL: origin,
       TRACKER_BACKEND: 'intelligence',
       ONBOARD_API_BASE_URL: '',
-      MERI_API_BASE_URL: '',
+      MERI_API_BASE_URL: meri.baseUrl,
+      MERI_CONVERSATION_WORKFLOW_ENABLED: String(meri.enabled),
       MERI_ACTION_WORKFLOW_ENABLED: 'false',
       MERI_DOCUMENT_WORKFLOW_ENABLED: 'false',
       MERI_DOCUMENT_OPERATION: '',
@@ -71,7 +95,9 @@ export function renderPreviewConfiguration(bindings) {
       requiredEnvironment: 'test',
     },
     holds: ['strategy', 'onboard', 'meri'],
-    activationStatus: 'unverified; all backend services held at zero; not a complete apply request',
+    activationStatus: meri.enabled
+      ? 'unverified; Meri service and model readiness not established; not a complete apply request'
+      : 'unverified; all backend services held at zero; not a complete apply request',
   };
 }
 

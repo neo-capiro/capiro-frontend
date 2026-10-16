@@ -1,0 +1,24 @@
+/*
+ * Figma 10.19–10.24 and 10.35 final phone frames: 16px content inset and rhythm, and a page-level
+ * heading action below the copy, closed by a divider. Apply `.page` next to meri-ui `.page`;
+ * desktop and tablet rendering is unchanged. (The 26px phone title belongs to meri-ui.)
+ */
+@media (max-width: 680px) {
+  div.page {
+    padding: 16px;
+    gap: 16px;
+  }
+  .page > header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  /* The heading aside holds only the hidden wordmark unless the page has an action. */
+  .page > header > :last-child:not(:has(> a, > button)) {
+    display: none;
+  }
+  .page > header > :last-child:has(> a, > button) {
+    align-self: stretch;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+}

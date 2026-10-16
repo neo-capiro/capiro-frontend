@@ -1,0 +1,279 @@
+/* Figma 3.4 12 · Tooling coverage page layouts (desktop 1208px content column). */
+.tileGrid,
+.formatGrid {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tileGrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+}
+.formatGrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 24px;
+}
+.tileGrid > li > *,
+.formatGrid > li > * {
+  height: 100%;
+}
+.librarySearch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 12px;
+  align-items: start;
+}
+.section,
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+.section {
+  gap: 12px;
+}
+.section > section,
+.stack > [role="group"] {
+  width: 100%;
+}
+.stack > [role="group"] {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.fill {
+  width: 100%;
+}
+.fill > div {
+  width: 100%;
+}
+.titleL {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+.titleS {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.07px;
+}
+.body {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.split[data-ratio="wide"] {
+  grid-template-columns: minmax(0, 720px) minmax(0, 416px);
+}
+.conversation {
+  gap: 16px;
+}
+.codeArtifact {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.code {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+}
+.code figcaption,
+.code pre,
+.output {
+  margin: 0;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.files,
+.plainList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.files li {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.plainList {
+  gap: 0;
+}
+.composer {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.promptBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--muted);
+}
+.promptBox textarea {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  resize: vertical;
+  field-sizing: content;
+}
+.promptBox textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 4px;
+}
+.requestAside {
+  gap: 16px;
+  padding: 20px;
+}
+.sourceRecord {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+.sourceRecord h2 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+.sourceRecord blockquote {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+}
+.sourceRecord p {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+  color: var(--muted-foreground);
+}
+.matrixCell {
+  display: flex;
+  flex-direction: column;
+  color: var(--muted-foreground);
+}
+.matrixCell > :first-child {
+  color: var(--foreground);
+}
+.draftRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+}
+.summary {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--muted);
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+@media (max-width: 960px) {
+  .librarySearch,
+  .split,
+  .split[data-ratio="wide"],
+  .draftRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* Phone back target (Figma "Meri/Mobile icon action · Back"); hidden above phone width. */
+.mobileBack {
+  display: none;
+}
+/* Figma "Workflow library · Tablet": two tile columns beside the tablet sidebar. */
+@media (max-width: 1100px) {
+  .tileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  }
+}
+/* Figma 02 · Responsive phone frames: 16px rhythm, Title L heading, icon Back. */
+@media (max-width: 680px) {
+  .toolingPage {
+    gap: 16px;
+  }
+  .mobileBack {
+    display: flex;
+  }
+  .mobileBack > * {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .mobileBack svg {
+    width: 20px;
+    height: 20px;
+  }
+  .desktopBack {
+    display: none;
+  }
+  .composer,
+  .requestAside {
+    padding: 16px;
+  }
+  /* Phone setup frames show the setup sheet edge to edge. */
+  div.setupPage {
+    padding: 0;
+  }
+  .promptBox {
+    padding: 12px;
+  }
+}

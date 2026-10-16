@@ -80,6 +80,7 @@
   font-weight: 500;
   letter-spacing: -0.07px;
   white-space: nowrap;
+  text-decoration: none;
 }
 .newConversation {
   --meri-icon-filter: brightness(0) invert(1);
@@ -154,6 +155,13 @@
     --border: #242424;
     --input: #242424;
     --border-strong: #5b514b;
+    /* Status tones for dark surfaces (provisional: Figma 3.4 defines no dark status variables). */
+    --success: #93c4a5;
+    --success-subtle: #1d2a22;
+    --warning-text: #e2c48e;
+    --warning-subtle: #2c2618;
+    --destructive-text: #eba3a3;
+    --destructive-subtle: #2e1d1d;
     --meri-icon-filter: brightness(0) invert(1);
     color: var(--foreground);
     color-scheme: dark;
@@ -166,14 +174,6 @@
   .main {
     background: linear-gradient(153.8deg, #242424, #0a0a0a);
   }
-  .currentDestination {
-    background: linear-gradient(173.738deg, #242424, #0a0a0a);
-  }
-  .newConversation {
-    --meri-icon-filter: brightness(0);
-    color: #0a0a0a;
-    background: #f5f5f4;
-  }
 }
 @media (max-width: 900px) {
   .brand {
@@ -183,19 +183,130 @@
   .globalActions {
     gap: 2px;
   }
+}
+/*
+ * Figma 10.02/10.03 tablet: the sidebar collapses to an icon rail; labels remain accessible names.
+ * The final tablet frames (10.25–10.27, 10.36) keep New conversation as the filled 40px tile.
+ */
+@media (min-width: 681px) and (max-width: 1100px) {
   .sidebar {
-    flex-basis: 210px;
-    width: 210px;
-    padding: 12px 5px;
+    flex-basis: 72px;
+    width: 72px;
+    padding: 16px;
+    align-items: center;
+  }
+  .navButton,
+  .newConversation {
+    width: 40px;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+    font-size: 0;
+  }
+  .divider,
+  .recents,
+  .preferences {
+    display: none;
+  }
+  /* Recommendation actions has no authored icon; the rail marks it with the Meri sparkle. */
+  .destinations > a::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("/design/home/sparkle.svg") center / 16px 16px no-repeat;
   }
 }
 @media (max-width: 680px) {
+  /* Figma 10.19–10.24: an outlined "Workspace menu" button opens the menu in the content inset. */
   .mobileNavigation {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 16px 0;
+    background: var(--card);
+  }
+  .menuToggle {
+    height: 36px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
     gap: 8px;
-    padding: 8px 12px;
+    border: 1px solid var(--input);
+    border-radius: 10px;
+    background: var(--card);
+    box-shadow: 0 1px 2px #0c0a090d;
+    color: var(--foreground);
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: -0.07px;
+    white-space: nowrap;
+  }
+  .menuToggle svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 120ms;
+  }
+  .menuToggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+  .mobileMenu {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
+  }
+  .mobileItem,
+  .mobileNewConversation {
+    width: 100%;
+    height: 36px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--foreground);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.07px;
+    white-space: nowrap;
+    text-align: left;
+    text-decoration: none;
+  }
+  .mobileItem:disabled {
+    opacity: 0.6;
+  }
+  .mobileItem[aria-current="page"] {
+    border: 1px solid var(--input);
+    background: var(--card);
+    box-shadow: 0 1px 2px #0c0a090d;
+  }
+  .mobileNewConversation {
+    --meri-icon-filter: brightness(0) invert(1);
+    color: white;
+    background: linear-gradient(176.49deg, #242424, #0a0a0a);
+    box-shadow:
+      0 1px 2px #0c0a0924,
+      inset 0 1px #ffffff24;
+  }
+  .mobileDivider {
+    height: 1px;
+    background: var(--border);
+  }
+  .mobileRecentLabel {
+    font-size: 11px;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: 0.66px;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
   }
   .brand {
     width: 77px;
@@ -203,5 +314,21 @@
   }
   .sidebar {
     display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menuToggle svg {
+    transition: none;
+  }
+}
+@media (max-width: 680px) and (prefers-color-scheme: dark) {
+  /* The menu row sits in the content inset, so it continues the top of the main surface. */
+  .mobileNavigation {
+    background: linear-gradient(90deg, #242424, #212121);
+  }
+  .mobileNewConversation {
+    --meri-icon-filter: brightness(0);
+    color: #0a0a0a;
+    background: #f5f5f4;
   }
 }

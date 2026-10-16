@@ -16,6 +16,8 @@ import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage
 import { ObjectiveCalendarDestination } from "../../src/features/portfolio/calendar/ObjectiveCalendarDestination";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHomeFixture } from "../../src/features/meri/fixtures/MeriHomeFixture";
+import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
+import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
@@ -26,6 +28,7 @@ import { CapiroBoundary } from "../../src/shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../src/shared/capiro/queries";
 import { ModuleShell } from "../../src/shared/shell/ModuleShell";
 import { SettingsScreen } from "../../src/features/settings";
+import { MeriPreferencesPanel } from "../../src/features/meri/screens/settings/MeriPreferencesPanel";
 import { ModuleScreen } from "../../src/features/modules/ModuleScreen";
 import { ModuleHub } from "../../src/features/modules/hub/ModuleHub";
 import type { ModuleSlug } from "../../src/shared/shell/module-catalog";
@@ -104,13 +107,32 @@ function RoutedApp() {
     );
   if (path === "/meri/fixture/home")
     return (
-      <ProductShell fixture>
+      <ProductShell fixture pendingApprovals={pendingApprovals()}>
         <MeriHomeFixture />
+      </ProductShell>
+    );
+  // Mirrors src/app/meri/fixture/[screen]/page.tsx for registered fixture screens.
+  const fixtureScreen = path.startsWith("/meri/fixture/")
+    ? findFixtureScreen(path.slice("/meri/fixture/".length))
+    : undefined;
+  if (fixtureScreen)
+    return (
+      <ProductShell
+        fixture
+        designTarget={fixtureScreen.figmaNode}
+        section={fixtureScreen.section}
+        pendingApprovals={pendingApprovals(fixtureScreen.slug)}
+      >
+        <fixtureScreen.Screen />
       </ProductShell>
     );
   if (path === "/meri")
     return (
-      <ProductShell>
+      <ProductShell
+        conversationEnabled={
+          sessionStorage.getItem("meri-conversation-enabled") === "true"
+        }
+      >
         <RequireSession>
           <MeriHome
             conversationEnabled={
@@ -153,7 +175,7 @@ function RoutedApp() {
   const configured = path !== "/__test/unconfigured";
   const isSettings = path.startsWith("/settings");
   const slug = path.split("/")[2] as ModuleSlug;
-  const module = path.startsWith("/modules/") ? (
+  const moduleView = path.startsWith("/modules/") ? (
     <ModuleScreen module={slug} />
   ) : (
     <ModuleHub />
@@ -181,9 +203,12 @@ function RoutedApp() {
             ) : path === "/__test/strategy-proposal-refresh" ? (
               <ProposalRefreshProbe />
             ) : isSettings ? (
-              <SettingsScreen section={path.split("/")[2]} />
+              <SettingsScreen
+                section={path.split("/")[2]}
+                meriPreferences={<MeriPreferencesPanel />}
+              />
             ) : path.startsWith("/modules") ? (
-              module
+              moduleView
             ) : (
               <SessionProbe />
             )}

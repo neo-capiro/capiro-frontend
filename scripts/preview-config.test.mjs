@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { copyFileSync, mkdtempSync, readFileSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -17,20 +17,52 @@ const bindings = {
 const script = 'apps/web/deployment/portfolio/preview-config.mjs';
 const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8');
 
-test('preview proposes only the three published owners; unavailable services stay disabled', () => {
+test('preview proposes held Meri defaults while unavailable services stay disabled', () => {
   const p = renderPreviewConfiguration(bindings);
   assert.equal(p.environment.CORE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/api');
   assert.equal(p.environment.WORKSPACE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/workspace-api');
   assert.equal(p.environment.INTELLIGENCE_API_BASE_URL, 'https://portfolio-preview.app.capiro.ai/intel-api');
   for (const name of ['STRATEGY_API_BASE_URL', 'ONBOARD_API_BASE_URL', 'MERI_API_BASE_URL', 'MERI_DOCUMENT_OPERATION']) assert.equal(p.environment[name], '');
   assert.equal(p.environment.MERI_ACTION_WORKFLOW_ENABLED, 'false');
+  assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'false');
   assert.equal(p.environment.MERI_DOCUMENT_WORKFLOW_ENABLED, 'false');
-  assert.equal(p.parameters.length, 9);
+  assert.equal(p.parameters.length, 11);
+  assert.deepEqual(p.parameters.filter(item => item.ParameterKey.startsWith('Meri')), [
+    { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
+    { ParameterKey: 'MeriConversationWorkflowEnabled', ParameterValue: 'false' },
+  ]);
   assert.equal(p.clerkMetadata.requiredEnvironment, 'test');
   assert.match(p.activationStatus, /held at zero/);
   assert.equal(Object.hasOwn(p.environment, 'CLERK_SECRET_KEY'), false);
   assert.equal(p.secretReferences.CLERK_SECRET_KEY, bindings.clerkSecretArn);
   validatePreviewParameters(p.parameters.toReversed(), bindings);
+});
+
+test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
+  assert.throws(() => renderPreviewConfiguration({ ...bindings, meriConversationWorkflowEnabled: true }), /PREVIEW_MERI_ORIGIN_REQUIRED/);
+  for (const meriApiBaseUrl of [null, 1, 'http://meri.example.test', 'https://meri.example.test/',
+    'https://meri.example.test/path', 'https://user@meri.example.test', 'https://meri.example.test?x=1',
+    'https://meri.example.test#part', 'https://meri..example.test', 'https://MERI.example.test',
+    'https://127.0.0.1']) {
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, meriApiBaseUrl }), /PREVIEW_MERI_ORIGIN_INVALID/);
+  }
+  for (const meriConversationWorkflowEnabled of [null, 1, 'true']) {
+    assert.throws(() => renderPreviewConfiguration({ ...bindings, meriConversationWorkflowEnabled }), /PREVIEW_MERI_FLAG_INVALID/);
+  }
+});
+
+test('explicit Meri origin and opt-in form one exact, reviewable parameter proposal', () => {
+  const optedIn = { ...bindings, meriApiBaseUrl: 'https://meri-preview.example.test', meriConversationWorkflowEnabled: true };
+  const p = renderPreviewConfiguration(optedIn);
+  assert.equal(p.environment.MERI_API_BASE_URL, optedIn.meriApiBaseUrl);
+  assert.equal(p.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'true');
+  assert.equal(p.holds.includes('meri'), true);
+  assert.match(p.activationStatus, /readiness not established/);
+  validatePreviewParameters(p.parameters.toReversed(), optedIn);
+  assert.throws(() => validatePreviewParameters(p.parameters, bindings), /PREVIEW_PARAMETER_MISMATCH/);
+  const held = renderPreviewConfiguration({ ...optedIn, meriConversationWorkflowEnabled: false });
+  assert.equal(held.environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'false');
+  assert.equal(held.holds.includes('meri'), true);
 });
 
 test('preview rejects unknown, missing, credential-valued and production Clerk bindings', () => {
@@ -40,6 +72,8 @@ test('preview rejects unknown, missing, credential-valued and production Clerk b
     { ...bindings, clerkIssuer: `${bindings.clerkIssuer}/` }, { ...bindings, clerkApplicationId: ' app_syntheticpreview' }]) {
     assert.throws(() => renderPreviewConfiguration(invalid), /PREVIEW_BIND/);
   }
+  const getter = Object.defineProperty({ ...bindings }, 'meriApiBaseUrl', { get() { throw Error('getter executed'); } });
+  assert.throws(() => renderPreviewConfiguration(getter), /PREVIEW_BINDINGS_SHAPE/);
 });
 
 test('preview rejects retained or overridden production parameters and ambiguous sets', () => {
@@ -62,6 +96,18 @@ test('preview template constrains every explicit configuration value and keeps h
       assert.equal(typeof pattern, 'string', item.ParameterKey);
       assert.match(item.ParameterValue, new RegExp(pattern));
       assert.doesNotMatch('sk_live_synthetic', new RegExp(pattern));
+    } else if (item.ParameterKey === 'MeriApiBaseUrl') {
+      assert.match(block, /Default: ""/);
+      const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
+      assert.match(item.ParameterValue, new RegExp(pattern));
+      assert.match('https://meri-preview.example.test', new RegExp(pattern));
+      assert.doesNotMatch('http://meri-preview.example.test', new RegExp(pattern));
+      assert.doesNotMatch('https://meri-preview.example.test/path', new RegExp(pattern));
+      assert.doesNotMatch('https://127.0.0.1', new RegExp(pattern));
+    } else if (item.ParameterKey === 'MeriConversationWorkflowEnabled') {
+      assert.match(block, /Default: "false"/);
+      const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
+      assert.deepEqual(allowed, ['false', 'true']);
     } else {
       const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
       assert.deepEqual(allowed, [item.ParameterValue], item.ParameterKey);
@@ -69,8 +115,10 @@ test('preview template constrains every explicit configuration value and keeps h
   }
   assert.doesNotMatch(template, /https:\/\/os\.capiro\.ai/);
   for (const [name, value] of Object.entries(p.environment).filter(([name]) => /^(ONBOARD_|MERI_)/.test(name))) {
-    assert.match(template, new RegExp(`- Name: ${name}\\n +Value: "${value}"`));
+    const parameter = { MERI_API_BASE_URL: 'MeriApiBaseUrl', MERI_CONVERSATION_WORKFLOW_ENABLED: 'MeriConversationWorkflowEnabled' }[name];
+    assert.match(template, new RegExp(`- Name: ${name}\\n +Value: ${parameter ? `!Ref ${parameter}` : `"${value}"`}`));
   }
+  assert.match(template, /MeriConversationRequiresOrigin:\n +RuleCondition: !Equals \[!Ref MeriConversationWorkflowEnabled, "true"\]\n +Assertions:\n +- Assert: !Not \[!Equals \[!Ref MeriApiBaseUrl, ""\]\]/);
 });
 
 test('preview CLI is import-safe, ignores hostile ambient values and never echoes rejected secrets', () => {
@@ -84,7 +132,11 @@ test('preview CLI is import-safe, ignores hostile ambient values and never echoe
   try {
     const input = join(dir, 'bindings.json');
     const alias = join(dir, 'preview-entry.mjs');
-    symlinkSync(resolve(script), alias);
+    try { symlinkSync(resolve(script), alias); }
+    catch (error) {
+      if (process.platform !== 'win32' || error?.code !== 'EPERM') throw error;
+      copyFileSync(resolve(script), alias); // Windows sandbox can deny symlink creation.
+    }
     const aliasHelp = run([alias, '--help']);
     assert.equal(aliasHelp.status, 0); assert.match(aliasHelp.stdout, /Usage:/);
     assert.equal(run([alias]).status, 2);
@@ -95,6 +147,13 @@ test('preview CLI is import-safe, ignores hostile ambient values and never echoe
     assert.doesNotMatch(good.stdout, /do_not_echo|os\.capiro\.ai/);
     const aliasGood = run([alias, '--bindings', input]);
     assert.equal(aliasGood.status, 0); assert.equal(aliasGood.stdout, good.stdout);
+    writeFileSync(input, JSON.stringify({ ...bindings, meriApiBaseUrl: 'https://meri-preview.example.test', meriConversationWorkflowEnabled: true }));
+    const optedIn = run([script, '--bindings', input]);
+    assert.equal(optedIn.status, 0, optedIn.stderr);
+    assert.equal(JSON.parse(optedIn.stdout).environment.MERI_CONVERSATION_WORKFLOW_ENABLED, 'true');
+    writeFileSync(input, JSON.stringify({ ...bindings, meriConversationWorkflowEnabled: true }));
+    const missingOrigin = run([script, '--bindings', input]);
+    assert.equal(missingOrigin.status, 1); assert.match(missingOrigin.stderr, /PREVIEW_MERI_ORIGIN_REQUIRED/);
     writeFileSync(input, JSON.stringify({ ...bindings, clerkSecretArn: env.CLERK_SECRET_KEY }));
     const bad = run([script, '--bindings', input]);
     assert.equal(bad.status, 1); assert.equal(bad.stdout, ''); assert.doesNotMatch(bad.stderr, /sk_live|do_not_echo/);

@@ -1,0 +1,14 @@
+/* Figma 3.4 04.08B: the artifact sharing view as a dialog over the document workspace. */
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.body :where(p, ul) {
+  margin: 0;
+}
+.body :where(ul) {
+  padding: 0;
+  list-style: none;
+}

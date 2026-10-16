@@ -1,0 +1,73 @@
+/* Figma 3.4 outcome overlays: Task created, Research account connected, Routine paused. */
+.region {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 40;
+  max-width: calc(100vw - 32px);
+}
+.toast {
+  width: 420px;
+  max-width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow:
+    0 2px 4px #0c0a090a,
+    0 1px 1px #0c0a090a;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--success-subtle);
+  color: var(--success);
+}
+.toast[data-tone="danger"] .icon {
+  background: var(--destructive-subtle);
+  color: var(--destructive-text);
+}
+.icon svg {
+  width: 14px;
+  height: 14px;
+}
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+}
+.content h2 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.content p {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--muted-foreground);
+}
+.toast > button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  justify-content: center;
+}
+@media (max-width: 680px) {
+  .region {
+    right: 16px;
+    bottom: 16px;
+  }
+}

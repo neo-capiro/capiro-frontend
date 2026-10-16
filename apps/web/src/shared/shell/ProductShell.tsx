@@ -1,16 +1,20 @@
 import { SelectedClientGate } from "../session/SelectedClient";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
+import type { MeriSection } from "./SidebarDestinations";
 import { MeriMobileNavigation } from "./MeriMobileNavigation";
 import styles from "./shell.module.css";
 
 export function ProductShell({
   children,
-  designTarget = "442:81437",
+  designTarget = "1064:144075",
   assetSet = "home",
   actionWorkflow = false,
   documentWorkflow = false,
   fixture = false,
+  conversationEnabled = false,
+  section,
+  pendingApprovals,
 }: {
   children: React.ReactNode;
   designTarget?: string;
@@ -18,14 +22,31 @@ export function ProductShell({
   actionWorkflow?: boolean;
   documentWorkflow?: boolean;
   fixture?: boolean;
+  conversationEnabled?: boolean;
+  /** Marks the matching sidebar destination as current. */
+  section?: MeriSection | undefined;
+  /** Fixture sample count shown on the Approvals destination. */
+  pendingApprovals?: number | undefined;
 }) {
   return (
     <>
       <div className={styles.target} data-design-target={designTarget}>
-        <Header assetSet={assetSet} />
-        <MeriMobileNavigation />
+        <Header assetSet={assetSet} fixture={fixture} />
+        <MeriMobileNavigation
+          assetSet={assetSet}
+          fixture={fixture}
+          conversationEnabled={conversationEnabled}
+          section={section}
+          pendingApprovals={pendingApprovals}
+        />
         <div className={styles.workspace}>
-          <Sidebar assetSet={assetSet} fixture={fixture} />
+          <Sidebar
+            assetSet={assetSet}
+            fixture={fixture}
+            conversationEnabled={conversationEnabled}
+            section={section}
+            pendingApprovals={pendingApprovals}
+          />
           <main id="main-content" className={styles.main}>
             {actionWorkflow || documentWorkflow ? (
               children

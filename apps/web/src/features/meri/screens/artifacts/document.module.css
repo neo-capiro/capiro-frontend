@@ -1,0 +1,387 @@
+/* Figma 3.4 03.02 Word document workspace and the document working draft. */
+.conversation {
+  width: 360px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+.userMessage {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--muted);
+}
+.userMessage,
+.reply {
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+}
+.meriMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.identity {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.identity svg {
+  width: 18px;
+  height: 18px;
+}
+.panel {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.panelTitle {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.toolbarArea {
+  position: relative;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  overflow-x: auto;
+}
+.tool,
+.toolOutline {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.07px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.tool:disabled {
+  opacity: 0.35;
+}
+.tool svg {
+  width: 16px;
+  height: 16px;
+}
+.tool[aria-expanded="true"],
+.toolOutline[aria-expanded="true"] {
+  background: var(--muted);
+}
+.toolOutline {
+  border: 1px solid var(--input);
+  background: var(--card);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.toolDivider {
+  width: 1px;
+  height: 20px;
+  flex-shrink: 0;
+  background: var(--border);
+}
+.toolSpacer {
+  flex: 1 0 8px;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 548px;
+  padding: 32px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+.page > * {
+  margin: 0;
+}
+.pdfPage {
+  flex: 1 1 0;
+  max-height: none;
+  overflow: visible;
+}
+.blockEyebrow,
+.blockSources {
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  white-space: pre-wrap;
+}
+.blockTitle {
+  font-size: 34px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+.blockByline,
+.blockNote,
+.blockFooter {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+  white-space: pre-wrap;
+}
+.blockDivider {
+  height: 1px;
+  border: 0;
+  background: var(--border);
+}
+.blockHeading {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.blockParagraph {
+  font-size: 15px;
+  line-height: 1.5;
+}
+.blockSubheading {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+}
+.blockCheck {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+.blockCheck > svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.blockCheck strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+.blockCheck span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.editorial .blockTitle,
+.editorial .blockHeading,
+.editorial .blockParagraph,
+.editorial .blockCheck {
+  font-family: var(--font-newsreader);
+}
+.sans .blockTitle {
+  letter-spacing: -1.02px;
+}
+.sans .blockHeading {
+  letter-spacing: -0.3px;
+}
+.sans .blockParagraph {
+  letter-spacing: -0.075px;
+}
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.pager button:disabled {
+  color: var(--muted-foreground);
+}
+.zoom {
+  appearance: none;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+}
+.popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow:
+    0 2px 6px #0c0a090d,
+    0 16px 40px -12px #0c0a092e;
+}
+.popover:focus-visible {
+  outline: 2px solid #2563eb;
+}
+.blocks {
+  left: 300px;
+  width: 320px;
+  gap: 4px;
+  padding: 8px 12px;
+}
+.alignEnd {
+  right: 0;
+  width: 280px;
+}
+.popover h2 {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+.menuList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menuItem {
+  width: 100%;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.menuItem span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+.menuItem[aria-pressed="true"] {
+  background: var(--muted);
+}
+.modeItem {
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+.search {
+  height: 36px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--muted);
+  color: var(--foreground);
+  font-size: 14px;
+}
+.revision {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+.revision h2 {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+.revision h2 svg {
+  width: 16px;
+  height: 16px;
+}
+.suggested {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--success-subtle);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.author {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+/* The Chat/Document switch exists only where the panes stack (tablet and phone). */
+.paneSwitch {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .conversation {
+    width: 100%;
+  }
+  .blocks {
+    left: 0;
+  }
+  .paneSwitch {
+    display: block;
+  }
+  .panes[data-pane="artifact"] > :first-child,
+  .panes[data-pane="conversation"] > :last-child {
+    display: none;
+  }
+  /* Figma 10.03/10.06: the single artifact pane sits directly on the page. */
+  .panes > .panel {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+}
+.inline {
+  position: relative;
+  top: auto;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.headingCaption {
+  margin-top: -14px;
+}
+/* Figma working draft · Phone: the toolbar wraps to two rows instead of scrolling. */
+@media (max-width: 680px) {
+  .toolbar {
+    flex-wrap: wrap;
+    row-gap: 6px;
+    overflow-x: visible;
+  }
+  .page {
+    padding: 20px;
+  }
+}

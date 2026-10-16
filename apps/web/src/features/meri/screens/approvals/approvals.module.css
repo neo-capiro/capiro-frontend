@@ -1,0 +1,61 @@
+/* Figma 3.4 06 · Approvals review details. */
+.comparison {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.comparison section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+}
+.comparison h3 {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.comparison p {
+  font-size: 18px;
+  line-height: 27px;
+}
+/* Layout-neutral wrapper that lets the field table stack on a phone. */
+.fields {
+  display: contents;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+@media (max-width: 680px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+/* Recorded decision state (06.05A, 06.07B, 06.07D, 06.08): compact full-width card. */
+.stateCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+/* 06.02 proposer view: approve, reject (adopted buttons) and request changes (third control)
+   belong to another reviewer, so they read as unavailable; "View submitted proposal" does not. */
+.notYours > [data-slot="button"]:disabled,
+.notYours > :nth-child(3):disabled {
+  opacity: 0.45;
+}

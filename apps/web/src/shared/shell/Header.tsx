@@ -5,6 +5,7 @@ import { ModeLink } from "./ModeLink";
 import { productModes } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
 import { HeaderFrame } from "./HeaderFrame";
+import { FixtureHeaderActions } from "./FixtureHeaderActions";
 import styles from "./shell.module.css";
 
 const actions = [
@@ -16,8 +17,11 @@ const actions = [
 
 export function Header({
   assetSet = "home",
+  fixture = false,
 }: {
   assetSet?: "home" | "cited-answer";
+  /** Fixture mode opens the designed Updates panel and Account menu overlays. */
+  fixture?: boolean;
 }) {
   return (
     <HeaderFrame
@@ -56,36 +60,47 @@ export function Header({
       }
       actions={
         <div className={styles.globalActions}>
-          {actions.map((action) =>
-            action.href ? (
-              <Button
-                key={action.label}
-                asChild
-                variant="ghost"
-                className={styles.action}
-              >
-                <ScopedLink href={action.href} aria-label={action.label}>
-                  <DesignIcon name={action.icon} assetSet={assetSet} />
-                </ScopedLink>
-              </Button>
-            ) : (
-              <Button
-                key={action.label}
-                type="button"
-                variant="ghost"
-                className={styles.action}
-                disabled
-                aria-label={`${action.label} — unavailable`}
-              >
-                <DesignIcon name={action.icon} assetSet={assetSet} />
-              </Button>
-            ),
+          {(fixture ? actions.filter((action) => action.href) : actions).map(
+            (action) =>
+              action.href ? (
+                <Button
+                  key={action.label}
+                  asChild
+                  variant="ghost"
+                  className={styles.action}
+                >
+                  <ScopedLink href={action.href} aria-label={action.label}>
+                    <DesignIcon
+                      name={action.icon}
+                      assetSet="header-34-20261016"
+                    />
+                  </ScopedLink>
+                </Button>
+              ) : (
+                <Button
+                  key={action.label}
+                  type="button"
+                  variant="ghost"
+                  className={styles.action}
+                  disabled
+                  aria-label={`${action.label} — unavailable`}
+                >
+                  <DesignIcon
+                    name={action.icon}
+                    assetSet="header-34-20261016"
+                  />
+                </Button>
+              ),
           )}
-          <Button asChild variant="ghost" className={styles.action}>
-            <Link href="/settings/personal" aria-label="Account settings">
-              <DesignIcon name="profile" assetSet={assetSet} />
-            </Link>
-          </Button>
+          {fixture ? (
+            <FixtureHeaderActions assetSet={assetSet} />
+          ) : (
+            <Button asChild variant="ghost" className={styles.action}>
+              <Link href="/settings/personal" aria-label="Account settings">
+                <DesignIcon name="profile" assetSet={assetSet} />
+              </Link>
+            </Button>
+          )}
         </div>
       }
     />

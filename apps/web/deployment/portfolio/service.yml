@@ -49,6 +49,24 @@ Parameters:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai
     AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
+  MeriApiBaseUrl:
+    Type: String
+    Default: ""
+    MaxLength: 512
+    AllowedPattern: "^$|^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+    Description: Explicit HTTPS root origin for a separately qualified Meri service; empty keeps conversation held
+  MeriConversationWorkflowEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Explicit Meri conversation opt-in after the service and its dependencies are qualified
+
+Rules:
+  MeriConversationRequiresOrigin:
+    RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "true"]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref MeriApiBaseUrl, ""]]
+        AssertDescription: Meri conversation opt-in requires an HTTPS Meri root origin
 
 Resources:
   PreviewVpc:
@@ -284,7 +302,9 @@ Resources:
             - Name: ONBOARD_API_BASE_URL
               Value: ""
             - Name: MERI_API_BASE_URL
-              Value: ""
+              Value: !Ref MeriApiBaseUrl
+            - Name: MERI_CONVERSATION_WORKFLOW_ENABLED
+              Value: !Ref MeriConversationWorkflowEnabled
             - Name: MERI_ACTION_WORKFLOW_ENABLED
               Value: "false"
             - Name: MERI_DOCUMENT_WORKFLOW_ENABLED

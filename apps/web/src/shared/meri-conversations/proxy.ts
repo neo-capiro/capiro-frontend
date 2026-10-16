@@ -1,4 +1,5 @@
 import { conversationApplicationMetadata as protocol } from "@capiro/meri-contracts/conversation-application";
+import { conversationInitialInputMetadata as initial } from "@capiro/meri-contracts/conversation-initial-input";
 import {
   boundedJsonBytes,
   withActionDeadline,
@@ -103,7 +104,9 @@ async function receivedConversation(
   const body = await boundedJsonBytes(
     response,
     signal,
-    protocol.limits.responseBytes,
+    route === "inputAllocate"
+      ? initial.limits.responseBytes
+      : protocol.limits.responseBytes,
   );
   signal.throwIfAborted();
   return new Response(body, { status: response.status, headers });
@@ -181,6 +184,7 @@ export async function proxyConversationRequest(
             void response.body?.cancel().catch(() => undefined);
         }
       },
+      route === "inputAllocate" ? initial.limits.maxRequestMs : undefined,
     );
   } catch {
     transport.abort();

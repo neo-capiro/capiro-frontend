@@ -7,5 +7,10 @@ export function readDocumentConfig(env: Record<string, string | undefined>) {
     enabled: config.documentEnabled,
     baseUrl: config.baseUrl,
     operation: config.documentOperation,
+    /**
+     * Version-bound reads (inspect, download, signed links) of artifacts in the session's own
+     * conversation. Either opt-in serves them; writes still require the document family.
+     */
+    readEnabled: config.documentEnabled || config.conversationEnabled,
   };
 }

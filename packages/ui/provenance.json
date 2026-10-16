@@ -414,5 +414,693 @@
     }
   ],
   "behaviorChanges": [],
-  "retainedAdaptation": "The original dropdown checked-prop conditional spread remains unchanged; only quoted import specifiers are relocated."
+  "retainedAdaptation": "The original dropdown checked-prop conditional spread remains unchanged; only quoted import specifiers are relocated.",
+  "aiElementsCommit": "bc871264341cf54a7ea1fee36d951688ed2a1ff7",
+  "aiElementsTag": "ai-elements@1.9.0",
+  "shadcnCommit": "2d3f1cd436b18ea12f24130de4df781355925b08",
+  "additionsScope": "Meri Figma 3.4 lane: additional AI Elements and their shadcn dependencies fetched directly from the pinned upstream commits; the 17 original source records above are unchanged.",
+  "additions": [
+    {
+      "localPath": "packages/elements/src/artifact.tsx",
+      "localBytes": 3404,
+      "localSha256": "6e5017f85105164b95861b1d10a78c956c312682c5ecd17e2619870ba5993aba",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/artifact.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/artifact.tsx",
+      "upstreamBlobSha1": "4d5fef418484fc71952fc5df4ce8332dd219121e",
+      "upstreamBytes": 3404,
+      "upstreamSha256": "6e5017f85105164b95861b1d10a78c956c312682c5ecd17e2619870ba5993aba",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/artifact.tsx",
+      "promotedSha256": "248edad66d9ddfc1eb77110a63ed76a32d3694b9f83015f2f973c9b0088be4b1",
+      "promotedBytes": 3351,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/tooltip",
+          "to": "../shadcn/tooltip"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/attachments.tsx",
+      "localBytes": 11417,
+      "localSha256": "91c42be9a592fe8ff2468352b8636f6bc364567779618ac3a075f1080b378fad",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/attachments.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/attachments.tsx",
+      "upstreamBlobSha1": "cc7b24958a815341dad0d5497fb338ae56a5c83f",
+      "upstreamBytes": 11417,
+      "upstreamSha256": "91c42be9a592fe8ff2468352b8636f6bc364567779618ac3a075f1080b378fad",
+      "adaptation": {
+        "owner": "Fable implementation owner (Meri Figma 3.4 lane)",
+        "reason": "Strict exactOptionalPropertyTypes: omit onRemove from the Attachment context value when undefined instead of explicitly passing undefined",
+        "changes": [
+          "Prominent owner change notice",
+          "() => ({ data, mediaCategory, onRemove, variant }), -> () => ({\n      data,\n      mediaCategory,\n      ...(onRemove === undefined ? {} : { onRemove }),\n      variant,\n    }),"
+        ],
+        "importsExports": "Preserved",
+        "notice": "// Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by\n// omitting an absent onRemove context value; all upstream imports/exports are retained.\n\n",
+        "edits": [
+          {
+            "from": "() => ({ data, mediaCategory, onRemove, variant }),",
+            "to": "() => ({\n      data,\n      mediaCategory,\n      ...(onRemove === undefined ? {} : { onRemove }),\n      variant,\n    }),"
+          }
+        ]
+      },
+      "promotedPath": "src/ai-elements/attachments.tsx",
+      "promotedSha256": "afef2be1e393351e1f81b6f5c3ab2a5d4d9325aec11ce8795ba0c241404322c6",
+      "promotedBytes": 11600,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/hover-card",
+          "to": "../shadcn/hover-card"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/checkpoint.tsx",
+      "localBytes": 1683,
+      "localSha256": "8649b28c7969c6c58bd9a8643279810c13da332198a4fcbc5b8a75000673eb5b",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/checkpoint.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/checkpoint.tsx",
+      "upstreamBlobSha1": "ab7900ce8a3311ce4afb886fc57f044deae371f5",
+      "upstreamBytes": 1683,
+      "upstreamSha256": "8649b28c7969c6c58bd9a8643279810c13da332198a4fcbc5b8a75000673eb5b",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/checkpoint.tsx",
+      "promotedSha256": "b381d7331086c257518b3d356ed9c1a1ea0c844d8fe241c56f9fe1175ccf2904",
+      "promotedBytes": 1610,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/separator",
+          "to": "../shadcn/separator"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/tooltip",
+          "to": "../shadcn/tooltip"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/confirmation.tsx",
+      "localBytes": 3919,
+      "localSha256": "62aafcb7db41853faaf91b0247b6fce044b7a985e336e21b802e8778e7d1af7a",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/confirmation.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/confirmation.tsx",
+      "upstreamBlobSha1": "505139f02800e8d3cdaf52d3afdea80b5ca21b14",
+      "upstreamBytes": 3919,
+      "upstreamSha256": "62aafcb7db41853faaf91b0247b6fce044b7a985e336e21b802e8778e7d1af7a",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/confirmation.tsx",
+      "promotedSha256": "5324e7bc00e3ee376c4981a8f3818d6f151ef40bf119e785b435a05191953e31",
+      "promotedBytes": 3866,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/alert",
+          "to": "../shadcn/alert"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/file-tree.tsx",
+      "localBytes": 7680,
+      "localSha256": "9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/file-tree.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/file-tree.tsx",
+      "upstreamBlobSha1": "6c1f8441ffebf750061e4911dcdd8762577d92fd",
+      "upstreamBytes": 7680,
+      "upstreamSha256": "9b6946171369d224d5d10df686c3c18ce7608aa4a4792744fc5c313499cec0cb",
+      "adaptation": {
+        "owner": "Fable implementation owner (Meri Figma 3.4 lane)",
+        "reason": "Strict exactOptionalPropertyTypes: omit onSelect and selectedPath from the FileTree context value when undefined instead of explicitly passing undefined; nest folder children in role=\"group\" so treeitems have the required parent (axe aria-required-parent); name the folder expand control (axe button-name); implement the WAI-ARIA tree keyboard pattern (review HOLD: parent treeitems lacked expansion state and keyboard navigation): folder treeitems expose aria-expanded, items expose aria-selected, one roving tab stop with inner buttons removed from the tab order, and the tree handles Up/Down, Right (expand or first child), Left (collapse or parent), Home/End and Enter/Space (select, and toggle a folder)",
+        "changes": [
+          "Prominent owner change notice",
+          "() => ({ expandedPaths, onSelect, selectedPath, togglePath }), -> () => ({\n      expandedPaths,\n      ...(onSelect === undefined ? {} : { onSelect }),\n      ...(selectedPath === undefined ? {} : { selectedPath }),\n      togglePath,\n    }),",
+          "<div className=\"ml-4 border-l pl-2\">{children}</div> -> <div className=\"ml-4 border-l pl-2\" role=\"group\">{children}</div>",
+          "              <button\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              > ->               <button\n                aria-label={`${isExpanded ? \"Collapse\" : \"Expand\"} ${name}`}\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >",
+          "  useContext,\n  useMemo,\n  useState, ->   useContext,\n  useEffect,\n  useMemo,\n  useRef,\n  useState,",
+          "  onSelect?: (path: string) => void;\n} ->   onSelect?: (path: string) => void;\n  tabStopPath?: string;\n}",
+          "  togglePath: noop,\n});\n\nexport type FileTreeProps = Omit<HTMLAttributes<HTMLDivElement>, \"onSelect\"> & { ->   togglePath: noop,\n});\n\n// Visible treeitems in document order: descendants of collapsed folders are skipped.\nconst visibleItems = (tree: HTMLElement | null) =>\n  Array.from(\n    tree?.querySelectorAll<HTMLElement>('[role=\"treeitem\"]') ?? []\n  ).filter(\n    (item) =>\n      !item.parentElement?.closest('[role=\"treeitem\"][aria-expanded=\"false\"]')\n  );\n\nexport type FileTreeProps = Omit<HTMLAttributes<HTMLDivElement>, \"onSelect\"> & {",
+          "  children,\n  ...props\n}: FileTreeProps) => {\n  const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);\n  const expandedPaths = controlledExpanded ?? internalExpanded; ->   children,\n  onBlur,\n  onFocus,\n  onKeyDown,\n  ...props\n}: FileTreeProps) => {\n  const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);\n  const expandedPaths = controlledExpanded ?? internalExpanded;\n  const treeRef = useRef<HTMLDivElement>(null);\n  const [tabStopPath, setTabStopPath] = useState(selectedPath);\n\n  // Entering the tree lands on the selected item; keep exactly one visible tab stop.\n  useEffect(() => {\n    if (\n      selectedPath !== undefined &&\n      !treeRef.current?.contains(document.activeElement)\n    ) {\n      setTabStopPath(selectedPath);\n    }\n  }, [selectedPath]);\n  useEffect(() => {\n    const items = visibleItems(treeRef.current);\n    if (!items.some((item) => item.dataset.path === tabStopPath)) {\n      setTabStopPath(items[0]?.dataset.path);\n    }\n  });",
+          "        newExpanded.delete(path);\n      } else { ->         newExpanded.delete(path);\n        // Collapsing hides descendants: the folder takes over their tab stop and focus.\n        const folder = visibleItems(treeRef.current).find(\n          (item) => item.dataset.path === path\n        );\n        const stop = treeRef.current?.querySelector(\n          '[role=\"treeitem\"][tabindex=\"0\"]'\n        );\n        if (folder && stop && stop !== folder && folder.contains(stop)) {\n          setTabStopPath(path);\n          const active = document.activeElement;\n          if (\n            active?.closest('[role=\"treeitem\"]') !== folder &&\n            folder.contains(active)\n          ) {\n            folder.focus();\n          }\n        }\n      } else {",
+          "      togglePath,\n    }),\n    [expandedPaths, onSelect, selectedPath, togglePath]\n  ); ->       ...(tabStopPath === undefined ? {} : { tabStopPath }),\n      togglePath,\n    }),\n    [expandedPaths, onSelect, selectedPath, tabStopPath, togglePath]\n  );\n\n  const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {\n    onFocus?.(event);\n    const item = (event.target as Element).closest<HTMLElement>(\n      '[role=\"treeitem\"]'\n    );\n    if (item?.dataset.path !== undefined) {\n      setTabStopPath(item.dataset.path);\n    }\n  };\n\n  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {\n    onBlur?.(event);\n    if (\n      selectedPath !== undefined &&\n      !event.currentTarget.contains(event.relatedTarget)\n    ) {\n      setTabStopPath(selectedPath);\n    }\n  };\n\n  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(event);\n    const item = (event.target as Element).closest<HTMLElement>(\n      '[role=\"treeitem\"]'\n    );\n    const path = item?.dataset.path;\n    if (\n      event.defaultPrevented ||\n      event.altKey ||\n      event.ctrlKey ||\n      event.metaKey ||\n      !item ||\n      path === undefined\n    ) {\n      return;\n    }\n    const items = visibleItems(treeRef.current);\n    const index = items.indexOf(item);\n    const expanded = item.getAttribute(\"aria-expanded\");\n    let next: HTMLElement | null | undefined;\n    if (event.key === \"ArrowDown\") {\n      next = items[index + 1];\n    } else if (event.key === \"ArrowUp\") {\n      next = items[index - 1];\n    } else if (event.key === \"Home\") {\n      next = items[0];\n    } else if (event.key === \"End\") {\n      next = items.at(-1);\n    } else if (event.key === \"ArrowRight\" && expanded === \"false\") {\n      togglePath(path);\n    } else if (event.key === \"ArrowRight\" && expanded === \"true\") {\n      next = item.querySelector<HTMLElement>(\n        '[role=\"group\"] [role=\"treeitem\"]'\n      );\n    } else if (event.key === \"ArrowLeft\" && expanded === \"true\") {\n      togglePath(path);\n    } else if (event.key === \"ArrowLeft\") {\n      next = item.parentElement?.closest<HTMLElement>('[role=\"treeitem\"]');\n    } else if (\n      (event.key === \"Enter\" || event.key === \" \") &&\n      event.target === item\n    ) {\n      onSelect?.(path);\n      if (expanded !== null) {\n        togglePath(path);\n      }\n    } else {\n      return;\n    }\n    event.preventDefault();\n    if (next && treeRef.current?.contains(next)) {\n      setTabStopPath(next.dataset.path);\n      next.focus();\n    }\n  };",
+          "        )}\n        role=\"tree\" ->         )}\n        onBlur={handleBlur}\n        onFocus={handleFocus}\n        onKeyDown={handleKeyDown}\n        ref={treeRef}\n        role=\"tree\"",
+          "  const { expandedPaths, togglePath, selectedPath, onSelect } = ->   const { expandedPaths, togglePath, selectedPath, onSelect, tabStopPath } =",
+          "          className={cn(\"\", className)}\n          role=\"treeitem\"\n          tabIndex={0} ->           aria-expanded={isExpanded}\n          aria-selected={isSelected}\n          className={cn(\"\", className)}\n          data-path={path}\n          role=\"treeitem\"\n          tabIndex={tabStopPath === path ? 0 : -1}",
+          "                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\" ->                 className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                tabIndex={-1}\n                type=\"button\"",
+          "              onClick={handleSelect}\n              type=\"button\" ->               onClick={handleSelect}\n              tabIndex={-1}\n              type=\"button\"",
+          "  const { selectedPath, onSelect } = useContext(FileTreeContext);\n  const isSelected = selectedPath === path;\n\n  const handleClick = useCallback(() => {\n    onSelect?.(path);\n  }, [onSelect, path]);\n\n  const handleKeyDown = useCallback(\n    (e: React.KeyboardEvent) => {\n      if (e.key === \"Enter\" || e.key === \" \") {\n        onSelect?.(path);\n      }\n    },\n    [onSelect, path]\n  ); ->   const { selectedPath, onSelect, tabStopPath } = useContext(FileTreeContext);\n  const isSelected = selectedPath === path;\n\n  const handleClick = useCallback(() => {\n    onSelect?.(path);\n  }, [onSelect, path]);",
+          "        onClick={handleClick}\n        onKeyDown={handleKeyDown}\n        role=\"treeitem\"\n        tabIndex={0} ->         aria-selected={isSelected}\n        data-path={path}\n        onClick={handleClick}\n        role=\"treeitem\"\n        tabIndex={tabStopPath === path ? 0 : -1}"
+        ],
+        "importsExports": "Preserved",
+        "notice": "// Meri Fable owner adaptation: preserve strict exactOptionalPropertyTypes by\n// omitting absent onSelect/selectedPath context values, and give a folder's children\n// the ARIA group role that treeitem nesting requires and the expand control an accessible\n// name. Second owner edit: implement the WAI-ARIA tree keyboard pattern (one roving\n// tab stop, aria-expanded/aria-selected treeitems, Up/Down/Left/Right/Home/End and\n// Enter/Space handled by the tree, inner buttons out of the tab order); all upstream\n// imports/exports are retained.\n\n",
+        "edits": [
+          {
+            "from": "() => ({ expandedPaths, onSelect, selectedPath, togglePath }),",
+            "to": "() => ({\n      expandedPaths,\n      ...(onSelect === undefined ? {} : { onSelect }),\n      ...(selectedPath === undefined ? {} : { selectedPath }),\n      togglePath,\n    }),"
+          },
+          {
+            "from": "<div className=\"ml-4 border-l pl-2\">{children}</div>",
+            "to": "<div className=\"ml-4 border-l pl-2\" role=\"group\">{children}</div>"
+          },
+          {
+            "from": "              <button\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >",
+            "to": "              <button\n                aria-label={`${isExpanded ? \"Collapse\" : \"Expand\"} ${name}`}\n                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"\n              >"
+          },
+          {
+            "from": "  useContext,\n  useMemo,\n  useState,",
+            "to": "  useContext,\n  useEffect,\n  useMemo,\n  useRef,\n  useState,"
+          },
+          {
+            "from": "  onSelect?: (path: string) => void;\n}",
+            "to": "  onSelect?: (path: string) => void;\n  tabStopPath?: string;\n}"
+          },
+          {
+            "from": "  togglePath: noop,\n});\n\nexport type FileTreeProps = Omit<HTMLAttributes<HTMLDivElement>, \"onSelect\"> & {",
+            "to": "  togglePath: noop,\n});\n\n// Visible treeitems in document order: descendants of collapsed folders are skipped.\nconst visibleItems = (tree: HTMLElement | null) =>\n  Array.from(\n    tree?.querySelectorAll<HTMLElement>('[role=\"treeitem\"]') ?? []\n  ).filter(\n    (item) =>\n      !item.parentElement?.closest('[role=\"treeitem\"][aria-expanded=\"false\"]')\n  );\n\nexport type FileTreeProps = Omit<HTMLAttributes<HTMLDivElement>, \"onSelect\"> & {"
+          },
+          {
+            "from": "  children,\n  ...props\n}: FileTreeProps) => {\n  const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);\n  const expandedPaths = controlledExpanded ?? internalExpanded;",
+            "to": "  children,\n  onBlur,\n  onFocus,\n  onKeyDown,\n  ...props\n}: FileTreeProps) => {\n  const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);\n  const expandedPaths = controlledExpanded ?? internalExpanded;\n  const treeRef = useRef<HTMLDivElement>(null);\n  const [tabStopPath, setTabStopPath] = useState(selectedPath);\n\n  // Entering the tree lands on the selected item; keep exactly one visible tab stop.\n  useEffect(() => {\n    if (\n      selectedPath !== undefined &&\n      !treeRef.current?.contains(document.activeElement)\n    ) {\n      setTabStopPath(selectedPath);\n    }\n  }, [selectedPath]);\n  useEffect(() => {\n    const items = visibleItems(treeRef.current);\n    if (!items.some((item) => item.dataset.path === tabStopPath)) {\n      setTabStopPath(items[0]?.dataset.path);\n    }\n  });"
+          },
+          {
+            "from": "        newExpanded.delete(path);\n      } else {",
+            "to": "        newExpanded.delete(path);\n        // Collapsing hides descendants: the folder takes over their tab stop and focus.\n        const folder = visibleItems(treeRef.current).find(\n          (item) => item.dataset.path === path\n        );\n        const stop = treeRef.current?.querySelector(\n          '[role=\"treeitem\"][tabindex=\"0\"]'\n        );\n        if (folder && stop && stop !== folder && folder.contains(stop)) {\n          setTabStopPath(path);\n          const active = document.activeElement;\n          if (\n            active?.closest('[role=\"treeitem\"]') !== folder &&\n            folder.contains(active)\n          ) {\n            folder.focus();\n          }\n        }\n      } else {"
+          },
+          {
+            "from": "      togglePath,\n    }),\n    [expandedPaths, onSelect, selectedPath, togglePath]\n  );",
+            "to": "      ...(tabStopPath === undefined ? {} : { tabStopPath }),\n      togglePath,\n    }),\n    [expandedPaths, onSelect, selectedPath, tabStopPath, togglePath]\n  );\n\n  const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {\n    onFocus?.(event);\n    const item = (event.target as Element).closest<HTMLElement>(\n      '[role=\"treeitem\"]'\n    );\n    if (item?.dataset.path !== undefined) {\n      setTabStopPath(item.dataset.path);\n    }\n  };\n\n  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {\n    onBlur?.(event);\n    if (\n      selectedPath !== undefined &&\n      !event.currentTarget.contains(event.relatedTarget)\n    ) {\n      setTabStopPath(selectedPath);\n    }\n  };\n\n  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(event);\n    const item = (event.target as Element).closest<HTMLElement>(\n      '[role=\"treeitem\"]'\n    );\n    const path = item?.dataset.path;\n    if (\n      event.defaultPrevented ||\n      event.altKey ||\n      event.ctrlKey ||\n      event.metaKey ||\n      !item ||\n      path === undefined\n    ) {\n      return;\n    }\n    const items = visibleItems(treeRef.current);\n    const index = items.indexOf(item);\n    const expanded = item.getAttribute(\"aria-expanded\");\n    let next: HTMLElement | null | undefined;\n    if (event.key === \"ArrowDown\") {\n      next = items[index + 1];\n    } else if (event.key === \"ArrowUp\") {\n      next = items[index - 1];\n    } else if (event.key === \"Home\") {\n      next = items[0];\n    } else if (event.key === \"End\") {\n      next = items.at(-1);\n    } else if (event.key === \"ArrowRight\" && expanded === \"false\") {\n      togglePath(path);\n    } else if (event.key === \"ArrowRight\" && expanded === \"true\") {\n      next = item.querySelector<HTMLElement>(\n        '[role=\"group\"] [role=\"treeitem\"]'\n      );\n    } else if (event.key === \"ArrowLeft\" && expanded === \"true\") {\n      togglePath(path);\n    } else if (event.key === \"ArrowLeft\") {\n      next = item.parentElement?.closest<HTMLElement>('[role=\"treeitem\"]');\n    } else if (\n      (event.key === \"Enter\" || event.key === \" \") &&\n      event.target === item\n    ) {\n      onSelect?.(path);\n      if (expanded !== null) {\n        togglePath(path);\n      }\n    } else {\n      return;\n    }\n    event.preventDefault();\n    if (next && treeRef.current?.contains(next)) {\n      setTabStopPath(next.dataset.path);\n      next.focus();\n    }\n  };"
+          },
+          {
+            "from": "        )}\n        role=\"tree\"",
+            "to": "        )}\n        onBlur={handleBlur}\n        onFocus={handleFocus}\n        onKeyDown={handleKeyDown}\n        ref={treeRef}\n        role=\"tree\""
+          },
+          {
+            "from": "  const { expandedPaths, togglePath, selectedPath, onSelect } =",
+            "to": "  const { expandedPaths, togglePath, selectedPath, onSelect, tabStopPath } ="
+          },
+          {
+            "from": "          className={cn(\"\", className)}\n          role=\"treeitem\"\n          tabIndex={0}",
+            "to": "          aria-expanded={isExpanded}\n          aria-selected={isSelected}\n          className={cn(\"\", className)}\n          data-path={path}\n          role=\"treeitem\"\n          tabIndex={tabStopPath === path ? 0 : -1}"
+          },
+          {
+            "from": "                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                type=\"button\"",
+            "to": "                className=\"flex shrink-0 cursor-pointer items-center border-none bg-transparent p-0\"\n                tabIndex={-1}\n                type=\"button\""
+          },
+          {
+            "from": "              onClick={handleSelect}\n              type=\"button\"",
+            "to": "              onClick={handleSelect}\n              tabIndex={-1}\n              type=\"button\""
+          },
+          {
+            "from": "  const { selectedPath, onSelect } = useContext(FileTreeContext);\n  const isSelected = selectedPath === path;\n\n  const handleClick = useCallback(() => {\n    onSelect?.(path);\n  }, [onSelect, path]);\n\n  const handleKeyDown = useCallback(\n    (e: React.KeyboardEvent) => {\n      if (e.key === \"Enter\" || e.key === \" \") {\n        onSelect?.(path);\n      }\n    },\n    [onSelect, path]\n  );",
+            "to": "  const { selectedPath, onSelect, tabStopPath } = useContext(FileTreeContext);\n  const isSelected = selectedPath === path;\n\n  const handleClick = useCallback(() => {\n    onSelect?.(path);\n  }, [onSelect, path]);"
+          },
+          {
+            "from": "        onClick={handleClick}\n        onKeyDown={handleKeyDown}\n        role=\"treeitem\"\n        tabIndex={0}",
+            "to": "        aria-selected={isSelected}\n        data-path={path}\n        onClick={handleClick}\n        role=\"treeitem\"\n        tabIndex={tabStopPath === path ? 0 : -1}"
+          }
+        ]
+      },
+      "promotedPath": "src/ai-elements/file-tree.tsx",
+      "promotedSha256": "4c1601e0558e9ab3b64262b5f58e3a28eceff06aef726fed977ebd488b20f45e",
+      "promotedBytes": 12557,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/plan.tsx",
+      "localBytes": 3600,
+      "localSha256": "bfa20e90199fa40e5f714be131798406dc07b23051f8c48c590e91c65ade99d8",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/plan.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/plan.tsx",
+      "upstreamBlobSha1": "cce50c74a0222e9fa633bff69e41fdb0baad7f41",
+      "upstreamBytes": 3600,
+      "upstreamSha256": "bfa20e90199fa40e5f714be131798406dc07b23051f8c48c590e91c65ade99d8",
+      "adaptation": {
+        "owner": "Fable implementation owner (Meri Figma 3.4 lane)",
+        "reason": "Upstream ./shimmer requires motion, which is not installed; the streaming PlanTitle/PlanDescription branch renders through the project-authored StreamingText marker",
+        "changes": [
+          "Prominent owner change notice",
+          "import { Shimmer } from \"./shimmer\"; -> import { StreamingText } from \"../streaming-text\";",
+          "{isStreaming ? <Shimmer>{children}</Shimmer> : children} -> {isStreaming ? <StreamingText>{children}</StreamingText> : children} (x2)"
+        ],
+        "importsExports": "Preserved",
+        "notice": "// Meri Fable owner adaptation: the upstream motion-backed Shimmer import is replaced by\n// the project-authored StreamingText marker (../streaming-text); every other upstream\n// import, export, prop and branch is retained.\n\n",
+        "edits": [
+          {
+            "from": "import { Shimmer } from \"./shimmer\";",
+            "to": "import { StreamingText } from \"../streaming-text\";"
+          },
+          {
+            "from": "{isStreaming ? <Shimmer>{children}</Shimmer> : children}",
+            "to": "{isStreaming ? <StreamingText>{children}</StreamingText> : children}",
+            "occurrences": 2
+          }
+        ]
+      },
+      "promotedPath": "src/ai-elements/plan.tsx",
+      "promotedSha256": "061fbcccbcde4cdff5a57b41315abb1e129602dcf1099c71e03bddc1618d7918",
+      "promotedBytes": 3790,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/card",
+          "to": "../shadcn/card"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/queue.tsx",
+      "localBytes": 6294,
+      "localSha256": "c823f565e0430749ba0b09db33e76eeb675eea4838bed10245bca392bffd6cfa",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/queue.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/queue.tsx",
+      "upstreamBlobSha1": "efe793cb581e92d65c68362909efadd6aada802b",
+      "upstreamBytes": 6294,
+      "upstreamSha256": "c823f565e0430749ba0b09db33e76eeb675eea4838bed10245bca392bffd6cfa",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/queue.tsx",
+      "promotedSha256": "cd35e4a35ebaf4e0d6d3e5c6abe7236bde4cdc353640553f52f888472f8394ac",
+      "promotedBytes": 6221,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/scroll-area",
+          "to": "../shadcn/scroll-area"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/sources.tsx",
+      "localBytes": 1886,
+      "localSha256": "1454af3ac2c58766a155a881d119d1f9321632a4922d3f74581ba37f52b4707a",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/sources.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/sources.tsx",
+      "upstreamBlobSha1": "8c5d559a3926d40eb0254582a0bee5151e8ba801",
+      "upstreamBytes": 1886,
+      "upstreamSha256": "1454af3ac2c58766a155a881d119d1f9321632a4922d3f74581ba37f52b4707a",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/sources.tsx",
+      "promotedSha256": "81db9ff918731bff2b6ddc5a90a158edde7d73c4c09d6224fbeb8627551f5c9e",
+      "promotedBytes": 1853,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/task.tsx",
+      "localBytes": 2373,
+      "localSha256": "cc9fb7138ded75f17c37c28a2b23425c98f4d06bead436531ad6e65ae553507e",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/task.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/task.tsx",
+      "upstreamBlobSha1": "f30d4e3433f404affd632286df9dbc2d72bfef93",
+      "upstreamBytes": 2373,
+      "upstreamSha256": "cc9fb7138ded75f17c37c28a2b23425c98f4d06bead436531ad6e65ae553507e",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/task.tsx",
+      "promotedSha256": "24e55ce774d5c05a7ab9136cb828e5f4653ccdc21d9d903bf6aab2d481d87bf5",
+      "promotedBytes": 2340,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/tool.tsx",
+      "localBytes": 5076,
+      "localSha256": "5b520e0c33792cba0ceb04e1cb18c69b212cffacdb52d7297e292c7af568dda4",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/tool.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/tool.tsx",
+      "upstreamBlobSha1": "9a22010eb5985b20c7256a881451fc252271942e",
+      "upstreamBytes": 5076,
+      "upstreamSha256": "5b520e0c33792cba0ceb04e1cb18c69b212cffacdb52d7297e292c7af568dda4",
+      "adaptation": {
+        "owner": "Fable implementation owner (Meri Figma 3.4 lane)",
+        "reason": "Upstream ./code-block requires shiki, which is not a declared @capiro/ui dependency; ToolInput and ToolOutput render through the project-authored plain-text OutputBlock while keeping their props and output/errorText behaviour",
+        "changes": [
+          "Prominent owner change notice",
+          "import { CodeBlock } from \"./code-block\"; -> import { OutputBlock } from \"../output-block\";",
+          "<CodeBlock code={JSON.stringify(input, null, 2)} language=\"json\" /> -> <OutputBlock text={JSON.stringify(input, null, 2)} />",
+          "<CodeBlock code={JSON.stringify(output, null, 2)} language=\"json\" /> -> <OutputBlock text={JSON.stringify(output, null, 2)} />",
+          "<CodeBlock code={output} language=\"json\" /> -> <OutputBlock text={output} />"
+        ],
+        "importsExports": "Preserved",
+        "notice": "// Meri Fable owner adaptation: the upstream shiki CodeBlock import is replaced by the\n// project-authored plain-text OutputBlock (../output-block); every other upstream\n// import, export, prop and branch is retained.\n\n",
+        "edits": [
+          {
+            "from": "import { CodeBlock } from \"./code-block\";",
+            "to": "import { OutputBlock } from \"../output-block\";"
+          },
+          {
+            "from": "<CodeBlock code={JSON.stringify(input, null, 2)} language=\"json\" />",
+            "to": "<OutputBlock text={JSON.stringify(input, null, 2)} />"
+          },
+          {
+            "from": "<CodeBlock code={JSON.stringify(output, null, 2)} language=\"json\" />",
+            "to": "<OutputBlock text={JSON.stringify(output, null, 2)} />"
+          },
+          {
+            "from": "<CodeBlock code={output} language=\"json\" />",
+            "to": "<OutputBlock text={output} />"
+          }
+        ]
+      },
+      "promotedPath": "src/ai-elements/tool.tsx",
+      "promotedSha256": "1c1b0746e097b103e3c25e6a8fdcff68102abb67007eeee21dc70386c1fc9670",
+      "promotedBytes": 5205,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/badge",
+          "to": "../shadcn/badge"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/elements/src/web-preview.tsx",
+      "localBytes": 7152,
+      "localSha256": "7ae44586766db67c5341b36a30340b202e6f45c205457ad98f0817968d162d2c",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/elements/src/web-preview.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/web-preview.tsx",
+      "upstreamBlobSha1": "f3ac1c214ef7a3e096cd335749ebb28aec6826b4",
+      "upstreamBytes": 7152,
+      "upstreamSha256": "7ae44586766db67c5341b36a30340b202e6f45c205457ad98f0817968d162d2c",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/web-preview.tsx",
+      "promotedSha256": "cac455f95a20f030d83142c2af13cca46cc12b507e5f545fe8394ebe6f907df0",
+      "promotedBytes": 7059,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/collapsible",
+          "to": "../shadcn/collapsible"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/input",
+          "to": "../shadcn/input"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/tooltip",
+          "to": "../shadcn/tooltip"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "packages/shadcn-ui/components/ui/alert.tsx",
+      "localBytes": 1628,
+      "localSha256": "3d1ebed4f4685ee7689db9f05c48389df00ec54b28061b7cea2795cf5189199f",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/shadcn-ui/components/ui/alert.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/alert.tsx",
+      "upstreamBlobSha1": "cb11ebb330727fa329763073d67398d5cb2a7976",
+      "upstreamBytes": 1628,
+      "upstreamSha256": "3d1ebed4f4685ee7689db9f05c48389df00ec54b28061b7cea2795cf5189199f",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/alert.tsx",
+      "promotedSha256": "bea5460b74dd83fc95c481843f6d5a9f31deb62dd86cbf7383f5158d29fa7193",
+      "promotedBytes": 1615,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ],
+      "shadcnRegistryReference": {
+        "upstreamUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/2d3f1cd436b18ea12f24130de4df781355925b08/apps/v4/registry/new-york-v4/ui/alert.tsx",
+        "upstreamBlobSha1": "86310a66e80c0a370169b9fb4ed49af6bea954fb",
+        "upstreamBytes": 1604,
+        "upstreamSha256": "d03dcae5cdb63c381c1144ca9a0c49ba0e46466967d7deb94662034042acb034",
+        "byteIdenticalToPromotedUpstream": false,
+        "note": "Pinned shadcn-ui/ui registry copy recorded for licence/lineage reference only; the promoted bytes derive from the vercel/ai-elements monorepo copy, which is what the adopted elements import."
+      }
+    },
+    {
+      "localPath": "packages/shadcn-ui/components/ui/badge.tsx",
+      "localBytes": 1666,
+      "localSha256": "145cf69448e20e027dd99e8e013507279aaa0922c30f63dabb54b75ab15222aa",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/shadcn-ui/components/ui/badge.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/badge.tsx",
+      "upstreamBlobSha1": "b02f598b7e019266ef7d38ed3263dbf6e4c60c19",
+      "upstreamBytes": 1666,
+      "upstreamSha256": "145cf69448e20e027dd99e8e013507279aaa0922c30f63dabb54b75ab15222aa",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/badge.tsx",
+      "promotedSha256": "fd2c161026e28debea5a19da1f2a5d63ccefa0c1d7fe5f0c6b03451d1cc82235",
+      "promotedBytes": 1653,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ],
+      "shadcnRegistryReference": {
+        "upstreamUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/2d3f1cd436b18ea12f24130de4df781355925b08/apps/v4/registry/new-york-v4/ui/badge.tsx",
+        "upstreamBlobSha1": "1a94cc539326e26227271a0b3599be99e0e55fb6",
+        "upstreamBytes": 1766,
+        "upstreamSha256": "13a9380dfff853ee730c14a52df49f22aecd31f40f2998d7c1e7ec458b6e1650",
+        "byteIdenticalToPromotedUpstream": false,
+        "note": "Pinned shadcn-ui/ui registry copy recorded for licence/lineage reference only; the promoted bytes derive from the vercel/ai-elements monorepo copy, which is what the adopted elements import."
+      }
+    },
+    {
+      "localPath": "packages/shadcn-ui/components/ui/card.tsx",
+      "localBytes": 2001,
+      "localSha256": "1c0537a8fa6adb76a9a275b8c569a744b92fa70fd1edbdca05d3b7234923be1a",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/shadcn-ui/components/ui/card.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/card.tsx",
+      "upstreamBlobSha1": "384b4630161e90b6cf94f2c3ee56bad0bd6784f2",
+      "upstreamBytes": 2001,
+      "upstreamSha256": "1c0537a8fa6adb76a9a275b8c569a744b92fa70fd1edbdca05d3b7234923be1a",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/card.tsx",
+      "promotedSha256": "83e0b1501b765c26c84b0f2b0636c10a95a91b1bf357130ec176af2c128f42df",
+      "promotedBytes": 1988,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ],
+      "shadcnRegistryReference": {
+        "upstreamUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/2d3f1cd436b18ea12f24130de4df781355925b08/apps/v4/registry/new-york-v4/ui/card.tsx",
+        "upstreamBlobSha1": "6aebd4cf612dfa24d40ffdf357c6f6363e144d6a",
+        "upstreamBytes": 1977,
+        "upstreamSha256": "ef8305b12c3112dab42a4708b41b1ebcc042fa5ab4c20f039da8d45b09ed5059",
+        "byteIdenticalToPromotedUpstream": false,
+        "note": "Pinned shadcn-ui/ui registry copy recorded for licence/lineage reference only; the promoted bytes derive from the vercel/ai-elements monorepo copy, which is what the adopted elements import."
+      }
+    },
+    {
+      "localPath": "packages/shadcn-ui/components/ui/collapsible.tsx",
+      "localBytes": 795,
+      "localSha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/shadcn-ui/components/ui/collapsible.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/collapsible.tsx",
+      "upstreamBlobSha1": "2f7a4e7fc64a8874373c1584646a63f28cd63c47",
+      "upstreamBytes": 795,
+      "upstreamSha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/collapsible.tsx",
+      "promotedSha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "promotedBytes": 795,
+      "importSpecifierChanges": [],
+      "shadcnRegistryReference": {
+        "upstreamUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/2d3f1cd436b18ea12f24130de4df781355925b08/apps/v4/registry/new-york-v4/ui/collapsible.tsx",
+        "upstreamBlobSha1": "2f7a4e7fc64a8874373c1584646a63f28cd63c47",
+        "upstreamBytes": 795,
+        "upstreamSha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+        "byteIdenticalToPromotedUpstream": true,
+        "note": "Pinned shadcn-ui/ui registry copy recorded for licence/lineage reference only; the promoted bytes derive from the vercel/ai-elements monorepo copy, which is what the adopted elements import."
+      }
+    },
+    {
+      "localPath": "packages/shadcn-ui/components/ui/scroll-area.tsx",
+      "localBytes": 1653,
+      "localSha256": "e7d38bb90960e5cd95069bb0ced0177d4284a7d029a65171ac5772b6ab42ff46",
+      "localCopy": "none: fetched directly from upstreamUrl; local fields repeat the upstream blob",
+      "upstreamRepository": "vercel/ai-elements",
+      "upstreamPath": "packages/shadcn-ui/components/ui/scroll-area.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/scroll-area.tsx",
+      "upstreamBlobSha1": "61634918da7f0d398d9514638921af461f26fddc",
+      "upstreamBytes": 1653,
+      "upstreamSha256": "e7d38bb90960e5cd95069bb0ced0177d4284a7d029a65171ac5772b6ab42ff46",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/scroll-area.tsx",
+      "promotedSha256": "5e4ea1181bf03acd5f2c4338664ea7ce2198ee973ae7db12f125e35736fdba9e",
+      "promotedBytes": 1640,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ],
+      "shadcnRegistryReference": {
+        "upstreamUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/2d3f1cd436b18ea12f24130de4df781355925b08/apps/v4/registry/new-york-v4/ui/scroll-area.tsx",
+        "upstreamBlobSha1": "4542a3e26d68a524dc5e504156eb09dd3440a3f5",
+        "upstreamBytes": 1629,
+        "upstreamSha256": "8b73bb9be51300079c7f561bafbe43ee10f6f464cf39c8c1b25123cd4edb94dd",
+        "byteIdenticalToPromotedUpstream": false,
+        "note": "Pinned shadcn-ui/ui registry copy recorded for licence/lineage reference only; the promoted bytes derive from the vercel/ai-elements monorepo copy, which is what the adopted elements import."
+      }
+    }
+  ],
+  "projectAuthoredReplacements": [
+    {
+      "path": "src/output-block.tsx",
+      "replaces": "packages/elements/src/code-block.tsx (shiki)",
+      "usedBy": [
+        "src/ai-elements/tool.tsx"
+      ]
+    },
+    {
+      "path": "src/streaming-text.tsx",
+      "replaces": "packages/elements/src/shimmer.tsx (motion)",
+      "usedBy": [
+        "src/ai-elements/plan.tsx"
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "name": "code-block",
+      "upstreamPath": "packages/elements/src/code-block.tsx",
+      "reason": "dependency not installed: shiki (present only transitively via streamdown; not a declared @capiro/ui dependency)"
+    },
+    {
+      "name": "shimmer",
+      "upstreamPath": "packages/elements/src/shimmer.tsx",
+      "reason": "dependency not installed: motion (motion/react)"
+    },
+    {
+      "name": "context",
+      "upstreamPath": "packages/elements/src/context.tsx",
+      "reason": "dependency not installed: tokenlens"
+    },
+    {
+      "name": "inline-citation",
+      "upstreamPath": "packages/elements/src/inline-citation.tsx",
+      "reason": "dependency not installed: embla-carousel-react (via the shadcn carousel component)"
+    },
+    {
+      "name": "terminal",
+      "upstreamPath": "packages/elements/src/terminal.tsx",
+      "reason": "dependency not installed: ansi-to-react"
+    }
+  ]
 }

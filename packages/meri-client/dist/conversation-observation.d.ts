@@ -6,6 +6,8 @@ export interface ConversationObservationSnapshot {
     readonly hasMore: boolean;
     readonly events: readonly ConversationEvent[];
     readonly runState: AdmittedConversationView['run']['state'];
+    /** The admitted request text for this run: stored history request, or the exact submitted input. */
+    readonly prompt: string | null;
 }
 /** Display only. Cursor provenance and event admission belong to the public receiver. */
 export declare class ConversationObservation {
@@ -13,7 +15,7 @@ export declare class ConversationObservation {
     private readonly changed;
     private cursor;
     private state;
-    constructor(view: AdmittedConversationView, changed: () => void);
+    constructor(view: AdmittedConversationView, changed: () => void, prompt?: string | null);
     get snapshot(): ConversationObservationSnapshot;
     reconnect(): Readonly<{
         method: "GET";

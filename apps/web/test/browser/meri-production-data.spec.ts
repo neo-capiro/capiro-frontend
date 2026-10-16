@@ -29,7 +29,7 @@ async function noSamples(page: Page) {
     "Anduril meeting brief",
     "FY27 funding landscape",
     "Weekly client updates",
-    "Approvals · 2",
+    /Approvals · \d/,
     "Your authorized data",
     "Disconnected synthetic fixture",
     "Conversation and workspace samples remain disconnected",

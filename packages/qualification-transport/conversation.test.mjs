@@ -14,7 +14,7 @@ test('closed POST subscription starts at zero despite advertised stored tip; fin
   const { chat } = f.client.openChat();
   await chat.sendMessage({ text: 'not a second prompt' }, { body: { prompt: 'smuggled', after: 2, tenantId: 'foreign' } });
   assert.equal(chat.status, 'ready');
-  assert.deepEqual(f.calls[1].body, { command: { conversationId: binding.conversationId, intent: 'view.subscribe' } });
+  assert.deepEqual(f.calls[2].body, { command: { conversationId: binding.conversationId, intent: 'view.subscribe' } });
   assert.equal(f.calls.filter(c => c.path.endsWith('/submit')).length, 1);
   assert.equal(f.client.getSnapshot().observation.after, 2);
   assert.equal(f.client.getSnapshot().observation.runState, 'running');
@@ -108,23 +108,26 @@ test('lost submit acknowledgement fences new intent and explicit retry preserves
   const input = { requestId: id(6), prompt: 'original' };
   await assert.rejects(f.client.submit(input)); input.prompt = 'changed';
   assert.equal(f.client.getSnapshot().submit, 'unknown');
-  await assert.rejects(f.client.submit(input)); assert.equal(f.calls.length, 1);
-  await f.client.retrySubmit(); assert.equal(f.calls[0].rawBody, f.calls[1].rawBody);
+  await assert.rejects(f.client.submit(input)); assert.equal(f.calls.length, 2);
+  await f.client.retrySubmit();
+  const submits = f.calls.filter(c => c.path.endsWith('/submit'));
+  assert.equal(submits.length, 2); assert.equal(submits[0].rawBody, submits[1].rawBody);
+  assert.ok(f.calls.filter(c => c.path.endsWith('/input/admit')).every(c => c.rawBody === submits[0].rawBody));
   assert.equal(f.client.getSnapshot().submit, 'observed');
 });
 
 test('current session and selected client are correlated before first view publication', async t => {
   for (const change of [{ binding: { ...binding, runId: id(88) } }, { scopes: [{ ...run.scopes[0], resourceId: id(88) }] }]) {
-    const f = setup(t); f.override = () => Response.json({ run: { ...run, ...change }, requestId: id(6), lastSequence: 0, replayed: false });
+    const f = setup(t); f.override = c => c.path.endsWith('/submit') ? Response.json({ run: { ...run, ...change }, requestId: id(6), lastSequence: 2, replayed: false }) : undefined;
     await assert.rejects(f.submit()); assert.equal(f.client.getSnapshot().observation, null);
   }
 });
 
-test('held submit and late stream cannot repopulate disposed lifetime; disposal makes no durable cancel', async t => {
+test('held input admission cannot repopulate disposed lifetime or dispatch submit; disposal makes no durable cancel', async t => {
   const f = setup(t); let release;
   f.override = () => new Promise(resolve => { release = resolve; });
   const pending = f.submit(); await Promise.resolve(); f.close();
-  release(Response.json({ run, requestId: id(6), lastSequence: 0, replayed: false }));
+  release(Response.json({ run, request: f.stored, lastSequence: 2, replayed: false }));
   await assert.rejects(pending); assert.equal(f.client.getSnapshot().status, 'disposed');
   assert.equal(f.client.getSnapshot().observation, null); assert.equal(f.calls.length, 1);
 });
@@ -145,4 +148,20 @@ test('HTTP204 reconnect ends observation without completing the run', async t =>
   await f.client.openChat().chat.resumeStream();
   assert.equal(f.client.getSnapshot().observation.runState, 'queued');
   assert.equal(f.client.getSnapshot().observation.after, 0);
+});
+
+test('observation exposes only the admitted request text: the exact submitted input', async t => {
+  const f = setup(t);
+  await f.submit();
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Hello');
+});
+
+test('observation exposes the stored history request and keeps it while streaming', async t => {
+  const f = setup(t);
+  f.stored = { ...f.stored, prompt: 'Stored request' };
+  await f.client.history({ limit: 1 });
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Stored request');
+  await f.client.openChat().chat.resumeStream();
+  assert.equal(f.client.getSnapshot().observation.after, 2);
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Stored request');
 });
