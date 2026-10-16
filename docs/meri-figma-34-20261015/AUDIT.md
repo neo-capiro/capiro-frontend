@@ -13,6 +13,7 @@ Method: the full page metadata was read once (1.0 MB XML) and every Meri frame w
 - Shared Capiro header, the Meri sidebar (nine destinations, recents, preferences) and Home with a synthetic fixture.
 - Synthetic cited-answer fixture and run-activity fixture.
 - Live adapters for conversations, documents (DOCX and XLSX) and recommendation actions. Their screens are plain diagnostic controls, not the Figma layouts.
+- 16 October: the ordinary `/meri` route runs a live multi-turn conversation with streaming, reconnect, Stop and conversation files (preview and signed-link download). See [LIVE-WIRING-20261016.md](LIVE-WIRING-20261016.md) for routes and remaining gaps.
 - Only three AI Elements are adopted: conversation, message and prompt input.
 - Sidebar entries Runs, Approvals, Memory, Routines and Data access are disabled with "no connected service".
 
