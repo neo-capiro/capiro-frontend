@@ -564,7 +564,9 @@ test("resolved representative target reports failed saves, validates receipt and
   expect(writes).toBe(1);
   await add.click();
   await expect(
-    representation.getByRole("alert").filter({ hasText: "unexpected response" }),
+    representation
+      .getByRole("alert")
+      .filter({ hasText: "unexpected response" }),
   ).toContainText("unexpected response");
   await expect(
     detail.getByText("Added to targets", { exact: true }),
