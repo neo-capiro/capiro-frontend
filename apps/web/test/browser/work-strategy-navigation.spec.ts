@@ -210,6 +210,41 @@ test("view/client navigation is reflected by URL, history and reload; library op
   });
 });
 
+test("Context library without a selected client starts in All clients scope", async ({
+  page,
+}) => {
+  const documentReads: unknown[] = [];
+  await setup(page, {
+    ...moduleRouteFixtures,
+    "strategies.context.documents": (input) => {
+      documentReads.push(input);
+      return [];
+    },
+    "strategies.context.health": {
+      assessment: "not_assessed",
+      status: "ok",
+      factCounts: { active: 0, superseded: 0, stale: 0, rejected: 0 },
+      openConflicts: 0,
+      missingRequired: [],
+      staleDocs: [],
+    },
+  });
+  await page.goto("/modules/strategies?view=context");
+  await expect(
+    page.getByRole("heading", { name: "Context library", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "All clients", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(
+    page.getByRole("button", { name: "Selected client", exact: true }),
+  ).toBeDisabled();
+  await expect.poll(() => documentReads.length).toBeGreaterThan(0);
+  expect(documentReads).toContainEqual({
+    query: { includeStale: "true", state: "active" },
+  });
+});
+
 test("New strategy consumes the current catalog-backed client hint and routes only after acknowledgement", async ({
   page,
 }) => {

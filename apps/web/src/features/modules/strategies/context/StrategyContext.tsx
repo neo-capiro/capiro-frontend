@@ -32,7 +32,7 @@ export function StrategyContext({
   onUploadClose: () => void;
 }) {
   const [search, setSearch] = useState("");
-  const [scope, setScope] = useState("client");
+  const [scope, setScope] = useState(clientId ? "client" : "all");
   const [state, setState] = useState<
     "draft" | "active" | "superseded" | "archived" | "all"
   >("active");
