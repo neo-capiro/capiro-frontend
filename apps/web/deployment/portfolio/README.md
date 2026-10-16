@@ -13,30 +13,36 @@ The source-only preview profile now follows backend
 [PR2483 at 0f1e663d](https://github.com/neo-capiro/capirov2/pull/2483).
 Core `/api`, Workspace `/workspace-api` and Intelligence `/intel-api` target
 `https://portfolio-preview.app.capiro.ai`. Their backend services remain held
-at zero capacity. Strategy, Onboard and Meri are explicitly unconfigured, with
-Meri workflow flags false. These targets are not evidence of live availability.
+at zero capacity. Strategy and Onboard remain unconfigured. Meri defaults to an
+empty origin and false workflow flags. These targets are not evidence of live
+availability.
 
 `preview-config.mjs` reads one explicit local JSON file containing exactly
 `clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
-and `clerkKeyArn`. Supply only owner-verified public metadata from the designated
-preview Test Clerk application. No live bindings are supplied by this repository.
-Do not put credential values in this file.
+and `clerkKeyArn`. Optional `meriApiBaseUrl` must be a canonical HTTPS DNS root
+origin; optional `meriConversationWorkflowEnabled` is a boolean that defaults
+to false and requires that origin when true. Supply only owner-verified public
+metadata from the designated preview Test Clerk application. No live bindings
+are supplied by this repository. Do not put credential values in this file.
 
 ```sh
 node apps/web/deployment/portfolio/preview-config.mjs --help
 node apps/web/deployment/portfolio/preview-config.mjs --bindings /absolute/path/to/verified-public-metadata.json
 ```
 
-The command prints a local configuration proposal with all nine configuration
-parameters explicit. `--parameters FILE` additionally validates a candidate
-JSON parameter array against those exact values. It rejects missing values,
+The command prints a local configuration proposal with all eleven configuration
+parameters explicit, including the held Meri defaults. `--parameters FILE`
+additionally validates a candidate JSON parameter array against those exact
+values. It rejects missing values,
 duplicates, overrides and `UsePreviousValue`; it never merges ambient environment
 values or reads AWS/secret contents. Output is not a complete apply request.
 Image, certificate and ingress review remain with the shipping owner.
 
-The service template constrains the same preview parameters and disables the
-unavailable services. Existing IAM, network and secret-reference wiring remains
-unchanged. A namespace-valid reference cannot prove its secret payload contains
+The service template constrains the same preview parameters, with Meri origin
+empty and conversation opt-in false by default. A proposed nonempty Meri origin
+or opt-in is not evidence that its service, model grant or dispatch is ready.
+Existing IAM, network and secret-reference wiring remains unchanged. A
+namespace-valid reference cannot prove its secret payload contains
 the matching `pk_test`/`sk_test` keys or belongs to the declared application and
 issuer. Those checks, backend/auth/data isolation and all activation remain held.
 Do not retain a previous production-bound parameter or restore a production URL
