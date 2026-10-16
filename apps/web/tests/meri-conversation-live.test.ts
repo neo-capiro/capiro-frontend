@@ -1,11 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import type { ConversationObservationSnapshot } from "@capiro/meri-client/conversation";
 import { observeUntilSettled } from "../src/features/meri/conversation/observation-loop";
+import { sessionHistoryState } from "../src/features/meri/conversation/saved-turns";
 import {
   conversationArtifacts,
   isSettled,
   isTerminal,
   turnFromObservation,
+  currentTurnView,
 } from "../src/features/meri/conversation/conversation-view";
 
 const binding = {
@@ -49,6 +51,90 @@ const observation = (
     prompt: "Synthetic request",
     ...patch,
   }) as unknown as ConversationObservationSnapshot;
+
+describe("synthetic saved-current display completeness", () => {
+  const empty = () => turnFromObservation(observation([]), binding.runId);
+  it("uses original run-local progress to show a more complete saved segment without altering the SDK snapshot", () => {
+    const observed = {
+      ...empty(),
+      throughSequence: 100,
+      incompleteHistory: true,
+    };
+    const saved = {
+      ...empty(),
+      throughSequence: 105,
+      incompleteHistory: false,
+    };
+    expect(currentTurnView(observed, saved)).toBe(saved);
+    expect(observed.throughSequence).toBe(100);
+  });
+  it("retains a newer observed segment and refuses a different saved run", () => {
+    const observed = { ...empty(), throughSequence: 106 };
+    expect(
+      currentTurnView(observed, { ...empty(), throughSequence: 105 }),
+    ).toBe(observed);
+    expect(
+      currentTurnView(observed, {
+        ...empty(),
+        runId: "another-run",
+        throughSequence: 999,
+      }),
+    ).toBe(observed);
+  });
+  it("recovers an omitted prefix only at equal progress, and preserves absence when neither owner returned data", () => {
+    const observed = { ...empty(), throughSequence: 100, omittedPrefix: true };
+    const saved = { ...empty(), throughSequence: 100, omittedPrefix: false };
+    expect(currentTurnView(observed, saved)).toBe(saved);
+    expect(currentTurnView(null, undefined)).toBeNull();
+  });
+});
+
+describe("synthetic accepted-history versus reserved-session ordering", () => {
+  // Already-admitted UI state only; byte receiver controls live in the public artifact/proxy suites.
+  const segment = (runId: string, sequenceBase: number) => ({
+    run: { binding: { ...binding, runId }, state: "completed" },
+    sequenceBase,
+    request: { prompt: "Synthetic request" },
+    promptLineage: { logicalRequestId: runId },
+    lastSequence: 2,
+  });
+  const page = (turns: ReturnType<typeof segment>[]) =>
+    ({
+      turns,
+      latestRun: turns.at(-1)!.run,
+      pendingTurn: null,
+      events: [],
+    }) as unknown as NonNullable<
+      Parameters<typeof sessionHistoryState>[0]["current"]
+    >;
+
+  it("never redirects a newly reserved target backwards to the last accepted source", () => {
+    const source = segment(binding.runId, 0);
+    const state = sessionHistoryState(
+      { current: page([source]) },
+      "reserved-target",
+      [],
+      undefined,
+      false,
+    );
+    expect(state.latestTarget).toBeUndefined();
+    expect(state.source).toBeUndefined();
+  });
+
+  it("offers the exact newer accepted binding only when the current accepted segment precedes it", () => {
+    const source = segment(binding.runId, 0),
+      successor = segment("accepted-successor", 2);
+    const state = sessionHistoryState(
+      { current: page([source, successor]) },
+      binding.runId,
+      [],
+      undefined,
+      false,
+    );
+    expect(state.latestTarget).toEqual(successor.run.binding);
+    expect(state.source).toBeUndefined();
+  });
+});
 
 describe("observeUntilSettled", () => {
   const instant = () => Promise.resolve();

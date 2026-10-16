@@ -12,6 +12,7 @@ export function ProductShell({
   actionWorkflow = false,
   documentWorkflow = false,
   fixture = false,
+  conversationEnabled = false,
   section,
   pendingApprovals,
 }: {
@@ -21,6 +22,7 @@ export function ProductShell({
   actionWorkflow?: boolean;
   documentWorkflow?: boolean;
   fixture?: boolean;
+  conversationEnabled?: boolean;
   /** Marks the matching sidebar destination as current. */
   section?: MeriSection | undefined;
   /** Fixture sample count shown on the Approvals destination. */
@@ -33,6 +35,7 @@ export function ProductShell({
         <MeriMobileNavigation
           assetSet={assetSet}
           fixture={fixture}
+          conversationEnabled={conversationEnabled}
           section={section}
           pendingApprovals={pendingApprovals}
         />
@@ -40,6 +43,7 @@ export function ProductShell({
           <Sidebar
             assetSet={assetSet}
             fixture={fixture}
+            conversationEnabled={conversationEnabled}
             section={section}
             pendingApprovals={pendingApprovals}
           />

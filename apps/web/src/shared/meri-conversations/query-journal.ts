@@ -81,13 +81,6 @@ export function conversationSelectionOwner(
     client.getQueryData<{ conversationId?: string; runId?: string }>(key) ?? {};
   return {
     hints: { ...remembered, clientId },
-    /**
-     * A new turn asks for the conversation's current run without pinning the finished one; the
-     * service binds its reserved successor or refuses. It never chooses another conversation.
-     */
-    nextTurnHints(conversationId: string) {
-      return { clientId, conversationId };
-    },
     record(context: ActionContext) {
       if (current())
         client.setQueryData(

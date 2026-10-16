@@ -36,8 +36,11 @@ export function useLiveRun(
     if (!started.current) {
       started.current = true;
       const retained = journal.read().submit;
-      if (initialPrompt && !retained) void commands.submit(initialPrompt);
-      else if (!retained || retained.state === "observed") void commands.history();
+      // Fresh next-turn admission records identity before reservation; reconnect reuses it exactly.
+      if (initialPrompt && retained && retained.state !== "observed")
+        void commands.submit(retained.prompt, true);
+      else if (!retained || retained.state === "observed")
+        void commands.history();
     } else if (!active.current) observation.observe();
     return () => {
       alive.current = false;

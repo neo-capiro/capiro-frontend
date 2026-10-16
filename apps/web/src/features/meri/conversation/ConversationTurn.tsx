@@ -63,12 +63,17 @@ export function ConversationTurn({
               Earlier events of this run are not shown.
             </p>
           )}
+          {turn.incompleteHistory && (
+            <p className={styles.muted}>
+              More saved updates for this run have not been loaded.
+            </p>
+          )}
           {turn.messages.map((message) => (
             <p key={message.messageId} className={styles.text}>
               {message.text}
             </p>
           ))}
-          {working && (
+          {working && !turn.incompleteHistory && (
             <p className={styles.muted}>
               {turn.runState === "completed"
                 ? "This run finished without a text answer."

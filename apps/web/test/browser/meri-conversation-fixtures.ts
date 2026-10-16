@@ -165,6 +165,12 @@ export async function setupConversation(
     json(r, { ...client, name: "Verified conversation client" }),
   );
   const hints: object[] = [];
+  // New native history routes remain explicitly unavailable unless a focused test supplies them.
+  // These synthetic failures do not stand in for a production owner or real history acceptance.
+  for (const path of ["list", "transcript", "next-turn"])
+    await page.route(`**/api/conversations/${path}`, (r) =>
+      json(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 503),
+    );
   await page.route("**/api/action-followthrough/session", (r) => {
     hints.push(r.request().postDataJSON());
     const value = {

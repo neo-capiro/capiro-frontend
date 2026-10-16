@@ -56,6 +56,22 @@
       "regularEntryCount": 23,
       "status": "verified-source-pending-consumer-qualification",
       "purpose": "Public conversation JSON/event receiver and branded observed cursors; seventeen previous runtime/schema/type/notice members preserved byte-exact."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.6.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "b8322cdc86e4b113b326e357acdb148394ee39c3",
+      "artifactPublicationCommit": "5aa13719e8706704785d142ad903fb42db51220e",
+      "sourceTree": "18e3f4a448c554c04c44533bd8c161379fe04271",
+      "artifactPublicationTree": "53cc7ca458214fbc7bfb1be854d78ef852670eb3",
+      "bytes": 467014,
+      "sha256": "050ce4a5a0facb0c3df4dbc14c2dedb5b49bfdfe618c4f88148f7779300313a4",
+      "integrity": "sha512-cscsnPoKIF2CCCIzXyOSQQZcOiHCbx0gfkGCqfcjfdJ41K96eUz61UDjtBKNSCSNJQWspZDqXprKj9nTyvQSWw==",
+      "regularEntryCount": 31,
+      "status": "accepted-artifact-pending-consumer-qualification",
+      "purpose": "Additive native conversation discovery/transcript/next-turn public receiver; preserves historical artifacts and frozen wire bytes.",
+      "independentReviewManifestSha256": "8e40d9a06b0856cb9ad778a4dcc5edc2ac0d8742c36bbed592222dfd3eb42b94",
+      "ownerAcceptance": "Parent explicit artifact acceptance of exact 5aa13719 / 050ce4a5 on 2026-10-16; consumer/runtime validation pending."
     }
   ]
 }

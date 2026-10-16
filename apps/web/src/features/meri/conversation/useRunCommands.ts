@@ -6,6 +6,7 @@ import { conversationIntentJournal } from "../../../shared/meri-conversations/qu
 import { requestStop, sendRequest } from "./run-commands";
 import { useCommandGate } from "./useCommandGate";
 import type { useRunObservation } from "./useRunObservation";
+import { isSettled } from "./conversation-view";
 
 export type TranscriptState = "loading" | "loaded" | "unavailable";
 
@@ -44,22 +45,26 @@ export function useRunCommands(
   const thenObserve = (done: boolean) => {
     if (done && alive.current) observation.observe();
   };
-  const history = () =>
-    perform(async () => {
-      observation.stop();
-      setTranscript("loading");
-      try {
-        await port.history({ limit: 100 });
-        setTranscript("loaded");
-      } catch (cause) {
-        setTranscript("unavailable");
-        throw cause;
-      }
-    }).then(thenObserve);
+  const loadHistory = async () => {
+    observation.stop();
+    setTranscript("loading");
+    try {
+      await port.history({ limit: 100 });
+      setTranscript("loaded");
+    } catch (cause) {
+      setTranscript("unavailable");
+      throw cause;
+    }
+  };
+  const history = () => perform(loadHistory).then(thenObserve);
   const submit = (prompt: string, retry = false) =>
     perform(async () => {
       await sendRequest(port, record, prompt, retry);
       setTranscript("loaded");
+      // A replayed ACK may already be terminal and contain no output events. Read its exact
+      // run-local transcript before the observation loop sees that there is nothing left to watch.
+      if (isSettled(port.getSnapshot().observation?.runState))
+        await loadHistory();
     }).then(thenObserve);
   // The receipt is not the run's status; keep observing for run.status either way.
   const cancel = () =>
