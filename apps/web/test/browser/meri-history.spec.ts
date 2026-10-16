@@ -138,9 +138,9 @@ test("synthetic saved transcript preserves resumed output, shows each logical pr
   await expect(
     page.getByText("Saved conversation history loaded."),
   ).toBeVisible();
-  await expect(page.getByText("First question", { exact: true })).toHaveCount(
-    2,
-  );
+  await expect(
+    page.getByRole("article").filter({ hasText: /You:\s*First question/ }),
+  ).toHaveCount(2);
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
   await expect(page.getByText("Resumed answer", { exact: true })).toBeVisible();
   await expect(sendButton(page)).toBeDisabled();
