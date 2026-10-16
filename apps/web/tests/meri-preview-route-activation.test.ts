@@ -1,11 +1,12 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { NextRequest, type NextFetchEvent } from "next/server";
+import packageJson from "../package.json";
 import proxy, { config as proxyConfig } from "../src/proxy";
 import { POST as actionPost } from "../src/app/api/action-followthrough/[operation]/route";
 import { POST as conversationPost } from "../src/app/api/conversations/[...path]/route";
 import { previewBackendRejection } from "../src/shared/preview/backend-policy.server";
 import {
-  previewMeriBackendSource,
+  previewMeriContractsPackageVersion,
   previewMeriConversationRoute,
 } from "../src/shared/preview/meri-conversation-route.server";
 
@@ -35,7 +36,11 @@ const reconnectPath = `/api/conversations/events/${conversationId}/stream`;
 const environment = {
   CAPIRO_PREVIEW_READ_ONLY: "true",
   CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: "true",
-  CAPIRO_PREVIEW_MERI_BACKEND_SOURCE: previewMeriBackendSource,
+  CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: "a".repeat(40),
+  CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST: `sha256:${"b".repeat(64)}`,
+  CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN: meriOrigin,
+  CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION:
+    previewMeriContractsPackageVersion,
   MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
   MERI_API_BASE_URL: meriOrigin,
   CORE_API_BASE_URL: "https://ordinary.synthetic.invalid/api",
@@ -78,9 +83,6 @@ afterEach(() => {
 });
 
 it("admits only the closed public Meri conversation route family", () => {
-  expect(previewMeriBackendSource).toBe(
-    "5850e858f9776ec5faa2902a90a1e90ea3903346",
-  );
   for (const path of allowedPostPaths) {
     const current = request(path);
     expect(previewMeriConversationRoute(environment, current), path).toBe(true);
@@ -91,13 +93,59 @@ it("admits only the closed public Meri conversation route family", () => {
   expect(previewBackendRejection(environment, reconnect)).toBeNull();
 });
 
+it("binds the preview conversation gate to the app's pinned contract package", () => {
+  const tarball = packageJson.dependencies["@capiro/meri-contracts"];
+  const version =
+    /^file:\.\.\/\.\.\/vendor\/capiro-meri-contracts-(\d+\.\d+\.\d+)\.tgz$/.exec(
+      tarball,
+    )?.[1];
+  expect(version).toBeDefined();
+  expect(previewMeriContractsPackageVersion).toBe(version);
+});
+
 it.each([
-  ["absent", undefined],
-  ["wrong", "unreviewed-source"],
-])("holds %s Meri runtime source at every preview entry", async (_, source) => {
+  ["missing runtime source", "CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE", undefined],
+  [
+    "malformed runtime source",
+    "CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE",
+    "unreviewed-source",
+  ],
+  ["zero runtime source", "CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE", "0".repeat(40)],
+  [
+    "missing image digest",
+    "CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST",
+    undefined,
+  ],
+  [
+    "malformed image digest",
+    "CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST",
+    "sha256:unreviewed",
+  ],
+  [
+    "zero image digest",
+    "CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST",
+    `sha256:${"0".repeat(64)}`,
+  ],
+  ["missing runtime origin", "CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN", undefined],
+  [
+    "mismatched runtime origin",
+    "CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN",
+    "https://other-runtime.synthetic.invalid",
+  ],
+  [
+    "missing conversation contract",
+    "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
+    undefined,
+  ],
+  [
+    "incompatible conversation contract",
+    "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
+    "999.999.999",
+  ],
+])("holds %s at every preview entry", async (_, key, value) => {
   const env: Record<string, string | undefined> = { ...environment };
-  if (source === undefined) delete env.CAPIRO_PREVIEW_MERI_BACKEND_SOURCE;
-  else env.CAPIRO_PREVIEW_MERI_BACKEND_SOURCE = source;
+  if (value === undefined) delete env[key];
+  else env[key] = value;
   for (const path of [
     "/api/action-followthrough/session",
     "/api/conversations/history",
@@ -106,7 +154,7 @@ it.each([
     expect(previewMeriConversationRoute(env, current)).toBe(false);
     expect(previewBackendRejection(env, current)?.status).toBe(503);
   }
-  vi.stubEnv("CAPIRO_PREVIEW_MERI_BACKEND_SOURCE", source);
+  vi.stubEnv(key, value);
   for (const path of [
     "/api/action-followthrough/session",
     "/api/conversations/history",

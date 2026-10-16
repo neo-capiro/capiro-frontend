@@ -1,8 +1,9 @@
 type Environment = Record<string, string | undefined>;
 
-/** Reviewed Meri PR #92 source; a later mounted runtime needs its own reviewed pin. */
-export const previewMeriBackendSource =
-  "5850e858f9776ec5faa2902a90a1e90ea3903346";
+/** The app's pinned @capiro/meri-contracts distribution. */
+export const previewMeriContractsPackageVersion = "0.1.8";
+const sourceCommit = /^[0-9a-f]{40}$/;
+const imageDigest = /^sha256:[0-9a-f]{64}$/;
 const meriHost =
   /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const ordinaryHosts = new Set([
@@ -36,10 +37,30 @@ const postPaths = new Set([
 const reconnectPath =
   /^\/api\/conversations\/events\/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\/stream$/;
 
+/** Deployment coordinates are explicit inputs; they do not attest the running service. */
+function configuredRuntimeBinding(env: Environment): boolean {
+  const source = env.CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE ?? "";
+  const image = env.CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST ?? "";
+  return (
+    sourceCommit.test(source) &&
+    !/^0+$/.test(source) &&
+    imageDigest.test(image) &&
+    !/^sha256:0+$/.test(image) &&
+    env.CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION ===
+      previewMeriContractsPackageVersion
+  );
+}
+
 /** Preview Meri admission requires a distinct, explicitly configured HTTPS runtime. */
 function configuredMeriOrigin(env: Environment, requestUrl: URL): boolean {
   const raw = env.MERI_API_BASE_URL;
-  if (!raw || raw.length > 512 || raw.trim() !== raw) return false;
+  if (
+    !raw ||
+    raw.length > 512 ||
+    raw.trim() !== raw ||
+    env.CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN !== raw
+  )
+    return false;
   try {
     const target = new URL(raw);
     if (
@@ -70,8 +91,8 @@ export function previewMeriConversationRoute(
   if (
     env.CAPIRO_PREVIEW_READ_ONLY !== "true" ||
     env.CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED !== "true" ||
-    env.CAPIRO_PREVIEW_MERI_BACKEND_SOURCE !== previewMeriBackendSource ||
-    env.MERI_CONVERSATION_WORKFLOW_ENABLED !== "true"
+    env.MERI_CONVERSATION_WORKFLOW_ENABLED !== "true" ||
+    !configuredRuntimeBinding(env)
   )
     return false;
   try {
