@@ -2898,6 +2898,15 @@
     "reviewedOn": "2026-10-16"
   },
   {
+    "file": "apps/web/src/features/meri/conversation/useConversationConnection.ts",
+    "kind": "function",
+    "symbol": "useConversationConnection",
+    "fingerprint": "2e5a4319e45b503bc023529ae40eaa2d94b60463548ac6360a5ae68b471b4650",
+    "reason": "One selected account and client owns host attachment, exact-run reopening, and the bounded session renewal lifetime. The explicit next-turn target is projected to clientId, conversationId and runId before strict session validation; the UI-only pending prompt remains separate. History, admission and transport have other owners, so the 84-line hook does not combine independent workflows. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
     "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
     "kind": "function",
     "symbol": "sessionHistoryState",
