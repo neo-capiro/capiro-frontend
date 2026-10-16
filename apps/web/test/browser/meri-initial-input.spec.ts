@@ -144,8 +144,8 @@ test("synthetic desktop interrupted initial submit survives ordinary navigation 
   await expect(
     page.getByText("You: Original before navigation", { exact: true }),
   ).toHaveCount(1);
-  expect(native.calls.allocate).toHaveLength(2);
-  expect(native.calls.submit).toHaveLength(2);
+  await expect.poll(() => native.calls.allocate.length).toBe(2);
+  await expect.poll(() => native.calls.submit.length).toBe(2);
   expect(
     new Set([
       ...native.calls.allocate,
