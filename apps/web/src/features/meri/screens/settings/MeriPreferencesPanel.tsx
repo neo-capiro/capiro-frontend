@@ -13,6 +13,7 @@ import {
   type PreferencePageId,
 } from "./preferences-unavailable";
 import type { SettingsChrome } from "./settings-view";
+import { unavailableResources } from "../../../../shared/meri-resources/unavailable";
 
 const unavailable =
   "Unavailable until a verified Meri settings contract is connected.";
@@ -29,8 +30,7 @@ export function MeriPreferencesPanel() {
     embedded: true,
     notice: {
       title: "Meri preferences connection unavailable",
-      detail:
-        "The new Meri backend owns writing preferences, connectors, limits, skills, notifications and privacy. A verified greenfield settings contract is required before these controls can be saved.",
+      detail: `${unavailableResources.preferences.summary} Missing: ${unavailableResources.preferences.missing}`,
     },
     unavailable,
     localDrafts: false,

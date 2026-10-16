@@ -1,4 +1,5 @@
 import { Button } from "@capiro/ui/button";
+import { unavailableResources } from "../meri-resources/unavailable";
 import styles from "./shell.module.css";
 
 /** Synthetic recent conversation titles, shared by the sidebar and the phone menu. */
@@ -27,7 +28,9 @@ export function SidebarRecents({ fixture }: { fixture: boolean }) {
           </Button>
         ))
       ) : (
-        <p>Recent conversations unavailable</p>
+        <p title={unavailableResources.conversationList.missing}>
+          Recent conversations unavailable
+        </p>
       )}
     </section>
   );

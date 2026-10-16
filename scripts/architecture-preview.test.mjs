@@ -10,6 +10,7 @@ test('preview policy is allocated only to the existing backend entries and Next 
     'app/api/capiro/[operation]/route.ts',
     'app/api/action-followthrough/[operation]/route.ts',
     'app/api/documents/[operation]/route.ts',
+    'app/api/documents/links/[action]/route.ts',
     'app/api/conversations/[...path]/route.ts',
     'proxy.ts',
   ]) {

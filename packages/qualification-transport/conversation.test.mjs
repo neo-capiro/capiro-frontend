@@ -146,3 +146,19 @@ test('HTTP204 reconnect ends observation without completing the run', async t =>
   assert.equal(f.client.getSnapshot().observation.runState, 'queued');
   assert.equal(f.client.getSnapshot().observation.after, 0);
 });
+
+test('observation exposes only the admitted request text: the exact submitted input', async t => {
+  const f = setup(t);
+  await f.submit();
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Hello');
+});
+
+test('observation exposes the stored history request and keeps it while streaming', async t => {
+  const f = setup(t);
+  f.stored = { ...f.stored, prompt: 'Stored request' };
+  await f.client.history({ limit: 1 });
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Stored request');
+  await f.client.openChat().chat.resumeStream();
+  assert.equal(f.client.getSnapshot().observation.after, 2);
+  assert.equal(f.client.getSnapshot().observation.prompt, 'Stored request');
+});

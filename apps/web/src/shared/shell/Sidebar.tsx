@@ -5,6 +5,7 @@ import { useSelectedClient } from "../session/SelectedClient";
 import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
 import {
   preferencesHref,
@@ -54,7 +55,7 @@ export function Sidebar({
         title={
           fixture
             ? "New local fixture draft"
-            : "Conversation service unavailable"
+            : unavailableTitle("newConversation")
         }
       >
         <DesignIcon name="plus" assetSet={assetSet} />
@@ -73,7 +74,7 @@ export function Sidebar({
           variant="ghost"
           className={styles.navButton}
           disabled
-          title="No connected conversation store"
+          title={unavailableTitle("conversationList")}
         >
           <DesignIcon name="search" assetSet={assetSet} />
           Search conversations

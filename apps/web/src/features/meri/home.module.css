@@ -54,6 +54,10 @@
   flex-direction: column;
   gap: 24px;
 }
+/* A connected conversation starts near the top; the empty-state spacing is for Home only. */
+.welcomeGroup.connectedGroup {
+  margin-top: 32px;
+}
 .welcome {
   display: flex;
   flex-direction: column;

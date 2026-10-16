@@ -99,7 +99,7 @@ class ConversationConnection {
             this.network.check();
             if (this.observation === observation)
                 this.publish({ observation: observation.snapshot });
-        });
+        }, 'request' in view ? null : this.intent?.prompt ?? null);
         this.observation = observation;
         this.publish({ status: 'ready', observation: observation.snapshot });
     }

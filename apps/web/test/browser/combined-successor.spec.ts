@@ -21,6 +21,8 @@ import {
   run,
   binding as conversationBinding,
   reply,
+  sse,
+  status,
 } from "./meri-conversation-fixtures";
 const origin = `/portfolio/${clientId}/objectives?objective=${objective.id}`;
 const occurrence = `planner:${taskId}:due`;
@@ -68,7 +70,9 @@ async function fixture(page: Page) {
       if (
         ![
           "/api/action-followthrough/session",
+          "/api/conversations/history",
           "/api/conversations/submit",
+          "/api/conversations/events",
         ].includes(path)
       )
         state.unexpected.push(`Unexpected write: ${path}`);
@@ -240,6 +244,12 @@ test("unknown Meri input remains visible and scoped across all three bound desti
           replayed: true,
         });
   });
+  await page.route("**/api/conversations/history", (r) =>
+    reply(r, { error: { code: "NOT_FOUND" } }, 404),
+  );
+  await page.route("**/api/conversations/events", (r) =>
+    sse(r, [status(1, "completed")]),
+  );
   await connect(page);
   await page
     .getByLabel("Meri message", { exact: true })
@@ -269,12 +279,14 @@ test("unknown Meri input remains visible and scoped across all three bound desti
     .getByRole("navigation", { name: "Workspace", exact: true })
     .getByRole("link", { name: "Meri", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: "Connect conversation service", exact: true })
-    .click();
-  const input = page.getByLabel("Meri message", { exact: true });
-  await expect(input).toHaveValue("Original integration request");
-  await expect(input).toBeDisabled();
+  await expect(
+    page
+      .getByRole("article", { name: "Current turn" })
+      .getByText("Original integration request"),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Send message", exact: true }),
+  ).toBeDisabled();
   expect(f.hints).toEqual([
     { clientId },
     {
@@ -287,18 +299,16 @@ test("unknown Meri input remains visible and scoped across all three bound desti
   await page
     .getByRole("button", { name: "Retry same request", exact: true })
     .click();
-  await expect(
-    page.getByText("The submitted request was observed by the service.", {
-      exact: true,
-    }),
-  ).toBeVisible();
+  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
   expect(requests).toEqual([requests[0], requests[0]]);
   exactQueries(f.queries);
   expect(f.commands).toEqual([
     "/api/action-followthrough/session",
+    "/api/conversations/history",
     "/api/conversations/submit",
     "/api/action-followthrough/session",
     "/api/conversations/submit",
+    "/api/conversations/events",
   ]);
   expect(f.unexpected).toEqual([]);
 });

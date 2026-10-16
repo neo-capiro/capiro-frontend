@@ -75,10 +75,16 @@ export function conversationSelectionOwner(
     owned = cache.find({ queryKey: key, exact: true });
   const current = () =>
     owned !== undefined && cache.find({ queryKey: key, exact: true }) === owned;
+  const remembered =
+    client.getQueryData<{ conversationId?: string; runId?: string }>(key) ?? {};
   return {
-    hints: {
-      ...client.getQueryData<{ conversationId?: string; runId?: string }>(key),
-      clientId,
+    hints: { ...remembered, clientId },
+    /**
+     * A new turn asks for the conversation's current run without pinning the finished one; the
+     * service binds its reserved successor or refuses. It never chooses another conversation.
+     */
+    nextTurnHints(conversationId: string) {
+      return { clientId, conversationId };
     },
     record(context: ActionContext) {
       if (current())

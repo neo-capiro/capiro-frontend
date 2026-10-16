@@ -6,12 +6,14 @@ import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
+import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
 import {
   destinationHref,
   destinationLabel,
   destinations,
   type MeriSection,
+  unavailableDestinationTitle,
 } from "./SidebarDestinations";
 import { recents } from "./SidebarRecents";
 import styles from "./shell.module.css";
@@ -99,7 +101,7 @@ function MobileNewConversation({
       type="button"
       className={styles.mobileNewConversation}
       disabled
-      title="Conversation service unavailable"
+      title={unavailableTitle("newConversation")}
     >
       {plus}
       New conversation
@@ -153,7 +155,7 @@ function MobileMenu({
             type="button"
             className={styles.mobileItem}
             disabled
-            title="Unavailable: no connected service"
+            title={unavailableDestinationTitle(item)}
           >
             {icon}
             {label}

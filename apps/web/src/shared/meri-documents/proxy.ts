@@ -45,9 +45,11 @@ export async function proxyDocumentRequest(
     request.headers.has("content-encoding")
   )
     return unavailable(400);
-  if (!config.enabled || !config.baseUrl || !config.operation)
-    return unavailable(503);
   const route = operation as DocumentRoute;
+  // Writes need the bound document family; version reads also serve conversation artifacts.
+  const write = route === "create" || route === "revise";
+  if (!(write ? config.enabled && config.operation : config.readEnabled))
+    return unavailable(503);
   try {
     return await withActionDeadline([request.signal], async (signal) => {
       const nativeToken = await getNativeToken();

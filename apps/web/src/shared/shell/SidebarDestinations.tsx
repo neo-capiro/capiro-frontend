@@ -5,6 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@capiro/ui/button";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
+import {
+  unavailableTitle,
+  type UnavailableResourceId,
+} from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
 import styles from "./shell.module.css";
 
@@ -35,30 +39,40 @@ export const destinations = [
     href: "/meri/files",
     fixture: "workspace-files",
   },
-  { label: "Runs", icon: "runs", section: "runs", fixture: "background-runs" },
+  {
+    label: "Runs",
+    icon: "runs",
+    section: "runs",
+    fixture: "background-runs",
+    unavailable: "runs",
+  },
   {
     label: "Approvals",
     icon: "approvals",
     section: "approvals",
     fixture: "approval-center",
+    unavailable: "approvals",
   },
   {
     label: "Memory",
     icon: "memory",
     section: "memory",
     fixture: "memory-recall",
+    unavailable: "memory",
   },
   {
     label: "Routines",
     icon: "routines",
     section: "routines",
     fixture: "routines",
+    unavailable: "routines",
   },
   {
     label: "Data access",
     icon: "data-access",
     section: "data-access",
     fixture: "data-coverage",
+    unavailable: "dataAccess",
   },
 ] as const satisfies readonly {
   label: string;
@@ -66,7 +80,16 @@ export const destinations = [
   section: MeriSection;
   href?: string;
   fixture?: string;
+  /** Ordinary routes: the missing service that keeps this destination disabled. */
+  unavailable?: UnavailableResourceId;
 }[];
+/** Tooltip for a destination with no ordinary route. */
+export const unavailableDestinationTitle = (
+  item: (typeof destinations)[number],
+) =>
+  "unavailable" in item
+    ? unavailableTitle(item.unavailable)
+    : "Unavailable: no connected service";
 /** Fixture mode links a destination to its synthetic Figma screen when one exists. */
 export const destinationHref = (
   item: (typeof destinations)[number],
@@ -141,7 +164,7 @@ export function SidebarDestinations({
                   : fixture
                     ? "Open local fixture"
                     : "Open Meri"
-                : "Unavailable: no connected service"
+                : unavailableDestinationTitle(item)
             }
           >
             {<DesignIcon name={item.icon} assetSet={assetSet} />}
