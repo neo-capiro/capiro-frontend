@@ -1,9 +1,20 @@
 import { test, expect, type Page } from "@playwright/test";
-import { clientId, installFixtures, json } from "./fixtures";
+import {
+  clientId,
+  installFixtures,
+  installUnavailableLocationReads,
+  json,
+} from "./fixtures";
 import { boundaryFixture, facility } from "../facility-map-fixtures";
 
 async function mapFixtures(page: Page) {
   const unexpected = await installFixtures(page);
+  await installUnavailableLocationReads(
+    page,
+    clientId,
+    { state: "CA", code: "01" },
+    unexpected,
+  );
   await page.route(`**/clients/${clientId}/facilities`, (route) =>
     json(route, [facility]),
   );
@@ -295,7 +306,11 @@ test("candidate index, district resolution, queued retry and failure messages st
   await detail
     .getByRole("button", { name: "Retry geocoding", exact: true })
     .click();
-  await expect(detail.getByRole("status")).toContainText("Retry requested");
+  await expect(
+    detail
+      .getByRole("region", { name: "Address resolution" })
+      .getByRole("status"),
+  ).toContainText("Retry requested");
   expect(queued).toBe(true);
   await page.screenshot({ path: "test-results/facility-geocoding-detail.png" });
   expect(unexpected).toEqual([]);

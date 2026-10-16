@@ -389,16 +389,17 @@ for (const delayed of [false, true]) {
     await message(page).press("ControlOrMeta+z");
     await expect(message(page).locator("strong")).toHaveCount(0);
     await expect(message(page)).toHaveText("Verified rewrite.");
+    if (delayed) await message(page).press("Home");
     await message(page).press("End");
-    await message(page).pressSequentially(" Added locally.");
-    await expect(message(page)).toHaveText("Verified rewrite. Added locally.");
-    await message(page).press("ControlOrMeta+z");
-    await expect(message(page)).toHaveText("Verified rewrite.");
     if (delayed)
       await expect(page.locator("html")).toHaveAttribute(
         "data-delayed-mail-selection",
         "observed",
       );
+    await message(page).pressSequentially(" Added locally.");
+    await expect(message(page)).toHaveText("Verified rewrite. Added locally.");
+    await message(page).press("ControlOrMeta+z");
+    await expect(message(page)).toHaveText("Verified rewrite.");
     expect(state.rewrites).toHaveLength(1);
     expect(state.sends).toHaveLength(0);
   });
