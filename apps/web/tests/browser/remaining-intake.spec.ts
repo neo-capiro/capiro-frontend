@@ -65,10 +65,10 @@ test("CI-01 standard reader can inspect saved client details and government fiel
     page.getByText("Saved synthetic intake note", { exact: true }),
   ).toBeVisible();
   await page
-    .getByRole("button", { name: "Government info", exact: true })
+    .getByRole("button", { name: "Government & federal profile", exact: true })
     .click();
   const dialog = page.getByRole("dialog", {
-    name: "Government info",
+    name: "Government & federal profile",
     exact: true,
   });
   for (const value of [
@@ -88,7 +88,10 @@ test("CI-01 standard reader can inspect saved client details and government fiel
   });
   await page.keyboard.press("Escape");
   await expect(
-    page.getByRole("button", { name: "Government info", exact: true }),
+    page.getByRole("button", {
+      name: "Government & federal profile",
+      exact: true,
+    }),
   ).toBeFocused();
   expect(writes).toEqual([]);
   expect(unexpected).toEqual([]);
@@ -191,7 +194,10 @@ test("CI-02 keyboard search has an empty state, arrow selection and dialog/input
   const unexpected = await installFixtures(page);
   await page.goto(`/portfolio/${clientId}`);
   await expect(
-    page.getByRole("button", { name: "Government info", exact: true }),
+    page.getByRole("button", {
+      name: "Government & federal profile",
+      exact: true,
+    }),
   ).toBeVisible();
   await page.keyboard.press("Control+j");
   const search = page.getByRole("combobox", { name: "Jump to a view" });
@@ -222,13 +228,16 @@ test("CI-02 keyboard search has an empty state, arrow selection and dialog/input
     page.getByRole("button", { name: "Switch client view: Overview" }),
   ).toBeFocused();
   await page
-    .getByRole("button", { name: "Government info", exact: true })
+    .getByRole("button", { name: "Government & federal profile", exact: true })
     .click();
   await page.keyboard.press("Control+j");
   await page.keyboard.press("g");
   await page.keyboard.press("f");
   await expect(
-    page.getByRole("dialog", { name: "Government info", exact: true }),
+    page.getByRole("dialog", {
+      name: "Government & federal profile",
+      exact: true,
+    }),
   ).toBeVisible();
   await expect(search).toHaveCount(0);
   await expect(page).toHaveURL(new RegExp(`/portfolio/${clientId}$`));
@@ -248,7 +257,10 @@ test("CI-01 unavailable client never exposes saved details or government action"
     page.getByRole("heading", { name: "Client details", exact: true }),
   ).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Government info", exact: true }),
+    page.getByRole("button", {
+      name: "Government & federal profile",
+      exact: true,
+    }),
   ).toHaveCount(0);
   expect(unexpected).toEqual([]);
 });
@@ -260,10 +272,10 @@ test("CI-01 government read view fits a narrow screen and keeps absent values ex
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`/portfolio/${clientId}`);
   await page
-    .getByRole("button", { name: "Government info", exact: true })
+    .getByRole("button", { name: "Government & federal profile", exact: true })
     .click();
   const dialog = page.getByRole("dialog", {
-    name: "Government info",
+    name: "Government & federal profile",
     exact: true,
   });
   await expect(

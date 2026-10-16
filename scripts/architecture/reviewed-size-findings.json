@@ -320,10 +320,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
     "kind": "function",
     "symbol": "FacilityDetailDialog",
-    "fingerprint": "a17f402ff9b58624e00643c490114a01cc9735349ff2ce6e7a81d0fec0aea6fb",
-    "reason": "Owns presentation and opening/closing of one current facility detail, with subordinate edit/remove dialogs. Delegation selection, notes/stats, and related navigation all describe that same selected facility. Native writes are delegated to separate facility and target owners; representation reads remain in the dedicated query module. The availability prop gates actions while the parent source is unqualified.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
+    "fingerprint": "b622830f35b6ec70e0a8b2844806cdf5fa8967ce7bdde83a04301d6dcadbf9d5",
+    "reason": "The current-facility container now owns scope, section navigation and edit/remove modal lifetime only. Pure LocationFacts and RepresentationSection owners render facts and roster/committee composition; evidence queries remain separately owned. Independent successor review verified the extraction and wrong-client guard. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "reviewedOn": "2026-10-16",
+    "reviewedBy": "Codex root and independent continuation source reviewers"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
@@ -609,10 +609,10 @@
     "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
     "kind": "function",
     "symbol": "ContactMail",
-    "fingerprint": "aec3ed053e3c32d19740c5cc800f96f5ebec84867ca93eacae54268b80e3424b",
-    "reason": "One selected contact\u2019s mailbox-history, selected-thread and draft-entry presentation. History/thread queries and current-read error transitions share the contact selection lifetime. The function composes the existing MailCompose rather than owning its send or provider implementation. Keeping reset decisions beside selection prevents mismatched contact/thread UI. No extraction required for this patch. The nested thread view is the presentation of the selected history item; separating only JSX would add state plumbing without a distinct owner.",
-    "reviewedBy": "Codex independent prospects_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "39414ae5a513e5548577754642b31580856c241e64e0e4ed395f831bc229928e",
+    "reason": "The existing contact-scoped read/compose workflow and stale/error barriers remain together. The caption alone selects the latest valid effective instant among returned messages; canonical mail hooks and compose/dialog owners retain transport, writes and lifecycle. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "reviewedBy": "Codex root and independent continuation source reviewers",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/directory-queries.ts",
@@ -798,10 +798,10 @@
     "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
     "kind": "function",
     "symbol": "WorkPage",
-    "fingerprint": "b17ef5e4ba4bd46f95cab84e38f19965fc48ca771295e97a124fe91295c0b82d",
-    "reason": "One current-client read-only Work composition shows current Strategy projections and the separate Workspace document view. The existing fixed tenantMembers read supplies labels through a pure exact-Clerk resolver with canonical derived type; missing or ambiguous roster data is unavailable, only null ownership unassigned. Source failures stay independent, while shared query/ApplicationBoundary own cancellation and expiry. Upcoming status is a supplied node field. Root and independent core_intake reviewed full226-line function, final8f2f499 bytes and owner/status controls. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "464eccb167b3f77fad74c0cdb6231f51524e2c2ae4f7451a8f09cff6b2d13bff",
+    "reason": "The screen presents the existing work projection and independent partial/error states. Current Strategy and step navigation formatting is delegated to the pure shared URL owner, without adding a source, writer or policy engine. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "reviewedBy": "Codex root and independent continuation source reviewers",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
@@ -2550,10 +2550,10 @@
     "file": "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx",
     "kind": "function",
     "symbol": "StrategiesLibrary",
-    "fingerprint": "c7415b14c1fe4748201e44de838b5256f111c7f080880aa135f0a2d75f387933",
-    "reason": "Independent review accepted one existing Strategies library presentation/filter/archive interaction. Inline proposals unavailable feedback and dependency-aware counts delegate transport/admission/reload to the canonical query and StatusPanel; no new workflow, endpoint, authority or fallback dataset is added. See docs/service-error-feedback-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "b9aae37dea6f9be36c34d8718407dc8aa2a50bec3c2eecb9a8ff8749d2d3b77a",
+    "reason": "One library workflow owns filters, returned-data statistics, table actions and child editors; canonical operation hooks retain persistence. Independent review caught and re-read the corrected client argument in both Open actions. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "reviewedBy": "Codex root and independent continuation source reviewers",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
@@ -2685,10 +2685,10 @@
     "file": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
     "kind": "function",
     "symbol": "EngagementOverview",
-    "fingerprint": "90822d6c136faf663a25ca31e673de83babdb5ef3da484a329aa302cdefa3433",
-    "reason": "Existing current-scope meetings/tasks/report/outreach projection and independent read/error/retry gates. Workload summary is derived solely from returned task states/ownership and delegates rendering; no new operational aggregate or service.",
-    "reviewedBy": "Codex outreach_review independent exact-source review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "7b5a9d3ecfd90fc26e0fbebf01205d3015884ad9fbf8d28e000de40e8877797c",
+    "reason": "Existing overview composition retains independent source failures and presentation owners. The next-meeting repair compares valid instants and adds no scheduler, transport or shared query owner. Independently source reviewed. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "reviewedBy": "Codex root and independent continuation source reviewers",
+    "reviewedOn": "2026-10-16"
   },
   {
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",

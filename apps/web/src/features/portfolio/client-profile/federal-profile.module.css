@@ -1,0 +1,120 @@
+.dialog {
+  width: min(1020px, calc(100vw - 32px));
+  height: min(820px, 90dvh);
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  gap: 16px;
+}
+.dialog > header h2 {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+}
+.dialog > p {
+  font-size: 13px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+.tabs button {
+  font-size: 13px;
+}
+.tabs button[aria-pressed="true"] {
+  background: var(--muted);
+  color: var(--foreground);
+}
+.body {
+  min-height: 0;
+  overflow: auto;
+}
+.card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.card h3 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.card p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.metrics > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.metrics dt {
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.metrics dd {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.entry {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: grid;
+  gap: 6px;
+  cursor: pointer;
+}
+.entry:hover {
+  background: var(--muted);
+}
+.entryHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 18px;
+}
+.entryHeading strong {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+.entryMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  min-height: 46px;
+}
+.entryMetrics > span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.entryMetrics strong {
+  font-size: 18px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.entryMetrics small {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+@media (max-width: 800px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+}

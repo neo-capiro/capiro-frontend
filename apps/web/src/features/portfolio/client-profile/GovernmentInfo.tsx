@@ -1,22 +1,20 @@
 "use client";
+import { useId, useState } from "react";
 import type { Client } from "@/features/portfolio/index/public";
-import {
-  clientToIntake,
-  organizationTypes,
-  sectors,
-  tracks,
-} from "@/features/portfolio/client-intake/public";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { ProfileFacts } from "./ProfileFacts";
-import styles from "./profile-details.module.css";
+import { FederalActivity } from "./FederalActivity";
+import { GovernmentRegistration } from "./GovernmentRegistration";
+import styles from "./federal-profile.module.css";
 
-const labels = (
-  values: string[],
-  options: readonly (readonly [string, string])[],
-) =>
-  values.map((value) => options.find(([key]) => key === value)?.[1] ?? value);
+export function GovernmentInfo(props: {
+  client: Client;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
+  return <GovernmentProfile key={props.client.id} {...props} />;
+}
 
-export function GovernmentInfo({
+function GovernmentProfile({
   client,
   open,
   onOpenChange,
@@ -25,58 +23,49 @@ export function GovernmentInfo({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const values = clientToIntake(client);
+  const [section, setSection] = useState<"identity" | "federal">("identity");
+  const id = useId();
   return (
     <Dialog
       open={open}
       onOpenChange={onOpenChange}
-      title="Government info"
-      className={styles.government}
+      title="Government & federal profile"
+      description={`Saved identity and separately sourced federal context for ${client.name}.`}
+      className={styles.dialog}
     >
-      <section aria-label="Registration" className={styles.group}>
-        <h3>Registration</h3>
-        <ProfileFacts
-          rows={[
-            ["CAGE code", values.cageCode],
-            ["UEI", values.uei],
-            ["SAM.gov status", values.samStatus],
-            ["SAM.gov expiration", values.samExpirationDate],
-            ["LDA registrant", values.ldaRegistrantName],
-            ["EIN", values.ein],
-            ["NAICS", values.naicsCodes],
-            ["PSC", values.pscCodes],
-            [
-              "Organization types",
-              labels(values.applicantTypes, organizationTypes),
-            ],
-            ["Federal set-aside certifications", values.setAsideCertifications],
-          ]}
-        />
+      <nav className={styles.tabs} aria-label="Government profile sections">
+        <button
+          id={`${id}-identity`}
+          className="button ghost"
+          aria-pressed={section === "identity"}
+          onClick={() => setSection("identity")}
+        >
+          Identity & registration
+        </button>
+        <button
+          id={`${id}-federal`}
+          className="button ghost"
+          aria-pressed={section === "federal"}
+          onClick={() => setSection("federal")}
+        >
+          Federal activity
+        </button>
+      </nav>
+      <section className={styles.body} aria-labelledby={`${id}-${section}`}>
+        {section === "identity" ? (
+          <GovernmentRegistration client={client} />
+        ) : (
+          <FederalActivity clientId={client.id} enabled={open} />
+        )}
       </section>
-      <section aria-label="Sector and tracks" className={styles.group}>
-        <h3>Sector and tracks</h3>
-        <ProfileFacts
-          rows={[
-            [
-              "Sector",
-              labels(values.sectors, sectors).map((value, index) =>
-                index === 0 ? `${value} · primary` : value,
-              ),
-            ],
-            ["Active tracks", labels(values.submissionTracks, tracks)],
-            ["LDA issue codes", values.issueCodes],
-          ]}
-        />
-      </section>
-      <div className="row between">
+      <footer className="row between">
         <small className="muted">
-          Saved client profile · External registration status is not verified
-          here.
+          Source availability and client attribution are shown separately.
         </small>
         <button className="button primary" onClick={() => onOpenChange(false)}>
           Done
         </button>
-      </div>
+      </footer>
     </Dialog>
   );
 }

@@ -2,10 +2,14 @@
 import { StrategiesLibrary } from "./StrategiesLibrary";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { strategyId } from "../../../shared/capiro/operations/strategies-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
+import {
+  readStrategyNavigation,
+  strategyHref,
+  type StrategyView as View,
+} from "../../../shared/capiro/strategy-navigation";
 import {
   ActionButton,
   SelectInput,
@@ -18,7 +22,6 @@ import styles from "./strategies.module.css";
 import { StrategyCreate } from "./StrategyCreate";
 import { StrategyTimeline } from "./StrategyTimeline";
 
-type View = "library" | "context" | "review" | "runs";
 const tabs: { id: View; label: string }[] = [
   { id: "library", label: "Strategies" },
   { id: "context", label: "Context library" },
@@ -46,37 +49,86 @@ const pageText: Record<View, { title: string; description: string }> = {
 
 export function StrategiesScreen() {
   const searchParams = useSearchParams();
-  const requested = searchParams.get("view");
-  const [view, setView] = useState<View>(
-    requested === "context" || requested === "review" || requested === "runs"
-      ? requested
-      : "library",
+  const router = useRouter();
+  const selection = readStrategyNavigation(
+    new URLSearchParams(searchParams.toString()),
   );
-  const [clientId, setClientId] = useState(searchParams.get("clientId") ?? "");
-  const [selected, setSelected] = useState<string>();
-  const [creating, setCreating] = useState(false);
-  const linked = searchParams.has("strategy");
-  const clients = useCapiroQuery("clients.list", {}, { enabled: !linked });
+  const { clientId, view, creating, linked, stepId } = selection;
+  const invalid =
+    selection.invalid ||
+    Boolean(clientId && !strategyId.safeParse(clientId).success) ||
+    (linked &&
+      (!strategyId.safeParse(selection.strategyId).success || !clientId)) ||
+    (stepId !== undefined && !strategyId.safeParse(stepId).success);
+  const clients = useCapiroQuery(
+    "clients.list",
+    {},
+    { enabled: !linked && !invalid },
+  );
+  const navigate = (next: Parameters<typeof strategyHref>[0]) =>
+    router.push(strategyHref(next, searchParams.toString()));
+  const setView = (view: View) => navigate({ clientId, view });
+  const create = () => navigate({ clientId, create: true });
+  const open = (id: string, clientId: string) =>
+    navigate({ clientId, strategyId: id, view });
+  const close = () =>
+    router.replace(strategyHref({ clientId, view }, searchParams.toString()));
+  if (invalid)
+    return (
+      <>
+        <StatusPanel error="This Strategy link is invalid." />
+        <ActionButton
+          onClick={() =>
+            router.replace(strategyHref({}, searchParams.toString()))
+          }
+        >
+          Dismiss Strategy link
+        </ActionButton>
+      </>
+    );
   if (linked)
     return (
       <CurrentStrategyLink
         key={searchParams.toString()}
-        onDismiss={() => setSelected(undefined)}
+        id={selection.strategyId!}
+        clientId={clientId}
+        stepId={stepId}
+        onClose={close}
+        onStepClose={() =>
+          router.replace(
+            strategyHref(
+              { clientId, strategyId: selection.strategyId, view },
+              searchParams.toString(),
+            ),
+          )
+        }
       />
     );
-  if (selected)
-    return (
-      <StrategyTimeline id={selected} onClose={() => setSelected(undefined)} />
-    );
   return (
-    <section className={styles.screen} data-design-node="411:119498">
+    <section
+      key={clientId}
+      className={styles.screen}
+      data-design-node="411:119498"
+    >
       <div className={styles.scope}>
         <SelectInput
           aria-label="Strategy client scope"
           value={clientId}
-          onValueChange={setClientId}
+          disabled={clients.loading || Boolean(clients.error)}
+          onValueChange={(clientId) => navigate({ clientId, view })}
           options={[
             { value: "", label: "All clients" },
+            ...(clientId &&
+            !clients.data?.some((client) => client.id === clientId)
+              ? [
+                  {
+                    value: clientId,
+                    label: clients.loading
+                      ? "Checking selected client"
+                      : "Selected client unavailable",
+                  },
+                ]
+              : []),
             ...(clients.data ?? []).map((client) => ({
               value: client.id,
               label: client.name,
@@ -98,7 +150,7 @@ export function StrategiesScreen() {
             <ActionButton onClick={() => setView("context")}>
               Context library
             </ActionButton>
-            <ActionButton primary onClick={() => setCreating(true)}>
+            <ActionButton primary onClick={create}>
               New strategy
             </ActionButton>
           </div>
@@ -120,9 +172,10 @@ export function StrategiesScreen() {
       )}
       {view === "library" && (
         <StrategiesLibrary
+          key={clientId}
           clientId={clientId}
-          onOpen={setSelected}
-          onCreate={() => setCreating(true)}
+          onOpen={open}
+          onCreate={create}
           onReview={() => setView("review")}
         />
       )}
@@ -138,50 +191,60 @@ export function StrategiesScreen() {
       )}
       {creating && (
         <StrategyCreate
-          onClose={() => setCreating(false)}
-          onCreated={(strategy) => setSelected(strategy.id)}
+          key={clientId}
+          initialClientId={clientId}
+          onClose={close}
+          onCreated={(strategy) =>
+            router.replace(
+              strategyHref(
+                { clientId: strategy.clientId, strategyId: strategy.id, view },
+                searchParams.toString(),
+              ),
+            )
+          }
         />
       )}
     </section>
   );
 }
 
-function CurrentStrategyLink({ onDismiss }: { onDismiss: () => void }) {
-  const params = useSearchParams();
-  const router = useRouter();
+function CurrentStrategyLink({
+  id,
+  clientId,
+  stepId,
+  onClose,
+  onStepClose,
+}: {
+  id: string;
+  clientId: string;
+  stepId?: string;
+  onClose: () => void;
+  onStepClose: () => void;
+}) {
   const scope = useSelectedClient();
-  const id = params.get("strategy") ?? "";
-  const clientId = params.get("clientId") ?? "";
-  const valid =
-    params.getAll("strategy").length === 1 &&
-    params.getAll("clientId").length === 1 &&
-    strategyId.safeParse(id).success &&
-    strategyId.safeParse(clientId).success;
   const authorized =
     scope.state === "authorized-client" && scope.client.id === clientId;
-  const close = () => {
-    onDismiss();
-    const next = new URLSearchParams(params.toString());
-    next.delete("strategy");
-    router.replace(`/modules/strategies${next.size ? `?${next}` : ""}`);
-  };
-  if (!valid || !authorized)
+  if (!authorized)
     return (
       <>
         <StatusPanel
-          loading={valid && scope.state === "loading"}
+          loading={scope.state === "loading"}
           error={
-            !valid
-              ? "This Strategy link is invalid."
-              : scope.state === "loading"
-                ? undefined
-                : "This Strategy is unavailable in the selected client scope."
+            scope.state === "loading"
+              ? undefined
+              : "This Strategy is unavailable in the selected client scope."
           }
         />
-        <ActionButton onClick={close}>Dismiss Strategy link</ActionButton>
+        <ActionButton onClick={onClose}>Dismiss Strategy link</ActionButton>
       </>
     );
   return (
-    <StrategyTimeline id={id} expectedClientId={clientId} onClose={close} />
+    <StrategyTimeline
+      id={id}
+      expectedClientId={clientId}
+      requestedStepId={stepId}
+      onClose={onClose}
+      onStepClose={onStepClose}
+    />
   );
 }

@@ -1,0 +1,6011 @@
+{
+  "sourceCommit": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "sourceTree": "fe91d99ea53e982f73fd346c0dcff0f7225597cd",
+  "scope": "Documentation-only Components2:107 audit in both current Figma3.4 files. Not Prototype page audit, browser parity, authorization or release qualification.",
+  "metadataIdentical": true,
+  "counts": {
+    "uniqueHierarchyNodes": 620,
+    "nodeTypes": {
+      "canvas": 1,
+      "frame": 112,
+      "symbol": 418,
+      "text": 30,
+      "instance": 59
+    },
+    "topLevelChildren": 78,
+    "derivedFamilies": 101,
+    "nonMeriFamilies": 69,
+    "excludedMeriFamilies": 32,
+    "nonMeriSymbolDefinitions": 348,
+    "excludedMeriSymbolDefinitions": 70,
+    "toolContexts": 45,
+    "toolContextsWithScreenshots": 45
+  },
+  "files": [
+    {
+      "label": "Portfolio",
+      "key": "mpXWnySldUFzdVna8i69Ki"
+    },
+    {
+      "label": "Modules/Settings",
+      "key": "zGvvF6V6hh7yweoplCdpdE"
+    }
+  ],
+  "pageId": "2:107",
+  "contexts": [
+    {
+      "name": "buttons",
+      "path": "audit-evidence/figma34/shared/context-buttons.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "cascader-panels",
+      "path": "audit-evidence/figma34/shared/context-cascader-panels.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "capability-states",
+      "path": "audit-evidence/figma34/shared/context-capability-states.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "header",
+      "path": "audit-evidence/figma34/shared/context-header.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "sidebar",
+      "path": "audit-evidence/figma34/shared/context-sidebar.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "plate-toolbar",
+      "path": "audit-evidence/figma34/shared/context-plate-toolbar.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "kibo-review",
+      "path": "audit-evidence/figma34/shared/context-kibo-review.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "client-tiles",
+      "path": "audit-evidence/figma34/shared/context-client-tiles.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "contact-fields",
+      "path": "audit-evidence/figma34/shared/context-contact-fields.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "calendar-events",
+      "path": "audit-evidence/figma34/shared/context-calendar-events.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "capability-details",
+      "path": "audit-evidence/figma34/shared/context-capability-details.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "chips",
+      "path": "audit-evidence/figma34/shared/context-chips.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "progress",
+      "path": "audit-evidence/figma34/shared/context-progress.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "timeline",
+      "path": "audit-evidence/figma34/shared/context-timeline.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "contact-history",
+      "path": "audit-evidence/figma34/shared/context-contact-history.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "cascader-trigger",
+      "path": "audit-evidence/figma34/shared/context-cascader-trigger.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "cascader-options",
+      "path": "audit-evidence/figma34/shared/context-cascader-options.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "timeline-event",
+      "path": "audit-evidence/figma34/shared/context-timeline-event.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "org-person",
+      "path": "audit-evidence/figma34/shared/context-org-person.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "calendar-week",
+      "path": "audit-evidence/figma34/shared/context-calendar-week.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "follow-up",
+      "path": "audit-evidence/figma34/shared/context-follow-up.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "action-buttons",
+      "path": "audit-evidence/figma34/shared/context-action-buttons.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "capability-footer",
+      "path": "audit-evidence/figma34/shared/context-capability-footer.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "avatars",
+      "path": "audit-evidence/figma34/shared/context-avatars.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "kpi",
+      "path": "audit-evidence/figma34/shared/context-kpi.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "map-markers",
+      "path": "audit-evidence/figma34/shared/context-map-markers.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "source-toggles",
+      "path": "audit-evidence/figma34/shared/context-source-toggles.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "history-nodes",
+      "path": "audit-evidence/figma34/shared/context-history-nodes.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "fy-chapters",
+      "path": "audit-evidence/figma34/shared/context-fy-chapters.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "outreach-detail",
+      "path": "audit-evidence/figma34/shared/context-outreach-detail.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "meeting-unsaved",
+      "path": "audit-evidence/figma34/shared/context-meeting-unsaved.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "active-ask",
+      "path": "audit-evidence/figma34/shared/context-active-ask.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "plan-editor",
+      "path": "audit-evidence/figma34/shared/context-plan-editor.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "report-builder",
+      "path": "audit-evidence/figma34/shared/context-report-builder.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "outreach-editor",
+      "path": "audit-evidence/figma34/shared/context-outreach-editor.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "meeting-link",
+      "path": "audit-evidence/figma34/shared/context-meeting-link.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "legacy-sheet",
+      "path": "audit-evidence/figma34/shared/context-legacy-sheet.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "legacy-top-nav",
+      "path": "audit-evidence/figma34/shared/context-legacy-top-nav.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "legacy-bottom-nav",
+      "path": "audit-evidence/figma34/shared/context-legacy-bottom-nav.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "legacy-month-event",
+      "path": "audit-evidence/figma34/shared/context-legacy-month-event.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "legacy-week-event",
+      "path": "audit-evidence/figma34/shared/context-legacy-week-event.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "document-selection",
+      "path": "audit-evidence/figma34/shared/context-document-selection.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "document-block-menu",
+      "path": "audit-evidence/figma34/shared/context-document-block-menu.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "document-comment",
+      "path": "audit-evidence/figma34/shared/context-document-comment.json",
+      "screenshotInspected": true
+    },
+    {
+      "name": "advocacy-compact",
+      "path": "audit-evidence/figma34/shared/context-advocacy-compact.json",
+      "screenshotInspected": true
+    }
+  ],
+  "families": [
+    {
+      "id": "4:3",
+      "name": "Icons",
+      "sheet": "Component sheet",
+      "width": "336",
+      "height": "16",
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "4:6",
+          "name": "icon/pencil",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:9",
+          "name": "icon/sparkle",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:13",
+          "name": "icon/search",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:17",
+          "name": "icon/bell",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:20",
+          "name": "icon/plus",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:26",
+          "name": "icon/layout-grid",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:29",
+          "name": "icon/list",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:37",
+          "name": "icon/grip-vertical",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:40",
+          "name": "icon/resize-corner",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-3"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-3"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "4:41",
+      "name": "Button",
+      "sheet": "Component sheet",
+      "width": "252",
+      "height": "40",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "4:42",
+          "name": "Variant=Default",
+          "width": "101",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:46",
+          "name": "Variant=Outline",
+          "width": "103",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-41"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-41"
+        }
+      ],
+      "owner": "Shared module-ui owner via root coordination",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "packages/ui/src/shadcn/button.tsx"
+      ],
+      "assessment": "SH-IMP-01_RADIUS_MISMATCH_FOR_MODULE_ACTIONBUTTON",
+      "test": "Future focused component rendering: primary/outline/ghost,36px/14px/10px; keyboard, disabled, no reaction while pending"
+    },
+    {
+      "id": "4:51",
+      "name": "Toggle pill",
+      "sheet": "Component sheet",
+      "width": "144",
+      "height": "32",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "4:52",
+          "name": "State=Off",
+          "width": "50",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:54",
+          "name": "State=On",
+          "width": "50",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-51"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-51"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "4:57",
+      "name": "Urgency badge",
+      "sheet": "Component sheet",
+      "width": "210",
+      "height": "32",
+      "variantCount": 5,
+      "variants": [
+        {
+          "id": "4:58",
+          "name": "Level=Critical",
+          "width": "26",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:60",
+          "name": "Level=High",
+          "width": "26",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:62",
+          "name": "Level=Medium",
+          "width": "26",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:64",
+          "name": "Level=Low",
+          "width": "26",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:66",
+          "name": "Level=None",
+          "width": "26",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-57"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-57"
+        }
+      ],
+      "owner": "Shared primitives + feature caller owner",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "apps/web/src/shared/portfolio/styles.css"
+      ],
+      "assessment": "SH-IMP-02_BADGE_REUSE_LIMITATION_SCREEN_BINDING_REQUIRED",
+      "test": "Future screenshot of exact chip callers; semantic dot/text,22px capsule, colors do not grant authority"
+    },
+    {
+      "id": "4:69",
+      "name": "Tag",
+      "sheet": "Component sheet",
+      "width": "196",
+      "height": "50",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "4:70",
+          "name": "Tag",
+          "width": "122",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:72",
+          "name": "Stat",
+          "width": "50",
+          "height": "50",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-69"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-69"
+        }
+      ],
+      "owner": "Shared primitives + feature caller owner",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "apps/web/src/shared/portfolio/styles.css"
+      ],
+      "assessment": "SH-IMP-02_BADGE_REUSE_LIMITATION_SCREEN_BINDING_REQUIRED",
+      "test": "Future screenshot of exact chip callers; semantic dot/text,22px capsule, colors do not grant authority"
+    },
+    {
+      "id": "4:75",
+      "name": "Progress",
+      "sheet": "Component sheet",
+      "width": "4472",
+      "height": "52",
+      "variantCount": 42,
+      "variants": [
+        {
+          "id": "7:449",
+          "name": "Tone=Default, Value=0",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:451",
+          "name": "Tone=Default, Value=5",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:453",
+          "name": "Tone=Default, Value=10",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:455",
+          "name": "Tone=Default, Value=15",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:457",
+          "name": "Tone=Default, Value=20",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:459",
+          "name": "Tone=Default, Value=25",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:461",
+          "name": "Tone=Default, Value=30",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:463",
+          "name": "Tone=Default, Value=35",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:465",
+          "name": "Tone=Default, Value=40",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:76",
+          "name": "Tone=Default, Value=45",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:467",
+          "name": "Tone=Default, Value=50",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:469",
+          "name": "Tone=Default, Value=55",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:471",
+          "name": "Tone=Default, Value=60",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:473",
+          "name": "Tone=Default, Value=65",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:475",
+          "name": "Tone=Default, Value=70",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:477",
+          "name": "Tone=Default, Value=75",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:479",
+          "name": "Tone=Default, Value=80",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:481",
+          "name": "Tone=Default, Value=85",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:483",
+          "name": "Tone=Default, Value=90",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:485",
+          "name": "Tone=Default, Value=95",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:487",
+          "name": "Tone=Default, Value=100",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:489",
+          "name": "Tone=Danger, Value=0",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:491",
+          "name": "Tone=Danger, Value=5",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:493",
+          "name": "Tone=Danger, Value=10",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:495",
+          "name": "Tone=Danger, Value=15",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:497",
+          "name": "Tone=Danger, Value=20",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:499",
+          "name": "Tone=Danger, Value=25",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:501",
+          "name": "Tone=Danger, Value=30",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:503",
+          "name": "Tone=Danger, Value=35",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:505",
+          "name": "Tone=Danger, Value=40",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:78",
+          "name": "Tone=Danger, Value=45",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:507",
+          "name": "Tone=Danger, Value=50",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:509",
+          "name": "Tone=Danger, Value=55",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:511",
+          "name": "Tone=Danger, Value=60",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:513",
+          "name": "Tone=Danger, Value=65",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:515",
+          "name": "Tone=Danger, Value=70",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:517",
+          "name": "Tone=Danger, Value=75",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:519",
+          "name": "Tone=Danger, Value=80",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:521",
+          "name": "Tone=Danger, Value=85",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:523",
+          "name": "Tone=Danger, Value=90",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:525",
+          "name": "Tone=Danger, Value=95",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "7:527",
+          "name": "Tone=Danger, Value=100",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-75"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-75"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "4:83",
+      "name": "Client logo",
+      "sheet": "Component sheet",
+      "width": "132",
+      "height": "44",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "4:84",
+          "name": "Type=Client",
+          "width": "44",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "4:86",
+          "name": "Type=Prospect",
+          "width": "44",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=4-83"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=4-83"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "5:74",
+      "name": "Client card",
+      "sheet": "Component sheet",
+      "width": "926",
+      "height": "233",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "5:4",
+          "name": "Type=Client",
+          "width": "427",
+          "height": "233",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "5:39",
+          "name": "Type=Prospect",
+          "width": "427",
+          "height": "178",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=5-74"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=5-74"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "12:339",
+      "name": "v2 \u00c2\u00b7 Icons",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "296",
+      "height": "16",
+      "variantCount": 8,
+      "variants": [
+        {
+          "id": "12:342",
+          "name": "icon/chevron-down",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:346",
+          "name": "icon/calendar",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:349",
+          "name": "icon/arrow-up-right",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:352",
+          "name": "icon/list-filter",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:355",
+          "name": "icon/arrow-up-down",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:359",
+          "name": "icon/trending-up",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:364",
+          "name": "icon/more-horizontal",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:368",
+          "name": "icon/clock",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=12-339"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=12-339"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "12:369",
+      "name": "v2 \u00c2\u00b7 Button",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "354",
+      "height": "36",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "12:370",
+          "name": "Variant=Primary",
+          "width": "96",
+          "height": "36",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:376",
+          "name": "Variant=Outline",
+          "width": "98",
+          "height": "36",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:382",
+          "name": "Variant=Ghost",
+          "width": "96",
+          "height": "36",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=12-369"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=12-369"
+        }
+      ],
+      "owner": "Shared module-ui owner via root coordination",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "packages/ui/src/shadcn/button.tsx"
+      ],
+      "assessment": "SH-IMP-01_RADIUS_MISMATCH_FOR_MODULE_ACTIONBUTTON",
+      "test": "Future focused component rendering: primary/outline/ghost,36px/14px/10px; keyboard, disabled, no reaction while pending"
+    },
+    {
+      "id": "12:389",
+      "name": "v2 \u00c2\u00b7 Chip",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "618",
+      "height": "32",
+      "variantCount": 6,
+      "variants": [
+        {
+          "id": "12:390",
+          "name": "Tone=Red solid",
+          "width": "86",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:393",
+          "name": "Tone=Red",
+          "width": "88",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:396",
+          "name": "Tone=Orange",
+          "width": "88",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:399",
+          "name": "Tone=Amber",
+          "width": "88",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:402",
+          "name": "Tone=Blue",
+          "width": "88",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:405",
+          "name": "Tone=Gray",
+          "width": "88",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=12-389"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=12-389"
+        }
+      ],
+      "owner": "Shared primitives + feature caller owner",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "apps/web/src/shared/portfolio/styles.css"
+      ],
+      "assessment": "SH-IMP-02_BADGE_REUSE_LIMITATION_SCREEN_BINDING_REQUIRED",
+      "test": "Future screenshot of exact chip callers; semantic dot/text,22px capsule, colors do not grant authority"
+    },
+    {
+      "id": "12:409",
+      "name": "v2 \u00c2\u00b7 Progress",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "4484",
+      "height": "52",
+      "variantCount": 42,
+      "variants": [
+        {
+          "id": "12:410",
+          "name": "Tone=Default, Value=0",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:412",
+          "name": "Tone=Default, Value=5",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:414",
+          "name": "Tone=Default, Value=10",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:416",
+          "name": "Tone=Default, Value=15",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:418",
+          "name": "Tone=Default, Value=20",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:420",
+          "name": "Tone=Default, Value=25",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:422",
+          "name": "Tone=Default, Value=30",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:424",
+          "name": "Tone=Default, Value=35",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:426",
+          "name": "Tone=Default, Value=40",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:428",
+          "name": "Tone=Default, Value=45",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:430",
+          "name": "Tone=Default, Value=50",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:432",
+          "name": "Tone=Default, Value=55",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:434",
+          "name": "Tone=Default, Value=60",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:436",
+          "name": "Tone=Default, Value=65",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:438",
+          "name": "Tone=Default, Value=70",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:440",
+          "name": "Tone=Default, Value=75",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:442",
+          "name": "Tone=Default, Value=80",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:444",
+          "name": "Tone=Default, Value=85",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:446",
+          "name": "Tone=Default, Value=90",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:448",
+          "name": "Tone=Default, Value=95",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:450",
+          "name": "Tone=Default, Value=100",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:452",
+          "name": "Tone=Danger, Value=0",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:454",
+          "name": "Tone=Danger, Value=5",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:456",
+          "name": "Tone=Danger, Value=10",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:458",
+          "name": "Tone=Danger, Value=15",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:460",
+          "name": "Tone=Danger, Value=20",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:462",
+          "name": "Tone=Danger, Value=25",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:464",
+          "name": "Tone=Danger, Value=30",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:466",
+          "name": "Tone=Danger, Value=35",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:468",
+          "name": "Tone=Danger, Value=40",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:470",
+          "name": "Tone=Danger, Value=45",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:472",
+          "name": "Tone=Danger, Value=50",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:474",
+          "name": "Tone=Danger, Value=55",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:476",
+          "name": "Tone=Danger, Value=60",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:478",
+          "name": "Tone=Danger, Value=65",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:480",
+          "name": "Tone=Danger, Value=70",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:482",
+          "name": "Tone=Danger, Value=75",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:484",
+          "name": "Tone=Danger, Value=80",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:486",
+          "name": "Tone=Danger, Value=85",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:488",
+          "name": "Tone=Danger, Value=90",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:490",
+          "name": "Tone=Danger, Value=95",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:492",
+          "name": "Tone=Danger, Value=100",
+          "width": "200",
+          "height": "4",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=12-409"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=12-409"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "12:495",
+      "name": "v2 \u00c2\u00b7 Avatar + Monogram",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "170",
+      "height": "40",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "12:496",
+          "name": "v2/Avatar",
+          "width": "22",
+          "height": "22",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:498",
+          "name": "Type=Client",
+          "width": "40",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "12:500",
+          "name": "Type=Prospect",
+          "width": "40",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=12-495"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=12-495"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "13:486",
+      "name": "v2 \u00c2\u00b7 Client tile",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "1368",
+      "height": "400",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "13:426",
+          "name": "Size=Featured",
+          "width": "869.3300170898438",
+          "height": "224",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "13:341",
+          "name": "Size=Standard",
+          "width": "426.6700134277344",
+          "height": "224",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "13:376",
+          "name": "Size=Compact",
+          "width": "426.6700134277344",
+          "height": "104",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "13:400",
+          "name": "Size=Prospect",
+          "width": "426.6700134277344",
+          "height": "104",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=13-486"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=13-486"
+        }
+      ],
+      "owner": "Portfolio index owner",
+      "paths": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx",
+        "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+        "apps/web/src/features/portfolio/index/portfolio.module.css"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_CURRENT_DATA_NOT_PROTOTYPE_VALUES",
+      "test": "Existing portfolio-layout*.spec.ts and portfolio-index.spec.ts; future current-frame parity/keyboard, responsive wrap, unavailable metadata"
+    },
+    {
+      "id": "20:367",
+      "name": "v2 \u00c2\u00b7 Icons (profile)",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "896",
+      "height": "16",
+      "variantCount": 23,
+      "variants": [
+        {
+          "id": "20:370",
+          "name": "icon/landmark",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:375",
+          "name": "icon/banknote",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:378",
+          "name": "icon/activity",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:382",
+          "name": "icon/map-pin",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:385",
+          "name": "icon/minus",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:388",
+          "name": "icon/maximize-2",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:391",
+          "name": "icon/arrow-left",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:371",
+          "name": "icon/phone",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:375",
+          "name": "icon/mail",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:378",
+          "name": "icon/send",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:382",
+          "name": "icon/file-text",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:386",
+          "name": "icon/sticky-note",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:391",
+          "name": "icon/users",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:395",
+          "name": "icon/flag",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:398",
+          "name": "icon/message-square",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:401",
+          "name": "icon/pin",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2469",
+          "name": "icon/target",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2472",
+          "name": "icon/check",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2475",
+          "name": "icon/x",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2480",
+          "name": "icon/handshake",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2484",
+          "name": "icon/triangle-alert",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "644:139285",
+          "name": "icon/notepad",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "797:150137",
+          "name": "icon/routine",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=20-367"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=20-367"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "20:392",
+      "name": "v2 \u00c2\u00b7 KPI tile",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "205.3300018310547",
+      "height": "104",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "20:393",
+          "name": "v2/KPI tile",
+          "width": "205.3300018310547",
+          "height": "104",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=20-392"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=20-392"
+        }
+      ],
+      "owner": "Portfolio client-profile owner",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_DETAIL_FACTS_NEED_SCREEN_LANE",
+      "test": "Future: authorized details only, missing-count state and keyboard-open dialog"
+    },
+    {
+      "id": "20:404",
+      "name": "v2 \u00c2\u00b7 Timeline item",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "1644",
+      "height": "242",
+      "variantCount": 14,
+      "variants": [
+        {
+          "id": "20:405",
+          "name": "Lane=Meetings &amp; calls, Label=Right",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:411",
+          "name": "Lane=Meetings &amp; calls, Label=Left",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:417",
+          "name": "Lane=Email &amp; outreach, Label=Right",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:423",
+          "name": "Lane=Email &amp; outreach, Label=Left",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:429",
+          "name": "Lane=Documents &amp; notes, Label=Right",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:435",
+          "name": "Lane=Documents &amp; notes, Label=Left",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:441",
+          "name": "Lane=Commitments &amp; requests, Label=Right",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:447",
+          "name": "Lane=Commitments &amp; requests, Label=Left",
+          "width": "145",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:487",
+          "name": "Status=Open, Label=Right",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:497",
+          "name": "Status=Overdue, Label=Right",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "24:507",
+          "name": "Status=Settled, Label=Right",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "26:399",
+          "name": "Status=Open, Label=Left",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "26:407",
+          "name": "Status=Overdue, Label=Left",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "26:415",
+          "name": "Status=Settled, Label=Left",
+          "width": "271",
+          "height": "25",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=20-404"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=20-404"
+        }
+      ],
+      "owner": "Portfolio client-profile owner",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_SOURCE_SEMANTICS_PRESERVED",
+      "test": "Future: edge label directions, overdue/range truth, no invented occurrence or due date"
+    },
+    {
+      "id": "20:454",
+      "name": "v2 \u00c2\u00b7 Map marker",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "106",
+      "height": "34",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "20:455",
+          "name": "State=Default",
+          "width": "24",
+          "height": "24",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "20:458",
+          "name": "State=Active",
+          "width": "34",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=20-454"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=20-454"
+        }
+      ],
+      "owner": "Portfolio client-profile map owner",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/FacilityMap.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilityMapDialog.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_GEOMETRY_PENDING",
+      "test": "Future: active/default markers, keyboard-equivalent detail open, unavailable location"
+    },
+    {
+      "id": "29:405",
+      "name": "v2 \u00c2\u00b7 Source toggle",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "720",
+      "height": "112",
+      "variantCount": 10,
+      "variants": [
+        {
+          "id": "29:406",
+          "name": "Tone=Clay, State=On",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:412",
+          "name": "Tone=Clay, State=Off",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:416",
+          "name": "Tone=Teal, State=On",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:422",
+          "name": "Tone=Teal, State=Off",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:426",
+          "name": "Tone=Ochre, State=On",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:432",
+          "name": "Tone=Ochre, State=Off",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:436",
+          "name": "Tone=Plum, State=On",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:442",
+          "name": "Tone=Plum, State=Off",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:446",
+          "name": "Tone=Sage, State=On",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:452",
+          "name": "Tone=Sage, State=Off",
+          "width": "121",
+          "height": "34",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=29-405"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=29-405"
+        }
+      ],
+      "owner": "Portfolio/Modules calendar owners",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "assessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "test": "Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "id": "29:457",
+      "name": "v2 \u00c2\u00b7 Cal event (month)",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "720",
+      "height": "112",
+      "variantCount": 10,
+      "variants": [
+        {
+          "id": "29:458",
+          "name": "Tone=Clay, Style=Timed",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:462",
+          "name": "Tone=Clay, Style=All-day",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:466",
+          "name": "Tone=Teal, Style=Timed",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:470",
+          "name": "Tone=Teal, Style=All-day",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:474",
+          "name": "Tone=Ochre, Style=Timed",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:478",
+          "name": "Tone=Ochre, Style=All-day",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:482",
+          "name": "Tone=Plum, Style=Timed",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:486",
+          "name": "Tone=Plum, Style=All-day",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:490",
+          "name": "Tone=Sage, Style=Timed",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:494",
+          "name": "Tone=Sage, Style=All-day",
+          "width": "150",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=29-457"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=29-457"
+        }
+      ],
+      "owner": "Portfolio/Modules calendar owners",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "assessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "test": "Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "id": "29:499",
+      "name": "v2 \u00c2\u00b7 Week event",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "830",
+      "height": "52",
+      "variantCount": 5,
+      "variants": [
+        {
+          "id": "29:500",
+          "name": "Tone=Clay",
+          "width": "150",
+          "height": "52",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:503",
+          "name": "Tone=Teal",
+          "width": "150",
+          "height": "52",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:506",
+          "name": "Tone=Ochre",
+          "width": "150",
+          "height": "52",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:509",
+          "name": "Tone=Plum",
+          "width": "150",
+          "height": "52",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "29:512",
+          "name": "Tone=Sage",
+          "width": "150",
+          "height": "52",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=29-499"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=29-499"
+        }
+      ],
+      "owner": "Portfolio/Modules calendar owners",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "assessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "test": "Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "id": "34:405",
+      "name": "v2 \u00c2\u00b7 Top nav",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "1480",
+      "height": "752",
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "34:406",
+          "name": "Breakpoint=Desktop, Active=Dashboard",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:448",
+          "name": "Breakpoint=Desktop, Active=Portfolio",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:490",
+          "name": "Breakpoint=Desktop, Active=Modules",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:532",
+          "name": "Breakpoint=Tablet, Active=Dashboard",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:565",
+          "name": "Breakpoint=Tablet, Active=Portfolio",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:598",
+          "name": "Breakpoint=Tablet, Active=Modules",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "34:631",
+          "name": "Breakpoint=Mobile, Active=Dashboard",
+          "width": "390",
+          "height": "56",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "34:651",
+          "name": "Breakpoint=Mobile, Active=Portfolio",
+          "width": "390",
+          "height": "56",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "34:671",
+          "name": "Breakpoint=Mobile, Active=Modules",
+          "width": "390",
+          "height": "56",
+          "scopeClassification": "PHONE_DEFERRED"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=34-405"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=34-405"
+        }
+      ],
+      "owner": "Shared shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "assessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "test": "Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "id": "34:692",
+      "name": "v2 \u00c2\u00b7 Bottom nav",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "1218",
+      "height": "256",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "34:693",
+          "name": "Active=Dashboard",
+          "width": "390",
+          "height": "64",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "34:715",
+          "name": "Active=Portfolio",
+          "width": "390",
+          "height": "64",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "34:737",
+          "name": "Active=Modules",
+          "width": "390",
+          "height": "64",
+          "scopeClassification": "PHONE_DEFERRED"
+        }
+      ],
+      "mobileDeferred": true,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=34-692"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=34-692"
+        }
+      ],
+      "owner": "Shared shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "assessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "test": "Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "id": "61:2485",
+      "name": "v2 \u00c2\u00b7 History node",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "340",
+      "height": "632",
+      "variantCount": 8,
+      "variants": [
+        {
+          "id": "61:2486",
+          "name": "Kind=Outcome \u00c2\u00b7 Successful",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2494",
+          "name": "Kind=Outcome \u00c2\u00b7 Partial",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2503",
+          "name": "Kind=Outcome \u00c2\u00b7 Unsuccessful",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2511",
+          "name": "Kind=Outcome \u00c2\u00b7 Gap",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2520",
+          "name": "Kind=Submission",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2528",
+          "name": "Kind=LDA filing",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2536",
+          "name": "Kind=Program Element",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2546",
+          "name": "Kind=Agreement",
+          "width": "340",
+          "height": "68",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=61-2485"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=61-2485"
+        }
+      ],
+      "owner": "Portfolio advocacy owner",
+      "paths": [
+        "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+        "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_DATA_PROVENANCE_IS_AUTHORITATIVE",
+      "test": "Future: outcome/Evidence labels, current/closed/pre-Capiro FY and selection; no inferred approval"
+    },
+    {
+      "id": "61:2557",
+      "name": "v2 \u00c2\u00b7 FY chapter",
+      "sheet": "v2 \u00c2\u00b7 Component sheet",
+      "width": "340",
+      "height": "124",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "61:2558",
+          "name": "State=Current",
+          "width": "340",
+          "height": "24",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2562",
+          "name": "State=Closed",
+          "width": "340",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "61:2566",
+          "name": "State=Before Capiro",
+          "width": "340",
+          "height": "26",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=61-2557"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=61-2557"
+        }
+      ],
+      "owner": "Portfolio advocacy owner",
+      "paths": [
+        "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+        "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_DATA_PROVENANCE_IS_AUTHORITATIVE",
+      "test": "Future: outcome/Evidence labels, current/closed/pre-Capiro FY and selection; no inferred approval"
+    },
+    {
+      "id": "80:4672",
+      "name": "icon/briefcase",
+      "sheet": null,
+      "width": "20",
+      "height": "20",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "80:4672",
+          "name": "icon/briefcase",
+          "width": "20",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=80-4672"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=80-4672"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "80:4677",
+      "name": "icon/layers",
+      "sheet": null,
+      "width": "20",
+      "height": "20",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "80:4677",
+          "name": "icon/layers",
+          "width": "20",
+          "height": "20",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=80-4677"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=80-4677"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "284:31060",
+      "name": "v2/Timeline event \u00c2\u00b7 coss icon vertical",
+      "sheet": null,
+      "width": "740",
+      "height": "116",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "284:31060",
+          "name": "v2/Timeline event \u00c2\u00b7 coss icon vertical",
+          "width": "740",
+          "height": "116",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=284-31060"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=284-31060"
+        }
+      ],
+      "owner": "Portfolio client-profile owner",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+        "apps/web/src/features/portfolio/client-profile/ActivityDialogs.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_SOURCE_SEMANTICS_PRESERVED",
+      "test": "Future: edge label directions, overdue/range truth, no invented occurrence or due date"
+    },
+    {
+      "id": "293:31360",
+      "name": "v2/Calendar event \u00c2\u00b7 Schedule-X",
+      "sheet": null,
+      "width": "520",
+      "height": "420",
+      "variantCount": 10,
+      "variants": [
+        {
+          "id": "293:31335",
+          "name": "Source=Meetings, Style=Timed",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31338",
+          "name": "Source=Meetings, Style=All-day",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31340",
+          "name": "Source=Hearings, Style=Timed",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31343",
+          "name": "Source=Hearings, Style=All-day",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31345",
+          "name": "Source=Planner, Style=Timed",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31348",
+          "name": "Source=Planner, Style=All-day",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31350",
+          "name": "Source=Government, Style=Timed",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31353",
+          "name": "Source=Government, Style=All-day",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31355",
+          "name": "Source=Deadlines, Style=Timed",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "293:31358",
+          "name": "Source=Deadlines, Style=All-day",
+          "width": "176",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=293-31360"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=293-31360"
+        }
+      ],
+      "owner": "Portfolio/Modules calendar owners",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "assessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "test": "Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "id": "300:31334",
+      "name": "v2/Org person \u00c2\u00b7 React Flow",
+      "sheet": null,
+      "width": "1080",
+      "height": "200",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "300:31282",
+          "name": "State=Default",
+          "width": "228",
+          "height": "148",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "300:31295",
+          "name": "State=Manual",
+          "width": "228",
+          "height": "148",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "300:31308",
+          "name": "State=Review",
+          "width": "228",
+          "height": "148",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "300:31321",
+          "name": "State=Selected",
+          "width": "228",
+          "height": "148",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=300-31334"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=300-31334"
+        }
+      ],
+      "owner": "Portfolio relationships owner",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+        "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+        "apps/web/src/features/portfolio/relationships/email.ts",
+        "apps/web/src/features/portfolio/relationships/OrganizationChart.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_PERMISSION_AND_LIFETIME_GATES_EXIST",
+      "test": "Existing relationships.spec.ts, acceptance-relationships*.spec.ts; future date/no-email/error/loading, same-client current auth, selected roles"
+    },
+    {
+      "id": "313:32568",
+      "name": "v2/Calendar week event",
+      "sheet": null,
+      "width": "420",
+      "height": "164",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "313:32560",
+          "name": "Source=Meetings",
+          "width": "169",
+          "height": "100",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "313:32564",
+          "name": "Source=Hearings",
+          "width": "169",
+          "height": "100",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=313-32568"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=313-32568"
+        }
+      ],
+      "owner": "Portfolio/Modules calendar owners",
+      "paths": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+        "apps/web/src/features/modules/calendar/CalendarGrid.tsx"
+      ],
+      "assessment": "SCHEDULE_X_EXISTING_OWNER_LEGACY_AND_CURRENT_VARIANTS_COEXIST",
+      "test": "Existing calendar-visual-closeout.spec.ts; future timed/all-day categorical palette/source toggle; never fabricate end time"
+    },
+    {
+      "id": "337:34389",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Prompt Input",
+      "sheet": null,
+      "width": "2244",
+      "height": "182",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "337:34314",
+          "name": "State=Empty",
+          "width": "716",
+          "height": "118",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34345",
+          "name": "State=Ready",
+          "width": "716",
+          "height": "118",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34367",
+          "name": "State=Research running",
+          "width": "716",
+          "height": "118",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=337-34389"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=337-34389"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "337:34390",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Suggestion",
+      "sheet": null,
+      "width": "240",
+      "height": "34",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "337:34390",
+          "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Suggestion",
+          "width": "240",
+          "height": "34",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=337-34390"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=337-34390"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "337:34392",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Source",
+      "sheet": null,
+      "width": "320",
+      "height": "80",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "337:34392",
+          "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Source",
+          "width": "320",
+          "height": "80",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=337-34392"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=337-34392"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "337:34425",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Tool",
+      "sheet": null,
+      "width": "2244",
+      "height": "202",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "337:34398",
+          "name": "State=Completed expanded",
+          "width": "716",
+          "height": "138",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34407",
+          "name": "State=Completed collapsed",
+          "width": "716",
+          "height": "42",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34416",
+          "name": "State=Running expanded",
+          "width": "716",
+          "height": "138",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=337-34425"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=337-34425"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "337:34443",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Plan step",
+      "sheet": null,
+      "width": "2016",
+      "height": "96",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "337:34428",
+          "name": "State=Complete",
+          "width": "640",
+          "height": "32",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34433",
+          "name": "State=Running",
+          "width": "640",
+          "height": "32",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "337:34438",
+          "name": "State=Waiting",
+          "width": "640",
+          "height": "32",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=337-34443"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=337-34443"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "338:34356",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Skill suggestion",
+      "sheet": null,
+      "width": "346",
+      "height": "128",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "338:34356",
+          "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Skill suggestion",
+          "width": "346",
+          "height": "128",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=338-34356"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=338-34356"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "340:34887",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Confirmation",
+      "sheet": null,
+      "width": "790",
+      "height": "420",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "340:34853",
+          "name": "Kind=Task",
+          "width": "359",
+          "height": "353",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "340:34886",
+          "name": "Kind=Email",
+          "width": "359",
+          "height": "348",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=340-34887"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=340-34887"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "340:34888",
+      "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Message user",
+      "sheet": null,
+      "width": "586",
+      "height": "44",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "340:34888",
+          "name": "v2/Meri \u00c2\u00b7 AI Elements \u00c2\u00b7 Message user",
+          "width": "586",
+          "height": "44",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=340-34888"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=340-34888"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35131",
+      "name": "v2/Meri \u00c2\u00b7 Artifact card",
+      "sheet": null,
+      "width": "1288",
+      "height": "460",
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "350:35122",
+          "name": "Type=Document, State=Ready",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35123",
+          "name": "Type=Document, State=Generating",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35124",
+          "name": "Type=Document, State=Error",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35125",
+          "name": "Type=Chart, State=Ready",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35126",
+          "name": "Type=Chart, State=Generating",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35127",
+          "name": "Type=Chart, State=Error",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35128",
+          "name": "Type=Table, State=Ready",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35129",
+          "name": "Type=Table, State=Generating",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35130",
+          "name": "Type=Table, State=Error",
+          "width": "392",
+          "height": "116",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35131"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35131"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35271",
+      "name": "v2/Meri \u00c2\u00b7 Artifact status",
+      "sheet": null,
+      "width": "1024",
+      "height": "108",
+      "variantCount": 6,
+      "variants": [
+        {
+          "id": "350:35265",
+          "name": "State=Draft",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35266",
+          "name": "State=Generating",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35267",
+          "name": "State=Saved",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35268",
+          "name": "State=Unsaved",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35269",
+          "name": "State=Exporting",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35270",
+          "name": "State=Error",
+          "width": "144",
+          "height": "28",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35271"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35271"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35280",
+      "name": "v2/Meri \u00c2\u00b7 Artifact version item",
+      "sheet": null,
+      "width": "588",
+      "height": "184",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "350:35278",
+          "name": "State=Current",
+          "width": "246",
+          "height": "104",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35279",
+          "name": "State=Previous",
+          "width": "246",
+          "height": "104",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35280"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35280"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35305",
+      "name": "v2/Meri \u00c2\u00b7 Artifact header",
+      "sheet": null,
+      "width": "1628",
+      "height": "192",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "350:35303",
+          "name": "Mode=Preview",
+          "width": "766",
+          "height": "112",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35304",
+          "name": "Mode=Edit",
+          "width": "766",
+          "height": "112",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35305"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35305"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35385",
+      "name": "v2/Meri \u00c2\u00b7 Artifact navigation",
+      "sheet": null,
+      "width": "2410",
+      "height": "128",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "350:35382",
+          "name": "Active=Brief",
+          "width": "766",
+          "height": "48",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35383",
+          "name": "Active=Visuals",
+          "width": "766",
+          "height": "48",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "350:35384",
+          "name": "Active=Actions",
+          "width": "766",
+          "height": "48",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35385"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35385"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35440",
+      "name": "v2/Meri \u00c2\u00b7 Visual milestone",
+      "sheet": null,
+      "width": "670",
+      "height": "73",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "350:35440",
+          "name": "v2/Meri \u00c2\u00b7 Visual milestone",
+          "width": "670",
+          "height": "73",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35440"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35440"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35446",
+      "name": "v2/Meri \u00c2\u00b7 Workspace rail",
+      "sheet": null,
+      "width": "232",
+      "height": "838",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "350:35446",
+          "name": "v2/Meri \u00c2\u00b7 Workspace rail",
+          "width": "232",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35446"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35446"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "350:35526",
+      "name": "v2/Meri \u00c2\u00b7 Workspace top bar",
+      "sheet": null,
+      "width": "1438",
+      "height": "60",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "350:35526",
+          "name": "v2/Meri \u00c2\u00b7 Workspace top bar",
+          "width": "1438",
+          "height": "60",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=350-35526"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=350-35526"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35256",
+      "name": "v2/Meri \u00c2\u00b7 Artifact document",
+      "sheet": null,
+      "width": "702",
+      "height": "507",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35256",
+          "name": "v2/Meri \u00c2\u00b7 Artifact document",
+          "width": "702",
+          "height": "507",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35256"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35256"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35294",
+      "name": "v2/Meri \u00c2\u00b7 Visual timeline",
+      "sheet": null,
+      "width": "702",
+      "height": "427",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35294",
+          "name": "v2/Meri \u00c2\u00b7 Visual timeline",
+          "width": "702",
+          "height": "427",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35294"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35294"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35324",
+      "name": "v2/Meri \u00c2\u00b7 Funding visual",
+      "sheet": null,
+      "width": "1500",
+      "height": "324",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "353:35322",
+          "name": "View=Chart",
+          "width": "702",
+          "height": "244",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "353:35323",
+          "name": "View=Data",
+          "width": "702",
+          "height": "244",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35324"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35324"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35383",
+      "name": "v2/Meri \u00c2\u00b7 Action table",
+      "sheet": null,
+      "width": "702",
+      "height": "349",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35383",
+          "name": "v2/Meri \u00c2\u00b7 Action table",
+          "width": "702",
+          "height": "349",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35383"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35383"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35411",
+      "name": "v2/Meri \u00c2\u00b7 Artifact editor",
+      "sheet": null,
+      "width": "702",
+      "height": "548",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35411",
+          "name": "v2/Meri \u00c2\u00b7 Artifact editor",
+          "width": "702",
+          "height": "548",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35411"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35411"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35489",
+      "name": "v2/Meri \u00c2\u00b7 Artifact action review",
+      "sheet": null,
+      "width": "702",
+      "height": "541",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35489",
+          "name": "v2/Meri \u00c2\u00b7 Artifact action review",
+          "width": "702",
+          "height": "541",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35489"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35489"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35511",
+      "name": "v2/Meri \u00c2\u00b7 Artifact sources",
+      "sheet": null,
+      "width": "702",
+      "height": "497",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35511",
+          "name": "v2/Meri \u00c2\u00b7 Artifact sources",
+          "width": "702",
+          "height": "497",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35511"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35511"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "353:35544",
+      "name": "v2/Meri \u00c2\u00b7 Artifact export menu",
+      "sheet": null,
+      "width": "244",
+      "height": "226",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "353:35544",
+          "name": "v2/Meri \u00c2\u00b7 Artifact export menu",
+          "width": "244",
+          "height": "226",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=353-35544"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=353-35544"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "358:35362",
+      "name": "v2/Meri \u00c2\u00b7 Unsaved changes dialog",
+      "sheet": null,
+      "width": "448",
+      "height": "184",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "358:35362",
+          "name": "v2/Meri \u00c2\u00b7 Unsaved changes dialog",
+          "width": "448",
+          "height": "184",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=358-35362"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=358-35362"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "358:35394",
+      "name": "v2/Meri \u00c2\u00b7 Artifact workspace",
+      "sheet": null,
+      "width": "2442",
+      "height": "3528",
+      "variantCount": 11,
+      "variants": [
+        {
+          "id": "358:35385",
+          "name": "View=Brief",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35386",
+          "name": "View=Visuals",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35387",
+          "name": "View=Data",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35388",
+          "name": "View=Edit",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35389",
+          "name": "View=Review",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35390",
+          "name": "View=Sources",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35391",
+          "name": "View=Export",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35392",
+          "name": "View=Saved",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:35393",
+          "name": "View=Leave",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "362:37697",
+          "name": "View=Sources v2",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "362:37782",
+          "name": "View=Export v2",
+          "width": "766",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=358-35394"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=358-35394"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "358:36367",
+      "name": "v2/Meri \u00c2\u00b7 Artifact conversation",
+      "sheet": null,
+      "width": "2344",
+      "height": "918",
+      "variantCount": 5,
+      "variants": [
+        {
+          "id": "358:36362",
+          "name": "Context=Brief",
+          "width": "440",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:36363",
+          "name": "Context=Visuals",
+          "width": "440",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:36364",
+          "name": "Context=Data",
+          "width": "440",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:36365",
+          "name": "Context=Edit",
+          "width": "440",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        },
+        {
+          "id": "358:36366",
+          "name": "Context=Review",
+          "width": "440",
+          "height": "838",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=358-36367"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=358-36367"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "358:36734",
+      "name": "Meri \u00c2\u00b7 Artifact components \u00c2\u00b7 Review",
+      "sheet": null,
+      "width": "1280",
+      "height": "1268",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=358-36734"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=358-36734"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "362:37619",
+      "name": "v2/Meri \u00c2\u00b7 Artifact document \u00c2\u00b7 Revision 2",
+      "sheet": null,
+      "width": "702",
+      "height": "507",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "362:37619",
+          "name": "v2/Meri \u00c2\u00b7 Artifact document \u00c2\u00b7 Revision 2",
+          "width": "702",
+          "height": "507",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=362-37619"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=362-37619"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "373:37993",
+      "name": "v2/Engagement \u00c2\u00b7 Follow-up",
+      "sheet": null,
+      "width": "1560",
+      "height": "422",
+      "variantCount": 3,
+      "variants": [
+        {
+          "id": "373:37991",
+          "name": "Link=Unlinked, Size=Desktop",
+          "width": "732",
+          "height": "140",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "373:37992",
+          "name": "Link=Linked, Size=Desktop",
+          "width": "732",
+          "height": "140",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "392:40990",
+          "name": "Link=Linked, Size=Mobile",
+          "width": "342",
+          "height": "192",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=373-37993"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=373-37993"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "373:38394",
+      "name": "v2/Engagement \u00c2\u00b7 Outreach detail",
+      "sheet": null,
+      "width": "680",
+      "height": "850",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "373:38394",
+          "name": "v2/Engagement \u00c2\u00b7 Outreach detail",
+          "width": "680",
+          "height": "850",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=373-38394"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=373-38394"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "373:38458",
+      "name": "v2/Engagement \u00c2\u00b7 Unsaved meeting changes",
+      "sheet": null,
+      "width": "480",
+      "height": "230",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "373:38458",
+          "name": "v2/Engagement \u00c2\u00b7 Unsaved meeting changes",
+          "width": "480",
+          "height": "230",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=373-38458"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=373-38458"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "374:38138",
+      "name": "v2/Engagement \u00c2\u00b7 Active ask",
+      "sheet": null,
+      "width": "868",
+      "height": "158",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "374:38138",
+          "name": "v2/Engagement \u00c2\u00b7 Active ask",
+          "width": "868",
+          "height": "158",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=374-38138"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=374-38138"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "374:38156",
+      "name": "v2/Engagement \u00c2\u00b7 Plan editor",
+      "sheet": null,
+      "width": "980",
+      "height": "809",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "374:38156",
+          "name": "v2/Engagement \u00c2\u00b7 Plan editor",
+          "width": "980",
+          "height": "809",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=374-38156"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=374-38156"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "374:38210",
+      "name": "v2/Engagement \u00c2\u00b7 Report builder",
+      "sheet": null,
+      "width": "980",
+      "height": "797",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "374:38210",
+          "name": "v2/Engagement \u00c2\u00b7 Report builder",
+          "width": "980",
+          "height": "797",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=374-38210"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=374-38210"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "385:40249",
+      "name": "v2/Engagement \u00c2\u00b7 Outreach editor",
+      "sheet": null,
+      "width": "980",
+      "height": "850",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "385:40249",
+          "name": "v2/Engagement \u00c2\u00b7 Outreach editor",
+          "width": "980",
+          "height": "850",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=385-40249"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=385-40249"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "385:40311",
+      "name": "v2/Engagement \u00c2\u00b7 Meeting link",
+      "sheet": null,
+      "width": "680",
+      "height": "160",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "385:40311",
+          "name": "v2/Engagement \u00c2\u00b7 Meeting link",
+          "width": "680",
+          "height": "160",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=385-40311"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=385-40311"
+        }
+      ],
+      "owner": "Modules Engagement owner + accepted backend owner",
+      "paths": [
+        "apps/web/src/features/modules/engagement/OutreachView.tsx",
+        "apps/web/src/features/modules/engagement/plan/PlanEditor.tsx",
+        "apps/web/src/features/modules/engagement/ReportView.tsx",
+        "apps/web/src/shared/meetings/MeetingDetail.tsx"
+      ],
+      "assessment": "SCREEN_OWNER_MUST_BIND_EXISTING_CONTRACT_NOT_PROTOTYPE_FIELDS",
+      "test": "Existing engagement/team/Objective/Plan focused tests; verify real operation available before display/writes, no fabricated ranking/execution/approval"
+    },
+    {
+      "id": "394:41443",
+      "name": "v2/Engagement \u00c2\u00b7 Action button",
+      "sheet": null,
+      "width": "428",
+      "height": "116",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "394:41441",
+          "name": "State=Default",
+          "width": "166",
+          "height": "36",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "394:41442",
+          "name": "State=Disabled",
+          "width": "166",
+          "height": "36",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=394-41443"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=394-41443"
+        }
+      ],
+      "owner": "Shared module-ui owner via root coordination",
+      "paths": [
+        "apps/web/src/shared/module-ui/controls.tsx",
+        "apps/web/src/shared/module-ui/module-ui.module.css",
+        "packages/ui/src/shadcn/button.tsx"
+      ],
+      "assessment": "SH-IMP-01_RADIUS_MISMATCH_FOR_MODULE_ACTIONBUTTON",
+      "test": "Future focused component rendering: primary/outline/ghost,36px/14px/10px; keyboard, disabled, no reaction while pending"
+    },
+    {
+      "id": "414:80880",
+      "name": "v2/Advocacy history \u00c2\u00b7 Compact vertical event",
+      "sheet": null,
+      "width": "320",
+      "height": "152",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "414:80880",
+          "name": "v2/Advocacy history \u00c2\u00b7 Compact vertical event",
+          "width": "320",
+          "height": "152",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=414-80880"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=414-80880"
+        }
+      ],
+      "owner": "Portfolio advocacy owner",
+      "paths": [
+        "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+        "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_DATA_PROVENANCE_IS_AUTHORITATIVE",
+      "test": "Future: outcome/Evidence labels, current/closed/pre-Capiro FY and selection; no inferred approval"
+    },
+    {
+      "id": "431:41487",
+      "name": "v2/Contact field",
+      "sheet": null,
+      "width": "1260",
+      "height": "139",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "431:41485",
+          "name": "Type=Line",
+          "width": "582",
+          "height": "56",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "431:41486",
+          "name": "Type=Multiline",
+          "width": "582",
+          "height": "108",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=431-41487"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=431-41487"
+        }
+      ],
+      "owner": "Portfolio relationships owner",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+        "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+        "apps/web/src/features/portfolio/relationships/email.ts",
+        "apps/web/src/features/portfolio/relationships/OrganizationChart.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_PERMISSION_AND_LIFETIME_GATES_EXIST",
+      "test": "Existing relationships.spec.ts, acceptance-relationships*.spec.ts; future date/no-email/error/loading, same-client current auth, selected roles"
+    },
+    {
+      "id": "431:41501",
+      "name": "v2/Contact message history",
+      "sheet": null,
+      "width": "3054",
+      "height": "235",
+      "variantCount": 5,
+      "variants": [
+        {
+          "id": "431:41496",
+          "name": "State=Ready",
+          "width": "582",
+          "height": "195",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "431:41497",
+          "name": "State=Empty",
+          "width": "582",
+          "height": "50",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "431:41498",
+          "name": "State=Loading",
+          "width": "582",
+          "height": "50",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "431:41499",
+          "name": "State=Error",
+          "width": "582",
+          "height": "50",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "431:41500",
+          "name": "State=No email",
+          "width": "582",
+          "height": "50",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=431-41501"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=431-41501"
+        }
+      ],
+      "owner": "Portfolio relationships owner",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/ContactDrawer.tsx",
+        "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+        "apps/web/src/features/portfolio/relationships/email.ts",
+        "apps/web/src/features/portfolio/relationships/OrganizationChart.tsx"
+      ],
+      "assessment": "SH-IMP-03_READY_HISTORY_DATE_MISSING",
+      "test": "Existing relationships.spec.ts, acceptance-relationships*.spec.ts; future date/no-email/error/loading, same-client current auth, selected roles"
+    },
+    {
+      "id": "469:41439",
+      "name": "Capiro 3.1/Profile picture",
+      "sheet": null,
+      "width": "32",
+      "height": "32",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "469:41439",
+          "name": "Capiro 3.1/Profile picture",
+          "width": "32",
+          "height": "32",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=469-41439"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=469-41439"
+        }
+      ],
+      "owner": "Shared shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "assessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "test": "Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "id": "469:92041",
+      "name": "Capiro 3.1/Shared header",
+      "sheet": null,
+      "width": "4448",
+      "height": "428",
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "469:41447",
+          "name": "Device=Desktop, Mode=Meri",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:41500",
+          "name": "Device=Desktop, Mode=Portfolio",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:41552",
+          "name": "Device=Desktop, Mode=Modules",
+          "width": "1440",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:91744",
+          "name": "Device=Tablet, Mode=Meri",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:91793",
+          "name": "Device=Tablet, Mode=Portfolio",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:91842",
+          "name": "Device=Tablet, Mode=Modules",
+          "width": "1024",
+          "height": "64",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "469:91891",
+          "name": "Device=Phone, Mode=Meri",
+          "width": "390",
+          "height": "108",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "469:91941",
+          "name": "Device=Phone, Mode=Portfolio",
+          "width": "390",
+          "height": "108",
+          "scopeClassification": "PHONE_DEFERRED"
+        },
+        {
+          "id": "469:91991",
+          "name": "Device=Phone, Mode=Modules",
+          "width": "390",
+          "height": "108",
+          "scopeClassification": "PHONE_DEFERRED"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=469-92041"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=469-92041"
+        }
+      ],
+      "owner": "Shared shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "assessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "test": "Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "id": "469:92042",
+      "name": "Capiro 3.1 \u00c2\u00b7 Shared header \u00c2\u00b7 Review",
+      "sheet": null,
+      "width": "1504",
+      "height": "777",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=469-92042"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=469-92042"
+        }
+      ],
+      "owner": "Shared shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/HeaderFrame.tsx",
+        "apps/web/src/shared/shell/ModuleHeader.tsx",
+        "apps/web/src/shared/shell/Header.tsx",
+        "apps/web/src/shared/portfolio/shell/Shell.tsx"
+      ],
+      "assessment": "SH-IMP-04_MODULE_HEADER_STATIC_PROFILE_AND_LEGACY_REFERENCE_REVIEW",
+      "test": "Future: mode current labels, named compact controls; portfolio Clerk avatar versus Modules placeholder; no navigation/auth relaxation"
+    },
+    {
+      "id": "471:92354",
+      "name": "icon/settings \u00c2\u00b7 Capiro 3.1",
+      "sheet": null,
+      "width": "16",
+      "height": "16",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "471:92354",
+          "name": "icon/settings \u00c2\u00b7 Capiro 3.1",
+          "width": "16",
+          "height": "16",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=471-92354"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=471-92354"
+        }
+      ],
+      "owner": "Shared shell/assets owner",
+      "paths": [
+        "apps/web/src/shared/shell/DesignIcon.tsx",
+        "apps/web/src/shared/shell/ModuleAsset.tsx"
+      ],
+      "assessment": "EXISTING_ASSET_ADAPTERS_RENDER_VERIFICATION_PENDING",
+      "test": "Future: exact asset-slot dimensions and accessible parent names; no replacing exact assets"
+    },
+    {
+      "id": "471:92866",
+      "name": "Capiro 3.1/Shared sidebar",
+      "sheet": null,
+      "width": "856",
+      "height": "2195",
+      "variantCount": 6,
+      "variants": [
+        {
+          "id": "471:92355",
+          "name": "Device=Desktop, Context=Portfolio",
+          "width": "232",
+          "height": "975",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "471:92397",
+          "name": "Device=Desktop, Context=Client",
+          "width": "232",
+          "height": "975",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "471:92526",
+          "name": "Device=Desktop, Context=Modules",
+          "width": "232",
+          "height": "975",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "471:92613",
+          "name": "Device=Tablet, Context=Portfolio",
+          "width": "72",
+          "height": "1035",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "471:92653",
+          "name": "Device=Tablet, Context=Client",
+          "width": "72",
+          "height": "1035",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "471:92780",
+          "name": "Device=Tablet, Context=Modules",
+          "width": "72",
+          "height": "1035",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=471-92866"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=471-92866"
+        }
+      ],
+      "owner": "Shared shell and Portfolio shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/ModuleNavigation.tsx",
+        "apps/web/src/shared/shell/module-shell.module.css",
+        "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+        "apps/web/src/shared/portfolio/shell/shell.module.css"
+      ],
+      "assessment": "DESKTOP232_TABLET72_EXIST_IN_SOURCE_RESPONSIVE_PARITY_PENDING",
+      "test": "Future: desktop/tablet current item, Settings bottom, client scope, tooltip/access name, scroll/keyboard; phone deferred"
+    },
+    {
+      "id": "471:92867",
+      "name": "Capiro 3.1 \u00c2\u00b7 Shared sidebar \u00c2\u00b7 Review",
+      "sheet": null,
+      "width": "1096",
+      "height": "1183",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=471-92867"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=471-92867"
+        }
+      ],
+      "owner": "Shared shell and Portfolio shell owner; coordinate Meri owner",
+      "paths": [
+        "apps/web/src/shared/shell/ModuleNavigation.tsx",
+        "apps/web/src/shared/shell/module-shell.module.css",
+        "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+        "apps/web/src/shared/portfolio/shell/shell.module.css"
+      ],
+      "assessment": "DESKTOP232_TABLET72_EXIST_IN_SOURCE_RESPONSIVE_PARITY_PENDING",
+      "test": "Future: desktop/tablet current item, Settings bottom, client scope, tooltip/access name, scroll/keyboard; phone deferred"
+    },
+    {
+      "id": "526:43330",
+      "name": "v2/Document editor \u00c2\u00b7 Plate toolbar",
+      "sheet": null,
+      "width": "2400",
+      "height": "480",
+      "variantCount": 9,
+      "variants": [
+        {
+          "id": "526:42837",
+          "name": "Density=Wide, Mode=Editing",
+          "width": "740",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "526:42924",
+          "name": "Density=Wide, Mode=Suggesting",
+          "width": "740",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "526:43010",
+          "name": "Density=Compact, Mode=Editing",
+          "width": "522",
+          "height": "78",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "526:43096",
+          "name": "Density=Compact, Mode=Suggesting",
+          "width": "522",
+          "height": "78",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "526:43182",
+          "name": "Density=Mobile, Mode=Editing",
+          "width": "358",
+          "height": "78",
+          "scopeClassification": "NARROW_COMPONENT_SURFACE_DESKTOP_RELEVANT"
+        },
+        {
+          "id": "526:43256",
+          "name": "Density=Mobile, Mode=Suggesting",
+          "width": "358",
+          "height": "78",
+          "scopeClassification": "NARROW_COMPONENT_SURFACE_DESKTOP_RELEVANT"
+        },
+        {
+          "id": "529:43467",
+          "name": "Density=Wide, Mode=Viewing",
+          "width": "740",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "529:43530",
+          "name": "Density=Compact, Mode=Viewing",
+          "width": "522",
+          "height": "78",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "529:43592",
+          "name": "Density=Mobile, Mode=Viewing",
+          "width": "358",
+          "height": "78",
+          "scopeClassification": "NARROW_COMPONENT_SURFACE_DESKTOP_RELEVANT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=526-43330"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=526-43330"
+        }
+      ],
+      "owner": "Modules workspace owner; Meri composition belongs to Meri owner",
+      "paths": [
+        "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/rich-document.module.css"
+      ],
+      "assessment": "SH-IMP-05_DESIGNED_PLATE_COMPOSITION_VS_EXISTING_TIPTAP_SUBSET",
+      "test": "Existing prospect-rich-document-end.spec.ts and newsletter-document-lifecycle.spec.ts; future container-width toolbar, read-only rendering, source/saved payload parity. Suggesting/comments require owner contract"
+    },
+    {
+      "id": "526:43331",
+      "name": "v2/Document editor \u00c2\u00b7 Floating selection",
+      "sheet": null,
+      "width": "355",
+      "height": "80",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "526:43331",
+          "name": "v2/Document editor \u00c2\u00b7 Floating selection",
+          "width": "355",
+          "height": "80",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=526-43331"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=526-43331"
+        }
+      ],
+      "owner": "Modules workspace owner; Meri composition belongs to Meri owner",
+      "paths": [
+        "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/rich-document.module.css"
+      ],
+      "assessment": "SH-IMP-05_DESIGNED_PLATE_COMPOSITION_VS_EXISTING_TIPTAP_SUBSET",
+      "test": "Existing prospect-rich-document-end.spec.ts and newsletter-document-lifecycle.spec.ts; future container-width toolbar, read-only rendering, source/saved payload parity. Suggesting/comments require owner contract"
+    },
+    {
+      "id": "526:43373",
+      "name": "v2/Document editor \u00c2\u00b7 Block menu",
+      "sheet": null,
+      "width": "320",
+      "height": "495",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "526:43373",
+          "name": "v2/Document editor \u00c2\u00b7 Block menu",
+          "width": "320",
+          "height": "495",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=526-43373"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=526-43373"
+        }
+      ],
+      "owner": "Modules workspace owner; Meri composition belongs to Meri owner",
+      "paths": [
+        "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/rich-document.module.css"
+      ],
+      "assessment": "SH-IMP-05_DESIGNED_PLATE_COMPOSITION_VS_EXISTING_TIPTAP_SUBSET",
+      "test": "Existing prospect-rich-document-end.spec.ts and newsletter-document-lifecycle.spec.ts; future container-width toolbar, read-only rendering, source/saved payload parity. Suggesting/comments require owner contract"
+    },
+    {
+      "id": "526:43409",
+      "name": "v2/Document editor \u00c2\u00b7 Meri revision",
+      "sheet": null,
+      "width": "640",
+      "height": "228",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "526:43409",
+          "name": "v2/Document editor \u00c2\u00b7 Meri revision",
+          "width": "640",
+          "height": "228",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=526-43409"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=526-43409"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "526:43441",
+      "name": "v2/Document editor \u00c2\u00b7 Comment thread",
+      "sheet": null,
+      "width": "280",
+      "height": "199",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "526:43441",
+          "name": "v2/Document editor \u00c2\u00b7 Comment thread",
+          "width": "280",
+          "height": "199",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=526-43441"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=526-43441"
+        }
+      ],
+      "owner": "Modules workspace owner; Meri composition belongs to Meri owner",
+      "paths": [
+        "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+        "apps/web/src/features/modules/workspace/rich-document/rich-document.module.css"
+      ],
+      "assessment": "SH-IMP-05_DESIGNED_PLATE_COMPOSITION_VS_EXISTING_TIPTAP_SUBSET",
+      "test": "Existing prospect-rich-document-end.spec.ts and newsletter-document-lifecycle.spec.ts; future container-width toolbar, read-only rendering, source/saved payload parity. Suggesting/comments require owner contract"
+    },
+    {
+      "id": "531:43587",
+      "name": "v2/Document editor \u00c2\u00b7 Meri revision \u00c2\u00b7 Mobile",
+      "sheet": null,
+      "width": "358",
+      "height": "288",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "531:43587",
+          "name": "v2/Document editor \u00c2\u00b7 Meri revision \u00c2\u00b7 Mobile",
+          "width": "358",
+          "height": "288",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": true,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=531-43587"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=531-43587"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "542:43607",
+      "name": "v2/Planning \u00c2\u00b7 Kibo Gantt bar",
+      "sheet": null,
+      "width": "456",
+      "height": "248",
+      "variantCount": 8,
+      "variants": [
+        {
+          "id": "542:43599",
+          "name": "Status=Planned, Interaction=Default",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43600",
+          "name": "Status=Planned, Interaction=Selected",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43601",
+          "name": "Status=Active, Interaction=Default",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43602",
+          "name": "Status=Active, Interaction=Selected",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43603",
+          "name": "Status=Done, Interaction=Default",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43604",
+          "name": "Status=Done, Interaction=Selected",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43605",
+          "name": "Status=Blocked, Interaction=Default",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43606",
+          "name": "Status=Blocked, Interaction=Selected",
+          "width": "180",
+          "height": "30",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43607"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43607"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "542:43644",
+      "name": "v2/Planning \u00c2\u00b7 Kibo Kanban card",
+      "sheet": null,
+      "width": "1088",
+      "height": "210",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "542:43640",
+          "name": "Status=Planned",
+          "width": "240",
+          "height": "103",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43641",
+          "name": "Status=Active",
+          "width": "240",
+          "height": "103",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43642",
+          "name": "Status=Done",
+          "width": "240",
+          "height": "103",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43643",
+          "name": "Status=Blocked",
+          "width": "240",
+          "height": "103",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43644"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43644"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "542:43701",
+      "name": "v2/Planning \u00c2\u00b7 Kibo group header",
+      "sheet": null,
+      "width": "2688",
+      "height": "116",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "542:43697",
+          "name": "Status=Planned",
+          "width": "640",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43698",
+          "name": "Status=Active",
+          "width": "640",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43699",
+          "name": "Status=Done",
+          "width": "640",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43700",
+          "name": "Status=Blocked",
+          "width": "640",
+          "height": "44",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43701"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43701"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "542:43765",
+      "name": "v2/Planning \u00c2\u00b7 Kibo list row",
+      "sheet": null,
+      "width": "1376",
+      "height": "158",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "542:43763",
+          "name": "Density=Wide",
+          "width": "640",
+          "height": "66",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43764",
+          "name": "Density=Mobile",
+          "width": "358",
+          "height": "95",
+          "scopeClassification": "NARROW_COMPONENT_SURFACE_DESKTOP_RELEVANT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43765"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43765"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "542:43784",
+      "name": "v2/Planning \u00c2\u00b7 Kibo milestone",
+      "sheet": null,
+      "width": "848",
+      "height": "108",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "542:43780",
+          "name": "Status=Planned",
+          "width": "180",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43781",
+          "name": "Status=Active",
+          "width": "180",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43782",
+          "name": "Status=Done",
+          "width": "180",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "542:43783",
+          "name": "Status=Blocked",
+          "width": "180",
+          "height": "28",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43784"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43784"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "542:43793",
+      "name": "Kibo planning \u00c2\u00b7 Component review",
+      "sheet": null,
+      "width": "1000",
+      "height": "472",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=542-43793"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=542-43793"
+        }
+      ],
+      "owner": "Modules Planner owner",
+      "paths": [
+        "apps/web/src/features/modules/planner/TaskViews.tsx",
+        "apps/web/src/features/modules/planner/planner.module.css",
+        "apps/web/src/features/modules/planner/task-presentation.ts"
+      ],
+      "assessment": "CANONICAL_TASK_VIEWS_EXIST_VISUAL_STATUS_MAPPING_PENDING",
+      "test": "Existing planner-engagement.spec.ts; future grouped/board/timeline and keyboard selected state; preserve real access/status enums"
+    },
+    {
+      "id": "563:44165",
+      "name": "v2/Cascader \u00c2\u00b7 ReUI trigger",
+      "sheet": null,
+      "width": "2080",
+      "height": "168",
+      "variantCount": 12,
+      "variants": [
+        {
+          "id": "563:44153",
+          "name": "Density=Compact, State=Default",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44154",
+          "name": "Density=Compact, State=Selected",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44155",
+          "name": "Density=Compact, State=Focus",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44156",
+          "name": "Density=Compact, State=Multi",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44157",
+          "name": "Density=Compact, State=Disabled",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44158",
+          "name": "Density=Compact, State=Error",
+          "width": "141",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44159",
+          "name": "Density=Field, State=Default",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44160",
+          "name": "Density=Field, State=Selected",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44161",
+          "name": "Density=Field, State=Focus",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44162",
+          "name": "Density=Field, State=Multi",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44163",
+          "name": "Density=Field, State=Disabled",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44164",
+          "name": "Density=Field, State=Error",
+          "width": "73",
+          "height": "37",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=563-44165"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=563-44165"
+        }
+      ],
+      "owner": "Portfolio relationships committee owner; shared reuse only if real caller allocated",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/catalog.ts"
+      ],
+      "assessment": "SINGLE_VALUE_EXISTING_NO_UNALLOCATED_MULTI_BROADENING",
+      "test": "Existing committee-picker.spec.ts/committee-catalog.test.ts; branch!=selection, Enter/Esc/arrows, empty/search/fullpath; future loading/retry/multi only for actual caller"
+    },
+    {
+      "id": "563:44221",
+      "name": "v2/Cascader \u00c2\u00b7 ReUI option",
+      "sheet": null,
+      "width": "2528",
+      "height": "120",
+      "variantCount": 7,
+      "variants": [
+        {
+          "id": "563:44214",
+          "name": "Kind=Branch",
+          "width": "336",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44215",
+          "name": "Kind=Leaf",
+          "width": "336",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44216",
+          "name": "Kind=Selected",
+          "width": "336",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44217",
+          "name": "Kind=Checkbox",
+          "width": "360",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44218",
+          "name": "Kind=Checked",
+          "width": "360",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44219",
+          "name": "Kind=Focus",
+          "width": "336",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44220",
+          "name": "Kind=Disabled",
+          "width": "336",
+          "height": "40",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=563-44221"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=563-44221"
+        }
+      ],
+      "owner": "Portfolio relationships committee owner; shared reuse only if real caller allocated",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/catalog.ts"
+      ],
+      "assessment": "SINGLE_VALUE_EXISTING_NO_UNALLOCATED_MULTI_BROADENING",
+      "test": "Existing committee-picker.spec.ts/committee-catalog.test.ts; branch!=selection, Enter/Esc/arrows, empty/search/fullpath; future loading/retry/multi only for actual caller"
+    },
+    {
+      "id": "563:44282",
+      "name": "v2/Cascader \u00c2\u00b7 ReUI panel",
+      "sheet": null,
+      "width": "2696",
+      "height": "400",
+      "variantCount": 7,
+      "variants": [
+        {
+          "id": "563:44275",
+          "name": "View=Root",
+          "width": "360",
+          "height": "301",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44276",
+          "name": "View=Nested",
+          "width": "360",
+          "height": "341",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44277",
+          "name": "View=Multi",
+          "width": "360",
+          "height": "409",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44278",
+          "name": "View=Search",
+          "width": "360",
+          "height": "277",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44279",
+          "name": "View=Empty",
+          "width": "360",
+          "height": "294",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44280",
+          "name": "View=Loading",
+          "width": "360",
+          "height": "257",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "563:44281",
+          "name": "View=Error",
+          "width": "360",
+          "height": "294",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=563-44282"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=563-44282"
+        }
+      ],
+      "owner": "Portfolio relationships committee owner; shared reuse only if real caller allocated",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/catalog.ts"
+      ],
+      "assessment": "SINGLE_VALUE_EXISTING_NO_UNALLOCATED_MULTI_BROADENING",
+      "test": "Existing committee-picker.spec.ts/committee-catalog.test.ts; branch!=selection, Enter/Esc/arrows, empty/search/fullpath; future loading/retry/multi only for actual caller"
+    },
+    {
+      "id": "563:44623",
+      "name": "ReUI cascader \u00c2\u00b7 Capiro component review",
+      "sheet": null,
+      "width": "1200",
+      "height": "501",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=563-44623"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=563-44623"
+        }
+      ],
+      "owner": "Portfolio relationships committee owner",
+      "paths": [
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePicker.tsx",
+        "apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx"
+      ],
+      "assessment": "COMPONENT_REVIEW_EXAMPLES_COVERED_BY_CASCADER_FAMILY",
+      "test": "Existing committee-picker.spec.ts; no new selection contract"
+    },
+    {
+      "id": "773:149102",
+      "name": "Capiro 3.1/Meri wordmark",
+      "sheet": null,
+      "width": "62",
+      "height": "20",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "773:149102",
+          "name": "Capiro 3.1/Meri wordmark",
+          "width": "62",
+          "height": "20",
+          "scopeClassification": "MERI_OTHER_OWNER"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=773-149102"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=773-149102"
+        }
+      ],
+      "owner": "Meri frontend owner",
+      "paths": [],
+      "assessment": "EXCLUDED_OWNER_INVENTORY_ONLY",
+      "test": "Meri owner qualification; no carry"
+    },
+    {
+      "id": "999:51266",
+      "name": "__Portfolio/Capability text field",
+      "sheet": null,
+      "width": "562",
+      "height": "65",
+      "variantCount": 1,
+      "variants": [
+        {
+          "id": "999:51266",
+          "name": "__Portfolio/Capability text field",
+          "width": "562",
+          "height": "65",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=999-51266"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=999-51266"
+        }
+      ],
+      "owner": "Portfolio capabilities + Files owners",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+        "apps/web/src/features/portfolio/files/DocumentState.tsx"
+      ],
+      "assessment": "EXPLICIT_SAVE_DISCLOSURE_AND_DOCUMENT_READ_STATES_EXIST_PARITY_PENDING",
+      "test": "Existing capability-presentation*.spec.ts/capability-registration*.spec.ts/capability-documents*.spec.ts; draft retained collapse, no scan/cancel inference, current access check"
+    },
+    {
+      "id": "999:51300",
+      "name": "Capiro 3.1/Portfolio/Capability details",
+      "sheet": null,
+      "width": "1480",
+      "height": "720",
+      "variantCount": 4,
+      "variants": [
+        {
+          "id": "999:51267",
+          "name": "Mode=Saved, State=Collapsed",
+          "width": "662",
+          "height": "32",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "999:51269",
+          "name": "Mode=Saved, State=Expanded",
+          "width": "662",
+          "height": "263",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "999:51288",
+          "name": "Mode=Create, State=Collapsed",
+          "width": "562",
+          "height": "32",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "999:51290",
+          "name": "Mode=Create, State=Expanded",
+          "width": "562",
+          "height": "216",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=999-51300"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=999-51300"
+        }
+      ],
+      "owner": "Portfolio capabilities + Files owners",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+        "apps/web/src/features/portfolio/files/DocumentState.tsx"
+      ],
+      "assessment": "EXPLICIT_SAVE_DISCLOSURE_AND_DOCUMENT_READ_STATES_EXIST_PARITY_PENDING",
+      "test": "Existing capability-presentation*.spec.ts/capability-registration*.spec.ts/capability-documents*.spec.ts; draft retained collapse, no scan/cancel inference, current access check"
+    },
+    {
+      "id": "999:51327",
+      "name": "Capiro 3.1/Portfolio/Capability footer",
+      "sheet": null,
+      "width": "1480",
+      "height": "160",
+      "variantCount": 2,
+      "variants": [
+        {
+          "id": "999:51301",
+          "name": "Mode=Saved",
+          "width": "720",
+          "height": "69",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "999:51314",
+          "name": "Mode=Create",
+          "width": "620",
+          "height": "69",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=999-51327"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=999-51327"
+        }
+      ],
+      "owner": "Portfolio capabilities + Files owners",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+        "apps/web/src/features/portfolio/files/DocumentState.tsx"
+      ],
+      "assessment": "EXPLICIT_SAVE_DISCLOSURE_AND_DOCUMENT_READ_STATES_EXIST_PARITY_PENDING",
+      "test": "Existing capability-presentation*.spec.ts/capability-registration*.spec.ts/capability-documents*.spec.ts; draft retained collapse, no scan/cancel inference, current access check"
+    },
+    {
+      "id": "999:51328",
+      "name": "Capiro 3.1 / Portfolio capability editor additions",
+      "sheet": null,
+      "width": "1412",
+      "height": "522",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=999-51328"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=999-51328"
+        }
+      ],
+      "owner": "Portfolio capabilities + Files owners",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+        "apps/web/src/features/portfolio/files/DocumentState.tsx"
+      ],
+      "assessment": "EXPLICIT_SAVE_DISCLOSURE_AND_DOCUMENT_READ_STATES_EXIST_PARITY_PENDING",
+      "test": "Existing capability-presentation*.spec.ts/capability-registration*.spec.ts/capability-documents*.spec.ts; draft retained collapse, no scan/cancel inference, current access check"
+    },
+    {
+      "id": "1011:51339",
+      "name": "Portfolio/Capability documents/Status",
+      "sheet": null,
+      "width": "3520",
+      "height": "220",
+      "variantCount": 5,
+      "variants": [
+        {
+          "id": "1011:51334",
+          "name": "State=Loading",
+          "width": "664",
+          "height": "102",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "1011:51335",
+          "name": "State=Empty",
+          "width": "664",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "1011:51336",
+          "name": "State=Error",
+          "width": "664",
+          "height": "90",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "1011:51337",
+          "name": "State=Unavailable",
+          "width": "664",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        },
+        {
+          "id": "1011:51338",
+          "name": "State=Checking",
+          "width": "664",
+          "height": "46",
+          "scopeClassification": "DESKTOP_OR_SHARED_COMPONENT"
+        }
+      ],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1011-51339"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=1011-51339"
+        }
+      ],
+      "owner": "Portfolio client-profile owner",
+      "paths": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+        "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx"
+      ],
+      "assessment": "FEATURE_MAPPING_FOUND_DETAIL_FACTS_NEED_SCREEN_LANE",
+      "test": "Future: authorized details only, missing-count state and keyboard-open dialog"
+    },
+    {
+      "id": "1011:51353",
+      "name": "Portfolio capability document states \u00c2\u00b7 Review",
+      "sheet": null,
+      "width": "720",
+      "height": "484",
+      "variantCount": 0,
+      "variants": [],
+      "mobileDeferred": false,
+      "figma": [
+        {
+          "file": "Portfolio",
+          "url": "https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=1011-51353"
+        },
+        {
+          "file": "Modules/Settings",
+          "url": "https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=1011-51353"
+        }
+      ],
+      "owner": "Portfolio capabilities + Files owners",
+      "paths": [
+        "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+        "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+        "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+        "apps/web/src/features/portfolio/files/DocumentState.tsx"
+      ],
+      "assessment": "EXPLICIT_SAVE_DISCLOSURE_AND_DOCUMENT_READ_STATES_EXIST_PARITY_PENDING",
+      "test": "Existing capability-presentation*.spec.ts/capability-registration*.spec.ts/capability-documents*.spec.ts; draft retained collapse, no scan/cancel inference, current access check"
+    }
+  ],
+  "qualification": {
+    "browser": "UNRUN",
+    "compiler": "UNRUN",
+    "tests": "UNRUN",
+    "appEdits": false,
+    "mobile": "DEFERRED_UNQUALIFIED",
+    "Meri": "OTHER_OWNER_INVENTORY_ONLY",
+    "assetSlotGeometry": "UNQUALIFIED_IN_IMPLEMENTATION",
+    "legacyRemoval": "NOT_AUTHORIZED_WITHOUT_REFERENCE_AND_REPLACEMENT_COVERAGE"
+  }
+}

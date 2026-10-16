@@ -1,0 +1,83 @@
+{
+  "schema": "figma34-modules-documentation-handoff/2",
+  "status": "DOCUMENTATION_DIRECT_CONTROL_COVERAGE_CLOSED_NOT_APP_PARITY",
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+  "page": "1064:140864",
+  "ownedDocsRoot": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/non-meri-desktop-continuation-20261016/docs/figma-34-audit-20261016/modules",
+  "externalEvidenceRoot": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/modules",
+  "deliverables": [
+    "CHECKLIST.md",
+    "ROW-CONTROL-CHECKLIST.json",
+    "CONTROL-AUDIT-SUMMARY.json",
+    "CONTROL-AUDIT.md",
+    "DESKTOP-ROWS.md",
+    "SCREEN-CHECKLIST.json",
+    "FAMILY-CHECKLIST.json (initial family summary retained)",
+    "DESIGN-GAPS.md",
+    "DESIGN-GAPS.json",
+    "AUDIT-MANIFEST.json"
+  ],
+  "counts": {
+    "eligible": 682,
+    "directVisible": 682,
+    "localHiddenBodies": 94,
+    "fullScreenReuseCredits": 0,
+    "sourceRules": 86,
+    "sourcePaths": 129,
+    "sourceReadFiles": 18,
+    "sourceReadAnchorRows": 279,
+    "contextResponses": 38,
+    "screenshotResponses": 36,
+    "exactEligibleFramesDirectlyPictured": 34,
+    "sparseParentsWithChildPicture": 2,
+    "exactEligibleFramesNotManuallyPictured": 646,
+    "preciseNeoMockupRequests": 7,
+    "shortSectionChildAssetComponentReferenceExclusions": 93
+  },
+  "integrity": {
+    "scope": "Pure in-memory documentation-reference checks, not source/app tests",
+    "eligibleIDs": 682,
+    "rowIDs": 682,
+    "missingEligibleIDs": [],
+    "extraIDs": [],
+    "semanticReferences": 24269,
+    "invalidReferences": 0,
+    "readOrMissingHiddenBodyErrors": 0,
+    "batchDataOrRoundtripFailures": 0,
+    "noBlankSourceBindings": true,
+    "additionalLocalHiddenSemanticReferences": 317,
+    "invalidLocalHiddenReferences": 0
+  },
+  "boundaries": {
+    "sourceEdits": false,
+    "gitIndexEdits": false,
+    "localProcessesDuringV2": false,
+    "figmaWrites": false,
+    "renderedVisualParity": false,
+    "nativeEffects": false,
+    "meri": false,
+    "phone": false,
+    "cloud": false
+  },
+  "remainingGates": [
+    "646 exact eligible frames have not been manually pictured; design-body/control inventory is complete, pixel/manual layout conformance is not.",
+    "Per-control source handlers, native permission/version/receipt semantics and current contract field coverage remain unqualified; source mapping is not implementation absence.",
+    "534 aggregate label definitions are explicitly previews beyond320characters (467 local container candidates,67 instance/container candidates); no full static-copy acceptance.",
+    "Shared master/component acceptance must be joined from the separate Components owner.",
+    "No source test/compiler/browser/install/native/provider/cloud or app rendered comparison ran.",
+    "No Meri/phone/live effects/image/release/deployment acceptance."
+  ],
+  "writeCustody": "Files written/updated only in owned documentation/evidence paths through apply_patch. No final filesystem SHA256/Git readback was attempted during the local-process memory stop; no immutable byte-seal is invented.",
+  "initialLimitSuperseded": "Initial217collapsedmetadata candidates remain historical metadata facts;200eligible actual bodies now expanded directly,17excluded.",
+  "retainedWriteFailure": {
+    "path": "FAMILY-CHECKLIST.json",
+    "result": "Expected-context mismatch while trying to append V2 pointers from retained array, actual file shape not re-read during memory stop. No change applied to that file; initial family summary retained and current CHECKLIST explicitly delegates to V2 rows. No policy denial or source edit.",
+    "retry": false
+  },
+  "parentOwnedSourcesUntouched": [
+    "CommitmentView.tsx",
+    "EngagementOverview.tsx"
+  ],
+  "newProcessesRemaining": 0
+}

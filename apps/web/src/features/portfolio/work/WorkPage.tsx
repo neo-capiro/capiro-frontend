@@ -3,6 +3,10 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { Temporal } from "temporal-polyfill";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useCapiroQuery } from "@/shared/capiro/queries";
+import {
+  currentStrategyHref,
+  strategyHref,
+} from "@/shared/capiro/strategy-navigation";
 import { useStrategies, useStrategyDetails } from "./queries";
 import { workProjection } from "./contracts";
 import { workOwnerLabel } from "./owners";
@@ -40,9 +44,8 @@ export function WorkPage({
     details,
     Temporal.Now.plainDateISO().toString(),
   );
-  const base = destinations.existingApp;
   const strategyLink = (id: string, nodeId?: string) =>
-    `${base}/strategies/${id}${nodeId ? `?step=${nodeId}` : ""}`;
+    currentStrategyHref(clientId, id, nodeId);
   const error = summaries.error ?? queries.find((query) => query.error)?.error;
   const summariesUnavailable =
     Boolean(summaries.error) || isRetryingWorkFailure(summaries);
@@ -51,23 +54,18 @@ export function WorkPage({
     <div className="page stack">
       <header className="row between">
         <h1>Client work</h1>
-        {base && (
-          <div className={styles.actions}>
-            <span className={styles.source}>Source of truth: Strategies</span>
-            <a
-              className="button"
-              href={`${base}/strategies?clientId=${encodeURIComponent(clientId)}`}
-            >
-              Open Strategies
-            </a>
-            <a
-              className="button primary"
-              href={`${base}/strategies/new?clientId=${encodeURIComponent(clientId)}`}
-            >
-              New strategy
-            </a>
-          </div>
-        )}
+        <div className={styles.actions}>
+          <span className={styles.source}>Source of truth: Strategies</span>
+          <a className="button" href={strategyHref({ clientId })}>
+            Open Strategies
+          </a>
+          <a
+            className="button primary"
+            href={strategyHref({ clientId, create: true })}
+          >
+            New strategy
+          </a>
+        </div>
       </header>
       {summariesUnavailable ? (
         <WorkStrategyUnavailable />
@@ -137,9 +135,7 @@ export function WorkPage({
                 </p>
                 <header className="row between">
                   <h2>{strategy.title}</h2>
-                  {base && (
-                    <a href={strategyLink(strategy.id)}>Open strategy ↗</a>
-                  )}
+                  <a href={strategyLink(strategy.id)}>Open strategy ↗</a>
                 </header>
                 <p className="muted">{strategy.goal ?? "No goal provided."}</p>
                 <small className={styles.owner}>
@@ -164,11 +160,9 @@ export function WorkPage({
                         {node.status.replaceAll("_", " ")}
                       </span>
                       <small>{node.startsOn.slice(0, 10)}</small>
-                      {base && (
-                        <a href={strategyLink(strategy.id, node.id)}>
-                          Open step ↗
-                        </a>
-                      )}
+                      <a href={strategyLink(strategy.id, node.id)}>
+                        Open step ↗
+                      </a>
                     </div>
                   ))}
               </article>
@@ -197,11 +191,9 @@ export function WorkPage({
                       {node.status.replaceAll("_", " ")}
                     </span>
                   </div>
-                  {base && (
-                    <a href={strategyLink(node.strategyId, node.id)}>
-                      Open step ↗
-                    </a>
-                  )}
+                  <a href={strategyLink(node.strategyId, node.id)}>
+                    Open step ↗
+                  </a>
                 </div>
               ))}
               {complete && projection.upcoming.length === 0 && (
@@ -220,13 +212,11 @@ export function WorkPage({
                   <small>
                     {node.openEnded ? "Ongoing" : node.startsOn.slice(0, 10)}
                   </small>
-                  {base && (
-                    <p>
-                      <a href={strategyLink(node.strategyId, node.id)}>
-                        Open risk ↗
-                      </a>
-                    </p>
-                  )}
+                  <p>
+                    <a href={strategyLink(node.strategyId, node.id)}>
+                      Open risk ↗
+                    </a>
+                  </p>
                 </article>
               ))}
               {complete && projection.risks.length === 0 && (
@@ -235,12 +225,6 @@ export function WorkPage({
             </section>
           </aside>
         </div>
-      )}
-      {!base && (
-        <p className="muted">
-          Configure the existing application destination to open Strategies and
-          Workspace.
-        </p>
       )}
     </div>
   );

@@ -1,17 +1,22 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
+import { useId, useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { AddGovernmentTargetButton } from "@/features/portfolio/relationships/public";
 import type { Facility } from "./contracts";
 import { FacilityDialog } from "./FacilityDialog";
-import { FacilityGeocoding } from "./FacilityGeocoding";
-import { FacilityRepresentation } from "./FacilityRepresentation";
+import { FacilityLocationFacts } from "./FacilityLocationFacts";
+import { FacilityRepresentationSection } from "./FacilityRepresentationSection";
 import { facilityAddress, facilityDistrict } from "./facility-map-model";
 import { useFacilityRepresentation } from "./facility-map-queries";
 import { FacilityRemoveDialog } from "./FacilityRemoveDialog";
-import styles from "./facility-map.module.css";
+import { FacilityEconomicSections } from "./FacilityEconomicSections";
+import { FacilityStrategySections } from "./FacilityStrategySections";
+import { FacilityAwardSection } from "./FacilityAwardSection";
+import {
+  normalizeProfileDistrict,
+  type ProfileEvidenceScope,
+} from "./profile-evidence-contracts";
+import { useProfileActor } from "./profile-access";
+import profile from "./facility-profile.module.css";
 
 export function FacilityDetailDialog({
   clientId,
@@ -30,84 +35,155 @@ export function FacilityDetailDialog({
 }) {
   const [editing, setEditing] = useState(false);
   const [removing, setRemoving] = useState(false);
-  const representation = useFacilityRepresentation(clientId, open);
+  const id = useId();
+  const actor = useProfileActor();
+  const current = facility.clientId === clientId;
+  const enabled = open && current;
+  const representation = useFacilityRepresentation(clientId, enabled);
   const delegation =
     !representation.error && representation.isSuccess
       ? representation.data?.find((row) => row.facility.id === facility.id)
           ?.representation
       : undefined;
+  const scope: ProfileEvidenceScope = {
+    clientId,
+    facilityId: facility.id,
+    district: normalizeProfileDistrict({
+      state: facility.state,
+      districtCode: facility.congressionalDistrict,
+    }),
+  };
+  const ids = Object.fromEntries(
+    [
+      "location",
+      "economic",
+      "unemployment",
+      "workforce",
+      "representation",
+      "awards",
+      "strategic",
+      "priorities",
+      "engagement",
+      "changes",
+    ].map((name) => [name, `${id}-${name}`]),
+  ) as Record<
+    | "location"
+    | "economic"
+    | "unemployment"
+    | "workforce"
+    | "representation"
+    | "awards"
+    | "strategic"
+    | "priorities"
+    | "engagement"
+    | "changes",
+    string
+  >;
+  const navigate = (target: string) => {
+    const section = document.getElementById(target);
+    section?.scrollIntoView({ block: "start" });
+    section?.focus({ preventScroll: true });
+  };
   return (
     <>
       <Dialog
         open={open}
-        className={styles.detail}
+        className={profile.dialog}
         onOpenChange={onOpenChange}
-        title={`${facility.name}${facilityDistrict(facility) ? ` · ${facilityDistrict(facility)}` : ""}`}
-        description={`Location for ${clientName}. ${facilityAddress(facility)}`}
+        title={
+          current
+            ? `${facility.name}${facilityDistrict(facility) ? ` · ${facilityDistrict(facility)}` : ""}`
+            : "Location unavailable"
+        }
+        description={
+          current
+            ? `Location for ${clientName}. ${facilityAddress(facility)}`
+            : "The saved location does not match the current client."
+        }
       >
-        <div className={styles.stats}>
-          <div>
-            <strong>
-              {facility.employeeCount?.toLocaleString() ?? "Not reported"}
-            </strong>
-            <small>EMPLOYEES</small>
+        {!current ? (
+          <p role="alert">
+            This location is unavailable for the current client.
+          </p>
+        ) : (
+          <div className={profile.layout}>
+            <nav
+              className={profile.navigation}
+              aria-label="Location profile sections"
+            >
+              {(
+                [
+                  ["Location", ids.location],
+                  ["Footprint", ids.economic],
+                  ["Workforce", ids.unemployment],
+                  ["Federal activity", ids.representation],
+                  ["Strategy & engagement", ids.strategic],
+                  ["Evidence", ids.changes],
+                ] as const
+              ).map(([label, target]) => (
+                <button
+                  key={target}
+                  className="button ghost"
+                  onClick={() => navigate(target)}
+                >
+                  {label}
+                </button>
+              ))}
+            </nav>
+            <div className={profile.body}>
+              <FacilityLocationFacts
+                id={ids.location}
+                clientId={clientId}
+                facility={facility}
+                delegation={delegation}
+                available={available}
+              />
+              <FacilityEconomicSections
+                key={`${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
+                scope={scope}
+                open={enabled}
+                ids={ids}
+              />
+              <FacilityRepresentationSection
+                id={ids.representation}
+                clientId={clientId}
+                delegation={delegation}
+                enabled={enabled}
+                hasCurrentSession={Boolean(actor)}
+                pending={representation.isPending}
+                error={representation.error}
+                success={representation.isSuccess}
+                onRetry={() => void representation.refetch()}
+              />
+              <FacilityAwardSection
+                scope={scope}
+                open={enabled}
+                id={ids.awards}
+              />
+              <FacilityStrategySections
+                key={`${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
+                scope={scope}
+                open={enabled}
+                ids={ids}
+              />
+            </div>
           </div>
-          <div>
-            <strong>{facilityDistrict(facility) ?? "Unresolved"}</strong>
-            <small>HOUSE DISTRICT</small>
-          </div>
-          <div>
-            <strong>
-              {delegation && !delegation.unresolved
-                ? delegation.federal.senate.length
-                : "—"}
-            </strong>
-            <small>MATCHED SENATORS</small>
-          </div>
-        </div>
-        {facility.notes && <p className={styles.notes}>{facility.notes}</p>}
-        <section className="stack" aria-label="Elected representation">
-          <h3>Delegation</h3>
-          <QueryState
-            pending={representation.isPending}
-            error={representation.error}
-            retry={() => void representation.refetch()}
-          />
-          {!representation.error && representation.isSuccess && (
-            <FacilityRepresentation value={delegation} />
-          )}
-          {delegation && !delegation.unresolved && delegation.federal.house && (
-            <AddGovernmentTargetButton
-              clientId={clientId}
-              memberId={delegation.federal.house.bioguideId}
-              name={delegation.federal.house.fullName}
-              sourceDirectory="congress"
-            />
-          )}
-        </section>
-        <FacilityGeocoding
-          clientId={clientId}
-          facility={facility}
-          disabled={!available}
-        />
+        )}
         <div className="row between">
-          <Link
-            className="button"
-            href={`/portfolio/${clientId}/relationships?kind=government`}
-          >
-            Open relationships
-          </Link>
+          <button className="button" onClick={() => onOpenChange(false)}>
+            Done
+          </button>
           <div className="row">
             <button
               className="button"
-              disabled={!available}
+              disabled={!available || !current}
               onClick={() => setEditing(true)}
             >
               Edit facility
             </button>
             <button
               className="button ghost danger"
-              disabled={!available}
+              disabled={!available || !current}
               onClick={() => setRemoving(true)}
             >
               Remove
@@ -115,25 +191,29 @@ export function FacilityDetailDialog({
           </div>
         </div>
       </Dialog>
-      <FacilityDialog
-        key={`${facility.id}-${editing}`}
-        clientId={clientId}
-        clientName={clientName}
-        facility={facility}
-        open={editing}
-        onOpenChange={setEditing}
-      />
-      <FacilityRemoveDialog
-        clientId={clientId}
-        clientName={clientName}
-        facility={facility}
-        open={removing}
-        onOpenChange={setRemoving}
-        onRemoved={() => {
-          setRemoving(false);
-          onOpenChange(false);
-        }}
-      />
+      {current && (
+        <FacilityDialog
+          key={`${facility.id}-${editing}`}
+          clientId={clientId}
+          clientName={clientName}
+          facility={facility}
+          open={editing}
+          onOpenChange={setEditing}
+        />
+      )}
+      {current && (
+        <FacilityRemoveDialog
+          clientId={clientId}
+          clientName={clientName}
+          facility={facility}
+          open={removing}
+          onOpenChange={setRemoving}
+          onRemoved={() => {
+            setRemoving(false);
+            onOpenChange(false);
+          }}
+        />
+      )}
     </>
   );
 }

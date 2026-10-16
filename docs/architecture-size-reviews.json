@@ -107,40 +107,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
-    "sha256": "900260a4799347633313d4703d8a527fc66528175ec9e4b4170a077266362bee",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CommitmentView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "CommitmentView",
-        "nonblankLines": 93
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/engagement/CommitmentView.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
-    "sha256": "e5ca3912855cc6c056522cfdf03973dd56fcff6ffa8086ae3447a5c66e80dc39",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The overview still aggregates permitted meetings/tasks/report projections. A stable view clock replaces a render-time clock; no service, provider or authorization responsibility moves into the component.",
-    "functions": [
-      {
-        "name": "EngagementOverview",
-        "nonblankLines": 119
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/engagement/EngagementOverview.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "sha256": "268d2ca2dd156e33f7adbd671dadd804cf3a61861969609d10f45e86825c0f22",
     "reviewer": "Codex shared frontend integration review",
@@ -245,23 +211,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/intelligence/DistrictMap.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
-    "sha256": "c2d126a9007d3bad71eecabb768f944e10ac2b397c651267fc1b8e9cf9e4c880",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "DistrictNexus.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "DistrictNexus",
-        "nonblankLines": 147
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/intelligence/DistrictNexus.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -2073,40 +2022,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx",
-    "sha256": "f6499096b58f9ae6e47f769bb0363f516ec7ff56db19de57e3b74d2cc4803370",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "StrategiesLibrary.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "StrategiesLibrary",
-        "nonblankLines": 251
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
-    "sha256": "484ab1c5727914d5540271f4cc0ecb7e7fb9af080850bd62876e91ef5d071d6b",
-    "reviewer": "Codex independent_fix_review",
-    "reviewedAt": "2026-10-16",
-    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "Existing Strategy route composition delegates current-link verification to CurrentStrategyLink; ordinary section/library behavior remains intact.",
-    "functions": [
-      {
-        "name": "StrategiesScreen",
-        "nonblankLines": 101
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/strategies/StrategiesScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/strategies/StrategyCalendar.tsx",
     "sha256": "9b6d775d23b038a9bf814b162cec6358bfa3888fb6a08471e01fa02687f41982",
     "reviewer": "Codex implementation review",
@@ -2121,23 +2036,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/strategies/StrategyCalendar.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
-    "sha256": "c5116c20ee58e8bb4172bf00ea1bbea10b83fd86bb2b63a04aea177863ac47ef",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "StrategyCreate.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "StrategyCreate",
-        "nonblankLines": 194
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/strategies/StrategyCreate.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -2189,23 +2087,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/strategies/StrategyStep.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
-    "sha256": "86cb483dc9feba582bd37b3bf01e96aa33c3b74fec463ff91978fb8d62fa7e44",
-    "reviewer": "Codex independent_fix_review",
-    "reviewedAt": "2026-10-16",
-    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "Inherited unchanged Strategy detail/timeline responsibility; current client correlation is added in the outer receiver, not mixed into this body.",
-    "functions": [
-      {
-        "name": "TimelineView",
-        "nonblankLines": 230
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/strategies/StrategyTimeline.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -2369,23 +2250,6 @@
     ],
     "signals": [
       "apps/web/src/features/modules/strategies/runs/ApprovalReview.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/strategies/runs/RunActions.tsx",
-    "sha256": "a251b58909bbc0c9bde2dcef7549b5aa56f6dee6de53ec14cbeb1b894f211eff",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "RunActions.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "RunActions",
-        "nonblankLines": 136
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/strategies/runs/RunActions.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -3912,6 +3776,158 @@
     ],
     "signals": [
       "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
+    "sha256": "0e8123d4fd7bfd897ac30eb9adf41cecfbb0447735c66c4cb5ad90a9a8b4d949",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One client-scoped Commitment edit workflow. Canonical mutation ownership handles cancellation and generations; local pending guards prevent overlapping submissions and dismissal. The pure date field projection preserves an unchanged saved instant. Independently reviewed after the bounded change.",
+    "functions": [
+      {
+        "name": "ScopedCommitments",
+        "nonblankLines": 105
+      },
+      {
+        "name": "CommitmentForm",
+        "nonblankLines": 91
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/CommitmentView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "sha256": "d06b3375e2986aa26b77553e01d3dbb1ed02563be4d63834003bea920722d047",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "A single-query and current-selection screen. Selection stores request scope and district key, resolves only from current returned rows, and disappears on loading, error or scope replacement. Independent review found the remaining screen cohesive.",
+    "functions": [
+      {
+        "name": "DistrictNexus",
+        "nonblankLines": 164
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DistrictNexus.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/runs/RunActions.tsx",
+    "sha256": "e94288cd6997d0056c59b140a82263765d0d953a176721f16325d05704dd8f72",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The existing run-policy confirmations and canonical mutation owner remain together. The only new navigation delegates current Strategy, node and client validation to RunPlanStepLink rather than inventing client identity or transport on the run.",
+    "functions": [
+      {
+        "name": "RunActions",
+        "nonblankLines": 129
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/runs/RunActions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
+    "sha256": "ffeb50c4ef55c5b4c7273266a4d2d89a832f9cedb0bb90a24276f0e2752de6a1",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One URL-selection and navigation owner keeps route hints separate from current SelectedClient admission and the detail/node receiver. Independent whole-function review accepted this cohesive screen boundary.",
+    "functions": [
+      {
+        "name": "StrategiesScreen",
+        "nonblankLines": 160
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategiesScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
+    "sha256": "e2699b28a5e30f47b7ea6ce85f371b496a1cf39104b1bf2136e5001cb10e8e89",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One draft form owns its acknowledged-create transition. Current client-catalog membership gates submission, and only the acknowledged response supplies navigation identity. Canonical mutation hooks retain transport and lifetime ownership.",
+    "functions": [
+      {
+        "name": "StrategyCreate",
+        "nonblankLines": 210
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyCreate.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
+    "sha256": "ec44f93da13b67fa796fe4d03f2bbe76aee64b36773c76f6b87d6897205ac2ae",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One admitted current Strategy workspace composes existing child editors. Requested steps require unique, nonarchived membership in that returned Strategy; data, mutation and modal children retain their own owners.",
+    "functions": [
+      {
+        "name": "TimelineView",
+        "nonblankLines": 235
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyTimeline.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityCommittees.tsx",
+    "sha256": "cc118521332afa6e8fc588975354f7664a09fb86f747e99983543af5d1d3d41b",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One on-demand member-snapshot workflow owns request intent and actor/client/member correlation alongside cancellation and read state. Existing API/cache owners retain transport, and the presentation does not infer exhaustive or live committee coverage.",
+    "functions": [
+      {
+        "name": "CurrentMemberCommittees",
+        "nonblankLines": 94
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/client-profile/FacilityCommittees.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/FacilityEvidenceChanges.tsx",
+    "sha256": "05b03839f02888cc757de58a8f162d3ef6fa17d27340edf2ce67b6fc3ba5c538",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One pure priority-evidence response card renders changes, dataset geography/vintage, freshness and warnings together. It has no query, writer or independent lifecycle. Independent successor review verified all fields after semantic extraction.",
+    "functions": [
+      {
+        "name": "FacilityEvidenceChanges",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/client-profile/FacilityEvidenceChanges.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/client-profile/profile-evidence-contracts.ts",
+    "sha256": "d2b70be2c94b49c1b7288a5840589e63909be729ad4a0481f6e814c108e5516d",
+    "reviewer": "Codex root and independent continuation source reviewers",
+    "reviewedAt": "2026-10-16",
+    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "A receiving catalog for four related native read projections shares primitives and exact identity refinements. It contains no transport, persistence, policy engine or import side effects. Independent review inspected the actual Core economic, strategic and priority type subsets.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/portfolio/client-profile/profile-evidence-contracts.ts: 465 nonblank lines require review"
     ]
   }
 ]

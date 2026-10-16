@@ -7,6 +7,7 @@ import type {
   StrategyNode,
 } from "../../../shared/capiro/operations/strategies-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
+import { currentStrategyStep } from "../../../shared/capiro/strategy-navigation";
 import {
   ActionButton,
   Badge,
@@ -29,10 +30,14 @@ function TimelineView({
   strategy,
   onClose,
   reload,
+  initialStep,
+  onStepClose,
 }: {
   strategy: StrategyDetail;
   onClose: () => void;
   reload: () => void;
+  initialStep?: StrategyNode;
+  onStepClose?: () => void;
 }) {
   const [years, setYears] = useState(3);
   const [startFy, setStartFy] = useState(() =>
@@ -41,7 +46,9 @@ function TimelineView({
       : fiscalYear(new Date()),
   );
   const [flags, setFlags] = useState({ ppbe: true, congress: true });
-  const [step, setStep] = useState<true | StrategyNode>();
+  const [step, setStep] = useState<true | StrategyNode | undefined>(
+    initialStep,
+  );
   const [phasesOpen, setPhasesOpen] = useState(false);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [history, setHistory] = useState(false);
@@ -179,7 +186,10 @@ function TimelineView({
         <StrategyStep
           strategy={strategy}
           node={step === true ? undefined : step}
-          onClose={() => setStep(undefined)}
+          onClose={() => {
+            setStep(undefined);
+            onStepClose?.();
+          }}
           onSaved={reload}
         />
       )}
@@ -267,32 +277,50 @@ function TimelineView({
 export function StrategyTimeline({
   id,
   expectedClientId,
+  requestedStepId,
   onClose,
+  onStepClose,
 }: {
   id: string;
   expectedClientId?: string;
+  requestedStepId?: string;
   onClose: () => void;
+  onStepClose?: () => void;
 }) {
   const query = useCapiroQuery("strategies.detail", { params: { id } });
   const mismatch =
     query.data &&
-    expectedClientId !== undefined &&
-    (query.data.id !== id || query.data.clientId !== expectedClientId);
+    (query.data.id !== id ||
+      (expectedClientId !== undefined &&
+        query.data.clientId !== expectedClientId));
+  const initialStep =
+    query.data && requestedStepId
+      ? currentStrategyStep(query.data.nodes, id, requestedStepId)
+      : undefined;
   const error =
     query.error ??
     (mismatch
       ? "This Strategy is unavailable in the selected client scope."
-      : undefined);
+      : requestedStepId !== undefined && query.data && !initialStep
+        ? "This Strategy step is unavailable in the current Strategy."
+        : undefined);
   return (
-    <StatusPanel loading={query.loading} error={error} onRetry={query.reload}>
-      {!error && !query.loading && query.data && (
-        <TimelineView
-          key={query.data.id}
-          strategy={query.data}
-          onClose={onClose}
-          reload={query.reload}
-        />
+    <>
+      {error && (
+        <ActionButton onClick={onClose}>Back to Strategies</ActionButton>
       )}
-    </StatusPanel>
+      <StatusPanel loading={query.loading} error={error} onRetry={query.reload}>
+        {!error && !query.loading && query.data && (
+          <TimelineView
+            key={`${query.data.id}:${requestedStepId ?? ""}`}
+            strategy={query.data}
+            onClose={onClose}
+            reload={query.reload}
+            initialStep={initialStep}
+            onStepClose={requestedStepId ? onStepClose : undefined}
+          />
+        )}
+      </StatusPanel>
+    </>
   );
 }

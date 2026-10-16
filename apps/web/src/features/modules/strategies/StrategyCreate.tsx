@@ -23,15 +23,17 @@ import styles from "./strategies.module.css";
 import { objectiveLabels } from "./strategy-model";
 
 export function StrategyCreate({
+  initialClientId = "",
   onClose,
   onCreated,
 }: {
+  initialClientId?: string;
   onClose: () => void;
   onCreated: (strategy: StrategyDetail) => void;
 }) {
   const clients = useCapiroQuery("clients.list", {});
   const people = useCapiroQuery("planner.bootstrap", {});
-  const [clientId, setClientId] = useState("");
+  const [clientId, setClientId] = useState(initialClientId);
   const [type, setType] =
     useState<(typeof strategyTypes)[number]>("appropriations");
   const [owner, setOwner] = useState("");
@@ -41,7 +43,15 @@ export function StrategyCreate({
   const [title, setTitle] = useState("");
   const [discard, setDiscard] = useState(false);
   const create = useCapiroMutation("strategies.create");
+  const permittedClients = (clients.data ?? []).filter(
+    (client) => client.status !== "archived",
+  );
+  const currentClient =
+    !clients.loading &&
+    !clients.error &&
+    permittedClients.some((client) => client.id === clientId);
   async function save() {
+    if (!currentClient) return;
     try {
       const result = await create.run({
         body: {
@@ -55,7 +65,6 @@ export function StrategyCreate({
         },
       });
       onCreated(result);
-      onClose();
     } catch {
       /* Required fields and server validation remain reviewable. */
     }
@@ -80,7 +89,7 @@ export function StrategyCreate({
             </ActionButton>
             <ActionButton
               primary
-              disabled={create.pending || !clientId || !goal.trim()}
+              disabled={create.pending || !currentClient || !goal.trim()}
               onClick={save}
             >
               {create.pending ? "Creating…" : "Create strategy"}
@@ -98,12 +107,21 @@ export function StrategyCreate({
                   onValueChange={setClientId}
                   options={[
                     { value: "", label: "Choose client" },
-                    ...(clients.data ?? [])
-                      .filter((client) => client.status !== "archived")
-                      .map((client) => ({
-                        value: client.id,
-                        label: client.name,
-                      })),
+                    ...(clientId &&
+                    !permittedClients.some((client) => client.id === clientId)
+                      ? [
+                          {
+                            value: clientId,
+                            label: clients.loading
+                              ? "Checking selected client"
+                              : "Selected client unavailable",
+                          },
+                        ]
+                      : []),
+                    ...permittedClients.map((client) => ({
+                      value: client.id,
+                      label: client.name,
+                    })),
                   ]}
                 />
               </Field>

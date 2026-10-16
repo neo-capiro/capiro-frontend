@@ -57,7 +57,8 @@ export function EngagementOverview({
     row.meetings++;
     if (
       Date.parse(meeting.startsAt) > now &&
-      (!row.next || meeting.startsAt < row.next.startsAt)
+      (!row.next ||
+        Date.parse(meeting.startsAt) < Date.parse(row.next.startsAt))
     )
       row.next = meeting;
     clients.set(row.id, row);

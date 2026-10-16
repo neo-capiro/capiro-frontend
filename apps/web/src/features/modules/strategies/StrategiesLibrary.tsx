@@ -24,7 +24,7 @@ export function StrategiesLibrary({
   onReview,
 }: {
   clientId: string;
-  onOpen: (id: string) => void;
+  onOpen: (id: string, clientId: string) => void;
   onCreate: () => void;
   onReview: () => void;
 }) {
@@ -197,7 +197,7 @@ export function StrategiesLibrary({
               render: (strategy) => (
                 <button
                   className={styles.link}
-                  onClick={() => onOpen(strategy.id)}
+                  onClick={() => onOpen(strategy.id, strategy.clientId)}
                 >
                   <span className={styles.clientTag}>
                     {clients.data?.find(
@@ -236,7 +236,9 @@ export function StrategiesLibrary({
               label: "Actions",
               render: (strategy) => (
                 <div className={styles.actions}>
-                  <ActionButton onClick={() => onOpen(strategy.id)}>
+                  <ActionButton
+                    onClick={() => onOpen(strategy.id, strategy.clientId)}
+                  >
                     Open
                   </ActionButton>
                   <ActionButton onClick={() => setDeleting(strategy)}>

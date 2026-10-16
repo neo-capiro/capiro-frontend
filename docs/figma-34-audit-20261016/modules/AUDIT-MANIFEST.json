@@ -1,0 +1,99 @@
+{
+  "schema": "figma34-modules-audit-custody/2",
+  "status": "COMPLETE_DIRECT_DESKTOP_DESIGN_CONTROL_INVENTORY_SOURCE_MAPPING_NOT_PARITY",
+  "fileKey": "zGvvF6V6hh7yweoplCdpdE",
+  "prototypePage": "1064:140864",
+  "sourceBase": "3ef15d9a8ae6a27a9c2f39ccd923b5e2e07797cd",
+  "metadataNodes": 49219,
+  "screenCandidates": 752,
+  "categoryCounts": {
+    "shared_shell_boundary_other_owner": 15,
+    "desktop_or_1024_responsive": 682,
+    "phone_deferred": 24,
+    "design_reference_not_product_navigation": 10,
+    "meri_boundary_not_allocated": 13,
+    "shared_component_master_other_owner": 8
+  },
+  "collapsedCandidateBodies": {
+    "initialMetadataCollapsed": 217,
+    "eligibleExpandedDirectly": 200,
+    "excluded": 17,
+    "remainingEligibleUnexpanded": 0
+  },
+  "contextResponses": 38,
+  "highFidelityScreenshotResponses": 36,
+  "sparseOuterResponses": 2,
+  "decodedPngCount": 30,
+  "remainingImageRetainedInContext": "1064:225117",
+  "motionContexts": [
+    "1064:198085",
+    "1064:224852",
+    "1064:253185"
+  ],
+  "reactionCensusFamilyCount": 15,
+  "sourceReadPinCount": 18,
+  "docs": [
+    "SCREEN-CHECKLIST.json",
+    "FAMILY-CHECKLIST.json",
+    "CHECKLIST.md",
+    "DESIGN-GAPS.json",
+    "DESIGN-GAPS.md",
+    "ROW-CONTROL-CHECKLIST.json",
+    "CONTROL-AUDIT-SUMMARY.json",
+    "CONTROL-AUDIT.md",
+    "DESKTOP-ROWS.md"
+  ],
+  "externalEvidenceRoot": "C:/Users/neoma/Documents/Codex/2026-10-14/task-3/audit-evidence/figma34/modules",
+  "evidenceFiles": [
+    "PROTOTYPE-HIERARCHY.json",
+    "SOURCE-READ-PINS.json",
+    "SCREENSHOT-HASHES.json",
+    "design-context/",
+    "interaction-census-small.json",
+    "interaction-census-large.json",
+    "PROTOTYPE-READ-ONLY-SEMANTICS.json",
+    "wiring-review-notes.json",
+    "failed-authored-notes.json",
+    "actual-review-notes-bounded.json",
+    "full-screenshot-requests.json",
+    "motion-1064-198085.json",
+    "motion-1064-224852.json",
+    "motion-1064-253185.json",
+    "control-audit-v2/",
+    "design-context/*-v2.json"
+  ],
+  "limits": [
+    "No app source changed; root-owned Commitment/Overview files untouched.",
+    "No source tests/compiler/browser/install/provider/database/cloud execution.",
+    "Complete in-scope design-body inventory is documentation evidence only; per-control source/native/current authority and app rendered parity remain unqualified.",
+    "Components page separate owner; exact instance tuple equality grants no master acceptance.",
+    "534 aggregate labels explicitly previewed; full static-copy/style acceptance unclaimed.",
+    "Figma calls not immutable file-version snapshot; no whole-product/Meri/phone/live/image/release/deployment acceptance."
+  ],
+  "resourceStop": {
+    "availableCommitBytes": 840351744,
+    "action": "Stopped further local process launches; final docs assembled through retaineddata/apply_patch."
+  },
+  "eligibleFramesDirectlyPictured": 34,
+  "eligibleSparseParentsWithPicturedChild": 2,
+  "eligibleNotManuallyPictured": 646,
+  "directControlFrames": 682,
+  "localHiddenBodiesRead": 94,
+  "visibleControlBatches": 39,
+  "fullScreenEquivalenceCredits": 0,
+  "sourceBindingRules": 86,
+  "sourceOwnerPaths": 129,
+  "sourceBodyReadAnchorRows": 279,
+  "v2Integrity": {
+    "scope": "Pure in-memory documentation-reference checks, not source/app tests",
+    "eligibleIDs": 682,
+    "rowIDs": 682,
+    "missingEligibleIDs": [],
+    "extraIDs": [],
+    "semanticReferences": 24269,
+    "invalidReferences": 0,
+    "readOrMissingHiddenBodyErrors": 0,
+    "batchDataOrRoundtripFailures": 0,
+    "noBlankSourceBindings": true
+  }
+}

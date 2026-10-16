@@ -23,15 +23,35 @@ const dollars = (n: number | null) =>
 export function DistrictNexus() {
   const params = useSearchParams();
   const [state, setState] = useState("");
-  const [selected, setSelected] = useState<DistrictSummary>();
-  const query = useCapiroQuery("intelligence.district.map", {
+  const [selection, setSelection] = useState<{
+    scope: string;
+    districtKey: string;
+  }>();
+  const input = {
     query: {
-      view: "current",
+      view: "current" as const,
       clientId: params.get("clientId") || undefined,
       state: state || undefined,
     },
-  });
-  const rows = query.data?.districts || [];
+  };
+  const scope = JSON.stringify(input);
+  const query = useCapiroQuery("intelligence.district.map", input);
+  const rows =
+    !query.loading && !query.error ? query.data?.districts || [] : [];
+  const selected =
+    selection?.scope === scope
+      ? rows.find((row) => row.districtKey === selection.districtKey)
+      : undefined;
+  if (
+    selection &&
+    (selection.scope !== scope ||
+      (!query.loading && !query.error && query.data && !selected))
+  )
+    setSelection(undefined);
+  function select(row: DistrictSummary) {
+    if (!query.loading && !query.error && rows.includes(row))
+      setSelection({ scope, districtKey: row.districtKey });
+  }
   return (
     <>
       <div className={styles.toolbar}>
@@ -45,7 +65,7 @@ export function DistrictNexus() {
         <ActionButton
           onClick={() => {
             setState("");
-            setSelected(undefined);
+            setSelection(undefined);
           }}
         >
           Clear all
@@ -62,7 +82,7 @@ export function DistrictNexus() {
               title="District footprint"
               description="Current districts. Contracts, grant obligations and grant outlays remain separate."
             >
-              <DistrictMap districts={rows} onSelect={setSelected} />
+              <DistrictMap districts={rows} onSelect={select} />
             </Panel>
             <Panel title={`${rows.length} districts in scope`}>
               <DataTable
@@ -74,10 +94,7 @@ export function DistrictNexus() {
                     key: "district",
                     label: "District",
                     render: (r) => (
-                      <button
-                        className={styles.link}
-                        onClick={() => setSelected(r)}
-                      >
+                      <button className={styles.link} onClick={() => select(r)}>
                         {r.districtKey}
                       </button>
                     ),
