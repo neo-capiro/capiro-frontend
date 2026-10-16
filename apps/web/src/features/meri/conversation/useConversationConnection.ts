@@ -26,6 +26,14 @@ type Opening = Readonly<{
   /** A prompt the person sent that waits for this fresh run's session. */
   pending?: string;
 }>;
+type Reopening = {
+  target?: { conversationId: string; runId: string };
+  pending?: string;
+};
+const exactTarget = (hints: Hints | ActionContext | undefined) =>
+  hints?.conversationId && hints.runId
+    ? { conversationId: hints.conversationId, runId: hints.runId }
+    : undefined;
 
 /** The last context the service bound, kept for exact reopening; never read to render. */
 function boundContext() {
@@ -39,18 +47,18 @@ function boundContext() {
 }
 
 /**
- * Owns the short-lived opaque session for the conversation's current run. A finished run is never
- * reopened for input: the next prompt opens a new session for the same conversation and the
- * service binds its successor run (or refuses). Reopening the same run uses its exact selectors.
+ * Owns a short-lived opaque session. New-turn admission supplies an exact target; neither
+ * reconnect nor session issuance is allowed to select a broader successor on its own.
  */
 export function useConversationConnection(
   account: ConversationAccount,
   clientId: string,
   now: () => number = Date.now,
+  conversationId?: string,
 ) {
   const cache = useQueryClient();
   const [selection] = useState(() =>
-    conversationSelectionOwner(cache, account, clientId),
+    conversationSelectionOwner(cache, account, clientId, conversationId),
   );
   const [bound] = useState(boundContext);
   const create = useCallback(
@@ -86,17 +94,9 @@ export function useConversationConnection(
   );
 
   const reopen = useCallback(
-    (options: { nextTurn?: boolean; pending?: string } = {}) => {
-      const context = bound.last()?.context;
-      const hints = !context
-        ? selection.hints
-        : options.nextTurn
-          ? selection.nextTurnHints(context.conversationId)
-          : {
-              clientId,
-              conversationId: context.conversationId,
-              runId: context.runId,
-            };
+    (options: Reopening = {}) => {
+      const target = options.target ?? exactTarget(bound.last()?.context);
+      const hints = target ? { clientId, ...target } : selection.hints;
       setOpening({
         host: create(hints),
         hints,
@@ -118,11 +118,20 @@ export function useConversationConnection(
 
   return {
     state,
+    conversationId: opening.hints.conversationId,
     pending: opening.pending,
+    revoke: useCallback(() => {
+      const last = bound.last();
+      if (last) renewed.current = JSON.stringify(last.context) + last.at;
+      host.revoke();
+    }, [host, bound]),
     /** Reopen the same run after expiry; otherwise retry the same selectors, never broader ones. */
     retry: () =>
       state.status === "expired"
-        ? reopen(opening.pending ? { pending: opening.pending } : {})
+        ? reopen({
+            target: exactTarget(opening.hints),
+            pending: opening.pending,
+          })
         : setOpening({ ...opening, host: create(opening.hints) }),
     reopen,
   };

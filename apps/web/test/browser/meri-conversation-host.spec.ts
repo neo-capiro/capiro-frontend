@@ -1,6 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { client } from "../../tests/browser/fixtures";
 import {
+  acceptNext,
+  installCurrentRun,
+  installHistory,
+  installReservation,
+} from "./meri-history-fixtures";
+import {
   setupConversation,
   connect,
   clientId,
@@ -83,6 +89,8 @@ test("a finished run accepts the next prompt as the conversation's next run, kee
     context,
     contextFor(nextBinding),
   ]);
+  const { native } = await installHistory(page);
+  await installReservation(page, native);
   await page.route("**/api/conversations/history", (r) =>
     reply(
       r,
@@ -96,6 +104,7 @@ test("a finished run accepts the next prompt as the conversation's next run, kee
   await page.route("**/api/conversations/submit", (r) => {
     const body = r.request().postDataJSON();
     submits.push(body);
+    acceptNext(native, body.requestId, body.prompt);
     return reply(r, {
       run: runFor("queued", nextBinding),
       requestId: body.requestId,
@@ -113,9 +122,8 @@ test("a finished run accepts the next prompt as the conversation's next run, kee
       },
     });
     return sse(r, [
-      status(1, "running", nextBinding),
-      event(2, "Second answer", nextBinding),
-      status(3, "completed", nextBinding),
+      event(1, "Second answer", nextBinding),
+      status(2, "completed", nextBinding),
     ]);
   });
   await connect(page);
@@ -130,7 +138,11 @@ test("a finished run accepts the next prompt as the conversation's next run, kee
   await expect(current.getByText("Second question")).toBeVisible();
   expect(f.hints).toEqual([
     { clientId },
-    { clientId, conversationId: binding.conversationId },
+    {
+      clientId,
+      conversationId: binding.conversationId,
+      runId: nextBinding.runId,
+    },
   ]);
   expect(submits).toHaveLength(1);
   expect(Object.keys(submits[0]!)).toEqual(["requestId", "prompt"]);
@@ -345,21 +357,31 @@ test("a foreign native actor receipt cannot create a ready host or dispatch conv
   expect(f.unexpected).toEqual([]);
 });
 
-test("an uncertain first submit retries the exact original request, then observes without a duplicate", async ({
+test("an uncertain reserved-turn submit retries the exact original request, then observes without a duplicate", async ({
   page,
 }) => {
-  const f = await setupConversation(page);
-  await page.route("**/api/conversations/history", (r) =>
-    reply(r, { error: { code: "NOT_FOUND" } }, 404),
-  );
+  const f = await setupConversation(page, undefined, [
+    context,
+    contextFor(nextBinding),
+  ]);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await installReservation(page, native);
   const requests: { requestId: string; prompt: string }[] = [];
   await page.route("**/api/conversations/submit", (r) => {
     const body = r.request().postDataJSON();
     requests.push(body);
+    if (requests.length === 1)
+      acceptNext(
+        native,
+        body.requestId,
+        body.prompt,
+        "Observed native response",
+      );
     return requests.length === 1
       ? reply(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 502)
       : reply(r, {
-          run,
+          run: runFor("running", nextBinding),
           requestId: body.requestId,
           lastSequence: 1,
           replayed: true,
@@ -369,8 +391,8 @@ test("an uncertain first submit retries the exact original request, then observe
   await page.route("**/api/conversations/events", (r) => {
     observations++;
     return sse(r, [
-      event(1, "Observed native response"),
-      status(2, "completed"),
+      event(1, "Observed native response", nextBinding),
+      status(2, "completed", nextBinding),
     ]);
   });
   await connect(page);
@@ -404,25 +426,32 @@ test("an uncertain first submit retries the exact original request, then observe
 test("navigation keeps the uncertain request and rebinds the exact observed run before an explicit retry", async ({
   page,
 }) => {
-  const f = await setupConversation(page);
-  await page.route("**/api/conversations/history", (r) =>
-    reply(r, { error: { code: "NOT_FOUND" } }, 404),
-  );
+  const f = await setupConversation(page, undefined, [
+    context,
+    contextFor(nextBinding),
+  ]);
+  const { native } = await installHistory(page);
+  await installCurrentRun(page, native);
+  await installReservation(page, native);
   const requests: object[] = [];
   await page.route("**/api/conversations/submit", (r) => {
     const body = r.request().postDataJSON();
     requests.push(body);
+    if (requests.length === 1) acceptNext(native, body.requestId, body.prompt);
     return requests.length === 1
       ? reply(r, { error: { code: "CONVERSATION_UNAVAILABLE" } }, 502)
       : reply(r, {
-          run,
+          run: runFor("running", nextBinding),
           requestId: body.requestId,
           lastSequence: 1,
           replayed: true,
         });
   });
   await page.route("**/api/conversations/events", (r) =>
-    sse(r, [status(1, "completed")]),
+    sse(r, [
+      event(1, "Second answer", nextBinding),
+      status(2, "completed", nextBinding),
+    ]),
   );
   await connect(page);
   await composer(page).fill("Retain across navigation");
@@ -444,16 +473,20 @@ test("navigation keeps the uncertain request and rebinds the exact observed run 
       .getByRole("article", { name: "Current turn" })
       .getByText("Retain across navigation"),
   ).toBeVisible();
-  expect(f.hints[1]).toEqual({
+  expect(f.hints.at(-1)).toEqual({
     clientId,
     conversationId: binding.conversationId,
-    runId: binding.runId,
+    runId: nextBinding.runId,
   });
   expect(requests).toHaveLength(1);
   await page
     .getByRole("button", { name: "Retry same request", exact: true })
     .click();
-  await expect(page.getByText("Completed", { exact: true })).toBeVisible();
+  await expect(
+    page
+      .getByRole("article", { name: "Current turn" })
+      .getByText("Completed", { exact: true }),
+  ).toBeVisible();
   expect(requests[1]).toEqual(requests[0]);
   expect(f.unexpected).toEqual([]);
 });

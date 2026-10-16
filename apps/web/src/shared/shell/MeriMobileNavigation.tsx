@@ -16,6 +16,7 @@ import {
   unavailableDestinationTitle,
 } from "./SidebarDestinations";
 import { recents } from "./SidebarRecents";
+import { ConversationRecents } from "./ConversationRecents";
 import styles from "./shell.module.css";
 
 type AssetSet = "home" | "cited-answer";
@@ -23,6 +24,7 @@ type MenuProps = {
   id: string;
   assetSet: AssetSet;
   fixture: boolean;
+  conversationEnabled: boolean;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
   clientId?: string | undefined;
@@ -32,8 +34,9 @@ type MenuProps = {
 /** Recents and the workflow library entry beneath the destinations. */
 function MobileRecents({
   fixture,
+  conversationEnabled,
   onNavigate,
-}: Pick<MenuProps, "fixture" | "onNavigate">) {
+}: Pick<MenuProps, "fixture" | "conversationEnabled" | "onNavigate">) {
   return (
     <>
       <div className={styles.mobileDivider} />
@@ -50,6 +53,12 @@ function MobileRecents({
             {title}
           </button>
         ))
+      ) : conversationEnabled ? (
+        <ConversationRecents
+          enabled
+          className={styles.mobileItem}
+          onNavigate={onNavigate}
+        />
       ) : (
         <p className={styles.mobileRecentLabel}>
           Recent conversations unavailable
@@ -115,6 +124,7 @@ function MobileMenu({
   assetSet,
   fixture,
   section,
+  conversationEnabled,
   pendingApprovals,
   clientId,
   onNavigate,
@@ -178,7 +188,11 @@ function MobileMenu({
         <DesignIcon name="mode-modules" assetSet={assetSet} />
         Preferences
       </Link>
-      <MobileRecents fixture={fixture} onNavigate={onNavigate} />
+      <MobileRecents
+        fixture={fixture}
+        conversationEnabled={conversationEnabled}
+        onNavigate={onNavigate}
+      />
     </nav>
   );
 }
@@ -187,11 +201,13 @@ function MobileMenu({
 export function MeriMobileNavigation({
   assetSet = "home",
   fixture = false,
+  conversationEnabled = false,
   section,
   pendingApprovals,
 }: {
   assetSet?: AssetSet;
   fixture?: boolean;
+  conversationEnabled?: boolean;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
@@ -232,6 +248,7 @@ export function MeriMobileNavigation({
           id={menuId}
           assetSet={assetSet}
           fixture={fixture}
+          conversationEnabled={conversationEnabled}
           section={section}
           pendingApprovals={pendingApprovals}
           clientId={clientId}

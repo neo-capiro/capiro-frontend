@@ -8,6 +8,7 @@ import { unavailableResources } from "../../../shared/meri-resources/unavailable
 import { MeriComposer, type LiveComposer } from "../MeriComposer";
 import { ConversationTurn } from "./ConversationTurn";
 import type { TurnView } from "./conversation-view";
+import { shouldShowPrompt } from "./prompt-identity";
 import styles from "./live.module.css";
 
 /**
@@ -26,6 +27,7 @@ export function ConversationFrame({
   textareaRef,
   composer,
   running,
+  historyStatus,
 }: {
   scope: string;
   earlier: readonly TurnView[];
@@ -38,6 +40,7 @@ export function ConversationFrame({
   textareaRef: RefObject<HTMLTextAreaElement | null>;
   composer: LiveComposer;
   running: boolean;
+  historyStatus?: ReactNode;
 }) {
   return (
     <section className={styles.frame} aria-labelledby="meri-conversation">
@@ -45,9 +48,11 @@ export function ConversationFrame({
         <h2 id="meri-conversation">Conversation</h2>
         <p className={styles.muted}>{scope}</p>
       </div>
-      <p className={styles.muted}>
-        {unavailableResources.conversationHistory.summary}
-      </p>
+      {historyStatus ?? (
+        <p className={styles.muted}>
+          {unavailableResources.conversationHistory.summary}
+        </p>
+      )}
       <Conversation
         className={styles.log}
         aria-label="Conversation turns"
@@ -60,6 +65,7 @@ export function ConversationFrame({
               key={turn.runId}
               turn={turn}
               label={`Earlier turn ${index + 1}`}
+              showPrompt={shouldShowPrompt(turn, earlier.slice(0, index))}
             />
           ))}
           {current}

@@ -18,11 +18,13 @@ import styles from "./shell.module.css";
 export function Sidebar({
   assetSet = "home",
   fixture = false,
+  conversationEnabled = false,
   section,
   pendingApprovals,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
+  conversationEnabled?: boolean;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
@@ -87,7 +89,7 @@ export function Sidebar({
         section={section}
         pendingApprovals={pendingApprovals}
       />
-      <SidebarRecents fixture={fixture} />
+      <SidebarRecents fixture={fixture} enabled={conversationEnabled} />
       <SidebarPreferences fixture={fixture} section={section} />
     </aside>
   );

@@ -70,7 +70,10 @@ export function Header({
                   className={styles.action}
                 >
                   <ScopedLink href={action.href} aria-label={action.label}>
-                    <DesignIcon name={action.icon} assetSet={assetSet} />
+                    <DesignIcon
+                      name={action.icon}
+                      assetSet="header-34-20261016"
+                    />
                   </ScopedLink>
                 </Button>
               ) : (
@@ -82,7 +85,10 @@ export function Header({
                   disabled
                   aria-label={`${action.label} — unavailable`}
                 >
-                  <DesignIcon name={action.icon} assetSet={assetSet} />
+                  <DesignIcon
+                    name={action.icon}
+                    assetSet="header-34-20261016"
+                  />
                 </Button>
               ),
           )}

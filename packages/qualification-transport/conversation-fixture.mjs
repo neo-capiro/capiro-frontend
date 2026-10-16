@@ -24,6 +24,10 @@ export function fixture({ count = 2 } = {}) {
     const call = { path, method: init.method, body, rawBody: init.body, headers: Object.fromEntries(new Headers(init.headers)), signal: init.signal };
     f.calls.push(call);
     if (f.override) { const result = await f.override(call); if (result !== undefined) return result; }
+    if (path.endsWith('/input/admit')) {
+      f.stored = { ...f.stored, requestId: body.requestId, prompt: body.prompt, windowRequest: body.windowRequest ?? null };
+      return Response.json({ run: structuredClone(run), request: f.stored, lastSequence: f.events.length, replayed: false });
+    }
     if (path.endsWith('/submit')) {
       f.stored = { ...f.stored, requestId: body.requestId, prompt: body.prompt };
       return Response.json({ run: structuredClone(run), requestId: body.requestId, lastSequence: f.events.length, replayed: false });

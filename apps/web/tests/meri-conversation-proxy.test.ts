@@ -13,6 +13,14 @@ const authorization = `Bearer action_session_${"a".repeat(43)}`;
 const conversationId = "10000000-0000-4000-8000-000000000001";
 const reconnect = `events/${conversationId}/stream`;
 const payloads = {
+  "input/allocate": {
+    requestId: "20000000-0000-4000-8000-000000000002",
+    prompt: "Initial proposal",
+  },
+  "input/admit": {
+    requestId: "20000000-0000-4000-8000-000000000002",
+    prompt: "A ? question",
+  },
   submit: {
     requestId: "20000000-0000-4000-8000-000000000002",
     prompt: "A € question",
@@ -53,7 +61,14 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-for (const path of ["submit", "history", "cancel", "events"] as const)
+for (const path of [
+  "submit",
+  "history",
+  "cancel",
+  "events",
+  "input/admit",
+  "input/allocate",
+] as const)
   it(`forwards exact admitted ${path} bytes, opaque session and owner status without native bearer leakage`, async () => {
     const raw = ` ${JSON.stringify(payloads[path])} `;
     const fetcher = vi.fn(
@@ -210,7 +225,14 @@ it("rejects query claims and mismatched local path without invoking owner", asyn
   expect(fetcher).not.toHaveBeenCalled();
 });
 
-for (const path of ["submit", "history", "cancel", "events"] as const)
+for (const path of [
+  "submit",
+  "history",
+  "cancel",
+  "events",
+  "input/admit",
+  "input/allocate",
+] as const)
   it(`SDK refuses extra authority in ${path} before owner dispatch`, async () => {
     const fetcher = vi.fn();
     const response = await proxyConversationRequest(
