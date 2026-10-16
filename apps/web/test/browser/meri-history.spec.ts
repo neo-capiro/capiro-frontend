@@ -33,12 +33,15 @@ test("synthetic native discovery pages through other permitted clients and prese
 }) => {
   const f = await setupConversation(page);
   const otherClient = "10000000-0000-4000-8000-000000000002";
-  const others = Array.from({ length: 50 }, (_, index): typeof conversation => ({
-    ...conversation,
-    conversationId: `30000000-0000-4000-8000-${String(1000 - index).padStart(12, "0")}`,
-    createdAt: "2026-10-14T00:00:00.000Z",
-    scopes: [{ ...conversation.scopes[0]!, resourceId: otherClient }],
-  }));
+  const others = Array.from(
+    { length: 50 },
+    (_, index): typeof conversation => ({
+      ...conversation,
+      conversationId: `30000000-0000-4000-8000-${String(1000 - index).padStart(12, "0")}`,
+      createdAt: "2026-10-14T00:00:00.000Z",
+      scopes: [{ ...conversation.scopes[0]!, resourceId: otherClient }],
+    }),
+  );
   const { native, calls } = await installHistory(page, {
     conversations: [...others, conversation],
   });

@@ -320,10 +320,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
     "kind": "function",
     "symbol": "FacilityDetailDialog",
-    "fingerprint": "b622830f35b6ec70e0a8b2844806cdf5fa8967ce7bdde83a04301d6dcadbf9d5",
-    "reason": "The current-facility container now owns scope, section navigation and edit/remove modal lifetime only. Pure LocationFacts and RepresentationSection owners render facts and roster/committee composition; evidence queries remain separately owned. Independent successor review verified the extraction and wrong-client guard. See docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules.",
+    "fingerprint": "30dc1dad839f9bf16b45aa83e4a2a86eb1f6729de06073e0b711179d0627c6b0",
+    "reason": "Owns current-facility scope, section navigation and edit/remove modal lifetime. Header/footer presentation retains the wrong-client guard while pure location/representation children and evidence queries keep their separate owners. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
     "reviewedOn": "2026-10-16",
-    "reviewedBy": "Codex root and independent continuation source reviewers"
+    "reviewedBy": "Codex PR60 root and independent source reviewers"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
@@ -2694,9 +2694,9 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "d53c017af63e34946a634d22420e9b10f7646b23b3b1548f78e43c1a94acefda",
-    "reason": "The existing Engagement tab/client-scope composition owner adds only a presentation fallback for its controlled scope select when the valid URL identity is absent from the returned catalog. The same value and query scope remain unchanged; the static missing-name label carries no authority. This remains one local navigation/scope presentation responsibility, while Plan operations, authorization and receipt/uncertainty lifetimes stay delegated. Six extra option-rendering lines do not introduce a new reason to split the component.",
-    "reviewedBy": "Codex non_meri_closure_review scope-label successor",
+    "fingerprint": "a5de6c27e3b7e5e16196bc51cfaea8c29e946f0fc69b3db4696e11b1f155b6c6",
+    "reason": "Retains one Engagement tab and client-scope composition. The latest header wording and missing-name fallback are presentation; Plan operations, authorization and uncertain receipt lifetimes remain delegated. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
     "reviewedOn": "2026-10-16"
   },
   {
@@ -2887,5 +2887,77 @@
     "reason": "One canonical Markdown editing hook owns selection, native Undo and queued-link lifetime. The new field label changes only stale-selection wording; formatting and validation algorithms, length bounds and disposal remain unchanged.",
     "reviewedBy": "Codex non_meri_closure_review",
     "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+    "kind": "function",
+    "symbol": "CoreResolvedConversation",
+    "fingerprint": "86bf191233b45c6ebc3b825e224178e2bb508db00cdf8cb401fb4c3cba24e775",
+    "reason": "One selected tenant, actor and client owns a Core create-or-reuse attempt. Abort on scope change, the shared persisted request identity and verified receipt, and retry/New Chat presentation belong to that attempt; Meri session issuance mounts only after a verified conversation ID. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/saved-turns.ts",
+    "kind": "function",
+    "symbol": "sessionHistoryState",
+    "fingerprint": "71ed2508b56c429cf005b8903fce81ff3fddec939aff13cb8de50ce5c8a4ca22",
+    "reason": "One pure projection combines admitted saved/current runs, retained intent and local turns into display and action-blocking state. Fetching, event conversion and write admission remain with separate owners. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/context/StrategyContext.tsx",
+    "kind": "function",
+    "symbol": "StrategyContext",
+    "fingerprint": "af2759f9352c2a36664d65c7ae1aea5bcbb8ed0896ff4669edcdaf5ffa7a04be",
+    "reason": "One Strategy context-document screen owns local scope, search, selection and child upload presentation. Shared Capiro owners retain query, persistence and authorization; the no-client default and layout do not add another data owner. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/strategies.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "20af1791b6cec68810380c1795e289c65e946e3141d1d71362de63364a76001a",
+    "reason": "Declarative Strategy-family styles are imported within that feature. Current context-search and timeline-reference selectors add layout without policy or cross-feature behavior; split by view if unrelated edits begin to interact. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
+    "kind": "function",
+    "symbol": "StrategiesScreen",
+    "fingerprint": "a7afd5e968a3abf5182dfd1612cf40432ed3e0699e8891224a3fec3c72085183",
+    "reason": "Owns URL view selection and current-client navigation while StrategyViewSurface renders the admitted view. Persistence and Strategy-detail validation remain outside this screen. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
+    "kind": "function",
+    "symbol": "TimelineView",
+    "fingerprint": "4f89b5d57e3ac893375cc9823698af8c3a5645257858fbac1e80aa63ab144d60",
+    "reason": "Composes one admitted Strategy workspace with separate editors and current-step membership checks. Fiscal labels and control placement are presentation; mutation and authorization remain delegated. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/objective-operational-semantics.ts",
+    "kind": "function",
+    "symbol": "rowWitnesses",
+    "fingerprint": "c2db140cf0f9084eace2762d370e3dbe889c918dd2b0fb09032536ccd0e20766",
+    "reason": "One pure cross-section consistency pass checks resource, provenance, receipt and revision identity without transport or side effects. Its body is unchanged; sibling validation changed the whole-file review hash. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/shared/shell/Header.tsx",
+    "kind": "function",
+    "symbol": "Header",
+    "fingerprint": "2bdd4ce2928205fc953c49700c92cb8dcce6e9b7de1a16773f9fc6dccd399d27",
+    "reason": "Declaratively assembles brand, mode links and actions into HeaderFrame. Route scoping and fixture overlay state live in separate components, with no transport or policy here. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
+    "reviewedBy": "Codex PR60 root and independent source reviewers",
+    "reviewedOn": "2026-10-16"
   }
 ]

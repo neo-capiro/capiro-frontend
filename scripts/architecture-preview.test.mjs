@@ -30,11 +30,25 @@ test('preview policy cannot leak into client features, foundations, pages or una
 });
 
 test('all preview internals are server allocated, including through client foundations', () => {
-  for (const name of ['read-config.server', 'read-route.server', 'read-proxy.server']) {
+  for (const name of ['read-config.server', 'read-route.server', 'read-proxy.server', 'first-chat-gateway.server']) {
     const target = `apps/web/src/shared/preview/${name}.ts`;
     for (const entry of ['features/portfolio/home/client.tsx', 'shared/session/client.tsx', 'app/page.tsx', 'proxy.ts', 'app/api/action-followthrough/[operation]/route.ts']) {
       const files = new Map([[`apps/web/src/${entry}`, `import '@/shared/preview/${name}';`], [target, 'export const value = 1;']]);
       assert.ok(inspectSources(files).errors.some(error => /preview policy|server adapter dependency/.test(error)), `${entry} -> ${name}`);
     }
+  }
+});
+
+test('first-chat gateway is allocated only to the Capiro server route', () => {
+  const target = 'apps/web/src/shared/preview/first-chat-gateway.server.ts';
+  const source = "import '@/shared/preview/first-chat-gateway.server';";
+  const files = new Map([
+    ['apps/web/src/app/api/capiro/[operation]/route.ts', source],
+    [target, 'export const value = 1;'],
+  ]);
+  assert.deepEqual(inspectSources(files).errors, []);
+  for (const entry of ['proxy.ts', 'app/api/backend/[service]/[...path]/route.ts']) {
+    const rejected = new Map([[`apps/web/src/${entry}`, source], [target, 'export const value = 1;']]);
+    assert.ok(inspectSources(rejected).errors.length, entry);
   }
 });

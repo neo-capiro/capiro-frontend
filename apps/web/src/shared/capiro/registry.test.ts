@@ -15,6 +15,12 @@ import { capiroOperations } from "./registry";
 import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
+import { objectiveOperationalOperations } from "./operations/objective-operational";
+import { engagementPlanOperations } from "./operations/engagement-plans";
+import {
+  firstChatCoreOperation,
+  firstChatCoreOperationKey,
+} from "./operations/meri-first-chat";
 
 it("imports the complete reviewed allowlist safely and exposes no silently overwritten operation", () => {
   const groups = [
@@ -33,10 +39,14 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     onboardFunnelOperations,
     onboardSetupOperations,
     onboardCoreOperations,
+    objectiveOperationalOperations,
+    engagementPlanOperations,
+    { [firstChatCoreOperationKey]: firstChatCoreOperation },
   ];
   const declared = groups.flatMap((group) => Object.keys(group));
   expect(new Set(declared).size).toBe(declared.length);
   expect(Object.keys(capiroOperations)).toHaveLength(declared.length);
+  expect(Object.keys(capiroOperations).sort()).toEqual(declared.sort());
   expect(declared.length).toBeGreaterThan(0);
 });
 it("applies configured service prefixes once and ties the hearing socket to its actual gateway", () => {

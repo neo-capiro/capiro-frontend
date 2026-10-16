@@ -144,8 +144,27 @@ it("holds query, method, path and resolved operation mismatches", async () => {
     }),
   );
   await held(
+    await POST(request(), {
+      params: Promise.resolve({ operation: "public-onboard.verify" }),
+    }),
+  );
+  await held(
     (await proxy(
       new NextRequest(`${origin}/api/capiro/me.update`, { method: "POST" }),
+      {} as NextFetchEvent,
+    )) as Response,
+  );
+});
+
+it.each([
+  "/api/backend/core/clients",
+  "/api/action-followthrough/session",
+  "/api/capiro/me.update",
+  "/api/capiro/public-onboard.verify",
+])("keeps unrelated POST %s held with bootstrap enabled", async (path) => {
+  await held(
+    (await proxy(
+      new NextRequest(`${origin}${path}`, { method: "POST" }),
       {} as NextFetchEvent,
     )) as Response,
   );
