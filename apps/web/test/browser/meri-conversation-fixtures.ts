@@ -37,7 +37,7 @@ export const contextFor = (value: Binding = binding) => ({
   selectedClientId: clientId,
 });
 export const context = contextFor();
-export const scopes = [
+export const scopes: ConversationSubmittedResponse["run"]["scopes"] = [
   {
     tenantId: binding.tenantId,
     kind: "client",
@@ -46,7 +46,10 @@ export const scopes = [
   },
 ];
 type RunState = ConversationSubmittedResponse["run"]["state"];
-export const runFor = (state: RunState = "running", value = binding) => ({
+export const runFor = (
+  state: RunState = "running",
+  value = binding,
+): ConversationSubmittedResponse["run"] => ({
   binding: value,
   state,
   scopes,

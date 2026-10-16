@@ -9,7 +9,7 @@ import type { ConversationAccount } from "../meri-conversations/host-controller"
 
 type Props = {
   enabled: boolean;
-  className: string;
+  className?: string | undefined;
   onNavigate?: (() => void) | undefined;
 };
 

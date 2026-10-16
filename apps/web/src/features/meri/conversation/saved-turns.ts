@@ -111,7 +111,12 @@ export function sessionHistoryState(
       : undefined;
   return {
     logicalKey,
-    acceptedRequest: admitted?.request,
+    acceptedRequest: admitted?.request
+      ? {
+          ...admitted.request,
+          windowRequest: admitted.request.windowRequest ?? null,
+        }
+      : undefined,
     source,
     reservation,
     earlier,
