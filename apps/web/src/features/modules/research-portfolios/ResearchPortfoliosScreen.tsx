@@ -1,23 +1,17 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
-import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
+import { useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
   Badge,
-  Field,
-  Modal,
   PageHeader,
   StatusPanel,
-  TextArea,
-  TextInput,
 } from "../../../shared/module-ui";
 import { ResearchPortfolioDetail } from "./ResearchDetail";
-import { ResearchPortfolioCreateIntent } from "./create-intent";
+import { ResearchCreateAction } from "./ResearchCreate";
 import styles from "./research.module.css";
 export function ResearchPortfoliosScreen() {
-  const api = useCapiro();
   const params = useSearchParams();
   const [id, setId] = useState(params.get("portfolioId") || "");
   const [role, setRole] = useState("");
@@ -25,15 +19,6 @@ export function ResearchPortfoliosScreen() {
   const [lifecycle, setLifecycle] = useState("active");
   const [cursor, setCursor] = useState<string>();
   const [history, setHistory] = useState<(string | undefined)[]>([]);
-  const [creating, setCreating] = useState(false);
-  const [name, setName] = useState("");
-  const [purpose, setPurpose] = useState("");
-  const [newMode, setNewMode] = useState<"manual" | "rules" | "hybrid">(
-    "manual",
-  );
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string>();
-  const createIntent = useRef(new ResearchPortfolioCreateIntent());
   const query = useCapiroQuery("research.list", {
     query: { cursor, limit: 50 },
   });
@@ -44,26 +29,6 @@ export function ResearchPortfoliosScreen() {
       (!lifecycle || r.lifecycle === lifecycle),
   );
   const view = params.get("view") || "overview";
-  async function create() {
-    if (createIntent.current.busy) return;
-    setBusy(true);
-    setError(undefined);
-    try {
-      const receipt = await createIntent.current.submit(
-        { name, purpose: purpose || null, mode: newMode },
-        (body) => api.request("research.create", { body }),
-      );
-      setCreating(false);
-      setName("");
-      setPurpose("");
-      query.reload();
-      setId(receipt.portfolioId);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not create portfolio");
-    } finally {
-      setBusy(false);
-    }
-  }
   if (id)
     return (
       <ResearchPortfolioDetail
@@ -85,9 +50,12 @@ export function ResearchPortfoliosScreen() {
             : undefined
         }
         actions={
-          <ActionButton primary onClick={() => setCreating(true)}>
-            + New portfolio
-          </ActionButton>
+          <ResearchCreateAction
+            onCreated={(portfolioId) => {
+              query.reload();
+              setId(portfolioId);
+            }}
+          />
         }
       />
       <div className={styles.toolbar}>
@@ -181,69 +149,6 @@ export function ResearchPortfoliosScreen() {
           </ActionButton>
         </footer>
       </StatusPanel>
-      <Modal
-        open={creating}
-        onOpenChange={(open) => {
-          if (!createIntent.current.busy) setCreating(open);
-        }}
-        title="New research portfolio"
-        footer={
-          <ActionButton
-            primary
-            disabled={busy || !name.trim()}
-            onClick={create}
-          >
-            Create portfolio
-          </ActionButton>
-        }
-      >
-        <div className={styles.form}>
-          <Field label="Name" htmlFor="new-portfolio-name">
-            <TextInput
-              id="new-portfolio-name"
-              disabled={busy}
-              value={name}
-              maxLength={240}
-              onChange={(e) => {
-                if (createIntent.current.busy) return;
-                setError(undefined);
-                setName(e.target.value);
-              }}
-            />
-          </Field>
-          <Field label="Purpose" htmlFor="new-portfolio-purpose">
-            <TextArea
-              id="new-portfolio-purpose"
-              disabled={busy}
-              value={purpose}
-              maxLength={4000}
-              onChange={(e) => {
-                if (createIntent.current.busy) return;
-                setError(undefined);
-                setPurpose(e.target.value);
-              }}
-            />
-          </Field>
-          <Field label="Mode" htmlFor="new-portfolio-mode">
-            <select
-              id="new-portfolio-mode"
-              className={styles.select}
-              disabled={busy}
-              value={newMode}
-              onChange={(e) => {
-                if (createIntent.current.busy) return;
-                setError(undefined);
-                setNewMode(e.target.value as typeof newMode);
-              }}
-            >
-              {["manual", "rules", "hybrid"].map((m) => (
-                <option key={m}>{m}</option>
-              ))}
-            </select>
-          </Field>
-          {error && <p role="alert">{error}</p>}
-        </div>
-      </Modal>
     </>
   );
 }
