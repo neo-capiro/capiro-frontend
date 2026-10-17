@@ -85,12 +85,12 @@ it("does not show a profile when Core returns a different record", () => {
 });
 
 it("does not turn unsafe Core URL fields into links", () => {
+  const source = response.sources[0];
+  if (!source) throw new Error("Personnel profile fixture needs a source");
   query.data = {
     ...response,
     publicProfileUrl: "javascript:alert(1)",
-    sources: [
-      { ...response.sources[0], sourceUrl: "https://user:pass@example.gov/" },
-    ],
+    sources: [{ ...source, sourceUrl: "https://user:pass@example.gov/" }],
   };
   const html = renderToStaticMarkup(
     createElement(PersonnelProfile, { id: selectedId, onBack: vi.fn() }),
