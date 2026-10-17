@@ -5,6 +5,7 @@ import {
   boundedResponseBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
 
 const routes = new Set<string>(["create", "revise", "inspect", "download"]);
@@ -41,7 +42,7 @@ export async function proxyDocumentRequest(
   if (
     url.pathname !== `/api/documents/${operation}` ||
     url.search ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);

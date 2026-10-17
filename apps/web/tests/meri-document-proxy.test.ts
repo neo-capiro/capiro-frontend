@@ -20,6 +20,11 @@ const env = {
   MERI_DOCUMENT_OPERATION: "create_word",
 };
 const config = readDocumentConfig(env);
+const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const boundConfig = readDocumentConfig({
+  ...env,
+  CAPIRO_REQUEST_ORIGIN: publicOrigin,
+});
 const word = {
   operation: "create_word",
   format: "txt",
@@ -54,6 +59,19 @@ const request = (operation = "create", init: RequestInit = {}, suffix = "") =>
       ...Object.fromEntries(new Headers(init.headers)),
     },
   });
+const boundRequest = (originHeader = publicOrigin) =>
+  new Request("https://0.0.0.0:5188/api/documents/create", {
+    method: "POST",
+    body: JSON.stringify(bodies.create),
+    headers: {
+      Origin: originHeader,
+      "Content-Type": "application/json",
+      Authorization: bearer,
+      Host: "portfolio-preview.app.capiro.ai",
+      "X-Forwarded-Host": "portfolio-preview.app.capiro.ai",
+      "X-Forwarded-Proto": "https",
+    },
+  });
 function deferred<T>() {
   let resolve!: (value: T) => void;
   const promise = new Promise<T>((done) => {
@@ -75,6 +93,53 @@ afterEach(() => {
   vi.unstubAllEnvs();
   vi.clearAllMocks();
 });
+
+it("admits a document write from the configured public Origin behind the ALB", async () => {
+  const nativeToken = vi.fn(async () => "native-token");
+  const fetcher = vi.fn<typeof fetch>(async () =>
+    Response.json(
+      { error: { code: "UNAVAILABLE", outcome: "NOT_DISPATCHED" } },
+      { status: 503 },
+    ),
+  );
+  const response = await proxyDocumentRequest(
+    boundRequest(),
+    "create",
+    boundConfig,
+    nativeToken,
+    fetcher,
+  );
+  expect(response.status).toBe(503);
+  expect(nativeToken).toHaveBeenCalledOnce();
+  expect(fetcher).toHaveBeenCalledOnce();
+  expect(fetcher.mock.calls[0]![0]).toBe(
+    "https://meri.example.test/api/documents/create",
+  );
+  expect(fetcher.mock.calls[0]![1]!.headers).toEqual({
+    "Content-Type": "application/json",
+    Authorization: bearer,
+  });
+});
+
+it.each(["https://0.0.0.0:5188", "https://foreign.example.test"])(
+  "refuses document Origin %s before native auth or dispatch behind the ALB",
+  async (originHeader) => {
+    const nativeToken = vi.fn(async () => "native-token");
+    const fetcher = vi.fn<typeof fetch>();
+    await unavailable(
+      await proxyDocumentRequest(
+        boundRequest(originHeader),
+        "create",
+        boundConfig,
+        nativeToken,
+        fetcher,
+      ),
+      400,
+    );
+    expect(nativeToken).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  },
+);
 
 it.each([undefined, "false", "TRUE", "1", " true "])(
   "nonliteral document flag %s never authenticates or fetches",

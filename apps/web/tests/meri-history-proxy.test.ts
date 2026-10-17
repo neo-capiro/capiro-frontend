@@ -4,6 +4,7 @@ import {
   conversationHistoryRoute,
   proxyConversationHistory,
 } from "../src/shared/meri-conversations/history-proxy";
+import type { ConversationProxyConfig } from "../src/shared/meri-conversations/proxy";
 import {
   ConversationHistoryUnavailable,
   listConversations,
@@ -335,4 +336,81 @@ describe("synthetic native history browser client", () => {
       new ConversationHistoryUnavailable(403, "MEMBERSHIP_REVOKED").message,
     ).toBe("Conversation history unavailable");
   });
+});
+
+describe("standalone bind address behind the ALB", () => {
+  // Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188), never the public host.
+  const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+  const configured: ConversationProxyConfig = {
+    ...config,
+    requestOrigin: publicOrigin,
+    frontendOrigin: publicOrigin,
+  };
+  const bound = (headers: Record<string, string> = {}) =>
+    new Request("https://0.0.0.0:5188/api/conversations/list", {
+      method: "POST",
+      body: "{}",
+      headers: {
+        Origin: publicOrigin,
+        "Content-Type": "application/json",
+        Host: "portfolio-preview.app.capiro.ai",
+        "X-Forwarded-Proto": "https",
+        ...headers,
+      },
+    });
+  it("admits the configured public origin although request.url names the bind address", async () => {
+    const fetcher = vi.fn<typeof fetch>(async () => json(emptyList));
+    const response = await proxyConversationHistory(
+      bound(),
+      "list",
+      configured,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(fetcher).toHaveBeenCalledOnce();
+    expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+      publicOrigin,
+    );
+    expect(await response.json()).toEqual(emptyList);
+  });
+
+  it("refuses a browser/upstream public-origin configuration split before native auth", async () => {
+    const credential = vi.fn(token);
+    const fetcher = vi.fn();
+    const response = await proxyConversationHistory(
+      bound(),
+      "list",
+      { ...configured, frontendOrigin: origin },
+      credential,
+      fetcher,
+    );
+    expect(response.status).toBe(503);
+    expect(credential).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+  const refusals: [ConversationProxyConfig, Record<string, string>][] = [
+    [config, {}],
+    [configured, { Origin: "https://foreign.example" }],
+    [configured, { Origin: "https://0.0.0.0:5188" }],
+    [configured, { Origin: "null" }],
+    [{ ...config, requestOrigin: null }, {}],
+  ];
+  it.each(refusals)(
+    "refuses %o with %o before native credentials",
+    async (proxyConfig, headers) => {
+      const credential = vi.fn(token),
+        fetcher = vi.fn();
+      const response = await proxyConversationHistory(
+        bound(headers),
+        "list",
+        proxyConfig,
+        credential,
+        fetcher,
+      );
+      expect(response.status).toBe(400);
+      expect(credential).not.toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
 });

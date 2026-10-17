@@ -3,6 +3,7 @@ import {
   boundedResponseBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
 import { linkRequestBody, type LinkAction } from "./link-wire";
 
@@ -42,7 +43,7 @@ export async function proxyDocumentLinkRequest(
     url.pathname !== `/api/documents/links/${action}` ||
     url.search ||
     url.hash ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
     request.headers.has("content-encoding") ||
     !/^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(
       request.headers.get("content-type") ?? "",

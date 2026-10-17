@@ -6,6 +6,7 @@ export function readDocumentConfig(env: Record<string, string | undefined>) {
   return {
     enabled: config.documentEnabled,
     baseUrl: config.baseUrl,
+    requestOrigin: config.requestOrigin,
     operation: config.documentOperation,
     /**
      * Version-bound reads (inspect, download, signed links) of artifacts in the session's own

@@ -4,7 +4,10 @@ import {
   receiveConversationRequest,
   receiveConversationResponse,
 } from "@capiro/meri-contracts/conversation-application";
-import { proxyConversationRequest } from "../src/shared/meri-conversations/proxy";
+import {
+  proxyConversationRequest,
+  type ConversationProxyConfig,
+} from "../src/shared/meri-conversations/proxy";
 import { boundedConversationStream } from "../src/shared/meri-conversations/stream";
 
 const origin = "https://frontend.example.test";
@@ -587,4 +590,106 @@ for (const response of [
       ).status,
     ).toBe(502);
     expect(fetcher).toHaveBeenCalledOnce();
+  });
+
+// Behind the ALB, Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188).
+const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const configuredPublic: ConversationProxyConfig = {
+  ...config,
+  requestOrigin: publicOrigin,
+  frontendOrigin: publicOrigin,
+};
+const bound = (path: string, headers: Record<string, string> = {}) =>
+  new Request(`https://0.0.0.0:5188/api/conversations/${path}`, {
+    method: path === reconnect ? "GET" : "POST",
+    ...(path === reconnect ? {} : { body: JSON.stringify(payloads.submit) }),
+    headers: {
+      authorization,
+      Host: "portfolio-preview.app.capiro.ai",
+      "X-Forwarded-Proto": "https",
+      ...(path === reconnect
+        ? {}
+        : { Origin: publicOrigin, "Content-Type": "application/json" }),
+      ...headers,
+    },
+  });
+
+it("admits a submit from the configured public origin at the bind address", async () => {
+  const fetcher = vi.fn<typeof fetch>(async () => jsonResponse());
+  const response = await proxyConversationRequest(
+    bound("submit"),
+    "submit",
+    configuredPublic,
+    nativeToken,
+    fetcher,
+  );
+  expect(fetcher).toHaveBeenCalledOnce();
+  expect(response.status).toBe(403);
+  expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+    publicOrigin,
+  );
+});
+
+it("refuses a browser/upstream public-origin configuration split before dispatch", async () => {
+  const fetcher = vi.fn();
+  const token = vi.fn(nativeToken);
+  const response = await proxyConversationRequest(
+    bound("submit"),
+    "submit",
+    { ...configuredPublic, frontendOrigin: origin },
+    token,
+    fetcher,
+  );
+  expect(response.status).toBe(502);
+  expect(token).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("admits an Origin-less reconnect at the bind address and refuses a bind-address Origin", async () => {
+  const fetcher = vi.fn(
+    async () =>
+      new Response(null, {
+        status: 204,
+        headers: { "Cache-Control": "no-store" },
+      }),
+  );
+  const admitted = await proxyConversationRequest(
+    bound(reconnect),
+    reconnect,
+    configuredPublic,
+    nativeToken,
+    fetcher,
+  );
+  expect(admitted.status).toBe(204);
+  const refused = vi.fn();
+  const response = await proxyConversationRequest(
+    bound(reconnect, { Origin: "https://0.0.0.0:5188" }),
+    reconnect,
+    configuredPublic,
+    nativeToken,
+    refused,
+  );
+  expect(response.status).toBe(400);
+  expect(refused).not.toHaveBeenCalled();
+});
+
+const boundRefusals: [ConversationProxyConfig, Record<string, string>][] = [
+  [config, {}],
+  [configuredPublic, { Origin: "https://foreign.example.test" }],
+  [configuredPublic, { Origin: "https://0.0.0.0:5188" }],
+  [configuredPublic, { Origin: "null" }],
+  [{ ...config, requestOrigin: null }, {}],
+];
+for (const [proxyConfig, headers] of boundRefusals)
+  it(`refuses bind-address submit ${JSON.stringify({ requestOrigin: proxyConfig.requestOrigin, ...headers })} without dispatch`, async () => {
+    const fetcher = vi.fn();
+    const response = await proxyConversationRequest(
+      bound("submit", headers),
+      "submit",
+      proxyConfig,
+      nativeToken,
+      fetcher,
+    );
+    expect(response.status).toBe(400);
+    expect(fetcher).not.toHaveBeenCalled();
   });

@@ -1,3 +1,6 @@
+import { readRequestOrigin } from "../request-origin";
+import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-origin";
+
 type Environment = Record<string, string | undefined>;
 
 /** The app's pinned @capiro/meri-contracts distribution. */
@@ -52,12 +55,19 @@ function configuredRuntimeBinding(env: Environment): boolean {
 }
 
 /** Preview Meri admission requires a distinct, explicitly configured HTTPS runtime. */
-function configuredMeriOrigin(env: Environment, requestUrl: URL): boolean {
+function configuredMeriOrigin(env: Environment, request: Request): boolean {
   const raw = env.MERI_API_BASE_URL;
+  const requestUrl = new URL(request.url);
+  // Preview admission needs a fixed browser-visible origin. A missing value must
+  // never fall back to Next's internal bind address or client-supplied headers.
+  const publicOrigin = readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, []);
   if (
     !raw ||
     raw.length > 512 ||
     raw.trim() !== raw ||
+    !publicOrigin ||
+    publicOrigin !== portfolioPreviewFrontendOrigin ||
+    env.CAPIRO_EXISTING_APP_URL !== publicOrigin ||
     env.CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN !== raw
   )
     return false;
@@ -70,7 +80,8 @@ function configuredMeriOrigin(env: Environment, requestUrl: URL): boolean {
       target.port ||
       !meriHost.test(target.hostname) ||
       ordinaryHosts.has(target.hostname) ||
-      target.origin === requestUrl.origin
+      target.origin === requestUrl.origin ||
+      target.origin === publicOrigin
     )
       return false;
     for (const key of otherServices) {
@@ -97,7 +108,8 @@ export function previewMeriConversationRoute(
     return false;
   try {
     const url = new URL(request.url);
-    if (url.search || url.hash || !configuredMeriOrigin(env, url)) return false;
+    if (url.search || url.hash || !configuredMeriOrigin(env, request))
+      return false;
     return (
       (request.method === "POST" && postPaths.has(url.pathname)) ||
       (request.method === "GET" && reconnectPath.test(url.pathname))

@@ -49,6 +49,8 @@ export type ConversationProxyConfig = {
   enabled: boolean;
   baseUrl?: string;
   frontendOrigin?: string;
+  /** Configured browser-visible origin; undefined compares against the request URL. */
+  requestOrigin?: string | null;
 };
 
 function configuredOrigin(config: ConversationProxyConfig) {
@@ -149,11 +151,13 @@ export async function proxyConversationRequest(
   if (!route) return unavailable(404);
   if (request.method !== (route === "reconnect" ? "GET" : "POST"))
     return unavailable(405);
-  if (!validConversationRequest(request, path, route)) return unavailable(400);
+  if (!validConversationRequest(request, path, route, config.requestOrigin))
+    return unavailable(400);
   const origin = configuredOrigin(config);
   const frontendOrigin = trustedConversationFrontendOrigin(
     request,
     config.frontendOrigin,
+    config.requestOrigin,
   );
   if (!origin || !frontendOrigin) return unavailable(502);
   const transport = new AbortController();

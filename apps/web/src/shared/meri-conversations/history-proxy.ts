@@ -7,6 +7,7 @@ import {
   boundedJsonBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { sameRequestOrigin } from "../request-origin";
 import type { ConversationProxyConfig } from "./proxy";
 import type { HistoryRoute } from "./history-client";
 import { trustedConversationFrontendOrigin } from "./frontend-origin";
@@ -44,14 +45,18 @@ export function conversationHistoryRoute(
   );
 }
 
-function validRequest(request: Request, route: HistoryRoute) {
+function validRequest(
+  request: Request,
+  route: HistoryRoute,
+  config: ConversationProxyConfig,
+) {
   const url = new URL(request.url);
   const declared = request.headers.get("content-length");
   return (
     url.pathname === protocol.routes[route].path &&
     !url.search &&
     !url.hash &&
-    request.headers.get("origin") === url.origin &&
+    sameRequestOrigin(request, config.requestOrigin) &&
     request.headers.get("sec-fetch-site") !== "cross-site" &&
     ![
       "authorization",
@@ -90,11 +95,12 @@ export async function proxyConversationHistory(
   fetcher: typeof fetch = fetch,
 ) {
   if (request.method !== "POST") return unavailable(405);
-  if (!validRequest(request, route)) return unavailable(400);
+  if (!validRequest(request, route, config)) return unavailable(400);
   const origin = configuredOrigin(config);
   const frontendOrigin = trustedConversationFrontendOrigin(
     request,
     config.frontendOrigin,
+    config.requestOrigin,
   );
   if (!origin || !frontendOrigin) return unavailable(503);
   let dispatched = false;

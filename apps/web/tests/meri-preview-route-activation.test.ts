@@ -94,6 +94,38 @@ it("admits only the closed public Meri conversation route family", () => {
   expect(previewBackendRejection(environment, reconnect)).toBeNull();
 });
 
+it("admits the configured public origin when Next sees only its bind address", () => {
+  const current = new Request(
+    "https://0.0.0.0:5188/api/action-followthrough/session",
+    {
+      method: "POST",
+      body: "{}",
+      headers: {
+        Origin: origin,
+        Host: "portfolio-preview.app.capiro.ai",
+        "X-Forwarded-Proto": "https",
+      },
+    },
+  );
+  expect(previewMeriConversationRoute(environment, current)).toBe(true);
+  expect(previewBackendRejection(environment, current)).toBeNull();
+});
+
+it("refuses a paired but unreviewed preview public origin", () => {
+  const other = "https://elsewhere.synthetic.invalid";
+  const env = {
+    ...environment,
+    CAPIRO_REQUEST_ORIGIN: other,
+    CAPIRO_EXISTING_APP_URL: other,
+  };
+  const current = new Request(
+    "https://0.0.0.0:5188/api/action-followthrough/session",
+    { method: "POST", headers: { Origin: other }, body: "{}" },
+  );
+  expect(previewMeriConversationRoute(env, current)).toBe(false);
+  expect(previewBackendRejection(env, current)?.status).toBe(503);
+});
+
 it("binds the preview conversation gate to the app's pinned contract package", () => {
   const tarball = packageJson.dependencies["@capiro/meri-contracts"];
   const version =
@@ -132,6 +164,13 @@ it.each([
     "mismatched runtime origin",
     "CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN",
     "https://other-runtime.synthetic.invalid",
+  ],
+  ["missing public origin", "CAPIRO_REQUEST_ORIGIN", undefined],
+  ["invalid public origin", "CAPIRO_REQUEST_ORIGIN", "https://0.0.0.0:5188"],
+  [
+    "mismatched existing app",
+    "CAPIRO_EXISTING_APP_URL",
+    "https://elsewhere.synthetic.invalid",
   ],
   [
     "missing conversation contract",

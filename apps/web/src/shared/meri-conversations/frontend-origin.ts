@@ -1,4 +1,4 @@
-import { readRequestOrigin } from "../request-origin";
+import { publicRequestOrigin, readRequestOrigin } from "../request-origin";
 
 /** Preview browser authority is fixed by the reviewed Portfolio deployment source. */
 export const portfolioPreviewFrontendOrigin =
@@ -20,17 +20,16 @@ export function readConversationFrontendOrigin(
   return origin;
 }
 
-/** A configured origin must also be the origin of the admitted same-origin request. */
+/** The upstream Origin must equal the browser-visible origin admitted at this adapter. */
 export function trustedConversationFrontendOrigin(
   request: Request,
   configured: string | undefined,
+  requestOrigin?: string | null,
 ): string | undefined {
   const issues: string[] = [];
   const origin = readRequestOrigin(configured, issues);
   if (!origin || issues.length || origin !== configured) return undefined;
-  try {
-    return new URL(request.url).origin === origin ? origin : undefined;
-  } catch {
-    return undefined;
-  }
+  return publicRequestOrigin(request, requestOrigin) === origin
+    ? origin
+    : undefined;
 }

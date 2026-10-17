@@ -12,6 +12,7 @@ import {
   receiveConversationInitialInputRequest,
 } from "@capiro/meri-contracts/conversation-initial-input";
 import { boundedJsonBytes } from "../meri-actions/bounded-json";
+import { publicRequestOrigin } from "../request-origin";
 
 const reconnectPath =
   /^events\/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}\/stream$/;
@@ -42,8 +43,11 @@ export function validConversationRequest(
   request: Request,
   path: string,
   route: NonNullable<ReturnType<typeof conversationRoute>>,
+  requestOrigin?: string | null,
 ) {
   const url = new URL(request.url);
+  const expected = publicRequestOrigin(request, requestOrigin);
+  if (expected === null) return false;
   const origin = request.headers.get("origin");
   const length = request.headers.get("content-length");
   const limit =
@@ -56,7 +60,7 @@ export function validConversationRequest(
     url.hash ||
     request.headers.has("content-encoding") ||
     request.headers.has("last-event-id") ||
-    (origin !== null && origin !== url.origin) ||
+    (origin !== null && origin !== expected) ||
     request.headers.get("sec-fetch-site") === "cross-site" ||
     (length !== null &&
       (!/^(0|[1-9]\d*)$/.test(length) || !Number.isSafeInteger(Number(length))))
@@ -73,7 +77,7 @@ export function validConversationRequest(
     );
   }
   return (
-    origin === url.origin &&
+    origin === expected &&
     !request.headers.has(protocol.routes.reconnect.cursorHeader) &&
     (length === null || Number(length) <= limit) &&
     /^application\/json(?:\s*;\s*charset=utf-8)?$/i.test(
