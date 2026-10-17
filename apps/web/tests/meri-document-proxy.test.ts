@@ -9,7 +9,9 @@ import { POST as documentPost } from "../src/app/api/documents/[operation]/route
 const clerk = vi.hoisted(() => ({ auth: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => clerk);
 const origin = "https://frontend.example.test";
-const bearer = `Bearer action_session_${"a".repeat(43)}`;
+const credential = `action_session_${"a".repeat(43)}`;
+/** What Meri receives; the browser never sends a bearer to the proxy. */
+const bearer = `Bearer ${credential}`;
 const versionId = "12345678-1234-4234-8234-123456789012";
 const env = {
   CORE_API_BASE_URL: "https://core.example.test/api",
@@ -50,7 +52,7 @@ const request = (operation = "create", init: RequestInit = {}, suffix = "") =>
     headers: {
       Origin: origin,
       "Content-Type": "application/json",
-      Authorization: bearer,
+      "X-Meri-Action-Session": credential,
       ...Object.fromEntries(new Headers(init.headers)),
     },
   });
@@ -178,24 +180,42 @@ it.each([
 
 it.each([
   "",
-  "Bearer native-capiro-token",
-  "Bearer action_session_short",
-  `bearer action_session_${"a".repeat(43)}`,
-  `Bearer action_session_${"a".repeat(44)}`,
-])(
-  "refuses nonopaque credential %s without dispatch",
+  "native-capiro-token",
+  "action_session_short",
+  `Bearer action_session_${"a".repeat(43)}`,
+  `action_session_${"a".repeat(44)}`,
+])("refuses nonopaque session header %s without dispatch", async (session) => {
+  const fetcher = vi.fn<typeof fetch>();
+  await unavailable(
+    await proxyDocumentRequest(
+      request("create", { headers: { "X-Meri-Action-Session": session } }),
+      "create",
+      config,
+      async () => "native-token",
+      fetcher,
+    ),
+    401,
+  );
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+// A browser bearer would make Clerk's auth() read the request as signed out; it is never admitted.
+it.each([bearer, "Bearer native-capiro-token", "Basic abc"])(
+  "refuses browser Authorization %s before Clerk or dispatch",
   async (authorization) => {
+    const token = vi.fn(async () => "native-token");
     const fetcher = vi.fn<typeof fetch>();
     await unavailable(
       await proxyDocumentRequest(
-        request("create", { headers: { Authorization: authorization } }),
-        "create",
+        request("inspect", { headers: { Authorization: authorization } }),
+        "inspect",
         config,
-        async () => "native-token",
+        token,
         fetcher,
       ),
-      401,
+      400,
     );
+    expect(token).not.toHaveBeenCalled();
     expect(fetcher).not.toHaveBeenCalled();
   },
 );
@@ -701,7 +721,7 @@ it("document-only session bootstrap uses the native Clerk session token without 
       headers: {
         Origin: origin,
         "Content-Type": "application/json",
-        Authorization: bearer,
+        "X-Meri-Action-Session": credential,
       },
     });
   const session = await actionPost(make("session"), {

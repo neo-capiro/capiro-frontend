@@ -19,7 +19,8 @@ vi.mock("@clerk/nextjs/server", () => ({
 const origin = "https://preview.synthetic.invalid";
 const meriOrigin = "https://meri-preview.synthetic.invalid";
 const conversationId = "11111111-1111-4111-8111-111111111111";
-const actionBearer = `Bearer action_session_${"a".repeat(43)}`;
+const actionSession = `action_session_${"a".repeat(43)}`;
+const actionBearer = `Bearer ${actionSession}`;
 const allowedPostPaths = [
   "/api/action-followthrough/session",
   "/api/conversations/submit",
@@ -57,7 +58,10 @@ function request(path: string, method = "POST", body = "{}") {
     headers: {
       Origin: origin,
       ...(method === "POST"
-        ? { "Content-Type": "application/json", Authorization: actionBearer }
+        ? {
+            "Content-Type": "application/json",
+            "X-Meri-Action-Session": actionSession,
+          }
         : {}),
     },
     ...(method === "POST" ? { body } : {}),

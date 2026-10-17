@@ -46,7 +46,7 @@ const linkRequest = (
     headers: {
       Origin: origin,
       "Content-Type": "application/json",
-      Authorization: bearer,
+      "X-Meri-Action-Session": credential,
       ...init.headers,
     },
   });
@@ -78,7 +78,7 @@ describe("document read gating", () => {
         headers: {
           Origin: origin,
           "Content-Type": "application/json",
-          Authorization: bearer,
+          "X-Meri-Action-Session": credential,
         },
       }),
       "inspect",
@@ -97,7 +97,7 @@ describe("document read gating", () => {
         headers: {
           Origin: origin,
           "Content-Type": "application/json",
-          Authorization: bearer,
+          "X-Meri-Action-Session": credential,
         },
       }),
       "create",
@@ -202,10 +202,31 @@ describe("download link proxy", () => {
     ["malformed version", "issue", { versionId: "not-a-uuid" }, {}, 400],
     ["malformed token", "redeem", { token: "abc" }, {}, 400],
     [
-      "native bearer",
+      "browser bearer beside the session header",
       "issue",
       { versionId: ids.version },
       { headers: { Authorization: "Bearer native-token" } },
+      400,
+    ],
+    [
+      "opaque session sent as a browser bearer",
+      "issue",
+      { versionId: ids.version },
+      { headers: { Authorization: bearer } },
+      400,
+    ],
+    [
+      "bearer-prefixed session header",
+      "issue",
+      { versionId: ids.version },
+      { headers: { "X-Meri-Action-Session": bearer } },
+      401,
+    ],
+    [
+      "malformed session header",
+      "redeem",
+      { token },
+      { headers: { "X-Meri-Action-Session": "action_session_short" } },
       401,
     ],
   ] as const)(

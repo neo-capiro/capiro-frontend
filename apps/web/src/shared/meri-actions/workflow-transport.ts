@@ -4,6 +4,7 @@ import {
   type ActionResponse,
 } from "@capiro/meri-contracts/action-application";
 import { boundedJsonText, withActionDeadline } from "./bounded-json";
+import { actionSessionHeader } from "./session-header";
 
 export type ActionTransport = <R extends ActionRoute>(
   route: R,
@@ -39,7 +40,7 @@ export function actionTransport(
           body: capturedBody,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${currentCredential}`,
+            [actionSessionHeader]: currentCredential,
           },
           credentials: "same-origin",
           cache: "no-store",

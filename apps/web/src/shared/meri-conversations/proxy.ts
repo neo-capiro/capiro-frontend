@@ -4,6 +4,7 @@ import {
   boundedJsonBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { receivedActionSession } from "../meri-actions/session-header";
 import {
   conversationBody,
   conversationRoute,
@@ -144,12 +145,8 @@ export async function proxyConversationRequest(
       async (signal) => {
         const token = await getNativeToken();
         signal.throwIfAborted();
-        const bearer = request.headers.get("authorization");
-        if (
-          !token ||
-          !/^Bearer action_session_[A-Za-z0-9_-]{43}$/.test(bearer ?? "")
-        )
-          return unavailable(401);
+        const session = receivedActionSession(request);
+        if (!token || !session) return unavailable(401);
         let body: Uint8Array<ArrayBuffer> | undefined;
         if (route !== "reconnect") {
           try {
@@ -159,7 +156,8 @@ export async function proxyConversationRequest(
             return unavailable(400);
           }
         }
-        const headers = new Headers({ Authorization: bearer! });
+        // Meri's control service reads the opaque session as a bearer.
+        const headers = new Headers({ Authorization: `Bearer ${session}` });
         if (body) headers.set("Content-Type", "application/json");
         if (route === "reconnect")
           headers.set(

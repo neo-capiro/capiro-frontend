@@ -198,3 +198,40 @@ it("reopening uses only previously observed conversation/run selectors, scoped t
   first.record(context);
   expect(cache.getQueryCache().getAll()).toHaveLength(0);
 });
+// Clerk's auth() prefers a bearer Authorization header to the session cookie and would read the
+// opaque session as signed out, so the browser carries it only in the proxy's own header.
+it("sends the opaque session only in X-Meri-Action-Session, never as a browser bearer", async () => {
+  const calls: { url: string; headers: Record<string, string> }[] = [];
+  const host = new ConversationHostController({
+    hints: { clientId },
+    account,
+    fetcher: async (url, init) => {
+      calls.push({
+        url: String(url),
+        headers: Object.fromEntries(new Headers(init?.headers)),
+      });
+      return calls.length === 1
+        ? Response.json(receipt)
+        : Response.json(
+            { error: { code: "SESSION_CHANGED" } },
+            { status: 403 },
+          );
+    },
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const snapshot = host.getSnapshot();
+    if (snapshot.status !== "ready") throw new Error(snapshot.status);
+    await snapshot.port.history().catch(() => undefined);
+    expect(calls.map((call) => call.url)).toEqual([
+      "/api/action-followthrough/session",
+      "/api/conversations/history",
+    ]);
+    expect(calls[1]!.headers["x-meri-action-session"]).toBe(receipt.credential);
+    for (const call of calls)
+      expect(call.headers).not.toHaveProperty("authorization");
+  } finally {
+    detach();
+  }
+});

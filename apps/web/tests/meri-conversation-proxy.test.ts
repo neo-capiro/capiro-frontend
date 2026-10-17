@@ -12,7 +12,9 @@ import { boundedConversationStream } from "../src/shared/meri-conversations/stre
 
 const origin = "https://frontend.example.test";
 const config = { enabled: true, baseUrl: "https://meri.example.test" };
-const authorization = `Bearer action_session_${"a".repeat(43)}`;
+const credential = `action_session_${"a".repeat(43)}`;
+/** What Meri receives; the browser never sends a bearer to the proxy. */
+const authorization = `Bearer ${credential}`;
 const conversationId = "10000000-0000-4000-8000-000000000001";
 const reconnect = `events/${conversationId}/stream`;
 const payloads = {
@@ -42,7 +44,7 @@ const request = (path = "submit", init: RequestInit = {}, suffix = "") =>
         }),
     ...init,
     headers: {
-      authorization,
+      "x-meri-action-session": credential,
       ...(path === reconnect
         ? {}
         : { Origin: origin, "Content-Type": "application/json" }),
@@ -296,21 +298,50 @@ it("both designated Clerk token and exact opaque session are required", async ()
       )
     ).status,
   ).toBe(401);
-  expect(
-    (
-      await proxyConversationRequest(
-        request("submit", {
-          headers: { authorization: "Bearer native-token" },
-        }),
-        "submit",
+  for (const session of [
+    "",
+    "native-token",
+    "action_session_short",
+    authorization,
+    `action_session_${"a".repeat(44)}`,
+  ])
+    expect(
+      (
+        await proxyConversationRequest(
+          request("submit", { headers: { "x-meri-action-session": session } }),
+          "submit",
+          config,
+          nativeToken,
+          fetcher,
+        )
+      ).status,
+    ).toBe(401);
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+// Clerk's auth() prefers a bearer Authorization header to the session cookie, so one here would
+// read as signed out; the opaque session travels in its own header instead.
+it.each(["submit", reconnect])(
+  "refuses any browser Authorization header on %s before Clerk or dispatch",
+  async (path) => {
+    const fetcher = vi.fn();
+    for (const bearer of [authorization, "Bearer native-token", "Basic abc"]) {
+      const response = await proxyConversationRequest(
+        request(path, { headers: { authorization: bearer } }),
+        path,
         config,
         nativeToken,
         fetcher,
-      )
-    ).status,
-  ).toBe(401);
-  expect(fetcher).not.toHaveBeenCalled();
-});
+      );
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({
+        error: { code: "INVALID_REQUEST" },
+      });
+    }
+    expect(nativeToken).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  },
+);
 
 it("caps actual request bytes and invalid UTF8 before native dispatch", async () => {
   const fetcher = vi.fn();
@@ -548,7 +579,7 @@ const bound = (path: string, headers: Record<string, string> = {}) =>
     method: path === reconnect ? "GET" : "POST",
     ...(path === reconnect ? {} : { body: JSON.stringify(payloads.submit) }),
     headers: {
-      authorization,
+      "x-meri-action-session": credential,
       Host: "portfolio-preview.app.capiro.ai",
       "X-Forwarded-Proto": "https",
       ...(path === reconnect

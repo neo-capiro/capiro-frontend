@@ -87,6 +87,7 @@ export class ConversationNetwork {
     revoked = false;
     options;
     origin;
+    credentialHeader;
     constructor(options, onDispose) {
         this.onDispose = onDispose;
         this.options = {
@@ -97,6 +98,7 @@ export class ConversationNetwork {
         this.now = options.now ?? Date.now;
         this.credential = options.credential;
         this.origin = options.origin ?? '';
+        this.credentialHeader = options.credentialHeader ?? (this.origin ? 'authorization' : 'x-meri-action-session');
         if (this.origin) {
             const url = new URL(this.origin);
             if (url.protocol !== 'https:' || url.origin !== this.origin)
@@ -157,7 +159,8 @@ export class ConversationNetwork {
         this.check();
         signal.throwIfAborted();
         const headers = new Headers(init.headers);
-        headers.set('authorization', `Bearer ${this.credential}`);
+        headers.delete('authorization');
+        headers.set(this.credentialHeader, this.credentialHeader === 'authorization' ? `Bearer ${this.credential}` : this.credential);
         onDispatch?.();
         const response = await (this.options.fetchImpl ?? fetch)(this.origin + path, {
             ...init, headers, signal, credentials: 'same-origin', redirect: 'error', cache: 'no-store',

@@ -16,7 +16,7 @@ const request = (body: BodyInit = JSON.stringify(input)) =>
     headers: {
       origin,
       "content-type": "application/json",
-      authorization: `Bearer action_session_${"s".repeat(43)}`,
+      "x-meri-action-session": `action_session_${"s".repeat(43)}`,
     },
   });
 afterEach(() => vi.useRealTimers());

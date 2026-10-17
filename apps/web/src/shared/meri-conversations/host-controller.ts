@@ -53,6 +53,8 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
             ...lifetime,
             fetchImpl: fetcher,
             origin,
+            // The same-origin proxy reads the opaque session from its own header, never a bearer.
+            credentialHeader: "x-meri-action-session",
           }),
           context: session.context,
           artifacts: createArtifactAccess(session.credential, signal, fetcher),

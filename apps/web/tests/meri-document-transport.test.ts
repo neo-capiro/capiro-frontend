@@ -45,7 +45,7 @@ function heldBody() {
 afterEach(() => vi.useRealTimers());
 
 describe("fixed document transport and JSON cleanup", () => {
-  it("sends only the documented POST path, opaque bearer and same-origin credentials", async () => {
+  it("sends only the documented POST path, opaque session header and same-origin credentials", async () => {
     const fetcher = vi
       .fn<typeof fetch>()
       .mockResolvedValue(jsonResponse(created()));
@@ -60,7 +60,7 @@ describe("fixed document transport and JSON cleanup", () => {
       cache: "no-store",
       redirect: "error",
       headers: {
-        Authorization: `Bearer ${session.credential}`,
+        "X-Meri-Action-Session": session.credential,
         "Content-Type": "application/json",
       },
     });

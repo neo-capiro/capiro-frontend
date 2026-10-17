@@ -58,6 +58,8 @@ export function validConversationRequest(
     url.pathname !== `/api/conversations/${path}` ||
     url.search ||
     url.hash ||
+    // The opaque session has its own header; a bearer here would shadow the native Clerk cookie.
+    request.headers.has("authorization") ||
     request.headers.has("content-encoding") ||
     request.headers.has("last-event-id") ||
     (origin !== null && origin !== expected) ||
