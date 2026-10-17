@@ -4,6 +4,8 @@ Completed 16 October 2026. These are Figma design and prototype changes. No appl
 
 The 17 October follow-up checks all Portfolio and Modules coverage against 3.1, adds full review directories, repairs navigation between the split files, and places Newsletter under Modules → Workspace → Workflows. See [coverage, source mappings and navigation](PARITY-AND-NAVIGATION.md).
 
+The completed residual comparison additionally covers Meri, shared/loose boards, component families and source prototype behavior. It found and repaired lost cross-file links beyond screen presence. See the [final 3.1 → 3.4 comparison and repairs](RESIDUAL-COMPARISON.md), including the Meri map and area completion notes.
+
 ## Full files and review directories
 
 - [Meri 3.4 file](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri)
