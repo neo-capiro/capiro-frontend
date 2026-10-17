@@ -2891,6 +2891,15 @@
   {
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
     "kind": "function",
+    "symbol": "MeriConversationHost",
+    "fingerprint": "6056bf65ed132090737b083f9892a902004af27b369ff142e6a56aa82fcf4efc",
+    "reason": "One conversation availability and selection boundary applies feature enablement, URL validity, verified account/current-client eligibility, archived-client refusal, and configured preview scope before choosing Core bootstrap or an existing conversation. This function performs no request, receipt validation, token handling, or Meri session issuance; CoreResolvedConversation and useConversationSession own those lifetimes. Keeping refusal order together ensures current and explicit conversation links reject an archived client before downstream mounting; focused host tests cover this. See docs/non-meri-continuation-20261016/PR70-SIZE-REVIEW.md.",
+    "reviewedBy": "Codex PR70 root and independent source reviewer",
+    "reviewedOn": "2026-10-17"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+    "kind": "function",
     "symbol": "CoreResolvedConversation",
     "fingerprint": "86bf191233b45c6ebc3b825e224178e2bb508db00cdf8cb401fb4c3cba24e775",
     "reason": "One selected tenant, actor and client owns a Core create-or-reuse attempt. Abort on scope change, the shared persisted request identity and verified receipt, and retry/New Chat presentation belong to that attempt; Meri session issuance mounts only after a verified conversation ID. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
