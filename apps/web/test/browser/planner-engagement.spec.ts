@@ -3,8 +3,6 @@ import { installFixedDate } from "./fixed-date";
 import { expect } from "@playwright/test";
 import { operationFixtures, onlyLocalRequests, testIdentity } from "./fixtures";
 const taskId = "51000000-0000-4000-8000-000000000001";
-const clientId = "30000000-0000-4000-8000-000000000001";
-const meetingId = "40000000-0000-4000-8000-000000000001";
 const sessionId = "60000000-0000-4000-8000-000000000001";
 const blankTask = {
   id: taskId,
@@ -38,27 +36,6 @@ const blankTask = {
   createdAt: "2026-10-08T12:00:00Z",
   updatedAt: "2026-10-08T12:00:00Z",
   access: "admin",
-};
-const meeting = {
-  id: meetingId,
-  subject: "Test strategy review",
-  startsAt: "2026-10-12T14:00:00Z",
-  endsAt: "2026-10-12T15:00:00Z",
-  status: "scheduled",
-  location: "Test room",
-  description: null,
-  client: { id: clientId, name: "Test Aerospace" },
-  preps: [],
-  notes: [],
-  debriefs: [],
-  visibility: "private",
-};
-const note = {
-  id: "70000000-0000-4000-8000-000000000001",
-  body: "Synthetic meeting notes",
-  status: "draft",
-  createdAt: "2026-10-08T12:00:00Z",
-  restricted: false,
 };
 const session = {
   session: {
@@ -364,67 +341,6 @@ for (const width of [1440, 390]) {
     await expect(page.getByRole("dialog")).toBeHidden();
   });
 }
-test("Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width", async ({
-  page,
-}) => {
-  let notes = [note];
-  await operationFixtures(page, {
-    "me.read": testIdentity,
-    "clients.list": [
-      {
-        id: clientId,
-        name: "Test Aerospace",
-        profileStatus: "ACTIVE",
-        status: "ACTIVE",
-      },
-    ],
-    "engagement.meetings": [meeting],
-    "engagement.library": {
-      data: [{ ...meeting, notes: [{ id: note.id, status: "draft" }] }],
-      total: 1,
-      page: 1,
-      limit: 25,
-    },
-    "engagement.meeting": meeting,
-    "engagement.notes": () => notes,
-    "engagement.debriefs": [],
-    "engagement.note.approve": () => {
-      notes = [{ ...note, status: "approved" }];
-      return notes[0];
-    },
-  });
-  await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
-    route.fulfill({
-      json: {
-        id: clientId,
-        name: "Synthetic client",
-        status: "ACTIVE",
-        profileStatus: "ACTIVE",
-      },
-    }),
-  );
-  await page.goto("/modules/engagement?view=library&clientId=" + clientId);
-  await expect(
-    page.getByRole("tab", { name: "Library", exact: true }),
-  ).toHaveAttribute("aria-selected", "true");
-  await page.getByRole("button", { name: /Test strategy review/ }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByText("Synthetic meeting notes")).toBeVisible();
-  await page
-    .getByRole("button", { name: "Approve notes", exact: true })
-    .click();
-  await expect(page.getByText("approved", { exact: true })).toBeVisible();
-  await page.getByRole("tab", { name: "Debrief", exact: true }).click();
-  await expect(page.getByText("No debrief yet.")).toBeVisible();
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("tab", { name: "Meeting Notes", exact: true }).click();
-  await expect(page.getByText("Synthetic meeting notes")).toBeVisible();
-  await page.screenshot({
-    path: "test-results/engagement-meeting-phone.png",
-    fullPage: true,
-    animations: "disabled",
-  });
-});
 test("A template session deep link keeps the server state version and sends no mail", async ({
   page,
 }) => {
@@ -444,7 +360,6 @@ test("A template session deep link keeps the server state version and sends no m
   await operationFixtures(page, {
     "me.read": testIdentity,
     "clients.list": [],
-    "engagement.meetings": [],
     "engagement.sessions": [],
     "engagement.outreach": [],
     "engagement.session": session,

@@ -18,6 +18,23 @@ import { CampaignSession } from "./CampaignSession";
 import { NewsletterDestination } from "./NewsletterDestination";
 import { newsletterRecordKind } from "./newsletter-route";
 import styles from "./engagement.module.css";
+
+function defaultDateWindow() {
+  const today = new Date();
+  const from = new Date(today);
+  from.setUTCFullYear(from.getUTCFullYear() - 1);
+  return {
+    from: from.toISOString().slice(0, 10),
+    to: today.toISOString().slice(0, 10),
+  };
+}
+
+function exclusiveEndDate(inclusiveDate: string) {
+  const next = new Date(`${inclusiveDate}T00:00:00.000Z`);
+  next.setUTCDate(next.getUTCDate() + 1);
+  return next.toISOString();
+}
+
 export function OutreachView({
   clientId,
   initialDraft,
@@ -37,18 +54,28 @@ export function OutreachView({
     setPreviousSession(initialSession);
     setSession(initialSession ?? null);
   }
-  const sessions = useCampaignList();
   const draft = useCapiroQuery(
     "engagement.outreach.record",
     { params: { id: initialDraft ?? "" } },
     { enabled: !!initialDraft },
   );
-  const query = useOutreachRecords(clientId);
+  const [initialWindow] = useState(defaultDateWindow);
   const [search, setSearch] = useState(""),
-    [type, setType] = useState(""),
+    [from, setFrom] = useState(initialWindow.from),
+    [to, setTo] = useState(initialWindow.to),
+    [showDeleted, setShowDeleted] = useState(false),
     [selected, setSelected] = useState<OutreachRecord | "new" | null>(
       initialCreate ? "new" : null,
     );
+  const sessions = useCampaignList(!clientId && !showDeleted && !session);
+  const invalidDateWindow = Boolean(from && to && from > to);
+  const query = useOutreachRecords(
+    clientId,
+    from,
+    to,
+    showDeleted,
+    !invalidDateWindow,
+  );
   const [loadedDraft, setLoadedDraft] = useState(() => draft.data);
   const [draftSaving, setDraftSaving] = useState(false);
   if (loadedDraft !== draft.data) {
@@ -57,14 +84,14 @@ export function OutreachView({
   }
   const matchesScope = (record: OutreachRecord) =>
     !clientId || record.client?.id === clientId;
-  const listError = query.data?.some((record) => !matchesScope(record))
-    ? new Error("The returned outreach does not match this client scope.")
-    : query.error;
+  const listError = invalidDateWindow
+    ? new Error("The end date must be on or after the start date.")
+    : query.data?.some((record) => !matchesScope(record))
+      ? new Error("The returned outreach does not match this client scope.")
+      : query.error;
   const rows =
-    (!listError ? query.data : undefined)?.filter(
-      (record) =>
-        record.title.toLowerCase().includes(search.toLowerCase()) &&
-        (!type || record.type === type),
+    (!listError ? query.data : undefined)?.filter((record) =>
+      record.title.toLowerCase().includes(search.toLowerCase()),
     ) ?? [];
   if (draft.error || draft.loading)
     return (
@@ -111,19 +138,6 @@ export function OutreachView({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
         />
-        <select
-          className={styles.select}
-          aria-label="Outreach type"
-          value={type}
-          onChange={(event) => setType(event.target.value)}
-        >
-          <option value="">All types</option>
-          {["campaign", "follow_up", "prep", "outbound_campaign"].map(
-            (value) => (
-              <option key={value}>{value}</option>
-            ),
-          )}
-        </select>
         <ActionButton
           primary
           className={styles.end}
@@ -132,12 +146,53 @@ export function OutreachView({
           + New outreach
         </ActionButton>
       </div>
-      <CampaignList sessions={sessions} onSelect={setSession} />
+      <div className={styles.tools} aria-label="Outreach record filters">
+        <Field label="From" htmlFor="outreach-from">
+          <TextInput
+            id="outreach-from"
+            type="date"
+            value={from}
+            onChange={(event) => setFrom(event.target.value)}
+          />
+        </Field>
+        <Field label="To" htmlFor="outreach-to">
+          <TextInput
+            id="outreach-to"
+            type="date"
+            value={to}
+            onChange={(event) => setTo(event.target.value)}
+          />
+        </Field>
+        <label>
+          <input
+            type="checkbox"
+            checked={showDeleted}
+            onChange={(event) => setShowDeleted(event.target.checked)}
+          />{" "}
+          Show deleted
+        </label>
+      </div>
+      {!showDeleted && !clientId && (
+        <CampaignList sessions={sessions} onSelect={setSession} />
+      )}
+      {!showDeleted && clientId && (
+        <p className={styles.note}>
+          V3 campaign records are read-only here. Campaign sessions are
+          available under All permitted clients; the session list cannot filter
+          them to one client.
+        </p>
+      )}
       <OutreachRecords
         query={{ ...query, error: listError }}
         rows={rows}
         onSelect={setSelected}
+        deletedOnly={showDeleted}
       />
+      {showDeleted && (
+        <p className={styles.note}>
+          Showing deleted records only. Deleted drafts cannot be opened here.
+        </p>
+      )}
       <p className={styles.note}>
         Editing a draft does not send mail. Delivery requires an audited
         immutable draft and a reviewed send intent.
@@ -281,8 +336,12 @@ function OutreachForm({
   );
 }
 
-function useCampaignList() {
-  return useCapiroQuery("engagement.sessions", { query: { limit: 100 } });
+function useCampaignList(enabled: boolean) {
+  return useCapiroQuery(
+    "engagement.sessions",
+    { query: { limit: 100 } },
+    { enabled },
+  );
 }
 function CampaignList({
   sessions,
@@ -291,47 +350,109 @@ function CampaignList({
   sessions: ReturnType<typeof useCampaignList>;
   onSelect: (id: string) => void;
 }) {
+  const rows = sessions.data ?? [];
+  const drafts = rows.filter(
+    (row) =>
+      row.recordStatus !== "sent" &&
+      row.recordStatus !== "failed" &&
+      !row.sentAt,
+  );
+  const sent = rows.filter(
+    (row) =>
+      row.recordStatus !== "failed" &&
+      (row.recordStatus === "sent" || Boolean(row.sentAt)),
+  );
+  const needsAttention = rows.filter((row) => row.recordStatus === "failed");
   return (
     <StatusPanel
       loading={sessions.loading}
       error={sessions.error}
       onRetry={sessions.reload}
     >
-      <DataTable
-        rows={sessions.data ?? []}
-        rowKey={(row) => row.id}
-        caption="Outreach campaigns"
-        columns={[
-          {
-            key: "campaign",
-            label: "Campaign",
-            render: (row) => (
-              <button
-                className={styles.name}
-                onClick={() => setSession(row.id)}
-              >
-                {row.topic ?? row.title ?? "New outreach campaign"}
-              </button>
-            ),
-          },
-          {
-            key: "goal",
-            label: "Goal",
-            render: (row) => row.goal ?? "Not set",
-          },
-          {
-            key: "targets",
-            label: "Targets",
-            render: (row) => row.targetCount,
-          },
-          {
-            key: "status",
-            label: "Status",
-            render: (row) => <Badge>{row.recordStatus ?? row.status}</Badge>,
-          },
-        ]}
-      />
+      <section className={styles.stack} aria-label="Campaign drafts">
+        <h2>Campaign drafts</h2>
+        <CampaignTable
+          rows={drafts}
+          onSelect={setSession}
+          caption="Outreach campaigns"
+        />
+      </section>
+      {sent.length > 0 && (
+        <section className={styles.stack} aria-label="Sent campaigns">
+          <h2>Sent campaigns</h2>
+          <CampaignTable
+            rows={sent}
+            onSelect={setSession}
+            caption="Sent outreach campaigns"
+          />
+        </section>
+      )}
+      {needsAttention.length > 0 && (
+        <section
+          className={styles.stack}
+          aria-label="Campaigns needing attention"
+        >
+          <h2>Needs attention</h2>
+          <CampaignTable
+            rows={needsAttention}
+            onSelect={setSession}
+            caption="Campaigns needing attention"
+          />
+        </section>
+      )}
     </StatusPanel>
+  );
+}
+
+type CampaignRow = NonNullable<
+  ReturnType<typeof useCampaignList>["data"]
+>[number];
+function CampaignTable({
+  rows,
+  onSelect,
+  caption,
+}: {
+  rows: CampaignRow[];
+  onSelect: (id: string) => void;
+  caption: string;
+}) {
+  return (
+    <DataTable
+      rows={rows}
+      rowKey={(row) => row.id}
+      caption={caption}
+      columns={[
+        {
+          key: "campaign",
+          label: "Campaign",
+          render: (row) => (
+            <button className={styles.name} onClick={() => onSelect(row.id)}>
+              {row.topic ?? row.title ?? "New outreach campaign"}
+            </button>
+          ),
+        },
+        {
+          key: "goal",
+          label: "Goal",
+          render: (row) => row.goal ?? "Not set",
+        },
+        {
+          key: "targets",
+          label: "Targets",
+          render: (row) => row.targetCount,
+        },
+        {
+          key: "status",
+          label: "Status",
+          render: (row) => <Badge>{row.recordStatus ?? row.status}</Badge>,
+        },
+        {
+          key: "date",
+          label: "Date",
+          render: (row) => (row.sentAt ?? row.updatedAt).slice(0, 10),
+        },
+      ]}
+    />
   );
 }
 
@@ -363,62 +484,155 @@ function OutreachType({
   );
 }
 
-function useOutreachRecords(clientId: string) {
-  return useCapiroQuery("engagement.outreach", {
-    query: { clientId: clientId || undefined, limit: 500 },
-  });
+function useOutreachRecords(
+  clientId: string,
+  from: string,
+  to: string,
+  deletedOnly: boolean,
+  enabled: boolean,
+) {
+  return useCapiroQuery(
+    "engagement.outreach",
+    {
+      query: {
+        clientId: clientId || undefined,
+        from: from ? `${from}T00:00:00.000Z` : undefined,
+        to: to ? exclusiveEndDate(to) : undefined,
+        deleted: deletedOnly ? "true" : "false",
+        limit: 500,
+      },
+    },
+    { enabled },
+  );
 }
 function OutreachRecords({
   query,
   rows,
   onSelect: setSelected,
+  deletedOnly,
 }: {
   query: ReturnType<typeof useOutreachRecords>;
   rows: OutreachRecord[];
   onSelect: (record: OutreachRecord) => void;
+  deletedOnly: boolean;
 }) {
+  const drafts = rows.filter((row) => row.status === "draft");
+  const sent = rows.filter((row) => row.status === "sent");
+  const needsAttention = rows.filter(
+    (row) => row.status !== "draft" && row.status !== "sent",
+  );
   return (
     <StatusPanel
       loading={query.loading}
       error={query.error}
       onRetry={query.reload}
     >
-      <DataTable
-        rows={rows}
-        rowKey={(row) => row.id}
-        caption="Outreach records"
-        columns={[
-          {
-            key: "title",
-            label: "Outreach",
-            render: (row) => (
-              <button className={styles.name} onClick={() => setSelected(row)}>
+      {deletedOnly ? (
+        <section className={styles.stack} aria-label="Deleted outreach">
+          <h2>Deleted outreach</h2>
+          <OutreachTable
+            rows={rows}
+            caption="Outreach records"
+            onSelect={setSelected}
+            readOnly
+          />
+        </section>
+      ) : (
+        <>
+          <section className={styles.stack} aria-label="Outreach drafts">
+            <h2>Outreach record drafts</h2>
+            <OutreachTable
+              rows={drafts}
+              caption="Outreach records"
+              onSelect={setSelected}
+            />
+          </section>
+          {sent.length > 0 && (
+            <section className={styles.stack} aria-label="Sent outreach">
+              <h2>Sent outreach records</h2>
+              <OutreachTable
+                rows={sent}
+                caption="Sent outreach records"
+                onSelect={setSelected}
+                readOnly
+              />
+            </section>
+          )}
+          {needsAttention.length > 0 && (
+            <section
+              className={styles.stack}
+              aria-label="Outreach needing attention"
+            >
+              <h2>Needs attention</h2>
+              <OutreachTable
+                rows={needsAttention}
+                caption="Outreach needing attention"
+                onSelect={setSelected}
+                readOnly
+              />
+            </section>
+          )}
+        </>
+      )}
+    </StatusPanel>
+  );
+}
+
+function OutreachTable({
+  rows,
+  caption,
+  onSelect,
+  readOnly = false,
+}: {
+  rows: OutreachRecord[];
+  caption: string;
+  onSelect: (record: OutreachRecord) => void;
+  readOnly?: boolean;
+}) {
+  return (
+    <DataTable
+      rows={rows}
+      rowKey={(row) => row.id}
+      caption={caption}
+      columns={[
+        {
+          key: "title",
+          label: "Outreach",
+          render: (row) =>
+            readOnly || row.type === "outreach_v3" ? (
+              row.title
+            ) : (
+              <button className={styles.name} onClick={() => onSelect(row)}>
                 {row.title}
               </button>
             ),
-          },
-          {
-            key: "client",
-            label: "Client",
-            render: (row) => row.client?.name ?? "Unassigned",
-          },
-          {
-            key: "type",
-            label: "Type",
-            render: (row) => row.type.replaceAll("_", " "),
-          },
-          {
-            key: "recipients",
-            label: "Recipients",
-            render: (row) => row.recipients?.length ?? 0,
-          },
-          {
-            key: "status",
-            label: "Status",
-            render: (row) => <Badge>{row.status.replaceAll("_", " ")}</Badge>,
-          },
-        ]}
-      />
-    </StatusPanel>
+        },
+        {
+          key: "client",
+          label: "Client",
+          render: (row) => row.client?.name ?? "Unassigned",
+        },
+        {
+          key: "type",
+          label: "Type",
+          render: (row) => row.type.replaceAll("_", " "),
+        },
+        {
+          key: "recipients",
+          label: "Recipients",
+          render: (row) => row.recipients?.length ?? 0,
+        },
+        {
+          key: "status",
+          label: "Status",
+          render: (row) => <Badge>{row.status.replaceAll("_", " ")}</Badge>,
+        },
+        {
+          key: "date",
+          label: "Created",
+          render: (row) => row.createdAt?.slice(0, 10) ?? "Unknown",
+        },
+      ]}
+    />
   );
 }

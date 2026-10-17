@@ -31,7 +31,7 @@ for (const status of [403, 503]) {
         ],
       });
     });
-    await page.goto("/modules/engagement?view=overview");
+    await page.goto("/modules/engagement");
     const scope = page.getByRole("combobox", {
       name: "Engagement client scope",
     });
@@ -39,9 +39,7 @@ for (const status of [403, 503]) {
       "Synthetic client catalog refusal",
     );
     await expect(scope).toBeDisabled();
-    await expect(
-      page.getByRole("heading", { name: "Target offices", exact: true }),
-    ).toBeVisible();
+    await expect(page.getByLabel("Search outreach")).toBeVisible();
     const retry = page.getByRole("button", {
       name: "Retry client scopes",
       exact: true,
@@ -54,9 +52,7 @@ for (const status of [403, 503]) {
       await expect(page.getByRole("status")).toContainText(
         "Loading client scopes",
       );
-      await expect(
-        page.getByRole("heading", { name: "Target offices", exact: true }),
-      ).toBeVisible();
+      await expect(page.getByLabel("Search outreach")).toBeVisible();
     } finally {
       release();
     }
@@ -69,8 +65,6 @@ for (const status of [403, 503]) {
     await expect(page).toHaveURL(
       /clientId=30000000-0000-4000-8000-000000000001/,
     );
-    await expect(
-      page.getByRole("tab", { name: "Overview", exact: true }),
-    ).toHaveAttribute("aria-selected", "true");
+    await expect(page.getByLabel("Search outreach")).toBeVisible();
   });
 }

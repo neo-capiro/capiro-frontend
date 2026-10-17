@@ -105,7 +105,9 @@ export function CalendarPage({
     <MeetingDetail
       key={`${params.get("meeting") ?? "none"}:${scope ?? "all"}`}
       id={params.get("meeting")}
-      onClose={() => update({ meeting: undefined })}
+      onClose={() =>
+        update({ meeting: undefined, objectiveMeeting: undefined })
+      }
       zone={zone}
       destinations={destinations}
       clientId={scope}

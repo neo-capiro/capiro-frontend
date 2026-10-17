@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { StrategiesScreen } from "../src/features/modules/strategies/StrategiesScreen";
 import { PlannerScreen } from "../src/features/modules/planner/PlannerScreen";
-import { MeetingLibrary } from "../src/features/modules/engagement/MeetingLibrary";
 
 const state = vi.hoisted(() => ({
   params: "",
@@ -54,21 +53,6 @@ vi.mock("../src/features/modules/planner/ProjectCatalog", () => ({
   ProjectCatalog: () =>
     createElement("p", null, "All-project catalog fallback"),
 }));
-vi.mock("../src/shared/meetings/MeetingDetail", () => ({
-  MeetingDetail: ({
-    meeting,
-    presentation,
-  }: {
-    meeting: { id: string; subject: string };
-    presentation: string;
-  }) =>
-    createElement(
-      "section",
-      { "data-current-meeting": meeting.id, "data-presentation": presentation },
-      meeting.subject,
-    ),
-}));
-
 const clientId = "30000000-0000-4000-8000-000000000001";
 const otherClient = "30000000-0000-4000-8000-000000000002";
 const resourceId = "50000000-0000-4000-8000-000000000001";
@@ -83,25 +67,17 @@ const strategy = {
   nodes: [],
 };
 const project = { id: resourceId, clientId, archived: false };
-const meeting = {
-  id: resourceId,
-  client: { id: clientId },
-  subject: "Synthetic current meeting",
-};
-const render = (kind: "strategy" | "project" | "meeting") =>
+const render = (kind: "strategy" | "project") =>
   renderToStaticMarkup(
     kind === "strategy"
       ? createElement(StrategiesScreen)
-      : kind === "project"
-        ? createElement(PlannerScreen)
-        : createElement(MeetingLibrary, { clientId, mode: "meetings" }),
+      : createElement(PlannerScreen),
   );
-const select = (kind: "strategy" | "project" | "meeting") => {
+const select = (kind: "strategy" | "project") => {
   state.params = new URLSearchParams({
     clientId,
     [kind]: resourceId,
     ...(kind === "project" ? { view: "projects" } : {}),
-    ...(kind === "meeting" ? { view: "meetings" } : {}),
   }).toString();
 };
 beforeEach(() => {
@@ -113,7 +89,6 @@ beforeEach(() => {
   state.responses = {
     "strategies.detail": { data: strategy },
     "planner.bootstrap": { data: { projects: [project], people: [] } },
-    "engagement.meeting": { data: meeting },
   };
 });
 
@@ -191,36 +166,8 @@ describe("ordinary current-resource links", () => {
     }
   });
 
-  it("resolves a meeting independently of lists and passes it to real inline detail", () => {
-    select("meeting");
-    const html = render("meeting");
-    expect(html).toContain(`data-current-meeting="${resourceId}"`);
-    expect(html).toContain('data-presentation="inline"');
-    expect(html).toContain("Synthetic current meeting");
-    expect(state.reads.filter((read) => read.enabled)).toEqual([
-      {
-        key: "engagement.meeting",
-        input: { params: { id: resourceId } },
-        enabled: true,
-      },
-    ]);
-  });
-
-  it("withholds current meeting detail on identity/client mismatch, loading or denial", () => {
-    select("meeting");
-    for (const response of [
-      { data: { ...meeting, id: otherId } },
-      { data: { ...meeting, client: { id: otherClient } } },
-      { data: meeting, loading: true },
-      { data: meeting, error: new Error("Synthetic meeting denied") },
-    ]) {
-      state.responses["engagement.meeting"] = response;
-      expect(render("meeting")).not.toContain("data-current-meeting");
-    }
-  });
-
   it("refuses malformed or duplicate explicit selectors before reading a resource", () => {
-    for (const kind of ["strategy", "project", "meeting"] as const) {
+    for (const kind of ["strategy", "project"] as const) {
       for (const invalid of [
         "invalid",
         "",
@@ -240,7 +187,7 @@ describe("ordinary current-resource links", () => {
   });
 
   it("does not read or display linked resources before canonical client scope matches", () => {
-    for (const kind of ["strategy", "project", "meeting"] as const) {
+    for (const kind of ["strategy", "project"] as const) {
       select(kind);
       for (const scope of [
         "loading",
@@ -254,7 +201,6 @@ describe("ordinary current-resource links", () => {
         const html = render(kind);
         expect(state.reads.filter((read) => read.enabled)).toEqual([]);
         expect(html).not.toContain("data-current-project");
-        expect(html).not.toContain("data-current-meeting");
         expect(html).not.toContain("Synthetic current Strategy");
       }
     }

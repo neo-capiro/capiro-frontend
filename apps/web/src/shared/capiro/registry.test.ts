@@ -19,7 +19,6 @@ import { objectiveOperationalOperations } from "./operations/objective-operation
 import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
 import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
 import { governedObjectiveStrategyIntakeOperation } from "./operations/objective-governed-strategy-intake";
-import { engagementPlanOperations } from "./operations/engagement-plans";
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
@@ -50,7 +49,6 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
       "objectives.governedStrategy.intake":
         governedObjectiveStrategyIntakeOperation,
     },
-    engagementPlanOperations,
     { [firstChatCoreOperationKey]: firstChatCoreOperation },
   ];
   const declared = groups.flatMap((group) => Object.keys(group));

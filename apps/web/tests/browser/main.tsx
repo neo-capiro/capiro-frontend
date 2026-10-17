@@ -14,6 +14,8 @@ import { WorkPage } from "@/features/portfolio/work/WorkPage";
 import { RelationshipsPage } from "@/features/portfolio/relationships/RelationshipsPage";
 import { CapabilitiesPage } from "@/features/portfolio/capabilities/CapabilitiesPage";
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
+import { ObjectiveMeetingDestination } from "@/features/portfolio/calendar/ObjectiveMeetingDestination";
+import { SelectedClientProvider } from "@/shared/session/SelectedClient";
 import { FilesPage } from "@/features/portfolio/files/FilesPage";
 import { ProspectsIndex } from "@/features/portfolio/prospects/ProspectsIndex";
 import { ProspectDetail } from "@/features/portfolio/prospects/ProspectDetail";
@@ -117,7 +119,11 @@ function App() {
     ) : tab === "capabilities" ? (
       <CapabilitiesPage clientId={clientId} destinations={destinations} />
     ) : tab === "calendar" ? (
-      <CalendarPage clientId={clientId} destinations={destinations} />
+      <SelectedClientProvider requestedId={clientId}>
+        <ObjectiveMeetingDestination expectedClientId={clientId}>
+          <CalendarPage clientId={clientId} destinations={destinations} />
+        </ObjectiveMeetingDestination>
+      </SelectedClientProvider>
     ) : (
       <ClientOverview clientId={clientId} />
     );
