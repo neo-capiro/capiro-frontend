@@ -59,6 +59,18 @@ export function MeriConversationHost({
         </p>
       </section>
     );
+  // Core bootstrap and authority context refuse `status: "archived"` clients.
+  // Stop before any Core create or Meri session; Core stays the authority.
+  if (selected.client.status === "archived")
+    return (
+      <section role="alert">
+        <h2>Conversations unavailable for this client</h2>
+        <p>
+          This client is archived. Restore it or select an active client in
+          Portfolio to start a conversation.
+        </p>
+      </section>
+    );
   if (
     firstChatBootstrapEnabled &&
     selected.client.id !== firstChatBootstrapClientId
