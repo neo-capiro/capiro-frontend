@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -14,6 +14,7 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import { ResearchPortfolioDetail } from "./ResearchDetail";
+import { ResearchPortfolioCreateIntent } from "./create-intent";
 import styles from "./research.module.css";
 export function ResearchPortfoliosScreen() {
   const api = useCapiro();
@@ -32,6 +33,7 @@ export function ResearchPortfoliosScreen() {
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
+  const createIntent = useRef(new ResearchPortfolioCreateIntent());
   const query = useCapiroQuery("research.list", {
     query: { cursor, limit: 50 },
   });
@@ -43,17 +45,14 @@ export function ResearchPortfoliosScreen() {
   );
   const view = params.get("view") || "overview";
   async function create() {
+    if (createIntent.current.busy) return;
     setBusy(true);
     setError(undefined);
     try {
-      const receipt = await api.request("research.create", {
-        body: {
-          name,
-          purpose: purpose || null,
-          mode: newMode,
-          idempotencyKey: crypto.randomUUID(),
-        },
-      });
+      const receipt = await createIntent.current.submit(
+        { name, purpose: purpose || null, mode: newMode },
+        (body) => api.request("research.create", { body }),
+      );
       setCreating(false);
       setName("");
       setPurpose("");
@@ -184,7 +183,9 @@ export function ResearchPortfoliosScreen() {
       </StatusPanel>
       <Modal
         open={creating}
-        onOpenChange={setCreating}
+        onOpenChange={(open) => {
+          if (!createIntent.current.busy) setCreating(open);
+        }}
         title="New research portfolio"
         footer={
           <ActionButton
@@ -200,25 +201,40 @@ export function ResearchPortfoliosScreen() {
           <Field label="Name" htmlFor="new-portfolio-name">
             <TextInput
               id="new-portfolio-name"
+              disabled={busy}
               value={name}
               maxLength={240}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                if (createIntent.current.busy) return;
+                setError(undefined);
+                setName(e.target.value);
+              }}
             />
           </Field>
           <Field label="Purpose" htmlFor="new-portfolio-purpose">
             <TextArea
               id="new-portfolio-purpose"
+              disabled={busy}
               value={purpose}
               maxLength={4000}
-              onChange={(e) => setPurpose(e.target.value)}
+              onChange={(e) => {
+                if (createIntent.current.busy) return;
+                setError(undefined);
+                setPurpose(e.target.value);
+              }}
             />
           </Field>
           <Field label="Mode" htmlFor="new-portfolio-mode">
             <select
               id="new-portfolio-mode"
               className={styles.select}
+              disabled={busy}
               value={newMode}
-              onChange={(e) => setNewMode(e.target.value as typeof newMode)}
+              onChange={(e) => {
+                if (createIntent.current.busy) return;
+                setError(undefined);
+                setNewMode(e.target.value as typeof newMode);
+              }}
             >
               {["manual", "rules", "hybrid"].map((m) => (
                 <option key={m}>{m}</option>
