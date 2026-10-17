@@ -1,6 +1,14 @@
-# Capiro 3.4 — verified mockup gap handoff
+# Capiro 3.4 — verified mockup and coverage handoff
 
 Completed 16 October 2026. These are Figma design and prototype changes. No application code, API contract, backend, deployment or shared data changed. This documentation-only branch is based on the supplied source commit 3930e36593960966edaa39f8f7f25faa14f9654a; it does not merge or replace the implementation lanes.
+
+The 17 October follow-up checks all Portfolio and Modules coverage against 3.1, adds full review directories, repairs navigation between the split files, and places Newsletter under Modules → Workspace → Workflows. See [coverage, source mappings and navigation](PARITY-AND-NAVIGATION.md).
+
+## Full files and review directories
+
+- [Meri 3.4 file](https://www.figma.com/design/IXJzJUkXcUTkySHir5JNea/Capiro-3.4-Meri)
+- [Portfolio 3.4 file](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki/Capiro-3.4-Portfolio) · [full screen directory](https://www.figma.com/design/mpXWnySldUFzdVna8i69Ki?node-id=3069-54192)
+- [Modules, Workspace and Settings 3.4 file](https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE/Capiro-3.4-Modules) · [full screen directory](https://www.figma.com/design/zGvvF6V6hh7yweoplCdpdE?node-id=3060-110154)
 
 ## Review the designs
 
