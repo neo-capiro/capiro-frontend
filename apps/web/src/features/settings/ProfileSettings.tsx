@@ -179,7 +179,9 @@ export function ProfileSettings() {
       </p>
       <SettingsDialog
         open={!!archive}
-        onClose={() => setArchive(undefined)}
+        onClose={() => {
+          if (!action.busy) setArchive(undefined);
+        }}
         title={`Archive ${archive?.name ?? "profile"}?`}
         description="It leaves your portfolio and stops appearing in active lists. Its data is kept."
         footer={
@@ -245,7 +247,9 @@ function CreateProfile({
   return (
     <SettingsDialog
       open={open}
-      onClose={onClose}
+      onClose={() => {
+        if (!action.busy) onClose();
+      }}
       title="Add profile"
       description="Create a client profile in your current workspace."
       footer={

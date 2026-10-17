@@ -314,6 +314,60 @@ test("Profiles create, archive and restore through exact current records with re
   ]);
 });
 
+test("Profiles keep the exact create and archive dialogs open while their writes are pending", async ({
+  page,
+}) => {
+  let clients: (typeof profile)[] = [];
+  await settingsFixture(page, { "clients.list": () => clients });
+  await openSettings(page, "profiles");
+
+  const pendingCreate = await holdOperation(page, "settings.profiles.create");
+  await page.getByRole("button", { name: "+ Add profile" }).click();
+  const create = page.getByRole("dialog", { name: "Add profile" });
+  await create.getByLabel("Name", { exact: true }).fill(profile.name);
+  await create.getByRole("button", { name: "Create profile" }).click();
+  await expect.poll(() => pendingCreate.requests.length).toBe(1);
+  await expect(create.getByRole("button", { name: "Cancel" })).toBeDisabled();
+  await page.keyboard.press("Escape");
+  await page.locator('[data-slot="dialog-overlay"]').click({
+    position: { x: 2, y: 2 },
+  });
+  await expect(create).toBeVisible();
+  await expect(create.getByLabel("Name", { exact: true })).toHaveValue(
+    profile.name,
+  );
+  expect(pendingCreate.requests).toEqual([{ body: { name: profile.name } }]);
+  clients = [profile];
+  pendingCreate.finish(profile);
+  await expect(create).toHaveCount(0);
+  await expect(
+    page.getByRole("cell", { name: profile.name, exact: true }),
+  ).toBeVisible();
+
+  const pendingArchive = await holdOperation(page, "settings.profiles.archive");
+  await page.getByRole("button", { name: "Archive", exact: true }).click();
+  const archive = page.getByRole("dialog", {
+    name: `Archive ${profile.name}?`,
+    exact: true,
+  });
+  await archive.getByRole("button", { name: "Archive", exact: true }).click();
+  await expect.poll(() => pendingArchive.requests.length).toBe(1);
+  await expect(archive.getByRole("button", { name: "Cancel" })).toBeDisabled();
+  await page.keyboard.press("Escape");
+  await archive.getByRole("button", { name: "Close dialog" }).click();
+  await expect(archive).toBeVisible();
+  expect(pendingArchive.requests).toEqual([
+    { params: { clientId: profile.id } },
+  ]);
+  pendingArchive.finish({ ...profile, status: "active" });
+  await expect(archive.getByRole("alert")).toContainText(
+    "did not confirm this profile update",
+  );
+  await expect(archive).toBeVisible();
+  await archive.getByRole("button", { name: "Cancel" }).click();
+  await expect(archive).toHaveCount(0);
+});
+
 test("Profiles reject another record or an unachieved status instead of confirming archive or restore", async ({
   page,
 }) => {
