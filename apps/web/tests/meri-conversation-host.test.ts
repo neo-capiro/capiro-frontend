@@ -29,6 +29,7 @@ it("keeps activation closed until auth, HTTPS origin and explicit flag all exist
   const env = {
     CORE_API_BASE_URL: "https://core.example.test/api",
     MERI_API_BASE_URL: "https://meri.example.test",
+    CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test",
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
     CLERK_SECRET_KEY: "sk_test_fixture",
     MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
@@ -45,8 +46,36 @@ it("keeps activation closed until auth, HTTPS origin and explicit flag all exist
     { MERI_API_BASE_URL: "https://meri.example.test/private" },
     { CLERK_SECRET_KEY: "" },
     { MERI_API_BASE_URL: "https://user:pass@meri.example.test" },
+    { CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test/private" },
+    { CAPIRO_REQUEST_ORIGIN: "" },
+    { CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test?source=untrusted" },
   ])
     expect(readConversationConfig({ ...env, ...change }).enabled).toBe(false);
+});
+
+it("binds preview conversation admission to the fixed Portfolio browser origin", () => {
+  const preview = {
+    CORE_API_BASE_URL: "https://core.example.test/api",
+    MERI_API_BASE_URL: "https://meri.example.test",
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
+    CLERK_SECRET_KEY: "sk_test_fixture",
+    MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
+    CAPIRO_PREVIEW_READ_ONLY: "true",
+    CAPIRO_REQUEST_ORIGIN: "https://portfolio-preview.app.capiro.ai",
+    CAPIRO_EXISTING_APP_URL: "https://portfolio-preview.app.capiro.ai",
+  };
+  expect(readConversationConfig(preview)).toMatchObject({
+    enabled: true,
+    frontendOrigin: preview.CAPIRO_REQUEST_ORIGIN,
+  });
+  for (const change of [
+    { CAPIRO_REQUEST_ORIGIN: "https://os.capiro.ai" },
+    { CAPIRO_EXISTING_APP_URL: "https://os.capiro.ai" },
+    { CAPIRO_EXISTING_APP_URL: "" },
+  ])
+    expect(readConversationConfig({ ...preview, ...change }).enabled).toBe(
+      false,
+    );
 });
 it("bootstraps only existing allowed client hints and binds native Core user/tenant before ready", async () => {
   const calls: unknown[] = [];
@@ -197,4 +226,81 @@ it("reopening uses only previously observed conversation/run selectors, scoped t
   cache.clear();
   first.record(context);
   expect(cache.getQueryCache().getAll()).toHaveLength(0);
+});
+// Clerk's auth() prefers a bearer Authorization header to the session cookie and would read the
+// opaque session as signed out, so the browser carries it only in the proxy's own header.
+it("sends the opaque session only in X-Meri-Action-Session, never as a browser bearer", async () => {
+  const calls: { url: string; headers: Record<string, string> }[] = [];
+  const host = new ConversationHostController({
+    hints: { clientId },
+    account,
+    fetcher: async (url, init) => {
+      calls.push({
+        url: String(url),
+        headers: Object.fromEntries(new Headers(init?.headers)),
+      });
+      return calls.length === 1
+        ? Response.json(receipt)
+        : Response.json(
+            { error: { code: "SESSION_CHANGED" } },
+            { status: 403 },
+          );
+    },
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const snapshot = host.getSnapshot();
+    if (snapshot.status !== "ready") throw new Error(snapshot.status);
+    await snapshot.port.history().catch(() => undefined);
+    expect(calls.map((call) => call.url)).toEqual([
+      "/api/action-followthrough/session",
+      "/api/conversations/history",
+    ]);
+    expect(calls[1]!.headers["x-meri-action-session"]).toBe(receipt.credential);
+    for (const call of calls)
+      expect(call.headers).not.toHaveProperty("authorization");
+  } finally {
+    detach();
+  }
+});
+
+it("preserves Meri Authorization for a configured trusted direct origin", async () => {
+  const directOrigin = "https://meri.example.test";
+  const calls: { url: string; headers: Record<string, string> }[] = [];
+  const host = new ConversationHostController({
+    hints: { clientId },
+    account,
+    origin: directOrigin,
+    fetcher: async (url, init) => {
+      calls.push({
+        url: String(url),
+        headers: Object.fromEntries(new Headers(init?.headers)),
+      });
+      return calls.length === 1
+        ? Response.json(receipt)
+        : Response.json(
+            { error: { code: "SESSION_CHANGED" } },
+            { status: 403 },
+          );
+    },
+  });
+  const detach = host.attach();
+  try {
+    await host.connect();
+    const snapshot = host.getSnapshot();
+    if (snapshot.status !== "ready") throw new Error(snapshot.status);
+    await snapshot.port.history().catch(() => undefined);
+    expect(calls.map((call) => call.url)).toEqual([
+      "/api/action-followthrough/session",
+      `${directOrigin}/api/conversations/history`,
+    ]);
+    expect(calls[1]!.headers.authorization).toBe(
+      `Bearer ${receipt.credential}`,
+    );
+    expect(calls[1]!.headers).not.toHaveProperty("x-meri-action-session");
+    expect(calls[0]!.headers).not.toHaveProperty("authorization");
+  } finally {
+    detach();
+  }
 });

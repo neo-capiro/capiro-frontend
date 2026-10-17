@@ -14,6 +14,11 @@ export interface ConversationLifetime {
     fetchImpl?: typeof fetch;
     /** Trusted connection configuration; omitted means the current browser origin. */
     origin?: string;
+    /**
+     * Where the opaque credential travels. The same-origin proxy reads its own header so the
+     * credential never shadows the native session cookie; a direct trusted origin expects a bearer.
+     */
+    credentialHeader?: 'x-meri-action-session' | 'authorization';
 }
 export declare class ConversationUnavailable extends Error {
     readonly code: string;
@@ -30,6 +35,7 @@ export declare class ConversationNetwork {
     private revoked;
     private readonly options;
     readonly origin: string;
+    private readonly credentialHeader;
     constructor(options: ConversationLifetime, onDispose: () => void);
     check: () => void;
     revoke(): void;

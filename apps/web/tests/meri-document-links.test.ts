@@ -29,6 +29,12 @@ const conversationOnly = readDocumentConfig({
   ...base,
   MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
 });
+const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+const boundConfig = readDocumentConfig({
+  ...base,
+  MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
+  CAPIRO_REQUEST_ORIGIN: publicOrigin,
+});
 const disabled = readDocumentConfig(base);
 const nativeToken = () => vi.fn(async () => "native-token");
 const linkRequest = (
@@ -46,8 +52,21 @@ const linkRequest = (
     headers: {
       Origin: origin,
       "Content-Type": "application/json",
-      Authorization: bearer,
+      "X-Meri-Action-Session": credential,
       ...init.headers,
+    },
+  });
+const boundLinkRequest = (originHeader = publicOrigin) =>
+  new Request("https://0.0.0.0:5188/api/documents/links/issue", {
+    method: "POST",
+    body: JSON.stringify({ versionId: ids.version }),
+    headers: {
+      Origin: originHeader,
+      "Content-Type": "application/json",
+      "X-Meri-Action-Session": credential,
+      Host: "portfolio-preview.app.capiro.ai",
+      "X-Forwarded-Host": "portfolio-preview.app.capiro.ai",
+      "X-Forwarded-Proto": "https",
     },
   });
 async function refused(response: Response, status: number) {
@@ -78,7 +97,7 @@ describe("document read gating", () => {
         headers: {
           Origin: origin,
           "Content-Type": "application/json",
-          Authorization: bearer,
+          "X-Meri-Action-Session": credential,
         },
       }),
       "inspect",
@@ -97,7 +116,7 @@ describe("document read gating", () => {
         headers: {
           Origin: origin,
           "Content-Type": "application/json",
-          Authorization: bearer,
+          "X-Meri-Action-Session": credential,
         },
       }),
       "create",
@@ -111,6 +130,49 @@ describe("document read gating", () => {
 });
 
 describe("download link proxy", () => {
+  it("admits a link request from the configured public Origin behind the ALB", async () => {
+    const native = nativeToken();
+    const fetcher = vi.fn<typeof fetch>(async () =>
+      jsonResponse({ versionId: ids.version, token, expiresAtMs: 1_000 }),
+    );
+    const response = await proxyDocumentLinkRequest(
+      boundLinkRequest(),
+      "issue",
+      boundConfig,
+      native,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(native).toHaveBeenCalledOnce();
+    expect(fetcher).toHaveBeenCalledOnce();
+    expect(fetcher.mock.calls[0]![0]).toBe(
+      "https://meri.example.test/api/documents/links/issue",
+    );
+    expect(
+      new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
+    ).toBe(bearer);
+  });
+
+  it.each(["https://0.0.0.0:5188", "https://foreign.example.test"])(
+    "refuses link Origin %s before native auth or dispatch behind the ALB",
+    async (originHeader) => {
+      const native = nativeToken();
+      const fetcher = vi.fn<typeof fetch>();
+      await refused(
+        await proxyDocumentLinkRequest(
+          boundLinkRequest(originHeader),
+          "issue",
+          boundConfig,
+          native,
+          fetcher,
+        ),
+        400,
+      );
+      expect(native).not.toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
+
   it("forwards a closed issue body with the session bearer and returns the issued link", async () => {
     const fetcher = vi.fn<typeof fetch>(async () =>
       jsonResponse({ versionId: ids.version, token, expiresAtMs: 1_000 }),
@@ -202,10 +264,31 @@ describe("download link proxy", () => {
     ["malformed version", "issue", { versionId: "not-a-uuid" }, {}, 400],
     ["malformed token", "redeem", { token: "abc" }, {}, 400],
     [
-      "native bearer",
+      "browser bearer beside the session header",
       "issue",
       { versionId: ids.version },
       { headers: { Authorization: "Bearer native-token" } },
+      400,
+    ],
+    [
+      "opaque session sent as a browser bearer",
+      "issue",
+      { versionId: ids.version },
+      { headers: { Authorization: bearer } },
+      400,
+    ],
+    [
+      "bearer-prefixed session header",
+      "issue",
+      { versionId: ids.version },
+      { headers: { "X-Meri-Action-Session": bearer } },
+      401,
+    ],
+    [
+      "malformed session header",
+      "redeem",
+      { token },
+      { headers: { "X-Meri-Action-Session": "action_session_short" } },
       401,
     ],
   ] as const)(

@@ -3,7 +3,11 @@ import { conversationInitialInputMetadata as initial } from "@capiro/meri-contra
 import { proxyConversationRequest } from "../src/shared/meri-conversations/proxy";
 
 const origin = "https://frontend.example.test";
-const config = { enabled: true, baseUrl: "https://meri.example.test" };
+const config = {
+  enabled: true,
+  baseUrl: "https://meri.example.test",
+  frontendOrigin: origin,
+};
 const path = "input/allocate";
 const input = {
   requestId: "20000000-0000-4000-8000-000000000002",
@@ -16,7 +20,7 @@ const request = (body: BodyInit = JSON.stringify(input)) =>
     headers: {
       origin,
       "content-type": "application/json",
-      authorization: `Bearer action_session_${"s".repeat(43)}`,
+      "x-meri-action-session": `action_session_${"s".repeat(43)}`,
     },
   });
 afterEach(() => vi.useRealTimers());

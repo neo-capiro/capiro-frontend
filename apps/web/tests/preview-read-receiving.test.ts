@@ -49,7 +49,8 @@ const me = {
 };
 const fetcher = vi.fn<typeof fetch>();
 const getToken = vi.fn(
-  async (): Promise<string | null> => "native-synthetic-token",
+  async (options?: { template: string }): Promise<string | null> =>
+    options ? "template-synthetic-token" : "native-synthetic-token",
 );
 const request = (path: string, init?: RequestInit) =>
   new Request(`${origin}/api/${path}`, init);
@@ -74,7 +75,9 @@ beforeEach(() => {
   vi.stubEnv("CORE_API_BASE_URL", "https://ordinary.synthetic.invalid/api");
   vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_c3ludGhldGljJA==");
   vi.stubEnv("CLERK_SECRET_KEY", "sk_test_synthetic");
-  getToken.mockResolvedValue("native-synthetic-token");
+  getToken.mockImplementation(async (options) =>
+    options ? "template-synthetic-token" : "native-synthetic-token",
+  );
   clerk.auth.mockResolvedValue({ userId: "synthetic", getToken });
   clerk.middleware.mockReturnValue(new Response("native Clerk boundary"));
   fetcher.mockImplementation(async () => Response.json([client]));
@@ -126,7 +129,8 @@ it.each([
     },
   });
   expect(Object.keys(fetcher.mock.lastCall![1]!.headers!)).toHaveLength(3);
-  expect(getToken).toHaveBeenCalledWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledOnce();
+  expect(getToken).toHaveBeenCalledWith();
   expect(response.headers.get("cache-control")).toBe("private, no-store");
 });
 

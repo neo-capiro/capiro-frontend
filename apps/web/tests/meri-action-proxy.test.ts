@@ -3,7 +3,9 @@ import { readActionConfig } from "../src/shared/meri-actions/config";
 import { proxyActionRequest } from "../src/shared/meri-actions/proxy";
 
 const origin = "https://frontend.example.test";
-const actionBearer = `Bearer action_session_${"a".repeat(43)}`;
+const actionSession = `action_session_${"a".repeat(43)}`;
+/** What Meri receives; the browser never sends a bearer to the proxy. */
+const actionBearer = `Bearer ${actionSession}`;
 const env = {
   CORE_API_BASE_URL: "https://core.example.test/api",
   MERI_API_BASE_URL: "https://meri.example.test",
@@ -20,10 +22,23 @@ const request = (operation = "query", init: RequestInit = {}, suffix = "") =>
     headers: {
       Origin: origin,
       "Content-Type": "application/json",
-      Authorization: actionBearer,
+      "X-Meri-Action-Session": actionSession,
       ...Object.fromEntries(new Headers(init.headers)),
     },
   });
+
+it("rejects duplicate opaque session headers without sending anything to Meri", async () => {
+  const input = request("query");
+  input.headers.append("X-Meri-Action-Session", actionSession);
+  const native = vi.fn(async () => "native-token");
+  const fetcher = vi.fn<typeof fetch>();
+  await expectUnavailable(
+    await proxyActionRequest(input, "query", config, native, fetcher),
+    401,
+  );
+  expect(native).toHaveBeenCalledOnce();
+  expect(fetcher).not.toHaveBeenCalled();
+});
 function deferred<T>() {
   let resolve!: (value: T) => void;
   const promise = new Promise<T>((done) => (resolve = done));
@@ -195,17 +210,18 @@ describe("Meri proxy credentials, response dispositions and bounded bodies", () 
     },
   );
   it.each([
-    "Bearer native-token",
-    "Bearer action_session_short",
-    "Basic abc",
+    "native-token",
+    "action_session_short",
+    `Bearer action_session_${"a".repeat(43)}`,
+    `action_session_${"a".repeat(44)}`,
     "",
   ])(
-    "does not substitute native credentials for an invalid action bearer %s",
-    async (authorization) => {
+    "does not substitute native credentials for an invalid action session %s",
+    async (session) => {
       const fetcher = vi.fn(async () => Response.json({}));
       await expectUnavailable(
         await proxyActionRequest(
-          request("execute", { headers: { Authorization: authorization } }),
+          request("execute", { headers: { "X-Meri-Action-Session": session } }),
           "execute",
           config,
           async () => "native-token",
@@ -213,6 +229,28 @@ describe("Meri proxy credentials, response dispositions and bounded bodies", () 
         ),
         401,
       );
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
+  // Clerk's auth() prefers a bearer Authorization header to the session cookie and would read the
+  // opaque session as signed out, so the proxy never admits a browser bearer on any route.
+  it.each(["session", "query", "execute"])(
+    "refuses a browser Authorization header on %s before Clerk or dispatch",
+    async (operation) => {
+      const token = vi.fn(async () => "native-token");
+      const fetcher = vi.fn(async () => Response.json({}));
+      for (const bearer of [actionBearer, "Bearer native-token", "Basic abc"])
+        await expectUnavailable(
+          await proxyActionRequest(
+            request(operation, { headers: { Authorization: bearer } }),
+            operation,
+            config,
+            token,
+            fetcher,
+          ),
+          400,
+        );
+      expect(token).not.toHaveBeenCalled();
       expect(fetcher).not.toHaveBeenCalled();
     },
   );
@@ -403,5 +441,89 @@ describe("Meri proxy request lifetime", () => {
     await expectUnavailable(await pending, 502);
     expect(cancel).toHaveBeenCalledOnce();
     expect(fetcher).toHaveBeenCalledOnce();
+  });
+});
+
+describe("standalone bind address behind the ALB", () => {
+  // Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188), never the public host.
+  const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+  const configured = readActionConfig({
+    ...env,
+    CAPIRO_REQUEST_ORIGIN: publicOrigin,
+  });
+  const bound = (headers: Record<string, string> = {}) =>
+    new Request("https://0.0.0.0:5188/api/action-followthrough/session", {
+      method: "POST",
+      body: "{}",
+      headers: {
+        Origin: publicOrigin,
+        "Content-Type": "application/json",
+        Host: "portfolio-preview.app.capiro.ai",
+        "X-Forwarded-Proto": "https",
+        ...headers,
+      },
+    });
+  it("admits the configured public origin although request.url names the bind address", async () => {
+    expect(configured.requestOrigin).toBe(publicOrigin);
+    const token = vi.fn(async () => "native-token");
+    const fetcher = vi.fn<typeof fetch>(async () => Response.json({}));
+    const response = await proxyActionRequest(
+      bound(),
+      "session",
+      configured,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(token).toHaveBeenCalledOnce();
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it("still compares against request.url when no origin is configured", async () => {
+    const token = vi.fn(async () => "native-token");
+    const fetcher = vi.fn();
+    await expectUnavailable(
+      await proxyActionRequest(bound(), "session", config, token, fetcher),
+      400,
+    );
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+  it.each(["https://foreign.test", "https://0.0.0.0:5188", "null", ""])(
+    "rejects Origin %s against the configured origin despite a matching Host",
+    async (value) => {
+      const token = vi.fn(async () => "native-token");
+      const fetcher = vi.fn();
+      await expectUnavailable(
+        await proxyActionRequest(
+          bound({ Origin: value }),
+          "session",
+          configured,
+          token,
+          fetcher,
+        ),
+        400,
+      );
+      expect(token).not.toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
+  it("fails closed on an invalid configured origin", async () => {
+    const invalid = readActionConfig({
+      ...env,
+      CAPIRO_REQUEST_ORIGIN: "https://0.0.0.0:5188",
+    });
+    expect(invalid.requestOrigin).toBeNull();
+    const fetcher = vi.fn();
+    await expectUnavailable(
+      await proxyActionRequest(
+        bound({ Origin: "https://0.0.0.0:5188" }),
+        "session",
+        invalid,
+        vi.fn(async () => "native-token"),
+        fetcher,
+      ),
+      400,
+    );
+    expect(fetcher).not.toHaveBeenCalled();
   });
 });

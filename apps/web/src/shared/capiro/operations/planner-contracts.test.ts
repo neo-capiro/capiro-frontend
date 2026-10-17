@@ -68,6 +68,9 @@ describe("Planner and engagement wire boundaries", () => {
       plannerOperations["planner.form.upload"].multipart?.files[0]?.maxCount,
     ).toBe(10);
   });
+});
+
+describe("Engagement campaign decision boundary", () => {
   it("does not permit send commands through the campaign decision operation", () => {
     const base = {
       params: { sessionId: id },

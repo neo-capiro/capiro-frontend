@@ -16,10 +16,11 @@ vi.mock("@clerk/nextjs/server", () => ({
   clerkMiddleware: () => clerk.middleware,
 }));
 
-const origin = "https://preview.synthetic.invalid";
+const origin = "https://portfolio-preview.app.capiro.ai";
 const meriOrigin = "https://meri-preview.synthetic.invalid";
 const conversationId = "11111111-1111-4111-8111-111111111111";
-const actionBearer = `Bearer action_session_${"a".repeat(43)}`;
+const actionSession = `action_session_${"a".repeat(43)}`;
+const actionBearer = `Bearer ${actionSession}`;
 const allowedPostPaths = [
   "/api/action-followthrough/session",
   "/api/conversations/submit",
@@ -45,6 +46,7 @@ const environment = {
   MERI_API_BASE_URL: meriOrigin,
   CORE_API_BASE_URL: "https://ordinary.synthetic.invalid/api",
   CAPIRO_REQUEST_ORIGIN: origin,
+  CAPIRO_EXISTING_APP_URL: origin,
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_c3ludGhldGljJA==",
   CLERK_SECRET_KEY: "sk_test_synthetic",
 };
@@ -57,7 +59,10 @@ function request(path: string, method = "POST", body = "{}") {
     headers: {
       Origin: origin,
       ...(method === "POST"
-        ? { "Content-Type": "application/json", Authorization: actionBearer }
+        ? {
+            "Content-Type": "application/json",
+            "X-Meri-Action-Session": actionSession,
+          }
         : {}),
     },
     ...(method === "POST" ? { body } : {}),
@@ -91,6 +96,38 @@ it("admits only the closed public Meri conversation route family", () => {
   const reconnect = request(reconnectPath, "GET");
   expect(previewMeriConversationRoute(environment, reconnect)).toBe(true);
   expect(previewBackendRejection(environment, reconnect)).toBeNull();
+});
+
+it("admits the configured public origin when Next sees only its bind address", () => {
+  const current = new Request(
+    "https://0.0.0.0:5188/api/action-followthrough/session",
+    {
+      method: "POST",
+      body: "{}",
+      headers: {
+        Origin: origin,
+        Host: "portfolio-preview.app.capiro.ai",
+        "X-Forwarded-Proto": "https",
+      },
+    },
+  );
+  expect(previewMeriConversationRoute(environment, current)).toBe(true);
+  expect(previewBackendRejection(environment, current)).toBeNull();
+});
+
+it("refuses a paired but unreviewed preview public origin", () => {
+  const other = "https://elsewhere.synthetic.invalid";
+  const env = {
+    ...environment,
+    CAPIRO_REQUEST_ORIGIN: other,
+    CAPIRO_EXISTING_APP_URL: other,
+  };
+  const current = new Request(
+    "https://0.0.0.0:5188/api/action-followthrough/session",
+    { method: "POST", headers: { Origin: other }, body: "{}" },
+  );
+  expect(previewMeriConversationRoute(env, current)).toBe(false);
+  expect(previewBackendRejection(env, current)?.status).toBe(503);
 });
 
 it("binds the preview conversation gate to the app's pinned contract package", () => {
@@ -131,6 +168,13 @@ it.each([
     "mismatched runtime origin",
     "CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN",
     "https://other-runtime.synthetic.invalid",
+  ],
+  ["missing public origin", "CAPIRO_REQUEST_ORIGIN", undefined],
+  ["invalid public origin", "CAPIRO_REQUEST_ORIGIN", "https://0.0.0.0:5188"],
+  [
+    "mismatched existing app",
+    "CAPIRO_EXISTING_APP_URL",
+    "https://elsewhere.synthetic.invalid",
   ],
   [
     "missing conversation contract",
@@ -275,6 +319,9 @@ it("continues exact session and history requests through Clerk and their native 
   expect(
     new Headers(fetcher.mock.calls[1]![1]!.headers).get("authorization"),
   ).toBe(actionBearer);
+  expect(new Headers(fetcher.mock.calls[1]![1]!.headers).get("origin")).toBe(
+    origin,
+  );
   expect(getToken).toHaveBeenCalledTimes(2);
   for (const call of getToken.mock.calls) expect(call).toEqual([]);
 });
@@ -312,6 +359,7 @@ it("matches the conversation proxy path and sends native Clerk membership on lis
   );
   const upstream = new Headers(fetcher.mock.calls[0]![1]!.headers);
   expect(upstream.get("authorization")).toBe("Bearer native-session-token");
+  expect(upstream.get("origin")).toBe(origin);
   expect(upstream.has("cookie")).toBe(false);
   expect(getToken).toHaveBeenCalledExactlyOnceWith();
 });

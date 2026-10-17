@@ -270,7 +270,7 @@ describe("Meri fixed authenticated action transport", () => {
         body: '{"request":{"limit":20}}',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${credential}`,
+          "X-Meri-Action-Session": credential,
         },
         credentials: "same-origin",
         cache: "no-store",

@@ -1,4 +1,5 @@
 import { boundedJsonBytes } from "../meri-actions/bounded-json";
+import { actionSessionHeader } from "../meri-actions/session-header";
 import { issuedLink, linkRefusal } from "./link-wire";
 
 type Refused = { ok: false; code: string };
@@ -10,27 +11,30 @@ const decode = async (response: Response, signal: AbortSignal) =>
   ) as unknown;
 
 /**
- * Browser side of the signed download-link routes. The opaque session bearer is cleared when the
- * session lifetime ends. The token is returned to the caller in memory only and is sent back in the
- * redeem body; it is never placed in a URL, stored or logged.
+ * Browser side of the signed download-link routes. The opaque session credential is cleared when
+ * the session lifetime ends. The token is returned to the caller in memory only and is sent back in
+ * the redeem body; it is never placed in a URL, stored or logged.
  */
 export function createLinkTransport(
   credential: string,
   lifetime: AbortSignal,
   fetcher: typeof fetch = fetch,
 ) {
-  let bearer = lifetime.aborted ? "" : `Bearer ${credential}`;
-  lifetime.addEventListener("abort", () => (bearer = ""), { once: true });
+  let current = lifetime.aborted ? "" : credential;
+  lifetime.addEventListener("abort", () => (current = ""), { once: true });
   function post(
     action: "issue" | "redeem",
     body: unknown,
     signal: AbortSignal,
   ) {
-    if (!bearer) throw new Error("Artifact session ended");
+    if (!current) throw new Error("Artifact session ended");
     return fetcher(`/api/documents/links/${action}`, {
       method: "POST",
       body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json", Authorization: bearer },
+      headers: {
+        "Content-Type": "application/json",
+        [actionSessionHeader]: current,
+      },
       credentials: "same-origin",
       cache: "no-store",
       redirect: "error",

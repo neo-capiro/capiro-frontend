@@ -5,6 +5,8 @@ import {
   boundedResponseBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { receivedActionSession } from "../meri-actions/session-header";
+import { sameRequestOrigin } from "../request-origin";
 import type { readDocumentConfig } from "./config";
 
 const routes = new Set<string>(["create", "revise", "inspect", "download"]);
@@ -41,7 +43,9 @@ export async function proxyDocumentRequest(
   if (
     url.pathname !== `/api/documents/${operation}` ||
     url.search ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
+    // A browser bearer would shadow the native Clerk cookie; the opaque session has its own header.
+    request.headers.has("authorization") ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);
@@ -55,9 +59,8 @@ export async function proxyDocumentRequest(
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
-      const bearer = request.headers.get("authorization");
-      if (!bearer || !/^Bearer action_session_[A-Za-z0-9_-]{43}$/.test(bearer))
-        return unavailable(401);
+      const session = receivedActionSession(request);
+      if (!session) return unavailable(401);
       const body = await boundedJsonBytes(
         new Response(request.body, { headers: request.headers }),
         signal,
@@ -77,7 +80,7 @@ export async function proxyDocumentRequest(
           body,
           headers: {
             "Content-Type": "application/json",
-            Authorization: bearer,
+            Authorization: `Bearer ${session}`,
           },
           credentials: "omit",
           redirect: "error",

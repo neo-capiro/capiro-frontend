@@ -29,11 +29,24 @@ export function readRequestOrigin(
   }
 }
 
+/**
+ * The origin a browser sees for this request. Behind the ALB the standalone Next server
+ * reconstructs `request.url` from its bind address (`https://0.0.0.0:5188/...`), so the
+ * configured CAPIRO_REQUEST_ORIGIN is authoritative there; `request.url` serves only when no
+ * origin is configured (dev, tests). An invalid configuration resolves to null (fail closed).
+ */
+export function publicRequestOrigin(
+  request: Request,
+  configured?: string | null,
+): string | null {
+  if (configured === null) return null;
+  return configured ?? new URL(request.url).origin;
+}
+
 export function sameRequestOrigin(
   request: Request,
   configured?: string | null,
 ): boolean {
-  if (configured === null) return false;
-  const expected = configured ?? new URL(request.url).origin;
-  return request.headers.get("origin") === expected;
+  const expected = publicRequestOrigin(request, configured);
+  return expected !== null && request.headers.get("origin") === expected;
 }

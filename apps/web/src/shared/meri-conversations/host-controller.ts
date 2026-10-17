@@ -53,6 +53,10 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
             ...lifetime,
             fetchImpl: fetcher,
             origin,
+            // The same-origin proxy needs its own header; a trusted direct Meri origin expects a bearer.
+            credentialHeader: origin
+              ? "authorization"
+              : "x-meri-action-session",
           }),
           context: session.context,
           artifacts: createArtifactAccess(session.credential, signal, fetcher),

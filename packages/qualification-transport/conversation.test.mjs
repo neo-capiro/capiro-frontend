@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createMeriConversation } from '@capiro/meri-client/conversation';
 import { fixture, event, stream, chunks, part, id, binding, run, drain } from './conversation-fixture.mjs';
 
 const forbiddenFetch = globalThis.fetch;
@@ -164,4 +165,29 @@ test('observation exposes the stored history request and keeps it while streamin
   await f.client.openChat().chat.resumeStream();
   assert.equal(f.client.getSnapshot().observation.after, 2);
   assert.equal(f.client.getSnapshot().observation.prompt, 'Stored request');
+});
+
+test('the same-origin proxy receives the opaque session in its own header; a trusted origin receives a bearer', async t => {
+  const f = setup(t);
+  const credential = `action_session_${'s'.repeat(43)}`;
+  const open = options => createMeriConversation({
+    context: { tenantId: binding.tenantId, actorId: binding.actorId, conversationId: binding.conversationId, runId: binding.runId, selectedClientId: id(5) },
+    credential, expiresAtMs: f.now + 60_000, signal: f.lifetime.signal, isCurrent: () => true, onAccessLost: () => {}, now: () => f.now,
+    fetchImpl: (url, init) => f.fetchImpl(new URL(url, 'https://proxy.invalid'), init), ...options,
+  });
+  await f.submit();
+  assert.equal(f.calls.at(-1).headers.authorization, `Bearer ${credential}`);
+  assert.equal(f.calls.at(-1).headers['x-meri-action-session'], undefined);
+  const proxied = open({}); t.after(proxied.dispose);
+  await proxied.history();
+  await proxied.openChat().chat.resumeStream();
+  assert.equal(f.calls.at(-1).method, 'GET');
+  for (const call of f.calls.slice(-2)) {
+    assert.equal(call.headers['x-meri-action-session'], credential);
+    assert.equal(call.headers.authorization, undefined);
+  }
+  const direct = open({ credentialHeader: 'authorization' }); t.after(direct.dispose);
+  await direct.history();
+  assert.equal(f.calls.at(-1).headers.authorization, `Bearer ${credential}`);
+  assert.equal(f.calls.at(-1).headers['x-meri-action-session'], undefined);
 });
