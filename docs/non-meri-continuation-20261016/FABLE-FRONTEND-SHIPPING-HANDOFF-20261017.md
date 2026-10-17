@@ -1,5 +1,9 @@
 # Frontend shipping handoff to Fable — 17 October 2026
 
+**Selected-client read update:** Neo subsequently permitted preview writes to the existing database. The [PR #48 selected-client read binding review](PR48-SELECTED-CLIENT-READ-BINDING-20261017.md) supersedes the separate `111f` read-only service recommendation. The qualified `e0b47a34` image remains exact and unchanged; the new frontend source marker needs a separate reviewed image qualification before use.
+
+**Ownership update:** The Fable allocation below records its earlier handoff state, not a standing instruction to start another build or service change. Neo subsequently retained Meri shipping with dot/Codex. Confirm the current named frontend activation owner with the parent before using any of the historical resume commands.
+
 ## Ownership and stop point
 
 Neo assigned **Fable sole ownership of frontend image qualification and preview service activation/integration (steps 1–2)**. Dot retains **step 3, live authenticated end-to-end validation**, using [the separate acceptance checklist](DOT-LIVE-ACCEPTANCE-20261017.md) only after Fable returns deployed pins and health evidence. This task's frontend source owner stops at this reviewed handoff. Do not treat a source PR, image push, healthy old task, or credential-free smoke as live first-chat acceptance.

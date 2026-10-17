@@ -1,7 +1,7 @@
 type Environment = Record<string, string | undefined>;
 
 /** Source binding is deployment intent, not proof of a running service's identity. */
-export const previewBackendSource = "111f269d749cae0249c2141779bd6d7deb93f45c";
+export const previewBackendSource = "6542f5b089656b6d255465edd464d06c2a0b408f";
 const ordinaryServices = [
   "CORE_API_BASE_URL",
   "STRATEGY_API_BASE_URL",
