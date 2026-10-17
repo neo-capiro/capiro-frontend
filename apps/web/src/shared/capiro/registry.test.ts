@@ -16,6 +16,8 @@ import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
+import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
+import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
 import { engagementPlanOperations } from "./operations/engagement-plans";
 import {
   firstChatCoreOperation,
@@ -40,6 +42,11 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     onboardSetupOperations,
     onboardCoreOperations,
     objectiveOperationalOperations,
+    {
+      "objectives.governedGeneration.read":
+        governedObjectiveGenerationReadOperation,
+      "objectives.governedOutputs.read": governedObjectiveOutputsReadOperation,
+    },
     engagementPlanOperations,
     { [firstChatCoreOperationKey]: firstChatCoreOperation },
   ];
@@ -48,6 +55,24 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
   expect(Object.keys(capiroOperations)).toHaveLength(declared.length);
   expect(Object.keys(capiroOperations).sort()).toEqual(declared.sort());
   expect(declared.length).toBeGreaterThan(0);
+});
+it("registers only the reviewed governed Objective reads", () => {
+  expect(capiroOperations["objectives.governedGeneration.read"]).toBe(
+    governedObjectiveGenerationReadOperation,
+  );
+  expect(capiroOperations["objectives.governedOutputs.read"]).toBe(
+    governedObjectiveOutputsReadOperation,
+  );
+  expect(
+    Object.keys(capiroOperations).filter((key) =>
+      key.startsWith("objectives.governed"),
+    ),
+  ).toEqual([
+    "objectives.governedGeneration.read",
+    "objectives.governedOutputs.read",
+  ]);
+  expect(governedObjectiveGenerationReadOperation.method).toBe("GET");
+  expect(governedObjectiveOutputsReadOperation.method).toBe("GET");
 });
 it("applies configured service prefixes once and ties the hearing socket to its actual gateway", () => {
   for (const operation of Object.values(capiroOperations))

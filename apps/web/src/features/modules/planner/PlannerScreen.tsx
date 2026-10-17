@@ -17,6 +17,7 @@ import { CapacityView } from "./CapacityView";
 import styles from "./planner.module.css";
 import { PlannerInbox } from "./PlannerInbox";
 import { ProjectCatalog } from "./ProjectCatalog";
+import { canReadCurrentProjectLink } from "./current-project-link";
 import { ResourceCatalog } from "./ResourceCatalog";
 import { taskViews, type TaskView } from "./task-presentation";
 import { TaskWorkspace } from "./TaskWorkspace";
@@ -200,8 +201,7 @@ function CurrentProjectLink({ onDismiss }: { onDismiss: () => void }) {
     !params.has("materializationRequestId") &&
     plannerId.safeParse(id).success &&
     plannerId.safeParse(clientId).success;
-  const authorized =
-    scope.state === "authorized-client" && scope.client.id === clientId;
+  const authorized = canReadCurrentProjectLink(scope, clientId);
   const query = useCapiroQuery(
     "planner.bootstrap",
     {},
