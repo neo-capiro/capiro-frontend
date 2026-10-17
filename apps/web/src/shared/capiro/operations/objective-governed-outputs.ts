@@ -8,7 +8,7 @@ import {
   type GovernedObjectiveGenerationReadRequest,
 } from "./objective-governed-generation";
 
-/** Core PR #56 public Planner receipt read. Deliberately absent from the gateway registry. */
+/** Core PR #56 public Planner receipt read. Registered only as an authenticated GET. */
 export const governedObjectiveOutputsSource =
   "capiro-backend@bdcb546804f35d0973603fca5e99dbd4d640953f apps/api/src/clients/objectives/work/{objective-work-output,objective-work-command,objective-work.controller}.ts";
 
