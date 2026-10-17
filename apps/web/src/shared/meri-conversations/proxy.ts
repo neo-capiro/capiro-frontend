@@ -10,6 +10,7 @@ import {
   validConversationRequest,
 } from "./input";
 import { boundedConversationStream } from "./stream";
+import { trustedConversationFrontendOrigin } from "./frontend-origin";
 
 const responseHeaders = [
   "content-type",
@@ -44,7 +45,11 @@ const unavailable = (status: number) =>
       },
     },
   );
-export type ConversationProxyConfig = { enabled: boolean; baseUrl?: string };
+export type ConversationProxyConfig = {
+  enabled: boolean;
+  baseUrl?: string;
+  frontendOrigin?: string;
+};
 
 function configuredOrigin(config: ConversationProxyConfig) {
   if (!config.enabled || !config.baseUrl) return undefined;
@@ -126,7 +131,11 @@ export async function proxyConversationRequest(
     return unavailable(405);
   if (!validConversationRequest(request, path, route)) return unavailable(400);
   const origin = configuredOrigin(config);
-  if (!origin) return unavailable(502);
+  const frontendOrigin = trustedConversationFrontendOrigin(
+    request,
+    config.frontendOrigin,
+  );
+  if (!origin || !frontendOrigin) return unavailable(502);
   const transport = new AbortController();
   const abort = () => transport.abort();
   request.signal.addEventListener("abort", abort, { once: true });
@@ -153,7 +162,10 @@ export async function proxyConversationRequest(
             return unavailable(400);
           }
         }
-        const headers = new Headers({ Authorization: bearer! });
+        const headers = new Headers({
+          Authorization: bearer!,
+          Origin: frontendOrigin,
+        });
         if (body) headers.set("Content-Type", "application/json");
         if (route === "reconnect")
           headers.set(
