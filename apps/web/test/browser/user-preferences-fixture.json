@@ -1,0 +1,79 @@
+{
+  "source": "actual createUserPreferencesApplication + Core membership + canonical user settings service; synthetic identity and in-memory persistence boundaries",
+  "read": {
+    "owner": {
+      "tenantId": "tenant-A",
+      "actorId": "actor-A"
+    },
+    "revision": 1,
+    "preferences": {
+      "theme": "system",
+      "density": "comfortable",
+      "timezone": null,
+      "notifications": {
+        "runCompleted": false,
+        "approvalRequested": true,
+        "memoryReviewed": false
+      },
+      "defaultClientId": "00000000-0000-4000-8000-000000000001"
+    }
+  },
+  "request": {
+    "expectedRevision": 1,
+    "preferences": {
+      "theme": "dark",
+      "density": "compact",
+      "timezone": "America/New_York",
+      "notifications": {
+        "runCompleted": false,
+        "approvalRequested": true,
+        "memoryReviewed": false
+      },
+      "defaultClientId": "00000000-0000-4000-8000-000000000001"
+    }
+  },
+  "save": {
+    "owner": {
+      "tenantId": "tenant-A",
+      "actorId": "actor-A"
+    },
+    "revision": 2,
+    "preferences": {
+      "theme": "dark",
+      "density": "compact",
+      "timezone": "America/New_York",
+      "notifications": {
+        "runCompleted": false,
+        "approvalRequested": true,
+        "memoryReviewed": false
+      },
+      "defaultClientId": "00000000-0000-4000-8000-000000000001"
+    }
+  },
+  "readback": {
+    "owner": {
+      "tenantId": "tenant-A",
+      "actorId": "actor-A"
+    },
+    "revision": 2,
+    "preferences": {
+      "theme": "dark",
+      "density": "compact",
+      "timezone": "America/New_York",
+      "notifications": {
+        "runCompleted": false,
+        "approvalRequested": true,
+        "memoryReviewed": false
+      },
+      "defaultClientId": "00000000-0000-4000-8000-000000000001"
+    }
+  },
+  "conflict": {
+    "status": 409,
+    "body": {
+      "error": {
+        "code": "SETTINGS_REVISION_CONFLICT"
+      }
+    }
+  }
+}

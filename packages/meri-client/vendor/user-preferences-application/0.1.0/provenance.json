@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "9fe0b0857f0284cf460effab34b17fda21c5621d",
+  "schema": "meri-user-preferences-public-input/1",
+  "files": [
+    {
+      "sha256": "c3f8b08d83ac9e1957f228630e96f00e61bd33f1bd65a6f9ff7dde3276fc50c6",
+      "bytes": 5128,
+      "file": "user-preferences-application.d.ts"
+    },
+    {
+      "sha256": "413ccc14695a42f318142998cab1230b9f892b1ad43702e3010ac796cedac398",
+      "bytes": 5281,
+      "file": "user-preferences-application.metadata.json"
+    },
+    {
+      "sha256": "87c6ec9e08d450beb758b3aa80f02b7841505024ba25a24ebc40dc1825c94721",
+      "bytes": 80984,
+      "file": "user-preferences-application.mjs"
+    },
+    {
+      "sha256": "505d936a2eecfbcebbebe740048eea1eab02f3cfbdd9f89b2d00698c64da7ac9",
+      "bytes": 4750,
+      "file": "user-preferences-application.schema.json"
+    }
+  ],
+  "publicExport": "@capiro/meri-contracts/user-preferences-application",
+  "repository": "neo-capiro/meri-greenfield"
+}

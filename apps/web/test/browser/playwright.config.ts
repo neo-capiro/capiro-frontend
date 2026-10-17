@@ -1,5 +1,9 @@
 import { defineConfig } from "@playwright/test";
 import { fileURLToPath } from "node:url";
+const port = Number(process.env.CAPIRO_BROWSER_TEST_PORT ?? 5197);
+if (!Number.isInteger(port) || port < 1024 || port > 65535)
+  throw new Error("Invalid browser harness port");
+const baseURL = `http://127.0.0.1:${port}`;
 export default defineConfig({
   testDir: ".",
   testMatch: "**/*.spec.ts",
@@ -11,7 +15,7 @@ export default defineConfig({
     ["json", { outputFile: "test-results/modules-browser-results.json" }],
   ],
   use: {
-    baseURL: "http://127.0.0.1:5197",
+    baseURL,
     viewport: { width: 1440, height: 1040 },
     screenshot: "only-on-failure",
     trace: "retain-on-failure",
@@ -27,7 +31,7 @@ export default defineConfig({
   },
   webServer: {
     command: `"${process.execPath}" "${fileURLToPath(new URL("./server.mjs", import.meta.url))}"`,
-    url: "http://127.0.0.1:5197",
+    url: baseURL,
     reuseExistingServer: false,
   },
 });

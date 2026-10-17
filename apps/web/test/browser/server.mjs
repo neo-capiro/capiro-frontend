@@ -5,6 +5,8 @@ import path from "node:path";
 const app = fileURLToPath(new URL("../../", import.meta.url));
 const workspace = path.resolve(app, "../..");
 const local = (name) => path.join(app, "test/browser", name);
+const port = Number(process.env.CAPIRO_BROWSER_TEST_PORT ?? 5197);
+if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error("Invalid browser harness port");
 const configuration = {
   configFile: false,
   root: local("."),
@@ -30,7 +32,7 @@ const configuration = {
   },
   server: {
     host: "127.0.0.1",
-    port: 5197,
+    port,
     strictPort: true,
     hmr: false,
     fs: { allow: [workspace] },
@@ -58,9 +60,9 @@ await build({
 await preview({
   ...configuration,
   build: { outDir: path.join(app, ".qa/modules-harness") },
-  preview: { host: "127.0.0.1", port: 5197, strictPort: true },
+  preview: { host: "127.0.0.1", port, strictPort: true },
   logLevel: "warn",
 });
 console.log(
-  "Explicit test-only Modules and Settings harness: http://127.0.0.1:5197",
+  `Explicit test-only Modules and Settings harness: http://127.0.0.1:${port}`,
 );

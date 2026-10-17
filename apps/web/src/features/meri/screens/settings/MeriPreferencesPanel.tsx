@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { UserPreferencesHost } from "../../user-preferences/UserPreferencesHost";
 import { ConnectorAccountsScreen } from "./ConnectorAccountsScreen";
 import { HelpShortcutsScreen } from "./HelpShortcutsScreen";
 import { NotificationsAccountScreen } from "./NotificationsAccountScreen";
@@ -20,9 +21,14 @@ const unavailable =
 
 /**
  * Meri preferences inside Capiro Settings: the same 09.01–09.07 pages as the fixtures,
- * with no account data, every preference control disabled and local page tabs.
+ * with local tabs and disabled unavailable pages. Only the explicitly enabled
+ * personal slot uses the canonical native-authenticated preferences contract.
  */
-export function MeriPreferencesPanel() {
+export function MeriPreferencesPanel({
+  userPreferencesEnabled = false,
+}: {
+  userPreferencesEnabled?: boolean;
+}) {
   const [page, setPage] = useState<PreferencePageId>("personal");
   const chrome: SettingsChrome = {
     nav: pages.map((item) => ({ ...item, current: item.id === page })),
@@ -38,6 +44,8 @@ export function MeriPreferencesPanel() {
   };
   switch (page) {
     case "personal":
+      if (userPreferencesEnabled)
+        return <UserPreferencesHost chrome={chrome} />;
       return (
         <PersonalPreferencesScreen chrome={chrome} view={views.personal} />
       );
