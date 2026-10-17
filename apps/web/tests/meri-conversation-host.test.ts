@@ -29,6 +29,7 @@ it("keeps activation closed until auth, HTTPS origin and explicit flag all exist
   const env = {
     CORE_API_BASE_URL: "https://core.example.test/api",
     MERI_API_BASE_URL: "https://meri.example.test",
+    CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test",
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
     CLERK_SECRET_KEY: "sk_test_fixture",
     MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
@@ -45,8 +46,36 @@ it("keeps activation closed until auth, HTTPS origin and explicit flag all exist
     { MERI_API_BASE_URL: "https://meri.example.test/private" },
     { CLERK_SECRET_KEY: "" },
     { MERI_API_BASE_URL: "https://user:pass@meri.example.test" },
+    { CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test/private" },
+    { CAPIRO_REQUEST_ORIGIN: "" },
+    { CAPIRO_REQUEST_ORIGIN: "https://frontend.example.test?source=untrusted" },
   ])
     expect(readConversationConfig({ ...env, ...change }).enabled).toBe(false);
+});
+
+it("binds preview conversation admission to the fixed Portfolio browser origin", () => {
+  const preview = {
+    CORE_API_BASE_URL: "https://core.example.test/api",
+    MERI_API_BASE_URL: "https://meri.example.test",
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_YXBw",
+    CLERK_SECRET_KEY: "sk_test_fixture",
+    MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
+    CAPIRO_PREVIEW_READ_ONLY: "true",
+    CAPIRO_REQUEST_ORIGIN: "https://portfolio-preview.app.capiro.ai",
+    CAPIRO_EXISTING_APP_URL: "https://portfolio-preview.app.capiro.ai",
+  };
+  expect(readConversationConfig(preview)).toMatchObject({
+    enabled: true,
+    frontendOrigin: preview.CAPIRO_REQUEST_ORIGIN,
+  });
+  for (const change of [
+    { CAPIRO_REQUEST_ORIGIN: "https://os.capiro.ai" },
+    { CAPIRO_EXISTING_APP_URL: "https://os.capiro.ai" },
+    { CAPIRO_EXISTING_APP_URL: "" },
+  ])
+    expect(readConversationConfig({ ...preview, ...change }).enabled).toBe(
+      false,
+    );
 });
 it("bootstraps only existing allowed client hints and binds native Core user/tenant before ready", async () => {
   const calls: unknown[] = [];

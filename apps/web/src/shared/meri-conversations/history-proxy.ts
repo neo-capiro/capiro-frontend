@@ -9,6 +9,7 @@ import {
 } from "../meri-actions/bounded-json";
 import type { ConversationProxyConfig } from "./proxy";
 import type { HistoryRoute } from "./history-client";
+import { trustedConversationFrontendOrigin } from "./frontend-origin";
 
 const headers = {
   "Cache-Control": "private, no-store",
@@ -91,7 +92,11 @@ export async function proxyConversationHistory(
   if (request.method !== "POST") return unavailable(405);
   if (!validRequest(request, route)) return unavailable(400);
   const origin = configuredOrigin(config);
-  if (!origin) return unavailable(503);
+  const frontendOrigin = trustedConversationFrontendOrigin(
+    request,
+    config.frontendOrigin,
+  );
+  if (!origin || !frontendOrigin) return unavailable(503);
   let dispatched = false;
   try {
     return await withActionDeadline([request.signal], async (signal) => {
@@ -123,6 +128,7 @@ export async function proxyConversationHistory(
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            Origin: frontendOrigin,
           },
           credentials: "omit",
           redirect: "error",
