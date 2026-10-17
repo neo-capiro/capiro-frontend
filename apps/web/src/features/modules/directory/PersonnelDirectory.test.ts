@@ -13,6 +13,7 @@ const route = vi.hoisted(() => ({
   pageChange: null as ((page: number) => void) | null,
   rowClick: null as (() => void) | null,
   detailBack: null as (() => void) | null,
+  profileUrl: null as string | null,
   query: null as Record<string, unknown> | null,
   hooks: [] as unknown[],
   hookIndex: 0,
@@ -68,7 +69,7 @@ vi.mock("../../../shared/capiro/queries", () => ({
             status: "active",
             sourceCount: 1,
             email: null,
-            publicProfileUrl: null,
+            publicProfileUrl: route.profileUrl,
           },
         ],
         total: 26,
@@ -108,11 +109,14 @@ vi.mock("../../../shared/module-ui", () => ({
     rows: unknown[];
     columns: { key: string; render: (row: unknown) => ReactNode }[];
   }) => {
-    const rendered = columns
+    const name = columns
       .find((column) => column.key === "name")!
       .render(rows[0]);
-    route.rowClick = findButton(rendered);
-    return createElement("div", null, rendered);
+    const contact = columns
+      .find((column) => column.key === "contact")!
+      .render(rows[0]);
+    route.rowClick = findButton(name);
+    return createElement("div", null, name, contact);
   },
   Panel: ({ children }: { children: ReactNode }) =>
     createElement("section", null, children),
@@ -168,6 +172,7 @@ beforeEach(() => {
   route.hookIndex = 0;
   route.rowClick = null;
   route.detailBack = null;
+  route.profileUrl = null;
 });
 
 it("restores bounded Personnel filters and preserves other URL hints on edits", () => {
@@ -229,4 +234,24 @@ it("does not keep a selected profile visible after browser Back changes list sco
     "view=department-of-war&clientId=client-1&personnelQ=previous&personnelService=Army&personnelAligned=aligned&personnelPage=2";
   expect(render(detailChange)).not.toContain("Selected profile");
   expect(route.query).toMatchObject({ q: "previous", page: 2 });
+});
+
+it.each([
+  "javascript:alert(1)",
+  "not-a-url",
+  "http://",
+  "https://user:secret@example.org/profile",
+])("does not offer an invalid public profile URL as a link: %s", (url) => {
+  route.profileUrl = url;
+  const html = render();
+  expect(html).toContain("Not available");
+  expect(html).not.toContain("Public profile");
+  expect(html).not.toContain("<a ");
+});
+
+it("opens a validated public profile URL", () => {
+  route.profileUrl = "https://example.org/profile";
+  const html = render();
+  expect(html).toContain('href="https://example.org/profile"');
+  expect(html).toContain("Public profile");
 });

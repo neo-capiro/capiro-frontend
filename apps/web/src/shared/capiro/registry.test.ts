@@ -18,6 +18,7 @@ import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
 import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
 import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
+import { governedObjectiveStrategyIntakeOperation } from "./operations/objective-governed-strategy-intake";
 import { engagementPlanOperations } from "./operations/engagement-plans";
 import {
   firstChatCoreOperation,
@@ -46,6 +47,8 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
       "objectives.governedGeneration.read":
         governedObjectiveGenerationReadOperation,
       "objectives.governedOutputs.read": governedObjectiveOutputsReadOperation,
+      "objectives.governedStrategy.intake":
+        governedObjectiveStrategyIntakeOperation,
     },
     engagementPlanOperations,
     { [firstChatCoreOperationKey]: firstChatCoreOperation },
@@ -56,12 +59,15 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
   expect(Object.keys(capiroOperations).sort()).toEqual(declared.sort());
   expect(declared.length).toBeGreaterThan(0);
 });
-it("registers only the reviewed governed Objective reads", () => {
+it("registers only the reviewed governed Objective operations", () => {
   expect(capiroOperations["objectives.governedGeneration.read"]).toBe(
     governedObjectiveGenerationReadOperation,
   );
   expect(capiroOperations["objectives.governedOutputs.read"]).toBe(
     governedObjectiveOutputsReadOperation,
+  );
+  expect(capiroOperations["objectives.governedStrategy.intake"]).toBe(
+    governedObjectiveStrategyIntakeOperation,
   );
   expect(
     Object.keys(capiroOperations).filter((key) =>
@@ -70,9 +76,11 @@ it("registers only the reviewed governed Objective reads", () => {
   ).toEqual([
     "objectives.governedGeneration.read",
     "objectives.governedOutputs.read",
+    "objectives.governedStrategy.intake",
   ]);
   expect(governedObjectiveGenerationReadOperation.method).toBe("GET");
   expect(governedObjectiveOutputsReadOperation.method).toBe("GET");
+  expect(governedObjectiveStrategyIntakeOperation.method).toBe("POST");
 });
 it("registers the pinned, read-only Personnel detail contract once", () => {
   const operation = capiroOperations["directory.personnelDetail"];

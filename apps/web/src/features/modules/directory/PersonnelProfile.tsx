@@ -3,24 +3,8 @@
 import type { ReactNode } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { ActionButton, StatusPanel } from "../../../shared/module-ui";
+import { externalUrl } from "./personnel-links";
 import styles from "./personnel-profile.module.css";
-
-function externalUrl(value: string | null): string | null {
-  if (!value) return null;
-  try {
-    const url = new URL(value);
-    if (
-      (url.protocol === "https:" || url.protocol === "http:") &&
-      url.hostname &&
-      !url.username &&
-      !url.password
-    )
-      return url.href;
-  } catch {
-    // An invalid or relative URL is displayed as unavailable, never opened.
-  }
-  return null;
-}
 
 function observedDate(value: string): string {
   const date = new Date(value);
