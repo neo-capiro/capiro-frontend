@@ -12,11 +12,11 @@ const fixedParameters = Object.freeze({
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const optionalBindings = ['meriApiBaseUrl', 'meriConversationWorkflowEnabled'];
 const patterns = Object.freeze({
-  clerkIssuer: /^https:\/\/[a-z0-9-]+\.clerk\.accounts\.dev$/,
+  clerkIssuer: /^https:\/\/clerk\.app\.capiro\.ai$/,
   clerkApplicationId: /^app_[A-Za-z0-9]{8,80}$/,
-  clerkPublishableKeyArn: /^arn:aws:secretsmanager:us-east-1:967807252336:secret:\/capiro\/preview\/clerk\/publishable-key-[A-Za-z0-9]{6}$/,
-  clerkSecretArn: /^arn:aws:secretsmanager:us-east-1:967807252336:secret:\/capiro\/preview\/clerk\/secret-key-[A-Za-z0-9]{6}$/,
-  clerkKeyArn: /^arn:aws:kms:us-east-1:967807252336:key\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/,
+  clerkPublishableKeyArn: /^arn:aws:secretsmanager:us-east-1:967807252336:secret:\/capiro\/dev\/clerk\/publishable-key-rAfesC$/,
+  clerkSecretArn: /^arn:aws:secretsmanager:us-east-1:967807252336:secret:\/capiro\/dev\/clerk\/secret-key-FT67tM$/,
+  clerkKeyArn: /^arn:aws:kms:us-east-1:967807252336:key\/f47b4c53-b9c0-4d91-ad57-4d882f87767e$/,
 });
 
 function closedRecord(input, keys, code, optionalKeys = []) {
@@ -92,7 +92,7 @@ export function renderPreviewConfiguration(bindings) {
     clerkMetadata: {
       issuer: bindings.clerkIssuer,
       applicationId: bindings.clerkApplicationId,
-      requiredEnvironment: 'test',
+      requiredEnvironment: 'configured-core-issuer-unverified',
     },
     holds: ['strategy', 'onboard', 'meri'],
     activationStatus: meri.enabled

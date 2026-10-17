@@ -6,13 +6,13 @@ import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 import { renderPreviewConfiguration, validatePreviewParameters } from '../apps/web/deployment/portfolio/preview-config.mjs';
 
-// Clearly synthetic public references: not live resource or credential bindings.
+// Public resource references only. The test never reads secret payloads or sends a token.
 const bindings = {
-  clerkIssuer: 'https://synthetic-preview.clerk.accounts.dev',
+  clerkIssuer: 'https://clerk.app.capiro.ai',
   clerkApplicationId: 'app_syntheticpreview',
-  clerkPublishableKeyArn: 'arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/publishable-key-AbCd12',
-  clerkSecretArn: 'arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/secret-key-EfGh34',
-  clerkKeyArn: 'arn:aws:kms:us-east-1:967807252336:key/10000000-0000-4000-8000-000000000001',
+  clerkPublishableKeyArn: 'arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC',
+  clerkSecretArn: 'arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/secret-key-FT67tM',
+  clerkKeyArn: 'arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e',
 };
 const script = 'apps/web/deployment/portfolio/preview-config.mjs';
 const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8');
@@ -31,7 +31,7 @@ test('preview proposes held Meri defaults while unavailable services stay disabl
     { ParameterKey: 'MeriApiBaseUrl', ParameterValue: '' },
     { ParameterKey: 'MeriConversationWorkflowEnabled', ParameterValue: 'false' },
   ]);
-  assert.equal(p.clerkMetadata.requiredEnvironment, 'test');
+  assert.equal(p.clerkMetadata.requiredEnvironment, 'configured-core-issuer-unverified');
   assert.match(p.activationStatus, /held at zero/);
   assert.equal(Object.hasOwn(p.environment, 'CLERK_SECRET_KEY'), false);
   assert.equal(p.secretReferences.CLERK_SECRET_KEY, bindings.clerkSecretArn);
@@ -65,10 +65,11 @@ test('explicit Meri origin and opt-in form one exact, reviewable parameter propo
   assert.equal(held.holds.includes('meri'), true);
 });
 
-test('preview rejects unknown, missing, credential-valued and production Clerk bindings', () => {
-  for (const invalid of [null, [], {}, { ...bindings, extra: 'value' }, { ...bindings, clerkIssuer: 'https://clerk.capiro.ai' },
-    { ...bindings, clerkSecretArn: 'sk_live_synthetic' }, { ...bindings, clerkSecretArn: bindings.clerkSecretArn.replace('/preview/', '/production/') },
-    { ...bindings, clerkPublishableKeyArn: bindings.clerkSecretArn }, { ...bindings, clerkKeyArn: bindings.clerkKeyArn.replace('967807252336', '111111111111') },
+test('preview rejects unknown, missing, credential-valued and mismatched Clerk bindings', () => {
+  for (const invalid of [null, [], {}, { ...bindings, extra: 'value' }, { ...bindings, clerkIssuer: 'https://synthetic-preview.clerk.accounts.dev' },
+    { ...bindings, clerkSecretArn: 'sk_live_synthetic' }, { ...bindings, clerkSecretArn: bindings.clerkSecretArn.replace('/dev/', '/preview/') },
+    { ...bindings, clerkPublishableKeyArn: bindings.clerkSecretArn }, { ...bindings, clerkPublishableKeyArn: bindings.clerkPublishableKeyArn.replace('rAfesC', 'AAAAAA') },
+    { ...bindings, clerkKeyArn: bindings.clerkKeyArn.replace('967807252336', '111111111111') },
     { ...bindings, clerkIssuer: `${bindings.clerkIssuer}/` }, { ...bindings, clerkApplicationId: ' app_syntheticpreview' }]) {
     assert.throws(() => renderPreviewConfiguration(invalid), /PREVIEW_BIND/);
   }
