@@ -12,7 +12,7 @@ vi.mock("@clerk/nextjs/server", () => ({
 }));
 const origin = "https://frontend.synthetic.invalid";
 const target = "https://preview-api.synthetic.invalid/api";
-const source = "111f269d749cae0249c2141779bd6d7deb93f45c";
+const source = "6542f5b089656b6d255465edd464d06c2a0b408f";
 const id = "10000000-0000-4000-8000-000000000001";
 const client = {
   id,
@@ -157,13 +157,15 @@ it.each([
   });
 });
 
-it.each([undefined, "", "wrong-source"])(
-  "holds an absent or wrong backend source %s",
-  async (value) => {
-    vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", value);
-    await denied(await receive("backend/core/clients"));
-  },
-);
+it.each([
+  undefined,
+  "",
+  "wrong-source",
+  "111f269d749cae0249c2141779bd6d7deb93f45c",
+])("holds an absent or wrong backend source %s", async (value) => {
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", value);
+  await denied(await receive("backend/core/clients"));
+});
 it.each([
   undefined,
   "",

@@ -1,5 +1,9 @@
 # First-chat preview binding plan
 
+**Updated read decision:** Neo subsequently permitted preview writes to the existing database. The [PR #48 selected-client read binding review](PR48-SELECTED-CLIENT-READ-BINDING-20261017.md) supersedes this document's `111f` read-only process recommendation and records the source-only frontend marker successor. The `e0b47a34` image and its original `111f` gate remain immutable historical facts; the new source requires separate image qualification before activation.
+
+The owner names and readiness order below are the earlier handoff snapshot. Neo later retained Meri shipping with dot/Codex; current frontend activation ownership and allocations must be confirmed through the parent before any build or network change.
+
 This is source-only preparation for the already-qualified frontend image at `e0b47a34d00b8c181420188ed39a1d849e25ec0a` (`sha256:185d6ab9f7a8a6395546be4ac2374de2e329ab6182627de18e1fca9732220bcc`). It does not authorize a build, service update, migration, or authenticated conversation. Use the [Fable shipping handoff](FABLE-FRONTEND-SHIPPING-HANDOFF-20261017.md) for the exact image receipt, current ECS baseline, cost and rollback. Dot's [live checklist](DOT-LIVE-ACCEPTANCE-20261017.md) remains held until the shipping owner returns deployed pins and health.
 
 ## Exact frontend task bindings
