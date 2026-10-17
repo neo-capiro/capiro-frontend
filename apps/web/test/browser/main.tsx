@@ -4,6 +4,7 @@ import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
 import { MeriFilesHost } from "../../src/app/meri/files/MeriFilesHost";
 import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
+import { MeriTaskUpdateHost } from "../../src/app/meri/task-updates/MeriTaskUpdateHost";
 import { IntegrationProbe } from "./IntegrationProbe";
 import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
 import { isOnboardPath } from "../../src/shared/session/onboard-route";
@@ -74,6 +75,16 @@ function RoutedApp() {
       />
     );
   }
+  if (path === "/meri/task-updates")
+    return (
+      <ProductShell>
+        <RequireSession>
+          <MeriTaskUpdateHost
+            enabled={search.get("task-updates-disabled") !== "1"}
+          />
+        </RequireSession>
+      </ProductShell>
+    );
   if (path === "/meri/files")
     return (
       <ProductShell documentWorkflow>

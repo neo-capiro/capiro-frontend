@@ -1,5 +1,23 @@
 [
   {
+    "file": "apps/web/src/features/meri/task-updates/TaskUpdateForm.tsx",
+    "kind": "function",
+    "symbol": "TaskUpdateForm",
+    "fingerprint": "2d81aca851e617f10e8fa94573c1e825902f40c3acd8f8c2e04ea15aaaf2cfcc",
+    "reason": "This is one static four-field task patch form. Canonical contract receiving owns input normalization; the controller and port own interaction, immutable proposals and effects. The JSX does not add another domain or authority owner.",
+    "reviewedBy": "Codex independent scope_audit",
+    "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/shared/meri-task-commands/transport.ts",
+    "kind": "function",
+    "symbol": "taskCommandTransport",
+    "fingerprint": "3d31d2f5bcc12f21b36b4beb71c98e984466c1835fbbfca28f4b0f2ec9d42eb8",
+    "reason": "This closure owns one credential lifetime and the bounded send path shared by prepare/execute receiving entrypoints. It reuses canonical bounded JSON/deadline handling and the generated public receiver. It owns no workflow state, approval decision, authorization or source operation.",
+    "reviewedBy": "Codex independent scope_audit",
+    "reviewedOn": "2026-10-16"
+  },
+  {
     "file": "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx",
     "kind": "function",
     "symbol": "PreferenceForm",
