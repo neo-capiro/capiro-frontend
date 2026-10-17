@@ -183,6 +183,38 @@ export const personnelList = z.object({
   page: z.number(),
   limit: z.number(),
 });
+// Core's detail DTO also carries arbitrary metadata and source snippets. This
+// receiving shape deliberately drops them from the browser-facing operation.
+export const personnelDetail = z.object({
+  id: z.string().uuid(),
+  fullName: z.string(),
+  service: z.string().nullable(),
+  organization: z.string().nullable(),
+  title: z.string().nullable(),
+  role: z.string().nullable(),
+  programOfRecord: z.string().nullable(),
+  pePrimary: z.string().nullable(),
+  peSecondary: z.array(z.string()),
+  emailDomain: z.string().nullable(),
+  email: z.string().nullable(),
+  phone: z.string().nullable(),
+  parentOffice: z.string().nullable(),
+  department: z.string().nullable(),
+  publicProfileUrl: z.string().nullable(),
+  confidence: z.number(),
+  status: z.string(),
+  firstSeenAt: z.string(),
+  lastSeenAt: z.string(),
+  sources: z.array(
+    z.object({
+      id: z.string().uuid(),
+      source: z.string(),
+      sourceUrl: z.string().nullable(),
+      observedAt: z.string(),
+      confidence: z.number(),
+    }),
+  ),
+});
 export type DirectoryContact = z.infer<typeof directoryContact>;
 export type DirectoryCommittee = z.infer<typeof directoryCommittee>;
 export type DirectoryStaff = z.infer<typeof directoryStaff>;
