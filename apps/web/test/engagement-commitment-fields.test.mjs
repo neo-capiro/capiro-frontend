@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import test from "node:test";
-import { commitmentFields } from "../src/features/modules/engagement/commitment-fields.ts";
+import {
+  commitmentDueDay,
+  commitmentFields,
+} from "../src/features/modules/engagement/commitment-fields.ts";
 
 const draft = {
   title: "Updated follow-up",
@@ -9,11 +13,59 @@ const draft = {
 };
 for (const dueDate of ["2026-10-20T08:15:00.000Z", "2026-10-20T23:45:00-07:00"])
   test(`title-only Commitment edit preserves the saved instant ${dueDate}`, () => {
-    assert.deepEqual(commitmentFields(draft, { dueDate }), {
-      title: draft.title,
-      description: draft.description,
-    });
+    assert.deepEqual(
+      commitmentFields(
+        { ...draft, due: commitmentDueDay(dueDate) },
+        { dueDate },
+      ),
+      {
+        title: draft.title,
+        description: draft.description,
+      },
+    );
   });
+
+test("Commitment editor and unchanged patch use the viewer's calendar day across time zones", () => {
+  const moduleUrl = new URL(
+    "../src/features/modules/engagement/commitment-fields.ts",
+    import.meta.url,
+  ).href;
+  for (const [zone, dueDate, expectedDay] of [
+    ["Pacific/Kiritimati", "2026-10-19T22:00:00.000Z", "2026-10-20"],
+    ["America/Los_Angeles", "2026-10-21T06:45:00.000Z", "2026-10-20"],
+    ["UTC", "2026-10-19T22:00:00.000Z", "2026-10-19"],
+  ]) {
+    const script = `
+      import { commitmentDueDay, commitmentFields } from ${JSON.stringify(moduleUrl)};
+      const saved = ${JSON.stringify(dueDate)};
+      const due = commitmentDueDay(saved);
+      console.log(JSON.stringify({
+        due,
+        displayed: new Date(saved).toLocaleDateString("en-US"),
+        patch: commitmentFields({ title: "Edited", description: "Text", due }, { dueDate: saved }),
+      }));
+    `;
+    const result = JSON.parse(
+      execFileSync(process.execPath, ["--input-type=module", "-e", script], {
+        env: { ...process.env, TZ: zone },
+        encoding: "utf8",
+      }),
+    );
+    assert.equal(result.due, expectedDay, zone);
+    assert.equal(
+      result.displayed,
+      new Date(dueDate).toLocaleDateString("en-US", {
+        timeZone: zone,
+      }),
+      zone,
+    );
+    assert.deepEqual(
+      result.patch,
+      { title: "Edited", description: "Text" },
+      zone,
+    );
+  }
+});
 test("clearing an existing Commitment date sends null; an unchanged unset date sends no patch", () => {
   assert.deepEqual(
     commitmentFields(

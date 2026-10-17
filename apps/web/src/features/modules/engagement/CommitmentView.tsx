@@ -16,7 +16,7 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
-import { commitmentFields } from "./commitment-fields";
+import { commitmentDueDay, commitmentFields } from "./commitment-fields";
 export function CommitmentView({ clientId }: { clientId: string }) {
   return <ScopedCommitments key={clientId} clientId={clientId} />;
 }
@@ -151,7 +151,7 @@ function CommitmentForm({
   }, []);
   const [title, setTitle] = useState(task?.title ?? ""),
     [description, setDescription] = useState(task?.description ?? ""),
-    [due, setDue] = useState(task?.dueDate?.slice(0, 10) ?? "");
+    [due, setDue] = useState(commitmentDueDay(task?.dueDate));
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (pending.current) return;
