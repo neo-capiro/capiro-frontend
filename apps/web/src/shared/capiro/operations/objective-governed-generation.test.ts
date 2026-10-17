@@ -65,7 +65,7 @@ const receipt = {
 };
 
 describe("Core PR53 governed Objective read receiving", () => {
-  it("pins a read-only unmounted operation and a closed GET query", () => {
+  it("pins a read-only operation and a closed GET query", () => {
     expect(governedObjectiveGenerationReadOperation.service).toBe("core");
     expect(governedObjectiveGenerationReadOperation.method).toBe("GET");
     expect(governedObjectiveGenerationReadOperation.path).toBe(

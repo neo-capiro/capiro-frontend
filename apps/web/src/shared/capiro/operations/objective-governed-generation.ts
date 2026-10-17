@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 
-/** Core PR #53 read projection. This operation is deliberately absent from the gateway registry. */
+/** Core PR #53 read projection. Registered only as an authenticated GET. */
 export const governedObjectiveGenerationSource =
   "capiro-backend@57f8c8047a73df6d4a73351a98a5239f38240a24 apps/api/src/clients/objectives/work/{objective-work.controller,objective-work-command}.ts";
 
