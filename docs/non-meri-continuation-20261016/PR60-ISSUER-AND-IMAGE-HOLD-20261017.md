@@ -1,0 +1,50 @@
+# Frontend PR #60 issuer and image qualification hold
+
+This is the portable successor to the earlier [frontend shipping handoff](FABLE-FRONTEND-SHIPPING-HANDOFF-20261017.md) and [PR #48 read binding review](PR48-SELECTED-CLIENT-READ-BINDING-20261017.md). The older documents preserve their exact historical source and image receipts. No path on the preparation machine is needed to resume this work.
+
+## Source and current status
+
+| Item                                      | Exact status                                                                                                                                                                                                                  |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Draft frontend PR                         | [#60](https://github.com/neo-capiro/capiro-frontend/pull/60), published head `8fd2c4c4556e5fed37da012293a4f1b4d2088d14`, tree `c52e8147d4d1087ac4a85b59343ffecaef0f6e77` before this conditional issuer correction            |
+| Core read/first-chat image source         | Qualified PR #48 `6542f5b089656b6d255465edd464d06c2a0b408f`; the frontend read-source gate and focused test now name it                                                                                                       |
+| Last qualified frontend source/image      | `e0b47a34d00b8c181420188ed39a1d849e25ec0a`; `967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:185d6ab9f7a8a6395546be4ac2374de2e329ab6182627de18e1fca9732220bcc`, scan COMPLETE with zero findings |
+| New source archive / CodeBuild / ECR scan | **None** for the PR #48 read-marker successor or this issuer correction. The old e0 image cannot qualify changed source.                                                                                                      |
+
+From e0 to published `8fd2c4c4`, the sole product source change is `apps/web/src/shared/preview/read-config.server.ts`, replacing the old `111f269d` read marker with qualified Core PR #48 `6542f5b0`. The focused read-receiving suite passed **79/79** under explicit Node 24; it rejects the former marker. Package manifests, lockfile, Dockerfile, first-chat bootstrap operation and six-field receipt remain unchanged. Meri's owner confirmed no reviewed wire change requires a frontend edit. Prior full browser **1,312/1,312**, Modules browser **728/728**, Meri focused **14/14**, Facility/Work **63/63** are historical receipts at `ba95f63b`, followed by production build/smoke, Linux container smoke and zero-finding ECR scan at e0. This literal read-marker and deployment-proposal delta calls for the focused read/config tests, TypeScript, production build/smoke and fresh image/scan; it does not claim those broad suites ran at a successor SHA.
+
+## Clerk pre-seal hold
+
+The published PR #60 deployment proposal only accepts a Test Clerk `*.clerk.accounts.dev` issuer and `/capiro/preview/clerk/*` references. The held Core service source pins `CLERK_JWT_ISSUER=https://clerk.app.capiro.ai` and an existing `/capiro/dev/clerk/secret-key-FT67tM` reference. Core's JWT verifier compares `iss` exactly, so the published proposal cannot be called cross-service ready.
+
+Neo's earlier nonsecret parameter readback and the Core owner's fresh read-only `DescribeSecret` confirm the existing publishable reference `arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC`, matching secret reference `arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/secret-key-FT67tM`, and KMS key `arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e`. Metadata labels the references `pk_live` and `sk_live`; no payload was read. This establishes the resource references, **not** that the keys belong to the same Clerk application, that a native `capiro` token has issuer `https://clerk.app.capiro.ai` with suitable `sub/sid/exp/org` claims, or that the intended actor has a current active `capiro-internal` membership and nonarchived selected client.
+
+A conditional frontend-only source correction in `preview-config.mjs`, `service.yml`, `scripts/preview-config.test.mjs` and the deployment README pins the existing issuer and exact reference ARNs; it does not change product request handling or any running service. Keep the new image seal and the one allocated $4 CodeBuild start held until the common Clerk application, native template claims and selected tenant/member/client are verified with a sanitized owner receipt. If the owner chooses a different Test Clerk application instead, Core held-service configuration and its tenant proof need separate review; do not use this conditional correction as that decision. No secret value or live token belongs in Git.
+
+## Portable source and qualification recipe
+
+The tracked one-shot [buildspec](PR48-READ-IMAGE-QUALIFICATION.buildspec.yml) verifies Node 24, the exact source marker and S3 version, focused preview-config and read-policy tests, web TypeScript, production build and standalone smoke, Linux/amd64 Docker build/smoke, then pushes and reads the exact SHA tag. It is separate from the older smoke-only continuation buildspec, which cannot qualify a product read-marker change. The tracked [archive verifier](../../scripts/verify-preview-archive.py) checks a local Git tree against the published tree, adds the published commit marker and streams all ZIP members before reporting byte count and SHA256. Use the exact published successor source pin after review; do not reuse e0's S3 VersionId, archive, tag or idempotency token.
+
+```sh
+git archive --format=zip --output=preview-source.zip <local-treeish>
+python scripts/verify-preview-archive.py preview-source.zip . <local-treeish> <published-commit-sha> <published-tree-sha>
+```
+
+The operator should use an already authorized AWS identity and verify account `967807252336`, region `us-east-1`, the existing S3 key and CodeBuild project before any write. Create one versioned upload with `aws s3api put-object --bucket capiro-portfolio-preview-source-967807252336-us-east-1 --key inputs/portfolio-source.zip --body preview-source.zip --server-side-encryption AES256 --checksum-algorithm SHA256 --checksum-sha256 <base64-of-verified-SHA256> --expected-bucket-owner 967807252336 --region us-east-1 --no-cli-pager`; save the returned VersionId. Require an exact-version `head-object --checksum-mode ENABLED` readback of length, checksum, encryption and version. If upload response is uncertain, inspect versions before retrying. The start request must use that VersionId as `sourceVersion`, the tracked buildspec's exact text inline as `buildspecOverride`, `EXPECTED_SHA`, `EXPECTED_S3_VERSION`, Node heap cap 6144 MiB, 60/10-minute bounds, one saved idempotency token and automatic retries **0**. Start only under the allocated source pin, after the identity hold clears; no frontend deployment or network change is included.
+
+After a build starts, keep sanitized build/scan summaries in Git and private logs outside Git. These retrieval commands are portable; replace placeholders with the exact returned build ID, log stream, S3 VersionId, commit and image digest:
+
+```sh
+aws codebuild batch-get-builds --region us-east-1 --ids <build-id> --no-cli-pager
+aws logs get-log-events --region us-east-1 --log-group-name /capiro/portfolio-preview/build --log-stream-name <build.logs.streamName> --start-from-head --no-cli-pager
+aws s3api head-object --region us-east-1 --bucket capiro-portfolio-preview-source-967807252336-us-east-1 --key inputs/portfolio-source.zip --version-id <VersionId> --checksum-mode ENABLED --expected-bucket-owner 967807252336 --no-cli-pager
+aws s3api get-object --region us-east-1 --bucket capiro-portfolio-preview-source-967807252336-us-east-1 --key inputs/portfolio-source.zip --version-id <VersionId> --expected-bucket-owner 967807252336 <local-output.zip> --no-cli-pager
+aws ecr describe-images --region us-east-1 --repository-name capiro/portfolio-preview --image-ids imageTag=<published-commit-sha> --no-cli-pager
+aws ecr describe-image-scan-findings --region us-east-1 --repository-name capiro/portfolio-preview --image-id imageDigest=<sha256-digest> --no-cli-pager
+```
+
+Rehash the downloaded S3 version, verify its exact source marker, and require terminal CodeBuild **SUCCEEDED**, an exact ECR tag/digest readback, scan **COMPLETE** and zero HIGH/CRITICAL findings before describing a new image as qualified. `ScanNotFoundException` or scan `IN_PROGRESS` is pending, never a pass. Do not include bearer tokens, cookies, secret payloads, private prompts/output or raw user/client IDs in committed evidence.
+
+## Remaining integration ownership
+
+Frontend source/image qualification is separate from the held Core service, exact GET listener/404 ordering, full frontend task configuration, issuer/tenant proof and signed-in acceptance. Core's [published GET binding review](https://github.com/neo-capiro/capiro-backend/blob/a18ab71e59887116935b4c595b63d83a00141a29/docs/core-preview-pr48-selected-client-get-binding-review-20261017.md) describes the narrow same-target option. The Meri shipping owner is receiving a separate immutable Meri handoff; this frontend successor makes no Meri runtime/schema or activation change. Objective Planner's PR #62 uses the legacy generation/materialization/journal/navigation path. It does not consume governed Core generation GET/commands/confirm-pair or canonical producer continuation. Its backend owner is preparing additive `requestedSource` and `accounting` fields for command CAS; native Strategy ownership and canonical output discovery/v3 receiving remain dependencies. No independent governed Objective UI implementer was identified in the active frontend lanes, so that allocation remains pending on a separate branch with no change to these first-chat pins.

@@ -22,8 +22,13 @@ availability.
 and `clerkKeyArn`. Optional `meriApiBaseUrl` must be a canonical HTTPS DNS root
 origin; optional `meriConversationWorkflowEnabled` is a boolean that defaults
 to false and requires that origin when true. Supply only owner-verified public
-metadata from the designated preview Test Clerk application. No live bindings
-are supplied by this repository. Do not put credential values in this file.
+metadata for the candidate existing Clerk references and Core's configured
+issuer `https://clerk.app.capiro.ai`. The validator pins the owner-confirmed
+`/capiro/dev/clerk/` reference ARNs and their KMS key but does not read secret
+payloads or prove that they belong to the same Clerk application. It also does
+not establish that an issued `capiro` token maps to an active internal tenant,
+actor and client. Verify that pairing and native claims before enabling any
+first-chat route. Do not put credential values in this file.
 
 ```sh
 node apps/web/deployment/portfolio/preview-config.mjs --help
@@ -41,10 +46,10 @@ Image, certificate and ingress review remain with the shipping owner.
 The service template constrains the same preview parameters, with Meri origin
 empty and conversation opt-in false by default. A proposed nonempty Meri origin
 or opt-in is not evidence that its service, model grant or dispatch is ready.
-Existing IAM, network and secret-reference wiring remains unchanged. A
-namespace-valid reference cannot prove its secret payload contains
-the matching `pk_test`/`sk_test` keys or belongs to the declared application and
-issuer. Those checks, backend/auth/data isolation and all activation remain held.
+Existing IAM, network and secret-reference wiring remains unchanged. Exact
+reference validation cannot prove the payloads contain matching keys or belong
+to the declared application and issuer. Those checks, backend/auth/data
+isolation and all activation remain held.
 Do not retain a previous production-bound parameter or restore a production URL
 to make the preview work. Authentication implementation is unchanged.
 
@@ -105,18 +110,18 @@ terminates its probe and server on failure before exiting.
 
 ## Existing resource inventory from the handover
 
-| Resource | Recorded identity |
-| --- | --- |
-| Account / region | `967807252336` / `us-east-1` |
-| Registry stack | `Capiro-Portfolio-Preview-Registry` |
-| ECR repository | `967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview` |
-| Build project | `capiro-portfolio-preview-build` |
-| Source bucket/key | `capiro-portfolio-preview-source-967807252336-us-east-1` / `inputs/portfolio-source.zip` |
-| Service stack | `Capiro-Portfolio-Preview-Service` |
-| ECS cluster / service | `capiro-portfolio-preview` / `capiro-portfolio-preview` |
-| Certificate stack | `Capiro-Portfolio-Preview-Certificate` |
-| Preview hostname | `portfolio-preview.app.capiro.ai` |
-| ACM certificate | `arn:aws:acm:us-east-1:967807252336:certificate/edcc6113-12f5-4154-bfdf-64c7da1037cd` |
+| Resource              | Recorded identity                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Account / region      | `967807252336` / `us-east-1`                                                             |
+| Registry stack        | `Capiro-Portfolio-Preview-Registry`                                                      |
+| ECR repository        | `967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview`                  |
+| Build project         | `capiro-portfolio-preview-build`                                                         |
+| Source bucket/key     | `capiro-portfolio-preview-source-967807252336-us-east-1` / `inputs/portfolio-source.zip` |
+| Service stack         | `Capiro-Portfolio-Preview-Service`                                                       |
+| ECS cluster / service | `capiro-portfolio-preview` / `capiro-portfolio-preview`                                  |
+| Certificate stack     | `Capiro-Portfolio-Preview-Certificate`                                                   |
+| Preview hostname      | `portfolio-preview.app.capiro.ai`                                                        |
+| ACM certificate       | `arn:aws:acm:us-east-1:967807252336:certificate/edcc6113-12f5-4154-bfdf-64c7da1037cd`    |
 
 Do not assume a previous machine's CLI profile, source archive, credentials,
 ingress address or cached AWS reads are available or current.
@@ -145,7 +150,7 @@ ingress address or cached AWS reads are available or current.
    this ECR repository; it does not update ECS or DNS.
 5. Read back the exact ECR digest and a completed scan. Review the preview-only
    service change set with that immutable digest and the explicit configuration
-   proposal above. Independently verify the dedicated Test Clerk references and
+   proposal above. Independently verify the existing Clerk references and
    preview backend bindings; preserve narrow ingress and unrelated parameters.
    `TrackerBackend=intelligence` is the owner's confirmed preview choice. Do not
    deploy by mutable tag or silently change existing service configuration.

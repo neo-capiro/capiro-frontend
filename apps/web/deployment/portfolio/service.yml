@@ -15,16 +15,16 @@ Parameters:
     AllowedPattern: "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/32$"
   ClerkPublishableKeySecretArn:
     Type: String
-    Description: Designated preview Test Clerk publishable-key reference; payload verification is held
-    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/publishable-key-[A-Za-z0-9]{6}$"
+    Description: Owner-confirmed existing Clerk publishable-key reference; payload and issuer pairing remain held
+    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC$"
   ClerkSecretKeySecretArn:
     Type: String
-    Description: Matching preview Test Clerk secret-key reference; payload verification is held
-    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/secret-key-[A-Za-z0-9]{6}$"
+    Description: Owner-confirmed existing Clerk secret-key reference; payload and issuer pairing remain held
+    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/secret-key-FT67tM$"
   ClerkKmsKeyArn:
     Type: String
     Description: KMS key ARN protecting the two designated Clerk secrets
-    AllowedPattern: "^arn:aws:kms:us-east-1:967807252336:key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    AllowedPattern: "^arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e$"
   TrackerBackend:
     Type: String
     AllowedValues: ["intelligence"]
