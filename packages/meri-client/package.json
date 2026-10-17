@@ -7,9 +7,14 @@
   "type": "module",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "vendor/user-preferences-application/0.1.0"
   ],
   "exports": {
+    "./user-preferences": {
+      "types": "./vendor/user-preferences-application/0.1.0/user-preferences-application.d.ts",
+      "default": "./vendor/user-preferences-application/0.1.0/user-preferences-application.mjs"
+    },
     ".": {
       "types": "./dist/guarded-transport.d.ts",
       "default": "./dist/guarded-transport.js"

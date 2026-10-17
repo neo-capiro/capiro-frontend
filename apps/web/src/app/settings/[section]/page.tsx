@@ -11,8 +11,14 @@ export default async function SettingsPage({
   return (
     <ConnectedModule settings>
       <SettingsScreen
-        section={section}
-        meriPreferences={<MeriPreferencesPanel />}
+        section={section === "preferences" ? "meri-preferences" : section}
+        meriPreferences={
+          <MeriPreferencesPanel
+            userPreferencesEnabled={
+              process.env.MERI_USER_PREFERENCES_ENABLED === "true"
+            }
+          />
+        }
       />
     </ConnectedModule>
   );

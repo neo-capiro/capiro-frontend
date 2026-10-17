@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkUserPreferencesPublic } from './user-preferences-public.mjs';
 
 const ordinaryRecord = value => value !== null && typeof value === 'object'
   && [Object.prototype, null].includes(Object.getPrototypeOf(value));
@@ -36,7 +37,7 @@ function main(argv) {
   const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json', 'onboard-public-packages.json']
     .map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
   const records = manifests.flatMap(manifest => verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))));
-  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records }, null, 2));
+  console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records, userPreferences: checkUserPreferencesPublic() }, null, 2));
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
