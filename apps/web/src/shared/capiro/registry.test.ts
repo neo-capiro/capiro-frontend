@@ -74,6 +74,30 @@ it("registers only the reviewed governed Objective reads", () => {
   expect(governedObjectiveGenerationReadOperation.method).toBe("GET");
   expect(governedObjectiveOutputsReadOperation.method).toBe("GET");
 });
+it("registers the pinned, read-only Personnel detail contract once", () => {
+  const operation = capiroOperations["directory.personnelDetail"];
+  expect(operation).toBe(directoryOperations["directory.personnelDetail"]);
+  expect(operation.service).toBe("core");
+  expect(operation.method).toBe("GET");
+  expect(operation.path).toBe("/acquisition-personnel/:id");
+  expect(operation.source).toContain(
+    "51c157444ac43035eeb489ff46aee5a4e89ba3ac",
+  );
+  expect(
+    operation.request.safeParse({
+      params: { id: "00000000-0000-4000-8000-000000000001" },
+    }).success,
+  ).toBe(true);
+  expect(
+    operation.request.safeParse({ params: { id: "not-an-id" } }).success,
+  ).toBe(false);
+  expect(
+    operation.request.safeParse({
+      params: { id: "00000000-0000-4000-8000-000000000001" },
+      body: {},
+    }).success,
+  ).toBe(false);
+});
 it("applies configured service prefixes once and ties the hearing socket to its actual gateway", () => {
   for (const operation of Object.values(capiroOperations))
     expect(operation.path).not.toMatch(

@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ActionButton, PageHeader, Tabs } from "../../../shared/module-ui";
 import { CommitteeDirectory } from "./CommitteeDirectory";
@@ -15,34 +15,50 @@ const views = [
 ];
 export function DirectoryScreen() {
   const params = useSearchParams();
-  const [view, setView] = useState(
-    views.some((v) => v.id === params.get("view"))
-      ? params.get("view")!
-      : "congressional-staff",
-  );
+  const pathname = usePathname();
+  const router = useRouter();
+  const requestedView = params.get("view");
+  const view = views.some((item) => item.id === requestedView)
+    ? requestedView!
+    : "congressional-staff";
   const [favorites, setFavorites] = useState(false);
+  const [personnelDetailOpen, setPersonnelDetailOpen] = useState(false);
+  const setView = (nextView: string) => {
+    if (!views.some((item) => item.id === nextView)) return;
+    const next = new URLSearchParams(params.toString());
+    next.set("view", nextView);
+    router.push(`${pathname}?${next}`, { scroll: false });
+  };
+  const showDirectoryNavigation =
+    view !== "department-of-war" || !personnelDetailOpen;
   return (
     <>
-      <PageHeader
-        title="Directory"
-        actions={
-          <ActionButton
-            aria-pressed={favorites}
-            onClick={() => {
-              setFavorites(!favorites);
-              setView("congressional-staff");
-            }}
-          >
-            ★ Favorites
-          </ActionButton>
-        }
-      />
-      <Tabs items={views} value={view} onChange={setView} />
+      {showDirectoryNavigation && (
+        <>
+          <PageHeader
+            title="Directory"
+            actions={
+              <ActionButton
+                aria-pressed={favorites}
+                onClick={() => {
+                  setFavorites(!favorites);
+                  setView("congressional-staff");
+                }}
+              >
+                ★ Favorites
+              </ActionButton>
+            }
+          />
+          <Tabs items={views} value={view} onChange={setView} />
+        </>
+      )}
       {view === "congressional-staff" && (
         <CongressionalContacts key={view} favoritesOnly={favorites} />
       )}{" "}
       {view === "committee-staff" && <CommitteeDirectory />}
-      {view === "department-of-war" && <PersonnelDirectory />}
+      {view === "department-of-war" && (
+        <PersonnelDirectory onDetailChange={setPersonnelDetailOpen} />
+      )}
       {view === "state-legislators" && <StateDirectory />}
       {view === "state-committees" && <StateDirectory committees />}
     </>

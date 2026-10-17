@@ -1,6 +1,6 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -10,34 +10,76 @@ import {
 } from "../../../shared/module-ui";
 import { ResearchPortfolioDetail } from "./ResearchDetail";
 import { ResearchCreateAction } from "./ResearchCreate";
+import {
+  readResearchPortfolioFilters,
+  readResearchPortfolioView,
+  researchPortfolioHref,
+  type ResearchPortfolioFilters,
+  type ResearchPortfolioView,
+} from "./research-navigation";
 import styles from "./research.module.css";
 export function ResearchPortfoliosScreen() {
   const params = useSearchParams();
-  const [id, setId] = useState(params.get("portfolioId") || "");
-  const [role, setRole] = useState("");
-  const [mode, setMode] = useState("");
-  const [lifecycle, setLifecycle] = useState("active");
-  const [cursor, setCursor] = useState<string>();
-  const [history, setHistory] = useState<(string | undefined)[]>([]);
+  const router = useRouter();
+  const id = params.get("portfolioId") || "";
+  const view = readResearchPortfolioView(params.get("view"));
+  const filters = readResearchPortfolioFilters(params);
+  const { role, mode, lifecycle } = filters;
+  const filterKey = `${role}:${mode}:${lifecycle}`;
+  const navigate = (
+    portfolioId: string,
+    nextView: ResearchPortfolioView = view,
+  ) =>
+    router.push(
+      researchPortfolioHref({ portfolioId, view: nextView }, params.toString()),
+    );
+  const changeFilter = (key: keyof ResearchPortfolioFilters, value: string) => {
+    const requested = new URLSearchParams(params.toString());
+    requested.set(key, value);
+    router.push(
+      researchPortfolioHref(
+        {
+          portfolioId: id,
+          view,
+          filters: readResearchPortfolioFilters(requested),
+        },
+        params.toString(),
+      ),
+    );
+  };
+  const [pagination, setPagination] = useState<{
+    filterKey: string;
+    cursor?: string;
+    history: (string | undefined)[];
+  }>({ filterKey, cursor: undefined, history: [] });
+  if (pagination.filterKey !== filterKey)
+    setPagination({ filterKey, cursor: undefined, history: [] });
+  const cursor =
+    pagination.filterKey === filterKey ? pagination.cursor : undefined;
+  const history = pagination.filterKey === filterKey ? pagination.history : [];
   const query = useCapiroQuery("research.list", {
     query: { cursor, limit: 50 },
   });
+  const reloadList = query.reload;
+  const wasDetail = useRef(Boolean(id));
+  useEffect(() => {
+    if (wasDetail.current && !id) reloadList();
+    wasDetail.current = Boolean(id);
+  }, [id, reloadList]);
   const rows = (query.data?.items || []).filter(
     (r) =>
       (!role || r.myRole === role) &&
       (!mode || r.mode === mode) &&
-      (!lifecycle || r.lifecycle === lifecycle),
+      (lifecycle === "all" || r.lifecycle === lifecycle),
   );
-  const view = params.get("view") || "overview";
   if (id)
     return (
       <ResearchPortfolioDetail
+        key={id}
         id={id}
-        initialView={view}
-        onBack={() => {
-          setId("");
-          query.reload();
-        }}
+        view={view}
+        onView={(nextView) => navigate(id, nextView)}
+        onBack={() => navigate("")}
       />
     );
   return (
@@ -53,7 +95,7 @@ export function ResearchPortfoliosScreen() {
           <ResearchCreateAction
             onCreated={(portfolioId) => {
               query.reload();
-              setId(portfolioId);
+              navigate(portfolioId);
             }}
           />
         }
@@ -63,7 +105,7 @@ export function ResearchPortfoliosScreen() {
           className={styles.select}
           aria-label="Portfolio role"
           value={role}
-          onChange={(e) => setRole(e.target.value)}
+          onChange={(e) => changeFilter("role", e.target.value)}
         >
           <option value="">Role · Any</option>
           {["owner", "editor", "viewer"].map((r) => (
@@ -74,7 +116,7 @@ export function ResearchPortfoliosScreen() {
           className={styles.select}
           aria-label="Portfolio mode"
           value={mode}
-          onChange={(e) => setMode(e.target.value)}
+          onChange={(e) => changeFilter("mode", e.target.value)}
         >
           <option value="">Mode · Any</option>
           {["manual", "rules", "hybrid"].map((r) => (
@@ -85,9 +127,9 @@ export function ResearchPortfoliosScreen() {
           className={styles.select}
           aria-label="Portfolio status"
           value={lifecycle}
-          onChange={(e) => setLifecycle(e.target.value)}
+          onChange={(e) => changeFilter("lifecycle", e.target.value)}
         >
-          <option value="">Status · All</option>
+          <option value="all">Status · All</option>
           <option value="active">Active</option>
           <option value="archived">Archived</option>
         </select>
@@ -102,7 +144,7 @@ export function ResearchPortfoliosScreen() {
             <button
               key={r.id}
               className={styles.card}
-              onClick={() => setId(r.id)}
+              onClick={() => navigate(r.id)}
             >
               <header>
                 <h2>{r.name}</h2>
@@ -132,8 +174,11 @@ export function ResearchPortfoliosScreen() {
           <ActionButton
             disabled={!history.length}
             onClick={() => {
-              setCursor(history[history.length - 1]);
-              setHistory(history.slice(0, -1));
+              setPagination({
+                filterKey,
+                cursor: history[history.length - 1],
+                history: history.slice(0, -1),
+              });
             }}
           >
             Previous
@@ -141,8 +186,11 @@ export function ResearchPortfoliosScreen() {
           <ActionButton
             disabled={!query.data?.nextCursor}
             onClick={() => {
-              setHistory([...history, cursor]);
-              setCursor(query.data?.nextCursor || undefined);
+              setPagination({
+                filterKey,
+                cursor: query.data?.nextCursor || undefined,
+                history: [...history, cursor],
+              });
             }}
           >
             Next
