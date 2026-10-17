@@ -37,8 +37,12 @@ export async function verifyDocumentNavigation(
   await page
     .getByRole("heading", { name: "Connection setup required", exact: true })
     .waitFor();
+  if (viewport.width <= 680)
+    await page
+      .getByRole("button", { name: "Workspace menu", exact: true })
+      .click();
   await page
-    .getByRole(viewport.width < 768 ? "link" : "button", {
+    .getByRole(viewport.width <= 680 ? "link" : "button", {
       name: "Files",
       exact: true,
     })
@@ -73,8 +77,12 @@ export async function verifyDocumentNavigation(
   await page.waitForURL(`${origin}/meri`);
   await page.goForward();
   await page.waitForURL(`${origin}/meri/files`);
+  if (viewport.width <= 680)
+    await page
+      .getByRole("button", { name: "Workspace menu", exact: true })
+      .click();
   await page
-    .getByRole(viewport.width < 768 ? "link" : "button", {
+    .getByRole(viewport.width <= 680 ? "link" : "button", {
       name: "Conversations",
       exact: true,
     })
