@@ -25,7 +25,9 @@ export function readMeriConnectionConfig(
     baseUrl: config.services.meri,
     actionEnabled: available && env.MERI_ACTION_WORKFLOW_ENABLED === "true",
     taskCommandEnabled:
-      available && env.MERI_TASK_COMMAND_WORKFLOW_ENABLED === "true",
+      available &&
+      conversationOrigin?.pathname === "/" &&
+      env.MERI_TASK_COMMAND_WORKFLOW_ENABLED === "true",
     conversationEnabled:
       conversationAvailable &&
       env.MERI_CONVERSATION_WORKFLOW_ENABLED === "true",

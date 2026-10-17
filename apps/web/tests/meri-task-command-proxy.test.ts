@@ -63,6 +63,36 @@ describe("task-command exact frontend admission", () => {
       readTaskCommandConfig({ ...env, MERI_API_BASE_URL: undefined }).enabled,
     ).toBe(false);
   });
+  it.each([
+    ["API path", "https://meri.example.test/api"],
+    ["other path", "https://meri.example.test/private"],
+    ["credentials", "https://user:pass@meri.example.test"],
+    ["query", "https://meri.example.test/?scope=forged"],
+    ["fragment", "https://meri.example.test/#forged"],
+  ])(
+    "holds a %s Meri URL before authentication or dispatch",
+    async (_, baseUrl) => {
+      const invalidEnv = { ...env, MERI_API_BASE_URL: baseUrl };
+      const config = readTaskCommandConfig(invalidEnv);
+      const token = vi.fn(async () => "native");
+      const fetcher = vi.fn(async () => Response.json({}));
+      expect(config.enabled).toBe(false);
+      expect(readOpaqueSessionConfig(invalidEnv).enabled).toBe(false);
+      expect(
+        (
+          await proxyTaskCommandRequest(
+            request(),
+            "prepare",
+            config,
+            token,
+            fetcher,
+          )
+        ).status,
+      ).toBe(503);
+      expect(token).not.toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
   it.each(["approve", "PREPARE", "../execute", "prepare/execute"])(
     "refuses unallocated route %s",
     async (operation) => {
