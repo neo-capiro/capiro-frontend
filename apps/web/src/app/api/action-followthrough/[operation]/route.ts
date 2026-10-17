@@ -19,7 +19,11 @@ export async function POST(
       : readActionConfig(process.env),
     async () => {
       const session = await auth();
-      return session.userId ? session.getToken({ template: "capiro" }) : null;
+      return session.userId
+        ? operation === "session"
+          ? session.getToken()
+          : session.getToken({ template: "capiro" })
+        : null;
     },
   );
 }

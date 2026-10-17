@@ -229,6 +229,9 @@ it.each([
 });
 
 it("continues exact session and history requests through Clerk and their native adapters", async () => {
+  getToken.mockImplementation(async (...args) =>
+    args.length === 0 ? "native-session-token" : "template-capiro-token",
+  );
   for (const path of [allowedPostPaths[0]!, "/api/conversations/history"]) {
     const response = await proxy(
       new NextRequest(`${origin}${path}`, { method: "POST" }),
@@ -254,7 +257,7 @@ it("continues exact session and history requests through Clerk and their native 
   );
   expect(
     new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
-  ).toBe("Bearer native-capiro-token");
+  ).toBe("Bearer native-session-token");
 
   fetcher.mockResolvedValueOnce(
     Response.json({ error: { code: "SESSION_CHANGED" } }, { status: 403 }),
@@ -273,11 +276,13 @@ it("continues exact session and history requests through Clerk and their native 
     new Headers(fetcher.mock.calls[1]![1]!.headers).get("authorization"),
   ).toBe(actionBearer);
   expect(getToken).toHaveBeenCalledTimes(2);
-  for (const call of getToken.mock.calls)
-    expect(call).toEqual([{ template: "capiro" }]);
+  for (const call of getToken.mock.calls) expect(call).toEqual([]);
 });
 
 it("matches the conversation proxy path and sends native Clerk membership on list", async () => {
+  getToken.mockImplementation(async (...args) =>
+    args.length === 0 ? "native-session-token" : "template-capiro-token",
+  );
   expect(proxyConfig.matcher).toContain("/api/conversations/:path*");
   const continuation = await proxy(
     new NextRequest(`${origin}/api/conversations/list`, { method: "POST" }),
@@ -306,9 +311,9 @@ it("matches the conversation proxy path and sends native Clerk membership on lis
     `${meriOrigin}/api/conversations/list`,
   );
   const upstream = new Headers(fetcher.mock.calls[0]![1]!.headers);
-  expect(upstream.get("authorization")).toBe("Bearer native-capiro-token");
+  expect(upstream.get("authorization")).toBe("Bearer native-session-token");
   expect(upstream.has("cookie")).toBe(false);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
 });
 
 it("keeps both direct Meri adapters held before Clerk when activation is disabled", async () => {
