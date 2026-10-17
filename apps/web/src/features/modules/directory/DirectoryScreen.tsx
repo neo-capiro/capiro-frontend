@@ -5,6 +5,7 @@ import { ActionButton, PageHeader, Tabs } from "../../../shared/module-ui";
 import { CommitteeDirectory } from "./CommitteeDirectory";
 import { CongressionalContacts } from "./CongressionalContacts";
 import { PersonnelDirectory } from "./PersonnelDirectory";
+import { readPersonnelId } from "./personnel-selection";
 import { StateDirectory } from "./StateDirectory";
 const views = [
   { id: "congressional-staff", label: "Congressional Staff" },
@@ -22,11 +23,15 @@ export function DirectoryScreen() {
     ? requestedView!
     : "congressional-staff";
   const [favorites, setFavorites] = useState(false);
-  const [personnelDetailOpen, setPersonnelDetailOpen] = useState(false);
+  const [personnelDetailOpen, setPersonnelDetailOpen] = useState(
+    () => view === "department-of-war" && readPersonnelId(params) !== null,
+  );
   const setView = (nextView: string) => {
     if (!views.some((item) => item.id === nextView)) return;
     const next = new URLSearchParams(params.toString());
     next.set("view", nextView);
+    next.delete("personnelId");
+    next.delete("personnelPreviewId");
     router.push(`${pathname}?${next}`, { scroll: false });
   };
   const showDirectoryNavigation =
