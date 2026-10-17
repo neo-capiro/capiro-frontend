@@ -38,6 +38,8 @@ const coreDetail = {
 
 it("receives only vetted Personnel detail fields and source attribution", () => {
   const detail = personnelDetail.parse(coreDetail);
+  const source = coreDetail.sources[0];
+  if (!source) throw new Error("Personnel detail fixture needs a source");
   expect(detail).toEqual({
     id: coreDetail.id,
     fullName: coreDetail.fullName,
@@ -60,11 +62,11 @@ it("receives only vetted Personnel detail fields and source attribution", () => 
     lastSeenAt: coreDetail.lastSeenAt,
     sources: [
       {
-        id: coreDetail.sources[0].id,
-        source: coreDetail.sources[0].source,
-        sourceUrl: coreDetail.sources[0].sourceUrl,
-        observedAt: coreDetail.sources[0].observedAt,
-        confidence: coreDetail.sources[0].confidence,
+        id: source.id,
+        source: source.source,
+        sourceUrl: source.sourceUrl,
+        observedAt: source.observedAt,
+        confidence: source.confidence,
       },
     ],
   });
