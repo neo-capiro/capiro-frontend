@@ -9,6 +9,7 @@ const state = vi.hoisted(() => ({
   params: "",
   scopeState: "authorized-client",
   clientId: "30000000-0000-4000-8000-000000000001",
+  clientStatus: "active",
   responses: {} as Record<
     string,
     { data?: unknown; loading?: boolean; error?: Error }
@@ -23,7 +24,7 @@ vi.mock("../src/shared/session/SelectedClient", () => ({
   useSelectedClient: () => ({
     state: state.scopeState,
     requestedId: state.clientId,
-    client: { id: state.clientId },
+    client: { id: state.clientId, status: state.clientStatus },
   }),
 }));
 vi.mock("../src/shared/capiro/queries", () => ({
@@ -106,6 +107,7 @@ const select = (kind: "strategy" | "project" | "meeting") => {
 beforeEach(() => {
   state.scopeState = "authorized-client";
   state.clientId = clientId;
+  state.clientStatus = "active";
   state.params = "";
   state.reads = [];
   state.responses = {
@@ -164,6 +166,13 @@ describe("ordinary current-resource links", () => {
       expect(html).not.toContain("data-current-project");
       expect(html).not.toContain("All-project catalog fallback");
     }
+    state.responses["planner.bootstrap"] = {
+      data: { projects: [project], people: [] },
+    };
+    state.clientStatus = "archived";
+    expect(render("project")).toContain(
+      "unavailable in the selected client scope",
+    );
   });
 
   it("withholds project work on bootstrap loading or error without catalog fallback", () => {

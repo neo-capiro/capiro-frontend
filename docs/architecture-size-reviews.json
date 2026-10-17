@@ -52,15 +52,15 @@
   },
   {
     "path": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
-    "sha256": "343c0613183460504dbb59489104961197775f699222b2a727013fc4e4c1027a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "PersonnelDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "9949672a4464cec8e7f528b784b00194292955ed2af68081e93cc0b10d8899e6",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One bounded personnel list owns URL filters, list query, row selection and table presentation. Profile detail is a separate exact-id read; the corrected Contact column now shares the detail URL validator and renders an invalid or unsafe address as unavailable.",
     "functions": [
       {
         "name": "PersonnelDirectory",
-        "nonblankLines": 164
+        "nonblankLines": 246
       }
     ],
     "signals": [
@@ -1916,15 +1916,15 @@
   },
   {
     "path": "apps/web/src/features/modules/research-portfolios/ResearchPortfoliosScreen.tsx",
-    "sha256": "08f01fa0213e284cf5793c808a75a8037621019967ad40b75c38fb0c39fbad7f",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "ResearchPortfoliosScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "ea72d30243df8c4bd2abd55c9a22d34265989e1a2121cb14fb087d697f854b75",
+    "reviewer": "Codex independent coherent integration source review and exact copy delta review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One portfolio list owns bounded URL filters, cursor history, list query and row selection. URL projection and selected detail are separate owners; filter changes discard stale cursors and returning from detail reloads the list. The empty state now accurately scopes its claim to the current page and filters.",
     "functions": [
       {
         "name": "ResearchPortfoliosScreen",
-        "nonblankLines": 216
+        "nonblankLines": 184
       }
     ],
     "signals": [
@@ -3573,11 +3573,11 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
-    "sha256": "01ec98a0e8ed01718b2bc15b95737a9d9ee7e8677d828ed6f67e515e378a4454",
-    "reviewer": "Codex independent_fix_review",
-    "reviewedAt": "2026-10-16",
-    "evidence": "docs/objective-plan-bindings-20261015/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "Existing Planner section/task/generated-receipt selection now dispatches explicit current project URLs to a separate scoped receiver. Its selection state remains the page responsibility.",
+    "sha256": "bb1c5488e60dadd1733f1ae2e484fcb1d4ab0dda70c34ae0b7f77e4aebc06287",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One Planner page composes existing sections and the held current-project receiver. A pure helper determines link eligibility; the child link checks selected client and a fresh project read before opening the workspace.",
     "functions": [
       {
         "name": "PlannerScreen",
@@ -3780,11 +3780,11 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
-    "sha256": "0e8123d4fd7bfd897ac30eb9adf41cecfbb0447735c66c4cb5ad90a9a8b4d949",
-    "reviewer": "Codex root and independent continuation source reviewers",
-    "reviewedAt": "2026-10-16",
-    "evidence": "docs/non-meri-continuation-20261016/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "One client-scoped Commitment edit workflow. Canonical mutation ownership handles cancellation and generations; local pending guards prevent overlapping submissions and dismissal. The pure date field projection preserves an unchanged saved instant. Independently reviewed after the bounded change.",
+    "sha256": "d26e48484ba6d17f7e1f1db3c307ab705ba5d1d640a8d6df599e2d08f17c35fe",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "ScopedCommitments owns one client-keyed list, status filters and selected editor lifetime; CommitmentForm owns one draft with pending submit and dismissal guards. Due-day and save projections remain pure helpers, while canonical hooks own transport and writes.",
     "functions": [
       {
         "name": "ScopedCommitments",
@@ -3796,6 +3796,7 @@
       }
     ],
     "signals": [
+      "apps/web/src/features/modules/engagement/CommitmentView.tsx: function over80 nonblank lines requires review",
       "apps/web/src/features/modules/engagement/CommitmentView.tsx: function over80 nonblank lines requires review"
     ]
   },
@@ -3928,6 +3929,203 @@
     "functions": [],
     "signals": [
       "apps/web/src/features/portfolio/client-profile/profile-evidence-contracts.ts: 465 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/PersonnelProfile.tsx",
+    "sha256": "11df10e9e4f8874538958fd4c9d7a88bbadfa3aeebd5a85318da22314d2c895e",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One exact-id personnel profile read renders identity, role, contact and source chronology. It checks the returned id, shares the safe external URL validator, and treats observed dates as source evidence rather than employment tenure.",
+    "functions": [
+      {
+        "name": "PersonnelProfile",
+        "nonblankLines": 155
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/PersonnelProfile.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/create-intent.test.ts",
+    "sha256": "6d010606ddaa0659617e519f8c76e01daa148dbd2df6b0f4e539ff7a8e58ff9f",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One suite groups persisted-before-POST replay, changed-draft refusal, abandonment, scope isolation, storage failure and in-flight duplication cases. Each case is separate; the oversized anonymous callback is their lexical test container.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 196
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/create-intent.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/research-navigation.test.ts",
+    "sha256": "8b0ff19b1755a952573c358134fb8bf23cfc8ad81bc99d27144ed903c731eb15",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One grouped test callback covers selected tab history, malformed hints, URL filter restoration and cursor omission. It contains no production state or transport owner.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/research-navigation.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchCreate.tsx",
+    "sha256": "1fd1af28f7e7bed1dfe17cfe7fad7a233bf19a0fea7cb3a7f1c194a4aa7a3713",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-NONMERI-SIZE-REVIEW-20261017.md",
+    "rationale": "One account-keyed create dialog owns form and pending-result presentation. The separate create-intent helper validates and persists exact draft and idempotency identity before POST, while the component rechecks current actor and returned actor.",
+    "functions": [
+      {
+        "name": "ScopedResearchCreate",
+        "nonblankLines": 184
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchCreate.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-recovery.ts",
+    "sha256": "6c4573593861084d2d900879dbadef4cae1d7bba131e51217ce69ba004826304",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One tenant, actor, client and Objective scope fences the encrypted intake journal. The function rechecks identity, selected client and saved Objective before load, reserve and replay; shared journal code owns storage and locking, and Core owns admission.",
+    "functions": [
+      {
+        "name": "createStrategyIntakeRecovery",
+        "nonblankLines": 86
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-recovery.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts",
+    "sha256": "f5e219edb166cc05dc6973d537397553060c603bdde76ddcf5eecc1114db97de",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "The submit function and its two nested callbacks are one serialized v2 command lifecycle. It reloads exact saved requests before forming a new command, retains uncertain delivery, and keeps replay and new-write guards under one abort and journal lock.",
+    "functions": [
+      {
+        "name": "submit",
+        "nonblankLines": 90
+      },
+      {
+        "name": "submit > <anonymous>",
+        "nonblankLines": 90
+      },
+      {
+        "name": "submit > <anonymous> > <anonymous>",
+        "nonblankLines": 86
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review",
+      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review",
+      "apps/web/src/features/portfolio/objectives/objective-strategy-intake-session.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx",
+    "sha256": "03c509c07edf326f7cbedebb71d14925e1a9c3c90890587590dc321caf73cc5d",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One current Planner output view reads the exact source-scoped GET, presents unavailable and in-progress states, then rechecks fresh Core results before navigation to Planner current ACL. Pure selection and wire validation stay separate; no older binding is inferred.",
+    "functions": [
+      {
+        "name": "GovernedPlannerOutputs",
+        "nonblankLines": 113
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/ObjectiveGovernedPlanner.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx",
+    "sha256": "aa012180cac368fd22f7ce9deb11871769f4fef9c312a2927803934a201e6045",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One selected actor and client panel owns type selection plus truthful retained, uncertain and unavailable display. Dedicated recovery and session modules own admission and replay; removed dead state and corrected copy avoid implying generated Strategy progress. The feature remains default off.",
+    "functions": [
+      {
+        "name": "ReadyStrategyIntake",
+        "nonblankLines": 129
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/ObjectiveStrategyIntake.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-governed-generation.test.ts",
+    "sha256": "190d0ec1a46249ac6b8e5cb919f3a1f0bee68c4fe76add9bc690338313f4730b",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One grouped suite protects the immutable generation GET fixture, scope, requested versus accounted source, receipt, consent and timestamp rejection. The oversized anonymous callback is only the lexical container for separately named cases.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 161
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/objective-governed-generation.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-governed-outputs.test.ts",
+    "sha256": "e73362d961b55b755605babc8768fb872804ee58dc7d77d62187423eac3274a7",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One grouped suite protects exact Planner source selection, original creation versus retained application, fresh current read, archived and inaccessible masking, and unsupported Strategy and task states. The callback is a test container, not runtime logic.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 296
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/objective-governed-outputs.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/objective-governed-strategy-intake.test.ts",
+    "sha256": "e9f4016dae38ff3337216b6a61125068677ca49cad35e65b8191555a9e454a5f",
+    "reviewer": "Codex independent coherent integration source review",
+    "reviewedAt": "2026-10-17",
+    "evidence": "docs/non-meri-continuation-20261016/COHERENT-OBJECTIVE-SIZE-REVIEW-20261017.md",
+    "rationale": "One grouped suite asserts the closed v2 request, v1 receipt and v2 selection echo, and binding to the saved earlier source. Three separately named cases share an explicit fixture; the callback contains no production workflow.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 138
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/objective-governed-strategy-intake.test.ts: function over80 nonblank lines requires review"
     ]
   }
 ]

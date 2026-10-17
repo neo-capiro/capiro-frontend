@@ -169,7 +169,9 @@ export function ResearchPortfoliosScreen() {
             </button>
           ))}
         </div>
-        {!rows.length && <p>No portfolios match the current filters.</p>}
+        {!rows.length && (
+          <p>No portfolios on this page match the current filters.</p>
+        )}
         <footer className={styles.footer}>
           <ActionButton
             disabled={!history.length}
