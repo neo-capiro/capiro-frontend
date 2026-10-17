@@ -1,0 +1,43 @@
+{
+  "schema": "meri-frontend-fable-handoff-files/1",
+  "authorBase": "9a1fb2ed256dda520b9ee36c4da6ac588e5c308e",
+  "publishedBase": "1c0c059466963a3a5b4757d05f44701eb2007347",
+  "primaryCheckpoint": "https://github.com/neo-capiro/meri-greenfield/blob/88620c95ce19d6ec9dd6b34b3cf8b4160bcd3ed5/docs/handover/20261017/fable-shipping/FABLE-SHIPPING-HANDOFF.md",
+  "files": [
+    {
+      "file": "docs/meri-product-features-20261017/evidence/personal-preferences-desktop.png",
+      "bytes": 137701,
+      "sha256": "4de2596729a4868684df489e612a2e6bb237b827980974bc93edfab16f56eaad",
+      "gitBlob": "86f11cf58ec197b9cc9b311ab631c92a9adc10e1"
+    },
+    {
+      "file": "docs/meri-product-features-20261017/evidence/preferences-summary.json",
+      "bytes": 2805,
+      "sha256": "9fe7d0b93165d03cd006d475ecf674195e2565976666f890121526b7951548df",
+      "gitBlob": "76a25ac03a7de56c1810f4de6494a6ca5be13609"
+    },
+    {
+      "file": "docs/meri-product-features-20261017/evidence/task-update-desktop.png",
+      "bytes": 153384,
+      "sha256": "8c1973812f115ed3b29f9e4719a8c14a1dda42cec1b240e2ca626b6bedd846b3",
+      "gitBlob": "a003abee617b15871c1aead6965166c94b984281"
+    },
+    {
+      "file": "docs/meri-product-features-20261017/evidence/task-update-summary.json",
+      "bytes": 1956,
+      "sha256": "c5fcb4e7b792691c9d101c262da9ce943d3dd3f55e3039c45d87ea6c93a24b28",
+      "gitBlob": "fd05bcdec545007600cf5dcdb923a0a2f7a34ce2"
+    },
+    {
+      "file": "docs/meri-product-features-20261017/FABLE-HANDOFF.md",
+      "bytes": 26674,
+      "sha256": "11e0fa43a1d17aff7fa917b271477c76c249d5a4c95f2ce39e7659143dca1177",
+      "gitBlob": "b43d859e942c0778a3bd21e487fb33588167c4bd"
+    }
+  ],
+  "inspection": "Text files have UTF-8 without BOM, LF, exactly one final newline, no trailing spaces/tabs and identical filtered/unfiltered Git blobs. PNG files are unchanged synthetic browser captures. Staged git diff --check is reserved for parent after staging all untracked handoff files.",
+  "primaryTransferLink": "https://github.com/neo-capiro/meri-greenfield/blob/handoff/meri-portable-fable-20261017/docs/handover/20261017/fable-shipping/FABLE-SHIPPING-HANDOFF.md",
+  "primaryTransferStatus": "Coordinator-confirmed planned stable branch cross-link; publication pending at freeze. primaryCheckpoint remains the explicitly historical published source.",
+  "postgresReceiptLink": "https://github.com/neo-capiro/meri-greenfield/blob/codex/meri-product-features-handoff-task6-20261017/docs/qualification/user-preferences-20261017/README.md",
+  "postgresReceiptStatus": "Planned stable evidence path, publication pending at freeze. Actual attempt guard1 passed;10 canceled before hook; no persistence/roles/dump/restore pass. Diagnostic retry auto-review denied before execution; target stopped/removed and port55436 clean."
+}

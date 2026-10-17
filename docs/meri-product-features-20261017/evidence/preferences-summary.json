@@ -1,0 +1,73 @@
+{
+  "schema": "meri-frontend-selected-evidence/1",
+  "feature": "user-preferences",
+  "synthetic": true,
+  "publishedSource": "9e6d80843b0a46a862f7613b4ab9b08d925d7b17",
+  "reviewedTree": "678bb9a6ac507abbd091d4fd236bd162d4cfca8b",
+  "publicProducingSource": "9fe0b0857f0284cf460effab34b17fda21c5621d",
+  "sourceSnapshotSha256": "2105f66ab397eec21e84822a6a5a4b13a2185e23610c34c68d68cf947c75a427",
+  "checks": {
+    "vitestPassed": 28,
+    "nodePassed": 11,
+    "browserPassed": 5,
+    "browserFailed": 0,
+    "browserSkipped": 0,
+    "browserFlaky": 0,
+    "appTypeScript": "pass",
+    "clientTypeScript": "pass",
+    "scopedEslint": "pass",
+    "scopedPrettier": "pass",
+    "independentReview": "ACCEPT",
+    "architecture": {
+      "errors": [],
+      "ownSignals": [],
+      "existingBlocking": 233,
+      "wholeScannerExit": 1
+    },
+    "wholePublicPackageGate": "Initially blocked by missing sparse vendor input; later passed11 historical records and4 supplemental files; PR63 contains committed source-bound result."
+  },
+  "originalInputBindings": [
+    {
+      "name": "user-preferences-frontend-checks.json",
+      "bytes": 1920,
+      "sha256": "a2a49e2ec5aa50a11a89052d8363aa4e19b2d66acae4cba422a2dc2c03a858bd"
+    }
+  ],
+  "retainedHistoricalReceiptBindings": [
+    {
+      "file": "apps/web/.qa/user-preferences-vitest.json",
+      "bytes": 11682,
+      "sha256": "f2dbc18a47fb33b94958cbde19e65aa2098688fad998a80df70cf4dc84b4cf79"
+    },
+    {
+      "file": "apps/web/.qa/user-preferences-browser.json",
+      "bytes": 8009,
+      "sha256": "5f56ce4a0122875168720499f46bf82c1a8daa365711ca6d32567731ed55c095"
+    },
+    {
+      "file": "apps/web/.qa/user-preferences-architecture.json",
+      "bytes": 1020009,
+      "sha256": "3c973417155fe8db45244f72c5eac648cfe9e308d5d63ba264b2b40b694e1349"
+    },
+    {
+      "file": "apps/web/.qa/user-preferences-lint.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "apps/web/.qa/user-preferences-public.json",
+      "bytes": 70,
+      "sha256": "02ed8512b208709750c534746fe539b4f01cfdae862b62b088e11ddfa7a47d29"
+    },
+    {
+      "file": "apps/web/test-results/user-preferences/personal-preferences-desktop.png",
+      "bytes": 137701,
+      "sha256": "4de2596729a4868684df489e612a2e6bb237b827980974bc93edfab16f56eaad"
+    }
+  ],
+  "screenshot": {
+    "file": "personal-preferences-desktop.png",
+    "sha256": "4de2596729a4868684df489e612a2e6bb237b827980974bc93edfab16f56eaad"
+  },
+  "normalization": "Selected historical results; the stale initial whole-package limitation is explicitly reconciled to committed PR63 evidence. Large architecture output and author-local receipts are hash references only, not required files. No new test was run during handoff."
+}
