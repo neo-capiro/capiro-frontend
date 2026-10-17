@@ -72,3 +72,24 @@ it("derives the selected tab from restored and changed URLs", () => {
   renderToStaticMarkup(createElement(DirectoryScreen));
   expect(route.selected).toBe("congressional-staff");
 });
+
+it("restores the DoW detail layout for a valid selected ID", () => {
+  route.search =
+    "view=department-of-war&personnelId=00000000-0000-4000-8000-000000000001";
+  const html = renderToStaticMarkup(createElement(DirectoryScreen));
+  expect(html).not.toContain("<h1>Directory</h1>");
+  expect(html).not.toContain("<nav");
+});
+
+it("keeps navigation available for malformed or duplicate detail IDs", () => {
+  for (const suffix of [
+    "personnelId=invalid",
+    "personnelId=00000000-0000-4000-8000-000000000001&personnelId=00000000-0000-4000-8000-000000000001",
+  ]) {
+    route.search = `view=department-of-war&${suffix}`;
+    const html = renderToStaticMarkup(createElement(DirectoryScreen));
+    expect(html).toContain("<h1>Directory</h1>");
+    route.onView?.("committee-staff");
+    expect(route.pushed.at(-1)).toBe("/modules/directory?view=committee-staff");
+  }
+});

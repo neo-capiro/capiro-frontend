@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -13,6 +13,7 @@ import {
 import { DirectoryPagination } from "./DirectoryPagination";
 import { PersonnelProfile } from "./PersonnelProfile";
 import { externalUrl } from "./personnel-links";
+import { isPersonnelId, readPersonnelId } from "./personnel-selection";
 import styles from "./directory.module.css";
 
 const services = ["Army", "Navy", "Air Force", "Space Force", "Defense-wide"];
@@ -36,15 +37,9 @@ export function PersonnelDirectory({
       : "";
   const requestedPage = params.get("personnelPage") ?? "";
   const page = /^[1-9]\d{0,5}$/.test(requestedPage) ? Number(requestedPage) : 1;
-  const listScope = JSON.stringify([q, service, aligned, page]);
-  const [selection, setSelection] = useState<{
-    id: string;
-    scope: string;
-  } | null>(null);
-  const selectedId = selection?.scope === listScope ? selection.id : null;
+  const requestedId = readPersonnelId(params);
   const detailChangeRef = useRef(onDetailChange);
-  const previousScope = useRef(listScope);
-  const updateFilters = (
+  const updateParams = (
     updates: Record<string, string>,
     history: "push" | "replace" = "push",
   ) => {
@@ -58,20 +53,17 @@ export function PersonnelDirectory({
       scroll: false,
     });
   };
+  const updateFilters = (
+    updates: Record<string, string>,
+    history: "push" | "replace" = "push",
+  ) => updateParams({ ...updates, personnelId: "" }, history);
   useEffect(() => {
     detailChangeRef.current = onDetailChange;
   }, [onDetailChange]);
   useEffect(() => () => detailChangeRef.current?.(false), []);
-  useEffect(() => {
-    if (previousScope.current !== listScope) {
-      previousScope.current = listScope;
-      setSelection(null);
-      detailChangeRef.current?.(false);
-    }
-  }, [listScope]);
   const closeDetail = () => {
-    setSelection(null);
     onDetailChange?.(false);
+    updateParams({ personnelId: "" }, "replace");
   };
   const query = useCapiroQuery("directory.personnel", {
     query: {
@@ -83,6 +75,19 @@ export function PersonnelDirectory({
       sort: "pe_first",
     },
   });
+  // The URL is navigation state, not authority: a detail can only be restored
+  // from a current row in this exact list scope.
+  const selectedId =
+    !query.loading &&
+    !query.error &&
+    requestedId &&
+    query.data?.data.some((row) => row.id === requestedId)
+      ? requestedId
+      : null;
+  useEffect(() => {
+    if (!query.loading || requestedId === null)
+      onDetailChange?.(selectedId !== null);
+  }, [onDetailChange, query.loading, requestedId, selectedId]);
   return (
     <>
       {selectedId && <PersonnelProfile id={selectedId} onBack={closeDetail} />}
@@ -176,8 +181,9 @@ export function PersonnelDirectory({
                         type="button"
                         className={styles.link}
                         onClick={() => {
-                          setSelection({ id: r.id, scope: listScope });
+                          if (!isPersonnelId(r.id)) return;
                           onDetailChange?.(true);
+                          updateParams({ personnelId: r.id });
                         }}
                       >
                         <strong>{r.fullName}</strong>

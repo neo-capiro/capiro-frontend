@@ -14,30 +14,11 @@ const route = vi.hoisted(() => ({
   rowClick: null as (() => void) | null,
   detailBack: null as (() => void) | null,
   profileUrl: null as string | null,
+  rowId: "00000000-0000-4000-8000-000000000001",
+  listError: undefined as Error | undefined,
+  listLoading: false,
   query: null as Record<string, unknown> | null,
-  hooks: [] as unknown[],
-  hookIndex: 0,
 }));
-
-vi.mock("react", async (importOriginal) => {
-  const original = await importOriginal<typeof import("react")>();
-  return {
-    ...original,
-    useState: <T>(initial: T) => {
-      const index = route.hookIndex++;
-      if (!(index in route.hooks)) route.hooks[index] = initial;
-      return [
-        route.hooks[index] as T,
-        (next: T | ((value: T) => T)) => {
-          route.hooks[index] =
-            typeof next === "function"
-              ? (next as (value: T) => T)(route.hooks[index] as T)
-              : next;
-        },
-      ] as const;
-    },
-  };
-});
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/modules/directory",
@@ -52,13 +33,13 @@ vi.mock("../../../shared/capiro/queries", () => ({
   useCapiroQuery: (_key: string, input: { query: Record<string, unknown> }) => {
     route.query = input.query;
     return {
-      loading: false,
-      error: undefined,
+      loading: route.listLoading,
+      error: route.listError,
       reload: vi.fn(),
       data: {
         data: [
           {
-            id: "00000000-0000-4000-8000-000000000001",
+            id: route.rowId,
             fullName: "Casey Bennett",
             title: "Program Analyst",
             role: null,
@@ -149,14 +130,13 @@ vi.mock("./DirectoryPagination", () => ({
   },
 }));
 vi.mock("./PersonnelProfile", () => ({
-  PersonnelProfile: ({ onBack }: { onBack: () => void }) => {
+  PersonnelProfile: ({ id, onBack }: { id: string; onBack: () => void }) => {
     route.detailBack = onBack;
-    return createElement("div", null, "Selected profile");
+    return createElement("div", null, `Selected profile ${id}`);
   },
 }));
 
 function render(onDetailChange = vi.fn()) {
-  route.hookIndex = 0;
   return renderToStaticMarkup(
     createElement(PersonnelDirectory, { onDetailChange }),
   );
@@ -168,11 +148,12 @@ beforeEach(() => {
   route.pushed = [];
   route.replaced = [];
   route.query = null;
-  route.hooks = [];
-  route.hookIndex = 0;
   route.rowClick = null;
   route.detailBack = null;
   route.profileUrl = null;
+  route.rowId = "00000000-0000-4000-8000-000000000001";
+  route.listError = undefined;
+  route.listLoading = false;
 });
 
 it("restores bounded Personnel filters and preserves other URL hints on edits", () => {
@@ -207,15 +188,30 @@ it("restores bounded Personnel filters and preserves other URL hints on edits", 
   });
 });
 
-it("opens only a returned list row, then returns to the same filters", () => {
+it("opens a returned row in URL history and restores it after reload or Forward", () => {
   const detailChange = vi.fn();
   render(detailChange);
   expect(route.rowClick).toBeTypeOf("function");
   route.rowClick?.();
   expect(detailChange).toHaveBeenCalledWith(true);
+  expect(route.pushed).toEqual([
+    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=policy&personnelService=Army&personnelAligned=aligned&personnelPage=2&personnelId=00000000-0000-4000-8000-000000000001",
+  ]);
+  const profileUrl = route.pushed[0]!;
+  route.search = profileUrl.split("?")[1]!;
+  expect(render(detailChange)).toContain("Selected profile");
+  // A new render with no local selection state models a reloaded page.
+  expect(render(detailChange)).toContain("Selected profile");
+  route.search = route.search.replace(/&personnelId=[^&]+/, "");
+  expect(render(detailChange)).not.toContain("Selected profile");
+  route.search = profileUrl.split("?")[1]!;
   expect(render(detailChange)).toContain("Selected profile");
   route.detailBack?.();
   expect(detailChange).toHaveBeenLastCalledWith(false);
+  expect(route.replaced.at(-1)).toBe(
+    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=policy&personnelService=Army&personnelAligned=aligned&personnelPage=2",
+  );
+  route.search = route.replaced.at(-1)!.split("?")[1]!;
   expect(render(detailChange)).not.toContain("Selected profile");
   expect(route.query).toMatchObject({
     q: "policy",
@@ -225,14 +221,61 @@ it("opens only a returned list row, then returns to the same filters", () => {
   });
 });
 
-it("does not keep a selected profile visible after browser Back changes list scope", () => {
+it("clears detail selection when a filter changes", () => {
+  const selectedRoute =
+    route.search + "&personnelId=00000000-0000-4000-8000-000000000001";
+  route.search = selectedRoute;
+  expect(render()).toContain("Selected profile");
+  route.inputChange?.({ target: { value: "previous" } });
+  expect(route.replaced.at(-1)).not.toContain("personnelId");
+  route.search = route.replaced.at(-1)!.split("?")[1]!;
+  expect(render()).not.toContain("Selected profile");
+
+  route.search = selectedRoute;
+  render();
+  route.pageChange?.(3);
+  expect(route.pushed.at(-1)).toContain("personnelPage=3");
+  expect(route.pushed.at(-1)).not.toContain("personnelId");
+});
+
+it("fails closed for malformed, duplicate, or no-longer-returned detail ids", () => {
+  const base = route.search;
+  for (const suffix of [
+    "&personnelId=not-a-uuid",
+    "&personnelId=00000000-0000-4000-8000-000000000001&personnelId=00000000-0000-4000-8000-000000000001",
+    "&personnelId=00000000-0000-4000-8000-000000000002",
+  ]) {
+    route.search = base + suffix;
+    expect(render()).not.toContain("Selected profile");
+  }
+  route.search = base + "&personnelId=00000000-0000-4000-8000-000000000001";
+  route.rowId = "00000000-0000-4000-8000-000000000002";
+  expect(render()).not.toContain("Selected profile");
+  route.rowId = "00000000-0000-4000-8000-000000000001";
+  route.listError = new Error("Current list unavailable");
+  expect(render()).not.toContain("Selected profile");
+  route.listError = undefined;
+  route.listLoading = true;
+  expect(render()).not.toContain("Selected profile");
+  route.listLoading = false;
+  expect(render()).toContain("Selected profile");
+});
+
+it("does not open a list row with an unusable Core ID", () => {
+  route.rowId = "not-a-uuid";
   const detailChange = vi.fn();
   render(detailChange);
   route.rowClick?.();
-  expect(render(detailChange)).toContain("Selected profile");
+  expect(route.pushed).toEqual([]);
+  expect(detailChange).not.toHaveBeenCalledWith(true);
+});
+
+it("does not retain the profile when browser history switches list scope", () => {
+  route.search += "&personnelId=00000000-0000-4000-8000-000000000001";
+  expect(render()).toContain("Selected profile");
   route.search =
     "view=department-of-war&clientId=client-1&personnelQ=previous&personnelService=Army&personnelAligned=aligned&personnelPage=2";
-  expect(render(detailChange)).not.toContain("Selected profile");
+  expect(render()).not.toContain("Selected profile");
   expect(route.query).toMatchObject({ q: "previous", page: 2 });
 });
 
