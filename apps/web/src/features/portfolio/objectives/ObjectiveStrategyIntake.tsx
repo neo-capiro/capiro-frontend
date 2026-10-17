@@ -166,8 +166,8 @@ function ReadyStrategyIntake({
       </select>
       {retained?.accepted ? (
         <p role="status">
-          Consent and a reserved Strategy intake job were recorded. Refresh
-          current work to check progress; a Strategy output is not yet verified.
+          Consent and a reserved Strategy intake job were recorded. This receipt
+          does not verify a Strategy output.
         </p>
       ) : retained ? (
         <p role="status">
@@ -203,7 +203,7 @@ function ReadyStrategyIntake({
         disabled={disabled || state.busy}
         onClick={() => void session.refresh()}
       >
-        Refresh current Strategy work
+        Refresh saved intake and access
       </button>
     </section>
   );

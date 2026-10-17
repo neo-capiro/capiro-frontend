@@ -12,6 +12,7 @@ import {
 } from "../../../shared/module-ui";
 import { DirectoryPagination } from "./DirectoryPagination";
 import { PersonnelProfile } from "./PersonnelProfile";
+import { externalUrl } from "./personnel-links";
 import styles from "./directory.module.css";
 
 const services = ["Army", "Navy", "Air Force", "Space Force", "Defense-wide"];
@@ -227,22 +228,21 @@ export function PersonnelDirectory({
                 {
                   key: "contact",
                   label: "Contact",
-                  render: (r) =>
-                    r.email ||
-                    (r.publicProfileUrl && (
+                  render: (r) => {
+                    if (r.email) return r.email;
+                    const profileUrl = externalUrl(r.publicProfileUrl);
+                    return profileUrl ? (
                       <a
-                        href={
-                          /^https?:\/\//.test(r.publicProfileUrl)
-                            ? r.publicProfileUrl
-                            : undefined
-                        }
+                        href={profileUrl}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                       >
                         Public profile
                       </a>
-                    )) ||
-                    "Not available",
+                    ) : (
+                      "Not available"
+                    );
+                  },
                 },
               ]}
             />

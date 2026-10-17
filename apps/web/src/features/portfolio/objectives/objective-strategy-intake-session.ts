@@ -26,7 +26,6 @@ export type StrategyIntakeState = {
   busy: boolean;
   newSourceVerified: boolean;
   retained: RetainedStrategyIntake | null;
-  observedState?: string;
   error?: string;
 };
 const idle: StrategyIntakeState = {
@@ -123,10 +122,7 @@ export class ObjectiveStrategyIntakeSession {
           this.objective,
           this.client,
         );
-        this.update({
-          observedState: current.reconciliation,
-          newSourceVerified: true,
-        });
+        this.update({ newSourceVerified: true });
       }
     });
   submit = (type: StrategyType) =>
@@ -156,11 +152,7 @@ export class ObjectiveStrategyIntakeSession {
             this.objective,
             this.client,
           );
-        if (current)
-          this.update({
-            observedState: current.reconciliation,
-            newSourceVerified: true,
-          });
+        if (current) this.update({ newSourceVerified: true });
         const request =
           saved?.request ??
           governedObjectiveStrategyIntakeRequest.parse({
@@ -237,9 +229,6 @@ export class ObjectiveStrategyIntakeSession {
           this.objective,
           this.client,
         );
-      this.update({
-        observedState: current.reconciliation,
-        newSourceVerified: !retained,
-      });
+      this.update({ newSourceVerified: !retained });
     });
 }
