@@ -94,8 +94,8 @@ export function ModuleHub() {
       <PageHeader
         title={
           <>
-            Everything in Capiro
-            <span className={styles.desktopTitle}>, across the whole firm</span>
+            Work in Capiro
+            <span className={styles.desktopTitle}>, across your modules</span>
           </>
         }
         eyebrow="Modules"
@@ -109,11 +109,7 @@ export function ModuleHub() {
               disabled={clients.loading || Boolean(clients.error)}
               onChange={(event) => setClientId(event.target.value)}
             >
-              <option value="">
-                {clients.data
-                  ? `All ${profiles.length} client profiles`
-                  : "All client profiles"}
-              </option>
+              <option value="">No client filter</option>
               {profiles.map((client) => (
                 <option key={client.id} value={client.id}>
                   {client.name}
@@ -177,8 +173,8 @@ function ModuleHubInformation() {
               className={styles.infoContent}
               data-slot="tooltip-content"
             >
-              Every client and every activity, across the whole firm. Choose a
-              client profile to show just that client’s work.
+              Browse the work available in your modules. Choose a client profile
+              to focus the view.
               <TooltipPrimitive.Arrow />
             </TooltipPrimitive.Content>
           </TooltipPrimitive.Portal>
@@ -195,18 +191,18 @@ function ModulesRelationship() {
       aria-label="How modules and profiles relate"
     >
       <div>
-        <h2>Modules · the whole firm</h2>
+        <h2>Modules · available work</h2>
         <p>
-          Every client and every activity. Anyone at the firm can browse it,
-          even without a client profile.
+          Explore the modules and records available to your account. Choose a
+          client profile when you need a narrower view.
         </p>
       </div>
       <span aria-hidden="true">→</span>
       <div>
-        <h2>Client profile · just that client</h2>
+        <h2>Client profile · selected client</h2>
         <p>
-          The same data filtered to one client and arranged around their work,
-          so you stay fully inside it.
+          Open modules with that client selected. Available records depend on
+          your access in each module.
         </p>
       </div>
     </section>

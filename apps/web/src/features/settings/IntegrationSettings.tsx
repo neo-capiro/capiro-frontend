@@ -302,7 +302,9 @@ export function IntegrationSettings() {
       />
       <SettingsDialog
         open={!!disconnect}
-        onClose={() => setDisconnect(undefined)}
+        onClose={() => {
+          if (!action.busy) setDisconnect(undefined);
+        }}
         title={`Disconnect ${disconnect?.provider === "microsoft_365" ? "Microsoft 365" : "Google Workspace"}?`}
         description="Calendar and mail syncing will stop. Existing records are kept."
         footer={
