@@ -31,6 +31,7 @@ export function DirectoryScreen() {
     const next = new URLSearchParams(params.toString());
     next.set("view", nextView);
     next.delete("personnelId");
+    next.delete("personnelPreviewId");
     router.push(`${pathname}?${next}`, { scroll: false });
   };
   const showDirectoryNavigation =

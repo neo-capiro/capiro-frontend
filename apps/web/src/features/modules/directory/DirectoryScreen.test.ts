@@ -86,7 +86,7 @@ it("keeps navigation available for malformed or duplicate detail IDs", () => {
     "personnelId=invalid",
     "personnelId=00000000-0000-4000-8000-000000000001&personnelId=00000000-0000-4000-8000-000000000001",
   ]) {
-    route.search = `view=department-of-war&${suffix}`;
+    route.search = `view=department-of-war&${suffix}&personnelPreviewId=00000000-0000-4000-8000-000000000002`;
     const html = renderToStaticMarkup(createElement(DirectoryScreen));
     expect(html).toContain("<h1>Directory</h1>");
     route.onView?.("committee-staff");

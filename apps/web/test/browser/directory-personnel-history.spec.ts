@@ -38,7 +38,7 @@ const detail = {
   ],
 };
 
-test("DoW detail restores from browser history and reload; read error retries the same ID", async ({
+test("DoW preview opens detail, restores both history states, and retries the same ID", async ({
   page,
 }) => {
   const pageErrors: string[] = [];
@@ -67,14 +67,46 @@ test("DoW detail restores from browser history and reload; read error retries th
     name: "Casey Bennett",
     exact: true,
   });
+  const preview = page.getByRole("complementary", {
+    name: "Selected profile",
+  });
   await expect(rowButton).toBeVisible();
-  await rowButton.click();
+  await expect(
+    preview.getByRole("heading", { name: "Select a person" }),
+  ).toBeVisible();
+  await expect(
+    preview.getByRole("button", { name: "Open profile" }),
+  ).toHaveCount(0);
+  await page.getByRole("cell", { name: "Acquisition office" }).click();
+  await expect(page).toHaveURL(new RegExp(`personnelPreviewId=${personnelId}`));
+  await expect(page).not.toHaveURL(/(?:\?|&)personnelId=/);
+  await expect(preview).toBeVisible();
+  await expect(
+    preview.getByRole("heading", { name: "Casey Bennett" }),
+  ).toBeVisible();
+  const tableBox = await page
+    .getByRole("table", { name: "Defense personnel directory" })
+    .boundingBox();
+  const previewBox = await preview.boundingBox();
+  expect(tableBox).not.toBeNull();
+  expect(previewBox).not.toBeNull();
+  expect(previewBox!.x).toBeGreaterThan(tableBox!.x + tableBox!.width);
+  expect(previewBox!.width).toBeGreaterThanOrEqual(300);
+
+  await page.reload();
+  await expect(preview).toBeVisible();
+  await preview.getByRole("button", { name: "Open profile" }).click();
   await expect(page).toHaveURL(new RegExp(`personnelId=${personnelId}`));
   await expect(profileHeading).toBeVisible();
 
   await page.goBack();
   await expect(page).not.toHaveURL(/personnelId=/);
+  await expect(preview).toBeVisible();
+  await page.goBack();
+  await expect(page).not.toHaveURL(/personnelPreviewId=/);
   await expect(rowButton).toBeVisible();
+  await page.goForward();
+  await expect(preview).toBeVisible();
   await page.goForward();
   await expect(page).toHaveURL(new RegExp(`personnelId=${personnelId}`));
   await expect(profileHeading).toBeVisible();
@@ -90,4 +122,76 @@ test("DoW detail restores from browser history and reload; read error retries th
   await page.getByRole("button", { name: "Try again" }).click();
   await expect(profileHeading).toBeVisible();
   expect(pageErrors).toEqual([]);
+});
+
+test("DoW preview rejects invalid or stale IDs and clears on filter change", async ({
+  page,
+}) => {
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await onlyLocalRequests(page);
+  await operationFixtures(page, {
+    ...moduleRouteFixtures,
+    "directory.personnel": { data: [row], total: 1, page: 1, limit: 25 },
+  });
+  const preview = page.getByRole("complementary", {
+    name: "Selected profile",
+  });
+  for (const previewId of [
+    "invalid",
+    "00000000-0000-4000-8000-000000000003",
+    `${personnelId}&personnelPreviewId=${personnelId}`,
+  ]) {
+    await page.goto(
+      `/modules/directory?view=department-of-war&personnelPreviewId=${previewId}`,
+    );
+    await expect(
+      preview.getByRole("heading", { name: "Select a person" }),
+    ).toBeVisible();
+    await expect(
+      preview.getByRole("button", { name: "Open profile" }),
+    ).toHaveCount(0);
+  }
+  await page.goto("/modules/directory?view=department-of-war");
+  await page.getByRole("link", { name: "0603001A" }).click();
+  await expect(page).toHaveURL(/\/modules\/intelligence\?/);
+  await expect(page).not.toHaveURL(/personnelPreviewId=/);
+  await page.goBack();
+  const selectableRow = page.getByRole("row", {
+    name: "Preview Casey Bennett",
+  });
+  await selectableRow.focus();
+  await page.keyboard.press("Enter");
+  await expect(preview).toBeVisible();
+  await page.getByRole("combobox", { name: "Service" }).selectOption("Navy");
+  await expect(page).not.toHaveURL(/personnelPreviewId=/);
+  await expect(
+    preview.getByRole("heading", { name: "Select a person" }),
+  ).toBeVisible();
+  await expect(
+    preview.getByRole("button", { name: "Open profile" }),
+  ).toHaveCount(0);
+  expect(pageErrors).toEqual([]);
+});
+
+test("a direct verified personnel detail link opens without a preview selection", async ({
+  page,
+}) => {
+  await onlyLocalRequests(page);
+  await operationFixtures(page, {
+    ...moduleRouteFixtures,
+    "directory.personnel": { data: [row], total: 1, page: 1, limit: 25 },
+    "directory.personnelDetail": detail,
+  });
+  await page.goto(
+    `/modules/directory?view=department-of-war&personnelId=${personnelId}`,
+  );
+  await expect(
+    page.getByRole("heading", { name: "Casey Bennett" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Directory" }).click();
+  await expect(page).not.toHaveURL(/(?:\?|&)personnelId=/);
+  await expect(
+    page.getByRole("complementary", { name: "Selected profile" }),
+  ).toContainText("Casey Bennett");
 });

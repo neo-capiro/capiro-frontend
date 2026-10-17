@@ -183,6 +183,7 @@ export const personnelList = z.object({
   page: z.number(),
   limit: z.number(),
 });
+export type Personnel = z.infer<typeof personnel>;
 // Core's detail DTO also carries arbitrary metadata and source snippets. This
 // receiving shape deliberately drops them from the browser-facing operation.
 export const personnelDetail = z.object({

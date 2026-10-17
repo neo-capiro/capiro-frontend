@@ -250,6 +250,19 @@
 .table td {
   max-width: 450px;
 }
+.tableSelectedRow {
+  background: var(--muted);
+}
+.tableActionRow {
+  cursor: pointer;
+}
+.tableActionRow:hover {
+  background: var(--muted);
+}
+.tableActionRow:focus-visible {
+  outline: 2px solid var(--ring, #292524);
+  outline-offset: -2px;
+}
 .emptyCell {
   text-align: center;
   padding: 40px !important;

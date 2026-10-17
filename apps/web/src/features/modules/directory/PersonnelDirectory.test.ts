@@ -12,6 +12,7 @@ const route = vi.hoisted(() => ({
   page: 0,
   pageChange: null as ((page: number) => void) | null,
   rowClick: null as (() => void) | null,
+  previewOpen: null as (() => void) | null,
   detailBack: null as (() => void) | null,
   profileUrl: null as string | null,
   rowId: "00000000-0000-4000-8000-000000000001",
@@ -135,6 +136,22 @@ vi.mock("./PersonnelProfile", () => ({
     return createElement("div", null, `Selected profile ${id}`);
   },
 }));
+vi.mock("./PersonnelPreview", () => ({
+  PersonnelPreview: ({
+    person,
+    onOpen,
+  }: {
+    person?: { fullName: string };
+    onOpen: () => void;
+  }) => {
+    route.previewOpen = person ? onOpen : null;
+    return createElement(
+      "div",
+      null,
+      person ? `Selected preview ${person.fullName}` : "Select a person",
+    );
+  },
+}));
 
 function render(onDetailChange = vi.fn()) {
   return renderToStaticMarkup(
@@ -149,6 +166,7 @@ beforeEach(() => {
   route.replaced = [];
   route.query = null;
   route.rowClick = null;
+  route.previewOpen = null;
   route.detailBack = null;
   route.profileUrl = null;
   route.rowId = "00000000-0000-4000-8000-000000000001";
@@ -188,31 +206,42 @@ it("restores bounded Personnel filters and preserves other URL hints on edits", 
   });
 });
 
-it("opens a returned row in URL history and restores it after reload or Forward", () => {
+it("selects a current row before opening its profile and restores both URL states", () => {
   const detailChange = vi.fn();
   render(detailChange);
   expect(route.rowClick).toBeTypeOf("function");
   route.rowClick?.();
-  expect(detailChange).toHaveBeenCalledWith(true);
   expect(route.pushed).toEqual([
-    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=policy&personnelService=Army&personnelAligned=aligned&personnelPage=2&personnelId=00000000-0000-4000-8000-000000000001",
+    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=policy&personnelService=Army&personnelAligned=aligned&personnelPage=2&personnelPreviewId=00000000-0000-4000-8000-000000000001",
   ]);
-  const profileUrl = route.pushed[0]!;
+  const previewUrl = route.pushed[0]!;
+  route.search = previewUrl.split("?")[1]!;
+  expect(render(detailChange)).toContain("Selected preview Casey Bennett");
+  expect(render(detailChange)).not.toContain("Selected profile");
+  route.previewOpen?.();
+  expect(detailChange).toHaveBeenCalledWith(true);
+  const profileUrl = route.pushed[1]!;
+  expect(profileUrl).toContain(
+    "personnelPreviewId=00000000-0000-4000-8000-000000000001",
+  );
+  expect(profileUrl).toContain(
+    "personnelId=00000000-0000-4000-8000-000000000001",
+  );
   route.search = profileUrl.split("?")[1]!;
   expect(render(detailChange)).toContain("Selected profile");
   // A new render with no local selection state models a reloaded page.
   expect(render(detailChange)).toContain("Selected profile");
-  route.search = route.search.replace(/&personnelId=[^&]+/, "");
+  route.search = previewUrl.split("?")[1]!;
   expect(render(detailChange)).not.toContain("Selected profile");
+  expect(render(detailChange)).toContain("Selected preview Casey Bennett");
   route.search = profileUrl.split("?")[1]!;
   expect(render(detailChange)).toContain("Selected profile");
   route.detailBack?.();
   expect(detailChange).toHaveBeenLastCalledWith(false);
-  expect(route.replaced.at(-1)).toBe(
-    "/modules/directory?view=department-of-war&clientId=client-1&personnelQ=policy&personnelService=Army&personnelAligned=aligned&personnelPage=2",
-  );
+  expect(route.replaced.at(-1)).toBe(previewUrl);
   route.search = route.replaced.at(-1)!.split("?")[1]!;
   expect(render(detailChange)).not.toContain("Selected profile");
+  expect(render(detailChange)).toContain("Selected preview Casey Bennett");
   expect(route.query).toMatchObject({
     q: "policy",
     service: "Army",
@@ -223,11 +252,13 @@ it("opens a returned row in URL history and restores it after reload or Forward"
 
 it("clears detail selection when a filter changes", () => {
   const selectedRoute =
-    route.search + "&personnelId=00000000-0000-4000-8000-000000000001";
+    route.search +
+    "&personnelPreviewId=00000000-0000-4000-8000-000000000001&personnelId=00000000-0000-4000-8000-000000000001";
   route.search = selectedRoute;
   expect(render()).toContain("Selected profile");
   route.inputChange?.({ target: { value: "previous" } });
   expect(route.replaced.at(-1)).not.toContain("personnelId");
+  expect(route.replaced.at(-1)).not.toContain("personnelPreviewId");
   route.search = route.replaced.at(-1)!.split("?")[1]!;
   expect(render()).not.toContain("Selected profile");
 
@@ -236,6 +267,44 @@ it("clears detail selection when a filter changes", () => {
   route.pageChange?.(3);
   expect(route.pushed.at(-1)).toContain("personnelPage=3");
   expect(route.pushed.at(-1)).not.toContain("personnelId");
+  expect(route.pushed.at(-1)).not.toContain("personnelPreviewId");
+});
+
+it("restores only a valid preview from the current list scope", () => {
+  const base = route.search;
+  const id = "00000000-0000-4000-8000-000000000001";
+  route.search = `${base}&personnelPreviewId=${id}`;
+  expect(render()).toContain("Selected preview Casey Bennett");
+  for (const suffix of [
+    "personnelPreviewId=not-a-uuid",
+    `personnelPreviewId=${id}&personnelPreviewId=${id}`,
+    "personnelPreviewId=00000000-0000-4000-8000-000000000002",
+  ]) {
+    route.search = `${base}&${suffix}`;
+    expect(render()).not.toContain("Selected preview");
+  }
+  route.search = `${base}&personnelPreviewId=${id}`;
+  route.rowId = "00000000-0000-4000-8000-000000000002";
+  expect(render()).not.toContain("Selected preview");
+  route.rowId = id;
+  route.listError = new Error("Current list unavailable");
+  expect(render()).not.toContain("Selected preview");
+  route.listError = undefined;
+  route.listLoading = true;
+  expect(render()).not.toContain("Selected preview");
+  route.listLoading = false;
+  expect(render()).toContain("Selected preview Casey Bennett");
+});
+
+it("lets a verified detail ID take precedence over a conflicting preview hint", () => {
+  route.search +=
+    "&personnelId=00000000-0000-4000-8000-000000000001&personnelPreviewId=00000000-0000-4000-8000-000000000002";
+  expect(render()).toContain("Selected profile");
+  route.detailBack?.();
+  expect(route.replaced.at(-1)).toContain(
+    "personnelPreviewId=00000000-0000-4000-8000-000000000001",
+  );
+  expect(route.replaced.at(-1)).not.toContain("personnelId=");
 });
 
 it("fails closed for malformed, duplicate, or no-longer-returned detail ids", () => {
