@@ -9,6 +9,9 @@ const id = z
   .uuid()
   .refine((value) => value === value.toLowerCase(), "Use a canonical UUID.");
 const version = z.number().int().min(1).max(2147483647);
+/** Shared with the additive PR61 Strategy intake; retain one Objective wire vocabulary. */
+export const governedObjectiveId = id;
+export const governedObjectiveVersion = version;
 const controlVersion = z.number().int().min(0).max(2147483647);
 const utc = z.string().refine((value) => {
   const time = Date.parse(value);
