@@ -1,0 +1,59 @@
+{
+  "source": "056b562694df7bbca4a45aef1221d9a3a12bf057",
+  "node": "24.19.0",
+  "bundler": "webpack",
+  "started": "2026-10-17T01:50:15.7893031+00:00",
+  "finished": "2026-10-17T01:52:53.3165772+00:00",
+  "exit": 0,
+  "diskBeforeBytes": 2271748096,
+  "diskAfterBytes": 5668089856,
+  "publishedCommit": "9e6d80843b0a46a862f7613b4ab9b08d925d7b17",
+  "sourceTree": "678bb9a6ac507abbd091d4fd236bd162d4cfca8b",
+  "publishedPullRequest": "https://github.com/neo-capiro/capiro-frontend/pull/62",
+  "command": "node ../../node_modules/next/dist/bin/next build --webpack",
+  "workingDirectory": "apps/web",
+  "nextVersion": "16.4.0",
+  "environment": {
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NODE_OPTIONS": "--max-old-space-size=8192"
+  },
+  "compilationSeconds": 82,
+  "typeScriptSeconds": 56,
+  "generation": {
+    "completed": 282,
+    "total": 282,
+    "seconds": 8
+  },
+  "routeManifestEntries": 52,
+  "affectedRoutes": {
+    "userPreferences": true,
+    "settings": true
+  },
+  "output": {
+    "root": "apps/web/.next",
+    "regularFiles": 1245,
+    "regularFileBytes": 1258990863,
+    "links": [
+      {
+        "path": "apps\\web\\.next\\standalone\\node_modules\\next",
+        "target": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-16\\task-2\\capiro-frontend-first-chat\\node_modules\\next"
+      },
+      {
+        "path": "apps\\web\\.next\\standalone\\node_modules\\shiki",
+        "target": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-16\\task-2\\capiro-frontend-first-chat\\node_modules\\shiki"
+      }
+    ]
+  },
+  "qualification": {
+    "productionSourceBuild": true,
+    "defaultTurbopack": false,
+    "standaloneDeploymentArtifact": false,
+    "excludedOutsideRootTracedFiles": 27
+  },
+  "setup": {
+    "trackedVendorFiles": 14,
+    "trackedVendorBytes": 3371011,
+    "installedDependencies": false,
+    "modifiedProductionSource": false
+  }
+}
