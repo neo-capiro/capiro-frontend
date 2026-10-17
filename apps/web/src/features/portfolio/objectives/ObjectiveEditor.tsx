@@ -12,6 +12,10 @@ import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
 import { ObjectiveOutreach } from "./ObjectiveOutreach";
 import { ObjectiveWorkDestinations } from "./ObjectiveWorkDestinations";
 import { ObjectiveGeneration } from "./ObjectiveGeneration";
+import {
+  ObjectiveGovernedPlanner,
+  governedPlannerReadEnabled,
+} from "./ObjectiveGovernedPlanner";
 
 export function ObjectiveEditor({
   clientId,
@@ -79,6 +83,16 @@ export function ObjectiveEditor({
           objective={session.record}
           disabled={
             !session.mutation.canWrite ||
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
+      {governedPlannerReadEnabled && open && session.record && (
+        <ObjectiveGovernedPlanner
+          key={`governed-planner:${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
             session.mutation.isPending ||
             session.draftStatus === "Unsaved changes"
           }
