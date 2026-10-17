@@ -1,3 +1,4 @@
+import { sameRequestOrigin } from "../request-origin";
 import { boundedJsonText, withActionDeadline } from "./bounded-json";
 import { actionSessionHints } from "./session-bootstrap";
 import type { readActionConfig } from "./config";
@@ -28,7 +29,7 @@ export async function proxyActionRequest(
   if (
     url.pathname !== `/api/action-followthrough/${route}` ||
     url.search ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);

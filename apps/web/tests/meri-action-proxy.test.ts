@@ -405,3 +405,87 @@ describe("Meri proxy request lifetime", () => {
     expect(fetcher).toHaveBeenCalledOnce();
   });
 });
+
+describe("standalone bind address behind the ALB", () => {
+  // Next builds request.url from HOSTNAME/PORT (https://0.0.0.0:5188), never the public host.
+  const publicOrigin = "https://portfolio-preview.app.capiro.ai";
+  const configured = readActionConfig({
+    ...env,
+    CAPIRO_REQUEST_ORIGIN: publicOrigin,
+  });
+  const bound = (headers: Record<string, string> = {}) =>
+    new Request("https://0.0.0.0:5188/api/action-followthrough/session", {
+      method: "POST",
+      body: "{}",
+      headers: {
+        Origin: publicOrigin,
+        "Content-Type": "application/json",
+        Host: "portfolio-preview.app.capiro.ai",
+        "X-Forwarded-Proto": "https",
+        ...headers,
+      },
+    });
+  it("admits the configured public origin although request.url names the bind address", async () => {
+    expect(configured.requestOrigin).toBe(publicOrigin);
+    const token = vi.fn(async () => "native-token");
+    const fetcher = vi.fn<typeof fetch>(async () => Response.json({}));
+    const response = await proxyActionRequest(
+      bound(),
+      "session",
+      configured,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(token).toHaveBeenCalledOnce();
+    expect(fetcher).toHaveBeenCalledOnce();
+  });
+  it("still compares against request.url when no origin is configured", async () => {
+    const token = vi.fn(async () => "native-token");
+    const fetcher = vi.fn();
+    await expectUnavailable(
+      await proxyActionRequest(bound(), "session", config, token, fetcher),
+      400,
+    );
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+  it.each(["https://foreign.test", "https://0.0.0.0:5188", "null", ""])(
+    "rejects Origin %s against the configured origin despite a matching Host",
+    async (value) => {
+      const token = vi.fn(async () => "native-token");
+      const fetcher = vi.fn();
+      await expectUnavailable(
+        await proxyActionRequest(
+          bound({ Origin: value }),
+          "session",
+          configured,
+          token,
+          fetcher,
+        ),
+        400,
+      );
+      expect(token).not.toHaveBeenCalled();
+      expect(fetcher).not.toHaveBeenCalled();
+    },
+  );
+  it("fails closed on an invalid configured origin", async () => {
+    const invalid = readActionConfig({
+      ...env,
+      CAPIRO_REQUEST_ORIGIN: "https://0.0.0.0:5188",
+    });
+    expect(invalid.requestOrigin).toBeNull();
+    const fetcher = vi.fn();
+    await expectUnavailable(
+      await proxyActionRequest(
+        bound({ Origin: "https://0.0.0.0:5188" }),
+        "session",
+        invalid,
+        vi.fn(async () => "native-token"),
+        fetcher,
+      ),
+      400,
+    );
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+});

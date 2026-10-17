@@ -12,6 +12,7 @@ export function readConversationConfig(
   return {
     enabled: config.conversationEnabled,
     baseUrl: config.baseUrl,
+    requestOrigin: config.requestOrigin,
     firstChatBootstrapEnabled:
       config.conversationEnabled &&
       env.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED === "true",

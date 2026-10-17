@@ -1,3 +1,5 @@
+import { publicRequestOrigin, readRequestOrigin } from "../request-origin";
+
 type Environment = Record<string, string | undefined>;
 
 /** The app's pinned @capiro/meri-contracts distribution. */
@@ -52,8 +54,13 @@ function configuredRuntimeBinding(env: Environment): boolean {
 }
 
 /** Preview Meri admission requires a distinct, explicitly configured HTTPS runtime. */
-function configuredMeriOrigin(env: Environment, requestUrl: URL): boolean {
+function configuredMeriOrigin(env: Environment, request: Request): boolean {
   const raw = env.MERI_API_BASE_URL;
+  const requestUrl = new URL(request.url);
+  const publicOrigin = publicRequestOrigin(
+    request,
+    readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, []),
+  );
   if (
     !raw ||
     raw.length > 512 ||
@@ -70,7 +77,8 @@ function configuredMeriOrigin(env: Environment, requestUrl: URL): boolean {
       target.port ||
       !meriHost.test(target.hostname) ||
       ordinaryHosts.has(target.hostname) ||
-      target.origin === requestUrl.origin
+      target.origin === requestUrl.origin ||
+      target.origin === publicOrigin
     )
       return false;
     for (const key of otherServices) {
@@ -97,7 +105,8 @@ export function previewMeriConversationRoute(
     return false;
   try {
     const url = new URL(request.url);
-    if (url.search || url.hash || !configuredMeriOrigin(env, url)) return false;
+    if (url.search || url.hash || !configuredMeriOrigin(env, request))
+      return false;
     return (
       (request.method === "POST" && postPaths.has(url.pathname)) ||
       (request.method === "GET" && reconnectPath.test(url.pathname))
