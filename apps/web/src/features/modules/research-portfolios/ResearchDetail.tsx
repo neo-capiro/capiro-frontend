@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -16,44 +15,55 @@ import { ResearchReviews } from "./ResearchReviews";
 import { ResearchSettings } from "./ResearchSettings";
 import { ResearchSnapshots } from "./ResearchSnapshots";
 import { ResearchSubscriptions } from "./ResearchSubscriptions";
-const tabs = [
-  { id: "overview", label: "Overview" },
-  { id: "members", label: "Members" },
-  { id: "changes", label: "Changes" },
-  { id: "analytics", label: "Analytics" },
-  { id: "reviews", label: "Reviews" },
-  { id: "settings", label: "Settings" },
-  { id: "snapshots", label: "Snapshots" },
-  { id: "subscriptions", label: "Subscriptions" },
-];
+import {
+  readResearchPortfolioView,
+  researchPortfolioTabs,
+  type ResearchPortfolioView,
+} from "./research-navigation";
 export function ResearchPortfolioDetail({
   id,
-  initialView = "overview",
+  view,
+  onView,
   onBack,
 }: {
   id: string;
-  initialView?: string;
+  view: ResearchPortfolioView;
+  onView: (view: ResearchPortfolioView) => void;
   onBack: () => void;
 }) {
-  const [view, setView] = useState(
-    tabs.some((t) => t.id === initialView) ? initialView : "overview",
-  );
   const query = useCapiroQuery("research.detail", { params: { id } });
   const p = query.data;
+  const back = <ActionButton onClick={onBack}>Back to portfolios</ActionButton>;
+  if (p && p.id !== id)
+    return (
+      <>
+        {back}
+        <StatusPanel
+          error="This research portfolio could not be verified. Try again."
+          onRetry={query.reload}
+        />
+      </>
+    );
   return (
     <>
-      <ActionButton onClick={onBack}>Back to portfolios</ActionButton>
+      {back}
       <PageHeader
         title={p?.name || "Research Portfolio"}
         eyebrow="Research Portfolios"
         description={p?.purpose || undefined}
         actions={
-          <Link href={`/meri?researchPortfolioId=${encodeURIComponent(id)}`}>
-            Ask Meri
-          </Link>
+          p?.id === id ? (
+            <Link href={`/meri?researchPortfolioId=${encodeURIComponent(id)}`}>
+              Ask Meri
+            </Link>
+          ) : undefined
         }
       />
-      <Tabs items={tabs} value={view} onChange={setView} />
+      <Tabs
+        items={researchPortfolioTabs}
+        value={view}
+        onChange={(nextView) => onView(readResearchPortfolioView(nextView))}
+      />
       <StatusPanel
         loading={query.loading}
         error={query.error}

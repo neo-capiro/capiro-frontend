@@ -230,4 +230,15 @@ export const directoryOperations = {
     source:
       "apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts / dto/list-personnel.dto.ts",
   }),
+  "directory.personnelDetail": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/acquisition-personnel/:id",
+    request: z
+      .object({ params: z.object({ id: z.string().uuid() }).strict() })
+      .strict(),
+    response: s.personnelDetail,
+    source:
+      "neo-capiro/capiro-backend@51c157444ac43035eeb489ff46aee5a4e89ba3ac apps/api/src/acquisition-personnel/acquisition-personnel.controller.ts / dto/person-detail.dto.ts",
+  }),
 } as const;
