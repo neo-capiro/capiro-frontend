@@ -34,7 +34,9 @@ const entries = routes.flatMap(([path, handlers]) =>
   })),
 );
 const fetcher = vi.fn<typeof fetch>();
-const getToken = vi.fn(async () => "synthetic-token");
+const getToken = vi.fn(async (options?: { template: string }) =>
+  options ? "template-synthetic-token" : "native-synthetic-token",
+);
 
 beforeEach(() => {
   for (const key of [
@@ -52,6 +54,9 @@ beforeEach(() => {
   vi.stubEnv("MERI_DOCUMENT_WORKFLOW_ENABLED", "true");
   vi.stubEnv("MERI_DOCUMENT_OPERATION", "create_word");
   vi.stubEnv("CAPIRO_PREVIEW_READ_ONLY", "true");
+  getToken.mockImplementation(async (options) =>
+    options ? "template-synthetic-token" : "native-synthetic-token",
+  );
   clerk.auth.mockResolvedValue({ userId: "synthetic", getToken });
   clerk.middleware.mockImplementation(
     () => new Response("ordinary Clerk path"),
@@ -209,8 +214,12 @@ it.each([undefined, "false"])(
       expect(response.status).toBe(200);
       expect(await response.json()).toEqual({ synthetic: true });
       expect(fetcher.mock.lastCall?.[1]?.method).toBe(method);
+      expect(fetcher.mock.lastCall?.[1]?.headers).toMatchObject({
+        Authorization: "Bearer template-synthetic-token",
+      });
     }
     expect(getToken).toHaveBeenCalledTimes(2);
+    expect(getToken).toHaveBeenCalledWith({ template: "capiro" });
     expect(fetcher).toHaveBeenCalledTimes(2);
   },
 );
