@@ -49,6 +49,40 @@ Parameters:
     Type: String
     Default: https://portfolio-preview.app.capiro.ai
     AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
+  CapiroRequestOrigin:
+    Type: String
+    Default: https://portfolio-preview.app.capiro.ai
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
+  CapiroPreviewReadOnly:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true"]
+    Description: Keep ordinary backend routes held; only exact reviewed exceptions can pass
+  CapiroPreviewReadBackendSource:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "6542f5b089656b6d255465edd464d06c2a0b408f"]
+  CapiroPreviewReadApiBaseUrl:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/api"]
+  MeriFirstChatBootstrapEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+  MeriFirstChatClientId:
+    Type: String
+    Default: ""
+    AllowedPattern: "^$|^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    Description: Exact owner-verified active client; no value is committed in source
+  CapiroPreviewFirstChatBackendSource:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "c64f0005cf14d69683aabafa11def4964d766832"]
+  CapiroPreviewFirstChatApiBaseUrl:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/api"]
   MeriApiBaseUrl:
     Type: String
     Default: ""
@@ -60,13 +94,90 @@ Parameters:
     Default: "false"
     AllowedValues: ["false", "true"]
     Description: Explicit Meri conversation opt-in after the service and its dependencies are qualified
+  CapiroPreviewMeriConversationRoutesEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+  CapiroPreviewMeriRuntimeOrigin:
+    Type: String
+    Default: ""
+    MaxLength: 512
+    AllowedPattern: "^$|^https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$"
+  CapiroPreviewMeriRuntimeSource:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "f005f77316bb8735e60f16c3ac99a5c8e3d71a34"]
+  CapiroPreviewMeriRuntimeImageDigest:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d"]
+  CapiroPreviewMeriContractPackageVersion:
+    Type: String
+    Default: ""
+    AllowedValues: ["", "0.1.8"]
+    Description: Frontend consumer distribution; this is not a Meri producer package assertion
 
 Rules:
+  PreviewReadRequiresPairedTarget:
+    RuleCondition: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewReadApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/api"]
+        AssertDescription: Reviewed Core read source requires its exact preview API target
+  PreviewReadHeldWithoutSource:
+    RuleCondition: !Equals [!Ref CapiroPreviewReadBackendSource, ""]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewReadApiBaseUrl, ""]
+        AssertDescription: A Core read target cannot be staged without the reviewed source
+  FirstChatRequiresCurrentBindings:
+    RuleCondition: !Equals [!Ref MeriFirstChatBootstrapEnabled, "true"]
+    Assertions:
+      - Assert: !Not [!Equals [!Ref MeriFirstChatClientId, ""]]
+        AssertDescription: First chat requires one owner-verified active client
+      - Assert: !Equals [!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"]
+        AssertDescription: First chat needs the selected-client read binding
+      - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, "c64f0005cf14d69683aabafa11def4964d766832"]
+        AssertDescription: First chat requires its reviewed Core bootstrap source
+      - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, "https://first-chat-preview.app-dev.capiro.ai/api"]
+        AssertDescription: First chat requires the fixed Core preview API target
+      - Assert: !Equals [!Ref CapiroPreviewMeriConversationRoutesEnabled, "true"]
+        AssertDescription: First chat requires the separately qualified Meri route
+  FirstChatHeldWithoutFlag:
+    RuleCondition: !Equals [!Ref MeriFirstChatBootstrapEnabled, "false"]
+    Assertions:
+      - Assert: !Equals [!Ref MeriFirstChatClientId, ""]
+        AssertDescription: A held first-chat route must not carry a client identifier
+      - Assert: !Equals [!Ref CapiroPreviewFirstChatBackendSource, ""]
+        AssertDescription: A held first-chat route must not carry a source marker
+      - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, ""]
+        AssertDescription: A held first-chat route must not carry a target
   MeriConversationRequiresOrigin:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "true"]
     Assertions:
       - Assert: !Not [!Equals [!Ref MeriApiBaseUrl, ""]]
         AssertDescription: Meri conversation opt-in requires an HTTPS Meri root origin
+      - Assert: !Equals [!Ref CapiroPreviewMeriConversationRoutesEnabled, "true"]
+        AssertDescription: Meri workflow opt-in requires its narrow preview route
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeOrigin, !Ref MeriApiBaseUrl]
+        AssertDescription: Meri runtime origin must equal the configured Meri API origin
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, "f005f77316bb8735e60f16c3ac99a5c8e3d71a34"]
+        AssertDescription: Meri route requires the currently qualified image source
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d"]
+        AssertDescription: Meri route requires the currently qualified image digest
+      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.8"]
+        AssertDescription: Meri route requires the frontend consumer distribution version
+  MeriRouteHeldWithoutWorkflow:
+    RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "false"]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewMeriConversationRoutesEnabled, "false"]
+        AssertDescription: Held Meri workflow cannot open conversation routes
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeOrigin, ""]
+        AssertDescription: Held Meri route must not carry a runtime origin
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, ""]
+        AssertDescription: Held Meri route must not carry an image source
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, ""]
+        AssertDescription: Held Meri route must not carry an image digest
+      - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, ""]
+        AssertDescription: Held Meri route must not carry a consumer version
 
 Resources:
   PreviewVpc:
@@ -297,6 +408,22 @@ Resources:
               Value: !Ref IntelligenceApiBaseUrl
             - Name: CAPIRO_EXISTING_APP_URL
               Value: !Ref ExistingAppUrl
+            - Name: CAPIRO_REQUEST_ORIGIN
+              Value: !Ref CapiroRequestOrigin
+            - Name: CAPIRO_PREVIEW_READ_ONLY
+              Value: !Ref CapiroPreviewReadOnly
+            - Name: CAPIRO_PREVIEW_READ_BACKEND_SOURCE
+              Value: !Ref CapiroPreviewReadBackendSource
+            - Name: CAPIRO_PREVIEW_READ_API_BASE_URL
+              Value: !Ref CapiroPreviewReadApiBaseUrl
+            - Name: MERI_FIRST_CHAT_BOOTSTRAP_ENABLED
+              Value: !Ref MeriFirstChatBootstrapEnabled
+            - Name: MERI_FIRST_CHAT_CLIENT_ID
+              Value: !Ref MeriFirstChatClientId
+            - Name: CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE
+              Value: !Ref CapiroPreviewFirstChatBackendSource
+            - Name: CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL
+              Value: !Ref CapiroPreviewFirstChatApiBaseUrl
             - Name: TRACKER_BACKEND
               Value: !Ref TrackerBackend
             - Name: ONBOARD_API_BASE_URL
@@ -305,6 +432,16 @@ Resources:
               Value: !Ref MeriApiBaseUrl
             - Name: MERI_CONVERSATION_WORKFLOW_ENABLED
               Value: !Ref MeriConversationWorkflowEnabled
+            - Name: CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED
+              Value: !Ref CapiroPreviewMeriConversationRoutesEnabled
+            - Name: CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN
+              Value: !Ref CapiroPreviewMeriRuntimeOrigin
+            - Name: CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE
+              Value: !Ref CapiroPreviewMeriRuntimeSource
+            - Name: CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST
+              Value: !Ref CapiroPreviewMeriRuntimeImageDigest
+            - Name: CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION
+              Value: !Ref CapiroPreviewMeriContractPackageVersion
             - Name: MERI_ACTION_WORKFLOW_ENABLED
               Value: "false"
             - Name: MERI_DOCUMENT_WORKFLOW_ENABLED

@@ -19,9 +19,13 @@ availability.
 
 `preview-config.mjs` reads one explicit local JSON file containing exactly
 `clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
-and `clerkKeyArn`. Optional `meriApiBaseUrl` must be a canonical HTTPS DNS root
-origin; optional `meriConversationWorkflowEnabled` is a boolean that defaults
-to false and requires that origin when true. Supply only owner-verified public
+and `clerkKeyArn`. Optional `previewReadEnabled`, `firstChatBootstrapEnabled`,
+`meriConversationWorkflowEnabled` and `meriConversationRoutesEnabled` are
+booleans that default to false. The first-chat client ID stays empty unless
+the reviewed read, bootstrap and Meri route bindings are enabled together.
+`meriApiBaseUrl` must be a canonical HTTPS DNS root origin when Meri is enabled;
+its qualified image source and digest must match the explicit runtime pins.
+Supply only owner-verified public
 metadata for the candidate existing Clerk references and Core's configured
 issuer `https://clerk.app.capiro.ai`. The validator pins the owner-confirmed
 `/capiro/dev/clerk/` reference ARNs and their KMS key but does not read secret
@@ -35,17 +39,22 @@ node apps/web/deployment/portfolio/preview-config.mjs --help
 node apps/web/deployment/portfolio/preview-config.mjs --bindings /absolute/path/to/verified-public-metadata.json
 ```
 
-The command prints a local configuration proposal with all eleven configuration
-parameters explicit, including the held Meri defaults. `--parameters FILE`
+The command prints a local configuration proposal with all 24 configuration
+parameters explicit, including held first-chat and Meri defaults. `--parameters FILE`
 additionally validates a candidate JSON parameter array against those exact
 values. It rejects missing values,
 duplicates, overrides and `UsePreviousValue`; it never merges ambient environment
 values or reads AWS/secret contents. Output is not a complete apply request.
 Image, certificate and ingress review remain with the shipping owner.
 
-The service template constrains the same preview parameters, with Meri origin
-empty and conversation opt-in false by default. A proposed nonempty Meri origin
-or opt-in is not evidence that its service, model grant or dispatch is ready.
+The service template constrains the same preview parameters. Read and bootstrap
+target the separate Core bare API origin when enabled; ordinary `CORE_API_BASE_URL`
+still points to this frontend's `/api`. `CAPIRO_PREVIEW_READ_ONLY` remains true
+and `CAPIRO_REQUEST_ORIGIN` remains the Portfolio preview origin. First-chat
+and Meri routes are held by default. A proposed nonempty Meri origin or opt-in
+is not evidence that its service, model grant or dispatch is ready. The
+[PR70 build-input and activation handoff](../../../../docs/non-meri-continuation-20261016/PR70-PREVIEW-CONFIG-AND-IMAGE-PREP-20261017.md)
+keeps image source, template source and runtime proof separate.
 Existing IAM, network and secret-reference wiring remains unchanged. Exact
 reference validation cannot prove the payloads contain matching keys or belong
 to the declared application and issuer. Those checks, backend/auth/data
