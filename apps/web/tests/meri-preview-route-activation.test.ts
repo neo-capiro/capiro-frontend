@@ -16,7 +16,7 @@ vi.mock("@clerk/nextjs/server", () => ({
   clerkMiddleware: () => clerk.middleware,
 }));
 
-const origin = "https://preview.synthetic.invalid";
+const origin = "https://portfolio-preview.app.capiro.ai";
 const meriOrigin = "https://meri-preview.synthetic.invalid";
 const conversationId = "11111111-1111-4111-8111-111111111111";
 const actionBearer = `Bearer action_session_${"a".repeat(43)}`;
@@ -45,6 +45,7 @@ const environment = {
   MERI_API_BASE_URL: meriOrigin,
   CORE_API_BASE_URL: "https://ordinary.synthetic.invalid/api",
   CAPIRO_REQUEST_ORIGIN: origin,
+  CAPIRO_EXISTING_APP_URL: origin,
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_c3ludGhldGljJA==",
   CLERK_SECRET_KEY: "sk_test_synthetic",
 };
@@ -275,6 +276,9 @@ it("continues exact session and history requests through Clerk and their native 
   expect(
     new Headers(fetcher.mock.calls[1]![1]!.headers).get("authorization"),
   ).toBe(actionBearer);
+  expect(new Headers(fetcher.mock.calls[1]![1]!.headers).get("origin")).toBe(
+    origin,
+  );
   expect(getToken).toHaveBeenCalledTimes(2);
   for (const call of getToken.mock.calls) expect(call).toEqual([]);
 });
@@ -312,6 +316,7 @@ it("matches the conversation proxy path and sends native Clerk membership on lis
   );
   const upstream = new Headers(fetcher.mock.calls[0]![1]!.headers);
   expect(upstream.get("authorization")).toBe("Bearer native-session-token");
+  expect(upstream.get("origin")).toBe(origin);
   expect(upstream.has("cookie")).toBe(false);
   expect(getToken).toHaveBeenCalledExactlyOnceWith();
 });
