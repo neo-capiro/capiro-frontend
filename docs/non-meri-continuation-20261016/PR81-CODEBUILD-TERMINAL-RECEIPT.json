@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "01cf1df981250841d40df5fe0389f47168593cce",
+  "sourceS3VersionId": "ZNARrm2dAjn5W9HN2FcOcV5sSlXSnj07",
+  "build": {
+    "id": "capiro-portfolio-preview-build:5e2c6878-970b-4dc4-8a82-7947272f71b5",
+    "region": "us-east-1",
+    "status": "FAILED",
+    "startedAt": "2026-10-17T07:06:11.289Z",
+    "endedAt": "2026-10-17T07:12:55.453Z",
+    "failedPhase": "BUILD",
+    "failedCommand": "ECR DescribeImageScanFindings gate",
+    "failedCommandExitStatus": 1,
+    "authorizedRetryLimit": 0,
+    "observedRetryStarted": false,
+    "autoRetryLimitReadback": null,
+    "autoRetryNumberReadback": null,
+    "completedPreScanCommands": [
+      "npm run typecheck --workspace @capiro/web",
+      "npm run lint --workspace @capiro/web",
+      "npm run architecture",
+      "npm run build",
+      "npm run test:production",
+      "docker build --pull --platform linux/amd64",
+      "docker push"
+    ],
+    "logs": {
+      "group": "/capiro/portfolio-preview/build",
+      "stream": "5e2c6878-970b-4dc4-8a82-7947272f71b5"
+    }
+  },
+  "failureEvidence": {
+    "cloudTrailEventTime": "2026-10-17T07:12:54Z",
+    "eventName": "DescribeImageScanFindings",
+    "errorCode": "AccessDenied",
+    "deniedAction": "ecr:DescribeImageScanFindings",
+    "deniedResource": "arn:aws:ecr:us-east-1:967807252336:repository/capiro/portfolio-preview",
+    "principalRole": "Capiro-Portfolio-Preview-Build-BuildRole-npFg91tn0Hvb",
+    "reason": "No identity-based policy allows the scan findings action. The build failed immediately at the scan gate, before ECR scan completion."
+  },
+  "image": {
+    "repositoryUri": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview",
+    "tag": "01cf1df981250841d40df5fe0389f47168593cce",
+    "digest": "sha256:e1c5799b786ba7f55cfd4b97587500e9eaeab5c3e71582dcc31ff75e09bd80e7",
+    "pushedAt": "2026-10-17T07:12:53.436Z",
+    "scan": {
+      "status": "COMPLETE",
+      "completedAt": "2026-10-17T07:14:24Z",
+      "findingSeverityCounts": {},
+      "findingCount": 0,
+      "highCount": 0,
+      "criticalCount": 0,
+      "nextToken": null
+    }
+  },
+  "qualification": "CodeBuild FAILED. The later read-only ECR scan was complete and clean; it does not change the failed CodeBuild result or authorize deployment. No retry was started."
+}
