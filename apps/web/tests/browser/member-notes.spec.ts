@@ -157,6 +157,31 @@ test("global entry searches real members, preserves Client handoff and closes wi
   expect(unexpected).toEqual([]);
 });
 
+test("switching to Member clears the previous client handoff", async ({
+  page,
+}) => {
+  const { writes, unexpected } = await setup(page);
+  await page.goto("/portfolio?log=1");
+  const client = page.getByRole("combobox", { name: "Client", exact: true });
+  const continueButton = page.getByRole("button", {
+    name: "Continue",
+    exact: true,
+  });
+  await client.selectOption(clientId);
+  await expect(continueButton).toBeEnabled();
+
+  await page.getByRole("button", { name: "Member", exact: true }).click();
+  await expect(
+    page.getByRole("searchbox", { name: "Member", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Client", exact: true }).click();
+
+  await expect(client).toHaveValue("");
+  await expect(continueButton).toBeDisabled();
+  expect(writes).toEqual([]);
+  expect(unexpected).toEqual([]);
+});
+
 test("explicit Note save sends only supported fields and displays its verified receipt", async ({
   page,
 }) => {

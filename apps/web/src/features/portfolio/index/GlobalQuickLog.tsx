@@ -48,6 +48,7 @@ function QuickLogSession({ clients }: { clients: Client[] }) {
             type="button"
             aria-pressed={mode === "member"}
             onClick={() => {
+              setClientId("");
               setVisitedMember(true);
               setMode("member");
             }}
