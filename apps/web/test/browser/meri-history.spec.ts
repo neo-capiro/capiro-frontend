@@ -33,12 +33,15 @@ test("synthetic native discovery pages through other permitted clients and prese
 }) => {
   const f = await setupConversation(page);
   const otherClient = "10000000-0000-4000-8000-000000000002";
-  const others = Array.from({ length: 50 }, (_, index): typeof conversation => ({
-    ...conversation,
-    conversationId: `30000000-0000-4000-8000-${String(1000 - index).padStart(12, "0")}`,
-    createdAt: "2026-10-14T00:00:00.000Z",
-    scopes: [{ ...conversation.scopes[0]!, resourceId: otherClient }],
-  }));
+  const others = Array.from(
+    { length: 50 },
+    (_, index): typeof conversation => ({
+      ...conversation,
+      conversationId: `30000000-0000-4000-8000-${String(1000 - index).padStart(12, "0")}`,
+      createdAt: "2026-10-14T00:00:00.000Z",
+      scopes: [{ ...conversation.scopes[0]!, resourceId: otherClient }],
+    }),
+  );
   const { native, calls } = await installHistory(page, {
     conversations: [...others, conversation],
   });
@@ -190,12 +193,12 @@ test("synthetic partial history keeps an admitted current prompt visible while n
   await expect(
     page
       .getByRole("article", { name: "Earlier turn 1", exact: true })
-      .getByText("Earlier submitted question", { exact: true }),
+      .getByText("You: Earlier submitted question", { exact: true }),
   ).toBeVisible();
   await expect(
     page
       .getByRole("article", { name: "Current turn", exact: true })
-      .getByText("Distinct current question", { exact: true }),
+      .getByText("You: Distinct current question", { exact: true }),
   ).toBeVisible();
   await expect(
     page.getByText("Current admitted answer", { exact: true }),
@@ -368,9 +371,9 @@ test("synthetic lost reservation and submit ACKs preserve source, exact target a
   });
   expect(submits).toHaveLength(2);
   expect(submits[1]).toEqual(submits[0]);
-  await expect(page.getByText("Second question", { exact: true })).toHaveCount(
-    1,
-  );
+  await expect(
+    page.getByText("You: Second question", { exact: true }),
+  ).toHaveCount(1);
   expect(f.unexpected).toEqual([]);
 });
 

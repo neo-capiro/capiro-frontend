@@ -1,5 +1,9 @@
 import type { Page, Route } from "@playwright/test";
-import { installFixtures, json } from "./fixtures";
+import {
+  installFixtures,
+  installUnavailableLocationReads,
+  json,
+} from "./fixtures";
 import type { Facility } from "../../src/features/portfolio/client-profile/contracts";
 import type { OrderedOwners } from "../../src/features/portfolio/client-profile/ordered-owners";
 import {
@@ -104,6 +108,12 @@ export async function installProfileCurrentState(page: Page) {
       return json(route, []);
     return route.fallback();
   });
+  await installUnavailableLocationReads(
+    page,
+    profileClientId,
+    undefined,
+    unexpected,
+  );
   return { state, unexpected };
 }
 export async function profileEvent(page: Page, name: string, detail?: unknown) {

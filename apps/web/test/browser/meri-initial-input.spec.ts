@@ -30,7 +30,7 @@ test("synthetic desktop held admission rejects repeated keyboard dispatch while 
   await expect(
     page
       .getByRole("article", { name: "Current turn", exact: true })
-      .getByText("Original initial message", { exact: true }),
+      .getByText("You: Original initial message", { exact: true }),
   ).toBeVisible();
   await expect(sendButton(page)).toBeDisabled();
   await composer(page).fill("Edited draft while pending");
@@ -142,10 +142,10 @@ test("synthetic desktop interrupted initial submit survives ordinary navigation 
     page.getByText("Initial synthetic answer", { exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByText("Original before navigation", { exact: true }),
+    page.getByText("You: Original before navigation", { exact: true }),
   ).toHaveCount(1);
-  expect(native.calls.allocate).toHaveLength(2);
-  expect(native.calls.submit).toHaveLength(2);
+  await expect.poll(() => native.calls.allocate.length).toBe(2);
+  await expect.poll(() => native.calls.submit.length).toBe(2);
   expect(
     new Set([
       ...native.calls.allocate,
@@ -264,7 +264,7 @@ test("synthetic desktop hard reload recovers positively stored initial input wit
     ]).size,
   ).toBe(1);
   await expect(
-    page.getByText("Canonical input after reload", { exact: true }),
+    page.getByText("You: Canonical input after reload", { exact: true }),
   ).toHaveCount(1);
   expect(f.unexpected).toEqual([]);
 });

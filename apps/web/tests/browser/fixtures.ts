@@ -185,6 +185,7 @@ export async function installUnavailableLocationReads(
   page: Page,
   locationClientId: string,
   district?: { state: string; code: string },
+  unexpectedWrites: string[] = [],
 ) {
   const base = `intelligence/clients/${locationClientId}/district-nexus-v2`;
   const paths = [base, `${base}/economic-footprint`];
@@ -197,7 +198,6 @@ export async function installUnavailableLocationReads(
     );
   }
   const expected = new Set(paths.map((path) => `/api/backend/core/${path}`));
-  const unexpectedWrites: string[] = [];
   await page.route(
     (url) => expected.has(url.pathname + url.search),
     (route) => {

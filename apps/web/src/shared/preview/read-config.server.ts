@@ -1,7 +1,7 @@
 type Environment = Record<string, string | undefined>;
 
 /** Source binding is deployment intent, not proof of a running service's identity. */
-export const previewBackendSource = "111f269d749cae0249c2141779bd6d7deb93f45c";
+export const previewBackendSource = "6542f5b089656b6d255465edd464d06c2a0b408f";
 const ordinaryServices = [
   "CORE_API_BASE_URL",
   "STRATEGY_API_BASE_URL",
@@ -21,18 +21,13 @@ const host = (url: URL) => url.hostname.toLowerCase().replace(/\.$/, "");
 const sameOrigin = (a: URL, b: URL) =>
   a.protocol === b.protocol && host(a) === host(b) && a.port === b.port;
 
-/** No ordinary Core fallback. Native service qualification remains a release gate. */
-export function previewReadTarget(
+/** Validate a separately configured preview API without an ordinary service fallback. */
+export function previewApiTarget(
   env: Environment,
   request: Request,
+  raw: string | undefined,
 ): URL | null {
-  if (
-    env.CAPIRO_PREVIEW_READ_ONLY !== "true" ||
-    env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE !== previewBackendSource
-  )
-    return null;
   try {
-    const raw = env.CAPIRO_PREVIEW_READ_API_BASE_URL;
     if (!raw || raw.trim() !== raw) return null;
     const target = new URL(raw);
     if (
@@ -55,4 +50,17 @@ export function previewReadTarget(
   } catch {
     return null;
   }
+}
+
+/** No ordinary Core fallback. Native service qualification remains a release gate. */
+export function previewReadTarget(
+  env: Environment,
+  request: Request,
+): URL | null {
+  if (
+    env.CAPIRO_PREVIEW_READ_ONLY !== "true" ||
+    env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE !== previewBackendSource
+  )
+    return null;
+  return previewApiTarget(env, request, env.CAPIRO_PREVIEW_READ_API_BASE_URL);
 }

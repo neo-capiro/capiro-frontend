@@ -96,7 +96,13 @@ export function useConversationConnection(
   const reopen = useCallback(
     (options: Reopening = {}) => {
       const target = options.target ?? exactTarget(bound.last()?.context);
-      const hints = target ? { clientId, ...target } : selection.hints;
+      const hints = target
+        ? {
+            clientId,
+            conversationId: target.conversationId,
+            runId: target.runId,
+          }
+        : selection.hints;
       setOpening({
         host: create(hints),
         hints,

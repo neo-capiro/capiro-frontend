@@ -7,14 +7,17 @@ import {
   handlePublicPlannerFormRequest,
   handlePublicOnboardRequest,
 } from "../../../../shared/capiro/gateway";
-import { capiroOperations } from "../../../../shared/capiro/registry";
+import { selectFirstChatGateway } from "../../../../shared/preview/first-chat-gateway.server";
 
 type Context = { params: Promise<{ operation: string }> };
 async function handle(request: Request, context: Context) {
   const held = previewBackendRejection(process.env, request);
   if (held) return held;
   const { operation } = await context.params;
-  if (process.env.CAPIRO_PREVIEW_READ_ONLY === "true")
+  const selected = selectFirstChatGateway(process.env, request, operation);
+  if (selected.response) return selected.response;
+  const { operations, previewWriteTarget } = selected;
+  if (process.env.CAPIRO_PREVIEW_READ_ONLY === "true" && !previewWriteTarget)
     return proxyPreviewRead(
       request,
       process.env,
@@ -36,11 +39,13 @@ async function handle(request: Request, context: Context) {
       operation,
       readCapiroConfig(process.env),
     );
+  const config = readCapiroConfig(process.env);
+  if (previewWriteTarget) config.services = { core: previewWriteTarget.href };
   return handleCapiroRequest(
     request,
     operation,
-    capiroOperations,
-    readCapiroConfig(process.env),
+    operations,
+    config,
     async (authentication) => {
       const session = await auth();
       return session.userId

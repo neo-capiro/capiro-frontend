@@ -64,7 +64,9 @@ async function expectNoFirstStrategy(page: Page) {
     page.getByText(firstStrategy.nodes[1]!.title, { exact: true }),
   ).toHaveCount(0);
   await expect(
-    page.locator(`a[href*="/strategies/${firstStrategyId}"]`),
+    page.locator(
+      `a[href*="/strategies/${firstStrategyId}"], a[href*="&strategy=${firstStrategyId}"]`,
+    ),
   ).toHaveCount(0);
 }
 
@@ -102,7 +104,9 @@ for (const status of [403, 503]) {
       page.getByRole("heading", { name: secondStrategy.title, exact: true }),
     ).toHaveCount(0);
     await expect(
-      page.locator(`a[href*="/strategies/${secondStrategyId}"]`),
+      page.locator(
+        `a[href*="/strategies/${secondStrategyId}"], a[href*="&strategy=${secondStrategyId}"]`,
+      ),
     ).toHaveCount(0);
     await expect(
       page.getByText("No current strategies for this client."),
@@ -370,10 +374,7 @@ test("changing client scope requires a matching detail read even when the strate
   await expectDocuments(page, false);
   await expect(
     page.getByRole("link", { name: "Open Strategies", exact: true }),
-  ).toHaveAttribute(
-    "href",
-    `http://127.0.0.1:5191/existing/strategies?clientId=${otherClientId}`,
-  );
+  ).toHaveAttribute("href", `/modules/strategies?clientId=${otherClientId}`);
   state.details[firstStrategyId] = {
     ...firstStrategy,
     clientId: otherClientId,
@@ -412,7 +413,7 @@ test("a failed refresh of an empty Strategy list does not retain a successful em
   expect(unexpected).toEqual([]);
 });
 
-test("healthy Work keeps native counts, the five-node preview and exact existing application links", async ({
+test("healthy Work keeps native counts, the five-node preview and exact Strategy links", async ({
   page,
 }) => {
   const { state, unexpected, requests } = await installWorkFixtures(page);
@@ -454,20 +455,28 @@ test("healthy Work keeps native counts, the five-node preview and exact existing
     firstCard.getByRole("link", { name: "Open strategy" }),
   ).toHaveAttribute(
     "href",
-    `http://127.0.0.1:5191/existing/strategies/${firstStrategyId}`,
+    `/modules/strategies?clientId=${clientId}&strategy=${firstStrategyId}`,
   );
   await expect(
-    firstCard.locator(`a[href$="?step=${firstNodeId}"]`),
+    firstCard.getByRole("link", { name: "Open step" }).first(),
+  ).toHaveAttribute(
+    "href",
+    `/modules/strategies?clientId=${clientId}&strategy=${firstStrategyId}&step=${firstNodeId}`,
+  );
+  await expect(
+    firstCard.locator(
+      `a[href="/modules/strategies?clientId=${clientId}&strategy=${firstStrategyId}&step=${firstNodeId}"]`,
+    ),
   ).toHaveCount(1);
   await expect(page.getByRole("link", { name: "Open risk" })).toHaveAttribute(
     "href",
-    `http://127.0.0.1:5191/existing/strategies/${firstStrategyId}?step=${riskId}`,
+    `/modules/strategies?clientId=${clientId}&strategy=${firstStrategyId}&step=${riskId}`,
   );
   await expect(
     page.getByRole("link", { name: "New strategy", exact: true }),
   ).toHaveAttribute(
     "href",
-    `http://127.0.0.1:5191/existing/strategies/new?clientId=${clientId}`,
+    `/modules/strategies?clientId=${clientId}&create=strategy`,
   );
   expect(requests.every((request) => request.startsWith("GET "))).toBe(true);
   expect(requests.some((request) => request.includes("planner"))).toBe(false);

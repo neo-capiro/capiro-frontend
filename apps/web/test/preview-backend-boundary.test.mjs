@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
 import ts from "typescript";
@@ -21,13 +21,15 @@ function parse(path) {
     true,
   );
 }
-const apiRoutes = files(join(source, "app/api")).filter((path) =>
-  path.endsWith("/route.ts"),
+const apiRoutes = files(join(source, "app/api")).filter(
+  (path) => basename(path) === "route.ts",
 );
 
 test("every API handler applies preview admission before any route work", () => {
   assert.deepEqual(
-    apiRoutes.map((path) => relative(source, path)).sort(),
+    apiRoutes
+      .map((path) => relative(source, path).replaceAll("\\", "/"))
+      .sort(),
     [
       "app/api/action-followthrough/[operation]/route.ts",
       "app/api/backend/[service]/[...path]/route.ts",
@@ -98,10 +100,15 @@ test("every API handler applies preview admission before any route work", () => 
         declaration.initializer.expression.getText(ast),
         "previewBackendRejection",
       );
-      const receivesReads = /\/api\/(?:backend|capiro)\//.test(path);
+      const route = relative(source, path).replaceAll("\\", "/");
+      const receivesReads = /\/api\/(?:backend|capiro)\//.test(route);
+      const receivesMeriConversation =
+        /\/api\/(?:action-followthrough|conversations)\//.test(route);
       assert.deepEqual(
         declaration.initializer.arguments.map((arg) => arg.getText(ast)),
-        receivesReads ? ["process.env", "request"] : ["process.env"],
+        receivesReads || receivesMeriConversation
+          ? ["process.env", "request"]
+          : ["process.env"],
       );
       assert.ok(
         second &&
@@ -119,11 +126,13 @@ test("every API handler applies preview admission before any route work", () => 
       );
       assert.equal(second.elseStatement, undefined);
       if (receivesReads) {
+        const previewExpression = route.includes("/api/capiro/")
+          ? 'process.env.CAPIRO_PREVIEW_READ_ONLY === "true" && !previewWriteTarget'
+          : 'process.env.CAPIRO_PREVIEW_READ_ONLY === "true"';
         const previewBranch = body.statements.find(
           (node) =>
             ts.isIfStatement(node) &&
-            node.expression.getText(ast) ===
-              'process.env.CAPIRO_PREVIEW_READ_ONLY === "true"',
+            node.expression.getText(ast) === previewExpression,
         );
         assert.ok(
           previewBranch && ts.isReturnStatement(previewBranch.thenStatement),

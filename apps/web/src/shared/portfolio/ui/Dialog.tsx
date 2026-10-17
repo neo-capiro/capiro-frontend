@@ -46,7 +46,6 @@ export function Dialog({
   eyebrow,
   headerActions,
   textClose = false,
-  overlayClassName,
   children,
   drawer = false,
   wide = false,
@@ -61,7 +60,6 @@ export function Dialog({
   eyebrow?: string;
   headerActions?: ReactNode;
   textClose?: boolean;
-  overlayClassName?: string;
   children: ReactNode;
   drawer?: boolean;
   wide?: boolean;
@@ -80,7 +78,6 @@ export function Dialog({
         onFocusCapture={rememberFocus}
         aria-modal="true"
         showCloseButton={false}
-        overlayClassName={overlayClassName}
         onCloseAutoFocus={(event) => {
           onCloseAutoFocus?.(event);
           returnFocus(event);

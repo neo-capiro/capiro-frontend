@@ -1,10 +1,13 @@
 import { test, expect } from "@playwright/test";
+import type { UIEvent } from "@capiro/meri-contracts";
 import { client } from "../../tests/browser/fixtures";
 import {
   acceptNext,
   installCurrentRun,
   installHistory,
   installReservation,
+  requestId,
+  turn,
 } from "./meri-history-fixtures";
 import {
   setupConversation,
@@ -129,6 +132,7 @@ test("a finished run accepts the next prompt as the conversation's next run, kee
   await connect(page);
   await expect(page.getByText("First answer", { exact: true })).toBeVisible();
   await composer(page).fill("Second question");
+  await expect(sendButton(page)).toBeEnabled();
   await composer(page).press("Enter");
   await expect(page.getByText("Second answer", { exact: true })).toBeVisible();
   const earlier = page.getByRole("article", { name: "Earlier turn 1" });
@@ -224,27 +228,48 @@ test("Stop requests durable cancellation and the run status, not the receipt, en
   page,
 }) => {
   const f = await setupConversation(page);
+  const runEvents = [
+    status(1, "running"),
+    eventOf(2, "usage.recorded", {
+      usageId: "b0000000-0000-4000-8000-00000000000b",
+    }),
+    status(3, "cancelled"),
+  ];
+  const records = runEvents.map((event) => ({
+    sequence: event.sequence,
+    event: event as UIEvent,
+  }));
+  const { native } = await installHistory(page, {
+    turns: [
+      {
+        ...turn(binding, requestId, "Previously stored request", 0, 1),
+        run: runFor("running"),
+      },
+    ],
+    events: records.slice(0, 1),
+  });
   await page.route("**/api/conversations/history", (r) =>
-    reply(r, history([status(1, "running")])),
+    reply(r, history([runEvents[0]!])),
   );
   let cancelled = false;
   await page.route(
     `**/api/conversations/events/${binding.conversationId}/stream`,
     (r) => {
       const cursor = r.request().headers()["x-meri-resume-sequence"];
-      if (cursor === "1")
-        return sse(r, [
-          eventOf(2, "usage.recorded", {
-            usageId: "b0000000-0000-4000-8000-00000000000b",
-          }),
-        ]);
-      return sse(r, cancelled ? [status(3, "cancelled")] : []);
+      if (cursor === "1") return sse(r, [runEvents[1]!]);
+      return sse(r, cancelled ? [runEvents[2]!] : []);
     },
   );
   const cancels: unknown[] = [];
   await page.route("**/api/conversations/cancel", (r) => {
     cancels.push(r.request().postDataJSON());
     cancelled = true;
+    native.turns[0] = {
+      ...native.turns[0]!,
+      run: runFor("cancelled"),
+      lastSequence: 3,
+    };
+    native.events = records;
     return reply(r, { state: "cancelled" });
   });
   await connect(page);
@@ -335,9 +360,11 @@ test("a foreign native actor receipt cannot create a ready host or dispatch conv
     ...receipt,
     context: { ...context, actorId: "foreign-user" },
   }));
-  let calls = 0;
+  const calls: string[] = [];
   await page.route("**/api/conversations/**", (r) => {
-    calls++;
+    const path = new URL(r.request().url()).pathname;
+    if (path === "/api/conversations/list") return r.fallback();
+    calls.push(path);
     return reply(r, history());
   });
   await page.goto(`/meri?clientId=${clientId}`);
@@ -353,7 +380,7 @@ test("a foreign native actor receipt cannot create a ready host or dispatch conv
     page.getByRole("button", { name: "Try again", exact: true }),
   ).toBeVisible();
   expect(f.hints).toEqual([{ clientId }, { clientId }]);
-  expect(calls).toBe(0);
+  expect(calls).toEqual([]);
   expect(f.unexpected).toEqual([]);
 });
 
@@ -487,6 +514,7 @@ test("navigation keeps the uncertain request and rebinds the exact observed run 
       .getByRole("article", { name: "Current turn" })
       .getByText("Completed", { exact: true }),
   ).toBeVisible();
+  await expect.poll(() => requests.length).toBe(2);
   expect(requests[1]).toEqual(requests[0]);
   expect(f.unexpected).toEqual([]);
 });

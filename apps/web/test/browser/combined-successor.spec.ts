@@ -328,28 +328,31 @@ test("unknown Meri input remains visible and scoped across all three bound desti
       .getByRole("article", { name: "Current turn" })
       .getByText("Completed", { exact: true }),
   ).toBeVisible();
-  expect(requests).toEqual([requests[0], requests[0]]);
+  await expect.poll(() => requests).toEqual([requests[0], requests[0]]);
   exactQueries(f.queries);
   // Native list/transcript POSTs are reads and may run concurrently. Keep the strict command order.
-  expect(
-    f.commands.filter(
-      (path) =>
-        !["/api/conversations/list", "/api/conversations/transcript"].includes(
-          path,
-        ),
-    ),
-  ).toEqual([
-    "/api/action-followthrough/session",
-    "/api/conversations/history",
-    "/api/conversations/next-turn",
-    "/api/action-followthrough/session",
-    "/api/conversations/input/admit",
-    "/api/conversations/submit",
-    "/api/action-followthrough/session",
-    "/api/conversations/input/admit",
-    "/api/conversations/submit",
-    "/api/conversations/events",
-  ]);
+  await expect
+    .poll(() =>
+      f.commands.filter(
+        (path) =>
+          ![
+            "/api/conversations/list",
+            "/api/conversations/transcript",
+          ].includes(path),
+      ),
+    )
+    .toEqual([
+      "/api/action-followthrough/session",
+      "/api/conversations/history",
+      "/api/conversations/next-turn",
+      "/api/action-followthrough/session",
+      "/api/conversations/input/admit",
+      "/api/conversations/submit",
+      "/api/action-followthrough/session",
+      "/api/conversations/input/admit",
+      "/api/conversations/submit",
+      "/api/conversations/events",
+    ]);
   expect(f.unexpected).toEqual([]);
 });
 test("settled Directory preflight cannot navigate after switching to Calendar and Context Files", async ({
