@@ -14,6 +14,11 @@ export interface ConversationLifetime {
   fetchImpl?: typeof fetch;
   /** Trusted connection configuration; omitted means the current browser origin. */
   origin?: string;
+  /**
+   * Where the opaque credential travels. The same-origin proxy reads its own header so the
+   * credential never shadows the native session cookie; a direct trusted origin expects a bearer.
+   */
+  credentialHeader?: 'x-meri-action-session' | 'authorization';
 }
 
 export class ConversationUnavailable extends Error {
@@ -79,6 +84,7 @@ export class ConversationNetwork {
   private revoked = false;
   private readonly options: Pick<ConversationLifetime, 'expiresAtMs' | 'signal' | 'isCurrent' | 'onAccessLost' | 'fetchImpl'>;
   readonly origin: string;
+  private readonly credentialHeader: NonNullable<ConversationLifetime['credentialHeader']>;
   constructor(options: ConversationLifetime, private readonly onDispose: () => void) {
     this.options = {
       expiresAtMs: options.expiresAtMs, signal: options.signal,
@@ -88,6 +94,7 @@ export class ConversationNetwork {
     this.now = options.now ?? Date.now;
     this.credential = options.credential;
     this.origin = options.origin ?? '';
+    this.credentialHeader = options.credentialHeader ?? (this.origin ? 'authorization' : 'x-meri-action-session');
     if (this.origin) {
       const url = new URL(this.origin);
       if (url.protocol !== 'https:' || url.origin !== this.origin) throw new ConversationUnavailable('invalid-origin');
@@ -132,7 +139,8 @@ export class ConversationNetwork {
   private async dispatch(path: string, init: RequestInit, signal: AbortSignal, onDispatch?: () => void): Promise<Response> {
     this.check(); signal.throwIfAborted();
     const headers = new Headers(init.headers);
-    headers.set('authorization', `Bearer ${this.credential}`);
+    headers.delete('authorization');
+    headers.set(this.credentialHeader, this.credentialHeader === 'authorization' ? `Bearer ${this.credential}` : this.credential);
     onDispatch?.();
     const response = await (this.options.fetchImpl ?? fetch)(this.origin + path, {
       ...init, headers, signal, credentials: 'same-origin', redirect: 'error', cache: 'no-store',

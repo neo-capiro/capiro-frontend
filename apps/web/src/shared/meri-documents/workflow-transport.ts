@@ -12,6 +12,7 @@ import {
   boundedJsonBytes,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { actionSessionHeader } from "../meri-actions/session-header";
 
 type JsonRoute = Exclude<DocumentRoute, "download">;
 export interface DocumentTransport {
@@ -71,7 +72,7 @@ export function documentTransport(
           body,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${currentCredential}`,
+            [actionSessionHeader]: currentCredential,
           },
           credentials: "same-origin",
           cache: "no-store",

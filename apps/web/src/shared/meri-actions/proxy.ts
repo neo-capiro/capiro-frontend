@@ -1,6 +1,7 @@
 import { sameRequestOrigin } from "../request-origin";
 import { boundedJsonText, withActionDeadline } from "./bounded-json";
 import { actionSessionHints } from "./session-bootstrap";
+import { receivedActionSession } from "./session-header";
 import type { readActionConfig } from "./config";
 
 const routes = new Set(["session", "query", "draft", "prepare", "execute"]);
@@ -30,6 +31,8 @@ export async function proxyActionRequest(
     url.pathname !== `/api/action-followthrough/${route}` ||
     url.search ||
     !sameRequestOrigin(request, config.requestOrigin) ||
+    // A browser bearer would shadow the native Clerk cookie; the opaque session has its own header.
+    request.headers.has("authorization") ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);
@@ -39,16 +42,9 @@ export async function proxyActionRequest(
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
-      const bearer =
-        route === "session"
-          ? `Bearer ${nativeToken}`
-          : request.headers.get("authorization");
-      if (
-        !bearer ||
-        (route !== "session" &&
-          !/^Bearer action_session_[A-Za-z0-9_-]{43}$/.test(bearer))
-      )
-        return unavailable(401);
+      const credential =
+        route === "session" ? nativeToken : receivedActionSession(request);
+      if (!credential) return unavailable(401);
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         signal,
@@ -63,7 +59,7 @@ export async function proxyActionRequest(
           body,
           headers: {
             "Content-Type": "application/json",
-            Authorization: bearer,
+            Authorization: `Bearer ${credential}`,
           },
           credentials: "omit",
           redirect: "error",

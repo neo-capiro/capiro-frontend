@@ -12,7 +12,8 @@ import {
 const clerk = vi.hoisted(() => ({ auth: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => clerk);
 const origin = "https://frontend.example.test";
-const authorization = `Bearer action_session_${"a".repeat(43)}`;
+const credential = `action_session_${"a".repeat(43)}`;
+const authorization = `Bearer ${credential}`;
 const env = {
   CORE_API_BASE_URL: "https://core.example.test/api",
   MERI_API_BASE_URL: "https://meri.example.test",
@@ -26,7 +27,7 @@ const request = (method = "POST", path = "history") =>
     method,
     ...(method === "POST" ? { body: "{}" } : {}),
     headers: {
-      authorization,
+      "x-meri-action-session": credential,
       Origin: origin,
       ...(method === "POST" ? { "Content-Type": "application/json" } : {}),
     },
@@ -73,6 +74,27 @@ it("preview containment refuses before Clerk or owner dispatch", async () => {
     params: Promise.resolve({ path: ["history"] }),
   });
   expect(response.status).toBe(503);
+  expect(clerk.auth).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("the direct route guard refuses a browser bearer before invoking Clerk auth", async () => {
+  for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
+  const fetcher = vi.fn();
+  vi.stubGlobal("fetch", fetcher);
+  const forged = new Request(`${origin}/api/conversations/history`, {
+    method: "POST",
+    body: "{}",
+    headers: {
+      authorization,
+      Origin: origin,
+      "Content-Type": "application/json",
+    },
+  });
+  expect(
+    (await POST(forged, { params: Promise.resolve({ path: ["history"] }) }))
+      .status,
+  ).toBe(400);
   expect(clerk.auth).not.toHaveBeenCalled();
   expect(fetcher).not.toHaveBeenCalled();
 });
