@@ -12,19 +12,8 @@ export const moduleRouteFixtures = {
   "me.read": testIdentity,
   "clients.list": [],
   "engagement.meetings": [],
-  "engagement.tasks": [],
+  "engagement.sessions": [],
   "engagement.outreach": [],
-  "engagement.report": {
-    cycle: { label: "Synthetic test period", period: "all" },
-    summary: {
-      targetOffices: 0,
-      meetingsHeld: 0,
-      outreachSent: 0,
-      submissionsFiled: 0,
-      pendingActions: 0,
-    },
-    rows: [],
-  },
   "planner.bootstrap": {
     me: { id: "test-user", name: "Test User" },
     people: [],

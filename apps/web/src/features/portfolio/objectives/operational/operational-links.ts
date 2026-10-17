@@ -29,9 +29,12 @@ export function operationalResourceHref(
     query.set(kind === "planner_project" ? "project" : "task", id);
     return `/modules/planner?${query}`;
   }
-  if (kind === "meeting" || kind === "outreach_session") {
-    query.set("view", kind === "meeting" ? "meetings" : "outreach");
-    query.set(kind === "meeting" ? "meeting" : "session", id);
+  if (kind === "meeting") {
+    return `/portfolio/${encodeURIComponent(clientId)}/calendar?${new URLSearchParams({ meeting: id, objectiveMeeting: "1" })}`;
+  }
+  if (kind === "outreach_session") {
+    query.set("view", "outreach");
+    query.set("session", id);
     return `/modules/engagement?${query}`;
   }
   return undefined;

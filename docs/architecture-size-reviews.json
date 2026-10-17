@@ -107,45 +107,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
-    "sha256": "268d2ca2dd156e33f7adbd671dadd804cf3a61861969609d10f45e86825c0f22",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-contracts-20261012/EFFECTIVE-DATES-OBJECTIVE-OUTREACH.md",
-    "rationale": "EngagementScreen remains the route-selected screen composer. An explicitly Objective-bound route selects the separate read-only owner-resolver surface and disables unrelated client/meeting readers; other views, canonical session editor and CommitmentView retain their existing owners. It introduces no campaign writer or generic destination fallback.",
-    "functions": [
-      {
-        "name": "EngagementScreen",
-        "nonblankLines": 129
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/engagement/EngagementScreen.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
-    "sha256": "20bdd7f04a8f1414113b3ec9ded35a6176ac7fdbbf9f193bb8d2dc307f6b0512",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The view selects one outreach session/draft; the adjacent OutreachForm owns editing that record. Guarded state replacement handles changed inputs before rendering without moving dispatch into presentation. Original action/cancellation tests remain required.",
-    "functions": [
-      {
-        "name": "OutreachView",
-        "nonblankLines": 98
-      },
-      {
-        "name": "OutreachForm",
-        "nonblankLines": 88
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/engagement/OutreachView.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/modules/engagement/OutreachView.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/engagement/ReportView.tsx",
     "sha256": "57e4750d7294bca326bd139c3efcaa66e4ffe971b663daea45d0a4ff9fdaff09",
     "reviewer": "Codex implementation review",

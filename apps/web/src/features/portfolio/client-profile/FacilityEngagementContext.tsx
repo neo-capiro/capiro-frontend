@@ -78,7 +78,7 @@ export function FacilityEngagementContext({
           className="button"
           href={`/modules/engagement?clientId=${encodeURIComponent(scope.clientId)}`}
         >
-          Open engagement
+          Open outreach
         </Link>
       </div>
     </section>

@@ -27,15 +27,9 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     icon: "engagement",
     cardIcon: "engagementCard",
     group: "work",
-    description:
-      "Meetings, outreach, reports and the meeting library in your workspace.",
-    chips: [
-      { label: "Meetings", view: "meetings" },
-      { label: "Outreach", view: "outreach" },
-      { label: "Reports", view: "reports" },
-      { label: "Library", view: "library" },
-    ],
-    profile: "Engagement, one client",
+    description: "Draft and sent outreach campaigns for your clients.",
+    chips: [{ label: "Outreach", view: "outreach" }],
+    profile: "Outreach, one client",
     tone: "steel",
   },
   {
