@@ -17,7 +17,7 @@ async function receive(
   const nativeRoute = conversationHistoryRoute(path.join("/"));
   const nativeToken = async () => {
     const session = await auth();
-    return session.userId ? session.getToken({ template: "capiro" }) : null;
+    return session.userId ? session.getToken() : null;
   };
   if (nativeRoute)
     return proxyConversationHistory(

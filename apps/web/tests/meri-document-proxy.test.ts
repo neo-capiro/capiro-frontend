@@ -683,10 +683,12 @@ it.each(["abort", "deadline"])(
   },
 );
 
-it("document-only session bootstrap uses capiro token without enabling any action operation", async () => {
+it("document-only session bootstrap uses the native Clerk session token without enabling any action operation", async () => {
   for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
   vi.stubEnv("MERI_ACTION_WORKFLOW_ENABLED", undefined);
-  const getToken = vi.fn(async () => "native-capiro-token");
+  const getToken = vi.fn(async (...args: unknown[]) =>
+    args.length === 0 ? "native-session-token" : "template-capiro-token",
+  );
   clerk.auth.mockResolvedValue({ userId: "synthetic", getToken });
   const fetcher = vi.fn<typeof fetch>(async () =>
     Response.json({ synthetic: "session receipt is not validated by proxy" }),
@@ -706,10 +708,10 @@ it("document-only session bootstrap uses capiro token without enabling any actio
     params: Promise.resolve({ operation: "session" }),
   });
   expect(session.status).toBe(200);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
   expect(fetcher.mock.calls[0]![1]!.headers).toEqual({
     "Content-Type": "application/json",
-    Authorization: "Bearer native-capiro-token",
+    Authorization: "Bearer native-session-token",
   });
   for (const operation of ["query", "draft", "prepare", "execute"]) {
     const response = await actionPost(make(operation), {

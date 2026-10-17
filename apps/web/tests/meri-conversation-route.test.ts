@@ -36,7 +36,7 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-it("actual public conversation route gates with designated Clerk capiro token and forwards only opaque credential", async () => {
+it("actual public conversation route gates with a native Clerk session token and forwards only opaque credential", async () => {
   for (const [key, value] of Object.entries(env)) vi.stubEnv(key, value);
   const getToken = vi.fn(async () => "synthetic-native-bearer");
   clerk.auth.mockResolvedValue({ userId: "synthetic-user", getToken });
@@ -51,7 +51,7 @@ it("actual public conversation route gates with designated Clerk capiro token an
     params: Promise.resolve({ path: ["history"] }),
   });
   expect(response.status).toBe(403);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
   expect(fetcher.mock.calls[0]![0]).toBe(
     `${env.MERI_API_BASE_URL}/api/conversations/history`,
   );
