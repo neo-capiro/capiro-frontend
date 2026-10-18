@@ -1,0 +1,22 @@
+{
+  "stage": "syntax",
+  "argv": [
+    "--max-old-space-size=128",
+    "--check",
+    "packages/qualification-transport/conversation-initial-input.test.mjs"
+  ],
+  "outerDeadlineSeconds": 60,
+  "freshNormalMemory": {
+    "availableMiB": 11380,
+    "commitHeadroomMiB": 3122
+  },
+  "pid": 19464,
+  "startedAt": "2026-10-16T05:52:21.9795690+00:00",
+  "endedAt": "2026-10-16T05:52:22.0717180+00:00",
+  "exit": 0,
+  "terminal": true,
+  "timeout": false,
+  "sampledPeakWorkingSetBytes": 0,
+  "compilerBrowserInstallDatabaseProvider": false,
+  "sourceAnalysisOnly": true
+}

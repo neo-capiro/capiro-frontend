@@ -1,0 +1,48 @@
+{
+  "source": "845cebade818b8ceef1568574662196d813d14d0",
+  "stage": "sdk-runtime",
+  "profileSha256": "8a4ff50a976f843f68a44cd246e29224b3142eef7685f2771b5bb0b4fba44131",
+  "workingDirectory": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input\\packages\\qualification-transport",
+  "argv": [
+    "node",
+    "--max-old-space-size=256",
+    "--test",
+    "--test-isolation=none",
+    "--test-timeout=10000",
+    "--test-name-pattern=synthetic|closed POST subscription|lost submit acknowledgement|current session and selected client|held input admission",
+    "conversation-input.test.mjs",
+    "conversation.test.mjs"
+  ],
+  "startedAt": "2026-10-16T05:20:09.2918545+00:00",
+  "endedAt": "2026-10-16T05:20:10.0472622+00:00",
+  "rootPid": 7400,
+  "exitCode": 0,
+  "rootExited": true,
+  "nodeVersion": "24.19.0",
+  "capacity": {
+    "at": "2026-10-16T05:20:09.2593193+00:00",
+    "availableMiB": 11771,
+    "commitHeadroomMiB": 3101,
+    "requiredStartCommitMiB": 1536,
+    "requiredStartPhysicalMiB": 1536,
+    "remainingFloorMiB": 1024
+  },
+  "ownedProcesses": [],
+  "sampledAggregatePeakWorkingSetBytes": 0,
+  "memorySamples": [],
+  "timedOut": false,
+  "pressureStop": false,
+  "monitorFailure": null,
+  "forcedCleanupPids": [],
+  "remainingDirectChildren": [],
+  "generatedBeforeSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "generatedAfterSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "afterSourceStatus": [
+    " M packages/meri-client/dist/conversation-client.js"
+  ],
+  "lockUnchanged": true,
+  "scopeValid": true,
+  "synthetic": true,
+  "browserNextProviderDatabase": false,
+  "automaticNextStage": false
+}

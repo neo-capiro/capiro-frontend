@@ -1,0 +1,38 @@
+{
+  "stage": "format",
+  "argv": [
+    "--max-old-space-size=128",
+    "../meri-ui-input/node_modules/prettier/bin/prettier.cjs",
+    "--write",
+    "apps/web/src/features/meri/MeriComposer.tsx",
+    "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+    "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+    "apps/web/src/features/meri/conversation/run-commands.ts",
+    "apps/web/src/features/meri/conversation/saved-turns.ts",
+    "apps/web/src/features/meri/conversation/useRunCommands.ts",
+    "apps/web/src/shared/meri-conversations/input.ts",
+    "apps/web/src/shared/meri-conversations/proxy.ts",
+    "apps/web/src/shared/meri-conversations/query-journal.ts",
+    "apps/web/test/browser/meri-conversation-fixtures.ts",
+    "apps/web/test/browser/meri-history.spec.ts",
+    "apps/web/tests/meri-conversation-proxy.test.ts",
+    "apps/web/tests/meri-input-recovery.test.ts",
+    "apps/web/test/browser/meri-initial-input-fixtures.ts",
+    "apps/web/test/browser/meri-initial-input.spec.ts",
+    "apps/web/tests/meri-initial-input-proxy.test.ts"
+  ],
+  "outerDeadlineSeconds": 60,
+  "freshNormalMemory": {
+    "availableMiB": 11423,
+    "commitHeadroomMiB": 3161
+  },
+  "pid": 31320,
+  "startedAt": "2026-10-16T05:54:05.5828887+00:00",
+  "endedAt": "2026-10-16T05:54:06.0980102+00:00",
+  "exit": 0,
+  "terminal": true,
+  "timeout": false,
+  "sampledPeakWorkingSetBytes": 104681472,
+  "compilerBrowserInstallDatabaseProvider": false,
+  "sourceAnalysisOnly": true
+}

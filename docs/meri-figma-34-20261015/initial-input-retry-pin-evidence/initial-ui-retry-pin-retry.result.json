@@ -1,0 +1,21 @@
+{
+  "stage": "retry",
+  "argv": [
+    "--max-old-space-size=128",
+    "../evidence/check-meri-initial-retry-pin.mjs"
+  ],
+  "outerDeadlineSeconds": 60,
+  "freshNormalMemory": {
+    "availableMiB": 11003,
+    "commitHeadroomMiB": 2847
+  },
+  "pid": 24172,
+  "startedAt": "2026-10-16T06:00:27.8503658+00:00",
+  "endedAt": "2026-10-16T06:00:28.1018326+00:00",
+  "exit": 0,
+  "terminal": true,
+  "timeout": false,
+  "sampledPeakWorkingSetBytes": 0,
+  "compilerBrowserInstallDatabaseProvider": false,
+  "sourceAnalysisOnly": true
+}

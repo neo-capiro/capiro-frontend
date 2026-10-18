@@ -1,0 +1,56 @@
+{
+  "source": "845cebade818b8ceef1568574662196d813d14d0",
+  "stage": "sdk",
+  "profileSha256": "8a4ff50a976f843f68a44cd246e29224b3142eef7685f2771b5bb0b4fba44131",
+  "workingDirectory": "C:\\Users\\neoma\\Documents\\Codex\\2026-10-15\\task-7\\meri-ui-input",
+  "argv": [
+    "node",
+    "--max-old-space-size=512",
+    "node_modules/typescript/bin/tsc",
+    "-p",
+    "packages/meri-client/tsconfig.json"
+  ],
+  "startedAt": "2026-10-16T05:19:51.4837807+00:00",
+  "endedAt": "2026-10-16T05:19:52.8796564+00:00",
+  "rootPid": 37848,
+  "exitCode": 0,
+  "rootExited": true,
+  "nodeVersion": "24.19.0",
+  "capacity": {
+    "at": "2026-10-16T05:19:51.4608835+00:00",
+    "availableMiB": 11884,
+    "commitHeadroomMiB": 3247,
+    "requiredStartCommitMiB": 2048,
+    "requiredStartPhysicalMiB": 2048,
+    "remainingFloorMiB": 1024
+  },
+  "ownedProcesses": [],
+  "sampledAggregatePeakWorkingSetBytes": 0,
+  "memorySamples": [
+    {
+      "at": "2026-10-16T05:19:52.5110690+00:00",
+      "availableMiB": 11691,
+      "commitHeadroomMiB": 3039,
+      "ownedPids": [
+        37848,
+        30020
+      ],
+      "aggregateWorkingSetBytes": 0
+    }
+  ],
+  "timedOut": false,
+  "pressureStop": false,
+  "monitorFailure": null,
+  "forcedCleanupPids": [],
+  "remainingDirectChildren": [],
+  "generatedBeforeSha256": "d3afa6d2f64474c3e077ea1ef35d23b45caa3ab2cec3e117faccc13be4729f34",
+  "generatedAfterSha256": "9e46ca1eb522993b29f375afd62f4ddf6f737992ff9204d0dce1a5b3b9611232",
+  "afterSourceStatus": [
+    " M packages/meri-client/dist/conversation-client.js"
+  ],
+  "lockUnchanged": true,
+  "scopeValid": true,
+  "synthetic": true,
+  "browserNextProviderDatabase": false,
+  "automaticNextStage": false
+}

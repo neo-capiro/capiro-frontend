@@ -1,0 +1,20 @@
+Γ£ö synthetic positive durable input receipt precedes submit with identical closed bytes (30.2332ms)
+Γ£ö synthetic lost admission ACK retains one immutable identity and never submits before positive replay (2.1689ms)
+Γ£ö synthetic admitted binding substitution refuses submit before observation publication (1.1681ms)
+Γ£ö synthetic admitted request substitution refuses submit before observation publication (0.8185ms)
+Γ£ö synthetic admitted client substitution refuses submit before observation publication (0.8334ms)
+Γ£ö synthetic receipt and submit ACK preserve the actual already loaded event prefix and reconnect cursor (106.3633ms)
+Γ£ö synthetic lost submit ACK replay preserves original requested relative window and skill, not caller mutation (2.2549ms)
+Γ£ö synthetic foreign receipt or missing positive input does not reinterpret unknown as a fresh request (0.9368ms)
+Γ£ö closed POST subscription starts at zero despite advertised stored tip; finish is observation only (3.9104ms)
+Γ£ö lost submit acknowledgement fences new intent and explicit retry preserves exact original bytes (1.7734ms)
+Γ£ö current session and selected client are correlated before first view publication (1.5886ms)
+Γ£ö held input admission cannot repopulate disposed lifetime or dispatch submit; disposal makes no durable cancel (0.497ms)
+Γä╣ tests 12
+Γä╣ suites 0
+Γä╣ pass 12
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 327.625

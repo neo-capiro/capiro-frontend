@@ -1,0 +1,50 @@
+{
+  "schema": "meri-initial-input-retry-pin-delta/1",
+  "historicalSource": "4465c270695d59a24c1e11e3bfbd69782f44138d",
+  "historicalReview": "P2 HOLD, not accepted",
+  "historicalReviewReceiptSha256": "9988bbd5294e8556d72cfbf728b7ff206bd24aca5a8836c2a289698923964934",
+  "previousSourceIndexSha256": "895f788429dfc4a3721be7da70c91bc19437b99621ed110adb90dcfa566b4cbc",
+  "changedSource": {
+    "path": "packages/meri-client/src/conversation-client.ts",
+    "beforeGitSha256": "57825e5c5bf3daed7116ba134a6b78a2a4bab5cb5556c6ba162a6277cca2ef3f",
+    "afterLfSha256": "d42a5a87c3c72c22e3c6f78e8fe417b31de46f1638794c256f0fec72aafe4880",
+    "bytes": 13792
+  },
+  "other19SourceRowsUnchanged": true,
+  "behaviorChecks": "UNRUN; existing authored expiry-drift control retained",
+  "parser": "single128MiB process PASS0/terminal/no semantic types or product module execution; fast RSS unobserved",
+  "producer": "corrected published backend and actual0.1.8 artifact unavailable; hold preserved",
+  "files": [
+    {
+      "path": "initial-ui-retry-pin-retry.result.json",
+      "bytes": 548,
+      "sha256": "945f70ad84c05001166b36356e793af076232c663938a0c0b8f9d5ba55e74926"
+    },
+    {
+      "path": "initial-ui-retry-pin-retry.stdout.log",
+      "bytes": 339,
+      "sha256": "b3cb377076987111a81312bd17881cf633365612058703d10d25609f75ad7325"
+    },
+    {
+      "path": "initial-ui-retry-pin-retry.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-ui-retry-pin-source.json",
+      "bytes": 376,
+      "sha256": "0aecf58cc66cfa42a66806a7f39a4d2244ce47c20f18a80cf5ba5383c1252cbe"
+    },
+    {
+      "path": "check-meri-initial-retry-pin.mjs",
+      "bytes": 1157,
+      "sha256": "0a11ef8356cf40a070723dd717a756b3d87cd35cb5a930c4953c27cf3d326edf"
+    },
+    {
+      "path": "run-meri-initial-ui-analysis.ps1",
+      "bytes": 3692,
+      "sha256": "b5e07bd6fb56a08482b92484f51ba744ee4c91e740ea26422692fb226e73e586"
+    }
+  ],
+  "assemblyDiagnostic": "First relative-base evidence read failed before copying bytes; source/report commit e8d848e was created before evidence. Correct absolute workspace base used for this additive evidence repair. No source/test/check rerun."
+}

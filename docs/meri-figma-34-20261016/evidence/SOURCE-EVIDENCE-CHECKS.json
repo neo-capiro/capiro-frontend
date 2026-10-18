@@ -1,0 +1,18 @@
+{
+  "kind": "static source/design byte checks only",
+  "checks": {
+    "catalogCount": true,
+    "registeredPresent": true,
+    "nodeIdsUnique": true,
+    "metadataBinding": true,
+    "acceptanceIdsUnique": true,
+    "allMappedSourcePathsExist": true,
+    "componentCounts": true,
+    "currentWordmarkReuse": true,
+    "oldWordmarkPreserved": true
+  },
+  "mappedPathsChecked": 60,
+  "missingPaths": [],
+  "appTestsCompilerBrowserBuild": "NOT EXECUTED",
+  "currentVisualParity": "UNRUN"
+}

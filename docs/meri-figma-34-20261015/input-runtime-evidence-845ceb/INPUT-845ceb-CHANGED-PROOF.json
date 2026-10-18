@@ -1,0 +1,216 @@
+{
+  "schema": "meri-input-changed-git-byte-proof/1",
+  "at": "2026-10-16T04:55:27.443644+00:00",
+  "source": "845cebade818b8ceef1568574662196d813d14d0",
+  "tree": "26078557ee03e885d0e9f548eaa44f2aaca52076",
+  "directParent": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+  "branch": "dot/meri-ui-input-20261016",
+  "clean": true,
+  "pushConfirmed": true,
+  "hashDomain": "Exact committed Git blob bytes, not CRLF working-tree bytes",
+  "changedPaths": [
+    {
+      "path": "apps/web/package.json",
+      "bytes": 2117,
+      "sha256": "7c7e75db23e71aa3b5fd0bed83242a577ad0008c4476a4cfd83d62a0b5bdb6a1",
+      "gitBlob": "839a5310e27d22f7882d4ff1679f1bbcc273247c"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+      "bytes": 3235,
+      "sha256": "2ca82e7ce854aacc7e035764651ef96fede153d3fd834efabe4958f35a9454d6",
+      "gitBlob": "dacc565426ca53af7ab542a989648f9cf7369093"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+      "bytes": 5042,
+      "sha256": "ba69a170e2a5709d51ca6bde1ce82e84f937963d4442dbe0b33e41c1e9160294",
+      "gitBlob": "201dade2c3fbaebd9c271dd492cd43e2e5f16d96"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/RunStatus.tsx",
+      "bytes": 3966,
+      "sha256": "71f847b28e681d8ba757ab72adfa69113856e34c858833caab0f86b1d2b9503c",
+      "gitBlob": "45399e9b747951a07978b2de01468bc986dfd13a"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/run-commands.ts",
+      "bytes": 2862,
+      "sha256": "2b6d90562952dcbc4cd4a2e5861bd5b58fc646066ccd7659d3ccebc46e42344f",
+      "gitBlob": "7a6969bf6a135c19c98b5e4908ca47f1b8762a05"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/saved-turns.ts",
+      "bytes": 3958,
+      "sha256": "0f810d56af2e39d073fe8a575704858f6116640cad3b6fd9cb7b5d8f90f8bf87",
+      "gitBlob": "b7977817c93a856f390b4e4440d3020b826e6f8f"
+    },
+    {
+      "path": "apps/web/src/features/meri/conversation/useRunCommands.ts",
+      "bytes": 3292,
+      "sha256": "eb5933c716329a9e34e511e5b7c0acd8a69428cd1b51a7d6c019f5230cd317e3",
+      "gitBlob": "8a5d612edd7ece4ea4c340d9d37b187a8094ab4e"
+    },
+    {
+      "path": "apps/web/src/shared/meri-conversations/input.ts",
+      "bytes": 2706,
+      "sha256": "c071b26c787b38749f05603699b9c6d3a92e37e0af82878eadf265a262eca8ef",
+      "gitBlob": "36b116a6840392fdfc901bfd88946f9417aa239b"
+    },
+    {
+      "path": "apps/web/src/shared/meri-conversations/query-journal.ts",
+      "bytes": 4481,
+      "sha256": "eca98729277f1e68c8382890c10aa2502b1658de66b2b81b7364790479fe315c",
+      "gitBlob": "62b373ee15d5d9a550251414ae32b2a10f41ff57"
+    },
+    {
+      "path": "apps/web/test/browser/combined-successor.spec.ts",
+      "bytes": 12796,
+      "sha256": "3e816682009a91f91ad54fd975ef689d16b54b297e5e6b99e56ab905d0a3976b",
+      "gitBlob": "54fa3d12a88504a532543815fa8e0c560d9f4e44"
+    },
+    {
+      "path": "apps/web/test/browser/meri-conversation-fixtures.ts",
+      "bytes": 6208,
+      "sha256": "2f312f4ecf5aa1e6ac22b679ec1183a8e9ae76860849fce7738f474685f1faf7",
+      "gitBlob": "cb4f18ebf927e15672c1e17b49e9379c45e6251a"
+    },
+    {
+      "path": "apps/web/test/browser/meri-history-fixtures.ts",
+      "bytes": 7173,
+      "sha256": "c7386dfeb1c2175d50f7dcac8a0584781ed52b9690b3429aa07fca1a70e7c6a3",
+      "gitBlob": "8ae5b42ccd04e1dfdce9ce3e8c60a79db0a4d2b5"
+    },
+    {
+      "path": "apps/web/tests/meri-conversation-proxy.test.ts",
+      "bytes": 15470,
+      "sha256": "efc6fa6528a2c4552fcb3235d13be19a63ffaace6de0d44ff185d863a495eb72",
+      "gitBlob": "87f840c0f24c20e4d331ae5a896be536e507b75b"
+    },
+    {
+      "path": "apps/web/tests/meri-input-recovery.test.ts",
+      "bytes": 4215,
+      "sha256": "30fd81f80c2b68ac0e7c91267bc66c919e36931af204228f25f1c999afa3e0cf",
+      "gitBlob": "c059a5832ae009f15db5213182492966c083e944"
+    },
+    {
+      "path": "docs/meri-figma-34-20261015/INPUT-INTEGRATION-CHECKPOINT-20261016.md",
+      "bytes": 4844,
+      "sha256": "97702c21e5a9133cd7e027c7716fab8c300b88dedf97e5261089ee4c7a321153",
+      "gitBlob": "49aeb632f6229fecf1d86ea78a954d5016c3e187"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 513903,
+      "sha256": "99ed591fa24f46600495eeddc2cd785ed9aa0bd6d9bf8aab7c3a22e9724f86df",
+      "gitBlob": "efaf8195dc9c45f940a98ba621b75786c2e0baf8"
+    },
+    {
+      "path": "packages/meri-client/README.md",
+      "bytes": 6014,
+      "sha256": "091d7237383caff62a2aa31da55fb14ba3351b9e03189958d2315c42455acbbc",
+      "gitBlob": "e90959d993c2eb09f8706b9d7dd688924993b1e0"
+    },
+    {
+      "path": "packages/meri-client/package.json",
+      "bytes": 1435,
+      "sha256": "6b0759a0f059428aa82dda2763a31689047dc2eba962731cf4b7bfc86a685f6d",
+      "gitBlob": "dd365008693f727fec230cadb0727cdacf5169c4"
+    },
+    {
+      "path": "packages/meri-client/src/conversation-client.ts",
+      "bytes": 11013,
+      "sha256": "5bb212fad990d2c207e438c803beb9a0660297003c3953a84fa2f5b086c440af",
+      "gitBlob": "098d4bb01aeb8fd64b89c1337bc71ce5179b7e8a"
+    },
+    {
+      "path": "packages/qualification-transport/conversation-cross-repository.mjs",
+      "bytes": 6649,
+      "sha256": "6239517de1fff567b16318805764c44263b2cf285eb51f9dafc12c9c76253114",
+      "gitBlob": "918837c4524c6947edf476aad041e28855bb8813"
+    },
+    {
+      "path": "packages/qualification-transport/conversation-fixture.mjs",
+      "bytes": 4351,
+      "sha256": "c0804f645e2586368aa380a21fc9b2bab40dbc1b12afaee9a0fee224682abcc0",
+      "gitBlob": "a4361e21f1e45d07dce9a167f1d5fbf29e750db4"
+    },
+    {
+      "path": "packages/qualification-transport/conversation-input.test.mjs",
+      "bytes": 4950,
+      "sha256": "604dead363aa339e65e0d7befc03570b0b07f2c9dbe1274cf7e151f22aed312e",
+      "gitBlob": "f81be29134cdb7f09f5f1de522f8a571d30f5a06"
+    },
+    {
+      "path": "packages/qualification-transport/conversation.test.mjs",
+      "bytes": 10821,
+      "sha256": "08bd31dc20c865c4f67b13864fe7fa0b05c28f4a6f19ea682eedec9426f95d18",
+      "gitBlob": "8fdee415eca55a6a003d5b608a71066bf9d97ad0"
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "bytes": 8592,
+      "sha256": "7124edf7dbd8ff0c9967063cf8a3263c42e60098f1cfd3a86b5ee53b35a52bbd",
+      "gitBlob": "e05fe56aaf328c6dedea36a8447cd97a951aa859"
+    },
+    {
+      "path": "vendor/capiro-meri-contracts-0.1.7.tgz",
+      "bytes": 510639,
+      "sha256": "8f0c2e1435122c22f2a1ed7427dd744f361bc598e178f2ef842acd6f91b78daa",
+      "gitBlob": "ddb8eb7a6ac2d9acd6d3925bac907b0539b5ad58"
+    },
+    {
+      "path": "vendor/meri-public-packages.json",
+      "bytes": 5564,
+      "sha256": "cddc8cb7cc55a6f0e12ef45707454e2932d49f9b86c7cb687899e45fd376e51a",
+      "gitBlob": "ee9d5c8621380c280523ea9c0d8af502ab158f0c"
+    }
+  ],
+  "productionPaths": [
+    "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+    "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+    "apps/web/src/features/meri/conversation/RunStatus.tsx",
+    "apps/web/src/features/meri/conversation/run-commands.ts",
+    "apps/web/src/features/meri/conversation/saved-turns.ts",
+    "apps/web/src/features/meri/conversation/useRunCommands.ts",
+    "apps/web/src/shared/meri-conversations/input.ts",
+    "apps/web/src/shared/meri-conversations/query-journal.ts",
+    "packages/meri-client/src/conversation-client.ts"
+  ],
+  "changedLockPackageObjects": [
+    "apps/web",
+    "apps/web/node_modules/@capiro/meri-contracts",
+    "packages/meri-client",
+    "packages/meri-client/node_modules/@capiro/meri-contracts"
+  ],
+  "historicalManifestRowsPreserved": true,
+  "artifactAcceptance": "Parent independently accepted corrected a54239c5/tree1e1b27c4/SHA8f0c2e14; no old53497 adoption",
+  "sourceAcceptance": "PENDING existing independent reviewer",
+  "tests": {
+    "format": "PASS",
+    "parserOnlyArchitecture": "PASS1787/0errors/0blockers/482reviewed/19inherited",
+    "publicPackageByteRows": "PASS10",
+    "newSdkSyntheticAuthored": 8,
+    "newUiSyntheticAuthored": 4,
+    "newProxySyntheticAuthored": 2,
+    "allNewRuntimeTests": "UNRUN",
+    "successorInstall": "UNRUN",
+    "compiler": "UNRUN",
+    "browser": "UNRUN",
+    "productionBuild": "UNRUN",
+    "manualAccessibility": "INCOMPLETE",
+    "realNativeProvider": "UNRUN"
+  },
+  "blockers": [
+    "Startup positive fresh-original allocation/original-input proof; opaque session/404/empty/RESERVED do not grant new identity",
+    "033 focused Vitest awaits confirmed serialized release plus fresh2560MiB normal memory; grant already valid",
+    "Consumer install/runtime/build/browser checkpoints pending coordination"
+  ],
+  "originalSourcePreserved": "033a9862d1b4f3c2b98ac560d8737e2d8240d4a3",
+  "evidence": {
+    "input-corrected-artifact-independent-read-only-review.json": "bbdb4ac91e222955159be04a988f604961bf53aa651a672f4fdbf04255b836ef",
+    "input-format.result.json": "d45e42c171f683e8aaa4cdc3eedb8e8ae1fd560631bba0c9ae454ce70a2eab72",
+    "input-structure.result.json": "9407e6270558744919353ea0570aeff1453df8825b575b3f9b09e70f22430e5d",
+    "input-packages.result.json": "be0cea2669afe772ae512430bae38282fe6fa851c7f4811de726c83c9eb66407"
+  }
+}

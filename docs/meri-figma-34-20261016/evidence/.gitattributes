@@ -1,0 +1,7 @@
+# Preserve the exact newly captured source-formatter receipts and streams.
+current-figma-assets-format.result.json -text -whitespace
+current-figma-assets-format.stdout.log -text -whitespace
+current-figma-assets-format.stderr.log -text -whitespace
+current-mask-format.result.json -text -whitespace
+current-mask-format.stdout.log -text -whitespace
+current-mask-format.stderr.log -text -whitespace

@@ -1,0 +1,14 @@
+{
+  "capturedDate": "2026-10-16",
+  "fileKey": "IXJzJUkXcUTkySHir5JNea",
+  "scope": "Read-only current Figma; not implementation acceptance",
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"nodes\":[{\"nodeId\":\"1064:144127\",\"nodeName\":\"Suggestion · Research\",\"nodeType\":\"FRAME\",\"codeSnippets\":{\"motionDev\":\"<motion.div initial={{ opacity: 0, y: 6, }} animate={{ opacity: [0, 1, 1], y: [6, 0, 0], }} transition={{ opacity: { duration: 2, times: [0, 0.09, 1], ease: [\\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, y: { duration: 2, times: [0, 0.09, 1], ease: [\\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, }} />\"}},{\"nodeId\":\"1064:144133\",\"nodeName\":\"Suggestion · Create a brief\",\"nodeType\":\"FRAME\",\"codeSnippets\":{\"motionDev\":\"<motion.div initial={{ opacity: 0, y: 6, }} animate={{ opacity: [0, 0, 1, 1], y: [6, 6, 0, 0], }} transition={{ opacity: { duration: 2, times: [0, 0.01, 0.1, 1], ease: [\\\"linear\\\", \\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, y: { duration: 2, times: [0, 0.01, 0.1, 1], ease: [\\\"linear\\\", \\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, }} />\"}},{\"nodeId\":\"1064:144139\",\"nodeName\":\"Suggestion · Analyze a file\",\"nodeType\":\"FRAME\",\"codeSnippets\":{\"motionDev\":\"<motion.div initial={{ opacity: 0, y: 6, }} animate={{ opacity: [0, 0, 1, 1], y: [6, 6, 0, 0], }} transition={{ opacity: { duration: 2, times: [0, 0.02, 0.11, 1], ease: [\\\"linear\\\", \\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, y: { duration: 2, times: [0, 0.02, 0.11, 1], ease: [\\\"linear\\\", \\\"easeOut\\\", \\\"linear\\\"], repeat: Infinity }, }} />\"}}],\"timelineCohorts\":[{\"rootNodeId\":\"1064:144075\",\"durationMs\":2000,\"loopMode\":\"loop\",\"memberNodeIds\":[\"1064:144127\",\"1064:144133\",\"1064:144139\"]}]}"
+      }
+    ],
+    "isError": false
+  }
+}
