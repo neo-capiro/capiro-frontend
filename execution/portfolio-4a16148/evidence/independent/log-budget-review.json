@@ -1,0 +1,80 @@
+{
+  "runnerSHA256": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+  "awsCalls": 0,
+  "passed": 8,
+  "total": 8,
+  "cases": [
+    {
+      "case": "exact cap",
+      "passed": true,
+      "loggedBytes": 23,
+      "cap": 23,
+      "error": null,
+      "returnedBytes": 0,
+      "elapsedSeconds": 0.011023594001017045
+    },
+    {
+      "case": "cap+1 fails",
+      "passed": true,
+      "loggedBytes": 23,
+      "cap": 23,
+      "error": "BoundExceeded: Build command output exceeded the reviewed byte limit",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.010515914997085929
+    },
+    {
+      "case": "million-byte newline-free output fails bounded",
+      "passed": true,
+      "loggedBytes": 1024,
+      "cap": 1024,
+      "error": "BoundExceeded: Build command output exceeded the reviewed byte limit",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.0125495000029332
+    },
+    {
+      "case": "million-byte stderr fails bounded",
+      "passed": true,
+      "loggedBytes": 1024,
+      "cap": 1024,
+      "error": "BoundExceeded: Build command output exceeded the reviewed byte limit",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.023493507993407547
+    },
+    {
+      "case": "Unicode counts bytes",
+      "passed": true,
+      "loggedBytes": 24,
+      "cap": 24,
+      "error": "BoundExceeded: Build command output exceeded the reviewed byte limit",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.0106180549992132
+    },
+    {
+      "case": "quiet nonzero preserves error",
+      "passed": true,
+      "loggedBytes": 13,
+      "cap": 1024,
+      "error": "RuntimeError: Gate python3 failed with exit 7",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.01371841399668483
+    },
+    {
+      "case": "secret capture no stdout",
+      "passed": true,
+      "loggedBytes": 0,
+      "cap": 1024,
+      "error": null,
+      "returnedBytes": 13,
+      "elapsedSeconds": 0.011566561996005476
+    },
+    {
+      "case": "secret capture excess fails silent",
+      "passed": true,
+      "loggedBytes": 0,
+      "cap": 1024,
+      "error": "BoundExceeded: Command response exceeds capture limit",
+      "returnedBytes": null,
+      "elapsedSeconds": 0.009721902999444865
+    }
+  ]
+}

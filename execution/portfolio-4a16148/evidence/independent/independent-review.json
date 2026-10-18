@@ -1,0 +1,154 @@
+{
+  "review": "Independent final technical review of frozen4a execution override",
+  "date": "2026-10-12",
+  "reviewer": "core_intake_review",
+  "decision": "PASS_OFFLINE_EXECUTION_RECIPE_REVIEW",
+  "candidateDirectory": "/workspace/capiro-build-execution/execution/portfolio-4a16148",
+  "sourceSHA256": {
+    "prepare.py": "7ba0358e89473bac1bdb2058f88e7669292fb6a0669573c7fe78dffa0bee6242",
+    "runner.py": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+    "supervise.py": "1690197ae8790d6ae239736da74cd9945b91447d0d8d0a7abe987d23b2a9dd0a",
+    "tests/test_execution.py": "bbe69cc27df7ac229538c124121251e923bbfe82ca2a5d30d9063044e459ebac",
+    "README.md": "21d641525f5ed433ed7c9448a6dbedc10702346b14eefd174784a534591d2754"
+  },
+  "blockingSourceFindings": [],
+  "frozenInputVerification": {
+    "applicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+    "appPathsDiffAgainstSource": "EMPTY: apps packages scripts package.json package-lock.json",
+    "archivePath": "/tmp/capiro-image-proposal-4a16148/source-4a16148.zip",
+    "archiveSHA256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+    "archiveBytes": 451977924,
+    "archiveHashAndSizeIndependentlyReread": true,
+    "originalBuildspecSHA256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6",
+    "originalBuildspecIndependentlyReread": true,
+    "historical4155BlobComparisonRerun": false
+  },
+  "verification": {
+    "independentProbesPassed": 59,
+    "independentProbesTotal": 59,
+    "probeReports": [
+      {
+        "evidence": "gate-order-review.json",
+        "passed": 26,
+        "total": 26
+      },
+      {
+        "evidence": "log-budget-review.json",
+        "passed": 8,
+        "total": 8
+      },
+      {
+        "evidence": "lifecycle-review.json",
+        "passed": 15,
+        "total": 15
+      },
+      {
+        "evidence": "final-child-deadlines.json",
+        "passed": 2,
+        "total": 2
+      },
+      {
+        "evidence": "cli-boundary-review.json",
+        "passed": 8,
+        "total": 8
+      }
+    ],
+    "authorTestsIndependentlyReplayed": 35,
+    "authorFailures": 0,
+    "authorSuiteEvidence": "author-suite-independent-replay.log",
+    "awsCalls": 0,
+    "dockerCalls": 0,
+    "applicationEdits": 0,
+    "candidateScriptEditsByReviewer": 0
+  },
+  "requirements": [
+    {
+      "topic": "Publication gate",
+      "conclusion": "PASS",
+      "source": "runner.py:141-167",
+      "detail": "All existing qualification commands retained. Size uses strict positive decimal local docker.image.Size; exact boundary passes, malformed/overlimit/inspect failure aborts before ECR authentication or push. Shared command failure propagation preserved."
+    },
+    {
+      "topic": "Frozen archive and override binding",
+      "conclusion": "PASS",
+      "source": "prepare.py:24-91; supervise.py:36-68",
+      "detail": "New runner is embedded with SHA256 verification into inline buildspec and written outside Docker context. Archive digest/length fixed; request equality and resumed request hashes bind current reviewed runner, original source version, execution ID and deadlines. No archive/source mutation."
+    },
+    {
+      "topic": "Command log and local process bound",
+      "conclusion": "PASS_WITH_DOCUMENTED_SCOPE",
+      "source": "runner.py:20-108; runner.py:176-179",
+      "detail": "Merged stdout/stderr read incrementally and charged against shared byte cap. Excess fails the build; bounded secret capture avoids credential output. Nonblocking input and departed-leader process-group termination independently checked. Failure footer has1025-byte allowance; CodeBuild bootstrap/platform/daemon output excluded."
+    },
+    {
+      "topic": "Whole attempt supervision",
+      "conclusion": "PASS_WITH_DOCUMENTED_CLOUD_UNCERTAINTY",
+      "source": "supervise.py:86-199",
+      "detail": "One StartBuild attempt saved before submission, no automatic retry; original70min deadline retained on resume; cancel at65min, at most3stop attempts, call timeouts and no CLI retry. Terminal success requires matching build, buildComplete and persisted confirmation within original window without cancellation. Ambiguous/unreachable/nonterminal state fails rather than claiming termination."
+    },
+    {
+      "topic": "Actual shipping inputs",
+      "conclusion": "REQUIRED_BEFORE_EXECUTION",
+      "detail": "Verified actual S3 custody/version, accepted image/log byte limits and exact generated request remain coordinator inputs. No arbitrary limits or synthetic custody qualify a real attempt. This reviewer did not run prepare against actual cloud custody."
+    }
+  ],
+  "resolvedDuringReview": [
+    {
+      "id": "BE-R1",
+      "description": "Exited group leader previously left a live descendant after deadline",
+      "initialEvidence": "preliminary-descendant-repro.json",
+      "finalEvidence": "final-child-deadlines.json",
+      "status": "FIXED_BY_AUTHOR_AND_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "id": "BE-R2",
+      "description": "Credential input moved to nonblocking writes so small nonreading pipes cannot bypass command deadline",
+      "initialStatus": "REVIEW_RISK_IDENTIFIED; initial normal-pipe probe was not a failing reproduction",
+      "finalEvidence": "final-child-deadlines.json",
+      "status": "AUTHOR_CORRECTION_INDEPENDENTLY_VERIFIED_WITH_4KB_PIPE"
+    },
+    {
+      "id": "BE-R3",
+      "description": "Resume previously trusted persisted SUCCEEDED without terminal confirmation; out-of-window success also needed explicit rejection",
+      "initialEvidence": "preliminary-unconfirmed-resume.json",
+      "finalEvidence": "lifecycle-review.json",
+      "status": "FIXED_BY_AUTHOR_AND_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "id": "BE-R4",
+      "description": "README stop spacing now correctly applies to one continuous supervisor session; total three attempts persists across resume",
+      "status": "DOCUMENTATION_CORRECTED; NO_RUNTIME_CHANGE_REQUIRED"
+    }
+  ],
+  "mandatoryDesignReview": {
+    "instruction": "AGENTS.md:11 and docs/IMPLEMENTATION-STANDARDS.md:41-53",
+    "file": "supervise.py",
+    "fileNonblankLines": 230,
+    "function": "supervise",
+    "functionLine": 100,
+    "functionNonblankLines": 97,
+    "trigger": "function exceeds80 nonblank lines",
+    "disposition": "APPROVED_COHESIVE_WITHOUT_EXTRACTION",
+    "reason": "One CodeBuild attempt state machine owns submission/reconciliation/observation/cancellation/terminal transition around the same state and original deadline. Transport, recipe generation, state validation, persistence and success predicates have separate owners. Injected API/clock/save tests exercise this lifecycle without unrelated subsystems; splitting only to meet line count would obscure shared invariants. Scope is intentionally one designated operator and one live supervisor."
+  },
+  "retainedLimits": [
+    "No native image build/push/scan/deployment or provider behavior was accepted.",
+    "70minutes is an enforced local observation target and nonzero failure boundary, not a guarantee AWS will terminate or a hard spending cap.",
+    "One live supervisor and durable retained state are operational prerequisites; concurrent/distributed ownership and lost-host cancellation are not implemented.",
+    "CodeBuild queue is narrowed per run from project10minutes to5minutes; runtime stays60minutes and the project itself is unchanged.",
+    "Command log bytes plus fixed footer are bounded; total CloudWatch ingestion and Docker daemon output/work are not.",
+    "AWS CLI API response size is checked after subprocess capture; this is not a streaming memory limit.",
+    "Unknown submission search examines at most20recent IDs; unreconciled identity or stop denial remains UNKNOWN_REMOTE_STATE.",
+    "Runner final describe-images is not a completed exact-digest scan gate; scan/deployment review remains separate."
+  ],
+  "evidenceDirectory": "/tmp/capiro-build-execution-core-review",
+  "inlineBuildspecVerification": {
+    "sha256": "ee12fc3035d9542a5df25f77d9df1674d7ee2aa88a833c6028f00cdb67989c28",
+    "bytes": 11911,
+    "source": "prepare.buildspec(final runner bytes), compact JSON encoding",
+    "allCommandsStrings": true,
+    "bashSyntax": "PASS",
+    "executed": false,
+    "evidence": "inline-buildspec.reviewed.json"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "frozenArchive": "/tmp/capiro-image-proposal-4a16148/source-4a16148.zip",
+  "reportedWindowsSHA256": "9f3bf0962f5fa78595f87f78ac735b1ea23b2a9f18d6574771e30a179c060479",
+  "changedFields": "All4939Git local+central DOS timestamps shifted from UTC by listed offset, plus appended source-commit creator system3to0; no payload/CRC/compression changes",
+  "matched": true,
+  "trials": [
+    {
+      "timezoneOffsetMinutes": -240,
+      "sourceCommitCreateSystem": 0,
+      "sha256": "9f3bf0962f5fa78595f87f78ac735b1ea23b2a9f18d6574771e30a179c060479",
+      "matchesReportedWindows": true
+    }
+  ],
+  "elapsedSeconds": 0.6022746520029614,
+  "frozenArchiveModified": false,
+  "variantFileWritten": false,
+  "patchPositions": 9879
+}
