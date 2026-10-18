@@ -113,6 +113,24 @@ Not run (deferred by plan): full vitest/jest suites, `npm run build`, browser/Pl
 
 "Reachable" means a route renders the feature and its gate is open in the deployed preview env. In rev 17 these are open: `MERI_CONVERSATION_WORKFLOW_ENABLED`, `MERI_FIRST_CHAT_BOOTSTRAP_ENABLED`, `CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED`, `CAPIRO_PREVIEW_READ_ONLY=true`. These are held: action, documents and task commands.
 
+### 5.0 Completion-gate status per family
+
+Status values: **wired** (frontend reaches the backend route in the integrated candidate's configuration), **source-only** (frontend source exists; the remaining task is listed) or **deferred by Neo** (none recorded). Merged source alone is not completion. Every source-only row keeps the gate open.
+
+| Family | Frontend status | Exact remaining task (owner) |
+|---|---|---|
+| Conversations: first-chat bootstrap, allocate/admit/submit, stream and reconnect, Stop and recovery, next turn, list (Recents), transcript, stored-chat recovery, exact-run reconnect pin, pre-first-run empty history | **wired** | Live qualification on the integrated candidate (prompt → response → saved history after reload → follow-up); the runner exit 2 (runtime D14) blocks it (runtime lane). Confirm the runtime accepts #90's upstream `Origin` (§6.1) (runtime lane + this lane) |
+| Conversation artifact preview/download | source-only | Meri artifact/document read service; preview activation for `/api/documents/*` reads (runtime lane; frontend preview policy here) |
+| Meri Files (document workflow) | source-only | Meri document service; `MERI_DOCUMENT_WORKFLOW_ENABLED` + `MERI_DOCUMENT_OPERATION`; preview activation (runtime lane, deploy config) |
+| Recommendation actions | source-only | Meri action service; `MERI_ACTION_WORKFLOW_ENABLED`; preview activation (runtime lane, deploy config) |
+| Desktop task updates | source-only (now linked, proxy aligned) | Meri task-command application mounted; `MERI_TASK_COMMAND_WORKFLOW_ENABLED`; preview activation (runtime lane, deploy config) |
+| Personal Meri preferences | source-only (proxy aligned) | Meri settings application mounted with tables and audit; token decision (§6.3); `MERI_USER_PREFERENCES_ENABLED` (runtime lane; token switch here once decided) |
+| Governed Objective Planner read and Strategy intake | source-only | Core PR48 + PR53 + PR56 read pin, intake serving authority, reviewed preview routes (Core lane); then flip the two constants (this lane) |
+| Meri workspace screens: runs, approvals, memory, routines, data access, sources/coverage, browser, attachments, workspace files | source-only (fixture routes only) | Meri routes listed in `meri-resources/unavailable.ts` (runtime lane), then mount the existing screens on live data (this lane). Browser stays a product default per Neo; only its activation waits on host qualification |
+| New conversation | source-only | Meri create-conversation selector (runtime lane), or back the button with `useBeginNewChat` (this lane, after the integrated chat test) |
+| Search conversations | source-only | Meri search route (runtime lane) |
+| Non-Meri desktop (Portfolio, Modules, Directory, Research, Settings, Outreach-only Engagement) | merged | Served by existing Core/Workspace/Intelligence APIs where configured; the read-only preview admits only identity and client reads. Browser parity was not rerun here |
+
 ### 5.1 Wired in this branch (frontend composition only)
 
 - Task updates navigation entry (`108baa16`, `7aa8ed22`).
