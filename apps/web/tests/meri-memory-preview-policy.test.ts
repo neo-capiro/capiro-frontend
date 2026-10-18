@@ -40,6 +40,8 @@ describe("held personal memory preview routes", () => {
       ["GET", "/api/memory/owner/candidates?limit=50&limit=99"],
       ["POST", `/api/memory/owner/items/${id}/corrections?dryRun=true`],
       ["POST", "/api/memory/owner/items/not-a-uuid/corrections"],
+      ["POST", `/api/memory/owner/items/${id.replace(/^1/, "A")}/corrections`],
+      ["GET", `/api/memory/owner/candidates/${id.replace(/^1/, "A")}/status`],
       ["POST", "/api/memory/owner/items"],
     ]) {
       expect(previewMemoryOwnerRoute(request(method!, path!))).toBe(false);

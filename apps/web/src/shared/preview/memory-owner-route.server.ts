@@ -10,15 +10,11 @@ type Environment = Record<string, string | undefined>;
 export const previewMemoryCoreBackendSource: string | null = null;
 
 const uuid = "[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}";
-const status = new RegExp(`^/api/memory/owner/candidates/${uuid}/status$`, "i");
+const status = new RegExp(`^/api/memory/owner/candidates/${uuid}/status$`);
 const decision = new RegExp(
   `^/api/memory/owner/candidates/${uuid}/(?:decision|version-decision)$`,
-  "i",
 );
-const correction = new RegExp(
-  `^/api/memory/owner/items/${uuid}/corrections$`,
-  "i",
-);
+const correction = new RegExp(`^/api/memory/owner/items/${uuid}/corrections$`);
 
 function candidatePage(query: URLSearchParams): boolean {
   if ([...query.keys()].some((key) => key !== "limit" && key !== "cursor"))

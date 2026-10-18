@@ -58,11 +58,13 @@ keeps image source, template source and runtime proof separate.
 Personal memory owner review has six closed browser proxy routes, but the
 preview profile emits `MERI_MEMORY_OWNER_REVIEW_ENABLED=false`, an empty Core
 memory source and an empty memory target. The reviewed Core memory source
-`96065aea7076fde961071ebce402b6b2a31ee60c` does not include the qualified
-preview listener packet. Re-pin the source, template values and separate Core
-target together only after the seven Core owner endpoints pass listener and
-image qualification. Source admission does not establish that the running
-service has the corresponding image.
+`96065aea7076fde961071ebce402b6b2a31ee60c` did not include the preview
+listener packet. Core successor `b40971b1f8de888687a8fb92fbdf4ff653fe10d3`
+contains all seven owner endpoints and an optional listener packet, but its
+memory POST priority still needs central readback allocation and its qualified
+image pin is null. Re-pin the source, template values and separate Core target
+together only after listener and image qualification. Source admission does not
+establish that the running service has the corresponding image.
 Existing IAM, network and secret-reference wiring remains unchanged. Exact
 reference validation cannot prove the payloads contain matching keys or belong
 to the declared application and issuer. Those checks, backend/auth/data
