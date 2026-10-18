@@ -228,8 +228,19 @@ function RoutedApp() {
               <ProposalRefreshProbe />
             ) : isSettings ? (
               <SettingsScreen
-                section={path.split("/")[2]}
-                meriPreferences={<MeriPreferencesPanel />}
+                section={
+                  path.split("/")[2] === "preferences"
+                    ? "meri-preferences"
+                    : path.split("/")[2]
+                }
+                meriPreferences={
+                  <MeriPreferencesPanel
+                    userPreferencesEnabled={
+                      sessionStorage.getItem("user-preferences-enabled") ===
+                      "true"
+                    }
+                  />
+                }
               />
             ) : path.startsWith("/modules") ? (
               moduleView

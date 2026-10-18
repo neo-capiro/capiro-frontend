@@ -1,0 +1,56 @@
+{
+  "schema": "meri-frontend-selected-evidence/1",
+  "feature": "task-update",
+  "synthetic": true,
+  "publishedSource": "bd9e0d03c54ef4fbb57010c3b97cfb3d77bdf2b9",
+  "reviewedTree": "37ab9023296ee8d8f548c072223d9617eea2b3b8",
+  "reviewedParent": "ba95f63b4ec98078547958e32833e791be77a656",
+  "publicProducingSource": "cc43d0004be59f315658207405ff1aea126adad5",
+  "checks": {
+    "vitestPassed": 30,
+    "nodePassed": 7,
+    "browserPassed": 4,
+    "browserFailed": 0,
+    "browserExit": 0,
+    "appTypeScript": "pass",
+    "clientTypeScript": "pass",
+    "scopedEslint": "pass",
+    "scopedPrettier": "pass",
+    "independentReview": "ACCEPT",
+    "architecture": {
+      "errors": [],
+      "newBlocking": 0,
+      "existingBlocking": 233,
+      "wholeScannerExit": 1
+    }
+  },
+  "originalInputBindings": [
+    {
+      "name": "frontend-task-update-browser-receipt.json",
+      "bytes": 676,
+      "sha256": "a851dff54d3809c5d3967e65865fc6e0706a25146ad547f42495e00611dcc7c1"
+    },
+    {
+      "name": "frontend-task-update-final-vitest.txt",
+      "bytes": 282,
+      "sha256": "95d69e0cfc4c05835fb64b918a140d67306f36e0985772e77aa18143379d214d"
+    },
+    {
+      "name": "frontend-task-update-final-node.txt",
+      "bytes": 828,
+      "sha256": "551729ea6eed8f4c4ebf8a2085e93ee145ae2c97b808b40a31c921342316040a"
+    }
+  ],
+  "browser": {
+    "node": "24.19.0",
+    "engine": "Installed Chrome, fresh Playwright temporary profile",
+    "port": 5216,
+    "ownServerExited": true,
+    "historicalWindowsTeardown": "After all four cases passed, only the recorded own Vite server was stopped; runner then exited0."
+  },
+  "screenshot": {
+    "file": "task-update-desktop.png",
+    "sha256": "8c1973812f115ed3b29f9e4719a8c14a1dda42cec1b240e2ca626b6bedd846b3"
+  },
+  "normalization": "Selected historical result fields; author-local absolute paths and process ID omitted. Original receipt byte/hash bindings retained. No new test was run during handoff."
+}

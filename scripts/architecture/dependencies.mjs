@@ -25,6 +25,7 @@ function approvedPricingImport(file, module, entry) {
 }
 
 export const publicExports = new Set([
+  '@capiro/meri-client/user-preferences',
   '@capiro/ui/button', '@capiro/ui/markdown', '@capiro/ui/dialog', '@capiro/ui/tooltip', '@capiro/ui/prompt-input',
   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
@@ -48,6 +49,9 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/task-commands/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-task-commands/config.ts`, `${appSource}shared/meri-task-commands/proxy.ts`,
+  ])],
+  [`${appSource}app/api/settings/user/[operation]/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}shared/meri-user-preferences/config.ts`, `${appSource}shared/meri-user-preferences/proxy.ts`,
   ])],
   [`${appSource}app/api/conversations/[...path]/route.ts`, new Set([
     previewPolicy,
