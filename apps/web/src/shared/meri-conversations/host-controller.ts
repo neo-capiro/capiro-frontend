@@ -66,6 +66,10 @@ export class ConversationHostController extends OpaqueSessionController<MeriConv
           signal.throwIfAborted();
           if (!lifetime.isCurrent())
             throw new Error("Current client unavailable");
+          // Same-host reconnect must reauthorize this exact admitted run.
+          hints.clientId = session.context.selectedClientId;
+          hints.conversationId = session.context.conversationId;
+          hints.runId = session.context.runId;
         } catch (cause) {
           port.dispose();
           throw cause;
