@@ -121,6 +121,19 @@
       "status": "accepted-pushed-source-artifact; consumer qualification by the frontend preview build",
       "purpose": "Initial-input allocation budget raised to maxRequestMs 12000 (was 3000, which aborted every first-chat allocate at 3 s). dist/conversation-initial-input.{mjs,d.ts,schema.json} are byte-identical to 0.1.8 apart from that limit and the 0.1.9 version string; the generator generate-initial-input.mjs is now committed upstream.",
       "custody": "Built by Fable from the pushed integration commit; sha256/integrity recorded here before the frontend lock update."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.10.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "c16bfbf1b9a2f8d075913ff1d362ad78e3043bcc",
+      "sourceBranch": "fable/meri-first-chat-receiving-20261017",
+      "producer": "packages/contracts: npm run build (generate-initial-input.mjs) && npm pack (Node 24.19.0, Fable, 2026-10-18)",
+      "bytes": 523759,
+      "sha256": "10b0c233c1c0f94d837ae178897db46fd9f6a65d375a85c8897b07ea7f95c77d",
+      "integrity": "sha512-/gdiyfzslG5mWFSOO4SukuUNeafAz77+eKDc7/7BwAxJV7Kt1mtLLLHXajeBfybyAeW9SKeAXiKMSPMrgAls6Q==",
+      "status": "accepted-pushed-source-artifact; consumer qualification by the frontend preview build",
+      "purpose": "Initial-input allocate budget maxRequestMs 25000 (0.1.9 was 12000): one live allocate runs ~4 full session rechecks (~3 s each). Otherwise identical to 0.1.9 apart from the version string.",
+      "custody": "Built by Fable from the pushed integration commit; digests recorded before the lock update."
     }
   ]
 }
