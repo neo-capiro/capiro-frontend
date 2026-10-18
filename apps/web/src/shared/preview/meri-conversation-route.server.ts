@@ -24,6 +24,7 @@ const otherServices = [
   "ONBOARD_API_BASE_URL",
   "CAPIRO_PREVIEW_READ_API_BASE_URL",
   "CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL",
+  "CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL",
 ];
 const postPaths = new Set([
   "/api/action-followthrough/session",

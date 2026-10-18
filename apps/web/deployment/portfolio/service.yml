@@ -93,6 +93,25 @@ Parameters:
     Type: String
     Default: ""
     AllowedValues: ["", "https://first-chat-preview.app-dev.capiro.ai/api"]
+  MeriMemoryOwnerReviewEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+    Description: Held until the complete Core memory packet and listener are qualified
+  CapiroPreviewMemoryOwnerRoutesEnabled:
+    Type: String
+    Default: "false"
+    AllowedValues: ["false", "true"]
+  CapiroPreviewMemoryCoreBackendSource:
+    Type: String
+    Default: ""
+    AllowedValues: [""]
+    Description: Add the exact compatible Core source only after listener qualification
+  CapiroPreviewMemoryCoreApiBaseUrl:
+    Type: String
+    Default: ""
+    AllowedValues: [""]
+    Description: Add the matching separate Core preview target with its source
   MeriApiBaseUrl:
     Type: String
     Default: ""
@@ -174,6 +193,24 @@ Rules:
         AssertDescription: A held first-chat route must not carry a source marker
       - Assert: !Equals [!Ref CapiroPreviewFirstChatApiBaseUrl, ""]
         AssertDescription: A held first-chat route must not carry a target
+  MemoryReviewRequiresQualifiedCore:
+    RuleCondition: !Equals [!Ref MeriMemoryOwnerReviewEnabled, "true"]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewMemoryOwnerRoutesEnabled, "true"]
+        AssertDescription: Memory review requires its exact preview routes
+      - Assert: !Not [!Equals [!Ref CapiroPreviewMemoryCoreBackendSource, ""]]
+        AssertDescription: Memory review requires a qualified Core source
+      - Assert: !Not [!Equals [!Ref CapiroPreviewMemoryCoreApiBaseUrl, ""]]
+        AssertDescription: Memory review requires the matching Core preview target
+  MemoryReviewHeldWithoutFlag:
+    RuleCondition: !Equals [!Ref MeriMemoryOwnerReviewEnabled, "false"]
+    Assertions:
+      - Assert: !Equals [!Ref CapiroPreviewMemoryOwnerRoutesEnabled, "false"]
+        AssertDescription: Held memory review cannot open its preview routes
+      - Assert: !Equals [!Ref CapiroPreviewMemoryCoreBackendSource, ""]
+        AssertDescription: Held memory review must not carry a Core source
+      - Assert: !Equals [!Ref CapiroPreviewMemoryCoreApiBaseUrl, ""]
+        AssertDescription: Held memory review must not carry a Core target
   MeriConversationRequiresOrigin:
     RuleCondition: !Equals [!Ref MeriConversationWorkflowEnabled, "true"]
     Assertions:
@@ -452,6 +489,14 @@ Resources:
               Value: !Ref CapiroPreviewFirstChatBackendSource
             - Name: CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL
               Value: !Ref CapiroPreviewFirstChatApiBaseUrl
+            - Name: MERI_MEMORY_OWNER_REVIEW_ENABLED
+              Value: !Ref MeriMemoryOwnerReviewEnabled
+            - Name: CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED
+              Value: !Ref CapiroPreviewMemoryOwnerRoutesEnabled
+            - Name: CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE
+              Value: !Ref CapiroPreviewMemoryCoreBackendSource
+            - Name: CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL
+              Value: !Ref CapiroPreviewMemoryCoreApiBaseUrl
             - Name: TRACKER_BACKEND
               Value: !Ref TrackerBackend
             - Name: ONBOARD_API_BASE_URL

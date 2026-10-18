@@ -442,15 +442,17 @@ describe("Core-owned personal memory review proxy", () => {
     expect(fetcher).not.toHaveBeenCalled();
   });
 
-  it("uses a separate validated preview Core target when preview mode is active", async () => {
-    const fetcher = vi.fn<typeof fetch>(async () =>
-      Response.json({ schemaVersion: 1, items: [], nextCursor: null }),
-    );
+  it("holds the separate preview Core target until the listener-compatible source is pinned", async () => {
+    const fetcher = vi.fn<typeof fetch>();
     const preview = {
       ...env,
       CAPIRO_PREVIEW_READ_ONLY: "true",
       CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL:
         "https://core-preview.synthetic.invalid/api",
+      CAPIRO_PREVIEW_MEMORY_CORE_BACKEND_SOURCE:
+        "96065aea7076fde961071ebce402b6b2a31ee60c",
+      CAPIRO_PREVIEW_MEMORY_OWNER_ROUTES_ENABLED: "true",
+      CAPIRO_EXISTING_APP_URL: origin,
     };
     const response = await proxyOwnerMemoryReview(
       itemsRequest(),
@@ -459,9 +461,7 @@ describe("Core-owned personal memory review proxy", () => {
       async () => "native",
       fetcher,
     );
-    expect(response.status).toBe(200);
-    expect(fetcher.mock.calls[0]![0]).toBe(
-      "https://core-preview.synthetic.invalid/api/memory/owner/items?limit=25",
-    );
+    expect(response.status).toBe(503);
+    expect(fetcher).not.toHaveBeenCalled();
   });
 });
