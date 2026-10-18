@@ -15,18 +15,20 @@ export function useClient(id: string) {
       }),
   });
 }
-export function useAccountOwners() {
+export function useAccountOwners(options?: { enabled?: boolean }) {
   const api = useApi();
   return useQuery({
     queryKey: ["account-owners"],
+    enabled: options?.enabled !== false,
     queryFn: ({ signal }) =>
       api.request("core", "client-account-owners", ownersSchema, { signal }),
   });
 }
-export function useMemberOptions() {
+export function useMemberOptions(options?: { enabled?: boolean }) {
   const api = useApi();
   return useQuery({
     queryKey: ["member-options"],
+    enabled: options?.enabled !== false,
     queryFn: ({ signal }) =>
       api.request(
         "core",

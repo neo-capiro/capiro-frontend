@@ -65,6 +65,7 @@ export const settingsOperations = {
       z.object({
         id: z.string(),
         name: z.string(),
+        profileType: z.string().nullable().optional(),
         profileStatus: z.string(),
         status: z.string(),
         description: z.string().nullable().optional(),

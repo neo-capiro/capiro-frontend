@@ -14,11 +14,13 @@ export function ModuleShell({
   active = "hub",
   settings = false,
   portfolioUrl,
+  readOnlyPreview = false,
 }: {
   children: ReactNode;
   active?: ModuleSlug | "hub";
   settings?: boolean;
   portfolioUrl?: string;
+  readOnlyPreview?: boolean;
 }) {
   return (
     <ModuleSidebarVisibility>
@@ -26,9 +28,18 @@ export function ModuleShell({
         <a href="#main-content" className={styles.skip}>
           Skip to content
         </a>
-        <ModuleHeader portfolioUrl={portfolioUrl} settings={settings} />
+        <ModuleHeader
+          portfolioUrl={portfolioUrl}
+          settings={settings}
+          readOnlyPreview={readOnlyPreview}
+        />
         <ModuleSidebarWorkspace>
-          {!settings && <ModuleNavigation active={active} />}
+          {!settings && (
+            <ModuleNavigation
+              active={active}
+              readOnlyPreview={readOnlyPreview}
+            />
+          )}
           <main
             className={
               settings
