@@ -8,7 +8,7 @@ const mocks = vi.hoisted(() => ({
   selected: { state: "no-selection" } as Record<string, unknown>,
   useClients: vi.fn(),
 }));
-vi.mock("../src/features/portfolio/index/public", () => ({
+vi.mock("../src/shared/portfolio/api/clients", () => ({
   useClients: (options: unknown) => {
     mocks.useClients(options);
     return mocks.query;

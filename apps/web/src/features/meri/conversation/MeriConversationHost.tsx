@@ -118,7 +118,7 @@ function clientIneligibility(
 ): Ineligibility | null {
   // Core bootstrap and authority context refuse `status: "archived"` clients.
   // Stop before any Core create or Meri session; Core stays the authority.
-  if (client.status?.toLowerCase() === "archived") return "archived";
+  if (client.status === "archived") return "archived";
   if (firstChatBootstrapEnabled && client.id !== firstChatBootstrapClientId)
     return "not-configured";
   return null;

@@ -3,25 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { z } from "zod";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { clientSchema, ownersSchema, memberSchema } from "./contracts";
-export const clientsKey = ["portfolio", "clients"] as const;
+export { useClients, clientsKey } from "@/shared/portfolio/api/clients";
 export const clientKey = (id: string) => ["portfolio", "client", id] as const;
-export function useClients(options?: {
-  enabled?: boolean;
-  scope?: { tenantId: string; userId: string };
-}) {
-  const api = useApi();
-  const scope = options?.scope;
-  return useQuery({
-    queryKey: scope
-      ? [...clientsKey, scope.tenantId, scope.userId]
-      : clientsKey,
-    enabled:
-      options?.enabled !== false &&
-      (!scope || Boolean(scope.tenantId && scope.userId)),
-    queryFn: ({ signal }) =>
-      api.request("core", "clients", z.array(clientSchema), { signal }),
-  });
-}
 export function useClient(id: string) {
   const api = useApi();
   return useQuery({

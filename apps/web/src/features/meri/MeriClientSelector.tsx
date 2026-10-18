@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useClients } from "../portfolio/index/public";
+import { useClients } from "../../shared/portfolio/api/clients";
 import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { productHref } from "../../shared/session/client-route";
 import { DesignIcon } from "../../shared/shell/DesignIcon";
@@ -21,7 +21,7 @@ export function MeriClientSelector({ scope }: { scope?: ClientScope }) {
   );
   const options = ready
     ? (clients.data ?? []).filter(
-        (client) => client.status.toLowerCase() !== "archived",
+        (client) => client.status !== "archived",
       )
     : [];
   const selectedId =

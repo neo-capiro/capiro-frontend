@@ -74,7 +74,7 @@ function VerifiedNewConversation(props: Props) {
     selected.state === "authorized-client" ? selected.client : null;
   const unavailable = !client
     ? "Choose a visible client to start a conversation."
-    : client.status?.toLowerCase() === "archived"
+    : client.status === "archived"
       ? "This client is archived."
       : client.id !== props.firstChatBootstrapClientId
         ? "This client is not configured for the current conversation."
