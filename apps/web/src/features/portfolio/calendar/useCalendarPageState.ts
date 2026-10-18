@@ -78,7 +78,7 @@ export function useCalendarPageState(clientId?: string) {
       !clients.isFetching &&
       (!scope || currentClients.some((client) => client.id === scope)));
   const mixed = !scope && view === "agenda";
-  const range = calendarRange(date, view, zone);
+  const range = calendarRange(date, view, zone, clientId ? 1 : 7);
   const feeds = useCalendarFeeds(range, zone, scope, mixed);
   const [creating, setCreating] = useState(false);
   const [syncReview, setSyncReview] = useState<string | null>(null);

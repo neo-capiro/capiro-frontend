@@ -293,17 +293,21 @@ const committees = (): FacilityCommitteeSnapshot => ({
   })),
 });
 
-async function installProfile(page: Page, scoped = false) {
+async function installProfile(
+  page: Page,
+  scoped = false,
+  location: typeof facility = facility,
+) {
   const harness = scoped ? await installProfileCurrentState(page) : null;
   const unexpected = harness?.unexpected ?? (await installFixtures(page));
   const supportReads: Awaited<ReturnType<typeof controlledRead>>[] = [];
-  if (harness) harness.state.facilities = [{ ...facility }];
+  if (harness) harness.state.facilities = [{ ...location }];
   else
     supportReads.push(
       await controlledRead(
         page,
         `**/api/backend/core/clients/${clientId}/facilities`,
-        [facility],
+        [location],
       ),
     );
   supportReads.push(
@@ -342,10 +346,10 @@ async function installProfile(page: Page, scoped = false) {
     await controlledRead(page, `**/clients/${clientId}/representation`, [
       {
         facility: {
-          id: facility.id,
-          name: facility.name,
-          city: facility.city,
-          state: facility.state,
+          id: location.id,
+          name: location.name,
+          city: location.city,
+          state: location.state,
         },
         representation: {
           unresolved: false,
@@ -535,7 +539,7 @@ test("a saved map location exposes ten areas, retains the existing editor and re
     path: info.outputPath("location-opening-desktop.png"),
   });
   for (const heading of [
-    "Location & geography",
+    "Location",
     "Client economic footprint",
     "Unemployment",
     "Workforce and commuting",
@@ -593,6 +597,57 @@ test("a saved map location exposes ten areas, retains the existing editor and re
   await expect(
     map.getByRole("button", { name: "Open district map", exact: true }),
   ).toBeEnabled();
+  assertReadOnly(control);
+});
+
+test("a location awaiting address verification follows the desktop location hierarchy", async ({
+  page,
+}, info) => {
+  const control = await installProfile(page, false, {
+    ...facility,
+    addressLine: null,
+    districtSource: "user",
+    geocodeStatus: "not_requested",
+  });
+  await page.goto(`/portfolio/${clientId}`);
+  const detail = await openLocation(page);
+  const location = detail.getByRole("region", {
+    name: "Location and geography",
+    exact: true,
+  });
+  await expect(location.getByText("Observed physical presence")).toBeVisible();
+  await expect(
+    location.getByRole("heading", { name: "Locations and districts" }),
+  ).toBeVisible();
+  await expect(location.locator("dl").first().locator("dt")).toHaveText([
+    "Facility",
+    "Address",
+    "House district",
+    "State legislative districts",
+  ]);
+  await expect(location.getByRole("note")).toContainText(
+    "Geography needs verification",
+  );
+  await expect(
+    location.getByRole("heading", { name: "Representation and committees" }),
+  ).toBeVisible();
+  await expect(location).toContainText(member.fullName, {
+    timeout: 15_000,
+  });
+  await expect(
+    location.getByRole("link", { name: "Open relationships" }),
+  ).toHaveAttribute(
+    "href",
+    `/portfolio/${clientId}/relationships?kind=government`,
+  );
+  const box = await location.boundingBox();
+  expect(box).not.toBeNull();
+  expect(Math.abs(box!.x - 439)).toBeLessThanOrEqual(4);
+  expect(Math.abs(box!.y - 223)).toBeLessThanOrEqual(4);
+  expect(Math.abs(box!.width - 778)).toBeLessThanOrEqual(4);
+  await page.screenshot({
+    path: info.outputPath("location-verification-desktop.png"),
+  });
   assertReadOnly(control);
 });
 

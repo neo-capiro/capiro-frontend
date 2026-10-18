@@ -1,6 +1,6 @@
 "use client";
 import type { CalendarItem } from "./contracts";
-import { formatInstant } from "./range";
+import { formatMeetingSlot } from "./range";
 import { meetingMaterials } from "./lifecycle";
 import styles from "./calendar.module.css";
 
@@ -39,7 +39,7 @@ export function MeetingAgenda({
               <tr key={item.key}>
                 <td data-label="When">
                   {item.startAt
-                    ? formatInstant(item.startAt, item.timeZone)
+                    ? formatMeetingSlot(item.startAt, item.endAt, item.timeZone)
                     : "Time unavailable"}
                 </td>
                 <th scope="row">
@@ -50,6 +50,13 @@ export function MeetingAgenda({
                     {item.title}
                   </button>
                   <small>
+                    {item.meeting?.attendees.find(
+                      (attendee) =>
+                        attendee.role?.toLowerCase() === "organizer",
+                    )?.name ??
+                      item.meeting?.attendees[0]?.name ??
+                      "Organizer unavailable"}
+                    {" · "}
                     {item.meeting?.location ??
                       (item.meeting?.isVirtual
                         ? "Virtual meeting"

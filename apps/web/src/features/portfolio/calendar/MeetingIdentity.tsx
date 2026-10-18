@@ -3,9 +3,11 @@ import { MapPin, Video } from "lucide-react";
 import { safeWebsite } from "@/shared/portfolio/domain/website";
 import type { Meeting } from "./contracts";
 import { formatInstant, type CalendarZone } from "./range";
-import { meetingStage } from "./lifecycle";
+import { meetingMaterials, meetingStage } from "./lifecycle";
 import styles from "./calendar.module.css";
+import workspaceStyles from "./meeting-workspace.module.css";
 import { useMeetingClock } from "./useMeetingClock";
+import { MeetingAttendance } from "./attendance/public";
 
 export function MeetingIdentity({
   meeting,
@@ -13,18 +15,110 @@ export function MeetingIdentity({
   onEdit,
   onAssign,
   onShare,
+  onClose,
+  inline = false,
 }: {
   meeting: Meeting;
   zone: CalendarZone;
   onEdit: () => void;
   onAssign: () => void;
   onShare: () => void;
+  onClose?: () => void;
+  inline?: boolean;
 }) {
   const now = useMeetingClock();
   const stage = meetingStage(meeting, now);
   const validTime =
     Number.isFinite(Date.parse(meeting.startsAt)) &&
     Number.isFinite(Date.parse(meeting.endsAt));
+  if (inline) {
+    const materials = meetingMaterials(meeting);
+    const start = validTime ? new Date(meeting.startsAt) : null;
+    const end = validTime ? new Date(meeting.endsAt) : null;
+    const day = start?.toLocaleString("en-US", {
+      timeZone: zone,
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    const startTime = start?.toLocaleString("en-US", {
+      timeZone: zone,
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    const endTime = end?.toLocaleString("en-US", {
+      timeZone: zone,
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short",
+    });
+    const attendeeNames = meeting.attendees.map(
+      (attendee) => attendee.name ?? attendee.email ?? "Unnamed attendee",
+    );
+    return (
+      <header className={workspaceStyles.workspaceIdentity}>
+        <div className={workspaceStyles.workspaceIdentityTop}>
+          <small>
+            {meeting.id} · {meeting.client?.name ?? "No client"}
+          </small>
+          <small>
+            {stage === "unknown"
+              ? "Lifecycle unavailable"
+              : `${stage[0]?.toUpperCase()}${stage.slice(1)}`}
+            {stage === "completed" && materials.debrief !== "Approved"
+              ? " · Needs debrief"
+              : ""}
+          </small>
+        </div>
+        <h2>{meeting.subject}</h2>
+        <strong>
+          {validTime
+            ? `${day} · ${startTime}–${endTime}`
+            : "Meeting time unavailable"}
+          {meeting.location
+            ? ` · ${meeting.location}`
+            : meeting.isVirtual
+              ? " · Virtual meeting"
+              : ""}
+        </strong>
+        <p>
+          Attendees · {meeting.attendees.length}
+          {attendeeNames.length ? ` · ${attendeeNames.join(", ")}` : ""}
+        </p>
+        <div className={workspaceStyles.workspaceIdentityActions}>
+          {safeWebsite(meeting.joinLink) && (
+            <a
+              className="button"
+              href={safeWebsite(meeting.joinLink)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Video size={16} />
+              Join
+            </a>
+          )}
+          <MeetingAttendance meeting={meeting} zone={zone} compact />
+          <button className="button" onClick={onShare}>
+            Share artifacts
+          </button>
+          <button className="button ghost" onClick={onClose}>
+            Close ×
+          </button>
+          <details>
+            <summary>More actions</summary>
+            <div>
+              <button className="button" onClick={onEdit}>
+                Edit meeting
+              </button>
+              <button className="button" onClick={onAssign}>
+                Client assignment
+              </button>
+            </div>
+          </details>
+        </div>
+      </header>
+    );
+  }
   return (
     <section className={styles.meetingIdentity} aria-label="Meeting identity">
       <div className="row between">

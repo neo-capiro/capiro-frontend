@@ -8,6 +8,11 @@ import {
   type QuickLogReceipt,
 } from "./contracts";
 import type { ClientWriter } from "./authority";
+function sameInstant(left: string | null, right: string | null) {
+  return left === null || right === null
+    ? left === right
+    : Date.parse(left) === Date.parse(right);
+}
 export async function createQuickLog(
   api: ApiClient,
   clientId: string,
@@ -38,7 +43,9 @@ export async function createQuickLog(
     receipt.body !== (body.body || null) ||
     receipt.personId !== (body.personId ?? null) ||
     receipt.pinned ||
-    receipt.dueAt !== null ||
+    !sameInstant(receipt.dueAt, body.dueAt ?? null) ||
+    (body.occurredAt != null &&
+      Date.parse(receipt.occurredAt) !== Date.parse(body.occurredAt)) ||
     receipt.settledAt !== null ||
     receipt.sourceType !== null ||
     receipt.sourceId !== null
@@ -92,7 +99,7 @@ export async function undoQuickLog(
     Date.parse(current.occurredAt) !== Date.parse(receipt.occurredAt) ||
     current.personId !== receipt.personId ||
     current.pinned !== receipt.pinned ||
-    current.dueAt !== receipt.dueAt ||
+    !sameInstant(current.dueAt, receipt.dueAt) ||
     current.settledAt !== receipt.settledAt ||
     current.sourceType !== receipt.sourceType ||
     current.sourceId !== receipt.sourceId

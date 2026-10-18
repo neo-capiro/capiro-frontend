@@ -55,3 +55,14 @@
     gap: 12px;
   }
 }
+.compact {
+  display: inline-flex;
+}
+.compact > :global(.row) {
+  gap: 0;
+}
+.compact > :global(.row) > :global(.button) {
+  background: var(--dark-gradient);
+  color: white;
+  border-color: #242424;
+}

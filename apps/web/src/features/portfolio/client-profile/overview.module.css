@@ -1,6 +1,9 @@
+.overviewPage:global(.page) {
+  padding: 0 64px 40px;
+}
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -9,10 +12,40 @@
   gap: 16px;
   align-content: start;
 }
+.rightTop {
+  display: grid;
+  grid-template-columns: minmax(0, 2.08fr) minmax(0, 1fr);
+  gap: 12px;
+  min-height: 104px;
+}
+.profileCard:global(.card) {
+  min-height: 224px;
+  position: relative;
+  padding: 16px 24px;
+  gap: 12px;
+}
+.profileActions {
+  position: absolute;
+  right: 16px;
+  top: 14px;
+  display: flex;
+  gap: 4px;
+}
+.profileActions :global(.button) {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
 .identity {
   display: flex;
   gap: 16px;
   align-items: center;
+  padding-right: 60px;
+  margin-top: 6px;
+}
+.profileCard :global(.monogram) {
+  width: 52px;
+  height: 52px;
 }
 .identity h1 {
   font-size: 22px;
@@ -26,7 +59,11 @@
   align-items: center;
 }
 .pulse:global(.card) {
+  min-height: 412px;
   padding: 16px 20px;
+  display: grid;
+  grid-template-rows: auto auto minmax(80px, 1fr) auto;
+  gap: 10px;
 }
 .pulse h2 {
   font-size: 14px;
@@ -50,11 +87,88 @@
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 10px;
+  display: grid;
+  align-content: start;
+  gap: 2px;
 }
 .pulseGrid strong {
   font-size: 22px;
   letter-spacing: -0.44px;
   line-height: 1.2;
+}
+.pulseTrend {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.pulseLatest {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+.recordCount {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.recordCount strong {
+  font-size: 12px;
+}
+.latestItem {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) auto;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 4px;
+  font-size: 12px;
+}
+.latestItem span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.health:global(.card) {
+  height: 104px;
+  padding: 14px 16px;
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  overflow: hidden;
+}
+.health > strong {
+  font-size: 20px;
+}
+.health small {
+  line-height: 16px;
+}
+.deadlines:global(.card) {
+  min-height: 344px;
+  padding: 20px 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.deadlines > div {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+.deadlines > div + div {
+  border-left: 1px solid var(--border);
+  padding-left: 16px;
+}
+.deadlines h2 {
+  font-size: 15px;
+}
+.deadlines strong {
+  font-size: 24px;
+}
+.supplemental {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
 }
 .body {
   white-space: pre-wrap;
@@ -111,7 +225,14 @@
   grid-column: 1/-1;
 }
 @media (max-width: 1100px) {
+  .overviewPage:global(.page) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
   .layout {
+    grid-template-columns: 1fr;
+  }
+  .supplemental {
     grid-template-columns: 1fr;
   }
   .map {
@@ -119,6 +240,22 @@
   }
 }
 @media (max-width: 680px) {
+  .overviewPage:global(.page) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .rightTop,
+  .deadlines:global(.card) {
+    grid-template-columns: 1fr;
+  }
+  .deadlines > div + div {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding: 16px 0 0;
+  }
+  .pulseGrid {
+    grid-template-columns: 1fr;
+  }
   .identity {
     align-items: flex-start;
   }

@@ -2,21 +2,25 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { Plus, Search } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { useClients, useAccountOwners } from "./queries";
+import { useClients, useAccountOwners, useMemberOptions } from "./queries";
+import { useProspects } from "@/features/portfolio/prospects/public";
 import {
   clearPortfolioFilters,
   filterClients,
+  filterProspects,
   portfolioHref,
   readPortfolioState,
   sortClients,
 } from "./filter";
 import { CreateProfileDialog } from "./CreateProfileDialog";
 import { PortfolioProfiles } from "./PortfolioProfiles";
+import { ProspectResults } from "./ProspectResults";
+import { IndexPipeline } from "./IndexPipeline";
 import { IndexOwnerFilter } from "./IndexOwnerFilter";
 import { IndexNavigation } from "./IndexNavigation";
 import { PortfolioPulse } from "./PortfolioPulse";
@@ -24,6 +28,23 @@ import { GlobalQuickLog } from "./GlobalQuickLog";
 import { PortfolioAttention } from "./attention/public";
 import { GlobalObjectiveClientPicker } from "@/features/portfolio/objectives/global-create/public";
 import styles from "./portfolio.module.css";
+
+function portfolioWeekLabel(today: Date) {
+  const weekStart = new Date(
+    Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()),
+  );
+  weekStart.setUTCDate(
+    weekStart.getUTCDate() - ((weekStart.getUTCDay() + 6) % 7),
+  );
+  const fiscalYear =
+    today.getUTCFullYear() + (today.getUTCMonth() >= 9 ? 1 : 0);
+  const week = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(weekStart);
+  return `FY${String(fiscalYear).slice(-2)} · WEEK OF ${week.toUpperCase()}`;
+}
 
 export function PortfolioIndex({
   destinations,
@@ -34,6 +55,19 @@ export function PortfolioIndex({
   const records =
     clients.isSuccess && !clients.error ? clients.data : undefined;
   const owners = useAccountOwners();
+  const prospectOwners = useMemberOptions();
+  const prospects = useProspects({
+    search: "",
+    stage: "",
+    ownerId: "",
+    status: "active",
+  });
+  const prospectData =
+    prospects.isSuccess && prospects.isFetchedAfterMount && !prospects.error
+      ? prospects.data
+      : undefined;
+  const prospectRecords = prospectData?.prospects;
+  const prospectVisibleCount = prospectData?.counts.visible;
   const identity = useIdentity();
   const params = useSearchParams();
   const router = useRouter();
@@ -61,44 +95,109 @@ export function PortfolioIndex({
       clearPortfolioFilters(pathname, new URLSearchParams(params)),
       { scroll: false },
     );
+  const coreById = new Map(
+    (records ?? []).map((client) => [client.id, client]),
+  );
+  const linkedCoreIds = new Set(
+    (prospectRecords ?? [])
+      .map((prospect) => prospect.linkedClientId)
+      .filter((id): id is string => Boolean(id)),
+  );
+  const coreOnlyProspects = (records ?? []).filter(
+    (client) =>
+      client.profileType === "PROSPECT" && !linkedCoreIds.has(client.id),
+  );
+  const allCore = (records ?? []).filter(
+    (client) =>
+      client.profileType !== "PROSPECT" || !linkedCoreIds.has(client.id),
+  );
+  const allBd = (prospectRecords ?? []).filter((prospect) => {
+    const linked = prospect.linkedClientId
+      ? coreById.get(prospect.linkedClientId)
+      : undefined;
+    return !linked || linked.profileType === "PROSPECT";
+  });
   const rows = sortClients(
     filterClients(
-      records ?? [],
+      state.type === "PROSPECT" ? coreOnlyProspects : allCore,
       state,
       owners.error ? {} : (owners.data ?? {}),
-    ).filter((client) => !state.type || client.profileType === state.type),
+    ).filter(
+      (client) => state.type !== "CLIENT" || client.profileType === "CLIENT",
+    ),
     state.sort,
   );
-  const ownerFilterWaiting = Boolean(
-    state.owner && (owners.isPending || owners.error),
+  const visibleProspects =
+    prospectRecords && state.type !== "CLIENT"
+      ? filterProspects(
+          state.type === "PROSPECT" ? prospectRecords : allBd,
+          state,
+        )
+      : [];
+  const prospectsCapped =
+    prospectVisibleCount !== undefined &&
+    prospectRecords !== undefined &&
+    prospectVisibleCount > prospectRecords.length;
+  const prospectCount =
+    prospectVisibleCount === undefined || !records
+      ? undefined
+      : prospectsCapped && coreOnlyProspects.length > 0
+        ? undefined
+        : prospectVisibleCount + coreOnlyProspects.length;
+  const allCount =
+    prospectVisibleCount === undefined || !records
+      ? undefined
+      : prospectsCapped && records.length > 0
+        ? undefined
+        : allCore.length +
+          allBd.length +
+          (prospectVisibleCount - (prospectRecords?.length ?? 0));
+  const prospectiveOwnerById = Object.fromEntries(
+    (prospectOwners.data ?? []).map((member) => [member.id, member]),
   );
+  const ownerFilterWaiting = Boolean(
+    state.owner &&
+    state.type !== "PROSPECT" &&
+    (owners.isPending || owners.error),
+  );
+  const today = new Date();
+  const fiscalYear =
+    today.getUTCFullYear() + (today.getUTCMonth() >= 9 ? 1 : 0);
   const activeFilters = Boolean(
     state.search || state.status || state.sector || state.owner || state.type,
+  );
+  const criteriaFilters = Boolean(
+    state.search || state.status || state.sector || state.owner,
   );
   return (
     <Shell destinations={destinations}>
       <div className={`page ${styles.indexPage}`}>
         <header className={`pageHeader ${styles.indexHeader}`}>
           <div className="stack" style={{ gap: 10 }}>
-            <p className="eyebrow">Your client portfolio</p>
+            <p className="eyebrow">{portfolioWeekLabel(today)}</p>
             <h1 className={styles.title}>
-              Portfolio <span>{records?.length ?? "—"}</span>
+              Portfolio <span>{allCount ?? "—"}</span>
             </h1>
           </div>
           <div className={styles.headerActions}>
             <IndexOwnerFilter
               state={state}
               owners={owners.error ? undefined : owners.data}
-              ownerPending={owners.isPending}
+              options={prospectOwners.data}
+              ownerPending={
+                state.type === "PROSPECT"
+                  ? prospectOwners.isPending
+                  : owners.isPending
+              }
+              currentUser={identity.data?.user}
               disabled={customizing}
               set={set}
             />
             <label className={styles.search}>
-              <Search size={16} aria-hidden="true" />
               <input
                 aria-label="Search profiles"
                 autoFocus={params.has("search")}
-                placeholder="Search profiles…"
+                placeholder="Search clients"
                 value={state.search}
                 disabled={customizing}
                 onChange={(e) => set("q", e.target.value)}
@@ -129,19 +228,13 @@ export function PortfolioIndex({
         {identity.data && !permitted && !identity.error && (
           <p className="muted">Your role does not allow creating profiles.</p>
         )}
-        <PortfolioPulse clients={records} />
+        <PortfolioPulse clients={records} fiscalYear={fiscalYear} />
         {state.unsupportedSort && (
           <p className="status" role="status">
             This sort is unavailable. Showing most recently added profiles.{" "}
             <button className="button ghost" onClick={() => set("sort", "")}>
               Use recent order
             </button>
-          </p>
-        )}
-        {state.type === "PROSPECT" && (
-          <p className="status" role="status">
-            These are legacy prospect profiles. Current Business Development
-            prospects are in <Link href="/portfolio/prospects">Prospects</Link>.
           </p>
         )}
         <QueryState
@@ -155,11 +248,18 @@ export function PortfolioIndex({
             retry={() => void owners.refetch()}
           />
         )}
+        {prospectOwners.error && (
+          <QueryState
+            error={prospectOwners.error}
+            retry={() => void prospectOwners.refetch()}
+          />
+        )}
         <div className={styles.columns}>
-          {records && <PortfolioAttention clients={records} />}
           <section className="stack" aria-label="Portfolio profiles">
             <IndexNavigation
               records={records}
+              prospectCount={prospectCount}
+              allCount={allCount}
               customizing={customizing}
               state={state}
               permitted={permitted}
@@ -168,19 +268,36 @@ export function PortfolioIndex({
               set={set}
               clear={clear}
             />
-            {records && (
+            {state.type !== "CLIENT" && (
+              <QueryState
+                pending={prospects.isPending}
+                error={prospects.error}
+                retry={() => void prospects.refetch()}
+              />
+            )}
+            {prospectsCapped && state.type !== "CLIENT" && (
+              <p className="status" role="status">
+                Showing the latest {prospectRecords!.length} of{" "}
+                {prospectVisibleCount} active BD prospects. Search Business
+                Development to find older records.
+              </p>
+            )}
+            {(records || prospectRecords) && (
               <>
-                {ownerFilterWaiting && !customizing ? (
+                {ownerFilterWaiting && !customizing && (
                   <div className="status" role="status">
                     {owners.isPending
                       ? "Loading account owners…"
                       : "The account owner filter cannot be applied until owners are available."}
                   </div>
-                ) : (
+                )}
+                {(!ownerFilterWaiting ||
+                  customizing ||
+                  visibleProspects.length > 0) && (
                   <>
                     <p
                       className={
-                        customizing || activeFilters
+                        customizing || criteriaFilters
                           ? styles.resultCount
                           : "srOnly"
                       }
@@ -193,32 +310,59 @@ export function PortfolioIndex({
                         </>
                       ) : (
                         <>
-                          {rows.length}{" "}
-                          {rows.length === 1 ? "profile" : "profiles"}
-                          {activeFilters ? ` of ${records.length}` : ""}
+                          {rows.length + visibleProspects.length}{" "}
+                          {rows.length + visibleProspects.length === 1
+                            ? "profile"
+                            : "profiles"}
+                          {activeFilters && allCount !== undefined
+                            ? ` of ${allCount}`
+                            : ""}
                         </>
                       )}
                     </p>
-                    {(customizing ? records.length > 0 : rows.length > 0) ? (
-                      <PortfolioProfiles
-                        catalog={records}
-                        customizing={customizing}
-                        onFinishCustomizing={finishCustomizing}
-                        rows={rows}
-                        state={state}
-                        filtered={activeFilters}
-                        owners={owners.error ? undefined : owners.data}
-                        onRefreshCatalog={() => void clients.refetch()}
-                      />
-                    ) : (
+                    {(
+                      customizing
+                        ? Boolean(records?.length)
+                        : rows.length + visibleProspects.length > 0
+                    ) ? (
+                      (state.type === "PROSPECT" || !records?.length) &&
+                      !customizing ? (
+                        <ProspectResults
+                          coreRows={rows}
+                          rows={visibleProspects}
+                          view={state.view}
+                          owners={prospectiveOwnerById}
+                          coreOwners={owners.error ? undefined : owners.data}
+                          showAdd={permitted && state.type === "PROSPECT"}
+                        />
+                      ) : (
+                        <PortfolioProfiles
+                          catalog={records ?? []}
+                          customizing={customizing}
+                          onFinishCustomizing={finishCustomizing}
+                          rows={rows}
+                          prospects={customizing ? [] : visibleProspects}
+                          prospectOwners={prospectiveOwnerById}
+                          state={state}
+                          filtered={activeFilters}
+                          owners={owners.error ? undefined : owners.data}
+                          onRefreshCatalog={() => void clients.refetch()}
+                        />
+                      )
+                    ) : (state.type === "CLIENT" && records) ||
+                      (state.type === "PROSPECT" && prospectRecords) ||
+                      (state.type !== "CLIENT" &&
+                        state.type !== "PROSPECT" &&
+                        records &&
+                        prospectRecords) ? (
                       <div className="status">
                         <h3>
-                          {records.length
+                          {records?.length || prospectRecords?.length
                             ? "No profiles found"
                             : "No profiles yet"}
                         </h3>
                         <p className="muted">
-                          {records.length
+                          {records?.length || prospectRecords?.length
                             ? "Try a different search or clear your filters."
                             : "Add your first client or track a prospect in Business Development."}
                         </p>
@@ -236,27 +380,42 @@ export function PortfolioIndex({
                           </button>
                         )}
                       </div>
-                    )}
+                    ) : null}
                     {!customizing &&
-                      rows.length > 0 &&
+                      rows.length + visibleProspects.length > 0 &&
                       (state.view !== "cards" ||
                         state.sort !== "saved" ||
                         activeFilters) && (
                         <p className="muted">
-                          Select Customize to rearrange all profiles in their
+                          Select Customize to rearrange client profiles in their
                           saved order.
                         </p>
                       )}
                   </>
                 )}
-                {state.view === "cards" && permitted && (
-                  <button
-                    className={styles.addCard}
-                    onClick={() => setCreating(true)}
-                  >
-                    + Add profile
-                  </button>
-                )}
+                {state.view === "cards" &&
+                  permitted &&
+                  state.type === "PROSPECT" &&
+                  Boolean(prospectRecords) &&
+                  visibleProspects.length === 0 && (
+                    <Link
+                      className={`${styles.addCard} ${styles.prospectAddCard}`}
+                      href="/portfolio/prospects?new=1"
+                    >
+                      + Add prospect
+                    </Link>
+                  )}
+                {state.view === "cards" &&
+                  permitted &&
+                  state.type !== "PROSPECT" &&
+                  Boolean(records) && (
+                    <button
+                      className={styles.addCard}
+                      onClick={() => setCreating(true)}
+                    >
+                      + Add profile
+                    </button>
+                  )}
               </>
             )}
             {customizing && !records?.length && (
@@ -265,6 +424,7 @@ export function PortfolioIndex({
               </button>
             )}
           </section>
+          {records && <PortfolioAttention clients={records} />}
         </div>
         {records && <GlobalQuickLog clients={records} />}
         <CreateProfileDialog
@@ -272,6 +432,14 @@ export function PortfolioIndex({
           onOpenChange={setCreating}
           destinations={destinations}
         />
+        {state.type === "PROSPECT" &&
+          params.get("pipeline") === "1" &&
+          prospectData && (
+            <IndexPipeline
+              data={prospectData}
+              onClose={() => set("pipeline", "")}
+            />
+          )}
         <GlobalObjectiveClientPicker
           open={params.get("new") === "objective"}
           onCloseAutoFocus={(event) => {

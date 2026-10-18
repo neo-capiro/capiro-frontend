@@ -95,6 +95,11 @@ function CurrentFacilitiesCard({
       />
       <div className={styles.body}>
         <ul className={styles.locations}>
+          {query.data && !facilities.length && (
+            <li className={styles.emptyLocation}>
+              No facilities yet. Add a location with the plus action.
+            </li>
+          )}
           {facilities.map((facility) => (
             <li key={facility.id}>
               <button
@@ -141,11 +146,6 @@ function CurrentFacilitiesCard({
           </div>
         )}
       </div>
-      {query.data && !facilities.length && (
-        <p className="muted">
-          No facilities yet. Add a location with the plus action.
-        </p>
-      )}
       <FacilitiesManager
         key={`new-${creating}`}
         clientId={clientId}

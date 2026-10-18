@@ -8,6 +8,8 @@ import styles from "./portfolio.module.css";
 
 export function IndexNavigation({
   records,
+  prospectCount,
+  allCount,
   customizing = false,
   state,
   permitted,
@@ -17,6 +19,8 @@ export function IndexNavigation({
   clear,
 }: {
   records?: Client[];
+  prospectCount?: number;
+  allCount?: number;
   customizing?: boolean;
   state: PortfolioIndexState;
   permitted: boolean;
@@ -28,27 +32,25 @@ export function IndexNavigation({
   return (
     <nav className={styles.tabs} aria-label="Profile type" inert={customizing}>
       {[
-        ["All", ""],
-        ["Clients", "CLIENT"],
-      ].map(([label, value]) => (
+        { label: "All", value: "", count: allCount },
+        {
+          label: "Clients",
+          value: "CLIENT",
+          count: records?.filter((client) => client.profileType === "CLIENT")
+            .length,
+        },
+        { label: "Prospects", value: "PROSPECT", count: prospectCount },
+      ].map(({ label, value, count }) => (
         <button
           key={label}
           className={`button ${state.type === value ? "primary" : ""}`}
           aria-pressed={state.type === value}
-          onClick={() => set("type", value ?? "")}
+          onClick={() => set("type", value)}
         >
-          {label}{" "}
-          <small>
-            {value
-              ? records?.filter((c) => c.profileType === value).length
-              : (records?.length ?? "—")}
-          </small>
+          {label} <small>{count ?? "—"}</small>
         </button>
       ))}
-      <Link className="button" href="/portfolio/prospects">
-        Prospects
-      </Link>
-      <Link className="button" href="/portfolio/prospects?pipeline=1">
+      <Link className="button" href="/portfolio?type=PROSPECT&pipeline=1">
         Pipeline
       </Link>
       <div className={styles.secondaryActions}>

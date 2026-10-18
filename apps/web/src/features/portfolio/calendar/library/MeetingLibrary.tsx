@@ -1,5 +1,6 @@
 "use client";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ApiError } from "@/shared/portfolio/api/http";
@@ -95,21 +96,27 @@ export function MeetingLibrary({
           update({ search: String(form.get("search") ?? "") });
         }}
       >
-        <label className={styles.search}>
-          Search
-          <input
-            name="search"
-            aria-label="Search meeting library"
-            defaultValue={filters?.search ?? ""}
-            maxLength={160}
-            placeholder="Search by meeting or client…"
-          />
-        </label>
-        <button className="button" type="submit">
-          Search
-        </button>
+        <div className={styles.searchField}>
+          <label className={styles.search}>
+            Search
+            <input
+              name="search"
+              aria-label="Search meeting library"
+              defaultValue={filters?.search ?? ""}
+              maxLength={160}
+              placeholder="Search by meeting or client…"
+            />
+          </label>
+          <button
+            className={styles.searchButton}
+            type="submit"
+            aria-label="Search"
+          >
+            <Search size={16} />
+          </button>
+        </div>
         <label>
-          Type
+          <span className="srOnly">Type</span>
           <select
             aria-label="Library material type"
             value={filters?.artifactType ?? ""}
@@ -119,14 +126,14 @@ export function MeetingLibrary({
               })
             }
           >
-            <option value="">All</option>
-            <option value="prep">Prep</option>
-            <option value="notes">Notes</option>
-            <option value="debrief">Debrief</option>
+            <option value="">Type · All</option>
+            <option value="prep">Type · Prep</option>
+            <option value="notes">Type · Notes</option>
+            <option value="debrief">Type · Debrief</option>
           </select>
         </label>
         <label>
-          Visibility
+          <span className="srOnly">Visibility</span>
           <select
             aria-label="Library visibility"
             value={filters?.visibility ?? ""}
@@ -136,9 +143,9 @@ export function MeetingLibrary({
               })
             }
           >
-            <option value="">All</option>
-            <option value="shared">Shared</option>
-            <option value="private">Private</option>
+            <option value="">Visibility · All</option>
+            <option value="shared">Visibility · Shared</option>
+            <option value="private">Visibility · Private</option>
           </select>
         </label>
       </form>

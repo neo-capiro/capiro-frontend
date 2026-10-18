@@ -4,91 +4,138 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import type { Client } from "./contracts";
 import { MemberQuickLog } from "@/features/portfolio/relationships/public";
+import { QuickLog } from "@/features/portfolio/client-profile/public";
 import styles from "./quick-log.module.css";
 export function GlobalQuickLog({ clients }: { clients: Client[] }) {
   const params = useSearchParams();
-  return params.has("log") ? <QuickLogSession clients={clients} /> : null;
+  return <QuickLogSession clients={clients} open={params.has("log")} />;
 }
-function QuickLogSession({ clients }: { clients: Client[] }) {
+function QuickLogSession({
+  clients,
+  open,
+}: {
+  clients: Client[];
+  open: boolean;
+}) {
   const params = useSearchParams();
   const router = useRouter();
   const [clientId, setClientId] = useState("");
+  const [loggingClientId, setLoggingClientId] = useState("");
+  const [showCommand, setShowCommand] = useState(false);
   const [mode, setMode] = useState<"client" | "member">("client");
   const [visitedMember, setVisitedMember] = useState(false);
   const availableClients = clients.filter(
     (client) => client.status !== "archived",
   );
+  const selectedClient = availableClients.find(
+    (client) => client.id === clientId,
+  );
+  const loggingClient = availableClients.find(
+    (client) => client.id === loggingClientId,
+  );
+  const close = () => {
+    if (!showCommand) {
+      setClientId("");
+      setMode("client");
+      setVisitedMember(false);
+    }
+    const next = new URLSearchParams(params);
+    next.delete("log");
+    router.replace(`/portfolio?${next}`, { scroll: false });
+  };
   return (
-    <Dialog
-      open
-      title="Quick log"
-      description="Record an activity for a client or a shared Directory note on a member."
-      className={styles.dialog}
-      onOpenChange={(open) => {
-        if (!open) {
-          const next = new URLSearchParams(params);
-          next.delete("log");
-          router.replace(`/portfolio?${next}`, { scroll: false });
-        }
-      }}
-    >
-      <div className={styles.modes}>
-        <span className="eyebrow">Log to</span>
-        <div role="group" aria-label="Log destination">
-          <button
-            className={styles.mode}
-            type="button"
-            aria-pressed={mode === "client"}
-            onClick={() => setMode("client")}
-          >
-            Client
-          </button>
-          <button
-            className={styles.mode}
-            type="button"
-            aria-pressed={mode === "member"}
-            onClick={() => {
-              setClientId("");
-              setVisitedMember(true);
-              setMode("member");
-            }}
-          >
-            Member
-          </button>
-        </div>
-      </div>
-      <div hidden={mode !== "client"}>
-        <form
-          className="stack"
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (availableClients.some((c) => c.id === clientId))
-              router.push(`/portfolio/${clientId}?log=1`);
+    <>
+      {loggingClient && (
+        <QuickLog
+          key={loggingClient.id}
+          clientId={loggingClient.id}
+          clientName={loggingClient.name}
+          open={open && showCommand}
+          onChangeClient={() => {
+            setClientId("");
+            setShowCommand(false);
+          }}
+          onOpenChange={(open) => {
+            if (!open) close();
+          }}
+        />
+      )}
+      {open && (!showCommand || !loggingClient) && (
+        <Dialog
+          open
+          title="Quick log"
+          description="Record an activity for a client or a shared Directory note on a member."
+          className={styles.dialog}
+          headerActions={
+            <span className={styles.info} aria-hidden="true">
+              i
+            </span>
+          }
+          onOpenChange={(open) => {
+            if (!open) close();
           }}
         >
-          <label>
-            Client
-            <select
-              required
-              value={clientId}
-              onChange={(event) => setClientId(event.target.value)}
+          <div className={styles.modes}>
+            <span className="eyebrow">Log to</span>
+            <div role="group" aria-label="Log destination">
+              <button
+                className={styles.mode}
+                type="button"
+                aria-pressed={mode === "client"}
+                onClick={() => setMode("client")}
+              >
+                Client
+              </button>
+              <button
+                className={styles.mode}
+                type="button"
+                aria-pressed={mode === "member"}
+                onClick={() => {
+                  setClientId("");
+                  setVisitedMember(true);
+                  setMode("member");
+                }}
+              >
+                Member
+              </button>
+            </div>
+          </div>
+          <div hidden={mode !== "client"}>
+            <form
+              className="stack"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (selectedClient) {
+                  setLoggingClientId(selectedClient.id);
+                  setShowCommand(true);
+                }
+              }}
             >
-              <option value="">Select client</option>
-              {availableClients.map((c) => (
-                <option value={c.id} key={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button className="button primary" disabled={!clientId}>
-            Continue
-          </button>
-        </form>
-      </div>
-      <div hidden={mode !== "member"}>
-        {visitedMember && <MemberQuickLog open />}
-      </div>
-    </Dialog>
+              <label>
+                Client
+                <select
+                  required
+                  value={selectedClient?.id ?? ""}
+                  onChange={(event) => setClientId(event.target.value)}
+                >
+                  <option value="">Select client</option>
+                  {availableClients.map((c) => (
+                    <option value={c.id} key={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button className="button primary" disabled={!selectedClient}>
+                Continue
+              </button>
+            </form>
+          </div>
+          <div hidden={mode !== "member"}>
+            {visitedMember && <MemberQuickLog open />}
+          </div>
+        </Dialog>
+      )}
+    </>
   );
 }

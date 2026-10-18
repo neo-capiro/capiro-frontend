@@ -20,9 +20,11 @@ import styles from "./attendance.module.css";
 export function MeetingAttendance({
   meeting,
   zone,
+  compact = false,
 }: {
   meeting: Meeting;
   zone: CalendarZone;
+  compact?: boolean;
 }) {
   const identity = useIdentity();
   return (
@@ -30,15 +32,18 @@ export function MeetingAttendance({
       key={`${meeting.id}:${meeting.client?.id}:${meeting.startsAt}:${meeting.joinLink}:${meeting.status}:${identity.data?.tenant?.id}:${identity.data?.user.id}`}
       meeting={meeting}
       zone={zone}
+      compact={compact}
     />
   );
 }
 function AttendancePanel({
   meeting,
   zone,
+  compact,
 }: {
   meeting: Meeting;
   zone: CalendarZone;
+  compact: boolean;
 }) {
   const api = useApi(),
     cache = useQueryClient(),
@@ -91,13 +96,17 @@ function AttendancePanel({
   const error =
     access.identity.error ?? access.capabilities.error ?? query.error;
   return (
-    <section aria-label="Meri meeting attendance" className={styles.panel}>
-      <h3>Meri attendance</h3>
+    <section
+      aria-label="Meri meeting attendance"
+      className={compact ? styles.compact : styles.panel}
+    >
+      {!compact && <h3>Meri attendance</h3>}
       <QueryState
         pending={
-          access.identity.isPending || (access.readAllowed && query.isPending)
+          !compact &&
+          (access.identity.isPending || (access.readAllowed && query.isPending))
         }
-        error={error}
+        error={compact ? null : error}
         retry={() =>
           void (access.identity.error
             ? access.identity.refetch()
@@ -108,7 +117,7 @@ function AttendancePanel({
       />
       {access.readAllowed && !query.error && query.isSuccess && (
         <>
-          <p role="status">{sessionLabel(query.data)}</p>
+          {!compact && <p role="status">{sessionLabel(query.data)}</p>}
           {query.data?.error && <p role="alert">{query.data.error}</p>}
           <div className="row">
             <button
@@ -123,9 +132,9 @@ function AttendancePanel({
               }
               onClick={() => setSending(true)}
             >
-              Send Meri to take notes
+              {compact ? "Send Meri" : "Send Meri to take notes"}
             </button>
-            {removable(query.data) && (
+            {!compact && removable(query.data) && (
               <button
                 className="button"
                 disabled={!ready || mutation.isPending}
@@ -137,24 +146,28 @@ function AttendancePanel({
                 Cancel Meri attendance
               </button>
             )}
-            <button
-              className="button ghost"
-              disabled={query.isFetching || mutation.isPending}
-              onClick={() => void refresh()}
-            >
-              Refresh Meri status
-            </button>
+            {!compact && (
+              <button
+                className="button ghost"
+                disabled={query.isFetching || mutation.isPending}
+                onClick={() => void refresh()}
+              >
+                Refresh Meri status
+              </button>
+            )}
           </div>
         </>
       )}
-      {!access.readAllowed &&
+      {!compact &&
+        !access.readAllowed &&
         access.identity.isSuccess &&
         !access.identity.isFetching && (
           <p role="alert">
             Your current role or session cannot access meeting attendance.
           </p>
         )}
-      {access.readAllowed &&
+      {!compact &&
+        access.readAllowed &&
         !access.capabilities.isPending &&
         !access.allowed &&
         !error && (

@@ -13,7 +13,7 @@
   gap: 16px;
   min-height: 104px;
   padding: 22px 28px;
-  margin: 24px 0;
+  margin: 22px 0 24px;
   border-radius: 16px;
   color: white;
   background: var(--dark-gradient);
@@ -24,9 +24,12 @@
   gap: 6px;
   min-width: 0;
 }
-.pulseStats > div {
+.pulseStats > div + div {
   border-left: 1px solid #2b2b2b;
   padding-left: 20px;
+}
+.pulseStats > div:first-child {
+  padding-left: 16px;
 }
 .pulse .coverage {
   flex: 0 0 300px;
@@ -65,6 +68,46 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
+}
+.prospectCard {
+  border-style: dashed;
+  border-color: var(--border-strong);
+}
+.prospectCard:hover {
+  text-decoration: none;
+}
+.prospectCard:hover h2 {
+  text-decoration: underline;
+}
+.profileLogo.prospectLogo {
+  color: var(--muted-foreground);
+  background: var(--muted);
+}
+.prospectBadges {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+.prospectBadge,
+.stageBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.prospectBadge {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--muted-foreground) 10%, transparent);
+}
+.stageBadge {
+  color: var(--foreground);
+  background: var(--muted);
 }
 .cardIdentity {
   min-width: 0;
@@ -143,6 +186,8 @@
 .tabs a {
   border-radius: 999px;
   font-size: 12px;
+  min-height: 34px;
+  padding: 0 14px;
 }
 .tabs button[aria-pressed="true"] small {
   color: inherit;
@@ -205,13 +250,6 @@
   display: block;
   min-width: 160px;
 }
-.search svg {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted-foreground);
-}
 :global(.pageHeader).indexHeader {
   align-items: flex-end;
   margin-bottom: 0;
@@ -225,7 +263,21 @@
   gap: 8px;
 }
 .headerActions .search {
+  flex: 0 0 220px;
   width: 220px;
+}
+.headerActions .search input {
+  min-height: 36px;
+  padding-left: 12px;
+}
+.customize {
+  width: 112px;
+}
+.createProfile {
+  width: 113px;
+  gap: 6px;
+  padding-inline: 11px;
+  white-space: nowrap;
 }
 .filters {
   display: flex;
@@ -254,10 +306,32 @@
 .addCard:hover {
   background: var(--muted);
 }
+.prospectAddCard {
+  width: 100%;
+  min-height: 132px;
+}
 .profileChooser {
   width: min(560px, calc(100vw - 32px));
-  gap: 6px;
-  padding: 22px 24px 24px;
+  top: min(211px, 20.3dvh);
+  transform: translateX(-50%);
+  gap: 0;
+  padding: 0;
+  max-height: calc(100dvh - 24px);
+  box-shadow:
+    0 16px 40px -12px #0c0a092e,
+    0 2px 6px #0c0a090d;
+}
+.profileChooser > header {
+  padding: 22px 24px 0;
+  align-items: flex-start;
+}
+.profileChooser > header > button {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 2px;
+  border: 0;
+  box-shadow: none;
 }
 .profileChooser > header h2 {
   font-size: 20px;
@@ -268,12 +342,13 @@
 .profileChooser > p {
   font-size: 13px;
   line-height: 1.45;
+  padding: 6px 24px 0;
 }
 .choiceGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 10px;
+  padding: 8px 24px 24px;
 }
 .choiceGroup > p {
   padding: 6px 0 2px;
@@ -308,8 +383,8 @@
   background: var(--muted);
 }
 .choiceIcon > span {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: var(--foreground);
   mask-size: contain;
   mask-repeat: no-repeat;
@@ -341,6 +416,12 @@
   padding: 0 16px;
   font-size: 11px;
   color: var(--muted-foreground);
+}
+@media (max-height: 680px) {
+  .profileChooser {
+    top: 16px;
+    max-height: calc(100dvh - 32px);
+  }
 }
 @media (max-width: 900px) {
   .indexHeader {
@@ -377,7 +458,6 @@
 }
 .search input {
   width: 100%;
-  padding-left: 36px;
 }
 .viewSwitch {
   margin-left: auto;
@@ -424,12 +504,43 @@
 .ownerFilter {
   width: 190px;
   flex-shrink: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.ownerFilter:focus-within {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
 }
 .ownerFilter select {
-  width: 100%;
-  min-height: 36px;
-  padding: 7px 12px;
-  font-size: 13px;
+  flex: 1;
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 10px 0 0;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+}
+.ownerFilter select:focus-visible {
+  outline: none;
+}
+.ownerFilterAvatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--dark-gradient);
+  color: white;
+  font-size: 11px;
+  font-weight: 400;
 }
 .headerActions {
   flex-wrap: wrap;

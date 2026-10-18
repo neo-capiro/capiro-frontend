@@ -40,12 +40,45 @@ section.library {
 }
 .filters {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 8px;
 }
-.search {
+.searchField {
+  position: relative;
   flex: 1;
   min-width: 160px;
+}
+.search {
+  display: grid;
+  gap: 8px;
+}
+.search input {
+  width: 100%;
+  padding-right: 44px;
+}
+.searchButton {
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.searchButton:hover {
+  background: var(--muted);
+}
+.filters > label select {
+  height: 36px;
+  padding: 0 12px;
+  background: var(--card);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .dates {
   display: grid;
@@ -74,6 +107,7 @@ section.library {
   color: var(--muted-foreground);
   text-transform: uppercase;
   font-size: 12px;
+  min-height: 50px;
 }
 .item {
   border: 0;
@@ -82,6 +116,7 @@ section.library {
   color: var(--muted-foreground);
   font-size: 13px;
   cursor: pointer;
+  min-height: 75px;
 }
 .item:hover {
   background: var(--muted);

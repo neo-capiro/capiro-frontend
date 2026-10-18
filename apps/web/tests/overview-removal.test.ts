@@ -11,6 +11,7 @@ import {
   ambiguousClientWrite,
 } from "../src/features/portfolio/client-profile/quick-log/authority";
 import { quickLogReceiptSchema } from "../src/features/portfolio/client-profile/quick-log/contracts";
+import { activityCommandInputSchema } from "../src/features/portfolio/client-profile/quick-log/command-contracts";
 import { removeSubmission } from "../src/features/portfolio/client-profile/past-performance/actions";
 import {
   loadSubmissions,
@@ -72,6 +73,57 @@ function harness(reply: (method: string, url: string) => unknown) {
   return { api: createApiClient(fetcher), calls };
 }
 describe("owned Quick log inverse", () => {
+  it("accepts the same commitment timestamps after server ISO normalization", async () => {
+    const commitment = {
+      kind: "commitment" as const,
+      title: "Promised a one-pager",
+      body: "Follow through",
+      occurredAt: "2025-01-15T10:30:00-05:00",
+      dueAt: "2025-01-20T23:59:59-05:00",
+    };
+    const normalized = {
+      ...receipt,
+      ...commitment,
+      occurredAt: "2025-01-15T15:30:00.000Z",
+      dueAt: "2025-01-21T04:59:59.000Z",
+    };
+    const h = harness(() => normalized);
+    await expect(
+      createQuickLog(
+        h.api,
+        clientId,
+        actor,
+        commitment,
+        () => {},
+        new AbortController().signal,
+        () => {},
+      ),
+    ).resolves.toEqual(normalized);
+  });
+  it("keeps unsupported commitment fields out of the combined follow-up command", () => {
+    const command = {
+      requestId: id,
+      activity: {
+        kind: "commitment",
+        title: "Promised a one-pager",
+        body: "Follow through",
+        dueAt: "2025-01-21T04:59:59.000Z",
+      },
+      followUp: { assigneeUserId: userId },
+    };
+    expect(activityCommandInputSchema.safeParse(command).success).toBe(false);
+    expect(
+      activityCommandInputSchema.safeParse({
+        ...command,
+        activity: {
+          kind: "note",
+          title: "Note",
+          body: "Details",
+          occurredAt: "2025-01-15T15:30:00.000Z",
+        },
+      }).success,
+    ).toBe(false);
+  });
   it("retains only the exact validated created row for Undo", async () => {
     const h = harness(() => receipt);
     expect(

@@ -53,6 +53,12 @@ export function initials(name: string) {
     .join("")
     .toUpperCase();
 }
+export function organizationInitials(name: string) {
+  const words = name.trim().split(/\s+/);
+  return words.length === 1
+    ? words[0]!.slice(0, 2).toUpperCase()
+    : initials(name);
+}
 export { safeWebsite } from "@/shared/portfolio/domain/website";
 export const createProfileSchema = z.object({
   name: z.string().trim().min(1, "Organization name is required.").max(200),
