@@ -14,6 +14,7 @@ vi.mock("../src/shared/capiro/queries", () => ({
     key === "engagement.outreach.record"
       ? { ...state, reload: () => {} }
       : { data: [], loading: false, reload: () => {} },
+  useCapiroMutation: () => ({ pending: false, run: vi.fn() }),
 }));
 const clientId = "10000000-0000-4000-8000-000000000001";
 const recordId = "40000000-0000-4000-8000-000000000004";

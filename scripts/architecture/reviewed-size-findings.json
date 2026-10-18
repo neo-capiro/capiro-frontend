@@ -2508,10 +2508,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "639f600f496520d0d3076e50db17d2f6cb221783a63fd0ba6dec6390e768852a",
-    "reason": "The 630-line module retains named children for the existing ordinary draft form and campaign session, and adds only list/filter presentation with Core reads. Removed Engagement tabs do not leave imported owners here. This module does not add a send path or new authority. Independent review and limits: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
-    "reviewedBy": "Codex independent Engagement source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "0fa8a3fb90005b27c3f7d336009d29764e5577df2bcee82e93bd1979ba08f90d",
+    "reason": "The 634-line module adds only a campaign-create child to the existing owner-wide list header. The write state, form and Core operation stay isolated in CampaignCreate; no send path or new authority is added. Independent review and limits: docs/outreach-campaign-create-20261018/STRUCTURE-REVIEW.md#outreach-view.",
+    "reviewedBy": "Codex independent /root/outreach_create_review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
