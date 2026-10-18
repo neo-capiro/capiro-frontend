@@ -7,7 +7,7 @@ const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = 'f005f77316bb8735e60f16c3ac99a5c8e3d71a34';
 const meriImageDigest = 'sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d';
-const meriConsumerVersion = '0.1.8';
+const meriConsumerVersion = '0.1.10';
 const canonicalUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const nonMeriHosts = new Set([
   'capiro.ai', 'app.capiro.ai', 'os.capiro.ai', 'api.capiro.ai',
