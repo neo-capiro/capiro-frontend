@@ -32,6 +32,7 @@ type ScreenContext = {
   identity: CapiroMe;
   refresh: () => void;
   meriPreferences: ReactNode;
+  memoryReviewEnabled: boolean;
 };
 const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   personal: (context) => <PersonalSettings {...context} />,
@@ -39,7 +40,9 @@ const screens: Record<string, (context: ScreenContext) => ReactNode> = {
   branding: () => <BrandingSettings />,
   team: (context) => <TeamSettings identity={context.identity} />,
   integrations: () => <IntegrationSettings />,
-  memory: () => <MemorySettings />,
+  memory: (context) => (
+    <MemorySettings reviewEnabled={context.memoryReviewEnabled} />
+  ),
   "meri-preferences": (context) => context.meriPreferences,
   billing: () => <BillingSettings />,
   "ai-usage": () => <UsageSettings />,
@@ -80,9 +83,11 @@ const descriptions: Record<string, string> = {
 export function SettingsScreen({
   section = "personal",
   meriPreferences,
+  memoryReviewEnabled = false,
 }: {
   section?: string;
   meriPreferences: ReactNode;
+  memoryReviewEnabled?: boolean;
 }) {
   const query = useCapiroQuery("me.read", {});
   const identity = query.data;
@@ -126,7 +131,12 @@ export function SettingsScreen({
                 {["hq-tenants", "hq-ai-keys", "hq-personnel"].includes(
                   section,
                 ) && <TenantTabs section={section} />}
-                {render({ identity, refresh: query.reload, meriPreferences })}
+                {render({
+                  identity,
+                  refresh: query.reload,
+                  meriPreferences,
+                  memoryReviewEnabled,
+                })}
               </>
             ) : (
               <SettingsNotice title="Settings section unavailable">
