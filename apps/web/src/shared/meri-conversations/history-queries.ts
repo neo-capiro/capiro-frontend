@@ -16,6 +16,11 @@ import {
 const accessDenied = (error: unknown) =>
   error instanceof ConversationHistoryUnavailable &&
   ([401, 403].includes(error.status) || error.code === "MEMBERSHIP_CHANGED");
+/** Meri answers NOT_FOUND for an admitted conversation whose first input has not run yet. */
+export const historyNotStarted = (error: unknown) =>
+  error instanceof ConversationHistoryUnavailable &&
+  error.status === 404 &&
+  error.code === "NOT_FOUND";
 
 const transcriptKey = (
   account: ConversationAccount,
@@ -147,6 +152,7 @@ export function useConversationHistory(
   const current =
     saved && !tail.error && !tail.isFetching ? tail.data : undefined;
   const denied = accessDenied(query.error) || accessDenied(tail.error);
+  const empty = !!conversationId && historyNotStarted(query.error);
   return {
     query,
     tail,
@@ -154,7 +160,9 @@ export function useConversationHistory(
     current: denied ? undefined : current,
     denied,
     selected: !!conversationId,
-    unavailable: !!query.error || invalid || denied,
+    /** No turn has run yet; there is no saved history to show, which is not a failure. */
+    empty,
+    unavailable: (!!query.error && !empty) || invalid || denied,
     refresh: () => {
       if (conversationId) void query.refetch();
       if (latestBase !== undefined) void tail.refetch();
