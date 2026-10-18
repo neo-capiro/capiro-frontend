@@ -3165,9 +3165,18 @@
     "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
     "kind": "function",
     "symbol": "MeriLiveConversation",
-    "fingerprint": "6461b38a5fdf98306fac30ccbadfe6fce8e1935df7febe8edc2d8d4fd1c91070",
-    "reason": "This one session-bound conversation view composes the current admitted turn, run status, artifacts and composer availability. The added local first-submit receipt state clears only the captured draft after the existing command journal reports an observed ACK, and preserves any intervening edit; useLiveRun and its command owner still hold admission, immutable request identity and recovery. No second service, authorization rule or run workflow moved into this renderer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "6c83576eabb815e0a82c174e6cb660ece6074ea7c89048c02d7bc96535648124",
+    "reason": "This session-bound renderer composes one current turn, status, artifacts and composer. The draft owner now receives the canonical request only after the command journal records it, and acknowledgement/pending checks use the exact run scope. Command dispatch, request identity and observation remain in existing separate owners; the renderer adds no authority or independent workflow. Independent cross_run_review verified effect ordering and the real run-switch regressions.",
+    "reviewedBy": "Codex root and independent cross_run_review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/useConversationSession.ts",
+    "kind": "function",
+    "symbol": "useConversationSession",
+    "fingerprint": "aa553e07735c3720fe736dbc7f85c94d1b954012cf4a5164babaa8c70398f9c0",
+    "reason": "This hook composes one selected conversation lifetime: connection, saved-history view, draft and next-turn intent. Selecting a newly bound accepted run retires only the predecessor draft capture while retaining typed text; replacement sessions for the same run retain its capture. Request/run matching lives in initial-draft.ts and command identity remains in the canonical journal. Independent cross_run_review found no additional responsibility requiring extraction.",
+    "reviewedBy": "Codex root and independent cross_run_review",
     "reviewedOn": "2026-10-18"
   }
 ]

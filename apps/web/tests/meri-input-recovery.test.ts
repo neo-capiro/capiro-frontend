@@ -206,3 +206,33 @@ it("synthetic positive stored recovery uses ordinary admission after an initial 
   expect(submitInitial).not.toHaveBeenCalled();
   cache.clear();
 });
+
+it("initial capture receives the exact journaled request before allocation and never recaptures retries", async () => {
+  const cache = new QueryClient(),
+    journal = conversationIntentJournal(cache, context);
+  let captured: ConversationSubmitRequest | undefined;
+  const capture = vi.fn((request: ConversationSubmitRequest) => {
+    expect(journal.read().submit).toMatchObject({
+      ...request,
+      state: "unknown",
+      workflow: "initial",
+    });
+    captured = structuredClone(request);
+  });
+  const submitInitial = vi.fn(async (request: ConversationSubmitRequest) => {
+    expect(captured).toEqual(request);
+    expect(capture).toHaveBeenCalledOnce();
+    if (submitInitial.mock.calls.length === 1) throw new Error("Lost ACK");
+  });
+  const port = {
+    submitInitial,
+    getSnapshot: () => ({ submit: "idle" }),
+  } as unknown as MeriConversationPort;
+  await expect(
+    sendRequest(port, journal, "Exact initial capture", false, true, capture),
+  ).rejects.toThrow("Lost ACK");
+  await sendRequest(port, journal, "A later draft", true, true, capture);
+  expect(submitInitial).toHaveBeenCalledTimes(2);
+  expect(capture).toHaveBeenCalledOnce();
+  cache.clear();
+});

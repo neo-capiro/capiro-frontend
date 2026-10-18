@@ -9,7 +9,10 @@ import {
   requestStop,
   sendRequest,
 } from "./run-commands";
-import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
+import type {
+  ConversationStoredRequest,
+  ConversationSubmitRequest,
+} from "@capiro/meri-contracts/conversation-application";
 import { useCommandGate } from "./useCommandGate";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
@@ -96,8 +99,10 @@ export function useRunCommands(
     }).then(thenObserve);
   const submit = (prompt: string, retry = false) =>
     send(() => sendRequest(port, record, prompt, retry));
-  const submitInitial = (prompt: string) =>
-    send(() => sendRequest(port, record, prompt, false, true));
+  const submitInitial = (
+    prompt: string,
+    onRecorded?: (request: ConversationSubmitRequest) => void,
+  ) => send(() => sendRequest(port, record, prompt, false, true, onRecorded));
   const recover = (stored: ConversationStoredRequest) =>
     send(() => recoverRequest(port, record, stored));
   // The receipt is not the run's status; keep observing for run.status either way.
