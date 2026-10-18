@@ -3,13 +3,40 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import { conversationIntentJournal } from "../../../shared/meri-conversations/query-journal";
-import { recoverRequest, requestStop, sendRequest } from "./run-commands";
+import {
+  historyNotStarted,
+  recoverRequest,
+  requestStop,
+  sendRequest,
+} from "./run-commands";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { useCommandGate } from "./useCommandGate";
 import type { useRunObservation } from "./useRunObservation";
 import { isSettled } from "./conversation-view";
 
-export type TranscriptState = "loading" | "loaded" | "unavailable";
+/** `empty`: the conversation has no run yet, so there is no transcript to show. */
+export type TranscriptState = "loading" | "loaded" | "empty" | "unavailable";
+
+/** Reads the run's transcript; false when the conversation has no run yet to observe. */
+async function readTranscript(
+  port: MeriConversationPort,
+  setTranscript: (state: TranscriptState) => void,
+) {
+  setTranscript("loading");
+  try {
+    // `after` first keeps the body clear of the edge WAF rule that blocks a bare `{"limit":n}`.
+    await port.history({ after: 0, limit: 100 });
+    setTranscript("loaded");
+    return true;
+  } catch (cause) {
+    if (historyNotStarted(cause)) {
+      setTranscript("empty");
+      return false;
+    }
+    setTranscript("unavailable");
+    throw cause;
+  }
+}
 
 /** Session-bound command state; observation still owns its separate watching lifetime. */
 export function useRunCommands(
@@ -48,19 +75,16 @@ export function useRunCommands(
   const thenObserve = (done: boolean) => {
     if (done && alive.current) observation.observe();
   };
-  const loadHistory = async () => {
+  const loadHistory = () => {
     observation.stop();
-    setTranscript("loading");
-    try {
-      // `after` first keeps the body clear of the edge WAF rule that blocks a bare `{"limit":n}`.
-      await port.history({ after: 0, limit: 100 });
-      setTranscript("loaded");
-    } catch (cause) {
-      setTranscript("unavailable");
-      throw cause;
-    }
+    return readTranscript(port, setTranscript);
   };
-  const history = () => perform(loadHistory).then(thenObserve);
+  const history = () => {
+    let observable = false;
+    return perform(async () => {
+      observable = await loadHistory();
+    }).then((done) => thenObserve(done && observable));
+  };
   const send = (operation: () => Promise<unknown>) =>
     perform(async () => {
       await operation();
