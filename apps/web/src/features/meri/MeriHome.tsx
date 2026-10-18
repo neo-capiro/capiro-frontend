@@ -91,7 +91,8 @@ export function MeriHome({
           </Link>{" "}
           <Link href={scopedHref("/meri/actions", clientId)}>
             Open recommendation actions
-          </Link>
+          </Link>{" "}
+          <Link href="/meri/memory">Review personal memory</Link>
           <p>Each workspace reports its connection status when opened.</p>
         </section>
       </div>
