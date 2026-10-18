@@ -123,6 +123,11 @@ export async function actionHostFixture(page: Page) {
         : actionClient,
     }),
   );
+  // The ordinary Home selector reads the authorized roster before navigation.
+  await page.route("**/api/backend/core/clients", (route) => {
+    expect(route.request().method()).toBe("GET");
+    return route.fulfill({ json: [actionClient, otherActionClient] });
+  });
   await page.route("**/api/action-followthrough/*", (route) => {
     const name = new URL(route.request().url()).pathname.split("/").pop()!;
     const reply =
