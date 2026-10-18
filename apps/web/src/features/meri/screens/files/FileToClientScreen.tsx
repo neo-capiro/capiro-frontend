@@ -32,12 +32,12 @@ export function FileToClientScreen({
   unavailable,
 }: {
   view: FileToClientView;
-  links: { artifact?: string; review?: string };
+  links: { artifact?: string; sourceScopes?: string; review?: string };
   unavailable: string;
 }) {
   const [fileName, setFileName] = useState(view.fileName);
   return (
-    <div className={`${ui.page} ${styles.screen}`}>
+    <div className={`${ui.page} ${styles.screen} ${styles.filingScreen}`}>
       <MeriPageHeading
         title={view.heading.title}
         description={view.heading.description}
@@ -65,6 +65,13 @@ export function FileToClientScreen({
             unavailable={unavailable}
           >
             Cancel
+          </LinkAction>
+          <LinkAction
+            variant="outline"
+            href={links.sourceScopes}
+            unavailable={unavailable}
+          >
+            Review source scopes
           </LinkAction>
           <LinkAction
             variant="primary"
