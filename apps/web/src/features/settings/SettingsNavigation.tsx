@@ -24,7 +24,7 @@ export function SettingsNavigation({
     ? "hq-tenants"
     : section;
   return (
-    <aside className={styles.rail}>
+    <aside className={styles.rail} id="settings-navigation">
       <Link href="/modules" className={styles.back}>
         <img
           src="/figma/modules/settings-personal-imgIcon7.svg"

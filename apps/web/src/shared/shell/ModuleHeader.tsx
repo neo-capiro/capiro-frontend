@@ -3,27 +3,35 @@ import { ModeLink } from "./ModeLink";
 import Link from "next/link";
 import { ScopedLink } from "./ScopedLink";
 import { ModuleAsset } from "./ModuleAsset";
+import { ModuleSidebarToggle } from "./ModuleSidebarVisibility";
 import styles from "./module-shell.module.css";
 
 export function ModuleHeader({
   activeMode = "modules",
+  settings = false,
 }: {
   portfolioUrl?: string;
   activeMode?: "meri" | "modules";
+  settings?: boolean;
 }) {
   return (
     <HeaderFrame
       mobileModeRow
       className={styles.header}
       brand={
-        <Link href="/" className={styles.brand} aria-label="Capiro Home">
-          <img
-            src="/design/modules/shared/imgCapiroWordmark.png"
-            width="77"
-            height="26"
-            alt="Capiro"
+        <div className={styles.brand}>
+          <Link href="/" className={styles.wordmark} aria-label="Capiro Home">
+            <img
+              src="/design/modules/shared/imgCapiroWordmark.png"
+              width="77"
+              height="26"
+              alt="Capiro"
+            />
+          </Link>
+          <ModuleSidebarToggle
+            controls={settings ? "settings-navigation" : "module-navigation"}
           />
-        </Link>
+        </div>
       }
       modes={
         <nav className={styles.modes} aria-label="Product modes">

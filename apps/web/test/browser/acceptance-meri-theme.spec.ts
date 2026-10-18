@@ -16,6 +16,7 @@ async function style(locator: Locator) {
       color: css.color,
       background: css.backgroundColor,
       image: css.backgroundImage,
+      opacity: css.opacity,
       foreground: css.getPropertyValue("--foreground").trim(),
       card: css.getPropertyValue("--card").trim(),
       muted: css.getPropertyValue("--muted-foreground").trim(),
@@ -50,8 +51,15 @@ for (const width of [1440, 390]) {
       name: "Send unavailable: disconnected fixture",
       exact: true,
     });
-    expect((await style(send)).color).toBe("rgb(10, 10, 10)");
-    expect((await style(send)).background).toBe("rgb(245, 245, 244)");
+    await expect(send).toBeDisabled();
+    const disabledSend = await style(send);
+    expect(disabledSend.color).toBe("rgb(255, 255, 255)");
+    expect(disabledSend.image).toContain("linear-gradient");
+    expect(disabledSend.opacity).toBe("0.4");
+    await expect(send.locator("img")).toHaveCSS(
+      "filter",
+      "brightness(0) invert(1)",
+    );
     const start = page.getByRole("button", {
       name: "Start research draft",
       exact: true,

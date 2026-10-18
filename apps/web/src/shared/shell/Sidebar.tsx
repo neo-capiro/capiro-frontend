@@ -38,7 +38,11 @@ export function Sidebar({
     if (pathname !== "/meri/fixture/home") router.push("/meri/fixture/home");
   };
   return (
-    <aside className={styles.sidebar} aria-label="Meri navigation">
+    <aside
+      id="meri-sidebar"
+      className={styles.sidebar}
+      aria-label="Meri navigation"
+    >
       {fixture ? (
         <Button
           type="button"

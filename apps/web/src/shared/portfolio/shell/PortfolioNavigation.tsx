@@ -34,7 +34,9 @@ export function PortfolioNavigation({
       label: "Prospects",
       href: "/portfolio/prospects",
       icon: 2,
-      active: path === "/portfolio/prospects",
+      active:
+        path === "/portfolio/prospects" ||
+        (portfolioIndex && type === "PROSPECT"),
     },
   ];
   return (

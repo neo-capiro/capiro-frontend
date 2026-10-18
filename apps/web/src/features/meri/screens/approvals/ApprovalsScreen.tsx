@@ -34,17 +34,22 @@ const columns: readonly DataColumn<ApprovalRow>[] = [
   {
     key: "proposal",
     label: "Proposal",
-    width: 36,
+    width: 420,
     render: (row) => row.proposal,
   },
-  { key: "client", label: "Client", width: 12, render: (row) => row.client },
+  { key: "client", label: "Client", width: 140, render: (row) => row.client },
   {
     key: "action",
     label: "Requested action",
-    width: 24,
+    width: 340,
     render: (row) => row.action,
   },
-  { key: "expires", label: "Expires", width: 28, render: (row) => row.expires },
+  {
+    key: "expires",
+    label: "Expires",
+    width: 252,
+    render: (row) => row.expires,
+  },
 ];
 const cardColumns = phoneCardColumns(columns);
 const views = [

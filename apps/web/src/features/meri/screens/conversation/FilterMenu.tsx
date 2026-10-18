@@ -37,14 +37,15 @@ export function FilterMenu({
   return (
     <DropdownMenu defaultOpen={defaultOpen}>
       <DropdownMenuTrigger
-        className={ui.outline}
+        className={`${ui.outline} ${styles.trigger}`}
         aria-label={`${title}: ${value || allLabel}`}
       >
         {icon}
         {value || allLabel}
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="start"
+        align="end"
+        sideOffset={6}
         collisionPadding={16}
         className={`${portal.portalSurface} ${styles.menu}`}
       >
