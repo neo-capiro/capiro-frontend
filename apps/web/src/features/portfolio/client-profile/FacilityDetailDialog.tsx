@@ -138,7 +138,7 @@ export function FacilityDetailDialog({
                   ["Location", ids.location],
                   ["Footprint", ids.economic],
                   ["Workforce", ids.unemployment],
-                  ["Federal activity", ids.representation],
+                  ["Federal activity", ids.awards],
                   ["Strategy & engagement", ids.strategic],
                   ["Evidence", ids.changes],
                 ] as const
@@ -160,9 +160,12 @@ export function FacilityDetailDialog({
               <FacilityLocationFacts
                 id={ids.location}
                 clientId={clientId}
+                clientName={clientName}
                 facility={facility}
                 delegation={delegation}
+                representationPending={representation.isPending}
                 available={available}
+                onRemove={() => setRemoving(true)}
               />
               <FacilityEconomicSections
                 key={`economic:${facility.id}:${scope.district?.state}:${scope.district?.districtCode}`}
@@ -198,16 +201,13 @@ export function FacilityDetailDialog({
         <footer className={profile.footer}>
           <div className={profile.footerContext}>
             <small>
-              Location evidence retains its source and period. Economic impact
-              and award attribution require supporting records.
+              Location evidence retains its source and period. Review geography
+              and source dates before relying on this view.
             </small>
-            <button
-              className="button ghost danger"
-              disabled={!available || !current}
-              onClick={() => setRemoving(true)}
-            >
-              Remove
-            </button>
+            <small>
+              Location details do not establish verified economic impact or
+              award attribution.
+            </small>
           </div>
           <button className="button" onClick={() => onOpenChange(false)}>
             Done

@@ -17,33 +17,28 @@ import { initialMeetingTab, type MeetingTab } from "./lifecycle";
 import { MeetingIdentity } from "./MeetingIdentity";
 import { MeetingSharing } from "./sharing/MeetingSharing";
 import styles from "./calendar.module.css";
+import workspaceStyles from "./meeting-workspace.module.css";
 
 export function MeetingDetail({
   id,
   onClose,
   zone,
   clientId,
+  inline = false,
 }: {
   id: string | null;
   onClose: () => void;
   zone: CalendarZone;
   destinations: Destinations;
   clientId?: string;
+  inline?: boolean;
 }) {
   const query = useMeeting(id);
   const identity = useIdentity();
   const meeting = query.data;
   const inScope = !clientId || meeting?.client?.id === clientId;
-  return (
-    <Dialog
-      open={Boolean(id)}
-      onOpenChange={(open) => {
-        if (!open) onClose();
-      }}
-      title={inScope ? (meeting?.subject ?? "Meeting") : "Meeting unavailable"}
-      drawer
-      className={styles.meetingDrawer}
-    >
+  const content = (
+    <>
       <QueryState
         pending={query.isPending || identity.isPending}
         error={query.error ?? identity.error}
@@ -71,8 +66,38 @@ export function MeetingDetail({
             !identity.isFetching &&
             !identity.error
           }
+          inline={inline}
         />
       )}
+    </>
+  );
+  if (inline) {
+    return (
+      <section
+        className={workspaceStyles.workspacePanel}
+        role="dialog"
+        aria-label={
+          inScope ? (meeting?.subject ?? "Meeting") : "Meeting unavailable"
+        }
+        onKeyDown={(event) => {
+          if (event.key === "Escape") onClose();
+        }}
+      >
+        {content}
+      </section>
+    );
+  }
+  return (
+    <Dialog
+      open={Boolean(id)}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+      title={inScope ? (meeting?.subject ?? "Meeting") : "Meeting unavailable"}
+      drawer
+      className={styles.meetingDrawer}
+    >
+      {content}
     </Dialog>
   );
 }
@@ -84,12 +109,14 @@ function MeetingWorkspace({
   clientId,
   onClose,
   current,
+  inline,
 }: {
   meeting: Meeting;
   zone: CalendarZone;
   clientId?: string;
   onClose: () => void;
   current: boolean;
+  inline: boolean;
 }) {
   const [tab, setTab] = useState<MeetingTab>(() =>
     initialMeetingTab(meeting, Date.now()),
@@ -105,44 +132,80 @@ function MeetingWorkspace({
           being checked. Open local drafts are retained.
         </p>
       )}
-      <div hidden={!current}>
+      <div
+        hidden={!current}
+        className={inline ? workspaceStyles.workspaceContent : undefined}
+      >
         <MeetingIdentity
           meeting={meeting}
           zone={zone}
           onEdit={() => setEditing(true)}
           onAssign={() => setAssigning(true)}
           onShare={() => setSharing(true)}
+          onClose={onClose}
+          inline={inline}
         />
-        <nav className="row" aria-label="Meeting sections">
+        <nav
+          className={inline ? workspaceStyles.workspaceTabs : "row"}
+          aria-label="Meeting sections"
+        >
           {(["information", "preparation", "notes", "debriefs"] as const).map(
             (value) => (
               <button
-                className={`button ${tab === value ? "primary" : ""}`}
+                className={
+                  inline
+                    ? workspaceStyles.workspaceTab
+                    : `button ${tab === value ? "primary" : ""}`
+                }
                 key={value}
                 aria-pressed={tab === value}
+                aria-label={
+                  inline
+                    ? (
+                        {
+                          information: "Information",
+                          preparation: "Preparation",
+                          notes: "Notes",
+                          debriefs: "Debriefs",
+                        } as const
+                      )[value]
+                    : undefined
+                }
                 onClick={() => setTab(value)}
               >
-                {value[0]?.toUpperCase()}
-                {value.slice(1)}
+                {inline
+                  ? (
+                      {
+                        information: "Info",
+                        preparation: "Prep",
+                        notes: "Meeting Notes",
+                        debriefs: "Debrief",
+                      } as const
+                    )[value]
+                  : `${value[0]?.toUpperCase()}${value.slice(1)}`}
               </button>
             ),
           )}
         </nav>
-        {tab === "information" && (
-          <div className="stack">
-            <MeetingAttendance meeting={meeting} zone={zone} />
-            <p>{meeting.description ?? "No description."}</p>
-          </div>
-        )}
-        {tab === "preparation" && (
-          <>
-            <MeetingPreparation meeting={meeting} />
-            <MeetingAttachmentApprovals meeting={meeting} />
-          </>
-        )}
-        {(tab === "notes" || tab === "debriefs") && (
-          <MeetingArtifacts key={tab} meeting={meeting} kind={tab} />
-        )}
+        <div
+          className={inline ? workspaceStyles.workspaceTabContent : undefined}
+        >
+          {tab === "information" && (
+            <div className="stack">
+              <MeetingAttendance meeting={meeting} zone={zone} />
+              <p>{meeting.description ?? "No description."}</p>
+            </div>
+          )}
+          {tab === "preparation" && (
+            <>
+              <MeetingPreparation meeting={meeting} />
+              <MeetingAttachmentApprovals meeting={meeting} />
+            </>
+          )}
+          {(tab === "notes" || tab === "debriefs") && (
+            <MeetingArtifacts key={tab} meeting={meeting} kind={tab} />
+          )}
+        </div>
       </div>
       {sharing && (
         <MeetingSharing meeting={meeting} onClose={() => setSharing(false)} />

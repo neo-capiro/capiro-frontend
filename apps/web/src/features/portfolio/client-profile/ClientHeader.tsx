@@ -4,7 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DropdownMenu } from "radix-ui";
 import { clientViews } from "@/shared/portfolio/shell/client-views";
-import { type Client, initials } from "@/features/portfolio/index/public";
+import {
+  type Client,
+  organizationInitials,
+  clientLocation,
+  clientSectorLabel,
+} from "@/features/portfolio/index/public";
 import { ClientViewSwitcher } from "./ClientViewSwitcher";
 import { ClientProfileActions } from "./ClientProfileActions";
 import { ClientMeriActions } from "./ClientMeriActions";
@@ -16,8 +21,11 @@ export function ClientHeader({ client }: { client: Client }) {
   const view =
     clientViews.find((item) => path === `${base}${item.suffix}`) ??
     clientViews[0];
+  const location = clientLocation(client);
   return (
-    <div className={styles.frame}>
+    <div
+      className={`${styles.frame} ${view.suffix ? "" : styles.overviewFrame}`}
+    >
       <header className={styles.header}>
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href="/portfolio" aria-label="Back to Portfolio">
@@ -70,13 +78,14 @@ export function ClientHeader({ client }: { client: Client }) {
             {client.logoUrl ? (
               <img src={client.logoUrl} alt="" width={40} height={40} />
             ) : (
-              initials(client.name)
+              organizationInitials(client.name)
             )}
           </span>
           <div className={styles.identity}>
             <strong>{client.name}</strong>
             <p className="muted">
-              {client.sectorTag ?? "Sector not specified"}
+              {clientSectorLabel(client) ?? "Sector not specified"}
+              {location && ` · ${location}`}
             </p>
           </div>
           <span className="chip">

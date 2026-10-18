@@ -105,7 +105,7 @@ test("new catalog creates identified and closed won changes only stage, then ref
   await expect(change).not.toBeVisible();
   await page.getByRole("link", { name: "← Prospects" }).click();
   await page.getByRole("button", { name: "Pipeline", exact: true }).click();
-  const pipeline = page.getByRole("dialog", { name: "Prospects pipeline" });
+  const pipeline = page.getByRole("dialog", { name: "Pipeline" });
   await expect(
     pipeline.getByRole("heading", { name: "Closed won", exact: true }),
   ).toBeVisible();

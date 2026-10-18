@@ -1,10 +1,46 @@
 "use client";
 
 import { Temporal } from "temporal-polyfill";
-import { Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import {
+  CalendarDays,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+} from "lucide-react";
 import { moveDate, validDay, zones } from "./range";
 import type { CalendarKind } from "./contracts";
 import type { CalendarPageState } from "./useCalendarPageState";
+import clientStyles from "./calendar-client.module.css";
+
+function clientName(state: CalendarPageState) {
+  return (
+    state.currentClients.find((client) => client.id === state.scope)?.name ??
+    "Client"
+  );
+}
+
+function periodLabel(date: string, view: CalendarPageState["view"]) {
+  const day = Temporal.PlainDate.from(date);
+  if (view === "week") {
+    const monday = day.subtract({ days: day.dayOfWeek - 1 });
+    const sunday = monday.add({ days: 6 });
+    return monday.month === sunday.month
+      ? `${monday.toLocaleString("en-US", { month: "long" })} ${monday.day} to ${sunday.day}, ${sunday.year}`
+      : `${monday.toLocaleString("en-US", { month: "short", day: "numeric" })} to ${sunday.toLocaleString("en-US", { month: "short", day: "numeric" })}, ${sunday.year}`;
+  }
+  return day.toLocaleString("en-US", { month: "long", year: "numeric" });
+}
+
+const zoneLabels: Record<CalendarPageState["zone"], string> = {
+  "America/New_York": "Eastern time",
+  "America/Chicago": "Central time",
+  "America/Denver": "Mountain time",
+  "America/Los_Angeles": "Pacific time",
+  "Pacific/Honolulu": "Hawaii time",
+  UTC: "UTC",
+};
 
 export function CalendarPageHeader({
   clientId,
@@ -15,12 +51,81 @@ export function CalendarPageHeader({
 }) {
   const {
     scope,
+    view,
     meetingScopeAvailable,
     update,
     setCreating,
     setSyncReview,
     syncScope,
   } = state;
+  if (clientId) {
+    const name = clientName(state);
+    const agenda = view === "agenda";
+    return (
+      <header
+        className={`${clientStyles.clientHeader} ${agenda ? clientStyles.clientHeaderAgenda : ""} pageHeader`}
+      >
+        <div>
+          <nav
+            className={clientStyles.clientBreadcrumb}
+            aria-label="Breadcrumb"
+          >
+            {!agenda && (
+              <Link href="/portfolio" aria-label="Back to Portfolio">
+                <ChevronLeft size={16} />
+              </Link>
+            )}
+            <Link href="/portfolio">Portfolio</Link>
+            <span aria-hidden="true">/</span>
+            <Link href={`/portfolio/${clientId}`}>{name}</Link>
+            <span aria-hidden="true">/</span>
+            {agenda ? (
+              <span>Calendar</span>
+            ) : (
+              <span className={clientStyles.clientBreadcrumbCurrent}>
+                <CalendarDays size={14} />
+                Calendar
+                <ChevronDown size={14} />
+              </span>
+            )}
+          </nav>
+          <h1>
+            {name} {agenda ? "meetings" : "calendar"}
+          </h1>
+          <p className="muted">
+            {agenda
+              ? "Meeting preparation, notes and debriefs."
+              : `Meetings, preparation, notes and debriefs for ${name}.`}
+          </p>
+        </div>
+        <div className={clientStyles.clientActions}>
+          {agenda && (
+            <>
+              <button
+                className="button"
+                onClick={() => setSyncReview(syncScope)}
+              >
+                Sync calendar
+              </button>
+              <button
+                className="button"
+                onClick={() => update({ library: "1" })}
+              >
+                Meeting Library
+              </button>
+            </>
+          )}
+          <button
+            className="button primary"
+            disabled={!meetingScopeAvailable}
+            onClick={() => setCreating(true)}
+          >
+            New meeting
+          </button>
+        </div>
+      </header>
+    );
+  }
   return (
     <header className="pageHeader">
       <div>
@@ -54,6 +159,126 @@ export function CalendarPageHeader({
         </button>
       </div>
     </header>
+  );
+}
+
+function ClientPeriodNavigation({ state }: { state: CalendarPageState }) {
+  const { date, view, zone, update } = state;
+  return (
+    <div className={clientStyles.clientPeriodNavigation}>
+      <div className={clientStyles.clientPeriodButtons}>
+        <button
+          aria-label="Previous period"
+          onClick={() => update({ date: moveDate(date, view, -1) })}
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <button
+          onClick={() =>
+            update({ date: Temporal.Now.plainDateISO(zone).toString() })
+          }
+        >
+          Today
+        </button>
+        <button
+          aria-label="Next period"
+          onClick={() => update({ date: moveDate(date, view, 1) })}
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
+      <label className={clientStyles.clientPeriodLabel}>
+        <span>{periodLabel(date, view)}</span>
+        <input
+          type="date"
+          aria-label="Calendar date"
+          value={date}
+          onChange={(event) => {
+            if (validDay(event.target.value))
+              update({ date: event.target.value });
+          }}
+        />
+      </label>
+    </div>
+  );
+}
+
+function ClientViewPicker({ state }: { state: CalendarPageState }) {
+  const { view, update } = state;
+  return (
+    <div
+      className={clientStyles.clientViewPicker}
+      role="group"
+      aria-label="Calendar view"
+    >
+      {(["month", "week", "agenda"] as const).map((value) => (
+        <button
+          key={value}
+          aria-pressed={view === value}
+          onClick={() => update({ view: value })}
+        >
+          {value[0]?.toUpperCase()}
+          {value.slice(1)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export function ClientCalendarToolbar({ state }: { state: CalendarPageState }) {
+  const { view, zone, update, items, hidden, setHidden } = state;
+  const name = clientName(state);
+  const count = items.filter((item) => item.kind === "meeting").length;
+  return (
+    <div className={clientStyles.clientCalendarToolbar}>
+      <div className={clientStyles.clientCalendarTop}>
+        <ClientPeriodNavigation state={state} />
+        <div className={clientStyles.clientCalendarTopRight}>
+          <span className={clientStyles.clientCalendarCount}>
+            {count} {count === 1 ? "meeting" : "meetings"}{" "}
+            {view === "week" ? "this week" : "in view"} ·{" "}
+            <select
+              aria-label="Calendar timezone"
+              value={zone}
+              onChange={(event) => update({ zone: event.target.value })}
+            >
+              {zones.map((value) => (
+                <option key={value} value={value}>
+                  {zoneLabels[value]}
+                </option>
+              ))}
+            </select>
+          </span>
+          <ClientViewPicker state={state} />
+        </div>
+      </div>
+      {view !== "agenda" && (
+        <div className={clientStyles.clientSourceRow}>
+          <button
+            className={clientStyles.clientMeetingToggle}
+            aria-pressed={!hidden.includes("meeting")}
+            onClick={() =>
+              setHidden(
+                hidden.includes("meeting")
+                  ? hidden.filter((kind) => kind !== "meeting")
+                  : [...hidden, "meeting"],
+              )
+            }
+          >
+            <span
+              className={clientStyles.clientMeetingCheck}
+              aria-hidden="true"
+            >
+              {hidden.includes("meeting") ? "" : "✓"}
+            </span>
+            Meetings&nbsp; {count}
+          </button>
+          <span>
+            Only meetings associated with {name} appear in this calendar.
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -144,6 +369,14 @@ export function CalendarToolbar({
   clientId?: string;
   state: CalendarPageState;
 }) {
+  if (clientId && state.view === "agenda") {
+    return (
+      <div className={clientStyles.clientAgendaToolbar}>
+        <ClientPeriodNavigation state={state} />
+        <ClientViewPicker state={state} />
+      </div>
+    );
+  }
   return (
     <div className="toolbar">
       {!clientId && <ScopePicker state={state} />}
@@ -180,8 +413,15 @@ function MeetingLifecycleFilters({ state }: { state: CalendarPageState }) {
 }
 
 export function AgendaFilters({ state }: { state: CalendarPageState }) {
-  const { view, mixed, hidden, setHidden, search, setSearch, update } = state;
+  const { view, scope, mixed, hidden, setHidden, search, setSearch, update } =
+    state;
   if (view !== "agenda") return null;
+  if (scope)
+    return (
+      <div className={clientStyles.clientAgendaFilters}>
+        <MeetingLifecycleFilters state={state} />
+      </div>
+    );
   return (
     <div className="toolbar">
       <MeetingLifecycleFilters state={state} />

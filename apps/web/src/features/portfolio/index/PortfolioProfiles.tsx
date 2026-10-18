@@ -1,7 +1,9 @@
 "use client";
 import type { Client, Member } from "./contracts";
+import type { Prospect } from "@/features/portfolio/prospects/public";
 import type { PortfolioIndexState } from "./filter";
 import { ProfileCard, ProfileResults } from "./ProfileResults";
+import { ProspectResults } from "./ProspectResults";
 import { PortfolioLayoutEditor, usePortfolioLayout } from "./layout/public";
 
 /** Roster metadata supplies presentation; the layout receipt owns reorderable membership. */
@@ -10,6 +12,8 @@ export function PortfolioProfiles({
   customizing,
   onFinishCustomizing,
   rows,
+  prospects,
+  prospectOwners,
   state,
   filtered,
   owners,
@@ -19,6 +23,8 @@ export function PortfolioProfiles({
   customizing: boolean;
   onFinishCustomizing: () => void;
   rows: Client[];
+  prospects: readonly Prospect[];
+  prospectOwners: Record<string, Member>;
   state: PortfolioIndexState;
   filtered: boolean;
   owners?: Record<string, { accountOwner: Member | null }>;
@@ -45,7 +51,7 @@ export function PortfolioProfiles({
     <>
       {customizing && layout.receipt && (
         <p className="status" role="status">
-          Customizing all {layoutCatalog.length}{" "}
+          Customizing {layoutCatalog.length} client{" "}
           {layoutCatalog.length === 1 ? "profile" : "profiles"} you can access.
           Your filters and view will be restored when you finish.
         </p>
@@ -73,6 +79,13 @@ export function PortfolioProfiles({
         />
       ) : (
         <ProfileResults rows={ordered} view={state.view} owners={owners} />
+      )}
+      {prospects.length > 0 && (
+        <ProspectResults
+          rows={prospects}
+          view={state.view}
+          owners={prospectOwners}
+        />
       )}
     </>
   );

@@ -7,6 +7,7 @@ import {
   clientLocation,
   clientSectorLabel,
   initials,
+  organizationInitials,
   memberName,
   safeWebsite,
   type Client,
@@ -145,7 +146,7 @@ function ProfileLogo({ client }: { client: Client }) {
       {src ? (
         <img src={src} alt="" width={40} height={40} />
       ) : (
-        initials(client.name)
+        organizationInitials(client.name)
       )}
     </span>
   );

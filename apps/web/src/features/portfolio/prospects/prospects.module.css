@@ -209,48 +209,6 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
-.pipeline {
-  display: flex;
-  gap: 16px;
-  overflow: auto;
-  padding: 4px 0 16px;
-  min-height: 400px;
-  align-items: flex-start;
-}
-.pipelineColumn {
-  flex: 0 0 250px;
-  display: grid;
-  gap: 12px;
-  padding: 12px;
-  background: var(--muted);
-  border-radius: 12px;
-}
-.pipelineColumn header {
-  min-height: 36px;
-}
-.pipelineColumn h3 {
-  font-size: 14px;
-}
-.pipelineCard {
-  display: grid;
-  gap: 12px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  box-shadow: var(--shadow);
-}
-.pipelineCard p {
-  font-size: 12px;
-  color: var(--muted-foreground);
-  overflow-wrap: anywhere;
-}
-.pipelineCard[draggable="true"] {
-  cursor: grab;
-}
-.pipelineCard img {
-  flex-shrink: 0;
-}
 @media (max-width: 1100px) {
   .cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));

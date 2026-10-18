@@ -1,10 +1,18 @@
 import type { Client } from "./contracts";
 import styles from "./portfolio.module.css";
-export function PortfolioPulse({ clients }: { clients?: Client[] }) {
+export function PortfolioPulse({
+  clients,
+  fiscalYear,
+}: {
+  clients?: Client[];
+  fiscalYear: number;
+}) {
   return (
     <section className={styles.pulse} aria-label="Portfolio pulse">
       <div className={styles.coverage}>
-        <p className="eyebrow">Portfolio pulse</p>
+        <p className="eyebrow">
+          Portfolio pulse · FY{String(fiscalYear).slice(-2)}
+        </p>
         <div className="row">
           <strong>—</strong>
           <small>

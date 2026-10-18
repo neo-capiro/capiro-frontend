@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowUpRight, NotebookPen, Users } from "lucide-react";
+import { ArrowUpRight, NotebookPen, Plus, Users } from "lucide-react";
 import {
   useClient,
-  initials,
+  organizationInitials,
+  clientLocation,
+  clientSectorLabel,
   safeWebsite,
   memberName,
 } from "@/features/portfolio/index/public";
@@ -14,7 +16,12 @@ import { ObjectiveSummary } from "@/features/portfolio/objectives/public";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
-import { ClientDetails } from "./ClientDetails";
+import { ClientDetails, GovernmentSummary } from "./ClientDetails";
+import {
+  DeadlineAndRequests,
+  EngagementHealth,
+  EngagementPulse,
+} from "./OverviewSignals";
 import { TeamDialog } from "./TeamDialog";
 import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
@@ -41,51 +48,60 @@ export function ClientOverview({ clientId }: { clientId: string }) {
     );
   const value = client.data;
   const website = safeWebsite(value.website);
+  const websiteLabel = website
+    ? new URL(website).hostname.replace(/^www\./, "")
+    : undefined;
+  const location = clientLocation(value);
   const owner = team.data?.find((m) => m.isOwner);
   return (
-    <div className="page">
-      <header className="pageHeader">
-        <div>
-          <p className="eyebrow">Client profile</p>
-          <h1>Overview</h1>
-        </div>
-        <div className="row">
-          <button className="button" onClick={() => setShowNotes(true)}>
-            <NotebookPen size={16} />
-            Notes
-          </button>
-          <Link
-            className="button"
-            href={`/portfolio/${clientId}/objectives?new=1`}
-          >
-            New objective
-          </Link>
-        </div>
-      </header>
+    <div className={`page ${styles.overviewPage}`}>
       <div className={styles.layout}>
         <div className={styles.column}>
-          <section className="card stack">
+          <section
+            className={`card stack ${styles.profileCard}`}
+            aria-label="Client identity"
+          >
+            <div className={styles.profileActions}>
+              <button
+                className="button ghost iconButton"
+                aria-label="Notes"
+                onClick={() => setShowNotes(true)}
+              >
+                <NotebookPen size={16} />
+              </button>
+              <Link
+                className="button ghost iconButton"
+                href={`/portfolio/${clientId}/objectives?new=1`}
+                aria-label="New objective"
+              >
+                <Plus size={16} />
+              </Link>
+            </div>
             <div className={styles.identity}>
               <span className="monogram">
                 {value.logoUrl ? (
-                  <img src={value.logoUrl} width={44} height={44} alt="" />
+                  <img src={value.logoUrl} width={52} height={52} alt="" />
                 ) : (
-                  initials(value.name)
+                  organizationInitials(value.name)
                 )}
               </span>
               <div>
                 <div className="row">
                   <h1>{value.name}</h1>
-                  <span className="chip">{value.profileStatus}</span>
+                  <span className="chip">
+                    {value.profileStatus.toLowerCase().replaceAll("_", " ")}{" "}
+                    client
+                  </span>
                 </div>
                 <small>
-                  {value.sectorTag ?? "Sector not specified"}
+                  {clientSectorLabel(value) ?? "Sector not specified"}
+                  {location && ` · ${location}`}
                   {website && (
                     <>
                       {" "}
                       ·{" "}
                       <a href={website} target="_blank" rel="noreferrer">
-                        {value.website}
+                        {websiteLabel}
                       </a>
                     </>
                   )}
@@ -114,61 +130,40 @@ export function ClientOverview({ clientId }: { clientId: string }) {
               </button>
             </div>
           </section>
-          <section
-            className={`card ${styles.pulse}`}
-            aria-label="Engagement pulse"
-          >
-            <header className="row between">
-              <h2>Engagement pulse</h2>
-              <a href="#activity-timeline">Open timeline →</a>
-            </header>
-            <div className={styles.pulseGrid}>
-              <div>
-                <strong>{currentActivity?.length ?? "—"}</strong>
-                <p>
-                  <small>Recent activity items</small>
-                </p>
-              </div>
-              <div>
-                <strong>{team.data?.length ?? "—"}</strong>
-                <p>
-                  <small>Account team</small>
-                </p>
-              </div>
-              <div>
-                <strong>—</strong>
-                <p>
-                  <small>Objective coverage unavailable</small>
-                </p>
-              </div>
-            </div>
-          </section>
-          <ClientDetails key={value.id} client={value} />
+          <EngagementPulse records={currentActivity} />
           <ObjectiveSummary clientId={clientId} />
         </div>
         <div className={styles.column}>
+          <div className={styles.rightTop}>
+            <GovernmentSummary key={value.id} client={value} />
+            <EngagementHealth />
+          </div>
           <FacilitiesCard clientId={clientId} clientName={value.name} />
-          <section className="card stack">
-            <div className="row between">
-              <h2>Client calendar</h2>
-              <Link
-                className="button ghost iconButton"
-                href={`/portfolio/${clientId}/calendar`}
-                aria-label="Open client calendar"
-              >
-                <ArrowUpRight size={16} />
-              </Link>
-            </div>
-            <p className="muted">
-              Meetings, preparation, notes and debriefs for this client.
-            </p>
-            <Link className="button" href={`/portfolio/${clientId}/calendar`}>
-              Open calendar
-            </Link>
-          </section>
+          <DeadlineAndRequests />
         </div>
       </div>
       <ActivityTimeline clientId={clientId} />
+      <div className={styles.supplemental}>
+        <ClientDetails key={value.id} client={value} />
+        <section className="card stack">
+          <div className="row between">
+            <h2>Client calendar</h2>
+            <Link
+              className="button ghost iconButton"
+              href={`/portfolio/${clientId}/calendar`}
+              aria-label="Open client calendar"
+            >
+              <ArrowUpRight size={16} />
+            </Link>
+          </div>
+          <p className="muted">
+            Meetings, preparation, notes and debriefs for this client.
+          </p>
+          <Link className="button" href={`/portfolio/${clientId}/calendar`}>
+            Open calendar
+          </Link>
+        </section>
+      </div>
       <TeamDialog
         clientId={clientId}
         clientName={value.name}

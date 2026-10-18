@@ -4,10 +4,12 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { MeetingDetail } from "./MeetingDetail";
 import { MeetingLibrary, SharedMeetings } from "./library/public";
+import { MeetingWorkspacePage } from "./MeetingWorkspacePage";
 import { useCalendarPageState } from "./useCalendarPageState";
 import {
   CalendarPageHeader,
   CalendarToolbar,
+  ClientCalendarToolbar,
   AgendaFilters,
 } from "./CalendarPageControls";
 import {
@@ -15,6 +17,7 @@ import {
   CalendarDisplayedItems,
   CalendarPageDialogs,
 } from "./CalendarPagePanels";
+import clientStyles from "./calendar-client.module.css";
 
 export function CalendarPage({
   clientId,
@@ -25,6 +28,9 @@ export function CalendarPage({
 }) {
   const state = useCalendarPageState(clientId);
   const { params, scope, zone, update, clients } = state;
+  const workspace = Boolean(
+    clientId && params.get("meeting") && state.view === "agenda",
+  );
   const detail = (
     <MeetingDetail
       key={`${params.get("meeting") ?? "none"}:${scope ?? "all"}`}
@@ -59,19 +65,34 @@ export function CalendarPage({
       </>
     );
   return (
-    <div className="page">
+    <div className={`page ${clientId ? clientStyles.clientPage : ""}`}>
       <CalendarPageHeader clientId={clientId} state={state} />
-      <CalendarToolbar clientId={clientId} state={state} />
       {!clientId && (
         <QueryState
           error={clients.error}
           retry={() => void clients.refetch()}
         />
       )}
-      <AgendaFilters state={state} />
       <CalendarFeedStatuses state={state} />
-      <CalendarDisplayedItems state={state} />
-      {detail}
+      {clientId && (state.view === "month" || state.view === "week") ? (
+        <div className={clientStyles.clientCalendarCard}>
+          <ClientCalendarToolbar state={state} />
+          <CalendarDisplayedItems state={state} />
+        </div>
+      ) : (
+        <>
+          <CalendarToolbar clientId={clientId} state={state} />
+          {workspace ? (
+            <MeetingWorkspacePage state={state} destinations={destinations} />
+          ) : (
+            <>
+              <AgendaFilters state={state} />
+              <CalendarDisplayedItems state={state} />
+            </>
+          )}
+        </>
+      )}
+      {!workspace && detail}
       <CalendarPageDialogs state={state} destinations={destinations} />
     </div>
   );
