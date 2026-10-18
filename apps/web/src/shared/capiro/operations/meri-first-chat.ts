@@ -65,6 +65,7 @@ export const firstChatCoreOperation = defineOperation({
   service: "core",
   method: "POST",
   path: "/clio/conversations/bootstrap",
+  authentication: "clerk-session",
   request: z.strictObject({ body: firstChatCoreRequest }),
   response: firstChatCoreReceipt,
   source:

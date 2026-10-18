@@ -21,6 +21,7 @@ import { MeriCitedAnswer } from "../../src/features/meri/MeriCitedAnswer";
 import { findFixtureScreen } from "../../src/features/meri/fixtures/screens/registry";
 import { pendingApprovals } from "../../src/features/meri/fixtures/screens/approval-counts";
 import { MeriHome } from "../../src/features/meri/MeriHome";
+import { clientId as testClientId } from "../../tests/browser/fixtures";
 import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { StrictMode } from "react";
@@ -156,12 +157,20 @@ function RoutedApp() {
         conversationEnabled={
           sessionStorage.getItem("meri-conversation-enabled") === "true"
         }
+        firstChatBootstrapEnabled={
+          sessionStorage.getItem("meri-first-chat-enabled") === "true"
+        }
+        firstChatBootstrapClientId={testClientId}
       >
         <RequireSession>
           <MeriHome
             conversationEnabled={
               sessionStorage.getItem("meri-conversation-enabled") === "true"
             }
+            firstChatBootstrapEnabled={
+              sessionStorage.getItem("meri-first-chat-enabled") === "true"
+            }
+            firstChatBootstrapClientId={testClientId}
           />
         </RequireSession>
       </ProductShell>

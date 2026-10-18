@@ -27,6 +27,8 @@ const intentSchema = z.discriminatedUnion("state", [
   }),
 ]);
 export type FirstChatIntent = z.infer<typeof intentSchema>;
+/** Local presentation signal after an explicit, durably recorded New Chat intent. */
+export const newChatIntentEvent = "meri:new-chat-intent";
 type IntentStorage = Pick<Storage, "getItem" | "setItem">;
 const prefix = "capiro-meri-first-chat-intent-v1:";
 

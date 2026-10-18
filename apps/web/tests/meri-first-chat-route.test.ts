@@ -49,7 +49,7 @@ it("holds the registered Core write before Clerk when first chat is disabled", a
   expect(fetcher).not.toHaveBeenCalled();
 });
 
-it("passes a flagged first-chat write through the native Clerk Capiro bearer", async () => {
+it("passes a flagged first-chat write through the unmarked native Clerk bearer", async () => {
   for (const [key, value] of Object.entries({
     MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: "true",
     MERI_FIRST_CHAT_CLIENT_ID: body.clientId,
@@ -60,20 +60,22 @@ it("passes a flagged first-chat write through the native Clerk Capiro bearer", a
     CLERK_SECRET_KEY: "sk_test_synthetic",
   }))
     vi.stubEnv(key, value);
-  const getToken = vi.fn(async () => "native-capiro-token");
+  const getToken = vi.fn(async (...args) =>
+    args.length === 0 ? "native-session-token" : "marked-template-token",
+  );
   clerk.auth.mockResolvedValue({ userId: "clerk-subject", getToken });
   const fetcher = vi.fn<typeof fetch>(async () => Response.json(receipt));
   vi.stubGlobal("fetch", fetcher);
 
   const response = await POST(incoming(), context);
   expect(response.status).toBe(200);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
   expect(String(fetcher.mock.calls[0]![0])).toBe(
     "https://core.example.test/api/clio/conversations/bootstrap",
   );
   expect(
     new Headers(fetcher.mock.calls[0]![1]?.headers).get("authorization"),
-  ).toBe("Bearer native-capiro-token");
+  ).toBe("Bearer native-session-token");
   expect(await response.json()).toEqual(receipt);
 });
 

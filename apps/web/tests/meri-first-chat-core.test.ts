@@ -1,5 +1,6 @@
 import { expect, it, vi } from "vitest";
 import { handleCapiroRequest } from "../src/shared/capiro/gateway";
+import { defineOperation } from "../src/shared/capiro/contracts";
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
@@ -50,6 +51,13 @@ it("registers only the pinned first-chat Core operation", () => {
   expect(capiroOperations[firstChatCoreOperationKey]).toBe(
     firstChatCoreOperation,
   );
+  expect(firstChatCoreOperation.authentication).toBe("clerk-session");
+  expect(() =>
+    defineOperation({
+      ...firstChatCoreOperation,
+      path: "/clio/conversations",
+    }),
+  ).toThrow("Default Clerk session tokens are restricted");
 });
 
 it("sends only the native bearer and exact body through the narrow Core gateway", async () => {
@@ -67,6 +75,7 @@ it("sends only the native bearer and exact body through the narrow Core gateway"
   expect(response.status).toBe(200);
   expect(response.headers.get("cache-control")).toBe("no-store");
   expect(token).toHaveBeenCalledOnce();
+  expect(token).toHaveBeenCalledWith("clerk-session");
   expect(fetcher).toHaveBeenCalledOnce();
   const [url, options] = fetcher.mock.calls[0]!;
   expect(String(url)).toBe(

@@ -106,11 +106,11 @@ Parameters:
   CapiroPreviewMeriRuntimeSource:
     Type: String
     Default: ""
-    AllowedValues: ["", "f005f77316bb8735e60f16c3ac99a5c8e3d71a34"]
+    AllowedValues: ["", "176a8811a9b05d8613282e70bd7a57ebd75ca201"]
   CapiroPreviewMeriRuntimeImageDigest:
     Type: String
     Default: ""
-    AllowedValues: ["", "sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d"]
+    AllowedValues: ["", "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8"]
   CapiroPreviewMeriContractPackageVersion:
     Type: String
     Default: ""
@@ -159,9 +159,9 @@ Rules:
         AssertDescription: Meri workflow opt-in requires its narrow preview route
       - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeOrigin, !Ref MeriApiBaseUrl]
         AssertDescription: Meri runtime origin must equal the configured Meri API origin
-      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, "f005f77316bb8735e60f16c3ac99a5c8e3d71a34"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeSource, "176a8811a9b05d8613282e70bd7a57ebd75ca201"]
         AssertDescription: Meri route requires the currently qualified image source
-      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d"]
+      - Assert: !Equals [!Ref CapiroPreviewMeriRuntimeImageDigest, "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8"]
         AssertDescription: Meri route requires the currently qualified image digest
       - Assert: !Equals [!Ref CapiroPreviewMeriContractPackageVersion, "0.1.10"]
         AssertDescription: Meri route requires the frontend consumer distribution version

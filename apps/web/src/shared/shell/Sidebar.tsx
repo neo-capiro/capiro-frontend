@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSelectedClient } from "../session/SelectedClient";
-import { productHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { unavailableTitle } from "../meri-resources/unavailable";
@@ -13,56 +11,53 @@ import {
   type MeriSection,
 } from "./SidebarDestinations";
 import { SidebarRecents } from "./SidebarRecents";
+import { LiveNewConversation } from "./LiveNewConversation";
 import styles from "./shell.module.css";
 
 export function Sidebar({
   assetSet = "home",
   fixture = false,
   conversationEnabled = false,
+  firstChatBootstrapEnabled = false,
+  firstChatBootstrapClientId,
   section,
   pendingApprovals,
 }: {
   assetSet?: "home" | "cited-answer";
   fixture?: boolean;
   conversationEnabled?: boolean;
+  firstChatBootstrapEnabled?: boolean;
+  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
   const pathname = usePathname();
-  const selected = useSelectedClient();
   const router = useRouter();
-  const reset = () => {
+  const resetFixture = () => {
     window.dispatchEvent(new Event("meri:reset-local-draft"));
-    if (fixture) {
-      if (pathname !== "/meri/fixture/home") router.push("/meri/fixture/home");
-      return;
-    }
-    if (pathname !== "/meri")
-      router.push(
-        productHref(
-          "meri",
-          selected.state === "authorized-client"
-            ? selected.client.id
-            : undefined,
-        ),
-      );
+    if (pathname !== "/meri/fixture/home") router.push("/meri/fixture/home");
   };
   return (
     <aside className={styles.sidebar} aria-label="Meri navigation">
-      <Button
-        type="button"
-        className={styles.newConversation}
-        onClick={reset}
-        disabled={!fixture}
-        title={
-          fixture
-            ? "New local fixture draft"
-            : unavailableTitle("newConversation")
-        }
-      >
-        <DesignIcon name="plus" assetSet={assetSet} />
-        New conversation
-      </Button>
+      {fixture ? (
+        <Button
+          type="button"
+          className={styles.newConversation}
+          onClick={resetFixture}
+          title="New local fixture draft"
+        >
+          <DesignIcon name="plus" assetSet={assetSet} />
+          New conversation
+        </Button>
+      ) : (
+        <LiveNewConversation
+          assetSet={assetSet}
+          className={styles.newConversation}
+          conversationEnabled={conversationEnabled}
+          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          firstChatBootstrapClientId={firstChatBootstrapClientId}
+        />
+      )}
       {fixture ? (
         <Button asChild variant="ghost" className={styles.navButton}>
           <Link href="/meri/fixture/command-palette">

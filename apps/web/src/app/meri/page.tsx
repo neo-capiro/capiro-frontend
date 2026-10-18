@@ -6,7 +6,11 @@ import { readConversationConfig } from "../../shared/meri-conversations/config";
 export default function MeriPage() {
   const config = readConversationConfig(process.env);
   return (
-    <ProductShell conversationEnabled={config.enabled}>
+    <ProductShell
+      conversationEnabled={config.enabled}
+      firstChatBootstrapEnabled={config.firstChatBootstrapEnabled}
+      firstChatBootstrapClientId={config.firstChatBootstrapClientId}
+    >
       <RequireSession>
         <MeriHome
           conversationEnabled={config.enabled}

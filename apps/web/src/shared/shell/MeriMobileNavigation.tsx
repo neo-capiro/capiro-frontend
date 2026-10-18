@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { useSelectedClient } from "../session/SelectedClient";
 import { scopedHref } from "../session/client-route";
-import { unavailableTitle } from "../meri-resources/unavailable";
 import { DesignIcon } from "./DesignIcon";
 import {
   destinationHref,
@@ -17,6 +16,7 @@ import {
 } from "./SidebarDestinations";
 import { recents } from "./SidebarRecents";
 import { ConversationRecents } from "./ConversationRecents";
+import { LiveNewConversation } from "./LiveNewConversation";
 import styles from "./shell.module.css";
 
 type AssetSet = "home" | "cited-answer";
@@ -25,6 +25,8 @@ type MenuProps = {
   assetSet: AssetSet;
   fixture: boolean;
   conversationEnabled: boolean;
+  firstChatBootstrapEnabled: boolean;
+  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
   clientId?: string | undefined;
@@ -86,12 +88,23 @@ function MobileRecents({
   );
 }
 
-/** Fixture mode starts a fresh local draft; the live conversation service is unavailable. */
+/** Fixture mode starts a local draft; live mode records a verified Core intent. */
 function MobileNewConversation({
   assetSet,
   fixture,
+  conversationEnabled,
+  firstChatBootstrapEnabled,
+  firstChatBootstrapClientId,
   onNavigate,
-}: Pick<MenuProps, "assetSet" | "fixture" | "onNavigate">) {
+}: Pick<
+  MenuProps,
+  | "assetSet"
+  | "fixture"
+  | "conversationEnabled"
+  | "firstChatBootstrapEnabled"
+  | "firstChatBootstrapClientId"
+  | "onNavigate"
+>) {
   const plus = <DesignIcon name="plus" assetSet={assetSet} />;
   return fixture ? (
     <Link
@@ -106,15 +119,14 @@ function MobileNewConversation({
       New conversation
     </Link>
   ) : (
-    <button
-      type="button"
+    <LiveNewConversation
+      assetSet={assetSet}
       className={styles.mobileNewConversation}
-      disabled
-      title={unavailableTitle("newConversation")}
-    >
-      {plus}
-      New conversation
-    </button>
+      conversationEnabled={conversationEnabled}
+      firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+      firstChatBootstrapClientId={firstChatBootstrapClientId}
+      onNavigate={onNavigate}
+    />
   );
 }
 
@@ -125,6 +137,8 @@ function MobileMenu({
   fixture,
   section,
   conversationEnabled,
+  firstChatBootstrapEnabled,
+  firstChatBootstrapClientId,
   pendingApprovals,
   clientId,
   onNavigate,
@@ -143,6 +157,9 @@ function MobileMenu({
       <MobileNewConversation
         assetSet={assetSet}
         fixture={fixture}
+        conversationEnabled={conversationEnabled}
+        firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+        firstChatBootstrapClientId={firstChatBootstrapClientId}
         onNavigate={onNavigate}
       />
       {destinations.map((item) => {
@@ -211,12 +228,16 @@ export function MeriMobileNavigation({
   assetSet = "home",
   fixture = false,
   conversationEnabled = false,
+  firstChatBootstrapEnabled = false,
+  firstChatBootstrapClientId,
   section,
   pendingApprovals,
 }: {
   assetSet?: AssetSet;
   fixture?: boolean;
   conversationEnabled?: boolean;
+  firstChatBootstrapEnabled?: boolean;
+  firstChatBootstrapClientId?: string;
   section?: MeriSection | undefined;
   pendingApprovals?: number | undefined;
 }) {
@@ -258,6 +279,8 @@ export function MeriMobileNavigation({
           assetSet={assetSet}
           fixture={fixture}
           conversationEnabled={conversationEnabled}
+          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          firstChatBootstrapClientId={firstChatBootstrapClientId}
           section={section}
           pendingApprovals={pendingApprovals}
           clientId={clientId}

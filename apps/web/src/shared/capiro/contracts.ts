@@ -49,7 +49,7 @@ export type OperationDefinition<
   request: Request;
   response: Response;
   source: string;
-  /** Server-owned choice for the existing purchaser/setup Clerk contract. */
+  /** Server-owned choice for reviewed native Clerk session contracts. */
   authentication?: "clerk-session";
   queryArrays?: "repeat" | "comma";
   timeoutMs?: number;
@@ -75,13 +75,15 @@ export function defineOperation<
 >(
   definition: OperationDefinition<Request, Response>,
 ): OperationDefinition<Request, Response> {
-  if (
-    definition.authentication === "clerk-session" &&
-    (definition.service !== "onboard" ||
-      !/^\/(?:funnel|setup)\//.test(definition.path))
-  )
+  const nativeSessionAllowed =
+    (definition.service === "onboard" &&
+      /^\/(?:funnel|setup)\//.test(definition.path)) ||
+    (definition.service === "core" &&
+      definition.method === "POST" &&
+      definition.path === "/clio/conversations/bootstrap");
+  if (definition.authentication === "clerk-session" && !nativeSessionAllowed)
     throw new Error(
-      "Default Clerk session tokens are restricted to reviewed onboarding operations.",
+      "Default Clerk session tokens are restricted to reviewed operations.",
     );
   if (
     !/^\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*)(?:\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*))*$/.test(

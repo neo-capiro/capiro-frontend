@@ -20,8 +20,8 @@ const qualification = readFileSync('apps/web/deployment/portfolio/PR70-FIRST-CHA
 const coreApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
-const meriSource = 'f005f77316bb8735e60f16c3ac99a5c8e3d71a34';
-const meriDigest = 'sha256:6a03d5367c22a95db1fbc95a08b2bb1237164bfdf3b6f215f076a38833fffb8d';
+const meriSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
+const meriDigest = 'sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8';
 const syntheticClientId = '33333333-3333-4333-8333-333333333333';
 const meriEnabled = {
   meriApiBaseUrl: 'https://meri-preview.example.test',

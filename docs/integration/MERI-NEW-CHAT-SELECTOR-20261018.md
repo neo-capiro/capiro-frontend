@@ -1,0 +1,16 @@
+# Meri New Conversation selector, 18 October 2026
+
+This is a source handoff for the PR92 successor `dot/meri-new-chat-selector-20261018`, based on PR92 head `271a267da93aa952a89b208d1f42eed0ffb080c2`. The deployed frontend remains revision 17 at `4ea553fe71682b22192ab09cc6663b97971c21df` until a separately qualified image and preview update are completed.
+
+## Contract and ownership
+
+- The signed-in Meri page reads Core's native visible-client roster through the existing same-origin `GET /api/backend/core/clients` preview proxy. That proxy forwards an unmarked native Clerk session to Core `GET /api/clients`. The roster is a top-level array. The user chooses a nonarchived client; a URL client ID alone is not authority. The existing selected-client provider then verifies `GET /api/clients/:id` and identity before a chat can start.
+- Deployed Core:2 at `ade7fc883b7459cbc50e6f71d40ce3644bace5ea` owns idempotent `POST /api/clio/conversations/bootstrap`. The frontend gateway sends `{schemaVersion:1,requestId,clientId}` through the reviewed preview route with the same unmarked native Clerk session kind used by the roster read. A new explicit New Conversation rotates the confirmed intent to a fresh UUID. An unknown pending outcome keeps its request ID and refuses rotation. The Core receipt is verified for actor, tenant, client and request ID before Meri admission.
+- The desktop and phone controls use the same verified action. A selected history URL navigates to the current client chat route, and an already-current route restarts its Core resolver without cancelling or rewriting the old run. The old terminal `ATTEMPT_LOST` and its `RESERVED` next turn remain independent history.
+- Preview configuration source now pins the deployed N21 Meri source `176a8811a9b05d8613282e70bd7a57ebd75ca201` and Node image `sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8`. This changes source constraints only; it does not update CloudFormation or the running frontend.
+
+## Verification and remaining gate
+
+The focused browser suite covered desktop and phone distinct intents, selected-history navigation, and refusal to rotate an unresolved bootstrap (3/3). The native bootstrap bearer, first chat intent/gateway/host, and client selector suites passed (45/45). TypeScript and the final local Next production build passed (283 routes); preview configuration checks passed (9/9). Focused lint and formatting passed.
+
+No authenticated production bootstrap or Meri prompt has run on this source. One frontend image build, scan, immutable digest readback, reviewed preview service update, and a real signed-in chat remain. The existing frontend build route uses paid CodeBuild, which is outside this task's authorization. The currently running frontend task still pins Meri `e2723ed8` and `sha256:c2b6369d`; its reviewed preview update must pair the new frontend image with the deployed N21 source and digest pins above. The checked-in `service.yml` is behind the live stack template and must be reconciled before use. Do not count the disabled revision-17 New Conversation button as complete. Do not use the legacy non-idempotent Core create route, fabricate a client ID, edit a run journal, or alter live SQL to obtain a chat.

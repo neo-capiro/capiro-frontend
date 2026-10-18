@@ -28,7 +28,9 @@ const receipt = {
 const context = {
   params: Promise.resolve({ operation: firstChatCoreOperationKey }),
 };
-const getToken = vi.fn(async () => "native-capiro-token");
+const getToken = vi.fn(async (...args) =>
+  args.length === 0 ? "native-session-token" : "marked-template-token",
+);
 const fetcher = vi.fn<typeof fetch>();
 
 function request(url = `${origin}${path}`, requestBody = body) {
@@ -57,7 +59,9 @@ beforeEach(() => {
     CLERK_SECRET_KEY: "sk_test_synthetic",
   }))
     vi.stubEnv(key, value);
-  getToken.mockResolvedValue("native-capiro-token");
+  getToken.mockImplementation(async (...args) =>
+    args.length === 0 ? "native-session-token" : "marked-template-token",
+  );
   clerk.auth.mockResolvedValue({ userId: "clerk-subject", getToken });
   clerk.middleware.mockReturnValue(new Response("native Clerk middleware"));
   fetcher.mockImplementation(async () => Response.json(receipt));
@@ -92,7 +96,7 @@ it("continues through Clerk and sends the sole preview write to the pinned Core 
   const response = await POST(request(), context);
   expect(response.status).toBe(200);
   expect(await response.json()).toEqual(receipt);
-  expect(getToken).toHaveBeenCalledExactlyOnceWith({ template: "capiro" });
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
   expect(String(fetcher.mock.calls[0]![0])).toBe(
     `${previewTarget}/clio/conversations/bootstrap`,
   );
@@ -100,7 +104,7 @@ it("continues through Clerk and sends the sole preview write to the pinned Core 
   expect(sent.method).toBe("POST");
   expect(JSON.parse(String(sent.body))).toEqual(body);
   expect(new Headers(sent.headers).get("authorization")).toBe(
-    "Bearer native-capiro-token",
+    "Bearer native-session-token",
   );
   expect(new Headers(sent.headers).has("x-tenant-id")).toBe(false);
   expect(new Headers(sent.headers).has("cookie")).toBe(false);

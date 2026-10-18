@@ -16,6 +16,7 @@ import {
   useStoredConversationRecovery,
 } from "../../../shared/meri-conversations/stored-conversation-recovery";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
+import { newChatIntentEvent } from "../../../shared/meri-conversations/first-chat-intent";
 import { MeriLiveConversation } from "./MeriLiveConversation";
 import { useConversationSession } from "./useConversationSession";
 import { ConversationHistoryStatus } from "./ConversationHistoryStatus";
@@ -34,6 +35,13 @@ export function MeriConversationHost({
 }) {
   const selected = useSelectedClient();
   const selector = conversationSelection(useSearchParams());
+  const [newChatEpoch, setNewChatEpoch] = useState(0);
+  useEffect(() => {
+    if (selector.state !== "current") return;
+    const restart = () => setNewChatEpoch((epoch) => epoch + 1);
+    window.addEventListener(newChatIntentEvent, restart);
+    return () => window.removeEventListener(newChatIntentEvent, restart);
+  }, [selector.state]);
   if (!enabled)
     return (
       <section aria-labelledby="conversation-availability">
@@ -76,6 +84,7 @@ export function MeriConversationHost({
           account.tenantId,
           account.actorId,
           selected.client.id,
+          newChatEpoch,
         ])}
         account={account}
         clientId={selected.client.id}
@@ -109,7 +118,7 @@ function clientIneligibility(
 ): Ineligibility | null {
   // Core bootstrap and authority context refuse `status: "archived"` clients.
   // Stop before any Core create or Meri session; Core stays the authority.
-  if (client.status === "archived") return "archived";
+  if (client.status?.toLowerCase() === "archived") return "archived";
   if (firstChatBootstrapEnabled && client.id !== firstChatBootstrapClientId)
     return "not-configured";
   return null;

@@ -13,6 +13,8 @@ export function ProductShell({
   documentWorkflow = false,
   fixture = false,
   conversationEnabled = false,
+  firstChatBootstrapEnabled = false,
+  firstChatBootstrapClientId,
   section,
   pendingApprovals,
 }: {
@@ -23,6 +25,8 @@ export function ProductShell({
   documentWorkflow?: boolean;
   fixture?: boolean;
   conversationEnabled?: boolean;
+  firstChatBootstrapEnabled?: boolean;
+  firstChatBootstrapClientId?: string;
   /** Marks the matching sidebar destination as current. */
   section?: MeriSection | undefined;
   /** Fixture sample count shown on the Approvals destination. */
@@ -36,6 +40,8 @@ export function ProductShell({
           assetSet={assetSet}
           fixture={fixture}
           conversationEnabled={conversationEnabled}
+          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+          firstChatBootstrapClientId={firstChatBootstrapClientId}
           section={section}
           pendingApprovals={pendingApprovals}
         />
@@ -44,6 +50,8 @@ export function ProductShell({
             assetSet={assetSet}
             fixture={fixture}
             conversationEnabled={conversationEnabled}
+            firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+            firstChatBootstrapClientId={firstChatBootstrapClientId}
             section={section}
             pendingApprovals={pendingApprovals}
           />

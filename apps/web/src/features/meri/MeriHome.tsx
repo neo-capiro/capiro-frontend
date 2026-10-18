@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@capiro/ui/button";
-import { DesignIcon } from "../../shared/shell/DesignIcon";
 import Link from "next/link";
 import { useIdentity } from "../../shared/portfolio/auth/identity";
 import { QueryState } from "../../shared/portfolio/ui/QueryState";
@@ -9,6 +7,7 @@ import { useSelectedClient } from "../../shared/session/SelectedClient";
 import { scopedHref } from "../../shared/session/client-route";
 import styles from "./home.module.css";
 import { MeriConversationHost } from "./conversation/MeriConversationHost";
+import { MeriClientSelector } from "./MeriClientSelector";
 
 /** Ordinary Meri entry shows verified service data, never design fixture records. */
 export function MeriHome({
@@ -28,23 +27,13 @@ export function MeriHome({
       : undefined;
   const clientId =
     selected.state === "authorized-client" ? selected.client.id : undefined;
+  const clientScope = current?.tenant?.id
+    ? { tenantId: current.tenant.id, userId: current.user.id }
+    : undefined;
   return (
     <div className={styles.home}>
       <div className={styles.scopeRow}>
-        <div className={styles.scope}>
-          <Button
-            type="button"
-            variant="outline"
-            className={styles.scopeButton}
-            disabled
-            title="Choose client scope from Portfolio"
-          >
-            <DesignIcon name="chevron" />
-            {selected.state === "authorized-client"
-              ? selected.client.name
-              : "No client selected"}
-          </Button>
-        </div>
+        <MeriClientSelector scope={clientScope} />
         <span className={styles.meriWordmark} role="img" aria-label="Meri" />
       </div>
       <div
@@ -69,9 +58,7 @@ export function MeriHome({
           {selected.state === "authorized-client" ? (
             <p>Selected client: {selected.client.name}</p>
           ) : (
-            <p>
-              Choose a permitted client from Portfolio to work in its scope.
-            </p>
+            <p>Choose a permitted client above to work in its scope.</p>
           )}
           <Link href="/">Open Portfolio</Link>
         </section>

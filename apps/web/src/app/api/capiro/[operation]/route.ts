@@ -48,13 +48,10 @@ async function handle(request: Request, context: Context) {
     config,
     async (authentication) => {
       const session = await auth();
-      return session.userId
-        ? session.getToken(
-            authentication === "clerk-session"
-              ? undefined
-              : { template: "capiro" },
-          )
-        : null;
+      if (!session.userId) return null;
+      return authentication === "clerk-session"
+        ? session.getToken()
+        : session.getToken({ template: "capiro" });
     },
   );
 }
