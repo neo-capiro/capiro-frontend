@@ -127,6 +127,7 @@
 .meetingIdentity small {
   overflow-wrap: anywhere;
 }
+
 @media (max-width: 680px) {
   .meetingTable thead {
     display: none;

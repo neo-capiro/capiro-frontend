@@ -9,6 +9,7 @@ import { MeetingForm } from "./MeetingForm";
 import { PublicEventDetail } from "./public-event/public";
 import { CalendarSyncDialog } from "./sync/public";
 import styles from "./calendar.module.css";
+import clientStyles from "./calendar-client.module.css";
 import type { CalendarPageState } from "./useCalendarPageState";
 
 export function CalendarFeedStatuses({ state }: { state: CalendarPageState }) {
@@ -46,11 +47,13 @@ export function CalendarDisplayedItems({
   const { view, zone, date, scope, activeFeeds, items, update } = state;
   return (
     <>
-      <p className={styles.scopeNote}>
-        Master view includes meetings allowed by your calendar ownership and
-        explicit client sharing. It does not grant access to teammates&apos;
-        private calendars.
-      </p>
+      {!scope && (
+        <p className={styles.scopeNote}>
+          Master view includes meetings allowed by your calendar ownership and
+          explicit client sharing. It does not grant access to teammates&apos;
+          private calendars.
+        </p>
+      )}
       {view === "day" && (
         <p className={styles.scopeNote}>
           Shows meetings that start on this day in {zone}. Meetings that started
@@ -85,7 +88,14 @@ export function CalendarDisplayedItems({
             if (value !== date) update({ date: value });
           }}
           onMeeting={(id) => update({ meeting: id })}
+          client={Boolean(scope)}
         />
+      )}
+      {scope && view === "agenda" && (
+        <p className={clientStyles.clientAgendaNote}>
+          Only meetings assigned to this client are shown. Artifacts remain
+          private until shared.
+        </p>
       )}
     </>
   );

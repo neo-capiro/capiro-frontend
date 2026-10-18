@@ -35,7 +35,12 @@ export function CapabilitiesPage({
   return (
     <div className="page stack">
       <header className="row between">
-        <h1>Capabilities</h1>
+        <div className={styles.heading}>
+          <h1>Capabilities</h1>
+          <span className={styles.infoTip} aria-hidden="true">
+            i
+          </span>
+        </div>
         <div className="row">
           <button
             className="button"
@@ -54,70 +59,84 @@ export function CapabilitiesPage({
         error={query.error}
         retry={() => void query.refetch()}
       />
-      {records && (
-        <section className={`card stack ${styles.areas}`}>
-          <header className={`row between ${styles.areasHeader}`}>
-            <p className="eyebrow">
-              Capability areas
-              <span className={styles.mobileCount}> · {records.length}</span>
+      <div className={styles.surface}>
+        {records && (
+          <section className={styles.areas}>
+            <header className={`row between ${styles.areasHeader}`}>
+              <p className="eyebrow">
+                Capability areas
+                <span className={styles.mobileCount}> · {records.length}</span>
+              </p>
+              <small className={styles.desktopCount}>
+                {records.length} areas ·{" "}
+                {
+                  records.filter((cap) => maturity(cap.trl) === "Fielded")
+                    .length
+                }{" "}
+                fielded
+              </small>
+            </header>
+            <div className={styles.grid}>
+              {records.map((cap) => {
+                const program = cap.peNumbers.join(", ") || cap.peNumber;
+                return (
+                  <button
+                    key={cap.id}
+                    className={styles.card}
+                    disabled={query.isFetching}
+                    onClick={() => open(cap.id)}
+                  >
+                    <span className="monogram">▦</span>
+                    <strong className={styles.name}>{cap.name}</strong>
+                    <p className="muted">{cap.description}</p>
+                    <div className={`row ${styles.metadata}`}>
+                      <span
+                        className={`chip ${styles.maturity}`}
+                        data-maturity={maturity(cap.trl)}
+                      >
+                        {maturity(cap.trl)}
+                      </span>
+                      <small
+                        className={styles.program}
+                        data-mapped={Boolean(program)}
+                      >
+                        {program
+                          ? `${/^PE\s/i.test(program) ? "" : "PE "}${program}`
+                          : "No program line mapped"}
+                      </small>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            {records.length === 0 && (
+              <p className="empty">
+                Add a capability area to describe what this client can deliver.
+              </p>
+            )}
+          </section>
+        )}
+        <CapabilityFit
+          clientId={clientId}
+          existingApp={destinations.existingApp}
+          compact
+        />
+        <details className={styles.performance}>
+          <summary>
+            <span>Past performance</span>
+            <span>View saved submissions</span>
+          </summary>
+          <div className={styles.performanceBody}>
+            <PastPerformance clientId={clientId} />
+            <p className="muted">
+              Past advocacy:{" "}
+              <Link href={`/portfolio/${clientId}/objectives`}>
+                Advocacy history ↗
+              </Link>
             </p>
-            <small className={styles.desktopCount}>
-              {records.length} areas ·{" "}
-              {records.filter((cap) => maturity(cap.trl) === "Fielded").length}{" "}
-              fielded
-            </small>
-          </header>
-          <div className={styles.grid}>
-            {records.map((cap) => (
-              <button
-                key={cap.id}
-                className={styles.card}
-                disabled={query.isFetching}
-                onClick={() => open(cap.id)}
-              >
-                <span className="monogram">▦</span>
-                <strong className={styles.name}>{cap.name}</strong>
-                <p className="muted">{cap.description}</p>
-                <div className={`row ${styles.metadata}`}>
-                  <span
-                    className={`chip ${styles.maturity}`}
-                    data-maturity={maturity(cap.trl)}
-                  >
-                    {maturity(cap.trl)}
-                  </span>
-                  <small
-                    className={styles.program}
-                    data-mapped={Boolean(cap.peNumbers.length || cap.peNumber)}
-                  >
-                    {(cap.peNumbers.length > 0 || cap.peNumber) && (
-                      <span className={styles.mobileCount}>PE </span>
-                    )}
-                    {cap.peNumbers.join(", ") ||
-                      cap.peNumber ||
-                      "No program line mapped"}
-                  </small>
-                </div>
-              </button>
-            ))}
           </div>
-          {records.length === 0 && (
-            <p className="empty">
-              Add a capability area to describe what this client can deliver.
-            </p>
-          )}
-        </section>
-      )}
-      <CapabilityFit
-        clientId={clientId}
-        existingApp={destinations.existingApp}
-      />
-      <PastPerformance clientId={clientId} />
-      <p className="muted">
-        Past advocacy:{" "}
-        <Link href={`/portfolio/${clientId}/objectives`}>
-          Advocacy history ↗
-        </Link>
-      </p>
+        </details>
+      </div>
       {records && (selected === "new" || capability) && (
         <CapabilityEditor
           key={`${clientId}:${selected}`}

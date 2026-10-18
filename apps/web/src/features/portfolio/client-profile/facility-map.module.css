@@ -1,4 +1,4 @@
-.card {
+.card:global(.card) {
   padding: 16px;
   overflow: hidden;
 }
@@ -49,6 +49,12 @@
   overflow: auto;
   display: grid;
   gap: 2px;
+}
+.emptyLocation {
+  padding: 8px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 18px;
 }
 .location {
   width: 100%;

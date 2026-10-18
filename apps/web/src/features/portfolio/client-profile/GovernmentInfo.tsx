@@ -61,7 +61,7 @@ function GovernmentProfile({
       </section>
       <footer className="row between">
         <small className="muted">
-          Source availability and client attribution are shown separately.
+          Client-wide context · Location-specific detail is in District Nexus.
         </small>
         <button className="button primary" onClick={() => onOpenChange(false)}>
           Done

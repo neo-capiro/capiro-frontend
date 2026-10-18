@@ -2,7 +2,6 @@
 import { useDeleteObjective } from "./mutations";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Plus, Trash2 } from "lucide-react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { AdvocacyHistory } from "@/features/portfolio/advocacy/public";
@@ -11,8 +10,9 @@ import {
   memberName,
 } from "@/features/portfolio/index/public";
 import { useObjectives } from "./queries";
-import { statusLabels, type Objective } from "./contracts";
+import { type Objective } from "./contracts";
 import { ObjectiveEditor } from "./ObjectiveEditor";
+import { ObjectiveList, ObjectiveStats } from "./ObjectiveList";
 import { NewObjectivePage } from "./NewObjectivePage";
 import { ObjectiveOperationalPage } from "./operational/ObjectiveOperationalPage";
 import styles from "./objectives.module.css";
@@ -50,9 +50,9 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
     () => setDeleting(undefined),
     Boolean(records && deleting),
   );
-  const visible = records?.filter(
-    (objective) => !filter || objective.status === filter,
-  );
+  const ownerNames = members.data
+    ? new Map(members.data.map((member) => [member.id, memberName(member)]))
+    : undefined;
   function navigate(key?: string, value?: string) {
     const next = new URLSearchParams(params);
     next.delete("objective");
@@ -102,119 +102,45 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
     );
   return (
     <div className="page">
-      <header className="pageHeader">
-        <div>
-          <p className="eyebrow">Outcomes and institutional memory</p>
+      <header className={styles.pageHead}>
+        <div className={styles.pageTitle}>
           <h1>Objectives</h1>
+          <span
+            className={styles.readinessInfo}
+            title="Objectives capture outcomes, review readiness and linked work."
+            aria-hidden="true"
+          >
+            i
+          </span>
         </div>
         <button
-          className="button primary"
+          className={`button primary ${styles.newObjective}`}
           disabled={!records || query.isFetching}
           onClick={() => navigate("new", "1")}
         >
-          <Plus size={16} />
           New objective
         </button>
       </header>
+      {records && records.length > 0 && <ObjectiveStats records={records} />}
       <div className={styles.columns}>
         <AdvocacyHistory clientId={clientId} />
-        <section className="stack">
-          <header className="row between">
-            <h2>Current objectives</h2>
-            <select
-              aria-label="Objective status"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            >
-              <option value="">All statuses</option>
-              {Object.entries(statusLabels).map(([key, label]) => (
-                <option key={key} value={key}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </header>
+        <div className={styles.catalogColumn}>
           <QueryState
             pending={query.isPending}
             error={query.error}
             retry={() => void query.refetch()}
           />
-          {visible?.map((objective) => (
-            <article className="card stack" key={objective.id}>
-              <div className="row between">
-                <span className="chip">{statusLabels[objective.status]}</span>
-                <button
-                  className="button ghost iconButton"
-                  aria-label={`Delete ${objective.outcome || "untitled objective"}`}
-                  disabled={query.isFetching}
-                  onClick={() => setDeleting(objective)}
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
-              <h2>
-                <button
-                  className={styles.titleButton}
-                  disabled={query.isFetching}
-                  onClick={() => navigate("objective", objective.id)}
-                >
-                  {objective.outcome || "Untitled objective"}
-                </button>
-              </h2>
-              <p className="muted">
-                {objective.governmentProblem ||
-                  "Government problem not defined"}
-              </p>
-              <hr className="divider" />
-              <p>
-                <span className="eyebrow">Minimum win </span>
-                {objective.minimumWin || "Not defined"}
-              </p>
-              <div className="row between">
-                <small>
-                  {members.data
-                    ? memberName(
-                        members.data.find(
-                          (m) => m.id === objective.ownerUserId,
-                        ),
-                      )
-                    : "Owner unavailable"}
-                </small>
-                <small>
-                  {objective.readiness.completedFields}/4 required fields
-                </small>
-              </div>
-              <button
-                className="button"
-                disabled={query.isFetching}
-                onClick={() => navigate("objective", objective.id)}
-              >
-                Open objective
-              </button>
-              <button
-                className="button"
-                disabled={query.isFetching}
-                onClick={() => navigate("operational", objective.id)}
-              >
-                View linked work
-              </button>
-            </article>
-          ))}
-          {records?.length === 0 && (
-            <div className="status">
-              <h3>No current objectives</h3>
-              <p className="muted">
-                Create a draft to define the client&apos;s next outcome.
-              </p>
-            </div>
-          )}
-          {Boolean(records?.length) && visible?.length === 0 && (
-            <div className="status">
-              <h3>No objectives match this status</h3>
-              <button className="button" onClick={() => setFilter("")}>
-                Clear status filter
-              </button>
-            </div>
+          {records && (
+            <ObjectiveList
+              records={records}
+              filter={filter}
+              onFilter={setFilter}
+              busy={query.isFetching}
+              ownerNames={ownerNames}
+              onEdit={(id) => navigate("objective", id)}
+              onWork={(id) => navigate("operational", id)}
+              onDelete={setDeleting}
+            />
           )}
           {params.has("objective") && query.isSuccess && !selected && (
             <p role="alert">
@@ -227,7 +153,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
               removed.
             </p>
           )}
-        </section>
+        </div>
       </div>
       <ObjectiveEditor
         key={`${clientId}:${selected?.id ?? "closed"}`}

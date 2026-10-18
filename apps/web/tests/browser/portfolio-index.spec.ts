@@ -82,9 +82,10 @@ test("deep links restore combined filters and legacy layout; clearing preserves 
   await expect(page.getByLabel("Account owner", { exact: true })).toHaveValue(
     "owner-1",
   );
+  // The shared fixture also supplies one active Business Development prospect.
   await expect(
     page.getByRole("region", { name: "Portfolio profiles" }),
-  ).toContainText("1 profile of 2");
+  ).toContainText("1 profile of 3");
   await page
     .getByRole("button", { name: "Clear filters", exact: true })
     .click();
@@ -117,7 +118,7 @@ test("deep links restore combined filters and legacy layout; clearing preserves 
     page
       .getByRole("navigation", { name: "Profile type" })
       .getByRole("link", { name: "Pipeline", exact: true }),
-  ).toHaveAttribute("href", "/portfolio/prospects?pipeline=1");
+  ).toHaveAttribute("href", "/portfolio?type=PROSPECT&pipeline=1");
   expect(unexpected).toEqual([]);
 });
 
@@ -257,8 +258,8 @@ test("chooser uses native asset geometry and canonical manual intake, restoring 
   const masks = chooser.locator('[style*="mask-image"]');
   await expect(masks).toHaveCount(4);
   for (const mask of await masks.all()) {
-    await expect(mask).toHaveCSS("width", "16px");
-    await expect(mask).toHaveCSS("height", "16px");
+    await expect(mask).toHaveCSS("width", "18px");
+    await expect(mask).toHaveCSS("height", "18px");
     await expect(mask).toHaveCSS("background-color", "rgb(10, 10, 10)");
   }
   await chooser.screenshot({ path: "work/index/chooser-desktop.png" });
@@ -355,6 +356,20 @@ test("mobile dark cards and chooser fit viewport; empty portfolio and unsupporte
   await chooser.screenshot({ path: "work/index/chooser-mobile-dark.png" });
   await page.keyboard.press("Escape");
   await page.route("**/api/backend/core/clients", (route) => json(route, []));
+  await page.route(
+    "**/api/backend/core/business-development/prospects?*",
+    (route) =>
+      json(route, {
+        prospects: [],
+        counts: {
+          visible: 0,
+          total: 0,
+          active: 0,
+          dismissed: 0,
+          byStage: {},
+        },
+      }),
+  );
   await page.goto("/portfolio");
   await expect(
     page.getByRole("heading", { name: "No profiles yet" }),

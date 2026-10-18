@@ -1,0 +1,42 @@
+.card:global(.card) {
+  min-height: 156px;
+  padding: 16px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+.card h2 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.card header small,
+.list small {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.card header :global(.button) {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+.list {
+  display: grid;
+  gap: 8px;
+}
+.list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+}
+.list strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+.list small {
+  white-space: nowrap;
+}

@@ -81,7 +81,7 @@
   min-height: 40px;
   padding: 0 10px;
   font-size: 14px;
-  white-space: normal;
+  white-space: nowrap;
 }
 .navigationNote {
   display: grid;
@@ -151,6 +151,86 @@
   margin: 0;
   overflow-wrap: anywhere;
 }
+.locationCard {
+  gap: 18px;
+}
+.locationCard h3 {
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+}
+.locationCard .locationEyebrow {
+  margin: 0;
+  color: var(--teal, #3f6670);
+  font-size: 12px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.locationArea {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.locationArea h4 {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.locationArea .locationExplanation {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.locationFacts {
+  display: grid;
+  gap: 12px;
+}
+.locationFacts > div {
+  font-size: 13px;
+  line-height: 1.45;
+}
+.locationFacts > div + div {
+  margin-top: 0;
+}
+.locationFacts dd {
+  color: var(--foreground);
+  font-size: 14px;
+}
+.locationFacts dd small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.locationWarning {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--warning-subtle, #f3eee2);
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.locationWarning strong {
+  color: var(--warning-text, #6c5226);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.locationArea > a {
+  justify-self: start;
+  height: 36px;
+  padding-inline: 14px;
+}
+.locationSourceDetails {
+  color: var(--foreground);
+}
+.locationSourceDetails > button {
+  justify-self: start;
+}
 .footer {
   display: flex;
   align-items: center;
@@ -161,15 +241,14 @@
   background: var(--muted);
 }
 .footerContext {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: grid;
+  gap: 4px;
   min-width: 0;
 }
 .footerContext small {
-  max-width: 580px;
+  max-width: 750px;
   font-size: 12px;
-  line-height: 18px;
+  line-height: 17px;
 }
 .footer > button {
   flex: none;

@@ -6,6 +6,7 @@ import {
   type Member,
 } from "./contracts";
 import { sectorLabel } from "@/shared/portfolio/domain/sector";
+import type { Prospect } from "@/features/portfolio/prospects/public";
 export interface PortfolioFilter {
   search: string;
   status: string;
@@ -108,6 +109,34 @@ export function filterClients(
         (filter.owner === unassignedOwner
           ? owners[client.id]?.accountOwnerUserId === null
           : owners[client.id]?.accountOwnerUserId === filter.owner))
+    );
+  });
+}
+
+export function filterProspects(
+  prospects: readonly Prospect[],
+  filter: PortfolioFilter,
+) {
+  // Client profile status and sector have no equivalent on BD prospects.
+  const term = filter.search.trim().toLocaleLowerCase();
+  return prospects.filter((prospect) => {
+    const searchText = [
+      prospect.displayName,
+      prospect.description,
+      prospect.serviceHypothesis,
+      prospect.geography,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLocaleLowerCase();
+    return (
+      (!term || searchText.includes(term)) &&
+      (!filter.owner ||
+        (filter.owner === unassignedOwner
+          ? prospect.ownerUserId === null
+          : prospect.ownerUserId === filter.owner)) &&
+      !filter.status &&
+      !filter.sector
     );
   });
 }

@@ -14,17 +14,20 @@ import { followUpInputSchema } from "./quick-log/command-contracts";
 import { useFollowUpCommand } from "./quick-log/useFollowUpCommand";
 import { FollowUpFields } from "./quick-log/FollowUpFields";
 import { FollowUpStatus } from "./quick-log/FollowUpStatus";
+import styles from "./quick-log/quick-log-dialog.module.css";
 export function QuickLog({
   clientId,
   clientName,
   open,
   onOpenChange,
+  onChangeClient,
   personId,
 }: {
   clientId: string;
   clientName: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onChangeClient?: () => void;
   personId?: string;
 }) {
   const router = useRouter();
@@ -49,7 +52,37 @@ export function QuickLog({
         }}
         title="Quick log"
         description={`Record activity for ${clientName}.`}
+        className={styles.dialog}
+        headerActions={
+          <span className={styles.info} aria-hidden="true">
+            i
+          </span>
+        }
       >
+        <div className={styles.destination}>
+          <span className="eyebrow">Log to</span>
+          <span className={styles.destinationPill}>Client</span>
+        </div>
+        <div className={styles.clientField}>
+          <span>Client</span>
+          <div className={styles.clientValue}>
+            <output>{clientName}</output>
+            {onChangeClient && (
+              <button
+                type="button"
+                disabled={
+                  mutation.isPending ||
+                  command.busy ||
+                  Boolean(command.pending) ||
+                  uncertain
+                }
+                onClick={onChangeClient}
+              >
+                Change client
+              </button>
+            )}
+          </div>
+        </div>
         {command.checking ? (
           <p role="status">Checking saved follow-up recovery…</p>
         ) : command.blocked ? (
@@ -66,7 +99,7 @@ export function QuickLog({
         ) : (
           <form
             key={command.pending?.input.requestId ?? "new-activity"}
-            className="stack"
+            className={`${styles.form} stack`}
             onSubmit={(event) => {
               event.preventDefault();
               if (command.pending || command.checking || command.blocked)
@@ -108,10 +141,11 @@ export function QuickLog({
               mutation.mutate(input.data);
             }}
           >
-            <label>
-              Activity type
+            <label className={styles.kindField}>
+              What kind of log
               <select
                 name="kind"
+                aria-label="Activity type"
                 disabled={Boolean(command.pending)}
                 defaultValue={command.pending?.input.activity.kind ?? "note"}
               >
@@ -122,6 +156,9 @@ export function QuickLog({
                 <option value="request">Request</option>
               </select>
             </label>
+            <small className={styles.filingHint}>
+              Files to: {clientName} timeline
+            </small>
             <div className={meetingEntryStyles.entry}>
               <button
                 type="button"
@@ -162,7 +199,7 @@ export function QuickLog({
             <small>
               Logged email records history; it does not send a message.
             </small>
-            <label className="row">
+            <label className={`${styles.followUpToggle} row`}>
               <input
                 type="checkbox"
                 checked={withFollowUp}
@@ -174,10 +211,12 @@ export function QuickLog({
               Add generic follow-up
             </label>
             {withFollowUp && (
-              <FollowUpFields
-                disabled={Boolean(command.pending) || !canCreate}
-                initial={command.pending?.input.followUp}
-              />
+              <div className={styles.followUpFields}>
+                <FollowUpFields
+                  disabled={Boolean(command.pending) || !canCreate}
+                  initial={command.pending?.input.followUp}
+                />
+              </div>
             )}
             {validation && <p role="alert">{validation}</p>}
             <QueryState error={mutation.error} />
@@ -195,7 +234,15 @@ export function QuickLog({
                 unavailable without a verified saved entry.
               </p>
             )}
-            <div className="formActions">
+            <div className={`${styles.formActions} formActions`}>
+              <button
+                type="button"
+                className="button"
+                disabled={mutation.isPending || command.busy}
+                onClick={() => onOpenChange(false)}
+              >
+                Cancel
+              </button>
               <button
                 className="button primary"
                 disabled={

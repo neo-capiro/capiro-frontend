@@ -1,0 +1,167 @@
+.workspaceLayout {
+  display: grid;
+  grid-template-columns: 348px minmax(0, 1fr);
+  gap: 16px;
+  min-height: 760px;
+}
+.workspaceList,
+.workspacePanel {
+  height: 760px;
+  overflow: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.workspaceList {
+  padding: 16px;
+}
+.workspaceList h2 {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.workspaceList > p {
+  margin: 0 0 12px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.workspaceItems {
+  display: grid;
+  gap: 12px;
+}
+.workspaceItem {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  min-height: 119px;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--muted);
+  text-align: left;
+}
+.workspaceItem:hover,
+.workspaceItem[aria-current="true"] {
+  background: var(--accent);
+}
+.workspaceItem strong {
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+.workspaceItem small {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.workspacePanel {
+  overflow: hidden;
+}
+.workspaceContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.workspaceIdentity {
+  display: grid;
+  gap: 9px;
+  padding: 24px;
+  min-height: 195px;
+}
+.workspaceIdentityTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.workspaceIdentityTop small:last-child {
+  color: #855d2c;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.workspaceIdentity h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+.workspaceIdentity > strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+.workspaceIdentity > p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.workspaceIdentityActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.workspaceIdentityActions > button:nth-of-type(1) {
+  margin-left: auto;
+}
+.workspaceIdentityActions > details {
+  position: relative;
+  order: 1;
+}
+.workspaceIdentityActions > details summary {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.workspaceIdentityActions > details > div {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  display: grid;
+  gap: 4px;
+  min-width: 170px;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+.workspaceTabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 54px;
+  padding: 8px 12px;
+  background: var(--muted);
+}
+.workspaceTab {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+}
+.workspaceTab:first-child {
+  margin-left: auto;
+  order: 1;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.workspaceTab[aria-pressed="true"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.workspaceTabContent {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  font-size: 13px;
+}
+.workspaceTabContent :global(.card) {
+  box-shadow: none;
+  padding: 16px;
+}

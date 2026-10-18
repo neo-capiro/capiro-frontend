@@ -24,7 +24,7 @@ export function PortfolioAttention({
             role="note"
             aria-label={`${rows.length} shown alerts`}
           >
-            {rows.length} shown
+            {rows.length}
           </span>
         )}
         <span className={styles.order} title="Ordered by the source service">
