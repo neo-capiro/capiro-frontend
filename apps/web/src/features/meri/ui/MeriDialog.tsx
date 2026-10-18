@@ -19,6 +19,7 @@ export function MeriDialog({
   placement = "below-heading",
   width = "wide",
   hint = false,
+  clearBackdrop = false,
   returnFocus,
   children,
 }: {
@@ -32,6 +33,8 @@ export function MeriDialog({
   width?: "compact" | "default" | "wide" | "extra-wide";
   /** Renders the description as the smaller keyboard-hint line. */
   hint?: boolean;
+  /** Keep the modal overlay interactive without dimming the underlying page. */
+  clearBackdrop?: boolean;
   /** Receives focus on close when the dialog was not opened from a control (open on load). */
   returnFocus?: RefObject<HTMLElement | null>;
   children: ReactNode;
@@ -43,6 +46,7 @@ export function MeriDialog({
         className={`${styles.portalSurface} ${styles.dialog}`}
         data-placement={placement}
         data-width={width}
+        data-clear-backdrop={clearBackdrop ? "" : undefined}
         showCloseButton={false}
         onOpenAutoFocus={() => {
           opener.current =

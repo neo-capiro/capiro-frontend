@@ -3,6 +3,10 @@ import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 import type { MeriSection } from "./SidebarDestinations";
 import { MeriMobileNavigation } from "./MeriMobileNavigation";
+import {
+  MeriSidebarVisibility,
+  MeriSidebarWorkspace,
+} from "./MeriSidebarVisibility";
 import styles from "./shell.module.css";
 
 export function ProductShell({
@@ -34,19 +38,10 @@ export function ProductShell({
 }) {
   return (
     <>
-      <div className={styles.target} data-design-target={designTarget}>
-        <Header assetSet={assetSet} fixture={fixture} />
-        <MeriMobileNavigation
-          assetSet={assetSet}
-          fixture={fixture}
-          conversationEnabled={conversationEnabled}
-          firstChatBootstrapEnabled={firstChatBootstrapEnabled}
-          firstChatBootstrapClientId={firstChatBootstrapClientId}
-          section={section}
-          pendingApprovals={pendingApprovals}
-        />
-        <div className={styles.workspace}>
-          <Sidebar
+      <MeriSidebarVisibility>
+        <div className={styles.target} data-design-target={designTarget}>
+          <Header assetSet={assetSet} fixture={fixture} />
+          <MeriMobileNavigation
             assetSet={assetSet}
             fixture={fixture}
             conversationEnabled={conversationEnabled}
@@ -55,15 +50,26 @@ export function ProductShell({
             section={section}
             pendingApprovals={pendingApprovals}
           />
-          <main id="main-content" className={styles.main}>
-            {actionWorkflow || documentWorkflow ? (
-              children
-            ) : (
-              <SelectedClientGate>{children}</SelectedClientGate>
-            )}
-          </main>
+          <MeriSidebarWorkspace>
+            <Sidebar
+              assetSet={assetSet}
+              fixture={fixture}
+              conversationEnabled={conversationEnabled}
+              firstChatBootstrapEnabled={firstChatBootstrapEnabled}
+              firstChatBootstrapClientId={firstChatBootstrapClientId}
+              section={section}
+              pendingApprovals={pendingApprovals}
+            />
+            <main id="main-content" className={styles.main}>
+              {actionWorkflow || documentWorkflow ? (
+                children
+              ) : (
+                <SelectedClientGate>{children}</SelectedClientGate>
+              )}
+            </main>
+          </MeriSidebarWorkspace>
         </div>
-      </div>
+      </MeriSidebarVisibility>
       <footer className={styles.fixtureNotice}>
         <div role="note">
           {fixture ? (

@@ -31,6 +31,9 @@
 .full {
   width: 100%;
 }
+.filingScreen input:read-only {
+  background: var(--card);
+}
 .sheetTitle {
   width: 100%;
   font-size: 22px;

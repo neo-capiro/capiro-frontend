@@ -7,6 +7,8 @@ export type TableColumn<Row> = {
   render: (row: Row) => ReactNode;
   align?: "left" | "right";
   width?: string;
+  /** Hide the visible heading while retaining its accessible column name. */
+  visuallyHiddenHeader?: boolean;
 };
 export function DataTable<Row>({
   rows,
@@ -31,19 +33,7 @@ export function DataTable<Row>({
     <div className={styles.tableScroll}>
       <table className={styles.table}>
         <caption className="sr-only">{caption}</caption>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <th
-                key={column.key}
-                scope="col"
-                style={{ textAlign: column.align, width: column.width }}
-              >
-                {column.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
+        <TableHeader columns={columns} />
         <tbody>
           {rows.length ? (
             rows.map((row) => (
@@ -106,5 +96,32 @@ export function DataTable<Row>({
         </tbody>
       </table>
     </div>
+  );
+}
+
+/** Keep a column's accessible name when its visible label is blank by design. */
+function TableHeader<Row>({
+  columns,
+}: {
+  columns: readonly TableColumn<Row>[];
+}) {
+  return (
+    <thead>
+      <tr>
+        {columns.map((column) => (
+          <th
+            key={column.key}
+            scope="col"
+            style={{ textAlign: column.align, width: column.width }}
+          >
+            {column.visuallyHiddenHeader ? (
+              <span className="sr-only">{column.label}</span>
+            ) : (
+              column.label
+            )}
+          </th>
+        ))}
+      </tr>
+    </thead>
   );
 }

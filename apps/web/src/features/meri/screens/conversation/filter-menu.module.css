@@ -1,4 +1,12 @@
 /* Figma 3.4 13.21 / 13.22 conversation filter menus (480px panel). */
+.trigger[data-state="open"] {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(169deg, #242424, #0a0a0a);
+  box-shadow:
+    0 1px 2px #0c0a0924,
+    inset 0 1px #ffffff24;
+}
 .menu {
   z-index: 102;
   width: min(480px, calc(100vw - 32px));

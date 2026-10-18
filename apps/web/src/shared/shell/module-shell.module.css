@@ -9,13 +9,39 @@
   gap: 20px;
   padding: 0 16px;
   background: var(--card);
-  border-bottom: 2px solid var(--border);
 }
 .brand {
   flex: 0 0 196px;
   display: flex;
   align-items: center;
   height: 32px;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+.sidebarToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin-left: auto;
+  margin-right: 4px;
+  padding: 7px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+.sidebarToggle:hover {
+  background: var(--muted);
+}
+.sidebarToggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
 }
 .modes {
   display: flex;
@@ -122,6 +148,35 @@
 .navigation .settings {
   margin-top: auto;
 }
+@media (min-width: 681px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .navigation {
+    position: sticky;
+    top: 65px;
+    align-self: flex-start;
+    height: calc(100dvh - 65px);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .navigation nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .navigation .settings {
+    flex: 0 0 auto;
+  }
+}
+@media (min-width: 1101px) {
+  .sidebarCollapsed .navigation,
+  .sidebarCollapsed :global(#settings-navigation) {
+    display: none;
+  }
+}
 .main {
   flex: 1;
   min-width: 0;
@@ -176,6 +231,9 @@
   display: none;
 }
 @media (max-width: 1100px) {
+  .sidebarToggle {
+    display: none;
+  }
   .brand {
     flex-basis: 56px;
   }

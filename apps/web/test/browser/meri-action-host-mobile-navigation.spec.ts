@@ -118,7 +118,7 @@ test("375px Meri navigation preserves the verified client through keyboard and B
   await expectMobileRoute(page, fixture, "home");
 });
 
-test("1440px Meri retains one visible sidebar destination per route without duplicate mobile links", async ({
+test("1440px Meri reaches actions from the scoped Home workspace link", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -126,27 +126,39 @@ test("1440px Meri retains one visible sidebar destination per route without dupl
   await page.goto(homeUrl);
   await expectRoute(page, fixture, "home");
   const sidebar = page.getByRole("complementary", { name: "Meri navigation" });
-  const actions = page.getByRole("link", {
-    name: "Recommendation actions",
-    exact: true,
+  const workspace = page.getByRole("region", {
+    name: "Available Meri workspaces",
+  });
+  const actions = workspace.getByRole("link", {
+    name: "Open recommendation actions",
+  });
+  const taskUpdates = workspace.getByRole("link", {
+    name: "Open task updates",
   });
   const home = page.getByRole("button", { name: "Conversations", exact: true });
   await expect(sidebar).toBeVisible();
+  await expect(
+    sidebar
+      .getByRole("navigation", { name: "Meri workspace" })
+      .getByRole("button"),
+  ).toHaveCount(7);
   await expect(actions).toHaveCount(1);
   await expect(actions).toBeVisible();
   await expect(actions).toHaveAttribute("href", actionUrl());
+  await expect(taskUpdates).toHaveAttribute(
+    "href",
+    `/meri/task-updates?clientId=${actionClient.id}`,
+  );
   await expect(home).toHaveCount(1);
   await expect(home).toBeVisible();
   await expect(home).toHaveAttribute("aria-current", "page");
-  await expect(actions).not.toHaveAttribute("aria-current", /.*/);
   await expect(
     page.getByRole("link", { name: "Conversations", exact: true }),
   ).toHaveCount(0);
   await tabTo(page, actions);
   await page.keyboard.press("Enter");
   await expectRoute(page, fixture, "actions");
-  await expect(actions).toHaveCount(1);
-  await expect(actions).toHaveAttribute("aria-current", "page");
+  await expect(actions).toHaveCount(0);
   await expect(home).not.toHaveAttribute("aria-current", /.*/);
   await expect(home).toHaveCount(1);
   await expect(
@@ -156,5 +168,9 @@ test("1440px Meri retains one visible sidebar destination per route without dupl
   await page.keyboard.press("Enter");
   await expectRoute(page, fixture, "home");
   await expect(home).toHaveAttribute("aria-current", "page");
-  await expect(actions).not.toHaveAttribute("aria-current", /.*/);
+  await expect(actions).toHaveAttribute("href", actionUrl());
+  await page.goBack();
+  await expectRoute(page, fixture, "actions");
+  await page.goForward();
+  await expectRoute(page, fixture, "home");
 });

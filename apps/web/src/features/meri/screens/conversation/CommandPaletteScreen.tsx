@@ -49,6 +49,7 @@ export function CommandPaletteScreen({ view }: { view: PaletteView }) {
         description="⌘K / Ctrl+K · Use arrows to choose · Enter to open"
         placement="top"
         hint
+        clearBackdrop
       >
         <CommandPalette view={view} />
       </MeriDialog>

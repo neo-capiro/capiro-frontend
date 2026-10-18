@@ -1,11 +1,15 @@
+"use client";
+
 import { Button } from "@capiro/ui/button";
 import Link from "next/link";
+import { PanelLeft } from "lucide-react";
 import { ScopedLink } from "./ScopedLink";
 import { ModeLink } from "./ModeLink";
 import { productModes } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
 import { HeaderFrame } from "./HeaderFrame";
 import { FixtureHeaderActions } from "./FixtureHeaderActions";
+import { useMeriSidebarVisibility } from "./MeriSidebarVisibility";
 import styles from "./shell.module.css";
 
 const actions = [
@@ -27,16 +31,7 @@ export function Header({
     <HeaderFrame
       mobileModeRow
       className={styles.header}
-      brand={
-        <Link href="/" className={styles.brand} aria-label="Capiro Home">
-          <img
-            src="/design/home/wordmark.png"
-            width="77"
-            height="26"
-            alt="Capiro"
-          />
-        </Link>
-      }
+      brand={<MeriBrand />}
       modes={
         <nav className={styles.modes} aria-label="Product modes">
           {productModes.map((mode) => (
@@ -104,5 +99,31 @@ export function Header({
         </div>
       }
     />
+  );
+}
+
+function MeriBrand() {
+  const { expanded, toggle } = useMeriSidebarVisibility();
+  return (
+    <div className={styles.brand}>
+      <Link href="/" className={styles.wordmark} aria-label="Capiro Home">
+        <img
+          src="/design/home/wordmark.png"
+          width="77"
+          height="26"
+          alt="Capiro"
+        />
+      </Link>
+      <button
+        type="button"
+        className={styles.sidebarToggle}
+        aria-label="Toggle Meri sidebar"
+        aria-controls="meri-sidebar"
+        aria-expanded={expanded}
+        onClick={toggle}
+      >
+        <PanelLeft size={18} aria-hidden="true" />
+      </button>
+    </div>
   );
 }
