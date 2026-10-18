@@ -52,7 +52,8 @@ export function useRunCommands(
     observation.stop();
     setTranscript("loading");
     try {
-      await port.history({ limit: 100 });
+      // `after` first keeps the body clear of the edge WAF rule that blocks a bare `{"limit":n}`.
+      await port.history({ after: 0, limit: 100 });
       setTranscript("loaded");
     } catch (cause) {
       setTranscript("unavailable");

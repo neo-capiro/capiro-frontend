@@ -80,8 +80,10 @@ export function useConversationDiscovery(
     ],
     initialPageParam: null as ConversationListPage["nextBefore"],
     queryFn: async ({ pageParam: before, signal }) => {
+      // The shared edge WAF's SQL-injection body rule blocks `{"before":null,"limit":50}` and a bare `limit`
+      // (it reads like SQL `LIMIT n`). The first page sends the protocol defaults implicitly as `{}`.
       const page = await listConversations(
-        { before, limit: protocol.defaults.limit },
+        before === null ? {} : { before, limit: protocol.defaults.limit },
         signal,
       );
       // Check every owner, including entries belonging to another permitted client.
