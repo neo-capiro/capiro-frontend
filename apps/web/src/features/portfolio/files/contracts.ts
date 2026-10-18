@@ -1,4 +1,44 @@
 import { z } from "zod";
+const storageBytesSchema = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
+const storageUsageBase = z.object({
+  clientId: z.string().uuid(),
+  source: z.literal("engagement_attachments"),
+  usageBasis: z.literal("registered_attachments"),
+  allowanceScope: z.literal("client"),
+  asOf: z.iso.datetime({ offset: true }),
+  allowanceBytes: storageBytesSchema.positive(),
+  enforcement: z.literal("report_only"),
+});
+export const storageUsageSchema = (clientId: string) =>
+  z
+    .discriminatedUnion("status", [
+      storageUsageBase.extend({
+        status: z.literal("available"),
+        usedBytes: storageBytesSchema,
+        remainingBytes: storageBytesSchema,
+        overAllowance: z.boolean(),
+      }),
+      storageUsageBase.extend({
+        status: z.literal("unavailable"),
+        reason: z.enum(["incomplete_size_metadata", "unsafe_total"]),
+        usedBytes: z.null(),
+        remainingBytes: z.null(),
+        overAllowance: z.null(),
+      }),
+    ])
+    .refine(
+      (usage) => usage.clientId === clientId,
+      "Unexpected client storage usage",
+    )
+    .refine(
+      (usage) =>
+        usage.status === "unavailable" ||
+        (usage.remainingBytes ===
+          Math.max(0, usage.allowanceBytes - usage.usedBytes) &&
+          usage.overAllowance === usage.usedBytes > usage.allowanceBytes),
+      "Inconsistent client storage usage",
+    );
+export type StorageUsage = z.infer<ReturnType<typeof storageUsageSchema>>;
 export const attachmentSchema = z.object({
   id: z.string().uuid(),
   clientId: z.string().nullable(),
