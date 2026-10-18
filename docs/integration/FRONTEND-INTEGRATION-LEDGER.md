@@ -83,12 +83,19 @@ The base has since rebuilt the same phone Home against the later Figma 3.4 and 1
 | `aa889996` | Contracts `0.1.10` in the held preview template | §2.4 |
 | `59ffd28c` | Task commands and preferences compare Origin through `sameRequestOrigin` with `CAPIRO_REQUEST_ORIGIN`. Task commands send the session in `X-Meri-Action-Session`, refuse a browser `Authorization` header before `auth()`, and forward the session to Meri as its bearer | #61/#89 and #62/#65 branched before `0b03d4a2`/`2651a8a1`. Behind the standalone bind address, `request.url` is the internal origin, and Clerk reads a browser bearer as signed out, so both routes would refuse every real request once enabled |
 | `29cae7b9` | Add `/api/documents/*`, `/api/task-commands/*` and `/api/settings/*` to the Clerk proxy matcher, with a test | Their handlers call `auth()`, which throws unless `clerkMiddleware` ran; none was ever matched |
-| `cdf1f0a9` | An empty saved history before the first run shows "No saved turns yet." | Runtime H1 (meri-greenfield `00076b0a`) now answers the contract's 404 `NOT_FOUND` instead of 502. Write gating does not read this flag |
+| `cdf1f0a9`, `27f3c28b` | **H1 (runtime 00076b0a):** 404 `NOT_FOUND` before a conversation's first run is a quiet empty state on both reads (details below this table) | Before H1, control returned 502 and every fresh conversation showed an error |
 | `108baa16`, `7aa8ed22` | "Task updates" link in the sidebar and phone menu (`ClientScopedLink`) | `/meri/task-updates` was routed but linked from nowhere. It shows its own unavailable state while held |
 | `07120781` | Size-review records for `PersonnelDirectory`, `QuickLogSession`, `IntegrationSettings`, `DataTable` and `taskCommandTransport`; scoped lint exemption in `objective-meeting-destination.test.ts` | #91's own tip fails `npm run architecture` (4 blocking) and `npm run lint` (1 error). Each delta was read and its reason recorded |
 | `148993da` | Merge of `fix/meri-exact-run-reconnect`: after a session binds, the host keeps the admitted client/conversation/run as its hints | A same-host expiry reconnect re-authorizes the exact run, and a substituted run is refused. Reviewed on 2026-10-15 but never in a PR |
 | `25742e9a` | Boundary test lists `api/task-commands` and `api/settings/user`. Task commands are held in preview like documents and settings | #89's and #65's own tips fail this "review newly introduced API surfaces" assertion |
 | `4d329aa7` | The "Search conversations" tooltip now says only search is missing | `POST /api/conversations/list` backs Recents |
+
+**H1 (runtime 00076b0a).** Before a conversation's first accepted input, Meri has no run, and from transcript's point of view no conversation row (`apps/control/conversations/history/store.mjs` on the runtime integration branch). Both reads answer the contract's 404 `NOT_FOUND`:
+
+- `POST /api/conversations/history` (session-bound current run; `useRunCommands` → `port.history()`): `NOT_FOUND` sets the transcript to `empty` (`27f3c28b`). RunStatus shows nothing, no operation alert is raised, and no observation starts. Previously this showed "The current transcript could not be loaded" plus an alert.
+- `POST /api/conversations/transcript` (native saved history; `useConversationHistory`): `NOT_FOUND` sets `empty`. ConversationHistoryStatus shows "No saved turns yet." instead of "Saved conversation history unavailable" (`cdf1f0a9`).
+- Only `NOT_FOUND` with status 404 is quiet. All other codes and statuses keep their current handling. A 404 never revokes the session: the client revokes only on 401/403 (`packages/meri-client/src/conversation-network.ts:150`), and history `denied` covers only 401/403/`MEMBERSHIP_CHANGED`. Write gating (`sessionHistoryState`) does not read either flag, so the first message can still be sent.
+- Tests: `meri-session-history-not-started.test.ts`, `meri-history-not-started.test.ts`; live, input-recovery and first-chat host suites still pass.
 
 ## 4. Checks (quick only)
 
@@ -119,7 +126,7 @@ Status values: **wired** (frontend reaches the backend route in the integrated c
 
 | Family | Frontend status | Exact remaining task (owner) |
 |---|---|---|
-| Conversations: first-chat bootstrap, allocate/admit/submit, stream and reconnect, Stop and recovery, next turn, list (Recents), transcript, stored-chat recovery, exact-run reconnect pin, pre-first-run empty history | **wired** | Live qualification on the integrated candidate (prompt → response → saved history after reload → follow-up); the runner exit 2 (runtime D14) blocks it (runtime lane). Confirm the runtime accepts #90's upstream `Origin` (§6.1) (runtime lane + this lane) |
+| Conversations: first-chat bootstrap, allocate/admit/submit, stream and reconnect, Stop and recovery, next turn, list (Recents), transcript, stored-chat recovery, exact-run reconnect pin, H1 pre-first-run empty states (history and transcript) | **wired** | Live qualification on the integrated candidate (prompt → response → saved history after reload → follow-up); the runner exit 2 (runtime D14) blocks it (runtime lane). Confirm the runtime accepts #90's upstream `Origin` (§6.1) (runtime lane + this lane) |
 | Conversation artifact preview/download | source-only | Meri artifact/document read service; preview activation for `/api/documents/*` reads (runtime lane; frontend preview policy here) |
 | Meri Files (document workflow) | source-only | Meri document service; `MERI_DOCUMENT_WORKFLOW_ENABLED` + `MERI_DOCUMENT_OPERATION`; preview activation (runtime lane, deploy config) |
 | Recommendation actions | source-only | Meri action service; `MERI_ACTION_WORKFLOW_ENABLED`; preview activation (runtime lane, deploy config) |
@@ -136,7 +143,7 @@ Status values: **wired** (frontend reaches the backend route in the integrated c
 - Task updates navigation entry (`108baa16`, `7aa8ed22`).
 - Clerk middleware on the documents, task-command and settings API routes (`29cae7b9`).
 - Task-command and preference proxies on the shared session-header and public-origin conventions (`59ffd28c`).
-- Quiet empty history before the first run (`cdf1f0a9`).
+- H1 (runtime 00076b0a): quiet empty state for session history and saved transcript before the first run (`cdf1f0a9`, `27f3c28b`).
 - Exact-run reconnect pin (`148993da`).
 - Accurate "Search conversations" unavailability copy (`4d329aa7`).
 
@@ -164,7 +171,7 @@ Status values: **wired** (frontend reaches the backend route in the integrated c
 5. **`scripts/deployment-cli.test.mjs` cannot fully run on Windows** (`linux-x64` platform check; symlink privilege). This is a host limit, not a code defect.
 6. **Possible same-class local-day defect:** `meri-actions/projection.ts:18` and `workflow-adapter.ts:214,245` take `deadline/dueDate.slice(0, 10)`, the UTC calendar day of an ISO timestamp. That can differ from the local day shown elsewhere; #72 fixed the same class for commitments. Not verified.
 7. **#91's tip is red on architecture and lint** (fixed here in `07120781`). **#89's and #65's tips are red on `preview-backend-boundary.test.mjs`** (fixed here in `25742e9a`). The source PRs themselves are unchanged.
-8. **Known runtime-side first-chat state** (from the runtime lane, not frontend): the runner container exits 2 before `cli.main` (N17); runtime H1 and D14 address history and observability. The frontend has no change pending for these beyond §3 `cdf1f0a9`.
+8. **Known runtime-side first-chat state** (from the runtime lane, not frontend): the runner container exits 2 before `cli.main` (N17); runtime H1 and D14 address history and observability. The frontend has no change pending for these beyond H1 (§3, `cdf1f0a9` and `27f3c28b`).
 
 ## 7. Held feature flags (frontend)
 
