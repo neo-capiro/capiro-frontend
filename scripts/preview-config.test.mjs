@@ -19,8 +19,8 @@ const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8
 const qualification = readFileSync('apps/web/deployment/portfolio/PR70-FIRST-CHAT-IMAGE-QUALIFICATION.buildspec.yml', 'utf8');
 const coreApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
-const qualifiedCoreRosterSource = '784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb';
-const qualifiedCoreRosterApi = 'https://qualified-core.example.test/api';
+const qualifiedCoreRosterSource = 'b97a3286487abcda6a7424cf1dc2812d93b65b3d';
+const qualifiedCoreRosterApi = 'https://core-roster-preview.capiro.ai/api';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 const meriSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
 const meriDigest = 'sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8';
@@ -70,7 +70,8 @@ test('Meri opt-in requires an explicit canonical HTTPS root origin', () => {
   for (const meriApiBaseUrl of [null, 1, 'http://meri.example.test', 'https://meri.example.test/',
     'https://meri.example.test/path', 'https://user@meri.example.test', 'https://meri.example.test?x=1',
     'https://meri.example.test#part', 'https://meri..example.test', 'https://MERI.example.test',
-    'https://127.0.0.1', 'https://portfolio-preview.app.capiro.ai', 'https://first-chat-preview.app-dev.capiro.ai']) {
+    'https://127.0.0.1', 'https://portfolio-preview.app.capiro.ai', 'https://first-chat-preview.app-dev.capiro.ai',
+    'https://core-roster-preview.capiro.ai']) {
     assert.throws(() => renderPreviewConfiguration({ ...bindings, meriApiBaseUrl }), /PREVIEW_MERI_ORIGIN_INVALID/);
   }
   for (const meriConversationWorkflowEnabled of [null, 1, 'true']) {
@@ -161,17 +162,18 @@ test('qualified Core roster adds a separate pair without switching first-chat re
   assert.equal(integrated.environment.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL, qualifiedCoreRosterApi);
   assert.equal(integrated.status, 'configuration-proposal');
   validatePreviewParameters(integrated.parameters.toReversed(), firstChat);
-  for (const target of [null, 1, ' http://qualified-core.example.test/api',
-    'http://qualified-core.example.test/api', 'https://qualified-core.example.test/api/',
-    'https://qualified-core.example.test/api?x=1', 'https://qualified-core.example.test/api#fragment',
-    'https://user@qualified-core.example.test/api', 'https://qualified-core.example.test:443/api',
-    'https://qualified-core.example.test:8443/api', 'https://QUALIFIED-core.example.test/api',
+  for (const target of [null, 1, 'https://qualified-core.example.test/api',
+    ' http://core-roster-preview.capiro.ai/api',
+    'http://core-roster-preview.capiro.ai/api', 'https://core-roster-preview.capiro.ai/api/',
+    'https://core-roster-preview.capiro.ai/api?x=1', 'https://core-roster-preview.capiro.ai/api#fragment',
+    'https://user@core-roster-preview.capiro.ai/api', 'https://core-roster-preview.capiro.ai:443/api',
+    'https://core-roster-preview.capiro.ai:8443/api', 'https://CORE-ROSTER-PREVIEW.capiro.ai/api',
     'https://127.0.0.1/api', 'https://localhost/api',
     'https://portfolio-preview.app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
   ]) assert.throws(() => renderPreviewConfiguration({ ...qualified,
     qualifiedCoreClientRosterApiBaseUrl: target }), /PREVIEW_CORE_ROSTER_ORIGIN_INVALID/);
   assert.throws(() => renderPreviewConfiguration({ ...qualified, ...meriEnabled,
-    meriApiBaseUrl: 'https://qualified-core.example.test' }), /PREVIEW_CORE_ROSTER_ORIGIN_INVALID/);
+    meriApiBaseUrl: 'https://core-roster-preview.capiro.ai' }), /PREVIEW_MERI_ORIGIN_INVALID/);
 });
 
 test('preview rejects unknown, missing, credential-valued and mismatched Clerk bindings', () => {
@@ -283,6 +285,7 @@ test('roster template rejects an origin until the reviewed Core source is pinned
   const sourceBlock = template.match(/^  CapiroPreviewClientRosterBackendSource:\n([\s\S]*?)(?=^  \w+:)/m)?.[1];
   assert.ok(sourceBlock);
   assert.deepEqual(JSON.parse(sourceBlock.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null'), ['']);
+  assert.match(sourceBlock, new RegExp(qualifiedCoreRosterSource));
   assert.match(template, /PreviewClientRosterHeldWithoutSource:\n +RuleCondition: !Equals \[!Ref CapiroPreviewClientRosterBackendSource, ""\]\n +Assertions:\n +- Assert: !Equals \[!Ref CapiroPreviewClientRosterApiBaseUrl, ""\]/);
   assert.match(template, /PreviewClientRosterRequiresPairedTarget:\n +RuleCondition: !Not \[!Equals \[!Ref CapiroPreviewClientRosterBackendSource, ""\]\]\n +Assertions:\n +- Assert: !Equals \[!Ref CapiroPreviewClientRosterApiBaseUrl, "https:\/\/core-roster-preview\.capiro\.ai\/api"\]/);
   assert.match(template, /- Assert: !Equals \[!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"\]\n +AssertDescription: Core roster requires the reviewed preview read source/);

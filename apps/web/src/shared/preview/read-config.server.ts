@@ -3,8 +3,9 @@ type Environment = Record<string, string | undefined>;
 /** Source binding is deployment intent, not proof of a running service's identity. */
 export const previewBackendSource = "6542f5b089656b6d255465edd464d06c2a0b408f";
 export const qualifiedCorePreviewBackendSource =
-  "784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb";
+  "b97a3286487abcda6a7424cf1dc2812d93b65b3d";
 const firstChatPreviewApi = "https://first-chat-preview.app-dev.capiro.ai/api";
+const coreRosterPreviewApi = "https://core-roster-preview.capiro.ai/api";
 const dnsHost =
   /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
 const ordinaryServices = [
@@ -85,14 +86,10 @@ function qualifiedClientRosterTarget(
   if (
     env.CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE !==
       qualifiedCorePreviewBackendSource ||
-    env.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL === firstChatPreviewApi
+    env.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL !== coreRosterPreviewApi
   )
     return null;
-  return validatedPreviewApiTarget(
-    env,
-    env.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL,
-    requestUrl,
-  );
+  return validatedPreviewApiTarget(env, coreRosterPreviewApi, requestUrl);
 }
 
 /** UI mode marker only; request validation and Core authorization remain separate gates. */

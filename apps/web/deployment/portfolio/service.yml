@@ -70,7 +70,7 @@ Parameters:
     Type: String
     Default: ""
     AllowedValues: [""]
-    Description: Held until the reviewed Core roster source and image are pinned
+    Description: Reviewed Core source b97a3286487abcda6a7424cf1dc2812d93b65b3d; held until combined serving image and digest are qualified
   CapiroPreviewClientRosterApiBaseUrl:
     Type: String
     Default: ""

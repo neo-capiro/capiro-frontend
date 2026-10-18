@@ -14,8 +14,8 @@ vi.mock("@clerk/nextjs/server", () => ({
 const origin = "https://frontend.synthetic.invalid";
 const target = "https://first-chat-preview.app-dev.capiro.ai/api";
 const source = "6542f5b089656b6d255465edd464d06c2a0b408f";
-const qualifiedSource = "784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb";
-const qualifiedTarget = "https://qualified-core.synthetic.invalid/api";
+const qualifiedSource = "b97a3286487abcda6a7424cf1dc2812d93b65b3d";
+const qualifiedTarget = "https://core-roster-preview.capiro.ai/api";
 const id = "10000000-0000-4000-8000-000000000001";
 const client = {
   id,
@@ -247,14 +247,15 @@ it.each([
   undefined,
   "",
   target,
+  "https://qualified-core.synthetic.invalid/api",
   `${qualifiedTarget}/`,
   `${qualifiedTarget}?x=1`,
   `${qualifiedTarget}#fragment`,
-  "https://qualified-core.synthetic.invalid:443/api",
-  "https://qualified-core.synthetic.invalid:8443/api",
-  "https://user@qualified-core.synthetic.invalid/api",
-  "https://QUALIFIED-core.synthetic.invalid/api",
-  "http://qualified-core.synthetic.invalid/api",
+  "https://core-roster-preview.capiro.ai:443/api",
+  "https://core-roster-preview.capiro.ai:8443/api",
+  "https://user@core-roster-preview.capiro.ai/api",
+  "https://CORE-ROSTER-PREVIEW.capiro.ai/api",
+  "http://core-roster-preview.capiro.ai/api",
   "https://os.capiro.ai/api",
   "https://ordinary.synthetic.invalid/api",
   origin + "/api",
@@ -268,7 +269,7 @@ it.each([
 it("holds a qualified Core target that shares the configured Meri origin", async () => {
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
   vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
-  vi.stubEnv("MERI_API_BASE_URL", "https://qualified-core.synthetic.invalid");
+  vi.stubEnv("MERI_API_BASE_URL", "https://core-roster-preview.capiro.ai");
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
   await denied(await receive("capiro/clients.list"));
 });
