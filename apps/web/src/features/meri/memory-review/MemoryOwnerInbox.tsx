@@ -14,9 +14,14 @@ export function MemoryOwnerInbox({ enabled }: { enabled: boolean }) {
     inbox,
     feedback,
     working,
+    loadingMore,
+    loadMoreError,
+    verifying,
     holdStatus,
     uncertainIds,
     refresh,
+    loadMore,
+    verifyUncertain,
     decide,
   } = useOwnerMemoryInbox(enabled);
   const [confirm, setConfirm] = useState<{
@@ -60,16 +65,35 @@ export function MemoryOwnerInbox({ enabled }: { enabled: boolean }) {
               {feedback}
             </p>
           ) : null}
+          {uncertainIds.size > 0 ? (
+            <Notice tone="danger" title="Decision outcome needs verification">
+              {uncertainIds.size} personal memory
+              {uncertainIds.size === 1 ? " decision is" : " decisions are"} held
+              until Core confirms a terminal outcome. A pending list cannot
+              establish the result.
+              <div className={ui.row}>
+                <button
+                  className={ui.outline}
+                  type="button"
+                  disabled={verifying || holdStatus !== "ready"}
+                  onClick={() => void verifyUncertain()}
+                >
+                  {verifying
+                    ? "Checking outcomes…"
+                    : "Verify outcomes with Core"}
+                </button>
+              </div>
+            </Notice>
+          ) : null}
           {inbox.state === "loading" ? (
             <p role="status">Checking current memory proposals…</p>
           ) : inbox.state === "error" ? (
             <Notice tone="danger" title="Memory reviews unavailable">
               {inbox.message}
             </Notice>
-          ) : inbox.candidates.length === 0 ? (
+          ) : inbox.candidates.length === 0 && !inbox.nextCursor ? (
             <Notice title="No reviewable proposals returned">
-              Core returned no personal memory proposals in this review window.
-              Its current endpoint does not expose older review windows.
+              Core returned no pending personal memory proposals.
             </Notice>
           ) : (
             <section
@@ -77,9 +101,11 @@ export function MemoryOwnerInbox({ enabled }: { enabled: boolean }) {
               className={styles.list}
             >
               <p role="status" className={ui.muted}>
-                {inbox.candidates.length === 100
-                  ? "Showing the first 100 pending personal proposals. More may exist."
-                  : `${inbox.candidates.length} pending personal ${inbox.candidates.length === 1 ? "proposal" : "proposals"} returned in this review window. Older proposals may exist.`}
+                {inbox.candidates.length} pending personal
+                {inbox.candidates.length === 1
+                  ? " proposal"
+                  : " proposals"}{" "}
+                loaded{inbox.nextCursor ? "; more are available." : "."}
               </p>
               {inbox.candidates.map((candidate) => (
                 <CandidateCard
@@ -100,6 +126,23 @@ export function MemoryOwnerInbox({ enabled }: { enabled: boolean }) {
                   }}
                 />
               ))}
+              {loadMoreError ? (
+                <Notice tone="danger" title="More reviews unavailable">
+                  {loadMoreError}
+                </Notice>
+              ) : null}
+              {inbox.nextCursor ? (
+                <button
+                  className={ui.outline}
+                  type="button"
+                  disabled={loadingMore}
+                  onClick={() => void loadMore()}
+                >
+                  {loadingMore
+                    ? "Checking more proposals…"
+                    : "Show more proposals"}
+                </button>
+              ) : null}
             </section>
           )}
         </>

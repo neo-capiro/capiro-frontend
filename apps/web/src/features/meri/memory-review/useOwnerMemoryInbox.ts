@@ -10,13 +10,18 @@ import {
 } from "./owner-decision-hold";
 import {
   ownerReviewPaths,
-  receiveOwnerCandidates,
+  receiveOwnerCandidatePage,
+  receiveOwnerCandidateStatus,
   type OwnerMemoryCandidate,
 } from "./owner-review";
 
 export type OwnerInbox =
   | { state: "loading" }
-  | { state: "ready"; candidates: OwnerMemoryCandidate[] }
+  | {
+      state: "ready";
+      candidates: OwnerMemoryCandidate[];
+      nextCursor: string | null;
+    }
   | { state: "error"; message: string };
 export type OwnerDecision = "approve" | "reject";
 type Holds = { key: string; ids: Set<string> | null };
@@ -38,7 +43,13 @@ export function useOwnerMemoryInbox(enabled: boolean) {
   const [working, setWorking] = useState<string | null>(null);
   const [feedback, setFeedback] = useState("");
   const [holds, setHolds] = useState<Holds | null>(null);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState("");
+  const [verifying, setVerifying] = useState(false);
   const pending = useRef<string | null>(null);
+  const pageController = useRef<AbortController | null>(null);
+  const pagePending = useRef(false);
+  const verifyOffset = useRef(0);
   const holdStatus =
     !holdKey || holds?.key !== holdKey
       ? "loading"
@@ -68,10 +79,14 @@ export function useOwnerMemoryInbox(enabled: boolean) {
   useEffect(() => {
     if (!enabled) return;
     const controller = new AbortController();
+    pageController.current = controller;
+    pagePending.current = false;
     async function read() {
       setInbox({ state: "loading" });
+      setLoadingMore(false);
+      setLoadMoreError("");
       try {
-        const response = await fetch(ownerReviewPaths.list, {
+        const response = await fetch(`${ownerReviewPaths.list}?limit=50`, {
           credentials: "same-origin",
           cache: "no-store",
           signal: controller.signal,
@@ -82,9 +97,13 @@ export function useOwnerMemoryInbox(enabled: boolean) {
           return;
         }
         const value: unknown = await response.json();
-        const candidates = receiveOwnerCandidates(value);
+        const page = receiveOwnerCandidatePage(value);
         if (!controller.signal.aborted)
-          setInbox({ state: "ready", candidates });
+          setInbox({
+            state: "ready",
+            candidates: page.candidates,
+            nextCursor: page.nextCursor,
+          });
       } catch {
         if (!controller.signal.aborted)
           setInbox({
@@ -94,11 +113,113 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       }
     }
     void read();
-    return () => controller.abort();
-  }, [enabled, revision]);
+    return () => {
+      controller.abort();
+      if (pageController.current === controller) pageController.current = null;
+    };
+  }, [enabled, holdKey, revision]);
 
   function refresh() {
     setRevision((value) => value + 1);
+  }
+
+  async function loadMore() {
+    if (
+      inbox.state !== "ready" ||
+      !inbox.nextCursor ||
+      pagePending.current ||
+      !pageController.current
+    )
+      return;
+    const controller = pageController.current;
+    const cursor = inbox.nextCursor;
+    pagePending.current = true;
+    setLoadingMore(true);
+    setLoadMoreError("");
+    try {
+      const params = new URLSearchParams({ limit: "50", cursor });
+      const response = await fetch(`${ownerReviewPaths.list}?${params}`, {
+        credentials: "same-origin",
+        cache: "no-store",
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error("Page unavailable");
+      const value: unknown = await response.json();
+      const page = receiveOwnerCandidatePage(value);
+      if (page.nextCursor === cursor) throw new Error("Cursor did not advance");
+      if (controller.signal.aborted) return;
+      const seen = new Set(inbox.candidates.map((candidate) => candidate.id));
+      if (page.candidates.some((candidate) => seen.has(candidate.id))) {
+        setLoadMoreError(
+          "Core returned a repeated proposal. Refresh the review list.",
+        );
+        return;
+      }
+      setInbox((current) => {
+        if (current.state !== "ready" || current.nextCursor !== cursor)
+          return current;
+        return {
+          state: "ready",
+          candidates: [...current.candidates, ...page.candidates],
+          nextCursor: page.nextCursor,
+        };
+      });
+    } catch {
+      if (!controller.signal.aborted)
+        setLoadMoreError(
+          "The next review window could not be verified. Try again.",
+        );
+    } finally {
+      if (pageController.current === controller) {
+        pagePending.current = false;
+        setLoadingMore(false);
+      }
+    }
+  }
+
+  async function verifyUncertain() {
+    if (verifying || !holdKey || holdStatus !== "ready") return;
+    const storage = browserStorage();
+    const ids = storage && readOwnerDecisionHolds(storage, holdKey);
+    if (!storage || !ids || ids.size === 0) return;
+    setVerifying(true);
+    let confirmed = 0;
+    // Keep one verification action bounded even if old tabs left many markers.
+    const allIds = [...ids];
+    const start = verifyOffset.current % allIds.length;
+    const batch = Array.from(
+      { length: Math.min(20, allIds.length) },
+      (_, index) => allIds[(start + index) % allIds.length]!,
+    );
+    verifyOffset.current = (start + batch.length) % allIds.length;
+    try {
+      await Promise.all(
+        batch.map(async (id) => {
+          try {
+            const response = await fetch(ownerReviewPaths.status(id), {
+              credentials: "same-origin",
+              cache: "no-store",
+            });
+            if (!response.ok) return;
+            const value: unknown = await response.json();
+            const receipt = receiveOwnerCandidateStatus(value, id);
+            if (receipt.terminal && releaseOwnerDecision(storage, holdKey, id))
+              confirmed += 1;
+          } catch {
+            // Missing, pending, malformed and unavailable status keep the hold.
+          }
+        }),
+      );
+      setHolds({ key: holdKey, ids: readOwnerDecisionHolds(storage, holdKey) });
+      setFeedback(
+        confirmed > 0
+          ? `Core confirmed ${confirmed} terminal ${confirmed === 1 ? "decision" : "decisions"}. Refreshing the current list.`
+          : "Core has not confirmed a terminal outcome. Uncertain decisions remain paused.",
+      );
+      if (confirmed > 0) refresh();
+    } finally {
+      setVerifying(false);
+    }
   }
 
   async function decide(
@@ -207,7 +328,7 @@ export function useOwnerMemoryInbox(enabled: boolean) {
       // pending-list read alone cannot establish the terminal outcome. The
       // actor-scoped storage marker survives reload and is observed by other tabs.
       setFeedback(
-        "The decision status is uncertain. Refresh the list; do not submit this decision again until its outcome is verified.",
+        "The decision status is uncertain. Use Verify outcomes with Core before taking another action on this proposal.",
       );
     } finally {
       pending.current = null;
@@ -219,9 +340,14 @@ export function useOwnerMemoryInbox(enabled: boolean) {
     inbox,
     feedback,
     working,
+    loadingMore,
+    loadMoreError,
+    verifying,
     holdStatus,
     uncertainIds,
     refresh,
+    loadMore,
+    verifyUncertain,
     decide,
   };
 }

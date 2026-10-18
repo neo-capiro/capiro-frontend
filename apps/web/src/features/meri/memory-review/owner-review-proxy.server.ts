@@ -29,7 +29,10 @@ const answer = (status: number, code: string, outcome?: string) =>
  * its owner must bind a reviewed Core source pin and qualified target before
  * admitting them. This URL validation alone is not preview qualification.
  */
-function targetFor(request: Request, env: Environment): URL | null {
+export function targetForOwnerMemoryReview(
+  request: Request,
+  env: Environment,
+): URL | null {
   if (env.MERI_MEMORY_OWNER_REVIEW_ENABLED !== "true") return null;
   if (env.CAPIRO_PREVIEW_READ_ONLY === "true")
     return previewApiTarget(
@@ -133,7 +136,7 @@ export async function proxyOwnerMemoryReview(
       return answer(400, "MEMORY_REVIEW_INVALID_DECISION");
     }
   }
-  const target = targetFor(request, env);
+  const target = targetForOwnerMemoryReview(request, env);
   if (!target)
     return answer(503, "MEMORY_REVIEW_UNAVAILABLE", "NOT_DISPATCHED");
 
