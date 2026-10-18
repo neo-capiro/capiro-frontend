@@ -1,0 +1,206 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-acceptance-assessment/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "followup.playwright.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel/followup.playwright.ts",
+    "rootDir": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel/artifacts-followup",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel",
+        "testIgnore": [],
+        "testMatch": [
+          "followup.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "./results-followup.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "followup.spec.ts",
+      "file": "followup.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "mobile capability list remains tall desktop cards and registrations lack divided rows",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3594,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:22:56.024Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "capability-mobile-geometry",
+                      "contentType": "application/json",
+                      "body": "eyJ4IjozNSwieSI6NDA2LjMxMjUsIndpZHRoIjozMjAsImhlaWdodCI6MTcyLjUzMTI1fQ=="
+                    },
+                    {
+                      "name": "registration-row-geometry",
+                      "contentType": "application/json",
+                      "body": "eyJkaWFsb2ciOnsieCI6NDAwLCJ5IjozMjcuNjY0MDYyNSwid2lkdGgiOjY0MCwiaGVpZ2h0IjozODQuNjcxODc1fSwicm93cyI6W3siaGVpZ2h0IjoyMC4yOTY4NzUsInBhZGRpbmciOiIwcHgiLCJib3JkZXJCb3R0b20iOiIwcHgifSx7ImhlaWdodCI6MjAuMjk2ODc1LCJwYWRkaW5nIjoiMHB4IiwiYm9yZGVyQm90dG9tIjoiMHB4In0seyJoZWlnaHQiOjIwLjI5Njg3NSwicGFkZGluZyI6IjBweCIsImJvcmRlckJvdHRvbSI6IjBweCJ9LHsiaGVpZ2h0IjoyMC4yOTY4NzUsInBhZGRpbmciOiIwcHgiLCJib3JkZXJCb3R0b20iOiIwcHgifSx7ImhlaWdodCI6MjAuMjk2ODc1LCJwYWRkaW5nIjoiMHB4IiwiYm9yZGVyQm90dG9tIjoiMHB4In0seyJoZWlnaHQiOjIwLjI5Njg3NSwicGFkZGluZyI6IjBweCIsImJvcmRlckJvdHRvbSI6IjBweCJ9LHsiaGVpZ2h0IjoyMC4yOTY4NzUsInBhZGRpbmciOiIwcHgiLCJib3JkZXJCb3R0b20iOiIwcHgifSx7ImhlaWdodCI6MjAuMjk2ODc1LCJwYWRkaW5nIjoiMHB4IiwiYm9yZGVyQm90dG9tIjoiMHB4In1dfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01381fa8eee91c702ccd-fcb3147a70642e255ec9",
+          "file": "followup.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "remaining matter details render actual linked records",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2021,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:22:59.850Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "matter-detail-text",
+                      "contentType": "text/plain",
+                      "body": "U3ludGhldGljIGZ1bmRpbmcgbWF0dGVyCgpTeW50aGV0aWMgZnVuZGluZyBtYXR0ZXIKCmFjdGl2ZQpFZGl0IG1hdHRlcgpBZGQgYWR2b2NhY3kgcmVjb3JkCk1lcmdlIGFub3RoZXIgbWF0dGVyCgpTZW5zb3IgYXBwcm9wcmlhdGlvbiByZXZpZXcKClJlY29yZHMgKDEpClN5bnRoZXRpYyBtZWV0aW5nIGV2aWRlbmNlCklORkVSUkVECk9jdCA5LCAyMDI2IFVUQyDCtyBtZWV0aW5nIMK3IDc0JSBjb25maWRlbmNlCgpSZXZpZXdlZCBtZWV0aW5nIG5vdGUKCk91dGNvbWU6IG9ic2VydmVkCgpTb3VyY2U6IG1lZXRpbmcKU291cmNlIGxpbmsgdW5hdmFpbGFibGUuClJlYXNzaWduCkRldGFjaApOb3QgYWR2b2NhY3kKTGlua2VkIHdvcmsgKDAp"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01381fa8eee91c702ccd-9c842f7e58542b77f5b6",
+          "file": "followup.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "remaining bill board search and latest update surfaces",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2124,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:23:01.884Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "01381fa8eee91c702ccd-87644302093394991ed2",
+          "file": "followup.spec.ts",
+          "line": 29,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T14:22:55.516Z",
+    "duration": 8583.383000000002,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

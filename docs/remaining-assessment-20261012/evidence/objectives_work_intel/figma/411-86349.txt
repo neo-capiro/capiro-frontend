@@ -1,0 +1,393 @@
+const imgCapiro31ProfilePicture = "https://www.figma.com/api/mcp/asset/dba27578-08f2-46b2-9200-f6eb994092eb.svg";
+const imgCapiroWordmark = "https://www.figma.com/api/mcp/asset/bf937d70-f28f-4a9b-be4a-52f8ff4681ac.png";
+const imgIcon = "https://www.figma.com/api/mcp/asset/9d406f9c-48fd-44c1-9de5-9c9e68ca33d3.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/17363457-329d-466a-a67a-90723f8652c4.svg";
+const imgIcon2 = "https://www.figma.com/api/mcp/asset/6bab90bf-9c01-4942-b06f-18b8475c276b.svg";
+const imgIcon3 = "https://www.figma.com/api/mcp/asset/7fda29a1-74b8-44ae-a39c-02f1ab4a626a.svg";
+const imgIcon4 = "https://www.figma.com/api/mcp/asset/a1c56242-14d4-48a1-bcfb-6d73413dd8e0.svg";
+const imgIcon5 = "https://www.figma.com/api/mcp/asset/202d8395-db60-4c8e-ad66-d3294d0c71b0.svg";
+const imgIcon6 = "https://www.figma.com/api/mcp/asset/7717c2fe-b79e-4153-90ee-ed2d2fc41dce.svg";
+const imgIconArrowLeft = "https://www.figma.com/api/mcp/asset/de5402f3-ac6e-4049-972e-b647c02b08f4.svg";
+const imgIconLayoutGrid = "https://www.figma.com/api/mcp/asset/86c5ce65-328b-4073-9b59-0076e09ea4de.svg";
+const imgIconChevronDown = "https://www.figma.com/api/mcp/asset/2badf775-c407-465f-98df-fa2409546849.svg";
+const imgIconPlus = "https://www.figma.com/api/mcp/asset/39904cf6-95d3-4165-871b-2232dfa8c314.svg";
+const imgChevron = "https://www.figma.com/api/mcp/asset/c7e5ec4e-00a3-4a3a-8c9d-61010817f466.svg";
+const imgIcon7 = "https://www.figma.com/api/mcp/asset/a9e710d7-c8b7-4932-9bd3-b85296076ac5.svg";
+const imgChevron1 = "https://www.figma.com/api/mcp/asset/4acb4c4c-2080-47ee-8f55-01a72bebdb68.svg";
+
+function Capiro31ProfilePicture({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative size-[32px]"} data-node-id="469:41439" data-name="Capiro 3.1/Profile picture">
+      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapiro31ProfilePicture} />
+    </div>
+  );
+}
+
+export default function ClientProfileWorkMobile390() {
+  return (
+    <div className="bg-[var(--background,#f5f5f4)] relative size-full" data-node-id="411:86349" data-name="Client profile · Work · Mobile (390)">
+      <div className="absolute content-stretch flex flex-col h-[844px] items-start left-0 overflow-clip top-0 w-[390px]" data-node-id="411:86350" data-name="Scroll content">
+        <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] h-[108px] items-center pb-[var(--theme(spacing.4),16px)] pt-[var(--theme(spacing.3),12px)] px-[var(--theme(spacing.3),12px)] relative shrink-0 w-full" data-node-id="475:123289" data-name="Capiro · Shared header">
+          <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[366px]" data-node-id="I475:123289;469:91942" data-name="Brand and account">
+            <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[110px]" data-node-id="I475:123289;469:91943" data-name="Brand · Capiro · Home">
+              <div className="h-[23px] relative shrink-0 w-[68px]" data-node-id="I475:123289;469:91944" data-name="Capiro wordmark">
+                <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none size-full" src={imgCapiroWordmark} />
+              </div>
+            </div>
+            <div className="flex-[1_0_0] h-px min-w-px relative" data-node-id="I475:123289;469:91964" data-name="Flexible space" />
+            <div className="content-stretch cursor-pointer flex gap-[var(--theme(spacing.2),8px)] h-[32px] items-center overflow-clip relative shrink-0" data-node-id="I475:123289;469:91965" data-name="Global actions">
+              <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="I475:123289;644:139370" data-name="Action · Quick log">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;644:139370;12:383" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+                </div>
+              </a>
+              <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="I475:123289;501:42796" data-name="Action · Master calendar">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;501:42796;12:383" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+                </div>
+              </a>
+              <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[32px]" data-node-id="I475:123289;469:91966" data-name="Action · Search">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;469:91966;12:383" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+                </div>
+              </a>
+              <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[32px]" data-node-id="I475:123289;469:91974" data-name="Action · Updates">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;469:91974;12:383" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+                </div>
+              </a>
+              <a className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 size-[32px]" data-node-id="I475:123289;469:91982" data-name="Action · Profile">
+                <Capiro31ProfilePicture className="relative shrink-0 size-[32px]" />
+              </a>
+            </div>
+          </div>
+          <div className="bg-[var(--muted,#f5f5f4)] content-stretch cursor-pointer flex gap-[var(--theme(spacing.1),4px)] items-center justify-center overflow-clip p-[var(--theme(spacing.1),4px)] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I475:123289;469:91945" data-name="Modes · Portfolio active">
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:123289;469:91946" data-name="Mode · Meri">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;469:91946;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon4} />
+              </div>
+            </a>
+            <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:123289;469:91952" data-name="Mode · Portfolio">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;469:91952;12:377" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon5} />
+              </div>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:123289;469:91958" data-name="Mode · Modules">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:123289;469:91958;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon6} />
+              </div>
+            </a>
+          </div>
+        </div>
+        <div className="bg-[var(--border,#e7e5e4)] h-px relative shrink-0 w-full" data-node-id="475:123336" data-name="Capiro · Header divider" />
+        <div className="content-stretch flex flex-[1_0_0] items-start min-h-px overflow-clip relative w-full" data-node-id="475:123337" data-name="Capiro · Workspace body">
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] h-full items-start min-w-px overflow-x-clip overflow-y-auto pb-[16px] pt-[24px] px-[16px] relative" data-node-id="475:123338" data-name="Capiro · Existing page content">
+            <div className="content-stretch flex flex-col gap-[12px] items-start overflow-clip relative shrink-0 w-full" data-node-id="411:86351" data-name="Page header">
+              <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:86352" data-name="Breadcrumb">
+                <a className="block cursor-pointer relative shrink-0 size-[15px]" data-node-id="411:86353" data-name="icon/arrow-left">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconArrowLeft} />
+                </a>
+                <a className="[word-break:break-word] block cursor-pointer font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:86354">
+                  <p className="leading-[1.45]">Portfolio</p>
+                </a>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:86355">
+                  /
+                </p>
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] whitespace-nowrap" data-node-id="411:86356">
+                  Anduril
+                </p>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:86357">
+                  /
+                </p>
+                <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch cursor-pointer flex gap-[6px] items-center overflow-clip pl-[8px] pr-[6px] py-[5px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] shrink-0" data-node-id="411:86358" data-name="View switcher (⌘J)">
+                  <div className="relative shrink-0 size-[14px]" data-node-id="411:86359" data-name="icon/layout-grid">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconLayoutGrid} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] text-left whitespace-nowrap" data-node-id="411:86360">
+                    Work
+                  </p>
+                  <div className="relative shrink-0 size-[14px]" data-node-id="411:86361" data-name="icon/chevron-down">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChevronDown} />
+                  </div>
+                </a>
+              </div>
+              <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:86362" data-name="Actions">
+                <div className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:86363" data-name="Quick add">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="I411:86363;12:377" data-name="Icon">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPlus} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[14px] tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:86363;12:379">
+                    Quick add
+                  </p>
+                  <div className="relative shrink-0 size-[14px]" data-node-id="I411:86363;12:380" data-name="Chevron">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron} />
+                  </div>
+                </div>
+                <div className="content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:86364" data-name="Meri actions">
+                  <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(171.88910154620726deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+                  <div className="relative shrink-0 size-[16px]" data-node-id="I411:86364;12:371" data-name="Icon">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon7} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--primary-foreground,white)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:86364;12:373">
+                    Meri actions
+                  </p>
+                  <div className="relative shrink-0 size-[14px]" data-node-id="I411:86364;12:374" data-name="Chevron">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron1} />
+                  </div>
+                  <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex gap-[10px] items-center overflow-clip px-[14px] py-[10px] relative rounded-[12px] shrink-0 w-full" data-node-id="411:86365" data-name="Client strip">
+              <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center justify-center overflow-clip relative rounded-[6px] shrink-0 size-[30px]" data-node-id="411:86366" data-name="Av">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:86367">
+                  AN
+                </p>
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-col gap-px items-start overflow-clip relative shrink-0" data-node-id="411:86368" data-name="T">
+                <p className="font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:86369">
+                  Anduril
+                </p>
+                <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[230px]" data-node-id="411:86370">
+                  Defense technology · Costa Mesa, CA
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-[14px] items-start overflow-clip pb-[90px] relative shrink-0 w-full" data-node-id="411:86371" data-name="Body">
+              <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0 w-full" data-node-id="411:86372" data-name="Heading">
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px] w-[300px]" data-node-id="411:86373">
+                  Work
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="762:146796" data-name="Workspace documents · Client-created drafts and completed work">
+                <div className="content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="762:146797" data-name="Workspace documents heading">
+                  <div className="[word-break:break-word] content-stretch flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[358px]" data-node-id="762:146798" data-name="Heading and client scope">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px] w-full" data-node-id="762:146799">
+                      Workspace documents
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="762:146800">
+                      Anduril · 2 drafts · 2 completed
+                    </p>
+                  </div>
+                  <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="762:146801" data-name="Open workspace">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I762:146801;12:385">
+                      Open Workspace
+                    </p>
+                  </a>
+                </div>
+                <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[var(--radius-xl,12px)] shrink-0 w-full" data-node-id="762:146808" data-name="Workspace documents list">
+                  <a className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-center justify-center p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="762:146809" data-name="Workspace document · Hill Day schedule · week of Oct 12">
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146809;762:146566" data-name="Document and status">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I762:146809;762:146567">
+                        Hill Day schedule · week of Oct 12
+                      </p>
+                      <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[var(--radius-sm,6px)] shrink-0" data-node-id="I762:146809;762:146568" data-name="Status">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] text-left whitespace-nowrap" data-node-id="I762:146809;762:146569">
+                          Draft
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px] w-full" data-node-id="I762:146809;762:146570">
+                      Hill Day schedule · Jordan Clayton
+                    </p>
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146809;762:146571" data-name="Updated and open workspace">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px]" data-node-id="I762:146809;762:146572">
+                        2h ago
+                      </p>
+                      <div className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I762:146809;762:146573" data-name="Open workspace">
+                        <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I762:146809;762:146573;12:385">
+                          Open workspace
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                  <a className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-center justify-center p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="762:146825" data-name="Workspace document · FY27 NDAA authorization request">
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146825;762:146566" data-name="Document and status">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I762:146825;762:146567">
+                        FY27 NDAA authorization request
+                      </p>
+                      <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[var(--radius-sm,6px)] shrink-0" data-node-id="I762:146825;762:146568" data-name="Status">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] text-left whitespace-nowrap" data-node-id="I762:146825;762:146569">
+                          Draft
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px] w-full" data-node-id="I762:146825;762:146570">
+                      Authorization request · Jordan Clayton
+                    </p>
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146825;762:146571" data-name="Updated and open workspace">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px]" data-node-id="I762:146825;762:146572">
+                        Oct 9
+                      </p>
+                      <div className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I762:146825;762:146573" data-name="Open workspace">
+                        <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I762:146825;762:146573;12:385">
+                          Open workspace
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                  <a className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-center justify-center p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="762:146841" data-name="Workspace document · Fallon staff briefing packet">
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146841;762:146579" data-name="Document and status">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I762:146841;762:146580">
+                        Fallon staff briefing packet
+                      </p>
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[var(--radius-sm,6px)] shrink-0" data-node-id="I762:146841;762:146581" data-name="Status">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I762:146841;762:146582">
+                          Completed
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px] w-full" data-node-id="I762:146841;762:146583">
+                      Meeting brief · Jordan Clayton
+                    </p>
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146841;762:146584" data-name="Updated and open workspace">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px]" data-node-id="I762:146841;762:146585">
+                        Oct 6
+                      </p>
+                      <div className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I762:146841;762:146586" data-name="Open workspace">
+                        <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I762:146841;762:146586;12:385">
+                          Open workspace
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                  <a className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-center justify-center p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="762:146857" data-name="Workspace document · District impact one-pager">
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146857;762:146579" data-name="Document and status">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I762:146857;762:146580">
+                        District impact one-pager
+                      </p>
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[var(--radius-sm,6px)] shrink-0" data-node-id="I762:146857;762:146581" data-name="Status">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I762:146857;762:146582">
+                          Completed
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px] w-full" data-node-id="I762:146857;762:146583">
+                      One-pager · Jordan Clayton
+                    </p>
+                    <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="I762:146857;762:146584" data-name="Updated and open workspace">
+                      <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.039px]" data-node-id="I762:146857;762:146585">
+                        Oct 3
+                      </p>
+                      <div className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I762:146857;762:146586" data-name="Open workspace">
+                        <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I762:146857;762:146586;12:385">
+                          Open workspace
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:86374" data-name="Card">
+                <div className="[word-break:break-word] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[2px] items-start overflow-clip px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="411:86375" data-name="Head">
+                  <p className="font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:86376">
+                    Strategies
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.45] min-w-full relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[min-content]" data-node-id="411:86377">
+                    Strategies owns the record.
+                  </p>
+                </div>
+                <div className="border-[var(--border,#e7e5e4)] border-solid border-t content-stretch flex flex-col gap-[6px] items-start overflow-clip px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="411:86378" data-name="Item">
+                  <div className="content-stretch flex items-start justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:86379" data-name="T">
+                    <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="411:86380">
+                      FY27 counter-UAS posture
+                    </p>
+                    <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:86381" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--success,#3d6b4f)] whitespace-nowrap" data-node-id="411:86382">
+                        On track
+                      </p>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="411:86383">
+                    Protect the counter-UAS procurement line · 3 of 9 steps
+                  </p>
+                </div>
+                <div className="border-[var(--border,#e7e5e4)] border-solid border-t content-stretch flex flex-col gap-[6px] items-start overflow-clip px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="411:86384" data-name="Item">
+                  <div className="content-stretch flex items-start justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:86385" data-name="T">
+                    <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="411:86386">
+                      Army Lattice authorization language
+                    </p>
+                    <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:86387" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:86388">
+                        At risk
+                      </p>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="411:86389">
+                    Authorization · 2 of 6 steps
+                  </p>
+                </div>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shrink-0 w-full" data-node-id="411:86390" data-name="Open Strategies">
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:86391">
+                  Open Strategies
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0), v2/Small: Font(family: "Geist", style: Regular, size: 13, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.30000001192092896), v2/Label: Font(family: "Geist", style: Medium, size: 12, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: 0), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Black gradient: , v2/metal-shadow: Effect(type: INNER_SHADOW, color: #FFFFFF24, offset: (0, 1), radius: 0, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A0924, offset: (0, 1), radius: 2, spread: 0), v2/Caption: Font(family: "Geist", style: Regular, size: 12, weight: 400, lineHeight: 1.399999976158142, letterSpacing: 0), v2/Body medium: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.4500000476837158, letterSpacing: -0.5), v2/Title L: Font(family: "Geist", style: Medium, size: 20, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: -1.5), v2/Title S: Font(family: "Geist", style: SemiBold, size: 14, weight: 600, lineHeight: 1.350000023841858, letterSpacing: -0.5).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Device=Phone, Mode=Portfolio
+**Node ID:** 469:91941
+
+Shared Capiro 3.1 Phone header with Portfolio selected. Logo returns to Dashboard; three modes are Meri, Portfolio and Modules. Native portrait is a neutral illustration. Wire navigation on page-local instances.
+
+## Capiro 3.1/Shared header
+**Node ID:** 469:92041
+
+Shared Capiro navigation with Meri, Portfolio and Modules modes; Master calendar, Search, Updates and Profile actions. Desktop uses action labels; tablet and phone use icons. Prototype actions are mapped on screen instances to same-device destinations. Compact icon-only mode switcher: sparkle = Meri; briefcase = Portfolio; grid = Modules. Selected tile retains a visible surface and outline. Preserve semantic labels, accessible mode names and current-section navigation when implemented.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## icon/search
+**Node ID:** 4:13
+
+Lucide-style search icon. Recolor via the vector stroke.
+
+## icon/bell
+**Node ID:** 4:17
+
+Lucide-style bell icon. Recolor via the vector stroke.
+
+## Capiro 3.1/Profile picture
+**Node ID:** 469:41439
+
+Neutral editable portrait illustration used for the current-user profile control in the prototype. Replace with the signed-in user image in implementation.
+
+## icon/sparkle
+**Node ID:** 4:9
+
+Lucide-style sparkle icon. Recolor via the vector stroke.
+
+## icon/layout-grid
+**Node ID:** 4:26
+
+Lucide-style layout-grid icon. Recolor via the vector stroke.
+
+## icon/plus
+**Node ID:** 4:20
+
+Lucide-style plus icon. Recolor via the vector stroke.
+
+## Capiro 3.1/Client Work/Workspace document row
+**Node ID:** 762:146528
+
+Client-scoped workspace document display. Draft and Completed rows link to the Workspace module. No inline authoring or document actions.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

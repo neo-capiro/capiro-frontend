@@ -1,0 +1,1719 @@
+{
+  "createdAt": "2026-10-12T14:40:58.912682+00:00",
+  "applicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "applicationRootTree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "applicationSourceTreePath": "apps/web/src",
+  "applicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "evidenceBase": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "readOnlyApplicationAssessment": true,
+  "originalLedgerUnmodified": true,
+  "fullRowsNewlyAccepted": 0,
+  "scopeCounts": {
+    "inScope": 337,
+    "excluded": 8,
+    "total": 345
+  },
+  "laneCounts": [
+    {
+      "lane": "core_intake",
+      "assigned": 59,
+      "inScope": 57,
+      "findings": 4
+    },
+    {
+      "lane": "core_profile",
+      "assigned": 59,
+      "inScope": 59,
+      "findings": 6
+    },
+    {
+      "lane": "calendar_relationships",
+      "assigned": 100,
+      "inScope": 95,
+      "findings": 11
+    },
+    {
+      "lane": "objectives_work_intel",
+      "assigned": 73,
+      "inScope": 72,
+      "findings": 4
+    },
+    {
+      "lane": "prospects",
+      "assigned": 40,
+      "inScope": 40,
+      "findings": 3
+    },
+    {
+      "lane": "modules_settings",
+      "assigned": 14,
+      "inScope": 14,
+      "findings": 9
+    }
+  ],
+  "notes": [
+    "Each original row is assigned exactly once. Full native row acceptance remains open; current observations and missing criteria differ by row.",
+    "Original lane reports and severity labels are preserved; root secondary-review dispositions are explicit overlays.",
+    "The frozen image source and original578 qualification evidence files remain unchanged. This is not new build/image/native acceptance."
+  ],
+  "severityCounts": {
+    "P2": 26,
+    "P3": 6,
+    "P1": 5
+  },
+  "findings": [
+    {
+      "id": "CI-01",
+      "lane": "core_intake",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Saved client detail fields have no on-screen read-only profile surface",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_intake/findings.json",
+      "originalFinding": {
+        "id": "CI-01",
+        "severity": "P2",
+        "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+        "rowIds": [
+          "CORE-013"
+        ],
+        "frameIds": [
+          "411:47010",
+          "411:47482",
+          "411:47030"
+        ],
+        "title": "Saved client detail fields have no on-screen read-only profile surface",
+        "source": [
+          "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:75",
+          "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx:23",
+          "apps/web/src/features/portfolio/client-intake/form.ts:95"
+        ],
+        "observation": "Overview renders name, raw profileStatus, raw sectorTag, website and description, but no saved location/contact/government details. The Government info summary/dialog in the design is absent. A standard_user can read the client record but Edit client profile is disabled, so this user cannot inspect these fields on screen; JSON export is a separate possible workaround. The same fixture also shows HOMELAND_SECURITY and ACTIVE instead of display labels.",
+        "reproduction": [
+          "Serve the unchanged Portfolio fixture at 5191.",
+          "Run review.spec.ts second case: provide standard_user and a client containing Costa Mesa, contact name/email/phone, CAGE and UEI.",
+          "Open client Overview and More actions. All six saved values and Government info are absent; Edit is disabled."
+        ],
+        "evidence": [
+          "review.spec.ts:26",
+          "browser-results.json",
+          "browser-artifacts/review-observe-saved-profi-e80c6--to-standard-user-read-path/profile-standard-user.png",
+          "figma-411-47010.png",
+          "figma-411-47482.png",
+          "figma-411-47030.json"
+        ],
+        "deploymentImpact": "Incomplete CORE-013 feature/design acceptance. No crash, authority bypass or destructive effect was observed; this does not independently establish an infrastructure rollout blocker.",
+        "confidence": "confirmed by source and synthetic browser"
+      }
+    },
+    {
+      "id": "CI-02",
+      "lane": "core_intake",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Client view switcher omits search and the specified per-view keyboard shortcuts",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_intake/findings.json",
+      "originalFinding": {
+        "id": "CI-02",
+        "severity": "P2",
+        "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+        "rowIds": [
+          "CORE-121"
+        ],
+        "frameIds": [
+          "411:47736"
+        ],
+        "title": "Client view switcher omits search and the specified per-view keyboard shortcuts",
+        "source": [
+          "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:20",
+          "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:60",
+          "apps/web/src/shared/portfolio/shell/client-views.ts:2"
+        ],
+        "observation": "Figma specifies Jump to a view search, decorated rows and G O/G J/G C etc. The source renders nine bare links and only binds Ctrl/Meta+J to toggle the menu. No search input or G-sequence handling exists. Ordinary menu-click navigation works. Missing routes such as standalone Timeline/Outreach are not asserted as new required endpoints here.",
+        "reproduction": [
+          "Open a client Overview.",
+          "Press Ctrl+J: menu opens with nine menuitems and zero textboxes.",
+          "Press Escape, then G then C: route stays on Overview. Selecting Calendar by click navigates correctly."
+        ],
+        "evidence": [
+          "review.spec.ts:4",
+          "browser-results.json",
+          "browser-artifacts/review-observe-view-switch-27fbf-uts-against-Figma-411-47736/view-switcher.png",
+          "figma-411-47736.json",
+          "figma-411-47736.png"
+        ],
+        "deploymentImpact": "Blocks full CORE-121 interaction/design parity; no backend dependency prevents local search or shortcuts to existing views. Not a demonstrated infrastructure rollout blocker.",
+        "confidence": "confirmed by source and synthetic browser"
+      }
+    },
+    {
+      "id": "CI-03",
+      "lane": "core_intake",
+      "severity": "P3",
+      "authorSeverity": "P3",
+      "title": "Account team retains a generic stacked form instead of the designed roster",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_intake/findings.json",
+      "originalFinding": {
+        "id": "CI-03",
+        "severity": "P3",
+        "classification": "CONFIRMED_VISUAL_GAP",
+        "rowIds": [
+          "CORE-028",
+          "CORE-030",
+          "CORE-031",
+          "CORE-032"
+        ],
+        "frameIds": [
+          "411:51801"
+        ],
+        "title": "Account team retains a generic stacked form instead of the designed roster",
+        "source": [
+          "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:31",
+          "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:72",
+          "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx:30"
+        ],
+        "observation": "The design shows Account team plus client name, avatar/email roster details, row separators and side-by-side member/role controls. Current exact-source screenshot shows a generic Account team heading, name/role-only roster and full-width stacked member/role/add controls. The renderer omits the available email field. Manage owners is an intentional extra entry and the completed Owners repair is not reopened.",
+        "reproduction": [
+          "Inspect exact-source team-1440.png or open Account team on a client with a current roster.",
+          "Compare the roster and add-member form with Figma411:51801."
+        ],
+        "evidence": [
+          "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+          "figma-411-51801.json",
+          "figma-411-51801.png"
+        ],
+        "deploymentImpact": "Lower-priority presentation parity; no team-write regression or unsafe behavior claimed.",
+        "confidence": "confirmed source plus exact-source archived render"
+      }
+    },
+    {
+      "id": "CI-04",
+      "lane": "core_intake",
+      "severity": "P3",
+      "authorSeverity": "P3",
+      "title": "Intake choice groups use one three-column grid for distinct designed layouts",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_intake/findings.json",
+      "originalFinding": {
+        "id": "CI-04",
+        "severity": "P3",
+        "classification": "CONFIRMED_VISUAL_GAP",
+        "rowIds": [
+          "CORE-012",
+          "CORE-014"
+        ],
+        "frameIds": [
+          "517:121532",
+          "517:121876",
+          "517:122239"
+        ],
+        "title": "Intake choice groups use one three-column grid for distinct designed layouts",
+        "source": [
+          "apps/web/src/features/portfolio/client-intake/intake.module.css:109",
+          "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx:76",
+          "apps/web/src/features/portfolio/client-intake/SectorStep.tsx:43"
+        ],
+        "observation": "The common ChoiceList grid forces three columns. At 1440px the six certification options wrap into 3x2 instead of the design single row; submission tracks become 3x2 instead of the design 2x3; Foreign-owned does not span the business-classification row. These supplemental editor frames are the references documented by INTAKE-CHECKPOINT, distinct from the read-only Government info frame linked by the ledger.",
+        "reproduction": [
+          "Open Add profile > Manual entry at 1440x1040.",
+          "Visit Company Info, Government Registration, Sector & Tracks without saving.",
+          "Compare group geometry against supplemental editor frames."
+        ],
+        "evidence": [
+          "captures.spec.ts:4",
+          "capture-results.json",
+          "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png",
+          "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-2.png",
+          "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-3.png",
+          "figma-517-121532.png",
+          "figma-517-121876.png",
+          "figma-517-122239.png",
+          "docs/portfolio-31/INTAKE-CHECKPOINT.md:31"
+        ],
+        "deploymentImpact": "Lower-priority desktop form parity. Fields, step changes and cancel work in the bounded probe; no value or persistence regression claimed.",
+        "confidence": "confirmed source and fresh synthetic render"
+      }
+    },
+    {
+      "id": "CP-01",
+      "lane": "core_profile",
+      "severity": "P1",
+      "authorSeverity": "P1",
+      "title": "File access editor silently completes when receipt contradicts requested restriction",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-01",
+        "severity": "P1",
+        "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+        "title": "File access editor silently completes when receipt contradicts requested restriction",
+        "rowIds": [
+          "CORE-058"
+        ],
+        "figmaFrames": [
+          "411:54355"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/files/contracts.ts",
+            "line": 48
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/mutations.ts",
+            "line": 47
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/mutations.ts",
+            "line": 61
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'same-id wrong-access'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:43",
+          "steps": [
+            "Open client Files and Manage access for Test report.pdf.",
+            "Select Specific people with no selected users (UI says uploader-only).",
+            "Submit PATCH {viewerMode:'restricted',viewerUserIds:[]} to the file access endpoint.",
+            "Return the original same-ID fixture with viewerMode:'all',viewerUserIds:[]; keep subsequent list/roster reads unchanged."
+          ],
+          "actual": "Editor closes, no alert is shown, and no assertion requires returned viewerMode/viewerUserIds to match the requested restriction.",
+          "expected": "Retain the review and expose a conflicting or unverified result until exact requested ACL is acknowledged. A same-ID response alone is insufficient.",
+          "fixture": "apps/web/tests/browser/fixtures.ts exported file; attachment 60000000-0000-4000-8000-000000000001, client 10000000-0000-4000-8000-000000000001."
+        },
+        "evidence": [
+          "browser-results.json",
+          "defect-wrong-access-receipt.png",
+          "browser-output/assessment-DEFECT-same-id--5e63f-isses-requested-restriction/trace.zip"
+        ],
+        "deploymentImpact": "Blocks acceptance of file access management and is recommended as a release blocker for a product exposing this control. No cross-tenant disclosure or backend authorization bypass was demonstrated; the confirmed risk is false completion of a confidentiality change."
+      }
+    },
+    {
+      "id": "CP-02",
+      "lane": "core_profile",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Folder change discards the draft when the same-ID receipt still names the old folder",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-02",
+        "severity": "P2",
+        "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+        "title": "Folder change discards the draft when the same-ID receipt still names the old folder",
+        "rowIds": [
+          "CORE-056",
+          "CORE-063"
+        ],
+        "figmaFrames": [
+          "411:53579",
+          "411:53327"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/files/contracts.ts",
+            "line": 48
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/mutations.ts",
+            "line": 36
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/mutations.ts",
+            "line": 61
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'same-id wrong-folder'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:34",
+          "steps": [
+            "Select Test report.pdf in Reports; click New folder.",
+            "Enter Reviewed destination, submit PATCH {folder:'Reviewed destination'}.",
+            "Return the same file with folder:'Reports'; list readback also remains Reports."
+          ],
+          "actual": "Dialog closes and no error appears; Reports remains in the table.",
+          "expected": "Keep the requested folder draft and flag unverified/conflicting confirmation."
+        },
+        "evidence": [
+          "browser-results.json",
+          "defect-wrong-folder-receipt.png"
+        ],
+        "deploymentImpact": "Blocks row acceptance for verified move/new-folder saves. Distinct from the known absence of atomic multi-file moves."
+      }
+    },
+    {
+      "id": "CP-03",
+      "lane": "core_profile",
+      "severity": "P3",
+      "authorSeverity": "P2",
+      "title": "Ambiguous file deletion response immediately re-enables the destructive confirmation",
+      "disposition": "Secondary backend source review shows same-ID deletion is recoverable. Repeat DELETE dispatch is proved; duplicate destructive impact is not. Keep as uncertain-outcome/readback UX concern, not a standalone release blocker.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-03",
+        "severity": "P2",
+        "classification": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+        "title": "Ambiguous file deletion response immediately re-enables the destructive confirmation",
+        "rowIds": [
+          "CORE-060"
+        ],
+        "figmaFrames": [
+          "411:53857"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+            "line": 259
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/mutations.ts",
+            "line": 29
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'ambiguous delete'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:51",
+          "steps": [
+            "Open Delete file for Test report.pdf and confirm.",
+            "Return HTTP 503 after the DELETE was dispatched.",
+            "Click Confirm delete again."
+          ],
+          "actual": "The button is enabled immediately and a second DELETE is sent. The dialog has a generic failure only and no unknown-outcome state/reconciliation.",
+          "expected": "Disclose that the dispatched outcome is unknown and require current-state/operation reconciliation before presenting a renewed destructive intent."
+        },
+        "evidence": [
+          "browser-results.json",
+          "defect-repeat-delete.png"
+        ],
+        "deploymentImpact": "Blocks acceptance of interrupted-delete recovery. The browser proves repeat dispatch only; backend idempotency and duplicate effects were not tested. Lower priority than CP-01."
+      }
+    },
+    {
+      "id": "CP-04",
+      "lane": "core_profile",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Facilities entry opens a standalone editor instead of the designed management dialog",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-04",
+        "severity": "P2",
+        "classification": "CONFIRMED_VISUAL_AND_WORKFLOW_MISMATCH",
+        "title": "Facilities entry opens a standalone editor instead of the designed management dialog",
+        "rowIds": [
+          "CORE-033",
+          "CORE-034",
+          "CORE-035",
+          "CORE-037",
+          "CORE-038",
+          "CORE-039"
+        ],
+        "figmaFrames": [
+          "411:58068",
+          "411:58269"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+            "line": 73
+          },
+          {
+            "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+            "line": 33
+          },
+          {
+            "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+            "line": 28
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture overview'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:6",
+          "steps": [
+            "Load overview with the existing synthetic facility fixture.",
+            "Click the plus Add facility control in District nexus."
+          ],
+          "actual": "A 640px standalone Add facility form opens; the existing facility list, inline Edit/Remove controls and inline geocode candidates are absent from this dialog. State is a free-text input and address fields use the generic two-column grid.",
+          "expected": "Figma 411:58068/58269 specifies a 700px Facilities: client manager with saved facility cards above an inline add/edit form, City/State/ZIP in three columns, and footer Add facility/Done."
+        },
+        "evidence": [
+          "figma-411-58068.json",
+          "figma-411-58068.png",
+          "figma-411-58269.json",
+          "figma-411-58269.png",
+          "rendered-facility-add.png"
+        ],
+        "deploymentImpact": "Blocks exact design/workflow acceptance for the facility manager, not the validity of existing guarded add/edit/geocode adapters. Recomposition is frontend work; provider/native qualification stays separate. The map error visible behind this capture is an intentionally unstubbed fixture contract and is not a product finding."
+      }
+    },
+    {
+      "id": "CP-05",
+      "lane": "core_profile",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Overview timeline retains a generic dot list instead of the designed grouped activity feed",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-05",
+        "severity": "P2",
+        "classification": "CONFIRMED_VISUAL_MISMATCH",
+        "title": "Overview timeline retains a generic dot list instead of the designed grouped activity feed",
+        "rowIds": [
+          "CORE-048",
+          "CORE-103",
+          "CORE-104",
+          "CORE-105",
+          "CORE-107",
+          "CORE-110"
+        ],
+        "figmaFrames": [
+          "411:48800",
+          "411:48826",
+          "411:49051",
+          "411:60193"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+            "line": 55
+          },
+          {
+            "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+            "line": 59
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture overview'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:6",
+          "steps": [
+            "Open overview with one recorded note in the existing activity contract.",
+            "Compare timeline markup and capture against full context for 411:48826."
+          ],
+          "actual": "Each item uses the same grey dot/vertical connector, raw kind on a separate line and full timestamp. CSS limits the internal list to 420px. No date-group headers or kind-specific icon tiles are rendered.",
+          "expected": "The supplied default timeline has dated groups, 70px bordered feed rows, 32px kind icon tiles, compact metadata and row-level status/action positions. Expanded dialog 411:60193 is also not mounted by the current overview."
+        },
+        "evidence": [
+          "figma-411-48800.png",
+          "figma-411-48826.json",
+          "figma-411-48826.png",
+          "figma-411-60524.json",
+          "rendered-timeline.png",
+          "figma-411-60524.png"
+        ],
+        "deploymentImpact": "Blocks exact timeline visual acceptance. Existing filtering and guarded actions remain independently implemented; no pagination or native-history completeness is claimed.",
+        "evidenceLimit": "The 411:48826 and 411:49157 child raster exports are ancestor-clipped. Dated group/icon/70px row geometry is established by full returned design context; 411:60524 supplies an unobscured timeline visual. The owner-excluded Open commitments summary is not part of this defect."
+      }
+    },
+    {
+      "id": "CP-06",
+      "lane": "core_profile",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Files toolbar and results header do not follow the supplied Files composition",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/core_profile/findings.json",
+      "originalFinding": {
+        "id": "CP-06",
+        "severity": "P2",
+        "classification": "CONFIRMED_VISUAL_MISMATCH",
+        "title": "Files toolbar and results header do not follow the supplied Files composition",
+        "rowIds": [
+          "CORE-052",
+          "CORE-053",
+          "CORE-062"
+        ],
+        "figmaFrames": [
+          "411:52484",
+          "411:53189"
+        ],
+        "source": [
+          {
+            "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+            "line": 106
+          },
+          {
+            "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+            "line": 200
+          }
+        ],
+        "reproduction": {
+          "command": "cd /workspace/capiro-acceptance-assessment && PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium node node_modules/@playwright/test/cli.js test --config=/tmp/capiro-remaining-assessment-20261012/core_profile/playwright.config.ts --grep 'capture Files'",
+          "testFile": "/tmp/capiro-remaining-assessment-20261012/core_profile/assessment.spec.ts:20",
+          "steps": [
+            "Open client Files with the existing two-file fixture and wait for fonts/table.",
+            "Compare structural controls with Figma 411:52484."
+          ],
+          "actual": "Source and sort are adjacent native selects after search; result count and Move to folder form a detached toolbar above the table. The table has no enclosing folder header/breadcrumb or Upload here action. The alternate Folders card-grid view shown in 411:53189 is also absent; only the sidebar/table view is implemented.",
+          "expected": "Figma uses an inline source-chip row, right-aligned Sort Created, and a table card with folder breadcrumb/name/count and Upload here header. Differences in fixture file count, names and unavailable quotas are excluded from this finding."
+        },
+        "evidence": [
+          "figma-411-52484.json",
+          "figma-411-52484.png",
+          "rendered-files.png",
+          "figma-411-53189.json",
+          "figma-411-53189.png"
+        ],
+        "deploymentImpact": "Blocks exact Files presentation acceptance. Smart-link composition and source-taxonomy definitions remain separate owner dependencies; do not invent unavailable records/categories."
+      }
+    },
+    {
+      "id": "CR-01",
+      "lane": "calendar_relationships",
+      "severity": "P1",
+      "authorSeverity": "P1",
+      "title": "Meeting artifact writes accept arbitrary success bodies and discard the editor",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-01",
+        "severity": "P1",
+        "category": "SOURCE_BEHAVIOR",
+        "title": "Meeting artifact writes accept arbitrary success bodies and discard the editor",
+        "rows": [
+          "ENG-notes_add",
+          "ENG-notes_edit",
+          "ENG-notes_approve",
+          "ENG-debrief_create",
+          "ENG-debrief_edit",
+          "ENG-debrief_approve",
+          "ENG-meeting_share_artifacts",
+          "ENG-meeting_unshare_artifacts"
+        ],
+        "figmaFrames": [
+          "679:142262"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/mutations.ts:46",
+          "apps/web/src/features/portfolio/calendar/mutations.ts:56",
+          "apps/web/src/features/portfolio/calendar/mutations.ts:62",
+          "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx:31",
+          "apps/web/src/shared/portfolio/api/http.ts:75"
+        ],
+        "reproduction": "Open client Calendar meeting, Notes, Add note; type a draft; intercept POST response200 with {saved:false,meetingId:\"foreign-meeting\",clientId:\"foreign-client\"}; leave GET notes unchanged. Save closes the editor, loses the draft, and no new note appears. z.unknown is also used by edit/approve/share/unshare; new browser reproduction is for note creation.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results-initial.json",
+          "note-invalid-receipt-closed.png",
+          "backend-note-contract-excerpts.txt"
+        ],
+        "deploymentImpact": "Blocks acceptance of these mutation paths as receipt-verified. Frontend repair can validate the existing metadata and preserve uncertain draft. Does not establish a backend authorization bypass or require a blanket static-preview deployment hold.",
+        "backendContractComparison": "Pinned backend fd8765ec01d292013758606204f2c9d886cd31c1 createMeetingNote5696,createMeetingDebrief5794 and metadata selects10836/10858 return id,meetingId,clientId,author,status,timestamps. This is available validation data, not a missing receipt contract.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-02",
+      "lane": "calendar_relationships",
+      "severity": "P1",
+      "authorSeverity": "P1",
+      "title": "Meeting note/debrief creation can replay after an uncertain result and dispatch twice",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-02",
+        "severity": "P1",
+        "category": "SOURCE_BEHAVIOR",
+        "title": "Meeting note/debrief creation can replay after an uncertain result and dispatch twice",
+        "rows": [
+          "ENG-notes_add",
+          "ENG-debrief_create"
+        ],
+        "figmaFrames": [
+          "683:142816",
+          "698:142912"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx:155",
+          "apps/web/src/features/portfolio/calendar/mutations.ts:40"
+        ],
+        "reproduction": "Intercept note creation with503. Save remains enabled, a second click emits a second POST with the same body. After it settles, two synchronous submit events emit two further POSTs. Mutation contains no synchronous pending ref, attempt key or uncertain completion fence; disabling the rendered button is insufficient. Debrief shares this hook but was not independently dispatched in this review.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results-initial.json",
+          "note-unknown-retry.png",
+          "backend-note-contract-excerpts.txt"
+        ],
+        "deploymentImpact": "Blocks claiming reliable note/debrief creation under retries; potentially duplicates saved records after response loss. No live record was created. Backend idempotency would be additional protection; frontend can immediately refuse blind replay.",
+        "backendContractComparison": "Pinned backend creation directly calls meetingNote.create/meetingDebrief.create and exposes no idempotency input in this contract. It does not deduplicate repeat POSTs for the frontend.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-03",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Clearing a meeting location never clears the saved value",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-03",
+        "severity": "P2",
+        "category": "SOURCE_BEHAVIOR",
+        "title": "Clearing a meeting location never clears the saved value",
+        "rows": [
+          "ENG-meeting_edit"
+        ],
+        "figmaFrames": [
+          "683:142929",
+          "698:143074"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/MeetingForm.tsx:68",
+          "apps/web/src/features/portfolio/calendar/MeetingForm.tsx:76"
+        ],
+        "reproduction": "Open a meeting with location, Edit meeting, clear Location or join URL, Save. Payload lacks location and the prior value remains. New fixture control captures the omitted field and unchanged location.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results.json",
+          "meeting-clear-location-failed.png",
+          "backend-meeting-update-excerpt.txt"
+        ],
+        "deploymentImpact": "Blocks the clear-location part of edit acceptance; localized frontend fix. No deployment-wide dependency.",
+        "backendContractComparison": "Pinned backend updateMeeting1528 updates location only when the property exists and treats empty string/null as clearing. It deliberately preserves omitted fields.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-04",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P1",
+      "title": "Meeting save accepts a receipt for a different meeting/client",
+      "disposition": "Secondary review bounds this to false completion after a foreign meeting/client receipt. Edit is browser-proven; creation uses the shared source but lacks a separate mismatch probe. No native cross-client mutation or authorization bypass was demonstrated. See evidence/modules_settings/secondary-review.json.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-04",
+        "severity": "P1",
+        "category": "SOURCE_BEHAVIOR",
+        "title": "Meeting save accepts a receipt for a different meeting/client",
+        "rows": [
+          "ENG-meeting_edit",
+          "ENG-meeting_create"
+        ],
+        "figmaFrames": [
+          "683:142929",
+          "698:143074",
+          "680:142683"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/mutations.ts:17",
+          "apps/web/src/features/portfolio/calendar/mutations.ts:25"
+        ],
+        "reproduction": "During Edit meeting, return a schema-valid meeting with id=\"other-meeting\" and client.id=\"foreign-client\". Editor closes as successful; unlike useMeeting read validation, useSaveMeeting checks only broad meeting shape. The new control combines this with location-clear payload inspection.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results.json",
+          "meeting-clear-location-failed.png"
+        ],
+        "deploymentImpact": "Blocks receipt-context acceptance of meeting saves. New browser proof is edit; create uses the same hook and needs expected submitted-client checks. No server ACL bypass was shown.",
+        "backendContractComparison": "Existing meeting response includes id and client; frontend has original meetingId and selected client available to compare. Backend contract expansion is not required for those checks.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-05",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Client Agenda omits lifecycle triage filters and state columns",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-05",
+        "severity": "P2",
+        "category": "VISUAL_AND_FEATURE",
+        "title": "Client Agenda omits lifecycle triage filters and state columns",
+        "rows": [
+          "ENG-calendar_list",
+          "ENG-meeting_filters"
+        ],
+        "figmaFrames": [
+          "411:63431"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:198",
+          "apps/web/src/features/portfolio/calendar/feeds.ts:31",
+          "apps/web/src/features/portfolio/calendar/Agenda.tsx:38"
+        ],
+        "reproduction": "Open client Calendar Agenda. Only search, Meeting visibility and Clear filters appear; there are no Needs prep/Needs debrief controls. Generic cards show status/provenance, but no Prep, Meeting notes and Debrief columns. Compare new screenshot with captured frame411:63431.",
+        "evidence": [
+          "calendar-agenda.png",
+          "figma-411-63431.png",
+          "figma-411-63431.json",
+          "review.spec.ts"
+        ],
+        "deploymentImpact": "Prevents the designed meeting triage workflow and full visual acceptance. It is a frontend parity gap; native auth/provider availability cannot resolve it.",
+        "backendContractComparison": null,
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-06",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Meeting workspace loses identity context across tabs and always enters Information",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-06",
+        "severity": "P2",
+        "category": "VISUAL_AND_FEATURE",
+        "title": "Meeting workspace loses identity context across tabs and always enters Information",
+        "rows": [
+          "ENG-meeting_details",
+          "ENG-meeting_attendees"
+        ],
+        "figmaFrames": [
+          "679:142262",
+          "679:142349"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:32",
+          "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:85"
+        ],
+        "reproduction": "Open completed meeting. Information is always active. Switch Notes: date/time, location and attendee display disappear; only subject/privacy/client remain. Figma keeps ID/lifecycle status/date/attendees above tabs and its component context specifies upcoming\u2192Prep/live\u2192Notes/completed\u2192Debrief. The captured completed frame itself shows a Notes state, so this finding does not claim a single mandatory tab from its pixels alone.",
+        "evidence": [
+          "meeting-information.png",
+          "meeting-notes.png",
+          "figma-679-142262.png",
+          "figma-679-142262.json",
+          "figma-679-142349.png",
+          "review.spec.ts"
+        ],
+        "deploymentImpact": "Meeting details exist but full designed workspace parity is not accepted. Local presentation/routing work; no backend contract blocker.",
+        "backendContractComparison": null,
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-07",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Saved email signature is fetched but never displayed",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-07",
+        "severity": "P2",
+        "category": "SOURCE_AND_DESIGN",
+        "title": "Saved email signature is fetched but never displayed",
+        "rows": [
+          "ENG-email_signature",
+          "ENG-email_send"
+        ],
+        "figmaFrames": [
+          "433:77331",
+          "435:82656",
+          "435:82802"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/relationships/email.ts:106",
+          "apps/web/src/features/portfolio/relationships/MailCompose.tsx:200"
+        ],
+        "reproduction": "Return a nonempty enabled signature from GET me/email-signature, open New email. Append checkbox is checked but saved signature text is absent from composer and review; generic explanation replaces the preview. Figma child context has Automatic email signature/Saved signature text.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results-initial.json",
+          "mail-compose-signature-hidden.png",
+          "figma-435-82802.json"
+        ],
+        "deploymentImpact": "Cannot accept Display saved user email signature; reviewer cannot inspect appended identity content. Sending transport may still work. Frontend display repair; no new backend needed.",
+        "backendContractComparison": "The current GET contract already provides html and enabled. Figma child screenshots are1x1 because composer is clipped/off-canvas; structured child context is preserved and no pixel-level comparison is claimed.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-08",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Prep and attachment share/unshare are missing",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-08",
+        "severity": "P2",
+        "category": "MISSING_FRONTEND_FACET",
+        "title": "Prep and attachment share/unshare are missing",
+        "rows": [
+          "ENG-meeting_share_artifacts",
+          "ENG-meeting_unshare_artifacts"
+        ],
+        "figmaFrames": [
+          "682:142827",
+          "698:142722",
+          "683:142902",
+          "698:142952"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/mutations.ts:67",
+          "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx:330",
+          "apps/web/src/features/portfolio/calendar/review/MeetingAttachmentApprovals.tsx:34"
+        ],
+        "reproduction": "Inspect meeting preparation and attachment controls. Prep can be read/refined/exported/emailed; attachment can be reviewed/approved. Only note/debrief artifact changes build share/unshare requests. No prep/attachment branch or selection exists in Portfolio Calendar.",
+        "evidence": [
+          "backend-artifact-shared-contract-excerpt.txt"
+        ],
+        "deploymentImpact": "Two rows are partially implemented, not wholly unavailable: note/debrief operations exist, prep/attachment facets do not. These missing controls block full artifact sharing acceptance; feature flag/provider-native acceptance remains separate.",
+        "backendContractComparison": "Pinned controller2089/2098 exposes per-artifact share/unshare. Existing contract has target artifact list; no need to invent whole-meeting sharing, which remains excluded.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-09",
+      "lane": "calendar_relationships",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Client-shared meeting materials feed has no Portfolio consumer",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-09",
+        "severity": "P2",
+        "category": "MISSING_FRONTEND_FACET",
+        "title": "Client-shared meeting materials feed has no Portfolio consumer",
+        "rows": [
+          "ENG-meeting_shared_feed"
+        ],
+        "figmaFrames": [],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/calendar/feeds.ts:23",
+          "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx:94"
+        ],
+        "reproduction": "Search current Portfolio source for shared-meetings and inspect feed/library owners: no consumer exists. The standard Calendar GET and caller-owned approved library do not replace the separate client-shared feed.",
+        "evidence": [
+          "backend-artifact-shared-contract-excerpt.txt"
+        ],
+        "deploymentImpact": "Blocks this read criterion specifically. Existing service contract is available; remaining work is frontend composition plus native authorization evidence.",
+        "backendContractComparison": "Pinned controller2383 exposes GET engagement/shared-meetings?clientId for client-shared materials, distinct from caller-owned archive.",
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-10",
+      "lane": "calendar_relationships",
+      "severity": "P3",
+      "authorSeverity": "P3",
+      "title": "Email composer omits the designed rich-text formatting controls",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-10",
+        "severity": "P3",
+        "category": "VISUAL_PARITY",
+        "title": "Email composer omits the designed rich-text formatting controls",
+        "rows": [
+          "ENG-email_send"
+        ],
+        "figmaFrames": [
+          "435:82147",
+          "435:82656",
+          "435:82802"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/relationships/MailCompose.tsx:172",
+          "apps/web/src/features/portfolio/relationships/email.ts:58"
+        ],
+        "reproduction": "Open New email. Message is a textarea; no Bold/Italic/Underline/List formatting toolbar exists. Figma child context explicitly contains these controls, while plainMailHtml escapes plain text into paragraphs.",
+        "evidence": [
+          "review.spec.ts",
+          "browser-results-initial.json",
+          "mail-compose-signature-hidden.png",
+          "figma-435-82802.json"
+        ],
+        "deploymentImpact": "Visual/editor capability gap, not proof that plain-text email delivery fails. Do not use it as a blanket deployment hold. Child render is clipped; exact pixel parity unassessed.",
+        "backendContractComparison": null,
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "CR-11",
+      "lane": "calendar_relationships",
+      "severity": "P3",
+      "authorSeverity": "P3",
+      "title": "Meri rewrite has no Undo control or prior-body snapshot",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFinding": {
+        "id": "CR-11",
+        "severity": "P3",
+        "category": "VISUAL_PARITY",
+        "title": "Meri rewrite has no Undo control or prior-body snapshot",
+        "rows": [
+          "ENG-email_rewrite"
+        ],
+        "figmaFrames": [
+          "433:77331",
+          "433:77577",
+          "435:82802"
+        ],
+        "sourceLocations": [
+          "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts:127",
+          "apps/web/src/features/portfolio/relationships/MailCompose.tsx:181"
+        ],
+        "reproduction": "A verified rewrite replaces body. Hook exposes only body/edit/rewrite and stores no previous body; composer has no Undo rewrite action. Captured Figma child includes an Undo Meri rewrite variant. This is source/design-context evidence, not a paid rewrite execution.",
+        "evidence": [
+          "figma-435-82802.json"
+        ],
+        "deploymentImpact": "Rewrite request/response behavior is implemented; the designed undo facet is absent. Local parity work and not a provider deployment dependency.",
+        "backendContractComparison": null,
+        "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173"
+      }
+    },
+    {
+      "id": "OWI-F01",
+      "lane": "objectives_work_intel",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Objectives renders and opens cached records after a current read is denied",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFinding": {
+        "id": "OWI-F01",
+        "severity": "P2",
+        "type": "FRONTEND_CURRENT_READ_DEFECT",
+        "title": "Objectives renders and opens cached records after a current read is denied",
+        "rowIds": [
+          "OBJ-12"
+        ],
+        "frameIds": [
+          "411:60560"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+            "line": 25
+          },
+          {
+            "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+            "line": 32
+          },
+          {
+            "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+            "line": 87
+          },
+          {
+            "path": "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx",
+            "line": 25
+          }
+        ],
+        "reproduction": [
+          "Load the client Objectives page with a successful list response.",
+          "Advance the cache clock by31 seconds, navigate to Capabilities, then back to Objectives.",
+          "Return403 for the second Objectives list GET.",
+          "The permission alert appears beside the cached Test outcome card. Clicking that cached card opens Edit objective with the old fields."
+        ],
+        "expected": "A denied current read must conceal old record content and prevent opening a current editor, while retaining a truthful retry state.",
+        "observed": "Two list reads are recorded; the second returns403, but the old outcome, problem, minimum win and edit drawer remain visible.",
+        "evidence": [
+          "review.spec.ts:35",
+          "results.json",
+          "artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-list.png",
+          "artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-editor.png"
+        ],
+        "requirementsEvidence": [
+          "docs/ARCHITECTURE.md:19",
+          "docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md:80",
+          "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx:29"
+        ],
+        "deploymentImpact": "Blocks current-access frontend acceptance of Objectives. This demonstrates stale denied-data presentation, not a server authorization bypass; no protected write or native access was attempted.",
+        "certainty": "Confirmed by an isolated browser reproduction against the real frozen components. The analogous ObjectiveSummary pattern is source-confirmed only."
+      }
+    },
+    {
+      "id": "OWI-F02",
+      "lane": "objectives_work_intel",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Work discards supplied owner identities in its document and node projections",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFinding": {
+        "id": "OWI-F02",
+        "severity": "P2",
+        "type": "FRONTEND_PRESENTATION_OMISSION",
+        "title": "Work discards supplied owner identities in its document and node projections",
+        "rowIds": [
+          "WORK-03",
+          "WORK-08"
+        ],
+        "frameIds": [
+          "411:52106",
+          "411:86349"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/work/contracts.ts",
+            "line": 18
+          },
+          {
+            "path": "apps/web/src/features/portfolio/work/contracts.ts",
+            "line": 45
+          },
+          {
+            "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+            "line": 136
+          },
+          {
+            "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+            "line": 161
+          },
+          {
+            "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+            "line": 49
+          }
+        ],
+        "reproduction": [
+          "Supply a strategy node ownerUserId and Workspace draft ownerId through the existing fixtures.",
+          "Open Client work and inspect the node and document rows.",
+          "Compare the Workspace row to mobile Figma86349, where the product subtitle includes the owner name."
+        ],
+        "expected": "Show the supplied authorized owner through the existing member display contract, or a truthful unresolved-owner state.",
+        "observed": "The parsed ownerUserId/ownerId fields are never consumed anywhere in Work presentation. The screenshot shows product-only document subtitles and ownerless nodes; the upcoming projection also omits each individual node status.",
+        "evidence": [
+          "review.spec.ts:27",
+          "results.json",
+          "artifacts/review-work-owner-and-upcoming-status-source-facts/work-owners.png",
+          "figma/411-86349.json",
+          "figma/411-86349.png"
+        ],
+        "deploymentImpact": "Blocks the remaining Work owner-display facet, not the previously accepted source isolation, destination, or legacy-name refusal behavior. Native member identity completeness still needs signed-in acceptance.",
+        "certainty": "Owner omission confirmed in source and rendered fixture. New Figma comparison is the mobile document owner subtitle; prior52106 capture is not repeated."
+      }
+    },
+    {
+      "id": "OWI-F03",
+      "lane": "objectives_work_intel",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Registrations dialog omits the authored divided row layout",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFinding": {
+        "id": "OWI-F03",
+        "severity": "P2",
+        "type": "FRONTEND_VISUAL_MISMATCH",
+        "title": "Registrations dialog omits the authored divided row layout",
+        "rowIds": [
+          "CAP-08"
+        ],
+        "frameIds": [
+          "411:55825"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+            "line": 201
+          },
+          {
+            "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+            "line": 203
+          }
+        ],
+        "reproduction": [
+          "Open Capabilities and Registrations & codes at1440\u00d71040 with a valid registration response.",
+          "Measure the eight rendered dl rows and compare with Figma55825."
+        ],
+        "expected": "Figma55944 uses a680px dialog and55953 onward use two aligned columns,10px vertical row padding and bottom dividers.",
+        "observed": "The composed dialog is640px wide; each row is20.296875px high with0px padding and0px bottom border. Values are right-justified via the generic row-between class, producing a compressed unruled list.",
+        "evidence": [
+          "followup.spec.ts:7",
+          "results-followup.json",
+          "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/registrations-composed.png",
+          "figma/411-55825.txt",
+          "figma/411-55825.png"
+        ],
+        "deploymentImpact": "Blocks CAP-08 visual acceptance. Data read/write authorization is a separate dependency; this geometry mismatch needs no backend change.",
+        "certainty": "Confirmed by fresh Figma context, image inspection and measured browser geometry."
+      }
+    },
+    {
+      "id": "OWI-F04",
+      "lane": "objectives_work_intel",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Mobile capabilities retains full desktop cards instead of the compact authored list",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFinding": {
+        "id": "OWI-F04",
+        "severity": "P2",
+        "type": "FRONTEND_RESPONSIVE_VISUAL_MISMATCH",
+        "title": "Mobile capabilities retains full desktop cards instead of the compact authored list",
+        "rowIds": [
+          "CAP-01"
+        ],
+        "frameIds": [
+          "411:86453"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+            "line": 73
+          },
+          {
+            "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+            "line": 6
+          },
+          {
+            "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+            "line": 35
+          }
+        ],
+        "reproduction": [
+          "At390\u00d7844 return four capability records and open Capabilities.",
+          "Compare the area list against Figma86453."
+        ],
+        "expected": "The phone design uses compact divided rows with name and maturity on one line and PE/fallback below, with no desktop avatar/description block.",
+        "observed": "The phone CSS changes only grid column count. The first card measures172.53125px high; all cards retain a large circular icon, description, spacing and rounded individual borders. Four records consume almost800px before the fit panel.",
+        "evidence": [
+          "followup.spec.ts:7",
+          "results-followup.json",
+          "artifacts-followup/followup-mobile-capability-d9cb2-strations-lack-divided-rows/capabilities-mobile-list.png",
+          "figma/411-86453.json",
+          "figma/411-86453.png"
+        ],
+        "deploymentImpact": "Blocks remaining phone visual acceptance for CAP-01. This does not reopen the repaired capability Name/type/sector/scrim scope.",
+        "certainty": "Confirmed with real components and fresh390px design reference."
+      }
+    },
+    {
+      "id": "PROS-F01",
+      "lane": "prospects",
+      "severity": "P2",
+      "authorSeverity": "P1",
+      "title": "Fresh prospect-list denial leaves cached cards and pipeline usable",
+      "disposition": "Secondary review aligns with OWI-F01: same previously delivered cached data remains after fresh403. Fix or gate this authenticated surface; no backend authorization bypass or cross-tenant access was shown.",
+      "authorEvidence": "evidence/prospects/findings.json",
+      "originalFinding": {
+        "id": "PROS-F01",
+        "severity": "P1",
+        "classification": "CONFIRMED_FRONTEND_STATE_DEFECT",
+        "title": "Fresh prospect-list denial leaves cached cards and pipeline usable",
+        "rows": [
+          "PROS-001",
+          "PROS-002"
+        ],
+        "figmaFrames": [
+          "411:44335",
+          "411:44124"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+            "line": 112
+          },
+          {
+            "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+            "line": 123
+          },
+          {
+            "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+            "line": 190
+          }
+        ],
+        "reproduction": [
+          "Load the prospect index with one authorized synthetic prospect.",
+          "Open the prospect, expire the 30-second query freshness interval, and make the list endpoint return 403.",
+          "Return using the Prospects breadcrumb. The current 403 alert appears, but the prior name, geography, stage and next action remain rendered.",
+          "The Pipeline button remains enabled and opens those cached records despite the denied current list read."
+        ],
+        "observed": "QueryState displays the fresh permission denial while the list/count/pipeline branches use query.data without checking query.error or successful current access.",
+        "expected": "A denied list read must withhold the stale records and dependent pipeline actions until access is successfully re-established.",
+        "deploymentImpact": "Fix before enabling the authenticated Prospects list. This is a frontend revocation-display failure involving previously delivered data; no server authorization bypass, cross-tenant fetch or successful unauthorized mutation was demonstrated.",
+        "evidence": [
+          "review.spec.ts:43",
+          "browser-results.json",
+          "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-list.png",
+          "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-pipeline.png"
+        ],
+        "figmaEvidenceMeaning": "Actual411:44335 confirms the pipeline is a view of prospect records. The denial requirement is grounded in repository authorization/failure standards; the design does not itself specify403 behavior."
+      }
+    },
+    {
+      "id": "PROS-F02",
+      "lane": "prospects",
+      "severity": "P1",
+      "authorSeverity": "P1",
+      "title": "Typing during a prospect document save is silently lost on success",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/prospects/findings.json",
+      "originalFinding": {
+        "id": "PROS-F02",
+        "severity": "P1",
+        "classification": "CONFIRMED_FRONTEND_DATA_LOSS",
+        "title": "Typing during a prospect document save is silently lost on success",
+        "rows": [
+          "PROS-024"
+        ],
+        "figmaFrames": [
+          "411:65258",
+          "411:65367"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+            "line": 150
+          },
+          {
+            "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+            "line": 161
+          },
+          {
+            "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+            "line": 241
+          },
+          {
+            "path": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+            "line": 153
+          }
+        ],
+        "reproduction": [
+          "Open a manual document in the prospect-scoped Workspace.",
+          "Enter First submitted text and click Save draft; hold the synthetic PATCH response.",
+          "The Body field remains editable, so enter Later typed text that must survive.",
+          "Release the valid PATCH and snapshot responses. The field resets to First submitted text; the later edit is neither submitted nor retained."
+        ],
+        "observed": "The text controls accept edits while the request is pending. Clearing retained state changes the DraftEditor key and reloads it from saved content, discarding newer local input.",
+        "expected": "Freeze the fields during the save or retain post-submit edits as unsaved changes across the successful save/reload.",
+        "deploymentImpact": "Fix before enabling prospect manual document editing: normal typing during a slow successful save silently loses user work. This is independent of native transaction/CAS limitations and reproduces with valid successful service receipts.",
+        "evidence": [
+          "workspace-review.spec.ts:5",
+          "workspace-results.json",
+          "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/typing-during-pending-save.png",
+          "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/later-edits-lost-after-save.png"
+        ],
+        "figmaEvidenceMeaning": "Actual document frames establish an editable document workflow. The defect affects the currently implemented manual editor, regardless of the separately missing rich-formatting controls."
+      }
+    },
+    {
+      "id": "PROS-F03",
+      "lane": "prospects",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Prospect Files cannot search the loaded file list",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/prospects/findings.json",
+      "originalFinding": {
+        "id": "PROS-F03",
+        "severity": "P2",
+        "classification": "CONFIRMED_FRONTEND_PRODUCT_GAP",
+        "title": "Prospect Files cannot search the loaded file list",
+        "rows": [
+          "PROS-019"
+        ],
+        "figmaFrames": [
+          "411:65071"
+        ],
+        "source": [
+          {
+            "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+            "line": 164
+          },
+          {
+            "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+            "line": 166
+          }
+        ],
+        "reproduction": [
+          "Open a prospect with a current scoped attachment list containing a ready synthetic file.",
+          "Inspect the Files region: Preview and Download are present, but neither a searchbox nor a search-labelled textbox exists.",
+          "Compare actual Figma 411:65071, which provides Search files above the file table."
+        ],
+        "observed": "The component directly maps all returned files into an unfiltered list and supplies no search state or control.",
+        "expected": "Provide the search interaction for available prospect files without widening the authorized source.",
+        "deploymentImpact": "Blocks the search facet of PROS-019 and full Files design acceptance. It does not block the already implemented upload/readiness/open facets or establish a native storage failure.",
+        "evidence": [
+          "review.spec.ts:27",
+          "browser-results-locator-correction.json",
+          "browser-artifacts-locator-correction/review-Figma-files-search--9fd2d--file-records-are-available/prospect-files-current.png",
+          "figma-411-65071-context.txt",
+          "figma-411-65071.png"
+        ]
+      }
+    },
+    {
+      "id": "MS01",
+      "lane": "modules_settings",
+      "severity": "P1",
+      "authorSeverity": "P1",
+      "title": "Existing-plan Add profiles invokes subscription creation checkout",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS01",
+        "title": "Existing-plan Add profiles invokes subscription creation checkout",
+        "severity": "P1",
+        "category": "confirmed_source_contract_mismatch",
+        "route": "/settings/billing",
+        "frameIds": [
+          "411:91384"
+        ],
+        "rowIds": [
+          "CORE-077"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/features/settings/BillingSettings.tsx",
+            "line": 86
+          },
+          {
+            "path": "apps/web/src/features/settings/BillingSettings.tsx",
+            "line": 219
+          },
+          {
+            "path": "apps/web/src/shared/capiro/operations/settings.ts",
+            "line": 363
+          },
+          {
+            "path": "capirov2@4be13b0:apps/onboard-api/src/billing/billing.service.ts",
+            "line": 95
+          }
+        ],
+        "observed": "Active plan with hasSubscription=true enables Add profiles. Submission calls settings.billing.checkout with absolute quantity. Pinned backend always creates a Stripe Checkout Session in subscription mode; it does not read or update an existing subscription. ensureCustomer only reuses the customer. Existing subscription quantity management is documented on the portal path.",
+        "reproduction": "Using settingsFixtures active subscription, open Billing and Add profiles. Review checkout remains enabled. Do not submit. Read pinned backend service lines95-145 and148-166.",
+        "evidence": [
+          "billing-active-add-profiles.png",
+          "backend-pin-billing.service.ts",
+          "backend-pin-billing.controller.ts",
+          "figma-billing-context.json",
+          "browser-results.json"
+        ],
+        "deploymentImpact": "Block existing-payer Add profiles path pending reviewed semantics. Source mismatch is proven; duplicate subscriptions/charges were not executed or claimed."
+      }
+    },
+    {
+      "id": "MS02",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Modules Calendar loses a verified client selection on entry",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS02",
+        "title": "Modules Calendar loses a verified client selection on entry",
+        "severity": "P2",
+        "category": "confirmed_source_behavior",
+        "route": "/modules/calendar?clientId=<verified-client>",
+        "frameIds": [
+          "795:148369"
+        ],
+        "rowIds": [
+          "MCAL-002",
+          "MCAL-003"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+            "line": 18
+          }
+        ],
+        "observed": "After shared ApplicationBoundary verifies the client in the URL, Calendar initializes clientId to empty, displays Master view and sends engagement.meetings without clientId. Global /calendar retains the same hint correctly.",
+        "reproduction": "Supply verified client response and clients.list, visit scoped Modules calendar; inspect selected scope and request.",
+        "evidence": [
+          "calendar-scope-repro.json",
+          "calendar-scope-repro.png",
+          "browser-results.json"
+        ],
+        "deploymentImpact": "Wrong client scope is displayed and queried within permitted records; no authorization bypass claimed."
+      }
+    },
+    {
+      "id": "MS03",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Modules Agenda drops the start of tasks with a separate due date",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS03",
+        "title": "Modules Agenda drops the start of tasks with a separate due date",
+        "severity": "P2",
+        "category": "confirmed_source_behavior",
+        "route": "/modules/calendar",
+        "frameIds": [
+          "460:90798"
+        ],
+        "rowIds": [
+          "MCAL-009"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/calendar/agenda.ts",
+            "line": 56
+          }
+        ],
+        "observed": "plannerItems chooses task.dueOn ?? task.startOn and creates one task key. A task scheduled October10 and due October12 appears only October12. Global /calendar preserves both distinct occurrences.",
+        "reproduction": "Return task with startOn2026-10-10 and dueOn2026-10-12, select Agenda in October. Only the due row is rendered.",
+        "evidence": [
+          "calendar-task-occurrence-repro.png",
+          "browser-results.json",
+          "canonical-results.json"
+        ],
+        "deploymentImpact": "Users miss scheduled starts; route-specific defect, not a failed canonical global-calendar occurrence check."
+      }
+    },
+    {
+      "id": "MS04",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Modules meetings failure hides independently loaded agenda sources",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS04",
+        "title": "Modules meetings failure hides independently loaded agenda sources",
+        "severity": "P2",
+        "category": "confirmed_source_behavior",
+        "route": "/modules/calendar",
+        "frameIds": [
+          "460:90798"
+        ],
+        "rowIds": [
+          "MCAL-013"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+            "line": 48
+          },
+          {
+            "path": "apps/web/src/shared/module-ui/layout.tsx",
+            "line": 77
+          }
+        ],
+        "observed": "All agenda content is inside StatusPanel driven by meetings. A403 meeting response hides a successful Planner feed although its source chip says1. Global /calendar keeps the Planner rows visible with a meeting error.",
+        "reproduction": "Return403 for engagement.meetings, successful planner.tasks, select Agenda. Planner1 is visible but no table or task row exists.",
+        "evidence": [
+          "calendar-independent-feed-repro.png",
+          "browser-results.json",
+          "canonical-results.json"
+        ],
+        "deploymentImpact": "One unavailable source suppresses useful independently authorized sources."
+      }
+    },
+    {
+      "id": "MS05",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Modules agenda task links never open the referenced task",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS05",
+        "title": "Modules agenda task links never open the referenced task",
+        "severity": "P2",
+        "category": "confirmed_source_behavior",
+        "route": "/modules/calendar -> /modules/planner?task=<id>",
+        "frameIds": [
+          "460:90798",
+          "411:100367"
+        ],
+        "rowIds": [
+          "MCAL-009"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/calendar/agenda.ts",
+            "line": 70
+          },
+          {
+            "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+            "line": 44
+          },
+          {
+            "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+            "line": 59
+          }
+        ],
+        "observed": "Agenda links include task=id, but PlannerScreen and TaskWorkspace do not read that parameter. The destination is default My tasks with no selected task dialog. Generic Planner list/edit/complete works when a task is selected from its own list.",
+        "reproduction": "Click the synthetic task title in Modules Agenda. URL has task=id, Planner heading appears, dialog count remains0.",
+        "evidence": [
+          "calendar-task-target-repro.png",
+          "browser-results.json"
+        ],
+        "deploymentImpact": "Calendar-to-task drilldown stops short of the requested record; do not label the canonical Planner task writer unavailable."
+      }
+    },
+    {
+      "id": "MS06",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Modules meeting detail omits supplied join link and designed split view",
+      "disposition": "Separate the functional omission of a supplied safe join URL from remaining split-view visual parity. Do not infer missing backend join data or Meri generation authority.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS06",
+        "title": "Modules meeting detail omits supplied join link and designed split view",
+        "severity": "P2",
+        "category": "confirmed_source_and_visual_defect",
+        "route": "/modules/engagement?view=meetings and /modules/calendar",
+        "frameIds": [
+          "411:94827"
+        ],
+        "rowIds": [
+          "MCAL-006"
+        ],
+        "locations": [
+          {
+            "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+            "line": 29
+          },
+          {
+            "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+            "line": 34
+          },
+          {
+            "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+            "line": 107
+          }
+        ],
+        "observed": "Reviewed response schema retains joinLink but shared MeetingDetail never renders it. Fixture with https://example.test/join yields no link in the dialog. The meetings surface is a table plus modal, unlike Figma list/detail split view with Join, attendee line and prep panel. No claim that missing Meri execution controls can work without backend integration.",
+        "reproduction": "Open populated Engagement Meetings and click record. Inspect dialog and supplied joinLink.",
+        "evidence": [
+          "engagement-meeting-repro.png",
+          "figma-engagement.png",
+          "figma-engagement-context.json",
+          "browser-results.json"
+        ],
+        "deploymentImpact": "Users cannot join from the Modules meeting detail even when the source supplies a link; substantial remaining Figma mismatch. Portfolio global MeetingDetail separately renders Join and attendees."
+      }
+    },
+    {
+      "id": "MS07",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Workspace desktop filters expand to three full-width rows",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS07",
+        "title": "Workspace desktop filters expand to three full-width rows",
+        "severity": "P2",
+        "category": "confirmed_visual_defect",
+        "route": "/modules/workspace",
+        "frameIds": [
+          "411:112533"
+        ],
+        "rowIds": [],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+            "line": 50
+          },
+          {
+            "path": "apps/web/src/shared/module-ui/module-ui.module.css",
+            "line": 75
+          },
+          {
+            "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+            "line": 175
+          }
+        ],
+        "observed": "Workspace CSS targets .filters > select. SelectInput renders a Radix button with width100%, so client/template/status triggers each take a whole row. At1440 the document table begins around y749 instead of the designed y584 compact layout.",
+        "reproduction": "Visit Workspace at1440x1040 with reviewed empty library fixture. The three dropdowns span the full content width.",
+        "evidence": [
+          "browser-workspace-desktop.png",
+          "figma-workspace.png",
+          "figma-workspace-context.json"
+        ],
+        "deploymentImpact": "Pushes library content below the intended fold; backend data does not resolve this CSS mismatch."
+      }
+    },
+    {
+      "id": "MS08",
+      "lane": "modules_settings",
+      "severity": "P2",
+      "authorSeverity": "P2",
+      "title": "Planner All tasks lacks the authored client grouping and scope controls",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS08",
+        "title": "Planner All tasks lacks the authored client grouping and scope controls",
+        "severity": "P2",
+        "category": "confirmed_visual_and_presentation_gap",
+        "route": "/modules/planner?view=all-tasks",
+        "frameIds": [
+          "411:95475"
+        ],
+        "rowIds": [],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+            "line": 82
+          },
+          {
+            "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+            "line": 185
+          },
+          {
+            "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+            "line": 113
+          }
+        ],
+        "observed": "Figma groups All tasks under client headings with Open client links and Group by Client plus scope selector. Source renders one flat task table with estimate/actual columns and has no Group by control or page-level client selector. Available task clientId and project membership filtering are already represented in source.",
+        "reproduction": "Open All tasks with a permitted populated task list; compare controls and table structure with411:95475.",
+        "evidence": [
+          "browser-planner-desktop.png",
+          "figma-planner.png",
+          "figma-planner-context.json"
+        ],
+        "deploymentImpact": "Firm-wide task presentation is not Figma accepted; generic task operations remain implemented."
+      }
+    },
+    {
+      "id": "MS09",
+      "lane": "modules_settings",
+      "severity": "P3",
+      "authorSeverity": "P3",
+      "title": "Public Planner form loses the designed title and validation hierarchy",
+      "disposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "authorEvidence": "evidence/modules_settings/findings.json",
+      "originalFinding": {
+        "id": "MS09",
+        "title": "Public Planner form loses the designed title and validation hierarchy",
+        "severity": "P3",
+        "category": "confirmed_visual_defect",
+        "route": "/forms/<synthetic-token>",
+        "frameIds": [
+          "411:108618"
+        ],
+        "rowIds": [],
+        "locations": [
+          {
+            "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+            "line": 63
+          },
+          {
+            "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+            "line": 143
+          }
+        ],
+        "observed": "Figma places eyebrow and a40px title within the card over a muted canvas, with bounded submit and styled error strip. Source puts eyebrow outside the card, uses shared Panel small heading, white canvas, full-width submit and unstyled error after submit. Error retains input and successful fixture submission shows the receipt.",
+        "reproduction": "Render Request a briefing with text/select/attachment questions; submit against a synthetic400 error, then successful received:true fixture.",
+        "evidence": [
+          "browser-form-error-desktop.png",
+          "browser-form-receipt-desktop.png",
+          "figma-form.png",
+          "figma-form-context.json",
+          "browser-results.json"
+        ],
+        "deploymentImpact": "Visual acceptance remains open; the checked receipt/error behavior passes synthetic scope."
+      }
+    }
+  ]
+}

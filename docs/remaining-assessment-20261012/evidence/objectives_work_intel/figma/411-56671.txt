@@ -1,0 +1,674 @@
+const imgCapiro31ProfilePicture = "https://www.figma.com/api/mcp/asset/53569d7b-e842-4ede-b6d6-eeea43c1297c.svg";
+const imgCapiroWordmark = "https://www.figma.com/api/mcp/asset/5f06025e-31e1-4f06-ae23-8fcdbd5583c6.png";
+const imgIcon = "https://www.figma.com/api/mcp/asset/e007cab6-e580-4d9b-8a69-2d5969a1d634.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/1a38db31-a375-4b8a-8ec4-442e2875ef61.svg";
+const imgIcon2 = "https://www.figma.com/api/mcp/asset/77d68d81-04bd-4725-8eb1-6a64b8d2d4e2.svg";
+const imgIcon3 = "https://www.figma.com/api/mcp/asset/2044efc2-eeee-4430-a664-2e1895503ea6.svg";
+const imgIcon4 = "https://www.figma.com/api/mcp/asset/3faddf9b-5d0c-4a30-bc28-1a5eb1ef6e42.svg";
+const imgIcon5 = "https://www.figma.com/api/mcp/asset/df5dfe87-7975-4f45-a652-8a174f291f98.svg";
+const imgIcon6 = "https://www.figma.com/api/mcp/asset/743a91a6-58be-422e-a172-daeb6e533df5.svg";
+const imgIcon7 = "https://www.figma.com/api/mcp/asset/a1d3d4bf-4eae-44a8-8c17-46efdd17d9c4.svg";
+const imgIcon8 = "https://www.figma.com/api/mcp/asset/060273fe-b54f-4208-8926-1016ed610bf5.svg";
+const imgIcon9 = "https://www.figma.com/api/mcp/asset/531fb021-ea46-43c3-99df-94a2db3fe5dd.svg";
+const imgIcon10 = "https://www.figma.com/api/mcp/asset/c5f6c732-2218-4af8-8963-152af2753125.svg";
+const imgIcon11 = "https://www.figma.com/api/mcp/asset/a3452653-9dfc-41f9-964f-a1d9842e4862.svg";
+const imgIcon12 = "https://www.figma.com/api/mcp/asset/1a7bee20-7133-4279-b9ef-173b618cbe6d.svg";
+const imgIcon13 = "https://www.figma.com/api/mcp/asset/3786493c-1eaf-4cec-bc7d-8a5201b8b5cf.svg";
+const imgIcon14 = "https://www.figma.com/api/mcp/asset/0412bfd3-c57f-4b5d-98bf-294cb4f83a95.svg";
+const imgIcon15 = "https://www.figma.com/api/mcp/asset/31def2a0-5a3b-4749-bc2d-84b5c6ead750.svg";
+const imgIconArrowLeft = "https://www.figma.com/api/mcp/asset/bd6bdbc7-1c1e-4c2b-bd11-3c7fd6bf1a9c.svg";
+const imgIconLayoutGrid = "https://www.figma.com/api/mcp/asset/aff0b7a7-c475-46b3-b152-ae116c7cbeed.svg";
+const imgIconChevronDown = "https://www.figma.com/api/mcp/asset/d6595811-6e8f-46d8-a841-493fd9777149.svg";
+const imgIconPlus = "https://www.figma.com/api/mcp/asset/b8a130c5-4176-4db3-bc89-09ec13477051.svg";
+const imgChevron = "https://www.figma.com/api/mcp/asset/9d2991dc-1adb-430a-afa6-48c6a3f27d5a.svg";
+const imgIcon16 = "https://www.figma.com/api/mcp/asset/dacbcef5-24e2-4f2e-98f9-0077001d9fa1.svg";
+const imgChevron1 = "https://www.figma.com/api/mcp/asset/c66f0ad5-043d-4bde-be4a-7cfc42d62cea.svg";
+const imgEllipse = "https://www.figma.com/api/mcp/asset/762eaa8d-abd2-4124-8f33-b63925739ea7.svg";
+const imgEllipse1 = "https://www.figma.com/api/mcp/asset/cee625ce-784e-4ff8-8983-4b8d695bdf88.svg";
+const imgEllipse2 = "https://www.figma.com/api/mcp/asset/0b043dfd-2271-4eaa-b32f-adf903a0a0c4.svg";
+
+type InfoTipProps = {
+  className?: string;
+  state?: "Default";
+};
+
+function InfoTip({ className, state = "Default" }: InfoTipProps) {
+  return (
+    <div className={className || "bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] size-[16px]"} data-node-id="411:40618">
+      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:40619">
+        i
+      </p>
+    </div>
+  );
+}
+
+function Capiro31ProfilePicture({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative size-[32px]"} data-node-id="469:41439" data-name="Capiro 3.1/Profile picture">
+      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapiro31ProfilePicture} />
+    </div>
+  );
+}
+
+export default function ClientProfileBillTrackerBoard1440() {
+  return (
+    <div className="bg-[var(--background,#f5f5f4)] content-stretch flex flex-col items-start relative size-full" data-node-id="411:56671" data-name="Client profile · Bill Tracker · board (1440)">
+      <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex gap-[var(--theme(spacing.5),20px)] h-[64px] items-center px-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="475:104966" data-name="Capiro · Shared header">
+        <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[196px]" data-node-id="I475:104966;469:41501" data-name="Brand · Capiro · Home">
+          <div className="h-[26px] relative shrink-0 w-[77px]" data-node-id="I475:104966;469:41502" data-name="Capiro wordmark">
+            <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none size-full" src={imgCapiroWordmark} />
+          </div>
+        </div>
+        <div className="bg-[var(--muted,#f5f5f4)] content-stretch cursor-pointer flex gap-[var(--theme(spacing.1),4px)] items-center justify-center overflow-clip p-[var(--theme(spacing.1),4px)] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I475:104966;469:41503" data-name="Modes · Portfolio active">
+          <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:104966;469:41504" data-name="Mode · Meri">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;469:41504;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+            </div>
+          </a>
+          <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:104966;469:41510" data-name="Mode · Portfolio">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;469:41510;12:377" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:104966;469:41516" data-name="Mode · Modules">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;469:41516;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+            </div>
+          </a>
+        </div>
+        <div className="flex-[1_0_0] h-px min-w-px relative" data-node-id="I475:104966;469:41522" data-name="Flexible space" />
+        <div className="content-stretch cursor-pointer flex gap-[var(--theme(spacing.3),12px)] h-[40px] items-center overflow-clip relative shrink-0" data-node-id="I475:104966;469:41523" data-name="Global actions">
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:104966;644:139304" data-name="Action · Quick log">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;644:139304;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:104966;501:42742" data-name="Action · Master calendar">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;501:42742;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon4} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:104966;469:41524" data-name="Action · Search">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;469:41524;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon5} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:104966;469:41532" data-name="Action · Updates">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:104966;469:41532;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon6} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative shrink-0 size-[40px]" data-node-id="I475:104966;469:41540" data-name="Action · Profile">
+            <Capiro31ProfilePicture className="relative shrink-0 size-[32px]" />
+          </a>
+        </div>
+      </div>
+      <div className="bg-[var(--border,#e7e5e4)] h-px relative shrink-0 w-full" data-node-id="475:105015" data-name="Capiro · Header divider" />
+      <div className="content-stretch flex flex-[1_0_0] items-start min-h-px overflow-clip relative w-full" data-node-id="475:105016" data-name="Capiro · Workspace body">
+        <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-r border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] h-full items-start p-[var(--theme(spacing.4),16px)] relative shrink-0 w-[232px]" data-node-id="475:105017" data-name="Capiro · Client navigation">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="I475:105017;471:92398">
+            PORTFOLIO
+          </p>
+          <div className="content-stretch cursor-pointer flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:105017;471:92399" data-name="Portfolio navigation">
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92400" data-name="Nav · Portfolio">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92400;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92400;12:385">
+                Overview
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92410" data-name="Nav · Clients">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92410;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon7} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92410;12:385">
+                Clients
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92419" data-name="Nav · Prospects">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92419;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon8} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92419;12:385">
+                Prospects
+              </p>
+            </a>
+          </div>
+          <div className="bg-[var(--muted,#f5f5f4)] h-px relative shrink-0 w-[200px]" data-node-id="I475:105017;471:92428" data-name="Navigation divider" />
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="I475:105017;471:92429">
+            ANDURIL
+          </p>
+          <div className="content-stretch cursor-pointer flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:105017;471:92430" data-name="Client navigation">
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92431" data-name="Nav · Overview">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92431;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92431;12:385">
+                Overview
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92441" data-name="Nav · Objectives">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92441;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon9} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92441;12:385">
+                Objectives
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92450" data-name="Nav · Calendar">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92450;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon10} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92450;12:385">
+                Calendar
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92465" data-name="Nav · Relationships">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92465;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon7} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92465;12:385">
+                Relationships
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92474" data-name="Nav · Work">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92474;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon11} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92474;12:385">
+                Work
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92484" data-name="Nav · Capabilities">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92484;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon12} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92484;12:385">
+                Capabilities
+              </p>
+            </a>
+            <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[10px] shrink-0 w-[200px]" data-node-id="I475:105017;746:146731" data-name="Nav · Bill Tracker">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;746:146731;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon13} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;746:146731;12:385">
+                Bill Tracker
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92500" data-name="Nav · Opportunities">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92500;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon14} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92500;12:385">
+                Opportunities
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92508" data-name="Nav · Files">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92508;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon13} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92508;12:385">
+                Files
+              </p>
+            </a>
+          </div>
+          <div className="flex-[1_0_0] min-h-px relative w-[200px]" data-node-id="I475:105017;471:92516" data-name="Flexible space" />
+          <div className="content-stretch flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:105017;471:92517" data-name="Workspace settings">
+            <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:105017;471:92518" data-name="Nav · Settings">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:105017;471:92518;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon15} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:105017;471:92518;12:385">
+                Settings
+              </p>
+            </a>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] h-full items-start min-w-px overflow-x-clip overflow-y-auto pb-[48px] pt-[24px] px-[32px] relative" data-node-id="411:56673" data-name="Main">
+          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:56674" data-name="Page header">
+            <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:56675" data-name="Breadcrumb">
+              <a className="block cursor-pointer relative shrink-0 size-[15px]" data-node-id="411:56676" data-name="icon/arrow-left">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconArrowLeft} />
+              </a>
+              <a className="[word-break:break-word] block cursor-pointer font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56677">
+                <p className="leading-[1.45]">Portfolio</p>
+              </a>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56678">
+                /
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] whitespace-nowrap" data-node-id="411:56679">
+                Anduril
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56680">
+                /
+              </p>
+              <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch cursor-pointer flex gap-[6px] items-center overflow-clip pl-[8px] pr-[6px] py-[5px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] shrink-0" data-node-id="411:56681" data-name="View switcher (⌘J)">
+                <div className="relative shrink-0 size-[14px]" data-node-id="411:56682" data-name="icon/layout-grid">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconLayoutGrid} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] text-left whitespace-nowrap" data-node-id="411:56683">
+                  Bill Tracker
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="411:56684" data-name="icon/chevron-down">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChevronDown} />
+                </div>
+              </a>
+            </div>
+            <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:56685" data-name="Actions">
+              <div className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:56686" data-name="Quick add">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I411:56686;12:377" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPlus} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[14px] tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:56686;12:379">
+                  Quick add
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="I411:56686;12:380" data-name="Chevron">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron} />
+                </div>
+              </div>
+              <a className="content-stretch cursor-pointer drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:56687" data-name="Meri actions">
+                <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(171.88910154620726deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+                <div className="relative shrink-0 size-[16px]" data-node-id="I411:56687;12:371" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon16} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:56687;12:373">
+                  Meri actions
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="I411:56687;12:374" data-name="Chevron">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron1} />
+                </div>
+                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+              </a>
+            </div>
+          </div>
+          <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex gap-[14px] items-center overflow-clip px-[20px] py-[14px] relative rounded-[12px] shrink-0 w-full" data-node-id="411:56688" data-name="Client strip">
+            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center justify-center overflow-clip relative rounded-[8px] shrink-0 size-[40px]" data-node-id="411:56689" data-name="Avatar">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] whitespace-nowrap" data-node-id="411:56690">
+                AN
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[2px] items-start overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:56691" data-name="Name">
+              <p className="font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="411:56692">
+                Anduril
+              </p>
+              <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:56693">
+                Defense technology · Costa Mesa, CA
+              </p>
+            </div>
+            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:56694" data-name="Badge">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:56695">
+                Active client
+              </p>
+            </div>
+            <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="411:56696" data-name="Spacer" />
+          </div>
+          <div className="content-stretch flex flex-col gap-[20px] items-start overflow-clip relative shrink-0 w-full" data-node-id="411:56697" data-name="Content">
+            <div className="content-stretch flex items-start justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:56698" data-name="View head">
+              <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:56699" data-name="L">
+                <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:56700" data-name="Info row">
+                  <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px] whitespace-nowrap" data-node-id="411:56701">
+                    Bill Tracker
+                  </p>
+                  <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:56703" data-name="Bill Tracker">
+              <div className="content-stretch flex gap-[10px] items-center overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:56704" data-name="Tracked bills summary">
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:56706">
+                  Tracked bills
+                </p>
+                <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="411:56707" data-name="Spacer" />
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56708">
+                  12 tracked bills
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col gap-[16px] items-start overflow-clip pb-[20px] px-[20px] relative shrink-0 w-full" data-node-id="411:56709" data-name="Panel">
+                <div className="content-stretch flex gap-[8px] items-start justify-end overflow-clip relative shrink-0 w-full" data-node-id="411:56710" data-name="Actions">
+                  <div className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="411:56711" data-name="Configure">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56712">
+                      Configure
+                    </p>
+                  </div>
+                  <a className="content-stretch cursor-pointer flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="411:56713" style={{ backgroundImage: "linear-gradient(166.56299849550282deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} data-name="Track bill">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="411:56714">
+                      Track bill
+                    </p>
+                  </a>
+                </div>
+                <div className="[word-break:break-word] bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex items-start overflow-clip relative rounded-[12px] shrink-0 w-full whitespace-nowrap" data-node-id="411:56715" data-name="Domain stats">
+                  <div className="content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start min-w-px overflow-clip px-[20px] py-[14px] relative" data-node-id="411:56716" data-name="Stat">
+                    <p className="font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[22px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.44px]" data-node-id="411:56717">
+                      12
+                    </p>
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase" data-node-id="411:56718">
+                      TRACKED BILLS
+                    </p>
+                  </div>
+                  <div className="border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start min-w-px overflow-clip px-[20px] py-[14px] relative" data-node-id="411:56725" data-name="Stat">
+                    <p className="font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[22px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.44px]" data-node-id="411:56726">
+                      -
+                    </p>
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase" data-node-id="411:56727">
+                      MATERIAL CHANGES
+                    </p>
+                  </div>
+                  <div className="border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start min-w-px overflow-clip px-[20px] py-[14px] relative" data-node-id="411:56728" data-name="Stat">
+                    <p className="font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[22px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.44px]" data-node-id="411:56729">
+                      -
+                    </p>
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase" data-node-id="411:56730">
+                      WATCHLIST COVERAGE
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:56731" data-name="Tracked bills card">
+                  <div className="[word-break:break-word] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[16px] relative shrink-0 w-full whitespace-nowrap" data-node-id="411:56732" data-name="Head">
+                    <p className="font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="411:56733">
+                      Tracked bills
+                    </p>
+                    <a className="block cursor-pointer font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:56734">
+                      <p className="leading-[1.45]">Table view</p>
+                    </a>
+                  </div>
+                  <div className="content-stretch flex gap-[14px] items-start overflow-clip p-[20px] relative shrink-0 w-full" data-node-id="411:56735" data-name="Board">
+                    <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-[310px] min-w-px overflow-clip p-[8px] relative rounded-[8px]" data-node-id="411:56736" data-name="Column · Introduced">
+                      <div className="content-stretch flex flex-col items-center overflow-clip relative shrink-0 w-full" data-node-id="411:56737" data-name="Head">
+                        <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[8px] items-center justify-center pl-[12px] pr-[8px] py-[8px] relative shrink-0 w-full" data-node-id="547:124043" data-name="v2/Planning · Kibo group header">
+                          <div className="relative shrink-0 size-[7px]" data-node-id="I547:124043;542:43702" data-name="Ellipse">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse} />
+                          </div>
+                          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="I547:124043;542:43703">
+                            INTRODUCED
+                          </p>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[14px] leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[22px]" data-node-id="I547:124043;542:43704">
+                            2
+                          </p>
+                        </div>
+                      </div>
+                      <a className="content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="411:56741" data-name="Kibo · Card · H.R. 1893">
+                        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] items-center justify-center p-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="547:124107" data-name="v2/Planning · Kibo Kanban card">
+                          <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="I547:124107;542:43645" data-name="Card heading">
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['Geist_Mono:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I547:124107;542:43646">
+                              H.R. 1893
+                            </p>
+                          </div>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left w-full" data-node-id="I547:124107;542:43651">
+                            34% pass · Defense Innovation Unit Reform
+                          </p>
+                          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="I547:124107;542:43652" data-name="Card metadata">
+                            <div className="relative shrink-0 size-[7px]" data-node-id="I547:124107;542:43653" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124107;542:43654">
+                              ​
+                            </p>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124107;542:43655">
+                              ​
+                            </p>
+                            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[24px]" data-node-id="I547:124107;542:43656" data-name="Owner avatar">
+                              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I547:124107;542:43657">
+                                I
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <a className="content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="411:56748" data-name="Kibo · Card · H.R. 3102">
+                        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] items-center justify-center p-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="547:124122" data-name="v2/Planning · Kibo Kanban card">
+                          <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="I547:124122;542:43645" data-name="Card heading">
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['Geist_Mono:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I547:124122;542:43646">
+                              H.R. 3102
+                            </p>
+                          </div>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left w-full" data-node-id="I547:124122;542:43651">
+                            28% pass · Autonomous Systems Procurement Act
+                          </p>
+                          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="I547:124122;542:43652" data-name="Card metadata">
+                            <div className="relative shrink-0 size-[7px]" data-node-id="I547:124122;542:43653" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124122;542:43654">
+                              ​
+                            </p>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124122;542:43655">
+                              ​
+                            </p>
+                            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[24px]" data-node-id="I547:124122;542:43656" data-name="Owner avatar">
+                              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I547:124122;542:43657">
+                                I
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-[310px] min-w-px overflow-clip p-[8px] relative rounded-[8px]" data-node-id="411:56755" data-name="Column · Committee">
+                      <div className="content-stretch flex flex-col items-center overflow-clip relative shrink-0 w-full" data-node-id="411:56756" data-name="Head">
+                        <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[8px] items-center justify-center pl-[12px] pr-[8px] py-[8px] relative shrink-0 w-full" data-node-id="547:124059" data-name="v2/Planning · Kibo group header">
+                          <div className="relative shrink-0 size-[7px]" data-node-id="I547:124059;542:43718" data-name="Ellipse">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                          </div>
+                          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="I547:124059;542:43719">
+                            COMMITTEE
+                          </p>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[14px] leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[22px]" data-node-id="I547:124059;542:43720">
+                            2
+                          </p>
+                        </div>
+                      </div>
+                      <a className="content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="411:56760" data-name="Kibo · Card · H.R. 4455">
+                        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] items-center justify-center p-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="547:124137" data-name="v2/Planning · Kibo Kanban card">
+                          <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="I547:124137;542:43658" data-name="Card heading">
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['Geist_Mono:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I547:124137;542:43659">
+                              H.R. 4455
+                            </p>
+                          </div>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left w-full" data-node-id="I547:124137;542:43664">
+                            62% pass · National Defense Authorization Act FY27 · Referred to committee
+                          </p>
+                          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="I547:124137;542:43665" data-name="Card metadata">
+                            <div className="relative shrink-0 size-[7px]" data-node-id="I547:124137;542:43666" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124137;542:43667">
+                              ​
+                            </p>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124137;542:43668">
+                              ​
+                            </p>
+                            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[24px]" data-node-id="I547:124137;542:43669" data-name="Owner avatar">
+                              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I547:124137;542:43670">
+                                Mc
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                      <a className="content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="411:56769" data-name="Kibo · Card · S. 780">
+                        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] items-center justify-center p-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="547:124152" data-name="v2/Planning · Kibo Kanban card">
+                          <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="I547:124152;542:43658" data-name="Card heading">
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['Geist_Mono:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I547:124152;542:43659">
+                              S. 780
+                            </p>
+                          </div>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left w-full" data-node-id="I547:124152;542:43664">
+                            57% pass · Small Business Contracting Parity
+                          </p>
+                          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="I547:124152;542:43665" data-name="Card metadata">
+                            <div className="relative shrink-0 size-[7px]" data-node-id="I547:124152;542:43666" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124152;542:43667">
+                              ​
+                            </p>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124152;542:43668">
+                              ​
+                            </p>
+                            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[24px]" data-node-id="I547:124152;542:43669" data-name="Owner avatar">
+                              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I547:124152;542:43670">
+                                Rb
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-[310px] min-w-px overflow-clip p-[8px] relative rounded-[8px]" data-node-id="411:56776" data-name="Column · Passed">
+                      <div className="content-stretch flex flex-col items-center overflow-clip relative shrink-0 w-full" data-node-id="411:56777" data-name="Head">
+                        <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[8px] items-center justify-center pl-[12px] pr-[8px] py-[8px] relative shrink-0 w-full" data-node-id="547:124075" data-name="v2/Planning · Kibo group header">
+                          <div className="relative shrink-0 size-[7px]" data-node-id="I547:124075;542:43733" data-name="Ellipse">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+                          </div>
+                          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="I547:124075;542:43734">
+                            PASSED
+                          </p>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[14px] leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[22px]" data-node-id="I547:124075;542:43735">
+                            1
+                          </p>
+                        </div>
+                      </div>
+                      <a className="content-stretch cursor-pointer flex flex-col items-start overflow-clip relative rounded-[8px] shrink-0 w-full" data-node-id="411:56781" data-name="Kibo · Card · S. 2210">
+                        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.2),8px)] items-center justify-center p-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="547:124167" data-name="v2/Planning · Kibo Kanban card">
+                          <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="I547:124167;542:43671" data-name="Card heading">
+                            <p className="[word-break:break-word] flex-[1_0_0] font-['Geist_Mono:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px]" data-node-id="I547:124167;542:43672">
+                              S. 2210
+                            </p>
+                          </div>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left w-full" data-node-id="I547:124167;542:43677">
+                            81% pass · Counter-UAS Authorities Extension · Passed Senate
+                          </p>
+                          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="I547:124167;542:43678" data-name="Card metadata">
+                            <div className="relative shrink-0 size-[7px]" data-node-id="I547:124167;542:43679" data-name="Ellipse">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+                            </div>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124167;542:43680">
+                              ​
+                            </p>
+                            <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] text-left whitespace-nowrap" data-node-id="I547:124167;542:43681">
+                              ​
+                            </p>
+                            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[24px]" data-node-id="I547:124167;542:43682" data-name="Owner avatar">
+                              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] text-left whitespace-nowrap" data-node-id="I547:124167;542:43683">
+                                Bl
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex flex-[1_0_0] flex-col items-start min-h-[310px] min-w-px overflow-clip p-[8px] relative rounded-[8px]" data-node-id="411:56790" data-name="Column · Enacted">
+                      <div className="content-stretch flex flex-col items-center overflow-clip relative shrink-0 w-full" data-node-id="411:56791" data-name="Head">
+                        <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[8px] items-center justify-center pl-[12px] pr-[8px] py-[8px] relative shrink-0 w-full" data-node-id="547:124091" data-name="v2/Planning · Kibo group header">
+                          <div className="relative shrink-0 size-[7px]" data-node-id="I547:124091;542:43733" data-name="Ellipse">
+                            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+                          </div>
+                          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.45] min-w-px relative text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="I547:124091;542:43734">
+                            ENACTED
+                          </p>
+                          <p className="[word-break:break-word] font-['Geist:Regular'] font-normal h-[14px] leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[22px]" data-node-id="I547:124091;542:43735">
+                            0
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="[word-break:break-word] border-[var(--border,#e7e5e4)] border-solid border-t content-stretch flex items-start justify-between overflow-clip px-[20px] py-[12px] relative shrink-0 w-full whitespace-nowrap" data-node-id="411:56795" data-name="Footer">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase" data-node-id="411:56796">
+                      12 TRACKED BILLS
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:56797">
+                      Open full board →
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0), v2/Eyebrow: Font(family: "Geist", style: Medium, size: 11, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: 6), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Small: Font(family: "Geist", style: Regular, size: 13, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.30000001192092896), v2/Label: Font(family: "Geist", style: Medium, size: 12, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: 0), v2/Black gradient: , v2/metal-shadow: Effect(type: INNER_SHADOW, color: #FFFFFF24, offset: (0, 1), radius: 0, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A0924, offset: (0, 1), radius: 2, spread: 0), v2/Title S: Font(family: "Geist", style: SemiBold, size: 14, weight: 600, lineHeight: 1.350000023841858, letterSpacing: -0.5), v2/Caption: Font(family: "Geist", style: Regular, size: 12, weight: 400, lineHeight: 1.399999976158142, letterSpacing: 0), v2/Title L: Font(family: "Geist", style: Medium, size: 20, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: -1.5), v2/Body medium: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.4500000476837158, letterSpacing: -0.5), v2/Stat: Font(family: "Geist", style: SemiBold, size: 22, weight: 600, lineHeight: 1.2000000476837158, letterSpacing: -2).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Device=Desktop, Mode=Portfolio
+**Node ID:** 469:41500
+
+Shared Capiro 3.1 Desktop header with Portfolio selected. Logo returns to Dashboard; three modes are Meri, Portfolio and Modules. Native portrait is a neutral illustration. Wire navigation on page-local instances.
+
+## Capiro 3.1/Shared header
+**Node ID:** 469:92041
+
+Shared Capiro navigation with Meri, Portfolio and Modules modes; Master calendar, Search, Updates and Profile actions. Desktop uses action labels; tablet and phone use icons. Prototype actions are mapped on screen instances to same-device destinations. Compact icon-only mode switcher: sparkle = Meri; briefcase = Portfolio; grid = Modules. Selected tile retains a visible surface and outline. Preserve semantic labels, accessible mode names and current-section navigation when implemented.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## icon/sparkle
+**Node ID:** 4:9
+
+Lucide-style sparkle icon. Recolor via the vector stroke.
+
+## icon/layout-grid
+**Node ID:** 4:26
+
+Lucide-style layout-grid icon. Recolor via the vector stroke.
+
+## icon/search
+**Node ID:** 4:13
+
+Lucide-style search icon. Recolor via the vector stroke.
+
+## icon/bell
+**Node ID:** 4:17
+
+Lucide-style bell icon. Recolor via the vector stroke.
+
+## Capiro 3.1/Profile picture
+**Node ID:** 469:41439
+
+Neutral editable portrait illustration used for the current-user profile control in the prototype. Replace with the signed-in user image in implementation.
+
+## Device=Desktop, Context=Client
+**Node ID:** 471:92397
+
+Capiro3.1 Client Desktop navigation. Labels and native icons. Current item is a default highlight; override selected fills in screen instances. Reactions are wired on the prototype-page instances.
+
+## Capiro 3.1/Shared sidebar
+**Node ID:** 471:92866
+
+Shared Capiro3.1 application navigation. Contexts are Portfolio, Client and Modules; Desktop232px and Tablet72px widths. Client default scope is Anduril. Settings remains a bottom action. Settings pages retain their existing settings rail. Wire native navigation reactions on page-local instances.
+
+## icon/settings · Capiro 3.1
+**Node ID:** 471:92354
+
+Native editable settings cog, matching the local 16px line icon system.
+
+## icon/plus
+**Node ID:** 4:20
+
+Lucide-style plus icon. Recolor via the vector stroke.
+
+## v2/Planning · Kibo group header
+**Node ID:** 542:43701
+
+Native Capiro adaptation of Kibo UI. https://www.kibo-ui.com/components/list
+
+## v2/Planning · Kibo Kanban card
+**Node ID:** 542:43644
+
+Native Capiro adaptation of Kibo UI. https://www.kibo-ui.com/components/kanban
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

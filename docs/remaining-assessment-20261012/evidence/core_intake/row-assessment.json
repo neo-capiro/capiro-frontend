@@ -1,0 +1,1625 @@
+{
+  "review": "Portfolio core/intake bounded independent acceptance assessment",
+  "date": "2026-10-12",
+  "assessmentHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "frozenApplicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "recordedApplicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "sourceVerification": "git diff 4a1614886fd98bb42d529f1ef59b3d01d7ff9173 HEAD -- apps packages scripts package.json package-lock.json returned no differences. No application source edited.",
+  "coverage": {
+    "assigned": 59,
+    "inScope": 57,
+    "excluded": 2,
+    "classificationCounts": {
+      "IMPLEMENTED_BOUNDED_SOURCE_REVIEW": 24,
+      "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY": 19,
+      "EXCLUDED_AS_PREVIOUSLY_RECORDED": 2,
+      "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP": 1,
+      "CONFIRMED_SOURCE_FEATURE_GAP": 2,
+      "IMPLEMENTED_WITH_BACKEND_DEPENDENCY": 9,
+      "CONFIRMED_SOURCE_CONTRACT_MISMATCH_REFER_TO_MS01": 1,
+      "IMPLEMENTED_HOSTED_FLOW_NATIVE_UNASSESSED": 1
+    }
+  },
+  "boundedExecution": {
+    "browserObservations": 2,
+    "representativeCaptureCases": 2,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "workers": 1,
+    "server": "http://127.0.0.1:5191",
+    "note": "Passing tests assert observations including missing features; they are not native or full-row acceptance. No whole suite rerun."
+  },
+  "constraints": "Read-only application review; only owned tmp directory written; no native/provider/paid-model/AWS/commit/push actions.",
+  "rows": [
+    {
+      "audit_id": "CORE-001",
+      "criterion": "List all non-archived clients",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Current client query and list/cards composition use the returned client catalog; successful-empty and failed-read states are separate. Author list tests exist.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/queries.ts:9",
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx:31"
+      ],
+      "remainingNativeOrContractCriterion": "Native Core GET /clients must establish complete non-archived authorized catalog; no live list was read.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-002",
+      "criterion": "Search clients by name, sector, location and account owner",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Name, description, contact name, raw/display sector, city/state and current owner name all participate in search. The historical location-search blocker is superseded.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/filter.ts:75",
+        "apps/web/src/features/portfolio/index/contracts.ts:21"
+      ],
+      "remainingNativeOrContractCriterion": "Native client/owner field completeness and caller scope remain unverified; local search semantics are implemented.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-003",
+      "criterion": "Filter All/Active/At risk/Prospect",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Status/type filters exist, but At risk requires an approved risk definition; no fabricated risk filter is inserted.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/IndexFilters.tsx:22",
+        "apps/web/src/features/portfolio/index/IndexNavigation.tsx:1"
+      ],
+      "remainingNativeOrContractCriterion": "Product/backend must publish risk metric and status meaning; native status values remain unverified.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-004",
+      "criterion": "Sort Attention/Readiness/Name",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Only Saved order, Recently added and Name A-Z are implemented; unsupported attention/readiness query values produce an explicit unavailable notice.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/IndexFilters.tsx:69",
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx:137"
+      ],
+      "remainingNativeOrContractCriterion": "Attention/readiness definitions and ordering source are unresolved product/backend contracts.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-005",
+      "criterion": "Switch list and cards layout",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "URL-backed list/cards mode and current result rendering exist; existing browser case covers view reload and legacy layout parameter.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/filter.ts:20",
+        "apps/web/src/features/portfolio/index/IndexFilters.tsx:84"
+      ],
+      "remainingNativeOrContractCriterion": "No additional backend feature is required for the local switch; native catalog rendering remains untested here.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-006",
+      "criterion": "Open client profile / View logged client entry",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Profile cards link to the selected client route; current synthetic probes open the actual ClientFrame and Overview.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx:94",
+        "apps/web/src/features/portfolio/client-profile/ClientFrame.tsx:1"
+      ],
+      "remainingNativeOrContractCriterion": "Real signed-in GET for the selected client and denial/removal behavior are not exercised here.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-43761"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-007",
+      "criterion": "Portfolio summary / pulse counts",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Pulse displays the actual client count; other aggregates are dashes, not invented counts.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx:17"
+      ],
+      "remainingNativeOrContractCriterion": "Attention/objective/off-track/strategy aggregate definitions and authorized source must be provided.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-008",
+      "criterion": "Portfolio attention / next touch / per-client bill count rollup",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Bounded current alerts feed is implemented with shown-count and coverage limits. Next-touch and per-client bill rollups are not derived from this incomplete feed.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx:22"
+      ],
+      "remainingNativeOrContractCriterion": "Backend must define complete attention/next-touch/bill rollup semantics; live limited-feed coverage was not verified.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-009",
+      "criterion": "Portfolio engagement trend chart",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No trend chart is rendered. Existing revalidation documents a six-quarter legacy metric with unresolved caller/client scope, unsuitable for silently substituting current engagement health.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx:134",
+        "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-009"
+      ],
+      "remainingNativeOrContractCriterion": "Analytics owner must confirm intended metric and actor/client authorization before consumption; deployed behavior unassessed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-010",
+      "criterion": "Portfolio Program Elements summary",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "reason": "Preserved assigned ledger exclusion; no reassessment or feature restoration attempted.",
+      "evidence": [],
+      "remainingNativeOrContractCriterion": "No acceptance claim or new requirement introduced.",
+      "visualAssessment": "EXCLUDED",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-011",
+      "criterion": "Account owner names across portfolio",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Owner labels are derived from client-account-owners; failed owner reads are surfaced rather than treated as known-unassigned.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/queries.ts:41",
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx:58",
+        "apps/web/src/features/portfolio/index/ProfileResults.tsx:94"
+      ],
+      "remainingNativeOrContractCriterion": "Native owner roster names and exact authorized client associations need real-service acceptance.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-012",
+      "criterion": "Create client",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP",
+      "reason": "Current chooser and three-step client wizard render and can be navigated/cancelled without saving. Canonical create/partial-logo save behavior exists; CI-04 records choice layout divergence.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx:109",
+        "apps/web/src/features/portfolio/client-intake/profile-api.ts:21",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/add-profile.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native create authorization, capacity receipt/read-back and duplicate/uncertain-create handling require matching service/account acceptance.",
+      "visualAssessment": "DESKTOP_REVIEWED_WITH_CI-04",
+      "findingIds": [
+        "CI-04"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44629"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-013",
+      "criterion": "View client identity, description, contact and profile fields",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "reason": "Overview renders name, raw profileStatus, raw sectorTag, website and description, but no saved location/contact/government details. The Government info summary/dialog in the design is absent. A standard_user can read the client record but Edit client profile is disabled, so this user cannot inspect these fields on screen; JSON export is a separate possible workaround. The same fixture also shows HOMELAND_SECURITY and ACTIVE instead of display labels.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:75",
+        "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx:23",
+        "apps/web/src/features/portfolio/client-intake/form.ts:95",
+        "review.spec.ts:26",
+        "browser-results.json",
+        "browser-artifacts/review-observe-saved-profi-e80c6--to-standard-user-read-path/profile-standard-user.png",
+        "figma-411-47010.png",
+        "figma-411-47482.png",
+        "figma-411-47030.json"
+      ],
+      "remainingNativeOrContractCriterion": "Fix/review the missing on-screen read-only field presentation; native field completeness is a separate acceptance criterion.",
+      "visualAssessment": "DESKTOP_REVIEWED_WITH_CI-01",
+      "findingIds": [
+        "CI-01"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-014",
+      "criterion": "Edit client and all intake wizard fields",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "All three canonical editor steps and saved-field mapping exist, with fresh-read dirty merge. Supplemental frames and fresh captures expose CI-04 desktop choice-grid parity only.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx:204",
+        "apps/web/src/features/portfolio/client-intake/form.ts:95",
+        "apps/web/src/features/portfolio/client-intake/profile-api.ts:21",
+        "docs/portfolio-31/INTAKE-CHECKPOINT.md:47",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-2.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-3.png",
+        "figma-517-121876.png",
+        "figma-517-122239.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native whole-intake PUT has no CAS guarantee; signed-in concurrent field edits and receipt read-back remain unverified.",
+      "visualAssessment": "DESKTOP_REVIEWED_WITH_CI-04",
+      "findingIds": [
+        "CI-04"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47482"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-015",
+      "criterion": "Archive client",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Archive menu composes explicit retained-record confirmation; adapter requires returned archived status and invalidates current list. No archive was dispatched in this review.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-intake/ArchiveClientDialog.tsx:33",
+        "apps/web/src/features/portfolio/client-intake/profile-api.ts:52"
+      ],
+      "remainingNativeOrContractCriterion": "Native soft-delete receipt, active-list removal and client-linked retained data must be accepted for a designated disposable client.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-016",
+      "criterion": "Upload client logo - request signed upload",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Logo input validates MIME/2MiB, requests scoped signed POST and omits credentials when sending bytes. Current wizard shows upload entry.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-intake/logo.ts:30",
+        "apps/web/src/features/portfolio/client-intake/logo.ts:40",
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx:234",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png"
+      ],
+      "remainingNativeOrContractCriterion": "Real object-store signed destination, CORS, expiry and byte validation were not exercised.",
+      "visualAssessment": "UPLOAD_ENTRY_INSPECTED_NO_UPLOAD_DISPATCH",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44629"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-017",
+      "criterion": "Upload client logo - confirm",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Confirmation reuses staged s3Key after successful upload; partial profile save is disclosed and confirmation retry does not recreate the client.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-intake/logo.ts:86",
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx:297",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native scan/confirmation/client-logo read-back and lost-response recovery are not established by synthetic UI.",
+      "visualAssessment": "UPLOAD_ENTRY_INSPECTED_NO_UPLOAD_DISPATCH",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44629"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-018",
+      "criterion": "Bulk import parsed CSV client rows",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "classification": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "reason": "Preserved assigned ledger exclusion; no reassessment or feature restoration attempted.",
+      "evidence": [],
+      "remainingNativeOrContractCriterion": "No acceptance claim or new requirement introduced.",
+      "visualAssessment": "EXCLUDED",
+      "findingIds": [],
+      "assignedFigmaTargets": [],
+      "nativeReviewStatus": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-019",
+      "criterion": "Search LDA firm registrants",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Firm search and read gates preserve current firm context; input bounds and source counts are implemented. Archived search render matches the principal compact results structure.",
+      "evidence": [
+        "apps/web/src/features/portfolio/intake/registrant/FirmSearch.tsx:1",
+        "apps/web/src/features/portfolio/intake/registrant/queries.ts:1",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+        "figma-411-44770.png",
+        "figma-411-44899.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native registrant search completeness, source data and authorized caller behavior remain untested here.",
+      "visualAssessment": "BOUNDED_LDA_STRUCTURE_REVIEWED_NO_NEW_MATERIAL_GAP",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44770"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-020",
+      "criterion": "Read current firm LDA registrant",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Anchor read distinguishes linked/unlinked firm; dialog explicitly labels firm-wide setup and linked firm.",
+      "evidence": [
+        "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx:40",
+        "apps/web/src/features/portfolio/intake/registrant/queries.ts:1",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+        "figma-411-44770.png",
+        "figma-411-44899.png"
+      ],
+      "remainingNativeOrContractCriterion": "Real current tenant registrant GET and revocation behavior are not revalidated.",
+      "visualAssessment": "BOUNDED_LDA_STRUCTURE_REVIEWED_NO_NEW_MATERIAL_GAP",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44770"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-021",
+      "criterion": "Select / link firm LDA registrant",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Firm link requires administrator confirmation and handles failed acknowledgement via read-back without blind retry.",
+      "evidence": [
+        "apps/web/src/features/portfolio/intake/registrant/FirmLinkConfirmation.tsx:1",
+        "apps/web/src/features/portfolio/intake/registrant/useFirmLink.ts:1",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+        "figma-411-44770.png",
+        "figma-411-44899.png"
+      ],
+      "remainingNativeOrContractCriterion": "Real anchor-change write was not run; atomic expected-anchor contract is missing in recorded backend revalidation.",
+      "visualAssessment": "BOUNDED_LDA_STRUCTURE_REVIEWED_NO_NEW_MATERIAL_GAP",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44770"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-022",
+      "criterion": "Review LDA client import candidates",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Candidate review exposes actual matches, existing-client disable states, local filter and bounded selection; archived exact-source render was compared with411:44899.",
+      "evidence": [
+        "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx:1",
+        "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx:205",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+        "figma-411-44770.png",
+        "figma-411-44899.png"
+      ],
+      "remainingNativeOrContractCriterion": "Live LDA candidate source completeness and existing-client IDs remain unverified; receipt semantics are assessed separately in CORE-023.",
+      "visualAssessment": "BOUNDED_LDA_STRUCTURE_REVIEWED_NO_NEW_MATERIAL_GAP",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44899"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-023",
+      "criterion": "Import selected LDA clients",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Import freezes exact selections, checks fresh candidates/anchor, partitions returned results and keeps ambiguous completion in read-only recovery.",
+      "evidence": [
+        "apps/web/src/features/portfolio/intake/registrant/useImportAttempt.ts:1",
+        "apps/web/src/features/portfolio/intake/registrant/ImportRecovery.tsx:1",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/registrant-intake-desktop--0aa61-t-and-keyboard-dialog-focus/registrant-review-desktop-light.png",
+        "figma-411-44770.png",
+        "figma-411-44899.png"
+      ],
+      "remainingNativeOrContractCriterion": "Backend atomic anchor/capacity reservation and durable import receipt remain dependencies; no native batch import executed.",
+      "visualAssessment": "BOUNDED_LDA_STRUCTURE_REVIEWED_NO_NEW_MATERIAL_GAP",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-44899"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-024",
+      "criterion": "Add focus tags",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Focus tags perform scoped fresh intake read/merge and update chips. Existing exact-source focus screenshot confirms composed Overview entry.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/tags/actions.ts:1",
+        "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx:1",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-tools-integration--655bc-ates-the-real-profile-cache/overview-focus-desktop.png"
+      ],
+      "remainingNativeOrContractCriterion": "Whole-intake update lacks server CAS, so concurrent edits can race; no native tag mutation performed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-025",
+      "criterion": "Export client profile JSON",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Explicit prepare/review/download exports saved client and disclosed intelligence content. Authorization errors refuse download; non-auth source failure can yield marked partial export.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/export/actions.ts:44",
+        "apps/web/src/features/portfolio/client-profile/export/ClientProfileExport.tsx:128"
+      ],
+      "remainingNativeOrContractCriterion": "Historical intelligence reader actor/memory-wall assurance and source attribution remain owner dependencies; native/private-data export was not run.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-026",
+      "criterion": "Open client website",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Overview uses safeWebsite and opens a new tab with noreferrer; current synthetic source website appears as an actual link.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:44",
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:86",
+        "apps/web/src/features/portfolio/index/contracts.ts:1",
+        "browser-artifacts/review-observe-saved-profi-e80c6--to-standard-user-read-path/profile-standard-user.png"
+      ],
+      "remainingNativeOrContractCriterion": "No provider action is needed; native stored URL validity and destination reachability were not fetched.",
+      "visualAssessment": "OVERVIEW_LINK_INSPECTED",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-027",
+      "criterion": "Read assigned account owner",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Overview projects the current team member marked isOwner and uses a separate unavailable marker on a failed read.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:45",
+        "apps/web/src/features/portfolio/client-profile/queries.ts:73"
+      ],
+      "remainingNativeOrContractCriterion": "Native owner/roster consistency must be confirmed against the same client and identity.",
+      "visualAssessment": "OVERVIEW_OWNER_SLOT_INSPECTED_UNASSIGNED_FIXTURE_ONLY",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "ffed1971b641ee1e0fbe-d8b41f312b1132f8d5cd",
+        "ffed1971b641ee1e0fbe-75a56210d092b8aa41dc",
+        "ffed1971b641ee1e0fbe-e2dfc3895d2962bcd7b1",
+        "ffed1971b641ee1e0fbe-9137a360e9c72a385129",
+        "ffed1971b641ee1e0fbe-d8f3a1b24ea1158097c4",
+        "ffed1971b641ee1e0fbe-ebbaf361696dd6b6ab5d",
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-028",
+      "criterion": "Read account owner / team candidate options",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Current member-options query is separate from roster and fresh source is required for adding. Design gap CI-03 applies to presentation, not options transport.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/profile-read-queries.ts:1",
+        "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx:48",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native allowed-member roster and removed-member denial were not read from the real service.",
+      "visualAssessment": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+      "findingIds": [
+        "CI-03"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-51801"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "ffed1971b641ee1e0fbe-d8b41f312b1132f8d5cd",
+        "ffed1971b641ee1e0fbe-75a56210d092b8aa41dc",
+        "ffed1971b641ee1e0fbe-e2dfc3895d2962bcd7b1",
+        "ffed1971b641ee1e0fbe-9137a360e9c72a385129",
+        "ffed1971b641ee1e0fbe-d8f3a1b24ea1158097c4",
+        "ffed1971b641ee1e0fbe-ebbaf361696dd6b6ab5d",
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-029",
+      "criterion": "Assign / clear account owner",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Current ordered-owner editor replaces obsolete single-owner assumptions; owner changes have scoped source/version/receipt guards. The completed Owners repair is not repeated.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/OrderedOwnerFields.tsx:1",
+        "apps/web/src/features/portfolio/client-profile/ordered-owners.ts:1"
+      ],
+      "remainingNativeOrContractCriterion": "Native ordered-owner endpoint registration, exact versioned persistence and null/empty-owner clearing remain to qualify.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "ffed1971b641ee1e0fbe-d8b41f312b1132f8d5cd",
+        "ffed1971b641ee1e0fbe-75a56210d092b8aa41dc",
+        "ffed1971b641ee1e0fbe-e2dfc3895d2962bcd7b1",
+        "ffed1971b641ee1e0fbe-9137a360e9c72a385129",
+        "ffed1971b641ee1e0fbe-d8f3a1b24ea1158097c4",
+        "ffed1971b641ee1e0fbe-ebbaf361696dd6b6ab5d",
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-030",
+      "criterion": "Read account team roster",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Current roster query and guarded team presentation exist; CI-03 records the remaining design mismatch.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/queries.ts:73",
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:72",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.png"
+      ],
+      "remainingNativeOrContractCriterion": "Real team membership, role and owner projections were not accepted against native data.",
+      "visualAssessment": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+      "findingIds": [
+        "CI-03"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-51801"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-031",
+      "criterion": "Add team member with role",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Add member includes role and requires current actor, options and roster before mutation; scoped result acknowledgement updates cache.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx:30",
+        "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts:41",
+        "apps/web/src/features/portfolio/client-profile/profile-receipts.ts:49",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native POST membership persistence and concurrent member/role changes remain unverified.",
+      "visualAssessment": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+      "findingIds": [
+        "CI-03"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-51801"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-032",
+      "criterion": "Remove team member",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Remove is offered only for non-owner/non-ranked roster members; current source guard and explicit unknown-write recovery are preserved.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:88",
+        "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts:41",
+        "apps/web/src/features/portfolio/client-profile/profile-receipts.ts:49",
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.png"
+      ],
+      "remainingNativeOrContractCriterion": "Native DELETE membership, owner refusal and removal read-back remain unverified.",
+      "visualAssessment": "ARCHIVED_EXACT_SOURCE_RENDER_REVIEWED_WITH_CI-03",
+      "findingIds": [
+        "CI-03"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-51801"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-074",
+      "criterion": "Read slot capacity and billing access gate",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Client capacity read gate is composed into manual creation/LDA import; query loading/error/limit refuse creation. This is a current snapshot, not reservation.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/useProfileCapacity.ts:1",
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx:12",
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:106"
+      ],
+      "remainingNativeOrContractCriterion": "Native tenant capacity serialization/reservation and billing access must be validated.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45337"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-075",
+      "criterion": "Read full pricing / plan / usage summary",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Read-only summary exposes plan status, purchased/used slots, rate, allowance/spend/cap/end date and distinguishes values from a quote. Billing access fails closed.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx:26",
+        "apps/web/src/features/portfolio/billing/useBillingSummary.ts:1"
+      ],
+      "remainingNativeOrContractCriterion": "Native billing summary plus designated billingAdmin role must validate actual rates/usage; inline charge receipt is outside this read.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45337"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-076",
+      "criterion": "Block creation when client slot limit is reached",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Manual entry/create and selected LDA import are disabled when capacity disallows; server rejection remains surfaced.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:106",
+        "apps/web/src/features/portfolio/client-intake/ClientIntakeDialog.tsx:320",
+        "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx:68"
+      ],
+      "remainingNativeOrContractCriterion": "Native concurrent creations need authoritative capacity fencing; browser checks alone cannot prevent server races.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45337"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-077",
+      "criterion": "Purchase client capacity with hosted Checkout",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_CONTRACT_MISMATCH_REFER_TO_MS01",
+      "reason": "Secondary review supersedes the initial unresolved-risk classification: current frontend enables Add profiles for an existing subscription, but the supplied current backend billing service (root revision 243248e726243c44bd4b9d24fd1ed220da18c56a) is byte-identical to pinned4be13b0 and creates a new subscription Checkout session. Refer to canonical MS01; no duplicate finding or real provider outcome is claimed.",
+      "evidence": [
+        "apps/web/src/features/settings/BillingSettings.tsx:86",
+        "apps/web/src/features/settings/BillingSettings.tsx:197",
+        "apps/web/src/features/settings/BillingSettings.tsx:224",
+        "apps/web/src/shared/capiro/operations/settings.ts:363",
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18",
+        "secondary-review.json",
+        "../root-review/backend-current-billing.service.ts",
+        "../modules_settings/backend-pin-billing.service.ts"
+      ],
+      "remainingNativeOrContractCriterion": "Resolve/gate existing-payer Add profiles per MS01. Real provider charge/subscription/entitlement outcomes remain NOT RUN; source mismatch confirmation does not qualify payment execution.",
+      "visualAssessment": "UNASSESSED_PAYMENT_FRAME",
+      "findingIds": [
+        "MS01"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45611"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice.",
+      "initialBoundedAssessment": {
+        "classification": "BACKEND_SEMANTIC_RISK_REQUIRES_OWNER_REVIEW",
+        "reason": "Portfolio inline purchase remains unavailable. Current Settings now exposes Add profiles -> absolute-quantity Onboard Checkout even for existing plans; historical revalidation says this creates a new subscription. This seam is escalated to root/Settings reviewer, not confirmed as a live provider defect by this read-only slice.",
+        "remainingNativeOrContractCriterion": "Current Onboard owner must resolve new-subscription versus existing-payer increment semantics before calling this capacity purchase accepted. No checkout/provider request was made.",
+        "findingIds": []
+      },
+      "canonicalFindingReference": "../modules_settings/findings.json#MS01"
+    },
+    {
+      "audit_id": "CORE-078",
+      "criterion": "Manage payment methods, profile slots and invoices",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_HOSTED_FLOW_NATIVE_UNASSESSED",
+      "reason": "Manage billing now links to internal /settings/billing. Current Settings offers provider Portal for methods/invoices/cancel and hosted total-capacity checkout. This is more than the stale ledger external-link-only description.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx:135",
+        "apps/web/src/features/settings/BillingSettings.tsx:34",
+        "apps/web/src/shared/capiro/operations/settings.ts:355"
+      ],
+      "remainingNativeOrContractCriterion": "Designated billing-admin authorization, configured provider features, safe return origin and actual invoice/method results are unassessed; no Portal session was created.",
+      "visualAssessment": "UNASSESSED_PAYMENT_FRAME",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45611"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-079",
+      "criterion": "Monthly versus annual plan switch",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No monthly/annual added-slot choice exists in Portfolio. Current settings checkout is an absolute-quantity hosted path, not the co-term quote described by the revised billing requirements.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx:32",
+        "apps/web/src/features/settings/BillingSettings.tsx:197",
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18"
+      ],
+      "remainingNativeOrContractCriterion": "Billing owner must supply approved price/item choice and native co-term renewal quote semantics.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45476"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-080",
+      "criterion": "Native proration / invoice preview and confirmation",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Portfolio has no active inline quote/confirm UI or dispatch; read-only summary explicitly says it is not a quote.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx:128",
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18"
+      ],
+      "remainingNativeOrContractCriterion": "Requires owner quote/confirmation/recovery and paid single-use capacity/client consumption contract.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45611"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-081",
+      "criterion": "Choose ACH / bank account within Capiro billing modal",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No in-Portfolio bank-method control is exposed. Hosted settings management is not an inline ACH mandate/verification substitute.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx:32",
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18"
+      ],
+      "remainingNativeOrContractCriterion": "Authorized payment-method availability, mandate/verification and method-bound paid-only entitlement contract required.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46212"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-082",
+      "criterion": "Payment success / failure / ACH pending display",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No Portfolio payment attempt success/failure/pending screens are fabricated; generic plan status is not an individual payment receipt.",
+      "evidence": [
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx:32",
+        "apps/web/src/features/settings/BillingSettings.tsx:51",
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18"
+      ],
+      "remainingNativeOrContractCriterion": "Authoritative attempt/invoice/currency/result/receipt and idempotent paid entitlement consumption required; reversal rules unresolved.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45753",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45866",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46493",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46605"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-083",
+      "criterion": "Non-admin request for an additional client profile",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Non-admin request creation is not wired in the Add profile chooser; capacity errors do not claim a request was sent.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:100",
+        "apps/web/src/features/portfolio/billing/ProfileCapacityStatus.tsx:23"
+      ],
+      "remainingNativeOrContractCriterion": "Request/create/read recipient ownership contract must be registered and accepted; historical candidate availability is not current deployment proof.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45983",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46102"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-084",
+      "criterion": "Admin review / approve / decline profile purchase request",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No in-app review/approve/decline path for profile purchase requests is composed in Portfolio.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:100",
+        "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-084"
+      ],
+      "remainingNativeOrContractCriterion": "Requires current request owner plus quote/charge/paid-entitlement approval integration; no admin purchase action was attempted.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46722"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-085",
+      "criterion": "Admin notification for requested profile",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No notification is dispatched from current Add profile/capacity UI for a purchase request.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:100",
+        "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CORE-085"
+      ],
+      "remainingNativeOrContractCriterion": "Backend notification recipient/event/receipt contract required; no notification sent in this review.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-46861"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-086",
+      "criterion": "Filter portfolio by account owner",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Top owner filter uses actual owner catalog, including known-unassigned; requested owner filtering is blocked when owner data is unavailable.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/IndexOwnerFilter.tsx:1",
+        "apps/web/src/features/portfolio/index/PortfolioIndex.tsx:74",
+        "apps/web/src/features/portfolio/index/filter.ts:109"
+      ],
+      "remainingNativeOrContractCriterion": "Native owner assignments and accessible catalog completeness need acceptance; local filtering is implemented.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41645"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+        "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+        "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+        "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+        "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+        "3e9c8b236ae8d69bae0a-b750159774bcf1307a9b",
+        "3e9c8b236ae8d69bae0a-9df550e5f8a5569693f3",
+        "3e9c8b236ae8d69bae0a-fede39aaa4388d0b314d",
+        "3e9c8b236ae8d69bae0a-158884128ac2220599dd",
+        "3e9c8b236ae8d69bae0a-24adf088332b2db80a93",
+        "3e9c8b236ae8d69bae0a-71fbcb61d7d133094677",
+        "3e9c8b236ae8d69bae0a-0ff520aa09727ac666ce",
+        "3e9c8b236ae8d69bae0a-57d52a6e0311eed79aa3"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-087",
+      "criterion": "Inspect work-to-objective linkage coverage",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Coverage pulse displays a dash and contains no inspection action. No canonical association or denominator is inferred.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx:6"
+      ],
+      "remainingNativeOrContractCriterion": "Work/objective owner must define association and coverage denominator; target frame not visually assessed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41734"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-088",
+      "criterion": "Ignore / restore an unlinked-work item",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "No ignore/restore unlinked-work mutation exists in current pulse surface.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx:6"
+      ],
+      "remainingNativeOrContractCriterion": "Per-user/client ignore resource depends on agreed association/coverage semantics; target frame not visually assessed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-43867"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-089",
+      "criterion": "View client / attention / strategy pulse lists",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Client profiles and bounded alerts are available, but pulse summary cells are static counts/dashes without complete attention/strategy drilldowns.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx:17",
+        "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx:63"
+      ],
+      "remainingNativeOrContractCriterion": "Attention/strategy aggregation and complete drilldown source unresolved; three assigned drilldown frames not assessed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41892",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-42013",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-42371"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-090",
+      "criterion": "Portfolio objective count and off-track aggregate",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Objective and off-track pulse values remain dashes.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/PortfolioPulse.tsx:20"
+      ],
+      "remainingNativeOrContractCriterion": "Product/backend must define portfolio objective lifecycle count and off-track semantics; aggregate frames not assessed.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-42136",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-42258"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-097",
+      "criterion": "Create with Meri from company name / website",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Create with Meri is disabled with explicit drafting-unavailable text. No website/file research runs or automatic profile creation are claimed.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx:133",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/add-profile.png"
+      ],
+      "remainingNativeOrContractCriterion": "Authorized ready-file references, editable intent handoff and preview-only research/apply contract required; creation frame45054 unassessed.",
+      "visualAssessment": "DISABLED_CHOOSER_INSPECTED_TARGET45054_UNASSESSED",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-45054"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-098",
+      "criterion": "Customize cards, drag to rearrange, save layout to user profile",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Current saved-layout source exists with version, actor and complete-catalog receipt validation. Prior repaired header/disabled-copy visuals are not repeated.",
+      "evidence": [
+        "apps/web/src/features/portfolio/index/layout/api.ts:23",
+        "apps/web/src/features/portfolio/index/PortfolioProfiles.tsx:31"
+      ],
+      "remainingNativeOrContractCriterion": "Native route registration/migration/persistence and atomic catalog-membership fencing require acceptance; historical absent-feature blocker is not repeated.",
+      "visualAssessment": "PRIOR_ACCEPTED_REPAIR_PRESERVED_NOT_RERUN",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41421"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "d423f1d7749e0820a0f5-68aafc70df6a1a12308d",
+        "d423f1d7749e0820a0f5-5d07606a64cf2ff82f20",
+        "d423f1d7749e0820a0f5-13a2a20741384f88e372",
+        "cbf921ad508f85f5d40d-8b9c9b57f0a5fdfd3c16",
+        "cbf921ad508f85f5d40d-7befef4e6f032328f009",
+        "cbf921ad508f85f5d40d-151b6ac713df90ac55cc",
+        "cbf921ad508f85f5d40d-162b135dd45bbaa513f9",
+        "cbf921ad508f85f5d40d-bc25980fdbd22dc8d626",
+        "cbf921ad508f85f5d40d-26acd1bb47890145c246",
+        "cbf921ad508f85f5d40d-f38deb3d8109d5190a28",
+        "cbf921ad508f85f5d40d-ecf295a0ed2c3a041480",
+        "cbf921ad508f85f5d40d-7da2bfe18ca12a9e371c",
+        "cbf921ad508f85f5d40d-c530ce253e75e55189fe",
+        "cbf921ad508f85f5d40d-619470376f9d629ac8c9",
+        "cbf921ad508f85f5d40d-aaa97b602a2f199d3ccd",
+        "cbf921ad508f85f5d40d-6a4358875b7126dcca1d",
+        "cbf921ad508f85f5d40d-cbf5f25360ade3732f1a",
+        "cbf921ad508f85f5d40d-e69ed8753838d38bffdc",
+        "cbf921ad508f85f5d40d-02c4811be02e80713a64"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-099",
+      "criterion": "Save ordered Primary / Secondary / Tertiary / Quaternary owners",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_WITH_BACKEND_DEPENDENCY",
+      "reason": "Current ordered-owner editor and contract exist. Prior seven-repair owner acceptance is preserved; the old claim that only one owner can be expressed is stale.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/OrderedOwnerFields.tsx:1",
+        "apps/web/src/features/portfolio/client-profile/ordered-owners.ts:1",
+        "docs/visual-closeout-20261012/README.md:7"
+      ],
+      "remainingNativeOrContractCriterion": "Native versioned ordered-owner dispatch, rank clearing and concurrent roster/owner behavior remain to qualify.",
+      "visualAssessment": "PRIOR_ACCEPTED_REPAIR_PRESERVED_NOT_RERUN",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-41685"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "ffed1971b641ee1e0fbe-d8b41f312b1132f8d5cd",
+        "ffed1971b641ee1e0fbe-75a56210d092b8aa41dc",
+        "ffed1971b641ee1e0fbe-e2dfc3895d2962bcd7b1",
+        "ffed1971b641ee1e0fbe-9137a360e9c72a385129",
+        "ffed1971b641ee1e0fbe-d8f3a1b24ea1158097c4",
+        "ffed1971b641ee1e0fbe-ebbaf361696dd6b6ab5d"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-121",
+      "criterion": "View switcher, keyboard shortcuts, client tabs and Overview Objectives links",
+      "scope": "IN_SCOPE",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "reason": "Figma specifies Jump to a view search, decorated rows and G O/G J/G C etc. The source renders nine bare links and only binds Ctrl/Meta+J to toggle the menu. No search input or G-sequence handling exists. Ordinary menu-click navigation works. Missing routes such as standalone Timeline/Outreach are not asserted as new required endpoints here.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:20",
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:60",
+        "apps/web/src/shared/portfolio/shell/client-views.ts:2",
+        "review.spec.ts:4",
+        "browser-results.json",
+        "browser-artifacts/review-observe-view-switch-27fbf-uts-against-Figma-411-47736/view-switcher.png",
+        "figma-411-47736.json",
+        "figma-411-47736.png"
+      ],
+      "remainingNativeOrContractCriterion": "Local missing search/shortcut behavior needs feature completion; real-client route authorization is independently untested.",
+      "visualAssessment": "DESKTOP_REVIEWED_WITH_CI-02",
+      "findingIds": [
+        "CI-02"
+      ],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47736",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47010"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [
+        "616be4781cf8c32ae453-2cd20369e9b7ce0da38a",
+        "616be4781cf8c32ae453-df2563d0cba78babf2a4",
+        "2484e874aa3da4385063-7cd5081829bacc82691a",
+        "2484e874aa3da4385063-c780dc413d9dae8c09f7",
+        "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+        "34cb4603fa9a5b79d30c-9425c652c9761f017b71",
+        "34cb4603fa9a5b79d30c-e187b3a294068185da3b",
+        "34cb4603fa9a5b79d30c-08978050f8eaeaadd782",
+        "34cb4603fa9a5b79d30c-e7a429cee95a9dcc4a46",
+        "34cb4603fa9a5b79d30c-3908c0a6a624bcd81bde"
+      ],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-122",
+      "criterion": "Ask Meri about this client",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Ask Meri about this client is explicitly disabled with context-handoff explanation; it cannot auto-send an unsafe prompt.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx:36"
+      ],
+      "remainingNativeOrContractCriterion": "Native editable intent/client-context handoff which waits for Send is not active.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48021"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-123",
+      "criterion": "Read client automatic notetaker preference",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Client Meri menu opens caller/client-scoped notetaker preference; GET loading/error/retry and explicit On/Off/stopping states are present.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/ClientMeriActions.tsx:63",
+        "apps/web/src/features/portfolio/calendar/attendance/queries.ts:1",
+        "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx:104"
+      ],
+      "remainingNativeOrContractCriterion": "Native caller-specific preference and current external-action capability remain untested; no bot was invoked.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48021"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-124",
+      "criterion": "Enable client automatic notetaker",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Enable requires recording and notification consent and fresh preference comparison; copy expressly avoids claiming actual attendance.",
+      "evidence": [
+        "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx:57",
+        "apps/web/src/features/portfolio/calendar/attendance/api.ts:1"
+      ],
+      "remainingNativeOrContractCriterion": "Native consent POST persistence, worker/provider readiness and actual join behavior need separately authorized acceptance.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48021"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-125",
+      "criterion": "Disable client automatic notetaker",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Disable uses explicit action; stopping state says removal unconfirmed and offers retry while preventing re-enable.",
+      "evidence": [
+        "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx:197",
+        "apps/web/src/features/portfolio/calendar/attendance/api.ts:1"
+      ],
+      "remainingNativeOrContractCriterion": "Native DELETE Off persistence, provider removal/stop receipt and retry require separate permitted acceptance.",
+      "visualAssessment": "NOT_ASSESSED_IN_THIS_BOUNDED_REVIEW",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48021"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-126",
+      "criterion": "Select all new findings / inspect current and proposed values",
+      "scope": "IN_SCOPE",
+      "classification": "IMPLEMENTED_BOUNDED_SOURCE_REVIEW",
+      "reason": "Fresh synthetic drawer shows saved/current and proposed values; Select all new selects two eligible findings and leaves informational/rejected findings excluded. Four-findings drawer and current source evidence expanders are real UI.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx:183",
+        "apps/web/src/features/portfolio/client-profile/enrichment/FindingReview.tsx:150",
+        "capture-artifacts/captures-capture-saved-Mer-994fb-without-apply-or-generation/meri-findings.png",
+        "capture-results.json",
+        "figma-411-48691.png"
+      ],
+      "remainingNativeOrContractCriterion": "Saved native run attribution, completeness and write/apply authority were not accepted; this row local selection/read display was exercised without applying.",
+      "visualAssessment": "CURRENT_PROPOSED_SELECTION_DRAWER_DESKTOP_REVIEWED",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    },
+    {
+      "audit_id": "CORE-127",
+      "criterion": "Retry the whole Fill with Meri review",
+      "scope": "IN_SCOPE",
+      "classification": "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY",
+      "reason": "Run again and Start research remain disabled; saved review is available. Current source names preview-only research safety dependency.",
+      "evidence": [
+        "apps/web/src/features/portfolio/client-profile/enrichment/ClientEnrichmentDialog.tsx:123",
+        "apps/web/src/features/portfolio/client-profile/enrichment/ResearchSetup.tsx:80",
+        "apps/web/src/features/portfolio/client-profile/enrichment/contracts.ts:153",
+        "capture-artifacts/captures-capture-saved-Mer-994fb-without-apply-or-generation/meri-findings.png"
+      ],
+      "remainingNativeOrContractCriterion": "Backend preview-only worker/version/claim/recovery activation required; old mutation-prone start/retry must not be used.",
+      "visualAssessment": "DISABLED_RETRY_DISCLOSURE_INSPECTED",
+      "findingIds": [],
+      "assignedFigmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-48361"
+      ],
+      "nativeReviewStatus": "NOT_RUN_BY_THIS_REVIEW",
+      "fullRowAcceptance": "NOT_CLAIMED",
+      "existingCaseIdsReferencedNotRerun": [],
+      "unassessedCases": "Real identity/service/provider variants are not exercised. Only the named source/render/probe evidence supports this row; all other frame states, responsive/themes and mutation paths are unassessed by this slice."
+    }
+  ],
+  "secondaryReview": "secondary-review.json"
+}

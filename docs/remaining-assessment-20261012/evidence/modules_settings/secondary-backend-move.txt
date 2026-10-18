@@ -1,0 +1,106 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/clients/client-files.controller.ts
+   75   async move(ctx: TenantContext, clientId: string, attachmentId: string, folder: string | null) {
+   76     const normalized = folder?.trim() || null;
+   77     if (normalized && normalized.length > 120) {
+   78       throw new BadRequestException('Folder name is too long');
+   79     }
+   80 
+   81     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+   82       const existing = await tx.engagementAttachment.findFirst({
+   83         where: { prospectId: null, id: attachmentId, tenantId: ctx.tenantId, clientId },
+   84         select: { id: true, viewerMode: true, viewerUserIds: true, uploadedByUserId: true },
+   85       });
+   86       if (!existing) throw new NotFoundException('File not found for this client');
+   87       if (!this.canView(ctx.userId, existing)) {
+   88         throw new NotFoundException('File not found for this client');
+   89       }
+   90 
+   91       return tx.engagementAttachment.update({
+   92         where: { id: attachmentId },
+   93         data: { folder: normalized },
+   94         select: {
+   95           id: true,
+   96           fileName: true,
+   97           folder: true,
+   98           viewerMode: true,
+   99           viewerUserIds: true,
+  100         },
+  101       });
+  102     });
+  103   }
+  104 
+  105   /** Read the view-access ACL for one file. */
+  106   async getAccess(ctx: TenantContext, clientId: string, attachmentId: string) {
+  107     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+  108       const row = await tx.engagementAttachment.findFirst({
+  109         where: { prospectId: null, id: attachmentId, tenantId: ctx.tenantId, clientId },
+  110         select: {
+  111           id: true,
+  112           fileName: true,
+  113           folder: true,
+  114           viewerMode: true,
+  115           viewerUserIds: true,
+  116           uploadedByUserId: true,
+  117         },
+  118       });
+  119       if (!row) throw new NotFoundException('File not found for this client');
+  120       if (!this.canView(ctx.userId, row)) {
+  121         throw new NotFoundException('File not found for this client');
+  122       }
+  123       return {
+  124         id: row.id,
+  125         fileName: row.fileName,
+  126         folder: row.folder,
+  127         viewerMode: row.viewerMode as ViewerMode,
+  128         viewerUserIds: row.viewerUserIds,
+  129         uploadedByUserId: row.uploadedByUserId,
+  130       };
+  131     });
+  132   }
+  133 
+  134   /**
+  135    * Set who on the team can view a single file. `viewerMode: 'all'` clears the
+  136    * restricted list (it is meaningless under that mode). Restricted lists are
+  137    * de-duplicated and must only contain active tenant members.
+  138    */
+  139   async setAccess(
+  140     ctx: TenantContext,
+  141     clientId: string,
+  142     attachmentId: string,
+  143     viewerMode: ViewerMode,
+  144     viewerUserIds: string[],
+  145   ) {
+  146     const normalizedIds =
+  147       viewerMode === 'all' ? [] : [...new Set(viewerUserIds.map((id) => id.trim()).filter(Boolean))];
+  148 
+  149     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+  150       const existing = await tx.engagementAttachment.findFirst({
+  151         where: { prospectId: null, id: attachmentId, tenantId: ctx.tenantId, clientId },
+  152         select: { id: true, viewerMode: true, viewerUserIds: true, uploadedByUserId: true },
+  153       });
+  154       if (!existing) throw new NotFoundException('File not found for this client');
+  155       if (!this.canView(ctx.userId, existing)) {
+  156         throw new NotFoundException('File not found for this client');
+  157       }
+  158 
+  159       if (normalizedIds.length) {
+  160         await this.assertTenantMembers(tx, ctx.tenantId, normalizedIds);
+  161       }
+  162 
+  163       return tx.engagementAttachment.update({
+  164         where: { id: attachmentId },
+  165         data: { viewerMode, viewerUserIds: normalizedIds },
+  166         select: {
+  167           id: true,
+  168           fileName: true,
+  169           folder: true,
+  170           viewerMode: true,
+  171           viewerUserIds: true,
+  172           uploadedByUserId: true,
+  173         },
+  174       });
+  175     });
+  176   }
+  177 
+  178   /**
+  179    * Apply the same ACL to every file currently carrying `folder` (or the

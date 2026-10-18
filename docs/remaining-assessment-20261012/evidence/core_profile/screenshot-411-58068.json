@@ -1,0 +1,16 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"image_url\":\"https://www.figma.com/api/mcp/asset/14c5dfa9-9d1a-4bf1-aa53-2013c96ca4d1.png\",\"width\":1440,\"height\":1040,\"format\":\"png\",\"original_width\":1440,\"original_height\":1040}"
+      },
+      {
+        "type": "text",
+        "text": "The screenshot is hosted at the URL in the first content entry (as JSON). Download the PNG by running:\n\n  curl -L -o screenshot.png \"https://www.figma.com/api/mcp/asset/14c5dfa9-9d1a-4bf1-aa53-2013c96ca4d1.png\"\n\nThe URL returns raw PNG bytes (Content-Type: image/png). The URL is short-lived — treat it like a secret."
+      }
+    ],
+    "isError": false
+  }
+}

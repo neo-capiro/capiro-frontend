@@ -1,0 +1,286 @@
+{
+  "viewport": 390,
+  "width": 390,
+  "offenders": [
+    {
+      "tag": "BUTTON",
+      "text": "Portfolios",
+      "r": {
+        "x": 376.921875,
+        "y": 379.875,
+        "width": 85.375,
+        "height": 36,
+        "top": 379.875,
+        "right": 462.296875,
+        "bottom": 415.875,
+        "left": 376.921875
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Goals",
+      "r": {
+        "x": 478.296875,
+        "y": 379.875,
+        "width": 59.515625,
+        "height": 36,
+        "top": 379.875,
+        "right": 537.8125,
+        "bottom": 415.875,
+        "left": 478.296875
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Workload",
+      "r": {
+        "x": 553.8125,
+        "y": 379.875,
+        "width": 84.546875,
+        "height": 36,
+        "top": 379.875,
+        "right": 638.359375,
+        "bottom": 415.875,
+        "left": 553.8125
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Capacity",
+      "r": {
+        "x": 654.359375,
+        "y": 379.875,
+        "width": 80.265625,
+        "height": 36,
+        "top": 379.875,
+        "right": 734.625,
+        "bottom": 415.875,
+        "left": 654.359375
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Reporting",
+      "r": {
+        "x": 750.625,
+        "y": 379.875,
+        "width": 86.421875,
+        "height": 36,
+        "top": 379.875,
+        "right": 837.046875,
+        "bottom": 415.875,
+        "left": 750.625
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Timesheets",
+      "r": {
+        "x": 853.046875,
+        "y": 379.875,
+        "width": 97.515625,
+        "height": 36,
+        "top": 379.875,
+        "right": 950.5625,
+        "bottom": 415.875,
+        "left": 853.046875
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Templates",
+      "r": {
+        "x": 966.5625,
+        "y": 379.875,
+        "width": 89.484375,
+        "height": 36,
+        "top": 379.875,
+        "right": 1056.046875,
+        "bottom": 415.875,
+        "left": 966.5625
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Rules",
+      "r": {
+        "x": 1072.046875,
+        "y": 379.875,
+        "width": 58.875,
+        "height": 36,
+        "top": 379.875,
+        "right": 1130.921875,
+        "bottom": 415.875,
+        "left": 1072.046875
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Forms",
+      "r": {
+        "x": 1146.921875,
+        "y": 379.875,
+        "width": 62.78125,
+        "height": 36,
+        "top": 379.875,
+        "right": 1209.703125,
+        "bottom": 415.875,
+        "left": 1146.921875
+      }
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Gantt",
+      "r": {
+        "x": 347.484375,
+        "y": 437.875,
+        "width": 57.984375,
+        "height": 36,
+        "top": 437.875,
+        "right": 405.46875,
+        "bottom": 473.875,
+        "left": 347.484375
+      }
+    },
+    {
+      "tag": "TABLE",
+      "text": "Planner tasksTask nameAssigneeDue datePriorityStatusEstimate",
+      "r": {
+        "x": 17,
+        "y": 732.875,
+        "width": 588.375,
+        "height": 132.5,
+        "top": 732.875,
+        "right": 605.375,
+        "bottom": 865.375,
+        "left": 17
+      }
+    },
+    {
+      "tag": "THEAD",
+      "text": "Task nameAssigneeDue datePriorityStatusEstimatedActual",
+      "r": {
+        "x": 17,
+        "y": 732.875,
+        "width": 588.375,
+        "height": 53.5,
+        "top": 732.875,
+        "right": 605.375,
+        "bottom": 786.375,
+        "left": 17
+      }
+    },
+    {
+      "tag": "TR",
+      "text": "Task nameAssigneeDue datePriorityStatusEstimatedActual",
+      "r": {
+        "x": 17,
+        "y": 732.875,
+        "width": 588.375,
+        "height": 53.5,
+        "top": 732.875,
+        "right": 605.375,
+        "bottom": 786.375,
+        "left": 17
+      }
+    },
+    {
+      "tag": "TH",
+      "text": "Status",
+      "r": {
+        "x": 384.671875,
+        "y": 732.875,
+        "width": 66.984375,
+        "height": 53.5,
+        "top": 732.875,
+        "right": 451.65625,
+        "bottom": 786.375,
+        "left": 384.671875
+      }
+    },
+    {
+      "tag": "TH",
+      "text": "Estimated",
+      "r": {
+        "x": 451.65625,
+        "y": 732.875,
+        "width": 85.53125,
+        "height": 53.5,
+        "top": 732.875,
+        "right": 537.1875,
+        "bottom": 786.375,
+        "left": 451.65625
+      }
+    },
+    {
+      "tag": "TH",
+      "text": "Actual",
+      "r": {
+        "x": 537.1875,
+        "y": 732.875,
+        "width": 68.1875,
+        "height": 53.5,
+        "top": 732.875,
+        "right": 605.375,
+        "bottom": 786.375,
+        "left": 537.1875
+      }
+    },
+    {
+      "tag": "TBODY",
+      "text": "Test appropriation reviewTest UserOct 12highTo do1:300:15",
+      "r": {
+        "x": 17,
+        "y": 786.875,
+        "width": 588.375,
+        "height": 78.5,
+        "top": 786.875,
+        "right": 605.375,
+        "bottom": 865.375,
+        "left": 17
+      }
+    },
+    {
+      "tag": "TR",
+      "text": "Test appropriation reviewTest UserOct 12highTo do1:300:15",
+      "r": {
+        "x": 17,
+        "y": 786.875,
+        "width": 588.375,
+        "height": 78.5,
+        "top": 786.875,
+        "right": 605.375,
+        "bottom": 865.375,
+        "left": 17
+      }
+    },
+    {
+      "tag": "TD",
+      "text": "To do",
+      "r": {
+        "x": 384.671875,
+        "y": 786.875,
+        "width": 66.984375,
+        "height": 78.5,
+        "top": 786.875,
+        "right": 451.65625,
+        "bottom": 865.375,
+        "left": 384.671875
+      }
+    },
+    {
+      "tag": "SPAN",
+      "text": "To do",
+      "r": {
+        "x": 396.671875,
+        "y": 814.875,
+        "width": 42.984375,
+        "height": 22.5,
+        "top": 814.875,
+        "right": 439.65625,
+        "bottom": 837.375,
+        "left": 396.671875
+      }
+    }
+  ]
+}

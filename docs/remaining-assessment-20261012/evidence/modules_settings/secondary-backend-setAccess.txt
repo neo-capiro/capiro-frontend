@@ -1,0 +1,106 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/clients/client-files.controller.ts
+  139   async setAccess(
+  140     ctx: TenantContext,
+  141     clientId: string,
+  142     attachmentId: string,
+  143     viewerMode: ViewerMode,
+  144     viewerUserIds: string[],
+  145   ) {
+  146     const normalizedIds =
+  147       viewerMode === 'all' ? [] : [...new Set(viewerUserIds.map((id) => id.trim()).filter(Boolean))];
+  148 
+  149     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+  150       const existing = await tx.engagementAttachment.findFirst({
+  151         where: { prospectId: null, id: attachmentId, tenantId: ctx.tenantId, clientId },
+  152         select: { id: true, viewerMode: true, viewerUserIds: true, uploadedByUserId: true },
+  153       });
+  154       if (!existing) throw new NotFoundException('File not found for this client');
+  155       if (!this.canView(ctx.userId, existing)) {
+  156         throw new NotFoundException('File not found for this client');
+  157       }
+  158 
+  159       if (normalizedIds.length) {
+  160         await this.assertTenantMembers(tx, ctx.tenantId, normalizedIds);
+  161       }
+  162 
+  163       return tx.engagementAttachment.update({
+  164         where: { id: attachmentId },
+  165         data: { viewerMode, viewerUserIds: normalizedIds },
+  166         select: {
+  167           id: true,
+  168           fileName: true,
+  169           folder: true,
+  170           viewerMode: true,
+  171           viewerUserIds: true,
+  172           uploadedByUserId: true,
+  173         },
+  174       });
+  175     });
+  176   }
+  177 
+  178   /**
+  179    * Apply the same ACL to every file currently carrying `folder` (or the
+  180    * unfiled group when `folder` is null). Folders are labels on attachments —
+  181    * there is no folder table — so "folder access" is bulk file access.
+  182    */
+  183   async setFolderAccess(
+  184     ctx: TenantContext,
+  185     clientId: string,
+  186     folder: string | null,
+  187     viewerMode: ViewerMode,
+  188     viewerUserIds: string[],
+  189   ) {
+  190     const normalizedFolder = folder?.trim() || null;
+  191     const normalizedIds =
+  192       viewerMode === 'all' ? [] : [...new Set(viewerUserIds.map((id) => id.trim()).filter(Boolean))];
+  193 
+  194     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+  195       if (normalizedIds.length) {
+  196         await this.assertTenantMembers(tx, ctx.tenantId, normalizedIds);
+  197       }
+  198 
+  199       const result = await tx.engagementAttachment.updateMany({
+  200         where: { prospectId: null,
+  201           tenantId: ctx.tenantId,
+  202           clientId,
+  203           folder: normalizedFolder,
+  204           // Only rewrite files the caller can already see — never a vehicle for
+  205           // changing ACLs on restricted files the caller is not on.
+  206           OR: this.visibleWhere(ctx.userId),
+  207         },
+  208         data: { viewerMode, viewerUserIds: normalizedIds },
+  209       });
+  210       return {
+  211         folder: normalizedFolder,
+  212         viewerMode,
+  213         viewerUserIds: normalizedIds,
+  214         updated: result.count,
+  215       };
+  216     });
+  217   }
+  218 
+  219   /** Prisma `OR` clause: all-mode files, or restricted files listing the user / uploaded by them. */
+  220   private visibleWhere(userId: string) {
+  221     return [
+  222       { viewerMode: 'all' },
+  223       { viewerMode: 'restricted', viewerUserIds: { has: userId } },
+  224       { uploadedByUserId: userId },
+  225     ];
+  226   }
+  227 
+  228   private canView(
+  229     userId: string,
+  230     row: { viewerMode: string; viewerUserIds: string[]; uploadedByUserId: string | null },
+  231   ): boolean {
+  232     if (row.viewerMode !== 'restricted') return true;
+  233     if (row.uploadedByUserId && row.uploadedByUserId === userId) return true;
+  234     return row.viewerUserIds.includes(userId);
+  235   }
+  236 
+  237   private async assertTenantMembers(
+  238     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  239     tx: any,
+  240     tenantId: string,
+  241     userIds: string[],
+  242   ) {
+  243     // Same rule account-team assignment enforces: only ACTIVE members of this

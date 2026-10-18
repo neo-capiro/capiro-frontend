@@ -1,0 +1,63 @@
+  async updateMeeting(ctx: TenantContext, id: string, input: UpdateMeetingInput) {
+    const attachmentIds: string[] = [];
+    const result = await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      if ('clientId' in input || input.expectedRevision)
+        await this.lockMeetingClientAssignment(tx, ctx, id);
+      const existing = await tx.meeting.findFirst({
+        where: { id, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+      });
+      if (!existing) throw new NotFoundException('Meeting not found');
+      assertExpectedRevision(input.expectedRevision, existing.updatedAt, 'meeting', id, {
+        id: existing.id,
+        subject: existing.subject,
+        status: existing.status,
+        clientId: existing.clientId,
+      });
+
+      if ('clientId' in input) {
+        attachmentIds.push(
+          ...(await this.reassignMeetingClient(
+            tx,
+            ctx,
+            existing,
+            input.clientId ?? null,
+            false,
+            'Meeting client changed from meeting edit form.',
+          )),
+        );
+      }
+
+      // Re-derive the virtual-meeting classification (Meetings v2 §5) whenever the
+      // location or description changes — e.g. editing in a Zoom link should flip
+      // the meeting to Meri-eligible. Uses the incoming value for the changed
+      // field(s) and the stored value otherwise, and preserves any Graph webLink
+      // in metadata as a join-link source.
+      const reclassify = 'location' in input || 'description' in input;
+      const virtualityUpdate = reclassify
+        ? (({ isVirtual, joinLink, provider }) => ({ isVirtual, joinLink, provider }))(
+            deriveMeetingVirtuality({
+              location: 'location' in input ? (input.location ?? null) : existing.location,
+              description:
+                'description' in input ? (input.description ?? null) : existing.description,
+              metadata: (existing.metadata as Record<string, unknown> | null) ?? null,
+            }),
+          )
+        : {};
+
+      const updated = await tx.meeting.update({
+        where: { id },
+        data: {
+          ...('subject' in input ? { subject: input.subject?.trim() } : {}),
+          ...('description' in input ? { description: input.description?.trim() || null } : {}),
+          ...('location' in input ? { location: input.location?.trim() || null } : {}),
+          ...('startsAt' in input ? { startsAt: parseDate(input.startsAt, 'startsAt') } : {}),
+          ...('endsAt' in input ? { endsAt: parseDate(input.endsAt, 'endsAt') } : {}),
+          ...('status' in input ? { status: input.status } : {}),
+          ...virtualityUpdate,
+        },
+        include: meetingInclude(),
+      });
+
+      if ('clientId' in input && input.clientId && input.clientId !== existing.clientId) {
+        await tx.clientAssociationOverride.create({
+          data: {

@@ -1,0 +1,3659 @@
+{
+  "assignedCount": 73,
+  "inScopeCount": 72,
+  "rows": [
+    {
+      "audit_id": "OBJ-01",
+      "area": "Objectives",
+      "criterion": "Advocacy history / matter list and summary cards",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "reason": "AdvocacyBrowser supplies matters plus a separate dated timeline and per-matter record/outcome counts. The Figma matter-summary KPI strip and alternate tablet/phone matter list are not fully matched by this pass; aggregate completeness and native permission remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/AdvocacyBrowser.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60560",
+        "411:60686",
+        "411:83734",
+        "411:86673"
+      ],
+      "freshCapturedTargets": [
+        "411:60560"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60686",
+        "411:83734",
+        "411:86673"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-01",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-02",
+      "area": "Objectives",
+      "criterion": "Vertical advocacy timeline / historical events",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Existing timeline uses actual dated/undated source entries, first-five expansion and an explicit latest500 cap. Retained meaningful timeline/dark tests cover those facets; no whole-suite or timeline repair repeat. Native history completeness beyond the capped feed is unavailable.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60560",
+        "411:80882",
+        "411:85715"
+      ],
+      "freshCapturedTargets": [
+        "411:60560"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:80882",
+        "411:85715"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-02",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-03",
+      "area": "Objectives",
+      "criterion": "Search and status filters on advocacy history",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Title/summary/PE/bill and exact status filtering use the current matter catalog. Local loaded-data filtering is implemented; complete server search and native record visibility are not established.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/history-model.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60560",
+        "411:59175"
+      ],
+      "freshCapturedTargets": [
+        "411:60560",
+        "411:59175"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-03",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-04",
+      "area": "Objectives",
+      "criterion": "New matter: title and matter type",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "New matter form owns bounded title/type creation and current-role controls. Fresh59388 context shows the matching title/type concept. Native create receipt, persistence and all visual states were not rerun.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59388"
+      ],
+      "freshCapturedTargets": [
+        "411:59388"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-04",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-05",
+      "area": "Objectives",
+      "criterion": "Open matter details / linked records / lifecycle",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "reason": "Fresh59175 and real fixture detail show accessible records, related link labels/keys, status and corrections. The authored lifecycle phase strip is absent; the consumed detail schema supplies record types but no explicit lifecycle aggregate contract. Authoritative phase mapping and precise linked-destination semantics need owner resolution before implementation.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/MatterDetail.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59175",
+        "411:47869"
+      ],
+      "freshCapturedTargets": [
+        "411:59175",
+        "411:47869"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-05",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-06",
+      "area": "Objectives",
+      "criterion": "Edit matter title, status, summary and confirm outcome",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "EditMatterDialog preserves native lifecycle/legacy statuses, explicit human final-status confirmation or linked outcome evidence, current-read preflight and unknown-result reconciliation. Fresh59524 supports that review pattern. Backend CAS/operation receipt and native outcome acceptance remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59524"
+      ],
+      "freshCapturedTargets": [
+        "411:59524"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-06",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-07",
+      "area": "Objectives",
+      "criterion": "Merge matters",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_DURABILITY_DEPENDENCY",
+      "reason": "Fresh59667 matches source/destination review and irreversible warning. Existing correction writer verifies destination transfer and source absence. GET readback cannot prove atomic CAS or original-request causality after an uncertain destructive merge; no live merge was run.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/correction.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59667"
+      ],
+      "freshCapturedTargets": [
+        "411:59667"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-07",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-08",
+      "area": "Objectives",
+      "criterion": "Reassign advocacy evidence record",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_DURABILITY_DEPENDENCY",
+      "reason": "Fresh59801 and source identify the record, same-client target and lock semantics. Existing readback checks target lock/source absence. Durable operation receipt and cross-device revision safety remain native dependencies; no live reassignment was performed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59801"
+      ],
+      "freshCapturedTargets": [
+        "411:59801"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-08",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-09",
+      "area": "Objectives",
+      "criterion": "Detach record from matter",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_DURABILITY_DEPENDENCY",
+      "reason": "Fresh59935 and source explicitly retain the detached record unassigned. Existing reconciliation is bounded by latest500 timeline visibility; an older unobserved record cannot be confirmed. Native paging and durable receipt remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/correction.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59935"
+      ],
+      "freshCapturedTargets": [
+        "411:59935"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-09",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-10",
+      "area": "Objectives",
+      "criterion": "Mark record not advocacy",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_DURABILITY_DEPENDENCY",
+      "reason": "Fresh60062 supports bounded optional reason, audit retention and explicit review. Source never interprets an empty history as successful rejection after a lost acknowledgement. A rejected-record/audit GET or durable receipt remains missing for recovery.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60062"
+      ],
+      "freshCapturedTargets": [
+        "411:60062"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-10",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-11",
+      "area": "Objectives",
+      "criterion": "Open an advocacy record's source",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "RecordCard uses only supplied safe HTTP(S) source URLs and renders evidence class, confidence and source provenance; unavailable sources stay unavailable. Fresh59175/47869 inspect the source-link intent. Destination authentication/access was not exercised.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:59175",
+        "411:47869"
+      ],
+      "freshCapturedTargets": [
+        "411:59175",
+        "411:47869"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-11",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-12",
+      "area": "Objectives",
+      "criterion": "Current objective cards: outcome, owner, horizon, active/closed and related strategies",
+      "scope": "IN_SCOPE",
+      "assessment": "CONFIRMED_FRONTEND_DEFECT",
+      "reason": "OWI-F01 confirms cached cards and editor remain accessible after a403 list read. Outcome/owner/minimum-win/readiness are otherwise present. Horizon, active/closed, cycle and durable related-strategy fields are absent from the consumed Objective contract and remain separately blocked.",
+      "findingIds": [
+        "OWI-F01"
+      ],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60560",
+        "411:60686",
+        "411:80882",
+        "411:85715",
+        "411:47010"
+      ],
+      "freshCapturedTargets": [
+        "411:60560"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60686",
+        "411:80882",
+        "411:85715",
+        "411:47010"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-12",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-01",
+      "area": "Work",
+      "criterion": "Client-specific strategies list / featured strategy / secondary strategies",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "reason": "Strategy summaries are client-filtered and exact-client details fail independently. Current source has ordinary same-weight Strategy cards; featured/secondary priority is not supplied by the contract. Previous bounded failure/source evidence is retained; full rich presentation and native completeness remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106",
+        "411:52322",
+        "411:52390",
+        "411:52437",
+        "411:82424",
+        "411:86349"
+      ],
+      "freshCapturedTargets": [
+        "411:86349"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:52106",
+        "411:52322",
+        "411:52390",
+        "411:52437",
+        "411:82424"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-01",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-02",
+      "area": "Work",
+      "criterion": "Counts: current strategies, live plan steps, next 30 days, open risks, linked artifacts",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Projection counts successful current details: active/in-progress nodes,30-day starts, noncompleted risks and linked artifact arrays. Partial detail reads withhold complete counts. Full native list completeness and business meaning of current/live remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-02",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-03",
+      "area": "Work",
+      "criterion": "Upcoming work / timeline / node owner, status and date",
+      "scope": "IN_SCOPE",
+      "assessment": "CONFIRMED_FRONTEND_DEFECT",
+      "reason": "OWI-F02 confirms owner fields are parsed but omitted; upcoming cards also omit each node status. Existing dates, exact step links and30-day filter remain. This is a remaining presentation facet, not a repeat of prior source-failure tests.",
+      "findingIds": [
+        "OWI-F02"
+      ],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-03",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-04",
+      "area": "Work",
+      "criterion": "Risks and blockers list",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Projection shows supplied risk title/note and ongoing/start date for noncompleted risk nodes. No invented risk score or status transition. Native risk completeness and destination permissions remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-04",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-05",
+      "area": "Work",
+      "criterion": "Open strategy, plan step, risk and timeline",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "reason": "Strategy/step/risk links target existing owner routes with exact IDs; no duplicate editor is created. There is no dedicated timeline navigation/control in the current Work projection. Native route behavior and any richer timeline contract remain unassessed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-05",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-06",
+      "area": "Work",
+      "criterion": "New strategy action / open Strategies",
+      "scope": "IN_SCOPE",
+      "assessment": "NATIVE_FEATURE_DEPENDENCY",
+      "reason": "Open Strategies and New strategy route with selected clientId. These links do not establish the signed-in Strategies feature gate, client wall or creation workflow. Existing Objective destinations are separately scoped reads.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106",
+        "411:52390"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106",
+        "411:52390"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-06",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-08",
+      "area": "Work",
+      "criterion": "Workspace documents: display client drafts and completed work",
+      "scope": "IN_SCOPE",
+      "assessment": "CONFIRMED_FRONTEND_DEFECT_AND_NATIVE_DEPENDENCY",
+      "reason": "OWI-F02 finds the owner subtitle missing from Workspace rows despite ownerId and mobile Figma86349. Draft/complete state and product/update display retain earlier acceptance. Unique display-name association still cannot guarantee rename-safe completeness without canonical clientId.",
+      "findingIds": [
+        "OWI-F02"
+      ],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-08",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "WORK-09",
+      "area": "Work",
+      "criterion": "Click Workspace draft/completed work to redirect to Workspace",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Current Workspace documents open the existing draft editor at workspace/:id; no second editor. Browser destination selection is not general Workspace authorization, and actual signed-in access remains unassessed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:52106"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:52106"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Current Strategy and Workspace sources fail independently; typed authorized destinations, legacy-name ambiguity refusal, semantic table/mobile cards, explicit missing timestamps and retry states are exercised.",
+          "caseIds": [
+            "3ff40c7552fb540187d7-ac74b68b857de8a24d31",
+            "3ff40c7552fb540187d7-b901fe9f44419c197a3f",
+            "3ff40c7552fb540187d7-1e52671e715fd4d5bd61",
+            "3ff40c7552fb540187d7-8f97f70911626d93f573",
+            "3ff40c7552fb540187d7-54b46a29fcbe5fca4ad8",
+            "3ff40c7552fb540187d7-a44bd670b31a172bde7e",
+            "3ff40c7552fb540187d7-19c02447cd20eab1cd2b",
+            "3ff40c7552fb540187d7-d5a54c37eb96203f2f87",
+            "3ff40c7552fb540187d7-2b8d62bf38fdf7f3d0c8",
+            "3ff40c7552fb540187d7-88ae208c51fbe27c2ccb",
+            "3ff40c7552fb540187d7-24def9c6a1e3e18e70e1",
+            "3ff40c7552fb540187d7-3a52b60d1a59e45db317",
+            "3ff40c7552fb540187d7-540e4c64a37a093334c8",
+            "3ff40c7552fb540187d7-3484f834bf48aa5ea41a",
+            "3ff40c7552fb540187d7-9aa2e2838e3908b81f93",
+            "3ff40c7552fb540187d7-41fc2f48cde3e8fad77e",
+            "15f960cbdbd929bf5238-66b8a5790e31908af33a",
+            "15f960cbdbd929bf5238-6fe2e9aa7563f8e5c529",
+            "f880a0c872b238e00401-d0b128109c2c0fa55905",
+            "f880a0c872b238e00401-2d0ffd0757dcda5f24a2",
+            "f880a0c872b238e00401-303089b5bb355aa2986e",
+            "f880a0c872b238e00401-f12c29a8077bd57e94ee",
+            "f880a0c872b238e00401-be634eff522f0dde7c8f",
+            "f880a0c872b238e00401-e643e60f9c1ccf60dc96",
+            "f880a0c872b238e00401-98136a2e885a67b3e9f6",
+            "f880a0c872b238e00401-535cfc194fcd0c70ea7b"
+          ],
+          "remaining": "Native data completeness, owner display, stable legacy Workspace identity and full rich Strategy creation/work criteria remain open. Read-only Objective destinations do not establish general Workspace authority."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#WORK-09",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-01",
+      "area": "Capabilities",
+      "criterion": "Capability areas list / summary cards / editor selection",
+      "scope": "IN_SCOPE",
+      "assessment": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+      "reason": "OWI-F04 confirms the phone list retains desktop card blocks instead of compact mobile rows. Desktop list/editor selection and count use current successful reads. Tablet and all loading/error variants remain only partially assessed.",
+      "findingIds": [
+        "OWI-F04"
+      ],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867",
+        "411:54985",
+        "411:55040",
+        "411:55097",
+        "411:82874",
+        "411:86453"
+      ],
+      "freshCapturedTargets": [
+        "411:54867",
+        "411:86453"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:54985",
+        "411:55040",
+        "411:55097",
+        "411:82874"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-01",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-02",
+      "area": "Capabilities",
+      "criterion": "Create capability",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Previously repaired Name/type/sector/scrim and creation controls are retained without repetition. Capability input validation/current-client writer/exact result behavior exists; actual native create persistence remains open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55155"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:55155"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Canonical create/edit controls retain fields across tabs, explicit save/cancel, readiness/token choices, required-field focus, authored Details sections and desktop/phone geometry.",
+          "caseIds": [
+            "71372634395f2334920c-fd8c2fa2286140e6d194",
+            "71372634395f2334920c-2418341b25c50625abb3",
+            "71372634395f2334920c-adf6276c05c84b689b66",
+            "71372634395f2334920c-43fe57008e96e5deaef8",
+            "71372634395f2334920c-c50305e3097655cf3710",
+            "71372634395f2334920c-c042e1733230eeac53f5",
+            "71372634395f2334920c-e94f0af8e826119522f0",
+            "71372634395f2334920c-74867e39ce4c89862459",
+            "71372634395f2334920c-62264065f40ba954d4d0",
+            "71372634395f2334920c-d53a20a554212b482957",
+            "71372634395f2334920c-26127b36901a80215b29",
+            "71372634395f2334920c-d9eda38e7cd8f56c2803",
+            "adc3254f0aa778bb9311-1b8cd8f1873b07558c8f",
+            "adc3254f0aa778bb9311-a521d2dde5dfd7947f47",
+            "adc3254f0aa778bb9311-2cc2e67f67633aa0c225",
+            "8a51c8c339d17fc25348-24575dd2246d63062b61",
+            "8a51c8c339d17fc25348-a5d72b5898cdd2337eb2",
+            "8a51c8c339d17fc25348-d1fde825317b062bcd14",
+            "8a51c8c339d17fc25348-84d71a07f032a8b08800",
+            "8a51c8c339d17fc25348-9da6a4f7c8a0f51fc3d4",
+            "8a51c8c339d17fc25348-398d8c6ab0d26877a740",
+            "8a51c8c339d17fc25348-4909b77a2c8e01f3f9e4"
+          ],
+          "remaining": "Native CRUD/version/ACL and full-screen visual acceptance remain open; the authored detail extension is assessed separately from the older base frame."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-02",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-03",
+      "area": "Capabilities",
+      "criterion": "Edit capability profile, maturity, tags, PE numbers, keywords and notes",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh55341 and real saved editor show profile badges, TRL ladder, tags, PE numbers, keywords, description and notes in the expected order. Explicit save/cancel is deliberately retained; Figma has no autosave contract. Native save/concurrency remains unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55341"
+      ],
+      "freshCapturedTargets": [
+        "411:55341"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Canonical create/edit controls retain fields across tabs, explicit save/cancel, readiness/token choices, required-field focus, authored Details sections and desktop/phone geometry.",
+          "caseIds": [
+            "71372634395f2334920c-fd8c2fa2286140e6d194",
+            "71372634395f2334920c-2418341b25c50625abb3",
+            "71372634395f2334920c-adf6276c05c84b689b66",
+            "71372634395f2334920c-43fe57008e96e5deaef8",
+            "71372634395f2334920c-c50305e3097655cf3710",
+            "71372634395f2334920c-c042e1733230eeac53f5",
+            "71372634395f2334920c-e94f0af8e826119522f0",
+            "71372634395f2334920c-74867e39ce4c89862459",
+            "71372634395f2334920c-62264065f40ba954d4d0",
+            "71372634395f2334920c-d53a20a554212b482957",
+            "71372634395f2334920c-26127b36901a80215b29",
+            "71372634395f2334920c-d9eda38e7cd8f56c2803",
+            "adc3254f0aa778bb9311-1b8cd8f1873b07558c8f",
+            "adc3254f0aa778bb9311-a521d2dde5dfd7947f47",
+            "adc3254f0aa778bb9311-2cc2e67f67633aa0c225",
+            "8a51c8c339d17fc25348-24575dd2246d63062b61",
+            "8a51c8c339d17fc25348-a5d72b5898cdd2337eb2",
+            "8a51c8c339d17fc25348-d1fde825317b062bcd14",
+            "8a51c8c339d17fc25348-84d71a07f032a8b08800",
+            "8a51c8c339d17fc25348-9da6a4f7c8a0f51fc3d4",
+            "8a51c8c339d17fc25348-398d8c6ab0d26877a740",
+            "8a51c8c339d17fc25348-4909b77a2c8e01f3f9e4"
+          ],
+          "remaining": "Native CRUD/version/ACL and full-screen visual acceptance remain open; the authored detail extension is assessed separately from the older base frame."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-03",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-04",
+      "area": "Capabilities",
+      "criterion": "Delete capability with confirmation",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_REVIEW_NATIVE_PENDING",
+      "reason": "Remove capability requires a second confirmation and uses the current guarded mutation owner. No actual deletion was performed. Fresh55692 was not captured in this pass; final delete-dialog geometry and native deletion remain unassessed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55692"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:55692"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-04",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-05",
+      "area": "Capabilities",
+      "criterion": "Capability documents list",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh55548 and real fixture show the Documents tab, capability scope note and document rows with download action. Canonical EntityDocuments filters capability source; native document availability/completeness is still unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55548"
+      ],
+      "freshCapturedTargets": [
+        "411:55548"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-05",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-06",
+      "area": "Capabilities",
+      "criterion": "Upload capability document / choose file / progress / failure",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "The public EntityDocuments/UploadDialog flow retains current source, prepare/upload/confirm, scan/readiness and unknown-result handling from dedicated capability document cohorts. No provider/storage upload was run during this assessment; native completion and failure semantics remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55548"
+      ],
+      "freshCapturedTargets": [
+        "411:55548"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-06",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-07",
+      "area": "Capabilities",
+      "criterion": "Download capability document",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Capability document rows expose download through canonical current document capability rather than an invented URL; existing download tests remain evidence. This review captures the row/control only, not native signed URL or storage access.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55548"
+      ],
+      "freshCapturedTargets": [
+        "411:55548"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-07",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-08",
+      "area": "Capabilities",
+      "criterion": "Registrations and codes display / modal",
+      "scope": "IN_SCOPE",
+      "assessment": "CONFIRMED_FRONTEND_VISUAL_DEFECT",
+      "reason": "OWI-F03 confirms missing authored registration row spacing/dividers and wrong dialog width. UEI/CAGE/EIN/NAICS/PSC/certification values render; absent source values remain Not supplied. Registry-derived small-business/LDA/existing-contract facets need owner data verification.",
+      "findingIds": [
+        "OWI-F03"
+      ],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55825",
+        "411:54867"
+      ],
+      "freshCapturedTargets": [
+        "411:55825",
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-08",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-09",
+      "area": "Capabilities",
+      "criterion": "Edit registrations and codes",
+      "scope": "IN_SCOPE",
+      "assessment": "NATIVE_CONCURRENCY_AND_POLICY_DEPENDENCY",
+      "reason": "Source supports admin editing of five top-level code fields while preserving unknown certifications and refusing stale scope. EIN/primary NAICS/registry values are explicitly read-only; intake merge/concurrency policy is not silently invented. Native exact-current writes remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/registration-writer.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55825"
+      ],
+      "freshCapturedTargets": [
+        "411:55825"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-09",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-10",
+      "area": "Capabilities",
+      "criterion": "Where capabilities create fit / matches, evidence reason, freshness / thin profile",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh54867 and current CapabilityFit show supplied fit score/reason/computed time/stale or thin-profile text. Real match quality, completeness and freshness semantics remain native acceptance; screenshot data is synthetic.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867",
+        "411:55040"
+      ],
+      "freshCapturedTargets": [
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:55040"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-10",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-11",
+      "area": "Capabilities",
+      "criterion": "Refresh capability fit / retry error",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Refresh uses the guarded capability mutation and independent current-read retry. Existing boundary cases retain rejected stale reads and mutations. Native computation/retry/provider behavior was not executed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/mutations.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867",
+        "411:55097"
+      ],
+      "freshCapturedTargets": [
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:55097"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-11",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-12",
+      "area": "Capabilities",
+      "criterion": "Open capability fit target / View all capabilities in Capabilities tab",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "reason": "fitLink accepts only configured same-owner relative paths and suppresses unsafe/missing target URLs. Current page already is Capabilities; broader View-all placement and real target authorization are not newly accepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867"
+      ],
+      "freshCapturedTargets": [
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-12",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-01",
+      "area": "Opportunities",
+      "criterion": "Client matched opportunities list / fit score / deadlines / value / workflow status",
+      "scope": "IN_SCOPE",
+      "assessment": "DESIGN_AUDIT_RECONCILIATION_AND_NATIVE_PENDING",
+      "reason": "Fresh55991 and rendered list use matched explanation, eligibility, deadline, source-backed amount and workflow label. Numeric opportunity fit is an old-audit/current-design discrepancy already documented against raw85/45/30/10 native bands, not a missing percentage UI. Currency is not supplied, so source amount avoids inventing dollars.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/OpportunityResults.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991",
+        "411:56144",
+        "411:56303",
+        "411:56368",
+        "411:82992",
+        "411:86515"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56144",
+        "411:56303",
+        "411:56368",
+        "411:82992",
+        "411:86515"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-01",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-02",
+      "area": "Opportunities",
+      "criterion": "Summary counts / active pursuits",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_REVIEW_NATIVE_PENDING",
+      "reason": "Active total comes from response; pursuing/saved are explicitly this-page counts and unavailable stays a dash; first deadline is labelled first-on-page instead of falsely global next. Native catalog/workflow totals remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-02",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-03",
+      "area": "Opportunities",
+      "criterion": "Refresh current records / retry / loading / empty / flag off / error",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Independent opportunity/program refresh/retry, loading/error/no-results and source freshness are present; unavailable feeds conceal current rows. Existing boundary tests retain feature-off behavior. All Figma state variants and real feature/permission gates were not rerun.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56144",
+        "411:56201",
+        "411:56303",
+        "411:56368"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:56144",
+        "411:56201",
+        "411:56303",
+        "411:56368"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-03",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-04",
+      "area": "Opportunities",
+      "criterion": "Open recommendations / opportunity row",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh55991 and browser screenshot show recommendations and record links preserving clientId/matched mode and encoded source/sourceRecordId. Actual owner navigation was not exercised.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/presentation.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-04",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-05",
+      "area": "Opportunities",
+      "criterion": "Opportunity detail data after navigation",
+      "scope": "IN_SCOPE",
+      "assessment": "NATIVE_DESTINATION_DEPENDENCY",
+      "reason": "Portfolio only links to the existing opportunity detail owner; it does not implement a duplicate detail view. Current data after real navigation and source/client access need signed-in destination acceptance.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/presentation.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-05",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-06",
+      "area": "Opportunities",
+      "criterion": "Relevant budget programs list / explainable PE fit",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "RelevantPrograms displays actual PE/title/score and expandable path evidence; fresh55991 supports this separate percentage pane. Real explainability, source completeness and score semantics remain native acceptance.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-06",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OPP-07",
+      "area": "Opportunities",
+      "criterion": "Open relevant program / Open budget",
+      "scope": "IN_SCOPE",
+      "assessment": "NATIVE_DESTINATION_DEPENDENCY",
+      "reason": "Open budget and encoded PE links target existing program-elements routes. Their real selected-resource/client permission behavior is not proven by href checks or screenshots.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:55991"
+      ],
+      "freshCapturedTargets": [
+        "411:55991"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OPP-07",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-13",
+      "area": "Objectives",
+      "criterion": "New objective blank / filled / outcome needs rewording",
+      "scope": "IN_SCOPE",
+      "assessment": "PRODUCT_AND_MERI_CONTRACT_DEPENDENCY",
+      "reason": "Previously accepted blank/filled full-page intake is retained. Semantic outcome rewording is not implemented and has no approved Meri invocation/quality contract; current five fields must not be promoted as semantic validation.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveFields.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:81008",
+        "411:85781",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:81008",
+        "411:85781",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-13",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-14",
+      "area": "Objectives",
+      "criterion": "Generate strategy for an objective / generating progress",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "No Objective-bound generation command or progress view is consumed. Existing generic Strategy draft jobs cannot establish objective/version lineage, mandatory human review or generation acceptance. Requires Strategy/Objectives owner contract.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61062"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:61062"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-14",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-15",
+      "area": "Objectives",
+      "criterion": "Review generated strategy draft and proposed steps",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61136 exposes the rich generated draft/cycle/relationships design. Frozen Objective UI only edits the candidate record and opens existing authorized resources. Generated draft/proposed step projection and review receipt are not implemented or contract-qualified.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61136",
+        "411:81174",
+        "411:85883"
+      ],
+      "freshCapturedTargets": [
+        "411:61136"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:81174",
+        "411:85883"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-15",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-16",
+      "area": "Objectives",
+      "criterion": "Activate strategy confirmation",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "No Objective-bound Strategy activation command/approval contract is consumed. Confirm ready is an Objective readiness transition, not Strategy activation. Native activation review remains unassessed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditorControls.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61782"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:61782"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-16",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-17",
+      "area": "Objectives",
+      "criterion": "Confirm objective ready / mark objective readiness",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_DESIGN_REVIEW",
+      "reason": "Explicit readiness confirmation and exact versioned receipts retain earlier bounded coverage. Fresh62153 shows outcome/ask/minimum-win review tiles that the current generic confirmation text omits; this remaining dialog presentation is not visually accepted. Native lifecycle integration remains open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditorControls.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:62153",
+        "411:60728",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [
+        "411:62153"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60728",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-17",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-18",
+      "area": "Objectives",
+      "criterion": "Objective active detail: minimum win, decisions, Planner completion, intel questions and engagement state",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61442 requires active detail, Planner completion, decisions/intel/engagement projections. Current schema admits draft/in_review/ready only; the editor presents minimum win/readiness and existing-resource selectors. Native active objective projections are unimplemented dependencies.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61442",
+        "411:81480",
+        "411:86004"
+      ],
+      "freshCapturedTargets": [
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:81480",
+        "411:86004"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-18",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-19",
+      "area": "Objectives",
+      "criterion": "New objective outside client: choose authorized client",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Authorized client picker and approved Portfolio header entry are already recorded and not repeated. Historical trigger-decision blocker is superseded by the approved header variation; native accessible-client enumeration and Objective persistence remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:62481"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:62481"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-19",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-20",
+      "area": "Objectives",
+      "criterion": "Strategy draft out of date: detect changed objective and regenerate",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Source version controls protect edits/destinations but no generated Strategy draft association/revision is consumed. Detecting out-of-date drafts and regenerating cannot be inferred from Objective version alone.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:62826"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:62826"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-20",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-01",
+      "area": "Bill Tracker",
+      "criterion": "Tracked bill table / board / stage / passage probability / latest change",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh56671 and rendered board retain native stage, supplied probability, canonical status/change label and terminal risk. Header/results repair is not repeated. Core/Intel owner choice, real probability semantics and all table/board breakpoints remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471",
+        "411:56671",
+        "411:83145",
+        "411:86589"
+      ],
+      "freshCapturedTargets": [
+        "411:56671"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56471",
+        "411:83145",
+        "411:86589"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-01",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-02",
+      "area": "Bill Tracker",
+      "criterion": "Switch table / board",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "URL view parameter switches real table/board and preserves other params; fresh56671 board captured. No board mutation or inferred stage transition. Native data and mobile/table variants remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471",
+        "411:56671"
+      ],
+      "freshCapturedTargets": [
+        "411:56671"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-02",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-03",
+      "area": "Bill Tracker",
+      "criterion": "Loading / empty / error / retry / tracked-bill totals",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Current board errors suppress stale rows; totals distinguish loaded versus service total, capped cursor paging is guarded. Existing loading/empty/retry tests retained; fresh56889/56996/57089 variants not inspected in this pass.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56889",
+        "411:56996",
+        "411:57089"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:56889",
+        "411:56996",
+        "411:57089"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-03",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-04",
+      "area": "Bill Tracker",
+      "criterion": "Track-a-bill modal search by number or title",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_FIGMA_REVIEW",
+      "reason": "Fresh57573 and actual search dialog support number/title search and row selection. Current UI uses radio selection plus Track selected bill rather than per-row Track/On board chips. Search data has no canonical tracked flag; full visual parity/on-board state need resolution.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:57573"
+      ],
+      "freshCapturedTargets": [
+        "411:57573"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-04",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-05",
+      "area": "Bill Tracker",
+      "criterion": "Jurisdiction chips / federal and states available for search",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Intel jurisdiction options use corpus metadata; empty selection truthfully searches all available. Core stays federal-only, as its published owner supports. Figma chips differ from current native checkboxes; actual corpus availability remains native acceptance.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:57573"
+      ],
+      "freshCapturedTargets": [
+        "411:57573"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-05",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-06",
+      "area": "Bill Tracker",
+      "criterion": "Track selected bill / on-board confirmation / failure retry",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_REVIEW_NATIVE_PENDING",
+      "reason": "Track action validates Intel bill/client receipt and keeps failure retry visible; success invalidates board and closes the dialog. No real track write or on-board receipt semantics were exercised; native duplicates/failure behavior and exact visual state remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/api.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:57573"
+      ],
+      "freshCapturedTargets": [
+        "411:57573"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-06",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-07",
+      "area": "Bill Tracker",
+      "criterion": "Open latest bill updates drawer: status, action, note, matched topics, tracked date",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_FIGMA_REVIEW_NATIVE_PENDING",
+      "reason": "Fresh57827 and screenshot show supplied status/action/date/note/topics/tracked date, probability disclaimer and full-board/360 links. No frontend material-change calculation. Actual live receipt/current source behavior remains open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:57827"
+      ],
+      "freshCapturedTargets": [
+        "411:57827"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-07",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-08",
+      "area": "Bill Tracker",
+      "criterion": "Bill updates: discussed-in hearings list",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Existing lazy Intel hearings feed uses canonical hearing IDs and quoted source evidence; Core truthfully lacks the equivalent. Fresh57827 supports the region. Native hearing/client/bill association is not proven because response lacks a scope echo.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillHearings.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:57827"
+      ],
+      "freshCapturedTargets": [
+        "411:57827"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-08",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-09",
+      "area": "Bill Tracker",
+      "criterion": "Open full board or hearing",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_AND_NATIVE_DESTINATION_PENDING",
+      "reason": "Full-board URL preserves client filter; hearing URL requires canonical hearingId and does not substitute encrypted/raw session pointers. Actual destination access and signed-in owner behavior remain unassessed.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/hearings.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471",
+        "411:57827"
+      ],
+      "freshCapturedTargets": [
+        "411:57827"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-09",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-21",
+      "area": "Objectives",
+      "criterion": "Activate and create Planner project/tasks; 30-day rolling window, 40 tasks/run, objective/strategy/source lineage",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Read-only Planner destination resolution is implemented; it does not create an objective project, rolling30-day tasks or40-task batch or preserve activation lineage. Existing task creation elsewhere is not an Objective activation contract.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61442",
+        "411:61782"
+      ],
+      "freshCapturedTargets": [
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:61782"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-21",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-22",
+      "area": "Objectives",
+      "criterion": "Cycle preview/verdict and calendar: FY27/FY28/FY29, achievable/compressed, 118-day slack/latest responsible dates",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_AND_PRODUCT_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61136/61442 show cycle calendar/verdict/slack. No calendar/cycle fields or evaluator are consumed by the Objective schema. Fiscal calendars, latest responsible dates and achievable/compressed semantics need authoritative owner definitions; no hardcoded118-day rule was invented.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:61136",
+        "411:61442"
+      ],
+      "freshCapturedTargets": [
+        "411:61136",
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-22",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-23",
+      "area": "Objectives",
+      "criterion": "Recommended relationships: owner roles, needed state, provenance, accept/reject with reason",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61136 shows owner roles, needed relationship states, provenance and accept/reject. No Objective-bound recommendation model or acceptance/rejection command exists in this feature. General Relationships controls do not prove the requested lineage.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61136"
+      ],
+      "freshCapturedTargets": [
+        "411:61136"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-23",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-24",
+      "area": "Objectives",
+      "criterion": "Intel questions, engagement waves/exit criteria, work-product and client-owed dependencies",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61136/61442 contain intel questions, engagement waves and work-product dependencies. Current Objective contracts and editor do not consume these typed projections; ownership, exit criteria and client-owed dependencies remain unresolved.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61136",
+        "411:61442"
+      ],
+      "freshCapturedTargets": [
+        "411:61136",
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-24",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-25",
+      "area": "Objectives",
+      "criterion": "Decisions waiting: funding amount approval and batch acceptance of six debrief follow-up tasks",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh61442 shows funding-amount approval and six-task batch acceptance. No decision queue or batch receipt contract is present in Objective UI. Financial/person approval policy cannot be replaced by readiness controls.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61442"
+      ],
+      "freshCapturedTargets": [
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-25",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-26",
+      "area": "Objectives",
+      "criterion": "Open Planner, Directory, engagement plan, context files and calendar from objective",
+      "scope": "IN_SCOPE",
+      "assessment": "PARTIAL_SOURCE_AND_NATIVE_DEPENDENCY",
+      "reason": "Existing Strategy, explicit-client Planner task, eligible saved Workspace version and Outreach destinations use typed owner resolution against exact Objective/version/resource. Current backend243248e evidence preserves those four read routes. Directory, context-files and calendar destinations plus creation/association remain unaccepted.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:61136",
+        "411:61442"
+      ],
+      "freshCapturedTargets": [
+        "411:61136",
+        "411:61442"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Published owner observations open existing Outreach, Strategy, explicit-client Planner task and explicitly selected saved Workspace revision. Fresh GETs on open/reload/history/recheck, strict binding, unavailable states, cancellation and zero writes are exercised.",
+          "caseIds": [
+            "cef7f3a8fb5e1a57eee3-cc373b6e606fb5d0f91f",
+            "cef7f3a8fb5e1a57eee3-f016affc48f4def14656",
+            "cef7f3a8fb5e1a57eee3-5fb3d7b5c2065f7fc808",
+            "cef7f3a8fb5e1a57eee3-46df0099a5f8a1f3d164",
+            "cef7f3a8fb5e1a57eee3-727c2ab4041dd9959991",
+            "60c004e14f66a84ebb77-44057e8ab05fb97bdce3",
+            "60c004e14f66a84ebb77-333f42bc36b919ec7d25",
+            "d00d3ced147b02325ad4-9d312663f8fb146cba0a",
+            "d00d3ced147b02325ad4-63e90b2c55e65827de38",
+            "d00d3ced147b02325ad4-1245c3b803a4f33a7d0d",
+            "d00d3ced147b02325ad4-84403933c605a33395ae",
+            "d00d3ced147b02325ad4-2e29d3e93c572cae4f79",
+            "d00d3ced147b02325ad4-9ddecb0e9d2e5757b5c0",
+            "d00d3ced147b02325ad4-1102d9e2470f40150961",
+            "d00d3ced147b02325ad4-3c0f059c4ef8994391cc",
+            "d00d3ced147b02325ad4-a559e1716dfc9ca7fc97",
+            "d00d3ced147b02325ad4-4b2b72e6259d87f3fe8a",
+            "d00d3ced147b02325ad4-3bfce2458be189eb0c83",
+            "d00d3ced147b02325ad4-c6621368a3165561f963",
+            "d00d3ced147b02325ad4-76a24270bdda55f93e01",
+            "d00d3ced147b02325ad4-5f1c4f5cfa17522c7414",
+            "d00d3ced147b02325ad4-108f77863c6f2eb70185",
+            "d00d3ced147b02325ad4-d2a508c2c462fe59ed8e",
+            "d00d3ced147b02325ad4-e87e7e76d2d56acc8f41",
+            "d00d3ced147b02325ad4-4fb9d1e0302b43b6244f",
+            "a798a4968f19641d319c-799940b7399dba54c642",
+            "a798a4968f19641d319c-331021020e581ccc0a25",
+            "a798a4968f19641d319c-e15308258f61f546c238",
+            "a798a4968f19641d319c-4322fa55e5b387664353",
+            "a798a4968f19641d319c-3d10c0b9fdface27feb1"
+          ],
+          "remaining": "PR2362 tables, PR2402/2404/2405 runtime rollout, Workspace immutable revision migration, RLS/MVCC and client/grant lock-order review remain open. Creation, durable association, generation/activation and arbitrary destination prefills are unavailable."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-26",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-27",
+      "area": "Objectives",
+      "criterion": "Objective supporting files upload/choose existing files and automatic client context compilation",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "No Objective attachment binding, choose-existing-file contract or automatic context compilation is consumed. Client Files uploads cannot establish an Objective association. Approved intake continuation explicitly deferred file binding and inferred context.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:62153",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [
+        "411:62153"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-27",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-13",
+      "area": "Capabilities",
+      "criterion": "Capability count and Fielded/Prototype/Research/Not set maturity labels",
+      "scope": "IN_SCOPE",
+      "assessment": "SOURCE_REVIEW_NATIVE_PENDING",
+      "reason": "Count derives from current capability records; maturity maps1\u20133 Research,4\u20136 Prototype,7\u20139 Fielded,null Not set and fielded count shares that owner. Current sample labels match; native TRL completeness and every design variant remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867"
+      ],
+      "freshCapturedTargets": [
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#CAP-13",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "CAP-14",
+      "area": "Capabilities",
+      "criterion": "Past performance destination note still says Intelligence / Federal footprint",
+      "scope": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "assessment": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "reason": "Preserved assigned exclusion. Current PastPerformance placement now shows Saved submissions; the historical Intelligence/Federal-footprint destination note is not reopened as in-scope work.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:54867"
+      ],
+      "freshCapturedTargets": [
+        "411:54867"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "EXCLUDED",
+      "fullRowAcceptance": "EXCLUDED_AS_PREVIOUSLY_RECORDED",
+      "nativeRequired": [],
+      "priorNativeBlockerReference": null,
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-11",
+      "area": "Bill Tracker",
+      "criterion": "Configure opens client-scoped Bill module watchlist/alert settings",
+      "scope": "IN_SCOPE",
+      "assessment": "BOUNDED_EXISTING_EVIDENCE_RETAINED",
+      "reason": "Configure is now an in-page client-scoped owner-specific watchlist dialog, with My alert preferences nested separately. This supersedes the old navigation-only wording. Existing owner/current-read tests retained; native permissions and delivery remain open.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Core/Intel preference ownership remains distinct; Core404 keeps the entry visible/disabled with zero Intel calls. Accepted normalized projections and explicit partial rejections are honored. Requested-code copy matches Figma without a delivery claim; current-user/channel lifetimes are exercised.",
+          "caseIds": [
+            "c47bead36aa0376c9e7d-eeb4daed25f768dce21b",
+            "c47bead36aa0376c9e7d-17321839fe5502798955",
+            "c47bead36aa0376c9e7d-f9ddc7cf34ab56bc4809",
+            "c47bead36aa0376c9e7d-ac6e21999fe963c9aa48",
+            "c47bead36aa0376c9e7d-62c1d04db227917bfaed",
+            "c47bead36aa0376c9e7d-06eebf7ed09f0c0dcf86",
+            "c47bead36aa0376c9e7d-844eeb5d7a468be2ba9f",
+            "c47bead36aa0376c9e7d-a75de429fbaa21343929",
+            "c47bead36aa0376c9e7d-208ff4eaa5af9469862d",
+            "c47bead36aa0376c9e7d-92226ca4a6de8c52cc56",
+            "c47bead36aa0376c9e7d-5eb28eca7dee70860187",
+            "c47bead36aa0376c9e7d-f96abf10f8752e24130b",
+            "c47bead36aa0376c9e7d-36aff67eb42b90f6b22f",
+            "c47bead36aa0376c9e7d-2574e1ece080b115b5c0",
+            "c47bead36aa0376c9e7d-bbc83a387763a1bd0b0b",
+            "d90219735143caf453c3-c9a154e0d5a3f9824028",
+            "d90219735143caf453c3-b8c9efd131d0936e2180",
+            "d90219735143caf453c3-4dc5392ed6b66d4e79dc",
+            "d90219735143caf453c3-be7d04724ffc0360bf59",
+            "5a4311e7062bd41cb3d5-4e3d89b0de33118001b9",
+            "5a4311e7062bd41cb3d5-733716dbdf135c80cc22",
+            "5a4311e7062bd41cb3d5-1481c4c2732a942576c8",
+            "5a4311e7062bd41cb3d5-565fb2ac0fd4c140c221",
+            "5a4311e7062bd41cb3d5-9c86b08156ea1c6d88bd",
+            "5a4311e7062bd41cb3d5-6a196e812375b922ac14",
+            "5a4311e7062bd41cb3d5-6656cccba38f4243a978",
+            "5a4311e7062bd41cb3d5-c7ea9b18b66abd0f435b",
+            "5a4311e7062bd41cb3d5-c43a22745644340f3e53",
+            "5a4311e7062bd41cb3d5-8a108aa2c305c4382a83",
+            "5a4311e7062bd41cb3d5-328aa265836860bae289",
+            "5a4311e7062bd41cb3d5-e1b1d01bab8623d0f079",
+            "5a4311e7062bd41cb3d5-3a10fce0e7382c298f1b",
+            "5a4311e7062bd41cb3d5-7ade9df60f49ecdd4145",
+            "5a4311e7062bd41cb3d5-13cba6d94d216de8913e",
+            "5a4311e7062bd41cb3d5-73b7f206d576012e65dd",
+            "5a4311e7062bd41cb3d5-78e5854634d4c5fcf09e",
+            "5a4311e7062bd41cb3d5-7e0b25828909f3652edd",
+            "5a4311e7062bd41cb3d5-233bedb1d0e3d5527284",
+            "5a4311e7062bd41cb3d5-677629619e9f943d79c6",
+            "5a4311e7062bd41cb3d5-d69c6d2c0f5d04ae6cc1",
+            "5a4311e7062bd41cb3d5-640358bfd6b47093f663",
+            "5a4311e7062bd41cb3d5-f91babf5f65d32c1937f",
+            "5a4311e7062bd41cb3d5-45415e86abfdbed53c55",
+            "5a4311e7062bd41cb3d5-ad25f5ac09010cc2fe80",
+            "9f18c4c5fa62b65436af-798d15f18b1cf33a2b9e",
+            "9f18c4c5fa62b65436af-154e24a5ca8711891ff1",
+            "e74cdda5b69b91494354-a4039a690e06073fde6c",
+            "e74cdda5b69b91494354-2d33e5032d9e775acfa9",
+            "e74cdda5b69b91494354-b5cecdcb7852bf1f23fc",
+            "e74cdda5b69b91494354-a1c89a1800e7814a9529",
+            "e74cdda5b69b91494354-a96473817baaad2e5b46",
+            "e74cdda5b69b91494354-e05c227a082c6b2008bd",
+            "e74cdda5b69b91494354-1e5aa9f34c6ba33eb8da",
+            "e74cdda5b69b91494354-79a57a2591096c5f861c",
+            "e74cdda5b69b91494354-5922ed8961d9e9161a7e",
+            "749e860daf6141693183-006f059875a3f22df4ac",
+            "749e860daf6141693183-054802cc854c0ca745f8",
+            "749e860daf6141693183-eefb8512851d854fd3e4",
+            "749e860daf6141693183-ef9f66f2e167a1a0f968",
+            "749e860daf6141693183-beab783eb3ca83052f20",
+            "749e860daf6141693183-f89994858f9f6b723e67",
+            "749e860daf6141693183-85b8a36f062b5ca7ef8b",
+            "749e860daf6141693183-37bd360ad517585e416d",
+            "749e860daf6141693183-211f08922860087abad2",
+            "749e860daf6141693183-f9bf27f7bf16ffd9ea75",
+            "749e860daf6141693183-58fec0ac16add2d71183",
+            "749e860daf6141693183-0ddef47d8b29468ad588",
+            "749e860daf6141693183-a8bfbab13c9738d320d3",
+            "749e860daf6141693183-6b91726401cde296e0cb",
+            "749e860daf6141693183-3ceba80ca8c0a5309bfc",
+            "749e860daf6141693183-2648a8a24d783a0a3c28",
+            "be0a35bcceefc740a6bd-61c42a47059772b387ec",
+            "be0a35bcceefc740a6bd-fdfae76772247c7206fe"
+          ],
+          "remaining": "Native preference authorization/persistence, SMS verification and real provider acceptance/delivery remain unrun. No real test alert or verification message was sent."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-11",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-12",
+      "area": "Bill Tracker",
+      "criterion": "Watchlist/alert configuration after navigation",
+      "scope": "IN_SCOPE",
+      "assessment": "NATIVE_PROVIDER_AND_CONCURRENCY_DEPENDENCY",
+      "reason": "Current watchlist code supports Core terms/Intel versioned targeting and conflict/uncertain recovery. Personal alerts include phone verification/test-alert controls from later continuation, superseding historical absent-control notes. No provider send/SMS/test delivery or native preferences persistence was authorized or run.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Core/Intel preference ownership remains distinct; Core404 keeps the entry visible/disabled with zero Intel calls. Accepted normalized projections and explicit partial rejections are honored. Requested-code copy matches Figma without a delivery claim; current-user/channel lifetimes are exercised.",
+          "caseIds": [
+            "c47bead36aa0376c9e7d-eeb4daed25f768dce21b",
+            "c47bead36aa0376c9e7d-17321839fe5502798955",
+            "c47bead36aa0376c9e7d-f9ddc7cf34ab56bc4809",
+            "c47bead36aa0376c9e7d-ac6e21999fe963c9aa48",
+            "c47bead36aa0376c9e7d-62c1d04db227917bfaed",
+            "c47bead36aa0376c9e7d-06eebf7ed09f0c0dcf86",
+            "c47bead36aa0376c9e7d-844eeb5d7a468be2ba9f",
+            "c47bead36aa0376c9e7d-a75de429fbaa21343929",
+            "c47bead36aa0376c9e7d-208ff4eaa5af9469862d",
+            "c47bead36aa0376c9e7d-92226ca4a6de8c52cc56",
+            "c47bead36aa0376c9e7d-5eb28eca7dee70860187",
+            "c47bead36aa0376c9e7d-f96abf10f8752e24130b",
+            "c47bead36aa0376c9e7d-36aff67eb42b90f6b22f",
+            "c47bead36aa0376c9e7d-2574e1ece080b115b5c0",
+            "c47bead36aa0376c9e7d-bbc83a387763a1bd0b0b",
+            "d90219735143caf453c3-c9a154e0d5a3f9824028",
+            "d90219735143caf453c3-b8c9efd131d0936e2180",
+            "d90219735143caf453c3-4dc5392ed6b66d4e79dc",
+            "d90219735143caf453c3-be7d04724ffc0360bf59",
+            "5a4311e7062bd41cb3d5-4e3d89b0de33118001b9",
+            "5a4311e7062bd41cb3d5-733716dbdf135c80cc22",
+            "5a4311e7062bd41cb3d5-1481c4c2732a942576c8",
+            "5a4311e7062bd41cb3d5-565fb2ac0fd4c140c221",
+            "5a4311e7062bd41cb3d5-9c86b08156ea1c6d88bd",
+            "5a4311e7062bd41cb3d5-6a196e812375b922ac14",
+            "5a4311e7062bd41cb3d5-6656cccba38f4243a978",
+            "5a4311e7062bd41cb3d5-c7ea9b18b66abd0f435b",
+            "5a4311e7062bd41cb3d5-c43a22745644340f3e53",
+            "5a4311e7062bd41cb3d5-8a108aa2c305c4382a83",
+            "5a4311e7062bd41cb3d5-328aa265836860bae289",
+            "5a4311e7062bd41cb3d5-e1b1d01bab8623d0f079",
+            "5a4311e7062bd41cb3d5-3a10fce0e7382c298f1b",
+            "5a4311e7062bd41cb3d5-7ade9df60f49ecdd4145",
+            "5a4311e7062bd41cb3d5-13cba6d94d216de8913e",
+            "5a4311e7062bd41cb3d5-73b7f206d576012e65dd",
+            "5a4311e7062bd41cb3d5-78e5854634d4c5fcf09e",
+            "5a4311e7062bd41cb3d5-7e0b25828909f3652edd",
+            "5a4311e7062bd41cb3d5-233bedb1d0e3d5527284",
+            "5a4311e7062bd41cb3d5-677629619e9f943d79c6",
+            "5a4311e7062bd41cb3d5-d69c6d2c0f5d04ae6cc1",
+            "5a4311e7062bd41cb3d5-640358bfd6b47093f663",
+            "5a4311e7062bd41cb3d5-f91babf5f65d32c1937f",
+            "5a4311e7062bd41cb3d5-45415e86abfdbed53c55",
+            "5a4311e7062bd41cb3d5-ad25f5ac09010cc2fe80",
+            "9f18c4c5fa62b65436af-798d15f18b1cf33a2b9e",
+            "9f18c4c5fa62b65436af-154e24a5ca8711891ff1",
+            "e74cdda5b69b91494354-a4039a690e06073fde6c",
+            "e74cdda5b69b91494354-2d33e5032d9e775acfa9",
+            "e74cdda5b69b91494354-b5cecdcb7852bf1f23fc",
+            "e74cdda5b69b91494354-a1c89a1800e7814a9529",
+            "e74cdda5b69b91494354-a96473817baaad2e5b46",
+            "e74cdda5b69b91494354-e05c227a082c6b2008bd",
+            "e74cdda5b69b91494354-1e5aa9f34c6ba33eb8da",
+            "e74cdda5b69b91494354-79a57a2591096c5f861c",
+            "e74cdda5b69b91494354-5922ed8961d9e9161a7e",
+            "749e860daf6141693183-006f059875a3f22df4ac",
+            "749e860daf6141693183-054802cc854c0ca745f8",
+            "749e860daf6141693183-eefb8512851d854fd3e4",
+            "749e860daf6141693183-ef9f66f2e167a1a0f968",
+            "749e860daf6141693183-beab783eb3ca83052f20",
+            "749e860daf6141693183-f89994858f9f6b723e67",
+            "749e860daf6141693183-85b8a36f062b5ca7ef8b",
+            "749e860daf6141693183-37bd360ad517585e416d",
+            "749e860daf6141693183-211f08922860087abad2",
+            "749e860daf6141693183-f9bf27f7bf16ffd9ea75",
+            "749e860daf6141693183-58fec0ac16add2d71183",
+            "749e860daf6141693183-0ddef47d8b29468ad588",
+            "749e860daf6141693183-a8bfbab13c9738d320d3",
+            "749e860daf6141693183-6b91726401cde296e0cb",
+            "749e860daf6141693183-3ceba80ca8c0a5309bfc",
+            "749e860daf6141693183-2648a8a24d783a0a3c28",
+            "be0a35bcceefc740a6bd-61c42a47059772b387ec",
+            "be0a35bcceefc740a6bd-fdfae76772247c7206fe"
+          ],
+          "remaining": "Native preference authorization/persistence, SMS verification and real provider acceptance/delivery remain unrun. No real test alert or verification message was sent."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-12",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-13",
+      "area": "Bill Tracker",
+      "criterion": "Summary KPI: material change total and watchlist coverage",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_SEMANTICS_DEPENDENCY",
+      "reason": "The two KPI slots intentionally show dashes. No authoritative material-change window or watchlist numerator/denominator is supplied; showing invented counts would be incorrect. Current fresh56671 also uses dashes.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471",
+        "411:56671"
+      ],
+      "freshCapturedTargets": [
+        "411:56671"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-13",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "BILL-14",
+      "area": "Bill Tracker",
+      "criterion": "PASS percentage semantics",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_SEMANTICS_DEPENDENCY",
+      "reason": "Frontend multiplies supplied probability by100 only for display and labels it service estimate, not confirmed outcome. Native owner must define/calibrate PASS semantics/source; a synthetic62% screenshot cannot accept them.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:56471",
+        "411:56671"
+      ],
+      "freshCapturedTargets": [
+        "411:56671"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:56471"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#BILL-14",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-28",
+      "area": "Objectives",
+      "criterion": "Objective readiness checklist / readiness percentage and reword-outcome validation",
+      "scope": "IN_SCOPE",
+      "assessment": "PRODUCT_AND_MERI_CONTRACT_DEPENDENCY",
+      "reason": "The approved four-field readiness checklist is retained and derives completion only from nonempty outcome/problem/minimum win and selected ask. Semantic rewording/scoring is not inferred. Fresh62153 does not supersede the explicit human four-field decision.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveReadiness.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:62153",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [
+        "411:62153"
+      ],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-28",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-29",
+      "area": "Objectives",
+      "criterion": "Meri clarification: answer / suggested answer / skip, at most three questions",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_AND_MERI_CONTRACT_DEPENDENCY",
+      "reason": "No Objective clarification question/answer/suggest/skip protocol or at-most-three state model is present. Generic Meri UI or ask-type option does not qualify this request; model/provider actions were not authorized or run.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/ObjectiveFields.tsx",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-29",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-30",
+      "area": "Objectives",
+      "criterion": "Objective Save draft / autosave / Request review",
+      "scope": "IN_SCOPE",
+      "assessment": "PRODUCT_DECISION_AND_NATIVE_DEPENDENCY",
+      "reason": "Explicit Save draft/Request review and truthful unsaved state retain bounded evidence. Autosave remains absent by the approved intake scope, with no policy or persistence contract; explicit saving is not treated as autosave acceptance.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/objectives/useObjectiveEditorSession.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:64465"
+      ],
+      "freshCapturedTargets": [],
+      "targetsNotFreshlyCaptured": [
+        "411:60726",
+        "411:60728",
+        "411:60894",
+        "411:64465"
+      ],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [
+        {
+          "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+          "claim": "Four-field readiness, authorized-client selection, full-page create versus drawer edit, explicit save/review controls, exact receipts, keyboard and mobile layout are exercised.",
+          "caseIds": [
+            "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+            "f9617168d537df98e2eb-506168acd8cce6b91543",
+            "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+            "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+            "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+            "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+            "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+            "f9617168d537df98e2eb-183a77750466d1370d4e",
+            "f9617168d537df98e2eb-222de90f5aad541814b7",
+            "f9617168d537df98e2eb-9cadb759433283f1be84",
+            "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+            "f9617168d537df98e2eb-dddc0888421b43ca7746",
+            "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+            "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+            "f9617168d537df98e2eb-d4352d920e6ec1672263",
+            "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+            "fbd9517085330e3861eb-a561eb54bde022784162",
+            "fbd9517085330e3861eb-eeef0c5dd512aa0e0eef",
+            "fbd9517085330e3861eb-46d3d8a403136b8a1582",
+            "fbd9517085330e3861eb-e3314f4e11c97fd1b85f",
+            "fbd9517085330e3861eb-58e5de3406da47def210",
+            "1ce674cdb567e9b4f6a5-e9529a2e7dfd4c8340e2",
+            "1ce674cdb567e9b4f6a5-79f2bb5d2f1fc46553c8",
+            "1ce674cdb567e9b4f6a5-53a92b726405725c2a74",
+            "1ce674cdb567e9b4f6a5-01d49a7425eff37df46e",
+            "1ce674cdb567e9b4f6a5-7a88b4f31f4c5bd45b4f",
+            "1ce674cdb567e9b4f6a5-3dc41f281316e4a6cb55",
+            "1ce674cdb567e9b4f6a5-37e7f99dbd9f9cdfc86f",
+            "b46896936664904d9434-0d54a3912c13736462a7",
+            "b46896936664904d9434-1f9d13e9d059bc8e0570",
+            "b46896936664904d9434-277fb8012f4803a02bbf"
+          ],
+          "remaining": "Native readiness/persistence/approval and row-specific semantic rewording/autosave/clarification remain unaccepted. A tested explicit save is not an autosave or paid Meri quality test."
+        }
+      ],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-30",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    },
+    {
+      "audit_id": "OBJ-31",
+      "area": "Objectives",
+      "criterion": "FY26 enacted outcome hovercard: Continued as FY27 Objective 1 linkage",
+      "scope": "IN_SCOPE",
+      "assessment": "BACKEND_CONTRACT_DEPENDENCY",
+      "reason": "Fresh47869 shows Continued as FY27 Objective1. Current advocacy record/matter-link schemas have no typed continuation Objective id/year/version association, and RecordCard does not render it. Require actual lineage before adding the hovercard link; matching titles must not infer continuation.",
+      "findingIds": [],
+      "sourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/advocacy/contracts.ts",
+          "line": 1
+        }
+      ],
+      "figmaTargets": [
+        "411:47869"
+      ],
+      "freshCapturedTargets": [
+        "411:47869"
+      ],
+      "targetsNotFreshlyCaptured": [],
+      "visualAcceptance": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+      "existingBoundedEvidence": [],
+      "nativeAcceptance": "NOT_RUN_NATIVE",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "nativeRequired": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "priorNativeBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#OBJ-31",
+      "assessmentEvidence": [
+        "report.md",
+        "findings.json",
+        "results.json",
+        "results-followup.json"
+      ]
+    }
+  ]
+}
