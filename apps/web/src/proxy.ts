@@ -54,5 +54,9 @@ export const config = {
     "/api/capiro/:path*",
     "/api/action-followthrough/:path*",
     "/api/conversations/:path*",
+    // Their handlers call Clerk auth(), which requires this proxy on the request.
+    "/api/documents/:path*",
+    "/api/task-commands/:path*",
+    "/api/settings/:path*",
   ],
 };

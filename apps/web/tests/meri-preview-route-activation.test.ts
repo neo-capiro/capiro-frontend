@@ -331,6 +331,14 @@ it("matches the conversation proxy path and sends native Clerk membership on lis
     args.length === 0 ? "native-session-token" : "template-capiro-token",
   );
   expect(proxyConfig.matcher).toContain("/api/conversations/:path*");
+  // Every Meri API handler that calls Clerk auth() must run behind clerkMiddleware.
+  for (const path of [
+    "/api/action-followthrough/:path*",
+    "/api/documents/:path*",
+    "/api/task-commands/:path*",
+    "/api/settings/:path*",
+  ])
+    expect(proxyConfig.matcher).toContain(path);
   const continuation = await proxy(
     new NextRequest(`${origin}/api/conversations/list`, { method: "POST" }),
     {} as NextFetchEvent,
