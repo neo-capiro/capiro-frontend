@@ -37,10 +37,19 @@ export function ProfileSettings() {
     query: { includeArchived: true },
   });
   const [tab, setTab] = useState("active");
+  const owners = useCapiroQuery(
+    "settings.profiles.accountOwners",
+    {},
+    { enabled: tab === "active" },
+  );
   const [search, setSearch] = useState("");
   const [archive, setArchive] = useState<Client>();
   const [create, setCreate] = useState(false);
   const action = useSettingsAction();
+  const reload = () => {
+    query.reload();
+    owners.reload();
+  };
   async function changeStatus(
     client: Client,
     operation: "archive" | "restore",
@@ -104,6 +113,15 @@ export function ProfileSettings() {
         </SettingsNotice>
       )}
       {action.message && <SettingsNotice title={action.message} />}
+      {owners.error && tab === "active" && (
+        <SettingsNotice
+          title="Account owners unavailable"
+          error
+          retry={owners.reload}
+        >
+          Profile actions remain available. Reload to show account owners.
+        </SettingsNotice>
+      )}
       <StatusPanel
         loading={query.loading}
         error={query.error}
@@ -155,7 +173,35 @@ export function ProfileSettings() {
                 render: (row) =>
                   row.primaryContactName ?? row.primaryContactEmail ?? "—",
               },
-              { key: "owner", label: "Owner", render: () => "—" },
+              {
+                key: "owner",
+                label: "Owner",
+                render: (row) => {
+                  const owner =
+                    row.status === "archived"
+                      ? null
+                      : owners.data?.[row.id]?.accountOwner;
+                  if (!owner) return "—";
+                  const name =
+                    [owner.firstName, owner.lastName]
+                      .filter(Boolean)
+                      .join(" ") || owner.email;
+                  const initials =
+                    [owner.firstName?.[0], owner.lastName?.[0]]
+                      .filter(Boolean)
+                      .join("") || name.slice(0, 2);
+                  return (
+                    <span
+                      className={styles.ownerAvatar}
+                      role="img"
+                      aria-label={`Account owner: ${name}`}
+                      title={name}
+                    >
+                      {initials.toUpperCase()}
+                    </span>
+                  );
+                },
+              },
               {
                 key: "status",
                 label: "Status",
@@ -195,7 +241,7 @@ export function ProfileSettings() {
                         void action.run(
                           () => changeStatus(row, "restore"),
                           "Profile was restored.",
-                          query.reload,
+                          reload,
                         )
                       }
                     >
@@ -244,7 +290,7 @@ export function ProfileSettings() {
                     "Profile was archived.",
                     () => {
                       setArchive(undefined);
-                      query.reload();
+                      reload();
                     },
                   );
               }}
@@ -266,7 +312,7 @@ export function ProfileSettings() {
       <CreateProfile
         open={create}
         onClose={() => setCreate(false)}
-        refresh={query.reload}
+        refresh={reload}
       />
     </div>
   );

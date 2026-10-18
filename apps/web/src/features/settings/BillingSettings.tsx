@@ -57,7 +57,7 @@ export function BillingSettings() {
   const flow = billingFlow(plan, state.data);
   const canOpenPortal = flow === "portal";
   return (
-    <div className={styles.stack} data-design-target="411:91384">
+    <div className={styles.stack} data-design-target="1064:246942">
       <StatusPanel
         loading={state.loading || summary.loading}
         error={state.error ?? summary.error}
@@ -135,6 +135,10 @@ export function BillingSettings() {
                 items={[
                   ["Profiles", `${plan.usedSlots} of ${plan.slots} used`],
                   ["Price per profile", money(plan.pricePerSlotUsd)],
+                  [
+                    "Capacity list price per month",
+                    money(plan.slots * plan.pricePerSlotUsd),
+                  ],
                   [
                     "Current period ends",
                     plan.currentPeriodEnd

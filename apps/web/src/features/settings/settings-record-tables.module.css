@@ -32,6 +32,19 @@
   background: var(--muted);
   color: var(--muted-foreground);
 }
+.ownerAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #1c1c1c;
+  color: white;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1;
+}
 .profileTable {
   padding-top: 20px;
 }

@@ -78,6 +78,7 @@ export const settingsFixtures = {
     scopes: [],
   },
   "clients.list": [],
+  "settings.profiles.accountOwners": {},
   "settings.billing.state": {
     billingEnabled: true,
     status: "active",

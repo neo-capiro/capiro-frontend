@@ -49,6 +49,12 @@ for (const [section, title] of routes)
       await expect(cards).toHaveCSS("row-gap", "20px");
       await expect(page.getByTitle("Email signature preview")).toHaveCount(0);
     }
+    if (section === "billing") {
+      await expect(
+        page.getByText("Capacity list price per month"),
+      ).toBeVisible();
+      await expect(page.getByText("$2,000.00")).toBeVisible();
+    }
     if (section === "profiles") {
       const tabs = await page
         .getByRole("tablist", { name: "Profile status" })
@@ -146,19 +152,34 @@ test("Figma 3.4 Profiles desktop renders a populated table without toolbar overl
     "Overland AI",
     "Kratos",
   ];
+  const clients = names.map((name, index) => ({
+    id: `30000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+    name,
+    profileStatus: index === 8 ? "prospect" : "client",
+    status: index === 8 ? "prospect" : "active",
+    logoUrl: null,
+    website: `${name.toLowerCase().replaceAll(" ", "")}.test`,
+    createdAt: "2026-09-01T12:00:00.000Z",
+    primaryContactName: `Synthetic Contact ${index + 1}`,
+    primaryContactEmail: null,
+  }));
   await operationFixtures(page, {
     ...settingsFixtures,
-    "clients.list": names.map((name, index) => ({
-      id: `30000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
-      name,
-      profileStatus: index === 8 ? "prospect" : "client",
-      status: index === 8 ? "prospect" : "active",
-      logoUrl: null,
-      website: `${name.toLowerCase().replaceAll(" ", "")}.test`,
-      createdAt: "2026-09-01T12:00:00.000Z",
-      primaryContactName: `Synthetic Contact ${index + 1}`,
-      primaryContactEmail: null,
-    })),
+    "clients.list": clients,
+    "settings.profiles.accountOwners": Object.fromEntries(
+      clients.map((client) => [
+        client.id,
+        {
+          accountOwnerUserId: "10000000-0000-4000-8000-000000000004",
+          accountOwner: {
+            id: "10000000-0000-4000-8000-000000000004",
+            email: "owner@example.test",
+            firstName: "Test",
+            lastName: "Owner",
+          },
+        },
+      ]),
+    ),
   });
   await page.goto("/settings/profiles");
   await expect(page.getByRole("tab", { name: "Active (9)" })).toBeVisible();
@@ -169,6 +190,9 @@ test("Figma 3.4 Profiles desktop renders a populated table without toolbar overl
   await expect(
     page.getByRole("cell", { name: "Sep 2026" }).first(),
   ).toBeVisible();
+  await expect(
+    page.getByRole("img", { name: "Account owner: Test Owner" }),
+  ).toHaveCount(9);
   await mkdir("test-results/figma34-desktop", { recursive: true });
   await page.screenshot({ path: "test-results/figma34-desktop/profiles.png" });
 });

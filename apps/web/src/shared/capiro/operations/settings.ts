@@ -4,6 +4,7 @@ import {
   billingStateSchema,
   billingSummarySchema,
   brandingSchema,
+  clientAccountOwnersSchema,
   connectionParamsSchema,
   contactInfoSchema,
   editableTeamRoleSchema,
@@ -76,6 +77,14 @@ export const settingsOperations = {
       }),
     ),
     source: `apps/api/src/clients/clients.controller.ts:329 + clients.service.ts:1095 ${pinned}`,
+  }),
+  "settings.profiles.accountOwners": defineOperation({
+    service: "core",
+    method: "GET",
+    path: "/client-account-owners",
+    request: emptySettingsRequest,
+    response: clientAccountOwnersSchema,
+    source: `apps/api/src/clients/client-account-owner.controller.ts:15 + client-account-owner.service.ts:72 ${pinned}`,
   }),
   "me.read": defineOperation({
     service: "core",
@@ -493,6 +502,15 @@ export const settingsOperations = {
       })
       .strict(),
     response: integrationSyncResponseSchema,
+    timeoutMs: 170000,
+    source: microsoftSource,
+  }),
+  "settings.integrations.configureMicrosoftSubscriptions": defineOperation({
+    service: "core",
+    method: "POST",
+    path: "/engagement/integrations/microsoft/:connectionId/subscriptions",
+    request: z.object({ params: connectionParamsSchema }).strict(),
+    response: z.object({ configured: z.literal(true) }),
     timeoutMs: 170000,
     source: microsoftSource,
   }),

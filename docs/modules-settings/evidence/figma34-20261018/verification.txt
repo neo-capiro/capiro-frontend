@@ -11,15 +11,22 @@ Result: 13 passed.
 After the local CSS split: Team and populated Profiles cases rerun, 2 passed.
 After the final screenshot adjustments: Billing viewport case rerun, 1 passed; populated Profiles case rerun, 1 passed.
 
+Follow-up contract wiring on PR #94:
+CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm exec -- playwright test --config apps/web/test/browser/playwright.config.ts apps/web/test/browser/settings-scenes.spec.ts apps/web/test/browser/settings.spec.ts --grep 'Figma 3.4 Profiles desktop renders|Connected Microsoft account configures realtime subscriptions|Settings billing renders compatible responses'
+Result: 3 passed. The connected Microsoft case checks the exact subscription operation request and successful receipt; the populated Profiles case checks nine account-owner avatars from a test-only response; Billing checks the base monthly list-price label.
+Final Integrations empty and connected captures were rerun after card sizing changes: 2 passed.
+Connected Integrations asset check: both exact local 5 x 5 Figma dot SVGs loaded at 5 x 5 rendered pixels in their intended badge slots, 1 passed.
+Focused Capiro contract test: settings-contracts.test.ts, 1 passed. It rejects caller-supplied tenant authority and projects a Microsoft subscription receipt without server-only Graph details.
+
 npm run typecheck --workspace @capiro/web
 Result: passed.
 npm run build --workspace @capiro/web
 Result: passed. Next generated /modules, /modules/[module], /settings/[section].
 Scoped Prettier check on touched TypeScript and CSS: passed.
-Scoped ESLint: exit 0. One remaining Next lint warning for an external client logo img, whose URL is dynamic and not configured in Next remotePatterns; the existing browser-safe fallback is initials.
+Scoped ESLint: exit 0, four Next img-element warnings. Three are existing static Figma SVG uses in Settings components; one is the dynamic external client logo, whose URL is not configured in Next remotePatterns. The browser-safe fallback is initials.
 git diff --check
 Result: passed.
 node scripts/architecture.mjs
-Result: errors: []; review signals: 520 across the repository; exit 1 for review signals. No new architecture error reported. The audit explains the changed-file review signals.
+Result: errors: []; repository-wide review signals; exit 1 for review signals. No new architecture error reported. The audit explains the changed-file review signals.
 
-Evidence PNG files in this folder are 1440 x 1040 viewport captures. An on-screen banner identifies the explicit local test fixture. They are source-review evidence, not deployed screenshots or live customer data.
+Eight evidence PNG files in this folder are 1440 x 1040 viewport captures. An on-screen banner identifies the explicit local test fixture. They are source-review evidence, not deployed screenshots or live customer data.

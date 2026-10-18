@@ -8,10 +8,11 @@ import type {
   integrationSchema,
 } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
-import { Badge, StatusPanel } from "../../shared/module-ui";
+import { StatusPanel } from "../../shared/module-ui";
 import { RegisterAccount } from "./RegisterAccount";
 import {
   SettingsButton,
+  SettingsBadge,
   SettingsCard,
   SettingsDialog,
   SettingsNotice,
@@ -24,6 +25,25 @@ import { useSettingsAction } from "./useSettingsAction";
 type Provider = z.infer<typeof integrationProviderSchema>;
 type Connection = z.infer<typeof integrationSchema>;
 const providers = integrationProviders;
+
+function syncAge(value: string | null) {
+  if (!value) return "Not synced yet";
+  const minutes = Math.max(
+    0,
+    Math.round((Date.now() - Date.parse(value)) / 60000),
+  );
+  if (!Number.isFinite(minutes)) return "Sync time unavailable";
+  if (minutes < 1) return "Synced just now";
+  if (minutes < 60) return `Synced ${minutes} min ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return `Synced ${hours} hr ago`;
+  const days = Math.round(hours / 24);
+  if (days < 7) return `Synced ${days} days ago`;
+  return `Synced ${new Date(value).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  })}`;
+}
 
 export function IntegrationSettings() {
   const api = useCapiro();
@@ -103,10 +123,13 @@ export function IntegrationSettings() {
     return result;
   }
   return (
-    <div className={styles.stack} data-design-target="411:68885">
-      <div>
-        <h2 style={{ fontSize: 16 }}>
-          Engagement integrations <Badge>normalized engagement store</Badge>
+    <div className={styles.stack} data-design-target="1064:244275">
+      <div className={styles.integrationIntro}>
+        <h2 className={styles.integrationHeading}>
+          Engagement integrations{" "}
+          <SettingsBadge assetName="settings-integrations-imgEllipse">
+            normalized engagement store
+          </SettingsBadge>
         </h2>
         <p className={styles.description}>
           Provider records, scopes, sync state and connection health.
@@ -117,7 +140,7 @@ export function IntegrationSettings() {
         error={connections.error}
         onRetry={connections.reload}
       >
-        <div className={styles.grid}>
+        <div className={`${styles.grid} ${styles.integrationGrid}`}>
           {providers.map((provider) => {
             const rows = (connections.data ?? []).filter(
               (connection) => connection.provider === provider.id,
@@ -136,22 +159,48 @@ export function IntegrationSettings() {
               >
                 {rows.length ? (
                   rows.map((connection) => (
-                    <div className={styles.stack} key={connection.id}>
-                      <div className={styles.row}>
+                    <div
+                      className={`${styles.stack} ${styles.integrationConnection}`}
+                      key={connection.id}
+                    >
+                      <div
+                        className={`${styles.row} ${styles.integrationAccountRow}`}
+                      >
                         <div className={styles.grow}>
-                          <h3>
-                            {connection.displayName ||
-                              connection.accountEmail ||
-                              provider.title}
-                          </h3>
-                          <p className={styles.description}>
-                            {connection.accountEmail ?? "No account email"} ·{" "}
-                            {connection.lastSyncAt
-                              ? `Synced ${new Date(connection.lastSyncAt).toLocaleString()}`
-                              : "Not synced yet"}
-                          </p>
+                          <div className={styles.integrationAccountHeading}>
+                            <h3
+                              title={
+                                connection.displayName ||
+                                connection.accountEmail ||
+                                provider.title
+                              }
+                            >
+                              {connection.displayName ||
+                                connection.accountEmail ||
+                                provider.title}
+                            </h3>
+                            <SettingsButton
+                              small
+                              className={styles.integrationPermissions}
+                              onClick={() => setDetail(connection)}
+                            >
+                              Permissions
+                            </SettingsButton>
+                          </div>
+                          <div className={styles.integrationMeta}>
+                            <p className={styles.description}>
+                              {connection.accountEmail ?? "No account email"} ·{" "}
+                              {syncAge(connection.lastSyncAt)}
+                            </p>
+                          </div>
                         </div>
-                        <Badge
+                        <SettingsBadge
+                          {...(connection.status === "connected"
+                            ? {
+                                assetName:
+                                  "settings-integrations-imgEllipse1" as const,
+                              }
+                            : {})}
                           tone={
                             connection.status === "connected"
                               ? "success"
@@ -161,7 +210,7 @@ export function IntegrationSettings() {
                           }
                         >
                           {connection.status.replaceAll("_", " ")}
-                        </Badge>
+                        </SettingsBadge>
                       </div>
                       {connection.lastError && (
                         <SettingsNotice
@@ -171,7 +220,9 @@ export function IntegrationSettings() {
                           {connection.lastError}
                         </SettingsNotice>
                       )}
-                      <div className={`${styles.row} ${styles.wrap}`}>
+                      <div
+                        className={`${styles.row} ${styles.wrap} ${styles.integrationActions}`}
+                      >
                         <SettingsButton
                           small
                           disabled={
@@ -189,12 +240,29 @@ export function IntegrationSettings() {
                         >
                           Sync now
                         </SettingsButton>
-                        <SettingsButton
-                          small
-                          onClick={() => setDetail(connection)}
-                        >
-                          Permissions
-                        </SettingsButton>
+                        {connection.provider === "microsoft_365" &&
+                          connection.status === "connected" && (
+                            <SettingsButton
+                              small
+                              disabled={action.busy}
+                              onClick={() =>
+                                void action.run(
+                                  (signal) =>
+                                    api.request(
+                                      "settings.integrations.configureMicrosoftSubscriptions",
+                                      {
+                                        params: { connectionId: connection.id },
+                                      },
+                                      { signal },
+                                    ),
+                                  "Realtime subscriptions are configured.",
+                                  connections.reload,
+                                )
+                              }
+                            >
+                              Realtime
+                            </SettingsButton>
+                          )}
                         {connection.status === "connected" && (
                           <SettingsButton
                             danger
