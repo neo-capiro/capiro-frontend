@@ -8,6 +8,8 @@ export function readUserPreferencesConfig(
   const baseUrl = config.services.meri;
   return {
     baseUrl,
+    /** Configured browser-visible origin; undefined compares against the request URL. */
+    requestOrigin: config.requestOrigin,
     enabled:
       env.MERI_USER_PREFERENCES_ENABLED === "true" &&
       config.authConfigured &&

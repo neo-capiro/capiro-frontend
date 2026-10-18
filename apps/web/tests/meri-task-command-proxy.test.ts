@@ -6,7 +6,9 @@ import { previewBackendRejection } from "../src/shared/preview/backend-policy.se
 import { taskInput } from "./meri-task-command-fixtures";
 
 const origin = "https://frontend.example.test";
-const bearer = `Bearer action_session_${"a".repeat(43)}`;
+const session = `action_session_${"a".repeat(43)}`;
+/** What Meri receives; the browser never sends a bearer to the proxy. */
+const bearer = `Bearer ${session}`;
 const env = {
   CORE_API_BASE_URL: "https://core.example.test/api",
   MERI_API_BASE_URL: "https://meri.example.test",
@@ -27,7 +29,7 @@ const request = (
     headers: {
       "Content-Type": "application/json",
       Origin: origin,
-      Authorization: bearer,
+      "X-Meri-Action-Session": session,
       ...Object.fromEntries(new Headers(options.headers)),
     },
   });
@@ -115,6 +117,8 @@ describe("task-command exact frontend admission", () => {
     ["query", {}, "?clientId=browser", 400],
     ["encoding", { headers: { "Content-Encoding": "gzip" } }, "", 400],
     ["origin", { headers: { Origin: "https://foreign.test" } }, "", 400],
+    // Clerk would read a browser bearer as signed out; it never reaches auth().
+    ["browser bearer", { headers: { Authorization: bearer } }, "", 400],
   ] as const)(
     "refuses %s before authentication",
     async (_, options, suffix, status) => {
@@ -132,7 +136,7 @@ describe("task-command exact frontend admission", () => {
       expect(token).not.toHaveBeenCalled();
     },
   );
-  it("requires current native authentication and an opaque bearer; no token substitution", async () => {
+  it("requires current native authentication and the opaque session header; no token substitution", async () => {
     const fetcher = vi.fn(async () => Response.json({}));
     expect(
       (
@@ -151,7 +155,7 @@ describe("task-command exact frontend admission", () => {
           request(
             "prepare",
             {},
-            { headers: { Authorization: "Bearer native-browser" } },
+            { headers: { "X-Meri-Action-Session": "native-browser" } },
           ),
           "prepare",
           readTaskCommandConfig(env),
@@ -186,6 +190,49 @@ describe("task-command exact frontend admission", () => {
     expect(options.body).toBe(JSON.stringify({ arguments: taskInput }));
     expect(options.redirect).toBe("error");
     expect(options.credentials).toBe("omit");
+  });
+  it("admits the configured public origin although request.url names the bind address", async () => {
+    const publicOrigin = "https://portfolio-preview.example.test";
+    const fetcher = vi.fn(async () => Response.json({ synthetic: true }));
+    const bound = (requestOrigin: string) =>
+      new Request("https://0.0.0.0:5188/api/task-commands/prepare", {
+        method: "POST",
+        body: JSON.stringify({ arguments: taskInput }),
+        headers: {
+          "Content-Type": "application/json",
+          Origin: requestOrigin,
+          "X-Meri-Action-Session": session,
+        },
+      });
+    const config = readTaskCommandConfig({
+      ...env,
+      CAPIRO_REQUEST_ORIGIN: publicOrigin,
+    });
+    expect(
+      (
+        await proxyTaskCommandRequest(
+          bound(publicOrigin),
+          "prepare",
+          config,
+          async () => "native",
+          fetcher,
+        )
+      ).status,
+    ).toBe(200);
+    const token = vi.fn(async () => "native");
+    expect(
+      (
+        await proxyTaskCommandRequest(
+          bound("https://0.0.0.0:5188"),
+          "prepare",
+          config,
+          token,
+          fetcher,
+        )
+      ).status,
+    ).toBe(400);
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).toHaveBeenCalledOnce();
   });
   it("rejects browser authority fields and remains held by unchanged preview policy", async () => {
     const fetcher = vi.fn(async () => Response.json({}));

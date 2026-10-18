@@ -6,6 +6,8 @@ import {
   boundedJsonText,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { receivedActionSession } from "../meri-actions/session-header";
+import { sameRequestOrigin } from "../request-origin";
 import type { readTaskCommandConfig } from "./config";
 
 const headers = {
@@ -34,7 +36,8 @@ export async function proxyTaskCommandRequest(
   if (
     url.pathname !== taskCommandMetadata.routes[operation].path ||
     url.search ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
+    request.headers.has("authorization") ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);
@@ -44,9 +47,9 @@ export async function proxyTaskCommandRequest(
       const nativeToken = await getNativeToken();
       signal.throwIfAborted();
       if (!nativeToken) return unavailable(401);
-      const bearer = request.headers.get("authorization");
-      if (!bearer || !/^Bearer action_session_[A-Za-z0-9_-]{43}$/.test(bearer))
-        return unavailable(401);
+      // The opaque session arrives in its own header; Meri reads it as the bearer.
+      const session = receivedActionSession(request);
+      if (!session) return unavailable(401);
       const body = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         signal,
@@ -61,7 +64,7 @@ export async function proxyTaskCommandRequest(
           body,
           headers: {
             "Content-Type": "application/json",
-            Authorization: bearer,
+            Authorization: `Bearer ${session}`,
           },
           credentials: "omit",
           redirect: "error",

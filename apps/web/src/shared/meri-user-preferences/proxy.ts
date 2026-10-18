@@ -7,6 +7,7 @@ import {
   boundedJsonText,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { sameRequestOrigin } from "../request-origin";
 import type { readUserPreferencesConfig } from "./config";
 
 const headers = {
@@ -34,7 +35,7 @@ export async function proxyUserPreferencesRequest(
   if (
     url.pathname !== userPreferencesPaths[operation] ||
     url.search ||
-    request.headers.get("origin") !== url.origin ||
+    !sameRequestOrigin(request, config.requestOrigin) ||
     request.headers.has("content-encoding")
   )
     return unavailable(400);

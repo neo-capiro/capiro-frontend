@@ -13,6 +13,7 @@ import {
   boundedJsonText,
   withActionDeadline,
 } from "../meri-actions/bounded-json";
+import { actionSessionHeader } from "../meri-actions/session-header";
 
 type Reply<T> = { status: number; value: T | TaskCommandErrorResponse };
 export interface TaskCommandTransport {
@@ -59,7 +60,7 @@ export function taskCommandTransport(
           body: text,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            [actionSessionHeader]: token,
           },
           credentials: "same-origin",
           cache: "no-store",

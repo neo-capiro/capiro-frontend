@@ -237,4 +237,46 @@ describe("fixed native-token personal settings forwarding", () => {
     expect(withheld.status).toBe(503);
     expect(await withheld.json()).toEqual(error);
   });
+  it("admits the configured public origin although request.url names the bind address", async () => {
+    const publicOrigin = "https://portfolio-preview.synthetic.invalid";
+    const configured = readUserPreferencesConfig({
+      ...env,
+      CAPIRO_REQUEST_ORIGIN: publicOrigin,
+    });
+    const bound = (requestOrigin: string) =>
+      new Request("https://0.0.0.0:5188/api/settings/user/read", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          origin: requestOrigin,
+        },
+        body: "{}",
+      });
+    const fetcher = vi.fn(async () => Response.json({}, { status: 404 }));
+    expect(
+      (
+        await proxyUserPreferencesRequest(
+          bound(publicOrigin),
+          "read",
+          configured,
+          async () => "native",
+          fetcher,
+        )
+      ).status,
+    ).toBe(404);
+    expect(fetcher).toHaveBeenCalledOnce();
+    const token = vi.fn();
+    expect(
+      (
+        await proxyUserPreferencesRequest(
+          bound("https://0.0.0.0:5188"),
+          "read",
+          configured,
+          token,
+          fetcher,
+        )
+      ).status,
+    ).toBe(400);
+    expect(token).not.toHaveBeenCalled();
+  });
 });
