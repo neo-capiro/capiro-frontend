@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCapiro } from "../../shared/capiro/CapiroBoundary";
 import type { CapiroMe } from "../../shared/capiro/operations/settings-schemas";
 import { useCapiroQuery } from "../../shared/capiro/queries";
-import { DataTable, StatusPanel } from "../../shared/module-ui";
+import { DataTable, SelectInput, StatusPanel } from "../../shared/module-ui";
 import {
   SettingsBadge,
   SettingsButton,
@@ -17,6 +17,13 @@ import {
 import { InviteMember } from "./InviteMember";
 import styles from "./styles";
 import { useSettingsAction } from "./useSettingsAction";
+
+const joinedDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 export function TeamSettings({ identity }: { identity: CapiroMe }) {
   const api = useCapiro();
@@ -35,7 +42,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
   return (
     <div
       className={styles.stack}
-      data-design-target={tab === "members" ? "411:70590" : "411:70715"}
+      data-design-target={tab === "members" ? "1064:244607" : "1064:244732"}
     >
       <div className={styles.row}>
         <div className={styles.grow}>
@@ -68,137 +75,163 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
           error={members.error}
           onRetry={members.reload}
         >
-          <SettingsCard
-            title="Members"
-            description="Roles control what each person can open. Billing admins can view billing and invoices and add profiles."
-          >
-            <DataTable
-              rows={rows}
-              rowKey={(row) => row.membershipId}
-              caption="Workspace members"
-              emptyMessage="No team members to display."
-              columns={[
-                {
-                  key: "email",
-                  label: "Email",
-                  render: (row) => (
-                    <div>
-                      {[row.firstName, row.lastName]
-                        .filter(Boolean)
-                        .join(" ") || row.email}
-                      <p className={styles.description}>{row.email}</p>
-                    </div>
-                  ),
-                },
-                {
-                  key: "role",
-                  label: "Role",
-                  render: (row) =>
-                    row.userId === identity.user.id ||
-                    row.role === "capiro_admin" ? (
-                      <SettingsBadge>
-                        {row.role
-                          .replaceAll("_", " ")
-                          .replace(/^./, (character) =>
+          <div className={styles.teamCard}>
+            <SettingsCard
+              title="Members"
+              description="Roles control what each person can open. Billing admins can view billing and invoices and add profiles."
+            >
+              <div className={styles.teamTable}>
+                <DataTable
+                  rows={rows}
+                  rowKey={(row) => row.membershipId}
+                  caption="Workspace members"
+                  emptyMessage="No team members to display."
+                  columns={[
+                    {
+                      key: "email",
+                      label: "Email",
+                      render: (row) => {
+                        const name = [row.firstName, row.lastName]
+                          .filter(Boolean)
+                          .join(" ");
+                        const initials =
+                          [row.firstName?.[0], row.lastName?.[0]]
+                            .filter(Boolean)
+                            .join("") || row.email.slice(0, 2);
+                        return (
+                          <div className={styles.memberIdentity}>
+                            <span
+                              className={styles.memberAvatar}
+                              aria-hidden="true"
+                            >
+                              {initials.toUpperCase()}
+                            </span>
+                            <span className={styles.memberDetails}>
+                              <span className={styles.memberName}>
+                                {name || row.email}
+                              </span>
+                              <span className={styles.memberEmail}>
+                                {row.email}
+                              </span>
+                            </span>
+                          </div>
+                        );
+                      },
+                    },
+                    {
+                      key: "role",
+                      label: "Role",
+                      render: (row) =>
+                        row.userId === identity.user.id ||
+                        row.role === "capiro_admin" ? (
+                          <SettingsBadge>
+                            {row.role
+                              .replaceAll("_", " ")
+                              .replace(/^./, (character) =>
+                                character.toUpperCase(),
+                              )}
+                          </SettingsBadge>
+                        ) : (
+                          <SelectInput
+                            aria-label={`Role for ${row.email}`}
+                            value={row.role}
+                            disabled={action.busy}
+                            options={[
+                              {
+                                value: "standard_user",
+                                label: "Standard user",
+                              },
+                              { value: "user_admin", label: "User admin" },
+                            ]}
+                            onValueChange={(role) =>
+                              void action.run(
+                                () =>
+                                  api.request("settings.team.setRole", {
+                                    params: { userId: row.userId },
+                                    body: {
+                                      role: role as
+                                        | "user_admin"
+                                        | "standard_user",
+                                    },
+                                  }),
+                                "Member role was updated.",
+                                refresh,
+                              )
+                            }
+                          />
+                        ),
+                    },
+                    {
+                      key: "billing",
+                      label: "Billing",
+                      render: (row) => (
+                        <div className={styles.row}>
+                          <SettingsSwitch
+                            label={`Billing admin for ${row.email}`}
+                            checked={row.billingAdmin}
+                            disabled={
+                              action.busy ||
+                              row.role === "capiro_admin" ||
+                              row.userId === identity.user.id
+                            }
+                            onChange={(billingAdmin) =>
+                              void action.run(
+                                () =>
+                                  api.request("settings.team.setBillingAdmin", {
+                                    params: { userId: row.userId },
+                                    body: { billingAdmin },
+                                  }),
+                                "Billing administrator access was updated.",
+                                refresh,
+                              )
+                            }
+                          />
+                          {row.billingAdmin ? "On" : "Off"}
+                        </div>
+                      ),
+                    },
+                    {
+                      key: "status",
+                      label: "Status",
+                      render: (row) => (
+                        <SettingsBadge
+                          tone={row.status === "active" ? "success" : "neutral"}
+                        >
+                          {row.status.replace(/^./, (character) =>
                             character.toUpperCase(),
                           )}
-                      </SettingsBadge>
-                    ) : (
-                      <select
-                        className={styles.input}
-                        aria-label={`Role for ${row.email}`}
-                        value={row.role}
-                        disabled={action.busy}
-                        onChange={(event) =>
-                          void action.run(
-                            () =>
-                              api.request("settings.team.setRole", {
-                                params: { userId: row.userId },
-                                body: {
-                                  role: event.target.value as
-                                    | "user_admin"
-                                    | "standard_user",
-                                },
-                              }),
-                            "Member role was updated.",
-                            refresh,
-                          )
-                        }
-                      >
-                        <option value="standard_user">Standard user</option>
-                        <option value="user_admin">User admin</option>
-                      </select>
-                    ),
-                },
-                {
-                  key: "billing",
-                  label: "Billing",
-                  render: (row) => (
-                    <div className={styles.row}>
-                      <SettingsSwitch
-                        label={`Billing admin for ${row.email}`}
-                        checked={row.billingAdmin}
-                        disabled={
-                          action.busy ||
-                          row.role === "capiro_admin" ||
-                          row.userId === identity.user.id
-                        }
-                        onChange={(billingAdmin) =>
-                          void action.run(
-                            () =>
-                              api.request("settings.team.setBillingAdmin", {
-                                params: { userId: row.userId },
-                                body: { billingAdmin },
-                              }),
-                            "Billing administrator access was updated.",
-                            refresh,
-                          )
-                        }
-                      />
-                      {row.billingAdmin ? "On" : "Off"}
-                    </div>
-                  ),
-                },
-                {
-                  key: "status",
-                  label: "Status",
-                  render: (row) => (
-                    <SettingsBadge
-                      tone={row.status === "active" ? "success" : "neutral"}
-                    >
-                      {row.status.replace(/^./, (character) =>
-                        character.toUpperCase(),
-                      )}
-                    </SettingsBadge>
-                  ),
-                },
-                {
-                  key: "joined",
-                  label: "Joined",
-                  render: (row) =>
-                    row.joinedAt
-                      ? new Date(row.joinedAt).toLocaleDateString()
-                      : "—",
-                },
-                {
-                  key: "actions",
-                  label: "Actions",
-                  render: (row) =>
-                    row.userId !== identity.user.id &&
-                    row.role !== "capiro_admin" && (
-                      <SettingsButton
-                        danger
-                        small
-                        disabled={action.busy}
-                        onClick={() => setRemove(row)}
-                      >
-                        Remove
-                      </SettingsButton>
-                    ),
-                },
-              ]}
-            />
-          </SettingsCard>
+                        </SettingsBadge>
+                      ),
+                    },
+                    {
+                      key: "joined",
+                      label: "Joined",
+                      render: (row) =>
+                        row.joinedAt
+                          ? joinedDate.format(new Date(row.joinedAt))
+                          : "—",
+                    },
+                    {
+                      key: "actions",
+                      label: "Actions",
+                      render: (row) =>
+                        row.userId !== identity.user.id &&
+                        row.role !== "capiro_admin" && (
+                          <SettingsButton
+                            danger
+                            small
+                            disabled={action.busy}
+                            onClick={() => setRemove(row)}
+                          >
+                            Remove
+                          </SettingsButton>
+                        ),
+                    },
+                  ]}
+                />
+              </div>
+            </SettingsCard>
+          </div>
         </StatusPanel>
       ) : (
         <StatusPanel

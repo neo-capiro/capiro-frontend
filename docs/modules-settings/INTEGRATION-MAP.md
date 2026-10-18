@@ -1,6 +1,6 @@
 # Registered backend integrations
 
-Generated from the canonical operation registries. Backend reference: `capirov2@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace`. Paths are appended to configured service origins that already include their deployment prefix. 528 operations. This is source contract coverage, not a claim of live execution.
+Generated from the canonical operation registries. Backend reference: `capirov2@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace`. Paths are appended to configured service origins that already include their deployment prefix. 530 operations. This is source contract coverage, not a claim of live execution.
 
 | Operation | Boundary | Service | Method and path | Controller evidence |
 | --- | --- | --- | --- | --- |
@@ -387,6 +387,7 @@ Generated from the canonical operation registries. Backend reference: `capirov2@
 | settings.hq.tenants.detail | Clerk capiro token | core | `GET /capiro-admin/tenants/:tenantId` | apps/api/src/capiro-admin/capiro-admin.controller.ts + capiro-admin.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.hq.tenants.list | Clerk capiro token | core | `GET /capiro-admin/tenants` | apps/api/src/capiro-admin/capiro-admin.controller.ts + capiro-admin.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.hq.tenants.resendInvitation | Clerk capiro token | core | `POST /capiro-admin/tenants/:tenantId/admins/resend` | apps/api/src/capiro-admin/capiro-admin.controller.ts + capiro-admin.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
+| settings.integrations.configureMicrosoftSubscriptions | Clerk capiro token | core | `POST /engagement/integrations/microsoft/:connectionId/subscriptions` | apps/api/src/engagement/microsoft/microsoft-oauth.controller.ts:116 @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.integrations.create | Clerk capiro token | core | `POST /engagement/integrations` | apps/api/src/engagement/engagement.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.integrations.disconnectGoogle | Clerk capiro token | core | `DELETE /engagement/integrations/google/:connectionId` | apps/api/src/engagement/google/google-oauth.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.integrations.disconnectMicrosoft | Clerk capiro token | core | `DELETE /engagement/integrations/microsoft/:connectionId` | apps/api/src/engagement/microsoft/microsoft-oauth.controller.ts @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
@@ -411,6 +412,7 @@ Generated from the canonical operation registries. Backend reference: `capirov2@
 | settings.mappings.searchEmployers | Clerk capiro token | core | `GET /intelligence/fec-employers/search` | apps/api/src/intelligence/intelligence.controller.ts + intelligence.service.ts + entity-resolution.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.mappings.searchLda | Clerk capiro token | core | `GET /intelligence/lda-clients/search` | apps/api/src/intelligence/intelligence.controller.ts + intelligence.service.ts + entity-resolution.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.mappings.searchRecipients | Clerk capiro token | core | `GET /intelligence/assistance-recipients/search` | apps/api/src/intelligence/intelligence.controller.ts + intelligence.service.ts + entity-resolution.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
+| settings.profiles.accountOwners | Clerk capiro token | core | `GET /client-account-owners` | apps/api/src/clients/client-account-owner.controller.ts:15 + client-account-owner.service.ts:72 @4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.profiles.archive | Clerk capiro token | core | `DELETE /clients/:clientId` | apps/api/src/clients/clients.controller.ts:343-370 + clients.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.profiles.create | Clerk capiro token | core | `POST /clients` | apps/api/src/clients/clients.controller.ts:343-370 + clients.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
 | settings.profiles.restore | Clerk capiro token | core | `PUT /clients/:clientId` | apps/api/src/clients/clients.controller.ts:343-370 + clients.service.ts@4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace |
