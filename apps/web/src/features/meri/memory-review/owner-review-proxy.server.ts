@@ -5,13 +5,18 @@ import {
 import { readConfig } from "../../../shared/portfolio/config/config";
 import { previewApiTarget } from "../../../shared/preview/read-config.server";
 import { sameRequestOrigin } from "../../../shared/request-origin";
-import { ownerReviewPaths, receiveOwnerCandidates } from "./owner-review";
+import {
+  ownerCorrectionPaths,
+  receiveCorrectionReceipt,
+  receiveOwnerCorrectionPage,
+} from "./owner-correction";
+import { ownerReviewPaths } from "./owner-review";
 
 type Environment = Record<string, string | undefined>;
 type Token = () => Promise<string | null>;
 type Operation =
-  | { kind: "list" }
-  | { kind: "decision" | "version-decision"; id: string };
+  | { kind: "items" }
+  | { kind: "decision" | "version-decision" | "correction"; id: string };
 const uuid = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const headers = {
   "Cache-Control": "private, no-store",
@@ -24,11 +29,7 @@ const answer = (status: number, code: string, outcome?: string) =>
     { status, headers },
   );
 
-/**
- * Source connection is opt-in. Shared preview policy still holds these routes;
- * its owner must bind a reviewed Core source pin and qualified target before
- * admitting them. This URL validation alone is not preview qualification.
- */
+/** A reviewed Core connection is required before any personal review read or write. */
 export function targetForOwnerMemoryReview(
   request: Request,
   env: Environment,
@@ -53,7 +54,9 @@ export function targetForOwnerMemoryReview(
 }
 
 function expectedPath(operation: Operation): string {
-  if (operation.kind === "list") return ownerReviewPaths.list;
+  if (operation.kind === "items") return ownerCorrectionPaths.items;
+  if (operation.kind === "correction")
+    return ownerReviewPaths.correction(operation.id);
   return operation.kind === "decision"
     ? ownerReviewPaths.decision(operation.id)
     : ownerReviewPaths.versionDecision(operation.id);
@@ -63,13 +66,15 @@ function corePath(
   operation: Operation,
   decision?: "approve" | "reject",
 ): string {
-  if (operation.kind === "list") return "/memory/candidates/mine";
+  if (operation.kind === "items") return "/memory/owner/items";
+  if (operation.kind === "correction")
+    return `/memory/items/${operation.id}/review-correction`;
   return operation.kind === "decision"
     ? `/memory/candidates/${operation.id}/owner-decision`
     : `/memory/version-candidates/${operation.id}/${decision}`;
 }
 
-/** One closed Core route pair; the browser never supplies tenant, owner or token. */
+/** Closed owner memory operations; the browser never supplies tenant, owner or token. */
 export async function proxyOwnerMemoryReview(
   request: Request,
   operation: Operation,
@@ -78,17 +83,18 @@ export async function proxyOwnerMemoryReview(
   fetcher: typeof fetch = fetch,
 ): Promise<Response> {
   const url = new URL(request.url);
+  const itemCursor = operation.kind === "items" ? pageCursor(url) : undefined;
   if (
     url.pathname !== expectedPath(operation) ||
-    url.search ||
+    (operation.kind === "items" ? itemCursor === false : !!url.search) ||
     url.hash ||
-    (operation.kind !== "list" && !uuid.test(operation.id))
+    (operation.kind !== "items" && !uuid.test(operation.id))
   )
     return answer(400, "MEMORY_REVIEW_INVALID_REQUEST");
-  if (request.method !== (operation.kind === "list" ? "GET" : "POST"))
+  if (request.method !== (operation.kind === "items" ? "GET" : "POST"))
     return answer(405, "MEMORY_REVIEW_METHOD_NOT_ALLOWED");
   if (
-    operation.kind !== "list" &&
+    operation.kind !== "items" &&
     (!sameRequestOrigin(request, readConfig(env).requestOrigin) ||
       request.headers.has("content-encoding"))
   )
@@ -96,15 +102,39 @@ export async function proxyOwnerMemoryReview(
 
   let body: string | undefined;
   let decision: "approve" | "reject" | undefined;
-  if (operation.kind !== "list") {
+  if (operation.kind !== "items") {
     try {
       const raw = await boundedJsonText(
         new Response(request.body, { headers: request.headers }),
         request.signal,
-        operation.kind === "version-decision" ? 1_200 : 64,
+        operation.kind === "correction"
+          ? 16_384
+          : operation.kind === "version-decision"
+            ? 1_200
+            : 64,
       );
       const parsed: unknown = JSON.parse(raw);
-      if (
+      if (operation.kind === "correction") {
+        if (
+          !parsed ||
+          typeof parsed !== "object" ||
+          Object.keys(parsed).length !== 2 ||
+          !("newContent" in parsed) ||
+          typeof parsed.newContent !== "string" ||
+          !parsed.newContent.trim() ||
+          parsed.newContent.trim().length > 8_000 ||
+          !("expectedUpdatedAt" in parsed) ||
+          typeof parsed.expectedUpdatedAt !== "string" ||
+          !/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{6}Z$/.test(
+            parsed.expectedUpdatedAt,
+          )
+        )
+          throw new Error("Invalid correction");
+        body = JSON.stringify({
+          newContent: parsed.newContent.trim(),
+          expectedUpdatedAt: parsed.expectedUpdatedAt,
+        });
+      } else if (
         !parsed ||
         typeof parsed !== "object" ||
         Object.keys(parsed).length !==
@@ -117,7 +147,9 @@ export async function proxyOwnerMemoryReview(
         (parsed.decision !== "approve" && parsed.decision !== "reject")
       )
         throw new Error("Invalid decision");
-      decision = parsed.decision;
+      if (operation.kind !== "correction" && "decision" in parsed) {
+        decision = parsed.decision as "approve" | "reject";
+      }
       if (operation.kind === "version-decision") {
         if (decision === "reject") {
           if (
@@ -129,11 +161,16 @@ export async function proxyOwnerMemoryReview(
             throw new Error("Invalid rejection reason");
           body = JSON.stringify({ reason: parsed.reason.trim() });
         }
-      } else {
+      } else if (operation.kind === "decision") {
         body = JSON.stringify({ decision });
       }
     } catch {
-      return answer(400, "MEMORY_REVIEW_INVALID_DECISION");
+      return answer(
+        400,
+        operation.kind === "correction"
+          ? "MEMORY_REVIEW_INVALID_CORRECTION"
+          : "MEMORY_REVIEW_INVALID_DECISION",
+      );
     }
   }
   const target = targetForOwnerMemoryReview(request, env);
@@ -150,7 +187,7 @@ export async function proxyOwnerMemoryReview(
         if (!token) return answer(401, "MEMORY_REVIEW_SIGN_IN_REQUIRED");
         dispatched = true;
         const response = await fetcher(
-          `${target.origin}${target.pathname}${corePath(operation, decision)}`,
+          `${target.origin}${target.pathname}${corePath(operation, decision)}${operation.kind === "items" ? `?limit=25${itemCursor ? `&cursor=${encodeURIComponent(itemCursor)}` : ""}` : ""}`,
           {
             method: request.method,
             headers: {
@@ -169,7 +206,7 @@ export async function proxyOwnerMemoryReview(
           if (response.redirected)
             throw new Error("Redirected memory response");
           if (!response.ok) {
-            if (operation.kind !== "list" && response.status >= 500)
+            if (operation.kind !== "items" && response.status >= 500)
               return answer(503, "MEMORY_DECISION_UNCERTAIN", "UNKNOWN");
             const status = [400, 401, 403, 404, 409].includes(response.status)
               ? response.status
@@ -178,11 +215,21 @@ export async function proxyOwnerMemoryReview(
           }
           const raw = await boundedJsonText(response, signal, 2_000_000);
           const value: unknown = JSON.parse(raw);
-          if (operation.kind === "list")
+          if (operation.kind === "items")
+            return Response.json(receiveOwnerCorrectionPage(value), {
+              headers,
+            });
+          if (operation.kind === "correction") {
+            const candidateId = receiveCorrectionReceipt(value);
             return Response.json(
-              { candidates: receiveOwnerCandidates(value) },
+              {
+                status: "pending_review",
+                candidateId,
+                activeItemUnchanged: true,
+              },
               { headers },
             );
+          }
           if (operation.kind === "version-decision") {
             if (
               !value ||
@@ -217,8 +264,27 @@ export async function proxyOwnerMemoryReview(
       12_000,
     );
   } catch {
-    return operation.kind !== "list" && dispatched
+    return operation.kind !== "items" && dispatched
       ? answer(503, "MEMORY_DECISION_UNCERTAIN", "UNKNOWN")
       : answer(503, "MEMORY_REVIEW_UNAVAILABLE", "NOT_DISPATCHED");
   }
+}
+
+function pageCursor(url: URL): string | null | false {
+  const allowed = new Set(["limit", "cursor"]);
+  if ([...url.searchParams.keys()].some((key) => !allowed.has(key)))
+    return false;
+  if (
+    url.searchParams.getAll("limit").length !== 1 ||
+    url.searchParams.get("limit") !== "25" ||
+    url.searchParams.getAll("cursor").length > 1
+  )
+    return false;
+  const cursor = url.searchParams.get("cursor");
+  return cursor === null ||
+    (cursor.length > 0 &&
+      cursor.length <= 512 &&
+      /^[A-Za-z0-9_-]+$/.test(cursor))
+    ? cursor
+    : false;
 }

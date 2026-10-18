@@ -22,7 +22,6 @@ const candidate = {
   sourceType: "meri",
   createdAt: "2026-10-18T12:00:00.000Z",
 };
-const listRequest = () => new Request(`${origin}/api/memory/owner/candidates`);
 const decisionRequest = (body: unknown = { decision: "approve" }) =>
   new Request(`${origin}/api/memory/owner/candidates/${id}/decision`, {
     method: "POST",
@@ -40,24 +39,35 @@ const versionRequest = (body: unknown) =>
     headers: { Origin: origin, "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
+const correctionRequest = (body: unknown) =>
+  new Request(`${origin}/api/memory/owner/items/${id}/corrections`, {
+    method: "POST",
+    headers: {
+      Origin: origin,
+      "Content-Type": "application/json",
+      Authorization: "Bearer browser-token-must-not-forward",
+      Cookie: "browser-cookie-must-not-forward=1",
+    },
+    body: JSON.stringify(body),
+  });
+const updatedAt = "2026-10-18T12:34:56.123456Z";
+const item = {
+  id,
+  title: "Personal memory title",
+  value: "Current canonical text.",
+  scope: "user_private",
+  clientId: null,
+  updatedAt,
+};
+const itemsRequest = (cursor?: string) =>
+  new Request(
+    `${origin}/api/memory/owner/items?limit=25${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`,
+  );
 
 describe("Core-owned personal memory review proxy", () => {
-  it("requires opt-in and does not convert a disabled connection into an empty list", async () => {
+  it("requires opt-in before any owner memory write", async () => {
     const token = vi.fn();
     const fetcher = vi.fn();
-    const response = await proxyOwnerMemoryReview(
-      listRequest(),
-      { kind: "list" },
-      { ...env, MERI_MEMORY_OWNER_REVIEW_ENABLED: "false" },
-      token,
-      fetcher,
-    );
-    expect(response.status).toBe(503);
-    expect(await response.json()).toMatchObject({
-      error: { code: "MEMORY_REVIEW_UNAVAILABLE", outcome: "NOT_DISPATCHED" },
-    });
-    expect(token).not.toHaveBeenCalled();
-    expect(fetcher).not.toHaveBeenCalled();
     const decision = await proxyOwnerMemoryReview(
       decisionRequest(),
       { kind: "decision", id },
@@ -69,61 +79,8 @@ describe("Core-owned personal memory review proxy", () => {
     expect(await decision.json()).toMatchObject({
       error: { outcome: "NOT_DISPATCHED" },
     });
+    expect(token).not.toHaveBeenCalled();
     expect(fetcher).not.toHaveBeenCalled();
-  });
-
-  it("reads all owner pending candidates, including Core and Meri additions, through one Core list", async () => {
-    const fetcher = vi.fn<typeof fetch>(async () =>
-      Response.json({
-        candidates: [
-          candidate,
-          {
-            ...candidate,
-            id: "22222222-2222-4222-8222-222222222222",
-            sourceType: "settings",
-          },
-        ],
-      }),
-    );
-    const response = await proxyOwnerMemoryReview(
-      listRequest(),
-      { kind: "list" },
-      env,
-      async () => "native-clerk-session",
-      fetcher,
-    );
-    expect(response.status).toBe(200);
-    expect(await response.json()).toMatchObject({
-      candidates: [candidate, { sourceType: "settings" }],
-    });
-    expect(fetcher.mock.calls[0]![0]).toBe(
-      "https://core.synthetic.invalid/api/memory/candidates/mine",
-    );
-    const options = fetcher.mock.calls[0]![1]!;
-    expect(options.method).toBe("GET");
-    expect(new Headers(options.headers).get("authorization")).toBe(
-      "Bearer native-clerk-session",
-    );
-    expect(new Headers(options.headers).has("cookie")).toBe(false);
-    expect(response.headers.get("cache-control")).toContain("no-store");
-  });
-
-  it("keeps Core outage and malformed data distinct from a confirmed empty inbox", async () => {
-    for (const remote of [
-      Response.json({ message: "Core unavailable" }, { status: 503 }),
-      Response.json({ candidates: [{ id, value: "missing fields" }] }),
-    ]) {
-      const response = await proxyOwnerMemoryReview(
-        listRequest(),
-        { kind: "list" },
-        env,
-        async () => "native",
-        async () => remote,
-      );
-      expect(response.status).toBe(503);
-      expect(await response.json()).toHaveProperty("error");
-    }
-    expect(receiveOwnerCandidates({ candidates: [] })).toEqual([]);
   });
 
   it("does not display Core's synthetic key as an unkeyed Meri proposal title", () => {
@@ -289,9 +246,205 @@ describe("Core-owned personal memory review proxy", () => {
     expect(fetcher).toHaveBeenCalledTimes(1);
   });
 
+  it("submits an exact canonical correction to the review-only Core route", async () => {
+    const candidateId = "33333333-3333-4333-8333-333333333333";
+    const fetcher = vi.fn<typeof fetch>(async () =>
+      Response.json({
+        status: "pending_review",
+        candidateId,
+        activeItemUnchanged: true,
+      }),
+    );
+    const response = await proxyOwnerMemoryReview(
+      correctionRequest({
+        newContent: "  Correct current text.  ",
+        expectedUpdatedAt: updatedAt,
+      }),
+      { kind: "correction", id },
+      env,
+      async () => "native-clerk-session",
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      status: "pending_review",
+      candidateId,
+      activeItemUnchanged: true,
+    });
+    expect(fetcher.mock.calls[0]![0]).toBe(
+      `https://core.synthetic.invalid/api/memory/items/${id}/review-correction`,
+    );
+    const options = fetcher.mock.calls[0]![1]!;
+    expect(options.body).toBe(
+      `{"newContent":"Correct current text.","expectedUpdatedAt":"${updatedAt}"}`,
+    );
+    expect(new Headers(options.headers).get("authorization")).toBe(
+      "Bearer native-clerk-session",
+    );
+    expect(new Headers(options.headers).has("cookie")).toBe(false);
+  });
+
+  it("refuses correction body spoofing before token acquisition", async () => {
+    const token = vi.fn();
+    const fetcher = vi.fn();
+    for (const body of [
+      { newContent: "", expectedUpdatedAt: updatedAt },
+      {
+        newContent: "valid",
+        expectedUpdatedAt: updatedAt,
+        tenantId: "spoofed",
+      },
+      { newContent: "x".repeat(8_001), expectedUpdatedAt: updatedAt },
+      { newContent: "valid", expectedUpdatedAt: updatedAt.slice(0, -2) },
+    ]) {
+      const response = await proxyOwnerMemoryReview(
+        correctionRequest(body),
+        { kind: "correction", id },
+        env,
+        token,
+        fetcher,
+      );
+      expect(response.status).toBe(400);
+    }
+    const foreign = new Request(
+      correctionRequest({ newContent: "valid", expectedUpdatedAt: updatedAt }),
+      {
+        headers: {
+          Origin: "https://foreign.invalid",
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const response = await proxyOwnerMemoryReview(
+      foreign,
+      { kind: "correction", id },
+      env,
+      token,
+      fetcher,
+    );
+    expect(response.status).toBe(403);
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it("holds an incompatible or lost correction outcome instead of claiming review", async () => {
+    for (const remote of [
+      Response.json({ found: true, status: "activated", memoryItemId: id }),
+      Response.json({
+        status: "pending_review",
+        candidateId: id,
+        activeItemUnchanged: false,
+      }),
+    ]) {
+      const fetcher = vi.fn<typeof fetch>(async () => remote);
+      const response = await proxyOwnerMemoryReview(
+        correctionRequest({
+          newContent: "Corrected text",
+          expectedUpdatedAt: updatedAt,
+        }),
+        { kind: "correction", id },
+        env,
+        async () => "native",
+        fetcher,
+      );
+      expect(response.status).toBe(503);
+      expect(await response.json()).toMatchObject({
+        error: { outcome: "UNKNOWN" },
+      });
+      expect(fetcher).toHaveBeenCalledTimes(1);
+    }
+    const fetcher = vi.fn<typeof fetch>(async () => {
+      throw new Error("connection reset after dispatch");
+    });
+    const response = await proxyOwnerMemoryReview(
+      correctionRequest({
+        newContent: "Corrected text",
+        expectedUpdatedAt: updatedAt,
+      }),
+      { kind: "correction", id },
+      env,
+      async () => "native",
+      fetcher,
+    );
+    expect(response.status).toBe(503);
+    expect(await response.json()).toMatchObject({
+      error: { outcome: "UNKNOWN" },
+    });
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+
+  it("pages only caller-owned canonical personal items from Core", async () => {
+    const nextCursor = "opaque_page_2";
+    const fetcher = vi.fn<typeof fetch>(async () =>
+      Response.json({ schemaVersion: 1, items: [item], nextCursor }),
+    );
+    const response = await proxyOwnerMemoryReview(
+      itemsRequest(),
+      { kind: "items" },
+      env,
+      async () => "native",
+      fetcher,
+    );
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ items: [item], nextCursor });
+    expect(fetcher.mock.calls[0]![0]).toBe(
+      "https://core.synthetic.invalid/api/memory/owner/items?limit=25",
+    );
+    const second = await proxyOwnerMemoryReview(
+      itemsRequest(nextCursor),
+      { kind: "items" },
+      env,
+      async () => "native",
+      fetcher,
+    );
+    expect(second.status).toBe(200);
+    expect(fetcher.mock.calls[1]![0]).toBe(
+      `https://core.synthetic.invalid/api/memory/owner/items?limit=25&cursor=${nextCursor}`,
+    );
+  });
+
+  it("does not present malformed or shared item pages as an empty personal picker", async () => {
+    for (const page of [
+      {
+        schemaVersion: 1,
+        items: [{ ...item, scope: "firm_shared" }],
+        nextCursor: null,
+      },
+      {
+        schemaVersion: 1,
+        items: [{ ...item, updatedAt: "2026-10-18T12:34:56.123Z" }],
+        nextCursor: null,
+      },
+      { schemaVersion: 1, items: [], nextCursor: "not-exhausted" },
+      { schemaVersion: 2, items: [], nextCursor: null },
+    ]) {
+      const response = await proxyOwnerMemoryReview(
+        itemsRequest(),
+        { kind: "items" },
+        env,
+        async () => "native",
+        async () => Response.json(page),
+      );
+      expect(response.status).toBe(503);
+      expect(await response.json()).toHaveProperty("error");
+    }
+    const token = vi.fn();
+    const fetcher = vi.fn();
+    const invalid = await proxyOwnerMemoryReview(
+      new Request(`${origin}/api/memory/owner/items?limit=25&clientId=${id}`),
+      { kind: "items" },
+      env,
+      token,
+      fetcher,
+    );
+    expect(invalid.status).toBe(400);
+    expect(token).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
   it("uses a separate validated preview Core target when preview mode is active", async () => {
     const fetcher = vi.fn<typeof fetch>(async () =>
-      Response.json({ candidates: [] }),
+      Response.json({ schemaVersion: 1, items: [], nextCursor: null }),
     );
     const preview = {
       ...env,
@@ -300,15 +453,15 @@ describe("Core-owned personal memory review proxy", () => {
         "https://core-preview.synthetic.invalid/api",
     };
     const response = await proxyOwnerMemoryReview(
-      listRequest(),
-      { kind: "list" },
+      itemsRequest(),
+      { kind: "items" },
       preview,
       async () => "native",
       fetcher,
     );
     expect(response.status).toBe(200);
     expect(fetcher.mock.calls[0]![0]).toBe(
-      "https://core-preview.synthetic.invalid/api/memory/candidates/mine",
+      "https://core-preview.synthetic.invalid/api/memory/owner/items?limit=25",
     );
   });
 });

@@ -2,6 +2,8 @@ import { afterEach, expect, it, vi } from "vitest";
 import { GET } from "../src/app/api/memory/owner/candidates/route";
 import { POST } from "../src/app/api/memory/owner/candidates/[id]/decision/route";
 import { POST as POST_VERSION } from "../src/app/api/memory/owner/candidates/[id]/version-decision/route";
+import { POST as POST_CORRECTION } from "../src/app/api/memory/owner/items/[id]/corrections/route";
+import { GET as GET_ITEMS } from "../src/app/api/memory/owner/items/route";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => clerk);
@@ -122,5 +124,18 @@ it("the current preview policy holds this route until the shared owner admits it
     { params: Promise.resolve({ id }) },
   );
   expect(version.status).toBe(503);
+  const items = await GET_ITEMS(
+    new Request(`${origin}/api/memory/owner/items?limit=25`),
+  );
+  expect(items.status).toBe(503);
+  const correction = await POST_CORRECTION(
+    new Request(`${origin}/api/memory/owner/items/${id}/corrections`, {
+      method: "POST",
+      headers: { Origin: origin, "Content-Type": "application/json" },
+      body: `{"newContent":"Corrected text","expectedUpdatedAt":"2026-10-18T12:34:56.123456Z"}`,
+    }),
+    { params: Promise.resolve({ id }) },
+  );
+  expect(correction.status).toBe(503);
   expect(fetcher).not.toHaveBeenCalled();
 });
