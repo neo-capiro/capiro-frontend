@@ -189,6 +189,23 @@ export function SidebarDestinations({
           Recommendation actions
         </Link>
       </Button>
+      <Button
+        asChild
+        variant="ghost"
+        className={`${styles.navButton} ${pathname === "/meri/task-updates" ? styles.currentDestination : ""}`}
+      >
+        <Link
+          href={scopedHref(
+            "/meri/task-updates",
+            selected.state === "authorized-client"
+              ? selected.client.id
+              : undefined,
+          )}
+          aria-current={pathname === "/meri/task-updates" ? "page" : undefined}
+        >
+          Task updates
+        </Link>
+      </Button>
     </nav>
   );
 }

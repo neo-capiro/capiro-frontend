@@ -137,6 +137,7 @@ function MobileMenu({
         ? pathname === "/meri"
         : href === pathname;
   const actionsHref = "/meri/actions";
+  const taskUpdatesHref = "/meri/task-updates";
   return (
     <nav id={id} className={styles.mobileMenu} aria-label="Meri sections">
       <MobileNewConversation
@@ -179,6 +180,14 @@ function MobileMenu({
         onClick={onNavigate}
       >
         Recommendation actions
+      </Link>
+      <Link
+        href={scopedHref(taskUpdatesHref, clientId)}
+        className={styles.mobileItem}
+        aria-current={pathname === taskUpdatesHref ? "page" : undefined}
+        onClick={onNavigate}
+      >
+        Task updates
       </Link>
       <Link
         href="/settings/preferences"
