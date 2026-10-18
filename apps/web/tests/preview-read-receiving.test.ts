@@ -20,6 +20,7 @@ const id = "10000000-0000-4000-8000-000000000001";
 const client = {
   id,
   name: "Synthetic",
+  profileType: "CLIENT",
   profileStatus: "draft",
   status: "active",
   logoUrl: null,
@@ -106,7 +107,6 @@ it.each([
   ["backend/core/me", "/me"],
   ["backend/core/clients", "/clients"],
   [`backend/core/clients/${id}`, `/clients/${id}`],
-  ["capiro/clients.list", "/clients"],
 ])("receives only the dedicated contract for %s", async (path, suffix) => {
   const payload =
     suffix === "/me" ? me : suffix === "/clients" ? [client] : client;
@@ -138,22 +138,47 @@ it.each([
   expect(response.headers.get("cache-control")).toBe("private, no-store");
 });
 
-it("receives the same bounded roster through the explicit qualified Core pair", async () => {
-  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+it("requires the separate qualified pair for the exact roster operation", async () => {
+  await denied(await receive("capiro/clients.list"));
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
-  const response = await receive("backend/core/clients");
+  const response = await receive("capiro/clients.list", {
+    headers: {
+      Authorization: "Bearer browser-forged",
+      Cookie: "__session=synthetic",
+    },
+  });
   expect(response.status).toBe(200);
   expect(await response.json()).toEqual([client]);
   expect(String(fetcher.mock.lastCall?.[0])).toBe(`${qualifiedTarget}/clients`);
   expect(getToken).toHaveBeenCalledExactlyOnceWith();
+  expect(fetcher.mock.lastCall?.[1]).toMatchObject({
+    method: "GET",
+    credentials: "omit",
+    headers: {
+      Authorization: "Bearer native-synthetic-token",
+      Accept: "application/json",
+      "X-Capiro-Tenant": "capiro-internal",
+    },
+  });
+  expect(Object.keys(fetcher.mock.lastCall![1]!.headers!)).toHaveLength(3);
+
+  fetcher.mockResolvedValue(Response.json(client));
+  expect((await receive(`backend/core/clients/${id}`)).status).toBe(200);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(`${target}/clients/${id}`);
 });
 
-it("retains the legacy read pair when first-chat bootstrap is enabled", async () => {
+it("retains Meri reads and qualified roster with first-chat bootstrap enabled", async () => {
   vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
   const response = await receive("backend/core/clients");
   expect(response.status).toBe(200);
   expect(String(fetcher.mock.lastCall?.[0])).toBe(`${target}/clients`);
+  expect((await receive("capiro/clients.list")).status).toBe(200);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(`${qualifiedTarget}/clients`);
 });
 
 it("uses the existing me schema and keeps native Clerk middleware", async () => {
@@ -174,8 +199,15 @@ it.each([
   "backend/core/clients?profileStatus=draft&sectorTag=health&includeArchived=true",
   `capiro/clients.list?input=${encodeURIComponent(JSON.stringify({ query: { profileStatus: "draft", sectorTag: "health", includeArchived: true } }))}`,
 ])("normalizes only existing list filters from %s", async (path) => {
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   expect((await receive(path)).status).toBe(200);
   const url = new URL(String(fetcher.mock.lastCall?.[0]));
+  expect(url.origin).toBe(
+    path.startsWith("capiro/")
+      ? new URL(qualifiedTarget).origin
+      : new URL(target).origin,
+  );
   expect(Object.fromEntries(url.searchParams)).toEqual({
     profileStatus: "draft",
     sectorTag: "health",
@@ -227,32 +259,44 @@ it.each([
   "https://ordinary.synthetic.invalid/api",
   origin + "/api",
 ])("holds malformed or ordinary qualified Core target %s", async (value) => {
-  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", value);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", value);
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
-  await denied(await receive("backend/core/clients"));
+  await denied(await receive("capiro/clients.list"));
 });
 
 it("holds a qualified Core target that shares the configured Meri origin", async () => {
-  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   vi.stubEnv("MERI_API_BASE_URL", "https://qualified-core.synthetic.invalid");
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
-  await denied(await receive("backend/core/clients"));
+  await denied(await receive("capiro/clients.list"));
 });
 
-it("holds a manually co-activated qualified Core read and first-chat bootstrap", async () => {
+it.each([undefined, "", "wrong-source", source])(
+  "holds qualified roster with an absent or wrong source %s",
+  async (value) => {
+    vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", value);
+    vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
+    expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
+    await denied(await receive("capiro/clients.list"));
+    expect((await receive("backend/core/clients")).status).toBe(200);
+    expect(String(fetcher.mock.lastCall?.[0])).toBe(`${target}/clients`);
+  },
+);
+
+it("requires the legacy read pair even when the qualified roster pair is valid", async () => {
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
-  vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
-  await denied(await receive("backend/core/clients"));
+  await denied(await receive("capiro/clients.list"));
 });
 
 it("keeps the qualified client UI disabled without the complete read pair", () => {
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
-  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   vi.stubEnv("CAPIRO_PREVIEW_READ_ONLY", "false");
   expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
 });
@@ -368,6 +412,8 @@ it.each([
   "stream-oversize",
   "schema",
 ])("bounds or rejects %s responses", async (kind) => {
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL", qualifiedTarget);
   const response =
     kind === "non-json"
       ? new Response("ok")

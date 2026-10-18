@@ -68,28 +68,46 @@ export function previewApiTarget(
   return validatedPreviewApiTarget(env, raw, request.url);
 }
 
-/** UI mode marker only; request validation and Core authorization remain separate gates. */
-export function isQualifiedCorePreviewReadEnabled(env: Environment): boolean {
-  return (
-    env.CAPIRO_PREVIEW_READ_ONLY === "true" &&
-    env.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED !== "true" &&
-    env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE ===
-      qualifiedCorePreviewBackendSource &&
-    env.CAPIRO_PREVIEW_READ_API_BASE_URL !== firstChatPreviewApi &&
-    validatedPreviewApiTarget(env, env.CAPIRO_PREVIEW_READ_API_BASE_URL) !==
-      null
+function legacyReadTarget(env: Environment, requestUrl?: string): URL | null {
+  if (
+    env.CAPIRO_PREVIEW_READ_ONLY !== "true" ||
+    env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE !== previewBackendSource ||
+    env.CAPIRO_PREVIEW_READ_API_BASE_URL !== firstChatPreviewApi
+  )
+    return null;
+  return validatedPreviewApiTarget(env, firstChatPreviewApi, requestUrl);
+}
+
+function qualifiedClientRosterTarget(
+  env: Environment,
+  requestUrl?: string,
+): URL | null {
+  if (
+    env.CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE !==
+      qualifiedCorePreviewBackendSource ||
+    env.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL === firstChatPreviewApi
+  )
+    return null;
+  return validatedPreviewApiTarget(
+    env,
+    env.CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL,
+    requestUrl,
   );
 }
 
-/** No ordinary Core fallback. Native service qualification remains a release gate. */
+/** UI mode marker only; request validation and Core authorization remain separate gates. */
+export function isQualifiedCorePreviewReadEnabled(env: Environment): boolean {
+  return Boolean(legacyReadTarget(env) && qualifiedClientRosterTarget(env));
+}
+
+/** Preserve Meri's Core reads; only the fixed roster operation uses qualified Core. */
 export function previewReadTarget(
   env: Environment,
   request: Request,
 ): URL | null {
-  if (env.CAPIRO_PREVIEW_READ_ONLY !== "true") return null;
-  if (env.CAPIRO_PREVIEW_READ_BACKEND_SOURCE === previewBackendSource) {
-    if (env.CAPIRO_PREVIEW_READ_API_BASE_URL !== firstChatPreviewApi)
-      return null;
-  } else if (!isQualifiedCorePreviewReadEnabled(env)) return null;
-  return previewApiTarget(env, request, env.CAPIRO_PREVIEW_READ_API_BASE_URL);
+  const legacy = legacyReadTarget(env, request.url);
+  if (!legacy) return null;
+  return new URL(request.url).pathname === "/api/capiro/clients.list"
+    ? qualifiedClientRosterTarget(env, request.url)
+    : legacy;
 }

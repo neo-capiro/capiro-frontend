@@ -1,25 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { useClients } from "@/shared/portfolio/api/clients";
+import { useCapiroQuery } from "@/shared/capiro/queries";
 import { clientSectorLabel } from "./contracts";
 import { filterClients } from "./filter";
 import styles from "./portfolio.module.css";
 
-/** Only the Core-native client roster is qualified for this preview. */
+/** Only the fixed Core client-roster operation is eligible for this preview. */
 export function PreviewClientCatalog({
   destinations,
 }: {
   destinations: Destinations;
 }) {
-  const clients = useClients();
+  const clients = useCapiroQuery("clients.list", {
+    query: { includeArchived: false },
+  });
   const [search, setSearch] = useState("");
   const roster =
-    clients.isSuccess && !clients.error
+    clients.data && !clients.error
       ? clients.data.filter((client) => client.profileType === "CLIENT")
       : undefined;
   const rows = roster
@@ -27,7 +28,7 @@ export function PreviewClientCatalog({
     : undefined;
 
   return (
-    <Shell destinations={destinations}>
+    <Shell destinations={destinations} readOnlyPreview>
       <div className={`page ${styles.indexPage}`}>
         <header className={`pageHeader ${styles.indexHeader}`}>
           <div className="stack" style={{ gap: 10 }}>
@@ -48,14 +49,14 @@ export function PreviewClientCatalog({
           </div>
         </header>
         <p className="status" role="note">
-          This preview supports the client list and client selection in Modules.
-          Account owners, saved layouts, alerts, profile details, and editing
-          are unavailable here.
+          This preview supports the client list. Client selection, account
+          owners, saved layouts, alerts, profile details, and editing are
+          unavailable here.
         </p>
         <QueryState
-          pending={clients.isPending}
+          pending={clients.loading}
           error={clients.error}
-          retry={() => void clients.refetch()}
+          retry={clients.reload}
         />
         {rows && roster && (
           <section aria-label="Available clients">
@@ -71,7 +72,6 @@ export function PreviewClientCatalog({
                       <th>Organization</th>
                       <th>Sector</th>
                       <th>Status</th>
-                      <th>Client scope</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -83,14 +83,6 @@ export function PreviewClientCatalog({
                         <td>{clientSectorLabel(client) ?? "—"}</td>
                         <td>
                           <span className="chip">{client.profileStatus}</span>
-                        </td>
-                        <td>
-                          <Link
-                            href={`/modules?clientId=${encodeURIComponent(client.id)}`}
-                            aria-label={`Select ${client.name} in Modules`}
-                          >
-                            Select in Modules
-                          </Link>
                         </td>
                       </tr>
                     ))}

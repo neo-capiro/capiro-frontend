@@ -3,7 +3,7 @@ import { readFileSync, statSync } from 'node:fs';
 const origin = 'https://portfolio-preview.app.capiro.ai';
 const corePreviewApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
-const qualifiedCoreReadSource = '784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb';
+const qualifiedCoreRosterSource = '784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 // This pair qualifies image bytes only. Meri serving and later source remain separate gates.
 const meriImageSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
@@ -23,10 +23,10 @@ const fixedParameters = Object.freeze({
   TrackerBackend: 'intelligence',
 });
 const meriOriginPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
-const qualifiedCoreReadApiPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?\/api$/;
+const qualifiedCoreRosterApiPattern = /^https:\/\/[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*\.[a-z](?:[a-z0-9-]{0,61}[a-z0-9])?\/api$/;
 const optionalBindings = [
   'previewReadEnabled', 'firstChatBootstrapEnabled', 'firstChatClientId',
-  'qualifiedCoreReadApiBaseUrl',
+  'qualifiedCoreClientRosterApiBaseUrl',
   'meriApiBaseUrl', 'meriConversationWorkflowEnabled', 'meriConversationRoutesEnabled',
   'meriRuntimeSource', 'meriRuntimeImageDigest',
 ];
@@ -102,20 +102,20 @@ function readFirstChatConfiguration(bindings, meri) {
   return { readEnabled, bootstrapEnabled, clientId };
 }
 
-function readQualifiedCoreApi(bindings, firstChat, meri) {
-  const target = Object.hasOwn(bindings, 'qualifiedCoreReadApiBaseUrl')
-    ? bindings.qualifiedCoreReadApiBaseUrl : '';
+function readQualifiedCoreRosterApi(bindings, firstChat, meri) {
+  const target = Object.hasOwn(bindings, 'qualifiedCoreClientRosterApiBaseUrl')
+    ? bindings.qualifiedCoreClientRosterApiBaseUrl : '';
   if (typeof target !== 'string' || target.length > 512
-      || (target !== '' && !qualifiedCoreReadApiPattern.test(target)))
-    throw Error('PREVIEW_CORE_READ_ORIGIN_INVALID');
+      || (target !== '' && !qualifiedCoreRosterApiPattern.test(target)))
+    throw Error('PREVIEW_CORE_ROSTER_ORIGIN_INVALID');
   if (!target) return '';
   try {
     const url = new URL(target);
     if (target !== `${url.origin}/api` || url.port || nonMeriHosts.has(url.hostname)
         || (meri.baseUrl && url.origin === meri.baseUrl)) throw Error();
-  } catch { throw Error('PREVIEW_CORE_READ_ORIGIN_INVALID'); }
-  if (!firstChat.readEnabled || firstChat.bootstrapEnabled)
-    throw Error('PREVIEW_CORE_READ_DEPENDENCY_HELD');
+  } catch { throw Error('PREVIEW_CORE_ROSTER_ORIGIN_INVALID'); }
+  // Selected-client verification and Meri keep the original reviewed read pair.
+  if (!firstChat.readEnabled) throw Error('PREVIEW_CORE_ROSTER_DEPENDENCY_HELD');
   return target;
 }
 
@@ -131,13 +131,15 @@ export function renderPreviewConfiguration(bindings) {
   }
   const meri = readMeriConfiguration(bindings);
   const firstChat = readFirstChatConfiguration(bindings, meri);
-  const qualifiedCoreApi = readQualifiedCoreApi(bindings, firstChat, meri);
+  const qualifiedCoreRosterApi = readQualifiedCoreRosterApi(bindings, firstChat, meri);
   const values = {
     ...fixedParameters,
     CapiroRequestOrigin: origin,
     CapiroPreviewReadOnly: 'true',
-    CapiroPreviewReadBackendSource: qualifiedCoreApi ? qualifiedCoreReadSource : firstChat.readEnabled ? coreReadSource : '',
-    CapiroPreviewReadApiBaseUrl: qualifiedCoreApi || (firstChat.readEnabled ? corePreviewApi : ''),
+    CapiroPreviewReadBackendSource: firstChat.readEnabled ? coreReadSource : '',
+    CapiroPreviewReadApiBaseUrl: firstChat.readEnabled ? corePreviewApi : '',
+    CapiroPreviewClientRosterBackendSource: qualifiedCoreRosterApi ? qualifiedCoreRosterSource : '',
+    CapiroPreviewClientRosterApiBaseUrl: qualifiedCoreRosterApi,
     MeriFirstChatBootstrapEnabled: String(firstChat.bootstrapEnabled),
     MeriFirstChatClientId: firstChat.clientId,
     CapiroPreviewFirstChatBackendSource: firstChat.bootstrapEnabled ? coreBootstrapSource : '',
@@ -176,6 +178,8 @@ export function renderPreviewConfiguration(bindings) {
       CAPIRO_PREVIEW_READ_ONLY: 'true',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: values.CapiroPreviewReadBackendSource,
       CAPIRO_PREVIEW_READ_API_BASE_URL: values.CapiroPreviewReadApiBaseUrl,
+      CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: values.CapiroPreviewClientRosterBackendSource,
+      CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: values.CapiroPreviewClientRosterApiBaseUrl,
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: values.MeriFirstChatBootstrapEnabled,
       MERI_FIRST_CHAT_CLIENT_ID: values.MeriFirstChatClientId,
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: values.CapiroPreviewFirstChatBackendSource,

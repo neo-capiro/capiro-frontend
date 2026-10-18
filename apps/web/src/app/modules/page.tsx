@@ -4,11 +4,10 @@ import { isQualifiedCorePreviewReadEnabled } from "../../shared/preview/read-con
 export const dynamic = "force-dynamic";
 
 export default function ModulesPage() {
+  const previewCoreReadOnly = isQualifiedCorePreviewReadEnabled(process.env);
   return (
-    <ConnectedModule active="hub">
-      <ModuleHub
-        previewCoreReadOnly={isQualifiedCorePreviewReadEnabled(process.env)}
-      />
+    <ConnectedModule active="hub" readOnlyPreview={previewCoreReadOnly}>
+      <ModuleHub previewCoreReadOnly={previewCoreReadOnly} />
     </ConnectedModule>
   );
 }

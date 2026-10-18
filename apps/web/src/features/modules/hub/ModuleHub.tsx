@@ -6,7 +6,6 @@ import { Tooltip as TooltipPrimitive } from "radix-ui";
 import { Tooltip, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
-import { useClients } from "../../../shared/portfolio/api/clients";
 import { PageHeader } from "../../../shared/module-ui";
 import {
   moduleCatalog,
@@ -72,14 +71,9 @@ export function ModuleHub({
 }: {
   previewCoreReadOnly?: boolean;
 }) {
-  const previewClients = useClients({ enabled: previewCoreReadOnly });
-  const clients = useCapiroQuery(
-    "clients.list",
-    {
-      query: { includeArchived: false },
-    },
-    { enabled: !previewCoreReadOnly },
-  );
+  const clients = useCapiroQuery("clients.list", {
+    query: { includeArchived: false },
+  });
   const router = useRouter();
   const params = useSearchParams();
   const clientId = params.get("clientId") ?? "";
@@ -89,21 +83,9 @@ export function ModuleHub({
     else next.delete("clientId");
     router.push(`/modules?${next}`);
   };
-  const profiles = previewCoreReadOnly
-    ? previewClients.isSuccess && !previewClients.error
-      ? previewClients.data
-      : []
-    : (clients.data ?? []);
-  const clientsLoading = previewCoreReadOnly
-    ? previewClients.isPending
-    : clients.loading;
-  const clientsError = previewCoreReadOnly
-    ? previewClients.error
-    : clients.error;
-  const reloadClients = () => {
-    if (previewCoreReadOnly) void previewClients.refetch();
-    else clients.reload();
-  };
+  const profiles = clients.error ? [] : (clients.data ?? []);
+  const clientsLoading = clients.loading;
+  const clientsError = clients.error;
   const workOrder = ["engagement", "workspace", "planner", "strategies"];
   const work = moduleCatalog
     .filter((module) => module.group === "work")
@@ -136,26 +118,28 @@ export function ModuleHub({
           previewCoreReadOnly ? undefined : <ModuleHubInformation />
         }
         actions={
-          <label className={styles.scope}>
-            Scope
-            <select
-              aria-label="Client profile scope"
-              value={clientId}
-              disabled={clientsLoading || Boolean(clientsError)}
-              onChange={(event) => setClientId(event.target.value)}
-            >
-              <option value="">
-                {profiles.length
-                  ? `All ${profiles.length} available profile${profiles.length === 1 ? "" : "s"}`
-                  : "All available profiles"}
-              </option>
-              {profiles.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.name}
+          previewCoreReadOnly ? undefined : (
+            <label className={styles.scope}>
+              Scope
+              <select
+                aria-label="Client profile scope"
+                value={clientId}
+                disabled={clientsLoading || Boolean(clientsError)}
+                onChange={(event) => setClientId(event.target.value)}
+              >
+                <option value="">
+                  {profiles.length
+                    ? `All ${profiles.length} available profile${profiles.length === 1 ? "" : "s"}`
+                    : "All available profiles"}
                 </option>
-              ))}
-            </select>
-          </label>
+                {profiles.map((client) => (
+                  <option key={client.id} value={client.id}>
+                    {client.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )
         }
       />
       {previewCoreReadOnly && clientsLoading && (
@@ -164,7 +148,7 @@ export function ModuleHub({
       {clientsError && (
         <p className={styles.scopeError} role="alert">
           Client scope could not be loaded.{" "}
-          <button type="button" onClick={reloadClients}>
+          <button type="button" onClick={clients.reload}>
             Try again
           </button>
         </p>
@@ -181,11 +165,18 @@ export function ModuleHub({
           aria-label="Preview availability"
         >
           <div>
-            <h2>Client scope is available</h2>
+            <h2>Available client profiles</h2>
             <p>
-              Choose a client profile to check your current access. Module
-              records and actions are unavailable in this preview.
+              Client selection, module records, and actions are unavailable in
+              this preview.
             </p>
+            {profiles.length > 0 && (
+              <ul aria-label="Available client profiles">
+                {profiles.map((client) => (
+                  <li key={client.id}>{client.name}</li>
+                ))}
+              </ul>
+            )}
           </div>
         </section>
       ) : (

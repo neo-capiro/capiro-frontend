@@ -27,8 +27,6 @@ async function previewCoreFixtures(page: Page) {
         json: { message: "Unexpected write" },
       });
     }
-    if (path === "/api/backend/core/clients")
-      return route.fulfill({ json: roster });
     if (path === `/api/backend/core/clients/${clientId}`)
       return route.fulfill({ json: roster[0] });
     if (path === `/api/backend/core/clients/${secondId}`)
@@ -53,6 +51,8 @@ async function previewCoreFixtures(page: Page) {
     const request = route.request();
     const path = new URL(request.url()).pathname;
     requests.push(`${request.method()} ${path}`);
+    if (request.method() === "GET" && path === "/api/capiro/clients.list")
+      return route.fulfill({ json: roster });
     unexpected.push(`${request.method()} ${path}`);
     return route.fulfill({
       status: 500,
@@ -62,7 +62,7 @@ async function previewCoreFixtures(page: Page) {
   return { requests, unexpected };
 }
 
-test("Core preview catalog exposes only the available client roster and its Modules selection", async ({
+test("Core preview catalog exposes only the available client roster", async ({
   page,
 }, info) => {
   const { requests, unexpected } = await previewCoreFixtures(page);
@@ -76,11 +76,19 @@ test("Core preview catalog exposes only the available client roster and its Modu
   await expect(table).toContainText("Aster Aerospace");
   await expect(table).toContainText("Beacon Energy");
   await expect(page.getByRole("note")).toContainText(
-    "Account owners, saved layouts, alerts, profile details, and editing are unavailable here.",
+    "Client selection, account owners, saved layouts, alerts, profile details, and editing are unavailable here.",
   );
+  await expect(table.getByRole("link")).toHaveCount(0);
   await expect(
-    table.getByRole("link", { name: "Select Beacon Energy in Modules" }),
-  ).toHaveAttribute("href", `/modules?clientId=${secondId}`);
+    page.getByRole("navigation", { name: "Portfolio" }).getByRole("link"),
+  ).toHaveCount(1);
+  await expect(
+    page.getByRole("link", { name: "Portfolio Clients" }),
+  ).toHaveAttribute("href", "/portfolio");
+  await expect(page.getByRole("link", { name: "Meri" })).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "Master calendar" })).toHaveCount(
+    0,
+  );
   await page.screenshot({
     path: info.outputPath("preview-clients-desktop-light.png"),
     fullPage: true,
@@ -103,36 +111,40 @@ test("Core preview catalog exposes only the available client roster and its Modu
   ).toContainText("No clients match this search.");
 
   expect(requests).toEqual(
-    expect.arrayContaining(["GET /api/backend/core/clients"]),
+    expect.arrayContaining(["GET /api/capiro/clients.list"]),
   );
   expect(unexpected).toEqual([]);
 });
 
-test("Core preview Modules scope reads the same roster and verifies its selected client", async ({
+test("Core preview Modules exposes the roster without offering unqualified selection", async ({
   page,
 }) => {
   const { requests, unexpected } = await previewCoreFixtures(page);
-  await page.goto(`/__test/preview-modules?clientId=${secondId}`);
+  await page.goto("/__test/preview-modules");
 
   await expect(
     page.getByRole("heading", { name: "Modules client scope" }),
   ).toBeVisible();
-  const scope = page.getByRole("combobox", { name: "Client profile scope" });
-  await expect(scope).toHaveValue(secondId);
-  await expect(scope.locator("option")).toContainText([
-    "All 2 available profiles",
+  await expect(
+    page.getByRole("combobox", { name: "Client profile scope" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("navigation", { name: "Modules" }).getByRole("link"),
+  ).toHaveCount(1);
+  const profiles = page.getByRole("list", {
+    name: "Available client profiles",
+  });
+  await expect(profiles.getByRole("listitem")).toContainText([
     "Aster Aerospace",
     "Beacon Energy",
   ]);
   await expect(
     page.getByRole("region", { name: "Preview availability" }),
   ).toContainText(
-    "Module records and actions are unavailable in this preview.",
+    "Client selection, module records, and actions are unavailable in this preview.",
   );
-  await expect
-    .poll(() => requests)
-    .toContain(`GET /api/backend/core/clients/${secondId}`);
-  expect(requests).toContain("GET /api/backend/core/clients");
+  expect(requests).toContain("GET /api/capiro/clients.list");
+  expect(requests).not.toContain(`GET /api/backend/core/clients/${secondId}`);
   expect(unexpected).toEqual([]);
 });
 

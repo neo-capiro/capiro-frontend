@@ -9,10 +9,12 @@ import styles from "./module-shell.module.css";
 export function ModuleHeader({
   activeMode = "modules",
   settings = false,
+  readOnlyPreview = false,
 }: {
   portfolioUrl?: string;
   activeMode?: "meri" | "modules";
   settings?: boolean;
+  readOnlyPreview?: boolean;
 }) {
   return (
     <HeaderFrame
@@ -59,31 +61,33 @@ export function ModuleHeader({
         </nav>
       }
       actions={
-        <nav className={styles.globalActions} aria-label="Workspace actions">
-          <Link href="/?log=1" aria-label="Quick log">
-            <ModuleAsset name="quickLog" />
-          </Link>
-          <ScopedLink href="/calendar" aria-label="Master calendar">
-            <ModuleAsset name="calendar" />
-          </ScopedLink>
-          <ScopedLink
-            href="/modules/intelligence"
-            aria-label="Search intelligence"
-          >
-            <ModuleAsset name="search" />
-          </ScopedLink>
-          <button
-            type="button"
-            disabled
-            aria-label="Updates — unavailable"
-            title="Notifications integration is pending"
-          >
-            <ModuleAsset name="updates" />
-          </button>
-          <Link href="/settings/personal" aria-label="Account settings">
-            <ModuleAsset name="profile" />
-          </Link>
-        </nav>
+        readOnlyPreview ? undefined : (
+          <nav className={styles.globalActions} aria-label="Workspace actions">
+            <Link href="/?log=1" aria-label="Quick log">
+              <ModuleAsset name="quickLog" />
+            </Link>
+            <ScopedLink href="/calendar" aria-label="Master calendar">
+              <ModuleAsset name="calendar" />
+            </ScopedLink>
+            <ScopedLink
+              href="/modules/intelligence"
+              aria-label="Search intelligence"
+            >
+              <ModuleAsset name="search" />
+            </ScopedLink>
+            <button
+              type="button"
+              disabled
+              aria-label="Updates — unavailable"
+              title="Notifications integration is pending"
+            >
+              <ModuleAsset name="updates" />
+            </button>
+            <Link href="/settings/personal" aria-label="Account settings">
+              <ModuleAsset name="profile" />
+            </Link>
+          </nav>
+        )
       }
     />
   );

@@ -62,7 +62,7 @@ function App() {
   if (path === "/__test/preview-modules")
     return (
       <SelectedClientProvider requestedId={search.get("clientId") ?? undefined}>
-        <ModuleShell>
+        <ModuleShell readOnlyPreview>
           <SelectedClientGate>
             <ModuleHub previewCoreReadOnly />
           </SelectedClientGate>

@@ -10,33 +10,44 @@ const asset = (index: number) => `/design/471-93465-imgIcon${index || ""}.svg`;
 export function PortfolioNavigation({
   client,
   onNavigate,
+  readOnlyPreview = false,
 }: {
   client?: { id: string; name: string };
   onNavigate: () => void;
+  readOnlyPreview?: boolean;
 }) {
   const path = usePathname();
   const type = useSearchParams().get("type");
   const portfolioIndex = path === "/" || path === "/portfolio";
-  const globalItems = [
-    {
-      label: "Overview",
-      href: "/portfolio",
-      icon: 0,
-      active: portfolioIndex && !type,
-    },
-    {
-      label: "Clients",
-      href: "/portfolio?type=CLIENT",
-      icon: 1,
-      active: portfolioIndex && type === "CLIENT",
-    },
-    {
-      label: "Prospects",
-      href: "/portfolio?type=PROSPECT",
-      icon: 2,
-      active: portfolioIndex && type === "PROSPECT",
-    },
-  ];
+  const globalItems = readOnlyPreview
+    ? [
+        {
+          label: "Clients",
+          href: "/portfolio",
+          icon: 1,
+          active: true,
+        },
+      ]
+    : [
+        {
+          label: "Overview",
+          href: "/portfolio",
+          icon: 0,
+          active: portfolioIndex && !type,
+        },
+        {
+          label: "Clients",
+          href: "/portfolio?type=CLIENT",
+          icon: 1,
+          active: portfolioIndex && type === "CLIENT",
+        },
+        {
+          label: "Prospects",
+          href: "/portfolio?type=PROSPECT",
+          icon: 2,
+          active: portfolioIndex && type === "PROSPECT",
+        },
+      ];
   return (
     <>
       <p className="eyebrow">Portfolio</p>

@@ -16,11 +16,13 @@ export function Shell({
   destinations,
   client,
   profileControl,
+  readOnlyPreview = false,
 }: {
   children: ReactNode;
   destinations: Destinations;
   client?: { id: string; name: string };
   profileControl?: ReactNode;
+  readOnlyPreview?: boolean;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopExpanded, setDesktopExpanded] = useState(true);
@@ -68,7 +70,11 @@ export function Shell({
         }
         modes={<WorkspaceSwitcher destinations={destinations} />}
         actions={
-          <PortfolioHeaderActions base={base} profileControl={profileControl} />
+          <PortfolioHeaderActions
+            base={base}
+            profileControl={profileControl}
+            readOnlyPreview={readOnlyPreview}
+          />
         }
       />
       <div
@@ -82,13 +88,16 @@ export function Shell({
           <PortfolioNavigation
             client={client}
             onNavigate={() => setMobileOpen(false)}
+            readOnlyPreview={readOnlyPreview}
           />
-          <div className={styles.bottom}>
-            <Link href="/settings">
-              <img src="/design/471-93465-imgIcon10.svg" alt="" />
-              Settings
-            </Link>
-          </div>
+          {!readOnlyPreview && (
+            <div className={styles.bottom}>
+              <Link href="/settings">
+                <img src="/design/471-93465-imgIcon10.svg" alt="" />
+                Settings
+              </Link>
+            </div>
+          )}
         </aside>
         <main id="main" className={styles.main}>
           {children}

@@ -2571,8 +2571,8 @@
     "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
     "kind": "function",
     "symbol": "ModuleHub",
-    "fingerprint": "625d70db236a14853edf374aebec4bcece8fce414ae264d1102885e7e099ef11",
-    "reason": "One Modules hub owns the client-scope selector and its fixed catalog presentation. The limited preview switches that selector to the existing native Core roster hook, masks stale/error data, and replaces unqualified module destinations with an explicit unavailable state. The ordinary operation hook is disabled in preview; neither branch implements transport, authorization, or persistence.",
+    "fingerprint": "2b6d8e2cfdda43104450cba21d8bf61bcc8b02556eae24df34ce6fefa7b7bc8e",
+    "reason": "One Modules hub owns the client-scope presentation and fixed module catalog. The limited preview uses the existing fixed clients.list operation, masks stale/error data, lists visible profiles without selecting an unqualified detail route, and holds module destinations. The ordinary branch keeps its existing selector; transport and authority remain separate.",
     "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2589,8 +2589,8 @@
     "file": "apps/web/src/features/portfolio/index/PreviewClientCatalog.tsx",
     "kind": "function",
     "symbol": "PreviewClientCatalog",
-    "fingerprint": "e97d849458c617a9bb4eaafc124092e7fa1736aeb64b594fa5f4f7b298900d74",
-    "reason": "One limited Portfolio client-list presentation reads the canonical native roster hook and offers local search plus Modules scope selection. It does not mount owner, layout, alert, prospect, profile-detail or write controls; the existing shell, query error component, and filter rule retain their respective ownership.",
+    "fingerprint": "b1f493aea8a1da758ac1f75de6f5eda6f3c46f3c58de47dc5f9e59da454c4304",
+    "reason": "One limited Portfolio client-list presentation reads the existing fixed clients.list operation and offers local search. It does not mount client selection, owner, layout, alert, prospect, profile-detail or write controls; the shell, query error component and filter rule retain their respective ownership.",
     "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
@@ -2607,10 +2607,10 @@
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
     "kind": "function",
     "symbol": "Shell",
-    "fingerprint": "74ff011f5a56e14bc4e013e6063db13526bd052a14e170431093960f4bdc6af4",
-    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
-    "reviewedOn": "2026-10-14",
-    "reason": "Existing Portfolio header/navigation/session composition. Shared HeaderFrame owns geometry; canonical ModeLink owns scoped product routes; existing global actions and mobile navigation stay reachable. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+    "fingerprint": "91dfe55aeff6d32247f7cdb3637ac4eab7831ebd73aeff68489daa27ded702df",
+    "reviewedBy": "Codex non-Meri Core preview source review",
+    "reviewedOn": "2026-10-18",
+    "reason": "Existing Portfolio header, navigation and content composition remains one shell. The limited client-list preview passes a display-only flag to its existing child navigation/actions owners to hide unqualified destinations; ordinary Portfolio behavior and Meri mode switching remain. HeaderFrame owns geometry and no read transport or authorization moved into this component."
   },
   {
     "file": "apps/web/test/rendered-contrast.ts",
@@ -3147,8 +3147,8 @@
     "file": "apps/web/src/shared/capiro/operations/settings.ts",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "e38a3a57357aaaf7e15e7f96c67b8dd20b6e13aee1a187e876bc8550b9cb1dac",
-    "reason": "This is the declarative fixed settings-operation catalogue: each descriptor has a bounded path, strict request/response schema and controller provenance. New account-owner and Microsoft subscription descriptors add no HTTP dispatch, browser authority or UI state; splitting this catalogue would fragment the canonical operation registry.",
+    "fingerprint": "937d7de1d3d37d84e60a158cb205a5ac4de63a8024d3d94c63e96adc3f46b551",
+    "reason": "This declarative fixed settings-operation catalogue keeps each bounded path, request and response schema, and controller provenance together. The existing clients.list response now retains Core's optional profileType field for the limited Portfolio roster filter; no new dispatch, browser authority or UI state was added. Splitting this catalogue would fragment the canonical operation registry.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
