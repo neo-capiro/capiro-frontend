@@ -12,6 +12,9 @@ export default async function SettingsPage({
     <ConnectedModule settings>
       <SettingsScreen
         section={section === "preferences" ? "meri-preferences" : section}
+        memoryReviewEnabled={
+          process.env.MERI_MEMORY_OWNER_REVIEW_ENABLED === "true"
+        }
         meriPreferences={
           <MeriPreferencesPanel
             userPreferencesEnabled={
