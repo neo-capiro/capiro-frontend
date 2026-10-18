@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@capiro/ui/button";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import { firstChatCoreOperationKey } from "../../../shared/capiro/operations/meri-first-chat";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
@@ -10,7 +10,11 @@ import {
   canBeginNewChatAfterConflict,
   resolveFirstChatConversation,
 } from "../../../shared/meri-conversations/first-chat-bootstrap";
-import { beginNewChatIntent } from "../../../shared/meri-conversations/first-chat-intent";
+import {
+  storedConversationConfirmed,
+  useBeginNewChat,
+  useStoredConversationRecovery,
+} from "../../../shared/meri-conversations/stored-conversation-recovery";
 import { conversationSelection } from "../../../shared/meri-conversations/selection";
 import { MeriLiveConversation } from "./MeriLiveConversation";
 import { useConversationSession } from "./useConversationSession";
@@ -130,7 +134,7 @@ function ClientIneligibleNotice({ reason }: { reason: Ineligibility }) {
 
 type CoreResolution =
   | { state: "pending" }
-  | { state: "ready"; conversationId: string }
+  | { state: "ready"; conversationId: string; reused: boolean }
   | { state: "error"; canBeginNew: boolean };
 
 /** The Core receipt is verified before mounting a component that can issue a Meri session. */
@@ -149,8 +153,15 @@ function CoreResolvedConversation({
     state: "pending",
   });
   const { tenantId, actorId } = account;
+  const { restart, refuse } = useResolutionControls(setResolution, setAttempt);
+  const beginNew = useBeginNewChat(
+    { tenantId, actorId, clientId },
+    restart,
+    refuse,
+  );
   useEffect(() => {
     const controller = new AbortController();
+    const reused = storedConversationConfirmed({ tenantId, actorId, clientId });
     void Promise.resolve()
       .then(() =>
         resolveFirstChatConversation({
@@ -163,7 +174,7 @@ function CoreResolvedConversation({
       )
       .then(({ conversationId }) => {
         if (!controller.signal.aborted)
-          setResolution({ state: "ready", conversationId });
+          setResolution({ state: "ready", conversationId, reused });
       })
       .catch((error: unknown) => {
         if (!controller.signal.aborted)
@@ -191,32 +202,11 @@ function CoreResolvedConversation({
       <section role="alert">
         <h2>Conversation connection unavailable</h2>
         <p>The current conversation could not be confirmed.</p>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => {
-            setResolution({ state: "pending" });
-            setAttempt((value) => value + 1);
-          }}
-        >
+        <Button type="button" variant="outline" onClick={restart}>
           Retry conversation
         </Button>
         {resolution.canBeginNew && (
-          <Button
-            type="button"
-            onClick={() => {
-              try {
-                beginNewChatIntent(
-                  { tenantId, actorId, clientId },
-                  window.sessionStorage,
-                );
-                setResolution({ state: "pending" });
-                setAttempt((value) => value + 1);
-              } catch {
-                setResolution({ state: "error", canBeginNew: false });
-              }
-            }}
-          >
+          <Button type="button" onClick={beginNew}>
             New Chat
           </Button>
         )}
@@ -229,8 +219,24 @@ function CoreResolvedConversation({
       clientId={clientId}
       scope={scope}
       conversationId={resolution.conversationId}
+      onStoredRefused={resolution.reused ? beginNew : undefined}
     />
   );
+}
+
+function useResolutionControls(
+  setResolution: (value: CoreResolution) => void,
+  setAttempt: (update: (value: number) => number) => void,
+) {
+  const restart = useCallback(() => {
+    setResolution({ state: "pending" });
+    setAttempt((value) => value + 1);
+  }, [setResolution, setAttempt]);
+  const refuse = useCallback(
+    () => setResolution({ state: "error", canBeginNew: false }),
+    [setResolution],
+  );
+  return { restart, refuse };
 }
 
 /** One selected conversation; session changes preserve its draft and immutable recovery journal. */
@@ -239,14 +245,21 @@ function ConnectedConversation({
   clientId,
   scope,
   conversationId,
+  onStoredRefused,
 }: {
   account: ConversationAccount;
   clientId: string;
   scope: string;
   conversationId?: string | undefined;
+  onStoredRefused?: (() => void) | undefined;
 }) {
   const session = useConversationSession(account, clientId, conversationId);
   const { ready, connection } = session;
+  useStoredConversationRecovery(
+    connection?.state?.status ?? "idle",
+    onStoredRefused !== undefined,
+    onStoredRefused,
+  );
   if (!ready || session.latestTarget)
     return <ConnectionPending session={session} scope={scope} />;
   return (

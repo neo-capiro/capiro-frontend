@@ -60,6 +60,7 @@ export const serverAdapters = new Map([
   [`${appSource}app/api/action-followthrough/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`, `${appSource}shared/meri-actions/connection-config.ts`,
+    `${appSource}shared/meri-actions/identity-token.server.ts`,
   ])],
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
     previewPolicy, previewReadProxy,

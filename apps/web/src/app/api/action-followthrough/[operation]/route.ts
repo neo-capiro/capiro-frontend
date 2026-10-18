@@ -3,6 +3,7 @@ import { previewBackendRejection } from "../../../../shared/preview/backend-poli
 import { readOpaqueSessionConfig } from "../../../../shared/meri-actions/connection-config";
 import { readActionConfig } from "../../../../shared/meri-actions/config";
 import { proxyActionRequest } from "../../../../shared/meri-actions/proxy";
+import { meriIdentityToken } from "../../../../shared/meri-actions/identity-token.server";
 
 export async function POST(
   request: Request,
@@ -21,7 +22,7 @@ export async function POST(
       const session = await auth();
       return session.userId
         ? operation === "session"
-          ? session.getToken()
+          ? meriIdentityToken(session.sessionId, () => session.getToken())
           : session.getToken({ template: "capiro" })
         : null;
     },
