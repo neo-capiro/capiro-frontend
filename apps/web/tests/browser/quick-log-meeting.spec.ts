@@ -20,7 +20,7 @@ function recordWrites(page: Page) {
 async function fillActivity(page: Page) {
   const dialog = quickLog(page);
   await expect(dialog.getByLabel("Activity type").locator("option")).toHaveText(
-    ["Note", "Call", "Logged email", "Decision", "Request"],
+    ["Note", "Call", "Logged email", "Decision", "Request", "Commitment"],
   );
   await expect(dialog.getByText(/We owe|They owe|Counterparty/)).toHaveCount(0);
   await dialog.getByLabel("Activity type").selectOption("call");

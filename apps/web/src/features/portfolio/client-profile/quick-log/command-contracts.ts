@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { quickLogInputSchema } from "./contracts";
+import { quickLogInputBaseSchema } from "./contracts";
 import type { ClientWriter } from "./authority";
 
 const uuid = z.uuid().transform((value) => value.toLowerCase());
@@ -34,7 +34,12 @@ export type FollowUpInput = z.infer<typeof followUpInputSchema>;
 export const activityCommandInputSchema = z
   .object({
     requestId: uuid,
-    activity: quickLogInputSchema.strict(),
+    activity: quickLogInputBaseSchema
+      .omit({ occurredAt: true, dueAt: true })
+      .extend({
+        kind: quickLogInputBaseSchema.shape.kind.exclude(["commitment"]),
+      })
+      .strict(),
     followUp: followUpInputSchema,
   })
   .strict();

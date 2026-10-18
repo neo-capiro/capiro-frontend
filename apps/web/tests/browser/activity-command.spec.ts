@@ -71,7 +71,7 @@ test("activity saved and task pending are separate; explicit resume uses the lat
   ).toHaveCount(0);
   expect(unexpected).toEqual([]);
 });
-test("a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls", async ({
+test("a date requires explicit zone; scheduled generic follow-up fits mobile", async ({
   page,
 }, info) => {
   const { state, unexpected } = await installCommands(page);
@@ -105,7 +105,14 @@ test("a date requires explicit zone; scheduled follow-up fits mobile and has no 
   });
   await expect(
     page.getByRole("combobox", { name: "Activity type" }).locator("option"),
-  ).toHaveText(["Note", "Call", "Logged email", "Decision", "Request"]);
+  ).toHaveText([
+    "Note",
+    "Call",
+    "Logged email",
+    "Decision",
+    "Request",
+    "Commitment",
+  ]);
   await expect(page.getByText(/We owe|They owe|Counterparty/)).toHaveCount(0);
   await save(page);
   await expect(
