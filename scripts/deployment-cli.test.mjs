@@ -7,6 +7,9 @@ import test from 'node:test';
 
 const prepare = 'apps/web/deployment/portfolio/qualify-elements.mjs';
 const smoke = 'apps/web/deployment/portfolio/smoke.sh';
+const bash = process.env.CAPIRO_TEST_BASH ?? (process.platform === 'win32'
+  ? join(process.env.ProgramFiles || 'C:\\Program Files', 'Git', 'bin', 'bash.exe')
+  : 'bash');
 function run(binary, args, expected) {
   const result = spawnSync(binary, args, { encoding: 'utf8', timeout: 10000 });
   assert.equal(result.error, undefined);
@@ -29,11 +32,13 @@ test('shipping SSR entry is import-safe and refuses invalid/reused output before
 });
 
 test('container smoke documents exits and rejects invalid input before Docker allocation', () => {
-  run('bash', ['-n', smoke], 0);
-  assert.match(run('bash', [smoke, '--help'], 0).stdout, /ephemeral loopback port/);
-  run('bash', [smoke], 2);
-  run('bash', [smoke, '--bad'], 2);
-  run('bash', [smoke, 'one', 'two'], 2);
+  if (process.platform === 'win32' || process.env.CAPIRO_TEST_BASH)
+    assert.ok(existsSync(bash), 'Set CAPIRO_TEST_BASH to an available Bash executable; smoke assertions require a real shell');
+  run(bash, ['-n', smoke], 0);
+  assert.match(run(bash, [smoke, '--help'], 0).stdout, /ephemeral loopback port/);
+  run(bash, [smoke], 2);
+  run(bash, [smoke, '--bad'], 2);
+  run(bash, [smoke, 'one', 'two'], 2);
 });
 
 test('Docker context regression is import-safe and refuses invalid or reused outputs before allocation', () => {
