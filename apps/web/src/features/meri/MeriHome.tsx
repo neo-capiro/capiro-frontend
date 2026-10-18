@@ -96,7 +96,8 @@ function MeriWorkspaceLinks({ clientId }: { clientId?: string }) {
       </Link>{" "}
       <Link href={scopedHref("/meri/task-updates", clientId)}>
         Open task updates
-      </Link>
+      </Link>{" "}
+      <Link href="/meri/memory">Review personal memory</Link>
       <p>Each workspace reports its connection status when opened.</p>
     </section>
   );
