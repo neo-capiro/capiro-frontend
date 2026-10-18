@@ -11,6 +11,8 @@ const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
 const previewPolicy = `${appSource}shared/preview/backend-policy.server.ts`;
 const previewOwner = `${appSource}shared/preview/`;
 const previewReadProxy = `${previewOwner}read-proxy.server.ts`;
+const previewMemoryOwnerRoute = `${previewOwner}memory-owner-route.server.ts`;
+const memoryOwnerProxy = `${appSource}features/meri/memory-review/owner-review-proxy.server.ts`;
 const objectiveSnapshotOwner = `${appSource}shared/capiro/operations/objective-workspace-receiving.ts`;
 function approvedSnapshotImport(file, entry) {
   return file === objectiveSnapshotOwner && entry.kind === 'named' && entry.names.length === 1 && entry.names[0] === 'canonicalWorkspaceSnapshot';
@@ -46,6 +48,24 @@ export const publicExports = new Set([
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/memory/owner/candidates/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/status/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', `${appSource}features/meri/memory-review/owner-inbox-proxy.server.ts`,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/decision/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/candidates/[id]/version-decision/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/items/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
+  [`${appSource}app/api/memory/owner/items/[id]/corrections/route.ts`, new Set([
+    previewPolicy, '@clerk/nextjs/server', memoryOwnerProxy,
+  ])],
   [`${appSource}app/api/task-commands/[operation]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-task-commands/config.ts`, `${appSource}shared/meri-task-commands/proxy.ts`,
@@ -100,6 +120,7 @@ function resolveImport(from, specifier, files) {
 function edgeViolation(from, to) {
   if (to.startsWith(previewOwner) && !from.startsWith(previewOwner)
       && !(to === previewPolicy && from === `${appSource}proxy.ts`)
+      && !(to === previewMemoryOwnerRoute && from === memoryOwnerProxy)
       && !serverAdapters.get(from)?.has(to)) return `${from}: preview policy and receiving code are allocated only to reviewed backend server entries`;
   if (to === pricingOwner && from !== pricingEntry) return `${from}: public pricing projection is allocated only to the Onboard server entry`;
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;

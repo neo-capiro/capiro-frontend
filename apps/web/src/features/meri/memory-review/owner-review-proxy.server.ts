@@ -3,7 +3,7 @@ import {
   withActionDeadline,
 } from "../../../shared/meri-actions/bounded-json";
 import { readConfig } from "../../../shared/portfolio/config/config";
-import { previewApiTarget } from "../../../shared/preview/read-config.server";
+import { previewMemoryOwnerTarget } from "../../../shared/preview/memory-owner-route.server";
 import { sameRequestOrigin } from "../../../shared/request-origin";
 import {
   ownerCorrectionPaths,
@@ -36,11 +36,7 @@ export function targetForOwnerMemoryReview(
 ): URL | null {
   if (env.MERI_MEMORY_OWNER_REVIEW_ENABLED !== "true") return null;
   if (env.CAPIRO_PREVIEW_READ_ONLY === "true")
-    return previewApiTarget(
-      env,
-      request,
-      env.CAPIRO_PREVIEW_MEMORY_CORE_API_BASE_URL,
-    );
+    return previewMemoryOwnerTarget(env, request);
   if (
     env.CAPIRO_PREVIEW_READ_ONLY !== undefined &&
     env.CAPIRO_PREVIEW_READ_ONLY !== "false"

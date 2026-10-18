@@ -55,6 +55,14 @@ and Meri routes are held by default. A proposed nonempty Meri origin or opt-in
 is not evidence that its service, model grant or dispatch is ready. The
 [PR70 build-input and activation handoff](../../../../docs/non-meri-continuation-20261016/PR70-PREVIEW-CONFIG-AND-IMAGE-PREP-20261017.md)
 keeps image source, template source and runtime proof separate.
+Personal memory owner review has six closed browser proxy routes, but the
+preview profile emits `MERI_MEMORY_OWNER_REVIEW_ENABLED=false`, an empty Core
+memory source and an empty memory target. The reviewed Core memory source
+`96065aea7076fde961071ebce402b6b2a31ee60c` does not include the qualified
+preview listener packet. Re-pin the source, template values and separate Core
+target together only after the seven Core owner endpoints pass listener and
+image qualification. Source admission does not establish that the running
+service has the corresponding image.
 Existing IAM, network and secret-reference wiring remains unchanged. Exact
 reference validation cannot prove the payloads contain matching keys or belong
 to the declared application and issuer. Those checks, backend/auth/data
