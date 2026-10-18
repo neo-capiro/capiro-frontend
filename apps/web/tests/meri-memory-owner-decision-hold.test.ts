@@ -5,6 +5,7 @@ import {
   readOwnerDecisionHolds,
   releaseOwnerDecision,
 } from "../src/features/meri/memory-review/owner-decision-hold";
+import { ownerCorrectionHoldKey } from "../src/features/meri/memory-review/owner-correction";
 
 const id = "11111111-1111-4111-8111-111111111111";
 
@@ -46,6 +47,21 @@ describe("owner memory decision recovery", () => {
     ).toEqual(new Set());
     expect(releaseOwnerDecision(storage, actor, id)).toBe(true);
     expect(readOwnerDecisionHolds(storage, actor)).toEqual(new Set());
+  });
+
+  it("retains an uncertain correction separately from decisions", () => {
+    const storage = memoryStorage();
+    const actor = ownerCorrectionHoldKey("user-one", "firm-one")!;
+    expect(actor).not.toBe(ownerDecisionHoldKey("user-one", "firm-one"));
+    expect(holdOwnerDecision(storage, actor, id)).toBe(true);
+    expect(readOwnerDecisionHolds(storage, actor)).toEqual(new Set([id]));
+    expect(
+      readOwnerDecisionHolds(
+        storage,
+        ownerDecisionHoldKey("user-one", "firm-one")!,
+      ),
+    ).toEqual(new Set());
+    expect(holdOwnerDecision(storage, actor, id)).toBe(false);
   });
 
   it("holds decisions when recovery storage is corrupt or unavailable", () => {

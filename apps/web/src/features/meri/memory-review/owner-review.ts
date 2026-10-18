@@ -159,6 +159,7 @@ export const ownerReviewPaths = Object.freeze({
   decision: (id: string) => `/api/memory/owner/candidates/${id}/decision`,
   versionDecision: (id: string) =>
     `/api/memory/owner/candidates/${id}/version-decision`,
+  correction: (id: string) => `/api/memory/owner/items/${id}/corrections`,
 });
 
 /** Core uses an internal key for unkeyed Meri submissions; keep it out of the heading. */
