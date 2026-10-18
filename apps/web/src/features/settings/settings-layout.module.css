@@ -12,6 +12,15 @@
   flex-direction: column;
   gap: 20px;
 }
+@media (min-width: 1101px) {
+  .rail {
+    position: sticky;
+    top: 65px;
+    align-self: flex-start;
+    height: calc(100dvh - 65px);
+    overflow-y: auto;
+  }
+}
 .rail nav {
   display: flex;
   flex-direction: column;
