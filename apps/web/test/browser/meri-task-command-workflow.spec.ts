@@ -34,6 +34,11 @@ test("desktop task update uses explicit connection, immutable preparation and se
   page,
 }, testInfo) => {
   const fixture = await taskHostFixture(page);
+  const taskCommandHeaders: Promise<Record<string, string>>[] = [];
+  page.on("request", (request) => {
+    if (new URL(request.url()).pathname.startsWith("/api/task-commands/"))
+      taskCommandHeaders.push(request.allHeaders());
+  });
   await page.goto(taskUrl());
   await expect(
     page.getByRole("button", { name: "Connect task-update service" }),
@@ -90,14 +95,14 @@ test("desktop task update uses explicit connection, immutable preparation and se
     taskWire("observed").request,
   ]);
   expect(fixture.operations("prepare")).toHaveLength(1);
-  expect(
-    fixture.calls
-      .filter((call) => call.route !== "session")
-      .every(
-        (call) =>
-          call.authorization === `Bearer action_session_${"a".repeat(43)}`,
-      ),
-  ).toBe(true);
+  const browserHeaders = await Promise.all(taskCommandHeaders);
+  expect(browserHeaders).toHaveLength(4);
+  for (const headers of browserHeaders) {
+    expect(headers["x-meri-action-session"]).toBe(
+      `action_session_${"a".repeat(43)}`,
+    );
+    expect(headers).not.toHaveProperty("authorization");
+  }
   await page.evaluate(() => document.fonts.ready.then(() => undefined));
   await page.screenshot({
     path: testInfo.outputPath("task-update-desktop.png"),

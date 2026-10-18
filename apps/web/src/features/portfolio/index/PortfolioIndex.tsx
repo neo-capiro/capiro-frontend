@@ -11,12 +11,10 @@ import { useClients, useAccountOwners, useMemberOptions } from "./queries";
 import { useProspects } from "@/features/portfolio/prospects/public";
 import {
   clearPortfolioFilters,
-  filterClients,
-  filterProspects,
   portfolioHref,
   readPortfolioState,
-  sortClients,
 } from "./filter";
+import { projectPortfolioCatalog } from "./catalog-projection";
 import { CreateProfileDialog } from "./CreateProfileDialog";
 import { PortfolioProfiles } from "./PortfolioProfiles";
 import { ProspectResults } from "./ProspectResults";
@@ -95,63 +93,14 @@ export function PortfolioIndex({
       clearPortfolioFilters(pathname, new URLSearchParams(params)),
       { scroll: false },
     );
-  const coreById = new Map(
-    (records ?? []).map((client) => [client.id, client]),
-  );
-  const linkedCoreIds = new Set(
-    (prospectRecords ?? [])
-      .map((prospect) => prospect.linkedClientId)
-      .filter((id): id is string => Boolean(id)),
-  );
-  const coreOnlyProspects = (records ?? []).filter(
-    (client) =>
-      client.profileType === "PROSPECT" && !linkedCoreIds.has(client.id),
-  );
-  const allCore = (records ?? []).filter(
-    (client) =>
-      client.profileType !== "PROSPECT" || !linkedCoreIds.has(client.id),
-  );
-  const allBd = (prospectRecords ?? []).filter((prospect) => {
-    const linked = prospect.linkedClientId
-      ? coreById.get(prospect.linkedClientId)
-      : undefined;
-    return !linked || linked.profileType === "PROSPECT";
-  });
-  const rows = sortClients(
-    filterClients(
-      state.type === "PROSPECT" ? coreOnlyProspects : allCore,
+  const { rows, visibleProspects, prospectsCapped, prospectCount, allCount } =
+    projectPortfolioCatalog({
+      records,
+      prospectRecords,
+      prospectVisibleCount,
       state,
-      owners.error ? {} : (owners.data ?? {}),
-    ).filter(
-      (client) => state.type !== "CLIENT" || client.profileType === "CLIENT",
-    ),
-    state.sort,
-  );
-  const visibleProspects =
-    prospectRecords && state.type !== "CLIENT"
-      ? filterProspects(
-          state.type === "PROSPECT" ? prospectRecords : allBd,
-          state,
-        )
-      : [];
-  const prospectsCapped =
-    prospectVisibleCount !== undefined &&
-    prospectRecords !== undefined &&
-    prospectVisibleCount > prospectRecords.length;
-  const prospectCount =
-    prospectVisibleCount === undefined || !records
-      ? undefined
-      : prospectsCapped && coreOnlyProspects.length > 0
-        ? undefined
-        : prospectVisibleCount + coreOnlyProspects.length;
-  const allCount =
-    prospectVisibleCount === undefined || !records
-      ? undefined
-      : prospectsCapped && records.length > 0
-        ? undefined
-        : allCore.length +
-          allBd.length +
-          (prospectVisibleCount - (prospectRecords?.length ?? 0));
+      owners: owners.error ? {} : (owners.data ?? {}),
+    });
   const prospectiveOwnerById = Object.fromEntries(
     (prospectOwners.data ?? []).map((member) => [member.id, member]),
   );

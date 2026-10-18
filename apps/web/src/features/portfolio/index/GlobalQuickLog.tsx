@@ -34,11 +34,12 @@ function QuickLogSession({
     (client) => client.id === loggingClientId,
   );
   const close = () => {
-    if (!showCommand) {
-      setClientId("");
-      setMode("client");
-      setVisitedMember(false);
-    }
+    // Keep the mounted client log's verified Undo receipt, but begin the next
+    // invocation at the destination chooser as the prior URL-scoped flow did.
+    setShowCommand(false);
+    setClientId("");
+    setMode("client");
+    setVisitedMember(false);
     const next = new URLSearchParams(params);
     next.delete("log");
     router.replace(`/portfolio?${next}`, { scroll: false });

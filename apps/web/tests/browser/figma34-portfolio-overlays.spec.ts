@@ -66,6 +66,12 @@ test("Quick log global chooser and inline client form desktop frames", async ({
   await client.getByRole("button", { name: "Cancel", exact: true }).click();
   await expect(client).toHaveCount(0);
   expect(new URL(page.url()).searchParams.has("log")).toBe(false);
+  await page.getByRole("link", { name: "Quick log", exact: true }).click();
+  await expect(
+    page
+      .getByRole("dialog", { name: "Quick log", exact: true })
+      .getByRole("combobox", { name: "Client" }),
+  ).toBeVisible();
   expect(writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });

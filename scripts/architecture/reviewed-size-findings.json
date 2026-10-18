@@ -30,10 +30,10 @@
     "file": "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx",
     "kind": "function",
     "symbol": "AttendancePanel",
-    "fingerprint": "ac912c0a777e2b3060558eec8dbe6e97fc4ec95d5bc637227dbe3e85e98dfccb",
-    "reason": "This panel presents one meeting's attendance session and its remove/reconcile outcome. SendMeriDialog separately owns consented dispatch, and the existing API owns provider interactions. Removing and reconciling the same session are related lifecycle operations. A removal hook is a reasonable future extraction if that operation grows or becomes reusable; current state is cohesive.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "dc5359340c7d4f4bc59ae857e09e41cae9129aa3555fb6e7612b668a0498e198",
+    "reason": "One attendance session presents its visible send, remove and reconcile outcome. The guarded session query, consented send dialog and removal API are dedicated owners; the compact panel adds no independent lifecycle.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx",
@@ -111,10 +111,10 @@
     "file": "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx",
     "kind": "function",
     "symbol": "MeetingLibrary",
-    "fingerprint": "686df2cbfe6c5b8a8c84b764b471fc91822d40bfcfb4029ba6f5e6b3e7617977",
-    "reason": "This is a read-only meeting archive composition: URL filters, pagination and the resulting table. Query and URL schemas are separate and its only action is navigation or opening the dedicated assignment/upload surfaces. A filter view could be extracted if reused; the current JSX describes one archive rather than independent writers.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "c9b9df6d4db44b621053c213303385ee7a0b4727b08f708eb8704c9f7b002cbf",
+    "reason": "One meeting archive owns URL filters, current read result and pagination. Schema, query and actions are delegated; the changed masthead does not add another archive or transport responsibility.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
@@ -261,12 +261,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
     "kind": "function",
     "symbol": "ClientHeader",
-    "line": 13,
-    "nonblank": 111,
-    "fingerprint": "fa3ca83c8cedeb4f1bde8b068d1485424c9862b1ebb674862bf7d2de4eeddb05",
-    "reason": "Owns client breadcrumbs, view switching, the view keyboard shortcut and header action entry points. View descriptors and action implementations are separate. The effect removes its listener on teardown. Retain this navigation composition; no client business rule or transport is hidden in it.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "e459c4a456dccf946de3a5b6c87edae7c9d9e22551e205d5011fb2bb2990061f",
+    "reason": "One client header composes breadcrumbs, view switcher and client action entry points using shared descriptors. Destination implementations remain in child owners; no new data or policy is computed by this header.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
@@ -338,10 +336,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx",
     "kind": "function",
     "symbol": "FacilityDetailDialog",
-    "fingerprint": "af3334369aceac754655ce5ee72ae49f3e243cb715af15975e2be6ace315707d",
-    "reason": "Owns selected-facility scope, guarded section navigation and edit/remove modal lifetime. The open/current guard gates evidence reads; wrong-client content and action guards remain intact. Facts, queries and write editors have separate owners. The sole change removes the unpinned overlay prop; Facility styling is scoped in CSS. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedOn": "2026-10-16",
-    "reviewedBy": "Codex PR60 root and independent elements_pin_fix_review"
+    "fingerprint": "183be89cf92ea008542c2ae98ac9ad3f38a53a4fc275af615a856ea6649ccc58",
+    "reason": "One selected facility dialog owns evidence navigation, current-client guard and edit/remove modal lifetime. Evidence sections and write surfaces are children; no new service or source authority is embedded.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
@@ -580,12 +578,10 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx",
     "kind": "function",
     "symbol": "ProspectPipeline",
-    "line": 18,
-    "nonblank": 125,
-    "fingerprint": "6de7f0e3319ca02c8abc26a0604775cff426b3e1d618ffda0118902946d06d90",
-    "reason": "Owns the pipeline view's drag/selection intent and opens `StageEditor` for review. It does not persist on drop, infer legacy mappings, calculate billing or create clients. Counts and stage data remain authoritative inputs. Retain the local drag ID and selected-stage review together; a valuation model would need a different owner.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "c7fa7bed848ce9d74ea1dc8056a7d2cb6001c0b07bca36419667ca4e167e06ba",
+    "reason": "One pipeline board renders authoritative stage counts and cards, with local drag and selected-stage intent. StageEditor separately owns update review and write; the board preserves legacy-stage visibility and does not generate counts or mutate prospects directly.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/AddTargetDialog.tsx",
@@ -745,7 +741,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -888,10 +884,10 @@
     "file": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
     "kind": "function",
     "symbol": "UploadFiles",
-    "fingerprint": "858ae3cc854d140d122fc4c7d4b7bb0c3f192978b69b441a51873853b4f67099",
-    "reason": "Owns one upload job list: selected files, a single in-flight operation, per-job captured actor/view and attempt map, progress, explicit confirmation-only retry, and completion after the authorized list refresh. The existing uploadParentFile owns transport and useFileScope owns authority/lifetime. Retaining the attempt map with this UI queue prevents a retry from silently becoming a new upload; the status does not infer scan readiness.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "b7a27ab808a892cd98a7726849f897a3ad94713c571e8847c8631ab9bc2642be",
+    "reason": "One upload queue retains each job\u2019s captured actor, guard and attempt so retry cannot silently create a fresh attempt. uploadParentFile owns transport; usage invalidation only refreshes the successful upload\u2019s resulting state and adds no storage writer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/files/file-scope.ts",
@@ -1135,10 +1131,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
-    "fingerprint": "e582ed8617e436f13f83c017161541cae717cb5ad14c1522e428afaa4066e99b",
-    "reason": "This component remains the one ordinary-activity/optional-follow-up form. The added checking and hold presentations hide restored input until current Core authority and journal consistency pass. Field remounting follows the retained request identity; FollowUpFields and FollowUpStatus own specialized rendering, and useFollowUpCommand owns command lifetime. No storage or network implementation moved into the form.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "6e65e83a40d922201dfb33d108220460161361ad0d27dfee70864c4ba6206b6e",
+    "reason": "One activity form composes supported direct and generic follow-up fields with retained recovery and Undo presentation. Submission validation captures one input while useQuickLog and useFollowUpCommand own the direct mutation and saga; the view holds no service authority.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
@@ -1396,10 +1392,10 @@
     "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
     "kind": "function",
     "symbol": "CapabilitiesPage",
-    "fingerprint": "f637c27f71b03629f672fe313f55353bd71023c6732d40f7b35fd28dc5e05f56",
-    "reason": "Single capability-list projection and URL-selected editor owner. New markup connects existing records/maturity to responsive feature CSS; state, query, selection, fit and native mutations are unchanged. Extracting a second mobile projection would duplicate record rendering; no second state owner or shared-layer dependency was added.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "3255317709ca53ae48f14e22b21ffd4472efdafc9d52cab382f97c647a82dc50",
+    "reason": "One URL-selected capability list presents a read and delegates editor, registrations, fit, and past-performance content to existing owners. The page's local codes dialog flag adds no capability write or independent data lifecycle.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
@@ -1424,7 +1420,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1459,10 +1455,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
     "kind": "function",
     "symbol": "ClientOverview",
-    "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857",
-    "reason": "Existing overview composition retains read/query/error ownership and all prior child boundaries. Two-line change imports/inserts ClientDetails with current saved client and key=id. Detail field rendering and modal interaction live in cohesive new children; no new transport, writer or authority rule joins this container.",
-    "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "2196df6b7f614d95b35930a29c9438a18c5bab93e4363c52a745ddb1106621ca",
+    "reason": "One client overview composes current client, team and activity reads with its cards and dialog entry points. Data mutations and detailed editors remain in child owners; the reordered cards do not introduce another workflow.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
@@ -1522,10 +1518,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
     "kind": "function",
     "symbol": "CurrentFacilitiesCard",
-    "fingerprint": "57886290e8ec40b32db018ef14077b55c4a23b7e945217d32ccf564827d3ff8c",
-    "reason": "One current facilities collection card retains existing map/display and current-source ownership while launching the separate manager. Data/query/actor behavior remains canonical; extracted editor and manager own their distinct UI lifetimes. No new transport or permission policy is added.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "b2fdd54eb39ab1b4c8e65176db43a3711c8516e1ddd5db590fc088552575739c",
+    "reason": "One actor-scoped facility collection owns map selection and modal openings. Query, facility manager and editor remain separate, so facility presentation and selection stay cohesive.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
@@ -1558,12 +1554,10 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "9c083f6549341eed0ff1c975057ab28c4a34780ee497bb10ddacbad7aa1770b9",
-    "reason": "Composes one reader-scoped collection, filters and action lifetime. FileSelectionBar now owns count/hidden-selection disclosure, clear intent and the existing single-file move/batch-unavailable presentation. FilesPage retains the sole reader-scoped selected IDs and current-file guard; All files clears only folder through the existing filter owner. Query, upload, access, move, delete and preview owners retain transport, cancellation and receipt semantics. The 315-line function adds no backend or authorization responsibility.",
-    "reviewedBy": "Codex shared frontend integration owner",
-    "reviewedOn": "2026-10-14",
-    "line": 20,
-    "nonblank": 315
+    "fingerprint": "398d237e5aaa25b8bb7786f54296c1938acdc100a29879417be1cb3bf72459a9",
+    "reason": "One reader-scoped file collection composes local folder/filter/selection state, linked-file arrival and action dialog visibility. Storage usage has an independent Core read; upload, access, move, preview and delete remain in child owners.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
@@ -2154,10 +2148,10 @@
     "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
     "kind": "function",
     "symbol": "PortfolioAttention",
-    "fingerprint": "020cb2931bda740706e7755dce3dac807f49d3414257cc6ee5c08331dc766ebb",
-    "reason": "Independent exact responsibility/fingerprint review accepts cohesive existing presentation or strict rendered-contrast verification; unchanged auth/transport and unsupported effect rejection, with explicit accessibility controls. See docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "49dc5878d18abd4c7e2e5899465a08b35dbf9ce0d269fe0302f5aa00bb6dcb29",
+    "reason": "One identity-gated alerts card renders a source-provided alert snapshot, shown count, unavailable/limited coverage and refresh. usePortfolioAttention owns permission/read handling and AttentionItem owns rows; this component adds no alert source or writer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/shared/shell/Sidebar.tsx",
@@ -2371,7 +2365,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2406,10 +2400,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
     "kind": "function",
     "symbol": "ActivityRow",
-    "fingerprint": "60ab6bc6ec200d556a68d95c839e274477cb00ea352ea41631400793c6700b8e",
-    "reason": "ActivityRow presents one timeline item, its metadata and its native source links. The added branch reuses the existing link style and supplied identity; it introduces no transport, mutation, session or state owner. Splitting this ten-line branch would not isolate a distinct responsibility.",
-    "reviewedBy": "Codex calendar_relationships_review",
-    "reviewedOn": "2026-10-13"
+    "fingerprint": "03dc88c9f8e73040924bc11646b6934cbab31d88f0ed0542706201db0b9e32bd",
+    "reason": "One timeline item renderer presents its supplied activity and derives current-source and Objective links. It does not fetch or write either source, so the richer link display remains within this row responsibility.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
@@ -2577,28 +2571,28 @@
     "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
     "kind": "function",
     "symbol": "ModuleHub",
-    "fingerprint": "e3cf3848494045e7e265bff95a44702fcf22e15f61bb91bf89dfb99487d46ab7",
-    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
-    "reviewedOn": "2026-10-14",
-    "reason": "One module catalogue/scope/group composition; cards, information and relationship surfaces remain delegated. Responsive title reuses the existing shared PageHeader and does not add a new state or workflow. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+    "fingerprint": "923d94036a7ecb123752a0d0710f5ccad80764f08ca16545904caea47ba805b3",
+    "reason": "One module catalogue view binds the available-client read, selected-client URL hint, fixed group order and page heading. Cards and relationship visuals are separate components; the new frame target and copy introduce no second state or workflow.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
-    "fingerprint": "ef0940d606679f37299017516cf986b6e9364d9a77f2d008c17c718ef498d257",
-    "reviewedBy": "Codex independent outreach_review; root exact-source verification",
-    "reviewedOn": "2026-10-14",
-    "reason": "One existing portfolio index filter/dialog/owner/profile composition. Responsive header classes and DOM attention ordering preserve canonical query, creation, saved layout and attention owners. No authority, API or persistence responsibility is added. Evidence: docs/figma-parity-20261014/INDEPENDENT-REVIEW.md."
+    "fingerprint": "085ac0fc0e4ac8013bf7e0eff82bd5e0129293cfa23f69455d710bc14dbd8afc",
+    "reason": "This one Portfolio page reads URL filters and four scoped queries, then composes header, results, empty/error and customization states. Linked Core/BD deduplication, filtering and capped-count policy now belong to the pure catalog-projection module with focused tests; IndexNavigation, PortfolioProfiles, ProspectResults, PortfolioAttention, GlobalQuickLog and dialogs retain their respective surfaces. No persistence or business rule is hidden in this route renderer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "4d10a14ea676bf471bf93e4bf116252ed46946ae322f39a6741e8c084c3a528f",
-    "reviewedBy": "Codex independent outreach_review",
-    "reviewedOn": "2026-10-14",
-    "reason": "Independent exact responsibility/fingerprint review accepts cohesive existing presentation or strict rendered-contrast verification; unchanged auth/transport and unsupported effect rejection, with explicit accessibility controls. See docs/browser-release-repair-20261014/INDEPENDENT-REVIEW.md."
+    "fingerprint": "4272796b545f46b9864c6fddd8e7a1271d2e06add3a998f0d02b596f84de62aa",
+    "reason": "This page-scoped CSS module groups the Portfolio index pulse, cards, navigation, chooser, filters and responsive variants used by index components. The Figma changes adapt existing index selectors without adding a global token, shared shell rule or cross-feature style owner.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
@@ -2847,37 +2841,37 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "6ac07199ad93009f8409f785eb3dca50a903b02afbe13e830caaa7af6bbfebe5",
-    "reason": "Re-review after #85/#91 (67359f40): the only change since the 2026-10-15 review keeps the disconnect confirmation open while its write is pending (onClose ignores dismissal when action.busy). Provider/connection composition, transport and lifetime ownership are unchanged.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "fingerprint": "4aef2aff6925c163633c2d25fe5107a0512acddec02b50529b9f3a2136c1e9c0",
+    "reason": "One account-integration lifetime owns provider capability reads, registered connections, selected account dialogs and fixed connect, sync and disconnect commands. The Microsoft Realtime control targets the same selected connection; operation validation and mutation serialization remain delegated. Provider and connection callbacks are reviewed separately, rather than excused by the screen review.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous>",
-    "fingerprint": "b86ee62d387eb3c36f00c5403b417b268b5c85f952799e50cba9c78493356689",
-    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
-    "reviewedBy": "Codex non_meri_closure_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "da12b71f1b9dc251e00a5da08353b7333562a60aa4de3e6945d967918f98d02f",
+    "reason": "The provider mapping presents one provider card from its registered accounts and capability loading/error/configuration state, with register/connect actions. It does not fetch, authorize or persist independently. Extraction would pass the same screen callbacks through a component without a separate lifecycle today.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings > <anonymous> > <anonymous> #2",
-    "fingerprint": "368369f085d7558837a0bd5a22683e048406317b1ebb60971eb6101e86ae3a9f",
-    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
-    "reviewedBy": "Codex non_meri_closure_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "fcd3e7988ca1dd738141b8e46b31e3c126f8c47fb78d5fbccd9930221885eb5e",
+    "reason": "The connection mapping presents one connection identity, sync age, status, error and controls for permissions, sync, reconnect, Realtime or disconnect. Each control targets the same connection ID and delegates its write to the enclosing fixed-command owner; no row-local state or independent service is hidden here.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "function",
     "symbol": "ProfileSettings",
-    "fingerprint": "be3e73fe9248163d334ba8e88cea4bdea14ceec897db3d1fe6634c898612f97e",
-    "reason": "One Settings profile list owns search and status tabs plus archive and restore dialog lifetime. The existing action helper serializes mutations and verifies the exact profile and achieved state; the changed busy guard keeps the dialog open during a pending write.",
-    "reviewedBy": "Codex independent coherent integration source review",
-    "reviewedOn": "2026-10-17"
+    "fingerprint": "af8fcf127eef815ec0cc4915edd7c1785054eaa2757e9cc5da7002749373da73",
+    "reason": "One profile list owns status tabs, search, row projection, account-owner enrichment keyed by returned profile ID and archive/restore dialog state. Owner-read failure is explicitly unavailable; status writes verify the returned ID and achieved state. Creation remains in the local dialog.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
@@ -3009,9 +3003,9 @@
     "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLogSession",
-    "fingerprint": "dd96896b24d79aa782364fe9dbfb981fcb4be1e722d49bcc04caf82320ce0c47",
-    "reason": "One Quick log session owns its mode, client and member selection and the submit through existing operations. a377e1c1 adds one line clearing the client selection on the member-mode switch, crossing 80 lines by three; splitting the toggle out would only scatter one state machine.",
-    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "fingerprint": "d650dec1f458204155947c7b4e6357a81f46075c10e8cae32d6fe16b79f313d9",
+    "reason": "One global destination chooser selects a client or member log. Close resets chooser state for the next URL invocation while retaining the hidden mounted client QuickLog solely for its verified Undo receipt; reopening and Undo are browser covered. The session introduces no second write owner.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   },
   {
@@ -3021,6 +3015,150 @@
     "fingerprint": "8484c7493e009adc9db597dfa703957361770b4935e94863dbbb33e8f499eecc",
     "reason": "Shared presentational table primitive. 53534db6 adds optional selected-row styling and click/Enter/Space row activation that ignores nested interactive controls, used by the Personnel preview. No data fetching, transport or policy; callers own selection state.",
     "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx",
+    "kind": "function",
+    "symbol": "CalendarGrid",
+    "fingerprint": "9b25e95e35125f6855f4a683ccabe9e2707bf8749e5cbef1d7d2d22e6527bfc7",
+    "reason": "One ScheduleX adapter presents meeting items with the chosen timezone and theme. Calendar data and meeting writes remain in separate query and command owners; the function adds no independent schedule policy.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPageControls.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9be03005add2107ed1ed3f44cf41332de51096c5d363edc00ddcddf5327fe2d6",
+    "reason": "Client and master calendar headers, period/view controls and agenda filters all update the same CalendarPageState URL contract. Components are already separated within this calendar-control source; it contains no second feature or persistence owner.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+    "kind": "function",
+    "symbol": "MeetingWorkspace",
+    "fingerprint": "5945312430892d503218ad5cb0e13c2f57839d5c4ce937b21edcb31afa877a9a",
+    "reason": "One selected meeting workspace owns its tab and edit, assign and share dialog lifetime. Current-data gating and the child write owners remain separate; the expanded presentation does not introduce another meeting workflow.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+    "kind": "function",
+    "symbol": "MeetingIdentity",
+    "fingerprint": "7cbd4fdb3979a91abd1ad25554f0572dd76ec5fcd5f23ffd5b8467cc0ce8dba9",
+    "reason": "The same meeting identity and actions are rendered for inline and drawer layouts, deriving stage, time, materials and safe join link from the selected meeting. Transport and command authority remain outside this renderer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+    "kind": "function",
+    "symbol": "MeetingWorkspacePage",
+    "fingerprint": "3b82e43497f4fd55d6b762ccfa1a3a1af19cf747a8e820a9b08c76abbdfc354e",
+    "reason": "One client-scoped month list is bound to the selected meeting detail with the same client and date scope. The detail component and query module own their respective presentation and read behavior.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityLocationFacts.tsx",
+    "kind": "function",
+    "symbol": "FacilityLocationFacts",
+    "fingerprint": "3b92fb4a54718254bce7e6218228dd00d4becec6dea285c94ddbf94fcdfe8569",
+    "reason": "One facility-location fact panel labels saved address and district provenance beside separately identified public roster/source details. Geocoding and persistence remain delegated, avoiding a second location writer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "5572e0238ba00ba971baae3999336f1b835d63d52950a902e30abb141b4d126c",
+    "reason": "This CSS module scopes client-overview cards, government/facility details and the embedded timeline with their responsive variants. It changes no global token or cross-feature style owner; the section-specific selectors remain tied to this one page.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogDetailFields.tsx",
+    "kind": "function",
+    "symbol": "useQuickLogDetailFields",
+    "fingerprint": "56e1c1aeaf5d7b1faf8e761f9b95a9e32697cf308f181d5691dc4060fe769b24",
+    "reason": "One client-bound detail draft owns Objective options, paired current Objective version, counterparty and date normalization. It uses the existing scoped query and submits no command itself; the nested fields renderer is separately reviewed.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/QuickLogDetailFields.tsx",
+    "kind": "function",
+    "symbol": "useQuickLogDetailFields > fields",
+    "fingerprint": "bab6a19bc154f43cdbff6893e50620f682308964e93636c0da4dc9ef69b8e3a5",
+    "reason": "This nested renderer presents the same detail draft and its conditional pending/available fields for one Quick Log form. It does not read another service or own a second mutation; field normalization stays in the enclosing hook.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/settings/BillingSettings.tsx",
+    "kind": "function",
+    "symbol": "BillingSettings",
+    "fingerprint": "f9bf4c7327b73079b5f8c4cd4bbd1538094930fa05d784aa6ffa5a8494e6add1",
+    "reason": "One billing-state screen composes summary, lock notices, hosted checkout and portal entry, and their local confirmation dialogs. billingFlow and requestBillingDestination own flow choice, fresh preflight and URL validation; the added capacity list-price fact is presentation, not a new billing writer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "b8e790eb14c4a3962b0056eb7705a577faee752254a66e438503f3b818f6641b",
+    "reason": "This module contains the integration screen, its provider/connection types and local sync-age formatter. The three provider cards share one list, capability and action lifecycle; fixed operations, schemas and OAuth destination validation remain in separate owners. The nested render callbacks are reviewed individually below.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/settings/ProfileSettings.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "3114e89fb80d8dc4e887d92593229dd1eec095fb674a363e490730b05e166101",
+    "reason": "This source contains one active/archived profile-settings screen and its local CreateProfile dialog, plus a date formatter and Client type for that same domain. Moving the dialog solely to satisfy a line threshold would separate closely related profile actions without adding an owner.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/settings/TeamSettings.tsx",
+    "kind": "function",
+    "symbol": "TeamSettings",
+    "fingerprint": "be35eb5f2014ba0860a2aeaa633c600f58a30c6b36afd1b31296c6e930a0dd4c",
+    "reason": "One tenant-team screen keeps members and invitations as tabs with a shared refresh/action lifetime, invite dialog and member removal confirmation. Row controls target the displayed member or invitation and server operations enforce roles; the new Actions headers preserve accessible names without adding policy.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/settings.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "e38a3a57357aaaf7e15e7f96c67b8dd20b6e13aee1a187e876bc8550b9cb1dac",
+    "reason": "This is the declarative fixed settings-operation catalogue: each descriptor has a bounded path, strict request/response schema and controller provenance. New account-owner and Microsoft subscription descriptors add no HTTP dispatch, browser authority or UI state; splitting this catalogue would fragment the canonical operation registry.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "7cb93c9e40f94d91067247ad1b20b9291d4ab91736ca93ab6d266c701b60bc8a",
+    "reason": "This one Portfolio index route composes Core, Business Development, owner and identity reads with header, results, empty/error and customization views. Linked-record deduplication, filtering and capped-count policy were extracted to catalog-projection.ts and tested for mixed, linked and capped data; remaining components own navigation, cards, alerts, dialogs and mutations. Its length is the route's conditional presentation, not an additional authority owner.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "kind": "function",
+    "symbol": "ObjectivesPage",
+    "fingerprint": "96bff1a875a9b252a4cde3464fa8aa1f4be7ca4569ed816f70079d52a648c5ac",
+    "reason": "One client Objective page arbitrates list, create, operational and selected-editor URL states, plus a bounded delete confirmation. List, stats, editor, operational view and mutation hooks remain separate; no second Objective command implementation is introduced.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
   }
 ]
