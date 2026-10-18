@@ -7,7 +7,8 @@ export async function POST(
   request: Request,
   context: { params: Promise<{ operation: string }> },
 ) {
-  const held = previewBackendRejection(process.env, request);
+  // Held in the read-only preview like documents and settings: no activation path.
+  const held = previewBackendRejection(process.env);
   if (held) return held;
   const { operation } = await context.params;
   return proxyTaskCommandRequest(

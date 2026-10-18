@@ -37,6 +37,8 @@ test("every API handler applies preview admission before any route work", () => 
       "app/api/conversations/[...path]/route.ts",
       "app/api/documents/[operation]/route.ts",
       "app/api/documents/links/[action]/route.ts",
+      "app/api/settings/user/[operation]/route.ts",
+      "app/api/task-commands/[operation]/route.ts",
     ],
     "Review newly introduced API surfaces explicitly",
   );
