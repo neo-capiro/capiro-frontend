@@ -16,7 +16,8 @@ export async function POST(
     readUserPreferencesConfig(process.env),
     async () => {
       const session = await auth();
-      return session.userId ? session.getToken({ template: "capiro" }) : null;
+      // Meri checks Core identity/membership with this bearer; Core requires the native session `sid`.
+      return session.userId ? session.getToken() : null;
     },
   );
 }
