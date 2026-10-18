@@ -60,6 +60,11 @@ export async function taskHostFixture(page: Page) {
         : taskClient,
     }),
   );
+  // The ordinary Home selector reads the authorized roster before navigation.
+  await page.route("**/api/backend/core/clients", (route) => {
+    expect(route.request().method()).toBe("GET");
+    return route.fulfill({ json: [taskClient, otherTaskClient] });
+  });
   await page.route("**/api/action-followthrough/session", async (route) => {
     const body = route.request().postDataJSON() as { clientId: string },
       headers = await route.request().allHeaders();
