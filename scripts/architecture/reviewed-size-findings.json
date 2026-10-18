@@ -437,10 +437,10 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
     "kind": "function",
     "symbol": "ObjectiveEditor",
-    "fingerprint": "66c247e617e3ac24af67b9ee7476fb815d3a4c4dabf41aef4f7236fcc9c465db",
-    "reason": "One controlled objective draft editor owns field composition, readiness display and submit intent. Validation stays in contracts, persistence and actor lifetime checks stay in the mutation/writer modules, and readiness has a dedicated view. The long body is cohesive form markup. Extract controlled fields if the planned full-page intake adds a second composition, rather than introducing a broad editor hook now.",
-    "reviewedBy": "Codex portfolio_objectives",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "354c963de0aac8074598217ea3868c2754c8100cfd03f062bfaf8c1c254163b0",
+    "reason": "One controlled Objective editor composes held intake and current-read panels beside existing field, readiness and action children. The editor session retains state and mutation; the changed JSX does not acquire a Core request or second Objective state owner.",
+    "reviewedBy": "Codex independent coherent integration source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
@@ -727,7 +727,7 @@
     "kind": "function",
     "symbol": "TargetDrawer",
     "fingerprint": "b6816d70020af69e4c612022ff1ad6855bf57900659f7cf2a6bbc50c92d1d056",
-    "reason": "A selected saved target\u2019s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
+    "reason": "A selected saved target’s detail presentation and explicit target actions. Saved target facts and independently current Directory details are shown with distinct states. The change gates only Directory-derived positions/recipient entry, resets email selection, and adopts target-specific pending state. Mail and member-note behavior remain composed through their existing owners. No extraction required: these are sections of the same selected-target dialog and no backend policy, provider or shared authority owner was added.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -1406,7 +1406,7 @@
     "kind": "function",
     "symbol": "MailCompose",
     "fingerprint": "7ff0eb10abf0c7ce5f39dec389daffafa0ecb28062dbb5c7899b143a44dda73c",
-    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review\u2019s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
+    "reason": "One draft-to-explicit-review-to-send presentation workflow. Local recipients/subject/body/signature choice feed one captured review snapshot. The review’s immutable displayed payload is the payload handed to the existing guarded send owner. Both dialogs share this lifecycle, pending lock and unknown-send notice; independent mechanisms are already delegated to dedicated hooks/components. Accept this exact376-body-line function for its one composer workflow. Moving only the review JSX would not remove a responsibility and could obscure which immutable snapshot is sent; any future expansion must be reviewed afresh.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2353,7 +2353,7 @@
     "kind": "function",
     "symbol": "useTargetMutation",
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
-    "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
+    "reason": "One target-write hook’s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2397,10 +2397,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "function",
     "symbol": "OutreachView",
-    "fingerprint": "8bfbb75ea53281e837cee4bf7275581ad760d37a94f5ee10e443851cb376878d",
-    "reason": "Independent Codex outreach_review inspected the existing 138-line read/admission/selection/destination composition. Added parent flag reflects the child ordinary submit pending state solely to veto controlled modal dismissal; shared query/session boundaries and rich destinations retain ownership. No writer or transport responsibility is added. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "99dcedc00a9e26ae1b5e523ec7946e63e900effff5325f98d2c73f9495494868",
+    "reason": "The 176-line route view keeps existing draft and campaign session owners while adding bounded date/deleted filters and client scope. V3 records remain visible but cannot open the classic draft editor. No writer or transport authority is added. Independent review and limits: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
+    "reviewedBy": "Codex independent Engagement source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
@@ -2496,10 +2496,10 @@
     "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "cd0444d57a430d565ae1a800654cda81f589b967f675be5a9ab475ec11ef0d32",
-    "reason": "Independent Codex outreach_review inspected the complete 421-line ordinary Outreach composition/editor module. Named children already partition campaign/record listing, type selection and editing. Parent pending state only vetoes dismissal; form retains its existing submit lifetime. No duplicate mutation, shared primitive change, auth, persistence or unrelated domain is added. Splitting by line count would obscure the bounded field/submit/close invariant. See docs/outreach-pending-20261014/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent outreach_review; root recorded exact reviewed source",
-    "reviewedOn": "2026-10-14"
+    "fingerprint": "639f600f496520d0d3076e50db17d2f6cb221783a63fd0ba6dec6390e768852a",
+    "reason": "The 630-line module retains named children for the existing ordinary draft form and campaign session, and adds only list/filter presentation with Core reads. Removed Engagement tabs do not leave imported owners here. This module does not add a send path or new authority. Independent review and limits: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
+    "reviewedBy": "Codex independent Engagement source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
@@ -2694,10 +2694,10 @@
     "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
     "kind": "function",
     "symbol": "OrdinaryEngagementScreen",
-    "fingerprint": "a5de6c27e3b7e5e16196bc51cfaea8c29e946f0fc69b3db4696e11b1f155b6c6",
-    "reason": "Retains one Engagement tab and client-scope composition. The latest header wording and missing-name fallback are presentation; Plan operations, authorization and uncertain receipt lifetimes remain delegated. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
-    "reviewedBy": "Codex PR60 root and independent source reviewers",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "e1531f03eaa796c6b2c16eb744c626e320133d81b5bed23ab2a42c4e2993a356",
+    "reason": "The 88-line screen composes only Outreach and current client selection. Legacy meeting/library hints are validated and linked into Portfolio, while draft/session/create hints retain Outreach precedence; it performs no meeting detail read or campaign write. Independent review: docs/engagement-outreach-only-20261017/STRUCTURE-REVIEW.md#engagement.",
+    "reviewedBy": "Codex independent Engagement source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/test/browser/main.tsx",
@@ -2856,19 +2856,19 @@
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "function",
     "symbol": "ProfileSettings",
-    "fingerprint": "00b634ed5416e8b97f5d24b0f3be114a4fde8791f57cfb2474b0b8e3eb2d79a0",
-    "reason": "One existing profile Settings screen owns list and reviewed archive/restore dialogs; the local status helper checks the exact requested profile and achieved state before existing completion. CreateProfile remains its existing local draft and typed create request owner.",
-    "reviewedBy": "Codex non_meri_closure_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "be3e73fe9248163d334ba8e88cea4bdea14ceec897db3d1fe6634c898612f97e",
+    "reason": "One Settings profile list owns search and status tabs plus archive and restore dialog lifetime. The existing action helper serializes mutations and verifies the exact profile and achieved state; the changed busy guard keeps the dialog open during a pending write.",
+    "reviewedBy": "Codex independent coherent integration source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/features/settings/ProfileSettings.tsx",
     "kind": "function",
     "symbol": "CreateProfile",
-    "fingerprint": "f75e1ff9c3fa39df51341dfeced90202a8d20ff8c4af27ad7ce0a5060eb78253",
-    "reason": "One existing profile Settings screen owns list and reviewed archive/restore dialogs; the local status helper checks the exact requested profile and achieved state before existing completion. CreateProfile remains its existing local draft and typed create request owner.",
-    "reviewedBy": "Codex non_meri_closure_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "3903509085a7e126734a5e96fcd57f8b6ca4ee4572069f7fc8e80d0571634fdd",
+    "reason": "One create form owns three draft fields and submit feedback. Its changed busy guard prevents dismissal during a pending write; the existing success callback refreshes the list and closes the form.",
+    "reviewedBy": "Codex independent coherent integration source review",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/shared/markdown/MarkdownTextarea.tsx",
@@ -2887,6 +2887,15 @@
     "reason": "One canonical Markdown editing hook owns selection, native Undo and queued-link lifetime. The new field label changes only stale-selection wording; formatting and validation algorithms, length bounds and disposal remain unchanged.",
     "reviewedBy": "Codex non_meri_closure_review",
     "reviewedOn": "2026-10-15"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",
+    "kind": "function",
+    "symbol": "MeriConversationHost",
+    "fingerprint": "6056bf65ed132090737b083f9892a902004af27b369ff142e6a56aa82fcf4efc",
+    "reason": "One conversation availability and selection boundary applies feature enablement, URL validity, verified account/current-client eligibility, archived-client refusal, and configured preview scope before choosing Core bootstrap or an existing conversation. This function performs no request, receipt validation, token handling, or Meri session issuance; CoreResolvedConversation and useConversationSession own those lifetimes. Keeping refusal order together ensures current and explicit conversation links reject an archived client before downstream mounting; focused host tests cover this. See docs/non-meri-continuation-20261016/PR70-SIZE-REVIEW.md.",
+    "reviewedBy": "Codex PR70 root and independent source reviewer",
+    "reviewedOn": "2026-10-17"
   },
   {
     "file": "apps/web/src/features/meri/conversation/MeriConversationHost.tsx",

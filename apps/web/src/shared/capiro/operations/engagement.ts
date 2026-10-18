@@ -80,29 +80,6 @@ const createMeeting = z
   })
   .strict()
   .refine((value) => value.startsAt < value.endsAt, "End must follow start.");
-export const engagementTask = z
-  .object({
-    id,
-    title: z.string(),
-    status: z.string(),
-    dueDate: z.string().nullable(),
-    description: z.string().nullable(),
-    ownerUserId: id.nullable(),
-    client: client.optional(),
-    clientId: id.nullable().optional(),
-    meetingId: id.nullable().optional(),
-  })
-  .strip();
-const taskCreate = z
-  .object({
-    title: z.string().trim().min(1).max(240),
-    description: z.string().optional(),
-    clientId: id.optional(),
-    meetingId: id.optional(),
-    ownerUserId: id.optional(),
-    dueDate: z.iso.datetime().optional(),
-  })
-  .strict();
 const artifact = z
   .object({
     id,
@@ -171,77 +148,6 @@ export const engagementOperations = {
     path: "/engagement/meetings",
     request: z.object({ body: createMeeting }).strict(),
     response: engagementMeeting,
-    source,
-  }),
-  "engagement.library": defineOperation({
-    service: "core",
-    method: "GET",
-    path: "/engagement/meetings/library",
-    request: z
-      .object({
-        query: scopeQuery
-          .extend({
-            search: z.string().max(300).optional(),
-            artifactType: z.enum(["prep", "notes", "debrief"]).optional(),
-            visibility: z.enum(["shared", "private"]).optional(),
-            page: z.number().int().min(1).optional(),
-            limit: z.number().int().min(1).max(100).optional(),
-          })
-          .strict()
-          .optional(),
-      })
-      .strict(),
-    response: z
-      .object({
-        data: z.array(engagementMeeting),
-        total: z.number().int(),
-        page: z.number().int(),
-        limit: z.number().int(),
-      })
-      .strip(),
-    source,
-  }),
-  "engagement.tasks": defineOperation({
-    service: "core",
-    method: "GET",
-    path: "/engagement/tasks",
-    request: z
-      .object({
-        query: z.object({ clientId: id.optional() }).strict().optional(),
-      })
-      .strict(),
-    response: z.array(engagementTask),
-    source,
-  }),
-  "engagement.task.create": defineOperation({
-    service: "core",
-    method: "POST",
-    path: "/engagement/tasks",
-    request: z.object({ body: taskCreate }).strict(),
-    response: engagementTask,
-    source,
-  }),
-  "engagement.task.update": defineOperation({
-    service: "core",
-    method: "PATCH",
-    path: "/engagement/tasks/:id",
-    request: z
-      .object({
-        params,
-        body: z
-          .object({
-            title: z.string().min(1).max(240).optional(),
-            description: z.string().nullable().optional(),
-            status: z
-              .enum(["todo", "in_progress", "blocked", "done", "canceled"])
-              .optional(),
-            dueDate: z.iso.datetime().nullable().optional(),
-            ownerUserId: id.nullable().optional(),
-          })
-          .strict(),
-      })
-      .strict(),
-    response: engagementTask,
     source,
   }),
   "engagement.outreach": defineOperation({
@@ -316,45 +222,6 @@ export const engagementOperations = {
     response: outreachRecord,
     source,
   }),
-  "engagement.report": defineOperation({
-    service: "core",
-    method: "GET",
-    path: "/engagement/reports/overview",
-    request: z
-      .object({
-        query: z
-          .object({
-            clientId: id.optional(),
-            period: z.enum(["all", "current", "previous"]).optional(),
-          })
-          .strict()
-          .optional(),
-      })
-      .strict(),
-    response: z.object({
-      cycle: z.object({ label: z.string(), period: z.string() }).strip(),
-      summary: z.object({
-        targetOffices: z.number(),
-        meetingsHeld: z.number(),
-        outreachSent: z.number(),
-        submissionsFiled: z.number(),
-        pendingActions: z.number(),
-      }),
-      rows: z.array(
-        z
-          .object({
-            officeKey: z.string(),
-            memberPrincipal: z.string(),
-            clientName: z.string().nullable(),
-            prepStatus: z.string(),
-            outreachStatus: z.string(),
-            submissionStatus: z.string(),
-          })
-          .strip(),
-      ),
-    }),
-    source,
-  }),
   "engagement.notes": defineOperation({
     service: "core",
     method: "GET",
@@ -391,5 +258,4 @@ export const engagementOperations = {
   }),
 };
 export type EngagementMeeting = z.infer<typeof engagementMeeting>;
-export type EngagementTask = z.infer<typeof engagementTask>;
 export type OutreachRecord = z.infer<typeof outreachRecord>;

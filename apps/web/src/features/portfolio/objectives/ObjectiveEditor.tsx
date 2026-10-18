@@ -12,6 +12,14 @@ import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
 import { ObjectiveOutreach } from "./ObjectiveOutreach";
 import { ObjectiveWorkDestinations } from "./ObjectiveWorkDestinations";
 import { ObjectiveGeneration } from "./ObjectiveGeneration";
+import {
+  ObjectiveGovernedPlanner,
+  governedPlannerReadEnabled,
+} from "./ObjectiveGovernedPlanner";
+import {
+  ObjectiveStrategyIntake,
+  governedStrategyIntakeEnabled,
+} from "./ObjectiveStrategyIntake";
 
 export function ObjectiveEditor({
   clientId,
@@ -73,12 +81,32 @@ export function ObjectiveEditor({
           }
         />
       )}
-      {open && session.record && (
+      {!governedStrategyIntakeEnabled && open && session.record && (
         <ObjectiveGeneration
           key={`generation:${session.record.id}:${session.record.version}`}
           objective={session.record}
           disabled={
             !session.mutation.canWrite ||
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
+      {governedStrategyIntakeEnabled && open && session.record && (
+        <ObjectiveStrategyIntake
+          key={`strategy-intake:${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
+      {governedPlannerReadEnabled && open && session.record && (
+        <ObjectiveGovernedPlanner
+          key={`governed-planner:${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
             session.mutation.isPending ||
             session.draftStatus === "Unsaved changes"
           }

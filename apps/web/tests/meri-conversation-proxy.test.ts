@@ -11,7 +11,11 @@ import {
 import { boundedConversationStream } from "../src/shared/meri-conversations/stream";
 
 const origin = "https://frontend.example.test";
-const config = { enabled: true, baseUrl: "https://meri.example.test" };
+const config = {
+  enabled: true,
+  baseUrl: "https://meri.example.test",
+  frontendOrigin: origin,
+};
 const credential = `action_session_${"a".repeat(43)}`;
 /** What Meri receives; the browser never sends a bearer to the proxy. */
 const authorization = `Bearer ${credential}`;
@@ -82,6 +86,7 @@ for (const path of [
         expect(new Headers(init?.headers).get("authorization")).toBe(
           authorization,
         );
+        expect(new Headers(init?.headers).get("origin")).toBe(origin);
         expect(init).toMatchObject({
           method: "POST",
           credentials: "omit",
@@ -110,12 +115,13 @@ for (const path of [
     expect(response.headers.get("x-content-type-options")).toBe("nosniff");
   });
 
-it("reconnect forwards canonical cursor and no body/content-type/origin to exact public route", async () => {
+it("reconnect forwards the configured frontend origin and cursor, without a body or content type", async () => {
   const fetcher = vi.fn(async (_url: RequestInfo | URL, init?: RequestInit) => {
     expect(init?.method).toBe("GET");
     expect(init?.body).toBeUndefined();
     expect(Object.fromEntries(new Headers(init?.headers))).toEqual({
       authorization,
+      origin,
       "x-meri-resume-sequence": "7",
     });
     return new Response(null, {
@@ -261,8 +267,11 @@ it("disabled/invalid HTTPS configuration fails with a public SDK error and no to
   );
   for (const bad of [
     { enabled: false },
-    { enabled: true, baseUrl: "http://meri.example.test" },
-    { enabled: true, baseUrl: "https://meri.example.test/private" },
+    { ...config, baseUrl: "http://meri.example.test" },
+    { ...config, baseUrl: "https://meri.example.test/private" },
+    { enabled: true, baseUrl: config.baseUrl },
+    { ...config, frontendOrigin: "https://frontend.example.test/private" },
+    { ...config, frontendOrigin: "https://foreign.example.test" },
   ]) {
     const response = await proxyConversationRequest(
       request(),
@@ -281,6 +290,52 @@ it("disabled/invalid HTTPS configuration fails with a public SDK error and no to
       ),
     ).toEqual({ error: { code: "CONVERSATION_UNAVAILABLE" } });
   }
+  expect(nativeToken).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
+});
+
+it("never derives upstream Origin from forwarded headers or a mismatched request URL", async () => {
+  const fetcher = vi.fn(async (_url: RequestInfo | URL, _init?: RequestInit) =>
+    jsonResponse(),
+  );
+  const first = await proxyConversationRequest(
+    request("submit", {
+      headers: { "X-Forwarded-Host": "foreign.example.test" },
+    }),
+    "submit",
+    config,
+    nativeToken,
+    fetcher,
+  );
+  expect(first.status).toBe(403);
+  expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+    origin,
+  );
+  fetcher.mockClear();
+  nativeToken.mockClear();
+  const mismatched = new Request(
+    "https://foreign.example.test/api/conversations/submit",
+    {
+      method: "POST",
+      body: JSON.stringify(payloads.submit),
+      headers: {
+        "X-Meri-Action-Session": credential,
+        Origin: "https://foreign.example.test",
+        "Content-Type": "application/json",
+      },
+    },
+  );
+  expect(
+    (
+      await proxyConversationRequest(
+        mismatched,
+        "submit",
+        config,
+        nativeToken,
+        fetcher,
+      )
+    ).status,
+  ).toBe(502);
   expect(nativeToken).not.toHaveBeenCalled();
   expect(fetcher).not.toHaveBeenCalled();
 });
@@ -573,6 +628,7 @@ const publicOrigin = "https://portfolio-preview.app.capiro.ai";
 const configuredPublic: ConversationProxyConfig = {
   ...config,
   requestOrigin: publicOrigin,
+  frontendOrigin: publicOrigin,
 };
 const bound = (path: string, headers: Record<string, string> = {}) =>
   new Request(`https://0.0.0.0:5188/api/conversations/${path}`, {
@@ -590,7 +646,7 @@ const bound = (path: string, headers: Record<string, string> = {}) =>
   });
 
 it("admits a submit from the configured public origin at the bind address", async () => {
-  const fetcher = vi.fn(async () => jsonResponse());
+  const fetcher = vi.fn<typeof fetch>(async () => jsonResponse());
   const response = await proxyConversationRequest(
     bound("submit"),
     "submit",
@@ -600,6 +656,24 @@ it("admits a submit from the configured public origin at the bind address", asyn
   );
   expect(fetcher).toHaveBeenCalledOnce();
   expect(response.status).toBe(403);
+  expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+    publicOrigin,
+  );
+});
+
+it("refuses a browser/upstream public-origin configuration split before dispatch", async () => {
+  const fetcher = vi.fn();
+  const token = vi.fn(nativeToken);
+  const response = await proxyConversationRequest(
+    bound("submit"),
+    "submit",
+    { ...configuredPublic, frontendOrigin: origin },
+    token,
+    fetcher,
+  );
+  expect(response.status).toBe(502);
+  expect(token).not.toHaveBeenCalled();
+  expect(fetcher).not.toHaveBeenCalled();
 });
 
 it("admits an Origin-less reconnect at the bind address and refuses a bind-address Origin", async () => {

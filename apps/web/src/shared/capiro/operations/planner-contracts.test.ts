@@ -28,11 +28,6 @@ describe("Planner and engagement wire boundaries", () => {
         body: { data: { name: "Review", actorId: id } },
       }).success,
     ).toBe(false);
-    expect(
-      engagementOperations["engagement.task.create"].request.safeParse({
-        body: { title: "Review", tenantId: id },
-      }).success,
-    ).toBe(false);
   });
   it("preserves exact fixed service ownership and blocks traversal in task identifiers", () => {
     expect(plannerOperations["planner.task.attachments"].service).toBe(
@@ -73,24 +68,9 @@ describe("Planner and engagement wire boundaries", () => {
       plannerOperations["planner.form.upload"].multipart?.files[0]?.maxCount,
     ).toBe(10);
   });
-  it("validates the actual meeting Library envelope and refuses an invented items envelope", () => {
-    expect(
-      engagementOperations["engagement.library"].response.safeParse({
-        data: [],
-        total: 0,
-        page: 1,
-        limit: 25,
-      }).success,
-    ).toBe(true);
-    expect(
-      engagementOperations["engagement.library"].response.safeParse({
-        items: [],
-        total: 0,
-        page: 1,
-        limit: 25,
-      }).success,
-    ).toBe(false);
-  });
+});
+
+describe("Engagement campaign decision boundary", () => {
   it("does not permit send commands through the campaign decision operation", () => {
     const base = {
       params: { sessionId: id },

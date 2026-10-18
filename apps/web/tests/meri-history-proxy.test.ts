@@ -12,7 +12,11 @@ import {
 
 // Synthetic byte-boundary controls. All fetches are injected; none calls a real identity/provider.
 const origin = "https://frontend.example";
-const config = { enabled: true, baseUrl: "https://meri.example" };
+const config = {
+  enabled: true,
+  baseUrl: "https://meri.example",
+  frontendOrigin: origin,
+};
 const token = async () => "synthetic-native-membership";
 const conversationId = "30000000-0000-4000-8000-000000000003";
 const sourceRunId = "40000000-0000-4000-8000-000000000004";
@@ -118,6 +122,15 @@ describe("synthetic native history proxy", () => {
         )
       ).status,
     ).toBe(503);
+    for (const bad of [
+      { enabled: true, baseUrl: config.baseUrl },
+      { ...config, frontendOrigin: "https://frontend.example/private" },
+      { ...config, frontendOrigin: "https://foreign.example" },
+    ])
+      expect(
+        (await proxyConversationHistory(input(), "list", bad, token, fetcher))
+          .status,
+      ).toBe(503);
     expect(
       (
         await proxyConversationHistory(
@@ -149,6 +162,7 @@ describe("synthetic native history proxy", () => {
         expect(new Headers(init?.headers).get("authorization")).toBe(
           "Bearer synthetic-native-membership",
         );
+        expect(new Headers(init?.headers).get("origin")).toBe(origin);
         expect(new Headers(init?.headers).has("cookie")).toBe(false);
         expect(init?.credentials).toBe("omit");
         expect(init?.redirect).toBe("error");
@@ -169,6 +183,58 @@ describe("synthetic native history proxy", () => {
     expect(await response.json()).toEqual(emptyList);
     expect(response.headers.get("cache-control")).toContain("no-store");
     expect(response.headers.has("authorization")).toBe(false);
+  });
+
+  it("does not trust forwarded host or dispatch for a request URL outside the configured origin", async () => {
+    const credential = vi.fn(token);
+    const fetcher = vi.fn(
+      async (_url: RequestInfo | URL, _init?: RequestInit) => json(emptyList),
+    );
+    const forwarded = input(
+      "list",
+      {},
+      { "X-Forwarded-Host": "foreign.example" },
+    );
+    expect(
+      (
+        await proxyConversationHistory(
+          forwarded,
+          "list",
+          config,
+          credential,
+          fetcher,
+        )
+      ).status,
+    ).toBe(200);
+    expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+      origin,
+    );
+    fetcher.mockClear();
+    credential.mockClear();
+    const mismatched = new Request(
+      "https://foreign.example/api/conversations/list",
+      {
+        method: "POST",
+        body: "{}",
+        headers: {
+          Origin: "https://foreign.example",
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    expect(
+      (
+        await proxyConversationHistory(
+          mismatched,
+          "list",
+          config,
+          credential,
+          fetcher,
+        )
+      ).status,
+    ).toBe(503);
+    expect(credential).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
   });
 
   it("rejects an untrusted successful envelope and suppresses upstream error details", async () => {
@@ -278,6 +344,7 @@ describe("standalone bind address behind the ALB", () => {
   const configured: ConversationProxyConfig = {
     ...config,
     requestOrigin: publicOrigin,
+    frontendOrigin: publicOrigin,
   };
   const bound = (headers: Record<string, string> = {}) =>
     new Request("https://0.0.0.0:5188/api/conversations/list", {
@@ -292,7 +359,7 @@ describe("standalone bind address behind the ALB", () => {
       },
     });
   it("admits the configured public origin although request.url names the bind address", async () => {
-    const fetcher = vi.fn(async () => json(emptyList));
+    const fetcher = vi.fn<typeof fetch>(async () => json(emptyList));
     const response = await proxyConversationHistory(
       bound(),
       "list",
@@ -302,7 +369,25 @@ describe("standalone bind address behind the ALB", () => {
     );
     expect(response.status).toBe(200);
     expect(fetcher).toHaveBeenCalledOnce();
+    expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+      publicOrigin,
+    );
     expect(await response.json()).toEqual(emptyList);
+  });
+
+  it("refuses a browser/upstream public-origin configuration split before native auth", async () => {
+    const credential = vi.fn(token);
+    const fetcher = vi.fn();
+    const response = await proxyConversationHistory(
+      bound(),
+      "list",
+      { ...configured, frontendOrigin: origin },
+      credential,
+      fetcher,
+    );
+    expect(response.status).toBe(503);
+    expect(credential).not.toHaveBeenCalled();
+    expect(fetcher).not.toHaveBeenCalled();
   });
   const refusals: [ConversationProxyConfig, Record<string, string>][] = [
     [config, {}],

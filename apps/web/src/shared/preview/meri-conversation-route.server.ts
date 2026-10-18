@@ -1,4 +1,5 @@
-import { publicRequestOrigin, readRequestOrigin } from "../request-origin";
+import { readRequestOrigin } from "../request-origin";
+import { portfolioPreviewFrontendOrigin } from "../meri-conversations/frontend-origin";
 
 type Environment = Record<string, string | undefined>;
 
@@ -57,14 +58,16 @@ function configuredRuntimeBinding(env: Environment): boolean {
 function configuredMeriOrigin(env: Environment, request: Request): boolean {
   const raw = env.MERI_API_BASE_URL;
   const requestUrl = new URL(request.url);
-  const publicOrigin = publicRequestOrigin(
-    request,
-    readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, []),
-  );
+  // Preview admission needs a fixed browser-visible origin. A missing value must
+  // never fall back to Next's internal bind address or client-supplied headers.
+  const publicOrigin = readRequestOrigin(env.CAPIRO_REQUEST_ORIGIN, []);
   if (
     !raw ||
     raw.length > 512 ||
     raw.trim() !== raw ||
+    !publicOrigin ||
+    publicOrigin !== portfolioPreviewFrontendOrigin ||
+    env.CAPIRO_EXISTING_APP_URL !== publicOrigin ||
     env.CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN !== raw
   )
     return false;

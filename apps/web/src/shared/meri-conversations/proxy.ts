@@ -11,6 +11,7 @@ import {
   validConversationRequest,
 } from "./input";
 import { boundedConversationStream } from "./stream";
+import { trustedConversationFrontendOrigin } from "./frontend-origin";
 
 const responseHeaders = [
   "content-type",
@@ -48,6 +49,7 @@ const unavailable = (status: number) =>
 export type ConversationProxyConfig = {
   enabled: boolean;
   baseUrl?: string;
+  frontendOrigin?: string;
   /** Configured browser-visible origin; undefined compares against the request URL. */
   requestOrigin?: string | null;
 };
@@ -118,6 +120,26 @@ async function receivedConversation(
   return new Response(body, { status: response.status, headers });
 }
 
+function upstreamHeaders(
+  request: Request,
+  route: NonNullable<ReturnType<typeof conversationRoute>>,
+  bearer: string,
+  frontendOrigin: string,
+  hasBody: boolean,
+) {
+  const headers = new Headers({
+    Authorization: bearer,
+    Origin: frontendOrigin,
+  });
+  if (hasBody) headers.set("Content-Type", "application/json");
+  if (route === "reconnect")
+    headers.set(
+      protocol.routes.reconnect.cursorHeader,
+      request.headers.get(protocol.routes.reconnect.cursorHeader) ?? "0",
+    );
+  return headers;
+}
+
 /** Fixed same-origin public adapter. Meri owns current-session/run authority. */
 export async function proxyConversationRequest(
   request: Request,
@@ -133,7 +155,12 @@ export async function proxyConversationRequest(
   if (!validConversationRequest(request, path, route, config.requestOrigin))
     return unavailable(400);
   const origin = configuredOrigin(config);
-  if (!origin) return unavailable(502);
+  const frontendOrigin = trustedConversationFrontendOrigin(
+    request,
+    config.frontendOrigin,
+    config.requestOrigin,
+  );
+  if (!origin || !frontendOrigin) return unavailable(502);
   const transport = new AbortController();
   const abort = () => transport.abort();
   request.signal.addEventListener("abort", abort, { once: true });
@@ -157,13 +184,13 @@ export async function proxyConversationRequest(
           }
         }
         // Meri's control service reads the opaque session as a bearer.
-        const headers = new Headers({ Authorization: `Bearer ${session}` });
-        if (body) headers.set("Content-Type", "application/json");
-        if (route === "reconnect")
-          headers.set(
-            protocol.routes.reconnect.cursorHeader,
-            request.headers.get(protocol.routes.reconnect.cursorHeader) ?? "0",
-          );
+        const headers = upstreamHeaders(
+          request,
+          route,
+          `Bearer ${session}`,
+          frontendOrigin,
+          Boolean(body),
+        );
         signal.throwIfAborted();
         const response = await fetcher(`${origin}/api/conversations/${path}`, {
           method: request.method,

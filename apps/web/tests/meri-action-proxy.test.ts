@@ -26,6 +26,19 @@ const request = (operation = "query", init: RequestInit = {}, suffix = "") =>
       ...Object.fromEntries(new Headers(init.headers)),
     },
   });
+
+it("rejects duplicate opaque session headers without sending anything to Meri", async () => {
+  const input = request("query");
+  input.headers.append("X-Meri-Action-Session", actionSession);
+  const native = vi.fn(async () => "native-token");
+  const fetcher = vi.fn<typeof fetch>();
+  await expectUnavailable(
+    await proxyActionRequest(input, "query", config, native, fetcher),
+    401,
+  );
+  expect(native).toHaveBeenCalledOnce();
+  expect(fetcher).not.toHaveBeenCalled();
+});
 function deferred<T>() {
   let resolve!: (value: T) => void;
   const promise = new Promise<T>((done) => (resolve = done));

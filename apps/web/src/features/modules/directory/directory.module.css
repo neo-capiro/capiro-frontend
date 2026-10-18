@@ -25,6 +25,74 @@
   gap: 20px;
   align-items: start;
 }
+.personnelSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+  align-items: start;
+  gap: 16px;
+}
+.personnelPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.personnelPreviewEyebrow {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.personnelPreviewName {
+  color: var(--foreground);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 28px;
+  overflow-wrap: anywhere;
+}
+.personnelPreviewCard {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.personnelPreviewCard h3 {
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+}
+.personnelPreviewDetails {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.personnelPreviewDetails > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4px;
+  align-items: start;
+}
+.personnelPreviewDetails dt {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 18px;
+}
+.personnelPreviewDetails dd {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 13px;
+  line-height: 19px;
+  overflow-wrap: anywhere;
+}
+.personnelPreviewOpen {
+  width: 100%;
+  height: 38px;
+}
 .stack {
   display: grid;
   gap: 20px;
@@ -140,6 +208,9 @@
 }
 @media (max-width: 900px) {
   .split {
+    grid-template-columns: 1fr;
+  }
+  .personnelSplit {
     grid-template-columns: 1fr;
   }
   .select {

@@ -17,7 +17,10 @@ async function handle(request: Request, context: Context) {
       request,
       process.env,
       `/api/backend/${service}/${path.join("/")}`,
-      getToken,
+      async () => {
+        const session = await auth();
+        return session.userId ? session.getToken() : null;
+      },
     );
   return proxyRequest(
     request,

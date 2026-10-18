@@ -15,7 +15,9 @@ import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
-import { engagementPlanOperations } from "./operations/engagement-plans";
+import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
+import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
+import { governedObjectiveStrategyIntakeOperation } from "./operations/objective-governed-strategy-intake";
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
@@ -39,6 +41,10 @@ export const capiroOperations = {
   ...onboardSetupOperations,
   ...onboardCoreOperations,
   ...objectiveOperationalOperations,
-  ...engagementPlanOperations,
+  "objectives.governedGeneration.read":
+    governedObjectiveGenerationReadOperation,
+  "objectives.governedOutputs.read": governedObjectiveOutputsReadOperation,
+  "objectives.governedStrategy.intake":
+    governedObjectiveStrategyIntakeOperation,
   [firstChatCoreOperationKey]: firstChatCoreOperation,
 } as const satisfies OperationRegistry;

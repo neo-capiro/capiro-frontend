@@ -24,7 +24,7 @@ async function handle(request: Request, context: Context) {
       `/api/capiro/${operation}`,
       async () => {
         const session = await auth();
-        return session.userId ? session.getToken({ template: "capiro" }) : null;
+        return session.userId ? session.getToken() : null;
       },
     );
   if (operation.startsWith("public-form."))

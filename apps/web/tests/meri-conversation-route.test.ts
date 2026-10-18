@@ -17,6 +17,7 @@ const authorization = `Bearer ${credential}`;
 const env = {
   CORE_API_BASE_URL: "https://core.example.test/api",
   MERI_API_BASE_URL: "https://meri.example.test",
+  CAPIRO_REQUEST_ORIGIN: origin,
   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_c3ludGhldGljJA==",
   CLERK_SECRET_KEY: "sk_test_synthetic",
   MERI_CONVERSATION_WORKFLOW_ENABLED: "true",
@@ -59,6 +60,9 @@ it("actual public conversation route gates with a native Clerk session token and
   expect(
     new Headers(fetcher.mock.calls[0]![1]!.headers).get("authorization"),
   ).toBe(authorization);
+  expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+    origin,
+  );
   expect(fetcher).toHaveBeenCalledOnce();
 });
 
@@ -139,5 +143,8 @@ it("actual catchall reconnect preserves GET and default resume sequence", async 
       "x-meri-resume-sequence",
     ),
   ).toBe("0");
+  expect(new Headers(fetcher.mock.calls[0]![1]!.headers).get("origin")).toBe(
+    origin,
+  );
   expect(fetcher.mock.calls[0]![1]!.body).toBeUndefined();
 });

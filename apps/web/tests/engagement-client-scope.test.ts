@@ -15,7 +15,7 @@ vi.mock("next/navigation", () => ({
 vi.mock("../src/shared/capiro/queries", () => ({
   useCapiroQuery: (key: string, input: unknown) => {
     state.reads.push({ key, input });
-    if (key !== "clients.list" && key !== "engagement.meetings")
+    if (key !== "clients.list")
       throw new Error(`Unexpected scope query: ${key}`);
     return {
       data: key === "clients.list" ? state.clients : [],
@@ -24,9 +24,9 @@ vi.mock("../src/shared/capiro/queries", () => ({
     };
   },
 }));
-vi.mock("../src/features/modules/engagement/PlanView", () => ({
-  PlanView: ({ clientId }: { clientId: string }) =>
-    createElement("section", { "data-plan-client": clientId }),
+vi.mock("../src/features/modules/engagement/OutreachView", () => ({
+  OutreachView: ({ clientId }: { clientId: string }) =>
+    createElement("section", { "data-outreach-client": clientId }),
 }));
 
 const clientId = "30000000-0000-4000-8000-000000000001";
@@ -60,16 +60,14 @@ describe("Engagement client scope label", () => {
     );
     expect(select).not.toContain("Selected client (name unavailable)");
     expect(select.match(/selected=""/g)).toHaveLength(1);
-    expect(html).toContain(`data-plan-client="${clientId}"`);
-    expect(state.reads).toContainEqual({
-      key: "engagement.meetings",
-      input: { query: { clientId } },
-    });
+    expect(html).toContain(`data-outreach-client="${clientId}"`);
+    expect(state.reads).toEqual([{ key: "clients.list", input: {} }]);
   });
 
   it("retains the exact URL scope with an honest label when the catalog omits it", () => {
     for (const clients of [[], [otherClient]]) {
       state.clients = clients;
+      state.reads = [];
       const html = render();
       const select = scopeSelect(html);
       expect(select).toContain(
@@ -79,20 +77,13 @@ describe("Engagement client scope label", () => {
         '<option value="">All permitted clients</option>',
       );
       expect(select.match(/selected=""/g)).toHaveLength(1);
-      expect(html).toContain(`data-plan-client="${clientId}"`);
-      expect(state.reads).toContainEqual({
-        key: "engagement.meetings",
-        input: { query: { clientId } },
-      });
-      expect(state.reads).not.toContainEqual({
-        key: "engagement.meetings",
-        input: { query: { clientId: undefined } },
-      });
+      expect(html).toContain(`data-outreach-client="${clientId}"`);
+      expect(state.reads).toEqual([{ key: "clients.list", input: {} }]);
     }
   });
 
   it("selects All permitted clients only for the existing empty URL scope", () => {
-    state.params = "view=plan";
+    state.params = "";
     const html = render();
     const select = scopeSelect(html);
     expect(select).toContain(
@@ -100,10 +91,7 @@ describe("Engagement client scope label", () => {
     );
     expect(select).not.toContain("Selected client (name unavailable)");
     expect(select.match(/selected=""/g)).toHaveLength(1);
-    expect(html).toContain('data-plan-client=""');
-    expect(state.reads).toContainEqual({
-      key: "engagement.meetings",
-      input: { query: { clientId: undefined } },
-    });
+    expect(html).toContain('data-outreach-client=""');
+    expect(state.reads).toEqual([{ key: "clients.list", input: {} }]);
   });
 });

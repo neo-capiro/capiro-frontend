@@ -27,15 +27,9 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     icon: "engagement",
     cardIcon: "engagementCard",
     group: "work",
-    description:
-      "Meetings, outreach, reports and the meeting library for every client.",
-    chips: [
-      { label: "Meetings", view: "meetings" },
-      { label: "Outreach", view: "outreach" },
-      { label: "Reports", view: "reports" },
-      { label: "Library", view: "library" },
-    ],
-    profile: "Engagement, one client",
+    description: "Draft and sent outreach campaigns for your clients.",
+    chips: [{ label: "Outreach", view: "outreach" }],
+    profile: "Outreach, one client",
     tone: "steel",
   },
   {
@@ -44,7 +38,7 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     icon: "planner",
     cardIcon: "plannerCard",
     group: "work",
-    description: "Tasks, projects and deadlines across the firm.",
+    description: "Tasks, projects and deadlines in your workspace.",
     chips: [
       { label: "List", view: "list" },
       { label: "Board", view: "board" },
@@ -116,7 +110,7 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
     cardIcon: "intelligenceCard",
     group: "landscape",
     description:
-      "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+      "Explore available legislation, budgets, funding and geography.",
     chips: [
       { label: "Data Explorer", view: "explorer" },
       { label: "LegiWatch", view: "legiwatch" },
@@ -138,7 +132,7 @@ export const moduleCatalog: readonly ModuleDescriptor[] = [
       { label: "Snapshots", view: "snapshots" },
       { label: "Subscriptions", view: "subscriptions" },
     ],
-    profile: "Firm-wide only",
+    profile: "Research portfolios are separate from client profiles",
     tone: "plum",
   },
 ];

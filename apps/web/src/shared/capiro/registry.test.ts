@@ -16,7 +16,9 @@ import { onboardFunnelOperations } from "./operations/onboard-funnel";
 import { onboardSetupOperations } from "./operations/onboard-setup";
 import { onboardCoreOperations } from "./operations/onboard-core";
 import { objectiveOperationalOperations } from "./operations/objective-operational";
-import { engagementPlanOperations } from "./operations/engagement-plans";
+import { governedObjectiveGenerationReadOperation } from "./operations/objective-governed-generation";
+import { governedObjectiveOutputsReadOperation } from "./operations/objective-governed-outputs";
+import { governedObjectiveStrategyIntakeOperation } from "./operations/objective-governed-strategy-intake";
 import {
   firstChatCoreOperation,
   firstChatCoreOperationKey,
@@ -40,7 +42,13 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     onboardSetupOperations,
     onboardCoreOperations,
     objectiveOperationalOperations,
-    engagementPlanOperations,
+    {
+      "objectives.governedGeneration.read":
+        governedObjectiveGenerationReadOperation,
+      "objectives.governedOutputs.read": governedObjectiveOutputsReadOperation,
+      "objectives.governedStrategy.intake":
+        governedObjectiveStrategyIntakeOperation,
+    },
     { [firstChatCoreOperationKey]: firstChatCoreOperation },
   ];
   const declared = groups.flatMap((group) => Object.keys(group));
@@ -48,6 +56,53 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
   expect(Object.keys(capiroOperations)).toHaveLength(declared.length);
   expect(Object.keys(capiroOperations).sort()).toEqual(declared.sort());
   expect(declared.length).toBeGreaterThan(0);
+});
+it("registers only the reviewed governed Objective operations", () => {
+  expect(capiroOperations["objectives.governedGeneration.read"]).toBe(
+    governedObjectiveGenerationReadOperation,
+  );
+  expect(capiroOperations["objectives.governedOutputs.read"]).toBe(
+    governedObjectiveOutputsReadOperation,
+  );
+  expect(capiroOperations["objectives.governedStrategy.intake"]).toBe(
+    governedObjectiveStrategyIntakeOperation,
+  );
+  expect(
+    Object.keys(capiroOperations).filter((key) =>
+      key.startsWith("objectives.governed"),
+    ),
+  ).toEqual([
+    "objectives.governedGeneration.read",
+    "objectives.governedOutputs.read",
+    "objectives.governedStrategy.intake",
+  ]);
+  expect(governedObjectiveGenerationReadOperation.method).toBe("GET");
+  expect(governedObjectiveOutputsReadOperation.method).toBe("GET");
+  expect(governedObjectiveStrategyIntakeOperation.method).toBe("POST");
+});
+it("registers the pinned, read-only Personnel detail contract once", () => {
+  const operation = capiroOperations["directory.personnelDetail"];
+  expect(operation).toBe(directoryOperations["directory.personnelDetail"]);
+  expect(operation.service).toBe("core");
+  expect(operation.method).toBe("GET");
+  expect(operation.path).toBe("/acquisition-personnel/:id");
+  expect(operation.source).toContain(
+    "51c157444ac43035eeb489ff46aee5a4e89ba3ac",
+  );
+  expect(
+    operation.request.safeParse({
+      params: { id: "00000000-0000-4000-8000-000000000001" },
+    }).success,
+  ).toBe(true);
+  expect(
+    operation.request.safeParse({ params: { id: "not-an-id" } }).success,
+  ).toBe(false);
+  expect(
+    operation.request.safeParse({
+      params: { id: "00000000-0000-4000-8000-000000000001" },
+      body: {},
+    }).success,
+  ).toBe(false);
 });
 it("applies configured service prefixes once and ties the hearing socket to its actual gateway", () => {
   for (const operation of Object.values(capiroOperations))

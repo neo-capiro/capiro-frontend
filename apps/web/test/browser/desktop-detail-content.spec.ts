@@ -2,14 +2,11 @@ import { expect } from "@playwright/test";
 import { test } from "./runtime-observed-test";
 import {
   bootstrap,
-  client,
   clientId,
-  meeting,
   nextTask,
   setup,
   taskId,
 } from "./next-modules-fixtures";
-import { moduleRouteFixtures } from "./module-route-fixtures";
 import { expectAccessibleHome } from "../accessibility";
 const projectId = "52000000-0000-4000-8000-000000000001";
 const sectionId = "53000000-0000-4000-8000-000000000001";
@@ -143,37 +140,6 @@ for (const colorScheme of ["light", "dark"] as const) {
       footer.getByRole("button", { name: "Edit task", exact: true }),
     ).toBeFocused();
   });
-  test(`Desktop Engagement client row opens its current Outreach destination ${colorScheme}`, async ({
-    page,
-  }, info) => {
-    await page.emulateMedia({ colorScheme });
-    await setup(page, {
-      ...moduleRouteFixtures,
-      "clients.list": [client],
-      "engagement.meetings": [{ ...meeting, startsAt: "2026-10-10T14:00:00Z" }],
-    });
-    await page.goto("/modules/engagement?view=overview");
-    const table = page.getByRole("table", {
-      name: "Client engagement activity",
-      exact: true,
-    });
-    await expect(table).toContainText("Current meeting");
-    await page.screenshot({
-      path: info.outputPath("desktop-engagement-content.png"),
-    });
-    await table.getByRole("button", { name: client.name, exact: true }).click();
-    await expect(page).toHaveURL(
-      new RegExp(
-        `clientId=${clientId}.*view=outreach|view=outreach.*clientId=${clientId}`,
-      ),
-    );
-    await expect(
-      page.getByRole("tab", { name: "Outreach", exact: true }),
-    ).toHaveAttribute("aria-selected", "true");
-    await expect(
-      page.getByLabel("Engagement client scope", { exact: true }),
-    ).toHaveValue(clientId);
-  });
 }
 test("Desktop viewer can read schedule while task edit and archive remain unavailable", async ({
   page,
@@ -192,63 +158,4 @@ test("Desktop viewer can read schedule while task edit and archive remain unavai
   ).toBeDisabled();
   await dialog.getByRole("button", { name: "Close", exact: true }).click();
   await expect(dialog).toBeHidden();
-});
-test("Desktop Engagement task denial leaves the independent office report readable", async ({
-  page,
-}) => {
-  const report = {
-    ...moduleRouteFixtures["engagement.report"],
-    summary: {
-      ...moduleRouteFixtures["engagement.report"].summary,
-      targetOffices: 1,
-    },
-    rows: [
-      {
-        officeKey: "synthetic-office",
-        memberPrincipal: "Synthetic permitted office",
-        clientName: client.name,
-        prepStatus: "ready",
-        outreachStatus: "sent",
-        submissionStatus: "none",
-      },
-    ],
-  };
-  await setup(page, { ...moduleRouteFixtures, "engagement.report": report });
-  await page.route(/\/api\/capiro\/engagement\.tasks(?:\?|$)/, (route) =>
-    route.fulfill({ status: 403, json: { message: "Synthetic task denial" } }),
-  );
-  await page.goto("/modules/engagement?view=overview");
-  await expect(
-    page.getByText("Synthetic permitted office", { exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByText("Synthetic task denial", { exact: true }),
-  ).toHaveCount(4);
-  await expect(
-    page.getByRole("button", { name: "Open reports →", exact: true }),
-  ).toBeVisible();
-});
-test("Desktop Engagement outreach counter exposes read failure and retry rather than a silent dash", async ({
-  page,
-}) => {
-  await setup(page, { ...moduleRouteFixtures });
-  let fail = true;
-  await page.route(/\/api\/capiro\/engagement\.outreach(?:\?|$)/, (route) =>
-    route.fulfill(
-      fail
-        ? { status: 503, json: { message: "Synthetic outreach outage" } }
-        : { json: [] },
-    ),
-  );
-  await page.goto("/modules/engagement?view=overview");
-  const stat = page
-    .getByText("Outreach records", { exact: true })
-    .locator("..");
-  await expect(stat.getByRole("alert")).toContainText(
-    "Synthetic outreach outage",
-  );
-  fail = false;
-  await stat.getByRole("button", { name: "Try again", exact: true }).click();
-  await expect(stat.locator("strong")).toHaveText("0");
-  await expect(stat.getByRole("alert")).toHaveCount(0);
 });
