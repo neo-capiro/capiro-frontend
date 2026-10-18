@@ -26,6 +26,8 @@ const meetingId = "40000000-0000-4000-8000-000000000001";
 const otherMeetingId = "40000000-0000-4000-8000-000000000002";
 const render = () =>
   renderToStaticMarkup(
+    // createElement's typing requires a component's required children in props.
+    // eslint-disable-next-line react/no-children-prop
     createElement(ObjectiveMeetingDestination, {
       expectedClientId: clientId,
       children: createElement("span", null, "Calendar meeting read mounted"),

@@ -12,10 +12,10 @@
     "file": "apps/web/src/shared/meri-task-commands/transport.ts",
     "kind": "function",
     "symbol": "taskCommandTransport",
-    "fingerprint": "3d31d2f5bcc12f21b36b4beb71c98e984466c1835fbbfca28f4b0f2ec9d42eb8",
-    "reason": "This closure owns one credential lifetime and the bounded send path shared by prepare/execute receiving entrypoints. It reuses canonical bounded JSON/deadline handling and the generated public receiver. It owns no workflow state, approval decision, authorization or source operation.",
-    "reviewedBy": "Codex independent scope_audit",
-    "reviewedOn": "2026-10-16"
+    "fingerprint": "4e4b54536beb623966e690630d972b5b6432c4ed402be0c346ccd3ab0431792a",
+    "reason": "Re-review after integration: the browser now sends the opaque session in X-Meri-Action-Session instead of an Authorization bearer, matching every other Meri proxy (Clerk reads a bearer as signed out). Credential lifetime, bounded send path and receivers are unchanged; no workflow state or authority added.",
+    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/attendance/ClientAttendancePreferences.tsx",
@@ -2847,10 +2847,10 @@
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
     "kind": "function",
     "symbol": "IntegrationSettings",
-    "fingerprint": "8a4ce01d6f7221a6622140e77ada69558255eb2ffec171f705af13141ac4ebe2",
-    "reason": "One existing integration Settings screen composes typed provider capabilities, connections and fixed account actions. Its nested callbacks render provider/connection controls; added exact-target receipt checks precede the existing success callbacks, with transport and lifetime ownership unchanged.",
-    "reviewedBy": "Codex non_meri_closure_review",
-    "reviewedOn": "2026-10-15"
+    "fingerprint": "6ac07199ad93009f8409f785eb3dca50a903b02afbe13e830caaa7af6bbfebe5",
+    "reason": "Re-review after #85/#91 (67359f40): the only change since the 2026-10-15 review keeps the disconnect confirmation open while its write is pending (onClose ignores dismissal when action.busy). Provider/connection composition, transport and lifetime ownership are unchanged.",
+    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/settings/IntegrationSettings.tsx",
@@ -2995,5 +2995,32 @@
     "reason": "Declaratively assembles brand, mode links and actions into HeaderFrame. Route scoping and fixture overlay state live in separate components, with no transport or policy here. See docs/non-meri-continuation-20261016/PR60-SIZE-REVIEW.md#current-source.",
     "reviewedBy": "Codex PR60 root and independent source reviewers",
     "reviewedOn": "2026-10-16"
+  },
+  {
+    "file": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
+    "kind": "function",
+    "symbol": "PersonnelDirectory",
+    "fingerprint": "c807490bf373a0c8631f079d52c788a2d7f41a67aa18000a9134c264a67010c1",
+    "reason": "One bounded personnel list owns URL filters, the list query, row selection and table presentation (reviewed at 246 lines on 2026-10-17). 53534db6 adds the verified selected-profile side preview: the read and rendering live in PersonnelPreview and row activation in DataTable; the growth here is the list/preview layout and URL-selected row binding only.",
+    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
+    "kind": "function",
+    "symbol": "QuickLogSession",
+    "fingerprint": "dd96896b24d79aa782364fe9dbfb981fcb4be1e722d49bcc04caf82320ce0c47",
+    "reason": "One Quick log session owns its mode, client and member selection and the submit through existing operations. a377e1c1 adds one line clearing the client selection on the member-mode switch, crossing 80 lines by three; splitting the toggle out would only scatter one state machine.",
+    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/shared/module-ui/DataTable.tsx",
+    "kind": "function",
+    "symbol": "DataTable",
+    "fingerprint": "8484c7493e009adc9db597dfa703957361770b4935e94863dbbb33e8f499eecc",
+    "reason": "Shared presentational table primitive. 53534db6 adds optional selected-row styling and click/Enter/Space row activation that ignores nested interactive controls, used by the Personnel preview. No data fetching, transport or policy; callers own selection state.",
+    "reviewedBy": "Fable frontend integration review (capiro-frontend consolidation)",
+    "reviewedOn": "2026-10-18"
   }
 ]
