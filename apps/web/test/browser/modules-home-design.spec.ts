@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
 import { operationFixtures, testIdentity } from "./fixtures";
 import { expectAccessibleHome } from "../accessibility";
 import {
@@ -33,6 +34,38 @@ test("Figma Modules landscape keeps the authored wide card", async ({
     contentType: "application/json",
   });
   expect(geometry!.width).toBeCloseTo(646, 0);
+});
+
+test("Figma 3.4 desktop hub keeps its hierarchy and Outreach-only entry", async ({
+  page,
+}) => {
+  await expect(
+    page.getByRole("heading", {
+      name: "Everything in Capiro, across the whole firm",
+      exact: true,
+      level: 1,
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Modules · the whole firm" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Client profile · just that client" }),
+  ).toBeVisible();
+  const engagement = page.getByRole("article").filter({
+    has: page.getByRole("heading", { name: "Engagement", exact: true }),
+  });
+  await expect(
+    engagement.getByRole("link", { name: "Outreach" }),
+  ).toBeVisible();
+  await expect(engagement.getByRole("link", { name: "Reports" })).toHaveCount(
+    0,
+  );
+  await expect(engagement.getByRole("link", { name: "Meetings" })).toHaveCount(
+    0,
+  );
+  await mkdir("test-results/figma34-desktop", { recursive: true });
+  await page.screenshot({ path: "test-results/figma34-desktop/modules.png" });
 });
 
 test("Figma Modules card SVGs preserve native rendered geometry", async ({
@@ -94,7 +127,7 @@ for (const [width, colorScheme] of [
     await expect(tooltip).toContainText("Every client and every activity");
     await expect(tooltip).toHaveCount(1);
     await expect(help).toHaveAccessibleDescription(
-      "Every client and every activity, across the whole firm. Choose a client profile to show just that client’s work.",
+      "Every client and every activity available to your account. Choose a client profile to show just that client’s work.",
     );
     await expect(help).toHaveAttribute(
       "aria-describedby",

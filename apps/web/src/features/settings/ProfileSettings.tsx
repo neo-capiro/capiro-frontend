@@ -6,7 +6,6 @@ import type { OperationResponse } from "../../shared/capiro/contracts";
 import type { settingsOperations } from "../../shared/capiro/operations/settings";
 import { useCapiroQuery } from "../../shared/capiro/queries";
 import {
-  Badge,
   DataTable,
   StatusPanel,
   TextArea,
@@ -15,6 +14,7 @@ import {
 import {
   SettingField,
   SettingsButton,
+  SettingsBadge,
   SettingsDialog,
   SettingsNotice,
   SettingsTabs,
@@ -25,6 +25,11 @@ import { useSettingsAction } from "./useSettingsAction";
 type Client = OperationResponse<
   (typeof settingsOperations)["clients.list"]
 >[number];
+const addedDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 export function ProfileSettings() {
   const api = useCapiro();
@@ -67,7 +72,7 @@ export function ProfileSettings() {
   return (
     <div
       className={styles.stack}
-      data-design-target={tab === "active" ? "411:70958" : "411:71400"}
+      data-design-target={tab === "active" ? "1064:244975" : "411:71400"}
     >
       <div className={styles.row}>
         <div className={styles.grow}>
@@ -81,12 +86,14 @@ export function ProfileSettings() {
             ]}
           />
         </div>
-        <TextInput
-          aria-label="Search profiles"
-          placeholder="Search profiles"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
+        <div className={styles.profileSearch}>
+          <TextInput
+            aria-label="Search profiles"
+            placeholder="Search profiles"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </div>
         <SettingsButton primary onClick={() => setCreate(true)}>
           + Add profile
         </SettingsButton>
@@ -102,7 +109,7 @@ export function ProfileSettings() {
         error={query.error}
         onRetry={query.reload}
       >
-        <div className={styles.card}>
+        <div className={`${styles.card} ${styles.profileTable}`}>
           <DataTable
             rows={rows}
             rowKey={(row) => row.id}
@@ -111,7 +118,32 @@ export function ProfileSettings() {
               search ? "No profiles match your search." : `No ${tab} profiles.`
             }
             columns={[
-              { key: "name", label: "Name", render: (row) => row.name },
+              {
+                key: "name",
+                label: "Name",
+                render: (row) => {
+                  const words = row.name.trim().split(/\s+/);
+                  const initials =
+                    words.length > 1
+                      ? `${words[0]?.[0] ?? ""}${words[1]?.[0] ?? ""}`
+                      : row.name.slice(0, 2);
+                  return (
+                    <span className={styles.profileIdentity}>
+                      <span
+                        className={`${styles.profileAvatar} ${row.status === "prospect" ? styles.profileAvatarMuted : ""}`}
+                        aria-hidden="true"
+                      >
+                        {row.logoUrl ? (
+                          <img src={row.logoUrl} alt="" />
+                        ) : (
+                          initials.toUpperCase()
+                        )}
+                      </span>
+                      <span>{row.name}</span>
+                    </span>
+                  );
+                },
+              },
               {
                 key: "website",
                 label: "Website",
@@ -128,9 +160,19 @@ export function ProfileSettings() {
                 key: "status",
                 label: "Status",
                 render: (row) => (
-                  <Badge tone={row.status === "active" ? "success" : "neutral"}>
-                    {row.status}
-                  </Badge>
+                  <SettingsBadge
+                    tone={
+                      row.status === "active"
+                        ? "success"
+                        : row.status === "prospect"
+                          ? "warning"
+                          : "neutral"
+                    }
+                  >
+                    {row.status.replace(/^./, (character) =>
+                      character.toUpperCase(),
+                    )}
+                  </SettingsBadge>
                 ),
               },
               {
@@ -138,7 +180,7 @@ export function ProfileSettings() {
                 label: "Added",
                 render: (row) =>
                   row.createdAt
-                    ? new Date(row.createdAt).toLocaleDateString()
+                    ? addedDate.format(new Date(row.createdAt))
                     : "—",
               },
               {

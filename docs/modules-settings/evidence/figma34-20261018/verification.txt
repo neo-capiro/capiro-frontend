@@ -1,0 +1,25 @@
+Modules / Settings Figma 3.4 desktop verification
+Date: 2026-10-18 UTC
+Source: PR #92 head 271a267da93aa952a89b208d1f42eed0ffb080c2
+Viewport: 1440 x 1040, light theme, Chromium /usr/bin/chromium
+Test data: synthetic HTTP responses within the Playwright harness only
+
+Focused browser run:
+CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm exec -- playwright test --config apps/web/test/browser/playwright.config.ts apps/web/test/browser/modules-home-design.spec.ts apps/web/test/browser/engagement-outreach-only.spec.ts apps/web/test/browser/settings-scenes.spec.ts apps/web/test/browser/settings.spec.ts --grep 'Figma 3.4 desktop hub|Figma Modules card SVGs|at 1440px light|Engagement opens directly|old Modules meeting|saved meeting-library|Team role select saves|Settings (personal|team|profiles|integrations|billing) renders|Figma 3.4 Profiles desktop'
+Result: 13 passed.
+
+After the local CSS split: Team and populated Profiles cases rerun, 2 passed.
+After the final screenshot adjustments: Billing viewport case rerun, 1 passed; populated Profiles case rerun, 1 passed.
+
+npm run typecheck --workspace @capiro/web
+Result: passed.
+npm run build --workspace @capiro/web
+Result: passed. Next generated /modules, /modules/[module], /settings/[section].
+Scoped Prettier check on touched TypeScript and CSS: passed.
+Scoped ESLint: exit 0. One remaining Next lint warning for an external client logo img, whose URL is dynamic and not configured in Next remotePatterns; the existing browser-safe fallback is initials.
+git diff --check
+Result: passed.
+node scripts/architecture.mjs
+Result: errors: []; review signals: 520 across the repository; exit 1 for review signals. No new architecture error reported. The audit explains the changed-file review signals.
+
+Evidence PNG files in this folder are 1440 x 1040 viewport captures. An on-screen banner identifies the explicit local test fixture. They are source-review evidence, not deployed screenshots or live customer data.

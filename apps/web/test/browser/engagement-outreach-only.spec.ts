@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
 import {
   assertNoEffects,
   clientId,
@@ -34,6 +35,10 @@ test("Engagement opens directly to Outreach with no obsolete sections or meeting
       0,
     );
   }
+  await mkdir("test-results/figma34-desktop", { recursive: true });
+  await page.screenshot({
+    path: "test-results/figma34-desktop/engagement.png",
+  });
   assertNoEffects(observed);
 });
 

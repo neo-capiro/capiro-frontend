@@ -1,0 +1,176 @@
+.profileSearch {
+  flex: 0 0 240px;
+  min-width: 0;
+}
+.profileIdentity {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  font-weight: 500;
+}
+.profileAvatar {
+  display: inline-flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #1c1c1c;
+  color: white;
+  font-size: 11px;
+  line-height: 1;
+}
+.profileAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profileAvatarMuted {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+.profileTable {
+  padding-top: 20px;
+}
+.profileTable > div {
+  border: 0;
+  border-radius: 0;
+}
+.profileTable table {
+  table-layout: fixed;
+  min-width: 1080px;
+}
+.profileTable table th:nth-child(1) {
+  width: 20%;
+}
+.profileTable table th:nth-child(2),
+.profileTable table th:nth-child(3) {
+  width: 17%;
+}
+.profileTable table th:nth-child(4) {
+  width: 10%;
+}
+.profileTable table th:nth-child(5) {
+  width: 12%;
+}
+.profileTable table th:nth-child(6) {
+  width: 11%;
+}
+.profileTable table th:nth-child(7) {
+  width: 13%;
+}
+.profileTable table thead th {
+  padding-block: 14px;
+}
+.profileTable table tbody td {
+  padding-block: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.teamCard section {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+.teamTable table {
+  table-layout: fixed;
+  min-width: 1120px;
+}
+.teamTable table thead th,
+.teamTable table tbody td {
+  padding-left: 16px;
+  padding-right: 0;
+  padding-top: 19px;
+  padding-bottom: 19px;
+}
+.teamTable table th:first-child,
+.teamTable table td:first-child {
+  padding-left: 24px;
+}
+.teamTable table th:last-child,
+.teamTable table td:last-child {
+  padding-right: 24px;
+}
+.teamTable table th:nth-child(2) {
+  width: 186px;
+}
+.teamTable table th:nth-child(3) {
+  width: 166px;
+}
+.teamTable table th:nth-child(4) {
+  width: 116px;
+}
+.teamTable table th:nth-child(5) {
+  width: 126px;
+}
+.teamTable table th:nth-child(6) {
+  width: 120px;
+}
+.teamTable table td:nth-child(2) [data-slot="select-trigger"] {
+  width: 170px;
+  height: 32px;
+  min-height: 32px;
+  padding: 4px 10px;
+}
+.teamTable table td:nth-child(2) [data-tone] > span {
+  width: 170px;
+}
+.teamTable table td:nth-child(4) [data-tone] > span {
+  width: 100px;
+}
+.teamTable table td:nth-child(6) button {
+  width: 80px;
+}
+.teamTable [data-danger="true"] {
+  border-color: var(--destructive, #7a2e2e);
+  color: var(--destructive-text, #652424);
+}
+.memberIdentity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.memberAvatar {
+  display: inline-flex;
+  flex: 0 0 32px;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.memberDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.memberName {
+  overflow: hidden;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.memberEmail {
+  overflow: hidden;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .profileSearch {
+    flex-basis: 100%;
+  }
+}

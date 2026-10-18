@@ -49,10 +49,33 @@ for (const [section, title] of routes)
       await expect(cards).toHaveCSS("row-gap", "20px");
       await expect(page.getByTitle("Email signature preview")).toHaveCount(0);
     }
+    if (section === "profiles") {
+      const tabs = await page
+        .getByRole("tablist", { name: "Profile status" })
+        .boundingBox();
+      const search = await page
+        .getByRole("textbox", { name: "Search profiles" })
+        .boundingBox();
+      const add = await page
+        .getByRole("button", { name: "+ Add profile" })
+        .boundingBox();
+      expect(tabs).not.toBeNull();
+      expect(search).not.toBeNull();
+      expect(add).not.toBeNull();
+      expect(Math.abs(tabs!.y - search!.y)).toBeLessThan(4);
+      expect(Math.abs(search!.y - add!.y)).toBeLessThan(4);
+      expect(search!.width).toBeLessThanOrEqual(240);
+    }
     await page.screenshot({
       path: `test-results/settings-scenes/${section}.png`,
       fullPage: true,
     });
+    if (section === "personal" || section === "billing") {
+      await mkdir("test-results/figma34-desktop", { recursive: true });
+      await page.screenshot({
+        path: `test-results/figma34-desktop/${section}.png`,
+      });
+    }
     expect(errors).toEqual([]);
   });
 
@@ -107,4 +130,45 @@ test("Settings dialogs trap focus and Escape closes an unsent invitation", async
   await expect(
     page.getByRole("button", { name: /Add team member/ }),
   ).toBeFocused();
+});
+
+test("Figma 3.4 Profiles desktop renders a populated table without toolbar overlap", async ({
+  page,
+}) => {
+  const names = [
+    "Anduril",
+    "Hidden Level",
+    "Firestorm Labs",
+    "Castellion",
+    "Regent Craft",
+    "Shield AI",
+    "Applied Intuition",
+    "Overland AI",
+    "Kratos",
+  ];
+  await operationFixtures(page, {
+    ...settingsFixtures,
+    "clients.list": names.map((name, index) => ({
+      id: `30000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`,
+      name,
+      profileStatus: index === 8 ? "prospect" : "client",
+      status: index === 8 ? "prospect" : "active",
+      logoUrl: null,
+      website: `${name.toLowerCase().replaceAll(" ", "")}.test`,
+      createdAt: "2026-09-01T12:00:00.000Z",
+      primaryContactName: `Synthetic Contact ${index + 1}`,
+      primaryContactEmail: null,
+    })),
+  });
+  await page.goto("/settings/profiles");
+  await expect(page.getByRole("tab", { name: "Active (9)" })).toBeVisible();
+  await expect(page.getByRole("row")).toHaveCount(10);
+  await expect(
+    page.getByRole("cell", { name: "Anduril", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("cell", { name: "Sep 2026" }).first(),
+  ).toBeVisible();
+  await mkdir("test-results/figma34-desktop", { recursive: true });
+  await page.screenshot({ path: "test-results/figma34-desktop/profiles.png" });
 });

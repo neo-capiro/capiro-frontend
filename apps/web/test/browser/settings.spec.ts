@@ -115,6 +115,57 @@ test("Team prevents self-removal and failed invitations remain editable without 
   await expect(page.getByText("Invitation was sent.")).toHaveCount(0);
 });
 
+test("Team role select saves a non-self member through the adopted control", async ({
+  page,
+}) => {
+  let role: "standard_user" | "user_admin" = "standard_user";
+  const writes: unknown[] = [];
+  const member = {
+    membershipId: "membership-member",
+    userId: "10000000-0000-4000-8000-000000000003",
+    email: "member@example.test",
+    firstName: "Synthetic",
+    lastName: "Member",
+    status: "active",
+    billingAdmin: false,
+    joinedAt: "2026-10-03T12:00:00.000Z",
+    lastSeenAt: null,
+  };
+  await operationFixtures(page, {
+    "me.read": testIdentity,
+    "settings.team.list": () => [{ ...member, role }],
+    "settings.team.invitations": [],
+    "settings.team.setRole": (input) => {
+      writes.push(input);
+      role = (input as { body: { role: typeof role } }).body.role;
+      return {
+        member: {
+          clerkUserId: "synthetic-member",
+          localUserId: member.userId,
+          membershipId: member.membershipId,
+          userCreated: false,
+          membershipCreated: false,
+          membershipRoleUpdated: true,
+        },
+        role,
+      };
+    },
+  });
+  await page.goto("/settings/team");
+  const select = page.getByRole("combobox", {
+    name: "Role for member@example.test",
+  });
+  await select.click();
+  await page.getByRole("option", { name: "User admin" }).click();
+  await expect(select).toContainText("User admin");
+  expect(writes).toEqual([
+    {
+      params: { userId: member.userId },
+      body: { role: "user_admin" },
+    },
+  ]);
+});
+
 test("Mobile Personal fits the viewport and Settings sections remain keyboard accessible", async ({
   page,
 }) => {
