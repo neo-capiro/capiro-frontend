@@ -1,14 +1,14 @@
 "use client";
-/* Figma supplies the static line icons. The signed-in avatar is supplied by Clerk. */
+/* Figma supplies the static line icons. */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import { useState, type ReactNode } from "react";
-import { Menu } from "lucide-react";
+import { Menu, PanelLeft } from "lucide-react";
 import { HeaderFrame } from "@/shared/shell/HeaderFrame";
 import { PortfolioNavigation } from "./PortfolioNavigation";
 import type { Destinations } from "../config/config";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
+import { PortfolioHeaderActions } from "./PortfolioHeaderActions";
 import styles from "./shell.module.css";
 const asset = (name: string) => `/design/411-41421-${name}`;
 export function Shell({
@@ -23,6 +23,7 @@ export function Shell({
   profileControl?: ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [desktopExpanded, setDesktopExpanded] = useState(true);
   const base = client ? `/portfolio/${client.id}` : "/portfolio";
   return (
     <>
@@ -36,6 +37,7 @@ export function Shell({
           <button
             className={`button ghost iconButton ${styles.mobileToggle}`}
             aria-label="Toggle navigation"
+            aria-controls="portfolio-navigation"
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
@@ -43,58 +45,37 @@ export function Shell({
           </button>
         }
         brand={
-          <Link className={styles.brand} href="/" aria-label="Capiro Home">
-            <img
-              src={asset("imgCapiroWordmark.png")}
-              alt="Capiro"
-              width={77}
-              height={26}
-            />
-          </Link>
+          <div className={styles.brand}>
+            <Link href="/" aria-label="Capiro Home">
+              <img
+                src={asset("imgCapiroWordmark.png")}
+                alt="Capiro"
+                width={77}
+                height={26}
+              />
+            </Link>
+            <button
+              type="button"
+              className={styles.sidebarToggle}
+              aria-label="Toggle sidebar"
+              aria-controls="portfolio-navigation"
+              aria-expanded={desktopExpanded}
+              onClick={() => setDesktopExpanded((expanded) => !expanded)}
+            >
+              <PanelLeft size={18} aria-hidden="true" />
+            </button>
+          </div>
         }
         modes={<WorkspaceSwitcher destinations={destinations} />}
         actions={
-          <nav className={styles.actions} aria-label="Global actions">
-            <Link
-              className="button ghost iconButton"
-              href={client ? `${base}?log=1` : "/portfolio?log=1"}
-              aria-label="Quick log"
-              title="Quick log"
-            >
-              <img src={asset("imgIcon3.svg")} alt="" />
-            </Link>
-            <Link
-              className="button ghost iconButton"
-              href="/calendar"
-              aria-label="Master calendar"
-              title="Master calendar"
-            >
-              <img src={asset("imgIcon4.svg")} alt="" />
-            </Link>
-            <Link
-              className="button ghost iconButton"
-              href="/portfolio?search=1"
-              aria-label="Search Portfolio"
-              title="Search"
-            >
-              <img src={asset("imgIcon5.svg")} alt="" />
-            </Link>
-            <button
-              className="button ghost iconButton"
-              disabled
-              aria-label="Updates unavailable"
-              title="Updates contract has not been connected"
-            >
-              <img src={asset("imgIcon6.svg")} alt="" />
-            </button>
-            <div className={styles.avatar}>
-              {profileControl ?? <UserButton />}
-            </div>
-          </nav>
+          <PortfolioHeaderActions base={base} profileControl={profileControl} />
         }
       />
-      <div className={styles.body}>
+      <div
+        className={`${styles.body} ${desktopExpanded ? "" : styles.bodyCollapsed}`}
+      >
         <aside
+          id="portfolio-navigation"
           className={`${styles.sidebar} ${mobileOpen ? styles.open : ""}`}
           aria-label="Portfolio navigation"
         >
