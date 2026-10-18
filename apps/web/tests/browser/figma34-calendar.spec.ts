@@ -185,6 +185,9 @@ async function installCalendarFixtures(page: Page) {
       runtime: { externalActionsEnabled: true },
     }),
   );
+  await page.route("**/api/backend/core/engagement/integrations", (route) =>
+    json(route, []),
+  );
   await page.route("**/api/backend/core/engagement/meetings**", (route) => {
     const url = new URL(route.request().url());
     if (route.request().method() !== "GET")
@@ -240,47 +243,67 @@ async function installCalendarFixtures(page: Page) {
   return unexpected;
 }
 
+async function expectClientMeetingsHeader(page: Page) {
+  const header = page.locator("header.pageHeader");
+  await expect(
+    header.getByRole("heading", { name: "Anduril meetings" }),
+  ).toBeVisible();
+  const actions = ["Sync calendar", "Meeting Library", "New meeting"];
+  await expect(header.getByRole("button")).toHaveText(actions);
+  for (const action of actions)
+    await expect(
+      header.getByRole("button", { name: action, exact: true }),
+    ).toBeVisible();
+}
+
 test("client calendar desktop views follow the Portfolio 3.4 frames", async ({
   page,
-}, testInfo) => {
+}) => {
   const unexpected = await installCalendarFixtures(page);
   await page.goto(
     `/portfolio/${clientId}/calendar?view=agenda&date=2026-10-08&zone=America%2FNew_York`,
   );
-  await expect(
-    page.getByRole("heading", { name: "Anduril meetings" }),
-  ).toBeVisible();
+  await expectClientMeetingsHeader(page);
   await expect(
     page.getByRole("row", { name: /FY27 counter-UAS staff briefing/ }),
   ).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath("agenda.png") });
+  await page.screenshot({
+    path: "../../evidence/playwright/calendar-header/agenda-1440x1040.png",
+  });
 
   await page
     .getByRole("group", { name: "Calendar view" })
     .getByRole("button", { name: "Month" })
     .click();
-  await expect(
-    page.getByRole("heading", { name: "Anduril calendar" }),
-  ).toBeVisible();
+  await expectClientMeetingsHeader(page);
   await expect(page.locator('[data-view="month"]')).toBeVisible();
   await expect(page.locator('[data-view="month"]')).toContainText(
     "Fallon office",
   );
   await page.screenshot({
-    path: testInfo.outputPath("month.png"),
+    path: "../../evidence/playwright/calendar-header/month-1440x1040.png",
     animations: "disabled",
   });
+  await page.getByRole("button", { name: "Sync calendar" }).click();
+  const sync = page.getByRole("dialog", { name: "Sync calendar" });
+  await expect(sync).toBeVisible();
+  await sync.locator('[data-slot="dialog-close"]').click();
+  await page.getByRole("button", { name: "New meeting" }).click();
+  const create = page.getByRole("dialog", { name: "New meeting" });
+  await expect(create).toBeVisible();
+  await create.locator('[data-slot="dialog-close"]').click();
 
   await page
     .getByRole("group", { name: "Calendar view" })
     .getByRole("button", { name: "Week" })
     .click();
+  await expectClientMeetingsHeader(page);
   await expect(page.locator('[data-view="week"]')).toBeVisible();
   await expect(page.locator('[data-view="week"]')).toContainText(
     "Strategy review",
   );
   await page.screenshot({
-    path: testInfo.outputPath("week.png"),
+    path: "../../evidence/playwright/calendar-header/week-1440x1040.png",
     animations: "disabled",
   });
 
@@ -288,6 +311,7 @@ test("client calendar desktop views follow the Portfolio 3.4 frames", async ({
     .getByRole("group", { name: "Calendar view" })
     .getByRole("button", { name: "Agenda" })
     .click();
+  await expectClientMeetingsHeader(page);
   await page
     .getByRole("button", { name: "FY27 counter-UAS staff briefing" })
     .click();
@@ -295,16 +319,22 @@ test("client calendar desktop views follow the Portfolio 3.4 frames", async ({
     name: "FY27 counter-UAS staff briefing",
   });
   await prep.getByRole("button", { name: "Preparation" }).click();
+  await expectClientMeetingsHeader(page);
   await expect(
     prep.getByRole("button", { name: "Preparation" }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page.screenshot({ path: testInfo.outputPath("prep.png") });
+  await page.screenshot({
+    path: "../../evidence/playwright/calendar-header/prep-1440x1040.png",
+  });
   await page.getByRole("button", { name: "HAC-D staff call" }).click();
   const debrief = page.getByRole("dialog", { name: "HAC-D staff call" });
+  await expectClientMeetingsHeader(page);
   await expect(
     debrief.getByRole("button", { name: "Debriefs" }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page.screenshot({ path: testInfo.outputPath("debrief.png") });
+  await page.screenshot({
+    path: "../../evidence/playwright/calendar-header/debrief-1440x1040.png",
+  });
 
   await debrief.getByRole("button", { name: "Close" }).click();
   await page.getByRole("button", { name: "Meeting Library" }).click();
@@ -314,6 +344,8 @@ test("client calendar desktop views follow the Portfolio 3.4 frames", async ({
   await expect(
     page.getByRole("table", { name: "Approved meeting archive" }),
   ).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath("library.png") });
+  await page.screenshot({
+    path: "../../evidence/playwright/calendar-header/library-1440x1040.png",
+  });
   expect(unexpected).toEqual([]);
 });

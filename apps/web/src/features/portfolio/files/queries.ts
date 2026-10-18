@@ -7,15 +7,64 @@ import {
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
-import { clientFilesSchema, fileAccessForIdSchema } from "./contracts";
+import {
+  clientFilesSchema,
+  fileAccessForIdSchema,
+  storageUsageSchema,
+} from "./contracts";
 import {
   assertFileReader,
   currentFileReader,
+  filesKey,
   readerFilesKey,
   useFileReader,
   type FileReader,
 } from "./file-reader";
 export { filesKey } from "./file-reader";
+export const storageUsageKey = (clientId: string, reader?: FileReader) =>
+  [
+    ...filesKey(clientId),
+    "storage-usage",
+    reader?.tenantId ?? null,
+    reader?.userId ?? null,
+    reader?.revision ?? null,
+  ] as const;
+export function useStorageUsage(clientId: string) {
+  const api = useApi();
+  const cache = useQueryClient();
+  const identity = useIdentity();
+  const reader = useFileReader();
+  const query = useQuery({
+    queryKey: storageUsageKey(clientId, reader),
+    enabled: Boolean(reader),
+    retry: false,
+    queryFn: async ({ signal }) => {
+      assertFileReader(cache, reader);
+      const usage = await api.request(
+        "core",
+        `clients/${encodeURIComponent(clientId)}/files/storage-usage`,
+        storageUsageSchema(clientId),
+        { signal },
+      );
+      assertFileReader(cache, reader);
+      return usage;
+    },
+  });
+  const waiting = identity.isPending || identity.isFetching;
+  return {
+    ...query,
+    isPending: waiting || (Boolean(reader) && query.isPending),
+    error:
+      query.error ??
+      (!reader && !waiting
+        ? (identity.error ??
+          new ApiError(
+            403,
+            "A current session is required to load client storage usage.",
+          ))
+        : null),
+  };
+}
 export function filesOptions(
   api: ApiClient,
   cache: QueryClient,
