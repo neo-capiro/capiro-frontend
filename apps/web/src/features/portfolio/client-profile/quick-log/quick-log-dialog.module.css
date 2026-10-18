@@ -4,7 +4,7 @@
   width: min(640px, calc(100vw - 32px));
   max-height: calc(100dvh - 100px);
   padding: 26px 28px;
-  gap: 18px;
+  gap: 14px;
   border: 0;
   box-shadow:
     0 16px 40px -12px #0c0a092e,
@@ -103,7 +103,7 @@
   text-decoration: underline;
 }
 .form {
-  gap: 14px;
+  gap: 10px;
 }
 .form label {
   font-size: 14px;
@@ -118,7 +118,7 @@
   font-size: 14px;
 }
 .form textarea {
-  min-height: 110px;
+  min-height: 88px;
   resize: vertical;
 }
 .kindField {
