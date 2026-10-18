@@ -5,7 +5,10 @@ import {
   storedSubmission,
   submissionIdentity,
 } from "../../../shared/meri-conversations/query-journal";
-import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
+import type {
+  ConversationStoredRequest,
+  ConversationSubmitRequest,
+} from "@capiro/meri-contracts/conversation-application";
 
 /**
  * Meri answers the contract's 404 NOT_FOUND for a session's history before the conversation's
@@ -31,6 +34,7 @@ export async function sendRequest(
   prompt: string,
   retry: boolean,
   initial = false,
+  onRecorded?: (request: ConversationSubmitRequest) => void,
 ) {
   const retained = intent.read().submit;
   if ((!retry && retained) || (retry && !retained))
@@ -44,11 +48,12 @@ export async function sendRequest(
         ...(initial ? { workflow: "initial" as const } : {}),
       };
   intent.write({ ...intent.read(), submit: { ...input, state: "pending" } });
+  const { state: _state, workflow, ...request } = input;
   try {
+    if (!retry) onRecorded?.(request);
     if (retry && port.getSnapshot().submit === "unknown")
       await port.retrySubmit();
     else {
-      const { state: _state, workflow, ...request } = input;
       if (workflow === "initial") await port.submitInitial(request);
       else await port.submit(request);
     }

@@ -145,8 +145,9 @@ export function MeriLiveConversation({
   useEffect(() => {
     // Only a positively observed submit can consume the text that was sent. A late ACK must
     // leave newer edits alone, including edits made while this session was disconnected.
-    if (initialDraft.acknowledge(intent.submit, draft)) onDraft("");
-  }, [initialDraft, intent.submit, draft, onDraft]);
+    if (initialDraft.acknowledge(port.context, intent.submit, draft))
+      onDraft("");
+  }, [initialDraft, port.context, intent.submit, draft, onDraft]);
   const announced = useRef(false);
   useEffect(() => {
     if (finished && !announced.current) {
@@ -165,10 +166,11 @@ export function MeriLiveConversation({
   const send = () => {
     const prompt = draft.trim();
     if (availability.initial) {
-      initialDraft.begin(prompt, draft);
-      void run.submitInitial(prompt);
+      void run.submitInitial(prompt, (request) =>
+        initialDraft.begin(port.context, request, draft),
+      );
     } else if (
-      !initialDraft.hasPending() &&
+      !initialDraft.hasPending(port.context) &&
       turn &&
       finished &&
       !nextTurnBlocked

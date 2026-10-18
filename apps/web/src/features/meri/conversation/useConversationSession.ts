@@ -33,6 +33,9 @@ export function useConversationSession(
   }, [history.denied, boundReady, connection.revoke]);
   const [draft, setDraft] = useState("");
   const [initialDraft] = useState(createInitialDraftOwner);
+  useEffect(() => {
+    if (boundReady) initialDraft.select(boundReady.port.context);
+  }, [boundReady, initialDraft]);
   const updateDraft = useCallback(
     (value: string) => {
       initialDraft.edit();
