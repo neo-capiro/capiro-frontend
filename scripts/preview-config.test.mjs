@@ -198,8 +198,8 @@ test('preview rejects retained or overridden production parameters and ambiguous
 
 test('preview template constrains every explicit configuration value and keeps held services blank', () => {
   const p = renderPreviewConfiguration(bindings);
-  // The shipping owner separately adds these two parameters to service.yml.
-  const pendingTemplateParameters = new Set([
+  // The roster parameters exist, but the Core source remains held at blank.
+  const heldTemplateParameters = new Set([
     'CapiroPreviewClientRosterBackendSource', 'CapiroPreviewClientRosterApiBaseUrl',
   ]);
   const optionalExact = new Map([
@@ -214,10 +214,15 @@ test('preview template constrains every explicit configuration value and keeps h
   const optionalBooleans = new Set(['MeriConversationWorkflowEnabled', 'MeriFirstChatBootstrapEnabled',
     'CapiroPreviewMeriConversationRoutesEnabled']);
   for (const item of p.parameters) {
-    if (pendingTemplateParameters.has(item.ParameterKey)) continue;
     const block = template.match(new RegExp(`^  ${item.ParameterKey}:\\n([\\s\\S]*?)(?=^  \\w+:|^Resources:)`, 'm'))?.[1];
     assert.ok(block, item.ParameterKey);
-    if (item.ParameterKey.startsWith('Clerk')) {
+    if (heldTemplateParameters.has(item.ParameterKey)) {
+      assert.equal(item.ParameterValue, '');
+      assert.match(block, /Default: ""/);
+      const allowed = JSON.parse(block.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null');
+      assert.deepEqual(allowed, item.ParameterKey === 'CapiroPreviewClientRosterBackendSource'
+        ? [''] : ['', 'https://core-roster-preview.capiro.ai/api']);
+    } else if (item.ParameterKey.startsWith('Clerk')) {
       const pattern = JSON.parse(block.match(/AllowedPattern: (".*")/)?.[1] ?? 'null');
       assert.equal(typeof pattern, 'string', item.ParameterKey);
       assert.match(item.ParameterValue, new RegExp(pattern));
@@ -256,25 +261,32 @@ test('preview template constrains every explicit configuration value and keeps h
       MERI_FIRST_CHAT_BOOTSTRAP_ENABLED: 'MeriFirstChatBootstrapEnabled', MERI_FIRST_CHAT_CLIENT_ID: 'MeriFirstChatClientId',
       CAPIRO_REQUEST_ORIGIN: 'CapiroRequestOrigin', CAPIRO_PREVIEW_READ_ONLY: 'CapiroPreviewReadOnly',
       CAPIRO_PREVIEW_READ_BACKEND_SOURCE: 'CapiroPreviewReadBackendSource', CAPIRO_PREVIEW_READ_API_BASE_URL: 'CapiroPreviewReadApiBaseUrl',
+      CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE: 'CapiroPreviewClientRosterBackendSource',
+      CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL: 'CapiroPreviewClientRosterApiBaseUrl',
       CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE: 'CapiroPreviewFirstChatBackendSource', CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL: 'CapiroPreviewFirstChatApiBaseUrl',
       CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED: 'CapiroPreviewMeriConversationRoutesEnabled',
       CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN: 'CapiroPreviewMeriRuntimeOrigin', CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE: 'CapiroPreviewMeriRuntimeSource',
       CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST: 'CapiroPreviewMeriRuntimeImageDigest',
       CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION: 'CapiroPreviewMeriContractPackageVersion',
     }[name];
-    if (name.startsWith('CAPIRO_PREVIEW_CLIENT_ROSTER_')) continue;
     assert.match(template, new RegExp(`- Name: ${name}\\n +Value: ${parameter ? `!Ref ${parameter}` : `"${value}"`}`));
   }
   assert.match(template, /MeriConversationRequiresOrigin:\n +RuleCondition: !Equals \[!Ref MeriConversationWorkflowEnabled, "true"\]\n +Assertions:\n +- Assert: !Not \[!Equals \[!Ref MeriApiBaseUrl, ""\]\]/);
   assert.match(template, /FirstChatRequiresCurrentBindings:/);
   assert.match(template, /PreviewReadHeldWithoutSource:/);
+  assert.match(template, /PreviewClientRosterRequiresPairedTarget:/);
+  assert.match(template, /PreviewClientRosterHeldWithoutSource:/);
   assert.match(template, /MeriRouteHeldWithoutWorkflow:/);
 });
 
-test('qualified roster template parameters remain an explicit shipping gate', () => {
-  assert.doesNotMatch(template, /^  CapiroPreviewClientRosterBackendSource:/m);
-  assert.doesNotMatch(template, /^  CapiroPreviewClientRosterApiBaseUrl:/m);
-  assert.doesNotMatch(template, /- Name: CAPIRO_PREVIEW_CLIENT_ROSTER_/);
+test('roster template rejects an origin until the reviewed Core source is pinned', () => {
+  const sourceBlock = template.match(/^  CapiroPreviewClientRosterBackendSource:\n([\s\S]*?)(?=^  \w+:)/m)?.[1];
+  assert.ok(sourceBlock);
+  assert.deepEqual(JSON.parse(sourceBlock.match(/AllowedValues: (\[.*\])/)?.[1] ?? 'null'), ['']);
+  assert.match(template, /PreviewClientRosterHeldWithoutSource:\n +RuleCondition: !Equals \[!Ref CapiroPreviewClientRosterBackendSource, ""\]\n +Assertions:\n +- Assert: !Equals \[!Ref CapiroPreviewClientRosterApiBaseUrl, ""\]/);
+  assert.match(template, /PreviewClientRosterRequiresPairedTarget:\n +RuleCondition: !Not \[!Equals \[!Ref CapiroPreviewClientRosterBackendSource, ""\]\]\n +Assertions:\n +- Assert: !Equals \[!Ref CapiroPreviewClientRosterApiBaseUrl, "https:\/\/core-roster-preview\.capiro\.ai\/api"\]/);
+  assert.match(template, /- Assert: !Equals \[!Ref CapiroPreviewReadBackendSource, "6542f5b089656b6d255465edd464d06c2a0b408f"\]\n +AssertDescription: Core roster requires the reviewed preview read source/);
+  assert.match(template, /- Assert: !Equals \[!Ref CapiroPreviewReadApiBaseUrl, "https:\/\/first-chat-preview\.app-dev\.capiro\.ai\/api"\]\n +AssertDescription: Core roster requires the reviewed preview read target/);
 });
 
 test('PR70 one-shot override covers changed first-chat behavior and exact image/scan gates', () => {
