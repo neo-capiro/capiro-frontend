@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@capiro/ui/button";
 import { useSelectedClient } from "../session/SelectedClient";
@@ -172,33 +171,6 @@ export function SidebarDestinations({
           </Button>
         );
       })}
-      <ClientScopedLink href="/meri/actions" label="Recommendation actions" />
-      <ClientScopedLink href="/meri/task-updates" label="Task updates" />
     </nav>
-  );
-}
-
-/** A workflow page opened for the currently authorized client, when there is one. */
-function ClientScopedLink({ href, label }: { href: string; label: string }) {
-  const pathname = usePathname();
-  const selected = useSelectedClient();
-  return (
-    <Button
-      asChild
-      variant="ghost"
-      className={`${styles.navButton} ${pathname === href ? styles.currentDestination : ""}`}
-    >
-      <Link
-        href={scopedHref(
-          href,
-          selected.state === "authorized-client"
-            ? selected.client.id
-            : undefined,
-        )}
-        aria-current={pathname === href ? "page" : undefined}
-      >
-        {label}
-      </Link>
-    </Button>
   );
 }

@@ -85,16 +85,26 @@ export function MeriHome({
               : undefined
           }
         />
-        <section aria-label="Available Meri workspaces">
-          <Link href={scopedHref("/meri/files", clientId)}>
-            Open document files
-          </Link>{" "}
-          <Link href={scopedHref("/meri/actions", clientId)}>
-            Open recommendation actions
-          </Link>
-          <p>Each workspace reports its connection status when opened.</p>
-        </section>
+        <MeriWorkspaceLinks clientId={clientId} />
       </div>
     </div>
+  );
+}
+
+/** Keep additional real workflows reachable without shifting the designed sidebar. */
+function MeriWorkspaceLinks({ clientId }: { clientId?: string }) {
+  return (
+    <section aria-label="Available Meri workspaces">
+      <Link href={scopedHref("/meri/files", clientId)}>
+        Open document files
+      </Link>{" "}
+      <Link href={scopedHref("/meri/actions", clientId)}>
+        Open recommendation actions
+      </Link>{" "}
+      <Link href={scopedHref("/meri/task-updates", clientId)}>
+        Open task updates
+      </Link>
+      <p>Each workspace reports its connection status when opened.</p>
+    </section>
   );
 }

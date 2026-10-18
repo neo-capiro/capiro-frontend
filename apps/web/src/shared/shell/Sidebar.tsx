@@ -48,7 +48,11 @@ export function Sidebar({
       );
   };
   return (
-    <aside className={styles.sidebar} aria-label="Meri navigation">
+    <aside
+      id="meri-sidebar"
+      className={styles.sidebar}
+      aria-label="Meri navigation"
+    >
       <Button
         type="button"
         className={styles.newConversation}

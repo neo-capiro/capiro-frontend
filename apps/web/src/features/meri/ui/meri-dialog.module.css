@@ -2,6 +2,12 @@
 .portalSurface {
   color: var(--foreground);
 }
+/* 01.05 search sits over the unobscured workspace; Radix still owns the modal overlay. */
+:global([data-slot="dialog-overlay"]):has(
+  + .portalSurface[data-clear-backdrop]
+) {
+  background: transparent;
+}
 .dialog {
   position: fixed;
   z-index: 101;

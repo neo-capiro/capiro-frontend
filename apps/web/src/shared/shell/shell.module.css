@@ -13,6 +13,42 @@
   flex: 0 0 196px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+.sidebarToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  transition:
+    background-color 120ms ease,
+    opacity 120ms ease;
+}
+.sidebarToggle:hover {
+  background: var(--muted);
+}
+.sidebarToggle:active {
+  opacity: 0.7;
+}
+.sidebarToggle:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebarToggle {
+    transition: none;
+  }
 }
 .modes {
   display: flex;
@@ -50,6 +86,11 @@
 .workspace {
   display: flex;
   min-height: 975px;
+}
+@media (min-width: 1101px) {
+  .sidebarCollapsed .sidebar {
+    display: none;
+  }
 }
 .mobileNavigation {
   display: none;
@@ -182,6 +223,11 @@
   }
   .globalActions {
     gap: 2px;
+  }
+}
+@media (max-width: 1100px) {
+  .sidebarToggle {
+    display: none;
   }
 }
 /*

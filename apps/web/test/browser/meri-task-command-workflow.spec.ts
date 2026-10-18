@@ -6,8 +6,29 @@ import {
   prepareTaskUpdate,
   navigate,
   otherTaskClient,
+  taskClient,
   context,
 } from "./meri-task-command-fixtures";
+
+test("desktop Meri Home keeps Task updates reachable with the selected client", async ({
+  page,
+}) => {
+  const fixture = await taskHostFixture(page);
+  await page.goto(`/meri?clientId=${taskClient.id}`);
+  const taskUpdates = page
+    .getByRole("region", { name: "Available Meri workspaces" })
+    .getByRole("link", { name: "Open task updates" });
+  await expect(taskUpdates).toHaveAttribute("href", taskUrl());
+  await taskUpdates.click();
+  await expect(page).toHaveURL(taskUrl());
+  await expect(
+    page.getByRole("button", { name: "Connect task-update service" }),
+  ).toBeVisible();
+  expect(fixture.calls).toEqual([]);
+  expect(fixture.errors).toEqual([]);
+  expect(fixture.unexpected).toEqual([]);
+  expect(fixture.remote).toEqual([]);
+});
 
 test("desktop task update uses explicit connection, immutable preparation and separate approval before exact execution/replay", async ({
   page,
