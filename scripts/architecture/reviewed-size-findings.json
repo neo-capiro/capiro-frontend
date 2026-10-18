@@ -3160,5 +3160,14 @@
     "reason": "One client Objective page arbitrates list, create, operational and selected-editor URL states, plus a bounded delete confirmation. List, stats, editor, operational view and mutation hooks remain separate; no second Objective command implementation is introduced.",
     "reviewedBy": "Codex frontend receiving with independent scoped source review",
     "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/meri/conversation/MeriLiveConversation.tsx",
+    "kind": "function",
+    "symbol": "MeriLiveConversation",
+    "fingerprint": "6461b38a5fdf98306fac30ccbadfe6fce8e1935df7febe8edc2d8d4fd1c91070",
+    "reason": "This one session-bound conversation view composes the current admitted turn, run status, artifacts and composer availability. The added local first-submit receipt state clears only the captured draft after the existing command journal reports an observed ACK, and preserves any intervening edit; useLiveRun and its command owner still hold admission, immutable request identity and recovery. No second service, authorization rule or run workflow moved into this renderer.",
+    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "reviewedOn": "2026-10-18"
   }
 ]

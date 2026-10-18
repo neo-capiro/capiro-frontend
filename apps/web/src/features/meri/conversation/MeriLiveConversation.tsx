@@ -139,6 +139,24 @@ export function MeriLiveConversation({
   const turn = currentTurnView(observed, savedCurrent);
   const finished = isTerminal(turn?.runState);
   const active = !!turn && !finished;
+  const pendingInitial = useRef<{
+    prompt: string;
+    draft: string;
+    edited: boolean;
+  } | null>(null);
+  useEffect(() => {
+    const pending = pendingInitial.current;
+    // Only a positively observed submit can consume the text that was sent. A late ACK must
+    // leave any draft typed since Send alone, even when it happens to match the old text.
+    if (
+      !pending ||
+      intent.submit?.state !== "observed" ||
+      intent.submit.prompt !== pending.prompt
+    )
+      return;
+    pendingInitial.current = null;
+    if (!pending.edited && draft === pending.draft) onDraft("");
+  }, [intent.submit, draft, onDraft]);
   const announced = useRef(false);
   useEffect(() => {
     if (finished && !announced.current) {
@@ -156,8 +174,15 @@ export function MeriLiveConversation({
   );
   const send = () => {
     const prompt = draft.trim();
-    if (availability.initial) void run.submitInitial(prompt);
-    else if (turn && finished && !nextTurnBlocked) onNextTurn(prompt, turn);
+    if (availability.initial) {
+      pendingInitial.current = { prompt, draft, edited: false };
+      void run.submitInitial(prompt);
+    } else if (!pendingInitial.current && turn && finished && !nextTurnBlocked)
+      onNextTurn(prompt, turn);
+  };
+  const updateDraft = (value: string) => {
+    if (pendingInitial.current) pendingInitial.current.edited = true;
+    onDraft(value);
   };
   return (
     <ConversationFrame
@@ -179,7 +204,7 @@ export function MeriLiveConversation({
         />
       }
       draft={draft}
-      onDraft={onDraft}
+      onDraft={updateDraft}
       textareaRef={textareaRef}
       running={active}
       composer={{
