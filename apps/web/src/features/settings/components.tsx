@@ -179,16 +179,21 @@ export function SettingsSwitch({
 export function SettingsBadge({
   children,
   tone = "neutral",
+  assetName,
 }: {
   children: ReactNode;
   tone?: "neutral" | "success" | "warning" | "danger";
+  assetName?:
+    | "settings-integrations-imgEllipse"
+    | "settings-integrations-imgEllipse1";
 }) {
   const asset =
-    tone === "success"
+    assetName ??
+    (tone === "success"
       ? "settings-team-imgEllipse1"
       : tone === "warning"
         ? "settings-hq-imgEllipse1"
-        : "settings-team-imgEllipse";
+        : "settings-team-imgEllipse");
   return (
     <span className={styles.badgeScope} data-tone={tone}>
       <Badge tone={tone}>

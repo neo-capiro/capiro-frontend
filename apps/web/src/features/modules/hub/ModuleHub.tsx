@@ -90,12 +90,12 @@ export function ModuleHub() {
     "research-portfolios",
   ].flatMap((slug) => moduleCatalog.filter((module) => module.slug === slug));
   return (
-    <div className={styles.hub} data-design-target="411:93787">
+    <div className={styles.hub} data-design-target="1064:191436">
       <PageHeader
         title={
           <>
-            Work in Capiro
-            <span className={styles.desktopTitle}>, across your modules</span>
+            Everything in Capiro
+            <span className={styles.desktopTitle}>, across the whole firm</span>
           </>
         }
         eyebrow="Modules"
@@ -109,7 +109,11 @@ export function ModuleHub() {
               disabled={clients.loading || Boolean(clients.error)}
               onChange={(event) => setClientId(event.target.value)}
             >
-              <option value="">No client filter</option>
+              <option value="">
+                {profiles.length
+                  ? `All ${profiles.length} available profile${profiles.length === 1 ? "" : "s"}`
+                  : "All available profiles"}
+              </option>
               {profiles.map((client) => (
                 <option key={client.id} value={client.id}>
                   {client.name}
@@ -173,8 +177,8 @@ function ModuleHubInformation() {
               className={styles.infoContent}
               data-slot="tooltip-content"
             >
-              Browse the work available in your modules. Choose a client profile
-              to focus the view.
+              Every client and every activity available to your account. Choose
+              a client profile to show just that client’s work.
               <TooltipPrimitive.Arrow />
             </TooltipPrimitive.Content>
           </TooltipPrimitive.Portal>
@@ -191,15 +195,15 @@ function ModulesRelationship() {
       aria-label="How modules and profiles relate"
     >
       <div>
-        <h2>Modules · available work</h2>
+        <h2>Modules · the whole firm</h2>
         <p>
-          Explore the modules and records available to your account. Choose a
-          client profile when you need a narrower view.
+          Explore the modules and records available to your account, across the
+          firm.
         </p>
       </div>
       <span aria-hidden="true">→</span>
       <div>
-        <h2>Client profile · selected client</h2>
+        <h2>Client profile · just that client</h2>
         <p>
           Open modules with that client selected. Available records depend on
           your access in each module.

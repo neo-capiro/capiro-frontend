@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
+import { settingsFixtures } from "./settings-fixtures";
 
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
@@ -113,6 +115,107 @@ test("Team prevents self-removal and failed invitations remain editable without 
     page.getByRole("dialog").getByLabel("Email", { exact: true }),
   ).toHaveValue("recipient@example.test");
   await expect(page.getByText("Invitation was sent.")).toHaveCount(0);
+});
+
+test("Team role select saves a non-self member through the adopted control", async ({
+  page,
+}) => {
+  let role: "standard_user" | "user_admin" = "standard_user";
+  const writes: unknown[] = [];
+  const member = {
+    membershipId: "membership-member",
+    userId: "10000000-0000-4000-8000-000000000003",
+    email: "member@example.test",
+    firstName: "Synthetic",
+    lastName: "Member",
+    status: "active",
+    billingAdmin: false,
+    joinedAt: "2026-10-03T12:00:00.000Z",
+    lastSeenAt: null,
+  };
+  await operationFixtures(page, {
+    "me.read": testIdentity,
+    "settings.team.list": () => [{ ...member, role }],
+    "settings.team.invitations": [],
+    "settings.team.setRole": (input) => {
+      writes.push(input);
+      role = (input as { body: { role: typeof role } }).body.role;
+      return {
+        member: {
+          clerkUserId: "synthetic-member",
+          localUserId: member.userId,
+          membershipId: member.membershipId,
+          userCreated: false,
+          membershipCreated: false,
+          membershipRoleUpdated: true,
+        },
+        role,
+      };
+    },
+  });
+  await page.goto("/settings/team");
+  const select = page.getByRole("combobox", {
+    name: "Role for member@example.test",
+  });
+  await select.click();
+  await page.getByRole("option", { name: "User admin" }).click();
+  await expect(select).toContainText("User admin");
+  expect(writes).toEqual([
+    {
+      params: { userId: member.userId },
+      body: { role: "user_admin" },
+    },
+  ]);
+});
+
+test("Connected Microsoft account configures realtime subscriptions", async ({
+  page,
+}) => {
+  const writes: unknown[] = [];
+  await operationFixtures(page, {
+    ...settingsFixtures,
+    "settings.integrations.list": [
+      {
+        id: "40000000-0000-4000-8000-000000000001",
+        provider: "microsoft_365",
+        accountEmail: "owner@example.test",
+        displayName: "Test Microsoft 365",
+        status: "connected",
+        scopes: ["Calendars.ReadWrite", "Mail.Read"],
+        lastSyncAt: new Date(Date.now() - 60000).toISOString(),
+        lastError: null,
+      },
+    ],
+    "settings.integrations.configureMicrosoftSubscriptions": (input) => {
+      writes.push(input);
+      return { configured: true };
+    },
+  });
+  await page.goto("/settings/integrations");
+  await expect(page.getByText("Test Microsoft 365")).toBeVisible();
+  await expect(page.getByText("owner@example.test")).toBeVisible();
+  await expect(page.getByText("connected", { exact: true })).toBeVisible();
+  for (const asset of [
+    "settings-integrations-imgEllipse.svg",
+    "settings-integrations-imgEllipse1.svg",
+  ]) {
+    const dot = page.locator(`img[src="/figma/modules/${asset}"]`);
+    await expect(dot).toHaveCount(1);
+    await expect(dot).toHaveJSProperty("naturalWidth", 5);
+    expect((await dot.boundingBox())?.width).toBe(5);
+    expect((await dot.boundingBox())?.height).toBe(5);
+  }
+  await mkdir("test-results/figma34-desktop", { recursive: true });
+  await page.screenshot({
+    path: "test-results/figma34-desktop/integrations-connected.png",
+  });
+  await page.getByRole("button", { name: "Realtime" }).click();
+  await expect(
+    page.getByText("Realtime subscriptions are configured."),
+  ).toBeVisible();
+  expect(writes).toEqual([
+    { params: { connectionId: "40000000-0000-4000-8000-000000000001" } },
+  ]);
 });
 
 test("Mobile Personal fits the viewport and Settings sections remain keyboard accessible", async ({

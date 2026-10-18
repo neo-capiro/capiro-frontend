@@ -82,7 +82,7 @@
 }
 .landscapeGrid {
   display: grid;
-  /* Figma 411:93913: 646px / 229px / 229px at the 1144px content width. */
+  /* Figma 1064:191436: 646px / 229px / 229px at the 1144px content width. */
   grid-template-columns: minmax(0, 646fr) repeat(2, minmax(0, 229fr));
   gap: 20px;
 }

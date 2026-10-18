@@ -115,6 +115,20 @@ export const teamRowSchema = z.object({
   joinedAt: nullableText,
   lastSeenAt: nullableText,
 });
+export const clientAccountOwnersSchema = z.record(
+  z.string(),
+  z.object({
+    accountOwnerUserId: nullableText,
+    accountOwner: z
+      .object({
+        id: z.string(),
+        email: z.string(),
+        firstName: nullableText,
+        lastName: nullableText,
+      })
+      .nullable(),
+  }),
+);
 export const invitationSchema = z.object({
   id: z.string(),
   email: z.string(),

@@ -16,7 +16,7 @@ The frontend manifest covers all of `apps/web`, `apps/portfolio-web`, public UI/
 
 These are read-only contracts/controllers/services/schema references. Do not copy/import backend private implementation into frontend code. The pinned GitHub source is recoverable without this old scratch directory. Local SHA-256 records identify the captured bytes; GitHub remains the source authority. Some original local text captures may have newline normalization, so do not substitute a local snapshot hash for the backend's Git commit/blob identity.
 
-The archive also retains the larger `analysis/backend-source-paths.json` discovered path inventory and the derived `backend-endpoints.json` / `.md` indexes. A discovered path can be a directory or an unreviewed candidate, not a downloaded file or an exposed frontend operation. The authoritative frontend exposure is the [528-operation map](INTEGRATION-MAP.md) generated from the operation registry.
+The archive also retains the larger `analysis/backend-source-paths.json` discovered path inventory and the derived `backend-endpoints.json` / `.md` indexes. A discovered path can be a directory or an unreviewed candidate, not a downloaded file or an exposed frontend operation. The authoritative frontend exposure is the [530-operation map](INTEGRATION-MAP.md) generated from the operation registry.
 
 ## External design, spreadsheet and evidence context
 
