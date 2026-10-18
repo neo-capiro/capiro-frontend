@@ -12,6 +12,29 @@ export type OwnerMemoryCandidate = Readonly<{
   createdAt: string;
 }>;
 
+export type OwnerMemoryCandidatePage = Readonly<{
+  version: 1;
+  candidates: OwnerMemoryCandidate[];
+  nextCursor: string | null;
+}>;
+
+export type OwnerMemoryCandidateStatus = Readonly<{
+  version: 1;
+  id: string;
+  status:
+    | "pending"
+    | "approved"
+    | "rejected"
+    | "auto_committed"
+    | "withdrawn"
+    | "superseded"
+    | "changes_needed";
+  terminal: boolean;
+  decidedAt: string | null;
+  committedMemoryId: string | null;
+  committedMemoryItemId: string | null;
+}>;
+
 const uuid = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const kinds = new Set<OwnerMemoryCandidate["kind"]>([
   "addition",
@@ -55,8 +78,84 @@ export function receiveOwnerCandidates(value: unknown): OwnerMemoryCandidate[] {
   });
 }
 
+/** Opaque Core cursors are forwarded unchanged and never interpreted by the browser. */
+export function receiveOwnerCandidatePage(
+  value: unknown,
+): OwnerMemoryCandidatePage {
+  if (!value || typeof value !== "object")
+    throw new Error("Invalid memory candidate page");
+  const page = value as Record<string, unknown>;
+  if (
+    page.version !== 1 ||
+    !(
+      page.nextCursor === null ||
+      (typeof page.nextCursor === "string" &&
+        page.nextCursor.length > 0 &&
+        page.nextCursor.length <= 4_096 &&
+        !/[\u0000-\u001f\u007f]/.test(page.nextCursor))
+    )
+  )
+    throw new Error("Invalid memory candidate page");
+  const candidates = receiveOwnerCandidates(value);
+  if (
+    new Set(candidates.map((candidate) => candidate.id)).size !==
+    candidates.length
+  )
+    throw new Error("Repeated memory candidate");
+  return {
+    version: 1,
+    candidates,
+    nextCursor: page.nextCursor,
+  };
+}
+
+const terminalStatuses = new Set([
+  "approved",
+  "rejected",
+  "auto_committed",
+  "withdrawn",
+  "superseded",
+]);
+const pendingStatuses = new Set(["pending", "changes_needed"]);
+
+/** Only an exact owner-scoped terminal receipt may release an uncertain POST. */
+export function receiveOwnerCandidateStatus(
+  value: unknown,
+  id: string,
+): OwnerMemoryCandidateStatus {
+  if (!value || typeof value !== "object")
+    throw new Error("Invalid memory candidate status");
+  const receipt = value as Record<string, unknown>;
+  const terminal = terminalStatuses.has(String(receipt.status));
+  if (
+    receipt.version !== 1 ||
+    receipt.id !== id ||
+    !uuid.test(id) ||
+    (!terminal && !pendingStatuses.has(String(receipt.status))) ||
+    receipt.terminal !== terminal ||
+    !(
+      receipt.decidedAt === null ||
+      (typeof receipt.decidedAt === "string" &&
+        Number.isFinite(Date.parse(receipt.decidedAt)))
+    ) ||
+    !(
+      receipt.committedMemoryId === null ||
+      (typeof receipt.committedMemoryId === "string" &&
+        uuid.test(receipt.committedMemoryId))
+    ) ||
+    !(
+      receipt.committedMemoryItemId === null ||
+      (typeof receipt.committedMemoryItemId === "string" &&
+        uuid.test(receipt.committedMemoryItemId))
+    )
+  )
+    throw new Error("Invalid memory candidate status");
+  return receipt as OwnerMemoryCandidateStatus;
+}
+
 export const ownerReviewPaths = Object.freeze({
   list: "/api/memory/owner/candidates",
+  status: (id: string) => `/api/memory/owner/candidates/${id}/status`,
   decision: (id: string) => `/api/memory/owner/candidates/${id}/decision`,
   versionDecision: (id: string) =>
     `/api/memory/owner/candidates/${id}/version-decision`,

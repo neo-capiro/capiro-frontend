@@ -26,17 +26,21 @@ it("the owner list route uses the native Clerk session bearer", async () => {
   const getToken = vi.fn(async () => "native-session");
   clerk.auth.mockResolvedValue({ userId: "synthetic-user", getToken });
   const fetcher = vi.fn<typeof fetch>(async () =>
-    Response.json({ candidates: [] }),
+    Response.json({ version: 1, candidates: [], nextCursor: null }),
   );
   vi.stubGlobal("fetch", fetcher);
   const response = await GET(
     new Request(`${origin}/api/memory/owner/candidates`),
   );
   expect(response.status).toBe(200);
-  expect(await response.json()).toEqual({ candidates: [] });
+  expect(await response.json()).toEqual({
+    version: 1,
+    candidates: [],
+    nextCursor: null,
+  });
   expect(getToken).toHaveBeenCalledExactlyOnceWith();
   expect(fetcher.mock.calls[0]![0]).toBe(
-    "https://core.synthetic.invalid/api/memory/candidates/mine",
+    "https://core.synthetic.invalid/api/memory/candidates/mine?limit=50",
   );
 });
 

@@ -1,13 +1,13 @@
 import { auth } from "@clerk/nextjs/server";
 import { previewBackendRejection } from "../../../../../shared/preview/backend-policy.server";
-import { proxyOwnerMemoryReview } from "../../../../../features/meri/memory-review/owner-review-proxy.server";
+import { proxyOwnerMemoryInbox } from "../../../../../features/meri/memory-review/owner-inbox-proxy.server";
 
 export async function GET(request: Request) {
   const held = previewBackendRejection(process.env, request);
   if (held) return held;
-  return proxyOwnerMemoryReview(
+  return proxyOwnerMemoryInbox(
     request,
-    { kind: "list" },
+    { kind: "page" },
     process.env,
     async () => {
       const session = await auth();
