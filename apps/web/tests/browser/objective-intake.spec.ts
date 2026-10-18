@@ -32,6 +32,22 @@ test("create is a full page with a fixed readiness rail, explicit back navigatio
   });
   const cardBounds = await card.boundingBox();
   const readinessBounds = await readiness.boundingBox();
+  const identityBounds = await page
+    .getByRole("region", { name: "Client identity" })
+    .boundingBox();
+  expect(identityBounds).not.toBeNull();
+  expect(cardBounds).not.toBeNull();
+  expect(readinessBounds).not.toBeNull();
+  for (const [actual, expected] of [
+    [identityBounds!.x, 264],
+    [identityBounds!.y, 145],
+    [cardBounds!.x, 264],
+    [cardBounds!.y, 326],
+    [cardBounds!.width, 760],
+    [readinessBounds!.x, 1048],
+    [readinessBounds!.y, 326],
+  ] as const)
+    expect(Math.abs(actual - expected)).toBeLessThanOrEqual(6);
   expect(readinessBounds?.width).toBe(360);
   expect(readinessBounds?.y).toBe(cardBounds?.y);
   expect(
@@ -39,8 +55,7 @@ test("create is a full page with a fixed readiness rail, explicit back navigatio
       ((cardBounds?.x ?? 0) + (cardBounds?.width ?? 0)),
   ).toBe(24);
   await page.screenshot({
-    path: "work/objective-intake-desktop-blank.png",
-    fullPage: true,
+    path: "../../evidence/playwright/objectives/intake-empty-1440x1040.png",
   });
   await editor.getByLabel(/^Outcome/).fill("An unsaved page draft");
   await page.keyboard.press("Escape");
@@ -148,8 +163,7 @@ test("ask chips are native keyboard choices and the phone form stays within the 
     .getByLabel(/^Minimum win/)
     .fill("The smallest successful result");
   await page.screenshot({
-    path: "work/objective-intake-desktop-filled.png",
-    fullPage: true,
+    path: "../../evidence/playwright/objectives/intake-filled-1440x1040.png",
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ colorScheme: "dark" });

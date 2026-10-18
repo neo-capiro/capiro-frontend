@@ -2,6 +2,7 @@ import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { activitySchema } from "../contracts";
 import {
+  matchesQuickLogDetails,
   quickLogInputSchema,
   quickLogReceiptSchema,
   type QuickLogInput,
@@ -48,7 +49,8 @@ export async function createQuickLog(
       Date.parse(receipt.occurredAt) !== Date.parse(body.occurredAt)) ||
     receipt.settledAt !== null ||
     receipt.sourceType !== null ||
-    receipt.sourceId !== null
+    receipt.sourceId !== null ||
+    !matchesQuickLogDetails(receipt, body)
   )
     throw new ApiError(
       502,
@@ -102,7 +104,18 @@ export async function undoQuickLog(
     !sameInstant(current.dueAt, receipt.dueAt) ||
     current.settledAt !== receipt.settledAt ||
     current.sourceType !== receipt.sourceType ||
-    current.sourceId !== receipt.sourceId
+    current.sourceId !== receipt.sourceId ||
+    (receipt.direction !== undefined &&
+      current.direction !== receipt.direction) ||
+    (receipt.counterparty !== undefined &&
+      current.counterparty !== receipt.counterparty) ||
+    (receipt.objective !== undefined &&
+      (current.objective === undefined ||
+        current.objective?.objectiveId !== receipt.objective?.objectiveId ||
+        current.objective?.objectiveVersion !==
+          receipt.objective?.objectiveVersion ||
+        current.objective?.objectiveRevisionId !==
+          receipt.objective?.objectiveRevisionId))
   )
     throw new ApiError(
       409,

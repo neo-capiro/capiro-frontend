@@ -14,6 +14,7 @@ import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
 import { MoveFile } from "./MoveFile";
 import { UploadDialog } from "./UploadDialog";
+import { FileStorageUsage } from "./FileStorageUsage";
 import { DocumentState } from "./DocumentState";
 import { useLinkedFileArrival } from "./linked-arrival";
 import styles from "./files.module.css";
@@ -95,7 +96,6 @@ export function FilesPage({
     ...new Set(files.flatMap((file) => (file.folder ? [file.folder] : []))),
   ].sort();
   const chosen = files.filter((f) => selected.includes(f.id));
-  const knownBytes = files.every((file) => file.byteSize !== null);
   return (
     <div className="page stack">
       <header className="row between">
@@ -155,143 +155,145 @@ export function FilesPage({
           All files
         </button>
       </div>
-      <QueryState
-        pending={query.isPending}
-        error={query.error}
-        retry={() => void query.refetch()}
-      />
       {arrival.unavailable && (
         <DocumentState>
           This file is unavailable in the current list.
         </DocumentState>
       )}
-      {available && (
-        <div className={styles.layout}>
-          <aside className={`card stack ${styles.folders}`}>
-            <header className="row between">
-              <span className="eyebrow">Folders</span>
-              <button
-                className="button ghost"
-                disabled={folder === undefined}
-                onClick={() => {
-                  arrival.dismiss();
-                  setFolderAccess({
-                    view: query.readerScope,
-                    folder: folder || null,
-                  });
-                }}
-              >
-                Access
-              </button>
-            </header>
+      <div className={styles.layout}>
+        <aside className={`card stack ${styles.folders}`}>
+          <header className="row between">
+            <span className="eyebrow">Folders</span>
             <button
               className="button ghost"
-              aria-pressed={folder === undefined}
-              onClick={() => setFolder(undefined)}
+              disabled={!available || folder === undefined}
+              onClick={() => {
+                arrival.dismiss();
+                setFolderAccess({
+                  view: query.readerScope,
+                  folder: folder || null,
+                });
+              }}
             >
-              {client.data?.name ?? "All files"} · {files.length}
+              Access
             </button>
-            {[...folders, ""].map((name) => (
+          </header>
+          {available ? (
+            <>
               <button
-                key={name}
                 className="button ghost"
-                aria-pressed={folder === name}
-                onClick={() => setFolder(name)}
+                aria-pressed={folder === undefined}
+                onClick={() => setFolder(undefined)}
               >
-                <span className={styles.folderIcon} />
-                {name || "Unfiled"}
-                <small>
-                  {files.filter((f) => f.folder === (name || null)).length}
-                </small>
+                {client.data?.name ?? "All files"} · {files.length}
               </button>
-            ))}
-            <hr className="divider" />
-            <span className="eyebrow">Visible file storage</span>
-            <p>
-              {knownBytes
-                ? `${(files.reduce((sum, file) => sum + (file.byteSize ?? 0), 0) / 1048576).toFixed(1)} MiB`
-                : "Total size unavailable"}
-            </p>
-            <small>
-              Storage quota is not provided by this service. Only accessible
-              current attachments are counted.
-            </small>
-          </aside>
-          <section
-            className={styles.results}
-            aria-label={
-              folder === undefined
-                ? "All client files"
-                : `Folder ${folder || "Unfiled"}`
-            }
-          >
-            <header className={styles.folderHeading}>
-              <div className={styles.breadcrumb}>
-                <button onClick={() => setFolder(undefined)}>
-                  {client.data?.name ?? "All files"}
+              {[...folders, ""].map((name) => (
+                <button
+                  key={name}
+                  className="button ghost"
+                  aria-pressed={folder === name}
+                  onClick={() => setFolder(name)}
+                >
+                  <span className={styles.folderIcon} />
+                  {name || "Unfiled"}
+                  <small>
+                    {files.filter((f) => f.folder === (name || null)).length}
+                  </small>
                 </button>
-                {folder !== undefined && (
-                  <>
-                    <span aria-hidden="true">›</span>
-                    <strong>{folder || "Unfiled"}</strong>
-                  </>
-                )}
-                <small>{rows.length} files</small>
-              </div>
-              <button
-                className="button"
-                disabled={!available || Boolean(folder)}
-                title={
-                  folder
-                    ? "Upload first, then move the saved file into this folder."
-                    : undefined
-                }
-                onClick={() => {
-                  arrival.dismiss();
-                  setUploadView(query.readerScope);
-                }}
-              >
-                Upload here
-              </button>
-            </header>
-            {folder && (
-              <p className={styles.folderHint}>
-                Upload first, then use Move to folder. Uploads cannot be placed
-                directly in a named folder.
-              </p>
-            )}
-            {mode === "folders" ? (
-              <FolderCards files={rows} onOpen={setFolder} />
-            ) : (
-              <>
-                <FileSelectionBar
-                  visibleCount={rows.length}
-                  selectedCount={chosen.length}
-                  hiddenSelectedCount={
-                    chosen.filter(
-                      (file) => !rows.some((row) => row.id === file.id),
-                    ).length
+              ))}
+            </>
+          ) : (
+            <small>
+              {query.isPending ? "Loading folders…" : "Folders unavailable."}
+            </small>
+          )}
+          <hr className="divider" />
+          <FileStorageUsage clientId={clientId} />
+        </aside>
+        <section
+          className={styles.results}
+          aria-label={
+            folder === undefined
+              ? "All client files"
+              : `Folder ${folder || "Unfiled"}`
+          }
+        >
+          {available ? (
+            <>
+              <header className={styles.folderHeading}>
+                <div className={styles.breadcrumb}>
+                  <button onClick={() => setFolder(undefined)}>
+                    {client.data?.name ?? "All files"}
+                  </button>
+                  {folder !== undefined && (
+                    <>
+                      <span aria-hidden="true">›</span>
+                      <strong>{folder || "Unfiled"}</strong>
+                    </>
+                  )}
+                  <small>{rows.length} files</small>
+                </div>
+                <button
+                  className="button"
+                  disabled={!available || Boolean(folder)}
+                  title={
+                    folder
+                      ? "Upload first, then move the saved file into this folder."
+                      : undefined
                   }
-                  onClear={() =>
-                    setChecked({ view: query.readerScope, ids: [] })
-                  }
-                  onMove={() => {
-                    if (chosen[0]) requestAction("move", chosen[0].id);
+                  onClick={() => {
+                    arrival.dismiss();
+                    setUploadView(query.readerScope);
                   }}
-                />
-                <FileTable
-                  files={rows}
-                  selected={selected}
-                  onSelect={(ids) =>
-                    setChecked({ view: query.readerScope, ids })
-                  }
-                  onAction={(kind, file) => requestAction(kind, file.id)}
-                />
-              </>
-            )}
-          </section>
-        </div>
-      )}
+                >
+                  Upload here
+                </button>
+              </header>
+              {folder && (
+                <p className={styles.folderHint}>
+                  Upload first, then use Move to folder. Uploads cannot be
+                  placed directly in a named folder.
+                </p>
+              )}
+              {mode === "folders" ? (
+                <FolderCards files={rows} onOpen={setFolder} />
+              ) : (
+                <>
+                  <FileSelectionBar
+                    visibleCount={rows.length}
+                    selectedCount={chosen.length}
+                    hiddenSelectedCount={
+                      chosen.filter(
+                        (file) => !rows.some((row) => row.id === file.id),
+                      ).length
+                    }
+                    onClear={() =>
+                      setChecked({ view: query.readerScope, ids: [] })
+                    }
+                    onMove={() => {
+                      if (chosen[0]) requestAction("move", chosen[0].id);
+                    }}
+                  />
+                  <FileTable
+                    files={rows}
+                    selected={selected}
+                    onSelect={(ids) =>
+                      setChecked({ view: query.readerScope, ids })
+                    }
+                    onAction={(kind, file) => requestAction(kind, file.id)}
+                  />
+                </>
+              )}
+            </>
+          ) : (
+            <QueryState
+              pending={query.isPending}
+              error={query.error}
+              retry={() => void query.refetch()}
+            />
+          )}
+        </section>
+      </div>
       {action?.kind === "preview" && (
         <FilePreview
           key={`${action.file.id}:${action.file.lifecycleStatus}:${action.file.scanStatus}`}

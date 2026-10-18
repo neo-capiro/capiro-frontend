@@ -114,6 +114,31 @@ function ActivityRow({
             <small className={styles.activityKind}>{item.kind}</small>
           )}
           {item.body && <p className={styles.body}>{item.body}</p>}
+          {(item.direction || item.counterparty) && (
+            <small className={styles.activityDue}>
+              {item.direction === "we_owe"
+                ? "We owe"
+                : item.direction === "they_owe"
+                  ? "They owe"
+                  : "Counterparty"}
+              {item.counterparty ? ` · ${item.counterparty}` : ""}
+            </small>
+          )}
+          {item.objective && (
+            <small className={styles.activityDue}>
+              {item.objective.availability === "current" ? (
+                <Link
+                  href={`/portfolio/${encodeURIComponent(clientId)}/objectives?objective=${encodeURIComponent(item.objective.objectiveId)}`}
+                >
+                  Open linked objective ↗
+                </Link>
+              ) : item.objective.availability === "changed" ? (
+                "Linked Objective changed since this log"
+              ) : (
+                "Linked Objective unavailable"
+              )}
+            </small>
+          )}
           {expanded && (
             <div className={styles.expandedMeta}>
               <small className={styles.activityKind}>{item.kind}</small>

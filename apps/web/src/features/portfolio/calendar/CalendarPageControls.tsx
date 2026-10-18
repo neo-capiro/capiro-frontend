@@ -2,13 +2,7 @@
 
 import { Temporal } from "temporal-polyfill";
 import Link from "next/link";
-import {
-  CalendarDays,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  Plus,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 import { moveDate, validDay, zones } from "./range";
 import type { CalendarKind } from "./contracts";
 import type { CalendarPageState } from "./useCalendarPageState";
@@ -51,7 +45,6 @@ export function CalendarPageHeader({
 }) {
   const {
     scope,
-    view,
     meetingScopeAvailable,
     update,
     setCreating,
@@ -60,61 +53,29 @@ export function CalendarPageHeader({
   } = state;
   if (clientId) {
     const name = clientName(state);
-    const agenda = view === "agenda";
     return (
-      <header
-        className={`${clientStyles.clientHeader} ${agenda ? clientStyles.clientHeaderAgenda : ""} pageHeader`}
-      >
+      <header className={`${clientStyles.clientHeader} pageHeader`}>
         <div>
           <nav
             className={clientStyles.clientBreadcrumb}
             aria-label="Breadcrumb"
           >
-            {!agenda && (
-              <Link href="/portfolio" aria-label="Back to Portfolio">
-                <ChevronLeft size={16} />
-              </Link>
-            )}
             <Link href="/portfolio">Portfolio</Link>
             <span aria-hidden="true">/</span>
             <Link href={`/portfolio/${clientId}`}>{name}</Link>
             <span aria-hidden="true">/</span>
-            {agenda ? (
-              <span>Calendar</span>
-            ) : (
-              <span className={clientStyles.clientBreadcrumbCurrent}>
-                <CalendarDays size={14} />
-                Calendar
-                <ChevronDown size={14} />
-              </span>
-            )}
+            <span>Calendar</span>
           </nav>
-          <h1>
-            {name} {agenda ? "meetings" : "calendar"}
-          </h1>
-          <p className="muted">
-            {agenda
-              ? "Meeting preparation, notes and debriefs."
-              : `Meetings, preparation, notes and debriefs for ${name}.`}
-          </p>
+          <h1>{name} meetings</h1>
+          <p className="muted">Meeting preparation, notes and debriefs.</p>
         </div>
         <div className={clientStyles.clientActions}>
-          {agenda && (
-            <>
-              <button
-                className="button"
-                onClick={() => setSyncReview(syncScope)}
-              >
-                Sync calendar
-              </button>
-              <button
-                className="button"
-                onClick={() => update({ library: "1" })}
-              >
-                Meeting Library
-              </button>
-            </>
-          )}
+          <button className="button" onClick={() => setSyncReview(syncScope)}>
+            Sync calendar
+          </button>
+          <button className="button" onClick={() => update({ library: "1" })}>
+            Meeting Library
+          </button>
           <button
             className="button primary"
             disabled={!meetingScopeAvailable}

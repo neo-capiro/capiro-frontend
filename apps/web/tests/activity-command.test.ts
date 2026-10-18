@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createApiClient } from "../src/shared/portfolio/api/http";
 import {
+  type ActivityCommandInput,
   activityCommandInputSchema,
   followUpInputSchema,
   scopedCommandReceipt,
@@ -41,17 +42,47 @@ function wire(result: unknown, status = 200, afterOptions?: () => void) {
   return { api, calls };
 }
 describe("generic activity command contracts", () => {
-  it("retains ordinary kinds and rejects commitment or unrelated task associations", () => {
+  it("retains legacy command bodies, accepts supported commitments, and rejects unsupported task associations", () => {
     expect(activityCommandInputSchema.parse(commandInput)).toEqual(
       commandInput,
     );
-    for (const kind of ["commitment", "meeting", "we_owe", "they_owe"])
+    expect(
+      activityCommandInputSchema.safeParse({
+        ...commandInput,
+        activity: {
+          ...commandInput.activity,
+          kind: "commitment",
+          direction: "we_owe",
+          counterparty: "Client team",
+          occurredAt: "2025-10-17T14:00:00-04:00",
+          dueAt: "2026-10-25T17:00:00-04:00",
+          objectiveId: "90000000-0000-4000-8000-000000000001",
+          objectiveVersion: 3,
+        },
+      }).success,
+    ).toBe(true);
+    for (const kind of ["meeting", "we_owe", "they_owe"])
       expect(
         activityCommandInputSchema.safeParse({
           ...commandInput,
           activity: { ...commandInput.activity, kind },
         }).success,
       ).toBe(false);
+    expect(
+      activityCommandInputSchema.safeParse({
+        ...commandInput,
+        activity: { ...commandInput.activity, direction: "we_owe" },
+      }).success,
+    ).toBe(false);
+    expect(
+      activityCommandInputSchema.safeParse({
+        ...commandInput,
+        activity: {
+          ...commandInput.activity,
+          objectiveId: "90000000-0000-4000-8000-000000000001",
+        },
+      }).success,
+    ).toBe(false);
     for (const extra of [
       { clientId: commandClientId },
       { objectiveId: commandClientId },
@@ -169,6 +200,121 @@ describe("generic activity command contracts", () => {
   });
 });
 describe("single Core command owner and explicit recovery", () => {
+  it("verifies rich activity details from the canonical timeline after a command receipt", async () => {
+    const rich: ActivityCommandInput = {
+      ...commandInput,
+      activity: {
+        ...commandInput.activity,
+        kind: "commitment",
+        occurredAt: "2025-10-17T14:00:00-04:00",
+        dueAt: "2026-10-25T17:00:00-04:00",
+        direction: "we_owe",
+        counterparty: "Client counsel",
+        objectiveId: "90000000-0000-4000-8000-000000000001",
+        objectiveVersion: 3,
+      },
+    };
+    const reply = commandReceipt(rich);
+    const row = {
+      id: reply.activity.id,
+      kind: rich.activity.kind,
+      title: rich.activity.title,
+      body: rich.activity.body,
+      personId: null,
+      occurredAt: "2025-10-17T18:00:00.000Z",
+      dueAt: "2026-10-25T21:00:00.000Z",
+      sourceType: "activity_command",
+      sourceId: reply.commandId,
+      origin: "recorded",
+      pinned: false,
+      settledAt: null,
+      direction: "we_owe",
+      counterparty: "Client counsel",
+      objective: {
+        objectiveId: rich.activity.objectiveId,
+        objectiveVersion: 3,
+        objectiveRevisionId: "90000000-0000-4000-8000-000000000002",
+        availability: "current",
+      },
+    };
+    let timeline: unknown[] = [row];
+    const calls: string[] = [];
+    const api = createApiClient(async (path, init) => {
+      const route = String(path);
+      calls.push(`${init?.method ?? "GET"} ${route}`);
+      const data = route.endsWith("/options")
+        ? [commandAssignee]
+        : route.endsWith("/activity?limit=500")
+          ? timeline
+          : reply;
+      return new Response(JSON.stringify(data), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    const run = () =>
+      createActivityCommand(
+        api,
+        { ...context, input: rich },
+        new AbortController().signal,
+        () => {},
+        () => {},
+      );
+    await expect(run()).resolves.toMatchObject({ commandId: reply.commandId });
+    expect(calls).toContain(
+      `GET /api/backend/core/clients/${commandClientId}/activity?limit=500`,
+    );
+    timeline = [{ ...row, counterparty: null }];
+    await expect(run()).rejects.toThrow("details are not confirmed");
+    timeline = [];
+    await expect(run()).rejects.toThrow("details are not confirmed");
+  });
+  it("does not confirm a compound commitment when a command response omits its due instant", async () => {
+    const input: ActivityCommandInput = {
+      ...commandInput,
+      activity: {
+        ...commandInput.activity,
+        kind: "commitment",
+        occurredAt: "2025-10-17T14:00:00-04:00",
+        dueAt: "2026-10-25T17:00:00-04:00",
+      },
+    };
+    const receipt = commandReceipt(input);
+    const api = createApiClient(async (path) => {
+      const route = String(path);
+      const data = route.endsWith("/options")
+        ? [commandAssignee]
+        : route.endsWith("/activity?limit=500")
+          ? [
+              {
+                id: receipt.activity.id,
+                kind: "commitment",
+                title: input.activity.title,
+                body: input.activity.body,
+                personId: null,
+                occurredAt: "2025-10-17T18:00:00.000Z",
+                dueAt: null,
+                sourceType: "activity_command",
+                sourceId: receipt.commandId,
+                origin: "recorded",
+                pinned: false,
+                settledAt: null,
+              },
+            ]
+          : receipt;
+      return new Response(JSON.stringify(data), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    await expect(
+      createActivityCommand(
+        api,
+        { ...context, input },
+        new AbortController().signal,
+        () => {},
+        () => {},
+      ),
+    ).rejects.toThrow("details are not confirmed");
+  });
   it("retains the exact browser key/body and makes only one command POST after a current assignee read", async () => {
     const test = wire(commandReceipt());
     const dispatched: string[] = [];

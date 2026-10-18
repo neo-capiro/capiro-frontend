@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { quickLogDetailReceiptFields } from "./quick-log/contracts";
 export const activitySchema = z.object({
   id: z.string(),
   kind: z.string(),
@@ -11,6 +12,7 @@ export const activitySchema = z.object({
   dueAt: z.string().nullable(),
   settledAt: z.string().nullable(),
   pinned: z.boolean(),
+  ...quickLogDetailReceiptFields,
 });
 export type Activity = z.infer<typeof activitySchema>;
 export const activityEditSchema = z.object({

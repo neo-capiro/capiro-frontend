@@ -38,10 +38,7 @@ test("commitment sends Core's supported occurrence and due fields and retains ex
   ).toBeVisible();
   await expect(
     dialog.getByRole("checkbox", { name: "Add generic follow-up" }),
-  ).toBeDisabled();
-  await expect(dialog).toContainText(
-    "Save this activity first, then create a Planner task separately.",
-  );
+  ).toBeEnabled();
   await page.screenshot({
     path: info.outputPath("commitment-direct-1440x1040.png"),
   });

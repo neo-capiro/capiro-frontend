@@ -100,7 +100,7 @@ describe("owned Quick log inverse", () => {
       ),
     ).resolves.toEqual(normalized);
   });
-  it("keeps unsupported commitment fields out of the combined follow-up command", () => {
+  it("allows Core-supported commitment details in the combined follow-up command", () => {
     const command = {
       requestId: id,
       activity: {
@@ -108,10 +108,15 @@ describe("owned Quick log inverse", () => {
         title: "Promised a one-pager",
         body: "Follow through",
         dueAt: "2025-01-21T04:59:59.000Z",
+        occurredAt: "2025-01-15T15:30:00.000Z",
+        direction: "we_owe",
+        counterparty: "Client counsel",
+        objectiveId: "90000000-0000-4000-8000-000000000001",
+        objectiveVersion: 3,
       },
       followUp: { assigneeUserId: userId },
     };
-    expect(activityCommandInputSchema.safeParse(command).success).toBe(false);
+    expect(activityCommandInputSchema.safeParse(command).success).toBe(true);
     expect(
       activityCommandInputSchema.safeParse({
         ...command,
@@ -119,10 +124,80 @@ describe("owned Quick log inverse", () => {
           kind: "note",
           title: "Note",
           body: "Details",
-          occurredAt: "2025-01-15T15:30:00.000Z",
+          direction: "we_owe",
         },
       }).success,
     ).toBe(false);
+  });
+  it("checks direct rich details in the Core receipt and exact timeline before Undo", async () => {
+    const rich = {
+      kind: "commitment" as const,
+      title: "Send briefing",
+      body: "Promised counsel the revised version",
+      direction: "we_owe" as const,
+      counterparty: "Client counsel",
+      objectiveId: "90000000-0000-4000-8000-000000000001",
+      objectiveVersion: 3,
+    };
+    const objective = {
+      objectiveId: rich.objectiveId,
+      objectiveVersion: rich.objectiveVersion,
+      objectiveRevisionId: "90000000-0000-4000-8000-000000000002",
+      availability: "current" as const,
+    };
+    const saved = {
+      ...receipt,
+      ...rich,
+      direction: rich.direction,
+      counterparty: rich.counterparty,
+      objective,
+    };
+    const h = harness((method) =>
+      method === "GET"
+        ? [{ ...saved, origin: "recorded" }]
+        : method === "DELETE"
+          ? { ok: true }
+          : saved,
+    );
+    await expect(
+      createQuickLog(
+        h.api,
+        clientId,
+        actor,
+        rich,
+        () => {},
+        new AbortController().signal,
+        () => {},
+      ),
+    ).resolves.toMatchObject({ direction: "we_owe", objective });
+    await undoQuickLog(
+      h.api,
+      saved,
+      actor,
+      () => {},
+      new AbortController().signal,
+      () => {},
+    );
+    expect(h.calls.at(-1)).toBe(
+      `DELETE /api/backend/core/clients/${clientId}/activity/${id}`,
+    );
+    const dropped = harness(() => ({
+      ...saved,
+      direction: undefined,
+      counterparty: undefined,
+      objective: undefined,
+    }));
+    await expect(
+      createQuickLog(
+        dropped.api,
+        clientId,
+        actor,
+        rich,
+        () => {},
+        new AbortController().signal,
+        () => {},
+      ),
+    ).rejects.toThrow("receipt does not match");
   });
   it("retains only the exact validated created row for Undo", async () => {
     const h = harness(() => receipt);

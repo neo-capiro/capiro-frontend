@@ -5,7 +5,7 @@ import { useApi } from "@/shared/portfolio/api/provider";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { uploadParentFile, type UploadAttempt } from "./upload";
 import { fileValidation } from "./contracts";
-import { currentFilesKey } from "./file-reader";
+import { currentFilesKey, filesKey } from "./file-reader";
 import { useFileScope, type FileExecution } from "./file-scope";
 type Job = {
   id: string;
@@ -82,10 +82,15 @@ function UploadFiles({
         guard,
       );
       guard();
-      await cache.invalidateQueries({
-        queryKey: currentFilesKey(cache, clientId),
-        exact: true,
-      });
+      await Promise.all([
+        cache.invalidateQueries({
+          queryKey: currentFilesKey(cache, clientId),
+          exact: true,
+        }),
+        cache.invalidateQueries({
+          queryKey: [...filesKey(clientId), "storage-usage"],
+        }),
+      ]);
       guard();
       patch(job.id, {
         complete: true,

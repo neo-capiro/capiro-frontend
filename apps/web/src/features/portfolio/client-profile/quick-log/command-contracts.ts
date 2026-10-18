@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { quickLogInputBaseSchema } from "./contracts";
+import { quickLogInputBaseSchema, validQuickLogDetails } from "./contracts";
 import type { ClientWriter } from "./authority";
 
 const uuid = z.uuid().transform((value) => value.toLowerCase());
@@ -35,11 +35,20 @@ export const activityCommandInputSchema = z
   .object({
     requestId: uuid,
     activity: quickLogInputBaseSchema
-      .omit({ occurredAt: true, dueAt: true })
-      .extend({
-        kind: quickLogInputBaseSchema.shape.kind.exclude(["commitment"]),
-      })
-      .strict(),
+      .strict()
+      .refine(validQuickLogDetails, "Invalid activity detail binding")
+      .refine(
+        (value) =>
+          !value.dueAt ||
+          value.kind === "commitment" ||
+          value.kind === "request",
+        "Only commitments and requests carry a due instant",
+      )
+      .refine(
+        (value) =>
+          !value.occurredAt || Date.parse(value.occurredAt) <= Date.now(),
+        "Activity must have already occurred",
+      ),
     followUp: followUpInputSchema,
   })
   .strict();
