@@ -4,6 +4,7 @@ import * as core from "../src/app/api/backend/[service]/[...path]/route";
 import * as capiro from "../src/app/api/capiro/[operation]/route";
 import proxy from "../src/proxy";
 import { capiroOperations } from "../src/shared/capiro/registry";
+import { isQualifiedCorePreviewReadEnabled } from "../src/shared/preview/read-config.server";
 
 const clerk = vi.hoisted(() => ({ auth: vi.fn(), middleware: vi.fn() }));
 vi.mock("@clerk/nextjs/server", () => ({
@@ -11,8 +12,10 @@ vi.mock("@clerk/nextjs/server", () => ({
   clerkMiddleware: () => clerk.middleware,
 }));
 const origin = "https://frontend.synthetic.invalid";
-const target = "https://preview-api.synthetic.invalid/api";
+const target = "https://first-chat-preview.app-dev.capiro.ai/api";
 const source = "6542f5b089656b6d255465edd464d06c2a0b408f";
+const qualifiedSource = "784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb";
+const qualifiedTarget = "https://qualified-core.synthetic.invalid/api";
 const id = "10000000-0000-4000-8000-000000000001";
 const client = {
   id,
@@ -73,6 +76,7 @@ beforeEach(() => {
   vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", target);
   vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", source);
   vi.stubEnv("CORE_API_BASE_URL", "https://ordinary.synthetic.invalid/api");
+  vi.stubEnv("CAPIRO_REQUEST_ORIGIN", origin);
   vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_c3ludGhldGljJA==");
   vi.stubEnv("CLERK_SECRET_KEY", "sk_test_synthetic");
   getToken.mockImplementation(async (options) =>
@@ -134,6 +138,24 @@ it.each([
   expect(response.headers.get("cache-control")).toBe("private, no-store");
 });
 
+it("receives the same bounded roster through the explicit qualified Core pair", async () => {
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(true);
+  const response = await receive("backend/core/clients");
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual([client]);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(`${qualifiedTarget}/clients`);
+  expect(getToken).toHaveBeenCalledExactlyOnceWith();
+});
+
+it("retains the legacy read pair when first-chat bootstrap is enabled", async () => {
+  vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");
+  const response = await receive("backend/core/clients");
+  expect(response.status).toBe(200);
+  expect(String(fetcher.mock.lastCall?.[0])).toBe(`${target}/clients`);
+});
+
 it("uses the existing me schema and keeps native Clerk middleware", async () => {
   fetcher.mockResolvedValue(Response.json(me));
   expect(await (await receive("capiro/me.read")).json()).toEqual(me);
@@ -183,9 +205,56 @@ it.each([
   `${target}#fragment`,
   "https://user:pass@preview-api.synthetic.invalid/api",
   "https://preview-api.synthetic.invalid/other",
+  "https://preview-api.synthetic.invalid/api",
 ])("never falls back for rejected target %s", async (value) => {
   vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", value);
   await denied(await receive("backend/core/clients"));
+});
+
+it.each([
+  undefined,
+  "",
+  target,
+  `${qualifiedTarget}/`,
+  `${qualifiedTarget}?x=1`,
+  `${qualifiedTarget}#fragment`,
+  "https://qualified-core.synthetic.invalid:443/api",
+  "https://qualified-core.synthetic.invalid:8443/api",
+  "https://user@qualified-core.synthetic.invalid/api",
+  "https://QUALIFIED-core.synthetic.invalid/api",
+  "http://qualified-core.synthetic.invalid/api",
+  "https://os.capiro.ai/api",
+  "https://ordinary.synthetic.invalid/api",
+  origin + "/api",
+])("holds malformed or ordinary qualified Core target %s", async (value) => {
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", value);
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
+  await denied(await receive("backend/core/clients"));
+});
+
+it("holds a qualified Core target that shares the configured Meri origin", async () => {
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  vi.stubEnv("MERI_API_BASE_URL", "https://qualified-core.synthetic.invalid");
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
+  await denied(await receive("backend/core/clients"));
+});
+
+it("holds a manually co-activated qualified Core read and first-chat bootstrap", async () => {
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  vi.stubEnv("MERI_FIRST_CHAT_BOOTSTRAP_ENABLED", "true");
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
+  await denied(await receive("backend/core/clients"));
+});
+
+it("keeps the qualified client UI disabled without the complete read pair", () => {
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_BACKEND_SOURCE", qualifiedSource);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_API_BASE_URL", qualifiedTarget);
+  vi.stubEnv("CAPIRO_PREVIEW_READ_ONLY", "false");
+  expect(isQualifiedCorePreviewReadEnabled(process.env)).toBe(false);
 });
 
 it.each(["HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE", "PROPFIND"])(

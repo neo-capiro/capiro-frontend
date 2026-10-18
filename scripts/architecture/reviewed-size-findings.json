@@ -2571,18 +2571,27 @@
     "file": "apps/web/src/features/modules/hub/ModuleHub.tsx",
     "kind": "function",
     "symbol": "ModuleHub",
-    "fingerprint": "923d94036a7ecb123752a0d0710f5ccad80764f08ca16545904caea47ba805b3",
-    "reason": "One module catalogue view binds the available-client read, selected-client URL hint, fixed group order and page heading. Cards and relationship visuals are separate components; the new frame target and copy introduce no second state or workflow.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "625d70db236a14853edf374aebec4bcece8fce414ae264d1102885e7e099ef11",
+    "reason": "One Modules hub owns the client-scope selector and its fixed catalog presentation. The limited preview switches that selector to the existing native Core roster hook, masks stale/error data, and replaces unqualified module destinations with an explicit unavailable state. The ordinary operation hook is disabled in preview; neither branch implements transport, authorization, or persistence.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
-    "fingerprint": "085ac0fc0e4ac8013bf7e0eff82bd5e0129293cfa23f69455d710bc14dbd8afc",
-    "reason": "This one Portfolio page reads URL filters and four scoped queries, then composes header, results, empty/error and customization states. Linked Core/BD deduplication, filtering and capped-count policy now belong to the pure catalog-projection module with focused tests; IndexNavigation, PortfolioProfiles, ProspectResults, PortfolioAttention, GlobalQuickLog and dialogs retain their respective surfaces. No persistence or business rule is hidden in this route renderer.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "8c9e687baf07154d496c1502e91bf16dc154c802e18e8fe7e28847a904ca9a05",
+    "reason": "This ordinary Portfolio page composes scoped Core, owner, identity and BD queries with navigation, results, empty/error and customization states; projection and child surfaces remain separate. The changed query gate stops BD reads and cached BD data on the Clients tab without adding transport, persistence, or another authority owner.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
+    "reviewedOn": "2026-10-18"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PreviewClientCatalog.tsx",
+    "kind": "function",
+    "symbol": "PreviewClientCatalog",
+    "fingerprint": "e97d849458c617a9bb4eaafc124092e7fa1736aeb64b594fa5f4f7b298900d74",
+    "reason": "One limited Portfolio client-list presentation reads the canonical native roster hook and offers local search plus Modules scope selection. It does not mount owner, layout, alert, prospect, profile-detail or write controls; the existing shell, query error component, and filter rule retain their respective ownership.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {
@@ -3147,9 +3156,9 @@
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "file",
     "symbol": "<module>",
-    "fingerprint": "7cb93c9e40f94d91067247ad1b20b9291d4ab91736ca93ab6d266c701b60bc8a",
-    "reason": "This one Portfolio index route composes Core, Business Development, owner and identity reads with header, results, empty/error and customization views. Linked-record deduplication, filtering and capped-count policy were extracted to catalog-projection.ts and tested for mixed, linked and capped data; remaining components own navigation, cards, alerts, dialogs and mutations. Its length is the route's conditional presentation, not an additional authority owner.",
-    "reviewedBy": "Codex frontend receiving with independent scoped source review",
+    "fingerprint": "4e92a17763ad0bb2e4ed574aecf220a8975771d685e817821908f733ad4175fd",
+    "reason": "The file keeps the ordinary Portfolio route composition and week label together while catalog projection, navigation, cards, attention, dialogs and mutations stay in their existing owners. The added Clients-tab query gate reduces unneeded BD work and does not add a second workflow or backend authority.",
+    "reviewedBy": "Codex non-Meri Core preview source review",
     "reviewedOn": "2026-10-18"
   },
   {

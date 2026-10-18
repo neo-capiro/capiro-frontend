@@ -6,6 +6,7 @@ import { Tooltip as TooltipPrimitive } from "radix-ui";
 import { Tooltip, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
+import { useClients } from "../../../shared/portfolio/api/clients";
 import { PageHeader } from "../../../shared/module-ui";
 import {
   moduleCatalog,
@@ -66,10 +67,19 @@ function ModuleCard({
   );
 }
 
-export function ModuleHub() {
-  const clients = useCapiroQuery("clients.list", {
-    query: { includeArchived: false },
-  });
+export function ModuleHub({
+  previewCoreReadOnly = false,
+}: {
+  previewCoreReadOnly?: boolean;
+}) {
+  const previewClients = useClients({ enabled: previewCoreReadOnly });
+  const clients = useCapiroQuery(
+    "clients.list",
+    {
+      query: { includeArchived: false },
+    },
+    { enabled: !previewCoreReadOnly },
+  );
   const router = useRouter();
   const params = useSearchParams();
   const clientId = params.get("clientId") ?? "";
@@ -79,7 +89,21 @@ export function ModuleHub() {
     else next.delete("clientId");
     router.push(`/modules?${next}`);
   };
-  const profiles = clients.data ?? [];
+  const profiles = previewCoreReadOnly
+    ? previewClients.isSuccess && !previewClients.error
+      ? previewClients.data
+      : []
+    : (clients.data ?? []);
+  const clientsLoading = previewCoreReadOnly
+    ? previewClients.isPending
+    : clients.loading;
+  const clientsError = previewCoreReadOnly
+    ? previewClients.error
+    : clients.error;
+  const reloadClients = () => {
+    if (previewCoreReadOnly) void previewClients.refetch();
+    else clients.reload();
+  };
   const workOrder = ["engagement", "workspace", "planner", "strategies"];
   const work = moduleCatalog
     .filter((module) => module.group === "work")
@@ -90,23 +114,34 @@ export function ModuleHub() {
     "research-portfolios",
   ].flatMap((slug) => moduleCatalog.filter((module) => module.slug === slug));
   return (
-    <div className={styles.hub} data-design-target="1064:191436">
+    <div
+      className={styles.hub}
+      data-design-target={previewCoreReadOnly ? undefined : "1064:191436"}
+    >
       <PageHeader
         title={
-          <>
-            Everything in Capiro
-            <span className={styles.desktopTitle}>, across the whole firm</span>
-          </>
+          previewCoreReadOnly ? (
+            "Modules client scope"
+          ) : (
+            <>
+              Everything in Capiro
+              <span className={styles.desktopTitle}>
+                , across the whole firm
+              </span>
+            </>
+          )
         }
-        eyebrow="Modules"
-        titleAccessory={<ModuleHubInformation />}
+        eyebrow={previewCoreReadOnly ? "Read-only preview" : "Modules"}
+        titleAccessory={
+          previewCoreReadOnly ? undefined : <ModuleHubInformation />
+        }
         actions={
           <label className={styles.scope}>
             Scope
             <select
               aria-label="Client profile scope"
               value={clientId}
-              disabled={clients.loading || Boolean(clients.error)}
+              disabled={clientsLoading || Boolean(clientsError)}
               onChange={(event) => setClientId(event.target.value)}
             >
               <option value="">
@@ -123,28 +158,54 @@ export function ModuleHub() {
           </label>
         }
       />
-      {clients.error && (
+      {previewCoreReadOnly && clientsLoading && (
+        <p role="status">Loading available client profiles…</p>
+      )}
+      {clientsError && (
         <p className={styles.scopeError} role="alert">
           Client scope could not be loaded.{" "}
-          <button type="button" onClick={clients.reload}>
+          <button type="button" onClick={reloadClients}>
             Try again
           </button>
         </p>
       )}
-      <ModulesRelationship />
-      <ModuleGroup
-        id="run-work"
-        title="Run the work"
-        modules={work}
-        clientId={clientId}
-      />
-      <ModuleGroup
-        id="know-landscape"
-        title="Know the landscape"
-        modules={landscape}
-        clientId={clientId}
-        landscape
-      />
+      {previewCoreReadOnly &&
+        !clientsLoading &&
+        !clientsError &&
+        profiles.length === 0 && (
+          <p role="status">No available client profiles were returned.</p>
+        )}
+      {previewCoreReadOnly ? (
+        <section
+          className={styles.relationship}
+          aria-label="Preview availability"
+        >
+          <div>
+            <h2>Client scope is available</h2>
+            <p>
+              Choose a client profile to check your current access. Module
+              records and actions are unavailable in this preview.
+            </p>
+          </div>
+        </section>
+      ) : (
+        <>
+          <ModulesRelationship />
+          <ModuleGroup
+            id="run-work"
+            title="Run the work"
+            modules={work}
+            clientId={clientId}
+          />
+          <ModuleGroup
+            id="know-landscape"
+            title="Know the landscape"
+            modules={landscape}
+            clientId={clientId}
+            landscape
+          />
+        </>
+      )}
     </div>
   );
 }

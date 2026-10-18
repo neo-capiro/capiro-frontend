@@ -49,25 +49,29 @@ export function PortfolioIndex({
 }: {
   destinations: Destinations;
 }) {
+  const params = useSearchParams();
+  const state = readPortfolioState(params);
+  const includeProspects = state.type !== "CLIENT";
   const clients = useClients();
   const records =
     clients.isSuccess && !clients.error ? clients.data : undefined;
   const owners = useAccountOwners();
-  const prospectOwners = useMemberOptions();
-  const prospects = useProspects({
-    search: "",
-    stage: "",
-    ownerId: "",
-    status: "active",
-  });
+  const prospectOwners = useMemberOptions({ enabled: includeProspects });
+  const prospects = useProspects(
+    { search: "", stage: "", ownerId: "", status: "active" },
+    { enabled: includeProspects },
+  );
   const prospectData =
-    prospects.isSuccess && prospects.isFetchedAfterMount && !prospects.error
+    includeProspects &&
+    prospects.isSuccess &&
+    prospects.isFetchedAfterMount &&
+    !prospects.error
       ? prospects.data
       : undefined;
   const prospectRecords = prospectData?.prospects;
   const prospectVisibleCount = prospectData?.counts.visible;
+  const prospectOptions = includeProspects ? prospectOwners.data : undefined;
   const identity = useIdentity();
-  const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const [creating, setCreating] = useState(false);
@@ -78,7 +82,6 @@ export function PortfolioIndex({
     setCustomizing(false);
     customizeTrigger.current?.focus();
   };
-  const state = readPortfolioState(params);
   const permitted =
     !identity.error &&
     (identity.data?.role === "standard_user" ||
@@ -102,7 +105,7 @@ export function PortfolioIndex({
       owners: owners.error ? {} : (owners.data ?? {}),
     });
   const prospectiveOwnerById = Object.fromEntries(
-    (prospectOwners.data ?? []).map((member) => [member.id, member]),
+    (prospectOptions ?? []).map((member) => [member.id, member]),
   );
   const ownerFilterWaiting = Boolean(
     state.owner &&
@@ -132,7 +135,7 @@ export function PortfolioIndex({
             <IndexOwnerFilter
               state={state}
               owners={owners.error ? undefined : owners.data}
-              options={prospectOwners.data}
+              options={prospectOptions}
               ownerPending={
                 state.type === "PROSPECT"
                   ? prospectOwners.isPending
@@ -197,7 +200,7 @@ export function PortfolioIndex({
             retry={() => void owners.refetch()}
           />
         )}
-        {prospectOwners.error && (
+        {includeProspects && prospectOwners.error && (
           <QueryState
             error={prospectOwners.error}
             retry={() => void prospectOwners.refetch()}

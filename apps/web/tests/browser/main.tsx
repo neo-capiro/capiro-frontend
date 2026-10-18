@@ -9,13 +9,19 @@ import { ClientFrame } from "@/features/portfolio/client-profile/ClientFrame";
 import { ClientOverview } from "@/features/portfolio/client-profile/ClientOverview";
 import { PastPerformance } from "@/features/portfolio/client-profile/past-performance/public";
 import { PortfolioIndex } from "@/features/portfolio/index/PortfolioIndex";
+import { PreviewClientCatalog } from "@/features/portfolio/index/PreviewClientCatalog";
+import { ModuleHub } from "@/features/modules/hub/ModuleHub";
+import { ModuleShell } from "@/shared/shell/ModuleShell";
 import { ObjectivesPage } from "@/features/portfolio/objectives/ObjectivesPage";
 import { WorkPage } from "@/features/portfolio/work/WorkPage";
 import { RelationshipsPage } from "@/features/portfolio/relationships/RelationshipsPage";
 import { CapabilitiesPage } from "@/features/portfolio/capabilities/CapabilitiesPage";
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
 import { ObjectiveMeetingDestination } from "@/features/portfolio/calendar/ObjectiveMeetingDestination";
-import { SelectedClientProvider } from "@/shared/session/SelectedClient";
+import {
+  SelectedClientGate,
+  SelectedClientProvider,
+} from "@/shared/session/SelectedClient";
 import { FilesPage } from "@/features/portfolio/files/FilesPage";
 import { ProspectsIndex } from "@/features/portfolio/prospects/ProspectsIndex";
 import { ProspectDetail } from "@/features/portfolio/prospects/ProspectDetail";
@@ -39,7 +45,7 @@ import {
   PublicEventHarness,
   PublicEventCalendarHarness,
 } from "./public-event-harness";
-import { usePathname } from "./navigation";
+import { usePathname, useSearchParams } from "./navigation";
 import "@/app/globals.css";
 import "@/shared/portfolio/styles.css";
 import "./test-font.css";
@@ -50,6 +56,19 @@ const destinations = {
 };
 function App() {
   const path = usePathname();
+  const search = useSearchParams();
+  if (path === "/__test/preview-clients")
+    return <PreviewClientCatalog destinations={destinations} />;
+  if (path === "/__test/preview-modules")
+    return (
+      <SelectedClientProvider requestedId={search.get("clientId") ?? undefined}>
+        <ModuleShell>
+          <SelectedClientGate>
+            <ModuleHub previewCoreReadOnly />
+          </SelectedClientGate>
+        </ModuleShell>
+      </SelectedClientProvider>
+    );
   if (path === "/__test/acceptance-activity-authority")
     return <AcceptanceActivityAuthorityHarness />;
   if (path === "/__test/acceptance-bill-search")

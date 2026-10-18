@@ -19,6 +19,8 @@ const template = readFileSync('apps/web/deployment/portfolio/service.yml', 'utf8
 const qualification = readFileSync('apps/web/deployment/portfolio/PR70-FIRST-CHAT-IMAGE-QUALIFICATION.buildspec.yml', 'utf8');
 const coreApi = 'https://first-chat-preview.app-dev.capiro.ai/api';
 const coreReadSource = '6542f5b089656b6d255465edd464d06c2a0b408f';
+const qualifiedCoreReadSource = '784b1c3a91eb6d78f16d92c42e71f05c12c5b5bb';
+const qualifiedCoreApi = 'https://qualified-core.example.test/api';
 const coreBootstrapSource = 'c64f0005cf14d69683aabafa11def4964d766832';
 const meriSource = '176a8811a9b05d8613282e70bd7a57ebd75ca201';
 const meriDigest = 'sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8';
@@ -127,6 +129,31 @@ test('Core read and first chat remain held until all exact bindings are supplied
     { ...bindings, firstChatClientId: null },
     { ...bindings, previewReadEnabled: 'true' },
   ]) assert.throws(() => renderPreviewConfiguration(invalid), /PREVIEW_FIRST_CHAT_/);
+});
+
+test('qualified Core read needs an explicit distinct API target and cannot switch first chat', () => {
+  const qualified = { ...bindings, previewReadEnabled: true, qualifiedCoreReadApiBaseUrl: qualifiedCoreApi };
+  const p = renderPreviewConfiguration(qualified);
+  assert.equal(p.environment.CAPIRO_PREVIEW_READ_BACKEND_SOURCE, qualifiedCoreReadSource);
+  assert.equal(p.environment.CAPIRO_PREVIEW_READ_API_BASE_URL, qualifiedCoreApi);
+  assert.equal(p.environment.MERI_FIRST_CHAT_BOOTSTRAP_ENABLED, 'false');
+  assert.equal(p.environment.CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL, '');
+  validatePreviewParameters(p.parameters.toReversed(), qualified);
+  assert.throws(() => validatePreviewParameters(p.parameters, { ...bindings, previewReadEnabled: true }), /PREVIEW_PARAMETER_MISMATCH/);
+  for (const invalid of [
+    { ...bindings, qualifiedCoreReadApiBaseUrl: qualifiedCoreApi },
+    { ...qualified, ...meriEnabled, firstChatBootstrapEnabled: true, firstChatClientId: syntheticClientId },
+  ]) assert.throws(() => renderPreviewConfiguration(invalid), /PREVIEW_CORE_READ_DEPENDENCY_HELD/);
+  for (const target of [null, 1, ' http://qualified-core.example.test/api',
+    'http://qualified-core.example.test/api', 'https://qualified-core.example.test/api/',
+    'https://qualified-core.example.test/api?x=1', 'https://qualified-core.example.test/api#fragment',
+    'https://user@qualified-core.example.test/api', 'https://qualified-core.example.test:443/api',
+    'https://qualified-core.example.test:8443/api', 'https://QUALIFIED-core.example.test/api',
+    'https://127.0.0.1/api', 'https://localhost/api',
+    'https://portfolio-preview.app.capiro.ai/api', 'https://os.capiro.ai/api', coreApi,
+  ]) assert.throws(() => renderPreviewConfiguration({ ...qualified, qualifiedCoreReadApiBaseUrl: target }), /PREVIEW_CORE_READ_ORIGIN_INVALID/);
+  assert.throws(() => renderPreviewConfiguration({ ...qualified, ...meriEnabled,
+    meriApiBaseUrl: 'https://qualified-core.example.test' }), /PREVIEW_CORE_READ_ORIGIN_INVALID/);
 });
 
 test('preview rejects unknown, missing, credential-valued and mismatched Clerk bindings', () => {

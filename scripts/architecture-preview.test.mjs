@@ -39,6 +39,17 @@ test('all preview internals are server allocated, including through client found
   }
 });
 
+test('only the two server-rendered preview pages may read the qualified UI mode', () => {
+  const target = 'apps/web/src/shared/preview/read-config.server.ts';
+  const allowed = "import { isQualifiedCorePreviewReadEnabled } from '@/shared/preview/read-config.server';";
+  for (const entry of ['app/(portfolio)/(product)/portfolio/page.tsx', 'app/modules/page.tsx']) {
+    const files = new Map([[`apps/web/src/${entry}`, allowed], [target, 'export const isQualifiedCorePreviewReadEnabled = () => false;']]);
+    assert.deepEqual(inspectSources(files).errors, [], entry);
+    const broad = new Map([[`apps/web/src/${entry}`, "import { previewReadTarget } from '@/shared/preview/read-config.server';"], [target, 'export const previewReadTarget = () => null;']]);
+    assert.ok(inspectSources(broad).errors.some(error => /preview policy/.test(error)), entry);
+  }
+});
+
 test('first-chat gateway is allocated only to the Capiro server route', () => {
   const target = 'apps/web/src/shared/preview/first-chat-gateway.server.ts';
   const source = "import '@/shared/preview/first-chat-gateway.server';";

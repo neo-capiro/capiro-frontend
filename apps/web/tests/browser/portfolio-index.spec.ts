@@ -37,6 +37,89 @@ async function indexFixtures(page: Page) {
   return unexpected;
 }
 
+test("the Clients tab leaves Business Development reads unmounted", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  page.on("request", (request) =>
+    requests.push(new URL(request.url()).pathname),
+  );
+  const unexpected = await indexFixtures(page);
+  await page.goto("/portfolio?type=CLIENT&view=list&sort=recent");
+
+  const profiles = page.getByRole("table", { name: "Portfolio profiles" });
+  await expect(profiles.getByRole("row")).toHaveCount(3);
+  await expect(profiles).toContainText("Zephyr Aerospace");
+  await expect(profiles).toContainText("Alpha Energy");
+  expect(requests).not.toContain(
+    "/api/backend/core/business-development/prospects",
+  );
+  expect(requests).not.toContain(
+    "/api/backend/core/client-account-owners/options",
+  );
+  expect(unexpected).toEqual([]);
+});
+
+test("switching from Prospects to Clients hides cached prospect records and owners", async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  page.on("request", (request) =>
+    requests.push(new URL(request.url()).pathname),
+  );
+  const unexpected = await indexFixtures(page);
+  await page.route(
+    "**/api/backend/core/client-account-owners/options",
+    (route) =>
+      json(route, [
+        {
+          id: "bd-only-owner",
+          email: "bd-owner@example.test",
+          firstName: "BD",
+          lastName: "Only",
+        },
+      ]),
+  );
+  await page.goto("/portfolio?type=PROSPECT&view=list&sort=recent");
+  await expect(
+    page.getByRole("table", { name: "Portfolio prospects" }),
+  ).toContainText("Test Prospect");
+  await expect(
+    page.getByRole("combobox", { name: "Account owner" }),
+  ).toContainText("Owner: BD Only");
+  const prospectReads = requests.filter(
+    (path) => path === "/api/backend/core/business-development/prospects",
+  ).length;
+  const memberReads = requests.filter(
+    (path) => path === "/api/backend/core/client-account-owners/options",
+  ).length;
+  expect(prospectReads).toBeGreaterThan(0);
+  expect(memberReads).toBeGreaterThan(0);
+
+  await page
+    .getByRole("navigation", { name: "Profile type" })
+    .getByRole("button", { name: /^Clients/ })
+    .click();
+  await expect(page).toHaveURL("/portfolio?type=CLIENT&view=list&sort=recent");
+  const profiles = page.getByRole("table", { name: "Portfolio profiles" });
+  await expect(profiles.getByRole("row")).toHaveCount(3);
+  await expect(profiles).not.toContainText("Test Prospect");
+  await expect(
+    page.getByRole("combobox", { name: "Account owner" }),
+  ).not.toContainText("Owner: BD Only");
+  expect(
+    requests.filter(
+      (path) => path === "/api/backend/core/business-development/prospects",
+    ),
+  ).toHaveLength(prospectReads);
+  expect(
+    requests.filter(
+      (path) => path === "/api/backend/core/client-account-owners/options",
+    ),
+  ).toHaveLength(memberReads);
+  expect(unexpected).toEqual([]);
+});
+
 test("wordmark and workspace modes stay in the canonical shared application", async ({
   page,
 }) => {
@@ -82,10 +165,10 @@ test("deep links restore combined filters and legacy layout; clearing preserves 
   await expect(page.getByLabel("Account owner", { exact: true })).toHaveValue(
     "owner-1",
   );
-  // The shared fixture also supplies one active Business Development prospect.
+  // The Clients tab only has the Core roster; the combined total is unknown.
   await expect(
     page.getByRole("region", { name: "Portfolio profiles" }),
-  ).toContainText("1 profile of 3");
+  ).toContainText("1 profile");
   await page
     .getByRole("button", { name: "Clear filters", exact: true })
     .click();

@@ -31,11 +31,15 @@ export function useStageCatalog() {
     },
   });
 }
-export function useProspects(filter: ProspectFilter) {
+export function useProspects(
+  filter: ProspectFilter,
+  options?: { enabled?: boolean },
+) {
   const api = useApi();
   const query = prospectQuery(filter);
   return useQuery({
     queryKey: ["prospects", query],
+    enabled: options?.enabled !== false,
     staleTime: 0,
     queryFn: ({ signal }) =>
       api.request("core", `${prospectBase}?${query}`, prospectListSchema, {
