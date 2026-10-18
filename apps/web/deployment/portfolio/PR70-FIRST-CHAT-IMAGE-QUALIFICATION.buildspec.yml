@@ -1,0 +1,60 @@
+# One-shot inline override for exact frontend PR70 source 31a140cddf798c32b5cc45ad22e7b672312b3ca3.
+# This file belongs to a later deployment-only review; it is absent from the PR70 image archive.
+# The operator must pass these reviewed bytes as buildspecOverride, not a path in the old archive.
+# No build is authorized by this file. The source archive needs independent tree/member verification.
+version: 0.2
+env:
+  shell: bash
+phases:
+  install:
+    runtime-versions:
+      nodejs: 24
+    commands:
+      - set -euo pipefail
+      - node --version
+      - node -e 'if (Number(process.versions.node.split(".")[0]) !== 24) process.exit(1)'
+      - npm --version
+      - npm ci --ignore-scripts --no-audit --no-fund
+      - npm exec --workspace @capiro/web -- playwright install --with-deps chromium
+  build:
+    commands:
+      - set -euo pipefail
+      - test "$EXPECTED_SHA" = "31a140cddf798c32b5cc45ad22e7b672312b3ca3"
+      - printf '%s\n' "$EXPECTED_SHA" | cmp -s - source-commit.txt
+      - test -n "${EXPECTED_S3_VERSION:-}"
+      - test "$CODEBUILD_SOURCE_VERSION" = "$EXPECTED_S3_VERSION"
+      - node --test scripts/preview-config.test.mjs
+      - npm exec --workspace @capiro/web -- vitest run tests/preview-read-receiving.test.ts tests/first-chat-intent.test.ts tests/first-chat-bootstrap.test.ts tests/meri-first-chat-core.test.ts tests/meri-first-chat-preview-policy.test.ts tests/meri-first-chat-route.test.ts tests/meri-first-chat-host.test.ts tests/meri-conversation-host.test.ts tests/meri-conversation-route.test.ts tests/meri-conversation-proxy.test.ts tests/meri-history-proxy.test.ts tests/meri-preview-route-activation.test.ts tests/meri-document-proxy.test.ts tests/preview-backend-containment.test.ts
+      - npm run typecheck --workspace @capiro/web
+      - npm run lint --workspace @capiro/web
+      - npm run architecture
+      - npm run build
+      - npm run test:production
+      - test "$REPOSITORY_URI" = "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview"
+      - test "$AWS_DEFAULT_REGION" = "us-east-1"
+      - docker build --pull --platform linux/amd64 -f apps/web/Dockerfile -t "$REPOSITORY_URI:$EXPECTED_SHA" .
+      - bash apps/web/deployment/portfolio/smoke.sh "$REPOSITORY_URI:$EXPECTED_SHA"
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "${REPOSITORY_URI%%/*}"
+      - docker push "$REPOSITORY_URI:$EXPECTED_SHA"
+      - |
+        set -euo pipefail
+        digest=$(aws ecr describe-images --repository-name capiro/portfolio-preview --image-ids "imageTag=$EXPECTED_SHA" --query 'imageDetails[0].imageDigest' --output text --no-cli-pager)
+        [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+        scan_dir=$(mktemp -d)
+        trap 'rm -f "$scan_dir/scan.json" "$scan_dir/error.txt"; rmdir "$scan_dir"' EXIT
+        scan_complete=0
+        for attempt in $(seq 1 40); do
+          if aws ecr describe-image-scan-findings --repository-name capiro/portfolio-preview --image-id "imageDigest=$digest" --output json --no-cli-pager > "$scan_dir/scan.json" 2> "$scan_dir/error.txt"; then
+            set +e
+            node -e 'const fs=require("node:fs");const x=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));const s=x.imageScanStatus?.status;if(s!=="COMPLETE")process.exit(["PENDING","IN_PROGRESS"].includes(s)?75:2);const y=x.imageScanFindings;if(!y||!Array.isArray(y.findings)||x.nextToken)process.exit(2);const n=y.findingSeverityCounts??{};if((n.HIGH??0)!==0||(n.CRITICAL??0)!==0||y.findings.some(f=>["HIGH","CRITICAL"].includes(f.severity)))process.exit(2)' "$scan_dir/scan.json"
+            scan_status=$?
+            set -e
+            if [ "$scan_status" -eq 0 ]; then scan_complete=1; break; fi
+            if [ "$scan_status" -ne 75 ]; then exit 1; fi
+          else
+            if ! grep -q 'ScanNotFoundException' "$scan_dir/error.txt"; then exit 1; fi
+          fi
+          sleep 8
+        done
+        test "$scan_complete" -eq 1
+        printf 'Exact digest %s: scan COMPLETE, zero HIGH/CRITICAL; retain sanitized receipt.\n' "$digest"
