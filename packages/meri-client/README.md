@@ -1,5 +1,13 @@
 # Meri browser client
 
+The additive `/task-commands` entry exposes the reviewed backend-generated task-update
+request/response receiver and types directly from the immutable supplemental snapshot in
+`vendor/task-command-application/0.1.0`. Its provenance binds Meri source publication,
+public export and all four generated file hashes; run `node scripts/task-command-public-input.mjs`
+from the frontend root to check it. This does not replace the installed contracts0.1.8 input,
+add dependencies, approve a proposal or grant task authority. The receiving caller supplies
+the independently authenticated stable context and exact request/proposal expectations.
+
 This package owns browser subscription guarding, immutable conversation projection and the React facade. Trusted source access, authentication, authorization, publication fences and durable state remain in the separate Meri backend.
 
 Import `createMeriChat`, `MeriGuardedTransport` or `guardUiChunk` from the root; projection and safe error rendering from `/projection`; `useMeriChat` and `detachMeriView` from `/react`. The React entry is explicitly a client component. Private source imports are unsupported. Canonical wire types/validators are supplied by public @capiro/meri-contracts0.1.6, preserving the original0.1.0 event wire contract; the separate backend stream adapter owns SDK transport protocol names. There is no mirrored event DTO authority here.

@@ -26,6 +26,10 @@ export function readMeriConnectionConfig(
     /** The browser-visible origin (CAPIRO_REQUEST_ORIGIN); undefined means the request URL. */
     requestOrigin: config.requestOrigin,
     actionEnabled: available && env.MERI_ACTION_WORKFLOW_ENABLED === "true",
+    taskCommandEnabled:
+      available &&
+      conversationOrigin?.pathname === "/" &&
+      env.MERI_TASK_COMMAND_WORKFLOW_ENABLED === "true",
     conversationEnabled:
       conversationAvailable &&
       env.MERI_CONVERSATION_WORKFLOW_ENABLED === "true",
@@ -44,6 +48,7 @@ export function readOpaqueSessionConfig(
   return {
     enabled:
       config.actionEnabled ||
+      config.taskCommandEnabled ||
       config.documentEnabled ||
       config.conversationEnabled,
     baseUrl: config.baseUrl,

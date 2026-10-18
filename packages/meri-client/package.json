@@ -7,7 +7,8 @@
   "type": "module",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "vendor/task-command-application/0.1.0"
   ],
   "exports": {
     ".": {
@@ -21,6 +22,10 @@
     "./react": {
       "types": "./dist/client-facade.d.ts",
       "default": "./dist/client-facade.js"
+    },
+    "./task-commands": {
+      "types": "./vendor/task-command-application/0.1.0/task-command-application.d.ts",
+      "default": "./vendor/task-command-application/0.1.0/task-command-application.mjs"
     },
     "./conversation": {
       "types": "./dist/conversation-client.d.ts",

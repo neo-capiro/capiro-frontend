@@ -1,0 +1,56 @@
+{
+  "route": "prepare",
+  "request": {
+    "arguments": {
+      "taskId": "00000000-0000-4000-8000-000000000021",
+      "title": "Updated",
+      "status": "open"
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "status": "approval_required",
+    "proposal": {
+      "proposalId": "00000000-0000-4000-8000-000000000102",
+      "command": {
+        "contractVersion": "0.2.0",
+        "commandId": "00000000-0000-4000-8000-000000000100",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "action": "task.update",
+        "arguments": {
+          "taskId": "00000000-0000-4000-8000-000000000021",
+          "mode": "unconditional_patch",
+          "patch": {
+            "title": "Updated",
+            "status": "todo"
+          }
+        },
+        "attachments": [],
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "p1"
+          }
+        ],
+        "idempotencyKey": "00000000-0000-4000-8000-000000000101"
+      },
+      "commandSha256": "235a31f00b59acc54cd3642c6d76c1b0df7bce5fbac23fdbf75c2cc9031ed609",
+      "createdAt": "2026-10-12T20:00:00.000Z",
+      "expiresAt": "2026-10-12T20:00:45.000Z",
+      "requiredApprover": {
+        "tenantId": "tenant",
+        "actorId": "reviewer"
+      }
+    }
+  }
+}

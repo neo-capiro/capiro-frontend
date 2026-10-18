@@ -38,12 +38,17 @@ export const publicExports = new Set([
   '@capiro/meri-contracts/conversation-input',
   '@capiro/meri-contracts/conversation-initial-input',
   '@capiro/meri-client/conversation',
+  '@capiro/meri-client/task-commands',
   '@capiro/meri-contracts/document-application', '@capiro/meri-contracts/document-application/schema',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/task-commands/[operation]/route.ts`, new Set([
+    previewPolicy,
+    '@clerk/nextjs/server', `${appSource}shared/meri-task-commands/config.ts`, `${appSource}shared/meri-task-commands/proxy.ts`,
+  ])],
   [`${appSource}app/api/conversations/[...path]/route.ts`, new Set([
     previewPolicy,
     '@clerk/nextjs/server', `${appSource}shared/meri-conversations/config.ts`, `${appSource}shared/meri-conversations/proxy.ts`,
