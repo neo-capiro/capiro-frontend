@@ -106,6 +106,21 @@
       "purpose": "Genuine original-input allocation and full-pin admission bridge; all30 prior dist members and0.1.7 brands preserved.",
       "independentReviewManifestSha256": "1c4f123b210a4fe23de018d1164822f0407fb75b5f32e8c880ab424757d3e0c0",
       "ownerAcceptance": "Qualification explicit scoped LOCAL artifact acceptance on2026-10-16; no consumer execution/build/browser lease inferred."
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.9.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "b23a40a15cd9cf820d07dfca2569525581794cbf",
+      "sourceTree": "913859a0ad8a48730019813b10d0b439b193dfb0",
+      "sourceBranch": "fable/meri-first-chat-receiving-20261017",
+      "producer": "packages/contracts: npm ci && npm run build && npm pack (Node 24.19.0, Fable, 2026-10-18)",
+      "bytes": 523761,
+      "sha256": "f3ee654ba2c49247d9034dce82937c49d8146471b57e3d6c71ed55fc5f727f55",
+      "integrity": "sha512-y6m19wBOsb8lNhRbn88nAAbWMsNjlTnoIuQHXhik/ZFKj+ePr7PVpzRoV1Cz6ym+OE2QhkovcDgjZ9/Zmk5Gug==",
+      "regularEntryCount": 39,
+      "status": "accepted-pushed-source-artifact; consumer qualification by the frontend preview build",
+      "purpose": "Initial-input allocation budget raised to maxRequestMs 12000 (was 3000, which aborted every first-chat allocate at 3 s). dist/conversation-initial-input.{mjs,d.ts,schema.json} are byte-identical to 0.1.8 apart from that limit and the 0.1.9 version string; the generator generate-initial-input.mjs is now committed upstream.",
+      "custody": "Built by Fable from the pushed integration commit; sha256/integrity recorded here before the frontend lock update."
     }
   ]
 }
