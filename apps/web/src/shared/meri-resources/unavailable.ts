@@ -21,9 +21,9 @@ export const unavailableResources = Object.freeze({
   conversationList: {
     label: "Recent conversations",
     summary:
-      "Recent and searchable conversations are not available yet. The current conversation still works.",
+      "Searching conversations is not available yet. Recent conversations and the current conversation still work.",
     missing:
-      "A conversation list, search and paging route. The service only exposes the run bound to the current session (POST /api/conversations/history).",
+      "A conversation search route. The service lists recent conversations with paging (POST /api/conversations/list), which Recents uses, but cannot search them.",
     owner: `${conversations} (conversation-wide history lane)`,
   },
   conversationHistory: {
