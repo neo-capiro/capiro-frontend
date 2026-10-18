@@ -53,7 +53,10 @@ test("Portfolio desktop shell matches Figma rail anchors and keeps its toggle us
   await page.goto("/portfolio?type=PROSPECT");
   await expect(prospects).toHaveAttribute("aria-current", "page");
   await expect(nav.locator('[aria-current="page"]')).toHaveCount(1);
-  await expect(prospects).toHaveAttribute("href", "/portfolio/prospects");
+  await expect(prospects).toHaveAttribute("href", "/portfolio?type=PROSPECT");
+  await page.screenshot({
+    path: info.outputPath("portfolio-prospects-canonical-1440.png"),
+  });
   await page.goBack();
   await expect(overview).toHaveAttribute("aria-current", "page");
   await page.goForward();

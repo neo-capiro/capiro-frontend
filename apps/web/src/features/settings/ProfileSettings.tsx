@@ -232,6 +232,7 @@ export function ProfileSettings() {
               {
                 key: "actions",
                 label: "Actions",
+                visuallyHiddenHeader: true,
                 render: (row) =>
                   row.status === "archived" ? (
                     <SettingsButton

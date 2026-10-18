@@ -214,6 +214,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                     {
                       key: "actions",
                       label: "Actions",
+                      visuallyHiddenHeader: true,
                       render: (row) =>
                         row.userId !== identity.user.id &&
                         row.role !== "capiro_admin" && (
@@ -271,6 +272,7 @@ export function TeamSettings({ identity }: { identity: CapiroMe }) {
                 {
                   key: "resend",
                   label: "Actions",
+                  visuallyHiddenHeader: true,
                   render: (row) => (
                     <SettingsButton
                       small

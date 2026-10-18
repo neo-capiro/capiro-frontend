@@ -129,8 +129,19 @@ test("an incomplete draft saves only after an explicit action and returns to the
   await expect(
     page.getByRole("button", { name: "A partial outcome", exact: true }),
   ).toBeVisible();
+  const savedObjective = page
+    .getByRole("region", { name: "Current objectives" })
+    .getByRole("article")
+    .filter({
+      has: page.getByRole("button", {
+        name: "A partial outcome",
+        exact: true,
+      }),
+    });
   await expect(
-    page.getByText("1/4 required fields", { exact: true }),
+    savedObjective.locator("p").filter({
+      hasText: /^Readiness\s*1\/4 required fields$/,
+    }),
   ).toBeVisible();
   expect(writes).toHaveLength(1);
   expect(new URL(page.url()).searchParams.has("new")).toBe(false);

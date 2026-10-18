@@ -85,6 +85,25 @@ for (const [section, title] of routes)
     expect(errors).toEqual([]);
   });
 
+test("Settings action columns keep accessible names with visually hidden labels", async ({
+  page,
+}) => {
+  const expectActionHeader = async (caption: string) => {
+    const header = page
+      .getByRole("table", { name: caption })
+      .getByRole("columnheader", { name: "Actions" });
+    await expect(header).toBeVisible();
+    await expect(header.locator("span.sr-only")).toHaveText("Actions");
+  };
+
+  await page.goto("/settings/team");
+  await expectActionHeader("Workspace members");
+  await page.getByRole("tab", { name: /^Pending invitations/ }).click();
+  await expectActionHeader("Pending team invitations");
+  await page.goto("/settings/profiles");
+  await expectActionHeader("active client profiles");
+});
+
 test("All analyst queues and Meri preference screens are reachable with explicit unavailable contracts", async ({
   page,
 }) => {

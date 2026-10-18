@@ -53,6 +53,16 @@ export function IndexNavigation({
       <Link className="button" href="/portfolio?type=PROSPECT&pipeline=1">
         Pipeline
       </Link>
+      {state.type === "PROSPECT" && (
+        <Link
+          className="button"
+          href="/portfolio/prospects"
+          aria-label="Business Development list"
+          title="Business Development list"
+        >
+          BD list
+        </Link>
+      )}
       <div className={styles.secondaryActions}>
         <button
           ref={objectiveTrigger}

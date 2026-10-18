@@ -19,6 +19,10 @@ for (const path of ["/", "/portfolio"]) {
       name: "Portfolio Clients",
       exact: true,
     });
+    const prospects = navigation.getByRole("link", {
+      name: "Portfolio Prospects",
+      exact: true,
+    });
     await expect(overview).toHaveAttribute("aria-current", "page");
     await expect(navigation.locator('[aria-current="page"]')).toHaveCount(1);
     await page.goto(`${path}?type=CLIENT`);
@@ -29,6 +33,36 @@ for (const path of ["/", "/portfolio"]) {
     await expect(overview).toHaveAttribute("aria-current", "page");
     await page.goForward();
     await expect(clients).toHaveAttribute("aria-current", "page");
+    await expect(prospects).toHaveAttribute("href", "/portfolio?type=PROSPECT");
+    await prospects.click();
+    await expect(page).toHaveURL("/portfolio?type=PROSPECT");
+    await expect(prospects).toHaveAttribute("aria-current", "page");
+    await expect(navigation.locator('[aria-current="page"]')).toHaveCount(1);
+    const typeNavigation = page.getByRole("navigation", {
+      name: "Profile type",
+    });
+    const bdList = typeNavigation.getByRole("link", {
+      name: "Business Development list",
+    });
+    await expect(bdList).toBeVisible();
+    const pipelineY = (
+      await typeNavigation.getByRole("link", { name: "Pipeline" }).boundingBox()
+    )?.y;
+    expect((await bdList.boundingBox())?.y).toBe(pipelineY);
+    const objectiveY = (
+      await typeNavigation
+        .getByRole("button", { name: "New objective" })
+        .boundingBox()
+    )?.y;
+    expect(Math.abs((objectiveY ?? 0) - (pipelineY ?? 0))).toBeLessThanOrEqual(
+      2,
+    );
+    await bdList.click();
+    await expect(page).toHaveURL("/portfolio/prospects");
+    await expect(
+      page.getByRole("textbox", { name: "Search prospects" }),
+    ).toBeVisible();
+    await expect(prospects).not.toHaveAttribute("aria-current", "page");
     expect(unexpected).toEqual([]);
   });
 }
