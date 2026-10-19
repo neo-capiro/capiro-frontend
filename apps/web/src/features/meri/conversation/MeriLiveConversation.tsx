@@ -4,12 +4,11 @@ import { unavailableTitle } from "../../../shared/meri-resources/unavailable";
 import type { MeriConversationPort } from "../../../shared/meri-conversations/host-controller";
 import type { ConversationStoredRequest } from "@capiro/meri-contracts/conversation-application";
 import { UserMessage } from "../screens/conversation/UserMessage";
-import { ConversationArtifacts } from "./ConversationArtifacts";
+import { ConversationPanels } from "./ConversationPanels";
 import { ConversationFrame } from "./ConversationFrame";
 import { ConversationTurn } from "./ConversationTurn";
 import { RunStatus } from "./RunStatus";
 import {
-  conversationArtifacts,
   isTerminal,
   turnFromObservation,
   currentTurnView,
@@ -190,12 +189,7 @@ export function MeriLiveConversation({
           acceptedRequest={acceptedRequest}
         />
       }
-      files={
-        <ConversationArtifacts
-          artifacts={conversationArtifacts(turn ? [...earlier, turn] : earlier)}
-          access={port.artifacts}
-        />
-      }
+      files={<ConversationPanels port={port} turn={turn} earlier={earlier} />}
       draft={draft}
       onDraft={onDraft}
       textareaRef={textareaRef}

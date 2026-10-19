@@ -1,0 +1,100 @@
+/* Prepared actions panel, laid out like the Files panel: same tokens, same card treatment. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.panel h2 {
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  min-width: 0;
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.header h3 {
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.muted {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.fields {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.fields > div {
+  display: grid;
+  grid-template-columns: minmax(96px, 30%) 1fr;
+  gap: 8px;
+  min-width: 0;
+}
+.fields dt {
+  color: var(--muted-foreground);
+}
+.fields dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.hash {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.refusal {
+  font-size: 13px;
+  line-height: 1.45;
+}
+@media (max-width: 680px) {
+  .fields > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

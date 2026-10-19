@@ -1,0 +1,59 @@
+{
+  "synthetic": true,
+  "generator": "scripts/intents-fixtures.mjs",
+  "sourceRepository": "neo-capiro/meri-greenfield",
+  "sourceCommit": "5ee2fd6e979dff1c2b111bd964c91aadab8357a5",
+  "owners": [
+    "apps/control/intents/http.mjs",
+    "apps/control/intents/approval.mjs",
+    "apps/control/intents/native-approvals.mjs",
+    "apps/control/intents/test/fixture.mjs"
+  ],
+  "note": "Actual intent mount, approval owner, command executor and product HTTP application over a synthetic decision owner and synthetic command source; no native network, Core, database or credential.",
+  "files": [
+    {
+      "file": "context.json",
+      "sha256": "0fe7105c762c096f00afbf7f686c1226547f298fd0bc2baa18c6c93a6fc46835"
+    },
+    {
+      "file": "decideExecuted.json",
+      "sha256": "8f00103ed1bdaa0fa1f1f77791e0e72dc4c9b70034bc107b82cdfba0b3a53e3e"
+    },
+    {
+      "file": "decideExpired.json",
+      "sha256": "7aaf3ae93596cd6983689f8f5753c960eef05cd7c5c0d9a41ea337d6df36d6f0"
+    },
+    {
+      "file": "decideRecovered.json",
+      "sha256": "8f00103ed1bdaa0fa1f1f77791e0e72dc4c9b70034bc107b82cdfba0b3a53e3e"
+    },
+    {
+      "file": "decideRejected.json",
+      "sha256": "3dc2e9d60402995e2529ce8a848e28a13d8a68b00c2a25c0d188a576b46aa255"
+    },
+    {
+      "file": "decideRepeat.json",
+      "sha256": "8f00103ed1bdaa0fa1f1f77791e0e72dc4c9b70034bc107b82cdfba0b3a53e3e"
+    },
+    {
+      "file": "decideUnknown.json",
+      "sha256": "5930a7e8d517121bb6f0230e6c002773594e0af961b208c8ff3c527712c9ac80"
+    },
+    {
+      "file": "listAwaiting.json",
+      "sha256": "a0c9d11892fbe08d63fcd9fe4ad209da64de333b69e217ac34925dc7d2eecb93"
+    },
+    {
+      "file": "listCompleted.json",
+      "sha256": "215b3157616ba04a830c439612e1990eed1b546d56080bc857a00f1a2815e2d8"
+    },
+    {
+      "file": "listExpired.json",
+      "sha256": "15fb0839a9dbdb1cf3d8f557ad38c00a7b6adb47ed68846d84f1919bc62763fa"
+    },
+    {
+      "file": "listRejected.json",
+      "sha256": "3f0894515a9bd57a828c8622f4fe1f41e9d118c820f2e99e810063ee1fc66a76"
+    }
+  ]
+}

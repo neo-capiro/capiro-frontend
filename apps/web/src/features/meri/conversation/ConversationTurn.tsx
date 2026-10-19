@@ -1,6 +1,5 @@
 import { Message, MessageContent } from "@capiro/ui/message";
 import { DesignIcon } from "../../../shared/shell/DesignIcon";
-import { unavailableResources } from "../../../shared/meri-resources/unavailable";
 import { UserMessage } from "../screens/conversation/UserMessage";
 import { Notice } from "../ui/Notice";
 import { StatusPill, type StatusTone } from "../ui/StatusPill";
@@ -119,8 +118,8 @@ function TurnNotices({ turn }: { turn: TurnView }) {
         >
           <p>
             Meri is waiting for an approval that expires{" "}
-            {time(approval.expiresAt)}. Decisions cannot be made here yet.{" "}
-            {unavailableResources.approvals.missing}
+            {time(approval.expiresAt)}. Review and decide it under “Actions
+            for your approval”; nothing happens unless you approve it there.
           </p>
         </Notice>
       ))}

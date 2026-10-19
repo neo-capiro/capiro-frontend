@@ -1,0 +1,104 @@
+{
+  "route": "decide",
+  "request": {
+    "conversationId": "00000000-0000-4000-8000-000000000001",
+    "deliveryId": "sdk:0000000000000000000000000000000000000000000000000000000000000001",
+    "proposalId": "00000000-0000-4000-8000-000000000102",
+    "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+    "decision": "approved"
+  },
+  "httpStatus": 200,
+  "response": {
+    "status": "executed",
+    "deliveryId": "sdk:0000000000000000000000000000000000000000000000000000000000000001",
+    "proposalId": "00000000-0000-4000-8000-000000000102",
+    "decision": {
+      "proposalId": "00000000-0000-4000-8000-000000000102",
+      "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+      "decision": "approved",
+      "decidedAt": "2026-10-12T20:00:00.000Z",
+      "expiresAt": "2026-10-12T20:00:40.000Z",
+      "approver": {
+        "tenantId": "tenant",
+        "actorId": "actor"
+      },
+      "policyRevision": "p1"
+    },
+    "outcome": {
+      "receipt": {
+        "receiptId": "00000000-0000-4000-8000-000000000050",
+        "commandId": "00000000-0000-4000-8000-000000000100",
+        "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+        "idempotencyKey": "00000000-0000-4000-8000-000000000101",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "outcome": "succeeded",
+        "sourceTransactionId": null,
+        "completedAt": "2026-10-12T20:00:00.000Z",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "p1"
+          }
+        ],
+        "authorizationDecisionId": "00000000-0000-4000-8000-000000000010"
+      },
+      "result": {
+        "id": "00000000-0000-4000-8000-000000000030",
+        "title": "Task",
+        "status": "todo",
+        "dueDate": null,
+        "clientId": null,
+        "createdAt": "2026-10-12T20:00:00.000Z"
+      }
+    }
+  },
+  "proposal": {
+    "proposalId": "00000000-0000-4000-8000-000000000102",
+    "command": {
+      "contractVersion": "0.1.0",
+      "commandId": "00000000-0000-4000-8000-000000000100",
+      "binding": {
+        "tenantId": "tenant",
+        "actorId": "actor",
+        "conversationId": "00000000-0000-4000-8000-000000000001",
+        "runId": "00000000-0000-4000-8000-000000000002",
+        "attemptId": "00000000-0000-4000-8000-000000000003",
+        "workerId": "00000000-0000-4000-8000-000000000004",
+        "writerFence": 1
+      },
+      "action": "task.create",
+      "arguments": {
+        "title": "Task",
+        "clientId": null,
+        "dueDate": null
+      },
+      "attachments": [],
+      "scopes": [
+        {
+          "tenantId": "tenant",
+          "kind": "tenant",
+          "resourceId": "tenant",
+          "policyRevision": "p1"
+        }
+      ],
+      "idempotencyKey": "00000000-0000-4000-8000-000000000101"
+    },
+    "commandSha256": "7b064e00443462f446d0bc3abf2709e41fe618368c111ab3138a22b31023e69f",
+    "createdAt": "2026-10-12T20:00:00.000Z",
+    "expiresAt": "2026-10-12T20:00:45.000Z",
+    "requiredApprover": {
+      "tenantId": "tenant",
+      "actorId": "actor"
+    }
+  }
+}
