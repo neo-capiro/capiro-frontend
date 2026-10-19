@@ -21,87 +21,64 @@ export function CampaignSession({
   onBack: () => void;
 }) {
   const query = useCapiroQuery("engagement.session", { params: { sessionId } });
+  const [saving, setSaving] = useState(false);
+  const active = useRef(false);
+  const mismatch =
+    query.data &&
+    (query.data.session.id !== sessionId ||
+      query.data.session.currentStateVersion !==
+        query.data.currentStateVersion);
   return (
     <div className={styles.stack}>
-      <ActionButton onClick={onBack}>← All outreach</ActionButton>
+      <ActionButton
+        disabled={saving}
+        onClick={() => {
+          if (!active.current) onBack();
+        }}
+      >
+        ← All outreach
+      </ActionButton>
       <StatusPanel
         loading={query.loading}
-        error={query.error}
+        error={
+          mismatch
+            ? "The campaign response does not match the selected campaign. Reload to confirm access."
+            : query.error
+        }
         onRetry={query.reload}
       >
-        {query.data && (
+        {query.data && !mismatch && (
           <SessionEditor
-            key={query.data.currentStateVersion}
+            key={`${query.data.session.id}:${query.data.currentStateVersion}`}
             sessionId={sessionId}
             state={query.data}
             onSaved={query.reload}
+            onBusyChange={(busy) => {
+              active.current = busy;
+              setSaving(busy);
+            }}
           />
         )}
       </StatusPanel>
     </div>
   );
 }
-type SessionState = {
-  session: { title: string | null; status: string };
-  currentStateVersion: number;
-  spec: {
-    goal: {
-      goal: string | null;
-      objective: string | null;
-      topic: string | null;
-      desiredOutcome: string | null;
-      whyNow: string | null;
-    };
-    sponsor: {
-      kind: string;
-      label: string | null;
-      clientRefs: { clientId: string }[];
-    };
-    strategy: {
-      campaignAngle: string | null;
-      tone: string | null;
-      length: string;
-    };
-    delivery: { pattern: string; personalization: string };
-    targeting: { selectedTargetRefs: unknown[] };
-  };
-  readiness: {
-    blockers: string[];
-    goalReady: boolean;
-    sponsorResolved: boolean;
-    targetsReady: boolean;
-    contextReady: boolean;
-    strategyReady: boolean;
-    sendReviewEligible: boolean;
-  };
-};
+type SessionState = NonNullable<
+  ReturnType<typeof useCapiroQuery<"engagement.session">>["data"]
+>;
 function SessionEditor({
   sessionId,
   state,
   onSaved,
+  onBusyChange,
 }: {
   sessionId: string;
   state: SessionState;
   onSaved: () => void;
+  onBusyChange: (busy: boolean) => void;
 }) {
-  const model = useSessionEditor(sessionId, state, onSaved);
-  const {
-    goal,
-    setGoal,
-    objective,
-    setObjective,
-    topic,
-    setTopic,
-    why,
-    setWhy,
-    angle,
-    setAngle,
-    tone,
-    setTone,
-    error,
-    busy,
-    save,
-  } = model;
+  const model = useSessionEditor(sessionId, state, onSaved, onBusyChange);
+  const { angle, setAngle, tone, setTone, error, busy, save } = model;
   return (
     <div className={styles.stack}>
       <div>
@@ -128,13 +105,18 @@ function SessionEditor({
           </Badge>
         ))}
       </div>
-      <form onSubmit={(event) => void save(event)} className={styles.stack}>
+      <form
+        aria-busy={busy}
+        onSubmit={(event) => void save(event)}
+        className={styles.stack}
+      >
         <CampaignGoal model={model} />
         <Panel title="Strategy">
           <div className={styles.body}>
             <Field label="Campaign angle" htmlFor="campaign-angle">
               <TextArea
                 id="campaign-angle"
+                disabled={busy}
                 maxLength={4000}
                 value={angle}
                 onChange={(event) => setAngle(event.target.value)}
@@ -143,6 +125,7 @@ function SessionEditor({
             <Field label="Tone" htmlFor="campaign-tone">
               <TextInput
                 id="campaign-tone"
+                disabled={busy}
                 maxLength={120}
                 value={tone}
                 onChange={(event) => setTone(event.target.value)}
@@ -184,6 +167,7 @@ function useSessionEditor(
   sessionId: string,
   state: SessionState,
   onSaved: () => void,
+  onBusyChange: (busy: boolean) => void,
 ) {
   const api = useCapiro();
   const [goal, setGoal] = useState(state.spec.goal.goal ?? ""),
@@ -195,9 +179,13 @@ function useSessionEditor(
     [error, setError] = useState<string>(),
     [busy, setBusy] = useState(false);
   const batch = useRef<{ id: string; serialized: string } | null>(null);
+  const active = useRef(false);
   const save = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (active.current) return;
+    active.current = true;
     setBusy(true);
+    onBusyChange(true);
     setError(undefined);
     try {
       const commands = [
@@ -252,7 +240,9 @@ function useSessionEditor(
           : "Unable to save campaign decisions.",
       );
     } finally {
+      active.current = false;
       setBusy(false);
+      onBusyChange(false);
     }
   };
 
@@ -289,6 +279,7 @@ function CampaignGoal({
     setTopic,
     why,
     setWhy,
+    busy,
   } = model;
   return (
     <Panel
@@ -299,6 +290,7 @@ function CampaignGoal({
         <Field label="Topic" htmlFor="campaign-topic">
           <TextInput
             id="campaign-topic"
+            disabled={busy}
             value={topic}
             maxLength={500}
             onChange={(event) => setTopic(event.target.value)}
@@ -307,6 +299,7 @@ function CampaignGoal({
         <Field label="Goal" htmlFor="campaign-goal">
           <TextArea
             id="campaign-goal"
+            disabled={busy}
             maxLength={2000}
             value={goal}
             onChange={(event) => setGoal(event.target.value)}
@@ -315,6 +308,7 @@ function CampaignGoal({
         <Field label="Objective" htmlFor="campaign-objective">
           <TextArea
             id="campaign-objective"
+            disabled={busy}
             maxLength={4000}
             value={objective}
             onChange={(event) => setObjective(event.target.value)}
@@ -323,6 +317,7 @@ function CampaignGoal({
         <Field label="Why now" htmlFor="campaign-why">
           <TextArea
             id="campaign-why"
+            disabled={busy}
             maxLength={2000}
             value={why}
             onChange={(event) => setWhy(event.target.value)}
