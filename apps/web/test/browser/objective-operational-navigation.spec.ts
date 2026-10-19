@@ -10,7 +10,7 @@ import {
   nextTask,
   otherClient,
   otherClientId,
-  setup,
+  setup as setupModules,
 } from "./next-modules-fixtures";
 import { test } from "./runtime-observed-test";
 
@@ -60,9 +60,25 @@ const projectTask = {
   clientId,
   memberships: [{ projectId: project.id, sectionId: null, position: 0 }],
 };
+// Core stores lifecycle status separately from the uppercase profile status.
+const activeClient = { ...client, status: "active" };
+const activeOtherClient = { ...otherClient, status: "active" };
+async function setup(
+  page: Page,
+  overrides: Parameters<typeof setupModules>[1] = {},
+) {
+  await setupModules(page, overrides);
+  await page.route("**/api/backend/core/clients/*", (route) =>
+    route.fulfill({
+      json: route.request().url().endsWith(otherClientId)
+        ? activeOtherClient
+        : activeClient,
+    }),
+  );
+}
 const currentFixtures = {
   ...moduleRouteFixtures,
-  "clients.list": [client, otherClient],
+  "clients.list": [activeClient, activeOtherClient],
   "strategies.calendars": {
     congress: [],
     ppbeLanes: [],
@@ -164,9 +180,13 @@ test("current project link refuses missing, foreign, archived and duplicate boot
 }) => {
   let projects: (typeof project)[] = [];
   let taskReads = 0;
+  let bootstrapReads = 0;
   await setup(page, {
     ...currentFixtures,
-    "planner.bootstrap": () => ({ ...bootstrap, projects }),
+    "planner.bootstrap": () => {
+      bootstrapReads++;
+      return { ...bootstrap, projects };
+    },
     "planner.tasks": () => {
       taskReads++;
       return { items: [projectTask], nextCursor: null };
@@ -180,7 +200,11 @@ test("current project link refuses missing, foreign, archived and duplicate boot
   ] as const) {
     await test.step(fault, async () => {
       projects = [...records];
+      const previousBootstrapReads = bootstrapReads;
       await page.goto(projectUrl(project.id));
+      await expect
+        .poll(() => bootstrapReads)
+        .toBeGreaterThan(previousBootstrapReads);
       await expect(page.getByRole("alert")).toContainText(
         "This project is unavailable in the selected client scope.",
       );
