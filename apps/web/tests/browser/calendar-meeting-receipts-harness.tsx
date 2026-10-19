@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { DataProvider } from "@/shared/portfolio/api/provider";
 import { MeetingForm } from "@/features/portfolio/calendar/MeetingForm";
 import type { Meeting } from "@/features/portfolio/calendar/contracts";
@@ -26,6 +27,19 @@ const meeting: Meeting = {
 function Harness() {
   const [open, setOpen] = useState(true);
   const mode = new URLSearchParams(location.search).get("mode");
+  const currentMeeting =
+    mode === "create"
+      ? undefined
+      : mode === "clear"
+        ? { ...meeting, client: { id: clientId, name: "Synthetic" } }
+        : meeting;
+  // This receipt-only harness starts from an already confirmed meeting read.
+  useQuery({
+    queryKey: ["meeting", meeting.id],
+    queryFn: skipToken,
+    initialData: currentMeeting,
+    enabled: false,
+  });
   return (
     <main>
       <h1>Synthetic meeting receipt review</h1>
@@ -36,13 +50,7 @@ function Harness() {
           mode === "clear" || mode === "create" ? undefined : "client-one"
         }
         zone="UTC"
-        meeting={
-          mode === "create"
-            ? undefined
-            : mode === "clear"
-              ? { ...meeting, client: { id: clientId, name: "Synthetic" } }
-              : meeting
-        }
+        meeting={currentMeeting}
       />
     </main>
   );

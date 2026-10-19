@@ -37,14 +37,14 @@ export function MeetingDetail({
   const identity = useIdentity();
   const meeting = query.data;
   const inScope = !clientId || meeting?.client?.id === clientId;
+  const refresh = () =>
+    void (identity.error ? identity.refetch() : query.refetch());
   const content = (
     <>
       <QueryState
         pending={query.isPending || identity.isPending}
         error={query.error ?? identity.error}
-        retry={() =>
-          void (identity.error ? identity.refetch() : query.refetch())
-        }
+        retry={refresh}
       />
       {meeting && !inScope && (
         <p role="alert">
@@ -58,6 +58,7 @@ export function MeetingDetail({
           zone={zone}
           clientId={clientId}
           onClose={onClose}
+          onRefresh={refresh}
           current={
             query.isSuccess &&
             !query.isFetching &&
@@ -116,6 +117,7 @@ function MeetingWorkspace({
   onClose,
   current,
   inline,
+  onRefresh,
 }: {
   meeting: Meeting;
   zone: CalendarZone;
@@ -123,6 +125,7 @@ function MeetingWorkspace({
   onClose: () => void;
   current: boolean;
   inline: boolean;
+  onRefresh: () => void;
 }) {
   const [tab, setTab] = useState<MeetingTab>(() =>
     initialMeetingTab(meeting, Date.now()),
@@ -223,6 +226,8 @@ function MeetingWorkspace({
         onOpenChange={setEditing}
         zone={zone}
         clientId={clientId}
+        current={current}
+        onRefresh={onRefresh}
       />
       <MeetingAssignment
         meeting={meeting}
