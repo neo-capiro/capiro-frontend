@@ -29,7 +29,7 @@ Run with Node 24.0.0 and one browser worker. Tests use synthetic local browser f
 | Affected-source TypeScript check, including changed test files and reachable imports | Passed |
 | ESLint over changed source and test files | Passed |
 | Prettier over changed source and test files | Passed |
-| Architecture/dependency scan | Zero dependency errors; four pending exact size reviews |
+| Architecture/dependency scan | Passed: zero dependency errors or blocking size findings; 516 reviewed and 18 inherited unreviewed findings |
 
 The same-turn refresh/submission case was reproduced before the dispatch fix: Save issued a request and closed the editor. The fixed case verifies zero writes during pending/failed refresh, retained draft, successful refresh, and exactly one confirmed save. A separate case replaces the cached client association and submits in the same turn; no write is issued. Other cases cover initial loading versus failed versus genuinely empty meeting feeds, cancel/reopen, save/reopen, foreign receipts, pending-field locking, explicit client clearing, and unscoped creation.
 
@@ -51,9 +51,9 @@ The full web typecheck was attempted once. It failed outside the owned files bec
 
 ## Review coordination
 
-Independent source review found no remaining correctness objection. Four cohesive functions require new exact fingerprints: `MeetingWorkspace` (114 nonblank lines), `MeetingForm` (201), `MeetingWorkspacePage` (87), and `useSaveMeeting` (93). Their responsibilities and fingerprints are in [proposed-size-reviews.json](proposed-size-reviews.json).
+Independent source review found no remaining correctness objection. Four cohesive functions received new exact fingerprints: `MeetingWorkspace` (114 nonblank lines), `MeetingForm` (201), `MeetingWorkspacePage` (87), and `useSaveMeeting` (93). Their approved responsibilities and fingerprints are preserved in [proposed-size-reviews.json](proposed-size-reviews.json).
 
-Applying only those four records to `scripts/architecture/reviewed-size-findings.json` is pending shared-file coordination. That registry remains untouched. This is a size-review recording gate, not a dependency-boundary failure.
+Coordination explicitly approved only those four records in `scripts/architecture/reviewed-size-findings.json`. They were reconciled after independent review, preserving every other record. The architecture scan then passed with no blocking findings. No size threshold or enforcement rule was changed, and the Modules registry remained untouched.
 
 ## Design and remaining limits
 
