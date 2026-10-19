@@ -15,6 +15,8 @@ export function MeetingForm({
   clientScopeAvailable = true,
   zone,
   meeting,
+  current = true,
+  onRefresh,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -22,6 +24,8 @@ export function MeetingForm({
   clientScopeAvailable?: boolean;
   zone: CalendarZone;
   meeting?: Meeting;
+  current?: boolean;
+  onRefresh?: () => void;
 }) {
   const clients = useClients();
   const currentClients = clients.isSuccess ? clients.data : [];
@@ -37,7 +41,7 @@ export function MeetingForm({
           currentClients.some((client) => client.id === selectedClientId))));
   const [validation, setValidation] = useState("");
   const mutation = useSaveMeeting(
-    meeting?.id,
+    meeting,
     () => onOpenChange(false),
     clientId ?? selectedClientId,
   );
@@ -52,8 +56,12 @@ export function MeetingForm({
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (mutation.isPending || mutation.uncertain) return;
-    if (!clientAvailable) {
-      setValidation("Refresh the client list before saving the meeting.");
+    if (!current || !clientAvailable) {
+      setValidation(
+        current
+          ? "Refresh the client list before saving the meeting."
+          : "Refresh the meeting details before saving.",
+      );
       return;
     }
     const form = new FormData(event.currentTarget);
@@ -95,6 +103,19 @@ export function MeetingForm({
       description={`Meeting times use ${zone}. New meetings are private until explicitly shared.`}
     >
       <form className="stack" onSubmit={submit}>
+        {!current && (
+          <div className="stack" role="status">
+            <p>
+              Current meeting details are unavailable. Your draft is retained.
+              Refresh before saving.
+            </p>
+            {onRefresh && (
+              <button type="button" className="button" onClick={onRefresh}>
+                Refresh meeting
+              </button>
+            )}
+          </div>
+        )}
         <label>
           Subject
           <input
@@ -194,7 +215,10 @@ export function MeetingForm({
         <button
           className="button primary"
           disabled={
-            mutation.isPending || mutation.uncertain || !clientAvailable
+            mutation.isPending ||
+            mutation.uncertain ||
+            !clientAvailable ||
+            !current
           }
         >
           {mutation.isPending ? "Saving…" : "Save meeting"}

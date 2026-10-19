@@ -1,0 +1,26 @@
+[WebServer] (node:17068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node24 --trace-warnings ...` to show where the warning was created)
+[WebServer] [PLUGIN_TIMINGS] JavaScript callbacks ran for 4.3s of this 7.2s build (60%).
+[WebServer] The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+[WebServer]   - plugin vite:build-import-analysis generateBundle (39%, 2.8s, 1 call)
+[WebServer] Additional callback time came from the callbacks below and from callbacks under 1s.
+[WebServer] 3 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+[WebServer]   - plugin vite:css transform (136 calls)
+[WebServer]   - plugin vite:build-html transform (2 calls)
+[WebServer]   - plugin vite:asset-import-meta-url transform (2 calls)
+[WebServer] See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+[WebServer]
+
+Running 7 tests using 1 worker
+
+(node:26304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node24 --trace-warnings ...` to show where the warning was created)
+  ok 1 test\browser\settings-form-pending.spec.ts:32:3 ΓÇ║ Team invitation preserves the submitted draft through pending success (2.6s)
+  ok 2 test\browser\settings-form-pending.spec.ts:106:3 ΓÇ║ Integration registration preserves the submitted account through pending success (2.4s)
+  ok 3 test\browser\settings-form-pending.spec.ts:32:3 ΓÇ║ Team invitation preserves the submitted draft through pending refusal (2.5s)
+  ok 4 test\browser\settings-form-pending.spec.ts:106:3 ΓÇ║ Integration registration preserves the submitted account through pending refusal (2.2s)
+  ok 5 test\browser\settings.spec.ts:48:1 ΓÇ║ Team does not fetch private records for a standard user (1.7s)
+  ok 6 test\browser\settings.spec.ts:66:1 ΓÇ║ Team prevents self-removal and failed invitations remain editable without success feedback (1.8s)
+  ok 7 test\browser\settings.spec.ts:120:1 ΓÇ║ Team role select saves a non-self member through the adopted control (2.0s)
+
+  7 passed (24.3s)

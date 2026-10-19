@@ -32,7 +32,9 @@ export function RegisterAccount({
   return (
     <SettingsDialog
       open={!!provider}
-      onClose={onClose}
+      onClose={() => {
+        if (!action.busy) onClose();
+      }}
       title="Register account"
       description="Register the provider account before connecting it."
       footer={
@@ -86,6 +88,7 @@ export function RegisterAccount({
           <TextInput
             type="email"
             required
+            disabled={action.busy}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -93,6 +96,7 @@ export function RegisterAccount({
         <SettingField label="Display name">
           <TextInput
             maxLength={120}
+            disabled={action.busy}
             value={displayName}
             onChange={(event) => setDisplayName(event.target.value)}
           />

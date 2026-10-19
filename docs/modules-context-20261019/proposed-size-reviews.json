@@ -1,0 +1,36 @@
+[
+  {
+    "path": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "sha256": "87e538c76a15fc4b46a328155a66f19278b844e761d82b2ef16a95505b9c9f7f",
+    "reviewer": "Codex independent Modules behavior review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/modules-context-20261019/README.md#module-context",
+    "rationale": "DataExplorer owns one explorer screen's dataset selection, query filters, pagination and selected-record presentation. Clearing the record when entering Comment Deadlines enforces the existing dataset-selection lifetime without resetting filters. Operation mapping, validation, transport and authorization retain their canonical shared owners. Keeping the selection handlers beside this view remains cohesive; no new domain or lifecycle responsibility is added.",
+    "functions": [
+      {
+        "name": "DataExplorer",
+        "nonblankLines": 307
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DataExplorer.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "sha256": "c42038498099b979ffdc92e82955f94c69e6d3f9904c0074732004f7be819b7d",
+    "reviewer": "Codex independent Modules behavior review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/modules-context-20261019/README.md#module-context",
+    "rationale": "DocumentsLibrary owns one paged document list, its local ownership/search/client/template/status filters and result feedback. Identity-dependent loading, errors and footer visibility project the existing read states while preserving the filter and cursor draft. Identity validation, transport, authorization and document access remain in their canonical shared/backend owners. Keeping the ownership predicate, status gate and displayed counts together is justified; the change adds no separate service or workflow.",
+    "functions": [
+      {
+        "name": "DocumentsLibrary",
+        "nonblankLines": 185
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx: function over80 nonblank lines requires review"
+    ]
+  }
+]

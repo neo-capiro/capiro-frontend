@@ -5,6 +5,7 @@ import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useDispatchGuard } from "./access/public";
+import type { Meeting } from "./contracts";
 import {
   meetingInputSchema,
   meetingSaveReceiptSchema,
@@ -12,12 +13,14 @@ import {
 } from "./meeting-save";
 
 export function useSaveMeeting(
-  meetingId: string | undefined,
+  meeting: Meeting | undefined,
   onSaved: () => void,
   clientId?: string,
 ) {
   const api = useApi();
   const cache = useQueryClient();
+  const meetingId = meeting?.id;
+  const originalClientId = meeting?.client?.id ?? null;
   const identity = useIdentity();
   const userId = identity.data?.user.id;
   const tenantId = identity.data?.tenant?.id;
@@ -30,7 +33,7 @@ export function useSaveMeeting(
     const controller = new AbortController();
     lifetime.current = controller;
     return () => controller.abort();
-  }, [meetingId, clientId, userId, tenantId]);
+  }, [meetingId, originalClientId, clientId, userId, tenantId]);
   const mutation = useMutation({
     mutationFn: async (body: MeetingInput) => {
       const input = meetingInputSchema.parse(body);
@@ -40,6 +43,21 @@ export function useSaveMeeting(
       const current = () => {
         controller.signal.throwIfAborted();
         guard();
+        if (meetingId) {
+          const saved = cache.getQueryState<Meeting>(["meeting", meetingId]);
+          if (
+            saved?.status !== "success" ||
+            saved.fetchStatus !== "idle" ||
+            saved.isInvalidated ||
+            saved.error ||
+            saved.data?.id !== meetingId ||
+            (saved.data.client?.id ?? null) !== originalClientId
+          )
+            throw new ApiError(
+              409,
+              "Refresh the meeting details before saving.",
+            );
+        }
       };
       current();
       let knownRefusal = false;

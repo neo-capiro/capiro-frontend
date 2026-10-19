@@ -1,0 +1,20 @@
+
+> Unexpected error while generating route types. Original error:
+
+Error: Cannot find module './src/shared/response-headers'
+Require stack:
+- <receiving-worktree>\apps\web\next.config.compiled.js
+- <receiving-worktree>\node_modules\next\dist\build\next-config-ts\transpile-config.js
+- <receiving-worktree>\node_modules\next\dist\server\config.js
+- <receiving-worktree>\node_modules\next\dist\cli\next-test.js
+- <receiving-worktree>\node_modules\next\dist\bin\next
+    at ignore-listed frames {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Documents\\Codex\\2026-10-19\\task\\ui-receiving\\apps\\web\\next.config.compiled.js',
+    'C:\\Users\\Administrator\\Documents\\Codex\\2026-10-19\\task\\ui-receiving\\node_modules\\next\\dist\\build\\next-config-ts\\transpile-config.js',
+    'C:\\Users\\Administrator\\Documents\\Codex\\2026-10-19\\task\\ui-receiving\\node_modules\\next\\dist\\server\\config.js',
+    'C:\\Users\\Administrator\\Documents\\Codex\\2026-10-19\\task\\ui-receiving\\node_modules\\next\\dist\\cli\\next-test.js',
+    'C:\\Users\\Administrator\\Documents\\Codex\\2026-10-19\\task\\ui-receiving\\node_modules\\next\\dist\\bin\\next'
+  ]
+}

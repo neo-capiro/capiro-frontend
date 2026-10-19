@@ -125,15 +125,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
-    "sha256": "e9b730d656609e72230bbf0589a16d856bd9260029d451252e113d3784e2d79a",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "DataExplorer.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "87e538c76a15fc4b46a328155a66f19278b844e761d82b2ef16a95505b9c9f7f",
+    "reviewer": "Codex independent Modules behavior review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/modules-context-20261019/README.md#module-context",
+    "rationale": "DataExplorer owns one explorer screen's dataset selection, query filters, pagination and selected-record presentation. Clearing the record when entering Comment Deadlines enforces the existing dataset-selection lifetime without resetting filters. Operation mapping, validation, transport and authorization retain their canonical shared owners. Keeping the selection handlers beside this view remains cohesive; no new domain or lifecycle responsibility is added.",
     "functions": [
       {
         "name": "DataExplorer",
-        "nonblankLines": 306
+        "nonblankLines": 307
       }
     ],
     "signals": [
@@ -2278,15 +2278,15 @@
   },
   {
     "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
-    "sha256": "d37f60c1f4106a5ff456720a1ba0760bb61ec58c79686e0298e1a6645552302d",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "WorkspaceLibrary.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "sha256": "c42038498099b979ffdc92e82955f94c69e6d3f9904c0074732004f7be819b7d",
+    "reviewer": "Codex independent Modules behavior review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/modules-context-20261019/README.md#module-context",
+    "rationale": "DocumentsLibrary owns one paged document list, its local ownership/search/client/template/status filters and result feedback. Identity-dependent loading, errors and footer visibility project the existing read states while preserving the filter and cursor draft. Identity validation, transport, authorization and document access remain in their canonical shared/backend owners. Keeping the ownership predicate, status gate and displayed counts together is justified; the change adds no separate service or workflow.",
     "functions": [
       {
         "name": "DocumentsLibrary",
-        "nonblankLines": 176
+        "nonblankLines": 185
       }
     ],
     "signals": [
@@ -2694,15 +2694,15 @@
   },
   {
     "path": "apps/web/src/features/settings/InviteMember.tsx",
-    "sha256": "809cf371285c7a0d7db785d2c474188048f9a9a549d815acc48518c6c70bc9cf",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "InviteMember.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "sha256": "e34f1e892993e5cf3fc728e04ca07124eef37eb596faedefa3842a6284647647",
+    "reviewer": "Codex independent Modules/Settings review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+    "rationale": "InviteMember owns one invitation dialog's draft fields, fixed-operation submission, response feedback and close/reset behavior. Pending locks enforce that same lifecycle; transport, validation, authority and single-flight state remain delegated. Keeping coupled field/dismissal state together is justified.",
     "functions": [
       {
         "name": "InviteMember",
-        "nonblankLines": 100
+        "nonblankLines": 106
       }
     ],
     "signals": [
@@ -2745,15 +2745,15 @@
   },
   {
     "path": "apps/web/src/features/settings/RegisterAccount.tsx",
-    "sha256": "3119d5dfa8f43e8e9cb4a17c7d5ebda80231682d67abb66aea2f1a4178a52e74",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "RegisterAccount.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "sha256": "9c52765242f8a1f8d3693197f58c7a796e424f1a1499159ae9163392f08f8788",
+    "reviewer": "Codex independent Modules/Settings review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+    "rationale": "RegisterAccount owns one provider-account registration dialog's display, two draft fields, fixed-operation submission, feedback and close/reset behavior. Pending locks add no separate responsibility; provider metadata, transport, authority and action lifecycle retain their canonical owners.",
     "functions": [
       {
         "name": "RegisterAccount",
-        "nonblankLines": 82
+        "nonblankLines": 86
       }
     ],
     "signals": [

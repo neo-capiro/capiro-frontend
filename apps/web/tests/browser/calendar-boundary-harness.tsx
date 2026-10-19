@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { DataProvider } from "@/shared/portfolio/api/provider";
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
+import type { Meeting } from "@/features/portfolio/calendar/contracts";
 import { clientsKey } from "@/features/portfolio/index/public";
 import "@/app/globals.css";
 import "@/shared/portfolio/styles.css";
@@ -13,6 +14,8 @@ declare global {
     __calendarBoundary?: {
       refreshFeeds: () => Promise<void>;
       refreshClients: () => Promise<void>;
+      refreshMeeting: (id: string) => Promise<void>;
+      replaceMeeting: (meeting: Meeting) => void;
       snapshots: () => { status: string; retained: boolean }[];
     };
   }
@@ -24,6 +27,10 @@ function CalendarBoundaryHarness() {
     window.__calendarBoundary = {
       refreshFeeds: () => cache.invalidateQueries({ queryKey: ["calendar"] }),
       refreshClients: () => cache.invalidateQueries({ queryKey: clientsKey }),
+      refreshMeeting: (id) =>
+        cache.invalidateQueries({ queryKey: ["meeting", id], exact: true }),
+      replaceMeeting: (meeting) =>
+        cache.setQueryData(["meeting", meeting.id], meeting),
       snapshots: () =>
         cache
           .getQueryCache()
@@ -39,6 +46,9 @@ function CalendarBoundaryHarness() {
   }, [cache]);
   return (
     <CalendarPage
+      clientId={
+        new URLSearchParams(location.search).get("workspaceClient") ?? undefined
+      }
       destinations={{ existingApp: "http://127.0.0.1:5191/existing" }}
     />
   );

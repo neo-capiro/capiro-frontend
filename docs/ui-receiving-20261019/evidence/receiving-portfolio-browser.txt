@@ -1,0 +1,20 @@
+[WebServer] (node:20140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node24 --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:6596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node24 --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\browser\calendar-client-clear.spec.ts:20:3 ΓÇ║ existing meeting No client sends explicit null and accepts native clear receipt (2.0s)
+  ok  2 tests\browser\calendar-client-clear.spec.ts:20:3 ΓÇ║ existing meeting No client sends explicit null and rejects old association (816ms)
+  ok  3 tests\browser\calendar-client-clear.spec.ts:48:1 ΓÇ║ new unscoped meeting omits clientId and accepts backend association (810ms)
+  ok  4 tests\browser\calendar-meeting-receipts.spec.ts:23:3 ΓÇ║ foreign meeting receipt retains editor: {"id":"foreign"} (791ms)
+  ok  5 tests\browser\calendar-meeting-receipts.spec.ts:23:3 ΓÇ║ foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} (776ms)
+  ok  6 tests\browser\calendar-meeting-receipts.spec.ts:41:1 ΓÇ║ native normalized meeting receipt succeeds and an empty location is explicitly cleared (783ms)
+  ok  7 tests\browser\calendar-meeting-receipts.spec.ts:62:1 ΓÇ║ pending meeting fields cannot accept a newer unsaved draft before a valid receipt (924ms)
+  ok  8 tests\browser\calendar-meeting-recovery.spec.ts:71:1 ΓÇ║ selected meeting sidebar distinguishes loading and failed reads from an empty month (1.3s)
+  ok  9 tests\browser\calendar-meeting-recovery.spec.ts:98:1 ΓÇ║ meeting editor retains draft and blocks save through pending and failed detail refresh (1.5s)
+  ok 10 tests\browser\calendar-meeting-recovery.spec.ts:156:1 ΓÇ║ cancel and reopen discard only the local meeting edit while confirmed saves reopen from the receipt (1.5s)
+  ok 11 tests\browser\calendar-meeting-recovery.spec.ts:193:1 ΓÇ║ an edit cannot restore a client association changed before the form rerenders (1.2s)
+
+  11 passed (15.1s)
