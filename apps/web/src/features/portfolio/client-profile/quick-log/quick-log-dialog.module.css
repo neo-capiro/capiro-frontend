@@ -111,6 +111,8 @@
 .form input:not([type="checkbox"]),
 .form select,
 .form textarea {
+  min-width: 0;
+  width: 100%;
   min-height: 44px;
   padding: 10px 14px;
   border-color: var(--border-strong);
