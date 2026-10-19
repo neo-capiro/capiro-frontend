@@ -1,0 +1,7 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:capiro
+> vitest run --config src/shared/capiro/vitest.config.mts --maxWorkers=2
+
+
+ RUN  v4.1.11 /workspace/scratch/639ce8240192/capiro-frontend/apps/web/src/shared/capiro

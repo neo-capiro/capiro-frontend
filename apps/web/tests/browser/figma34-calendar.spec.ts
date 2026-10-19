@@ -349,3 +349,96 @@ test("client calendar desktop views follow the Portfolio 3.4 frames", async ({
   });
   expect(unexpected).toEqual([]);
 });
+
+test("Escape from a nested meeting editor leaves the client workspace open", async ({
+  page,
+}) => {
+  const unexpected = await installCalendarFixtures(page);
+  const selected = meetings.find((item) => item.id === "MTG-1042")!;
+  await page.goto(
+    `/portfolio/${clientId}/calendar?view=agenda&date=2026-10-08&zone=America%2FNew_York&meeting=${selected.id}`,
+    { waitUntil: "commit" },
+  );
+  const workspace = page.getByRole("dialog", {
+    name: selected.subject,
+    exact: true,
+  });
+  await workspace.getByText("More actions", { exact: true }).click();
+  await workspace.getByRole("button", { name: "Edit meeting" }).click();
+  const editor = page.getByRole("dialog", {
+    name: "Edit meeting",
+    exact: true,
+  });
+  await expect(editor).toBeVisible();
+  await editor
+    .getByLabel("Subject", { exact: true })
+    .fill("Unsaved local edit");
+  await page.keyboard.press("Escape");
+  await expect(editor).toHaveCount(0);
+  await expect(workspace).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`meeting=${selected.id}$`));
+  expect(unexpected).toEqual([]);
+});
+
+test("Escape cannot discard a nested meeting editor during its pending save", async ({
+  page,
+}, testInfo) => {
+  const unexpected = await installCalendarFixtures(page);
+  const selected = meetings.find((item) => item.id === "MTG-1042")!;
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const writes: Record<string, unknown>[] = [];
+  await page.route(
+    `**/api/backend/core/engagement/meetings/${selected.id}`,
+    async (route) => {
+      if (route.request().method() !== "PUT") return route.fallback();
+      const input = route.request().postDataJSON();
+      writes.push(input);
+      await held;
+      return json(route, {
+        ...selected,
+        ...input,
+        description: input.description?.trim() || null,
+        location: input.location?.trim() || null,
+      });
+    },
+  );
+  await page.goto(
+    `/portfolio/${clientId}/calendar?view=agenda&date=2026-10-08&zone=America%2FNew_York&meeting=${selected.id}`,
+    { waitUntil: "commit" },
+  );
+  const workspace = page.getByRole("dialog", {
+    name: selected.subject,
+    exact: true,
+  });
+  await workspace.getByText("More actions", { exact: true }).click();
+  await workspace.getByRole("button", { name: "Edit meeting" }).click();
+  const editor = page.getByRole("dialog", {
+    name: "Edit meeting",
+    exact: true,
+  });
+  await editor
+    .getByLabel("Subject", { exact: true })
+    .fill("Pending local edit");
+  await editor
+    .getByRole("button", { name: "Save meeting", exact: true })
+    .click();
+  await expect.poll(() => writes.length).toBe(1);
+  await expect(editor.getByRole("button", { name: "Saving…" })).toBeDisabled();
+  await page.keyboard.press("Escape");
+  await expect(editor).toBeVisible();
+  await expect(editor.getByLabel("Subject", { exact: true })).toHaveValue(
+    "Pending local edit",
+  );
+  await expect(page).toHaveURL(new RegExp(`meeting=${selected.id}$`));
+  await page.screenshot({
+    path: testInfo.outputPath("pending-edit-1440x1040.png"),
+  });
+  release();
+  await expect(editor).toHaveCount(0);
+  await expect(workspace).toBeVisible();
+  expect(writes).toHaveLength(1);
+  expect(unexpected).toEqual([]);
+});

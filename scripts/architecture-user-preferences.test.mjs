@@ -29,7 +29,8 @@ test('only deliberate supplemental package export crosses the preferences bounda
 test('real route retains preview containment before native token acquisition',()=>{
  const source=readFileSync(route,'utf8');
  assert.ok(source.indexOf('if (held) return held')<source.indexOf('await auth()'));
- assert.match(source,/getToken\(\{ template: "capiro" \}\)/);
+ assert.match(source,/session\.getToken\(\)/);
+ assert.doesNotMatch(source,/getToken\(\s*\{/);
  assert.doesNotMatch(source,/action_session|authorization.*get\(/);
 });
 test('personal page opt-in remains literal and existing preferences alias reaches canonical panel',()=>{

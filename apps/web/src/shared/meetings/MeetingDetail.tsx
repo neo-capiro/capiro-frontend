@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { EngagementMeeting } from "../capiro/operations/engagement";
 import { useCapiroQuery } from "../capiro/queries";
 import { Modal, StatusPanel, Tabs } from "../module-ui";
@@ -21,6 +21,15 @@ export function MeetingDetail({
 }) {
   const inline = presentation === "inline";
   const [tab, setTab] = useState(inline ? "prep" : "notes");
+  const [pending, setPending] = useState(false);
+  const pendingRef = useRef(false);
+  const onPendingChange = (value: boolean) => {
+    pendingRef.current = value;
+    setPending(value);
+  };
+  const close = () => {
+    if (!pendingRef.current) onClose();
+  };
   const detail = useCapiroQuery("engagement.meeting", {
     params: { id: meeting.id },
   });
@@ -43,7 +52,8 @@ export function MeetingDetail({
         meeting={meeting}
         current={current}
         inline={inline}
-        onClose={onClose}
+        onClose={close}
+        pending={pending}
       />
       <StatusPanel
         loading={detail.loading}
@@ -54,12 +64,14 @@ export function MeetingDetail({
           <>
             <Tabs
               items={[
-                { id: "prep", label: "Prep" },
-                { id: "notes", label: "Meeting Notes" },
-                { id: "debrief", label: "Debrief" },
+                { id: "prep", label: "Prep", disabled: pending },
+                { id: "notes", label: "Meeting Notes", disabled: pending },
+                { id: "debrief", label: "Debrief", disabled: pending },
               ]}
               value={tab}
-              onChange={setTab}
+              onChange={(next) => {
+                if (!pendingRef.current) setTab(next);
+              }}
               label="Meeting materials"
             />
             {tab === "prep" ? (
@@ -70,6 +82,7 @@ export function MeetingDetail({
                 meetingId={current.id}
                 kind={tab === "notes" ? "notes" : "debrief"}
                 onSaved={reload}
+                onPendingChange={onPendingChange}
               />
             )}
             <p className={styles.privacy}>
@@ -89,7 +102,7 @@ export function MeetingDetail({
         onKeyDown={(event) => {
           if (event.key === "Escape" && !event.defaultPrevented) {
             event.preventDefault();
-            onClose();
+            close();
           }
         }}
       >
@@ -101,8 +114,9 @@ export function MeetingDetail({
     <Modal
       open
       onOpenChange={(open) => {
-        if (!open) onClose();
+        if (!open) close();
       }}
+      closeDisabled={pending}
       title={displayed.subject}
       description={`${displayed.client?.name ?? "Unassigned"} · ${new Date(displayed.startsAt).toLocaleString()} · ${displayed.location ?? "Location not specified"}`}
     >

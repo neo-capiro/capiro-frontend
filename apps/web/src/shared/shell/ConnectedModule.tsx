@@ -23,7 +23,7 @@ export function ConnectedModule({
       settings={settings}
       readOnlyPreview={readOnlyPreview}
     >
-      <CapiroBoundary config={config}>
+      <CapiroBoundary config={config} clientScopeRequired={!settings}>
         <Suspense fallback={<p role="status">Loading view…</p>}>
           {children}
         </Suspense>

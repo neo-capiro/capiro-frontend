@@ -267,6 +267,7 @@ function ConnectedConversation({
       scope={scope}
       draft={session.draft}
       onDraft={session.setDraft}
+      initialDraft={session.initialDraft}
       textareaRef={session.textarea}
       onNextTurn={session.startNext}
       nextTurnBlocked={session.nextBlocked}

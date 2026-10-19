@@ -1,5 +1,6 @@
 import { expect, test, type Route } from "@playwright/test";
 import { expectAccessibleHome } from "../accessibility";
+import { installFixedDate } from "./fixed-date";
 import {
   assertNoEffects,
   clientId,
@@ -9,6 +10,10 @@ import {
   requestCompletion,
   setupOutreach,
 } from "./core109-outreach-fixtures";
+
+test.beforeEach(async ({ page }) => {
+  await installFixedDate(page, Date.parse("2026-10-08T16:00:00Z"));
+});
 
 for (const width of [1440, 390]) {
   test(`Outreach scope-error keyboard retry conceals rows during the held read at ${width}px`, async ({
@@ -109,7 +114,17 @@ for (const association of [
     await expect(page.getByLabel("Body", { exact: true })).toHaveValue(
       record.body,
     );
-    expect(inputs).toEqual(Array(2).fill({ query: { clientId, limit: 500 } }));
+    expect(inputs).toEqual(
+      Array(2).fill({
+        query: {
+          clientId,
+          from: "2025-10-08T00:00:00.000Z",
+          to: "2026-10-09T00:00:00.000Z",
+          deleted: "false",
+          limit: 500,
+        },
+      }),
+    );
     assertNoEffects(observed);
   });
 }

@@ -80,7 +80,13 @@ export function MeetingDetail({
           inScope ? (meeting?.subject ?? "Meeting") : "Meeting unavailable"
         }
         onKeyDown={(event) => {
-          if (event.key === "Escape") onClose();
+          if (
+            event.key === "Escape" &&
+            !event.defaultPrevented &&
+            event.target instanceof Element &&
+            event.target.closest('[role="dialog"]') === event.currentTarget
+          )
+            onClose();
         }}
       >
         {content}

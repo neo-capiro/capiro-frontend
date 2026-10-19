@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCapiro } from "../capiro/CapiroBoundary";
 import { useCapiroQuery } from "../capiro/queries";
 import {
@@ -15,9 +15,10 @@ type Props = {
   meetingId: string;
   kind: "notes" | "debrief";
   onSaved: () => void;
+  onPendingChange: (pending: boolean) => void;
 };
 type Model = ReturnType<typeof useArtifacts>;
-function useArtifacts({ meetingId, kind, onSaved }: Props) {
+function useArtifacts({ meetingId, kind, onSaved, onPendingChange }: Props) {
   const api = useCapiro();
   const query = useCapiroQuery(
     kind === "notes" ? "engagement.notes" : "engagement.debriefs",
@@ -28,10 +29,23 @@ function useArtifacts({ meetingId, kind, onSaved }: Props) {
     [composing, setComposing] = useState(false),
     [error, setError] = useState<string>(),
     [busy, setBusy] = useState(false);
+  const pending = useRef(false);
+  const start = () => {
+    if (pending.current) return false;
+    pending.current = true;
+    setBusy(true);
+    onPendingChange(true);
+    setError(undefined);
+    return true;
+  };
+  const finish = () => {
+    pending.current = false;
+    setBusy(false);
+    onPendingChange(false);
+  };
   const save = async (event: React.FormEvent) => {
     event.preventDefault();
-    setBusy(true);
-    setError(undefined);
+    if (!start()) return;
     try {
       if (kind === "notes") {
         if (edit)
@@ -66,12 +80,11 @@ function useArtifacts({ meetingId, kind, onSaved }: Props) {
         cause instanceof Error ? cause.message : "Unable to save material.",
       );
     } finally {
-      setBusy(false);
+      finish();
     }
   };
   const approve = async (id: string) => {
-    setBusy(true);
-    setError(undefined);
+    if (!start()) return;
     try {
       if (kind === "notes")
         await api.request("engagement.note.approve", {
@@ -88,7 +101,7 @@ function useArtifacts({ meetingId, kind, onSaved }: Props) {
         cause instanceof Error ? cause.message : "Unable to approve material.",
       );
     } finally {
-      setBusy(false);
+      finish();
     }
   };
   return {
@@ -114,6 +127,7 @@ export function MeetingArtifacts(props: Props) {
         <ArtifactComposer kind={props.kind} model={m} />
       ) : (
         <ActionButton
+          disabled={m.busy}
           onClick={() => {
             m.setEdit(null);
             m.setBody("");
@@ -206,11 +220,16 @@ function ArtifactComposer({
           required
           maxLength={100000}
           value={m.body}
+          disabled={m.busy}
           onChange={(event) => m.setBody(event.target.value)}
         />
       </Field>
       <div className={styles.tools}>
-        <ActionButton type="button" onClick={() => m.setComposing(false)}>
+        <ActionButton
+          type="button"
+          disabled={m.busy}
+          onClick={() => m.setComposing(false)}
+        >
           Cancel
         </ActionButton>
         <ActionButton primary type="submit" disabled={m.busy}>

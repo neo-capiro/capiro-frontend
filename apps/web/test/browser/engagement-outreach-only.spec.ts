@@ -104,6 +104,143 @@ test("existing campaign session link still opens its current Outreach editor", a
   assertNoEffects(observed);
 });
 
+test("creates a distinct versioned campaign and opens its saved session", async ({
+  page,
+}) => {
+  const observed = await setupOutreach(page);
+  const createdId = "80000000-0000-4000-8000-000000000009";
+  const created = {
+    ...session,
+    session: {
+      ...session.session,
+      id: createdId,
+      title: "Synthetic new campaign",
+      currentStateVersion: 1,
+    },
+    currentStateVersion: 1,
+    spec: {
+      ...session.spec,
+      goal: {
+        goal: null,
+        objective: null,
+        topic: null,
+        desiredOutcome: null,
+        ask: { mode: "undecided", text: null },
+        whyNow: null,
+      },
+      sponsor: { kind: "undecided", label: null, clientRefs: [] },
+      strategy: {
+        campaignAngle: null,
+        tone: null,
+        length: "undecided",
+        customLengthInstruction: null,
+      },
+      delivery: { pattern: "undecided", personalization: "undecided" },
+      targeting: { selectedTargetRefs: [] },
+    },
+  };
+  const requests: unknown[] = [];
+  const detailIds: unknown[] = [];
+  await page.route("**/api/capiro/engagement.session.create", (route) => {
+    expect(route.request().method()).toBe("POST");
+    requests.push(route.request().postDataJSON());
+    return route.fulfill({ json: created });
+  });
+  await page.route("**/api/capiro/engagement.session?*", (route) => {
+    const input = new URL(route.request().url()).searchParams.get("input");
+    detailIds.push(input && JSON.parse(input).params.sessionId);
+    return route.fulfill({ json: created });
+  });
+
+  await page.goto("/modules/engagement");
+  await expect(
+    page.getByRole("button", { name: "+ New outreach" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "+ New campaign" }).click();
+  const dialog = page.getByRole("dialog", { name: "New campaign" });
+  await dialog
+    .getByRole("textbox", { name: "Campaign title" })
+    .fill("  Synthetic new campaign  ");
+  await dialog.getByRole("button", { name: "Create campaign" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Synthetic new campaign" }),
+  ).toBeVisible();
+  expect(requests).toEqual([{ body: { title: "Synthetic new campaign" } }]);
+  expect(createdId).not.toBe(sessionId);
+  expect(detailIds).toEqual([createdId]);
+  expect(observed.writes).toEqual([
+    "POST /api/capiro/engagement.session.create",
+  ]);
+  expect(observed.errors).toEqual([]);
+  expect(observed.unexpected).toEqual([]);
+});
+
+test("known Core refusal leaves the campaign title available for correction", async ({
+  page,
+}) => {
+  const observed = await setupOutreach(page);
+  await page.route("**/api/capiro/engagement.session.create", (route) =>
+    route.fulfill({ status: 404, json: { message: "Not Found" } }),
+  );
+  await page.goto("/modules/engagement");
+  await page.getByRole("button", { name: "+ New campaign" }).click();
+  const dialog = page.getByRole("dialog", { name: "New campaign" });
+  await dialog
+    .getByRole("textbox", { name: "Campaign title" })
+    .fill("New campaign");
+  await dialog.getByRole("button", { name: "Create campaign" }).click();
+
+  await expect(
+    dialog
+      .getByRole("alert")
+      .getByText("Campaign creation is unavailable in this environment."),
+  ).toBeVisible();
+  await expect(
+    dialog.getByRole("textbox", { name: "Campaign title" }),
+  ).toHaveValue("New campaign");
+  await expect(
+    dialog.getByRole("button", { name: "Create campaign" }),
+  ).toBeEnabled();
+  expect(observed.writes).toEqual([
+    "POST /api/capiro/engagement.session.create",
+  ]);
+  expect(observed.errors).toEqual([]);
+  expect(observed.unexpected).toEqual([]);
+});
+
+test("an uncertain campaign creation cannot be replayed from the same view", async ({
+  page,
+}) => {
+  const observed = await setupOutreach(page);
+  await page.route("**/api/capiro/engagement.session.create", (route) =>
+    route.fulfill({ json: { unexpected: "receipt" } }),
+  );
+  await page.goto("/modules/engagement");
+  await page.getByRole("button", { name: "+ New campaign" }).click();
+  const dialog = page.getByRole("dialog", { name: "New campaign" });
+  await dialog
+    .getByRole("textbox", { name: "Campaign title" })
+    .fill("Uncertain campaign");
+  await dialog.getByRole("button", { name: "Create campaign" }).click();
+
+  await expect(
+    dialog.getByRole("button", { name: "Create campaign" }),
+  ).toBeDisabled();
+  await expect(dialog.getByRole("alert")).toContainText(
+    "Creation may have succeeded. Check the campaign list",
+  );
+  await dialog.getByRole("button", { name: "Cancel" }).click();
+  await expect(
+    page.getByRole("button", { name: "+ New campaign" }),
+  ).toBeDisabled();
+  expect(observed.writes).toEqual([
+    "POST /api/capiro/engagement.session.create",
+  ]);
+  expect(observed.errors).toEqual([]);
+  expect(observed.unexpected).toEqual([]);
+});
+
 test("newsletter and Objective destination hints keep their dedicated route guards", async ({
   page,
 }) => {
@@ -365,6 +502,9 @@ test("client scope does not fetch or show owner-only campaign sessions", async (
   await expect(page.getByText("Synthetic owner campaign")).toHaveCount(0);
   await expect(
     page.getByRole("table", { name: "Outreach campaigns" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("button", { name: "+ New campaign" }),
   ).toHaveCount(0);
   expect(sessionReads).toBe(0);
   await page
