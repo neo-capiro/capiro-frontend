@@ -1,0 +1,16 @@
+{
+  "extends": "../../apps/web/tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": [
+    "../../apps/web/next-env.d.ts",
+    "../../apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+    "../../apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "../../apps/web/src/features/portfolio/calendar/MeetingWorkspacePage.tsx",
+    "../../apps/web/src/features/portfolio/calendar/mutations.ts",
+    "../../apps/web/src/features/portfolio/index/queries.ts",
+    "../../apps/web/tests/portfolio-client-query.test.ts",
+    "../../apps/web/tests/browser/calendar-boundary-harness.tsx",
+    "../../apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+    "../../apps/web/tests/browser/calendar-meeting-recovery.spec.ts"
+  ]
+}

@@ -10,9 +10,15 @@ export function useClient(id: string) {
   return useQuery({
     queryKey: clientKey(id),
     queryFn: ({ signal }) =>
-      api.request("core", `clients/${encodeURIComponent(id)}`, clientSchema, {
-        signal,
-      }),
+      api.request(
+        "core",
+        `clients/${encodeURIComponent(id)}`,
+        clientSchema.refine(
+          (client) => client.id === id,
+          "Client association mismatch",
+        ),
+        { signal },
+      ),
   });
 }
 export function useAccountOwners(options?: { enabled?: boolean }) {

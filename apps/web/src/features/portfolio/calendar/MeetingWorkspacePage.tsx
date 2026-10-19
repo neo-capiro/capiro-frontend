@@ -27,6 +27,9 @@ export function MeetingWorkspacePage({
     year: "numeric",
   });
   const meetings = items.filter((item) => item.kind === "meeting");
+  const meetingsCurrent = state.activeFeeds.every(
+    ([, feed]) => feed.isSuccess && !feed.isFetching && !feed.error,
+  );
   const ordered = [
     ...meetings.filter((item) => item.sourceId === selectedId),
     ...meetings.filter((item) => item.sourceId !== selectedId),
@@ -80,7 +83,9 @@ export function MeetingWorkspacePage({
               </button>
             );
           })}
-          {meetings.length === 0 && <p>No meetings in this month.</p>}
+          {meetingsCurrent && meetings.length === 0 && (
+            <p>No meetings in this month.</p>
+          )}
         </div>
       </aside>
       <MeetingDetail
