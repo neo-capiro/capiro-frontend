@@ -28,7 +28,7 @@ Keep `CAPIRO_PREVIEW_READ_ONLY=true`, legacy read source `6542f5b089656b6d255465
 
 The [initial preview checklist and exact route plan](PREVIEW-FEATURE-CHECKLIST.md) records the Core-confirmed meeting visibility and unchanged-client reassignment blockers. Roster/native reads and truthful UI states are the initial goal; the earlier broader cohorts are not ready for activation.
 
-No build, deployment, migration, route activation or paid action is part of this change. The held archive and recipe prepared for frontend main `5cd5f20d` do not attest to this successor; any later build must seal its own exact frontend commit and inputs.
+The original source-pin change did not authorize a build, deployment, migration or route activation. Neo subsequently authorized one bounded frontend build; the [final receipt](FRONTEND-BUILD-RECEIPT.md) seals source `e6180219` and its exact inputs/image. Deployment and roster activation remain held. The older archive/recipe for frontend main `5cd5f20d` does not attest to this successor.
 
 ## Frontend verification
 
@@ -36,4 +36,4 @@ No build, deployment, migration, route activation or paid action is part of this
 - Vitest with one worker: `preview-read-receiving`, `meri-first-chat-preview-policy` and `preview-backend-containment` pass all 156 tests. These cover retired/drifted pins, parameter drift, native-token and first-chat preservation, and rejection of other registered operations with the candidate roster pair present.
 - Changed TypeScript files pass ESLint and Prettier; `git diff --check` passes.
 - Strict scoped TypeScript checking of `src/shared/preview/read-config.server.ts` passes (`--noEmit --strict --skipLibCheck --target ES2022 --module esnext --moduleResolution bundler --types node`, 1 GiB heap).
-- Full web `tsc --noEmit --incremental false` exceeded the deliberately bounded 2 GiB heap. It was not repeated with a higher limit. Runtime qualification, browser checks and builds were not run for this constant-only change.
+- The initial full web `tsc --noEmit --incremental false` exceeded the deliberately bounded 2 GiB heap. The subsequently authorized 4 GiB rerun at exact source `e6180219` passed with Node 24.19.0, exit 0 in 38.1 seconds, unchanged locked dependencies and no parallel heavy build. The later single cloud build also passed its full typecheck and required browser/build gates; see the [final receipt](FRONTEND-BUILD-RECEIPT.md). Live runtime qualification remains pending.
