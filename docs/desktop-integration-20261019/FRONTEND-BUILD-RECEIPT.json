@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "status": "image-built-scan-passed-awaiting-deployment-review",
+  "source": {
+    "repository": "neo-capiro/capiro-frontend",
+    "pullRequest": 111,
+    "commit": "e6180219b589ae8fced7155d1c451840c8663d94",
+    "tree": "86307a768b71d951d01e51352f1760d7cd35b55d"
+  },
+  "input": {
+    "bucket": "capiro-portfolio-preview-source-967807252336-us-east-1",
+    "key": "inputs/portfolio-source.zip",
+    "versionId": "cy1S4IQhPjgTzKdZkDtKXyTaM97qfgPg",
+    "bytes": 2021583585,
+    "sha256": "3643738e5726fac497096ccd30ec799b2ce261d4aeef19607861ddf1d6ee1196",
+    "trackedGitBlobsMatched": 23057,
+    "extraFile": "source-commit.txt containing exact commit plus LF",
+    "unexpectedEntries": 0,
+    "duplicateEntries": 0,
+    "recipeSha256": "4563e76507d85b9a929dff1432f479f56de4027656e3187ceb5d3cd38fcaf3d3",
+    "submittedRequestSha256": "ee82654285c542cbd00153e9942a83e4e3a90b72ad8016846735af7f5791bcca"
+  },
+  "build": {
+    "id": "capiro-portfolio-preview-build:78d8240f-16ed-42e1-a2f8-e0c388c8991b",
+    "status": "SUCCEEDED",
+    "complete": true,
+    "startTime": "2026-10-19T20:32:06.047000+00:00",
+    "endTime": "2026-10-19T20:41:11.607000+00:00",
+    "elapsedSeconds": 545.56,
+    "attempts": 1,
+    "autoRetries": 0,
+    "retryLimit": 0,
+    "environment": {
+      "type": "LINUX_CONTAINER",
+      "image": "aws/codebuild/standard:8.0",
+      "computeType": "BUILD_GENERAL1_LARGE"
+    },
+    "actualNode": "24.21.0",
+    "actualNpm": "11.7.0",
+    "phases": [
+      {
+        "type": "SUBMITTED",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "QUEUED",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "PROVISIONING",
+        "status": "SUCCEEDED",
+        "durationSeconds": 8
+      },
+      {
+        "type": "DOWNLOAD_SOURCE",
+        "status": "SUCCEEDED",
+        "durationSeconds": 26
+      },
+      {
+        "type": "INSTALL",
+        "status": "SUCCEEDED",
+        "durationSeconds": 61
+      },
+      {
+        "type": "PRE_BUILD",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "BUILD",
+        "status": "SUCCEEDED",
+        "durationSeconds": 447
+      },
+      {
+        "type": "POST_BUILD",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "UPLOAD_ARTIFACTS",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "FINALIZING",
+        "status": "SUCCEEDED",
+        "durationSeconds": 0
+      },
+      {
+        "type": "COMPLETED",
+        "status": null,
+        "durationSeconds": null
+      }
+    ],
+    "gateEvidence": "Terminal SUCCEEDED plus exact strict ABORT/set-e recipe; selected console observations. Complete console log is not included."
+  },
+  "image": {
+    "uri": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:32941b84d67f5c276aedffee3b8ec3f96a4de8160d130842d91dadc18d334bd4",
+    "digest": "sha256:32941b84d67f5c276aedffee3b8ec3f96a4de8160d130842d91dadc18d334bd4",
+    "bytes": 98468042,
+    "tag": "e6180219b589ae8fced7155d1c451840c8663d94",
+    "platform": "linux/amd64"
+  },
+  "scan": {
+    "status": "COMPLETE",
+    "completedAt": "2026-10-19T20:42:17+00:00",
+    "vulnerabilitySourceUpdatedAt": "2026-10-19T20:42:17+00:00",
+    "findingSeverityCounts": {},
+    "findingsReturned": 0,
+    "allPagesRead": true,
+    "high": 0,
+    "critical": 0
+  },
+  "localFullWebTypecheck": {
+    "command": "tsc --noEmit --incremental false",
+    "workspace": "apps/web",
+    "source": "e6180219b589ae8fced7155d1c451840c8663d94",
+    "exitCode": 0,
+    "heapMiB": 4096,
+    "node": "24.19.0",
+    "elapsedSeconds": 38.1,
+    "priorAttempt": "2 GiB V8 heap exhaustion; not a pass",
+    "lockfileUnchanged": true,
+    "lockfileSha256": "c42e790cc2eb7d2d62c0daac01bba9a3002f65a8b2a3ba97ad192ab164898234",
+    "parallelHeavyBuild": false
+  },
+  "cost": {
+    "frontendAllowanceUSD": 2,
+    "computeEstimateUSD": 0.2,
+    "note": "Rounded wall duration at the retained USD0.02/minute rate; estimate only, excludes storage/logs and other lanes."
+  },
+  "limits": {
+    "deployed": false,
+    "liveAuthenticationQualified": false,
+    "liveCoreOrMeriQualified": false,
+    "meetingsActivated": false,
+    "rosterActivated": false,
+    "newPaidBuildAuthorized": false,
+    "deploymentApproval": "Pending parent review and coordination"
+  },
+  "redaction": "No private client identifiers, credential values, secret references, raw environment payloads, idempotency token or local filesystem paths."
+}

@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "status": "REVIEW_ONLY_NOT_EXECUTED",
+  "observedAtUtc": "2026-10-19T20:50:12.5070982Z",
+  "region": "us-east-1",
+  "stackName": "Capiro-Portfolio-Preview-Service",
+  "stackStatus": "UPDATE_COMPLETE",
+  "stackLastUpdatedTime": "2026-10-18T15:37:38.587000+00:00",
+  "service": {
+    "observedAtUtc": "2026-10-19T20:55:55.9907600Z",
+    "cluster": "capiro-portfolio-preview",
+    "name": "capiro-portfolio-preview",
+    "status": "ACTIVE",
+    "taskDefinition": "capiro-portfolio-preview:18",
+    "desiredCount": 1,
+    "runningCount": 1,
+    "pendingCount": 0,
+    "rolloutState": "COMPLETED",
+    "deploymentController": {
+      "type": "ECS"
+    },
+    "deploymentConfiguration": {
+      "deploymentCircuitBreaker": {
+        "enable": true,
+        "rollback": true,
+        "resetOnHealthyTask": true,
+        "thresholdConfiguration": {
+          "type": "BOUNDED_PERCENT",
+          "value": 50
+        }
+      },
+      "maximumPercent": 200,
+      "minimumHealthyPercent": 100,
+      "strategy": "ROLLING",
+      "bakeTimeInMinutes": 0
+    },
+    "targetHealth": [
+      {
+        "state": "healthy",
+        "reason": null
+      }
+    ],
+    "taskHealth": "UNKNOWN"
+  },
+  "currentFrontend": {
+    "sourceTag": "67fdf56b8f63f25c95dd2c0a2ff0139dcfe3cfb8",
+    "image": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:0401f61d490cac98baaebeaf9ccd1daf08b19bc730aa9d313b33abf007cf9fce",
+    "taskDefinitionStatus": "ACTIVE",
+    "cpu": "512",
+    "memory": "1024",
+    "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+    }
+  },
+  "currentCore": {
+    "service": "capiro-preview-first-chat-core",
+    "taskDefinition": "capiro-preview-first-chat-core:2",
+    "rolloutState": "COMPLETED",
+    "image": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/preview-core@sha256:46acfc0734fd40afdfca6851ab542173b9d35eb9658d35c60180d716c02acde8",
+    "releaseShaMarker": "ade7fc883b7459cbc50e6f71d40ce3644bace5ea",
+    "previewNativeGetsFlag": "ABSENT_IN_TASK_ENVIRONMENT",
+    "coreRosterFlag": "ABSENT_IN_TASK_ENVIRONMENT",
+    "runtimeIdentityOrAuthenticatedReadProof": false
+  },
+  "delta": [
+    {
+      "parameter": "ImageUri",
+      "before": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:0401f61d490cac98baaebeaf9ccd1daf08b19bc730aa9d313b33abf007cf9fce",
+      "after": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:32941b84d67f5c276aedffee3b8ec3f96a4de8160d130842d91dadc18d334bd4"
+    }
+  ],
+  "currentTemplateSummary": {
+    "capabilities": ["CAPABILITY_IAM"],
+    "declaredTransforms": null
+  },
+  "proposedConfiguration": {
+    "StackName": "Capiro-Portfolio-Preview-Service",
+    "UsePreviousTemplate": true,
+    "Capabilities": ["CAPABILITY_IAM"],
+    "Parameters": [
+      {
+        "ParameterKey": "PreviewFirstChatApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "TrackerBackend",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "ExistingAppUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "AllowedIngressCidr",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "CoreApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewReadOnly",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "ClerkPublishableKeySecretArn",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewReadBackendSource",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "MeriFirstChatBootstrapEnabled",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewMeriContractPackageVersion",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "MeriApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "MeriFirstChatClientId",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "StrategyApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewFirstChatBackendSource",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewMeriRuntimeImageDigest",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "MeriConversationWorkflowEnabled",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewMeriConversationRoutesEnabled",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewReadApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "IntelligenceApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "ImageUri",
+        "ParameterValue": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:32941b84d67f5c276aedffee3b8ec3f96a4de8160d130842d91dadc18d334bd4"
+      },
+      {
+        "ParameterKey": "ClerkKmsKeyArn",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "ClerkSecretKeySecretArn",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "WorkspaceApiBaseUrl",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "PreviewMeriRuntimeSource",
+        "UsePreviousValue": true
+      },
+      {
+        "ParameterKey": "CertificateArn",
+        "UsePreviousValue": true
+      }
+    ]
+  },
+  "preserve": {
+    "allOtherStackParameters": "UsePreviousValue=true",
+    "taskEnvironment": "Unchanged, including all private values",
+    "secretReferences": "Unchanged; no secret values read or published; confirm version stability separately",
+    "core": "No update",
+    "meri": "No update",
+    "routesDnsListenersIamNetworkingResources": "No change",
+    "defaultProduct": "portfolio",
+    "publicBindings": [
+      {
+        "name": "CAPIRO_PREVIEW_MERI_CONVERSATION_ROUTES_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_READ_API_BASE_URL",
+        "value": "https://first-chat-preview.app-dev.capiro.ai/api"
+      },
+      {
+        "name": "MERI_DOCUMENT_WORKFLOW_ENABLED",
+        "value": "false"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_MERI_RUNTIME_IMAGE_DIGEST",
+        "value": "sha256:5534edfe5805eec7a5d0bce66b2c85765fe2f957173ddd3ce2726bed67e322d8"
+      },
+      {
+        "name": "CAPIRO_REQUEST_ORIGIN",
+        "value": "https://portfolio-preview.app.capiro.ai"
+      },
+      {
+        "name": "MERI_CONVERSATION_WORKFLOW_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_FIRST_CHAT_BACKEND_SOURCE",
+        "value": "c64f0005cf14d69683aabafa11def4964d766832"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_FIRST_CHAT_API_BASE_URL",
+        "value": "https://first-chat-preview.app-dev.capiro.ai/api"
+      },
+      {
+        "name": "MERI_API_BASE_URL",
+        "value": "https://meri-preview.capiro.ai"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_MERI_CONTRACT_PACKAGE_VERSION",
+        "value": "0.1.10"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_MERI_RUNTIME_ORIGIN",
+        "value": "https://meri-preview.capiro.ai"
+      },
+      {
+        "name": "MERI_ACTION_WORKFLOW_ENABLED",
+        "value": "false"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_READ_ONLY",
+        "value": "true"
+      },
+      {
+        "name": "MERI_FIRST_CHAT_BOOTSTRAP_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_MERI_RUNTIME_SOURCE",
+        "value": "176a8811a9b05d8613282e70bd7a57ebd75ca201"
+      },
+      {
+        "name": "CAPIRO_PREVIEW_READ_BACKEND_SOURCE",
+        "value": "6542f5b089656b6d255465edd464d06c2a0b408f"
+      },
+      {
+        "name": "MERI_DOCUMENT_OPERATION",
+        "value": ""
+      }
+    ],
+    "qualifiedRosterSource": "ABSENT",
+    "qualifiedRosterApiBaseUrl": "ABSENT"
+  },
+  "executionPrerequisites": [
+    "Parent reviews exact image-only proposal and fixed clients.list availability loss",
+    "Fresh current-template, parameter, private-binding and secret-version no-drift review by release owner",
+    "Existing template must be retained; repository service.yml has different parameter names and is not this proposal",
+    "Current template declares CAPABILITY_IAM and no transforms; proposed acknowledgment does not authorize IAM changes",
+    "Review actual change set before execution; no change set created here"
+  ],
+  "liveAcceptance": "Pending; synthetic build gates do not prove current Core native read or preserved Meri behavior",
+  "rollback": {
+    "status": "PREPARED_NOT_EXECUTED",
+    "retainedTaskDefinition": "capiro-portfolio-preview:18",
+    "imageAvailableInEcr": true,
+    "image": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:0401f61d490cac98baaebeaf9ccd1daf08b19bc730aa9d313b33abf007cf9fce",
+    "sourceTag": "67fdf56b8f63f25c95dd2c0a2ff0139dcfe3cfb8",
+    "proposedConfiguration": {
+      "StackName": "Capiro-Portfolio-Preview-Service",
+      "UsePreviousTemplate": true,
+      "Capabilities": ["CAPABILITY_IAM"],
+      "Parameters": [
+        {
+          "ParameterKey": "PreviewFirstChatApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "TrackerBackend",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "ExistingAppUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "AllowedIngressCidr",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "CoreApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewReadOnly",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "ClerkPublishableKeySecretArn",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewReadBackendSource",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "MeriFirstChatBootstrapEnabled",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewMeriContractPackageVersion",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "MeriApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "MeriFirstChatClientId",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "StrategyApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewFirstChatBackendSource",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewMeriRuntimeImageDigest",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "MeriConversationWorkflowEnabled",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewMeriConversationRoutesEnabled",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewReadApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "IntelligenceApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "ImageUri",
+          "ParameterValue": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview@sha256:0401f61d490cac98baaebeaf9ccd1daf08b19bc730aa9d313b33abf007cf9fce"
+        },
+        {
+          "ParameterKey": "ClerkKmsKeyArn",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "ClerkSecretKeySecretArn",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "WorkspaceApiBaseUrl",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "PreviewMeriRuntimeSource",
+          "UsePreviousValue": true
+        },
+        {
+          "ParameterKey": "CertificateArn",
+          "UsePreviousValue": true
+        }
+      ]
+    },
+    "precondition": "Image-only forward change; stop and re-coordinate if any parameter/template/service/secret binding changes",
+    "noDatabaseDownMigration": true,
+    "noCoreOrMeriChange": true
+  },
+  "authorization": {
+    "deploy": false,
+    "build": false,
+    "changeSetCreated": false,
+    "taskDefinitionRegistered": false,
+    "serviceUpdated": false
+  }
+}
