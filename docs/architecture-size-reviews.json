@@ -2694,15 +2694,15 @@
   },
   {
     "path": "apps/web/src/features/settings/InviteMember.tsx",
-    "sha256": "809cf371285c7a0d7db785d2c474188048f9a9a549d815acc48518c6c70bc9cf",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "InviteMember.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "sha256": "e34f1e892993e5cf3fc728e04ca07124eef37eb596faedefa3842a6284647647",
+    "reviewer": "Codex independent Modules/Settings review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+    "rationale": "InviteMember owns one invitation dialog's draft fields, fixed-operation submission, response feedback and close/reset behavior. Pending locks enforce that same lifecycle; transport, validation, authority and single-flight state remain delegated. Keeping coupled field/dismissal state together is justified.",
     "functions": [
       {
         "name": "InviteMember",
-        "nonblankLines": 100
+        "nonblankLines": 106
       }
     ],
     "signals": [
@@ -2745,15 +2745,15 @@
   },
   {
     "path": "apps/web/src/features/settings/RegisterAccount.tsx",
-    "sha256": "3119d5dfa8f43e8e9cb4a17c7d5ebda80231682d67abb66aea2f1a4178a52e74",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "RegisterAccount.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "sha256": "9c52765242f8a1f8d3693197f58c7a796e424f1a1499159ae9163392f08f8788",
+    "reviewer": "Codex independent Modules/Settings review",
+    "reviewedAt": "2026-10-19",
+    "evidence": "docs/settings-pending-20261019/README.md#settings-dialogs",
+    "rationale": "RegisterAccount owns one provider-account registration dialog's display, two draft fields, fixed-operation submission, feedback and close/reset behavior. Pending locks add no separate responsibility; provider metadata, transport, authority and action lifecycle retain their canonical owners.",
     "functions": [
       {
         "name": "RegisterAccount",
-        "nonblankLines": 82
+        "nonblankLines": 86
       }
     ],
     "signals": [
