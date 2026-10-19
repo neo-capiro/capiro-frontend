@@ -111,7 +111,8 @@ function ObservationStatus({ run }: { run: ReturnType<typeof useLiveRun> }) {
       {observing === "stalled" && (
         <div className={styles.statusRow}>
           <p role="status" className={styles.muted}>
-            Updates stopped arriving. The run continues on the service.
+            Updates stopped arriving. The current run status is unknown.
+            Reconnect to check for updates.
           </p>
           <Button
             type="button"
