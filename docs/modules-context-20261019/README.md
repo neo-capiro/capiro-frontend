@@ -31,7 +31,7 @@ Commands use `apps/web/test/browser/playwright.config.ts`, with the same browser
 - Scoped ESLint: exit 0, no errors; two inherited `no-img-element` warnings in unchanged WorkflowCards markup.
 - Prettier and `git diff --check`: passed.
 - Web TypeScript (`node --max-old-space-size=4096 ../../node_modules/typescript/bin/tsc --noEmit --incremental false` from `apps/web`): passed, exit 0.
-- Architecture (`node scripts/architecture.mjs`): exit 1 with **0 boundary errors; 533 size signals, 513 reviewed, 18 unchanged inherited and 2 blocking stale review fingerprints**. The only blocking entries are the two coordinated metadata replacements described below. This gate is not reported as passing.
+- Architecture (`node scripts/architecture.mjs`): **passed, exit 0; 0 boundary errors; 533 size signals, 515 reviewed, 18 unchanged inherited and 0 blocking** after the approved two-record metadata successor. The initial scan had two stale review fingerprints. Both hashes still match the independently reviewed source; no runtime source changed in this successor, so the earlier browser and TypeScript results remain applicable.
 
 ## Responsibility review and coordination
 
@@ -39,7 +39,7 @@ Commands use `apps/web/test/browser/playwright.config.ts`, with the same browser
 
 Independent Codex source review found no correctness issues in the three fixes. ResourceCatalog retains local selection/dialog ownership and has no size signal. DataExplorer remains one explorer screen owner for dataset/query/filter/page/selection presentation (307 nonblank function-body lines). DocumentsLibrary remains one paged document list owner for filters, required-read status, results/counts and page controls (185 nonblank function-body lines). The canonical shared query layer still owns request lifetime/validation; backend services own access and authority. No second service or persistence layer was introduced.
 
-The exact [proposed review records](proposed-size-reviews.json) replace only the existing DataExplorer and DocumentsLibrary entries. Their source hashes were independently verified. The shared `docs/architecture-size-reviews.json` registry is **unchanged pending parent coordination**; the earlier PR106 approval covered only its Settings records. No broad waiver or threshold change is proposed.
+The exact [approved review records](proposed-size-reviews.json) replace only the existing DataExplorer and DocumentsLibrary entries after explicit parent coordination. Their source hashes were independently verified. All 235 registry entries retain their order and the other 233 remain unchanged. The separate PR106 branch and Settings records were not edited; later integration must retain both PRs' disjoint record updates. No broad waiver, threshold change or runtime expansion is included.
 
 ## Design and live-service limits
 
