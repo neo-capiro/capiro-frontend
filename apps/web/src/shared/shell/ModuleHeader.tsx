@@ -83,9 +83,9 @@ export function ModuleHeader({
             >
               <ModuleAsset name="updates" />
             </button>
-            <Link href="/settings/personal" aria-label="Account settings">
+            <ScopedLink href="/settings/personal" aria-label="Account settings">
               <ModuleAsset name="profile" />
-            </Link>
+            </ScopedLink>
           </nav>
         )
       }

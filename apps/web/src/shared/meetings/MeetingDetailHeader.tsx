@@ -9,11 +9,13 @@ export function MeetingDetailHeader({
   current,
   inline,
   onClose,
+  pending = false,
 }: {
   meeting: EngagementMeeting;
   current?: EngagementMeeting;
   inline: boolean;
   onClose: () => void;
+  pending?: boolean;
 }) {
   const title = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -71,7 +73,11 @@ export function MeetingDetailHeader({
             Join meeting
           </ActionButton>
         )}
-        {inline && <ActionButton onClick={onClose}>Close meeting</ActionButton>}
+        {inline && (
+          <ActionButton disabled={pending} onClick={onClose}>
+            Close meeting
+          </ActionButton>
+        )}
       </div>
     </header>
   );

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { Menu, PanelLeft } from "lucide-react";
 import { HeaderFrame } from "@/shared/shell/HeaderFrame";
+import { ScopedLink } from "@/shared/shell/ScopedLink";
 import { PortfolioNavigation } from "./PortfolioNavigation";
 import type { Destinations } from "../config/config";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
@@ -92,10 +93,10 @@ export function Shell({
           />
           {!readOnlyPreview && (
             <div className={styles.bottom}>
-              <Link href="/settings">
+              <ScopedLink href="/settings/personal">
                 <img src="/design/471-93465-imgIcon10.svg" alt="" />
                 Settings
-              </Link>
+              </ScopedLink>
             </div>
           )}
         </aside>

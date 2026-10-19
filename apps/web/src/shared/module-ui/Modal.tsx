@@ -19,6 +19,7 @@ export function Modal({
   footer,
   side = "center",
   className = "",
+  closeDisabled = false,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -28,6 +29,7 @@ export function Modal({
   footer?: ReactNode;
   side?: "center" | "right";
   className?: string;
+  closeDisabled?: boolean;
 }) {
   const opener = useRef<HTMLElement | null>(null);
   return (
@@ -59,7 +61,11 @@ export function Modal({
               {description ?? `${title} dialog`}
             </DialogDescription>
           </div>
-          <DialogClose className={styles.close} aria-label="Close dialog">
+          <DialogClose
+            className={styles.close}
+            aria-label="Close dialog"
+            disabled={closeDisabled}
+          >
             ×
           </DialogClose>
         </header>

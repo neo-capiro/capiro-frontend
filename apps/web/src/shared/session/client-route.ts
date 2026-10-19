@@ -11,7 +11,7 @@ export function routeClientId(
       return segment;
     }
   }
-  if (/^\/(?:meri|modules|calendar)(?:\/|$)/.test(pathname))
+  if (/^\/(?:meri|modules|calendar|settings)(?:\/|$)/.test(pathname))
     return search.get("clientId") || undefined;
   return undefined;
 }

@@ -246,3 +246,76 @@ test("an unknown activity result retains the draft, blocks the handoff and expos
   ]);
   expect(unexpected).toEqual([]);
 });
+
+test("a direct save locks its captured draft and a refusal restores the same editable fields", async ({
+  page,
+}, testInfo) => {
+  const { unexpected } = await installRemoval(page);
+  const writes = recordWrites(page);
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route(
+    `**/api/backend/core/clients/${clientId}/activity*`,
+    async (route) => {
+      if (route.request().method() !== "POST") return route.fallback();
+      await held;
+      return json(route, { message: "Review the synthetic activity" }, 422);
+    },
+  );
+  await page.goto(`/portfolio/${clientId}?log=1`, { waitUntil: "commit" });
+  const dialog = quickLog(page);
+  await dialog.getByLabel("Activity type").selectOption("commitment");
+  await dialog.getByLabel("Title", { exact: true }).fill("Captured promise");
+  await dialog.getByLabel("Details", { exact: true }).fill("Captured details");
+  await dialog.getByLabel("Who owes it").selectOption("we_owe");
+  await dialog.getByLabel("Counterparty").fill("Client counsel");
+  await dialog.getByLabel("Due date").fill("2026-10-25");
+  await dialog.getByLabel("When", { exact: true }).fill("2026-10-19T09:30");
+  await expect(dialog.getByLabel("Objective", { exact: true })).toBeEnabled();
+  await dialog
+    .getByRole("button", { name: "Save activity", exact: true })
+    .click();
+  try {
+    await expect.poll(() => writes.length).toBe(1);
+    for (const name of [
+      "Activity type",
+      "Title",
+      "Details",
+      "Who owes it",
+      "Counterparty",
+      "Due date",
+      "When",
+      "Objective",
+    ])
+      await expect(dialog.getByLabel(name, { exact: true })).toBeDisabled();
+    await expect(
+      dialog.getByRole("checkbox", { name: "Add generic follow-up" }),
+    ).toBeDisabled();
+    await page.screenshot({
+      path: testInfo.outputPath("pending-quick-log-1440x1040.png"),
+    });
+  } finally {
+    release();
+  }
+  await expect(dialog).toContainText("Review the synthetic activity");
+  await expect(dialog.getByLabel("Title", { exact: true })).toBeEnabled();
+  await expect(dialog.getByLabel("Title", { exact: true })).toHaveValue(
+    "Captured promise",
+  );
+  await expect(dialog.getByLabel("Details", { exact: true })).toHaveValue(
+    "Captured details",
+  );
+  await expect(dialog.getByLabel("Activity type")).toHaveValue("commitment");
+  await expect(dialog.getByLabel("Who owes it")).toHaveValue("we_owe");
+  await expect(dialog.getByLabel("Counterparty")).toHaveValue("Client counsel");
+  await expect(dialog.getByLabel("Due date")).toHaveValue("2026-10-25");
+  await expect(dialog.getByLabel("When", { exact: true })).toHaveValue(
+    "2026-10-19T09:30",
+  );
+  expect(writes).toEqual([
+    `POST /api/backend/core/clients/${clientId}/activity`,
+  ]);
+  expect(unexpected).toEqual([]);
+});

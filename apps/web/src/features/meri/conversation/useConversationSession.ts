@@ -6,6 +6,7 @@ import { useConversationConnection } from "./useConversationConnection";
 import { useConversationTurn } from "./useConversationTurn";
 import { sessionHistoryState } from "./saved-turns";
 import type { TurnView } from "./conversation-view";
+import { createInitialDraftOwner } from "./initial-draft";
 
 /** Screen lifetime composition: saved reads, exact session selection and retained next-turn intent. */
 export function useConversationSession(
@@ -31,6 +32,17 @@ export function useConversationSession(
     if (history.denied && boundReady) connection.revoke();
   }, [history.denied, boundReady, connection.revoke]);
   const [draft, setDraft] = useState("");
+  const [initialDraft] = useState(createInitialDraftOwner);
+  useEffect(() => {
+    if (boundReady) initialDraft.select(boundReady.port.context);
+  }, [boundReady, initialDraft]);
+  const updateDraft = useCallback(
+    (value: string) => {
+      initialDraft.edit();
+      setDraft(value);
+    },
+    [initialDraft],
+  );
   const [localTurns, setLocalTurns] = useState<readonly TurnView[]>([]);
   const textarea = useRef<HTMLTextAreaElement>(null);
   const openTarget = useCallback(
@@ -67,7 +79,8 @@ export function useConversationSession(
     history,
     continuation,
     draft,
-    setDraft,
+    setDraft: updateDraft,
+    initialDraft,
     textarea,
     ...view,
     startNext,

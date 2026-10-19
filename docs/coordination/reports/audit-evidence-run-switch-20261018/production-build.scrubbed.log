@@ -1,0 +1,91 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 50ms
+- Experiments (use with caution):
+  ⨯ turbopackFileSystemCacheForBuild
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 18.9s
+  Running TypeScript ...
+  Finished TypeScript in 22.3s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/283) ...
+  Generating static pages using 8 workers (70/283) 
+  Generating static pages using 8 workers (141/283) 
+  Generating static pages using 8 workers (212/283) 
+✓ Generating static pages using 8 workers (283/283) in 1269ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ƒ /_not-found
+├ ƒ /accept-invite
+├ ƒ /admins
+├ ƒ /api/action-followthrough/[operation]
+├ ƒ /api/backend/[service]/[...path]
+├ ƒ /api/capiro/[operation]
+├ ƒ /api/conversations/[...path]
+├ ƒ /api/documents/[operation]
+├ ƒ /api/documents/links/[action]
+├ ƒ /api/settings/user/[operation]
+├ ƒ /api/task-commands/[operation]
+├ ƒ /billing
+├ ƒ /calendar
+├ ƒ /clients
+├ ƒ /confirm
+├ ƒ /engagement/outreach
+├ ƒ /forms/[token]
+├ ƒ /healthz
+├ ƒ /it/[token]
+├ ƒ /it/done
+├ ƒ /it/error
+├ ƒ /legal
+├ ƒ /meri
+├ ƒ /meri/actions
+├ ƒ /meri/files
+├ ƒ /meri/fixture/[screen]
+├ ƒ /meri/fixture/cited-answer
+├ ƒ /meri/fixture/home
+├ ƒ /meri/fixture/run-activity
+├ ƒ /meri/task-updates
+├ ƒ /modules
+├ ƒ /modules/[module]
+├ ƒ /org
+├ ƒ /plan
+├ ƒ /portfolio
+├ ƒ /portfolio/[clientId]
+├ ƒ /portfolio/[clientId]/bills
+├ ƒ /portfolio/[clientId]/calendar
+├ ƒ /portfolio/[clientId]/capabilities
+├ ƒ /portfolio/[clientId]/files
+├ ƒ /portfolio/[clientId]/objectives
+├ ƒ /portfolio/[clientId]/opportunities
+├ ƒ /portfolio/[clientId]/relationships
+├ ƒ /portfolio/[clientId]/work
+├ ƒ /portfolio/prospects
+├ ƒ /portfolio/prospects/[prospectId]
+├ ƒ /register
+├ ƒ /settings/[section]
+├ ƒ /setup
+├ ƒ /sign-in/[[...sign-in]]
+└ ƒ /verify
+
+
+ƒ Proxy (Middleware)
+
+ƒ  (Dynamic)  server-rendered on demand
+

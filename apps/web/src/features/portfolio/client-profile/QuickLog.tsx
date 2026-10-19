@@ -75,6 +75,8 @@ export function QuickLog({
   );
   const canOpenMeeting =
     open && canCreate && !mutation.isPending && !uncertain && !command.pending;
+  const fieldsLocked =
+    mutation.isPending || uncertain || Boolean(command.pending);
   return (
     <>
       <Dialog
@@ -193,7 +195,7 @@ export function QuickLog({
               <select
                 name="kind"
                 aria-label="Activity type"
-                disabled={Boolean(command.pending)}
+                disabled={fieldsLocked}
                 value={currentKind}
                 onChange={(event) => {
                   const nextKind = event.target.value;
@@ -239,7 +241,7 @@ export function QuickLog({
                 required
                 maxLength={300}
                 autoFocus
-                disabled={Boolean(command.pending)}
+                disabled={fieldsLocked}
                 defaultValue={command.pending?.input.activity.title ?? ""}
               />
             </label>
@@ -247,10 +249,10 @@ export function QuickLog({
               label="Details"
               name="body"
               maxLength={5000}
-              disabled={Boolean(command.pending)}
+              disabled={fieldsLocked}
               defaultValue={command.pending?.input.activity.body ?? ""}
             />
-            {details.fields(currentKind, Boolean(command.pending))}
+            {details.fields(currentKind, fieldsLocked)}
             {currentKind === "email" && (
               <small>
                 Logged email records history; it does not send a message.
@@ -282,7 +284,7 @@ export function QuickLog({
             {withFollowUp && (
               <div className={styles.followUpFields}>
                 <FollowUpFields
-                  disabled={Boolean(command.pending) || !canCreate}
+                  disabled={fieldsLocked || !canCreate}
                   initial={command.pending?.input.followUp}
                 />
               </div>

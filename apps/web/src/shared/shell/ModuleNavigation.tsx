@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ScopedLink } from "./ScopedLink";
 import { useRef, useState } from "react";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
@@ -64,10 +63,10 @@ export function ModuleNavigation({
             ))}
         </nav>
         {!readOnlyPreview && (
-          <Link href="/settings/personal" className={styles.settings}>
+          <ScopedLink href="/settings/personal" className={styles.settings}>
             <ModuleAsset name="settings" />
             <span>Settings</span>
-          </Link>
+          </ScopedLink>
         )}
       </aside>
     </>
