@@ -86,16 +86,22 @@ export function DocumentsLibrary({
     query: { clientId, cursor, status: status || undefined, limit: 50 },
   });
   const me = useCapiroQuery("me.read", {});
+  const needsIdentity = scope !== "all";
+  const identityError = needsIdentity ? me.error : undefined;
+  const error = documents.error ?? identityError;
+  const loading =
+    !error && (documents.loading || (needsIdentity && me.loading));
+  const ownerId = me.data?.user.clerkUserId;
   const rows = (documents.data?.items ?? []).filter(
     (row) =>
       row.name.toLowerCase().includes(search.toLowerCase()) &&
       (!client || row.client === client) &&
       (!template || row.kind === template) &&
       (scope === "all" ||
-        (scope === "mine"
-          ? row.owner.id === me.data?.user.clerkUserId
-          : row.kind === "draft" &&
-            row.owner.id !== me.data?.user.clerkUserId)),
+        (ownerId !== undefined &&
+          (scope === "mine"
+            ? row.owner.id === ownerId
+            : row.kind === "draft" && row.owner.id !== ownerId))),
   );
   const clients = [
     ...new Set(
@@ -174,9 +180,12 @@ export function DocumentsLibrary({
         />
       </div>
       <StatusPanel
-        loading={documents.loading}
-        error={documents.error}
-        onRetry={documents.reload}
+        loading={loading}
+        error={error}
+        onRetry={() => {
+          if (documents.error) documents.reload();
+          if (identityError) me.reload();
+        }}
       >
         <DataTable
           rows={rows}
@@ -228,22 +237,22 @@ export function DocumentsLibrary({
             },
           ]}
         />
+        <div className={styles.actions}>
+          <span className={styles.footnote}>{rows.length} documents</span>
+          {documents.data?.nextCursor && (
+            <ActionButton
+              onClick={() => setCursor(documents.data?.nextCursor ?? undefined)}
+            >
+              Load older
+            </ActionButton>
+          )}
+          {cursor && (
+            <ActionButton onClick={() => setCursor(undefined)}>
+              Newest documents
+            </ActionButton>
+          )}
+        </div>
       </StatusPanel>
-      <div className={styles.actions}>
-        <span className={styles.footnote}>{rows.length} documents</span>
-        {documents.data?.nextCursor && (
-          <ActionButton
-            onClick={() => setCursor(documents.data?.nextCursor ?? undefined)}
-          >
-            Load older
-          </ActionButton>
-        )}
-        {cursor && (
-          <ActionButton onClick={() => setCursor(undefined)}>
-            Newest documents
-          </ActionButton>
-        )}
-      </div>
       <p className={styles.footnote}>
         Documents are visible to their owner and collaborators. Access is
         checked by the existing Workspace service.
