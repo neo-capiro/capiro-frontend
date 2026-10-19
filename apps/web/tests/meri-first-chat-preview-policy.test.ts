@@ -121,7 +121,7 @@ it("keeps the pinned first-chat write with a separate qualified roster binding",
   );
   vi.stubEnv(
     "CAPIRO_PREVIEW_CLIENT_ROSTER_BACKEND_SOURCE",
-    "b97a3286487abcda6a7424cf1dc2812d93b65b3d",
+    "50475125275853299798fc40f8cb119f0b865464",
   );
   vi.stubEnv(
     "CAPIRO_PREVIEW_CLIENT_ROSTER_API_BASE_URL",
