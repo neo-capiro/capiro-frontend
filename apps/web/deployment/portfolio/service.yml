@@ -70,7 +70,7 @@ Parameters:
     Type: String
     Default: ""
     AllowedValues: [""]
-    Description: Reviewed Core source b97a3286487abcda6a7424cf1dc2812d93b65b3d; held until combined serving image and digest are qualified
+    Description: Reviewed Core source 50475125275853299798fc40f8cb119f0b865464; held until combined serving image and digest are qualified
   CapiroPreviewClientRosterApiBaseUrl:
     Type: String
     Default: ""
