@@ -26,6 +26,8 @@ Before separately approved activation, qualify the immutable Core image digest a
 
 Keep `CAPIRO_PREVIEW_READ_ONLY=true`, legacy read source `6542f5b089656b6d255465edd464d06c2a0b408f` at `https://first-chat-preview.app-dev.capiro.ai/api`, first-chat bootstrap and Meri bindings unchanged. Only the existing `clients.list` operation uses the roster pair; native client/detail and `me` reads retain their legacy target. Other registered operations, nested Portfolio/meeting routes, Modules and Settings APIs remain held. Their admission needs a separate route/schema/auth/dispatch review.
 
+The [initial preview checklist and exact route plan](PREVIEW-FEATURE-CHECKLIST.md) records the Core-confirmed meeting visibility and unchanged-client reassignment blockers. Roster/native reads and truthful UI states are the initial goal; the earlier broader cohorts are not ready for activation.
+
 No build, deployment, migration, route activation or paid action is part of this change. The held archive and recipe prepared for frontend main `5cd5f20d` do not attest to this successor; any later build must seal its own exact frontend commit and inputs.
 
 ## Frontend verification
