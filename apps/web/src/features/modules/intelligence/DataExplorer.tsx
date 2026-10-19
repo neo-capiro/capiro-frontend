@@ -104,6 +104,7 @@ export function DataExplorer({
           className={styles.dataset}
           onClick={() => {
             setDataset("federal-register");
+            setSelected(undefined);
             setSort("comment-close");
             setPage(1);
           }}
